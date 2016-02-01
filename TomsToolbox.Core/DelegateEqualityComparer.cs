@@ -1,0 +1,110 @@
+﻿namespace TomsToolbox.Core
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+
+    /// <summary>
+    /// <see cref="IEqualityComparer{T}"/> implementation using a delegate function to compare the values.
+    /// </summary>
+    /// <typeparam name="T">The type of objects to compare.</typeparam>
+    public class DelegateEqualityComparer<T> : IEqualityComparer<T>
+    {
+        private readonly Func<T, T, bool> _comparer;
+        private readonly Func<T, int> _hashCodeGenerator;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DelegateEqualityComparer{T}"/> class,
+        /// using <see cref="object.Equals(object, object)"/> and <see cref="object.GetHashCode()"/>
+        /// </summary>
+        public DelegateEqualityComparer()
+            : this((a, b) => object.Equals(a, b), x => ReferenceEquals(x, null) ? 0 : x.GetHashCode())
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DelegateEqualityComparer{T}"/> class.
+        /// </summary>
+        /// <param name="selector">The selector that selects the object to compare, if e.g. two objects can be compared by a single property.</param>
+        public DelegateEqualityComparer(Func<T, object> selector)
+        {
+            Contract.Requires(selector != null);
+
+            _comparer = (a, b) => Equals(selector(a), selector(b));
+            _hashCodeGenerator = obj => selector(obj).GetHashCode();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DelegateEqualityComparer{T}" /> class.
+        /// </summary>
+        /// <param name="comparer">The compare function.</param>
+        /// <param name="hashCodeGenerator">The hash code generator.</param>
+        public DelegateEqualityComparer(Func<T, T, bool> comparer, Func<T, int> hashCodeGenerator)
+        {
+            Contract.Requires(comparer != null);
+            Contract.Requires(hashCodeGenerator != null);
+
+            _comparer = comparer;
+            _hashCodeGenerator = hashCodeGenerator;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DelegateEqualityComparer{T}" /> class.
+        /// </summary>
+        /// <param name="selector">The selector that selects the object to compare, if e.g. two objects can be compared by a single property.</param>
+        /// <param name="comparer">The compare function.</param>
+        /// <param name="hashCodeGenerator">The hash code generator.</param>
+        public DelegateEqualityComparer(Func<T, object> selector, Func<object, object, bool> comparer, Func<object, int> hashCodeGenerator)
+        {
+            Contract.Requires(selector != null);
+            Contract.Requires(comparer != null);
+            Contract.Requires(hashCodeGenerator != null);
+
+            _comparer = (a, b) => comparer(selector(a), selector(b));
+            _hashCodeGenerator = obj => hashCodeGenerator(selector(obj));
+        }
+
+        /// <summary>
+        /// Determines whether the specified objects are equal.
+        /// </summary>
+        /// <returns>
+        /// true if the specified objects are equal; otherwise, false.
+        /// </returns>
+        /// <param name="x">The first object of type <typeparamref name="T"/> to compare.</param>
+        /// <param name="y">The second object of type <typeparamref name="T"/> to compare.</param>
+        public bool Equals(T x, T y)
+        {
+            if (ReferenceEquals(x, null))
+                return ReferenceEquals(y, null);
+
+            if (ReferenceEquals(y, null))
+                return false;
+
+            return _comparer(x, y);
+        }
+
+        /// <summary>
+        /// Returns a hash code for the specified object.
+        /// </summary>
+        /// <returns>
+        /// A hash code for the specified object.
+        /// </returns>
+        /// <param name="obj">The <see cref="T:System.Object"/> for which a hash code is to be returned.</param>
+        /// <exception cref="T:System.ArgumentNullException">The type of <paramref name="obj"/> is a reference type and <paramref name="obj"/> is null.</exception>
+        public int GetHashCode(T obj)
+        {
+            if (ReferenceEquals(obj, null))
+                throw new ArgumentNullException("obj");
+
+            return _hashCodeGenerator(obj);
+        }
+
+        [ContractInvariantMethod]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_comparer != null);
+            Contract.Invariant(_hashCodeGenerator != null);
+        }
+    }
+}

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <MapSourceList>
+
+    <MapSource ID="MapQuest OSM">
+      <Copyright>http://www.mapquest.com</Copyright>
+      <MinZoom>1</MinZoom>
+      <MaxZoom>18</MaxZoom>
+      <TileUrl>http://otile1.mqcdn.com/tiles/1.0.0/map/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://otile2.mqcdn.com/tiles/1.0.0/map/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://otile3.mqcdn.com/tiles/1.0.0/map/%z/%x/%y.png</TileUrl>
+    </MapSource>
+
+    <MapSource ID="MapQuest Aerial">
+      <Copyright>http://www.mapquest.com</Copyright>
+      <MinZoom>1</MinZoom>
+      <MaxZoom>11</MaxZoom>
+      <TileUrl>http://otile1.mqcdn.com/tiles/1.0.0/sat/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://otile2.mqcdn.com/tiles/1.0.0/sat/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://otile3.mqcdn.com/tiles/1.0.0/sat/%z/%x/%y.png</TileUrl>
+    </MapSource>
+
+    <MapSource ID="4UMaps">
+      <Copyright>http://www.4umaps.eu</Copyright>
+      <MinZoom>1</MinZoom>
+      <MaxZoom>15</MaxZoom>
+      <TileUrl>http://www.4umaps.eu/%z/%x/%y.png</TileUrl>
+    </MapSource>
+
+    <MapSource ID="benzinpreis.de">
+      <Copyright>http://maps.benzinpreis.de</Copyright>
+      <MinZoom>1</MinZoom>
+      <MaxZoom>17</MaxZoom>
+      <TileUrl>http://maps.benzinpreis.de/osm/%z/%x/%y.png</TileUrl>
+    </MapSource>
+    
+    <MapSource ID="HikeBikeMap">
+      <Copyright>http://hikebikemap.de</Copyright>
+      <MinZoom>1</MinZoom>
+      <MaxZoom>17</MaxZoom>
+      <TileUrl>http://a.tiles.wmflabs.org/hikebike/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://b.tiles.wmflabs.org/hikebike/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://c.tiles.wmflabs.org/hikebike/%z/%x/%y.png</TileUrl>
+    </MapSource>
+
+  </MapSourceList>
+</root>

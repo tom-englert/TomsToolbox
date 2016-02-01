@@ -1,0 +1,161 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CD367555-C8E1-4F5D-9BCF-50396D0D2F1B}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B35F4812-32F1-469C-8AFC-A58B3D3A62C0}"
+	ProjectSection(SolutionItems) = preProject
+		CodeContracts.ruleset = CodeContracts.ruleset
+		Publish.cmd = Publish.cmd
+		Resources.Designer.t4 = Resources.Designer.t4
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Core", "TomsToolbox.Core\TomsToolbox.Core.csproj", "{AE305312-7637-43BF-9156-7EC513C55135}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0350DFCD-5BFF-46BD-ABF4-568EF308D5B6} = {0350DFCD-5BFF-46BD-ABF4-568EF308D5B6}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Desktop", "TomsToolbox.Desktop\TomsToolbox.Desktop.csproj", "{3647CD2D-2A4E-4859-9BBD-606A73C14801}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F22B1781-138C-400D-85FC-5C70EE7BAA56} = {F22B1781-138C-400D-85FC-5C70EE7BAA56}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Wpf", "TomsToolbox.Wpf\TomsToolbox.Wpf.csproj", "{EC9F9418-877F-49BA-AF91-F456FBC5AD57}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FBE436B4-7624-41CF-AC88-E4CB759FBA65} = {FBE436B4-7624-41CF-AC88-E4CB759FBA65}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.ObservableCollections", "TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj", "{E3EE79EA-50EC-4D54-B59F-799D50E8B221}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation\Documentation.shfbproj", "{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Desktop.Tests", "TomsToolbox.Desktop.Tests\TomsToolbox.Desktop.Tests.csproj", "{53966F8B-9898-47D4-AD7A-2FBF84BA431C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Core.Tests", "TomsToolbox.Core.Tests\TomsToolbox.Core.Tests.csproj", "{E8095803-2DE6-4023-8981-66DCEE62F18D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.ObservableCollections.Tests", "TomsToolbox.ObservableCollections.Tests\TomsToolbox.ObservableCollections.Tests.csproj", "{D061A57E-38E3-4F2A-B392-FB344C71F7F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp", "SampleApp\SampleApp.csproj", "{31D12A42-C0C6-4B45-82D3-E896BB2E00E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Wpf.45", "TomsToolbox.Wpf\TomsToolbox.Wpf.45.csproj", "{FBE436B4-7624-41CF-AC88-E4CB759FBA65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Desktop.45", "TomsToolbox.Desktop\TomsToolbox.Desktop.45.csproj", "{F22B1781-138C-400D-85FC-5C70EE7BAA56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Core.Portable", "TomsToolbox.Core\TomsToolbox.Core.Portable.csproj", "{0350DFCD-5BFF-46BD-ABF4-568EF308D5B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Wpf.Tests", "TomsToolbox.Wpf.Tests\TomsToolbox.Wpf.Tests.csproj", "{726D085F-C3E1-444B-96AB-0B40C3DC0311}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 14
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs36
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = TomsToolbox.Core\\TomsToolbox.Core.csproj
+		SccProjectName1 = TomsToolbox.Core
+		SccLocalPath1 = TomsToolbox.Core
+		SccProjectUniqueName2 = TomsToolbox.Desktop\\TomsToolbox.Desktop.csproj
+		SccProjectName2 = TomsToolbox.Desktop
+		SccLocalPath2 = TomsToolbox.Desktop
+		SccProjectUniqueName3 = TomsToolbox.Wpf\\TomsToolbox.Wpf.csproj
+		SccProjectName3 = TomsToolbox.Wpf
+		SccLocalPath3 = TomsToolbox.Wpf
+		SccProjectUniqueName4 = TomsToolbox.ObservableCollections\\TomsToolbox.ObservableCollections.csproj
+		SccProjectName4 = TomsToolbox.ObservableCollections
+		SccLocalPath4 = TomsToolbox.ObservableCollections
+		SccProjectUniqueName5 = Documentation\\Documentation.shfbproj
+		SccProjectName5 = Documentation
+		SccLocalPath5 = Documentation
+		SccProjectUniqueName6 = TomsToolbox.Desktop.Tests\\TomsToolbox.Desktop.Tests.csproj
+		SccProjectName6 = TomsToolbox.Desktop.Tests
+		SccLocalPath6 = TomsToolbox.Desktop.Tests
+		SccProjectUniqueName7 = TomsToolbox.Core.Tests\\TomsToolbox.Core.Tests.csproj
+		SccProjectName7 = TomsToolbox.Core.Tests
+		SccLocalPath7 = TomsToolbox.Core.Tests
+		SccProjectUniqueName8 = TomsToolbox.ObservableCollections.Tests\\TomsToolbox.ObservableCollections.Tests.csproj
+		SccProjectName8 = TomsToolbox.ObservableCollections.Tests
+		SccLocalPath8 = TomsToolbox.ObservableCollections.Tests
+		SccProjectUniqueName9 = SampleApp\\SampleApp.csproj
+		SccProjectName9 = SampleApp
+		SccLocalPath9 = SampleApp
+		SccProjectUniqueName10 = TomsToolbox.Wpf\\TomsToolbox.Wpf.45.csproj
+		SccProjectName10 = TomsToolbox.Wpf
+		SccLocalPath10 = TomsToolbox.Wpf
+		SccProjectUniqueName11 = TomsToolbox.Desktop\\TomsToolbox.Desktop.45.csproj
+		SccProjectName11 = TomsToolbox.Desktop
+		SccLocalPath11 = TomsToolbox.Desktop
+		SccProjectUniqueName12 = TomsToolbox.Core\\TomsToolbox.Core.Portable.csproj
+		SccProjectName12 = TomsToolbox.Core
+		SccLocalPath12 = TomsToolbox.Core
+		SccProjectUniqueName13 = TomsToolbox.Wpf.Tests\\TomsToolbox.Wpf.Tests.csproj
+		SccProjectName13 = TomsToolbox.Wpf.Tests
+		SccLocalPath13 = TomsToolbox.Wpf.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE305312-7637-43BF-9156-7EC513C55135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE305312-7637-43BF-9156-7EC513C55135}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE305312-7637-43BF-9156-7EC513C55135}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE305312-7637-43BF-9156-7EC513C55135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3647CD2D-2A4E-4859-9BBD-606A73C14801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3647CD2D-2A4E-4859-9BBD-606A73C14801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3647CD2D-2A4E-4859-9BBD-606A73C14801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3647CD2D-2A4E-4859-9BBD-606A73C14801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC9F9418-877F-49BA-AF91-F456FBC5AD57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC9F9418-877F-49BA-AF91-F456FBC5AD57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC9F9418-877F-49BA-AF91-F456FBC5AD57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC9F9418-877F-49BA-AF91-F456FBC5AD57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3EE79EA-50EC-4D54-B59F-799D50E8B221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3EE79EA-50EC-4D54-B59F-799D50E8B221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3EE79EA-50EC-4D54-B59F-799D50E8B221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3EE79EA-50EC-4D54-B59F-799D50E8B221}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53966F8B-9898-47D4-AD7A-2FBF84BA431C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53966F8B-9898-47D4-AD7A-2FBF84BA431C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53966F8B-9898-47D4-AD7A-2FBF84BA431C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53966F8B-9898-47D4-AD7A-2FBF84BA431C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8095803-2DE6-4023-8981-66DCEE62F18D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8095803-2DE6-4023-8981-66DCEE62F18D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8095803-2DE6-4023-8981-66DCEE62F18D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8095803-2DE6-4023-8981-66DCEE62F18D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D061A57E-38E3-4F2A-B392-FB344C71F7F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D061A57E-38E3-4F2A-B392-FB344C71F7F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D061A57E-38E3-4F2A-B392-FB344C71F7F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D061A57E-38E3-4F2A-B392-FB344C71F7F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31D12A42-C0C6-4B45-82D3-E896BB2E00E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31D12A42-C0C6-4B45-82D3-E896BB2E00E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31D12A42-C0C6-4B45-82D3-E896BB2E00E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31D12A42-C0C6-4B45-82D3-E896BB2E00E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBE436B4-7624-41CF-AC88-E4CB759FBA65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE436B4-7624-41CF-AC88-E4CB759FBA65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE436B4-7624-41CF-AC88-E4CB759FBA65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F22B1781-138C-400D-85FC-5C70EE7BAA56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F22B1781-138C-400D-85FC-5C70EE7BAA56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F22B1781-138C-400D-85FC-5C70EE7BAA56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0350DFCD-5BFF-46BD-ABF4-568EF308D5B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0350DFCD-5BFF-46BD-ABF4-568EF308D5B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0350DFCD-5BFF-46BD-ABF4-568EF308D5B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{726D085F-C3E1-444B-96AB-0B40C3DC0311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{726D085F-C3E1-444B-96AB-0B40C3DC0311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{726D085F-C3E1-444B-96AB-0B40C3DC0311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{726D085F-C3E1-444B-96AB-0B40C3DC0311}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		RESX_CodeReferences = {"Items":[{"Expression":"\\W($File.$Key)\\W","Extensions":".cs,.xaml,.cshtml","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"ResourceManager.GetString\\(\"($Key)\"\\)","Extensions":".cs","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"typeof\\((\\w+\\.)*($File)\\).+\"($Key)\"|\"($Key)\".+typeof\\((\\w+\\.)*($File)\\)","Extensions":".cs","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"\\W($Key)\\W","Extensions":".vb","IsCaseSensitive":false,"SingleLineComment":"'"},{"Expression":"\\W($File::$Key)\\W","Extensions":".cpp,.c,.hxx,.h","IsCaseSensitive":true,"SingleLineComment":"\/\/"},{"Expression":"<%\\$\\s+Resources:\\s*($File)\\s*,\\s*($Key)\\s*%>","Extensions":".aspx,.ascx","IsCaseSensitive":true,"SingleLineComment":null},{"Expression":"StringResourceKey.($Key)","Extensions":".cs","IsCaseSensitive":true,"SingleLineComment":"\/\/"}]}
+	EndGlobalSection
+EndGlobal

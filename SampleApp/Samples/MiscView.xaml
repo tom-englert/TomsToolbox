@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="SampleApp.Samples.MiscView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="500"
+             xmlns:toms="urn:TomsToolbox"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions">
+  <UserControl.Resources>
+    <Style TargetType="ListBoxItem" x:Key="ListBoxItemStyle">
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ListBoxItem">
+            <DockPanel>
+              <CheckBox DockPanel.Dock="Left" Style="{StaticResource {x:Static toms:ResourceKeys.ListBoxItemCheckBoxStyle}}" />
+              <Decorator Width="5" DockPanel.Dock="Left" />
+              <ContentPresenter VerticalAlignment="Center" />
+            </DockPanel>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <toms:CompositeConverter x:Key="LessThanToVisibilityConverter">
+      <toms:BinaryOperationConverter Operation="LessThan" />
+      <BooleanToVisibilityConverter />
+    </toms:CompositeConverter>
+  </UserControl.Resources>
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Margin="10">
+      <HeaderedContentControl
+        Header="Custom focus visual that aligns with the content (use keyboard navigation to see it)" Focusable="False">
+        <HeaderedContentControl.Resources>
+          <Style TargetType="Button">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="MinWidth" Value="70" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="15,3" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="Template">
+              <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                  <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Background="White">
+                    <Grid Margin="{TemplateBinding Padding}"
+                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                      <ContentPresenter />
+                      <Rectangle x:Name="FocusVisual" Margin="-3,-1"
+                                 Stroke="Transparent" StrokeThickness="1" StrokeDashArray="2"
+                                 IsHitTestVisible="False" />
+                    </Grid>
+                  </Border>
+                  <ControlTemplate.Triggers>
+                    <Trigger Property="IsPressed" Value="True">
+                      <Setter Property="BorderBrush" Value="Black" />
+                    </Trigger>
+                    <MultiDataTrigger>
+                      <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsKeyboardFocusWithin, RelativeSource={RelativeSource Self}}" Value="True" />
+                        <Condition Binding="{Binding IsFocusVisualVisible, Source={x:Static toms:KeyboardNavigation.Current}}" Value="True" />
+                      </MultiDataTrigger.Conditions>
+                      <Setter TargetName="FocusVisual" Property="Stroke" Value="Green" />
+                    </MultiDataTrigger>
+                  </ControlTemplate.Triggers>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </Style>
+        </HeaderedContentControl.Resources>
+        <StackPanel Orientation="Horizontal" Margin="5">
+          <Button Content="#1" />
+          <Button Content="#2-2" />
+          <Button Content="#3-3-3" />
+          <Button Content="#4-4-4-4" />
+        </StackPanel>
+      </HeaderedContentControl>
+      <HeaderedContentControl Header="Update binding to a POCO property with a timer.">
+        <Grid>
+          <TextBlock x:Name="Time" Margin="10"
+                     Text="{Binding Now, Mode=OneWay, Source={x:Static toms:DateTimeSource.Default}}"
+                     VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" />
+        </Grid>
+        <i:Interaction.Triggers>
+          <ei:TimerTrigger MillisecondsPerTick="1000">
+            <toms:UpdatePropertyAction TargetName="Time" Property="{x:Static TextBlock.TextProperty}" />
+          </ei:TimerTrigger>
+        </i:Interaction.Triggers>
+      </HeaderedContentControl>
+      <HeaderedContentControl Header="BinaryOperationConverter Sample">
+        <Border x:Name="OuterBorder" Margin="5" BorderBrush="Orange" BorderThickness="2">
+          <Grid>
+            <ListBox x:Name="ListBox" ItemContainerStyle="{StaticResource ListBoxItemStyle}" SelectionMode="Extended">
+              <TextBlock Text="#1" />
+              <TextBlock Text="#2" />
+              <TextBlock Text="#3" />
+              <TextBlock Text="#4" />
+            </ListBox>
+            <Border Margin="5" BorderBrush="Goldenrod" BorderThickness="2" Width="{Binding ActualWidth, ElementName=OuterBorder, Converter={x:Static toms:BinaryOperationConverter.Division}, ConverterParameter=2 }">
+              <TextBlock Margin="5" Text="Please select at least two items"
+                         TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center"
+                         Visibility="{Binding SelectedItems.Count, ElementName=ListBox, Converter={StaticResource LessThanToVisibilityConverter}, ConverterParameter=2}" />
+            </Border>
+          </Grid>
+        </Border>
+      </HeaderedContentControl>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

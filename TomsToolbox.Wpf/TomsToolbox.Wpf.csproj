@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EC9F9418-877F-49BA-AF91-F456FBC5AD57}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TomsToolbox.Wpf</RootNamespace>
+    <AssemblyName>TomsToolbox.Wpf</AssemblyName>
+    <TargetFrameworkVersion Condition=" '$(TargetFrameworkVersion)' == '' ">v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile Condition=" '$(TargetFrameworkVersion)' == 'v4.0' ">Client</TargetFrameworkProfile>
+    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\$(TargetFrameworkVersion)\</IntermediateOutputPath>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>$(AdditionalConstants)DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>True</CodeContractsRedundantAssumptions>
+    <CodeContractsAssertsToContractsCheckBox>True</CodeContractsAssertsToContractsCheckBox>
+    <CodeContractsRedundantTests>True</CodeContractsRedundantTests>
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <CodeContractsMissingPublicEnsuresAsWarnings>True</CodeContractsMissingPublicEnsuresAsWarnings>
+    <CodeContractsInferRequires>True</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>True</CodeContractsInferEnsures>
+    <CodeContractsInferEnsuresAutoProperties>True</CodeContractsInferEnsuresAutoProperties>
+    <CodeContractsInferObjectInvariants>True</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>True</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestAssumptionsForCallees>True</CodeContractsSuggestAssumptionsForCallees>
+    <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
+    <CodeContractsNecessaryEnsures>True</CodeContractsNecessaryEnsures>
+    <CodeContractsSuggestObjectInvariants>True</CodeContractsSuggestObjectInvariants>
+    <CodeContractsSuggestReadonly>True</CodeContractsSuggestReadonly>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsSQLServerOption />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
+    <CodeContractsSkipAnalysisIfCannotConnectToCache>False</CodeContractsSkipAnalysisIfCannotConnectToCache>
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
+    <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <DocumentationFile>obj\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
+    <CodeAnalysisRuleSet>..\CodeContracts.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>$(AdditionalConstants)TRACE;CODE_ANALYSIS;JETBRAINS_ANNOTATIONS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>True</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>True</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>True</CodeContractsRedundantAssumptions>
+    <CodeContractsAssertsToContractsCheckBox>True</CodeContractsAssertsToContractsCheckBox>
+    <CodeContractsRedundantTests>True</CodeContractsRedundantTests>
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <CodeContractsMissingPublicEnsuresAsWarnings>False</CodeContractsMissingPublicEnsuresAsWarnings>
+    <CodeContractsInferRequires>True</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>True</CodeContractsInferEnsures>
+    <CodeContractsInferEnsuresAutoProperties>True</CodeContractsInferEnsuresAutoProperties>
+    <CodeContractsInferObjectInvariants>True</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>True</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestAssumptionsForCallees>False</CodeContractsSuggestAssumptionsForCallees>
+    <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
+    <CodeContractsNecessaryEnsures>True</CodeContractsNecessaryEnsures>
+    <CodeContractsSuggestObjectInvariants>True</CodeContractsSuggestObjectInvariants>
+    <CodeContractsSuggestReadonly>True</CodeContractsSuggestReadonly>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsSQLServerOption />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
+    <CodeContractsSkipAnalysisIfCannotConnectToCache>False</CodeContractsSkipAnalysisIfCannotConnectToCache>
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
+    <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
+    <CodeContractsRuntimeCheckingLevel>Preconditions</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <DocumentationFile>obj\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
+    <CodeAnalysisRuleSet>..\CodeContracts.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\TomsToolbox.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=9.2.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.9.2.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\MapTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Version.cs">
+      <Link>Version.cs</Link>
+    </Compile>
+    <Compile Include="Composition\IVisualCompositionBehavior.cs" />
+    <Compile Include="XamlExtensions\VisualComposition.cs" />
+    <Compile Include="Controls\CompositeContextMenu.cs" />
+    <Compile Include="Composition\ICheckableCommand.cs" />
+    <Compile Include="Converters\CompositeMultiValueConverter.cs" />
+    <Compile Include="Converters\ArithmeticMultiValueConverter.cs" />
+    <Compile Include="Converters\ImageSourceToImageConverter.cs" />
+    <Compile Include="Converters\LogicalMultiValueConverter.cs" />
+    <Compile Include="XamlExtensions\DataTemplate.cs" />
+    <Compile Include="Converters\BinaryOperationConverter.cs" />
+    <Compile Include="Interactivity\CustomNonClientAreaBehavior.cs" />
+    <Compile Include="DateTimeSource.cs" />
+    <Compile Include="DoubleClickPanel.cs" />
+    <Compile Include="Interactivity\UpdatePropertyAction.cs" />
+    <Compile Include="Interactivity\FrameworkElementBehavior.cs" />
+    <Compile Include="Interactivity\MapPanBehavior.cs" />
+    <Compile Include="Interactivity\PopupFocusManagerBehavior.cs" />
+    <Compile Include="Interactivity\SelectGroupOnGroupHeaderClickBehavior.cs" />
+    <Compile Include="Interactivity\SelectionRectangleBehavior.cs" />
+    <Compile Include="Interactivity\MapZoomBehavior.cs" />
+    <Compile Include="Interactivity\WindowButtonsHandlingBehavior.cs" />
+    <Compile Include="Interactivity\ZoomFontSizeOnMouseWheelBehavior.cs" />
+    <Compile Include="BindingErrorTracer.cs" />
+    <Compile Include="CanvasAnchor.cs" />
+    <Compile Include="Composition\CommandRoutingBehavior.cs" />
+    <Compile Include="Composition\CommandSource.cs" />
+    <Compile Include="Composition\CommandSourceFactory.cs" />
+    <Compile Include="Composition\ComposableContentControl.cs" />
+    <Compile Include="Composition\ComposablePartWithContext.cs" />
+    <Compile Include="Composition\ContentControlCompositionBehavior.cs" />
+    <Compile Include="Composition\DataTemplateAttribute.cs" />
+    <Compile Include="Composition\DataTemplateManager.cs" />
+    <Compile Include="Composition\DataTemplateMetadata.cs" />
+    <Compile Include="Composition\ExportProviderLocator.cs" />
+    <Compile Include="Composition\IComposablePart.cs" />
+    <Compile Include="Composition\ISelectableComposablePart.cs" />
+    <Compile Include="Composition\ImportExtension.cs" />
+    <Compile Include="Composition\ItemsControlCompositionBehavior.cs" />
+    <Compile Include="Composition\IVisualCompositionMetadata.cs" />
+    <Compile Include="Composition\ModuleResourceUriAttribute.cs" />
+    <Compile Include="Composition\RoleBasedDataTemplateKey.cs" />
+    <Compile Include="Composition\RoleBasedDataTemplateSelector.cs" />
+    <Compile Include="Composition\VisualCompositionBehavior.cs" />
+    <Compile Include="Composition\VisualCompositionExportAttribute.cs" />
+    <Compile Include="Controls\IImage.cs" />
+    <Compile Include="Controls\IImageProvider.cs" />
+    <Compile Include="Controls\IMapTile.cs" />
+    <Compile Include="Controls\InPlaceEdit.cs" />
+    <Compile Include="Controls\LoadingIndicator.cs" />
+    <Compile Include="Controls\Map.cs" />
+    <Compile Include="Controls\MapTile.xaml.cs">
+      <DependentUpon>MapTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\ColorNameToBrushConverter.cs" />
+    <Compile Include="Converters\CompositeConverter.cs" />
+    <Compile Include="Converters\ConfirmedCommandConverter.cs" />
+    <Compile Include="Converters\ConfirmedCommandEventArgs.cs" />
+    <Compile Include="Converters\CoordinatesToPointConverter.cs" />
+    <Compile Include="Converters\DoubleToThicknessConverter.cs" />
+    <Compile Include="Converters\EnumToBooleanConverter.cs" />
+    <Compile Include="Converters\EnumToValuesConverter.cs" />
+    <Compile Include="Converters\ObjectToAttributeConverter.cs" />
+    <Compile Include="Converters\ObjectToDescriptionConverter.cs" />
+    <Compile Include="Converters\ObjectToDisplayNameConverter.cs" />
+    <Compile Include="Converters\ObjectToTextConverter.cs" />
+    <Compile Include="Converters\ReplaceTextConverter.cs" />
+    <Compile Include="Converters\ThicknessMultiplyConverter.cs" />
+    <Compile Include="Converters\StringToObjectConverter.cs" />
+    <Compile Include="Converters\VisibilityToBooleanConverter.cs" />
+    <Compile Include="DelegateCommand.cs" />
+    <Compile Include="ImageExtensions.cs" />
+    <Compile Include="ILayer.cs" />
+    <Compile Include="ItemsControlExtensions.cs" />
+    <Compile Include="Controls\ViewportCanvas.cs" />
+    <Compile Include="ListCollectionViewListAdapter.cs" />
+    <Compile Include="MultiSelectorExtensions.cs" />
+    <Compile Include="DependencyObjectExtensions.cs" />
+    <Compile Include="NullCommand.cs" />
+    <Compile Include="PresentationFrameworkExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\PixelSnapper.cs" />
+    <Compile Include="PropertyBinding.cs" />
+    <Compile Include="PropertyBindingValueChangedEventArgs.cs" />
+    <Compile Include="SelectorExtensions.cs" />
+    <Compile Include="Controls\SharedWidthHeaderedContentControl.cs" />
+    <Compile Include="StyleBindings.cs" />
+    <Compile Include="TextBlockHelper.cs" />
+    <Compile Include="ResourceKeys.cs" />
+    <Compile Include="TextBoxVisibleWhiteSpaceDecorator.cs" />
+    <Compile Include="TextValidationEventArgs.cs" />
+    <Compile Include="VisualExtensions.cs" />
+    <Compile Include="WaitCursor.cs" />
+    <Compile Include="WindowCommands.cs" />
+    <Compile Include="XamlExtensions\KeyboardNavigation.cs" />
+    <None Include="..\TomsToolbox.snk">
+      <Link>TomsToolbox.snk</Link>
+    </None>
+    <None Include="packages.config" />
+    <AppDesigner Include="Properties\" />
+    <None Include="TomsToolbox.Wpf.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TomsToolbox.Core\TomsToolbox.Core.csproj">
+      <Project>{ae305312-7637-43bf-9156-7ec513c55135}</Project>
+      <Name>TomsToolbox.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj">
+      <Project>{3647cd2d-2a4e-4859-9bbd-606a73c14801}</Project>
+      <Name>TomsToolbox.Desktop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj">
+      <Project>{E3EE79EA-50EC-4D54-B59F-799D50E8B221}</Project>
+      <Name>TomsToolbox.ObservableCollections</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>if not "$(ConfigurationName)"=="Release" goto :eof
+if not "$(TargetFrameworkVersion)" == "v4.0" goto :eof
+"$(SolutionDir).nuget\nuget" pack -symbols "$(ProjectPath)" -IncludeReferencedProjects -Prop Configuration=$(ConfigurationName)
+xcopy /R /Y /I /F "$(TargetDir)*.nupkg" "$(SolutionDir)Deploy\"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

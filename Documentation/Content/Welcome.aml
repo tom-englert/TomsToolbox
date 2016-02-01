@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<topic id="70e0e697-583b-46c1-94a3-a992d398d79a" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <para>A rich set of core functions and classes to ease every days .Net development tasks.</para>
+      <para/>
+      <para>The Core module is available as portable (net40+sl50+win+wpa81+wp80) and .Net 4.0 client version</para>
+      <para>All other modules are based on .Net 4.0, so it will work great with any version of .Net 4.0 and higher.</para>
+      <para>Some extensions are also available as .Net 4.5 to make use of it's new features.</para>
+      <para>
+        <externalLink>
+          <linkText>CodeContracts</linkText>
+          <linkUri>http://research.microsoft.com/en-us/projects/contracts/</linkUri>
+        </externalLink>
+        reference assemblies are part of all packages, so you can build robust code.
+      </para>
+      <para>
+        Symbol files for debugging are available at
+        <externalLink>
+          <linkText>SymbolSource.org</linkText>
+          <linkUri>http://www.symbolsource.org</linkUri>
+        </externalLink>
+      </para>
+    </introduction>
+
+    <section>
+      <title>Getting Started</title>
+      <content>
+        <list class="bullet">
+          <listItem>
+            <para>Browse this documentation to find out how this library can support you.</para>
+          </listItem>
+          <listItem>
+            <para>
+              Use <externalLink>
+                <linkText>NuGet</linkText>
+                <linkUri>http://www.nuget.org/packages/TomsToolbox.Wpf/</linkUri>
+              </externalLink> to integrate the library into your projects.
+            </para>
+          </listItem>
+          <listItem>
+            <para>
+              Download the source code from <externalLink>
+                <linkText>CodePlex</linkText>
+                <linkUri>https://tomstoolbox.codeplex.com/</linkUri>
+              </externalLink> to learn about the internals or integrate the parts of interest with your own tool set.
+            </para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+
+    <section>
+      <title>Feature requests and issues</title>
+      <content>
+        <para>
+          Report new ideas or problems here: <externalLink>
+            <linkText>Issue tracker</linkText>
+            <linkUri>https://tomstoolbox.codeplex.com/workitem/list/basic</linkUri>
+          </externalLink>
+        </para>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="30a05c61-ca5f-4fe9-8190-f1bd787fe2c7" />
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>
