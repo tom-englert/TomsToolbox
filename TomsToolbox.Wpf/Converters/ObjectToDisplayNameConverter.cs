@@ -1,4 +1,6 @@
-﻿namespace TomsToolbox.Wpf.Converters
+﻿using System.Windows;
+
+namespace TomsToolbox.Wpf.Converters
 {
     using System;
     using System.ComponentModel;
@@ -21,6 +23,7 @@
     /// Assert.Equals("This is item 1", ObjectToDisplayNameConverter.Convert(Items.Item1));
     /// </code></example>
     /// <remarks>Works with any object; for enum types the attribute of the field is returned.</remarks>
+    [ValueConversion(typeof(object), typeof(string))]
     public class ObjectToDisplayNameConverter : ObjectToAttributeConverter<DisplayNameAttribute>
     {
         /// <summary>
@@ -30,16 +33,20 @@
 
         /// <summary>
         /// Converts a value.
+        /// UnSet is unchanged, null becomes an empty string.
         /// </summary>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value.
         /// </returns>
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == DependencyProperty.UnsetValue)
+                return value;
+
             return value == null ? string.Empty : Convert(value, parameter as Type);
         }
 

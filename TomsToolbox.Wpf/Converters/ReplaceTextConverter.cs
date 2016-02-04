@@ -1,4 +1,6 @@
-﻿namespace TomsToolbox.Wpf.Converters
+﻿using System.Windows;
+
+namespace TomsToolbox.Wpf.Converters
 {
     using System;
     using System.Diagnostics;
@@ -9,6 +11,7 @@
     /// <summary>
     /// A converter that converts the specified value by replacing text using a regular expression.
     /// </summary>
+    [ValueConversion(typeof(string), typeof(string))]
     public class ReplaceTextConverter : IValueConverter
     {
         /// <summary>
@@ -70,18 +73,21 @@
 
         /// <summary>
         /// Converts a value.
+        /// Null and UnSet are unchanged.
         /// </summary>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value.
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var stringValue = value as string;
-            return stringValue == null ? value : Convert(stringValue);
+            if (value == null || value == DependencyProperty.UnsetValue)
+                return value;
+
+            return Convert((string)value);
         }
 
         /// <summary>
@@ -97,7 +103,7 @@
         /// <exception cref="System.NotImplementedException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException();
         }
     }
 }
