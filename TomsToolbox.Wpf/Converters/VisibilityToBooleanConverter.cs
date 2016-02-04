@@ -8,12 +8,19 @@
     /// <summary>
     /// The counterpart of BooleanToVisibilityConverter.
     /// </summary>
+    [ValueConversion(typeof(Visibility), typeof(bool))]
     public class VisibilityToBooleanConverter : IValueConverter
     {
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
         public static readonly IValueConverter Default = new VisibilityToBooleanConverter();
+        
+        public Visibility VisibilityWhenFalse { get; set; }
+        
+        public VisibilityToBooleanConverter() {
+            VisibilityWhenFalse = Visibility.Collapsed;
+        }
 
         /// <summary>
         /// Converts a value.
@@ -23,12 +30,12 @@
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value. If the value is null or Unset then the value is unchanged.
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
-                return false;
+            if (value == null || value == DependencyProperty.Unset)
+                return value;
 
             return ((Visibility)value == Visibility.Visible);
         }
@@ -41,11 +48,14 @@
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value. If the value is null or Unset then the value is unchanged.
         /// </returns>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return ((value != null) && (bool)value) ? Visibility.Visible : Visibility.Collapsed;
+            if (value == null || value == DependencyProperty.Unset)
+                return value;
+
+            return ((bool)value) ? Visibility.Visible : VisibilityWhenFalse;
         }
     }
 }
