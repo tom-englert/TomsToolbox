@@ -19,7 +19,6 @@
         private KeyboardNavigation()
         {
             var inputManager = InputManager.Current;
-            Contract.Assume(inputManager != null); // TODO: remove after fixing missing contract in CC 
             inputManager.PostProcessInput += InputManager_PostProcessInput;
         }
 

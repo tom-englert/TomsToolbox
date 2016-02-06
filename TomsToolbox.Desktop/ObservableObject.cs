@@ -288,6 +288,9 @@
         {
             Contract.Requires(sender != null);
 
+            if (e.PropertyName == null)
+                return;
+
             var sourceType = sender.GetType();
             foreach (var mapping in RelayMapping.Where(item => item.Key.IsAssignableFrom(sourceType)).Select(item => item.Value))
             {

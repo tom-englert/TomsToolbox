@@ -94,7 +94,7 @@
             Contract.Requires(table != null);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            if ((table.Count == 1) && (table[0].Count == 1) && string.IsNullOrWhiteSpace(table[0][0]))
+            if ((table.Count == 1) && (table[0] != null) && (table[0].Count == 1) && string.IsNullOrWhiteSpace(table[0][0]))
                 return Quote + (table[0][0] ?? string.Empty) + Quote;
 
             return string.Join(Environment.NewLine, table.Select(line => string.Join(separator.ToString(), line.Select(cell => Quoted(cell, separator)))));
@@ -140,7 +140,7 @@
         {
             Contract.Requires(reader != null);
             Contract.Ensures(Contract.Result<IList<string>>() != null);
-            Contract.Ensures(Contract.ForAll(Contract.Result<IList<string>>(), item => item != null));
+            // TODO: crashes CC 1.10.10126.2-rc1 Contract.Ensures(Contract.ForAll(Contract.Result<IList<string>>(), item => item != null));
 
             var columns = new List<string>();
 

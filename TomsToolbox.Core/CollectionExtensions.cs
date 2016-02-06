@@ -463,6 +463,7 @@
         public static IEnumerable<T> Repeat<T>(ICollection<T> source, int count)
         {
             Contract.Requires(source != null);
+            Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
 
             for (var i = 0; i < count; i++)
             {

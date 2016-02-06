@@ -5,6 +5,7 @@ namespace TomsToolbox.Desktop
     using System.Diagnostics.Contracts;
     using System.Reflection;
     using System.Threading;
+    using System.Threading.Tasks;
     using System.Windows.Threading;
 
     using TomsToolbox.Core;
@@ -132,6 +133,7 @@ namespace TomsToolbox.Desktop
         private readonly Thread _thread;
         private readonly EventWaitHandle _threadStarted = new EventWaitHandle(false, EventResetMode.ManualReset);
         private Dispatcher _dispatcher;
+        private TaskScheduler _taskScheduler;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadWithDispatcher" /> class.
@@ -178,6 +180,20 @@ namespace TomsToolbox.Desktop
 
                 Contract.Assume(_dispatcher != null);
                 return _dispatcher;
+            }
+        }
+
+        /// <summary>
+        /// Gets the task scheduler associated with the <see cref="Dispatcher"/>
+        /// </summary>
+        [ContractVerification(false)]
+        public TaskScheduler TaskScheduler
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<TaskScheduler>() != null);
+
+                return _taskScheduler ?? (_taskScheduler = Invoke(() => TaskScheduler.FromCurrentSynchronizationContext()));
             }
         }
 

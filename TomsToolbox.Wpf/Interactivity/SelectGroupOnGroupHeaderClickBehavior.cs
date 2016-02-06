@@ -1,4 +1,5 @@
-﻿namespace TomsToolbox.Wpf.Interactivity
+﻿using System.Diagnostics.Contracts;
+namespace TomsToolbox.Wpf.Interactivity
 {
     using System.Diagnostics.Contracts;
     using System.Windows;
@@ -62,24 +63,34 @@
             if (selector == null)
                 return;
 
-            var multiSelector = (dynamic)selector;
             selector.BeginInit();
 
             try
             {
+                var multiSelector = (dynamic)selector;
+
+                var selectedItems = multiSelector.SelectedItems;
+                if (selectedItems == null)
+                    return;
+
                 if ((Keyboard.Modifiers & ModifierKeys.Control) == 0)
                 {
-                    multiSelector.SelectedItems.Clear();
+                    selectedItems.Clear();
                 }
 
                 foreach (var item in group.Items)
                 {
-                    multiSelector.SelectedItems.Add(item);
+                    selectedItems.Add(item);
                 }
             }
-            catch {} // Element did not have a SelectedItems property.
-
-            selector.EndInit();
+            catch
+            {
+                // Element did not have a SelectedItems property.
+            }
+            finally
+            {
+                selector.EndInit();
+            }
         }
     }
 }
