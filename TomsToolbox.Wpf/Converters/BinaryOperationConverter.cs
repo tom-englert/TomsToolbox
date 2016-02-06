@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-
-namespace TomsToolbox.Wpf.Converters
+﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
     using System.ComponentModel;
     using System.Diagnostics.Contracts;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
@@ -89,20 +88,22 @@ namespace TomsToolbox.Wpf.Converters
         private static readonly Func<object, object, object> _greaterThanOrEqualsMethod = (a, b) => ToDouble(a) >= ToDouble(b);
         private static readonly Func<object, object, object> _lessThanOrEqualsMethod = (a, b) => ToDouble(a) <= ToDouble(b);
 
-        private static Dictionary<Func<object, object, object>, Func<object, object, object>> _inverseOperations =
-            new Dictionary<Func<object, object, object>, Func<object, object, object>>();
+        private static readonly Dictionary<Func<object, object, object>, Func<object, object, object>> _inverseOperations;
 
         static BinaryOperationConverter() {
-            _inverseOperations.Add(_additionMethod, _subtractionMethod);
-            _inverseOperations.Add(_subtractionMethod, _additionMethod);
-            _inverseOperations.Add(_multiplyMethod, _divisionMethod);
-            _inverseOperations.Add(_divisionMethod, _multiplyMethod);
-            _inverseOperations.Add(_equalityMethod, _inequalityMethod);
-            _inverseOperations.Add(_inequalityMethod, _equalityMethod);
-            _inverseOperations.Add(_greaterThanMethod, _lessThanOrEqualsMethod);
-            _inverseOperations.Add(_lessThanOrEqualsMethod, _greaterThanMethod);
-            _inverseOperations.Add(_lessThanMethod, _greaterThanOrEqualsMethod);
-            _inverseOperations.Add(_greaterThanOrEqualsMethod, _lessThanMethod);
+            _inverseOperations = new Dictionary<Func<object, object, object>, Func<object, object, object>>
+            {
+                {_additionMethod, _subtractionMethod},
+                {_subtractionMethod, _additionMethod},
+                {_multiplyMethod, _divisionMethod},
+                {_divisionMethod, _multiplyMethod},
+                {_equalityMethod, null},
+                {_inequalityMethod, null},
+                {_greaterThanMethod, null},
+                {_lessThanOrEqualsMethod, null},
+                {_lessThanMethod, null},
+                {_greaterThanOrEqualsMethod, null}
+            };
         }
 
         private BinaryOperation _operation;
@@ -113,7 +114,12 @@ namespace TomsToolbox.Wpf.Converters
         {
             if (!inverse)
                 return _operationMethod;
-            return _inverseOperations[_operationMethod];
+            var inverseMethod  = _inverseOperations[_operationMethod];
+            if (inverseMethod == null)
+            {
+                throw new InvalidOperationException("The operation cannot be converted back.");
+            }
+            return inverseMethod;
         }
 
         /// <summary>
@@ -215,7 +221,7 @@ namespace TomsToolbox.Wpf.Converters
                         break;
 
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(value), value, null);
+                        throw new ArgumentOutOfRangeException("value", value, null);
                 }
             }
         }

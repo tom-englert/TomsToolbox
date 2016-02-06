@@ -64,7 +64,7 @@
                 return (Point)(Coordinates)value;
             }
 
-            throw new ArgumentException("The value has to be a Point or a Coordinate.", nameof(value));
+            throw new ArgumentException("The value has to be a Point or a Coordinate.", "value");
         }
     }
 }

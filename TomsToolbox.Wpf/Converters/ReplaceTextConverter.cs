@@ -1,11 +1,10 @@
-﻿using System.Windows;
-
-namespace TomsToolbox.Wpf.Converters
+﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
     using System.Diagnostics;
     using System.Globalization;
     using System.Text.RegularExpressions;
+    using System.Windows;
     using System.Windows.Data;
 
     /// <summary>

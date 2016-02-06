@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace TomsToolbox.Wpf.Converters
+﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
     using System.Collections.Generic;
@@ -8,6 +6,7 @@ namespace TomsToolbox.Wpf.Converters
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
+    using System.Windows;
     using System.Windows.Data;
 
     /// <summary>
@@ -74,7 +73,7 @@ namespace TomsToolbox.Wpf.Converters
                         break;
 
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(value), value, null);
+                        throw new ArgumentOutOfRangeException("value", value, null);
                 }
             }
         }

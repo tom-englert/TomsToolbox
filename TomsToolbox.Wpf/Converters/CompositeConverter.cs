@@ -44,7 +44,7 @@
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (Converters == null || Converters.Count <= 0)
+            if (Converters.Count <= 0)
             {
                 throw new InvalidOperationException("One or more converters are required.");
             }
@@ -64,7 +64,7 @@
         /// </returns>
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (Converters == null || Converters.Count <= 0) {
+            if (Converters.Count <= 0) {
                 throw new InvalidOperationException("One or more converters are required.");
             }
 

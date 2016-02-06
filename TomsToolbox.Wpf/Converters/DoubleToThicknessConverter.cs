@@ -12,8 +12,6 @@
     [ValueConversion(typeof(double), typeof(Thickness))]
     public class DoubleToThicknessConverter : IValueConverter
     {
-        private static readonly TypeConverter _typeConverter = new ThicknessConverter();
-
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>

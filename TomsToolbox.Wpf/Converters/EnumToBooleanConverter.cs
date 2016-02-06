@@ -1,11 +1,10 @@
-﻿using System.Windows;
-
-namespace TomsToolbox.Wpf.Converters
+﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
     using System.ComponentModel;
     using System.Globalization;
     using System.Linq;
+    using System.Windows;
     using System.Windows.Data;
 
     /// <summary>
@@ -52,7 +51,7 @@ namespace TomsToolbox.Wpf.Converters
             var valueType = value.GetType();
             if (!valueType.IsEnum)
             {
-                throw new ArgumentException("The value is not an enum.", nameof(value));
+                throw new ArgumentException("The value is not an enum.", "value");
             }
 
             // do not catch exceptions and let it fail fast so we are not left wondering what happened

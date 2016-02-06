@@ -66,7 +66,7 @@
             }
             else
             {
-                throw new ArgumentException("Invalid thickness parameter.", nameof(parameter));
+                throw new ArgumentException("Invalid thickness parameter.", "parameter");
             }
 
             return Multiply(target, factor);

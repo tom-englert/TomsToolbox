@@ -1,11 +1,10 @@
-﻿using System.Windows;
-
-namespace TomsToolbox.Wpf.Converters
+﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Windows;
     using System.Windows.Data;
 
     /// <summary>
@@ -29,7 +28,9 @@ namespace TomsToolbox.Wpf.Converters
         {
             get
             {
-                return _typeConverter?.GetType();
+                if (_typeConverter != null)
+                    return _typeConverter.GetType();
+                return null;
             }
             set
             {
@@ -77,7 +78,8 @@ namespace TomsToolbox.Wpf.Converters
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException($"{typeConverter} failed to convert '{value}': {ex.Message}");
+                throw new InvalidOperationException(string.Format("{0} failed to convert '{1}': {2}", typeConverter,
+                    value, ex.Message));
             }
         }
 
@@ -106,7 +108,8 @@ namespace TomsToolbox.Wpf.Converters
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException($"{typeConverter} failed to convert '{value}': {ex.Message}");
+                throw new InvalidOperationException(string.Format("{0} failed to convert '{1}': {2}", typeConverter,
+                    value, ex.Message));
             }
         }
 

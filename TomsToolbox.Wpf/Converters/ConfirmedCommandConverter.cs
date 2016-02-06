@@ -1,11 +1,10 @@
-﻿using System.Windows;
-
-namespace TomsToolbox.Wpf.Converters
+﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
+    using System.Windows;
     using System.Windows.Data;
     using System.Windows.Input;
 
@@ -65,13 +64,15 @@ namespace TomsToolbox.Wpf.Converters
             Contract.Requires(e != null);
 
             var handler = Executing;
-            handler?.Invoke(this, e);
+            if (handler != null)
+                handler.Invoke(this, e);
         }
 
         private void OnError(ErrorEventArgs e)
         {
             var handler = Error;
-            handler?.Invoke(this, e);
+            if (handler != null)
+                handler.Invoke(this, e);
         }
 
         class CommandProxy : ICommand
