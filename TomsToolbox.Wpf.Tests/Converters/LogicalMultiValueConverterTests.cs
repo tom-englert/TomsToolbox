@@ -1,5 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Tests.Converters
 {
+    using System.Windows;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using TomsToolbox.Wpf.Converters;
@@ -99,7 +101,7 @@
 
             var result = target.Convert(source, null, null, null);
 
-            Assert.AreEqual(false, result);
+            Assert.AreEqual(DependencyProperty.UnsetValue, result);
         }
 
         [TestMethod]

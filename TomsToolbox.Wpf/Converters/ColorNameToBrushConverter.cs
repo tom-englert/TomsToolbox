@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Windows.Data;
@@ -48,7 +49,15 @@
             if (value == null || value == DependencyProperty.UnsetValue)
                 return value;
 
-            return Convert((string)value);
+            try
+            {
+                return Convert((string)value);
+            }
+            catch (Exception ex)
+            {
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
+            }
         }
 
         /// <summary>

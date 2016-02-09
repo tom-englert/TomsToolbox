@@ -2,6 +2,8 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
     using System.Windows;
@@ -32,7 +34,15 @@
             if (value == DependencyProperty.UnsetValue)
                 return value;
 
-            return Convert(value, (string)parameter);
+            try
+            {
+                return Convert(value, (string)parameter);
+            }
+            catch (Exception ex)
+            {
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
+            }
         }
 
         /// <summary>
@@ -43,10 +53,8 @@
         /// <returns>True if the value matches one of the enum names.</returns>
         public static bool Convert(object value, string matches)
         {
-            if (value == null)
-                return false;
-            if (matches == null)
-                return false;
+            Contract.Requires(value != null);
+            Contract.Requires(matches != null);
 
             var valueType = value.GetType();
             if (!valueType.IsEnum)

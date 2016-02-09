@@ -1,5 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Tests.Converters
 {
+    using System.Windows;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using TomsToolbox.Wpf.Converters;
@@ -24,7 +26,7 @@
             var source = new object[] { 10, 12, "3.5", "NAN" };
             var result = target.Convert(source, null, null, null);
 
-            Assert.AreEqual(null, result);
+            Assert.AreEqual(DependencyProperty.UnsetValue, result);
         }
 
         [TestMethod]
@@ -44,7 +46,7 @@
             var source = new object[] { 10, 12, "3.5", "NAN" };
             var result = target.Convert(source, null, null, null);
 
-            Assert.AreEqual(null, result);
+            Assert.AreEqual(DependencyProperty.UnsetValue, result);
         }
 
         [TestMethod]
@@ -64,7 +66,7 @@
             var source = new object[] { 10, 12, "3.5", "NAN" };
             var result = target.Convert(source, null, null, null);
 
-            Assert.AreEqual(null, result);
+            Assert.AreEqual(DependencyProperty.UnsetValue, result);
         }
 
         [TestMethod]
@@ -84,7 +86,7 @@
             var source = new object[] { 10, 12, "3.5", "NAN" };
             var result = target.Convert(source, null, null, null);
 
-            Assert.AreEqual(null, result);
+            Assert.AreEqual(DependencyProperty.UnsetValue, result);
         }
     }
 }

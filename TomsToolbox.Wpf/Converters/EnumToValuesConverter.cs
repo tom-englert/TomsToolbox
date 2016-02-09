@@ -3,6 +3,8 @@
     using System;
     using System.Collections;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
     using System.Windows;
@@ -33,7 +35,15 @@
             if (value == null || value == DependencyProperty.UnsetValue)
                 return value;
 
-            return Convert((Type)value, (string)parameter);
+            try
+            {
+                return Convert((Type)value, (string)parameter);
+            }
+            catch (Exception ex)
+            {
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
+            }
         }
 
         /// <summary>
@@ -43,6 +53,8 @@
         /// <returns>An array of the enum's values.</returns>
         public static Array Convert(Type type)
         {
+            Contract.Requires(type != null);
+
             return Convert(type, null);
         }
 
@@ -54,8 +66,7 @@
         /// <returns>An array of the enum's values.</returns>
         public static Array Convert(Type type, string excluded)
         {
-            if (type == null)
-                return null;
+            Contract.Requires(type != null);
 
             var values = Enum.GetValues(type);
 

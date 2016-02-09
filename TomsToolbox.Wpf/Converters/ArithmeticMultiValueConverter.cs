@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
@@ -141,8 +142,15 @@
             if (values.Any(x => x == DependencyProperty.UnsetValue))
                 return DependencyProperty.UnsetValue;
 
-            // let it fail fast so we are not left wondering what happened
-            return _operationMethod(values.Select(v => System.Convert.ToDouble(v, CultureInfo.InvariantCulture)));
+            try
+            {
+                return _operationMethod(values.Select(v => System.Convert.ToDouble(v, CultureInfo.InvariantCulture)));
+            }
+            catch (Exception ex)
+            {
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
+            }
         }
 
         /// <summary>

@@ -1,9 +1,12 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
+
+    using TomsToolbox.Core;
 
     /// <summary>
     /// The counterpart of VisibilityToBooleanConverter.
@@ -17,24 +20,25 @@
         public static readonly IValueConverter Default = new BooleanToVisibilityConverter();
 
         /// <summary>
-        /// The visibility value to be used when converting from a false bool value. Defaults to Collapsed.
+        /// The visibility value to be used when converting from a false boolean value. Defaults to Collapsed.
         /// </summary>
         public Visibility VisibilityWhenBooleanIsFalse { get; set; }
 
         /// <summary>
-        /// The visibility value to be used when converting from a null bool value. Defaults to Collapsed.
+        /// The visibility value to be used when converting from a null boolean value. Defaults to Collapsed.
         /// </summary>
         public Visibility? VisibilityWhenBooleanIsNull { get; set; }
 
         /// <summary>
-        /// The bool value to be used when converting from a null Visibility value. Defaults to false.
+        /// The boolean value to be used when converting from a null Visibility value. Defaults to false.
         /// </summary>
         public bool? BooleanWhenVisibilityIsNull { get; set; }
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public BooleanToVisibilityConverter() {
+        public BooleanToVisibilityConverter() 
+        {
             VisibilityWhenBooleanIsFalse = Visibility.Collapsed;
             VisibilityWhenBooleanIsNull = Visibility.Collapsed;
             BooleanWhenVisibilityIsNull = false;
@@ -51,12 +55,20 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-            if (value == DependencyProperty.UnsetValue)
-                return value;
-
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) 
+        {
             if (value == null)
                 return VisibilityWhenBooleanIsNull;
+
+            if (value == DependencyProperty.UnsetValue)
+            {
+                value = false;
+            }
+            else if (!(value is bool))
+            {
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, "Source is not a boolean.");
+                value = false;
+            }
 
             return (bool)value ? Visibility.Visible : VisibilityWhenBooleanIsFalse;
         }

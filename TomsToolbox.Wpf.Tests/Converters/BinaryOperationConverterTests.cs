@@ -57,7 +57,7 @@
         {
             var target = BinaryOperationConverter.Multiply;
             var result = target.Convert(new Vector(1, 2), null, target, null);
-            Assert.AreEqual(null, result);
+            Assert.AreEqual(DependencyProperty.UnsetValue, result);
         }
 
         [TestMethod]
@@ -73,7 +73,7 @@
         {
             var target = BinaryOperationConverter.Multiply;
             var result = target.Convert(target, null, 2, null);
-            Assert.AreEqual(null, result);
+            Assert.AreEqual(DependencyProperty.UnsetValue, result);
         }
 
         [TestMethod]
@@ -216,6 +216,14 @@
             Assert.AreEqual(true, result);
         }
 
+        [TestMethod]
+        public void BinaryOperationMultiConverter_GreaterThanOrEqual_Test()
+        {
+            var target = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThanOrEqual };
+            var result = target.Convert(new object[] { 2, 2.0 }, null, null, null);
+            Assert.AreEqual(true, result);
+        }
+
         class TestClassTypeConverter : TypeConverter
         {
             public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
@@ -239,7 +247,7 @@
                 _value = value;
             }
 
-            public static TestClass operator * (TestClass x, int y)
+            public static TestClass operator *(TestClass x, int y)
             {
                 return new TestClass(x._value * y);
             }

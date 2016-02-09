@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
@@ -17,24 +18,25 @@
         public static readonly IValueConverter Default = new VisibilityToBooleanConverter();
 
         /// <summary>
-        /// The visibility value to be used when converting from a false bool value. Defaults to Collapsed.
+        /// The visibility value to be used when converting from a false boolean value. Defaults to Collapsed.
         /// </summary>
         public Visibility VisibilityWhenBooleanIsFalse { get; set; }
 
         /// <summary>
-        /// The visibility value to be used when converting from a null bool value. Defaults to Collapsed.
+        /// The visibility value to be used when converting from a null boolean value. Defaults to Collapsed.
         /// </summary>
         public Visibility? VisibilityWhenBooleanIsNull { get; set; }
 
         /// <summary>
-        /// The bool value to be used when converting from a null Visibility value. Defaults to false.
+        /// The boolean value to be used when converting from a null Visibility value. Defaults to false.
         /// </summary>
         public bool? BooleanWhenVisibilityIsNull { get; set; }
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public VisibilityToBooleanConverter() {
+        public VisibilityToBooleanConverter()
+        {
             VisibilityWhenBooleanIsFalse = Visibility.Collapsed;
             VisibilityWhenBooleanIsNull = Visibility.Collapsed;
             BooleanWhenVisibilityIsNull = false;
@@ -51,13 +53,22 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
             if (value == DependencyProperty.UnsetValue)
                 return value;
             if (value == null)
                 return BooleanWhenVisibilityIsNull;
 
-            return (Visibility)value == Visibility.Visible;
+            try
+            {
+                return (Visibility)value == Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
+            }
         }
 
         /// <summary>
@@ -79,7 +90,15 @@
             if (value == null)
                 return VisibilityWhenBooleanIsNull;
 
-            return (bool)value ? Visibility.Visible : VisibilityWhenBooleanIsFalse;
+            try
+            {
+                return (bool)value ? Visibility.Visible : VisibilityWhenBooleanIsFalse;
+            }
+            catch (Exception ex)
+            {
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
+            }
         }
     }
 }

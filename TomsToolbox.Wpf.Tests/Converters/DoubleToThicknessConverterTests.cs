@@ -38,7 +38,7 @@
             var parameter = new Rect();
             var result = target.Convert(source, null, parameter, null);
 
-            Assert.AreEqual(new Thickness(2, 2, 2, 2), result);
+            Assert.AreEqual(DependencyProperty.UnsetValue, result);
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@
             var source = new Rect();
             var result = target.Convert(source, null, null, null);
 
-            Assert.AreEqual(new Thickness(), result);
+            Assert.AreEqual(DependencyProperty.UnsetValue, result);
         }
     }
 }

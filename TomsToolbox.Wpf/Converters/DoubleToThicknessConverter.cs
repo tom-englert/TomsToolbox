@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
@@ -30,9 +31,17 @@
             if (value == null || value == DependencyProperty.UnsetValue)
                 return value;
 
-            var thickness = ConvertNumberToThickness(value);
+            try
+            {
+                var thickness = ConvertNumberToThickness(value);
 
-            return ThicknessMultiplyConverter.Default.Convert(thickness, targetType, parameter, culture);
+                return ThicknessMultiplyConverter.Default.Convert(thickness, targetType, parameter, culture);
+            }
+            catch (Exception ex)
+            {
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
+            }
         }
 
         private static Thickness ConvertNumberToThickness(object value)

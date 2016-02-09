@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Windows;
@@ -43,10 +44,18 @@
         /// </returns>
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == DependencyProperty.UnsetValue)
+            if ((value == null) || (value == DependencyProperty.UnsetValue))
                 return value;
 
-            return value == null ? string.Empty : Convert(value, parameter as Type);
+            try
+            {
+                return Convert(value, parameter as Type);
+            }
+            catch (Exception ex)
+            {
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
+            }
         }
 
         /// <summary>

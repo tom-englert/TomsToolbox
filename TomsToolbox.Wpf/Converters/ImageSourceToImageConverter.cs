@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Windows.Controls;
     using System.Windows;
@@ -35,7 +36,15 @@
             if (value == null || value == DependencyProperty.UnsetValue)
                 return value;
 
-            return new Image { Source = (ImageSource)value };
+            try
+            {
+                return new Image { Source = (ImageSource)value };
+            }
+            catch (Exception ex)
+            {
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
+            }
         }
 
         /// <summary>

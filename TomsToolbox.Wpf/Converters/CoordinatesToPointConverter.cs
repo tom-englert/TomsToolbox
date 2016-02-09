@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
@@ -64,7 +65,8 @@
                 return (Point)(Coordinates)value;
             }
 
-            throw new ArgumentException("The value has to be a Point or a Coordinate.", "value");
+            PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", typeof(CoordinatesToPointConverter).Name, "Source in neither of type Point no of type Coordinates.");
+            return DependencyProperty.UnsetValue;
         }
     }
 }

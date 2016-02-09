@@ -57,15 +57,8 @@
 
             replacement = replacement ?? string.Empty;
 
-            try
-            {
-                var regex = new Regex(pattern, options);
-                regex.Replace(value, replacement, replaceAll ? -1 : 1);
-            }
-            catch (ArgumentException ex)
-            {
-                Trace.TraceError(ex.ToString());
-            }
+            var regex = new Regex(pattern, options);
+            regex.Replace(value, replacement, replaceAll ? -1 : 1);
 
             return value;
         }
@@ -86,7 +79,15 @@
             if (value == null || value == DependencyProperty.UnsetValue)
                 return value;
 
-            return Convert((string)value);
+            try
+            {
+                return Convert((string)value);
+            }
+            catch (Exception ex)
+            {
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
+            }
         }
 
         /// <summary>

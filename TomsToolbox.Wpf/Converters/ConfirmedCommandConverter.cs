@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
@@ -30,7 +31,15 @@
             if (value == null || value == DependencyProperty.UnsetValue)
                 return value;
 
-            return new CommandProxy(this, (ICommand)value);
+            try
+            {
+                return new CommandProxy(this, (ICommand)value);
+            }
+            catch (Exception ex)
+            {
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
+            }
         }
 
         /// <summary>
@@ -91,7 +100,7 @@
             public void Execute(object parameter)
             {
                 var args = new ConfirmedCommandEventArgs { Parameter = parameter };
-                
+
                 _owner.QueryCancelExecution(args);
 
                 if (args.Cancel)

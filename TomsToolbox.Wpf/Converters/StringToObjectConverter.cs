@@ -78,7 +78,8 @@
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "{0} failed to convert '{1}': {2}", typeConverter, value, ex.Message));
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
             }
         }
 
@@ -107,7 +108,8 @@
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "{0} failed to convert '{1}': {2}", typeConverter, value, ex.Message), ex);
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
             }
         }
 

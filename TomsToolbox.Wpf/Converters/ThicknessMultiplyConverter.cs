@@ -2,10 +2,13 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
+
+    using TomsToolbox.Core;
 
     /// <summary>
     /// Multiplies all corresponding members of two <see cref="Thickness"/>. structures. 
@@ -51,10 +54,18 @@
             if (value == null || value == DependencyProperty.UnsetValue)
                 return value;
 
-            var target = (Thickness)value;
-            var factor = GetThicknessFromParameter(parameter);
+            try
+            {
+                var target = (Thickness)value;
+                var factor = GetThicknessFromParameter(parameter);
 
-            return Multiply(target, factor);
+                return Multiply(target, factor);
+            }
+            catch (Exception ex)
+            {
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
+            }
         }
 
         private static Thickness GetThicknessFromParameter(object parameter)
@@ -67,8 +78,8 @@
 
             var parameterString = parameter as string;
             if (parameterString != null)
-                return (Thickness)_typeConverter.ConvertFromInvariantString(parameterString);
-            
+                return _typeConverter.ConvertFromInvariantString(parameterString).SafeCast<Thickness>();
+
             throw new ArgumentException("Invalid thickness parameter.", "parameter");
         }
 

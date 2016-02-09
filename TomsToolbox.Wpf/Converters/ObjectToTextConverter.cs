@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Windows;
@@ -55,10 +56,18 @@
         /// </returns>
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == DependencyProperty.UnsetValue)
+            if ((value == null) || (value == DependencyProperty.UnsetValue))
                 return value;
 
-            return value == null ? string.Empty : Convert(parameter ?? Key, value, null);
+            try
+            {
+                return Convert(parameter ?? Key, value, null);
+            }
+            catch (Exception ex)
+            {
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
+            }
         }
 
         /// <summary>

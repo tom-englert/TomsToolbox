@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
@@ -217,12 +218,21 @@
 
             var valueType = value.GetType();
 
-            if (Type.GetTypeCode(valueType) == TypeCode.Object)
+            try
             {
-                return ApplyOperation(valueType, value, parameter) ?? ApplyOperationOnCastedObject(valueType, value, parameter) ?? ApplyOperation(value, parameter);
-            }
 
-            return ApplyOperation(value, parameter);
+                if (Type.GetTypeCode(valueType) == TypeCode.Object)
+                {
+                    return ApplyOperation(valueType, value, parameter) ?? ApplyOperationOnCastedObject(valueType, value, parameter) ?? ApplyOperation(value, parameter) ?? DependencyProperty.UnsetValue;
+                }
+
+                return ApplyOperation(value, parameter) ?? DependencyProperty.UnsetValue;
+            }
+            catch (Exception ex)
+            {
+                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                return DependencyProperty.UnsetValue;
+            }
         }
 
         /// <summary>
