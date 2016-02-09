@@ -210,23 +210,19 @@
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == DependencyProperty.UnsetValue)
-                return value;
-
-            if ((value == null) || (parameter == null))
+            if ((value == DependencyProperty.UnsetValue) || (value == null) || (parameter == null))
                 return value;
 
             var valueType = value.GetType();
 
             try
             {
-
                 if (Type.GetTypeCode(valueType) == TypeCode.Object)
                 {
-                    return ApplyOperation(valueType, value, parameter) ?? ApplyOperationOnCastedObject(valueType, value, parameter) ?? ApplyOperation(value, parameter) ?? DependencyProperty.UnsetValue;
+                    return ApplyOperation(valueType, value, parameter) ?? ApplyOperationOnCastedObject(valueType, value, parameter) ?? ApplyOperation(value, parameter);
                 }
 
-                return ApplyOperation(value, parameter) ?? DependencyProperty.UnsetValue;
+                return ApplyOperation(value, parameter);
             }
             catch (Exception ex)
             {
@@ -286,15 +282,7 @@
             Contract.Requires(value != null);
             Contract.Requires(parameter != null);
 
-            try
-            {
-                return _operationMethod(value, parameter);
-            }
-            catch (SystemException)
-            {
-            }
-
-            return null;
+            return _operationMethod(value, parameter);
         }
 
         private object ApplyOperation(Type valueType, object value, object parameter)
