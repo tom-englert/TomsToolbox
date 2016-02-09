@@ -4,29 +4,33 @@
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
+    using System.Windows;
     using System.Windows.Data;
     using System.Windows.Input;
 
     /// <summary>
     /// A converter to use in <see cref="ICommand"/> bindings to intercept or filter command executions in the view layer in MVVM applications.
     /// </summary>
+    [ValueConversion(typeof(ICommand), typeof(CommandProxy))]
     public class ConfirmedCommandConverter : IValueConverter
     {
         /// <summary>
         /// Converts a value.
+        /// Null and UnSet are unchanged.
         /// </summary>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value.
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var command = value as ICommand;
+            if (value == null || value == DependencyProperty.UnsetValue)
+                return value;
 
-            return command == null ? value : new CommandProxy(this, command);
+            return new CommandProxy(this, (ICommand)value);
         }
 
         /// <summary>
@@ -39,10 +43,10 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        /// <exception cref="System.NotImplementedException"></exception>
+        /// <exception cref="System.InvalidOperationException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException();
         }
 
         /// <summary>
@@ -61,14 +65,14 @@
 
             var handler = Executing;
             if (handler != null)
-                handler(this, e);
+                handler.Invoke(this, e);
         }
 
         private void OnError(ErrorEventArgs e)
         {
             var handler = Error;
             if (handler != null)
-                handler(this, e);
+                handler.Invoke(this, e);
         }
 
         class CommandProxy : ICommand

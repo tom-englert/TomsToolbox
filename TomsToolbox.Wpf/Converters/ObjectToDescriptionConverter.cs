@@ -4,6 +4,7 @@
     using System.ComponentModel;
     using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Windows;
     using System.Windows.Data;
 
     /// <summary>
@@ -21,6 +22,7 @@
     /// Assert.Equals("This is item 1", ObjectToDescriptionConverter.Convert(Items.Item1));
     /// </code></example>
     /// <remarks>Works with any object; for enum types the attribute of the field is returned.</remarks>
+    [ValueConversion(typeof(object), typeof(string))]
     public class ObjectToDescriptionConverter : ObjectToAttributeConverter<DescriptionAttribute>
     {
         /// <summary>
@@ -30,6 +32,7 @@
 
         /// <summary>
         /// Converts a value.
+        /// UnSet is unchanged, null becomes an empty string.
         /// </summary>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
@@ -40,6 +43,9 @@
         /// </returns>
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == DependencyProperty.UnsetValue)
+                return value;
+
             return value == null ? string.Empty : Convert(value, parameter as Type);
         }
 

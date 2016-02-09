@@ -10,6 +10,7 @@
     /// <summary>
     /// Converts WGS-84 coordinates into logical XY coordinates in the range 0..1 and back.
     /// </summary>
+    [ValueConversion(typeof(object), typeof(object))]
     public class CoordinatesToPointConverter : IValueConverter
     {
         /// <summary>
@@ -19,13 +20,14 @@
 
         /// <summary>
         /// Converts a value.
+        /// Null and UnSet are unchanged.
         /// </summary>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value.
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -49,6 +51,9 @@
 
         private static object Convert(object value)
         {
+            if (value == null || value == DependencyProperty.UnsetValue)
+                return value;
+
             if (value is Point)
             {
                 return (Coordinates)(Point)value;
@@ -59,7 +64,7 @@
                 return (Point)(Coordinates)value;
             }
 
-            return null;
+            throw new ArgumentException("The value has to be a Point or a Coordinate.", "value");
         }
     }
 }

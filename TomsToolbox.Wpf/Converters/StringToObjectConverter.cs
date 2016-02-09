@@ -4,11 +4,13 @@
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Windows;
     using System.Windows.Data;
 
     /// <summary>
     /// A <see cref="IValueConverter" /> wrapping a <see cref="TypeConverter" />
     /// </summary>
+    [ValueConversion(typeof(string), typeof(object))]
     public class StringToObjectConverter : IValueConverter
     {
         private TypeConverter _typeConverter;
@@ -26,7 +28,9 @@
         {
             get
             {
-                return _typeConverter != null ? _typeConverter.GetType() : null;
+                if (_typeConverter != null)
+                    return _typeConverter.GetType();
+                return null;
             }
             set
             {
@@ -46,10 +50,10 @@
         }
 
         /// <summary>
-        /// Converts a value.
+        /// Converts a value. Null or UnSet are unchanged.
         /// </summary>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value.
         /// </returns>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
@@ -57,8 +61,8 @@
         /// <param name="culture">The culture to use in the converter.</param>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
-                return null;
+            if (value == null || value == DependencyProperty.UnsetValue)
+                return value;
 
             var typeConverter = GetTypeConverter(targetType);
             if (typeConverter == null)
@@ -74,8 +78,8 @@
             }
             catch (Exception ex)
             {
-                Trace.TraceError("{0} failed to convert '{1}': {2}", typeConverter, value, ex.Message);
-                return null;
+                throw new InvalidOperationException(string.Format("{0} failed to convert '{1}': {2}", typeConverter,
+                    value, ex.Message));
             }
         }
 
@@ -91,8 +95,8 @@
         /// <param name="culture">The culture to use in the converter.</param>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
-                return null;
+            if (value == null || value == DependencyProperty.UnsetValue)
+                return value;
 
             var typeConverter = GetTypeConverter(targetType);
             if (typeConverter == null)
@@ -104,8 +108,8 @@
             }
             catch (Exception ex)
             {
-                Trace.TraceError("{0} failed to convert '{1}': {2}", typeConverter, value, ex.Message);
-                return null;
+                throw new InvalidOperationException(string.Format("{0} failed to convert '{1}': {2}", typeConverter,
+                    value, ex.Message));
             }
         }
 

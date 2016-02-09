@@ -3,6 +3,7 @@
     using System;
     using System.ComponentModel;
     using System.Diagnostics.Contracts;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
@@ -46,7 +47,15 @@
         /// <summary>
         /// The less than operation.
         /// </summary>
-        LessThan
+        LessThan,
+        /// <summary>
+        /// The greater than or equals operation.
+        /// </summary>
+        GreaterThanOrEquals,
+        /// <summary>
+        /// The less than or equals operation.
+        /// </summary>
+        LessThanOrEquals
     }
 
     /// <summary>
@@ -65,6 +74,7 @@
     /// For <see cref="Rect"/> the <see cref="BinaryOperation.Addition"/> is mapped to <see cref="Rect.Offset(Vector)"/> and
     /// the <see cref="BinaryOperation.Multiply"/> is mapped to <see cref="Rect.Transform(Matrix)"/>
     /// </remarks>
+    [ValueConversion(typeof(object), typeof(object))]
     public class BinaryOperationConverter : IValueConverter
     {
         private static readonly Func<object, object, object> _additionMethod = (a, b) => ToDouble(a) + ToDouble(b);
@@ -75,10 +85,42 @@
         private static readonly Func<object, object, object> _inequalityMethod = (a, b) => a.GetType() == b.GetType() ? !a.Equals(b) : Math.Abs(ToDouble(a) - ToDouble(b)) > Double.Epsilon;
         private static readonly Func<object, object, object> _greaterThanMethod = (a, b) => ToDouble(a) > ToDouble(b);
         private static readonly Func<object, object, object> _lessThanMethod = (a, b) => ToDouble(a) < ToDouble(b);
+        private static readonly Func<object, object, object> _greaterThanOrEqualsMethod = (a, b) => ToDouble(a) >= ToDouble(b);
+        private static readonly Func<object, object, object> _lessThanOrEqualsMethod = (a, b) => ToDouble(a) <= ToDouble(b);
+
+        private static readonly Dictionary<Func<object, object, object>, Func<object, object, object>> _inverseOperations;
+
+        static BinaryOperationConverter() {
+            _inverseOperations = new Dictionary<Func<object, object, object>, Func<object, object, object>>
+            {
+                {_additionMethod, _subtractionMethod},
+                {_subtractionMethod, _additionMethod},
+                {_multiplyMethod, _divisionMethod},
+                {_divisionMethod, _multiplyMethod},
+                {_equalityMethod, null},
+                {_inequalityMethod, null},
+                {_greaterThanMethod, null},
+                {_lessThanOrEqualsMethod, null},
+                {_lessThanMethod, null},
+                {_greaterThanOrEqualsMethod, null}
+            };
+        }
 
         private BinaryOperation _operation;
         private string[] _operationMethodNames = { "op_Addition", "Offset" };
         private Func<object, object, object> _operationMethod = _additionMethod;
+
+        private Func<object, object, object> GetOperationMethod(bool inverse)
+        {
+            if (!inverse)
+                return _operationMethod;
+            var inverseMethod  = _inverseOperations[_operationMethod];
+            if (inverseMethod == null)
+            {
+                throw new InvalidOperationException("The operation cannot be converted back.");
+            }
+            return inverseMethod;
+        }
 
         /// <summary>
         /// The default addition converter.
@@ -112,6 +154,14 @@
         /// The default less than converter.
         /// </summary>
         public static readonly IValueConverter LessThan = new BinaryOperationConverter { Operation = BinaryOperation.LessThan };
+        /// <summary>
+        /// The default greater than or equals converter.
+        /// </summary>
+        public static readonly IValueConverter GreaterThanOrEquals = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThanOrEquals };
+        /// <summary>
+        /// The default less than or equals converter.
+        /// </summary>
+        public static readonly IValueConverter LessThanOrEquals = new BinaryOperationConverter { Operation = BinaryOperation.LessThanOrEquals };
 
         /// <summary>
         /// Gets or sets the operation the converter is performing.
@@ -162,10 +212,37 @@
                         _operationMethod = _lessThanMethod;
                         break;
 
+                    case BinaryOperation.GreaterThanOrEquals:
+                        _operationMethod = _greaterThanOrEqualsMethod;
+                        break;
+
+                    case BinaryOperation.LessThanOrEquals:
+                        _operationMethod = _lessThanOrEqualsMethod;
+                        break;
+
                     default:
                         throw new ArgumentOutOfRangeException("value", value, null);
                 }
             }
+        }
+
+        private object InternalConvert(object value, Type targetType, object parameter, CultureInfo culture,
+            bool inverse)
+        {
+            if (value == DependencyProperty.UnsetValue)
+                return value;
+
+            if ((value == null) || (parameter == null))
+                return value;
+
+            var valueType = value.GetType();
+
+            // TODO: I'm not sure where inverse should be plugged in for ApplyOperation and ApplyOperationOnCastedObject
+            if (Type.GetTypeCode(valueType) == TypeCode.Object) {
+                return ApplyOperation(valueType, value, parameter) ?? ApplyOperationOnCastedObject(valueType, value, parameter) ?? ApplyOperation(value, parameter, inverse);
+            }
+
+            return ApplyOperation(value, parameter, inverse);
         }
 
         /// <summary>
@@ -180,17 +257,7 @@
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((value == null) || (parameter == null))
-                return value;
-
-            var valueType = value.GetType();
-
-            if (Type.GetTypeCode(valueType) == TypeCode.Object)
-            {
-                return ApplyOperation(valueType, value, parameter) ?? ApplyOperationOnCastedObject(valueType, value, parameter) ?? ApplyOperation(value, parameter);
-            }
-
-            return ApplyOperation(value, parameter);
+            return InternalConvert(value, targetType, parameter, culture, false);
         }
 
         /// <summary>
@@ -203,20 +270,23 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        /// <exception cref="System.NotImplementedException"></exception>
+        /// <exception cref="System.InvalidOperationException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            // TODO: I'm not sure where inverse should be plugged in for ApplyOperation and ApplyOperationOnCastedObject
+            // once that is fixed enabled this line
+            //return InternalConvert(value, targetType, parameter, culture, true);
+            throw new InvalidOperationException();
         }
 
-        private object ApplyOperation(object value, object parameter)
+        private object ApplyOperation(object value, object parameter, bool inverse)
         {
             Contract.Requires(value != null);
             Contract.Requires(parameter != null);
 
             try
             {
-                return _operationMethod(value, parameter);
+                return GetOperationMethod(inverse)(value, parameter);
             }
             catch (SystemException)
             {

@@ -6,6 +6,7 @@
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
+    using System.Windows;
     using System.Windows.Data;
 
     /// <summary>
@@ -29,6 +30,10 @@
         /// The arithmetic average operation; returns the average of all items.
         /// </summary>
         Average,
+        /// <summary>
+        /// The arithmetic product operation; returns the product of all items.
+        /// </summary>
+        Product,
     }
 
     /// <summary>
@@ -38,12 +43,18 @@
     /// All items must be convertible to double.
     /// </remarks>
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Use the same term as in IMultiValueConverter")]
+    [ValueConversion(typeof(object[]), typeof(double))]
     public class ArithmeticMultiValueConverter : IMultiValueConverter
     {
-        private static readonly Func<IEnumerable<double>, double> _minOperationMethod = items => items.DefaultIfEmpty().Min();
-        private static readonly Func<IEnumerable<double>, double> _maxOperationMethod = items => items.DefaultIfEmpty().Max();
-        private static readonly Func<IEnumerable<double>, double> _sumOperationMethod = items => items.DefaultIfEmpty().Sum();
-        private static readonly Func<IEnumerable<double>, double> _averageOperationMethod = items => items.DefaultIfEmpty().Average();
+        // removed DefaultIfEmpty() so we are not left wondering what went wrong if one of the items cannot be resolved
+        private static readonly Func<IEnumerable<double>, double> _minOperationMethod = items => items.Min();
+        private static readonly Func<IEnumerable<double>, double> _maxOperationMethod = items => items.Max();
+        private static readonly Func<IEnumerable<double>, double> _sumOperationMethod = items => items.Sum();
+        private static readonly Func<IEnumerable<double>, double> _averageOperationMethod = items => items.Average();
+        private static readonly Func<IEnumerable<double>, double> _productOperationMethod = items =>
+        {
+            return items.Aggregate(1.0, (current, item) => current*item);
+        };
 
         private ArithmeticOperation _operation;
         private Func<IEnumerable<double>, double> _operationMethod = _minOperationMethod;
@@ -64,6 +75,10 @@
         /// The default arithmetic AVERAGE converter. 
         /// </summary>
         public static readonly IMultiValueConverter Average = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Average };
+        /// <summary>
+        /// The default arithmetic PRODUCT converter. 
+        /// </summary>
+        public static readonly IMultiValueConverter Product = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Product };
 
         /// <summary>
         /// Gets or sets the operation to be performed on all items.
@@ -96,6 +111,10 @@
                         _operationMethod = _averageOperationMethod;
                         break;
 
+                    case ArithmeticOperation.Product:
+                        _operationMethod = _productOperationMethod;
+                        break;
+
                     default:
                         throw new ArgumentOutOfRangeException("value", value, null);
                 }
@@ -104,28 +123,26 @@
 
         /// <summary>
         /// Converts source values to a value for the binding target. The data binding engine calls this method when it propagates the values from source bindings to the binding target.
+        /// An input value of null will return null, whereas if the input array contains UnSet then UnSet will be returned.
         /// </summary>
         /// <param name="values">The array of values that the source bindings in the <see cref="T:System.Windows.Data.MultiBinding" /> produces. The value <see cref="F:System.Windows.DependencyProperty.UnsetValue" /> indicates that the source binding has no value to provide for conversion.</param>
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value.If the method returns null, the valid null value is used.A return value of <see cref="T:System.Windows.DependencyProperty" />.<see cref="F:System.Windows.DependencyProperty.UnsetValue" /> indicates that the converter did not produce a value, and that the binding will use the <see cref="P:System.Windows.Data.BindingBase.FallbackValue" /> if it is available, or else will use the default value.A return value of <see cref="T:System.Windows.Data.Binding" />.<see cref="F:System.Windows.Data.Binding.DoNothing" /> indicates that the binding does not transfer the value or use the <see cref="P:System.Windows.Data.BindingBase.FallbackValue" /> or the default value.
+        /// A converted value.
         /// </returns>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values == null)
+            if (values == null || values == DependencyProperty.UnsetValue)
+                return values;
+            if (values.Any(x => x == null))
                 return null;
+            if (values.Any(x => x == DependencyProperty.UnsetValue))
+                return DependencyProperty.UnsetValue;
 
-            try
-            {
-                return _operationMethod(values.Select(v => System.Convert.ToDouble(v, CultureInfo.InvariantCulture)));
-            }
-            catch (SystemException)
-            {
-            }
-
-            return null;
+            // let it fail fast so we are not left wondering what happened
+            return _operationMethod(values.Select(v => System.Convert.ToDouble(v, CultureInfo.InvariantCulture)));
         }
 
         /// <summary>
@@ -138,10 +155,10 @@
         /// <returns>
         /// An array of values that have been converted from the target value back to the source values.
         /// </returns>
-        /// <exception cref="System.NotImplementedException"></exception>
+        /// <exception cref="System.InvalidOperationException"></exception>
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException();
         }
 
         [ContractInvariantMethod]

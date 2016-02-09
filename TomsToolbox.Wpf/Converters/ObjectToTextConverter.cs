@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics.Contracts;
     using System.Globalization;
+    using System.Windows;
     using System.Windows.Data;
 
     using TomsToolbox.Desktop;
@@ -23,6 +24,7 @@
     /// Assert.AreEqual("This is item 1", ObjectToTextConverter.Convert("key1", Items.Item1));
     /// </code></example>
     /// <remarks>Works with any object; for enum types the attribute of the field is returned. When used via the <see cref="IValueConverter"/> interface, the key is specified as the converter parameter.</remarks>
+    [ValueConversion(typeof(object), typeof(string))]
     public class ObjectToTextConverter : ObjectToAttributeConverter<TextAttribute>
     {
         /// <summary>
@@ -42,16 +44,20 @@
 
         /// <summary>
         /// Converts a value.
+        /// UnSet is unchanged, null becomes an empty string.
         /// </summary>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value.
         /// </returns>
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == DependencyProperty.UnsetValue)
+                return value;
+
             return value == null ? string.Empty : Convert(parameter ?? Key, value, null);
         }
 
