@@ -78,8 +78,7 @@
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException(string.Format("{0} failed to convert '{1}': {2}", typeConverter,
-                    value, ex.Message));
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "{0} failed to convert '{1}': {2}", typeConverter, value, ex.Message));
             }
         }
 
@@ -108,8 +107,7 @@
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException(string.Format("{0} failed to convert '{1}': {2}", typeConverter,
-                    value, ex.Message));
+                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "{0} failed to convert '{1}': {2}", typeConverter, value, ex.Message), ex);
             }
         }
 

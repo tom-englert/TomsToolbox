@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
@@ -51,25 +52,24 @@
                 return value;
 
             var target = (Thickness)value;
-            Thickness factor;
-            if (parameter == null)
-            {
-                factor = new Thickness(1.0);
-            }
-            else if (parameter is Thickness)
-            {
-                factor = (Thickness) parameter;
-            }
-            else if (parameter is string)
-            {
-                factor = (Thickness) _typeConverter.ConvertFromInvariantString((string) parameter);
-            }
-            else
-            {
-                throw new ArgumentException("Invalid thickness parameter.", "parameter");
-            }
+            var factor = GetThicknessFromParameter(parameter);
 
             return Multiply(target, factor);
+        }
+
+        private static Thickness GetThicknessFromParameter(object parameter)
+        {
+            if (parameter == null)
+                return new Thickness(1.0);
+
+            if (parameter is Thickness)
+                return (Thickness)parameter;
+
+            var parameterString = parameter as string;
+            if (parameterString != null)
+                return (Thickness)_typeConverter.ConvertFromInvariantString(parameterString);
+            
+            throw new ArgumentException("Invalid thickness parameter.", "parameter");
         }
 
         /// <summary>
@@ -82,6 +82,13 @@
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new InvalidOperationException();
+        }
+
+        [ContractInvariantMethod]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_typeConverter != null);
         }
     }
 }

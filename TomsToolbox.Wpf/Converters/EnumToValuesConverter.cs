@@ -40,9 +40,19 @@
         /// Converts the specified enum-type into an array of the individual enum values.
         /// </summary>
         /// <param name="type">The enum type.</param>
+        /// <returns>An array of the enum's values.</returns>
+        public static Array Convert(Type type)
+        {
+            return Convert(type, null);
+        }
+
+        /// <summary>
+        /// Converts the specified enum-type into an array of the individual enum values.
+        /// </summary>
+        /// <param name="type">The enum type.</param>
         /// <param name="excluded">A comma separated list of values to exclude.</param>
         /// <returns>An array of the enum's values.</returns>
-        public static Array Convert(Type type, string excluded = null)
+        public static Array Convert(Type type, string excluded)
         {
             if (type == null)
                 return null;
