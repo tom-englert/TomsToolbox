@@ -3,7 +3,6 @@
     using System;
     using System.ComponentModel;
     using System.Diagnostics.Contracts;
-    using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
@@ -51,11 +50,11 @@
         /// <summary>
         /// The greater than or equals operation.
         /// </summary>
-        GreaterThanOrEquals,
+        GreaterThanOrEqual,
         /// <summary>
         /// The less than or equals operation.
         /// </summary>
-        LessThanOrEquals
+        LessThanOrEqual
     }
 
     /// <summary>
@@ -86,8 +85,8 @@
         private static readonly Func<object, object, object> _inequalityMethod = (a, b) => a.GetType() == b.GetType() ? !a.Equals(b) : Math.Abs(ToDouble(a) - ToDouble(b)) > double.Epsilon;
         private static readonly Func<object, object, object> _greaterThanMethod = (a, b) => ToDouble(a) > ToDouble(b);
         private static readonly Func<object, object, object> _lessThanMethod = (a, b) => ToDouble(a) < ToDouble(b);
-        private static readonly Func<object, object, object> _greaterThanOrEqualsMethod = (a, b) => ToDouble(a) >= ToDouble(b);
-        private static readonly Func<object, object, object> _lessThanOrEqualsMethod = (a, b) => ToDouble(a) <= ToDouble(b);
+        private static readonly Func<object, object, object> _greaterThanOrEqualMethod = (a, b) => ToDouble(a) >= ToDouble(b);
+        private static readonly Func<object, object, object> _lessThanOrEqualMethod = (a, b) => ToDouble(a) <= ToDouble(b);
 
         private BinaryOperation _operation;
         private string[] _operationMethodNames = { "op_Addition", "Offset" };
@@ -128,11 +127,11 @@
         /// <summary>
         /// The default greater than or equals converter.
         /// </summary>
-        public static readonly IValueConverter GreaterThanOrEquals = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThanOrEquals };
+        public static readonly IValueConverter GreaterThanOrEqual = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThanOrEqual };
         /// <summary>
         /// The default less than or equals converter.
         /// </summary>
-        public static readonly IValueConverter LessThanOrEquals = new BinaryOperationConverter { Operation = BinaryOperation.LessThanOrEquals };
+        public static readonly IValueConverter LessThanOrEqual = new BinaryOperationConverter { Operation = BinaryOperation.LessThanOrEqual };
 
         /// <summary>
         /// Gets or sets the operation the converter is performing.
@@ -184,12 +183,12 @@
                         _operationMethod = _lessThanMethod;
                         break;
 
-                    case BinaryOperation.GreaterThanOrEquals:
-                        _operationMethod = _greaterThanOrEqualsMethod;
+                    case BinaryOperation.GreaterThanOrEqual:
+                        _operationMethod = _greaterThanOrEqualMethod;
                         break;
 
-                    case BinaryOperation.LessThanOrEquals:
-                        _operationMethod = _lessThanOrEqualsMethod;
+                    case BinaryOperation.LessThanOrEqual:
+                        _operationMethod = _lessThanOrEqualMethod;
                         break;
 
                     default:
