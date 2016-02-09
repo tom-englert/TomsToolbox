@@ -30,19 +30,19 @@
         /// Gets the clipboard data as a table.
         /// </summary>
         /// <returns>The parsed clipboard data as a table, or <c>null</c> if the clipboard is empty or does not contain normalized table data.</returns>
-        /// <remarks>CSV data is preferred over TEXT data, since e.g. Excel create ambiguous text format when cells in the last column contain line breaks.</remarks>
+        /// <remarks>If no TEXT is present in the clipboard, CSV data is used.</remarks>
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public static IList<IList<string>> GetClipboardDataAsTable()
         {
             Contract.Ensures((Contract.Result<IList<IList<string>>>() == null) || (Contract.Result<IList<IList<string>>>().Count > 0));
 
-            var csv = Clipboard.GetData(DataFormats.CommaSeparatedValue) as string;
-            if (!string.IsNullOrEmpty(csv))
-                return ParseTable(csv, CsvColumnSeparator);
-
             var text = Clipboard.GetText();
             if (!string.IsNullOrEmpty(text))
                 return ParseTable(text, TextColumnSeparator);
+
+            var csv = Clipboard.GetData(DataFormats.CommaSeparatedValue) as string;
+            if (!string.IsNullOrEmpty(csv))
+                return ParseTable(csv, CsvColumnSeparator);
 
             return null;
         }
@@ -52,7 +52,7 @@
         /// </summary>
         /// <param name="table">The table.</param>
         /// <remarks>
-        /// This method sets the TEXT (tab delimited) and CSV data. Like in Excel the CSV delimiter is either comma or semicolon, depending on the current culture. 
+        /// This method sets the TEXT (tab delimited) and CSV data. Like in Excel the CSV delimiter is either comma or semicolon, depending on the current culture.
         /// </remarks>
         public static void SetClipboardData(this IList<IList<string>> table)
         {
