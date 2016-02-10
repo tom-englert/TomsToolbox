@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
@@ -14,11 +15,17 @@
     using TomsToolbox.Core;
 
     /// <summary>
-    /// Base class implementing INotifyPropertyChanged.<para/>
+    /// Base class implementing <see cref="INotifyPropertyChanged"/>.<para/>
     /// Supports declarative dependencies specified by the <see cref="PropertyDependencyAttribute"/> and
     /// relaying events of other objects using the <see cref="RelayedEventAttribute"/>.
     /// </summary>
-    public abstract class ObservableObject : INotifyPropertyChanged
+    /// <remarks>
+    /// Also implements <see cref="IDataErrorInfo"/> (and INotifyDataErrorInfo in .Net4.5++) to support validation. The default implementation examines <see cref="ValidationAttribute"/> on the affected properties to retrieve error information.
+    /// </remarks>
+    public abstract class ObservableObject : INotifyPropertyChanged, IDataErrorInfo
+#if NETFRAMEWORK_4_5
+        INotifyDataErrorInfo
+#endif
     {
         private static readonly AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>> DependencyMappingCache = new AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>>(type => PropertyDependencyAttribute.CreateDependencyMapping(type.GetProperties()));
         private IDictionary<string, IEnumerable<string>> _dependencyMapping;
@@ -320,6 +327,84 @@
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Gets the validation errors for a specified property or for the entire entity.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to retrieve validation errors for; or null or <see cref="F:System.String.Empty"/>, to retrieve entity-level errors.</param>
+        /// <returns>
+        /// The validation errors for the property or entity.
+        /// </returns>
+        protected virtual IEnumerable<string> GetDataErrors(string propertyName)
+        {
+            Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
+
+            if (string.IsNullOrEmpty(propertyName))
+                return Enumerable.Empty<string>();
+
+            var property = GetType().GetProperty(propertyName);
+            if (property == null)
+                return Enumerable.Empty<string>();
+
+            var errorInfos = property.GetCustomAttributes<ValidationAttribute>(true)
+                .Where(va => !va.IsValid(property.GetValue(this, null)))
+                .Select(va => va.FormatErrorMessage(propertyName));
+
+            return errorInfos;
+        }
+
+        string IDataErrorInfo.Error
+        {
+            get
+            {
+                return GetDataErrors(null).FirstOrDefault();
+            }
+        }
+
+        string IDataErrorInfo.this[string columnName]
+        {
+            get
+            {
+                return GetDataErrors(columnName).FirstOrDefault();
+            }
+        }
+
+#if NETFRAMEWORK_4_5
+        private event EventHandler<DataErrorsChangedEventArgs> _errorsChanged;
+
+        /// <summary>
+        /// Raises the <see cref="INotifyDataErrorInfo.ErrorsChanged"/> event.
+        /// </summary>
+        /// <param name="propertyName">The name of the property where validation errors have changed; or null or <see cref="F:System.String.Empty"/>, when entity-level errors have changed.</param>
+        protected void OnErrorsChanged(string propertyName)
+        {
+            _errorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        }
+
+        IEnumerable INotifyDataErrorInfo.GetErrors(string propertyName)
+        {
+            return GetDataErrors(propertyName);
+        }
+
+        bool INotifyDataErrorInfo.HasErrors
+        {
+            get
+            {
+                return GetDataErrors(null).Any();
+            }
+        }
+
+        event EventHandler<DataErrorsChangedEventArgs> INotifyDataErrorInfo.ErrorsChanged
+        {
+            add
+            {
+                _errorsChanged += value;
+            }
+            remove
+            {
+                _errorsChanged -= value;
+            }
+        }
+#endif
 
         [ContractInvariantMethod]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
