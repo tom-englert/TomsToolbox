@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
-    using System.Diagnostics;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
@@ -9,10 +8,10 @@
     using TomsToolbox.Desktop;
 
     /// <summary>
-    /// Converts WGS-84 coordinates into logical XY coordinates in the range 0..1 and back.
+    /// Converts WGS-84 coordinates (<see cref="Coordinates"/> ) into normalized logical XY coordinates (<see cref="Point"/>) in the range 0..1 and back.
     /// </summary>
     [ValueConversion(typeof(object), typeof(object))]
-    public class CoordinatesToPointConverter : IValueConverter
+    public class CoordinatesToPointConverter : ValueConverter
     {
         /// <summary>
         /// The singleton instance of the converter.
@@ -30,7 +29,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return Convert(value);
         }
@@ -45,16 +44,16 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return Convert(value);
         }
 
-        private static object Convert(object value)
+        /// <summary>
+        /// Converts WGS-84 coordinates (<see cref="Coordinates"/> ) into normalized logical XY coordinates (<see cref="Point"/>) in the range 0..1 and back.
+        /// </summary>
+        public static object Convert(object value)
         {
-            if (value == null || value == DependencyProperty.UnsetValue)
-                return value;
-
             if (value is Point)
             {
                 return (Coordinates)(Point)value;
@@ -65,8 +64,7 @@
                 return (Point)(Coordinates)value;
             }
 
-            PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", typeof(CoordinatesToPointConverter).Name, "Source in neither of type Point no of type Coordinates.");
-            return DependencyProperty.UnsetValue;
+            throw new InvalidOperationException("Value us neither of type Point nor of type Coordinates");
         }
     }
 }

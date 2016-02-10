@@ -3,11 +3,9 @@
     using System;
     using System.Collections;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
-    using System.Windows;
     using System.Windows.Data;
 
     /// <summary>
@@ -15,7 +13,7 @@
     /// The converter parameter can be used to specify a comma separated exclude list.
     /// </summary>
     [ValueConversion(typeof(Type), typeof(Array))]
-    public class EnumToValuesConverter : IValueConverter
+    public class EnumToValuesConverter : ValueConverter
     {
         /// <summary>
         /// The singleton instance of the converter.
@@ -30,20 +28,9 @@
         /// A converted value.
         /// </returns>
         /// <param name="value">The value produced by the binding source.</param><param name="targetType">The type of the binding target property.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || value == DependencyProperty.UnsetValue)
-                return value;
-
-            try
-            {
-                return Convert((Type)value, (string)parameter);
-            }
-            catch (Exception ex)
-            {
-                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
-                return DependencyProperty.UnsetValue;
-            }
+            return Convert((Type)value, (string)parameter);
         }
 
         /// <summary>
@@ -54,6 +41,7 @@
         public static Array Convert(Type type)
         {
             Contract.Requires(type != null);
+            Contract.Ensures(Contract.Result<Array>() != null);
 
             return Convert(type, null);
         }
@@ -67,6 +55,7 @@
         public static Array Convert(Type type, string excluded)
         {
             Contract.Requires(type != null);
+            Contract.Ensures(Contract.Result<Array>() != null);
 
             var values = Enum.GetValues(type);
 
@@ -78,18 +67,6 @@
             var filtered = values.OfType<object>().Except(excludeList).ToArray();
 
             return new ArrayList(filtered).ToArray(type);
-        }
-
-        /// <summary>
-        /// Converts a value. 
-        /// </summary>
-        /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
-        /// </returns>
-        /// <param name="value">The value that is produced by the binding target.</param><param name="targetType">The type to convert to.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new InvalidOperationException();
         }
     }
 }

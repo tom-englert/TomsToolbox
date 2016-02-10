@@ -1,12 +1,9 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
-    using System.Diagnostics;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
-
-    using TomsToolbox.Core;
 
     /// <summary>
     /// The counterpart of VisibilityToBooleanConverter.
@@ -66,7 +63,7 @@
             }
             else if (!(value is bool))
             {
-                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, "Source is not a boolean.");
+                this.TraceError("Source is not a boolean.", "Convert");
                 value = false;
             }
 
@@ -84,14 +81,14 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) 
+        {
             if (value == DependencyProperty.UnsetValue)
                 return value;
             if (value == null)
                 return BooleanWhenVisibilityIsNull;
 
-            return (Visibility)value == Visibility.Visible;
+            return Visibility.Visible.Equals(value);
         }
-
     }
 }

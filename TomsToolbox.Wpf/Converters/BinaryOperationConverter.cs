@@ -1,63 +1,14 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
-    using System.Collections;
-    using System.ComponentModel;
-    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
-    using System.Reflection;
     using System.Windows;
     using System.Windows.Data;
     using System.Windows.Media;
 
-    /// <summary>
-    /// Binary operations supported by the <see cref="BinaryOperationConverter"/>
-    /// </summary>
-    public enum BinaryOperation
-    {
-        /// <summary>
-        /// The addition operation.
-        /// </summary>
-        Addition,
-        /// <summary>
-        /// The subtraction operation.
-        /// </summary>
-        Subtraction,
-        /// <summary>
-        /// The multiply operation.
-        /// </summary>
-        Multiply,
-        /// <summary>
-        /// The division operation.
-        /// </summary>
-        Division,
-        /// <summary>
-        /// The equality operation.
-        /// </summary>
-        Equality,
-        /// <summary>
-        /// The inequality operation.
-        /// </summary>
-        Inequality,
-        /// <summary>
-        /// The greater than operation.
-        /// </summary>
-        GreaterThan,
-        /// <summary>
-        /// The less than operation.
-        /// </summary>
-        LessThan,
-        /// <summary>
-        /// The greater than or equals operation.
-        /// </summary>
-        GreaterThanOrEqual,
-        /// <summary>
-        /// The less than or equals operation.
-        /// </summary>
-        LessThanOrEqual
-    }
+    using TomsToolbox.Desktop;
 
     /// <summary>
     /// Applies the <see cref="BinaryOperationConverter.Operation"/> on the value and the converter parameter.<para/>
@@ -77,22 +28,9 @@
     /// the <see cref="BinaryOperation.Multiply"/> is mapped to <see cref="Rect.Transform(Matrix)"/>
     /// </remarks>
     [ValueConversion(typeof(object), typeof(object))]
-    public class BinaryOperationConverter : IValueConverter, IMultiValueConverter
+    public class BinaryOperationConverter : ValueConverter, IMultiValueConverter
     {
-        private static readonly Func<object, object, object> _additionMethod = (a, b) => ToDouble(a) + ToDouble(b);
-        private static readonly Func<object, object, object> _subtractionMethod = (a, b) => ToDouble(a) - ToDouble(b);
-        private static readonly Func<object, object, object> _multiplyMethod = (a, b) => ToDouble(a) * ToDouble(b);
-        private static readonly Func<object, object, object> _divisionMethod = (a, b) => ToDouble(a) / ToDouble(b);
-        private static readonly Func<object, object, object> _equalityMethod = (a, b) => a.GetType() == b.GetType() ? a.Equals(b) : Math.Abs(ToDouble(a) - ToDouble(b)) < double.Epsilon;
-        private static readonly Func<object, object, object> _inequalityMethod = (a, b) => a.GetType() == b.GetType() ? !a.Equals(b) : Math.Abs(ToDouble(a) - ToDouble(b)) > double.Epsilon;
-        private static readonly Func<object, object, object> _greaterThanMethod = (a, b) => Comparer.DefaultInvariant.Compare(a, b) > 0;
-        private static readonly Func<object, object, object> _lessThanMethod = (a, b) => Comparer.DefaultInvariant.Compare(a, b) < 0;
-        private static readonly Func<object, object, object> _greaterThanOrEqualMethod = (a, b) => Comparer.DefaultInvariant.Compare(a, b) >= 0;
-        private static readonly Func<object, object, object> _lessThanOrEqualMethod = (a, b) => Comparer.DefaultInvariant.Compare(a, b) <= 0;
-
-        private BinaryOperation _operation;
-        private string[] _operationMethodNames = { "op_Addition", "Offset" };
-        private Func<object, object, object> _operationMethod = _additionMethod;
+        private BinaryOperationProcessor _processor;
 
         /// <summary>
         /// The default addition converter.
@@ -142,60 +80,20 @@
         {
             get
             {
-                return _operation;
+                return Processor.Operation;
             }
             set
             {
-                _operation = value;
-                _operationMethodNames = new[] { "op_" + value };
+                _processor = new BinaryOperationProcessor(value);
+            }
+        }
 
-                switch (value)
-                {
-                    case BinaryOperation.Addition:
-                        _operationMethod = _additionMethod;
-                        _operationMethodNames = new[] { "op_" + value, "Offset" };
-                        break;
-
-                    case BinaryOperation.Subtraction:
-                        _operationMethod = _subtractionMethod;
-                        break;
-
-                    case BinaryOperation.Multiply:
-                        _operationMethod = _multiplyMethod;
-                        _operationMethodNames = new[] { "op_" + value, "Transform" };
-                        break;
-
-                    case BinaryOperation.Division:
-                        _operationMethod = _divisionMethod;
-                        break;
-
-                    case BinaryOperation.Equality:
-                        _operationMethod = _equalityMethod;
-                        break;
-
-                    case BinaryOperation.Inequality:
-                        _operationMethod = _inequalityMethod;
-                        break;
-
-                    case BinaryOperation.GreaterThan:
-                        _operationMethod = _greaterThanMethod;
-                        break;
-
-                    case BinaryOperation.LessThan:
-                        _operationMethod = _lessThanMethod;
-                        break;
-
-                    case BinaryOperation.GreaterThanOrEqual:
-                        _operationMethod = _greaterThanOrEqualMethod;
-                        break;
-
-                    case BinaryOperation.LessThanOrEqual:
-                        _operationMethod = _lessThanOrEqualMethod;
-                        break;
-
-                    default:
-                        throw new ArgumentOutOfRangeException("value", value, null);
-                }
+        private BinaryOperationProcessor Processor
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<BinaryOperationProcessor>() != null);
+                return _processor ?? (_processor = new BinaryOperationProcessor(BinaryOperation.Addition));
             }
         }
 
@@ -209,45 +107,25 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((value == DependencyProperty.UnsetValue) || (value == null) || (parameter == null))
+            if ((value == DependencyProperty.UnsetValue) || (parameter == null))
                 return value;
 
-            var valueType = value.GetType();
-
-            try
-            {
-                if (Type.GetTypeCode(valueType) == TypeCode.Object)
-                {
-                    return ApplyOperation(valueType, value, parameter) ?? ApplyOperationOnCastedObject(valueType, value, parameter) ?? ApplyOperation(value, parameter);
-                }
-
-                return ApplyOperation(value, System.Convert.ChangeType(parameter, valueType, CultureInfo.InvariantCulture));
-            }
-            catch (Exception ex)
-            {
-                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
-                return DependencyProperty.UnsetValue;
-            }
+            return Processor.Execute(value, parameter);
         }
 
         /// <summary>
-        /// Converts a value.
+        /// Converts source values to a value for the binding target. The data binding engine calls this method when it propagates the values from source bindings to the binding target.
         /// </summary>
-        /// <param name="value">The value that is produced by the binding target.</param>
-        /// <param name="targetType">The type to convert to.</param>
+        /// <param name="values">The array of values that the source bindings in the <see cref="T:System.Windows.Data.MultiBinding" /> produces. The value <see cref="F:System.Windows.DependencyProperty.UnsetValue" /> indicates that the source binding has no value to provide for conversion.</param>
+        /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value.If the method returns null, the valid null value is used.A return value of <see cref="T:System.Windows.DependencyProperty" />.<see cref="F:System.Windows.DependencyProperty.UnsetValue" /> indicates that the converter did not produce a value, and that the binding will use the <see cref="P:System.Windows.Data.BindingBase.FallbackValue" /> if it is available, or else will use the default value.A return value of <see cref="T:System.Windows.Data.Binding" />.<see cref="F:System.Windows.Data.Binding.DoNothing" /> indicates that the binding does not transfer the value or use the <see cref="P:System.Windows.Data.BindingBase.FallbackValue" /> or the default value.
         /// </returns>
-        /// <exception cref="System.InvalidOperationException">This operation is not supported.</exception>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new InvalidOperationException();
-        }
-
+        /// <exception cref="System.ArgumentException">MultiValueConverter requires two values.;values</exception>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values == null)
@@ -259,7 +137,7 @@
             if (values.Length != 2)
                 throw new ArgumentException("MultiValueConverter requires two values.", "values");
 
-            return Convert(values[0], targetType, values[1], culture);
+            return Processor.Execute(values[0], values[1]);
         }
 
         /// <summary>
@@ -278,94 +156,11 @@
             throw new InvalidOperationException();
         }
 
-        private object ApplyOperation(object value, object parameter)
-        {
-            Contract.Requires(value != null);
-            Contract.Requires(parameter != null);
-
-            return _operationMethod(value, parameter);
-        }
-
-        private object ApplyOperation(Type valueType, object value, object parameter)
-        {
-            Contract.Requires(valueType != null);
-            Contract.Requires(value != null);
-            Contract.Requires(parameter != null);
-
-            var methods = valueType.GetMethods(BindingFlags.Static | BindingFlags.Public);
-
-            return methods
-                .Where(m => _operationMethodNames.Contains(m.Name))
-                .Select(m => new { Method = m, Parameters = m.GetParameters() })
-                .Where(m => m.Parameters.Length == 2)
-                .Where(m => m.Parameters[0].ParameterType == valueType)
-                .Select(m => ApplyOperation(m.Method, value, m.Parameters[1].ParameterType, parameter))
-                .FirstOrDefault(v => v != null);
-        }
-
-        private object ApplyOperationOnCastedObject(Type valueType, object value, object parameter)
-        {
-            Contract.Requires(valueType != null);
-            Contract.Requires(value != null);
-            Contract.Requires(parameter != null);
-
-            var result = valueType
-                .GetMethods(BindingFlags.Static | BindingFlags.Public)
-                .Where(m => (m.Name == "op_Explicit") || (m.Name == "op_Implicit"))
-                .Select(m => new { Method = m, Parameters = m.GetParameters() })
-                .Where(m => m.Parameters.Length == 1)
-                .Where(m => m.Parameters[0].ParameterType == valueType)
-                .Select(m => ApplyOperation(m.Method.ReturnType, m.Method.Invoke(null, new[] { value }), parameter))
-                .FirstOrDefault(v => v != null);
-
-            return result;
-        }
-
-        private static object ApplyOperation(MethodInfo method, object value, Type parameterType, object parameter)
-        {
-            Contract.Requires(method != null);
-            Contract.Requires(value != null);
-            Contract.Requires(parameterType != null);
-            Contract.Requires(parameter != null);
-
-            try
-            {
-                if (parameter.GetType() == parameterType)
-                {
-                    return method.Invoke(null, new[] { value, parameter });
-                }
-
-                var parameterString = parameter as string;
-                if (parameterString != null)
-                {
-                    var typeConverter = TypeDescriptor.GetConverter(parameterType);
-
-                    parameter = typeConverter.ConvertFromInvariantString(parameterString);
-
-                    return method.Invoke(null, new[] { value, parameter });
-                }
-
-                parameter = System.Convert.ChangeType(parameter, parameterType, CultureInfo.InvariantCulture);
-                return method.Invoke(null, new[] { value, parameter });
-            }
-            catch
-            {
-            }
-
-            return null;
-        }
-
-        private static double ToDouble(object value)
-        {
-            return System.Convert.ToDouble(value, CultureInfo.InvariantCulture);
-        }
-
         [ContractInvariantMethod]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
         private void ObjectInvariant()
         {
-            Contract.Invariant(_operationMethodNames != null);
-            Contract.Invariant(_operationMethod != null);
+            Contract.Invariant(Processor != null);
         }
     }
 }

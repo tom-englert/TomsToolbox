@@ -1,17 +1,15 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
-    using System.Diagnostics;
     using System.Globalization;
     using System.Text.RegularExpressions;
-    using System.Windows;
     using System.Windows.Data;
 
     /// <summary>
     /// A converter that converts the specified value by replacing text using a regular expression.
     /// </summary>
     [ValueConversion(typeof(string), typeof(string))]
-    public class ReplaceTextConverter : IValueConverter
+    public class ReplaceTextConverter : ValueConverter
     {
         /// <summary>
         /// Gets or sets the regular expression to find.
@@ -74,36 +72,9 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || value == DependencyProperty.UnsetValue)
-                return value;
-
-            try
-            {
-                return Convert((string)value);
-            }
-            catch (Exception ex)
-            {
-                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
-                return DependencyProperty.UnsetValue;
-            }
-        }
-
-        /// <summary>
-        /// Converts a value.
-        /// </summary>
-        /// <param name="value">The value that is produced by the binding target.</param>
-        /// <param name="targetType">The type to convert to.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
-        /// </returns>
-        /// <exception cref="System.NotImplementedException"></exception>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new InvalidOperationException();
+            return Convert((string)value);
         }
     }
 }

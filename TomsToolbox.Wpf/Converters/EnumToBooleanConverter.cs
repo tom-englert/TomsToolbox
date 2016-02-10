@@ -2,11 +2,9 @@
 {
     using System;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
-    using System.Windows;
     using System.Windows.Data;
 
     /// <summary>
@@ -14,7 +12,7 @@
     /// If the enum has a <see cref="FlagsAttribute"/>, the match is done with the logic "is any flag set".
     /// </summary>
     [ValueConversion(typeof(object), typeof(bool))]
-    public class EnumToBooleanConverter : IValueConverter
+    public class EnumToBooleanConverter : ValueConverter
     {
         /// <summary>
         /// The singleton instance of the converter.
@@ -29,20 +27,9 @@
         /// A converted value.
         /// </returns>
         /// <param name="value">The value produced by the binding source.</param><param name="targetType">The type of the binding target property.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == DependencyProperty.UnsetValue)
-                return value;
-
-            try
-            {
-                return Convert(value, (string)parameter);
-            }
-            catch (Exception ex)
-            {
-                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
-                return DependencyProperty.UnsetValue;
-            }
+            return Convert(value, (string)parameter);
         }
 
         /// <summary>
@@ -71,18 +58,6 @@
             return Attribute.IsDefined(valueType, typeof(FlagsAttribute))
                 ? matchesList.Any(x => (valueValue & x) != 0)
                 : matchesList.Contains(valueValue);
-        }
-
-        /// <summary>
-        /// Converts a value. 
-        /// </summary>
-        /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
-        /// </returns>
-        /// <param name="value">The value that is produced by the binding target.</param><param name="targetType">The type to convert to.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new InvalidOperationException();
         }
     }
 }

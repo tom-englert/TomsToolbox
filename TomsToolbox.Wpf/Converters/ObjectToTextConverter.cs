@@ -1,10 +1,8 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
-    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
-    using System.Windows;
     using System.Windows.Data;
 
     using TomsToolbox.Desktop;
@@ -45,7 +43,6 @@
 
         /// <summary>
         /// Converts a value.
-        /// UnSet is unchanged, null becomes an empty string.
         /// </summary>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
@@ -54,20 +51,9 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((value == null) || (value == DependencyProperty.UnsetValue))
-                return value;
-
-            try
-            {
-                return Convert(parameter ?? Key, value, null);
-            }
-            catch (Exception ex)
-            {
-                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
-                return DependencyProperty.UnsetValue;
-            }
+            return Convert(parameter ?? Key, value, null);
         }
 
         /// <summary>

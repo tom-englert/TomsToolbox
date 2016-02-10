@@ -1,11 +1,9 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
-    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
-    using System.Windows;
     using System.Windows.Data;
     using System.Windows.Input;
 
@@ -13,7 +11,7 @@
     /// A converter to use in <see cref="ICommand"/> bindings to intercept or filter command executions in the view layer in MVVM applications.
     /// </summary>
     [ValueConversion(typeof(ICommand), typeof(CommandProxy))]
-    public class ConfirmedCommandConverter : IValueConverter
+    public class ConfirmedCommandConverter : ValueConverter
     {
         /// <summary>
         /// Converts a value.
@@ -26,36 +24,9 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || value == DependencyProperty.UnsetValue)
-                return value;
-
-            try
-            {
-                return new CommandProxy(this, (ICommand)value);
-            }
-            catch (Exception ex)
-            {
-                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
-                return DependencyProperty.UnsetValue;
-            }
-        }
-
-        /// <summary>
-        /// Converts a value.
-        /// </summary>
-        /// <param name="value">The value that is produced by the binding target.</param>
-        /// <param name="targetType">The type to convert to.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
-        /// </returns>
-        /// <exception cref="System.InvalidOperationException"></exception>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new InvalidOperationException();
+            return new CommandProxy(this, (ICommand)value);
         }
 
         /// <summary>
@@ -84,7 +55,7 @@
                 handler.Invoke(this, e);
         }
 
-        class CommandProxy : ICommand
+        private class CommandProxy : ICommand
         {
             private readonly ConfirmedCommandConverter _owner;
             private readonly ICommand _command;

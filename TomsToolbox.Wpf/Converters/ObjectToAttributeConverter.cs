@@ -5,7 +5,6 @@
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
-    using System.Windows.Data;
 
     using TomsToolbox.Desktop;
 
@@ -13,7 +12,7 @@
     /// Converts an object to a value derived from an attribute of the object.
     /// </summary>
     /// <typeparam name="T">The attribute to look up.</typeparam>
-    public abstract class ObjectToAttributeConverter<T> : IValueConverter where T : Attribute
+    public abstract class ObjectToAttributeConverter<T> : ValueConverter where T : Attribute
     {
         /// <summary>
         /// Does the conversion.
@@ -87,21 +86,6 @@
         /// A converted value.
         /// </returns>
         /// <param name="value">The value produced by the binding source.</param><param name="targetType">The type of the binding target property.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
-        public abstract object Convert(object value, Type targetType, object parameter, CultureInfo culture);
-
-        /// <summary>
-        /// Converts a value.
-        /// </summary>
-        /// <param name="value">The value that is produced by the binding target.</param>
-        /// <param name="targetType">The type to convert to.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// A converted value.
-        /// </returns>
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new InvalidOperationException();
-        }
+        protected abstract override object Convert(object value, Type targetType, object parameter, CultureInfo culture);
     }
 }

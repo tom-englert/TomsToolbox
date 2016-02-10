@@ -4,14 +4,13 @@
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
-    using System.Windows;
     using System.Windows.Data;
 
     /// <summary>
     /// A <see cref="IValueConverter" /> wrapping a <see cref="TypeConverter" />
     /// </summary>
     [ValueConversion(typeof(string), typeof(object))]
-    public class StringToObjectConverter : IValueConverter
+    public class StringToObjectConverter : ValueConverter
     {
         private TypeConverter _typeConverter;
 
@@ -36,7 +35,7 @@
             {
                 if (value != null)
                 {
-                    if (typeof (TypeConverter).IsAssignableFrom(value) && (value.GetConstructor(Type.EmptyTypes) != null))
+                    if (typeof(TypeConverter).IsAssignableFrom(value) && (value.GetConstructor(Type.EmptyTypes) != null))
                     {
                         _typeConverter = (TypeConverter)Activator.CreateInstance(value);
                         return;
@@ -59,11 +58,8 @@
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || value == DependencyProperty.UnsetValue)
-                return value;
-
             var typeConverter = GetTypeConverter(targetType);
             if (typeConverter == null)
                 return null;
@@ -72,15 +68,7 @@
             if (string.IsNullOrEmpty(text))
                 return null;
 
-            try
-            {
-                return typeConverter.ConvertFromInvariantString(text);
-            }
-            catch (Exception ex)
-            {
-                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
-                return DependencyProperty.UnsetValue;
-            }
+            return typeConverter.ConvertFromInvariantString(text);
         }
 
         /// <summary>
@@ -93,24 +81,13 @@
         /// <param name="targetType">The type to convert to.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || value == DependencyProperty.UnsetValue)
-                return value;
-
             var typeConverter = GetTypeConverter(targetType);
             if (typeConverter == null)
                 return null;
 
-            try
-            {
-                return typeConverter.ConvertToInvariantString(value);
-            }
-            catch (Exception ex)
-            {
-                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
-                return DependencyProperty.UnsetValue;
-            }
+            return typeConverter.ConvertToInvariantString(value);
         }
 
         private TypeConverter GetTypeConverter(Type targetType)

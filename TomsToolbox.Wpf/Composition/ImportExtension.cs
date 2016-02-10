@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.Composition;
     using System.ComponentModel.Composition.Hosting;
     using System.Diagnostics.Contracts;
@@ -99,6 +100,9 @@
 
             _rootObject = rootObjectProvider.RootObject as DependencyObject;
             if (_rootObject == null)
+                return null;
+
+            if (DesignerProperties.GetIsInDesignMode(_rootObject))
                 return null;
 
             if (AllowRecomposition)

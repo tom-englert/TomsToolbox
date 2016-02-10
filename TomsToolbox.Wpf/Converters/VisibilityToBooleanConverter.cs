@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
-    using System.Diagnostics;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
@@ -66,7 +65,7 @@
             }
             catch (Exception ex)
             {
-                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                this.TraceError(ex.Message, "Convert");
                 return DependencyProperty.UnsetValue;
             }
         }
@@ -96,7 +95,7 @@
             }
             catch (Exception ex)
             {
-                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
+                this.TraceError(ex.Message, "ConvertBack");
                 return DependencyProperty.UnsetValue;
             }
         }

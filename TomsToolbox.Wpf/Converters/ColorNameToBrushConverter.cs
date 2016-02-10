@@ -2,18 +2,16 @@
 {
     using System;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Windows.Data;
-    using System.Windows;
     using System.Windows.Media;
 
     /// <summary>
     /// Converts a color name to the corresponding solid color brush. See <see cref="BrushConverter"/> for supported values.
     /// </summary>
     [ValueConversion(typeof(string), typeof(Brush))]
-    public class ColorNameToBrushConverter : IValueConverter
+    public class ColorNameToBrushConverter : ValueConverter
     {
         private static readonly TypeConverter _typeConverter = new BrushConverter();
 
@@ -44,36 +42,9 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || value == DependencyProperty.UnsetValue)
-                return value;
-
-            try
-            {
-                return Convert((string)value);
-            }
-            catch (Exception ex)
-            {
-                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
-                return DependencyProperty.UnsetValue;
-            }
-        }
-
-        /// <summary>
-        /// Converts a value.
-        /// </summary>
-        /// <param name="value">The value that is produced by the binding target.</param>
-        /// <param name="targetType">The type to convert to.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
-        /// </returns>
-        /// <exception cref="System.InvalidOperationException"></exception>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new InvalidOperationException();
+            return Convert((string)value);
         }
 
         [ContractInvariantMethod]

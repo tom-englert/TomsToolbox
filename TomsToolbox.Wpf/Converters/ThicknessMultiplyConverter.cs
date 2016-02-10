@@ -2,7 +2,6 @@
 {
     using System;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Windows;
@@ -15,7 +14,7 @@
     /// The first structure is passed as the converter value, the second as the converter parameter.
     /// </summary>
     [ValueConversion(typeof(Thickness), typeof(Thickness))]
-    public class ThicknessMultiplyConverter : IValueConverter
+    public class ThicknessMultiplyConverter : ValueConverter
     {
         private static readonly TypeConverter _typeConverter = new ThicknessConverter();
 
@@ -49,23 +48,23 @@
         /// A converted value.
         /// </returns>
         /// <param name="value">The value produced by the binding source.</param><param name="targetType">The type of the binding target property.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || value == DependencyProperty.UnsetValue)
-                return value;
+            return Convert(value, parameter);
+        }
 
-            try
-            {
-                var target = (Thickness)value;
-                var factor = GetThicknessFromParameter(parameter);
+        /// <summary>
+        /// Converts the specified values.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="parameter">The parameter.</param>
+        /// <returns>The multiplied thickness.</returns>
+        public static object Convert(object value, object parameter)
+        {
+            var target = (Thickness)value;
+            var factor = GetThicknessFromParameter(parameter);
 
-                return Multiply(target, factor);
-            }
-            catch (Exception ex)
-            {
-                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
-                return DependencyProperty.UnsetValue;
-            }
+            return Multiply(target, factor);
         }
 
         private static Thickness GetThicknessFromParameter(object parameter)
@@ -81,18 +80,6 @@
                 return _typeConverter.ConvertFromInvariantString(parameterString).SafeCast<Thickness>();
 
             throw new ArgumentException("Invalid thickness parameter.", "parameter");
-        }
-
-        /// <summary>
-        /// Converts a value. 
-        /// </summary>
-        /// <returns>
-        /// A converted value.
-        /// </returns>
-        /// <param name="value">The value that is produced by the binding target.</param><param name="targetType">The type to convert to.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new InvalidOperationException();
         }
 
         [ContractInvariantMethod]

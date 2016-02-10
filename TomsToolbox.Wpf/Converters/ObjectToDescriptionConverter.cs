@@ -2,10 +2,8 @@
 {
     using System;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Globalization;
-    using System.Windows;
     using System.Windows.Data;
 
     /// <summary>
@@ -42,20 +40,9 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((value == null) || (value == DependencyProperty.UnsetValue))
-                return value;
-
-            try
-            {
-                return Convert(value, parameter as Type);
-            }
-            catch (Exception ex)
-            {
-                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
-                return DependencyProperty.UnsetValue;
-            }
+            return Convert(value, parameter as Type);
         }
 
         /// <summary>

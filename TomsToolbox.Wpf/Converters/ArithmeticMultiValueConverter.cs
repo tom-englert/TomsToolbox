@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
@@ -45,7 +44,7 @@
     /// </remarks>
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Use the same term as in IMultiValueConverter")]
     [ValueConversion(typeof(object[]), typeof(double))]
-    public class ArithmeticMultiValueConverter : IMultiValueConverter
+    public class ArithmeticMultiValueConverter : MultiValueConverter
     {
         // removed DefaultIfEmpty() so we are not left wondering what went wrong if one of the items cannot be resolved
         private static readonly Func<IEnumerable<double>, double> _minOperationMethod = items => items.Min();
@@ -54,7 +53,7 @@
         private static readonly Func<IEnumerable<double>, double> _averageOperationMethod = items => items.Average();
         private static readonly Func<IEnumerable<double>, double> _productOperationMethod = items =>
         {
-            return items.Aggregate(1.0, (current, item) => current*item);
+            return items.Aggregate(1.0, (current, item) => current * item);
         };
 
         private ArithmeticOperation _operation;
@@ -133,40 +132,9 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values == null || values == DependencyProperty.UnsetValue)
-                return values;
-            if (values.Any(x => x == null))
-                return null;
-            if (values.Any(x => x == DependencyProperty.UnsetValue))
-                return DependencyProperty.UnsetValue;
-
-            try
-            {
-                return _operationMethod(values.Select(v => System.Convert.ToDouble(v, CultureInfo.InvariantCulture)));
-            }
-            catch (Exception ex)
-            {
-                PresentationTraceSources.DataBindingSource.TraceEvent(TraceEventType.Error, 9000, "{0} failed: {1}", GetType().Name, ex.Message);
-                return DependencyProperty.UnsetValue;
-            }
-        }
-
-        /// <summary>
-        /// Converts a binding target value to the source binding values.
-        /// </summary>
-        /// <param name="value">The value that the binding target produces.</param>
-        /// <param name="targetTypes">The array of types to convert to. The array length indicates the number and types of values that are suggested for the method to return.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// An array of values that have been converted from the target value back to the source values.
-        /// </returns>
-        /// <exception cref="System.InvalidOperationException"></exception>
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new InvalidOperationException();
+            return _operationMethod(values.Select(v => System.Convert.ToDouble(v, CultureInfo.InvariantCulture)));
         }
 
         [ContractInvariantMethod]
