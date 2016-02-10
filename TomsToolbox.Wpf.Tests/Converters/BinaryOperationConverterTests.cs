@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Wpf.Tests
+﻿namespace TomsToolbox.Wpf.Tests.Converters
 {
     using System;
     using System.ComponentModel;
@@ -141,6 +141,30 @@
         }
 
         [TestMethod]
+        public void BinaryOperationConverter_Equality_Boolean_String_Test()
+        {
+            var target = BinaryOperationConverter.Equality;
+            var result = target.Convert(true, null, "true", null);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void BinaryOperationConverter_Equality_Boolean_String2_Test()
+        {
+            var target = BinaryOperationConverter.Equality;
+            var result = target.Convert(true, null, "false", null);
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod]
+        public void BinaryOperationConverter_Equality_TimeSpan_Test()
+        {
+            var target = BinaryOperationConverter.Equality;
+            var result = target.Convert(TimeSpan.FromHours(2), null, "2:00:00", null);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
         public void BinaryOperationConverter_Equality_Rect_UnmatchedString_Test()
         {
             var target = BinaryOperationConverter.Equality;
@@ -215,6 +239,31 @@
             var result = target.Convert(new Rect(1, 2, 3, 4), null, "1,4,3,4", null);
             Assert.AreEqual(true, result);
         }
+
+        [TestMethod]
+        public void BinaryOperationConverter_GreaterThan_TimeSpan_Test()
+        {
+            var target = BinaryOperationConverter.GreaterThan;
+            var result = target.Convert(TimeSpan.FromHours(2), null, "1:59:00", null);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void BinaryOperationMultiConverter_GreaterThan_Test()
+        {
+            var target = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThan };
+            var result = target.Convert(new object[] { 3, 2.0 }, null, null, null);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void BinaryOperationMultiConverter_NotGreaterThan_Test()
+        {
+            var target = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThan };
+            var result = target.Convert(new object[] { 1, 2.0 }, null, null, null);
+            Assert.AreEqual(false, result);
+        }
+
 
         [TestMethod]
         public void BinaryOperationMultiConverter_GreaterThanOrEqual_Test()

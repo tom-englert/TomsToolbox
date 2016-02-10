@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
+    using System.Collections;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
@@ -84,10 +85,10 @@
         private static readonly Func<object, object, object> _divisionMethod = (a, b) => ToDouble(a) / ToDouble(b);
         private static readonly Func<object, object, object> _equalityMethod = (a, b) => a.GetType() == b.GetType() ? a.Equals(b) : Math.Abs(ToDouble(a) - ToDouble(b)) < double.Epsilon;
         private static readonly Func<object, object, object> _inequalityMethod = (a, b) => a.GetType() == b.GetType() ? !a.Equals(b) : Math.Abs(ToDouble(a) - ToDouble(b)) > double.Epsilon;
-        private static readonly Func<object, object, object> _greaterThanMethod = (a, b) => ToDouble(a) > ToDouble(b);
-        private static readonly Func<object, object, object> _lessThanMethod = (a, b) => ToDouble(a) < ToDouble(b);
-        private static readonly Func<object, object, object> _greaterThanOrEqualMethod = (a, b) => ToDouble(a) >= ToDouble(b);
-        private static readonly Func<object, object, object> _lessThanOrEqualMethod = (a, b) => ToDouble(a) <= ToDouble(b);
+        private static readonly Func<object, object, object> _greaterThanMethod = (a, b) => Comparer.DefaultInvariant.Compare(a, b) > 0;
+        private static readonly Func<object, object, object> _lessThanMethod = (a, b) => Comparer.DefaultInvariant.Compare(a, b) < 0;
+        private static readonly Func<object, object, object> _greaterThanOrEqualMethod = (a, b) => Comparer.DefaultInvariant.Compare(a, b) >= 0;
+        private static readonly Func<object, object, object> _lessThanOrEqualMethod = (a, b) => Comparer.DefaultInvariant.Compare(a, b) <= 0;
 
         private BinaryOperation _operation;
         private string[] _operationMethodNames = { "op_Addition", "Offset" };
@@ -222,7 +223,7 @@
                     return ApplyOperation(valueType, value, parameter) ?? ApplyOperationOnCastedObject(valueType, value, parameter) ?? ApplyOperation(value, parameter);
                 }
 
-                return ApplyOperation(value, parameter);
+                return ApplyOperation(value, System.Convert.ChangeType(parameter, valueType, CultureInfo.InvariantCulture));
             }
             catch (Exception ex)
             {
