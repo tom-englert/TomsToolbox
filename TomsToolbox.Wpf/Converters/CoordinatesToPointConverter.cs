@@ -50,8 +50,11 @@
         }
 
         /// <summary>
-        /// Converts WGS-84 coordinates (<see cref="Coordinates"/> ) into normalized logical XY coordinates (<see cref="Point"/>) in the range 0..1 and back.
+        /// Converts WGS-84 coordinates (<see cref="Coordinates" /> ) into normalized logical XY coordinates (<see cref="Point" />) in the range 0..1 and back.
         /// </summary>
+        /// <param name="value">The <see cref="Coordinates" /> or <see cref="Point" /> value.</param>
+        /// <returns>The <see cref="Coordinates" /> or <see cref="Point" /> value.</returns>
+        /// <exception cref="System.InvalidOperationException">Value is neither a Point nor a Coordinates structure.</exception>
         public static object Convert(object value)
         {
             if (value is Point)
@@ -64,7 +67,7 @@
                 return (Point)(Coordinates)value;
             }
 
-            throw new InvalidOperationException("Value us neither of type Point nor of type Coordinates");
+            throw new InvalidOperationException("Value is neither a Point nor a Coordinates structure");
         }
     }
 }
