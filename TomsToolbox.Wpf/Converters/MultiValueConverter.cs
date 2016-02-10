@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
@@ -10,7 +11,8 @@
     /// <summary>
     /// A base class for mutli value converters performing pre-check of value and error handling.
     /// </summary>
-    [ContractClass(typeof (MultiValueConverterContract))]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi")]
+    [ContractClass(typeof(MultiValueConverterContract))]
     public abstract class MultiValueConverter : IMultiValueConverter
     {
         /// <summary>

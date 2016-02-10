@@ -24,7 +24,7 @@
     /// </remarks>
     public abstract class ObservableObject : INotifyPropertyChanged, IDataErrorInfo
 #if NETFRAMEWORK_4_5
-        INotifyDataErrorInfo
+        , INotifyDataErrorInfo
 #endif
     {
         private static readonly AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>> DependencyMappingCache = new AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>>(type => PropertyDependencyAttribute.CreateDependencyMapping(type.GetProperties()));
@@ -377,10 +377,12 @@
         /// <param name="propertyName">The name of the property where validation errors have changed; or null or <see cref="F:System.String.Empty"/>, when entity-level errors have changed.</param>
         protected void OnErrorsChanged(string propertyName)
         {
-            _errorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+            var eventHandler = _errorsChanged;
+            if (eventHandler != null)
+                eventHandler(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        IEnumerable INotifyDataErrorInfo.GetErrors(string propertyName)
+        System.Collections.IEnumerable INotifyDataErrorInfo.GetErrors(string propertyName)
         {
             return GetDataErrors(propertyName);
         }
@@ -414,3 +416,4 @@
         }
     }
 }
+
