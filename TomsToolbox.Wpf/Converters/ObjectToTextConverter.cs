@@ -23,6 +23,7 @@
     /// Assert.AreEqual("This is item 1", ObjectToTextConverter.Convert("key1", Items.Item1));
     /// </code></example>
     /// <remarks>Works with any object; for enum types the attribute of the field is returned. When used via the <see cref="IValueConverter"/> interface, the key is specified as the converter parameter.</remarks>
+    [ValueConversion(typeof(object), typeof(string))]
     public class ObjectToTextConverter : ObjectToAttributeConverter<TextAttribute>
     {
         /// <summary>
@@ -48,11 +49,11 @@
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value.
         /// </returns>
-        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value == null ? string.Empty : Convert(parameter ?? Key, value, null);
+            return Convert(parameter ?? Key, value, null);
         }
 
         /// <summary>

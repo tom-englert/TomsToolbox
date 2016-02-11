@@ -10,6 +10,8 @@
 [Rr]elease/
 [Bb]in/
 [Oo]bj/
+[Dd]eploy/
+[Dd]ocumentation/[Hh]elp
 
 # MSTest test Results
 [Tt]est[Rr]esult*/

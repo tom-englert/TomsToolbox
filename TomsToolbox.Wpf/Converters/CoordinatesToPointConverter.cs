@@ -8,9 +8,10 @@
     using TomsToolbox.Desktop;
 
     /// <summary>
-    /// Converts WGS-84 coordinates into logical XY coordinates in the range 0..1 and back.
+    /// Converts WGS-84 coordinates (<see cref="Coordinates"/> ) into normalized logical XY coordinates (<see cref="Point"/>) in the range 0..1 and back.
     /// </summary>
-    public class CoordinatesToPointConverter : IValueConverter
+    [ValueConversion(typeof(object), typeof(object))]
+    public class CoordinatesToPointConverter : ValueConverter
     {
         /// <summary>
         /// The singleton instance of the converter.
@@ -19,15 +20,16 @@
 
         /// <summary>
         /// Converts a value.
+        /// Null and UnSet are unchanged.
         /// </summary>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return Convert(value);
         }
@@ -42,12 +44,18 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return Convert(value);
         }
 
-        private static object Convert(object value)
+        /// <summary>
+        /// Converts WGS-84 coordinates (<see cref="Coordinates" /> ) into normalized logical XY coordinates (<see cref="Point" />) in the range 0..1 and back.
+        /// </summary>
+        /// <param name="value">The <see cref="Coordinates" /> or <see cref="Point" /> value.</param>
+        /// <returns>The <see cref="Coordinates" /> or <see cref="Point" /> value.</returns>
+        /// <exception cref="System.InvalidOperationException">Value is neither a Point nor a Coordinates structure.</exception>
+        public static object Convert(object value)
         {
             if (value is Point)
             {
@@ -59,7 +67,7 @@
                 return (Point)(Coordinates)value;
             }
 
-            return null;
+            throw new InvalidOperationException("Value is neither a Point nor a Coordinates structure");
         }
     }
 }

@@ -12,6 +12,7 @@
     /// A converter composed of a chain of converters. The converters are invoked in the oder specified.
     /// </summary>
     [ContentProperty("Converters")]
+    [ValueConversion(typeof(object), typeof(object))]
     public class CompositeConverter : IValueConverter
     {
         private readonly Collection<IValueConverter> _converters = new Collection<IValueConverter>(new List<IValueConverter>());
@@ -39,10 +40,15 @@
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value.
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
+            if (Converters.Count <= 0)
+            {
+                throw new InvalidOperationException("One or more converters are required.");
+            }
+
             return Converters.Aggregate(value, (current, converter) => converter.Convert(current, targetType, parameter, culture));
         }
 
@@ -54,10 +60,15 @@
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value.
         /// </returns>
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
+            if (Converters.Count <= 0) 
+            {
+                throw new InvalidOperationException("One or more converters are required.");
+            }
+
             return Converters.Reverse().Aggregate(value, (current, converter) => converter.ConvertBack(current, targetType, parameter, culture));
         }
 

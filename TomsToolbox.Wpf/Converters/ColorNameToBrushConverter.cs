@@ -10,7 +10,8 @@
     /// <summary>
     /// Converts a color name to the corresponding solid color brush. See <see cref="BrushConverter"/> for supported values.
     /// </summary>
-    public class ColorNameToBrushConverter : IValueConverter
+    [ValueConversion(typeof(string), typeof(Brush))]
+    public class ColorNameToBrushConverter : ValueConverter
     {
         private static readonly TypeConverter _typeConverter = new BrushConverter();
 
@@ -21,19 +22,14 @@
 
         /// <summary>
         /// Converts the specified color name.
+        /// Null and UnSet are unchanged.
         /// </summary>
         /// <param name="colorName">The color name.</param>
         /// <returns>The corresponding brush if the conversion was successful; otherwise <c>null</c>.</returns>
         public static Brush Convert(string colorName)
         {
-            try
-            {
-                return colorName != null ? _typeConverter.ConvertFromInvariantString(colorName) as Brush : null;
-            }
-            catch (NotSupportedException)
-            {
-                return null;
-            }
+            // let it fail fast so we are not left wondering what went wrong
+            return colorName != null ? _typeConverter.ConvertFromInvariantString(colorName) as Brush : null;
         }
 
         /// <summary>
@@ -46,25 +42,9 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Convert(value as string);
-        }
-
-        /// <summary>
-        /// Converts a value.
-        /// </summary>
-        /// <param name="value">The value that is produced by the binding target.</param>
-        /// <param name="targetType">The type to convert to.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
-        /// </returns>
-        /// <exception cref="System.NotImplementedException"></exception>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
+            return Convert((string)value);
         }
 
         [ContractInvariantMethod]

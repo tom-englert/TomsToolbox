@@ -1,5 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Tests.Converters
 {
+    using System.Windows;
+    using System.Windows.Data;
     using System.Windows.Media;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -22,7 +24,7 @@
         [TestMethod]
         public void StringToObjectConverter_ConvertWithExplicitTargetType_Test()
         {
-            var target = new StringToObjectConverter { TypeConverterType = typeof(BrushConverter) };
+            IValueConverter target = new StringToObjectConverter { TypeConverterType = typeof(BrushConverter) };
 
             var result = target.Convert("Blue", null, null, null);
 
@@ -32,11 +34,21 @@
         [TestMethod]
         public void StringToObjectConverter_ConvertWithExplicitAndImplicitTargetType_Test()
         {
-            var target = new StringToObjectConverter { TypeConverterType = typeof(BrushConverter) };
+            IValueConverter target = new StringToObjectConverter { TypeConverterType = typeof(BrushConverter) };
 
             var result = target.Convert("Blue", typeof(Color), null, null);
 
             Assert.AreEqual(Brushes.Blue, result);
+        }
+
+        [TestMethod]
+        public void StringToObjectConverter_ConvertWithBadInput_Test()
+        {
+            IValueConverter target = new StringToObjectConverter { TypeConverterType = typeof(BrushConverter) };
+
+            var result = target.Convert("NoABrushName", null, null, null);
+
+            Assert.AreEqual(DependencyProperty.UnsetValue, result);
         }
     }
 }

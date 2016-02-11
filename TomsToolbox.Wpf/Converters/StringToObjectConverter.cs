@@ -9,7 +9,8 @@
     /// <summary>
     /// A <see cref="IValueConverter" /> wrapping a <see cref="TypeConverter" />
     /// </summary>
-    public class StringToObjectConverter : IValueConverter
+    [ValueConversion(typeof(string), typeof(object))]
+    public class StringToObjectConverter : ValueConverter
     {
         private TypeConverter _typeConverter;
 
@@ -26,13 +27,15 @@
         {
             get
             {
-                return _typeConverter != null ? _typeConverter.GetType() : null;
+                if (_typeConverter != null)
+                    return _typeConverter.GetType();
+                return null;
             }
             set
             {
                 if (value != null)
                 {
-                    if (typeof (TypeConverter).IsAssignableFrom(value) && (value.GetConstructor(Type.EmptyTypes) != null))
+                    if (typeof(TypeConverter).IsAssignableFrom(value) && (value.GetConstructor(Type.EmptyTypes) != null))
                     {
                         _typeConverter = (TypeConverter)Activator.CreateInstance(value);
                         return;
@@ -46,20 +49,17 @@
         }
 
         /// <summary>
-        /// Converts a value.
+        /// Converts a value. Null or UnSet are unchanged.
         /// </summary>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value.
         /// </returns>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
-                return null;
-
             var typeConverter = GetTypeConverter(targetType);
             if (typeConverter == null)
                 return null;
@@ -68,15 +68,7 @@
             if (string.IsNullOrEmpty(text))
                 return null;
 
-            try
-            {
-                return typeConverter.ConvertFromInvariantString(text);
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceError("{0} failed to convert '{1}': {2}", typeConverter, value, ex.Message);
-                return null;
-            }
+            return typeConverter.ConvertFromInvariantString(text);
         }
 
         /// <summary>
@@ -89,24 +81,13 @@
         /// <param name="targetType">The type to convert to.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
-                return null;
-
             var typeConverter = GetTypeConverter(targetType);
             if (typeConverter == null)
                 return null;
 
-            try
-            {
-                return typeConverter.ConvertToInvariantString(value);
-            }
-            catch (Exception ex)
-            {
-                Trace.TraceError("{0} failed to convert '{1}': {2}", typeConverter, value, ex.Message);
-                return null;
-            }
+            return typeConverter.ConvertToInvariantString(value);
         }
 
         private TypeConverter GetTypeConverter(Type targetType)

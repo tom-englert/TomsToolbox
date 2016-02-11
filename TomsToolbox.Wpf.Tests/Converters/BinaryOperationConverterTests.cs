@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Wpf.Tests
+﻿namespace TomsToolbox.Wpf.Tests.Converters
 {
     using System;
     using System.ComponentModel;
@@ -7,6 +7,7 @@
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using TomsToolbox.Desktop;
     using TomsToolbox.Wpf.Converters;
 
     [TestClass]
@@ -57,7 +58,7 @@
         {
             var target = BinaryOperationConverter.Multiply;
             var result = target.Convert(new Vector(1, 2), null, target, null);
-            Assert.AreEqual(null, result);
+            Assert.AreEqual(DependencyProperty.UnsetValue, result);
         }
 
         [TestMethod]
@@ -73,7 +74,7 @@
         {
             var target = BinaryOperationConverter.Multiply;
             var result = target.Convert(target, null, 2, null);
-            Assert.AreEqual(null, result);
+            Assert.AreEqual(DependencyProperty.UnsetValue, result);
         }
 
         [TestMethod]
@@ -137,6 +138,30 @@
         {
             var target = BinaryOperationConverter.Equality;
             var result = target.Convert(3, null, "3", null);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void BinaryOperationConverter_Equality_Boolean_String_Test()
+        {
+            var target = BinaryOperationConverter.Equality;
+            var result = target.Convert(true, null, "true", null);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void BinaryOperationConverter_Equality_Boolean_String2_Test()
+        {
+            var target = BinaryOperationConverter.Equality;
+            var result = target.Convert(true, null, "false", null);
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod]
+        public void BinaryOperationConverter_Equality_TimeSpan_Test()
+        {
+            var target = BinaryOperationConverter.Equality;
+            var result = target.Convert(TimeSpan.FromHours(2), null, "2:00:00", null);
             Assert.AreEqual(true, result);
         }
 
@@ -216,6 +241,39 @@
             Assert.AreEqual(true, result);
         }
 
+        [TestMethod]
+        public void BinaryOperationConverter_GreaterThan_TimeSpan_Test()
+        {
+            var target = BinaryOperationConverter.GreaterThan;
+            var result = target.Convert(TimeSpan.FromHours(2), null, "1:59:00", null);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void BinaryOperationMultiConverter_GreaterThan_Test()
+        {
+            var target = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThan };
+            var result = target.Convert(new object[] { 3, 2.0 }, null, null, null);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod]
+        public void BinaryOperationMultiConverter_NotGreaterThan_Test()
+        {
+            var target = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThan };
+            var result = target.Convert(new object[] { 1, 2.0 }, null, null, null);
+            Assert.AreEqual(false, result);
+        }
+
+
+        [TestMethod]
+        public void BinaryOperationMultiConverter_GreaterThanOrEqual_Test()
+        {
+            var target = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThanOrEqual };
+            var result = target.Convert(new object[] { 2, 2.0 }, null, null, null);
+            Assert.AreEqual(true, result);
+        }
+
         class TestClassTypeConverter : TypeConverter
         {
             public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
@@ -239,7 +297,7 @@
                 _value = value;
             }
 
-            public static TestClass operator * (TestClass x, int y)
+            public static TestClass operator *(TestClass x, int y)
             {
                 return new TestClass(x._value * y);
             }

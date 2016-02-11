@@ -5,5 +5,10 @@ using System.Reflection;
 [assembly: AssemblyCopyright("© tom-englert.de 2015-2016")]
 [assembly: AssemblyTrademark("")]
 
-[assembly: AssemblyVersion("1.0.32.0")]
-[assembly: AssemblyFileVersion("1.0.32.0")]
+[assembly: AssemblyVersion(Product.Version)]
+[assembly: AssemblyFileVersion(Product.Version)]
+
+internal static class Product
+{
+    public const string Version = "1.0.33.0";
+}

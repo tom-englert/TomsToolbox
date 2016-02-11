@@ -6,6 +6,7 @@
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
+    using System.Windows;
     using System.Windows.Data;
 
     /// <summary>
@@ -30,7 +31,8 @@
     /// All items must be convertible to boolean.
     /// </remarks>
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Use the same term as in IMultiValueConverter")]
-    public class LogicalMultiValueConverter : IMultiValueConverter
+    [ValueConversion(typeof(object[]), typeof(bool))]
+    public class LogicalMultiValueConverter : MultiValueConverter
     {
         private static readonly Func<IEnumerable<bool>, bool> _andOperationMethod = items => items.All(item => item);
         private static readonly Func<IEnumerable<bool>, bool> _orOperationMethod = items => items.Any(item => item);
@@ -78,44 +80,18 @@
 
         /// <summary>
         /// Converts source values to a value for the binding target. The data binding engine calls this method when it propagates the values from source bindings to the binding target.
+        /// An input value of null will return null, whereas if the input array contains UnSet then UnSet will be returned.
         /// </summary>
         /// <param name="values">The array of values that the source bindings in the <see cref="T:System.Windows.Data.MultiBinding" /> produces. The value <see cref="F:System.Windows.DependencyProperty.UnsetValue" /> indicates that the source binding has no value to provide for conversion.</param>
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value.If the method returns null, the valid null value is used.A return value of <see cref="T:System.Windows.DependencyProperty" />.<see cref="F:System.Windows.DependencyProperty.UnsetValue" /> indicates that the converter did not produce a value, and that the binding will use the <see cref="P:System.Windows.Data.BindingBase.FallbackValue" /> if it is available, or else will use the default value.A return value of <see cref="T:System.Windows.Data.Binding" />.<see cref="F:System.Windows.Data.Binding.DoNothing" /> indicates that the binding does not transfer the value or use the <see cref="P:System.Windows.Data.BindingBase.FallbackValue" /> or the default value.
+        /// A converted value.
         /// </returns>
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values == null)
-                return false;
-
-            try
-            {
-                return _operationMethod(values.Select(v => System.Convert.ToBoolean(v, CultureInfo.InvariantCulture)));
-            }
-            catch (SystemException)
-            {
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Converts a binding target value to the source binding values.
-        /// </summary>
-        /// <param name="value">The value that the binding target produces.</param>
-        /// <param name="targetTypes">The array of types to convert to. The array length indicates the number and types of values that are suggested for the method to return.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// An array of values that have been converted from the target value back to the source values.
-        /// </returns>
-        /// <exception cref="System.NotImplementedException"></exception>
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
+            return _operationMethod(values.Select(v => System.Convert.ToBoolean(v, CultureInfo.InvariantCulture)));
         }
 
         [ContractInvariantMethod]

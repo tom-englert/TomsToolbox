@@ -1,5 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Tests.Converters
 {
+    using System.Windows.Data;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using TomsToolbox.Desktop;
@@ -32,7 +34,7 @@
         [TestMethod]
         public void ObjectToTextConverter_Dynamic_Class()
         {
-            var target = new ObjectToTextConverter { Key = "key" };
+            IValueConverter target = new ObjectToTextConverter { Key = "key" };
 
             Assert.AreEqual("This is a class", target.Convert(new Class(), null, null, null));
         }
@@ -40,7 +42,7 @@
         [TestMethod]
         public void ObjectToTextConverter_Dynamic_Class_BadKey()
         {
-            var target = new ObjectToTextConverter { Key = "keyxx" };
+            IValueConverter target = new ObjectToTextConverter { Key = "keyxx" };
 
             Assert.AreEqual("TomsToolbox.Wpf.Tests.Converters.ObjectToTextConverterTests+Class", target.Convert(new Class(), null, null, null));
         }
@@ -48,7 +50,7 @@
         [TestMethod]
         public void ObjectToTextConverter_Dynamic_Class_ParameterOverride()
         {
-            var target = new ObjectToTextConverter { Key = "keyxx" };
+            IValueConverter target = new ObjectToTextConverter { Key = "keyxx" };
 
             Assert.AreEqual("This is a class", target.Convert(new Class(), null, "key", null));
         }

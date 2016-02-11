@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Converters\ArithmeticMultiValueConverterTests.cs" />
     <Compile Include="Converters\BinaryOperationConverterTests.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverterTests.cs" />
     <Compile Include="Converters\DoubleToThicknessConverterTests.cs" />
     <Compile Include="Converters\LogicalMultiValueConverterTests.cs" />
     <Compile Include="Converters\ObjectToTextConverterTests.cs" />

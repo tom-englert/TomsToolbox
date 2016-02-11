@@ -142,6 +142,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -155,6 +156,8 @@
       <Link>Version.cs</Link>
     </Compile>
     <Compile Include="AppDomainHelper.cs" />
+    <Compile Include="BinaryOperation.cs" />
+    <Compile Include="BinaryOperationProcessor.cs" />
     <Compile Include="ClipboardHelper.cs" />
     <Compile Include="Composition\CompositionExtensions.cs" />
     <Compile Include="Composition\CompositionHost.cs" />

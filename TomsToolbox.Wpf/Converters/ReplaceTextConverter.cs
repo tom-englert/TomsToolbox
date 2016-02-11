@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
-    using System.Diagnostics;
     using System.Globalization;
     using System.Text.RegularExpressions;
     using System.Windows.Data;
@@ -9,7 +8,8 @@
     /// <summary>
     /// A converter that converts the specified value by replacing text using a regular expression.
     /// </summary>
-    public class ReplaceTextConverter : IValueConverter
+    [ValueConversion(typeof(string), typeof(string))]
+    public class ReplaceTextConverter : ValueConverter
     {
         /// <summary>
         /// Gets or sets the regular expression to find.
@@ -55,49 +55,26 @@
 
             replacement = replacement ?? string.Empty;
 
-            try
-            {
-                var regex = new Regex(pattern, options);
-                regex.Replace(value, replacement, replaceAll ? -1 : 1);
-            }
-            catch (ArgumentException ex)
-            {
-                Trace.TraceError(ex.ToString());
-            }
+            var regex = new Regex(pattern, options);
+            regex.Replace(value, replacement, replaceAll ? -1 : 1);
 
             return value;
         }
 
         /// <summary>
         /// Converts a value.
+        /// Null and UnSet are unchanged.
         /// </summary>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var stringValue = value as string;
-            return stringValue == null ? value : Convert(stringValue);
-        }
-
-        /// <summary>
-        /// Converts a value.
-        /// </summary>
-        /// <param name="value">The value that is produced by the binding target.</param>
-        /// <param name="targetType">The type to convert to.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
-        /// </returns>
-        /// <exception cref="System.NotImplementedException"></exception>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
+            return Convert((string)value);
         }
     }
 }

@@ -10,39 +10,23 @@
     /// <summary>
     /// A converter to use in <see cref="ICommand"/> bindings to intercept or filter command executions in the view layer in MVVM applications.
     /// </summary>
-    public class ConfirmedCommandConverter : IValueConverter
+    [ValueConversion(typeof(ICommand), typeof(CommandProxy))]
+    public class ConfirmedCommandConverter : ValueConverter
     {
         /// <summary>
         /// Converts a value.
+        /// Null and UnSet are unchanged.
         /// </summary>
         /// <param name="value">The value produced by the binding source.</param>
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var command = value as ICommand;
-
-            return command == null ? value : new CommandProxy(this, command);
-        }
-
-        /// <summary>
-        /// Converts a value.
-        /// </summary>
-        /// <param name="value">The value that is produced by the binding target.</param>
-        /// <param name="targetType">The type to convert to.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
-        /// </returns>
-        /// <exception cref="System.NotImplementedException"></exception>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
+            return new CommandProxy(this, (ICommand)value);
         }
 
         /// <summary>
@@ -61,17 +45,17 @@
 
             var handler = Executing;
             if (handler != null)
-                handler(this, e);
+                handler.Invoke(this, e);
         }
 
         private void OnError(ErrorEventArgs e)
         {
             var handler = Error;
             if (handler != null)
-                handler(this, e);
+                handler.Invoke(this, e);
         }
 
-        class CommandProxy : ICommand
+        private class CommandProxy : ICommand
         {
             private readonly ConfirmedCommandConverter _owner;
             private readonly ICommand _command;
@@ -87,7 +71,7 @@
             public void Execute(object parameter)
             {
                 var args = new ConfirmedCommandEventArgs { Parameter = parameter };
-                
+
                 _owner.QueryCancelExecution(args);
 
                 if (args.Cancel)

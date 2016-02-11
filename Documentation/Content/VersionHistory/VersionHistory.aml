@@ -9,6 +9,16 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.33.0</para>
+            <list class="bullet">
+              <listItem>
+                <para>Attributed validation support for ObservableObject.</para>
+                <para>ClipoardHelper: Default to TEXT, as CSV is not Unicode.</para>
+                <para>Enhance all converters (usage, error handling, tracing).</para>
+              </listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.32.0</para>
             <list class="bullet">
               <listItem>

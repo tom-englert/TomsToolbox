@@ -2,7 +2,7 @@
 {
     using System;
     using System.ComponentModel;
-    using System.Diagnostics;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
     using System.Windows.Data;
@@ -11,7 +11,8 @@
     /// Tests if an enum value matches one of the given values provides as the converter parameter. 
     /// If the enum has a <see cref="FlagsAttribute"/>, the match is done with the logic "is any flag set".
     /// </summary>
-    public class EnumToBooleanConverter : IValueConverter
+    [ValueConversion(typeof(object), typeof(bool))]
+    public class EnumToBooleanConverter : ValueConverter
     {
         /// <summary>
         /// The singleton instance of the converter.
@@ -20,14 +21,15 @@
 
         /// <summary>
         /// Converts a value. 
+        /// UnSet is unchanged, null returns false.
         /// </summary>
         /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
+        /// A converted value.
         /// </returns>
         /// <param name="value">The value produced by the binding source.</param><param name="targetType">The type of the binding target property.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Convert(value, parameter as string);
+            return Convert(value, (string)parameter);
         }
 
         /// <summary>
@@ -38,47 +40,24 @@
         /// <returns>True if the value matches one of the enum names.</returns>
         public static bool Convert(object value, string matches)
         {
-            if (value == null)
-                return false;
-            if (matches == null)
-                return false;
+            Contract.Requires(value != null);
+            Contract.Requires(matches != null);
 
             var valueType = value.GetType();
             if (!valueType.IsEnum)
-                return false;
-
-            try
             {
-                var valueValue = System.Convert.ToInt64(value, CultureInfo.InvariantCulture);
-
-                var typeConverter = TypeDescriptor.GetConverter(value);
-                var matchesList = matches.Split(',').Select(typeConverter.ConvertFromInvariantString).Select(x => System.Convert.ToInt64(x, CultureInfo.InvariantCulture));
-
-                return Attribute.IsDefined(valueType, typeof(FlagsAttribute))
-                    ? matchesList.Any(x => (valueValue & x) != 0)
-                    : matchesList.Contains(valueValue);
-            }
-            catch (SystemException ex)
-            {
-                if (Debugger.IsAttached)
-                {
-                    Debug.Fail(ex.ToString());
-                }
+                throw new ArgumentException("The value is not an enum.", "value");
             }
 
-            return false;
-        }
+            // do not catch exceptions and let it fail fast so we are not left wondering what happened
+            var valueValue = System.Convert.ToInt64(value, CultureInfo.InvariantCulture);
 
-        /// <summary>
-        /// Converts a value. 
-        /// </summary>
-        /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
-        /// </returns>
-        /// <param name="value">The value that is produced by the binding target.</param><param name="targetType">The type to convert to.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
+            var typeConverter = TypeDescriptor.GetConverter(value);
+            var matchesList = matches.Split(',').Select(typeConverter.ConvertFromInvariantString).Select(x => System.Convert.ToInt64(x, CultureInfo.InvariantCulture));
+
+            return Attribute.IsDefined(valueType, typeof(FlagsAttribute))
+                ? matchesList.Any(x => (valueValue & x) != 0)
+                : matchesList.Contains(valueValue);
         }
     }
 }
