@@ -9,6 +9,7 @@
              xmlns:samples="clr-namespace:SampleApp.Samples"
              d:DataContext="{d:DesignInstance samples:MiscViewModel}">
   <UserControl.Resources>
+    <toms:DateTimeSource UpdateInterval="00:00:01" x:Key="LiveDateTime"/>
     <Style TargetType="ListBoxItem" x:Key="ListBoxItemStyle">
       <Setter Property="Template">
         <Setter.Value>
@@ -114,19 +115,13 @@
             <TextBlock x:Name="ThresholdText" Text="NOT " FontWeight="Bold">
               <TextBlock.Visibility>
                 <MultiBinding Converter="{StaticResource ThresholdConverter}">
-                  <Binding Path="Now" Source="{x:Static toms:DateTimeSource.Default}"/>
+                  <Binding Path="Now" Source="{StaticResource LiveDateTime}"/>
                   <Binding Path="OperationStarted" />
                   <Binding Path="MinimumDuration" />
                 </MultiBinding>
               </TextBlock.Visibility>
             </TextBlock>
             <TextBlock Text="reached."/>
-            <i:Interaction.Triggers>
-              <ei:TimerTrigger MillisecondsPerTick="1000">
-                <!-- Since outcome may change with actual time, we need to refresh manually -->
-                <toms:UpdatePropertyAction TargetName="ThresholdText" Property="{x:Static UIElement.VisibilityProperty}" />
-              </ei:TimerTrigger>
-            </i:Interaction.Triggers>
           </StackPanel>
         </StackPanel>
       </HeaderedContentControl>

@@ -1,8 +1,11 @@
 ﻿namespace TomsToolbox.Wpf
 {
     using System;
+    using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows.Data;
+    using System.Windows.Threading;
+
     using TomsToolbox.Desktop;
 
     /// <summary>
@@ -21,13 +24,50 @@
     /// </remarks>
     public class DateTimeSource : ObservableObject
     {
+        private readonly DispatcherTimer _updateTimer;
+
         /// <summary>
-        /// The default singleton object. Use this as a source for binding that supports updating.
+        /// The default singleton object. Use this as a source for binding that supports manual updating.
         /// </summary>
         public static readonly DateTimeSource Default = new DateTimeSource();
 
-        private DateTimeSource()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DateTimeSource"/> class.
+        /// </summary>
+        public DateTimeSource()
         {
+            _updateTimer = new DispatcherTimer();
+            _updateTimer.Tick += UpdateTimer_Tick;
+        }
+
+        private void UpdateTimer_Tick(object sender, EventArgs eventArgs)
+        {
+            OnPropertyChanged("Now");
+            OnPropertyChanged("Today");
+            OnPropertyChanged("UtcNow");
+        }
+
+        /// <summary>
+        /// Gets or sets the interval in which the <see cref="INotifyPropertyChanged.PropertyChanged"/> event is raised for all properties.
+        /// </summary>
+        public TimeSpan UpdateInterval
+        {
+            get
+            {
+                return _updateTimer.Interval;
+            }
+            set
+            {
+                if (value > TimeSpan.Zero)
+                {
+                    _updateTimer.Restart();
+                    _updateTimer.Interval = value;
+                }
+                else
+                {
+                    _updateTimer.Stop();
+                }
+            }
         }
 
         /// <summary>
