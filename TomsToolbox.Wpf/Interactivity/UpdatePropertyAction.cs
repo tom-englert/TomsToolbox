@@ -4,6 +4,8 @@
     using System.Windows.Data;
     using System.Windows.Interactivity;
 
+    using TomsToolbox.Core;
+
     /// <summary>
     /// Updates the associated objects binding of the specified property; e.g. display computed properties like current time without the need to
     /// write a special services that provide individual property change events.
@@ -51,10 +53,18 @@
                 return;
 
             var bindingExpression = BindingOperations.GetBindingExpression(target, property);
-            if (bindingExpression == null)
+            if (bindingExpression != null)
+            {
+                bindingExpression.UpdateTarget();
                 return;
-                
-            bindingExpression.UpdateTarget();
+            }
+
+            var multiBindingExpression = BindingOperations.GetMultiBindingExpression(target, property);
+            if (multiBindingExpression != null)
+            {
+                multiBindingExpression.BindingExpressions.ForEach(expr => expr.UpdateTarget());
+                return;
+            }
         }
     }
 }
