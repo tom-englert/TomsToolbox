@@ -15,7 +15,7 @@
     /// May also be used as <see cref="IMultiValueConverter"/> where both operands are specified using bindings.
     /// </summary>
     /// <returns>
-    /// If the conversions succeed, the result of the operation is returned. If any error occurs, the result is null.
+    /// If the conversions succeed, the result of the operation is returned. If any error occurs, the result is <see cref="DependencyProperty.UnsetValue"/>.
     /// </returns>
     /// <remarks>
     /// Either<para/>

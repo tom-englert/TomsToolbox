@@ -56,7 +56,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -69,6 +71,7 @@
     <Compile Include="Converters\LogicalMultiValueConverterTests.cs" />
     <Compile Include="Converters\ObjectToTextConverterTests.cs" />
     <Compile Include="Converters\StringToObjectConverterTests.cs" />
+    <Compile Include="Converters\UnaryOperationConverterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

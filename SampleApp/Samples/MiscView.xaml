@@ -10,28 +10,10 @@
              d:DataContext="{d:DesignInstance samples:MiscViewModel}">
   <UserControl.Resources>
     <toms:DateTimeSource UpdateInterval="00:00:01" x:Key="LiveDateTime"/>
-    <Style TargetType="ListBoxItem" x:Key="ListBoxItemStyle">
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="ListBoxItem">
-            <DockPanel>
-              <CheckBox DockPanel.Dock="Left" Style="{StaticResource {x:Static toms:ResourceKeys.ListBoxItemCheckBoxStyle}}" />
-              <Decorator Width="5" DockPanel.Dock="Left" />
-              <ContentPresenter VerticalAlignment="Center" />
-            </DockPanel>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
-    </Style>
-    <toms:CompositeConverter x:Key="LessThanToVisibilityConverter">
-      <toms:BinaryOperationConverter Operation="LessThan" />
-      <BooleanToVisibilityConverter />
-    </toms:CompositeConverter>
   </UserControl.Resources>
   <ScrollViewer VerticalScrollBarVisibility="Auto">
     <StackPanel Margin="10">
-      <HeaderedContentControl
-        Header="Custom focus visual that aligns with the content (use keyboard navigation to see it)" Focusable="False">
+      <HeaderedContentControl Header="Custom focus visual that aligns with the content (use keyboard navigation to see it)" Focusable="False">
         <HeaderedContentControl.Resources>
           <Style TargetType="Button">
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -127,6 +109,25 @@
       </HeaderedContentControl>
       <HeaderedContentControl Header="BinaryOperationConverter Sample">
         <Border x:Name="OuterBorder" Margin="5" BorderBrush="Orange" BorderThickness="2">
+          <Border.Resources>
+            <toms:CompositeConverter x:Key="LessThanToVisibilityConverter">
+              <toms:BinaryOperationConverter Operation="LessThan" />
+              <BooleanToVisibilityConverter />
+            </toms:CompositeConverter>
+            <Style TargetType="ListBoxItem" x:Key="ListBoxItemStyle">
+              <Setter Property="Template">
+                <Setter.Value>
+                  <ControlTemplate TargetType="ListBoxItem">
+                    <DockPanel>
+                      <CheckBox DockPanel.Dock="Left" Style="{StaticResource {x:Static toms:ResourceKeys.ListBoxItemCheckBoxStyle}}" />
+                      <Decorator Width="5" DockPanel.Dock="Left" />
+                      <ContentPresenter VerticalAlignment="Center" />
+                    </DockPanel>
+                  </ControlTemplate>
+                </Setter.Value>
+              </Setter>
+            </Style>
+          </Border.Resources>
           <Grid>
             <ListBox x:Name="ListBox" ItemContainerStyle="{StaticResource ListBoxItemStyle}" SelectionMode="Extended">
               <TextBlock Text="#1" />
@@ -144,4 +145,4 @@
       </HeaderedContentControl>
     </StackPanel>
   </ScrollViewer>
-</UserControl>
+</UserControl> 

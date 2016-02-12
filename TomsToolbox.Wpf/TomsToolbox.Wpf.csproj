@@ -178,6 +178,7 @@
     <Compile Include="Composition\IVisualCompositionBehavior.cs" />
     <Compile Include="Converters\AggregatingMultiValueConverter.cs" />
     <Compile Include="Converters\MultiValueConverter.cs" />
+    <Compile Include="Converters\UnaryOperationConverter.cs" />
     <Compile Include="Converters\ValueConverter.cs" />
     <Compile Include="Converters\ValueConverterExtensions.cs" />
     <Compile Include="XamlExtensions\VisualComposition.cs" />

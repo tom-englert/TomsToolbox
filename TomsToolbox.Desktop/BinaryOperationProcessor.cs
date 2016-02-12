@@ -11,7 +11,7 @@
     using System.Windows.Media;
 
     /// <summary>
-    /// Applies the <see cref="BinaryOperationProcessor.Operation"/> on the values.<para/>
+    /// Applies the <see cref="Operation"/> on the values.<para/>
     /// </summary>
     /// <returns>
     /// If the conversions succeed, the result of the operation is returned. If any error occurs, the result is null.
