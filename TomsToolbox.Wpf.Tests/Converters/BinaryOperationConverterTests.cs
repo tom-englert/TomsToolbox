@@ -14,11 +14,27 @@
     public class BinaryOperationConverterTests
     {
         [TestMethod]
-        public void BinaryOperationConverter_Multiply_Double_Number_Test()
+        public void BinaryOperationConverter_Add_Double_Integer_Test()
         {
             var target = BinaryOperationConverter.Multiply;
-            var result = target.Convert(1.5, null, 2.5, null);
-            Assert.AreEqual(1.5 * 2.5, result);
+            var result = target.Convert(1.5, null, 2, null);
+            Assert.AreEqual(1.5 * 2, result);
+        }
+
+        [TestMethod]
+        public void BinaryOperationConverter_Add_Integer_Integer_Test()
+        {
+            var target = BinaryOperationConverter.Multiply;
+            var result = target.Convert(1, null, 2, null);
+            Assert.AreEqual(2.0, result);
+        }
+
+        [TestMethod]
+        public void BinaryOperationConverter_Multiply_Integer_Double_Test()
+        {
+            var target = BinaryOperationConverter.Multiply;
+            var result = target.Convert(3, null, 2.5, null);
+            Assert.AreEqual(3 * 2.5, result);
         }
 
         [TestMethod]
@@ -91,6 +107,17 @@
             var target = BinaryOperationConverter.Subtraction;
             var result = target.Convert(new Vector(2, 5), null, "2,3", null);
             Assert.AreEqual(new Vector(0, 2), result);
+        }
+
+        [TestMethod]
+        public void BinaryOperationConverter_Substract_DateTime_DateTime_Test()
+        {
+            var target = BinaryOperationConverter.Subtraction;
+            var diff = TimeSpan.FromMinutes(10);
+            var op1 = DateTime.Now;
+            var op2 = op1 - diff;
+            var result = target.Convert(op1, null, op2, null);
+            Assert.AreEqual(diff, result);
         }
 
         [TestMethod]

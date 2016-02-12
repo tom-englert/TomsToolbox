@@ -33,12 +33,12 @@
         private static readonly Func<object, object, object> _subtractionMethod = (a, b) => ToDouble(a) - ToDouble(b);
         private static readonly Func<object, object, object> _multiplyMethod = (a, b) => ToDouble(a) * ToDouble(b);
         private static readonly Func<object, object, object> _divisionMethod = (a, b) => ToDouble(a) / ToDouble(b);
-        private static readonly Func<object, object, object> _equalityMethod = (a, b) => a.GetType() == b.GetType() ? a.Equals(b) : Math.Abs(ToDouble(a) - ToDouble(b)) < double.Epsilon;
-        private static readonly Func<object, object, object> _inequalityMethod = (a, b) => a.GetType() == b.GetType() ? !a.Equals(b) : Math.Abs(ToDouble(a) - ToDouble(b)) > double.Epsilon;
-        private static readonly Func<object, object, object> _greaterThanMethod = (a, b) => Comparer.DefaultInvariant.Compare(a, b) > 0;
-        private static readonly Func<object, object, object> _lessThanMethod = (a, b) => Comparer.DefaultInvariant.Compare(a, b) < 0;
-        private static readonly Func<object, object, object> _greaterThanOrEqualMethod = (a, b) => Comparer.DefaultInvariant.Compare(a, b) >= 0;
-        private static readonly Func<object, object, object> _lessThanOrEqualMethod = (a, b) => Comparer.DefaultInvariant.Compare(a, b) <= 0;
+        private static readonly Func<object, object, object> _equalityMethod = (a, b) => Equals(a, b);
+        private static readonly Func<object, object, object> _inequalityMethod = (a, b) => !Equals(a, b);
+        private static readonly Func<object, object, object> _greaterThanMethod = (a, b) => Compare(a, b) > 0;
+        private static readonly Func<object, object, object> _lessThanMethod = (a, b) => Compare(a, b) < 0;
+        private static readonly Func<object, object, object> _greaterThanOrEqualMethod = (a, b) => Compare(a, b) >= 0;
+        private static readonly Func<object, object, object> _lessThanOrEqualMethod = (a, b) => Compare(a, b) <= 0;
 
         private readonly BinaryOperation _operation;
         private readonly string[] _operationMethodNames;
@@ -130,12 +130,9 @@
 
             var valueType = value1.GetType();
 
-            if (Type.GetTypeCode(valueType) == TypeCode.Object)
-            {
-                return ApplyOperation(valueType, value1, value2) ?? ApplyOperationOnCastedObject(valueType, value1, value2) ?? ApplyOperation(value1, value2);
-            }
-
-            return ApplyOperation(value1, System.Convert.ChangeType(value2, valueType, CultureInfo.InvariantCulture));
+            return ApplyOperation(valueType, value1, value2)
+                ?? ApplyOperationOnCastedObject(valueType, value1, value2)
+                ?? ApplyOperation(value1, value2);
         }
 
         private object ApplyOperation(object value1, object value2)
@@ -218,6 +215,34 @@
         private static double ToDouble(object value)
         {
             return Convert.ToDouble(value, CultureInfo.InvariantCulture);
+        }
+
+        private static object TryChangeType(object value, Type targetType)
+        {
+            try
+            {
+                return Convert.ChangeType(value, targetType, CultureInfo.InvariantCulture);
+            }
+            catch
+            {
+            }
+
+            return null;
+        }
+
+        private static int Compare(object a, object b)
+        {
+            return Comparer.DefaultInvariant.Compare(a, Convert.ChangeType(b, a.GetType(), CultureInfo.InvariantCulture));
+        }
+
+        private static bool Equals(object a, object b)
+        {
+            object c;
+
+            if ((c = TryChangeType(b, a.GetType())) != null)
+                return a.Equals(c);
+
+            return Math.Abs(ToDouble(a) - ToDouble(b)) < double.Epsilon;
         }
 
         [ContractInvariantMethod]

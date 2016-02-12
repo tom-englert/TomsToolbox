@@ -61,6 +61,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Converters\AggregatingMultiValueConverterTests.cs" />
     <Compile Include="Converters\ArithmeticMultiValueConverterTests.cs" />
     <Compile Include="Converters\BinaryOperationConverterTests.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverterTests.cs" />

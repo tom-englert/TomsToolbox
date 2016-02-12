@@ -109,7 +109,7 @@
         /// </returns>
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((value == DependencyProperty.UnsetValue) || (parameter == null))
+            if (parameter == null)
                 return value;
 
             return Processor.Execute(value, parameter);
