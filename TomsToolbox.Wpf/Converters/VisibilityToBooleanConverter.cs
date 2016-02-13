@@ -9,7 +9,7 @@
     /// The counterpart of BooleanToVisibilityConverter.
     /// </summary>
     [ValueConversion(typeof(Visibility), typeof(bool))]
-    public class VisibilityToBooleanConverter : IValueConverter
+    public class VisibilityToBooleanConverter : ValueConverter
     {
         /// <summary>
         /// The singleton instance of the converter.
@@ -17,33 +17,12 @@
         public static readonly IValueConverter Default = new VisibilityToBooleanConverter();
 
         /// <summary>
-        /// The visibility value to be used when converting from a false boolean value. Defaults to Collapsed.
+        /// The visibility value to be used when converting back from a false boolean value. Defaults to Collapsed.
         /// </summary>
-        public Visibility VisibilityWhenBooleanIsFalse { get; set; }
-
-        /// <summary>
-        /// The visibility value to be used when converting from a null boolean value. Defaults to Collapsed.
-        /// </summary>
-        public Visibility? VisibilityWhenBooleanIsNull { get; set; }
-
-        /// <summary>
-        /// The boolean value to be used when converting from a null Visibility value. Defaults to false.
-        /// </summary>
-        public bool? BooleanWhenVisibilityIsNull { get; set; }
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        public VisibilityToBooleanConverter()
-        {
-            VisibilityWhenBooleanIsFalse = Visibility.Collapsed;
-            VisibilityWhenBooleanIsNull = Visibility.Collapsed;
-            BooleanWhenVisibilityIsNull = false;
-        }
+        public Visibility VisibilityWhenBooleanIsFalse { get; set; } = Visibility.Collapsed;
 
         /// <summary>
         /// Converts a value.
-        /// Visible becomes true, Collapsed and Hidden become false, null becomes BooleanWhenVisibilityIsNull and UnSet is unchanged.
         /// </summary>
         /// <param name="value">The value that is produced by the binding target.</param>
         /// <param name="targetType">The type to convert to.</param>
@@ -52,27 +31,13 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == DependencyProperty.UnsetValue)
-                return value;
-            if (value == null)
-                return BooleanWhenVisibilityIsNull;
-
-            try
-            {
-                return (Visibility)value == Visibility.Visible;
-            }
-            catch (Exception ex)
-            {
-                this.TraceError(ex.Message, "Convert");
-                return DependencyProperty.UnsetValue;
-            }
+            return Visibility.Visible.Equals(value);
         }
 
         /// <summary>
         /// Converts a value.
-        /// True becomes Visible, false becomes the value set by VisibilityWhenBooleanIsFale, null becomes VisibilityWhenBooleanIsNull and UnSet is unchanged.
         /// </summary>
         /// <param name="value">The value that is produced by the binding target.</param>
         /// <param name="targetType">The type to convert to.</param>
@@ -81,23 +46,9 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == DependencyProperty.UnsetValue)
-                return value;
-
-            if (value == null)
-                return VisibilityWhenBooleanIsNull;
-
-            try
-            {
-                return (bool)value ? Visibility.Visible : VisibilityWhenBooleanIsFalse;
-            }
-            catch (Exception ex)
-            {
-                this.TraceError(ex.Message, "ConvertBack");
-                return DependencyProperty.UnsetValue;
-            }
+            return true.Equals(value) ? Visibility.Visible : VisibilityWhenBooleanIsFalse;
         }
     }
 }

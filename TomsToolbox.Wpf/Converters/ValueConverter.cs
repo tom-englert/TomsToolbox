@@ -9,9 +9,39 @@
     /// <summary>
     /// A base class for value converters performing pre-check of value and error handling.
     /// </summary>
-    [ContractClass(typeof (ValueConverterContract))]
+    [ContractClass(typeof(ValueConverterContract))]
     public abstract class ValueConverter : IValueConverter
     {
+        /// <summary>
+        /// Gets or sets the <c>null</c> value, which is returned whenever the value to convert is <c>null</c>; the default is <c>null</c>.
+        /// </summary>
+        public object ConvertNullValue { get; set; } = null;
+
+        /// <summary>
+        /// Gets or sets the <c>unset</c> value, which is returned whenever the value to convert is <see cref="DependencyProperty.UnsetValue"/>; the default is <see cref="DependencyProperty.UnsetValue"/>.
+        /// </summary>
+        public object ConvertUnsetValue { get; set; } = DependencyProperty.UnsetValue;
+
+        /// <summary>
+        /// Gets or sets the <c>error</c> value, which is returned whenever the value to convert produces an error; the default is <see cref="DependencyProperty.UnsetValue"/>.
+        /// </summary>
+        public object ConvertErrorValue { get; set; } = DependencyProperty.UnsetValue;
+
+        /// <summary>
+        /// Gets or sets the <c>null</c> value, which is returned whenever the value to convert back is <c>null</c>; the default is <c>null</c>.
+        /// </summary>
+        public object ConvertBackNullValue { get; set; } = null;
+
+        /// <summary>
+        /// Gets or sets the <c>unset</c> value, which is returned whenever the value to convert back is <see cref="DependencyProperty.UnsetValue"/>; the default is <see cref="DependencyProperty.UnsetValue"/>.
+        /// </summary>
+        public object ConvertBackUnsetValue { get; set; } = DependencyProperty.UnsetValue;
+
+        /// <summary>
+        /// Gets or sets the <c>error</c> value, which is returned whenever the value to convert back produces an error; the default is <see cref="DependencyProperty.UnsetValue"/>.
+        /// </summary>
+        public object ConvertBackErrorValue { get; set; } = DependencyProperty.UnsetValue;
+
         /// <summary>
         /// Converts a value.
         /// </summary>
@@ -44,8 +74,10 @@
 
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((value == null) || (value == DependencyProperty.UnsetValue))
-                return value;
+            if (value == null) 
+                return ConvertNullValue;
+            if (value == DependencyProperty.UnsetValue)
+                return ConvertUnsetValue;
 
             try
             {
@@ -54,14 +86,17 @@
             catch (Exception ex)
             {
                 this.TraceError(ex.Message, "Convert");
-                return DependencyProperty.UnsetValue;
+
+                return ConvertErrorValue;
             }
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((value == null) || (value == DependencyProperty.UnsetValue))
-                return value;
+            if (value == null)
+                return ConvertBackNullValue;
+            if (value == DependencyProperty.UnsetValue)
+                return ConvertBackUnsetValue;
 
             try
             {
@@ -70,12 +105,12 @@
             catch (Exception ex)
             {
                 this.TraceError(ex.Message, "ConvertBack");
-                return DependencyProperty.UnsetValue;
+                return ConvertBackErrorValue;
             }
         }
     }
 
-    [ContractClassFor(typeof (ValueConverter))]
+    [ContractClassFor(typeof(ValueConverter))]
     abstract class ValueConverterContract : ValueConverter
     {
         /// <summary>
