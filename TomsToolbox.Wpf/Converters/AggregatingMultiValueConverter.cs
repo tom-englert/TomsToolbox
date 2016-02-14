@@ -12,9 +12,10 @@
     /// A converter that aggregates the inner converters for all values, overcoming the restriction of .Net that <see cref="IMultiValueConverter"/> can't be nested.
     /// </summary>
     /// <remarks>
-    /// This converter aggregates the result by calling each of the <see cref="Converters"/> with the aggregated value as input and the next value as parameter. 
-    /// If there are less converters than parameters, and the last converter is an <see cref="IValueConverter"/>, the last converter is used to aggregate the remainder of values.
-    /// If there are less converters than parameters, and the last converter is an <see cref="IMultiValueConverter"/>, the <see cref="IMultiValueConverter"/> is invoked with the aggregated value and all remaining values.
+    /// This converter aggregates the result by calling each of the <see cref="Converters"/> with the aggregated value as input and the next value as parameter, 
+    /// i.e. the first converter will aggregate value[0] and value[1], the second converter will aggregate the result of the first and value[2], etc.<para/>
+    /// If there are less converters than parameters-1, and the last converter is an <see cref="IValueConverter"/>, the last converter is used to aggregate the remainder of values.<para/>
+    /// If there are less converters than parameters-1, and the last converter is an <see cref="IMultiValueConverter"/>, the <see cref="IMultiValueConverter"/> is invoked with the aggregated value and all remaining values.
     /// </remarks>
     /// <example>
     /// 
@@ -97,13 +98,14 @@
         }
 
         /// <summary>
-        /// Gets the aggregating converters.
+        /// Gets the aggregating converters. Must be all <see cref="IValueConverter"/>, only the last might be a <see cref="IMultiValueConverter"/>.
         /// </summary>
         public Collection<object> Converters
         {
             get
             {
                 Contract.Ensures(Contract.Result<Collection<object>>() != null);
+
                 return _converters;
             }
         }

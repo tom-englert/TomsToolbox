@@ -17,7 +17,7 @@
             {
                 Converters =
                 {
-                    BinaryOperationConverter.Subtraction, 
+                    BinaryOperationConverter.Subtraction,
                     BinaryOperationConverter.LessThan
                 }
             };
@@ -38,7 +38,7 @@
             {
                 Converters =
                 {
-                    BinaryOperationConverter.Subtraction, 
+                    BinaryOperationConverter.Subtraction,
                     BinaryOperationConverter.LessThan
                 }
             };
@@ -51,5 +51,45 @@
 
             Assert.AreEqual(false, result);
         }
+
+        [TestMethod]
+        public void AggregatingMultiValueConverter_CascadingMultiConverters()
+        {
+            IMultiValueConverter target = new AggregatingMultiValueConverter
+            {
+                Converters =
+                {
+                    BinaryOperationConverter.Subtraction,
+                    BinaryOperationConverter.Division,
+                    ArithmeticMultiValueConverter.Product
+                }
+            };
+
+            var input = new object[] { 9, 3, 2, 3, 2 };
+            var result = target.Convert(input, null, null, null);
+
+            // ((9 - 3) / 2) * 3 * 2
+            Assert.AreEqual(18.0, result);
+        }
+
+        [TestMethod]
+        public void AggregatingMultiValueConverter_RepeatingLastConverter()
+        {
+            IMultiValueConverter target = new AggregatingMultiValueConverter
+            {
+                Converters =
+                {
+                    BinaryOperationConverter.Subtraction,
+                    BinaryOperationConverter.Division,
+                }
+            };
+
+            var input = new object[] { 9, 3, 2, 3, 2 };
+            var result = target.Convert(input, null, null, null);
+
+            // (((9 - 3) / 2) / 3) / 2
+            Assert.AreEqual(.5, result);
+        }
+
     }
 }
