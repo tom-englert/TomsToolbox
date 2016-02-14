@@ -241,12 +241,22 @@
             private WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> GeneratePropertyChangedEventListener(INotifyPropertyChanged item)
             {
                 return (item == null) ? null :
-                    new WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs>(
-                        this,
-                        item,
-                        (self, sender, e) => self.SourceItem_PropertyChanged(sender, e),
-                        (weakEvent, sender) => sender.PropertyChanged += weakEvent.OnEvent,
-                        (weakEvent, sender) => sender.PropertyChanged -= weakEvent.OnEvent);
+                    new WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs>(this,item, OnCollectionChanged, Attach, Detach);
+            }
+
+            private static void OnCollectionChanged(ObservableSelectImpl<TSource, TTarget> self, object sender, PropertyChangedEventArgs e)
+            {
+                self.SourceItem_PropertyChanged(sender, e);
+            }
+
+            private static void Attach(WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> weakEvent, INotifyPropertyChanged sender)
+            {
+                sender.PropertyChanged += weakEvent.OnEvent;
+            }
+
+            private static void Detach(WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> weakEvent, INotifyPropertyChanged sender)
+            {
+                sender.PropertyChanged -= weakEvent.OnEvent;
             }
 
             private List<WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs>> GeneratePropertyChangeEventListeners(IEnumerable sourceList)

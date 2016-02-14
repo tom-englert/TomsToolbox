@@ -55,10 +55,22 @@
             Contract.Ensures(Contract.Result<WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs>>() != null);
 
             return new WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs>(
-                this, eventSource,
-                (self, sender, e) => self.SourceCollection_CollectionChanged(sender, e),
-                (weakEvent, sender) => sender.CollectionChanged += weakEvent.OnEvent,
-                (weakEvent, sender) => sender.CollectionChanged -= weakEvent.OnEvent);
+                this, eventSource, OnCollectionChanged, Attach, Detach);
+        }
+
+        private static void OnCollectionChanged(ObservableFilteredCollection<T> self, object sender, NotifyCollectionChangedEventArgs e)
+        {
+            self.SourceCollection_CollectionChanged(sender, e);
+        }
+
+        private static void Attach(WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, INotifyCollectionChanged sender)
+        {
+            sender.CollectionChanged += weakEvent.OnEvent;
+        }
+
+        private static void Detach(WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, INotifyCollectionChanged sender)
+        {
+            sender.CollectionChanged -= weakEvent.OnEvent;
         }
 
         private void SourceCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
