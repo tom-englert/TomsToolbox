@@ -26,10 +26,6 @@
       <Argument Key="logoAlignment" Value="left" xmlns="" />
       <Argument Key="maxVersionParts" Value="" xmlns="" />
     </TransformComponentArguments>
-    <SccProjectName>SAK</SccProjectName>
-    <SccProvider>SAK</SccProvider>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccLocalPath>SAK</SccLocalPath>
     <DocumentationSources>
       <DocumentationSource sourceFile="..\TomsToolbox.Core\TomsToolbox.Core.csproj" />
       <DocumentationSource sourceFile="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj" />
