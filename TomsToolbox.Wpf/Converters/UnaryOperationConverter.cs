@@ -33,7 +33,7 @@
         /// <summary>
         /// The default negation converter.
         /// </summary>
-        public static IValueConverter Negation = new UnaryOperationConverter();
+        public static readonly IValueConverter Negation = new UnaryOperationConverter();
 
         /// <summary>
         /// Gets or sets the operation performed by this converter.<para/>

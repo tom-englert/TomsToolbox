@@ -42,6 +42,7 @@
     /// </TextBlock>
     /// ]]></code>
     /// </example>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi")]
     [ContentProperty("Converters")]
     public class AggregatingMultiValueConverter : MultiValueConverter
     {
