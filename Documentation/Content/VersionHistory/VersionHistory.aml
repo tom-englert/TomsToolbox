@@ -9,6 +9,16 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.34.0</para>
+            <list class="bullet">
+              <listItem>
+                <para>Add UnaryOperationConverter and AggregatingMultiValueConverter.</para>
+                <para>Enhance DateTimeSource and UpdatePropertyAction.</para>
+                <para>Fix BinaryOperationConverter for DateTime operations.</para>
+              </listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.33.0</para>
             <list class="bullet">
               <listItem>
