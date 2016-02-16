@@ -76,7 +76,7 @@
             <Style TargetType="TextBlock">
               <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
-            <toms:CompositeMultiValueConverter  x:Key="ThresholdConverter">
+            <toms:CompositeMultiValueConverter x:Key="ThresholdConverter">
               <toms:CompositeMultiValueConverter.MultiValueConverter>
                 <toms:AggregatingMultiValueConverter>
                   <toms:BinaryOperationConverter Operation="Subtraction"/>
