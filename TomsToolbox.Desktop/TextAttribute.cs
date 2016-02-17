@@ -3,9 +3,6 @@
     using System;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
-    using System.Linq;
-    using System.Reflection;
 
     /// <summary>
     /// Specifies a general usable attribute to associate text with an object, 

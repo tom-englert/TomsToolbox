@@ -6,6 +6,7 @@
     /// General usable sequence attribute to assign sequences to any object that may need to be e.g. sorted by some means.
     /// </summary>
     [AttributeUsage(AttributeTargets.All)]
+    [Serializable]
     public sealed class SequenceAttribute : Attribute
     {
         /// <summary>
