@@ -10,6 +10,7 @@
     /// </summary>
     [CLSCompliant(false)]
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Module)]
+    [Serializable]
     public sealed class PluginModuleAttribute : Attribute
     {
         /// <summary>
