@@ -1,12 +1,14 @@
 ﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
     /// <summary>
     /// Attribute to associate a resource with a module; when a module is loaded dynamically, the resource can be linked into the application resource scope.
     /// </summary>
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Module, AllowMultiple=true)]
+    [Serializable]
     public sealed class ModuleResourceUriAttribute : Attribute
     {
         /// <summary>
@@ -29,7 +31,7 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
         private void ObjectInvariant()
         {
             Contract.Invariant(Uri != null);
