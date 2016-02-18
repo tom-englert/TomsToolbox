@@ -47,7 +47,7 @@
         /// <param name="arg1">The arguments of the function.</param>
         /// <param name="arg2">The arguments of the function.</param>
         /// <returns>The result of the function.</returns>
-        public static T InvokeInSeparateDomain<TA1, TA2, T>(this Func<TA1, T> func, TA1 arg1, TA2 arg2)
+        public static T InvokeInSeparateDomain<TA1, TA2, T>(this Func<TA1, TA2, T> func, TA1 arg1, TA2 arg2)
         {
             Contract.Requires(func != null);
 
@@ -66,7 +66,7 @@
         /// <param name="arg2">The arguments of the function.</param>
         /// <param name="arg3">The arguments of the function.</param>
         /// <returns>The result of the function.</returns>
-        public static T InvokeInSeparateDomain<TA1, TA2, TA3, T>(this Func<TA1, T> func, TA1 arg1, TA2 arg2, TA3 arg3)
+        public static T InvokeInSeparateDomain<TA1, TA2, TA3, T>(this Func<TA1, TA2, TA3, T> func, TA1 arg1, TA2 arg2, TA3 arg3)
         {
             Contract.Requires(func != null);
 
@@ -87,7 +87,7 @@
         /// <param name="arg3">The arguments of the function.</param>
         /// <param name="arg4">The arguments of the function.</param>
         /// <returns>The result of the function.</returns>
-        public static T InvokeInSeparateDomain<TA1, TA2, TA3, TA4, T>(this Func<TA1, T> func, TA1 arg1, TA2 arg2, TA3 arg3, TA4 arg4)
+        public static T InvokeInSeparateDomain<TA1, TA2, TA3, TA4, T>(this Func<TA1, TA2, TA3, TA4, T> func, TA1 arg1, TA2 arg2, TA3 arg3, TA4 arg4)
         {
             Contract.Requires(func != null);
 
