@@ -137,7 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Version.cs">
-      <Link>Version.cs</Link>
+      <Link>Properties\Version.cs</Link>
     </Compile>
     <Compile Include="AutoWeakIndexer.cs" />
     <Compile Include="AssemblyExtensions.cs" />
