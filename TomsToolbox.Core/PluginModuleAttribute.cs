@@ -10,7 +10,9 @@
     /// </summary>
     [CLSCompliant(false)]
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Module)]
+#if !PORTABLE
     [Serializable]
+#endif
     public sealed class PluginModuleAttribute : Attribute
     {
         /// <summary>
