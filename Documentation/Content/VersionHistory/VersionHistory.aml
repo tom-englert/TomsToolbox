@@ -9,6 +9,16 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.35.0</para>
+            <list class="bullet">
+              <listItem>
+                <para>Make attributes serializable.</para>
+                <para>Define xmlns prefix.</para>
+                <para>Fix missing parameters in AppDomainHelper.</para>
+              </listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.34.0</para>
             <list class="bullet">
               <listItem>
