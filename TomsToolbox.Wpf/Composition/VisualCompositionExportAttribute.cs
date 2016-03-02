@@ -30,7 +30,7 @@
         /// <summary>
         /// Gets the role of the view model for visual composition.
         /// </summary>
-        public string Role
+        public object Role
         {
             get;
             set;

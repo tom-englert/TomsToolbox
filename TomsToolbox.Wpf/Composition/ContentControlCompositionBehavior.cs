@@ -17,16 +17,16 @@
         /// <remarks>
         /// The first exported item matching RegionId and Role will be set as the content of the content control.
         /// </remarks>
-        public string Role
+        public object Role
         {
-            get { return (string)GetValue(RoleProperty); }
+            get { return GetValue(RoleProperty); }
             set { SetValue(RoleProperty, value); }
         }
         /// <summary>
         /// Identifies the <see cref="Role"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty RoleProperty =
-            DependencyProperty.Register("Role", typeof(string), typeof(ContentControlCompositionBehavior), new FrameworkPropertyMetadata((sender, e) => ((ContentControlCompositionBehavior)sender).Role_Changed()));
+            DependencyProperty.Register("Role", typeof(object), typeof(ContentControlCompositionBehavior), new FrameworkPropertyMetadata((sender, e) => ((ContentControlCompositionBehavior)sender).Role_Changed()));
 
         private void Role_Changed()
         {

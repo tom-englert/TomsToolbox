@@ -8,7 +8,7 @@
         /// <summary>
         /// Gets the id of the item for visual composition.
         /// </summary>
-        string Role
+        object Role
         {
             get;
         }
