@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		CodeContracts.ruleset = CodeContracts.ruleset
 		Publish.cmd = Publish.cmd
 		Resources.Designer.t4 = Resources.Designer.t4
+		Version.cs = Version.cs
+		Documentation\Content\VersionHistory\VersionHistory.aml = Documentation\Content\VersionHistory\VersionHistory.aml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Core", "TomsToolbox.Core\TomsToolbox.Core.csproj", "{AE305312-7637-43BF-9156-7EC513C55135}"
