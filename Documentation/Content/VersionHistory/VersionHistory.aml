@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.37.0</para>
+            <list class="bullet">
+              <listItem><para>Fix command routing behavior: Detach does not work if called after unloading.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.36.0</para>
             <list class="bullet">
               <listItem><para>Role property should be of type object everywhere.</para></listItem>
