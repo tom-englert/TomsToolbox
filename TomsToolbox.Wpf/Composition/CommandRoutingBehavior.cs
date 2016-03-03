@@ -222,10 +222,12 @@
 
         private CommandSourceFactory GetCommandSourceFactory(Type commandSourceType)
         {
-            if ((commandSourceType == null) || !IsActive)
+            if (commandSourceType == null) 
                 return null;
 
-            var exportProvider = AssociatedObject.GetExportProvider();
+            var exportProvider = IsActive ? AssociatedObject.GetExportProvider() : AssociatedObject.TryGetExportProvider();
+            if (exportProvider == null)
+                return null;
 
             return exportProvider.GetExports(commandSourceType, typeof(object), null)
                 .Select(export => export.Value)
