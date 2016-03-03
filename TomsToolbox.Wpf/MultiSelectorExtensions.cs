@@ -1,4 +1,5 @@
-﻿namespace TomsToolbox.Wpf
+﻿using System.Diagnostics.Contracts;
+namespace TomsToolbox.Wpf
 {
     using System;
     using System.Collections;
@@ -101,7 +102,8 @@
             var dataGrid = selector as DataGrid;
             if (dataGrid != null)
             {
-                dataGrid.CommitEdit();
+                dataGrid.CommitEdit(); // cell
+                dataGrid.CommitEdit(); // row
             }
         }
 
@@ -311,7 +313,11 @@
 
                 try
                 {
+                    _selector.CommitEdit();
+
                     var selectedItems = _selector.GetSelectedItems();
+
+                    var itemsToSelect = e.NewItems;
 
                     switch (e.Action)
                     {
@@ -322,10 +328,17 @@
                             break;
 
                         case NotifyCollectionChangedAction.Add:
+                            Contract.Assume(itemsToSelect != null);
+                            if ((selectedItems.Count == 0) && (itemsToSelect.Count == 1))
+                                _selector.SelectSingleItem(itemsToSelect);
+                            else
+                                _selector.AddItemsToSelection(itemsToSelect);
+                            break;
+
                         case NotifyCollectionChangedAction.Remove:
                         case NotifyCollectionChangedAction.Replace:
                             selectedItems.RemoveRange(e.OldItems ?? EmptyObjectArray);
-                            _selector.AddItemsToSelection(e.NewItems ?? EmptyObjectArray);
+                            _selector.AddItemsToSelection(itemsToSelect ?? EmptyObjectArray);
                             break;
                     }
                 }
