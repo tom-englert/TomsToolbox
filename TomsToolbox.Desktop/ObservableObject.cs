@@ -22,31 +22,21 @@
     /// <remarks>
     /// Also implements <see cref="IDataErrorInfo"/> (and INotifyDataErrorInfo in .Net4.5++) to support validation. The default implementation examines <see cref="ValidationAttribute"/> on the affected properties to retrieve error information.
     /// </remarks>
-    public abstract class ObservableObject : INotifyPropertyChanged, IDataErrorInfo
+    [Serializable]
+    public abstract class ObservableObjectBase : INotifyPropertyChanged, IDataErrorInfo
 #if NETFRAMEWORK_4_5
         , INotifyDataErrorInfo
 #endif
     {
         private static readonly AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>> DependencyMappingCache = new AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>>(type => PropertyDependencyAttribute.CreateDependencyMapping(type.GetProperties()));
+        [NonSerialized]
         private IDictionary<string, IEnumerable<string>> _dependencyMapping;
 
         private static readonly AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>> RelayMappingCache = new AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>>(type => RelayedEventAttribute.CreateRelayMapping(type.GetProperties()));
+        [NonSerialized]
         private IDictionary<Type, IDictionary<string, string>> _relayMapping;
+        [NonSerialized]
         private Dictionary<Type, INotifyPropertyChanged> _eventSources;
-
-        private readonly Dispatcher _dispatcher = Dispatcher.CurrentDispatcher;
-
-        /// <summary>
-        /// Gets the dispatcher of the thread where this object was created.
-        /// </summary>
-        public Dispatcher Dispatcher
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<Dispatcher>() != null);
-                return _dispatcher;
-            }
-        }
 
         /// <summary>
         /// Relays the property changed events of the source object (if not null) and detaches the old source (if not null).
@@ -334,6 +324,9 @@
         /// <returns>
         /// The validation errors for the property or entity.
         /// </returns>
+        /// <remarks>
+        /// The default implementation returns the <see cref="ValidationAttribute"/> errors of the property.
+        /// </remarks>
         protected virtual IEnumerable<string> GetDataErrors(string propertyName)
         {
             Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
@@ -407,6 +400,29 @@
             }
         }
 #endif
+    }
+
+    /// <summary>
+    /// Like <see cref="TomsToolbox.Desktop.ObservableObjectBase" />, with an additional dispatcher field to track the owning thread.
+    /// This version is not serializable, since <see cref="Dispatcher"/> is not.
+    /// </summary>
+    /// <seealso cref="TomsToolbox.Desktop.ObservableObjectBase" />
+    public abstract class ObservableObject : ObservableObjectBase
+    {
+        private readonly Dispatcher _dispatcher = Dispatcher.CurrentDispatcher;
+
+        /// <summary>
+        /// Gets the dispatcher of the thread where this object was created.
+        /// </summary>
+        public Dispatcher Dispatcher
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Dispatcher>() != null);
+                return _dispatcher;
+            }
+        }
+
 
         [ContractInvariantMethod]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
