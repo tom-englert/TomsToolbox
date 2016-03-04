@@ -9,6 +9,13 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.38.0</para>
+            <list class="bullet">
+              <listItem><para>Split ObservableObject to have a serializable base class.</para></listItem>
+              <listItem><para>Focus not set when MultiSelectorExtensions selects single item via SourceSelection_CollectionChanged.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.37.0</para>
             <list class="bullet">
               <listItem><para>Fix command routing behavior: Detach does not work if called after unloading.</para></listItem>
