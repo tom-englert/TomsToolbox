@@ -336,9 +336,20 @@ namespace TomsToolbox.Wpf
                             break;
 
                         case NotifyCollectionChangedAction.Remove:
-                        case NotifyCollectionChangedAction.Replace:
                             selectedItems.RemoveRange(e.OldItems ?? EmptyObjectArray);
-                            _selector.AddItemsToSelection(itemsToSelect ?? EmptyObjectArray);
+                            break;
+
+                        case NotifyCollectionChangedAction.Replace:
+                            Contract.Assume(itemsToSelect != null);
+                            if ((selectedItems.Count == 1) && (itemsToSelect.Count == 1))
+                            {
+                                _selector.SelectSingleItem(itemsToSelect);
+                            }
+                            else
+                            {
+                                selectedItems.RemoveRange(e.OldItems ?? EmptyObjectArray);
+                                _selector.AddItemsToSelection(itemsToSelect);
+                            }
                             break;
                     }
                 }
