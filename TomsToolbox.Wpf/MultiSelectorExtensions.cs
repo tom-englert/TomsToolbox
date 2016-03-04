@@ -318,6 +318,7 @@ namespace TomsToolbox.Wpf
                     var selectedItems = _selector.GetSelectedItems();
 
                     var itemsToSelect = e.NewItems;
+                    var itemsToDeselect = e.OldItems;
 
                     switch (e.Action)
                     {
@@ -336,18 +337,20 @@ namespace TomsToolbox.Wpf
                             break;
 
                         case NotifyCollectionChangedAction.Remove:
-                            selectedItems.RemoveRange(e.OldItems ?? EmptyObjectArray);
+                            Contract.Assume(itemsToDeselect != null);
+                            selectedItems.RemoveRange(itemsToDeselect);
                             break;
 
                         case NotifyCollectionChangedAction.Replace:
                             Contract.Assume(itemsToSelect != null);
+                            Contract.Assume(itemsToDeselect != null);
                             if ((selectedItems.Count == 1) && (itemsToSelect.Count == 1))
                             {
                                 _selector.SelectSingleItem(itemsToSelect);
                             }
                             else
                             {
-                                selectedItems.RemoveRange(e.OldItems ?? EmptyObjectArray);
+                                selectedItems.RemoveRange(itemsToDeselect);
                                 _selector.AddItemsToSelection(itemsToSelect);
                             }
                             break;
