@@ -107,19 +107,17 @@
             private void parts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
             {
                 // Monitor changes of parts and forward events properly
-                var collectionChangedEventHandler = CollectionChanged;
-                if (collectionChangedEventHandler != null)
+                var collectionChanged = CollectionChanged;
+                if (collectionChanged != null)
                 {
                     // Offset to apply is the sum of all counts of all parts preceding this part
-                    var offset = (_parts.TakeWhile(part => !part.Equals(sender)).Select(part => part.Count)).Sum();
-                    collectionChangedEventHandler(_owner, TranslateEventArgs(e, offset));
+                    var offset = _parts.TakeWhile(part => !part.Equals(sender)).Select(part => part.Count).Sum();
+                    collectionChanged(_owner, TranslateEventArgs(e, offset));
                 }
 
                 if ((e.Action != NotifyCollectionChangedAction.Replace) && (e.Action != NotifyCollectionChangedAction.Move))
                 {
-                    var propertyChangedEventHandler = PropertyChanged;
-                    if (propertyChangedEventHandler != null)
-                        propertyChangedEventHandler(_owner, new PropertyChangedEventArgs(@"Count"));
+                    OnCountPropertyChanged();
                 }
             }
 
@@ -174,8 +172,13 @@
                 if (dynamicPart != null)
                     dynamicPart.CollectionChanged += parts_CollectionChanged;
 
+                if (item.Count == 0)
+                    return;
+
                 // If this new part contains items and someone registered for changes, raise change events
-                if ((item.Count > 0) && (CollectionChanged != null))
+                var collectionChanged = CollectionChanged;
+
+                if (collectionChanged != null)
                 {
                     // calculate the absolute offset of the first item (= sum of all preceding items in all lists before the new item)
                     var offset = (_parts.GetRange(0, index).Select(p => p.Count)).Sum();
@@ -184,10 +187,12 @@
                     foreach (T element in item)
                     {
                         var args = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, element, offset);
-                        CollectionChanged(_owner, args);
+                        collectionChanged(_owner, args);
                         offset += 1;
                     }
                 }
+
+                OnCountPropertyChanged();
             }
 
             [ContractVerification(false)] // Just forwarding...
@@ -202,17 +207,24 @@
                 if (dynamicPart != null)
                     dynamicPart.CollectionChanged -= parts_CollectionChanged;
 
-                if ((part.Count <= 0) || (CollectionChanged == null))
+                if (part.Count == 0)
                     return;
 
-                // calculate the absolute offset of the first item (sum of all items in all lists before the removed item)
-                var offset = (_parts.GetRange(0, index).Select(p => p.Count)).Sum();
+                var collectionChanged = CollectionChanged;
 
-                foreach (T item in part)
+                if (collectionChanged != null)
                 {
-                    // offset stays, items are bubbling up!
-                    CollectionChanged(_owner, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, offset));
+                    // calculate the absolute offset of the first item (sum of all items in all lists before the removed item)
+                    var offset = (_parts.GetRange(0, index).Select(p => p.Count)).Sum();
+
+                    foreach (T item in part)
+                    {
+                        // offset stays, items are bubbling up!
+                        collectionChanged(_owner, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, offset));
+                    }
                 }
+
+                OnCountPropertyChanged();
             }
 
             [ContractVerification(false)] // Just forwarding...
@@ -311,6 +323,11 @@
             public event NotifyCollectionChangedEventHandler CollectionChanged;
 
             public event PropertyChangedEventHandler PropertyChanged;
+
+            private void OnCountPropertyChanged()
+            {
+                PropertyChanged?.Invoke(_owner, new PropertyChangedEventArgs(nameof(Count)));
+            }
 
             #region Contracts Invariant
 
