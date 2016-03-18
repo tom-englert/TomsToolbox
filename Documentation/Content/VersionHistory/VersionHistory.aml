@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.39.0</para>
+            <list class="bullet">
+              <listItem><para>ObservableCompositeCollection: Property changed for Count property not always raised.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.38.0</para>
             <list class="bullet">
               <listItem><para>Split ObservableObject to have a serializable base class.</para></listItem>
