@@ -68,16 +68,26 @@
 
         private static void OnCollectionChanged(ObservableWrappedCollection<TSource, TTarget> self, object sender, NotifyCollectionChangedEventArgs e)
         {
+            Contract.Requires(self != null);
+            Contract.Requires(sender != null);
+            Contract.Requires(e != null);
+
             self.SourceItems_CollectionChanged(sender, e);
         }
 
         private static void Attach(WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, INotifyCollectionChanged sender)
         {
+            Contract.Requires(weakEvent != null);
+            Contract.Requires(sender != null);
+
             sender.CollectionChanged += weakEvent.OnEvent;
         }
 
         private static void Detach(WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, INotifyCollectionChanged sender)
         {
+            Contract.Requires(weakEvent != null);
+            Contract.Requires(sender != null);
+
             sender.CollectionChanged -= weakEvent.OnEvent;
         }
 

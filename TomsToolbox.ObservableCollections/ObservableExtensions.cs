@@ -246,16 +246,26 @@
 
             private static void OnCollectionChanged(ObservableSelectImpl<TSource, TTarget> self, object sender, PropertyChangedEventArgs e)
             {
+                Contract.Requires(self != null);
+                Contract.Requires(sender != null);
+                Contract.Requires(e != null);
+
                 self.SourceItem_PropertyChanged(sender, e);
             }
 
             private static void Attach(WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> weakEvent, INotifyPropertyChanged sender)
             {
+                Contract.Requires(weakEvent != null);
+                Contract.Requires(sender != null);
+
                 sender.PropertyChanged += weakEvent.OnEvent;
             }
 
             private static void Detach(WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> weakEvent, INotifyPropertyChanged sender)
             {
+                Contract.Requires(weakEvent != null);
+                Contract.Requires(sender != null);
+
                 sender.PropertyChanged -= weakEvent.OnEvent;
             }
 

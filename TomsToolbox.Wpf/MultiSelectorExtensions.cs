@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-namespace TomsToolbox.Wpf
+﻿namespace TomsToolbox.Wpf
 {
     using System;
     using System.Collections;
@@ -13,7 +12,6 @@ namespace TomsToolbox.Wpf
     using System.Windows.Controls.Primitives;
 
     using TomsToolbox.Core;
-    using TomsToolbox.Desktop;
 
     /// <summary>
     /// Extensions for multi selectors like ListBox or DataGrid:
@@ -107,6 +105,7 @@ namespace TomsToolbox.Wpf
             }
         }
 
+        [ContractVerification(false)] // because of dynamic
         private static IList GetSelectedItems(this Selector selector)
         {
             Contract.Requires(selector != null);
@@ -117,6 +116,7 @@ namespace TomsToolbox.Wpf
             return selectedItems;
         }
 
+        [ContractVerification(false)] // because of dynamic
         private static void ScrollIntoView(this Selector selector, object selectedItem)
         {
             Contract.Requires(selector != null);

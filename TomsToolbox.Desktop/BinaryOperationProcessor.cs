@@ -219,6 +219,8 @@
 
         private static object TryChangeType(object value, Type targetType)
         {
+            Contract.Requires(targetType != null);
+
             try
             {
                 return Convert.ChangeType(value, targetType, CultureInfo.InvariantCulture);
@@ -232,11 +234,14 @@
 
         private static int Compare(object a, object b)
         {
+            Contract.Requires(a != null);
             return Comparer.DefaultInvariant.Compare(a, Convert.ChangeType(b, a.GetType(), CultureInfo.InvariantCulture));
         }
 
-        private static bool Equals(object a, object b)
+        private new static bool Equals(object a, object b)
         {
+            Contract.Requires(a != null);
+
             object c;
 
             if ((c = TryChangeType(b, a.GetType())) != null)

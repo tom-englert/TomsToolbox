@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
@@ -84,7 +85,13 @@
 
                 case TypeCode.String:
                     if ((targetType != null) && (targetType != typeof(string)))
-                        return Convert(ChangeType((string)value, targetType), targetType, parameter, culture);
+                    {
+                        value = ChangeType((string) value, targetType);
+                        if (value == null)
+                            return null;
+
+                        return Convert(value, targetType, parameter, culture);
+                    }
                     break;
             }
 
@@ -93,6 +100,8 @@
 
         private object ApplyOperation(object value, Type valueType)
         {
+            Contract.Requires(valueType != null);
+
             var methods = valueType.GetMethods(BindingFlags.Static | BindingFlags.Public);
 
             return methods
@@ -106,6 +115,8 @@
 
         private static object ChangeType(string value, Type targetType)
         {
+            Contract.Requires(targetType != null);
+
             var typeConverter = TypeDescriptor.GetConverter(targetType);
             return typeConverter.ConvertFromInvariantString(value);
         }

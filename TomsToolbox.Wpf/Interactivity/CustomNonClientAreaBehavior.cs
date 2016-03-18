@@ -530,13 +530,5 @@
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool GetMonitorInfo(HandleRef hmonitor, [In, Out] NativeMethods.MONITORINFOEX info);
         }
-
-        [ContractInvariantMethod]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_transformToDevice != null);
-            Contract.Invariant(_transformFromDevice != null);
-        }
     }
 }

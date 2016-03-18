@@ -46,16 +46,15 @@ namespace TomsToolbox.Wpf.Interactivity
             AssociatedObject.MouseLeftButtonDown -= GroupHeader_OnMouseLeftButtonDown;
         }
 
+        [ContractVerification(false)] // because of dynamic
         private static void GroupHeader_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Contract.Requires(sender != null);
 
             var visual = sender as FrameworkElement;
-            if (visual == null)
-                return;
 
-            var group = visual.DataContext as CollectionViewGroup;
-            if ((group == null) || (group.Items == null))
+            var items = (visual?.DataContext as CollectionViewGroup)?.Items;
+            if (items == null)
                 return;
 
             var selector = visual.TryFindAncestor<Selector>();
@@ -78,7 +77,7 @@ namespace TomsToolbox.Wpf.Interactivity
                     selectedItems.Clear();
                 }
 
-                foreach (var item in group.Items)
+                foreach (var item in items)
                 {
                     selectedItems.Add(item);
                 }

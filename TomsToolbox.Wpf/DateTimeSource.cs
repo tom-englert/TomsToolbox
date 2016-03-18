@@ -1,4 +1,5 @@
-﻿namespace TomsToolbox.Wpf
+﻿using System.Diagnostics.Contracts;
+namespace TomsToolbox.Wpf
 {
     using System;
     using System.ComponentModel;
@@ -24,7 +25,7 @@
     /// </remarks>
     public class DateTimeSource : ObservableObject
     {
-        private readonly DispatcherTimer _updateTimer;
+        private readonly DispatcherTimer _updateTimer = new DispatcherTimer();
 
         /// <summary>
         /// The default singleton object. Use this as a source for binding that supports manual updating.
@@ -36,7 +37,6 @@
         /// </summary>
         public DateTimeSource()
         {
-            _updateTimer = new DispatcherTimer();
             _updateTimer.Tick += UpdateTimer_Tick;
         }
 
@@ -68,6 +68,7 @@
                     _updateTimer.Stop();
                 }
             }
+
         }
 
         /// <summary>
@@ -113,6 +114,13 @@
             {
                 return DateTime.UtcNow;
             }
+        }
+
+        [ContractInvariantMethod]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_updateTimer != null);
         }
     }
 }

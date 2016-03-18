@@ -64,6 +64,8 @@
                 throw new InvalidOperationException("Need at least one converter");
 
             var numberOfValues = values.Length;
+            if (numberOfValues == 0)
+                return null;
 
             var aggregated = values[0];
             var converter = _converters[0];
@@ -80,7 +82,8 @@
 
                     if (nextConverterIndex < _converters.Count)
                     {
-                        converter = _converters[nextConverterIndex++];
+                        converter = _converters[nextConverterIndex];
+                        nextConverterIndex += 1;
                     }
                 }
                 else if (nextConverterIndex >= _converters.Count)

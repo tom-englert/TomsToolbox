@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
@@ -57,6 +58,8 @@
         /// <exception cref="System.InvalidOperationException">Value is neither a Point nor a Coordinates structure.</exception>
         public static object Convert(object value)
         {
+            Contract.Ensures(Contract.Result<object>() != null);
+
             if (value is Point)
             {
                 return (Coordinates)(Point)value;

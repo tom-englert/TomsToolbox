@@ -60,16 +60,24 @@
 
         private static void OnCollectionChanged(ObservableFilteredCollection<T> self, object sender, NotifyCollectionChangedEventArgs e)
         {
+            Contract.Requires(self != null);
+
             self.SourceCollection_CollectionChanged(sender, e);
         }
 
         private static void Attach(WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, INotifyCollectionChanged sender)
         {
+            Contract.Requires(weakEvent != null);
+            Contract.Requires(sender != null);
+
             sender.CollectionChanged += weakEvent.OnEvent;
         }
 
         private static void Detach(WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, INotifyCollectionChanged sender)
         {
+            Contract.Requires(weakEvent != null);
+            Contract.Requires(sender != null);
+
             sender.CollectionChanged -= weakEvent.OnEvent;
         }
 

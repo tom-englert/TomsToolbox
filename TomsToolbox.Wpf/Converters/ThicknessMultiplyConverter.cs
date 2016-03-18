@@ -61,7 +61,9 @@
         /// <returns>The multiplied thickness.</returns>
         public static object Convert(object value, object parameter)
         {
-            var target = (Thickness)value;
+            Contract.Ensures(Contract.Result<object>() != null);
+
+            var target = value.SafeCast<Thickness>();
             var factor = GetThicknessFromParameter(parameter);
 
             return Multiply(target, factor);

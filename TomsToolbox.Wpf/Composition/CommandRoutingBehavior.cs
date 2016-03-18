@@ -225,7 +225,11 @@
             if (commandSourceType == null) 
                 return null;
 
-            var exportProvider = IsActive ? AssociatedObject.GetExportProvider() : AssociatedObject.TryGetExportProvider();
+            var element = AssociatedObject;
+            if (element == null)
+                return null;
+
+            var exportProvider = IsActive ? element.GetExportProvider() : element.TryGetExportProvider();
             if (exportProvider == null)
                 return null;
 

@@ -10,7 +10,7 @@
 
     /// <summary>
     /// Attribute to mark one property as dependent on another property.
-    /// If you call <see cref="ObservableObject.OnPropertyChanged(string)"/> for one property, the property change event will also be raised for all dependent properties.
+    /// If you call <see cref="ObservableObjectBase.OnPropertyChanged(string)"/> for one property, the property change event will also be raised for all dependent properties.
     /// </summary>
     /// <example><code language="C#"><![CDATA[
     /// class X : ObservableObject
