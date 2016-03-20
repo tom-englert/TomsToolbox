@@ -20,7 +20,7 @@
         <externalLink>
           <linkText>SymbolSource.org</linkText>
           <linkUri>http://www.symbolsource.org</linkUri>
-        </externalLink>
+        </externalLink>. Use http://srv.symbolsource.org/pdb/Public as symbol server url.
       </para>
     </introduction>
 
@@ -42,8 +42,8 @@
           <listItem>
             <para>
               Download the source code from <externalLink>
-                <linkText>CodePlex</linkText>
-                <linkUri>https://tomstoolbox.codeplex.com/</linkUri>
+                <linkText>GitHub</linkText>
+                <linkUri>http://tom-englert.github.io/TomsToolbox/</linkUri>
               </externalLink> to learn about the internals or integrate the parts of interest with your own tool set.
             </para>
           </listItem>
@@ -57,7 +57,7 @@
         <para>
           Report new ideas or problems here: <externalLink>
             <linkText>Issue tracker</linkText>
-            <linkUri>https://tomstoolbox.codeplex.com/workitem/list/basic</linkUri>
+            <linkUri>https://github.com/tom-englert/TomsToolbox/issues</linkUri>
           </externalLink>
         </para>
       </content>
