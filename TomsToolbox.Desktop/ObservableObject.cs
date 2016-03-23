@@ -345,11 +345,31 @@
             return errorInfos;
         }
 
+        /// <summary>
+        /// Called when data errors have been evaluated. Used e.g. to track data errors for each property.
+        /// </summary>
+        /// <param name="propertyName">Name of the property, or <c>null</c> if the errors .</param>
+        /// <param name="dataErrors">The data errors for the property.</param>
+        protected virtual void OnDataErrorsEvaluated(string propertyName, IEnumerable<string> dataErrors)
+        {
+        }
+
+        private IEnumerable<string> InternalGetDataErrors(string propertyName)
+        {
+            Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
+
+            var dataErrors = GetDataErrors(propertyName).ToArray();
+
+            OnDataErrorsEvaluated(propertyName, dataErrors);
+
+            return dataErrors;
+        }
+
         string IDataErrorInfo.Error
         {
             get
             {
-                return GetDataErrors(null).FirstOrDefault();
+                return InternalGetDataErrors(null).FirstOrDefault();
             }
         }
 
@@ -357,7 +377,7 @@
         {
             get
             {
-                return GetDataErrors(columnName).FirstOrDefault();
+                return InternalGetDataErrors(columnName).FirstOrDefault();
             }
         }
 
@@ -377,14 +397,14 @@
 
         System.Collections.IEnumerable INotifyDataErrorInfo.GetErrors(string propertyName)
         {
-            return GetDataErrors(propertyName);
+            return InternalGetDataErrors(propertyName);
         }
 
         bool INotifyDataErrorInfo.HasErrors
         {
             get
             {
-                return GetDataErrors(null).Any();
+                return InternalGetDataErrors(null).Any();
             }
         }
 

@@ -165,6 +165,9 @@
     <Compile Include="HGlobal.cs" />
     <Compile Include="HighResolutionTimer.cs" />
     <Compile Include="LegacyV2RuntimeActivationPolicy.cs" />
+    <Compile Include="ReflectionExtensions.cs" />
+    <Compile Include="SafeNativeMemory.cs" />
+    <Compile Include="SafeTokenHandle.cs" />
     <Compile Include="TextAttribute.cs" />
     <Compile Include="Throttle.cs" />
     <Compile Include="DispatcherThrottle.cs" />
@@ -174,6 +177,7 @@
     <Compile Include="PropertyDependencyAttribute.cs" />
     <Compile Include="RelayedEventAttribute.cs" />
     <Compile Include="ThreadWithDispatcher.cs" />
+    <Compile Include="UserAccountControl.cs" />
     <Compile Include="WebHelper.cs" />
     <Compile Include="XmlExtensions.cs" />
   </ItemGroup>
