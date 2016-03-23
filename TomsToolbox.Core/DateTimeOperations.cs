@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
@@ -218,6 +219,7 @@
         /// </summary>
         /// <param name="time">The time.</param>
         /// <returns>The time with no fractional days.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "ToDays")]
         public static DateTime RoundToDays(this DateTime time)
         {
             return RoundToDays(time, Math.Round);
@@ -229,6 +231,7 @@
         /// <param name="time">The time.</param>
         /// <param name="roundingOperation">The rounding operation that rounds the days.</param>
         /// <returns>The time with no fractional days.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "ToDays")]
         public static DateTime RoundToDays(this DateTime time, Func<double, double> roundingOperation)
         {
             Contract.Requires(roundingOperation != null);
