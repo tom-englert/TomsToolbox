@@ -9,6 +9,13 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.40.0</para>
+            <list class="bullet">
+              <listItem><para>Extend ObservableObject to enable validation error tracking.</para></listItem>
+              <listItem><para>Add additional classes.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.39.0</para>
             <list class="bullet">
               <listItem><para>ObservableCompositeCollection: Property changed for Count property not always raised.</para></listItem>
