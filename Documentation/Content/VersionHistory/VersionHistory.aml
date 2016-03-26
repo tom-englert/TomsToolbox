@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.41.0</para>
+            <list class="bullet">
+              <listItem><para>Refactor visual composition to not require the IComposablePart interface and allow lazy setting of the export provider.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.40.0</para>
             <list class="bullet">
               <listItem><para>Extend ObservableObject to enable validation error tracking.</para></listItem>
