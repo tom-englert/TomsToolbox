@@ -49,12 +49,12 @@
 
             if (!string.IsNullOrEmpty(regionId))
             {
-                var exportProvider = ExportProvider;
-                var exports = exportProvider.GetExports<IComposablePart, IVisualCompositionMetadata>();
+                var exports = GetExports(regionId);
+                if (exports == null)
+                    return;
 
                 exportedItem = exports
                     .Where(item => DataTemplateManager.RoleEquals(item.Metadata.Role, role))
-                    .Where(item => item.Metadata.TargetRegions.Contains(regionId))
                     .Select(item => GetTarget(item.Value))
                     .FirstOrDefault();
             }

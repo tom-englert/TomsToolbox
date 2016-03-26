@@ -12,6 +12,11 @@
         where T : FrameworkElement
     {
         /// <summary>
+        /// Gets a value indicating whether the associated object is loaded.
+        /// </summary>
+        protected bool IsLoaded => AssociatedObject?.IsLoaded ?? false;
+
+        /// <summary>
         /// Called when the associated object is loaded.
         /// </summary>
         protected virtual void OnAssociatedObjectLoaded()

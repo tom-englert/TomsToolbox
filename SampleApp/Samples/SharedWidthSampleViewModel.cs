@@ -4,7 +4,7 @@
     using TomsToolbox.Wpf.Composition;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 4)]
-    class SharedWidthSampleViewModel : ObservableObject, IComposablePart
+    class SharedWidthSampleViewModel : ObservableObject
     {
         private string _longText = "This is a long text";
 

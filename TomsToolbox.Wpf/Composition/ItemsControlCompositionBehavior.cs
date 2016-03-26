@@ -52,10 +52,11 @@
                 return;
             }
 
-            var exportProvider = ExportProvider;
-            var exports = exportProvider.GetExports<IComposablePart, IVisualCompositionMetadata>();
+            var exports = GetExports(regionId);
+            if (exports == null)
+                return;
+
             var exportedItems = exports
-                .Where(item => item.Metadata.TargetRegions.Contains(regionId))
                 .OrderBy(item => item.Metadata.Sequence)
                 .Select(item => GetTarget(item.Value))
                 .ToArray();
@@ -111,14 +112,12 @@
         protected override void OnDetaching()
         {
             var itemsControl = AssociatedObject;
-            if (itemsControl == null)
-                return;
 
             var selector = itemsControl as Selector;
             if (selector == null)
                 return;
 
-            var items = itemsControl.ItemsSource as IEnumerable<IComposablePart>;
+            var items = itemsControl.ItemsSource;
             if (items == null)
                 return;
 

@@ -3,7 +3,7 @@
     using TomsToolbox.Wpf.Composition;
 
     [VisualCompositionExport(RegionId.Main, Sequence=2)]
-    class ChessViewModel : IComposablePart
+    class ChessViewModel
     {
         public override string ToString()
         {

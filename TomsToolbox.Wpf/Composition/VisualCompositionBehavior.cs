@@ -1,12 +1,16 @@
 ﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel.Composition.Hosting;
     using System.Diagnostics.Contracts;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Data;
     using System.Windows.Threading;
 
+    using TomsToolbox.Core;
     using TomsToolbox.Desktop;
     using TomsToolbox.Wpf.Interactivity;
 
@@ -22,6 +26,8 @@
         where T : FrameworkElement
     {
         private readonly DispatcherThrottle _deferredUpdateThrottle;
+        private INotifyChanged _exportProviderChangeTracker;
+        private ExportProvider _exportProvider;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VisualCompositionBehavior{T}"/> class.
@@ -102,7 +108,7 @@
         /// but for the framework the <see cref="CompositionContextBinding"/> property must look like a regular property, else it would try to apply the binding instead of simply assigning it.
         /// </summary>
         private static readonly DependencyProperty _compositionContextBindingProperty =
-            DependencyProperty.Register("InternalCompositionContextBinding", typeof (BindingBase), typeof (VisualCompositionBehavior<T>));
+            DependencyProperty.Register("InternalCompositionContextBinding", typeof(BindingBase), typeof(VisualCompositionBehavior<T>));
 
         /// <summary>
         /// Gets or sets the export provider (IOC). The export provider must be registered with the <see cref="ExportProviderLocator"/>.
@@ -111,13 +117,22 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<ExportProvider>() != null);
+                return _exportProvider ?? (_exportProvider = GetExportProvider());
+            }
+            private set
+            {
+                if (_exportProvider != null)
+                {
+                    _exportProvider.ExportsChanged -= ExportProvider_ExportsChanged;
+                }
 
-                var owner = AssociatedObject;
-                if (owner == null)
-                    throw new InvalidOperationException("Can't get export provider before behavior is attached.");
+                _exportProvider = value;
 
-                return owner.GetExportProvider();
+                if (_exportProvider != null)
+                {
+                    _exportProvider.ExportsChanged += ExportProvider_ExportsChanged;
+                    Update();
+                }
             }
         }
 
@@ -131,15 +146,19 @@
         {
             base.OnAttached();
 
-            ExportProvider.ExportsChanged += ExportProvider_ExportsChanged;
-
             if (RegionIdBinding != null)
                 BindingOperations.SetBinding(this, RegionIdProperty, RegionIdBinding);
 
             if (CompositionContextBinding != null)
                 BindingOperations.SetBinding(this, CompositionContextProperty, CompositionContextBinding);
 
-            Update();
+            var associatedObject = AssociatedObject;
+            Contract.Assume(associatedObject != null);
+
+            _exportProviderChangeTracker = associatedObject.Track(ExportProviderLocator.ExportProviderProperty);
+            _exportProviderChangeTracker.Changed += ExportProvider_Changed;
+
+            ExportProvider = associatedObject.TryGetExportProvider();
         }
 
         /// <summary>
@@ -152,7 +171,48 @@
         {
             base.OnDetaching();
 
-            ExportProvider.ExportsChanged -= ExportProvider_ExportsChanged;
+            if (_exportProviderChangeTracker != null)
+                _exportProviderChangeTracker.Changed -= ExportProvider_Changed;
+
+            ExportProvider = null;
+        }
+
+        /// <summary>
+        /// Gets the visual composition exports for the specified region.
+        /// </summary>
+        /// <param name="regionId">The region identifier.</param>
+        /// <returns>The exports for the region, or <c>null</c> if the export provider is not set yet.</returns>
+        protected IEnumerable<Lazy<object, IVisualCompositionMetadata>> GetExports(string regionId)
+        {
+            return ExportProvider?.GetExports<object, IVisualCompositionMetadata>(VisualCompositionExportAttribute.ExportContractName)
+                .Where(item => item.Metadata.TargetRegions.Contains(regionId));
+        }
+
+        /// <summary>
+        /// Gets the target object for the item. 
+        /// If the item implements <see cref="IComposablePartFactory"/>, the element returned by the factory is returned; 
+        /// otherwise the item itself is returned.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        /// <returns>The item or the factory generated item.</returns>
+        protected object GetTarget(object item)
+        {
+            var partFactory = item as IComposablePartFactory;
+
+            return (partFactory != null) ? partFactory.GetPart(CompositionContext) : item;
+        }
+
+        /// <summary>
+        /// Called when any of the constraints have changed and the target needs to be updated.
+        /// </summary>
+        /// <remarks>
+        /// Derived classes override this to update the target element.
+        /// </remarks>
+        protected abstract void Update();
+
+        private ExportProvider GetExportProvider()
+        {
+            return IsLoaded ? AssociatedObject.GetExportProvider() : AssociatedObject.TryGetExportProvider();
         }
 
         private void RegionId_Changed()
@@ -168,26 +228,9 @@
             _deferredUpdateThrottle.Tick();
         }
 
-        /// <summary>
-        /// Gets the target object for the item. 
-        /// If the item implements <see cref="IComposablePartFactory"/>, the element returned by the factory is returned; 
-        /// otherwise the item itself is returned.
-        /// </summary>
-        /// <param name="item">The item.</param>
-        /// <returns>The item or the factory generated item.</returns>
-        protected object GetTarget(IComposablePart item)
+        private void ExportProvider_Changed(object sender, EventArgs e)
         {
-            var partFactory = item as IComposablePartFactory;
-
-            return (partFactory != null) ? partFactory.GetPart(CompositionContext) : item;
+            ExportProvider = AssociatedObject?.TryGetExportProvider();
         }
-
-        /// <summary>
-        /// Called when any of the constraints have changed and the target needs to be updated.
-        /// </summary>
-        /// <remarks>
-        /// Derived classes override this to update the target element.
-        /// </remarks>
-        protected abstract void Update();
     }
 }

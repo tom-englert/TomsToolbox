@@ -104,12 +104,8 @@
         /// Initializes a new instance of the <see cref="CompositeContextMenu" /> class.
         /// </summary>
         /// <param name="exportProvider">The export provider.</param>
-        public CompositeContextMenu(ExportProvider exportProvider)
+        public CompositeContextMenu()
         {
-            Contract.Requires(exportProvider != null);
-
-            this.SetExportProvider(exportProvider);
-
             var compositionBehavior = new ItemsControlCompositionBehavior();
             BindingOperations.SetBinding(compositionBehavior, ItemsControlCompositionBehavior.RegionIdProperty, new Binding() { Source = this, Path = new PropertyPath(RegionIdProperty) });
 

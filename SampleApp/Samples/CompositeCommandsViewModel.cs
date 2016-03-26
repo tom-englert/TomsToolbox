@@ -7,7 +7,7 @@
     using TomsToolbox.Wpf.Composition;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 4)]
-    public class CompositeCommandsViewModel : IComposablePart
+    public class CompositeCommandsViewModel
     {
         public ICommand OpenCommand
         {

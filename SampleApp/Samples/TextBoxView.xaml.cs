@@ -9,7 +9,7 @@
     /// </summary>
     [DataTemplate(typeof(TextBoxViewModel), Role = TemplateRoles.Content)]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class TextBoxView : IComposablePart
+    public partial class TextBoxView
     {
         public TextBoxView()
         {

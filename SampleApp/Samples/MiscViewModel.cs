@@ -6,7 +6,7 @@
     using TomsToolbox.Wpf.Composition;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 99)]
-    internal class MiscViewModel : ObservableObject, IComposablePart
+    internal class MiscViewModel : ObservableObject
     {
         private DateTime _operationStarted = DateTime.Now;
         private TimeSpan _minimumDuration = TimeSpan.FromMinutes(0.2);

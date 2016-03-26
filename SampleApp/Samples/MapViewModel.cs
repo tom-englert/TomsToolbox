@@ -15,7 +15,7 @@
     using TomsToolbox.Wpf.Controls;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 1)]
-    public class MapViewModel : ObservableObject, IComposablePart
+    public class MapViewModel : ObservableObject
     {
         private static readonly string ConfigurationFileName = Path.Combine(Path.GetDirectoryName(typeof(MainWindow).Assembly.Location), "Map", "MapSources.xml");
 

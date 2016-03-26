@@ -12,11 +12,8 @@
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class MiscView
     {
-        [ImportingConstructor]
-        public MiscView(ExportProvider exportProvider)
+        public MiscView()
         {
-            this.SetExportProvider(exportProvider);
-
             InitializeComponent();
         }
     }
