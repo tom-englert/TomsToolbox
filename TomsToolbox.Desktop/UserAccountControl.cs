@@ -118,18 +118,19 @@ namespace TomsToolbox.Desktop
         }
 
         /// <summary>
-        /// The function checks whether the object associated with the access token belongs 
-        /// to a user account that is a member of the local Administrators group, even if 
+        /// The function checks whether the object associated with the access token belongs
+        /// to a user account that is a member of the local Administrators group, even if
         /// it currently is not elevated.
         /// </summary>
+        /// <param name="userToken">The user token.</param>
         /// <returns>
-        /// Returns true if the object associated with the access token belongs to user 
-        /// account that is a member of the local Administrators group. Returns false 
+        /// Returns true if the object associated with the access token belongs to user
+        /// account that is a member of the local Administrators group. Returns false
         /// if the token does not.
         /// </returns>
-        /// <exception cref="System.ComponentModel.Win32Exception">
-        /// When any native Windows API call fails, the function throws a Win32Exception with the last error code.
+        /// <exception cref="Win32Exception">
         /// </exception>
+        /// <exception cref="System.ComponentModel.Win32Exception">When any native Windows API call fails, the function throws a Win32Exception with the last error code.</exception>
         public static bool IsUserInAdminGroup(SafeTokenHandle userToken)
         {
             Contract.Requires(userToken != null);
