@@ -62,19 +62,7 @@
         /// </returns>
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            Contract.Assume(serviceProvider != null);
-
-            var rootObjectProvider = serviceProvider.GetService<IRootObjectProvider>();
-            if (rootObjectProvider == null)
-                return null;
-
-            var rootObject = rootObjectProvider.RootObject as DependencyObject;
-            if (rootObject == null)
-                return null;
-
-            var exportProvider = rootObject.GetExportProvider();
-
-            var compositeContextMenu = new CompositeContextMenu(exportProvider)
+            var compositeContextMenu = new CompositeContextMenu()
             {
                 RegionId = RegionId
             };
@@ -103,7 +91,6 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="CompositeContextMenu" /> class.
         /// </summary>
-        /// <param name="exportProvider">The export provider.</param>
         public CompositeContextMenu()
         {
             var compositionBehavior = new ItemsControlCompositionBehavior();

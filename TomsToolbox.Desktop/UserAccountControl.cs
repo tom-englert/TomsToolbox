@@ -1,4 +1,5 @@
-﻿namespace TomsToolbox.Desktop
+﻿using System.Diagnostics.Contracts;
+namespace TomsToolbox.Desktop
 {
     using System;
     using System.ComponentModel;
@@ -28,7 +29,8 @@
         /// <param name="message">The message.</param>
         /// <param name="authenticationError">The previous authentication error, if any; 0 to hide previous error information.</param>
         /// <param name="template">The credential used to initialize the dialog; maybe <c>null</c> to start with an empty dialog.</param>
-        /// <returns>The credentials entered by the user, or <c>null</c> if the user has canceled the operation.
+        /// <returns>
+        /// The credentials entered by the user, or <c>null</c> if the user has canceled the operation.
         /// </returns>
         public static NetworkCredential PromptForCredential(IWin32Window parent, string caption, string message, int authenticationError, NetworkCredential template)
         {
@@ -220,7 +222,9 @@
         /// Determines whether the current user is in the specified group.
         /// </summary>
         /// <param name="groupName">Name of the group.</param>
-        /// <returns></returns>
+        /// <returns>
+        /// <c>true</c> if the user blongs to the specified group; otherwise <c>false</c>
+        /// </returns>
         public static bool IsCurrentUserInGroup(string groupName)
         {
             using (var id = WindowsIdentity.GetCurrent())
@@ -236,7 +240,9 @@
         /// </summary>
         /// <param name="userToken">The user token.</param>
         /// <param name="groupName">Name of the group.</param>
-        /// <returns></returns>
+        /// <returns>
+        /// <c>true</c> if the user blongs to the specified group; otherwise <c>false</c>
+        /// </returns>
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         public static bool IsUserInGroup(SafeTokenHandle userToken, string groupName)
         {
@@ -349,7 +355,6 @@
         ///    SECURITY_MANDATORY_SYSTEM_RID - means system integrity level. It is 
         ///    used by services and other system-level applications (such as Wininit, 
         ///    Winlogon, Smss, etc.)  (SID: S-1-16-0x4000)
-        /// 
         /// </returns>
         /// <exception cref="System.ComponentModel.Win32Exception">
         /// When any native Windows API call fails, the function throws a Win32Exception 
@@ -410,9 +415,12 @@
         }
 
         /// <summary>
-        /// Gets a handle the UAC (user account control) shield icon.
+        /// Gets a handle of the UAC (user account control) shield icon.
         /// </summary>
         /// <value>The handle of the icon.</value>
+        /// <returns>
+        /// The handle of the UAC (user account control) shield icon.
+        /// </returns>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Uac", Justification = "UAC is a common windows term.")]
         public static IntPtr UacShieldIcon
         {
