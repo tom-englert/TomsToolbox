@@ -19,7 +19,8 @@
         /// <returns>The role.</returns>
         [AttachedPropertyBrowsableForType(typeof(ContentControl))]
         [AttachedPropertyBrowsableForType(typeof(TabControl))]
-        public static object GetRole(Control obj)
+        [AttachedPropertyBrowsableForType(typeof(ContentPresenter))]
+        public static object GetRole(FrameworkElement obj)
         {
             Contract.Requires(obj != null);
             return obj.GetValue(RoleProperty);
@@ -29,7 +30,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetRole(Control obj, object value)
+        public static void SetRole(FrameworkElement obj, object value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(RoleProperty, value);
@@ -49,7 +50,8 @@
 
             d.TryCast()
                 .When<ContentControl>(cc => cc.ContentTemplateSelector = new RoleBasedDataTemplateSelector {Role = newValue})
-                .When<TabControl>(tc => tc.ContentTemplateSelector = new RoleBasedDataTemplateSelector {Role = newValue});
+                .When<TabControl>(tc => tc.ContentTemplateSelector = new RoleBasedDataTemplateSelector {Role = newValue})
+                .When<ContentPresenter>(cp => cp.ContentTemplateSelector = new RoleBasedDataTemplateSelector { Role = newValue });
         }
     }
 }
