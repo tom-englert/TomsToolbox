@@ -171,6 +171,8 @@
     <Compile Include="..\Version.cs">
       <Link>Properties\Version.cs</Link>
     </Compile>
+    <Compile Include="Composition\Import.cs" />
+    <Compile Include="Composition\ImportBehavior.cs" />
     <Compile Include="Composition\IVisualCompositionBehavior.cs" />
     <Compile Include="Converters\AggregatingMultiValueConverter.cs" />
     <Compile Include="Converters\MultiValueConverter.cs" />
