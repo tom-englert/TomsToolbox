@@ -9,6 +9,13 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.42.0</para>
+            <list class="bullet">
+              <listItem><para>Add ImportBehavior.</para></listItem>
+              <listItem><para>DataTemplate.Role works with ContentPresenter.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.41.0</para>
             <list class="bullet">
               <listItem><para>Refactor visual composition to not require the IComposablePart interface and allow lazy setting of the export provider.</para></listItem>
