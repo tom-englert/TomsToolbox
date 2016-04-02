@@ -372,7 +372,7 @@
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(e));
             }
         }
 
