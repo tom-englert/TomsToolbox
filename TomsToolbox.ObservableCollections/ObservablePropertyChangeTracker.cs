@@ -9,11 +9,31 @@
     using System.Linq;
 
     /// <summary>
+    /// Helper class to create typed change trackers from arbitrary lists.
+    /// </summary>
+    public static class ObservablePropertyChangeTracker
+    {
+        /// <summary>
+        /// Creates a new <see cref="ObservablePropertyChangeTracker{T}"/>
+        /// </summary>
+        /// <typeparam name="TList">The type of the collection.</typeparam>
+        /// <typeparam name="T">The type of the items in the collection.</typeparam>
+        /// <param name="collection">The collection.</param>
+        /// <returns>The <see cref="ObservablePropertyChangeTracker{T}"></see></returns>
+        public static ObservablePropertyChangeTracker<T> Create<TList, T>(TList collection)
+            where TList : IList<T>, INotifyCollectionChanged
+            where T : INotifyPropertyChanged
+        {
+            return new ObservablePropertyChangeTracker<T>(collection, collection);
+        }
+    }
+
+    /// <summary>
     /// Tracks <see cref="INotifyPropertyChanged.PropertyChanged"/> events of all items in an observable collection.
     /// </summary>
     /// <typeparam name="T">The type of the items in the collection.</typeparam>
     public class ObservablePropertyChangeTracker<T>
-        where T: INotifyPropertyChanged
+        where T : INotifyPropertyChanged
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ObservablePropertyChangeTracker{T}"/> class.
@@ -36,11 +56,21 @@
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ObservablePropertyChangeTracker{T}"/> class.
+        /// </summary>
+        /// <param name="collection">The collection.</param>
+        public ObservablePropertyChangeTracker(ReadOnlyObservableCollection<T> collection)
+            : this(collection, collection)
+        {
+            Contract.Requires(collection != null);
+        }
+
+        /// <summary>
         /// Occurs when the property of any item has changed. The sender in the event is the item that has changed, not this instance.
         /// </summary>
         public event EventHandler<PropertyChangedEventArgs> ItemPropertyChanged;
 
-        private ObservablePropertyChangeTracker(IList<T> items, INotifyCollectionChanged eventSource)
+        internal ObservablePropertyChangeTracker(IList<T> items, INotifyCollectionChanged eventSource)
         {
             Contract.Requires(items != null);
             Contract.Requires(eventSource != null);
@@ -56,9 +86,7 @@
 
         private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var handler = ItemPropertyChanged;
-            if (handler != null)
-                handler(sender, e);
+            ItemPropertyChanged?.Invoke(sender, e);
         }
 
         [ContractVerification(false)] // Too complex, checker is confused.

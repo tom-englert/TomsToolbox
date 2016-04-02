@@ -113,7 +113,7 @@
             private List<WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs>> _propertyChangeEventListeners;
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="ObservableWrappedCollection&lt;TTarget, TSource&gt;" /> class.
+            /// Initializes a new instance of the <see cref="ObservableSelectImpl{TSource, TTarget}" /> class.
             /// </summary>
             /// <param name="sourceCollection">The source collection to wrap.</param>
             /// <param name="itemGeneratorExpression">The item generator to generate the wrapper for each item.</param>
@@ -178,7 +178,7 @@
                         break;
 
                     case NotifyCollectionChangedAction.Reset:
-                        _propertyChangeEventListeners.ForEach(item => item.SafeDetach());
+                        _propertyChangeEventListeners.ForEach(item => item?.Detach());
                         _propertyChangeEventListeners = GeneratePropertyChangeEventListeners(sourceCollection);
                         break;
                 }
@@ -212,7 +212,7 @@
                 Contract.Requires((itemIndex >= 0) && (itemIndex < _propertyChangeEventListeners.Count));
                 Contract.Ensures(_propertyChangeEventListeners.Count == Contract.OldValue(_propertyChangeEventListeners.Count) - 1);
 
-                _propertyChangeEventListeners[itemIndex].SafeDetach();
+                _propertyChangeEventListeners[itemIndex]?.Detach();
                 _propertyChangeEventListeners.RemoveAt(itemIndex);
             }
 
@@ -285,12 +285,6 @@
             {
                 Contract.Invariant(_sourceReference != null);
             }
-        }
-
-        private static void SafeDetach<TSource, TTarget>(this WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> eventListener)
-        {
-            if (eventListener != null)
-                eventListener.Detach();
         }
 
         private class ObservableSelectManyImpl<TSource, TTarget> : ReadOnlyObservableCollectionAdapter<TTarget, ObservableCompositeCollection<TTarget>>

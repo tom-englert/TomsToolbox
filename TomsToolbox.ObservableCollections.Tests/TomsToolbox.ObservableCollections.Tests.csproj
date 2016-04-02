@@ -46,11 +46,14 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ObservableCompositeCollectionTest.cs" />
     <Compile Include="ObservableExtensionsTests.cs" />
     <Compile Include="ObservableIndexerTests.cs" />
     <Compile Include="ObservableFilteredCollectionTests.cs" />

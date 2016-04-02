@@ -3,6 +3,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
@@ -82,7 +83,7 @@
     /// </list>
     /// </summary>
     /// <typeparam name="T">Type of the items in the collection</typeparam>
-    public sealed class ObservableCompositeCollection<T> : IObservableCollection<T>, IList
+    public sealed class ObservableCompositeCollection<T> : ReadOnlyObservableCollection<T>, IObservableCollection<T>
     {
         [ContractPublicPropertyName("Content")]
         private readonly ContentManager _content;
@@ -90,14 +91,14 @@
         /// <summary>
         /// Taking care of the physical content
         /// </summary>
-        private class ContentManager : IList<IList<T>>, INotifyCollectionChanged, INotifyPropertyChanged
+        private class ContentManager : IList<IList<T>>
         {
             // The parts that make up the composite collection
             private readonly List<IList<T>> _parts = new List<IList<T>>();
             // The composite collection that we manage
-            private readonly object _owner;
+            private readonly ObservableCompositeCollection<T> _owner;
 
-            public ContentManager(object owner)
+            public ContentManager(ObservableCompositeCollection<T> owner)
             {
                 Contract.Requires(owner != null);
 
@@ -107,18 +108,10 @@
             private void parts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
             {
                 // Monitor changes of parts and forward events properly
-                var collectionChanged = CollectionChanged;
-                if (collectionChanged != null)
-                {
-                    // Offset to apply is the sum of all counts of all parts preceding this part
-                    var offset = _parts.TakeWhile(part => !part.Equals(sender)).Select(part => part.Count).Sum();
-                    collectionChanged(_owner, TranslateEventArgs(e, offset));
-                }
+                // Offset to apply is the sum of all counts of all parts preceding this part
+                var offset = _parts.TakeWhile(part => !part.Equals(sender)).Select(part => part.Count).Sum();
 
-                if ((e.Action != NotifyCollectionChangedAction.Replace) && (e.Action != NotifyCollectionChangedAction.Move))
-                {
-                    OnCountPropertyChanged();
-                }
+                _owner.ContentCollectionChanged(TranslateEventArgs(e, offset));
             }
 
             private static NotifyCollectionChangedEventArgs TranslateEventArgs(NotifyCollectionChangedEventArgs e, int offset)
@@ -140,6 +133,9 @@
                     case NotifyCollectionChangedAction.Remove:
                         return new NotifyCollectionChangedEventArgs(e.Action, e.OldItems, e.OldStartingIndex + offset);
 
+                    case NotifyCollectionChangedAction.Move:
+                        return new NotifyCollectionChangedEventArgs(e.Action, e.NewItems, e.NewStartingIndex + offset, e.OldStartingIndex + offset);
+
                     case NotifyCollectionChangedAction.Replace:
                         return new NotifyCollectionChangedEventArgs(e.Action, e.NewItems, e.OldItems, e.OldStartingIndex + offset);
 
@@ -159,9 +155,9 @@
             public void Insert(int index, IList<T> item)
             {
                 if (item == null)
-                    throw new ArgumentNullException(@"item");
+                    throw new ArgumentNullException(nameof(item));
                 if (index > _parts.Count)
-                    throw new ArgumentOutOfRangeException(@"index");
+                    throw new ArgumentOutOfRangeException(nameof(index));
 
                 // now add this list to the list of all
                 _parts.Insert(index, item);
@@ -175,24 +171,10 @@
                 if (item.Count == 0)
                     return;
 
-                // If this new part contains items and someone registered for changes, raise change events
-                var collectionChanged = CollectionChanged;
-
-                if (collectionChanged != null)
-                {
-                    // calculate the absolute offset of the first item (= sum of all preceding items in all lists before the new item)
-                    var offset = (_parts.GetRange(0, index).Select(p => p.Count)).Sum();
-
-                    // Send single notifications, ListCollectionView does not support multi-item changes!
-                    foreach (T element in item)
-                    {
-                        var args = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, element, offset);
-                        collectionChanged(_owner, args);
-                        offset += 1;
-                    }
-                }
-
-                OnCountPropertyChanged();
+                // calculate the absolute offset of the first item (= sum of all preceding items in all lists before the new item)
+                var offset = (_parts.GetRange(0, index).Select(p => p.Count)).Sum();
+                var args = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, (IList)item, offset);
+                _owner.ContentCollectionChanged(args);
             }
 
             [ContractVerification(false)] // Just forwarding...
@@ -210,21 +192,10 @@
                 if (part.Count == 0)
                     return;
 
-                var collectionChanged = CollectionChanged;
+                // calculate the absolute offset of the first item (sum of all items in all lists before the removed item)
+                var offset = (_parts.GetRange(0, index).Select(p => p.Count)).Sum();
 
-                if (collectionChanged != null)
-                {
-                    // calculate the absolute offset of the first item (sum of all items in all lists before the removed item)
-                    var offset = (_parts.GetRange(0, index).Select(p => p.Count)).Sum();
-
-                    foreach (T item in part)
-                    {
-                        // offset stays, items are bubbling up!
-                        collectionChanged(_owner, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, offset));
-                    }
-                }
-
-                OnCountPropertyChanged();
+                _owner.ContentCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, (IList)part, offset));
             }
 
             [ContractVerification(false)] // Just forwarding...
@@ -262,7 +233,7 @@
             public bool Contains(IList<T> item)
             {
                 if (item == null)
-                    throw new ArgumentNullException(@"item");
+                    throw new ArgumentNullException(nameof(item));
 
                 return IndexOf(item) != -1;
             }
@@ -272,26 +243,14 @@
                 throw new NotImplementedException();
             }
 
-            public int Count
-            {
-                get
-                {
-                    return _parts.Count;
-                }
-            }
+            public int Count => _parts.Count;
 
-            public bool IsReadOnly
-            {
-                get
-                {
-                    return false;
-                }
-            }
+            public bool IsReadOnly => false;
 
             public bool Remove(IList<T> item)
             {
                 if (item == null)
-                    throw new ArgumentNullException(@"item");
+                    throw new ArgumentNullException(nameof(item));
 
                 var index = IndexOf(item);
                 if (index == -1)
@@ -320,15 +279,6 @@
 
             #endregion
 
-            public event NotifyCollectionChangedEventHandler CollectionChanged;
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            private void OnCountPropertyChanged()
-            {
-                PropertyChanged?.Invoke(_owner, new PropertyChangedEventArgs(nameof(Count)));
-            }
-
             #region Contracts Invariant
 
             [ContractInvariantMethod]
@@ -346,6 +296,7 @@
         /// Create an empty collection
         /// </summary>
         public ObservableCompositeCollection()
+            : base(new ObservableCollection<T>())
         {
             _content = new ContentManager(this);
         }
@@ -382,356 +333,81 @@
             }
         }
 
-        #region Implementation of the interfaces to get a flat read only collection of all parts
-
-        /// <summary>
-        /// General handling for all interface functions not supported because we are read only.
-        /// </summary>
-        private static void ReadOnlyNotSupported()
+        private void ContentCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            throw new NotSupportedException(@"Collection is read-only.");
-        }
-
-        #region IEnumerable<T> Members
-
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.Collections.Generic.IEnumerator`1"></see> that can be used to iterate through the collection.
-        /// </returns>
-        public IEnumerator<T> GetEnumerator()
-        {
-            return _content.SelectMany(list => list.Cast<T>()).GetEnumerator();
-        }
-
-        #endregion
-
-        #region IEnumerable Members
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        #endregion
-
-        #region IList<T> Members
-
-        /// <summary>
-        /// Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1"></see>.
-        /// </summary>
-        /// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.IList`1"></see>.</param>
-        /// <returns>
-        /// The index of item if found in the list; otherwise, -1.
-        /// </returns>
-        [ContractVerification(false)]
-        public int IndexOf(T item)
-        {
-            var offset = 0;
-            foreach (var list in _content)
+            switch (e.Action)
             {
-                var index = list.IndexOf(item);
-                if (index >= 0)
-                    return index + offset;
-                offset += list.Count;
-            }
-            return -1;
-        }
+                case NotifyCollectionChangedAction.Add:
+                    var insertionIndex = e.NewStartingIndex;
+                    foreach (var item in e.NewItems.Cast<T>())
+                    {
+                        Items.Insert(insertionIndex++, item);
+                    }
+                    break;
 
-        void IList<T>.Insert(int index, T item)
-        {
-            ReadOnlyNotSupported();
-        }
+                case NotifyCollectionChangedAction.Remove:
+                    var removeIndex = e.OldStartingIndex;
+                    for (var k = 0; k < e.OldItems.Count; k++)
+                    {
+                        Items.RemoveAt(removeIndex);
+                    }
+                    break;
 
-        [ContractVerification(false)]
-        void IList<T>.RemoveAt(int index)
-        {
-            ReadOnlyNotSupported();
-        }
+                case NotifyCollectionChangedAction.Replace:
+                    var replaceIndex = e.OldStartingIndex;
+                    foreach (var item in e.NewItems.Cast<T>())
+                    {
+                        Items[replaceIndex++] = item;
+                    }
+                    break;
 
-        /// <summary>
-        /// Gets the element at the specified index.
-        /// </summary>
-        /// <returns>The element at the specified index.</returns>
-        /// <exception cref="T:System.ArgumentOutOfRangeException">index is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"></see>.</exception>
-        public T this[int index]
-        {
-            get
-            {
-                Contract.Requires(index >= 0);
+                case NotifyCollectionChangedAction.Move:
+                    Contract.Assume(e.OldItems.Count == 1);
+                    ((ObservableCollection<T>)Items).Move(e.OldStartingIndex, e.NewStartingIndex);
+                    break;
 
-                foreach (var list in _content)
-                {
-                    Contract.Assume(list != null);
+                case NotifyCollectionChangedAction.Reset:
+                    Items.Clear();
+                    Items.AddRange(_content.SelectMany(list => list));
+                    break;
 
-                    if (index < list.Count)
-                        return (T)list[index];
-                    index -= list.Count;
-                    if (index < 0)
-                        throw new ArgumentOutOfRangeException(@"index");
-                }
-
-                throw new ArgumentOutOfRangeException(@"index");
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
-
-        T IList<T>.this[int index]
-        {
-            get
-            {
-                return this[index];
-            }
-            set
-            {
-                ReadOnlyNotSupported();
-            }
-        }
-
-        #endregion
-
-        #region ICollection<T> Members
-
-        void ICollection<T>.Add(T item)
-        {
-            ReadOnlyNotSupported();
-        }
-
-        [ContractVerification(false)]
-        void ICollection<T>.Clear()
-        {
-            ReadOnlyNotSupported();
-        }
-
-        /// <summary>
-        /// Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"></see> contains a specific value.
-        /// </summary>
-        /// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"></see>.</param>
-        /// <returns>
-        /// true if item is found in the <see cref="T:System.Collections.Generic.ICollection`1"></see>; otherwise, false.
-        /// </returns>
-        public bool Contains(T item)
-        {
-            return IndexOf(item) != -1;
-        }
-
-        void ICollection<T>.CopyTo(T[] array, int arrayIndex)
-        {
-            if (arrayIndex + array.Length < Count)
-                throw new ArgumentException(@"array is too small");
-
-            foreach (var item in this)
-            {
-                Contract.Assume(arrayIndex < array.Length);
-                array[arrayIndex++] = item;
-            }
-        }
-
-        /// <summary>
-        /// Gets the number of elements contained in the collection.
-        /// </summary>
-        /// <returns>The number of elements contained in the collection.</returns>
-        [ContractVerification(false)] // Validation: Sum of positive numbers is always positive.
-        public int Count
-        {
-            get
-            {
-                return _content.Select(list => list.Count).Sum();
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"></see> is read-only.
-        /// </summary>
-        /// <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"></see> is read-only; otherwise, false.</returns>
-        public bool IsReadOnly
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        bool ICollection<T>.Remove(T item)
-        {
-            ReadOnlyNotSupported();
-            return false;
-        }
-
-        #endregion
-
-        #region IList Members
-
-        [ContractVerification(false)]
-        int IList.Add(object value)
-        {
-            ReadOnlyNotSupported();
-            return 0;
-        }
-
-        [ContractVerification(false)]
-        void IList.Clear()
-        {
-            ReadOnlyNotSupported();
-        }
-
-        bool IList.Contains(object value)
-        {
-            return IndexOf(value.SafeCast<T>()) != -1;
-        }
-
-        [ContractVerification(false)]
-        int IList.IndexOf(object value)
-        {
-            return IndexOf(value.SafeCast<T>());
-        }
-
-        void IList.Insert(int index, object value)
-        {
-            ReadOnlyNotSupported();
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the <see cref="T:System.Collections.IList"/> has a fixed size.
-        /// </summary>
-        /// <returns>true if the <see cref="T:System.Collections.IList"/> has a fixed size; otherwise, false.</returns>
-        bool IList.IsFixedSize
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<bool>() == false);
-                return false;
-            }
-        }
-
-        bool IList.IsReadOnly
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        void IList.Remove(object value)
-        {
-            ReadOnlyNotSupported();
-        }
-
-        void IList.RemoveAt(int index)
-        {
-            ReadOnlyNotSupported();
-        }
-
-        object IList.this[int index]
-        {
-            get
-            {
-                return this[index];
-            }
-            set
-            {
-                ReadOnlyNotSupported();
-            }
-        }
-
-        #endregion
-
-        #region ICollection Members
-
-        void ICollection.CopyTo(Array array, int index)
-        {
-            if (index + array.Length < Count)
-                throw new ArgumentException(@"array is too small");
-            if (array.Rank != 1)
-                throw new ArgumentException(@"array is not one-dimensional");
-
-            foreach (var item in this)
-            {
-                Contract.Assume(index < array.Length);
-                array.SetValue(item, index++);
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe).
-        /// </summary>
-        /// <returns>true if access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.</returns>
-        bool ICollection.IsSynchronized
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<bool>() == false);
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
-        /// </summary>
-        /// <returns>An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.</returns>
-        object ICollection.SyncRoot
-        {
-            get
-            {
-                return this;
-            }
-        }
-
-
-        int ICollection.Count
-        {
-            get
-            {
-                return Count;
-            }
-        }
-
-        #endregion
-
-        #region INotifyCollectionChanged Members
 
         /// <summary>
         /// Occurs when the collection changes.
         /// </summary>
-        public event NotifyCollectionChangedEventHandler CollectionChanged
+        public new event NotifyCollectionChangedEventHandler CollectionChanged
         {
             add
             {
-                _content.CollectionChanged += value;
+                base.CollectionChanged += value;
             }
             remove
             {
-                _content.CollectionChanged -= value;
+                base.CollectionChanged -= value;
             }
         }
-
-        #endregion
-
-        #region INotifyPropertyChanged Members
 
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged
+        public new event PropertyChangedEventHandler PropertyChanged
         {
             add
             {
-                _content.PropertyChanged += value;
+                base.PropertyChanged += value;
             }
             remove
             {
-                _content.PropertyChanged -= value;
+                base.PropertyChanged -= value;
             }
         }
 
-
-        #endregion INotifyPropertyChanged Members
-
-        #endregion  // Interface implementations
-
-
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_content != null);
