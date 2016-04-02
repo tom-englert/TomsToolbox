@@ -9,10 +9,16 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.43.0</para>
+            <list class="bullet">
+              <listItem><para>Fix performance issues of the ObservableCompositeCollection indexer.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.42.0</para>
             <list class="bullet">
               <listItem><para>Add ImportBehavior.</para></listItem>
-              <listItem><para>DataTemplate.Role works with ContentPresenter.</para></listItem>
+              <listItem><para>DataTemplate.Role also works with ContentPresenter.</para></listItem>
             </list>
           </listItem>
           <listItem>
