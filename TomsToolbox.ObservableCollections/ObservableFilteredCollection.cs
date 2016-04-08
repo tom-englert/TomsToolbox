@@ -14,33 +14,40 @@
     /// <summary>
     /// A simple filtered collection implementation.<para/>
     /// This collection contains only the items from the source collection passing the filter.<para/>
-    /// Changes in the source collection will be tracked, however changes in the individual objects that would affect the filter will not be tracked.<para/>
-    /// Changes that affect the items order in the source collection (see <see cref="NotifyCollectionChangedAction.Move"/>, <see cref="IList.Insert"/>) will be ignored.<para/>
     /// </summary>
     /// <typeparam name="T">Type of the items in the collection.</typeparam>
     /// <remarks>
-    /// This collection does <c>not</c> hold a reference to the source collection.
-    /// To keep the source collection alive, the object generating the <see cref="ObservableFilteredCollection{T}" /> must hold a reference to the source collection.
+    /// Changes in the source collection will be tracked always, changes in the individual objects that would affect the filter will be tracked when any of the live tracking properties changes.<para/>
+    /// The order of the elements may be different than the order in the source collection; also changes that affect the items order in the source collection (see <see cref="NotifyCollectionChangedAction.Move"/>, <see cref="IList.Insert"/>) will be ignored.<para/>
+    /// This collection does <c>not</c> hold a reference to the source collection. To keep the source collection alive, the object generating the <see cref="ObservableFilteredCollection{T}" /> must hold a reference to the source collection.<para/>
+    /// When live tracking is active, Reset of the source collection is not supported.
     /// </remarks>
     public class ObservableFilteredCollection<T> : ReadOnlyObservableCollectionAdapter<T, ObservableCollection<T>>, IObservableCollection<T>
     {
-        private static readonly IEnumerable _emptyList = new T[0];
-
         private readonly IWeakEventListener _collectionChangedWeakEvent;
         private readonly Func<T, bool> _filter;
+        private readonly string[] _liveTrackingProperties;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObservableFilteredCollection{T}"/> class.
+        /// Initializes a new instance of the <see cref="ObservableFilteredCollection{T}" /> class.
         /// </summary>
         /// <param name="sourceCollection">The source collection. This instance will not hold a reference to the source collection.</param>
         /// <param name="filter">The filter.</param>
-        public ObservableFilteredCollection(IEnumerable sourceCollection, Func<T, bool> filter)
+        /// <param name="liveTrackingProperties">The live tracking properties. Whenever one of these properties in any item changes, the filter is reevaluated for the item.</param>
+        public ObservableFilteredCollection(IEnumerable sourceCollection, Func<T, bool> filter, params string[] liveTrackingProperties)
             : base(new ObservableCollection<T>(sourceCollection.Cast<T>().Where(filter)))
         {
             Contract.Requires(sourceCollection != null);
             Contract.Requires(filter != null);
+            Contract.Requires(liveTrackingProperties != null);
 
             _filter = filter;
+            _liveTrackingProperties = liveTrackingProperties;
+
+            if (liveTrackingProperties.Any())
+            {
+                sourceCollection.Cast<T>().ForEach(AttachItemEvents);
+            }
 
             var eventSource = sourceCollection as INotifyCollectionChanged;
             if (eventSource != null)
@@ -88,27 +95,24 @@
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    var newItems = e.NewItems ?? _emptyList;
-                    foreach (var newItem in newItems.Cast<T>().Where(_filter))
-                    {
-                        Items.Add(newItem);
-                    }
+                    AddItems(e.NewItems?.Cast<T>());
                     break;
 
                 case NotifyCollectionChangedAction.Remove:
-                    var oldItems = e.OldItems ?? _emptyList;
-                    foreach (var oldItem in oldItems.Cast<T>())
-                    {
-                        Items.Remove(oldItem);
-                    }
+                    RemoveItems(e.OldItems?.Cast<T>());
                     break;
 
                 case NotifyCollectionChangedAction.Reset:
+                    if (_liveTrackingProperties.Any())
+                        throw new NotSupportedException("NotifyCollectionChangedAction.Reset is not supported when the ObservableFilteredCollection is in live tracking mode.");
+
                     Items.Clear();
-                    foreach (var newItem in ((IEnumerable)sender).Cast<T>().Where(_filter))
-                    {
-                        Items.Add(newItem);
-                    }
+                    AddItems(((IEnumerable)sender).Cast<T>());
+                    break;
+
+                case NotifyCollectionChangedAction.Replace:
+                    RemoveItems(e.OldItems?.Cast<T>());
+                    AddItems(e.NewItems?.Cast<T>());
                     break;
 
                 case NotifyCollectionChangedAction.Move:
@@ -119,15 +123,73 @@
             }
         }
 
+        private void AddItems(IEnumerable<T> newItems)
+        {
+            if (newItems == null)
+                return;
+
+            foreach (var newItem in newItems)
+            {
+                if (_liveTrackingProperties.Any())
+                    AttachItemEvents(newItem);
+
+                if (_filter(newItem))
+                    Items.Add(newItem);
+            }
+        }
+
+        private void AttachItemEvents(T newItem)
+        {
+            var eventSource = newItem as INotifyPropertyChanged;
+            if (eventSource != null)
+                eventSource.PropertyChanged += Item_PropertyChanged;
+        }
+
+        private void RemoveItems(IEnumerable<T> oldItems)
+        {
+            if (oldItems == null)
+                return;
+
+            foreach (var oldItem in oldItems)
+            {
+                if (_liveTrackingProperties.Any())
+                    DetachItemEvents(oldItem);
+
+                Items.Remove(oldItem);
+            }
+        }
+
+        private void DetachItemEvents(T oldItem)
+        {
+            var eventSource = oldItem as INotifyPropertyChanged;
+            if (eventSource != null)
+                eventSource.PropertyChanged -= Item_PropertyChanged;
+        }
+
+        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            var item = (T)sender;
+
+            if (!_liveTrackingProperties.Contains(e.PropertyName))
+                return;
+
+            if (_filter(item))
+            {
+                if (!Items.Contains(item))
+                    Items.Add(item);
+            }
+            else
+            {
+                Items.Remove(item);
+            }
+        }
+
         /// <summary>
         /// Finalizes an instance of the <see cref="ObservableFilteredCollection{T}"/> class.
         /// </summary>
         ~ObservableFilteredCollection()
         {
-            if (_collectionChangedWeakEvent != null)
-            {
-                _collectionChangedWeakEvent.Detach();
-            }
+            _collectionChangedWeakEvent?.Detach();
         }
 
         [ContractInvariantMethod]

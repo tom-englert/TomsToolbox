@@ -6,7 +6,6 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
-    using System.Runtime.Remoting.Activation;
 
     /// <summary>
     /// A Dictionary like implementation that populates it's content on demand, i.e. calling indexer[key] will never return null.

@@ -192,10 +192,7 @@
         /// </summary>
         ~ObservableWrappedCollection()
         {
-            if (_collectionChangedWeakEvent != null)
-            {
-                _collectionChangedWeakEvent.Detach();
-            }
+            _collectionChangedWeakEvent?.Detach();
         }
 
         [ContractInvariantMethod]
