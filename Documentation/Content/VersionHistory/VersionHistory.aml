@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.44.0</para>
+            <list class="bullet">
+              <listItem><para>Support live filtering in ObservableFilteredCollection/ObservableWhere.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.43.0</para>
             <list class="bullet">
               <listItem><para>Fix performance issues of the ObservableCompositeCollection indexer.</para></listItem>
