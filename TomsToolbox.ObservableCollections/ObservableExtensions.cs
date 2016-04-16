@@ -91,19 +91,21 @@
         /// <typeparam name="T">The type of the target elements.</typeparam>
         /// <param name="source">The source collection.</param>
         /// <param name="predicate">The predicate used to filter.</param>
+        /// <param name="liveTrackingProperties">The live tracking properties. Whenever one of these properties in any item changes, the filter is reevaluated for the item.</param>
         /// <returns>
         /// The observable collection of objects of type <typeparamref name="T" /> that contains the filtered items of the source collection.
         /// </returns>
         /// <remarks>
         /// See <see cref="ObservableFilteredCollection{T}"/> for usage details.
         /// </remarks>
-        public static IObservableCollection<T> ObservableWhere<T>(this IList<T> source, Func<T, bool> predicate)
+        public static IObservableCollection<T> ObservableWhere<T>(this IList<T> source, Func<T, bool> predicate, params string[] liveTrackingProperties)
         {
             Contract.Requires(source != null);
             Contract.Requires(predicate != null);
+            Contract.Requires(liveTrackingProperties != null);
             Contract.Ensures(Contract.Result<IObservableCollection<T>>() != null);
 
-            return new ObservableFilteredCollection<T>(source, predicate);
+            return new ObservableFilteredCollection<T>(source, predicate, liveTrackingProperties);
         }
 
         private class ObservableSelectImpl<TSource, TTarget> : ObservableWrappedCollection<TSource, TTarget>
