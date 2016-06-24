@@ -308,6 +308,12 @@
                     var result = NcHitTest(windowHandle, lParam);
                     return (IntPtr)result;
 
+                case WM_NCRBUTTONUP:
+                    var hitTest = wParam.ToInt32();
+                    if ((hitTest == (int)HitTest.SysMenu) || (hitTest == (int)HitTest.Caption))
+                        ShowSystemMenu(windowHandle, LOWORD(lParam), HIWORD(lParam));
+                    break;
+
                 case WM_GETMINMAXINFO:
                     RegisterMinMaxInfo(lParam);
                     break;
@@ -316,6 +322,8 @@
                     handled = true;
                     ShowGlassFrame();
                     break;
+
+
             }
 
             return IntPtr.Zero;
@@ -404,13 +412,34 @@
             _maximizedPadding = -1 * (Vector)_transformFromDevice.Transform(mmi.ptMaxPosition);
         }
 
+        private static void ShowSystemMenu(IntPtr handle, int x, int y)
+        {
+            var cmd = NativeMethods.TrackPopupMenuEx(NativeMethods.GetSystemMenu(handle, false), 256U, x, y, handle, IntPtr.Zero);
+            if (cmd == 0)
+                return;
+
+            NativeMethods.PostMessage(handle, WM_SYSCOMMAND, new IntPtr(cmd), IntPtr.Zero);
+        }
+
         // ReSharper disable InconsistentNaming
 
         private const int WM_GETMINMAXINFO = 0x0024;
         private const int WM_NCHITTEST = 0x0084;
         private const int WM_NCCALCSIZE = 0x0083;
         private const int WM_NCACTIVATE = 0x0086;
+        private const int WM_NCRBUTTONUP = 165;
         private const int WM_DWMCOMPOSITIONCHANGED = 798;
+        private const int WM_SYSCOMMAND = 274;
+
+        private static int HIWORD(IntPtr i)
+        {
+            return (short)(i.ToInt32() >> 16);
+        }
+
+        private static int LOWORD(IntPtr i)
+        {
+            return (short)(i.ToInt32() & ushort.MaxValue);
+        }
 
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
         private struct RECT
@@ -567,6 +596,16 @@
             [DllImport("dwmapi.dll", EntryPoint = "DwmIsCompositionEnabled", PreserveSig = false)]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool DwmIsCompositionEnabled();
+
+            [DllImport("user32.dll")]
+            public static extern uint TrackPopupMenuEx(IntPtr hmenu, uint fuFlags, int x, int y, IntPtr hwnd, IntPtr lptpm);
+
+            [DllImport("user32.dll")]
+            public static extern IntPtr GetSystemMenu(IntPtr hWnd, [MarshalAs(UnmanagedType.Bool)] bool bRevert);
+
+            [DllImport("user32.dll", SetLastError = true)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool PostMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
         }
     }
 }
