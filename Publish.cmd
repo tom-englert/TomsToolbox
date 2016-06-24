@@ -1,4 +1,4 @@
-SET VERSION=1.0.44.0
+SET VERSION=1.0.45.0
 
 PUSHD "%~dp0Deploy"
 

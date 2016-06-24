@@ -32,7 +32,7 @@
     <ProductName>Tom%27s Toolbox</ProductName>
     <PublisherName>tom-englert</PublisherName>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.34.0</ApplicationVersion>
+    <ApplicationVersion>1.0.45.0</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -64,10 +64,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>A0D827E1B350F5C0C80B3621FFD9AD3DCC2ABCC1</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>35A3F470805B8977A18C111E2D13AE735D6074B2</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' != 'Debug'">
-    <ManifestKeyFile>SampleApp_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>SampleAppKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
