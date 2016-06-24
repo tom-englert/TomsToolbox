@@ -42,7 +42,7 @@
                   <toms:CustomNonClientAreaBehavior BorderSize="4,4" CornerSize="8,8" />
                 </i:Interaction.Behaviors>
                 <DockPanel>
-                  <Border x:Name="Caption" DockPanel.Dock="Top" 
+                  <Border x:Name="Caption" DockPanel.Dock="Top"
                           Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"
                           TextElement.Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"
                           Tag="{x:Static toms:HitTest.Caption}" MinHeight="28">

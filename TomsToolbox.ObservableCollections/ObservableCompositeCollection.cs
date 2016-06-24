@@ -105,6 +105,7 @@
                 _owner = owner;
             }
 
+            [ContractVerification(false)]
             private void parts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
             {
                 // Monitor changes of parts and forward events properly
@@ -333,6 +334,7 @@
             }
         }
 
+        [ContractVerification(false)]
         private void ContentCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)

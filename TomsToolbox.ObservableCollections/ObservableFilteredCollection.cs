@@ -1,4 +1,5 @@
-﻿namespace TomsToolbox.ObservableCollections
+﻿using System.Diagnostics.Contracts;
+namespace TomsToolbox.ObservableCollections
 {
     using System;
     using System.Collections;
@@ -65,6 +66,7 @@
                 this, eventSource, OnCollectionChanged, Attach, Detach);
         }
 
+        [ContractVerification(false)]
         private static void OnCollectionChanged(ObservableFilteredCollection<T> self, object sender, NotifyCollectionChangedEventArgs e)
         {
             Contract.Requires(self != null);
@@ -88,6 +90,7 @@
             sender.CollectionChanged -= weakEvent.OnEvent;
         }
 
+        [ContractVerification(false)]
         private void SourceCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             Contract.Requires(sender != null);
@@ -168,6 +171,8 @@
 
         private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            Contract.Requires(sender != null);
+
             var item = (T)sender;
 
             if (!_liveTrackingProperties.Contains(e.PropertyName))
@@ -197,6 +202,7 @@
         private void ObjectInvariant()
         {
             Contract.Invariant(_filter != null);
+            Contract.Invariant(_liveTrackingProperties != null);
         }
     }
 }

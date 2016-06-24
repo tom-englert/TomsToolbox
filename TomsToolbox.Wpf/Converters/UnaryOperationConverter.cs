@@ -56,46 +56,49 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
+        [ContractVerification(false)]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var valueType = value.GetType();
-
-            switch (Type.GetTypeCode(valueType))
+            while (true)
             {
-                case TypeCode.Boolean:
-                    return !(bool)value;
+                var valueType = value.GetType();
 
-                case TypeCode.SByte:
-                    return -(sbyte)value;
-                case TypeCode.Int16:
-                    return -(short)value;
-                case TypeCode.Int32:
-                    return -(int)value;
-                case TypeCode.Int64:
-                    return -(long)value;
-                case TypeCode.Single:
-                    return -(float)value;
-                case TypeCode.Double:
-                    return -(double)value;
-                case TypeCode.Decimal:
-                    return -(decimal)value;
+                switch (Type.GetTypeCode(valueType))
+                {
+                    case TypeCode.Boolean:
+                        return !(bool)value;
 
-                case TypeCode.Object:
-                    return ApplyOperation(value, valueType);
+                    case TypeCode.SByte:
+                        return -(sbyte)value;
+                    case TypeCode.Int16:
+                        return -(short)value;
+                    case TypeCode.Int32:
+                        return -(int)value;
+                    case TypeCode.Int64:
+                        return -(long)value;
+                    case TypeCode.Single:
+                        return -(float)value;
+                    case TypeCode.Double:
+                        return -(double)value;
+                    case TypeCode.Decimal:
+                        return -(decimal)value;
 
-                case TypeCode.String:
-                    if ((targetType != null) && (targetType != typeof(string)))
-                    {
-                        value = ChangeType((string) value, targetType);
-                        if (value == null)
-                            return null;
+                    case TypeCode.Object:
+                        return ApplyOperation(value, valueType);
 
-                        return Convert(value, targetType, parameter, culture);
-                    }
-                    break;
+                    case TypeCode.String:
+                        if ((targetType != null) && (targetType != typeof(string)))
+                        {
+                            value = ChangeType((string)value, targetType);
+                            if (value == null)
+                                return null;
+                            continue;
+                        }
+                        break;
+                }
+
+                throw new ArgumentOutOfRangeException(nameof(value), "Unsupported type");
             }
-
-            throw new ArgumentOutOfRangeException(nameof(value), "Unsupported type");
         }
 
         private object ApplyOperation(object value, Type valueType)
@@ -106,10 +109,10 @@
 
             return methods
                 .Where(m => _operationMethodNames.Contains(m.Name))
-                .Select(m => new {Method = m, Parameters = m.GetParameters()})
+                .Select(m => new { Method = m, Parameters = m.GetParameters() })
                 .Where(m => m.Parameters.Length == 1)
                 .Where(m => m.Parameters[0].ParameterType == valueType)
-                .Select(m => m.Method.Invoke(null, new[] {value}))
+                .Select(m => m.Method.Invoke(null, new[] { value }))
                 .FirstOrDefault(v => v != null);
         }
 

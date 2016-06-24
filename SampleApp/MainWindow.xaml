@@ -4,6 +4,11 @@
         xmlns:toms="urn:TomsToolbox"
         xmlns:sampleApp="clr-namespace:SampleApp"
         Title="MainWindow" Height="600" Width="800" Style="{DynamicResource WindowStyle}">
+  <Window.ContextMenu>
+    <ContextMenu>
+      <MenuItem Header="Show Popup" Click="ShowPopup_Click"></MenuItem>
+    </ContextMenu>
+  </Window.ContextMenu>
 
   <TabControl toms:VisualComposition.RegionId="{x:Static sampleApp:RegionId.Main}"
               toms:DataTemplate.Role="{x:Static sampleApp:TemplateRoles.Content}" Margin="-1"/>

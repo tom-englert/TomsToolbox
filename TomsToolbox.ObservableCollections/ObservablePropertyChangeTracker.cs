@@ -24,6 +24,9 @@
             where TList : IList<T>, INotifyCollectionChanged
             where T : INotifyPropertyChanged
         {
+            Contract.Requires(collection != null);
+            Contract.Ensures(Contract.Result<ObservablePropertyChangeTracker<T>>() != null);
+
             return new ObservablePropertyChangeTracker<T>(collection, collection);
         }
     }

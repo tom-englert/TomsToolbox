@@ -140,6 +140,7 @@
         ///     Not a <see cref="MemberExpression"/><br/>
         ///     The <see cref="MemberExpression"/> does not represent a property.<br/>
         /// </exception>
+        [ContractVerification(false)]
         public static PropertyChangedEventArgs GetEventArgs<T>(Expression<Func<T>> propertyExpression)
         {
             Contract.Requires(propertyExpression != null);

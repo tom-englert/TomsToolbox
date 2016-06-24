@@ -80,7 +80,7 @@
                 {
                     aggregated = valueConverter.Convert(aggregated, targetType, values[nextValueIndex], culture);
 
-                    if (nextConverterIndex < _converters.Count)
+                    if (nextConverterIndex < _converters.Count())
                     {
                         converter = _converters[nextConverterIndex];
                         nextConverterIndex += 1;

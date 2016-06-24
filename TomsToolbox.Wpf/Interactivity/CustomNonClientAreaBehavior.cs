@@ -7,6 +7,7 @@
     using System.Windows.Interactivity;
     using System.Windows.Interop;
     using System.Windows.Media;
+    using System.Windows.Threading;
 
     using TomsToolbox.Desktop;
 
@@ -154,7 +155,7 @@
         /// </value>
         public bool HasGlassFrame
         {
-            get { return (bool)GetValue(HasGlassFrameProperty); }
+            get { return this.GetValue<bool>(HasGlassFrameProperty); }
             set { SetValue(HasGlassFrameProperty, value); }
         }
         /// <summary>
@@ -180,14 +181,15 @@
         {
             base.OnAttached();
 
-            var clientArea = AssociatedObject;
-            Contract.Assume(clientArea != null);
+            var nonClientArea = AssociatedObject;
+            Contract.Assume(nonClientArea != null);
 
-            _window = clientArea.TryFindAncestor<Window>();
+            _window = nonClientArea.TryFindAncestor<Window>();
             if (_window == null)
                 return;
 
             _window.SourceInitialized += Window_SourceInitialized;
+            _window.StateChanged += WindowState_Changed;
         }
 
         /// <summary>
@@ -204,15 +206,20 @@
                 return;
 
             _window.SourceInitialized -= Window_SourceInitialized;
+            _window.StateChanged -= WindowState_Changed;
 
             Unregister(_window);
         }
 
         private void Window_SourceInitialized(object sender, EventArgs e)
         {
-            Contract.Assume(_window != null);
+            var nonClientArea = AssociatedObject;
+            Contract.Assume(nonClientArea != null);
 
-            var messageSource = (HwndSource)PresentationSource.FromDependencyObject(_window);
+            var window = _window;
+            Contract.Assume(window != null);
+
+            var messageSource = (HwndSource)PresentationSource.FromDependencyObject(window);
 
             if (messageSource == null)
                 throw new InvalidOperationException("Window needs to be initialized");
@@ -224,11 +231,58 @@
             _transformFromDevice = compositionTarget.TransformFromDevice;
             _transformToDevice = compositionTarget.TransformToDevice;
 
-            _window.StateChanged += WindowState_Changed;
-
             messageSource.AddHook(WindowProc);
 
             ShowGlassFrame();
+
+            ApplySizeToContent(window, nonClientArea);
+        }
+
+        private static void ApplySizeToContent(Window window, FrameworkElement nonClientArea)
+        {
+            Contract.Requires(window != null);
+            Contract.Requires(nonClientArea != null);
+
+            var sizeToContent = window.SizeToContent;
+
+            if (sizeToContent == SizeToContent.Manual)
+                return;
+
+            window.SizeToContent = SizeToContent.Manual;
+
+            var width = nonClientArea.ActualWidth;
+            var height = nonClientArea.ActualHeight;
+
+            window.Dispatcher?.BeginInvoke(DispatcherPriority.Loaded, () =>
+            {
+                ApplySizeToContent(window, sizeToContent, width, height);
+            });
+        }
+
+        private static void ApplySizeToContent(Window window, SizeToContent sizeToContent, double width, double height)
+        {
+            Contract.Requires(window != null);
+            Contract.Requires(width >= 0);
+            Contract.Requires(height >= 0);
+
+            switch (sizeToContent)
+            {
+                case SizeToContent.Manual:
+                    break;
+
+                case SizeToContent.Width:
+                    window.Width = width;
+                    break;
+
+                case SizeToContent.Height:
+                    window.Height = height;
+                    break;
+
+                case SizeToContent.WidthAndHeight:
+                    window.Width = width;
+                    window.Height = height;
+                    break;
+            }
         }
 
         private void ShowGlassFrame()
@@ -244,6 +298,8 @@
             if (compositionTarget == null)
                 throw new InvalidOperationException("Window needs to be initialized");
 
+            var handle = messageSource.Handle;
+
             if (HasGlassFrame)
             {
                 try
@@ -253,7 +309,7 @@
                         compositionTarget.BackgroundColor = Colors.Transparent;
 
                         var m = new MARGINS(-1);
-                        NativeMethods.DwmExtendFrameIntoClientArea(messageSource.Handle, ref m);
+                        NativeMethods.DwmExtendFrameIntoClientArea(handle, ref m);
 
                         return;
                     }
@@ -285,8 +341,6 @@
             var messageSource = (HwndSource)PresentationSource.FromDependencyObject(window);
 
             messageSource?.RemoveHook(WindowProc);
-
-            window.StateChanged -= WindowState_Changed;
         }
 
         private IntPtr WindowProc(IntPtr windowHandle, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)

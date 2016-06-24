@@ -108,6 +108,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PopupWindow.xaml.cs">
+      <DependentUpon>PopupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\ChessView.xaml.cs">
       <DependentUpon>ChessView.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
       <DependentUpon>TextBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\TextBoxViewModel.cs" />
+    <Page Include="PopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Samples\ChessView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

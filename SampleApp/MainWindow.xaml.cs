@@ -1,6 +1,8 @@
 ﻿namespace SampleApp
 {
     using System.ComponentModel.Composition;
+    using System.Windows;
+
     using TomsToolbox.Desktop.Composition;
     using TomsToolbox.Wpf.Composition;
 
@@ -16,6 +18,11 @@
             this.SetExportProvider(compositionHost.Container);
 
             InitializeComponent();
+        }
+
+        private void ShowPopup_Click(object sender, RoutedEventArgs e)
+        {
+            new PopupWindow { Owner = this }.ShowDialog();
         }
     }
 }
