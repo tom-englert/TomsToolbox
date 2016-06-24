@@ -4,23 +4,12 @@
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Interactivity;
-    using TomsToolbox.Wpf;
 
     /// <summary>
     /// Attaches default handling for the <see cref="WindowCommands"/>
     /// </summary>
     public class WindowButtonsHandlingBehavior : Behavior<Window>
     {
-        /// <summary>
-        /// Gets or sets the window style of the window. 
-        /// Since the style of the associated window is usually <see cref="System.Windows.WindowStyle.None"/> you have to set the intended style here.
-        /// </summary>
-        public WindowStyle WindowStyle
-        {
-            get;
-            set;
-        }
-
         /// <summary>
         /// Called after the behavior is attached to an AssociatedObject.
         /// </summary>
@@ -36,7 +25,7 @@
 
             window.CommandBindings.Add(new CommandBinding(WindowCommands.Close, Close));
 
-            if (WindowStyle == WindowStyle.ToolWindow)
+            if (window.ResizeMode == ResizeMode.NoResize)
                 return;
 
             window.CommandBindings.Add(new CommandBinding(WindowCommands.Minimize, Minimize));
@@ -81,7 +70,7 @@
             var window = AssociatedObject;
             Contract.Assume(window != null);
 
-            e.CanExecute = window.WindowState == WindowState.Normal;
+            e.CanExecute = (window.WindowState == WindowState.Normal) && ((window.ResizeMode == ResizeMode.CanResize) || (window.ResizeMode == ResizeMode.CanResizeWithGrip));
         }
 
         private void Maximize(object sender, ExecutedRoutedEventArgs e)

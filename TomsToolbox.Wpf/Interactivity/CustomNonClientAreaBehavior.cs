@@ -410,13 +410,29 @@
             _maximizedPadding = -1 * (Vector)_transformFromDevice.Transform(mmi.ptMaxPosition);
         }
 
-        private static void ShowSystemMenu(IntPtr handle, int x, int y)
+        private void ShowSystemMenu(IntPtr handle, int x, int y)
         {
-            var cmd = NativeMethods.TrackPopupMenuEx(NativeMethods.GetSystemMenu(handle, false), 256U, x, y, handle, IntPtr.Zero);
+            var systemMenu = NativeMethods.GetSystemMenu(handle, false);
+
+            var windowState = _window?.WindowState;
+            var resizeMode = _window?.ResizeMode;
+
+            NativeMethods.EnableMenuItem(systemMenu, SC_RESTORE, MenuFlags(windowState != WindowState.Normal));
+            NativeMethods.EnableMenuItem(systemMenu, SC_MOVE, MenuFlags(windowState == WindowState.Normal));
+            NativeMethods.EnableMenuItem(systemMenu, SC_SIZE, MenuFlags((windowState == WindowState.Normal) && ((resizeMode == ResizeMode.CanResize) || (resizeMode == ResizeMode.CanResizeWithGrip))));
+            NativeMethods.EnableMenuItem(systemMenu, SC_MINIMIZE, MenuFlags((windowState != WindowState.Minimized) && (resizeMode != ResizeMode.NoResize)));
+            NativeMethods.EnableMenuItem(systemMenu, SC_MAXIMIZE, MenuFlags((windowState != WindowState.Maximized) && (resizeMode != ResizeMode.NoResize)));
+
+            var cmd = NativeMethods.TrackPopupMenuEx(systemMenu, 256U, x, y, handle, IntPtr.Zero);
             if (cmd == 0)
                 return;
 
             NativeMethods.PostMessage(handle, WM_SYSCOMMAND, new IntPtr(cmd), IntPtr.Zero);
+        }
+
+        private static uint MenuFlags(bool enabled)
+        {
+            return enabled ? MF_ENABLED : MF_DISABLED | MF_GRAYED;
         }
 
         // ReSharper disable InconsistentNaming
@@ -428,6 +444,16 @@
         private const int WM_NCRBUTTONUP = 165;
         private const int WM_DWMCOMPOSITIONCHANGED = 798;
         private const int WM_SYSCOMMAND = 274;
+
+        private const int SC_SIZE = 61440;
+        private const int SC_MOVE = 61456;
+        private const int SC_MINIMIZE = 61472;
+        private const int SC_MAXIMIZE = 61488;
+        private const int SC_RESTORE = 61728;
+
+        private const uint MF_ENABLED = 0;
+        private const uint MF_GRAYED = 1;
+        private const uint MF_DISABLED = 2;
 
         private static int HIWORD(IntPtr i)
         {
@@ -604,6 +630,9 @@
             [DllImport("user32.dll", SetLastError = true)]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool PostMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
+            [DllImport("user32.dll")]
+            public static extern int EnableMenuItem(IntPtr hMenu, uint uIDEnableItem, uint uEnable);
         }
     }
 }
