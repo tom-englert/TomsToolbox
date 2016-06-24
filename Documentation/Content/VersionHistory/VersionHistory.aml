@@ -9,6 +9,17 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.45.0</para>
+            <list class="bullet">
+              <listItem>
+                <para>Add liveTrackingProperties parameter also to ObservableWhere extension.</para>
+                <para>Use DWM to draw the glass frame in custom windows + minor fixes.</para>
+                <para>Add generic dialog commands to build generic dialogs.</para>
+                <para></para>
+              </listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.44.0</para>
             <list class="bullet">
               <listItem><para>Support live filtering in ObservableFilteredCollection/ObservableWhere.</para></listItem>
