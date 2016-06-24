@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.46.0</para>
+            <list class="bullet">
+              <listItem><para>CustomNonClientAreaBehavior: Handle SizeToContent.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.45.0</para>
             <list class="bullet">
               <listItem><para>Add liveTrackingProperties parameter also to ObservableWhere extension.</para></listItem>
