@@ -322,8 +322,6 @@
                     handled = true;
                     ShowGlassFrame();
                     break;
-
-
             }
 
             return IntPtr.Zero;

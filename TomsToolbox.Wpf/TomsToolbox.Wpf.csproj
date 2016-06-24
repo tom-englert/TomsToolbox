@@ -179,6 +179,7 @@
     <Compile Include="Converters\UnaryOperationConverter.cs" />
     <Compile Include="Converters\ValueConverter.cs" />
     <Compile Include="Converters\ValueConverterExtensions.cs" />
+    <Compile Include="DialogCommands.cs" />
     <Compile Include="XamlExtensions\VisualComposition.cs" />
     <Compile Include="Controls\CompositeContextMenu.cs" />
     <Compile Include="Composition\ICheckableCommand.cs" />
