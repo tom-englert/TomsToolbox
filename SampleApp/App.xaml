@@ -83,7 +83,7 @@
                         </Style>
                       </DockPanel.Resources>
                       <Border DockPanel.Dock="Left" Tag="{x:Static toms:HitTest.SysMenu}" Background="Transparent" Margin="10,0">
-                        <Image Source="/ResXManager.Styles;component/16x16.png" Stretch="None" IsHitTestVisible="False" />
+                        <Image Source="16x16.png" Stretch="None" IsHitTestVisible="False" />
                       </Border>
                       <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" UseLayoutRounding="True" SnapsToDevicePixels="True" VerticalAlignment="Stretch">
                         <StackPanel x:Name="SizeButtons" Orientation="Horizontal">
