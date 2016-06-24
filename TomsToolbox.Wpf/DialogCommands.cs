@@ -19,7 +19,7 @@
         /// <summary>
         /// Gets the OK Dialog command.
         /// </summary>
-        public static RoutedUICommand OK
+        public static RoutedUICommand Ok
         {
             get
             {

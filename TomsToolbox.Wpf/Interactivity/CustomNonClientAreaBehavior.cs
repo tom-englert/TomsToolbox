@@ -430,11 +430,6 @@
             NativeMethods.PostMessage(handle, WM_SYSCOMMAND, new IntPtr(cmd), IntPtr.Zero);
         }
 
-        private static uint MenuFlags(bool enabled)
-        {
-            return enabled ? MF_ENABLED : MF_DISABLED | MF_GRAYED;
-        }
-
         // ReSharper disable InconsistentNaming
 
         private const int WM_GETMINMAXINFO = 0x0024;
@@ -455,6 +450,11 @@
         private const uint MF_GRAYED = 1;
         private const uint MF_DISABLED = 2;
 
+        private static uint MenuFlags(bool enabled)
+        {
+            return enabled ? MF_ENABLED : MF_DISABLED | MF_GRAYED;
+        }
+
         private static int HIWORD(IntPtr i)
         {
             return (short)(i.ToInt32() >> 16);
@@ -472,14 +472,6 @@
             public readonly int Top;
             public readonly int Right;
             public readonly int Bottom;
-
-            public RECT(int left, int top, int right, int bottom)
-            {
-                Left = left;
-                Top = top;
-                Right = right;
-                Bottom = bottom;
-            }
 
             public POINT TopLeft
             {
@@ -584,14 +576,6 @@
                 Top = value;
                 Right = value;
                 Bottom = value;
-            }
-
-            public MARGINS(int left, int right, int top, int bottom)
-            {
-                Left = left;
-                Top = top;
-                Right = right;
-                Bottom = bottom;
             }
         }
 
