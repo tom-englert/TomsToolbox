@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
+    using System.Diagnostics;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -16,6 +17,22 @@
         {
             Focusable = false;
         }
+
+
+        /// <summary>
+        /// Gets or sets the role of the template.
+        /// </summary>
+        public object Role
+        {
+            get { return (object)GetValue(RoleProperty); }
+            set { SetValue(RoleProperty, value); }
+        }
+        /// <summary>
+        /// Identifies the <see cref="Role"/> dependency property
+        /// </summary>
+        public static readonly DependencyProperty RoleProperty =
+            DependencyProperty.Register("Role", typeof(object), typeof(ComposableContentControl));
+
 
         /// <summary>
         /// Raises the <see cref="E:System.Windows.FrameworkElement.Initialized" /> event. This method is invoked whenever <see cref="P:System.Windows.FrameworkElement.IsInitialized" /> is set to true internally.
@@ -36,50 +53,43 @@
         {
             base.OnPropertyChanged(e);
 
-            if ((e.Property == DataContextProperty) 
-                || ((e.Property == ExportProviderLocator.ExportProviderProperty) && (e.NewValue != null)) 
+            if ((e.Property == DataContextProperty)
+                || ((e.Property == ExportProviderLocator.ExportProviderProperty) && (e.NewValue != null))
                 || (e.Property == RoleProperty))
             {
                 Update();
             }
         }
 
-        /// <summary>
-        /// Gets or sets the role of the template.
-        /// </summary>
-        public object Role
-        {
-            get { return (object)GetValue(RoleProperty); }
-            set { SetValue(RoleProperty, value); }
-        }
-        /// <summary>
-        /// Identifies the <see cref="Role"/> dependency property
-        /// </summary>
-        public static readonly DependencyProperty RoleProperty =
-            DependencyProperty.Register("Role", typeof(object), typeof(ComposableContentControl));
-
         private void Update()
         {
-            if (!IsInitialized)
-                return;
+            try
+            {
+                if (!IsInitialized)
+                    return;
 
-            Content = null;
+                Content = null;
 
-            var dataContext = DataContext;
+                var dataContext = DataContext;
 
-            if (dataContext == null)
-                return;
+                if (dataContext == null)
+                    return;
 
-            var exportProvider = this.GetExportProvider();
+                var exportProvider = this.GetExportProvider();
 
-            var viewModel = dataContext.GetType();
-            var view = exportProvider.GetDataTemplateView(viewModel, Role);
+                var viewModel = dataContext.GetType();
+                var view = exportProvider.GetDataTemplateView(viewModel, Role);
 
-            if (view == null)
-                return;
+                if (view == null)
+                    return;
 
-            DataTemplateManager.SetRole(view, Role);
-            Content = view;
+                DataTemplateManager.SetRole(view, Role);
+                Content = view;
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.ToString());
+            }
         }
     }
 }

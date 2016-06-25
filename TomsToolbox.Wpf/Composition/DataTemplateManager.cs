@@ -163,7 +163,7 @@ namespace TomsToolbox.Wpf.Composition
                 .Select(AssertCorrectCreationPolicy)
                 .Where(item => item != null)
                 .Select(item => item.Value)
-                .Cast<DependencyObject>()
+                .OfType<DependencyObject>()
                 .FirstOrDefault();
         }
 
@@ -210,14 +210,9 @@ namespace TomsToolbox.Wpf.Composition
 
         private static IDataTemplateMetadata GetMetadataView(Lazy<object, object> item)
         {
-            if (item == null)
-                return null;
+            var metadataDictionary = item?.Metadata as IDictionary<string, object>;
 
-            var metadataDictionary = item.Metadata as IDictionary<string, object>;
-            if (metadataDictionary == null)
-                return null;
-
-            return AttributedModelServices.GetMetadataView<IDataTemplateMetadata>(metadataDictionary);
+            return metadataDictionary == null ? null : AttributedModelServices.GetMetadataView<IDataTemplateMetadata>(metadataDictionary);
         }
 
         private static Lazy<object, object> AssertCorrectCreationPolicy(Lazy<object, object> export)
@@ -232,7 +227,7 @@ namespace TomsToolbox.Wpf.Composition
                 return export;
 
             var target = export.Value;
-            var typeName = (target != null) ? target.GetType().Name : "<null>";
+            var typeName = target?.GetType().Name ?? "<null>";
             var message = "Creation policy of views must be CreationPolicy.NonShared: " + typeName;
 
             Trace.TraceError(message);
