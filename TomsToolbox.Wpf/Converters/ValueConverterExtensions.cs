@@ -53,10 +53,8 @@
             Contract.Requires(methodName != null);
 
             var traceSource = PresentationTraceSources.DataBindingSource;
-            if (traceSource == null)
-                return;
 
-            traceSource.TraceEvent(TraceEventType.Error, ConverterErrorNumber, "{0}.{1} failed: {2}", converter.GetType().Name, methodName, message);
+            traceSource?.TraceEvent(TraceEventType.Error, ConverterErrorNumber, "{0}.{1} failed: {2}", converter.GetType().Name, methodName, message);
         }
     }
 }

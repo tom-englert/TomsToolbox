@@ -40,6 +40,7 @@
         ///     this.ReportNotDisposedObject();
         /// }
         /// ]]></code></example>
+        [ContractVerification(false)]
         public static void ReportNotDisposedObject(this IDisposable obj)
         {
             Contract.Requires(obj != null);

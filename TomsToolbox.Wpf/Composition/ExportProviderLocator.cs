@@ -36,7 +36,7 @@
 
             var exportProvider = (ExportProvider)obj.GetValue(ExportProviderProperty);
             if (exportProvider == null)
-                throw new InvalidOperationException("Export provider must be registered in the visual tree " + string.Join("/", obj.AncestorsAndSelf().Reverse().Select(o => o.GetType().Name)));
+                throw new InvalidOperationException(GetMissingExportProviderMessage(obj));
 
             return exportProvider;
         }
@@ -63,7 +63,6 @@
             Contract.Requires(obj != null);
             obj.SetValue(ExportProviderProperty, value);
         }
-
         /// <summary>
         /// Identifies the <see cref="P:TomsToolbox.Wpf.Composition.ExportProviderLocator.ExportProvider"/> attached property.
         /// </summary>
@@ -74,5 +73,17 @@
         /// </AttachedPropertyComments>
         public static readonly DependencyProperty ExportProviderProperty =
             DependencyProperty.RegisterAttached("ExportProvider", typeof(ExportProvider), typeof(ExportProviderLocator), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
+
+        /// <summary>
+        /// Gets the message to show when an export provider could not be located in the visual tree.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns>The message.</returns>
+        internal static string GetMissingExportProviderMessage(this DependencyObject obj)
+        {
+            Contract.Requires(obj != null);
+
+            return "Export provider must be registered in the visual tree " + string.Join("/", obj.AncestorsAndSelf().Reverse().Select(o => o.GetType().Name));
+        }
     }
 }

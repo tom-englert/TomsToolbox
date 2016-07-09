@@ -37,7 +37,7 @@
         /// <summary>
         /// Updates this instance.
         /// </summary>
-        protected override void Update()
+        protected override void OnUpdate()
         {
             var regionId = RegionId;
             var itemsControl = AssociatedObject;

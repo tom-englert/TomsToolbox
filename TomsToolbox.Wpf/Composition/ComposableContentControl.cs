@@ -88,6 +88,8 @@
             }
             catch (Exception ex)
             {
+                Content = new TextBox { Text = ex.ToString(), IsReadOnly = true };
+
                 Trace.TraceError(ex.ToString());
             }
         }

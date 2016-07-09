@@ -77,6 +77,9 @@
         {
             base.OnAttached();
 
+            if (AssociatedObject == null)
+                return;
+
             _tracker = AssociatedObject.Track(ExportProviderLocator.ExportProviderProperty);
             _tracker.Changed += ExportProvider_Changed;
 

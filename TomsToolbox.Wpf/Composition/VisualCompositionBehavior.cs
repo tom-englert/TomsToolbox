@@ -4,6 +4,8 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.Composition.Hosting;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Windows;
@@ -25,6 +27,11 @@
     public abstract class VisualCompositionBehavior<T> : FrameworkElementBehavior<T>, IVisualCompositionBehavior
         where T : FrameworkElement
     {
+        /// <summary>
+        /// The error number shown in trace messages.
+        /// </summary>
+        public const int ErrorNumber = 9001;
+
         private readonly DispatcherThrottle _deferredUpdateThrottle;
         private INotifyChanged _exportProviderChangeTracker;
         private ExportProvider _exportProvider;
@@ -117,9 +124,21 @@
         {
             get
             {
-                return _exportProvider ?? (_exportProvider = GetExportProvider());
+                return InternalExportProvider ?? (InternalExportProvider = GetExportProvider());
             }
             private set
+            {
+                InternalExportProvider = value;
+            }
+        }
+
+        private ExportProvider InternalExportProvider
+        {
+            get
+            {
+                return _exportProvider;
+            }
+            set
             {
                 if (_exportProvider != null)
                 {
@@ -205,14 +224,51 @@
         /// <summary>
         /// Called when any of the constraints have changed and the target needs to be updated.
         /// </summary>
+        protected void Update()
+        {
+            try
+            {
+                OnUpdate();
+            }
+            catch (Exception ex)
+            {
+                TraceError(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Called when any of the constraints have changed and the target needs to be updated.
+        /// </summary>
         /// <remarks>
         /// Derived classes override this to update the target element.
         /// </remarks>
-        protected abstract void Update();
+        protected abstract void OnUpdate();
+
+        /// <summary>
+        /// Traces an error.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        protected static void TraceError(string message)
+        {
+            Contract.Requires(message != null);
+
+            PresentationTraceSources.DataBindingSource?.TraceEvent(TraceEventType.Error, ErrorNumber, message);
+        }
 
         private ExportProvider GetExportProvider()
         {
-            return IsLoaded ? AssociatedObject.GetExportProvider() : AssociatedObject.TryGetExportProvider();
+            var associatedObject = AssociatedObject;
+            if (associatedObject == null)
+                return null;
+
+            var exportProvider = associatedObject.TryGetExportProvider();
+
+            if (IsLoaded && (exportProvider == null))
+            {
+                TraceError(associatedObject.GetMissingExportProviderMessage());
+            }
+
+            return exportProvider;
         }
 
         private void RegionId_Changed()

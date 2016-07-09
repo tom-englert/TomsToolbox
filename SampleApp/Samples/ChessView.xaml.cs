@@ -7,7 +7,7 @@
     /// <summary>
     /// Interaction logic for ChessView.xaml
     /// </summary>
-    [DataTemplate(typeof(ChessViewModel), Role=TemplateRoles.Content)]
+    [DataTemplate(typeof(ChessViewModel), Role = TemplateRoles.Content)]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class ChessView
     {

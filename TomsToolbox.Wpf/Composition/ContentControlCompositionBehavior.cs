@@ -36,7 +36,7 @@
         /// <summary>
         /// Updates this instance when any of the constraints have changed.
         /// </summary>
-        protected override void Update()
+        protected override void OnUpdate()
         {
             var regionId = RegionId;
             var role = Role;
