@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.48.0</para>
+            <list class="bullet">
+              <listItem><para>VisualComposition runtime error handling.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.47.0</para>
             <list class="bullet">
               <listItem><para>Add ListBoxSelectAllBehavior.</para></listItem>
