@@ -131,10 +131,7 @@
         {
             get
             {
-                if (_exportProvider == null) 
-                    return null;
-                
-                var value = _exportProvider.GetExports(MemberType, null, ContractName).Select(item => item.Value).FirstOrDefault();
+                var value = _exportProvider?.GetExports(MemberType, null, ContractName).Select(item => item.Value).FirstOrDefault();
                 if (value == null)
                     return null;
 

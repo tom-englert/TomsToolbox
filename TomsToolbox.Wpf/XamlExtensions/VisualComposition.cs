@@ -1,5 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.XamlExtensions
 {
+    using System;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Windows;
@@ -14,6 +16,30 @@
     /// </summary>
     public static class VisualComposition
     {
+        /// <summary>
+        /// The error number shown in trace messages.
+        /// </summary>
+        public const int ErrorNumber = 9001;
+
+        /// <summary>
+        /// Occurs when the visual composition framework has detected an error.
+        /// </summary>
+        public static event EventHandler<TextEventArgs> Error;
+
+        internal static void OnError(object sender, Exception ex)
+        {
+            OnError(sender, ex.ToString());
+        }
+
+        internal static void OnError(object sender, string message)
+        {
+            Contract.Requires(message != null);
+
+            PresentationTraceSources.DataBindingSource?.TraceEvent(TraceEventType.Error, ErrorNumber, message);
+
+            Error?.Invoke(sender, new TextEventArgs(message));
+        }
+
         /// <summary>
         /// Gets the region identifier.
         /// </summary>

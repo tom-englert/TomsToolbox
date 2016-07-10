@@ -15,6 +15,7 @@
     using TomsToolbox.Core;
     using TomsToolbox.Desktop;
     using TomsToolbox.Wpf.Interactivity;
+    using TomsToolbox.Wpf.XamlExtensions;
 
     /// <summary>
     /// Base class to implement visual composition behaviors.
@@ -27,11 +28,6 @@
     public abstract class VisualCompositionBehavior<T> : FrameworkElementBehavior<T>, IVisualCompositionBehavior
         where T : FrameworkElement
     {
-        /// <summary>
-        /// The error number shown in trace messages.
-        /// </summary>
-        public const int ErrorNumber = 9001;
-
         private readonly DispatcherThrottle _deferredUpdateThrottle;
         private INotifyChanged _exportProviderChangeTracker;
         private ExportProvider _exportProvider;
@@ -232,7 +228,7 @@
             }
             catch (Exception ex)
             {
-                TraceError(ex.ToString());
+                VisualComposition.OnError(this, ex);
             }
         }
 
@@ -244,17 +240,6 @@
         /// </remarks>
         protected abstract void OnUpdate();
 
-        /// <summary>
-        /// Traces an error.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        protected static void TraceError(string message)
-        {
-            Contract.Requires(message != null);
-
-            PresentationTraceSources.DataBindingSource?.TraceEvent(TraceEventType.Error, ErrorNumber, message);
-        }
-
         private ExportProvider GetExportProvider()
         {
             var associatedObject = AssociatedObject;
@@ -265,7 +250,7 @@
 
             if (IsLoaded && (exportProvider == null))
             {
-                TraceError(associatedObject.GetMissingExportProviderMessage());
+                VisualComposition.OnError(this, associatedObject.GetMissingExportProviderMessage());
             }
 
             return exportProvider;

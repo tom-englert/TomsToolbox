@@ -5,6 +5,8 @@
     using System.Windows;
     using System.Windows.Controls;
 
+    using TomsToolbox.Wpf.XamlExtensions;
+
     /// <summary>
     /// A control used to create dynamic content from an IOC container.
     /// </summary>
@@ -90,7 +92,7 @@
             {
                 Content = new TextBox { Text = ex.ToString(), IsReadOnly = true };
 
-                Trace.TraceError(ex.ToString());
+                VisualComposition.OnError(this, ex.ToString());
             }
         }
     }

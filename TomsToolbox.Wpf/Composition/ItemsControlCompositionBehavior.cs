@@ -9,7 +9,7 @@
     using System.Windows.Controls.Primitives;
 
     /// <summary>
-    /// Retrieves all exported <see cref="IComposablePart"/> items that match the RegionId from the composition container and assigns them as the items source of the associated <see cref="ItemsControl"/>
+    /// Retrieves all exported items with the  <see cref="VisualCompositionExportAttribute"/> that match the RegionId from the composition container and assigns them as the items source of the associated <see cref="ItemsControl"/>
     /// <para/>
     /// If the items control is a <see cref="Selector"/>, and the composable object implement <see cref="ISelectableComposablePart"/>, the selection of the selector is synchronized with the <see cref="ISelectableComposablePart.IsSelected"/> property.
     /// </summary>
