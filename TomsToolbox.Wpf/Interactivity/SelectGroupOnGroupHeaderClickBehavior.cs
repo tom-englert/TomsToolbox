@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-namespace TomsToolbox.Wpf.Interactivity
+﻿namespace TomsToolbox.Wpf.Interactivity
 {
     using System.Diagnostics.Contracts;
     using System.Windows;
@@ -74,7 +73,8 @@ namespace TomsToolbox.Wpf.Interactivity
 
                 if ((Keyboard.Modifiers & ModifierKeys.Control) == 0)
                 {
-                    selectedItems.Clear();
+                    // This is the fasted way to clear the selection.
+                    selector.SelectedIndex = -1;
                 }
 
                 foreach (var item in items)
