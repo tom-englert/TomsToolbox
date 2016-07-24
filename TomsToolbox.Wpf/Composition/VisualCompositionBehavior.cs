@@ -3,6 +3,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.Composition.Hosting;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
@@ -169,6 +170,9 @@
 
             var associatedObject = AssociatedObject;
             Contract.Assume(associatedObject != null);
+
+            if (DesignerProperties.GetIsInDesignMode(associatedObject))
+                return;
 
             _exportProviderChangeTracker = associatedObject.Track(ExportProviderLocator.ExportProviderProperty);
             _exportProviderChangeTracker.Changed += ExportProvider_Changed;

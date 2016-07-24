@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Interactivity
 {
     using System;
+    using System.ComponentModel;
     using System.Diagnostics.Contracts;
     using System.Runtime.InteropServices;
     using System.Windows;
@@ -183,6 +184,9 @@
 
             var nonClientArea = AssociatedObject;
             Contract.Assume(nonClientArea != null);
+
+            if (DesignerProperties.GetIsInDesignMode(nonClientArea))
+                return;
 
             _window = nonClientArea.TryFindAncestor<Window>();
             if (_window == null)

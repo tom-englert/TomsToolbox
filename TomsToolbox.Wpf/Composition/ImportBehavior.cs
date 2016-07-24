@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
+    using System.ComponentModel;
     using System.Linq;
     using System.Windows;
     using System.Windows.Interactivity;
@@ -77,7 +78,7 @@
         {
             base.OnAttached();
 
-            if (AssociatedObject == null)
+            if ((AssociatedObject == null) || DesignerProperties.GetIsInDesignMode(AssociatedObject))
                 return;
 
             _tracker = AssociatedObject.Track(ExportProviderLocator.ExportProviderProperty);
