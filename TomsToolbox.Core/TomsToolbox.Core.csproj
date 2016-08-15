@@ -159,6 +159,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertySupport.cs" />
     <Compile Include="RealTimeService.cs" />
+    <Compile Include="RegexExtensions.cs" />
     <Compile Include="SequenceAttribute.cs" />
     <Compile Include="TextEventArgs.cs" />
     <Compile Include="TryCast.cs" />
