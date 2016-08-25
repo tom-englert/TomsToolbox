@@ -305,11 +305,7 @@
         {
             Contract.Requires(!string.IsNullOrEmpty(propertyName));
 
-            var eventHander = PropertyChanged;
-            if (eventHander != null)
-            {
-                eventHander(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>
@@ -339,7 +335,7 @@
                 return Enumerable.Empty<string>();
 
             var errorInfos = property.GetCustomAttributes<ValidationAttribute>(true)
-                .Where(va => !va.IsValid(property.GetValue(this, null)))
+                .Where(va => va.GetValidationResult(property.GetValue(this, null), new ValidationContext(this, null, null)) != ValidationResult.Success)
                 .Select(va => va.FormatErrorMessage(propertyName));
 
             return errorInfos;
