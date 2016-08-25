@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.50.0</para>
+            <list class="bullet">
+              <listItem><para>ObservableObject: Pass validation context to ValidationAttribute.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.49.0</para>
             <list class="bullet">
               <listItem><para>Speed up SelectGroupOnGroupHeaderClickBehavior.</para></listItem>
