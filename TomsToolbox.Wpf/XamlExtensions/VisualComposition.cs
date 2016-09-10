@@ -28,6 +28,8 @@
 
         internal static void OnError(object sender, Exception ex)
         {
+            Contract.Requires(ex != null);
+
             OnError(sender, ex.ToString());
         }
 
