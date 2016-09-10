@@ -2,22 +2,13 @@
 <root>
   <MapSourceList>
 
-    <MapSource ID="MapQuest OSM">
-      <Copyright>http://www.mapquest.com</Copyright>
+    <MapSource ID="OSM">
+      <Copyright>http://www.openstreetmap.org</Copyright>
       <MinZoom>1</MinZoom>
       <MaxZoom>18</MaxZoom>
-      <TileUrl>http://otile1.mqcdn.com/tiles/1.0.0/map/%z/%x/%y.png</TileUrl>
-      <TileUrl>http://otile2.mqcdn.com/tiles/1.0.0/map/%z/%x/%y.png</TileUrl>
-      <TileUrl>http://otile3.mqcdn.com/tiles/1.0.0/map/%z/%x/%y.png</TileUrl>
-    </MapSource>
-
-    <MapSource ID="MapQuest Aerial">
-      <Copyright>http://www.mapquest.com</Copyright>
-      <MinZoom>1</MinZoom>
-      <MaxZoom>11</MaxZoom>
-      <TileUrl>http://otile1.mqcdn.com/tiles/1.0.0/sat/%z/%x/%y.png</TileUrl>
-      <TileUrl>http://otile2.mqcdn.com/tiles/1.0.0/sat/%z/%x/%y.png</TileUrl>
-      <TileUrl>http://otile3.mqcdn.com/tiles/1.0.0/sat/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://a.tile.openstreetmap.org/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://b.tile.openstreetmap.org/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://c.tile.openstreetmap.org/%z/%x/%y.png</TileUrl>
     </MapSource>
 
     <MapSource ID="4UMaps">
@@ -35,7 +26,7 @@
     </MapSource>
     
     <MapSource ID="HikeBikeMap">
-      <Copyright>http://hikebikemap.de</Copyright>
+      <Copyright>http://hikebikemap.org</Copyright>
       <MinZoom>1</MinZoom>
       <MaxZoom>17</MaxZoom>
       <TileUrl>http://a.tiles.wmflabs.org/hikebike/%z/%x/%y.png</TileUrl>
@@ -43,5 +34,32 @@
       <TileUrl>http://c.tiles.wmflabs.org/hikebike/%z/%x/%y.png</TileUrl>
     </MapSource>
 
+    <MapSource ID="Thunderforest lanscape">
+      <Copyright>http://www.thunderforest.com</Copyright>
+      <MinZoom>1</MinZoom>
+      <MaxZoom>16</MaxZoom>
+      <TileUrl>http://a.tile.thunderforest.com/landscape/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://b.tile.thunderforest.com/landscape/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://c.tile.thunderforest.com/landscape/%z/%x/%y.png</TileUrl>
+    </MapSource>
+
+    <MapSource ID="Thunderforest outdoors">
+      <Copyright>http://www.thunderforest.com</Copyright>
+      <MinZoom>1</MinZoom>
+      <MaxZoom>16</MaxZoom>
+      <TileUrl>http://a.tile.thunderforest.com/outdoors/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://b.tile.thunderforest.com/outdoors/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://c.tile.thunderforest.com/outdoors/%z/%x/%y.png</TileUrl>
+    </MapSource>
+
+    <MapSource ID="Thunderforest neighbourhood">
+      <Copyright>http://www.thunderforest.com</Copyright>
+      <MinZoom>1</MinZoom>
+      <MaxZoom>16</MaxZoom>
+      <TileUrl>http://a.tile.thunderforest.com/neighbourhood/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://b.tile.thunderforest.com/neighbourhood/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://c.tile.thunderforest.com/neighbourhood/%z/%x/%y.png</TileUrl>
+    </MapSource>
+    
   </MapSourceList>
 </root>

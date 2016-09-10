@@ -3,6 +3,7 @@
     using System;
     using System.Globalization;
     using System.IO;
+    using System.Net;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using System.Xml.Serialization;
@@ -156,25 +157,32 @@
 
             private BitmapImage DownloadBitmap()
             {
-                lock (_sync)
+                try
                 {
-                    if (_source != null)
-                        return _source;
+                    lock (_sync)
+                    {
+                        if (_source != null)
+                            return _source;
 
-                    var uri = _owner.GetImageUri(_mapTile);
+                        var uri = _owner.GetImageUri(_mapTile);
 
-                    var bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.StreamSource = WebHelper.Download(uri); 
-                    bitmap.EndInit();
-                    bitmap.Freeze();
-                    
-                    _source = bitmap;
+                        var bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.StreamSource = WebHelper.Download(uri);
+                        bitmap.EndInit();
+                        bitmap.Freeze();
+
+                        _source = bitmap;
+                    }
+
+                    OnLoaded();
+
+                    return _source;
                 }
-
-                OnLoaded();
-
-                return _source;
+                catch (WebException)
+                {
+                    return null;
+                }
             }
         }
     }
