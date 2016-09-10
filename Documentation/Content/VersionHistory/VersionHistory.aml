@@ -9,6 +9,13 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.51.0</para>
+            <list class="bullet">
+              <listItem><para>Change resource keys to workaround https://connect.microsoft.com/VisualStudio/feedback/details/2993889/. </para></listItem>
+              <listItem><para>Remove WeakReference&lt;T&gt;> in .Net45.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.50.0</para>
             <list class="bullet">
               <listItem><para>ObservableObject: Pass validation context to ValidationAttribute.</para></listItem>
