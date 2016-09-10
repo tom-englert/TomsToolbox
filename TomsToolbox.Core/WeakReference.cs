@@ -1,5 +1,7 @@
 ﻿namespace TomsToolbox.Core
 {
+#if !NETFRAMEWORK_4_5 // 4.5 already has this...
+
     using System;
     using System.Diagnostics.Contracts;
     using System.Runtime.Serialization;
@@ -69,4 +71,5 @@
             return (target != null);
         }
     }
+#endif // !NETFRAMEWORK_4_5
 }
