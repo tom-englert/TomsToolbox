@@ -8,7 +8,7 @@
   xmlns:composition="clr-namespace:TomsToolbox.Wpf.Composition"
   xmlns:converters="clr-namespace:TomsToolbox.Wpf.Converters">
 
-  <Style TargetType="TextBlock" x:Key="{x:Static local:ResourceKeys.AutoToolTipTextBoxStyle}">
+  <Style TargetType="TextBlock" x:Key="{ComponentResourceKey {x:Type local:ResourceKeys}, {x:Static local:ResourceKeys.AutoToolTipTextBoxStyleKeyName}}">
     <Style.Triggers>
       <MultiTrigger>
         <MultiTrigger.Conditions>
@@ -33,7 +33,7 @@
     </Grid>
   </ControlTemplate>
 
-  <Style TargetType="ContentControl" x:Key="{x:Static local:ResourceKeys.SharedWidthContainerStyle}">
+  <Style TargetType="ContentControl" x:Key="{ComponentResourceKey {x:Type local:ResourceKeys}, {x:Static local:ResourceKeys.SharedWidthContainerStyleKeyName}}">
     <Setter Property="Template" Value="{StaticResource SharedWidthContainerTemplate}" />
     <Setter Property="Focusable" Value="False" />
   </Style>
@@ -64,7 +64,7 @@
   <!--List box/list view with check boxes: Style to be applied to the check box inside item or cell template.
       See e.g. http://msdn.microsoft.com/en-us/library/ms754143.aspx />
       -->
-  <Style TargetType="CheckBox" x:Key="{x:Static local:ResourceKeys.ListBoxItemCheckBoxStyle}">
+  <Style TargetType="CheckBox" x:Key="{ComponentResourceKey {x:Type local:ResourceKeys}, {x:Static local:ResourceKeys.ListBoxItemCheckBoxStyleKeyName}}">
     <Setter Property="Focusable" Value="False" />
     <Setter Property="DockPanel.Dock" Value="Left" />
     <Setter Property="Margin" Value="3" />
@@ -77,7 +77,7 @@
   </Style>
 
   <!-- Data grid with check boxes for row selection: Style to be applied to the check box inside the row header template. -->
-  <Style TargetType="CheckBox" x:Key="{x:Static local:ResourceKeys.DataGridRowCheckBoxStyle}">
+  <Style TargetType="CheckBox" x:Key="{ComponentResourceKey {x:Type local:ResourceKeys}, {x:Static local:ResourceKeys.DataGridRowCheckBoxStyleKeyName}}">
     <Setter Property="Focusable" Value="False" />
     <Setter Property="DockPanel.Dock" Value="Left" />
     <Setter Property="Margin" Value="2" />
@@ -94,7 +94,7 @@
     VerticalAlignment binding to control the vertical alignment of the content via the DataGrid.VerticalContentAlignment property.
     Also added support for padding.
   -->
-  <Style TargetType="{x:Type DataGridCell}" x:Key="{x:Static local:ResourceKeys.DataGridCellStyle}">
+  <Style TargetType="{x:Type DataGridCell}" x:Key="{ComponentResourceKey {x:Type local:ResourceKeys}, {x:Static local:ResourceKeys.DataGridCellStyleKeyName}}">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderBrush" Value="Transparent" />
     <Setter Property="BorderThickness" Value="1" />
@@ -120,7 +120,7 @@
   </Style>
 
   <!-- A control that shows validation errors in the tool tip. -->
-  <Style x:Key="{x:Static local:ResourceKeys.ControlWithValidationErrorToolTipStyle}" TargetType="{x:Type Control}">
+  <Style x:Key="{ComponentResourceKey {x:Type local:ResourceKeys}, {x:Static local:ResourceKeys.ControlWithValidationErrorToolTipStyleKeyName}}" TargetType="{x:Type Control}">
     <Style.Triggers>
       <Trigger Property="Validation.HasError" Value="True">
         <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
@@ -365,10 +365,10 @@
         </local:GroupDescriptionCollection>
       </Setter.Value>
     </Setter>
-    <Setter Property="ItemContainerStyle" Value="{StaticResource CompositeMenuItemStyle}"/>
+    <Setter Property="ContextMenu.ItemContainerStyle" Value="{StaticResource CompositeMenuItemStyle}"/>
   </Style>
 
-  <Style x:Key="{x:Static local:ResourceKeys.CompositeMenuStyle}" TargetType="{x:Type Menu}">
+  <Style x:Key="{ComponentResourceKey {x:Type local:ResourceKeys}, {x:Static local:ResourceKeys.CompositeMenuStyleKeyName}}" TargetType="{x:Type Menu}">
     <Setter Property="ItemContainerStyle" Value="{StaticResource CompositeMenuItemStyle}"/>
   </Style>
 
