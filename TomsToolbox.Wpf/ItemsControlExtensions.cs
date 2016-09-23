@@ -156,7 +156,12 @@
             while (itemCollection != null)
             {
                 itemCollection.Refresh();
-                itemCollection = itemCollection.SourceCollection as ICollectionView;
+
+                var sourceCollection = itemCollection.SourceCollection as ICollectionView;
+                if (itemCollection == sourceCollection)
+                    break;
+
+                itemCollection = sourceCollection;
             }
         }
     }

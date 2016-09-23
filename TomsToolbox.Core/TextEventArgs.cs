@@ -40,6 +40,5 @@
         {
             Contract.Invariant(_text != null);
         }
-
     }
 }
