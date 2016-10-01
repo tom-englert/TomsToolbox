@@ -6,6 +6,7 @@ CALL :PUSH Core
 CALL :PUSH Desktop
 CALL :PUSH ObservableCollections
 CALL :PUSH Wpf
+CALL :PUSH Wpf.Styles
 
 PAUSE
 GOTO :EOF

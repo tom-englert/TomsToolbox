@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>TomsToolbox.Wpf.Styles</id>
+    <version>$version$</version>
+    <title>Tom's Toolbox - WPF Standard Control Styles Module</title>
+    <authors>tom-englert.de</authors>
+    <owners>tom-englert.de</owners>
+    <licenseUrl>https://github.com/tom-englert/TomsToolbox/blob/master/LICENSE</licenseUrl>
+    <projectUrl>http://tomstoolbox.azurewebsites.net/</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>A set of classes and functions to ease our daily .Net development tasks.</description>
+    <summary>Modern styles for .Net WPF development.</summary>
+    <copyright>© 2012-2016 tom-englert.de</copyright>
+    <tags>.Net Tools Extensions Styles</tags>
+    <references>
+      <reference file="TomsToolbox.Wpf.Styles.dll" />
+    </references>
+  </metadata>
+  <files>
+    <file src="bin\Release\CodeContracts\*.dll" target="lib\net45\CodeContracts" />
+  </files>
+</package>
