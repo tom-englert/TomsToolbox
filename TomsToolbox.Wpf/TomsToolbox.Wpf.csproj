@@ -305,7 +305,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if not "$(ConfigurationName)"=="Release" goto :eof
+    <DeployOutput  Condition=" '$(Configuration)' == 'Release' ">true</DeployOutput>
+    <PostBuildEvent>if not "$(DeployOutput)"=="true" goto :eof
 if not "$(TargetFrameworkVersion)" == "v4.0" goto :eof
 "$(SolutionDir).nuget\nuget" pack -symbols "$(ProjectPath)" -IncludeReferencedProjects -Prop Configuration=$(ConfigurationName)
 xcopy /R /Y /I /F "$(TargetDir)*.nupkg" "$(SolutionDir)Deploy\"</PostBuildEvent>
