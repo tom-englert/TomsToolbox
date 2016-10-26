@@ -115,6 +115,14 @@
       <DependentUpon>ChessView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\ChessViewModel.cs" />
+    <Compile Include="Samples\CompositeCommandChild1View.xaml.cs">
+      <DependentUpon>CompositeCommandChild1View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\CompositeCommandChild2View.xaml.cs">
+      <DependentUpon>CompositeCommandChild2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\CompositeCommandChild1ViewModel.cs" />
+    <Compile Include="Samples\CompositeCommandChild2ViewModel.cs" />
     <Compile Include="Samples\CompositeCommands.cs" />
     <Compile Include="Samples\CompositeCommandsView.xaml.cs">
       <DependentUpon>CompositeCommandsView.xaml</DependentUpon>
@@ -159,6 +167,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Samples\CompositeCommandChild1View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Samples\CompositeCommandChild2View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Samples\CompositeCommandsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

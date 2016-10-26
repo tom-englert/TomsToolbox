@@ -68,7 +68,7 @@
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
     <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
     <DocumentationFile>obj\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
     <CodeAnalysisRuleSet>..\CodeContracts.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -178,7 +178,7 @@
   <Import Condition=" '$(TargetFrameworkProfile)' == 'Client' " Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Condition=" '$(TargetFrameworkProfile)' != 'Client' " Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <PropertyGroup>
-    <DeployOutput  Condition=" '$(Configuration)' == 'Release' ">true</DeployOutput>
+    <DeployOutput Condition=" '$(Configuration)' == 'Release' ">true</DeployOutput>
     <PostBuildEvent>if not "$(DeployOutput)"=="true" goto :eof
 if not "$(TargetFrameworkVersion)" == "v4.0" goto :eof
 if not "$(TargetFrameworkProfile)" == "Client" goto :eof

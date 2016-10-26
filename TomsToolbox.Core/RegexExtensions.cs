@@ -1,4 +1,5 @@
-﻿namespace TomsToolbox.Core
+﻿using System.Diagnostics.Contracts;
+namespace TomsToolbox.Core
 {
     using System;
     using System.Collections.Generic;
@@ -29,6 +30,7 @@
             Contract.Requires(input != null);
             Contract.Requires(regex != null);
             Contract.Requires(itemGenerator != null);
+            Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
 
             var textParts = regex.Matches(input).Cast<Match>().ToArray();
 

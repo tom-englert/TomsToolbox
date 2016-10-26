@@ -11,6 +11,7 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using TomsToolbox.Core;
     using TomsToolbox.Desktop;
 
     /// <summary>
@@ -71,93 +72,45 @@
         /// <summary>
         /// Gets the header to be shown in the UI. Usually this is a localized text naming the command.
         /// </summary>
-        public object Header
-        {
-            get
-            {
-                return _owner.Header;
-            }
-        }
+        public object Header => _owner.Header;
 
         /// <summary>
         /// Gets the tool tip to be shown in the UI. Usually this is a localized text describing the command.
         /// </summary>
-        public object Description
-        {
-            get
-            {
-                return _owner.Description;
-            }
-        }
+        public object Description => _owner.Description;
 
         /// <summary>
         /// Gets the icon to be shown in the UI, or null to show no icon.
         /// </summary>
-        public object Icon
-        {
-            get
-            {
-                return _owner.Icon;
-            }
-        }
+        public object Icon => _owner.Icon;
 
         /// <summary>
         /// Gets a value indicating whether to show the header text when this command is bound to a button. 
         /// If false, only the icon should be displayed.
         /// </summary>
-        public bool ShowTextOnButtons
-        {
-            get
-            {
-                return _owner.ShowTextOnButtons;
-            }
-        }
+        public bool ShowTextOnButtons => _owner.ShowTextOnButtons;
 
         /// <summary>
         /// Gets the id of the region sub-items can register for.
         /// </summary>
-        public string SubRegionId
-        {
-            get
-            {
-                return _owner.SubRegionId;
-            }
-        }
+        public string SubRegionId => _owner.SubRegionId;
 
         /// <summary>
         /// Gets a value indicating whether the control associated with this instance should be checkable, 
         /// e.g. a <see cref="MenuItem"/> with <see cref="MenuItem.IsCheckable"/> or a <see cref="ToggleButton"/> in a tool bar.
         /// </summary>
-        public bool IsCheckable
-        {
-            get
-            {
-                return _owner.IsCheckable;
-            }
-        }
+        public bool IsCheckable => _owner.IsCheckable;
 
         /// <summary>
         /// Gets the name of the group that this command belongs to.
         /// If different group names are specified for a target region, the commands can be grouped and the groups separated by a <see cref="Separator" />.
         /// </summary>
-        public virtual object GroupName
-        {
-            get
-            {
-                return _owner.GroupName;
-            }
-        }
+        public virtual object GroupName => _owner.GroupName;
 
         /// <summary>
         /// Gets a tag that can be bound to the target objects tag.
         /// </summary>
-        public object Tag
-        {
-            get
-            {
-                return _owner.Tag;
-            }
-        }
+        public object Tag => _owner.Tag;
 
         /// <summary>
         /// Gets a value indicating whether any target is attached to this source.
@@ -236,6 +189,8 @@
             }
 
             IsAnyTargetAttached = command != null;
+
+            _attachedCommands.OfType<ICommandChangedNotificationSink>().ForEach(item => item.ActiveCommandChanged(command));
         }
 
         [ContractInvariantMethod]

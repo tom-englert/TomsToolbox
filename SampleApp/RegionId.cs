@@ -9,5 +9,6 @@
         public const string FileSubMenu = "FileSubMenu";
         public const string EditSubMenu = "EditSubMenu";
         public const string ToolBar = "ToolBar";
+        public const string CommandViewContainer = "CommandViewContainer";
     }
 }

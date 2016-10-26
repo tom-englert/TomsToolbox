@@ -1,6 +1,8 @@
-﻿namespace TomsToolbox.Wpf.Composition
+﻿using System.Diagnostics.Contracts;
+namespace TomsToolbox.Wpf.Composition
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Windows;
@@ -14,7 +16,7 @@
     /// Handles routing of a command from the <see cref="CommandSource"/> to the view model.
     /// Using this behavior ensures that the command is only active if the view is loaded.
     /// </summary>
-    public sealed class CommandRoutingBehavior : FrameworkElementBehavior<FrameworkElement>, ICheckableCommand
+    public sealed class CommandRoutingBehavior : FrameworkElementBehavior<FrameworkElement>, ICheckableCommand, ICommandChangedNotificationSink
     {
         /// <summary>
         /// Gets or sets the type of the command source factory defining the command.
@@ -69,7 +71,7 @@
         /// </summary>
         public static readonly DependencyProperty CommandParameterProperty =
             DependencyProperty.Register("CommandParameter", typeof(object), typeof(CommandRoutingBehavior));
-        
+
 
         /// <summary>
         /// Gets or sets the composition context.
@@ -99,7 +101,7 @@
         /// Identifies the <see cref="IsEnabled"/> dependency property
         /// </summary>
         public static readonly DependencyProperty IsEnabledProperty =
-            DependencyProperty.Register("IsEnabled", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, e) => ((CommandRoutingBehavior)sender).State_Changed()));
+            DependencyProperty.Register("IsEnabled", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, e) => ((CommandRoutingBehavior)sender).StateChanged()));
 
 
         /// <summary>
@@ -114,7 +116,24 @@
         /// Identifies the <see cref="IsChecked"/> dependency property
         /// </summary>
         public static readonly DependencyProperty IsCheckedProperty =
-            DependencyProperty.Register("IsChecked", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, e) => ((CommandRoutingBehavior)sender).State_Changed()));
+            DependencyProperty.Register("IsChecked", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, e) => ((CommandRoutingBehavior)sender).StateChanged()));
+
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is active. 
+        /// If multiple command routings exist, the routing of the element that had the most recent keyboard focus is active.
+        /// </summary>
+        public bool IsActive
+        {
+            get { return this.GetValue<bool>(IsActiveProperty); }
+            private set { SetValue(_isActivePropertyKey, value); }
+        }
+        private static readonly DependencyPropertyKey _isActivePropertyKey =
+            DependencyProperty.RegisterReadOnly("IsActive", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(false));
+        /// <summary>
+        /// Identifies the <see cref="IsActive"/> read only dependency property
+        /// </summary>
+        public static readonly DependencyProperty IsActiveProperty = _isActivePropertyKey.DependencyProperty;
 
 
         private void CommandSource_Changed(Type oldValue, Type newValue)
@@ -137,22 +156,16 @@
             if (oldValue != null)
             {
                 var oldCommandSource = GetCommandSourceFactory(oldValue);
-                if (oldCommandSource != null)
-                {
-                    oldCommandSource.Detach(compositionContext, this);
-                }
+                oldCommandSource?.Detach(compositionContext, this);
             }
 
-            if (!IsActive)
+            if (!IsAlive)
                 return;
 
             if (newValue != null)
             {
                 var newCommandSource = GetCommandSourceFactory(newValue);
-                if (newCommandSource != null)
-                {
-                    newCommandSource.Attach(compositionContext, this);
-                }
+                newCommandSource?.Attach(compositionContext, this);
             }
         }
 
@@ -168,17 +181,47 @@
 
             factory.Detach(oldValue, this);
 
-            if (!IsActive)
+            if (!IsAlive)
                 return;
 
             factory.Attach(newValue, this);
         }
 
-        private void State_Changed()
+        private void StateChanged()
         {
             var compositionContext = CompositionContext;
 
             CompositionContext_Changed(compositionContext, compositionContext);
+        }
+
+        /// <summary>
+        /// Called after the behavior is attached to an AssociatedObject.
+        /// </summary>
+        /// <remarks>
+        /// Override this to hook up functionality to the AssociatedObject.
+        /// </remarks>
+        protected override void OnAttached()
+        {
+            base.OnAttached();
+
+            Contract.Assume(AssociatedObject != null);
+
+            AssociatedObject.IsKeyboardFocusWithinChanged += AssociatedObject_IsKeyboardFocusWithinChanged;
+        }
+
+        /// <summary>
+        /// Called when the behavior is being detached from its AssociatedObject, but before it has actually occurred.
+        /// </summary>
+        /// <remarks>
+        /// Override this to unhook functionality from the AssociatedObject.
+        /// </remarks>
+        protected override void OnDetaching()
+        {
+            base.OnDetaching();
+
+            Contract.Assume(AssociatedObject != null);
+
+            AssociatedObject.IsKeyboardFocusWithinChanged -= AssociatedObject_IsKeyboardFocusWithinChanged;
         }
 
         /// <summary>
@@ -189,15 +232,12 @@
             base.OnAssociatedObjectLoaded();
 
             // Sometimes objects are preloaded, so we get two loaded events! Ignore when object is not yet visible!
-            if (!IsActive)
+            if (!IsAlive)
                 return;
 
             var commandSource = GetCommandSourceFactory();
 
-            if (commandSource == null)
-                return;
-
-            commandSource.Attach(CompositionContext, this);
+            commandSource?.Attach(CompositionContext, this);
         }
 
         /// <summary>
@@ -209,10 +249,7 @@
 
             var commandSource = GetCommandSourceFactory();
 
-            if (commandSource == null)
-                return;
-
-            commandSource.Detach(CompositionContext, this);
+            commandSource?.Detach(CompositionContext, this);
         }
 
         private CommandSourceFactory GetCommandSourceFactory()
@@ -222,24 +259,22 @@
 
         private CommandSourceFactory GetCommandSourceFactory(Type commandSourceType)
         {
-            if (commandSourceType == null) 
+            if (commandSourceType == null)
                 return null;
 
             var element = AssociatedObject;
             if (element == null)
                 return null;
 
-            var exportProvider = IsActive ? element.GetExportProvider() : element.TryGetExportProvider();
-            if (exportProvider == null)
-                return null;
+            var exportProvider = IsAlive ? element.GetExportProvider() : element.TryGetExportProvider();
 
-            return exportProvider.GetExports(commandSourceType, typeof(object), null)
+            return exportProvider?.GetExports(commandSourceType, typeof(object), string.Empty)
                 .Select(export => export.Value)
                 .OfType<CommandSourceFactory>()
                 .FirstOrDefault();
         }
 
-        private bool IsActive
+        private bool IsAlive
         {
             get
             {
@@ -248,6 +283,14 @@
                 var associatedObject = AssociatedObject;
 
                 return (associatedObject != null) && IsEnabled && associatedObject.IsLoaded && associatedObject.IsVisible;
+            }
+        }
+
+        private void AssociatedObject_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (AssociatedObject?.IsKeyboardFocusWithin == true)
+            {
+                StateChanged();
             }
         }
 
@@ -272,5 +315,24 @@
         {
             CommandTarget.Execute(CommandParameter);
         }
+
+        void ICommandChangedNotificationSink.ActiveCommandChanged(ICommand command)
+        {
+            var oldValue = IsActive;
+
+            IsActive = ReferenceEquals(command, this);
+
+            var newValue = IsActive;
+
+            if (newValue != oldValue)
+            {
+                Debug.WriteLine("IsActive, " + this.CommandSource + ", " + AssociatedObject + ": " + newValue);
+            }
+        }
+    }
+
+    internal interface ICommandChangedNotificationSink
+    {
+        void ActiveCommandChanged(ICommand command);
     }
 }
