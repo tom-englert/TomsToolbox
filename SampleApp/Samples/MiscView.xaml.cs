@@ -1,7 +1,6 @@
 ﻿namespace SampleApp.Samples
 {
     using System.ComponentModel.Composition;
-    using System.ComponentModel.Composition.Hosting;
 
     using TomsToolbox.Wpf.Composition;
 

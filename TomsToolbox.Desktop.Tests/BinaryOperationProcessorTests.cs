@@ -7,8 +7,6 @@
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using TomsToolbox.Desktop;
-
     [TestClass]
     public class BinaryOperationProcessorTests
     {

@@ -640,11 +640,11 @@
         [StructLayout(LayoutKind.Sequential)]
         private struct MINMAXINFO
         {
-            public POINT ptReserved;
-            public POINT ptMaxSize;
-            public POINT ptMaxPosition;
-            public POINT ptMinTrackSize;
-            public POINT ptMaxTrackSize;
+            public readonly POINT ptReserved;
+            public readonly POINT ptMaxSize;
+            public readonly POINT ptMaxPosition;
+            public readonly POINT ptMinTrackSize;
+            public readonly POINT ptMaxTrackSize;
         };
 
         private static class NativeMethods

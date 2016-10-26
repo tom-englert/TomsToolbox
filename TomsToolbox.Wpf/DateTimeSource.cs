@@ -1,9 +1,9 @@
-﻿using System.Diagnostics.Contracts;
-namespace TomsToolbox.Wpf
+﻿namespace TomsToolbox.Wpf
 {
     using System;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Contracts;
     using System.Windows.Data;
     using System.Windows.Threading;
 

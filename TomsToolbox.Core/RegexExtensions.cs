@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-namespace TomsToolbox.Core
+﻿namespace TomsToolbox.Core
 {
     using System;
     using System.Collections.Generic;

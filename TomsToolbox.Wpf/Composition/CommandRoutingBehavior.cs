@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-namespace TomsToolbox.Wpf.Composition
+﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
     using System.Diagnostics;

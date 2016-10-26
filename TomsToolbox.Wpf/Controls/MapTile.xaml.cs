@@ -1,6 +1,5 @@
 ﻿namespace TomsToolbox.Wpf.Controls
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
@@ -11,7 +10,6 @@
     using System.Windows.Media;
 
     using TomsToolbox.Core;
-    using TomsToolbox.Desktop;
 
     /// <summary>
     /// Represents on tile in the map.

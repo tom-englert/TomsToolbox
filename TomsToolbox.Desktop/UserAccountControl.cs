@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Desktop
 {
     using System;
     using System.ComponentModel;
@@ -625,7 +624,7 @@ namespace TomsToolbox.Desktop
             public string pszMessageText;
             [MarshalAs(UnmanagedType.LPWStr)]
             public string pszCaptionText;
-            public IntPtr hbmBanner;
+            public readonly IntPtr hbmBanner;
         }
 
         private enum SHSTOCKICONID : uint
@@ -644,12 +643,12 @@ namespace TomsToolbox.Desktop
         private struct SHSTOCKICONINFO
         {
             public uint cbSize;
-            public IntPtr hIcon;
-            public int iSysIconIndex;
-            public int iIcon;
+            public readonly IntPtr hIcon;
+            public readonly int iSysIconIndex;
+            public readonly int iIcon;
 
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
-            public string szPath;
+            public readonly string szPath;
         }
 
         private static class NativeMethods

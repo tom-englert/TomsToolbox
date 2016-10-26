@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics.Contracts;
     using System.Windows.Input;
+
     using TomsToolbox.Core;
 
     /// <summary>

@@ -1,8 +1,7 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace TomsToolbox.Wpf
+﻿namespace TomsToolbox.Wpf
 {
     using System;
+    using System.Diagnostics.Contracts;
     using System.Windows.Input;
 
     /// <summary>

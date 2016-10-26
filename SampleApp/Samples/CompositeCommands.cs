@@ -1,7 +1,6 @@
 ﻿namespace SampleApp.Samples
 {
     using System.ComponentModel.Composition;
-    using System.Drawing;
 
     using SampleApp.Properties;
 

@@ -1,6 +1,5 @@
 ﻿namespace TomsToolbox.Desktop
 {
-    using System;
     using System.Diagnostics.Contracts;
     using System.Xml.Linq;
 

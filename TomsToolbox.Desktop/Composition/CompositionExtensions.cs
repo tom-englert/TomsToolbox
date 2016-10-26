@@ -7,6 +7,7 @@
     using System.ComponentModel.Composition.Primitives;
     using System.Diagnostics.Contracts;
     using System.Reflection;
+
     using TomsToolbox.Core;
 
     /// <summary>

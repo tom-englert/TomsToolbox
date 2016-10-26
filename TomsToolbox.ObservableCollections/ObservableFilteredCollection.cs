@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-namespace TomsToolbox.ObservableCollections
+﻿namespace TomsToolbox.ObservableCollections
 {
     using System;
     using System.Collections;

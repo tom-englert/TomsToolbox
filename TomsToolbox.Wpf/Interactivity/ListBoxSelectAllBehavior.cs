@@ -13,7 +13,7 @@
     /// <summary>
     /// A behavior for a list box to handle the interaction betwen the list box and a "select all" checkbox.
     /// </summary>
-    /// <seealso cref="Behavior{ListBox}" />
+    /// <seealso cref="Behavior{T}" />
     public class ListBoxSelectAllBehavior : Behavior<ListBox>
     {
         private readonly DispatcherThrottle _collectionChangedThrottle;

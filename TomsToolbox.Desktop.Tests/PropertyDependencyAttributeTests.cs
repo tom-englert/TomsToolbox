@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TomsToolbox.Desktop;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-namespace TomsToolbox.Desktop.Tests
+﻿namespace TomsToolbox.Desktop.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class PropertyDependencyAttributeTests
     {

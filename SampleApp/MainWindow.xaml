@@ -6,7 +6,7 @@
         Title="MainWindow" Height="600" Width="800" Style="{DynamicResource WindowStyle}">
   <Window.ContextMenu>
     <ContextMenu>
-      <MenuItem Header="Show Popup" Click="ShowPopup_Click"></MenuItem>
+      <MenuItem Header="Show Popup" Click="ShowPopup_Click" />
     </ContextMenu>
   </Window.ContextMenu>
 

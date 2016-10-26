@@ -1,6 +1,4 @@
-﻿using TomsToolbox.Desktop;
-
-namespace TomsToolbox.Wpf
+﻿namespace TomsToolbox.Wpf
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -10,6 +8,8 @@ namespace TomsToolbox.Wpf
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Media;
+
+    using TomsToolbox.Desktop;
 
     /// <summary>
     /// Attached property provider which adds the read-only attached property <see cref="IsTextTrimmedProperty"/> to

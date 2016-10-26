@@ -5,8 +5,6 @@
     using System.Windows.Input;
     using System.Windows.Threading;
 
-    using TomsToolbox.Desktop;
-
     /// <summary>
     /// Helper class to ease automatic display of the wait cursor.
     /// </summary>

@@ -1,16 +1,13 @@
 ﻿namespace TomsToolbox.Wpf.Controls
 {
     using System;
-    using System.ComponentModel.Composition.Hosting;
     using System.Diagnostics.Contracts;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Interactivity;
     using System.Windows.Markup;
-    using System.Xaml;
 
-    using TomsToolbox.Desktop.Composition;
     using TomsToolbox.Wpf.Composition;
 
     /// <summary>

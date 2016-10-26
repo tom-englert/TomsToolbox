@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
+
 using TomsToolbox.Core;
 
 [assembly: AssemblyTitle("SampleApp")]

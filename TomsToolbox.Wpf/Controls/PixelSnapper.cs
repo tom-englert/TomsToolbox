@@ -3,7 +3,6 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
-    using TomsToolbox.Wpf;
 
     /// <summary>
     /// Moves the view port by fractional pixels, so the control's top left point is always aligned on a pixel boundary.

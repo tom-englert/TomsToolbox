@@ -6,14 +6,9 @@
     using System.ComponentModel.Composition.Registration;
     using System.Diagnostics.Contracts;
     using System.Globalization;
-    using System.Reflection;
-    using System.Reflection.Context;
-    using System.Threading;
     using System.Windows;
     using System.Windows.Data;
     using System.Windows.Markup;
-
-    using SampleApp.Samples;
 
     using TomsToolbox.Desktop.Composition;
     using TomsToolbox.Wpf;
