@@ -18,13 +18,10 @@
         private const string Quote = "\"";
         private const char TextColumnSeparator = '\t';
 
-        private static char CsvColumnSeparator
-        {
-            get
-            {
-                return CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == "," ? ';' : ',';
-            }
-        }
+        /// <summary>
+        /// Gets the effectove CSV column separator for the current culture.
+        /// </summary>
+        public static char CsvColumnSeparator => CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == "," ? ';' : ',';
 
         /// <summary>
         /// Gets the clipboard data as a table.
