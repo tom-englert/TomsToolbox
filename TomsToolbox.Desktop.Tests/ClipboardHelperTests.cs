@@ -27,9 +27,9 @@
 
             var target1 = sourceTable.ToCsvString();
 
-            Assert.AreEqual(target1, expected);
+            Assert.AreEqual(target1, expected.Replace(";", ClipboardHelper.CsvColumnSeparator.ToString()));
 
-            var target2 = ClipboardHelper.ParseTable(expected, ClipboardHelper.CsvColumnSeparator);
+            var target2 = ClipboardHelper.ParseTable(expected, ';');
 
             Assert.AreEqual(sourceTable.Length, target2.Count);
             Assert.IsTrue(sourceTable[0].SequenceEqual(target2[0]));

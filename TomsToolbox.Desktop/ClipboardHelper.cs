@@ -16,7 +16,11 @@
     public static class ClipboardHelper
     {
         private const string Quote = "\"";
-        private const char TextColumnSeparator = '\t';
+
+        /// <summary>
+        /// The text column separator
+        /// </summary>
+        public const char TextColumnSeparator = '\t';
 
         /// <summary>
         /// Gets the effectove CSV column separator for the current culture.
