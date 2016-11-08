@@ -193,7 +193,7 @@ namespace TomsToolbox.Desktop
             {
                 Contract.Ensures(Contract.Result<TaskScheduler>() != null);
 
-                return _taskScheduler ?? (_taskScheduler = Invoke(() => TaskScheduler.FromCurrentSynchronizationContext()));
+                return _taskScheduler ?? (_taskScheduler = Invoke(TaskScheduler.FromCurrentSynchronizationContext));
             }
         }
 
