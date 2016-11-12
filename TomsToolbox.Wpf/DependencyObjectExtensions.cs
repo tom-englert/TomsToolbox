@@ -25,7 +25,8 @@
             Contract.Requires(self != null);
 
             var hwndSource = PresentationSource.FromDependencyObject(self) as HwndSource;
-            return (hwndSource != null) ? hwndSource.Handle : IntPtr.Zero;
+
+            return hwndSource?.Handle ?? IntPtr.Zero;
         }
 
         /// <summary>
@@ -79,17 +80,9 @@
             Contract.Requires(item != null);
 
             var hwndSource = (HwndSource)PresentationSource.FromDependencyObject(item);
-            if (hwndSource == null)
-            {
-                return null;
-            }
-            var compositionTarget = hwndSource.CompositionTarget;
-            if (compositionTarget == null)
-            {
-                return null;
-            }
+            var compositionTarget = hwndSource?.CompositionTarget;
 
-            var rootVisual = (FrameworkElement)compositionTarget.RootVisual;
+            var rootVisual = (FrameworkElement)compositionTarget?.RootVisual;
 
             return rootVisual;
         }
@@ -99,6 +92,7 @@
         /// </summary>
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
+        [ItemNotNull]
         [NotNull]
         public static IEnumerable<DependencyObject> AncestorsAndSelf([NotNull] this DependencyObject self)
         {
@@ -190,6 +184,7 @@
         /// <remarks>
         /// Uses <see cref="VisualTreeHelper.GetChildrenCount"/> and <see cref="VisualTreeHelper.GetChild"/>.
         /// </remarks>
+        [ItemNotNull]
         [NotNull]
         public static IEnumerable<DependencyObject> VisualChildren([NotNull] this DependencyObject item)
         {
@@ -215,6 +210,7 @@
         /// <remarks>
         /// Uses <see cref="VisualTreeHelper.GetChildrenCount"/> and <see cref="VisualTreeHelper.GetChild"/>.
         /// </remarks>
+        [ItemNotNull]
         [NotNull]
         public static IEnumerable<DependencyObject> VisualChildrenAndSelf([NotNull] this DependencyObject item)
         {

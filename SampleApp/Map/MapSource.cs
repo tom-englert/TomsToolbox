@@ -8,6 +8,8 @@
     using System.Windows.Media.Imaging;
     using System.Xml.Serialization;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
     using TomsToolbox.Desktop;
     using TomsToolbox.Wpf.Controls;
@@ -25,7 +27,7 @@
             set;
         }
 
-        public static MapSourceFile Load(string fileName)
+        public static MapSourceFile Load([NotNull] string fileName)
         {
             using (var stream = File.OpenRead(fileName))
             {

@@ -31,20 +31,12 @@
         /// <summary>
         /// Gets or sets the latitude in degrees.
         /// </summary>
-        public double Latitude
-        {
-            get;
-            set;
-        }
+        public double Latitude { get; }
 
         /// <summary>
         /// Gets or sets the longitude in degrees.
         /// </summary>
-        public double Longitude
-        {
-            get;
-            set;
-        }
+        public double Longitude { get; }
 
         /// <summary>
         /// Converts a point from WGS-84 coordinates (in degrees) into logical XY coordinates in the range 0..1.

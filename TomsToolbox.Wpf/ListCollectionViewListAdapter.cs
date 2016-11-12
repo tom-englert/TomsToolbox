@@ -165,7 +165,7 @@
 
         bool IList.Contains(object value)
         {
-            return _collectionView.Contains(value);
+            return value != null && _collectionView.Contains(value);
         }
 
         void ICollection<T>.Add(T item)
@@ -203,7 +203,7 @@
 
         int IList.IndexOf(object value)
         {
-            return _collectionView.IndexOf(value);
+            return value == null ? -1 : _collectionView.IndexOf(value);
         }
 
         void IList.Insert(int index, object value)

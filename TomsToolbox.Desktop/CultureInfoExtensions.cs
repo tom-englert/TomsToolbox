@@ -14,13 +14,14 @@
     /// </summary>
     public static class CultureInfoExtensions
     {
-        private static readonly Dictionary<CultureInfo, CultureInfo[]> ChildCache = new Dictionary<CultureInfo, CultureInfo[]>();
+        private static readonly Dictionary<CultureInfo, CultureInfo[]> _childCache = new Dictionary<CultureInfo, CultureInfo[]>();
 
         /// <summary>
         /// Returns an enumeration of the ancestor elements of this element.
         /// </summary>
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
+        [ItemNotNull]
         [NotNull]
         public static IEnumerable<CultureInfo> GetAncestors([NotNull] this CultureInfo self)
         {
@@ -41,6 +42,7 @@
         /// </summary>
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
+        [ItemNotNull]
         [NotNull]
         public static IEnumerable<CultureInfo> GetAncestorsAndSelf([NotNull] this CultureInfo self)
         {
@@ -67,7 +69,7 @@
             Contract.Requires(item != null);
             Contract.Ensures(Contract.Result<ICollection<CultureInfo>>() != null);
 
-            var children = ChildCache.ForceValue(item, CreateChildList);
+            var children = _childCache.ForceValue(item, CreateChildList);
             Contract.Assume(children != null); // because CreateChildList always returns != null
             return children;
         }
@@ -77,7 +79,7 @@
         {
             Contract.Ensures(Contract.Result<CultureInfo[]>() != null);
 
-            return CultureInfo.GetCultures(CultureTypes.AllCultures).Where(child => child.Parent.Equals(parent)).ToArray();
+            return CultureInfo.GetCultures(CultureTypes.AllCultures).Where(child => child?.Parent.Equals(parent) == true).ToArray();
         }
 
         /// <summary>
@@ -85,6 +87,7 @@
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns>The descendants of the item.</returns>
+        [ItemNotNull]
         [NotNull]
         public static IEnumerable<CultureInfo> GetDescendants([NotNull] this CultureInfo item)
         {
@@ -93,6 +96,9 @@
 
             foreach (var child in item.GetChildren())
             {
+                if (child == null)
+                    continue;
+
                 yield return child;
 
                 foreach (var d in child.GetDescendants())

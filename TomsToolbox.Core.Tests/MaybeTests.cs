@@ -1,4 +1,6 @@
-﻿namespace TomsToolbox.Core.Tests
+﻿// ReSharper disable PossibleNullReferenceException
+// ReSharper disable InconsistentNaming
+namespace TomsToolbox.Core.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

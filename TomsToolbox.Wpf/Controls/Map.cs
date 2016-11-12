@@ -15,8 +15,8 @@
     /// A control showing maps represented in a tile system, e.g. Open Street Map, Bing or Google maps.
     /// See e.g. <see href="https://msdn.microsoft.com/en-us/library/bb259689.aspx"/> for a description how the tile system works.
     /// </summary>
-    [TemplatePart(Name = Map.TemplatePartWorld)]
-    [TemplatePart(Name = Map.TemplatePartViewport)]
+    [TemplatePart(Name = TemplatePartWorld)]
+    [TemplatePart(Name = TemplatePartViewport)]
     public class Map : ContentControl
     {
         /// <summary>

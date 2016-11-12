@@ -83,6 +83,7 @@
             return ExtractPropertyName(propertyExpression, false);
         }
 
+        [ContractAnnotation("failOnErrors:true => notnull")]
         private static string ExtractPropertyName<T>([NotNull] Expression<Func<T>> propertyExpression, bool failOnErrors)
         {
             Contract.Requires(propertyExpression != null);
@@ -103,6 +104,7 @@
             return memberName;
         }
 
+        [ContractAnnotation("failOnErrors:true => notnull")]
         private static string ExtractPropertyName<T, TR>([NotNull] Expression<Func<T, TR>> propertyExpression, bool failOnErrors)
         {
             Contract.Requires(propertyExpression != null);

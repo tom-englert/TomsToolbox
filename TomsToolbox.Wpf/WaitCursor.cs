@@ -71,7 +71,7 @@
         {
             Contract.Requires(frameworkElement != null);
 
-            StartLocal(frameworkElement.GetRootVisual() ?? frameworkElement, priority);
+            StartLocal(frameworkElement.GetRootVisual(), priority);
         }
     }
 }

@@ -3,6 +3,8 @@
     using System.ComponentModel.Composition;
     using System.Windows;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Desktop.Composition;
     using TomsToolbox.Wpf.Composition;
 
@@ -13,7 +15,7 @@
     public partial class MainWindow
     {
         [ImportingConstructor]
-        public MainWindow(ICompositionHost compositionHost)
+        public MainWindow([NotNull] ICompositionHost compositionHost)
         {
             this.SetExportProvider(compositionHost.Container);
 

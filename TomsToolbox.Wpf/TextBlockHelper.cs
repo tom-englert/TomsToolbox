@@ -101,7 +101,7 @@
         /// </summary>
         /// <param name="sender">Object where the event handler is attached</param>
         /// <param name="e">Event data</param>
-        private static void TextBlock_SizeChanged(object sender, SizeChangedEventArgs e)
+        private static void TextBlock_SizeChanged([NotNull] object sender, [NotNull] SizeChangedEventArgs e)
         {
             var textBlock = sender as TextBlock;
             if (null == textBlock)
@@ -122,7 +122,7 @@
         /// </summary>
         /// <param name="sender">Object where the event handler is attached</param>
         /// <param name="e">Event data</param>
-        private static void Binding_TargetUpdated(object sender, DataTransferEventArgs e)
+        private static void Binding_TargetUpdated([NotNull] object sender, [NotNull] DataTransferEventArgs e)
         {
             var textBlock = sender as TextBlock;
 
@@ -155,10 +155,16 @@
         {
             Contract.Requires(textBlock != null);
 
-            var typeface = new Typeface(textBlock.FontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch);
+            var fontFamily = textBlock.FontFamily;
+            var text = textBlock.Text;
+
+            if ((fontFamily == null) || (text == null))
+                return false;
+
+            var typeface = new Typeface(fontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch);
 
             var numberSubstitution = new NumberSubstitution(NumberSubstitution.GetCultureSource(textBlock), NumberSubstitution.GetCultureOverride(textBlock), NumberSubstitution.GetSubstitution(textBlock));
-            var formattedText = new FormattedText(textBlock.Text, CultureInfo.CurrentCulture, textBlock.FlowDirection, typeface, textBlock.FontSize, textBlock.Foreground, numberSubstitution, TextOptions.GetTextFormattingMode(textBlock));
+            var formattedText = new FormattedText(text, CultureInfo.CurrentCulture, textBlock.FlowDirection, typeface, textBlock.FontSize, textBlock.Foreground, numberSubstitution, TextOptions.GetTextFormattingMode(textBlock));
 
             var padding = textBlock.Padding;
             var actualWidth = textBlock.ActualWidth - padding.Left - padding.Right;

@@ -32,7 +32,7 @@
         {
             public StringWrapper(string wrapped)
             {
-                this.Wrapped = wrapped;
+                Wrapped = wrapped;
             }
 
             public string Wrapped

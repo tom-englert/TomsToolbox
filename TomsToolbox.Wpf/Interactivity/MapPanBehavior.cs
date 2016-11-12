@@ -12,7 +12,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
     using TomsToolbox.Wpf.Controls;
 
     /// <summary>
@@ -29,7 +28,7 @@
         private bool _isStoryboardRunning;
 
         private static readonly DependencyProperty AnimatedPanPositionProperty =
-            DependencyProperty.Register("AnimatedPanPosition", typeof(Point), typeof(MapPanBehavior), new FrameworkPropertyMetadata((sender, e) => ((MapPanBehavior)sender).AnimatedPanPosition_Changed((Point)e.NewValue)));
+            DependencyProperty.Register("AnimatedPanPosition", typeof(Point), typeof(MapPanBehavior), new FrameworkPropertyMetadata((sender, e) => ((MapPanBehavior)sender)?.AnimatedPanPosition_Changed((Point)e.NewValue)));
 
         /// <summary>
         /// When implemented in a derived class, creates a new instance of the Freezable derived class. 
@@ -67,7 +66,7 @@
             map.MouseLeftButtonUp += Map_MouseLeftButtonUp;
             map.MouseMove += Map_MouseMove;
 
-            var focusableParent = map.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault(item => item.Focusable);
+            var focusableParent = map.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault(item => item?.Focusable == true);
             if (focusableParent != null)
             {
                 focusableParent.KeyDown += FocusableParent_KeyDown;
@@ -75,7 +74,7 @@
 
             Storyboard.SetTarget(_panAnimation, this);
             Storyboard.SetTargetProperty(_panAnimation, new PropertyPath(AnimatedPanPositionProperty));
-            _storyboard.Children.Maybe().Do(c => c.Add(_panAnimation));
+            _storyboard.Children?.Add(_panAnimation);
             _storyboard.Completed += Storyboard_Completed;
 
             CommandManager.RegisterClassCommandBinding(typeof(Map), new CommandBinding(ComponentCommands.MoveLeft, (_, __) => Pan(1, 0)));
@@ -84,7 +83,7 @@
             CommandManager.RegisterClassCommandBinding(typeof(Map), new CommandBinding(ComponentCommands.MoveDown, (_, __) => Pan(0, -1)));
         }
 
-        void FocusableParent_KeyDown(object sender, KeyEventArgs e)
+        void FocusableParent_KeyDown([NotNull] object sender, [NotNull] KeyEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                 return;
@@ -132,12 +131,12 @@
             _storyboard.Begin();
         }
 
-        void Storyboard_Completed(object sender, EventArgs e)
+        void Storyboard_Completed([NotNull] object sender, [NotNull] EventArgs e)
         {
             _isStoryboardRunning = false;
         }
 
-        private void Map_MouseMove(object sender, MouseEventArgs e)
+        private void Map_MouseMove([NotNull] object sender, [NotNull] MouseEventArgs e)
         {
             if (_panPosition == null)
                 return;
@@ -153,7 +152,7 @@
             map.Center += _panPosition.GetValueOrDefault() - mousePosition;
         }
 
-        private void Map_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Map_MouseLeftButtonDown([NotNull] object sender, [NotNull] MouseButtonEventArgs e)
         {
             var map = AssociatedObject;
 
@@ -166,7 +165,7 @@
             map.CaptureMouse();
         }
 
-        private void Map_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void Map_MouseLeftButtonUp([NotNull] object sender, [NotNull] MouseButtonEventArgs e)
         {
             _panPosition = null;
 

@@ -328,7 +328,7 @@
 
             if (newValue != oldValue)
             {
-                Debug.WriteLine("IsActive, " + this.CommandSource + ", " + AssociatedObject + ": " + newValue);
+                Debug.WriteLine("IsActive, " + CommandSource + ", " + AssociatedObject + ": " + newValue);
             }
         }
     }

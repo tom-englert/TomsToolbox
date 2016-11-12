@@ -29,6 +29,8 @@
         public void ObjectToTextConverter_Static_Enum()
         {
             Assert.AreEqual("This is item 1", ObjectToTextConverter.Convert("key1", Items.Item1));
+            Assert.AreEqual("This is other text on item 1", ObjectToTextConverter.Convert("key2", Items.Item1));
+            Assert.AreEqual("This is item 2", ObjectToTextConverter.Convert("key1", Items.Item2));
         }
 
         [TestMethod]

@@ -1,11 +1,14 @@
 ﻿namespace SampleApp.Samples
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
     using System.Windows;
     using System.Windows.Input;
+
+    using JetBrains.Annotations;
 
     using SampleApp.Map;
 
@@ -17,8 +20,11 @@
     [VisualCompositionExport(RegionId.Main, Sequence = 1)]
     public class MapViewModel : ObservableObject
     {
-        private static readonly string ConfigurationFileName = Path.Combine(Path.GetDirectoryName(typeof(MainWindow).Assembly.Location), "Map", "MapSources.xml");
+        // ReSharper disable once AssignNullToNotNullAttribute
+        [NotNull]
+        private static readonly string _configurationFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Map", "MapSources.xml");
 
+        [NotNull]
         private readonly MapSourceFile _mapSourceFile;
 
         private readonly ObservableCollection<Poi> _pois = new ObservableCollection<Poi>
@@ -41,7 +47,7 @@
         {
             try
             {
-                _mapSourceFile = MapSourceFile.Load(ConfigurationFileName);
+                _mapSourceFile = MapSourceFile.Load(_configurationFileName);
                 ImageProvider = _mapSourceFile.MapSources.FirstOrDefault();
             }
             catch (IOException ex)

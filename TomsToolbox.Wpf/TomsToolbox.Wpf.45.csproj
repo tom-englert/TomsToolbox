@@ -6,6 +6,7 @@
     <TargetFrameworkProfile />
     <Prefer32Bit>false</Prefer32Bit>
     <AdditionalConstants>NETFRAMEWORK_4_5;</AdditionalConstants>
+    <Tags>Link</Tags>
   </PropertyGroup>
   <Import Project="TomsToolbox.Wpf.csproj" />
 </Project>

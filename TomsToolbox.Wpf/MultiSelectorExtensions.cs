@@ -31,7 +31,7 @@
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Use the same term as in System.Windows.Controls.Primitives.MultiSelector")]
     public static class MultiSelectorExtensions
     {
-        private static readonly IList EmptyObjectArray = new object[0];
+        private static readonly IList _emptyObjectArray = new object[0];
 
         /// <summary>
         /// Gets the value of the <see cref="P:TomsToolbox.Wpf.MultiSelectorExtensions.SelectionBinding"/> attached property.
@@ -138,11 +138,9 @@
                 if (container == null)
                     return;
 
-                var child = container.VisualDescendantsAndSelf().OfType<UIElement>().FirstOrDefault(item => item.Focusable);
-                if (child != null)
-                {
-                    child.Focus();
-                }
+                var child = container.VisualDescendantsAndSelf().OfType<UIElement>().FirstOrDefault(item => item?.Focusable == true);
+
+                child?.Focus();
             });
         }
 
@@ -157,7 +155,7 @@
 
             if (sourceSelection.IsFixedSize || sourceSelection.IsReadOnly)
             {
-                selector.SetSelectionBinding(EmptyObjectArray);
+                selector.SetSelectionBinding(_emptyObjectArray);
             }
             else
             {
@@ -209,7 +207,7 @@
 
             foreach (var item in itemsToSelect)
             {
-                if (selector.Items.Contains(item))
+                if (selector.Items?.Contains(item) == true)
                 {
                     selectedItems.Add(item);
                 }
@@ -247,7 +245,7 @@
             var selectedItem = sourceSelection[0];
 
             // The item is not present, e.g. because of filtering, and can't be selected at this time.
-            if (!selector.Items.Contains(selectedItem))
+            if (selector.Items?.Contains(selectedItem) != true)
             {
                 selector.ClearSourceSelection();
             }
@@ -310,7 +308,7 @@
                 private set;
             }
 
-            private void SourceSelection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+            private void SourceSelection_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
             {
                 if (IsUpdating)
                     return;
@@ -368,7 +366,7 @@
                 }
             }
 
-            private void Selector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            private void Selector_SelectionChanged([NotNull] object sender, [NotNull] SelectionChangedEventArgs e)
             {
                 if (IsUpdating)
                     return;
@@ -395,8 +393,8 @@
                     }
                     else
                     {
-                        sourceSelection.RemoveRange(e.RemovedItems ?? EmptyObjectArray);
-                        sourceSelection.AddRange(e.AddedItems ?? EmptyObjectArray);
+                        sourceSelection.RemoveRange(e.RemovedItems ?? _emptyObjectArray);
+                        sourceSelection.AddRange(e.AddedItems ?? _emptyObjectArray);
                     }
                 }
                 finally

@@ -365,7 +365,7 @@
         </local:GroupDescriptionCollection>
       </Setter.Value>
     </Setter>
-    <Setter Property="ContextMenu.ItemContainerStyle" Value="{StaticResource CompositeMenuItemStyle}"/>
+    <Setter Property="ItemContainerStyle" Value="{StaticResource CompositeMenuItemStyle}"/>
   </Style>
 
   <Style x:Key="{ComponentResourceKey {x:Type local:ResourceKeys}, {x:Static local:ResourceKeys.CompositeMenuStyleKeyName}}" TargetType="{x:Type Menu}">

@@ -7,6 +7,8 @@
     using System.Windows.Input;
     using System.Windows.Interactivity;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// When attached to a framework element, the <see cref="P:System.Windows.Documents.TextElement.FontSize"/> property 
     /// will be changed upon Ctrl+MouseWheel events.
@@ -46,7 +48,7 @@
             AssociatedObject.PreviewMouseWheel -= AssociatedObject_PreviewMouseWheel;
         }
 
-        private void AssociatedObject_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        private void AssociatedObject_PreviewMouseWheel([NotNull] object sender, [NotNull] MouseWheelEventArgs e)
         {
             if ((!Keyboard.IsKeyDown(Key.LeftCtrl) && !Keyboard.IsKeyDown(Key.RightCtrl)) || (e.Delta == 0))
                 return;
@@ -62,15 +64,15 @@
 
             var newFontSize = _initialFontSize.Value + newZoomOffset;
 
-            if ((newFontSize >= 4) && (newFontSize < 48))
-            {
-                _zoomOffset = newZoomOffset;
-                TextElement.SetFontSize(AssociatedObject, newFontSize);
+            if ((newFontSize < 4) || (newFontSize >= 48))
+                return;
 
-                if (newZoomOffset == 0)
-                {
-                    _initialFontSize = null;
-                }
+            _zoomOffset = newZoomOffset;
+            TextElement.SetFontSize(AssociatedObject, newFontSize);
+
+            if (newZoomOffset == 0)
+            {
+                _initialFontSize = null;
             }
         }
     }

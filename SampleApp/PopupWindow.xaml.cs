@@ -1,12 +1,11 @@
 ﻿namespace SampleApp
 {
-    using System.Windows;
     using System.Windows.Input;
 
     /// <summary>
     /// Interaction logic for PopupWindow.xaml
     /// </summary>
-    public partial class PopupWindow : Window
+    public partial class PopupWindow
     {
         public PopupWindow()
         {

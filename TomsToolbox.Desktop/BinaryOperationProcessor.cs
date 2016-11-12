@@ -33,6 +33,7 @@
     /// </remarks>
     public sealed class BinaryOperationProcessor
     {
+        // ReSharper disable AssignNullToNotNullAttribute : we will never call these with a null argument.
         private static readonly Func<object, object, object> _additionMethod = (a, b) => ToDouble(a) + ToDouble(b);
         private static readonly Func<object, object, object> _subtractionMethod = (a, b) => ToDouble(a) - ToDouble(b);
         private static readonly Func<object, object, object> _multiplyMethod = (a, b) => ToDouble(a) * ToDouble(b);
@@ -43,6 +44,7 @@
         private static readonly Func<object, object, object> _lessThanMethod = (a, b) => Compare(a, b) < 0;
         private static readonly Func<object, object, object> _greaterThanOrEqualMethod = (a, b) => Compare(a, b) >= 0;
         private static readonly Func<object, object, object> _lessThanOrEqualMethod = (a, b) => Compare(a, b) <= 0;
+        // ReSharper restore AssignNullToNotNullAttribute
 
         private readonly BinaryOperation _operation;
         [NotNull]
@@ -158,9 +160,9 @@
             var methods = valueType.GetMethods(BindingFlags.Static | BindingFlags.Public);
 
             return methods
-                .Where(m => _operationMethodNames.Contains(m.Name))
-                .Select(m => new { Method = m, Parameters = m.GetParameters() })
-                .Where(m => m.Parameters.Length == 2)
+                .Where(m => _operationMethodNames.Contains(m?.Name))
+                .Select(m => new { Method = m, Parameters = m?.GetParameters() })
+                .Where(m => m?.Parameters.Length == 2)
                 .Where(m => m.Parameters[0].ParameterType == valueType)
                 .Select(m => ApplyOperation(m.Method, m.Parameters[1].ParameterType, value1, value2))
                 .FirstOrDefault(v => v != null);
@@ -174,9 +176,9 @@
 
             var result = targetType
                 .GetMethods(BindingFlags.Static | BindingFlags.Public)
-                .Where(m => (m.Name == "op_Explicit") || (m.Name == "op_Implicit"))
+                .Where(m => (m?.Name == "op_Explicit") || (m?.Name == "op_Implicit"))
                 .Select(m => new { Method = m, Parameters = m.GetParameters() })
-                .Where(m => m.Parameters.Length == 1)
+                .Where(m => m?.Parameters.Length == 1)
                 .Where(m => m.Parameters[0].ParameterType == targetType)
                 .Select(m => ApplyOperation(m.Method.ReturnType, m.Method.Invoke(null, new[] { value1 }), value2))
                 .FirstOrDefault(v => v != null);
@@ -208,11 +210,12 @@
                     return method.Invoke(null, new[] { value1, value2 });
                 }
 
-                value2 = System.Convert.ChangeType(value2, targetType, CultureInfo.InvariantCulture);
+                value2 = Convert.ChangeType(value2, targetType, CultureInfo.InvariantCulture);
                 return method.Invoke(null, new[] { value1, value2 });
             }
             catch
             {
+                // Catch all and don't make asumptions about exceptions, we can't know what the method could throw.
             }
 
             return null;
@@ -233,6 +236,7 @@
             }
             catch
             {
+                // Catch all conversion errors..
             }
 
             return null;

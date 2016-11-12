@@ -20,7 +20,7 @@
     /// </summary>
     public static class SelectorExtensions
     {
-        private static readonly WeakKeyIndexer<int> Cache = new WeakKeyIndexer<int>();
+        private static readonly WeakKeyIndexer<int> _cache = new WeakKeyIndexer<int>();
 
         /// <summary>
         /// Gets the value of the <see cref="P:TomsToolbox.Wpf.SelectorExtensions.TrackSelection"/> attached property.
@@ -103,11 +103,11 @@
 
             if ((selector.SelectedIndex < 0) || forceSelection)
             {
-                selector.BeginInvoke(DispatcherPriority.Loaded, () => selector.SelectedIndex = Cache[dataContext]);
+                selector.BeginInvoke(DispatcherPriority.Loaded, () => selector.SelectedIndex = _cache[dataContext]);
             }
             else
             {
-                Cache[dataContext] = selector.SelectedIndex;
+                _cache[dataContext] = selector.SelectedIndex;
             }
         }
 
@@ -135,7 +135,7 @@
                     if ((++_cleanupCycleCounter & 0x7F) == 0)
                         Cleanup();
 
-                    var innerKey = _items.Keys.FirstOrDefault(i => i.Target == key) ?? new WeakReference(key);
+                    var innerKey = _items.Keys.FirstOrDefault(i => i?.Target == key) ?? new WeakReference(key);
 
                     _items[innerKey] = value;
                 }
