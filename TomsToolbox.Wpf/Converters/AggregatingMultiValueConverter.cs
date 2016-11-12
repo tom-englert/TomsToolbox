@@ -2,11 +2,15 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
     using System.Windows.Data;
     using System.Windows.Markup;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// A converter that aggregates the inner converters for all values, overcoming the restriction of .Net that <see cref="IMultiValueConverter"/> can't be nested.
@@ -42,10 +46,11 @@
     /// </TextBlock>
     /// ]]></code>
     /// </example>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi")]
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi")]
     [ContentProperty("Converters")]
     public class AggregatingMultiValueConverter : MultiValueConverter
     {
+        [NotNull]
         private readonly Collection<object> _converters = new Collection<object>();
 
         /// <summary>
@@ -104,6 +109,7 @@
         /// <summary>
         /// Gets the aggregating converters. Must be all <see cref="IValueConverter"/>, only the last might be a <see cref="IMultiValueConverter"/>.
         /// </summary>
+        [NotNull]
         public Collection<object> Converters
         {
             get
@@ -115,7 +121,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_converters != null);

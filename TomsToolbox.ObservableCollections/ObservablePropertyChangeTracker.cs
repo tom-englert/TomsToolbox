@@ -8,6 +8,8 @@
     using System.Diagnostics.Contracts;
     using System.Linq;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Helper class to create typed change trackers from arbitrary lists.
     /// </summary>
@@ -20,7 +22,8 @@
         /// <typeparam name="T">The type of the items in the collection.</typeparam>
         /// <param name="collection">The collection.</param>
         /// <returns>The <see cref="ObservablePropertyChangeTracker{T}"></see></returns>
-        public static ObservablePropertyChangeTracker<T> Create<TList, T>(TList collection)
+        [NotNull]
+        public static ObservablePropertyChangeTracker<T> Create<TList, T>([NotNull] TList collection)
             where TList : IList<T>, INotifyCollectionChanged
             where T : INotifyPropertyChanged
         {
@@ -42,7 +45,7 @@
         /// Initializes a new instance of the <see cref="ObservablePropertyChangeTracker{T}"/> class.
         /// </summary>
         /// <param name="collection">The collection.</param>
-        public ObservablePropertyChangeTracker(IObservableCollection<T> collection)
+        public ObservablePropertyChangeTracker([NotNull] IObservableCollection<T> collection)
             : this(collection, collection)
         {
             Contract.Requires(collection != null);
@@ -52,7 +55,7 @@
         /// Initializes a new instance of the <see cref="ObservablePropertyChangeTracker{T}"/> class.
         /// </summary>
         /// <param name="collection">The collection.</param>
-        public ObservablePropertyChangeTracker(ObservableCollection<T> collection)
+        public ObservablePropertyChangeTracker([NotNull] ObservableCollection<T> collection)
             : this(collection, collection)
         {
             Contract.Requires(collection != null);
@@ -62,7 +65,7 @@
         /// Initializes a new instance of the <see cref="ObservablePropertyChangeTracker{T}"/> class.
         /// </summary>
         /// <param name="collection">The collection.</param>
-        public ObservablePropertyChangeTracker(ReadOnlyObservableCollection<T> collection)
+        public ObservablePropertyChangeTracker([NotNull] ReadOnlyObservableCollection<T> collection)
             : this(collection, collection)
         {
             Contract.Requires(collection != null);
@@ -73,7 +76,7 @@
         /// </summary>
         public event EventHandler<PropertyChangedEventArgs> ItemPropertyChanged;
 
-        internal ObservablePropertyChangeTracker(IList<T> items, INotifyCollectionChanged eventSource)
+        internal ObservablePropertyChangeTracker([NotNull] IList<T> items, [NotNull] INotifyCollectionChanged eventSource)
         {
             Contract.Requires(items != null);
             Contract.Requires(eventSource != null);

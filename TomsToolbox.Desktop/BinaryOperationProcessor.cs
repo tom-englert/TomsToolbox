@@ -3,12 +3,16 @@
     using System;
     using System.Collections;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
     using System.Windows;
     using System.Windows.Media;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Applies the <see cref="Operation"/> on the values.<para/>
@@ -41,7 +45,9 @@
         private static readonly Func<object, object, object> _lessThanOrEqualMethod = (a, b) => Compare(a, b) <= 0;
 
         private readonly BinaryOperation _operation;
+        [NotNull]
         private readonly string[] _operationMethodNames;
+        [NotNull]
         private readonly Func<object, object, object> _operationMethod;
 
         /// <summary>
@@ -135,7 +141,7 @@
                 ?? ApplyOperation(value1, value2);
         }
 
-        private object ApplyOperation(object value1, object value2)
+        private object ApplyOperation([NotNull] object value1, [NotNull] object value2)
         {
             Contract.Requires(value1 != null);
             Contract.Requires(value2 != null);
@@ -143,7 +149,7 @@
             return _operationMethod(value1, value2);
         }
 
-        private object ApplyOperation(Type valueType, object value1, object value2)
+        private object ApplyOperation([NotNull] Type valueType, [NotNull] object value1, [NotNull] object value2)
         {
             Contract.Requires(valueType != null);
             Contract.Requires(value1 != null);
@@ -160,7 +166,7 @@
                 .FirstOrDefault(v => v != null);
         }
 
-        private object ApplyOperationOnCastedObject(Type targetType, object value1, object value2)
+        private object ApplyOperationOnCastedObject([NotNull] Type targetType, [NotNull] object value1, [NotNull] object value2)
         {
             Contract.Requires(targetType != null);
             Contract.Requires(value1 != null);
@@ -178,7 +184,7 @@
             return result;
         }
 
-        private static object ApplyOperation(MethodInfo method, Type targetType, object value1, object value2)
+        private static object ApplyOperation([NotNull] MethodInfo method, [NotNull] Type targetType, [NotNull] object value1, [NotNull] object value2)
         {
             Contract.Requires(method != null);
             Contract.Requires(value1 != null);
@@ -217,7 +223,7 @@
             return Convert.ToDouble(value, CultureInfo.InvariantCulture);
         }
 
-        private static object TryChangeType(object value, Type targetType)
+        private static object TryChangeType(object value, [NotNull] Type targetType)
         {
             Contract.Requires(targetType != null);
 
@@ -232,13 +238,13 @@
             return null;
         }
 
-        private static int Compare(object a, object b)
+        private static int Compare([NotNull] object a, object b)
         {
             Contract.Requires(a != null);
             return Comparer.DefaultInvariant.Compare(a, Convert.ChangeType(b, a.GetType(), CultureInfo.InvariantCulture));
         }
 
-        private new static bool Equals(object a, object b)
+        private new static bool Equals([NotNull] object a, object b)
         {
             Contract.Requires(a != null);
 
@@ -251,7 +257,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_operationMethodNames != null);

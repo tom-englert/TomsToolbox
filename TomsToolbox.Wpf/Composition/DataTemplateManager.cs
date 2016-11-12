@@ -11,6 +11,8 @@ namespace TomsToolbox.Wpf.Composition
     using System.Windows;
     using System.Windows.Markup;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
 
     /// <summary>
@@ -33,7 +35,7 @@ namespace TomsToolbox.Wpf.Composition
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns>The role</returns>
-        public static object GetRole(DependencyObject obj)
+        public static object GetRole([NotNull] DependencyObject obj)
         {
             Contract.Requires(obj != null);
 
@@ -44,7 +46,7 @@ namespace TomsToolbox.Wpf.Composition
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetRole(DependencyObject obj, object value)
+        public static void SetRole([NotNull] DependencyObject obj, object value)
         {
             Contract.Requires(obj != null);
 
@@ -69,7 +71,8 @@ namespace TomsToolbox.Wpf.Composition
         /// <returns>
         /// The resource dictionary containing the dynamic data templates. This is usually added to the merged dictionaries of your application's resources.
         /// </returns>
-        public static ResourceDictionary CreateDynamicDataTemplates(ExportProvider exportProvider)
+        [NotNull]
+        public static ResourceDictionary CreateDynamicDataTemplates([NotNull] ExportProvider exportProvider)
         {
             Contract.Requires(exportProvider != null);
             Contract.Ensures(Contract.Result<ResourceDictionary>() != null);
@@ -93,7 +96,7 @@ namespace TomsToolbox.Wpf.Composition
             return dataTemplateResources;
         }
 
-        private static DataTemplate CreateTemplate(Type viewModelType, object role)
+        private static DataTemplate CreateTemplate([NotNull] Type viewModelType, object role)
         {
             Contract.Requires(viewModelType != null);
 
@@ -122,7 +125,8 @@ namespace TomsToolbox.Wpf.Composition
         /// <param name="dataType">The type for which the template is used to display items.</param>
         /// <param name="role">The optional role.</param>
         /// <returns>The key for the specified parameters.</returns>
-        public static TemplateKey CreateKey(Type dataType, object role)
+        [NotNull]
+        public static TemplateKey CreateKey([NotNull] Type dataType, object role)
         {
             Contract.Requires(dataType != null);
             Contract.Ensures(Contract.Result<TemplateKey>() != null);
@@ -138,7 +142,7 @@ namespace TomsToolbox.Wpf.Composition
         /// </summary>
         /// <param name="exportProvider">The export provider.</param>
         /// <returns>All exports.</returns>
-        private static IEnumerable<Lazy<DependencyObject, IDataTemplateMetadata>> GetDataTemplateExports(this ExportProvider exportProvider)
+        private static IEnumerable<Lazy<DependencyObject, IDataTemplateMetadata>> GetDataTemplateExports([NotNull] this ExportProvider exportProvider)
         {
             Contract.Requires(exportProvider != null);
 
@@ -152,7 +156,7 @@ namespace TomsToolbox.Wpf.Composition
         /// <param name="viewModel">The view model.</param>
         /// <param name="role">The role.</param>
         /// <returns>The view</returns>
-        internal static DependencyObject GetDataTemplateView(this ExportProvider exportProvider, Type viewModel, object role)
+        internal static DependencyObject GetDataTemplateView([NotNull] this ExportProvider exportProvider, [NotNull] Type viewModel, object role)
         {
             Contract.Requires(exportProvider != null);
             Contract.Requires(viewModel != null);
@@ -172,7 +176,7 @@ namespace TomsToolbox.Wpf.Composition
         /// </summary>
         /// <param name="exportProvider">The export provider.</param>
         /// <returns>The meta data of all exports.</returns>
-        internal static IEnumerable<IDataTemplateMetadata> GetDataTemplateExportsMetadata(this ExportProvider exportProvider)
+        internal static IEnumerable<IDataTemplateMetadata> GetDataTemplateExportsMetadata([NotNull] this ExportProvider exportProvider)
         {
             Contract.Requires(exportProvider != null);
 
@@ -183,7 +187,7 @@ namespace TomsToolbox.Wpf.Composition
                 .Distinct(ExportsComparer);
         }
 
-        private static bool Equals(IDataTemplateMetadata left, IDataTemplateMetadata right)
+        private static bool Equals([NotNull] IDataTemplateMetadata left, [NotNull] IDataTemplateMetadata right)
         {
             Contract.Requires(left != null);
             Contract.Requires(right != null);
@@ -191,7 +195,7 @@ namespace TomsToolbox.Wpf.Composition
             return (left.ViewModel == right.ViewModel) && RoleEquals(left.Role, right.Role);
         }
 
-        private static int GetHashCode(IDataTemplateMetadata metadata)
+        private static int GetHashCode([NotNull] IDataTemplateMetadata metadata)
         {
             Contract.Requires(metadata != null);
 
@@ -215,7 +219,7 @@ namespace TomsToolbox.Wpf.Composition
             return metadataDictionary == null ? null : AttributedModelServices.GetMetadataView<IDataTemplateMetadata>(metadataDictionary);
         }
 
-        private static Lazy<object, object> AssertCorrectCreationPolicy(Lazy<object, object> export)
+        private static Lazy<object, object> AssertCorrectCreationPolicy([NotNull] Lazy<object, object> export)
         {
             Contract.Requires(export != null);
 

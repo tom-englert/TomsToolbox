@@ -6,6 +6,8 @@
     using System.Linq;
     using System.Text.RegularExpressions;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Extension methods for <see cref="Regex"/>.
     /// </summary>
@@ -24,7 +26,8 @@
         /// It's up to the item generator how matched and non-matched items are handled.
         /// Concatenating all unmodified fragment values will always return the original string.
         /// </remarks>
-        public static IEnumerable<T> Split<T>(this Regex regex, string input, Func<string, bool, T> itemGenerator)
+        [NotNull]
+        public static IEnumerable<T> Split<T>([NotNull] this Regex regex, [NotNull] string input, [NotNull] Func<string, bool, T> itemGenerator)
         {
             Contract.Requires(input != null);
             Contract.Requires(regex != null);

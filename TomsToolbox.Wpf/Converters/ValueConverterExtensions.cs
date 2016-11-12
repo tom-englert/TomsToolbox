@@ -5,6 +5,8 @@
     using System.Diagnostics.Contracts;
     using System.Windows.Data;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Extension methods for value converters.
     /// </summary>
@@ -22,7 +24,7 @@
         /// <param name="converter">The converter.</param>
         /// <param name="message">The message.</param>
         /// <param name="methodName">Name of the calling method.</param>
-        public static void TraceError(this IValueConverter converter, string message, string methodName)
+        public static void TraceError([NotNull] this IValueConverter converter, [NotNull] string message, [NotNull] string methodName)
         {
             Contract.Requires(converter != null);
             Contract.Requires(message != null);
@@ -37,7 +39,7 @@
         /// <param name="converter">The converter.</param>
         /// <param name="message">The message.</param>
         /// <param name="methodName">Name of the calling method.</param>
-        public static void TraceError(this IMultiValueConverter converter, string message, string methodName)
+        public static void TraceError([NotNull] this IMultiValueConverter converter, [NotNull] string message, [NotNull] string methodName)
         {
             Contract.Requires(converter != null);
             Contract.Requires(message != null);
@@ -46,7 +48,7 @@
             InternalTraceError(converter, message, methodName);
         }
 
-        private static void InternalTraceError(object converter, string message, string methodName)
+        private static void InternalTraceError([NotNull] object converter, [NotNull] string message, [NotNull] string methodName)
         {
             Contract.Requires(converter != null);
             Contract.Requires(message != null);

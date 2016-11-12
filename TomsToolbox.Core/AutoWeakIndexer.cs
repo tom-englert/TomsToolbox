@@ -3,9 +3,12 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// A Dictionary like implementation that populates it's content on demand, i.e. calling indexer[key] will never return null.
@@ -17,15 +20,17 @@
         where TValue : class
     {
         private readonly object _sync = new object();
+        [NotNull]
         private readonly Func<TKey, TValue> _generator;
 
+        [NotNull]
         private Dictionary<TKey, WeakReference<TValue>> _items;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AutoWeakIndexer{TKey, TValue}"/> class.
         /// </summary>
         /// <param name="generator">The generator.</param>
-        public AutoWeakIndexer(Func<TKey, TValue> generator)
+        public AutoWeakIndexer([NotNull] Func<TKey, TValue> generator)
             : this(generator, null)
         {
             Contract.Requires(generator != null);
@@ -36,7 +41,7 @@
         /// </summary>
         /// <param name="generator">The generator.</param>
         /// <param name="comparer">The comparer.</param>
-        public AutoWeakIndexer(Func<TKey, TValue> generator, IEqualityComparer<TKey> comparer)
+        public AutoWeakIndexer([NotNull] Func<TKey, TValue> generator, IEqualityComparer<TKey> comparer)
         {
             Contract.Requires(generator != null);
 
@@ -94,6 +99,7 @@
         /// <returns>
         /// A <see cref="ICollection{TValue}"/> containing the values in the <see cref="AutoWeakIndexer{TKey, TValue}"/>.
         /// </returns>
+        [NotNull]
         public ICollection<TValue> Values
         {
             get
@@ -110,6 +116,7 @@
         /// <returns>
         /// A <see cref="ICollection{TKey}"/> containing the keys in the <see cref="AutoWeakIndexer{TKey, TValue}"/>.
         /// </returns>
+        [NotNull]
         public ICollection<TKey> Keys
         {
             get
@@ -126,6 +133,7 @@
         /// <returns>
         /// The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> generic interface implementation that is used to determine equality of keys for the current <see cref="AutoWeakIndexer{TKey, TValue}"/> and to provide hash values for the keys.
         /// </returns>
+        [NotNull]
         public IEqualityComparer<TKey> Comparer
         {
             get
@@ -204,6 +212,7 @@
 
         [ContractInvariantMethod]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_generator != null);

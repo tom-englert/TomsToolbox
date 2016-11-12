@@ -2,10 +2,13 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Windows.Data;
     using System.Windows.Threading;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Desktop;
 
@@ -25,11 +28,13 @@
     /// </remarks>
     public class DateTimeSource : ObservableObject
     {
+        [NotNull]
         private readonly DispatcherTimer _updateTimer = new DispatcherTimer();
 
         /// <summary>
         /// The default singleton object. Use this as a source for binding that supports manual updating.
         /// </summary>
+        [NotNull]
         public static readonly DateTimeSource Default = new DateTimeSource();
 
         /// <summary>
@@ -42,9 +47,9 @@
 
         private void UpdateTimer_Tick(object sender, EventArgs eventArgs)
         {
-            OnPropertyChanged("Now");
-            OnPropertyChanged("Today");
-            OnPropertyChanged("UtcNow");
+            OnPropertyChanged(nameof(Now));
+            OnPropertyChanged(nameof(Today));
+            OnPropertyChanged(nameof(UtcNow));
         }
 
         /// <summary>
@@ -78,13 +83,7 @@
         /// A <see cref="T:System.DateTime"/> whose value is the current local date and time.
         /// </returns>
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Should only be accessible via the Default singleton.")]
-        public DateTime Now
-        {
-            get
-            {
-                return DateTime.Now;
-            }
-        }
+        public DateTime Now => DateTime.Now;
 
         /// <summary>
         /// Gets the current date.
@@ -93,13 +92,7 @@
         /// A <see cref="T:System.DateTime"/> set to today's date, with the time component set to 00:00:00.
         /// </returns>
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Should only be accessible via the Default singleton.")]
-        public DateTime Today
-        {
-            get
-            {
-                return DateTime.Today;
-            }
-        }
+        public DateTime Today => DateTime.Today;
 
         /// <summary>
         /// Gets a <see cref="T:System.DateTime"/> object that is set to the current date and time on this computer, expressed as the Coordinated Universal Time (UTC).
@@ -108,16 +101,11 @@
         /// A <see cref="T:System.DateTime"/> whose value is the current UTC date and time.
         /// </returns>
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Should only be accessible via the Default singleton.")]
-        public DateTime UtcNow
-        {
-            get
-            {
-                return DateTime.UtcNow;
-            }
-        }
+        public DateTime UtcNow => DateTime.UtcNow;
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_updateTimer != null);

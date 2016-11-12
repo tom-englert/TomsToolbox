@@ -3,6 +3,8 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Windows;
@@ -12,6 +14,8 @@
     using System.Windows.Markup;
     using System.Windows.Media;
     using System.Windows.Threading;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Desktop;
 
@@ -57,9 +61,12 @@
     [ContentProperty("Child")]
     public class TextBoxVisibleWhiteSpaceDecorator : FrameworkElement
     {
+        [NotNull]
         private readonly AdornerDecorator _adornerDecorator = new AdornerDecorator { ClipToBounds = true };
+        [NotNull]
         private readonly AdornerLayer _adornerLayer;
         private ScrollViewer _scrollViewer;
+        [NotNull]
         private IList<TextAdorner> _adorners = new TextAdorner[0];
 
         /// <summary>
@@ -272,7 +279,7 @@
             }
         }
 
-        private TextAdorner GetNextAdorner(IEnumerator<TextAdorner> existingAdorners, int charIndex, string text)
+        private TextAdorner GetNextAdorner([NotNull] IEnumerator<TextAdorner> existingAdorners, int charIndex, string text)
         {
             Contract.Requires(existingAdorners != null);
 
@@ -294,11 +301,13 @@
 
         class TextAdorner : Adorner
         {
+            [NotNull]
             private readonly TextBox _textBox;
+            [NotNull]
             private readonly TextBlock _content = new TextBlock();
             private int _charIndex;
 
-            public TextAdorner(TextBoxVisibleWhiteSpaceDecorator owner, TextBox adornedElement)
+            public TextAdorner([NotNull] TextBoxVisibleWhiteSpaceDecorator owner, [NotNull] TextBox adornedElement)
                 : base(adornedElement)
             {
                 Contract.Requires(owner != null);
@@ -356,6 +365,7 @@
                 return finalSize;
             }
 
+            [NotNull]
             private GeneralTransform CreateTransform()
             {
                 Contract.Ensures(Contract.Result<GeneralTransform>() != null);
@@ -387,7 +397,8 @@
             }
 
             [ContractInvariantMethod]
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+            [Conditional("CONTRACTS_FULL")]
             private void ObjectInvariant()
             {
                 Contract.Invariant(_textBox != null);
@@ -396,7 +407,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_adornerDecorator != null);

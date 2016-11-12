@@ -6,6 +6,8 @@
     using System.Globalization;
     using System.Windows.Data;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Takes an object and returns the description taken from it's <see cref="DescriptionAttribute"/>
     /// </summary>
@@ -50,7 +52,8 @@
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The description of the value.</returns>
-        public static string Convert(object value)
+        [NotNull]
+        public static string Convert([NotNull] object value)
         {
             Contract.Requires(value != null);
             Contract.Ensures(Contract.Result<string>() != null);
@@ -64,7 +67,8 @@
         /// <param name="value">The value.</param>
         /// <param name="enumType">An optional type of an enum to support converting <see cref="Enum"/> where the value is given as a number or string.</param>
         /// <returns>The description of the value.</returns>
-        public static string Convert(object value, Type enumType)
+        [NotNull]
+        public static string Convert([NotNull] object value, Type enumType)
         {
             Contract.Requires(value != null);
             Contract.Ensures(Contract.Result<string>() != null);

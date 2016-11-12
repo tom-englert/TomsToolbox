@@ -7,6 +7,8 @@
     using System.Linq;
     using System.Reflection;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
 
     /// <summary>
@@ -23,7 +25,8 @@
         /// <returns>An array of custom attributes applied to this member, or an array with zero (0) elements if no attributes have been applied.</returns>
         /// <exception cref="System.TypeLoadException">A custom attribute type cannot be loaded</exception>
         /// <exception cref="System.InvalidOperationException">This member belongs to a type that is loaded into the reflection-only context. See How to: Load Assemblies into the Reflection-Only Context.</exception>
-        public static IEnumerable<T> GetCustomAttributes<T>(this ICustomAttributeProvider self, bool inherit)
+        [NotNull]
+        public static IEnumerable<T> GetCustomAttributes<T>([NotNull] this ICustomAttributeProvider self, bool inherit)
         {
             Contract.Requires(self != null);
             Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
@@ -37,7 +40,7 @@
         /// </summary>
         /// <param name="item">The item to lookup. This can be a MemberInfo like FieldInfo, PropertyInfo...</param>
         /// <returns>The associated display name, or null if the item does not have a DisplayName attribute.</returns>
-        public static string TryGetDisplayName(this ICustomAttributeProvider item)
+        public static string TryGetDisplayName([NotNull] this ICustomAttributeProvider item)
         {
             Contract.Requires(item != null);
 
@@ -51,7 +54,7 @@
         /// </summary>
         /// <param name="item">The item to lookup. This can be a MemberInfo like FieldInfo, PropertyInfo...</param>
         /// <returns>The associated description, or null if the item does not have a Description attribute.</returns>
-        public static string TryGetDescription(this ICustomAttributeProvider item)
+        public static string TryGetDescription([NotNull] this ICustomAttributeProvider item)
         {
             Contract.Requires(item != null);
 
@@ -66,7 +69,7 @@
         /// <param name="item">The item to lookup. This can be a MemberInfo like FieldInfo, PropertyInfo...</param>
         /// <param name="key">The key.</param>
         /// <returns>The associated text, or null if the item does not have a text attribute with this key.</returns>
-        public static string TryGetText(this ICustomAttributeProvider item, object key)
+        public static string TryGetText([NotNull] this ICustomAttributeProvider item, [NotNull] object key)
         {
             Contract.Requires(item != null);
             Contract.Requires(key != null);
@@ -84,7 +87,7 @@
         /// <returns>
         /// The custom type converter, or null if the item has no custom type converter attribute.
         /// </returns>
-        public static TypeConverter GetCustomTypeConverter(this ICustomAttributeProvider item)
+        public static TypeConverter GetCustomTypeConverter([NotNull] this ICustomAttributeProvider item)
         {
             Contract.Requires(item != null);
 
@@ -102,7 +105,7 @@
         /// <param name="target">The target object.</param>
         /// <param name="defaultValue">The default value, if the object has no sequence attribute.</param>
         /// <returns>The associated sequence.</returns>
-        public static double GetSequence(this ICustomAttributeProvider target, double defaultValue)
+        public static double GetSequence([NotNull] this ICustomAttributeProvider target, double defaultValue)
         {
             Contract.Requires(target != null);
 

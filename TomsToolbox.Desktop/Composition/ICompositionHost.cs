@@ -4,6 +4,8 @@
     using System.ComponentModel.Composition.Hosting;
     using System.Diagnostics.Contracts;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Class hosting a <see cref="CompositionContainer"/> with an <see cref="AggregateCatalog"/>.
     /// </summary>
@@ -30,6 +32,7 @@
     [ContractClassFor(typeof(ICompositionHost))]
     abstract class CompositionHostContracts : ICompositionHost
     {
+        [NotNull]
         public CompositionContainer Container
         {
             get
@@ -40,6 +43,7 @@
             }
         }
 
+        [NotNull]
         public AggregateCatalog Catalog
         {
             get

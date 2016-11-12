@@ -2,10 +2,14 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Windows.Data;
     using System.Windows.Media;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Converts a color name to the corresponding solid color brush. See <see cref="BrushConverter"/> for supported values.
@@ -13,6 +17,7 @@
     [ValueConversion(typeof(string), typeof(Brush))]
     public class ColorNameToBrushConverter : ValueConverter
     {
+        [NotNull]
         private static readonly TypeConverter _typeConverter = new BrushConverter();
 
         /// <summary>
@@ -48,7 +53,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_typeConverter != null);

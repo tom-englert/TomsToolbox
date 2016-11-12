@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Controls
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
@@ -8,6 +9,8 @@
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Media;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Core;
 
@@ -77,6 +80,7 @@
         /// <summary>
         /// Gets the vertical index of this tile.
         /// </summary>
+        [NotNull]
         public int Y
         {
             get
@@ -204,6 +208,7 @@
             ForceSubLevel(this, SubLevel);
         }
 
+        [NotNull]
         private IEnumerable<IMapTile> SubTiles
         {
             get
@@ -219,7 +224,7 @@
             Invalidate();
         }
 
-        private static void ForceSubLevel(IMapTile tile, Panel subLevel)
+        private static void ForceSubLevel([NotNull] IMapTile tile, [NotNull] Panel subLevel)
         {
             Contract.Requires(tile != null);
             Contract.Requires(subLevel != null);
@@ -248,7 +253,7 @@
             return (_zoomLevel < maxZoom) && (extent.Width > _subLevelTreshold.Width) && (extent.Height > _subLevelTreshold.Height);
         }
 
-        private static bool IsThisTileVisible(Visual visual, FrameworkElement viewPort, out Size extent)
+        private static bool IsThisTileVisible([NotNull] Visual visual, [NotNull] FrameworkElement viewPort, out Size extent)
         {
             Contract.Requires(visual != null);
             Contract.Requires(viewPort != null);
@@ -274,6 +279,7 @@
 
         [ContractInvariantMethod]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(World != null);

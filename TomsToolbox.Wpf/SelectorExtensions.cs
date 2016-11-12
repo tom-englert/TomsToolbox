@@ -2,12 +2,16 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
     using System.Windows.Threading;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Desktop;
 
@@ -24,7 +28,7 @@
         /// <param name="obj">The selector.</param>
         /// <returns><c>true</c> if the selection should be tracked; otherwise <c>false</c>.</returns>
         [AttachedPropertyBrowsableForType(typeof(Selector))]
-        public static bool GetTrackSelection(DependencyObject obj)
+        public static bool GetTrackSelection([NotNull] DependencyObject obj)
         {
             Contract.Requires(obj != null);
             return obj.GetValue<bool>(TrackSelectionProperty);
@@ -35,7 +39,7 @@
         /// <param name="obj">The object.</param>
         /// <param name="value">if set to <c>true</c> if the selection should be tracked; otherwise <c>false</c>.</param>
         [AttachedPropertyBrowsableForType(typeof(Selector))]
-        public static void SetTrackSelection(DependencyObject obj, bool value)
+        public static void SetTrackSelection([NotNull] DependencyObject obj, bool value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(TrackSelectionProperty, value);
@@ -110,9 +114,10 @@
         private class WeakKeyIndexer<T>
         {
             private int _cleanupCycleCounter;
+            [NotNull]
             private Dictionary<WeakReference, T> _items = new Dictionary<WeakReference, T>();
 
-            public T this[object key]
+            public T this[[NotNull] object key]
             {
                 get
                 {
@@ -142,7 +147,8 @@
             }
 
             [ContractInvariantMethod]
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+            [Conditional("CONTRACTS_FULL")]
             private void ObjectInvariant()
             {
                 Contract.Invariant(_items != null);

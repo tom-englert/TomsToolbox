@@ -6,6 +6,8 @@
     using System.Windows.Controls;
     using System.Windows.Input;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Extensions and helpers for the <see cref="ItemsControl"/> or derived classes.
     /// </summary>
@@ -17,7 +19,7 @@
         /// <param name="obj">The object.</param>
         /// <returns>The command.</returns>
         [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
-        public static ICommand GetDefaultItemCommand(this ItemsControl obj)
+        public static ICommand GetDefaultItemCommand([NotNull] this ItemsControl obj)
         {
             Contract.Requires(obj != null);
             return (ICommand)obj.GetValue(DefaultItemCommandProperty);
@@ -28,7 +30,7 @@
         /// <param name="obj">The object.</param>
         /// <param name="value">The command.</param>
         [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
-        public static void SetDefaultItemCommand(this ItemsControl obj, ICommand value)
+        public static void SetDefaultItemCommand([NotNull] this ItemsControl obj, ICommand value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(DefaultItemCommandProperty, value);
@@ -118,7 +120,7 @@
         /// </summary>
         /// <param name="obj">The <see cref="ItemsControl"/> to refresh.</param>
         /// <returns>The object to observe.</returns>
-        public static object GetRefreshOnSourceChanges(ItemsControl obj)
+        public static object GetRefreshOnSourceChanges([NotNull] ItemsControl obj)
         {
             Contract.Requires(obj != null);
             return obj.GetValue(RefreshOnSourceChangesProperty);
@@ -129,7 +131,7 @@
         /// </summary>
         /// <param name="obj">The <see cref="ItemsControl"/> to refresh.</param>
         /// <param name="value">The object to observe.</param>
-        public static void SetRefreshOnSourceChanges(ItemsControl obj, object value)
+        public static void SetRefreshOnSourceChanges([NotNull] ItemsControl obj, object value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(RefreshOnSourceChangesProperty, value);

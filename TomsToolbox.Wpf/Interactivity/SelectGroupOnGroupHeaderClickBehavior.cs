@@ -7,6 +7,8 @@
     using System.Windows.Input;
     using System.Windows.Interactivity;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// If attached to the root visual in the group header template of a selector control, 
     /// all items in the group will be selected when the group header is clicked, 
@@ -46,7 +48,7 @@
         }
 
         [ContractVerification(false)] // because of dynamic
-        private static void GroupHeader_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private static void GroupHeader_OnMouseLeftButtonDown([NotNull] object sender, MouseButtonEventArgs e)
         {
             Contract.Requires(sender != null);
 

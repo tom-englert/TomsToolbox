@@ -2,6 +2,8 @@
 {
     using System.Diagnostics.Contracts;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Implemented by image providers for the <see cref="Map"/> control.
     /// </summary>
@@ -51,7 +53,8 @@
             }
         }
 
-        IImage IImageProvider.GetImage(IMapTile tile)
+        [NotNull]
+        IImage IImageProvider.GetImage([NotNull] IMapTile tile)
         {
             Contract.Requires(tile != null);
             Contract.Ensures(Contract.Result<IImage>() != null);

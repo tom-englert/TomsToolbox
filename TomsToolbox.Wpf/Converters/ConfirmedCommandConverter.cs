@@ -1,11 +1,15 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.IO;
     using System.Windows.Data;
     using System.Windows.Input;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// A converter to use in <see cref="ICommand"/> bindings to intercept or filter command executions in the view layer in MVVM applications.
@@ -39,7 +43,7 @@
         /// </summary>
         public event EventHandler<ErrorEventArgs> Error;
 
-        private void QueryCancelExecution(ConfirmedCommandEventArgs e)
+        private void QueryCancelExecution([NotNull] ConfirmedCommandEventArgs e)
         {
             Contract.Requires(e != null);
 
@@ -57,10 +61,12 @@
 
         private class CommandProxy : ICommand
         {
+            [NotNull]
             private readonly ConfirmedCommandConverter _owner;
+            [NotNull]
             private readonly ICommand _command;
 
-            public CommandProxy(ConfirmedCommandConverter owner, ICommand command)
+            public CommandProxy([NotNull] ConfirmedCommandConverter owner, [NotNull] ICommand command)
             {
                 Contract.Requires(owner != null);
                 Contract.Requires(command != null);
@@ -99,7 +105,8 @@
             }
 
             [ContractInvariantMethod]
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+            [Conditional("CONTRACTS_FULL")]
             private void ObjectInvariant()
             {
                 Contract.Invariant(_owner != null);

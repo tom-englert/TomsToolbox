@@ -85,7 +85,7 @@
         [TestMethod]
         public void ObservableWrappedCollection_MoveTest()
         {
-            for (int i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
                 _source.Move(_random.Next(_source.Count), _random.Next(_source.Count));
                 VerifyConsistency();

@@ -171,9 +171,16 @@
     <None Include="..\TomsToolbox.snk">
       <Link>TomsToolbox.snk</Link>
     </None>
+    <None Include="packages.config" />
     <None Include="TomsToolbox.Core.nuspec">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=10.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.10.2.1\lib\net\JetBrains.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <Import Condition=" '$(TargetFrameworkProfile)' == 'Client' " Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Condition=" '$(TargetFrameworkProfile)' != 'Client' " Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

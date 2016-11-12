@@ -2,8 +2,11 @@
 {
     using System;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Threading;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// A high resolution timer that runs in a single thread. 
@@ -11,8 +14,11 @@
     /// </summary>
     public sealed class HighResolutionTimer : IDisposable
     {
+        [NotNull]
         private readonly Stopwatch _stopwatch = new Stopwatch();
+        [NotNull]
         private readonly ManualResetEvent _stopEvent = new ManualResetEvent(false);
+        [NotNull]
         private readonly Action<TimeSpan> _timerCallback;
 
         private TimeSpan _startTimeStamp;
@@ -22,7 +28,7 @@
         /// Initializes a new instance of the <see cref="HighResolutionTimer"/> class.
         /// </summary>
         /// <param name="timerCallback">The timer callback.</param>
-        public HighResolutionTimer(Action<TimeSpan> timerCallback)
+        public HighResolutionTimer([NotNull] Action<TimeSpan> timerCallback)
             : this(timerCallback, TimeSpan.FromSeconds(1))
         {
             Contract.Requires(timerCallback != null);
@@ -33,7 +39,7 @@
         /// </summary>
         /// <param name="timerCallback">The timer callback.</param>
         /// <param name="interval">The interval.</param>
-        public HighResolutionTimer(Action<TimeSpan> timerCallback, TimeSpan interval)
+        public HighResolutionTimer([NotNull] Action<TimeSpan> timerCallback, TimeSpan interval)
         {
             Contract.Requires(timerCallback != null);
 
@@ -134,7 +140,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_stopwatch != null);

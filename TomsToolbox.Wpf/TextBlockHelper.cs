@@ -9,6 +9,8 @@
     using System.Windows.Data;
     using System.Windows.Media;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Desktop;
 
     /// <summary>
@@ -33,13 +35,13 @@
         /// </summary>
         /// <param name="obj">The text block.</param>
         /// <returns><c>true</c> if text trimmed inside the text block; otherwise <c>false</c></returns>
-        public static bool GetIsTextTrimmed(DependencyObject obj)
+        public static bool GetIsTextTrimmed([NotNull] DependencyObject obj)
         {
             Contract.Requires(obj != null);
 
             return obj.GetValue<bool>(IsTextTrimmedProperty);
         }
-        private static void SetIsTextTrimmed(DependencyObject obj, bool value)
+        private static void SetIsTextTrimmed([NotNull] DependencyObject obj, bool value)
         {
             Contract.Requires(obj != null);
 
@@ -64,7 +66,7 @@
         /// <param name="obj">The <see cref="TextBlock"/> to evaluate.</param>
         /// <returns><c>true</c> if the automatic tool tip is enabled; otherwise <c>false</c></returns>
         [AttachedPropertyBrowsableForType(typeof(TextBlock))]
-        public static Boolean GetIsAutomaticToolTipEnabled(DependencyObject obj)
+        public static Boolean GetIsAutomaticToolTipEnabled([NotNull] DependencyObject obj)
         {
             Contract.Requires(obj != null);
 
@@ -76,7 +78,7 @@
         /// <param name="obj">The <see cref="TextBlock"/> to evaluate.</param>
         /// <param name="value"><c>true</c> to enable the automatic tool tip; otherwise <c>false</c></param>
         [AttachedPropertyBrowsableForType(typeof(TextBlock))]
-        public static void SetIsAutomaticToolTipEnabled(DependencyObject obj, bool value)
+        public static void SetIsAutomaticToolTipEnabled([NotNull] DependencyObject obj, bool value)
         {
             Contract.Requires(obj != null);
 
@@ -137,7 +139,7 @@
         /// Update the value of IsTextTrimmed.
         /// </summary>
         /// <param name="textBlock">The text block</param>
-        private static void UpdateIsTextTrimmed(TextBlock textBlock)
+        private static void UpdateIsTextTrimmed([NotNull] TextBlock textBlock)
         {
             Contract.Requires(textBlock != null);
 
@@ -149,7 +151,7 @@
         /// </summary>
         /// <param name="textBlock">The <see cref="TextBlock"/> to evaluate.</param>
         /// <returns><c>true</c> if the text is currently being trimmed; otherwise <c>false</c></returns>
-        private static bool EvaluateIsTextTrimmed(TextBlock textBlock)
+        private static bool EvaluateIsTextTrimmed([NotNull] TextBlock textBlock)
         {
             Contract.Requires(textBlock != null);
 

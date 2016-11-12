@@ -1,4 +1,6 @@
-﻿[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Scope = "member", Target = "TomsToolbox.Wpf.Composition.ComposablePartWithContext`1.#TomsToolbox.Wpf.Composition.IComposablePartWithContext.CompositionContext", Justification="Is accessible by the corresponding typed property.")]
+﻿using System.Diagnostics.CodeAnalysis;
+
+[assembly: SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Scope = "member", Target = "TomsToolbox.Wpf.Composition.ComposablePartWithContext`1.#TomsToolbox.Wpf.Composition.IComposablePartWithContext.CompositionContext", Justification="Is accessible by the corresponding typed property.")]
 
 namespace TomsToolbox.Wpf.Composition
 {

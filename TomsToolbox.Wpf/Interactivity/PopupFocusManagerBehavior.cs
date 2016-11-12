@@ -8,6 +8,8 @@
     using System.Windows.Input;
     using System.Windows.Interactivity;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Handle focus for popups opened by toggle buttons. 
     /// When the popup opens, the focus is set to the first focusable control in the popup.
@@ -80,7 +82,7 @@
             }
         }
 
-        private void Popup_Opened(object sender, EventArgs e)
+        private void Popup_Opened([NotNull] object sender, EventArgs e)
         {
             Contract.Requires(sender != null);
 

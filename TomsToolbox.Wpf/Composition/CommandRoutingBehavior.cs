@@ -8,6 +8,8 @@
     using System.Windows.Controls;
     using System.Windows.Input;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Desktop;
     using TomsToolbox.Wpf.Interactivity;
 
@@ -38,6 +40,7 @@
         /// <remarks>
         /// The command target is usually by a binding to the corresponding command property of the view model.
         /// </remarks>
+        [NotNull]
         public ICommand CommandTarget
         {
             get

@@ -3,6 +3,8 @@
     using System;
     using System.Diagnostics.Contracts;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Extension methods for the <see cref="Maybe{T}"/> monad implementation.
     /// <see href="http://www.codeproject.com/Articles/109026/Chained-null-checks-and-the-Maybe-monad"/>
@@ -18,7 +20,8 @@
         /// <param name="value">The value.</param>
         /// <param name="selector">The selector to get the target from the value.</param>
         /// <returns>The <see cref="Maybe{T}"/> with the target as value.</returns>
-        public static Maybe<TTarget> Maybe<TSource, TTarget>(this TSource value, Func<TSource, TTarget> selector)
+        [NotNull]
+        public static Maybe<TTarget> Maybe<TSource, TTarget>(this TSource value, [NotNull] Func<TSource, TTarget> selector)
             where TSource:class
             where TTarget:class
         {
@@ -34,6 +37,7 @@
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="value">The value.</param>
         /// <returns>The <see cref="Maybe{T}"/> with the value.</returns>
+        [NotNull]
         public static Maybe<TValue> Maybe<TValue>(this TValue value)
             where TValue : class
         {
@@ -68,7 +72,8 @@
         /// <typeparam name="TTarget">The type of the target.</typeparam>
         /// <param name="selector">The selector.</param>
         /// <returns>A new <see cref="Maybe{T}"/> for the target</returns>
-        public Maybe<TTarget> Select<TTarget>(Func<T, TTarget> selector)
+        [NotNull]
+        public Maybe<TTarget> Select<TTarget>([NotNull] Func<T, TTarget> selector)
             where TTarget : class
         {
             Contract.Requires(selector != null);
@@ -108,7 +113,7 @@
         /// <returns>
         /// The value extracted from the specified selector if the inner value is not null, else default(TTarget).
         /// </returns>
-        public TTarget Return<TTarget>(Func<T, TTarget> selector)
+        public TTarget Return<TTarget>([NotNull] Func<T, TTarget> selector)
         {
             Contract.Requires(selector != null);
 
@@ -124,7 +129,7 @@
         /// <returns>
         /// The value extracted from the specified selector if the inner value is not null, else default(TTarget).
         /// </returns>
-        public TTarget Return<TTarget>(Func<T, TTarget> selector, TTarget defaultValue)
+        public TTarget Return<TTarget>([NotNull] Func<T, TTarget> selector, TTarget defaultValue)
         {
             Contract.Requires(selector != null);
 
@@ -136,7 +141,8 @@
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>this</returns>
-        public Maybe<T> Do(Action<T> action)
+        [NotNull]
+        public Maybe<T> Do([NotNull] Action<T> action)
         {
             Contract.Requires(action != null);
             Contract.Ensures(Contract.Result<Maybe<T>>() != null);
@@ -152,7 +158,8 @@
         /// </summary>
         /// <param name="condition">The condition.</param>
         /// <returns>this or an empty maybe.</returns>
-        public Maybe<T> If(Func<T, bool> condition)
+        [NotNull]
+        public Maybe<T> If([NotNull] Func<T, bool> condition)
         {
             Contract.Requires(condition != null);
             Contract.Ensures(Contract.Result<Maybe<T>>() != null);
@@ -170,7 +177,8 @@
         /// </summary>
         /// <param name="condition">The condition.</param>
         /// <returns>this or an empty maybe.</returns>
-        public Maybe<T> Unless(Func<T, bool> condition)
+        [NotNull]
+        public Maybe<T> Unless([NotNull] Func<T, bool> condition)
         {
             Contract.Requires(condition != null);
             Contract.Ensures(Contract.Result<Maybe<T>>() != null);

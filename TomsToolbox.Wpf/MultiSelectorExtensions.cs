@@ -4,12 +4,15 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Core;
 
@@ -36,7 +39,7 @@
         /// <param name="obj">The object to attach to.</param>
         /// <returns>The current selection.</returns>
         [AttachedPropertyBrowsableForType(typeof(Selector))]
-        public static IList GetSelectionBinding(this Selector obj)
+        public static IList GetSelectionBinding([NotNull] this Selector obj)
         {
             Contract.Requires(obj != null);
             return (IList)obj.GetValue(SelectionBindingProperty);
@@ -47,7 +50,7 @@
         /// <param name="obj">The object to attach to.</param>
         /// <param name="value">The new selection.</param>
         [AttachedPropertyBrowsableForType(typeof(Selector))]
-        public static void SetSelectionBinding(this Selector obj, IList value)
+        public static void SetSelectionBinding([NotNull] this Selector obj, IList value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(SelectionBindingProperty, value);
@@ -73,7 +76,7 @@
         private static readonly DependencyProperty SelectionSynchronizerProperty =
             DependencyProperty.RegisterAttached("SelectionSynchronizer", typeof(SelectionSynchronizer), typeof(MultiSelectorExtensions));
 
-        private static void SelectionBinding_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void SelectionBinding_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             Contract.Requires(d != null);
 
@@ -106,7 +109,8 @@
         }
 
         [ContractVerification(false)] // because of dynamic
-        private static IList GetSelectedItems(this Selector selector)
+        [NotNull]
+        private static IList GetSelectedItems([NotNull] this Selector selector)
         {
             Contract.Requires(selector != null);
             Contract.Ensures(Contract.Result<IList>() != null);
@@ -117,14 +121,14 @@
         }
 
         [ContractVerification(false)] // because of dynamic
-        private static void ScrollIntoView(this Selector selector, object selectedItem)
+        private static void ScrollIntoView([NotNull] this Selector selector, object selectedItem)
         {
             Contract.Requires(selector != null);
 
             ((dynamic)selector).ScrollIntoView(selectedItem);
         }
 
-        private static void BeginSetFocus(this ItemsControl selector, object selectedItem)
+        private static void BeginSetFocus([NotNull] this ItemsControl selector, object selectedItem)
         {
             Contract.Requires(selector != null);
 
@@ -142,7 +146,7 @@
             });
         }
 
-        private static void ClearSourceSelection(this Selector selector)
+        private static void ClearSourceSelection([NotNull] this Selector selector)
         {
             Contract.Requires(selector != null);
 
@@ -161,7 +165,7 @@
             }
         }
 
-        private static bool All(this IEnumerable items, Func<object, bool> condition)
+        private static bool All([NotNull] this IEnumerable items, [NotNull] Func<object, bool> condition)
         {
             Contract.Requires(items != null);
             Contract.Requires(condition != null);
@@ -169,7 +173,7 @@
             return Enumerable.All(items.Cast<object>(), condition);
         }
 
-        private static void SynchronizeWithSource(this Selector selector, IList sourceSelection)
+        private static void SynchronizeWithSource([NotNull] this Selector selector, [NotNull] IList sourceSelection)
         {
             Contract.Requires(selector != null);
             Contract.Requires(sourceSelection != null);
@@ -194,7 +198,7 @@
             }
         }
 
-        private static void AddItemsToSelection(this Selector selector, IList itemsToSelect)
+        private static void AddItemsToSelection([NotNull] this Selector selector, [NotNull] IList itemsToSelect)
         {
             Contract.Requires(selector != null);
             Contract.Requires(itemsToSelect != null);
@@ -233,7 +237,7 @@
             }
         }
 
-        private static void SelectSingleItem(this Selector selector, IList sourceSelection)
+        private static void SelectSingleItem([NotNull] this Selector selector, [NotNull] IList sourceSelection)
         {
             Contract.Requires(selector != null);
             Contract.Requires(sourceSelection != null);
@@ -259,7 +263,8 @@
             }
         }
 
-        private static IList ArrayCopy(ICollection source)
+        [NotNull]
+        private static IList ArrayCopy([NotNull] ICollection source)
         {
             Contract.Requires(source != null);
             Contract.Ensures(Contract.Result<IList>() != null);
@@ -271,11 +276,12 @@
 
         private sealed class SelectionSynchronizer : IDisposable
         {
+            [NotNull]
             private readonly Selector _selector;
             private readonly INotifyCollectionChanged _observableSourceSelection;
             private readonly bool _selectorHasItemsSourceBinding;
 
-            public SelectionSynchronizer(Selector selector, IList sourceSelection)
+            public SelectionSynchronizer([NotNull] Selector selector, [NotNull] IList sourceSelection)
             {
                 Contract.Requires(selector != null);
                 Contract.Requires(sourceSelection != null);
@@ -411,6 +417,7 @@
 
             [ContractInvariantMethod]
             [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+            [Conditional("CONTRACTS_FULL")]
             private void ObjectInvariant()
             {
                 Contract.Invariant(_selector != null);

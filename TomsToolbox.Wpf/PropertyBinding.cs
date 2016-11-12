@@ -1,9 +1,13 @@
 ﻿namespace TomsToolbox.Wpf
 {
     using System;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Windows;
     using System.Windows.Data;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Desktop;
 
@@ -13,6 +17,7 @@
     /// <typeparam name="T">The type of the variable.</typeparam>
     public class PropertyBinding<T>
     {
+        [NotNull]
         private readonly BindingHelper _bindingHelper;
 
         /// <summary>
@@ -92,9 +97,10 @@
 
         private class BindingHelper : DependencyObject
         {
+            [NotNull]
             private readonly PropertyBinding<T> _owner;
 
-            public BindingHelper(PropertyBinding<T> owner)
+            public BindingHelper([NotNull] PropertyBinding<T> owner)
             {
                 Contract.Requires(owner != null);
                 _owner = owner;
@@ -104,7 +110,8 @@
                 DependencyProperty.Register("Value", typeof(T), typeof(BindingHelper), new FrameworkPropertyMetadata((sender, e) => ((BindingHelper)sender)._owner.Value_Changed((T)e.OldValue, (T)e.NewValue)));
 
             [ContractInvariantMethod]
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+            [Conditional("CONTRACTS_FULL")]
             private void ObjectInvariant()
             {
                 Contract.Invariant(_owner != null);
@@ -112,7 +119,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_bindingHelper != null);

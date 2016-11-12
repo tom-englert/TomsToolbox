@@ -5,10 +5,13 @@
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Linq.Expressions;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Core;
 
@@ -33,7 +36,8 @@
         /// <remarks>
         /// The selector must aways return the same object for the source, else removing elements will fail!
         /// </remarks>
-        public static IObservableCollection<TTarget> ObservableSelectMany<TSource, TTarget>(this IList<TSource> source, Expression<Func<TSource, IList<TTarget>>> itemGeneratorExpression)
+        [NotNull]
+        public static IObservableCollection<TTarget> ObservableSelectMany<TSource, TTarget>([NotNull] this IList<TSource> source, [NotNull] Expression<Func<TSource, IList<TTarget>>> itemGeneratorExpression)
         {
             Contract.Requires(source != null);
             Contract.Requires(itemGeneratorExpression != null);
@@ -58,7 +62,8 @@
         /// If the <paramref name="itemGeneratorExpression"/> is a property expression like "item => item.SomeProperty" and <typeparamref name="TSource"/>
         /// implements <see cref="INotifyPropertyChanged"/>, the returned collection will be updated when any items property changes.
         /// </remarks>
-        public static IObservableCollection<TTarget> ObservableSelect<TSource, TTarget>(this IList<TSource> source, Expression<Func<TSource, TTarget>> itemGeneratorExpression)
+        [NotNull]
+        public static IObservableCollection<TTarget> ObservableSelect<TSource, TTarget>([NotNull] this IList<TSource> source, [NotNull] Expression<Func<TSource, TTarget>> itemGeneratorExpression)
         {
             Contract.Requires(source != null);
             Contract.Requires(itemGeneratorExpression != null);
@@ -76,7 +81,8 @@
         /// <remarks>
         /// See <see cref="ObservableWrappedCollection{T1,T2}"/> for usage details.
         /// </remarks>
-        public static IObservableCollection<TTarget> ObservableCast<TTarget>(this IEnumerable source)
+        [NotNull]
+        public static IObservableCollection<TTarget> ObservableCast<TTarget>([NotNull] this IEnumerable source)
         {
             Contract.Requires(source != null);
             Contract.Ensures(Contract.Result<IObservableCollection<TTarget>>() != null);
@@ -98,7 +104,8 @@
         /// <remarks>
         /// See <see cref="ObservableFilteredCollection{T}"/> for usage details.
         /// </remarks>
-        public static IObservableCollection<T> ObservableWhere<T>(this IList<T> source, Func<T, bool> predicate, params string[] liveTrackingProperties)
+        [NotNull]
+        public static IObservableCollection<T> ObservableWhere<T>([NotNull] this IList<T> source, [NotNull] Func<T, bool> predicate, [NotNull] params string[] liveTrackingProperties)
         {
             Contract.Requires(source != null);
             Contract.Requires(predicate != null);
@@ -110,6 +117,7 @@
 
         private class ObservableSelectImpl<TSource, TTarget> : ObservableWrappedCollection<TSource, TTarget>
         {
+            [NotNull]
             private readonly WeakReference<IList<TSource>> _sourceReference;
             private readonly string _propertyName;
             private List<WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs>> _propertyChangeEventListeners;
@@ -119,7 +127,7 @@
             /// </summary>
             /// <param name="sourceCollection">The source collection to wrap.</param>
             /// <param name="itemGeneratorExpression">The item generator to generate the wrapper for each item.</param>
-            public ObservableSelectImpl(IList<TSource> sourceCollection, Expression<Func<TSource, TTarget>> itemGeneratorExpression)
+            public ObservableSelectImpl([NotNull] IList<TSource> sourceCollection, [NotNull] Expression<Func<TSource, TTarget>> itemGeneratorExpression)
                 : base(sourceCollection, itemGeneratorExpression.Compile())
             {
                 Contract.Requires(sourceCollection != null);
@@ -187,7 +195,7 @@
                 // ReSharper enable PossibleMultipleEnumeration
             }
 
-            private void SourceItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
+            private void SourceItem_PropertyChanged([NotNull] object sender, PropertyChangedEventArgs e)
             {
                 Contract.Requires(sender != null);
 
@@ -246,7 +254,7 @@
                     new WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs>(this,item, OnCollectionChanged, Attach, Detach);
             }
 
-            private static void OnCollectionChanged(ObservableSelectImpl<TSource, TTarget> self, object sender, PropertyChangedEventArgs e)
+            private static void OnCollectionChanged([NotNull] ObservableSelectImpl<TSource, TTarget> self, [NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
             {
                 Contract.Requires(self != null);
                 Contract.Requires(sender != null);
@@ -255,7 +263,7 @@
                 self.SourceItem_PropertyChanged(sender, e);
             }
 
-            private static void Attach(WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> weakEvent, INotifyPropertyChanged sender)
+            private static void Attach([NotNull] WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> weakEvent, [NotNull] INotifyPropertyChanged sender)
             {
                 Contract.Requires(weakEvent != null);
                 Contract.Requires(sender != null);
@@ -263,7 +271,7 @@
                 sender.PropertyChanged += weakEvent.OnEvent;
             }
 
-            private static void Detach(WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> weakEvent, INotifyPropertyChanged sender)
+            private static void Detach([NotNull] WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> weakEvent, [NotNull] INotifyPropertyChanged sender)
             {
                 Contract.Requires(weakEvent != null);
                 Contract.Requires(sender != null);
@@ -271,7 +279,8 @@
                 sender.PropertyChanged -= weakEvent.OnEvent;
             }
 
-            private List<WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs>> GeneratePropertyChangeEventListeners(IEnumerable sourceList)
+            [NotNull]
+            private List<WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs>> GeneratePropertyChangeEventListeners([NotNull] IEnumerable sourceList)
             {
                 Contract.Requires(sourceList != null);
                 Contract.Ensures(Contract.Result<List<WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs>>>() != null);
@@ -283,6 +292,7 @@
 
             [ContractInvariantMethod]
             [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+            [Conditional("CONTRACTS_FULL")]
             private void ObjectInvariant()
             {
                 Contract.Invariant(_sourceReference != null);
@@ -291,9 +301,10 @@
 
         private class ObservableSelectManyImpl<TSource, TTarget> : ReadOnlyObservableCollectionAdapter<TTarget, ObservableCompositeCollection<TTarget>>
         {
+            [NotNull]
             private readonly IObservableCollection<IList<TTarget>> _source;
 
-            public ObservableSelectManyImpl(IList<TSource> items, Expression<Func<TSource, IList<TTarget>>> itemGeneratorExpression)
+            public ObservableSelectManyImpl([NotNull] IList<TSource> items, [NotNull] Expression<Func<TSource, IList<TTarget>>> itemGeneratorExpression)
                 : base(new ObservableCompositeCollection<TTarget>())
             {
                 Contract.Requires(items != null);
@@ -306,7 +317,7 @@
             }
 
             [ContractVerification(false)]
-            private void Source_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+            private void Source_CollectionChanged(object sender, [NotNull] NotifyCollectionChangedEventArgs e)
             {
                 Contract.Requires(e != null);
 
@@ -357,6 +368,7 @@
 
             [ContractInvariantMethod]
             [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+            [Conditional("CONTRACTS_FULL")]
             private void ObjectInvariant()
             {
                 Contract.Invariant(_source != null);

@@ -2,10 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.IO;
     using System.Linq;
     using System.Reflection;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Methods to ease reflection
@@ -17,7 +20,8 @@
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
         /// <returns>The types in all assemblies.</returns>
-        public static IEnumerable<Type> EnumerateAllTypes(this IEnumerable<Assembly> assemblies)
+        [NotNull]
+        public static IEnumerable<Type> EnumerateAllTypes([NotNull] this IEnumerable<Assembly> assemblies)
         {
             Contract.Requires(assemblies != null);
             Contract.Ensures(Contract.Result<IEnumerable<Type>>() != null);
@@ -30,6 +34,7 @@
         /// </summary>
         /// <param name="assembly">The assembly. If assmbly is null, an empty list is returned.</param>
         /// <returns>The types in the assembly.</returns>
+        [NotNull]
         public static IEnumerable<Type> EnumerateAllTypes(this Assembly assembly)
         {
             Contract.Ensures(Contract.Result<IEnumerable<Type>>() != null);
@@ -37,6 +42,7 @@
             return assembly?.GetTypes().SelectMany(GetSelfAndNestedTypes) ?? Enumerable.Empty<Type>();
         }
 
+        [NotNull]
         private static IEnumerable<Type> GetSelfAndNestedTypes(Type type)
         {
             Contract.Ensures(Contract.Result<IEnumerable<Type>>() != null);
@@ -49,7 +55,8 @@
         /// </summary>
         /// <param name="directory">The directory.</param>
         /// <returns>All types in all assemblies in the specified directory</returns>
-        public static IEnumerable<Type> EnumerateAllTypes(this DirectoryInfo directory)
+        [NotNull]
+        public static IEnumerable<Type> EnumerateAllTypes([NotNull] this DirectoryInfo directory)
         {
             Contract.Requires(directory != null);
             Contract.Ensures(Contract.Result<IEnumerable<Type>>() != null);
@@ -63,7 +70,8 @@
         /// <param name="directory">The directory.</param>
         /// <param name="searchPattern">The search string. The default pattern is "*", which returns all files.</param>
         /// <returns>All types in all assemblies in the specified directory</returns>
-        public static IEnumerable<Type> EnumerateAllTypes(this DirectoryInfo directory, string searchPattern)
+        [NotNull]
+        public static IEnumerable<Type> EnumerateAllTypes([NotNull] this DirectoryInfo directory, [NotNull] string searchPattern)
         {
             Contract.Requires(directory != null);
             Contract.Requires(searchPattern != null);
@@ -79,7 +87,7 @@
         /// </summary>
         /// <param name="assemblyFile">The assembly file.</param>
         /// <returns>The assembly if the assembly could be loaded; otherwise <c>null</c>.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFile")]
+        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFile")]
         public static Assembly TryLoadAssembly(this FileSystemInfo assemblyFile)
         {
             if (assemblyFile == null)
@@ -106,7 +114,7 @@
         /// </summary>
         /// <param name="assemblyFile">The assembly file.</param>
         /// <returns>The assembly if the assembly could be loaded; otherwise <c>null</c>.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFile")]
+        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFile")]
         public static Assembly TryLoadAssemblyForReflectionOnly(this FileSystemInfo assemblyFile)
         {
             if (assemblyFile == null)
@@ -131,7 +139,8 @@
         /// </summary>
         /// <param name="assembly">The assembly.</param>
         /// <returns>The directory in which the given assembly is stored.</returns>
-        public static DirectoryInfo GetAssemblyDirectory(this Assembly assembly)
+        [NotNull]
+        public static DirectoryInfo GetAssemblyDirectory([NotNull] this Assembly assembly)
         {
             Contract.Requires(assembly != null);
             Contract.Ensures(Contract.Result<DirectoryInfo>() != null);

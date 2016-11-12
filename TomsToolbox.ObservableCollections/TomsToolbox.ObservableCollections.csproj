@@ -128,6 +128,10 @@
     <AssemblyOriginatorKeyFile>..\TomsToolbox.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=10.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.10.2.1\lib\net\JetBrains.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -155,6 +159,7 @@
     <None Include="..\TomsToolbox.snk">
       <Link>TomsToolbox.snk</Link>
     </None>
+    <None Include="packages.config" />
     <None Include="TomsToolbox.ObservableCollections.nuspec" />
   </ItemGroup>
   <ItemGroup>

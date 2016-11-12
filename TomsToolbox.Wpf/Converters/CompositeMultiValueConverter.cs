@@ -8,6 +8,8 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// A <see cref="IMultiValueConverter"/> that chains one <see cref="IMultiValueConverter"/> with a list of <see cref="IValueConverter"/>.
     /// The <see cref="CompositeMultiValueConverter.MultiValueConverter"/> is invoked first, and the result is converted by the <see cref="CompositeMultiValueConverter.Converters"/> in the specified order.
@@ -32,6 +34,7 @@
         /// <summary>
         /// Gets the list of converters.
         /// </summary>
+        [NotNull]
         public Collection<IValueConverter> Converters
         {
             get

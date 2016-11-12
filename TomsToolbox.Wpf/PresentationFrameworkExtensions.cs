@@ -6,6 +6,8 @@
     using System.Windows.Media;
     using System.Windows.Threading;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
     using TomsToolbox.Desktop;
 
@@ -18,7 +20,7 @@
         /// Waits until all pending messages up to the <see cref="DispatcherPriority.Background"/> priority are processed.
         /// </summary>
         /// <param name="visual">The dispatcher object to wait on.</param>
-        public static void ProcessMessages(this Visual visual)
+        public static void ProcessMessages([NotNull] this Visual visual)
         {
             Contract.Requires(visual != null);
 
@@ -30,7 +32,7 @@
         /// </summary>
         /// <param name="visual">The dispatcher object to wait on.</param>
         /// <param name="priority">The priority up to which all messages should be processed.</param>
-        public static void ProcessMessages(this Visual visual, DispatcherPriority priority)
+        public static void ProcessMessages([NotNull] this Visual visual, DispatcherPriority priority)
         {
             Contract.Requires(visual != null);
 
@@ -44,7 +46,7 @@
         /// Waits until all pending messages up to the <see cref="DispatcherPriority.Background"/> priority are processed.
         /// </summary>
         /// <param name="dispatcher">The dispatcher to wait on.</param>
-        public static void ProcessMessages(this Dispatcher dispatcher)
+        public static void ProcessMessages([NotNull] this Dispatcher dispatcher)
         {
             Contract.Requires(dispatcher != null);
 
@@ -56,7 +58,7 @@
         /// </summary>
         /// <param name="dispatcher">The dispatcher to wait on.</param>
         /// <param name="priority">The priority up to which all messages should be processed.</param>
-        public static void ProcessMessages(this Dispatcher dispatcher, DispatcherPriority priority)
+        public static void ProcessMessages([NotNull] this Dispatcher dispatcher, DispatcherPriority priority)
         {
             Contract.Requires(dispatcher != null);
 
@@ -82,7 +84,7 @@
         /// <param name="from">The visual for which the rectangle coordinates are specified.</param>
         /// <param name="to">The visual to which the rectangle coordinates are translated.</param>
         /// <returns>The translated rectangle</returns>
-        public static Rect Translate(this Rect rect, Visual from, Visual to)
+        public static Rect Translate(this Rect rect, [NotNull] Visual from, [NotNull] Visual to)
         {
             Contract.Requires(from != null);
             Contract.Requires(to != null);
@@ -102,7 +104,7 @@
         /// <param name="from">The visual for which the point coordinates are specified.</param>
         /// <param name="to">The visual to which the point coordinates are translated.</param>
         /// <returns>The translated point</returns>
-        public static Point Translate(this Point point, UIElement from, UIElement to)
+        public static Point Translate(this Point point, [NotNull] UIElement from, [NotNull] UIElement to)
         {
             Contract.Requires(from != null);
             Contract.Requires(to != null);
@@ -115,7 +117,7 @@
         /// </summary>
         /// <param name="self">The framework element for which to retrieve the client rectangle.</param>
         /// <returns>The client rectangle</returns>
-        public static Rect GetClientRect(this FrameworkElement self)
+        public static Rect GetClientRect([NotNull] this FrameworkElement self)
         {
             Contract.Requires(self != null);
 
@@ -130,7 +132,7 @@
         /// <returns>
         /// The client rectangle relative to the visual.
         /// </returns>
-        public static Rect GetClientRect(this FrameworkElement self, Visual relativeTo)
+        public static Rect GetClientRect([NotNull] this FrameworkElement self, [NotNull] Visual relativeTo)
         {
             Contract.Requires(self != null);
             Contract.Requires(relativeTo != null);
@@ -143,7 +145,7 @@
         /// </summary>
         /// <param name="self">The framework element for which to retrieve the extent.</param>
         /// <returns>The extent.</returns>
-        public static Size GetExtent(this FrameworkElement self)
+        public static Size GetExtent([NotNull] this FrameworkElement self)
         {
             Contract.Requires(self != null);
 
@@ -158,7 +160,7 @@
         /// <returns>
         /// The extent relative to the visual.
         /// </returns>
-        public static Size GetExtent(this FrameworkElement self, FrameworkElement relativeTo)
+        public static Size GetExtent([NotNull] this FrameworkElement self, [NotNull] FrameworkElement relativeTo)
         {
             Contract.Requires(self != null);
             Contract.Requires(relativeTo != null);
@@ -172,7 +174,7 @@
         /// <param name="self">The framework element used to get the presentation source.</param>
         /// <returns>The physical size of one pixel in design units.</returns>
         /// <exception cref="System.ArgumentException">The framework element is not loaded in the visual tree.</exception>
-        public static Size GetPhysicalPixelSize(this FrameworkElement self)
+        public static Size GetPhysicalPixelSize([NotNull] this FrameworkElement self)
         {
             Contract.Requires(self != null);
 
@@ -201,7 +203,7 @@
         /// <param name="self">The framework element used to get the presentation source.</param>
         /// <returns>The physical size of one design unit in pixels.</returns>
         /// <exception cref="System.ArgumentException">The framework element is not loaded in the visual tree.</exception>
-        public static Size GetDesignUnitSize(this FrameworkElement self)
+        public static Size GetDesignUnitSize([NotNull] this FrameworkElement self)
         {
             Contract.Requires(self != null);
 
@@ -230,7 +232,8 @@
         /// <param name="first">The base transformation.</param>
         /// <param name="others">The transformations to merge.</param>
         /// <returns>The merged transformation.</returns>
-        public static GeneralTransform MergeWith(this GeneralTransform first, params GeneralTransform[] others)
+        [NotNull]
+        public static GeneralTransform MergeWith([NotNull] this GeneralTransform first, [NotNull] params GeneralTransform[] others)
         {
             Contract.Requires(first != null);
             Contract.Requires(others != null);

@@ -5,6 +5,8 @@
     using System.IO;
     using System.Net;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Helper for web methods.
     /// </summary>
@@ -15,7 +17,8 @@
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <returns>The request.</returns>
-        public static WebRequest CreateHttpWebRequest(Uri uri)
+        [NotNull]
+        public static WebRequest CreateHttpWebRequest([NotNull] Uri uri)
         {
             Contract.Requires(uri != null);
             Contract.Ensures(Contract.Result<WebRequest>() != null);
@@ -33,7 +36,8 @@
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <returns>A stream containing the downloaded data.</returns>
-        public static MemoryStream Download(Uri uri)
+        [NotNull]
+        public static MemoryStream Download([NotNull] Uri uri)
         {
             Contract.Requires(uri != null);
             Contract.Ensures(Contract.Result<MemoryStream>() != null);

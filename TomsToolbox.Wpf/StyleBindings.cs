@@ -12,6 +12,8 @@
     using System.Windows.Interactivity;
     using System.Windows.Markup;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
 
     using TriggerBase = System.Windows.Interactivity.TriggerBase;
@@ -55,7 +57,7 @@
         /// </summary>
         /// <param name="obj">The object the inputBindings are attached to.</param>
         /// <returns>The inputBindings.</returns>
-        public static InputBindingTemplate GetInputBindings(DependencyObject obj)
+        public static InputBindingTemplate GetInputBindings([NotNull] DependencyObject obj)
         {
             Contract.Requires(obj != null);
             return (InputBindingTemplate)obj.GetValue(InputBindingsProperty);
@@ -65,7 +67,7 @@
         /// </summary>
         /// <param name="obj">The object the inputBindings are attached to.</param>
         /// <param name="value">The inputBindings to attach.</param>
-        public static void SetInputBindings(DependencyObject obj, InputBindingTemplate value)
+        public static void SetInputBindings([NotNull] DependencyObject obj, InputBindingTemplate value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(InputBindingsProperty, value);
@@ -116,7 +118,7 @@
         /// </summary>
         /// <param name="obj">The object the group style is attached to.</param>
         /// <returns>The group style.</returns>
-        public static GroupStyle GetGroupStyle(DependencyObject obj)
+        public static GroupStyle GetGroupStyle([NotNull] DependencyObject obj)
         {
             Contract.Requires(obj != null);
 
@@ -127,7 +129,7 @@
         /// </summary>
         /// <param name="obj">The object the group style is attached to.</param>
         /// <param name="value">The group style.</param>
-        public static void SetGroupStyle(DependencyObject obj, GroupStyle value)
+        public static void SetGroupStyle([NotNull] DependencyObject obj, GroupStyle value)
         {
             Contract.Requires(obj != null);
 
@@ -189,7 +191,7 @@
         /// </summary>
         /// <param name="obj">The object the group descriptions are attached to.</param>
         /// <returns>The group descriptions.</returns>
-        public static GroupDescriptionCollection GetGroupDescriptions(DependencyObject obj)
+        public static GroupDescriptionCollection GetGroupDescriptions([NotNull] DependencyObject obj)
         {
             Contract.Requires(obj != null);
 
@@ -200,7 +202,7 @@
         /// </summary>
         /// <param name="obj">The object the group descriptions are attached to.</param>
         /// <param name="value">The group descriptions.</param>
-        public static void SetGroupDescriptions(DependencyObject obj, ICollection<GroupDescription> value)
+        public static void SetGroupDescriptions([NotNull] DependencyObject obj, ICollection<GroupDescription> value)
         {
             Contract.Requires(obj != null);
 
@@ -252,7 +254,7 @@
         /// </summary>
         /// <param name="obj">The object the behaviors are attached to.</param>
         /// <returns>The behaviors.</returns>
-        public static BehaviorCollection GetBehaviors(DependencyObject obj)
+        public static BehaviorCollection GetBehaviors([NotNull] DependencyObject obj)
         {
             Contract.Requires(obj != null);
             return (BehaviorCollection)obj.GetValue(BehaviorsProperty);
@@ -262,7 +264,7 @@
         /// </summary>
         /// <param name="obj">The object the behaviors are attached to.</param>
         /// <param name="value">The behaviors to attach.</param>
-        public static void SetBehaviors(DependencyObject obj, BehaviorCollection value)
+        public static void SetBehaviors([NotNull] DependencyObject obj, BehaviorCollection value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(BehaviorsProperty, value);
@@ -306,7 +308,7 @@
         /// </summary>
         /// <param name="obj">The object the triggers are attached to.</param>
         /// <returns>The triggers.</returns>
-        public static TriggerCollection GetTriggers(DependencyObject obj)
+        public static TriggerCollection GetTriggers([NotNull] DependencyObject obj)
         {
             Contract.Requires(obj != null);
             return (TriggerCollection)obj.GetValue(TriggersProperty);
@@ -316,7 +318,7 @@
         /// </summary>
         /// <param name="obj">The obj.</param>
         /// <param name="value">The value.</param>
-        public static void SetTriggers(DependencyObject obj, TriggerCollection value)
+        public static void SetTriggers([NotNull] DependencyObject obj, TriggerCollection value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(TriggersProperty, value);

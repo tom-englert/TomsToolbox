@@ -5,6 +5,8 @@
     using System.Windows;
     using System.Windows.Controls;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Retrieves the exported object that matches RegionId and Role from the composition container
     /// and assigns it as the content of the associated <see cref="ContentControl"/>
@@ -62,7 +64,7 @@
             UpdateContent(contentControl, exportedItem);
         }
 
-        private void UpdateContent(ContentControl contentControl, object targetItem)
+        private void UpdateContent([NotNull] ContentControl contentControl, object targetItem)
         {
             Contract.Requires(contentControl != null);
 

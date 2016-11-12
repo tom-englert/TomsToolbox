@@ -5,6 +5,8 @@ namespace TomsToolbox.Wpf.Composition
     using System.Diagnostics.Contracts;
     using System.Windows;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Attribute to apply to views to dynamically generate the <see cref="System.Windows.DataTemplate"/> that associates the view with it's view model.
     /// </summary>
@@ -16,7 +18,7 @@ namespace TomsToolbox.Wpf.Composition
         /// Initializes a new instance of the <see cref="DataTemplateAttribute" /> class.
         /// </summary>
         /// <param name="viewModel">The type of the view model for which the template is designed.</param>
-        public DataTemplateAttribute(Type viewModel)
+        public DataTemplateAttribute([NotNull] Type viewModel)
             : base(DataTemplateManager.ContractName, typeof(DependencyObject))
         {
             Contract.Requires(viewModel != null);

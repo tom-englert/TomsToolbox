@@ -1,12 +1,16 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
     using System.Windows;
     using System.Windows.Data;
     using System.Windows.Media;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Desktop;
 
@@ -88,6 +92,7 @@
             }
         }
 
+        [NotNull]
         private BinaryOperationProcessor Processor
         {
             get
@@ -157,7 +162,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(Processor != null);

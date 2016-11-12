@@ -3,6 +3,8 @@
     using System.Diagnostics.Contracts;
     using System.Windows.Input;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Routed commands for dialog management.
     /// </summary>
@@ -19,6 +21,7 @@
         /// <summary>
         /// Gets the OK Dialog command.
         /// </summary>
+        [NotNull]
         public static RoutedUICommand Ok
         {
             get
@@ -31,6 +34,7 @@
         /// <summary>
         /// Gets the Cancel Dialog command.
         /// </summary>
+        [NotNull]
         public static RoutedUICommand Cancel
         {
             get
@@ -43,6 +47,7 @@
         /// <summary>
         /// Gets the Yes Dialog command.
         /// </summary>
+        [NotNull]
         public static RoutedUICommand Yes
         {
             get
@@ -55,6 +60,7 @@
         /// <summary>
         /// Gets the No Dialog command.
         /// </summary>
+        [NotNull]
         public static RoutedUICommand No
         {
             get
@@ -67,6 +73,7 @@
         /// <summary>
         /// Gets the Ignore Dialog command.
         /// </summary>
+        [NotNull]
         public static RoutedUICommand Ignore
         {
             get
@@ -79,6 +86,7 @@
         /// <summary>
         /// Gets the Retry Dialog command.
         /// </summary>
+        [NotNull]
         public static RoutedUICommand Retry
         {
             get
@@ -91,6 +99,7 @@
         /// <summary>
         /// Gets the Abort Dialog command.
         /// </summary>
+        [NotNull]
         public static RoutedUICommand Abort
         {
             get

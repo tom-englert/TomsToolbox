@@ -7,6 +7,8 @@
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Retrieves all exported items with the  <see cref="VisualCompositionExportAttribute"/> that match the RegionId from the composition container and assigns them as the items source of the associated <see cref="ItemsControl"/>
     /// <para/>
@@ -92,7 +94,7 @@
             }
         }
 
-        private static void ApplyContext(IEnumerable composables, object context)
+        private static void ApplyContext([NotNull] IEnumerable composables, object context)
         {
             Contract.Requires(composables != null);
 
@@ -125,7 +127,7 @@
             base.OnDetaching();
         }
 
-        private void AttachSelectables(IEnumerable viewModels)
+        private void AttachSelectables([NotNull] IEnumerable viewModels)
         {
             Contract.Requires(viewModels != null);
 

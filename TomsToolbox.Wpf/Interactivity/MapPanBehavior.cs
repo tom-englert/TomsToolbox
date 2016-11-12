@@ -1,12 +1,16 @@
 ﻿namespace TomsToolbox.Wpf.Interactivity
 {
     using System;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Interactivity;
     using System.Windows.Media.Animation;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Core;
     using TomsToolbox.Wpf.Controls;
@@ -16,7 +20,9 @@
     /// </summary>
     public class MapPanBehavior : Behavior<Map>
     {
+        [NotNull]
         private readonly PointAnimation _panAnimation = new PointAnimation { Duration = new Duration(TimeSpan.FromSeconds(0.25)) };
+        [NotNull]
         private readonly Storyboard _storyboard = new Storyboard();
 
         private Point? _panPosition;
@@ -137,10 +143,8 @@
                 return;
 
             var map = AssociatedObject;
-            if (map == null)
-                return;
 
-            var layer = map.World;
+            var layer = map?.World;
             if (layer == null)
                 return;
 
@@ -152,10 +156,8 @@
         private void Map_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var map = AssociatedObject;
-            if (map == null)
-                return;
 
-            var layer = map.World;
+            var layer = map?.World;
             if (layer == null)
                 return;
 
@@ -176,7 +178,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_panAnimation != null);

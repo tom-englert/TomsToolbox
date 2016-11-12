@@ -2,8 +2,12 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Windows;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Core;
 
@@ -19,7 +23,7 @@
         /// <param name="self">The dependency object from which to get the value.</param>
         /// <param name="property">The property to get.</param>
         /// <returns>The value safely casted to <typeparamref name="T"/></returns>
-        public static T GetValue<T>(this DependencyObject self, DependencyProperty property)
+        public static T GetValue<T>([NotNull] this DependencyObject self, [NotNull] DependencyProperty property)
         {
             Contract.Requires(self != null);
             Contract.Requires(property != null);
@@ -34,7 +38,8 @@
         /// <param name="dependencyObject">The dependency object.</param>
         /// <param name="property">The property to track.</param>
         /// <returns>The object providing the changed event.</returns>
-        public static INotifyChanged Track<T>(this T dependencyObject, DependencyProperty property)
+        [NotNull]
+        public static INotifyChanged Track<T>([NotNull] this T dependencyObject, [NotNull] DependencyProperty property)
             where T : DependencyObject
         {
             Contract.Requires(dependencyObject != null);
@@ -48,10 +53,12 @@
         class DependencyPropertyEventWrapper<T> : INotifyChanged
             where T : DependencyObject
         {
+            [NotNull]
             private readonly T _dependencyObject;
+            [NotNull]
             private readonly DependencyPropertyDescriptor _dependencyPropertyDescriptor;
 
-            public DependencyPropertyEventWrapper(T dependencyObject, DependencyProperty property)
+            public DependencyPropertyEventWrapper([NotNull] T dependencyObject, [NotNull] DependencyProperty property)
             {
                 Contract.Requires(dependencyObject != null);
                 Contract.Requires(property != null);
@@ -74,7 +81,8 @@
             }
 
             [ContractInvariantMethod]
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+            [Conditional("CONTRACTS_FULL")]
             private void ObjectInvariant()
             {
                 Contract.Invariant(_dependencyObject != null);

@@ -6,6 +6,8 @@
     using System.Linq;
     using System.Windows;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Provides location service for the export provider to the WPF UI tree.
     /// </summary>
@@ -15,7 +17,7 @@
         /// Registers the specified export provider.
         /// </summary>
         /// <param name="exportProvider">The export provider.</param>
-        public static void Register(ExportProvider exportProvider)
+        public static void Register([NotNull] ExportProvider exportProvider)
         {
             Contract.Requires(exportProvider != null);
             ExportProviderProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(exportProvider, FrameworkPropertyMetadataOptions.Inherits));
@@ -29,7 +31,8 @@
         /// The exports provider.
         /// </returns>
         /// <exception cref="System.InvalidOperationException">Export provider must be registered in the visual tree</exception>
-        public static ExportProvider GetExportProvider(this DependencyObject obj)
+        [NotNull]
+        public static ExportProvider GetExportProvider([NotNull] this DependencyObject obj)
         {
             Contract.Requires(obj != null);
             Contract.Ensures(Contract.Result<ExportProvider>() != null);
@@ -47,7 +50,7 @@
         /// <returns>
         /// The exports provider.
         /// </returns>
-        public static ExportProvider TryGetExportProvider(this DependencyObject obj)
+        public static ExportProvider TryGetExportProvider([NotNull] this DependencyObject obj)
         {
             Contract.Requires(obj != null);
 
@@ -58,7 +61,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetExportProvider(this DependencyObject obj, ExportProvider value)
+        public static void SetExportProvider([NotNull] this DependencyObject obj, ExportProvider value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(ExportProviderProperty, value);
@@ -79,7 +82,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns>The message.</returns>
-        internal static string GetMissingExportProviderMessage(this DependencyObject obj)
+        internal static string GetMissingExportProviderMessage([NotNull] this DependencyObject obj)
         {
             Contract.Requires(obj != null);
 

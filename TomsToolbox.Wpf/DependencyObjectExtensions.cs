@@ -8,6 +8,8 @@
     using System.Windows.Interop;
     using System.Windows.Media;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Extensions methods to ease dealing with dependency objects.
     /// </summary>
@@ -18,7 +20,7 @@
         /// </summary>
         /// <param name="self">The item.</param>
         /// <returns>The window handle, if the item is part of a valid visual tree, otherwise IntPtr.Zero.</returns>
-        public static IntPtr GetWindowHandle(this DependencyObject self)
+        public static IntPtr GetWindowHandle([NotNull] this DependencyObject self)
         {
             Contract.Requires(self != null);
 
@@ -36,7 +38,8 @@
         /// If the item is inside a control that's embedded in a native or WindowsForms window, the root visual
         /// is <c>not</c> a <see cref="System.Windows.Window"/>.
         /// </remarks>
-        public static FrameworkElement GetRootVisual(this DependencyObject item)
+        [NotNull]
+        public static FrameworkElement GetRootVisual([NotNull] this DependencyObject item)
         {
             Contract.Requires(item != null);
             Contract.Ensures(Contract.Result<FrameworkElement>() != null);
@@ -71,7 +74,7 @@
         /// If the item is inside a control that's embedded in a native or WindowsForms window, the root visual
         /// is <c>not</c> a <see cref="System.Windows.Window"/>.
         /// </remarks>
-        public static FrameworkElement TryGetRootVisual(this DependencyObject item)
+        public static FrameworkElement TryGetRootVisual([NotNull] this DependencyObject item)
         {
             Contract.Requires(item != null);
 
@@ -96,7 +99,8 @@
         /// </summary>
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
-        public static IEnumerable<DependencyObject> AncestorsAndSelf(this DependencyObject self)
+        [NotNull]
+        public static IEnumerable<DependencyObject> AncestorsAndSelf([NotNull] this DependencyObject self)
         {
             Contract.Requires(self != null);
             Contract.Ensures(Contract.Result<IEnumerable<DependencyObject>>() != null);
@@ -113,7 +117,8 @@
         /// </summary>
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
-        public static IEnumerable<DependencyObject> Ancestors(this DependencyObject self)
+        [NotNull]
+        public static IEnumerable<DependencyObject> Ancestors([NotNull] this DependencyObject self)
         {
             Contract.Requires(self != null);
             Contract.Ensures(Contract.Result<IEnumerable<DependencyObject>>() != null);
@@ -127,7 +132,7 @@
         /// <typeparam name="T">The type of element to return.</typeparam>
         /// <param name="self">The starting element.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
-        public static T TryFindAncestorOrSelf<T>(this DependencyObject self)
+        public static T TryFindAncestorOrSelf<T>([NotNull] this DependencyObject self)
         {
             Contract.Requires(self != null);
 
@@ -141,7 +146,7 @@
         /// <param name="self">The starting element.</param>
         /// <param name="match">The predicate to match.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
-        public static T TryFindAncestorOrSelf<T>(this DependencyObject self, Func<T, bool> match)
+        public static T TryFindAncestorOrSelf<T>([NotNull] this DependencyObject self, [NotNull] Func<T, bool> match)
         {
             Contract.Requires(self != null);
             Contract.Requires(match != null);
@@ -155,7 +160,7 @@
         /// <typeparam name="T">The type of element to return.</typeparam>
         /// <param name="self">The starting element.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
-        public static T TryFindAncestor<T>(this DependencyObject self)
+        public static T TryFindAncestor<T>([NotNull] this DependencyObject self)
         {
             Contract.Requires(self != null);
 
@@ -169,7 +174,7 @@
         /// <param name="self">The starting element.</param>
         /// <param name="match">The predicate to match.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
-        public static T TryFindAncestor<T>(this DependencyObject self, Func<T, bool> match)
+        public static T TryFindAncestor<T>([NotNull] this DependencyObject self, [NotNull] Func<T, bool> match)
         {
             Contract.Requires(self != null);
             Contract.Requires(match != null);
@@ -185,7 +190,8 @@
         /// <remarks>
         /// Uses <see cref="VisualTreeHelper.GetChildrenCount"/> and <see cref="VisualTreeHelper.GetChild"/>.
         /// </remarks>
-        public static IEnumerable<DependencyObject> VisualChildren(this DependencyObject item)
+        [NotNull]
+        public static IEnumerable<DependencyObject> VisualChildren([NotNull] this DependencyObject item)
         {
             Contract.Requires(item != null);
             Contract.Ensures(Contract.Result<IEnumerable<DependencyObject>>() != null);
@@ -209,7 +215,8 @@
         /// <remarks>
         /// Uses <see cref="VisualTreeHelper.GetChildrenCount"/> and <see cref="VisualTreeHelper.GetChild"/>.
         /// </remarks>
-        public static IEnumerable<DependencyObject> VisualChildrenAndSelf(this DependencyObject item)
+        [NotNull]
+        public static IEnumerable<DependencyObject> VisualChildrenAndSelf([NotNull] this DependencyObject item)
         {
             Contract.Requires(item != null);
             Contract.Ensures(Contract.Result<IEnumerable<DependencyObject>>() != null);
@@ -230,7 +237,8 @@
         /// <remarks>
         /// Uses <see cref="VisualTreeHelper.GetChildrenCount"/> and <see cref="VisualTreeHelper.GetChild"/>.
         /// </remarks>
-        public static IEnumerable<DependencyObject> VisualDescendants(this DependencyObject item)
+        [NotNull]
+        public static IEnumerable<DependencyObject> VisualDescendants([NotNull] this DependencyObject item)
         {
             Contract.Requires(item != null);
             Contract.Ensures(Contract.Result<IEnumerable<DependencyObject>>() != null);
@@ -254,7 +262,8 @@
         /// <remarks>
         /// Uses <see cref="VisualTreeHelper.GetChildrenCount"/> and <see cref="VisualTreeHelper.GetChild"/>.
         /// </remarks>
-        public static IEnumerable<DependencyObject> VisualDescendantsAndSelf(this DependencyObject item)
+        [NotNull]
+        public static IEnumerable<DependencyObject> VisualDescendantsAndSelf([NotNull] this DependencyObject item)
         {
             Contract.Requires(item != null);
             Contract.Ensures(Contract.Result<IEnumerable<DependencyObject>>() != null);

@@ -2,11 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
     using System.Windows.Data;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// The arithmetic operation performed by the <see cref="ArithmeticMultiValueConverter" />
@@ -56,6 +59,7 @@
         };
 
         private ArithmeticOperation _operation;
+        [NotNull]
         private Func<IEnumerable<double>, double> _operationMethod = _minOperationMethod;
 
         /// <summary>
@@ -138,6 +142,7 @@
 
         [ContractInvariantMethod]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_operationMethod != null);

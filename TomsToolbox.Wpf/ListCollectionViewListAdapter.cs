@@ -5,10 +5,13 @@
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Windows.Data;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.ObservableCollections;
 
@@ -21,13 +24,14 @@
     [ContractVerification(false)] // Just wrapping inner object
     public sealed class ListCollectionViewListAdapter<T> : IObservableCollection<T>, IList
     {
+        [NotNull]
         private readonly ListCollectionView _collectionView;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ListCollectionViewListAdapter{T}"/> class.
         /// </summary>
         /// <param name="collectionView">The collection view.</param>
-        public ListCollectionViewListAdapter(ListCollectionView collectionView)
+        public ListCollectionViewListAdapter([NotNull] ListCollectionView collectionView)
         {
             Contract.Requires(collectionView != null);
             _collectionView = collectionView;
@@ -38,6 +42,7 @@
         /// <summary>
         /// Gets the underlying collection view.
         /// </summary>
+        [NotNull]
         public ListCollectionView CollectionView
         {
             get
@@ -304,6 +309,7 @@
 
         [ContractInvariantMethod]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_collectionView != null);

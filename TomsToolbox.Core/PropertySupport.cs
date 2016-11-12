@@ -7,6 +7,8 @@
     using System.Linq.Expressions;
     using System.Reflection;
 
+    using JetBrains.Annotations;
+
     ///<summary>
     /// Provides support for extracting property information based on a property expression.
     ///</summary>
@@ -23,7 +25,8 @@
         ///     The <see cref="MemberExpression"/> does not represent a property.<br/>
         /// </exception>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Works only with exactly this kind of expression, so we don't want to allow to pass something else!")]
-        public static string ExtractPropertyName<TProperty>(Expression<Func<TProperty>> propertyExpression)
+        [NotNull]
+        public static string ExtractPropertyName<TProperty>([NotNull] Expression<Func<TProperty>> propertyExpression)
         {
             Contract.Requires(propertyExpression != null);
             Contract.Ensures(!string.IsNullOrEmpty(Contract.Result<string>()));
@@ -38,7 +41,7 @@
         /// <param name="propertyExpression">The property expression (e.g. () => p.PropertyName) to extract the property name from.</param>
         /// <returns>The name of the property, or null if the extraction fails.</returns>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Works only with exactly this kind of expression, so we don't want to allow to pass something else!")]
-        public static string TryExtractPropertyName<TProperty>(Expression<Func<TProperty>> propertyExpression)
+        public static string TryExtractPropertyName<TProperty>([NotNull] Expression<Func<TProperty>> propertyExpression)
         {
             Contract.Requires(propertyExpression != null);
 
@@ -56,7 +59,8 @@
         /// Not a <see cref="MemberExpression" /><br />
         /// The <see cref="MemberExpression" /> does not represent a property.<br /></exception>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Works only with exactly this kind of expression, so we don't want to allow to pass something else!")]
-        public static string ExtractPropertyName<T, TProperty>(Expression<Func<T, TProperty>> propertyExpression)
+        [NotNull]
+        public static string ExtractPropertyName<T, TProperty>([NotNull] Expression<Func<T, TProperty>> propertyExpression)
         {
             Contract.Requires(propertyExpression != null);
             Contract.Ensures(!string.IsNullOrEmpty(Contract.Result<string>()));
@@ -72,14 +76,14 @@
         /// <param name="propertyExpression">The property expression (e.g. p => p.PropertyName) to extract the property name from.</param>
         /// <returns>The name of the property, or null if the extraction fails.</returns>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Works only with exactly this kind of expression, so we don't want to allow to pass something else!")]
-        public static string TryExtractPropertyName<T, TProperty>(Expression<Func<T, TProperty>> propertyExpression)
+        public static string TryExtractPropertyName<T, TProperty>([NotNull] Expression<Func<T, TProperty>> propertyExpression)
         {
             Contract.Requires(propertyExpression != null);
 
             return ExtractPropertyName(propertyExpression, false);
         }
 
-        private static string ExtractPropertyName<T>(Expression<Func<T>> propertyExpression, bool failOnErrors)
+        private static string ExtractPropertyName<T>([NotNull] Expression<Func<T>> propertyExpression, bool failOnErrors)
         {
             Contract.Requires(propertyExpression != null);
             Contract.Ensures((failOnErrors == false) || !string.IsNullOrEmpty(Contract.Result<string>()));
@@ -99,7 +103,7 @@
             return memberName;
         }
 
-        private static string ExtractPropertyName<T, TR>(Expression<Func<T, TR>> propertyExpression, bool failOnErrors)
+        private static string ExtractPropertyName<T, TR>([NotNull] Expression<Func<T, TR>> propertyExpression, bool failOnErrors)
         {
             Contract.Requires(propertyExpression != null);
             Contract.Ensures((failOnErrors == false) || !string.IsNullOrEmpty(Contract.Result<string>()));
@@ -119,7 +123,7 @@
             return memberName;
         }
 
-        private static string HandleError(bool failOnErrors, string errorMessage)
+        private static string HandleError(bool failOnErrors, [NotNull] string errorMessage)
         {
             Contract.Requires(errorMessage != null);
             Contract.Ensures((failOnErrors == false) || !string.IsNullOrEmpty(Contract.Result<string>()));
@@ -141,7 +145,8 @@
         ///     The <see cref="MemberExpression"/> does not represent a property.<br/>
         /// </exception>
         [ContractVerification(false)]
-        public static PropertyChangedEventArgs GetEventArgs<T>(Expression<Func<T>> propertyExpression)
+        [NotNull]
+        public static PropertyChangedEventArgs GetEventArgs<T>([NotNull] Expression<Func<T>> propertyExpression)
         {
             Contract.Requires(propertyExpression != null);
             Contract.Ensures(Contract.Result<PropertyChangedEventArgs>() != null);

@@ -9,6 +9,8 @@
     using System.Windows;
     using System.Windows.Data;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Unary operations supported by the <see cref="UnaryOperationConverter"/>
     /// </summary>
@@ -101,7 +103,7 @@
             }
         }
 
-        private object ApplyOperation(object value, Type valueType)
+        private object ApplyOperation(object value, [NotNull] Type valueType)
         {
             Contract.Requires(valueType != null);
 
@@ -116,7 +118,7 @@
                 .FirstOrDefault(v => v != null);
         }
 
-        private static object ChangeType(string value, Type targetType)
+        private static object ChangeType(string value, [NotNull] Type targetType)
         {
             Contract.Requires(targetType != null);
 

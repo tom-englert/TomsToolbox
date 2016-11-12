@@ -1,5 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Composition
 {
+    using System.Diagnostics.CodeAnalysis;
+
     /// <summary>
     /// Export metadata for <see cref="IComposablePart"/> objects.
     /// </summary>
@@ -24,7 +26,7 @@
         /// <summary>
         /// Gets the target regions for visual composition.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "Export metadata requires array.")]
+        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "Export metadata requires array.")]
         string[] TargetRegions
         {
             get;

@@ -8,6 +8,8 @@
     using System.Windows.Controls;
     using System.Windows.Interactivity;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
     using TomsToolbox.Wpf.Composition;
 
@@ -26,14 +28,14 @@
         /// </summary>
         public static event EventHandler<TextEventArgs> Error;
 
-        internal static void OnError(object sender, Exception ex)
+        internal static void OnError(object sender, [NotNull] Exception ex)
         {
             Contract.Requires(ex != null);
 
             OnError(sender, ex.ToString());
         }
 
-        internal static void OnError(object sender, string message)
+        internal static void OnError(object sender, [NotNull] string message)
         {
             Contract.Requires(message != null);
 
@@ -49,7 +51,7 @@
         /// <returns>The region identifier</returns>
         [AttachedPropertyBrowsableForType(typeof(ContentControl))]
         [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
-        public static string GetRegionId(Control obj)
+        public static string GetRegionId([NotNull] Control obj)
         {
             Contract.Requires(obj != null);
             return (string)obj.GetValue(RegionIdProperty);
@@ -59,7 +61,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetRegionId(Control obj, string value)
+        public static void SetRegionId([NotNull] Control obj, string value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(RegionIdProperty, value);

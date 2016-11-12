@@ -7,6 +7,8 @@
     using System.Linq;
     using System.Reflection;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Attribute to mark one property to relay the property changed events of another property from the governing class.
     /// If you call <see cref="ObservableObjectBase.OnPropertyChanged(string)"/> for a property of the governing class,
@@ -83,7 +85,8 @@
             }
         }
 
-        internal static IDictionary<Type, IDictionary<string, string>> CreateRelayMapping(IEnumerable<PropertyInfo> properties)
+        [NotNull]
+        internal static IDictionary<Type, IDictionary<string, string>> CreateRelayMapping([NotNull] IEnumerable<PropertyInfo> properties)
         {
             Contract.Requires(properties != null);
             Contract.Ensures(Contract.Result<IDictionary<Type, IDictionary<string, string>>>() != null);
@@ -99,7 +102,7 @@
             return relayMapping;
         }
 
-        internal static bool AreAllPropertiesValid(Type sourceType, IEnumerable<string> propertyNames)
+        internal static bool AreAllPropertiesValid([NotNull] Type sourceType, [NotNull] IEnumerable<string> propertyNames)
         {
             Contract.Requires(sourceType != null);
             Contract.Requires(propertyNames != null);

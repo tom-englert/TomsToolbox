@@ -5,6 +5,8 @@
     using System.Globalization;
     using System.Linq;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
 
     /// <summary>
@@ -19,7 +21,8 @@
         /// </summary>
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
-        public static IEnumerable<CultureInfo> GetAncestors(this CultureInfo self)
+        [NotNull]
+        public static IEnumerable<CultureInfo> GetAncestors([NotNull] this CultureInfo self)
         {
             Contract.Requires(self != null);
             Contract.Ensures(Contract.Result<IEnumerable<CultureInfo>>() != null);
@@ -38,7 +41,8 @@
         /// </summary>
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
-        public static IEnumerable<CultureInfo> GetAncestorsAndSelf(this CultureInfo self)
+        [NotNull]
+        public static IEnumerable<CultureInfo> GetAncestorsAndSelf([NotNull] this CultureInfo self)
         {
             Contract.Requires(self != null);
             Contract.Ensures(Contract.Result<IEnumerable<CultureInfo>>() != null);
@@ -57,7 +61,8 @@
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns>The immediate children of the specified item.</returns>
-        public static ICollection<CultureInfo> GetChildren(this CultureInfo item)
+        [NotNull]
+        public static ICollection<CultureInfo> GetChildren([NotNull] this CultureInfo item)
         {
             Contract.Requires(item != null);
             Contract.Ensures(Contract.Result<ICollection<CultureInfo>>() != null);
@@ -67,6 +72,7 @@
             return children;
         }
 
+        [NotNull]
         private static CultureInfo[] CreateChildList(CultureInfo parent)
         {
             Contract.Ensures(Contract.Result<CultureInfo[]>() != null);
@@ -79,7 +85,8 @@
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns>The descendants of the item.</returns>
-        public static IEnumerable<CultureInfo> GetDescendants(this CultureInfo item)
+        [NotNull]
+        public static IEnumerable<CultureInfo> GetDescendants([NotNull] this CultureInfo item)
         {
             Contract.Requires(item != null);
             Contract.Ensures(Contract.Result<IEnumerable<CultureInfo>>() != null);

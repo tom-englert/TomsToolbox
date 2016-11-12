@@ -6,9 +6,12 @@
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Core;
 
@@ -24,6 +27,7 @@
         /// <typeparam name="T">The type of elements in the list.</typeparam>
         /// <param name="singleItem">The first single item in the collection</param>
         /// <returns>A new <see cref="ObservableCompositeCollection{T}"/> containing one fixed list with one single item.</returns>
+        [NotNull]
         public static ObservableCompositeCollection<T> FromSingleItem<T>(T singleItem)
         {
             Contract.Requires(!ReferenceEquals(singleItem, null));
@@ -40,7 +44,8 @@
         /// <param name="singleItem">The first single item in the collection</param>
         /// <param name="list">The list to add after the single item.</param>
         /// <returns>A new <see cref="ObservableCompositeCollection{T}"/> containing one fixed list with the single item plus all items from the list.</returns>
-        public static ObservableCompositeCollection<T> FromSingleItemAndList<T, TItem>(T singleItem, IList<TItem> list)
+        [NotNull]
+        public static ObservableCompositeCollection<T> FromSingleItemAndList<T, TItem>(T singleItem, [NotNull] IList<TItem> list)
             where TItem : T
         {
             Contract.Requires(list != null);
@@ -60,7 +65,8 @@
         /// <param name="list">The list to add before the single item.</param>
         /// <param name="singleItem">The last single item in the collection</param>
         /// <returns>A new <see cref="ObservableCompositeCollection{T}"/> containing all items from the list plus one fixed list with the single item at the end.</returns>
-        public static ObservableCompositeCollection<T> FromListAndSingleItem<TItem, T>(IList<TItem> list, T singleItem)
+        [NotNull]
+        public static ObservableCompositeCollection<T> FromListAndSingleItem<TItem, T>([NotNull] IList<TItem> list, T singleItem)
             where TItem : T
         {
             Contract.Requires(list != null);
@@ -87,6 +93,7 @@
     public sealed class ObservableCompositeCollection<T> : ReadOnlyObservableCollection<T>, IObservableCollection<T>
     {
         [ContractPublicPropertyName("Content")]
+        [NotNull]
         private readonly ContentManager _content;
 
         /// <summary>
@@ -95,11 +102,13 @@
         private class ContentManager : IList<IList<T>>
         {
             // The parts that make up the composite collection
+            [NotNull]
             private readonly List<IList<T>> _parts = new List<IList<T>>();
             // The composite collection that we manage
+            [NotNull]
             private readonly ObservableCompositeCollection<T> _owner;
 
-            public ContentManager(ObservableCompositeCollection<T> owner)
+            public ContentManager([NotNull] ObservableCompositeCollection<T> owner)
             {
                 Contract.Requires(owner != null);
 
@@ -116,7 +125,7 @@
                 _owner.ContentCollectionChanged(TranslateEventArgs(e, offset));
             }
 
-            private static NotifyCollectionChangedEventArgs TranslateEventArgs(NotifyCollectionChangedEventArgs e, int offset)
+            private static NotifyCollectionChangedEventArgs TranslateEventArgs([NotNull] NotifyCollectionChangedEventArgs e, int offset)
             {
                 // Translate given event args by adding the given offset to the starting index
                 Contract.Requires(e != null);
@@ -284,7 +293,8 @@
             #region Contracts Invariant
 
             [ContractInvariantMethod]
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+            [Conditional("CONTRACTS_FULL")]
             private void ObjectInvariant()
             {
                 Contract.Invariant(_owner != null);
@@ -308,7 +318,7 @@
         /// </summary>
         /// <param name="parts">The lists to wrap</param>
         /// <exception cref="System.ArgumentException">None of the parts may be null!</exception>
-        public ObservableCompositeCollection(params IList<T>[] parts)
+        public ObservableCompositeCollection([NotNull] params IList<T>[] parts)
             : this()
         {
             Contract.Requires(parts != null);
@@ -325,6 +335,7 @@
         /// <summary>
         /// Access to the physical layer of the content
         /// </summary>
+        [NotNull]
         public IList<IList<T>> Content
         {
             get
@@ -411,6 +422,7 @@
 
         [ContractInvariantMethod]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_content != null);

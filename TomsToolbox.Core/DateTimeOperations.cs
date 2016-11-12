@@ -7,6 +7,8 @@
     using System.Globalization;
     using System.Linq;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Additional operations for <see cref="DateTime"/> and <see cref="TimeSpan"/>.
     /// </summary>
@@ -62,7 +64,8 @@
         /// </summary>
         /// <param name="cultureInfo">The culture information.</param>
         /// <returns>The days of a week starting with the cultures first day of week.</returns>
-        public static IList<DayOfWeek> GetDaysOfWeek(this CultureInfo cultureInfo)
+        [NotNull]
+        public static IList<DayOfWeek> GetDaysOfWeek([NotNull] this CultureInfo cultureInfo)
         {
             Contract.Requires(cultureInfo != null);
             Contract.Ensures(Contract.Result<IList<DayOfWeek>>() != null);
@@ -91,7 +94,7 @@
         /// <param name="timeSpan">The time span.</param>
         /// <param name="roundingOperation">The rounding operation that rounds the seconds.</param>
         /// <returns> The time span with no fractional seconds.</returns>
-        public static TimeSpan RoundToSeconds(this TimeSpan timeSpan, Func<double, double> roundingOperation)
+        public static TimeSpan RoundToSeconds(this TimeSpan timeSpan, [NotNull] Func<double, double> roundingOperation)
         {
             Contract.Requires(roundingOperation != null);
 
@@ -114,7 +117,7 @@
         /// <param name="time">The time.</param>
         /// <param name="roundingOperation">The rounding operation that rounds the seconds.</param>
         /// <returns>The time with no fractional seconds.</returns>
-        public static DateTime RoundToSeconds(this DateTime time, Func<double, double> roundingOperation)
+        public static DateTime RoundToSeconds(this DateTime time, [NotNull] Func<double, double> roundingOperation)
         {
             Contract.Requires(roundingOperation != null);
 
@@ -137,7 +140,7 @@
         /// <param name="timeSpan">The time span.</param>
         /// <param name="roundingOperation">The rounding operation that rounds the minutes.</param>
         /// <returns> The time span with no fractional minutes.</returns>
-        public static TimeSpan RoundToMinutes(this TimeSpan timeSpan, Func<double, double> roundingOperation)
+        public static TimeSpan RoundToMinutes(this TimeSpan timeSpan, [NotNull] Func<double, double> roundingOperation)
         {
             Contract.Requires(roundingOperation != null);
 
@@ -160,7 +163,7 @@
         /// <param name="time">The time.</param>
         /// <param name="roundingOperation">The rounding operation that rounds the minutes.</param>
         /// <returns>The time with no fractional minutes.</returns>
-        public static DateTime RoundToMinutes(this DateTime time, Func<double, double> roundingOperation)
+        public static DateTime RoundToMinutes(this DateTime time, [NotNull] Func<double, double> roundingOperation)
         {
             Contract.Requires(roundingOperation != null);
 
@@ -184,7 +187,7 @@
         /// <param name="timeSpan">The time span.</param>
         /// <param name="roundingOperation">The rounding operation that rounds the hours.</param>
         /// <returns> The time span with no fractional hours.</returns>
-        public static TimeSpan RoundToHours(this TimeSpan timeSpan, Func<double, double> roundingOperation)
+        public static TimeSpan RoundToHours(this TimeSpan timeSpan, [NotNull] Func<double, double> roundingOperation)
         {
             Contract.Requires(roundingOperation != null);
 
@@ -207,7 +210,7 @@
         /// <param name="time">The time.</param>
         /// <param name="roundingOperation">The rounding operation that rounds the hours.</param>
         /// <returns>The time with no fractional hours.</returns>
-        public static DateTime RoundToHours(this DateTime time, Func<double, double> roundingOperation)
+        public static DateTime RoundToHours(this DateTime time, [NotNull] Func<double, double> roundingOperation)
         {
             Contract.Requires(roundingOperation != null);
 
@@ -232,7 +235,7 @@
         /// <param name="roundingOperation">The rounding operation that rounds the days.</param>
         /// <returns>The time with no fractional days.</returns>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "ToDays")]
-        public static DateTime RoundToDays(this DateTime time, Func<double, double> roundingOperation)
+        public static DateTime RoundToDays(this DateTime time, [NotNull] Func<double, double> roundingOperation)
         {
             Contract.Requires(roundingOperation != null);
 

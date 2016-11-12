@@ -5,6 +5,8 @@
     using System.Windows.Input;
     using System.Windows.Media;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// A panel that raises MouseDoubleClick events like the <see cref="Control"/>.
     /// </summary>
@@ -85,7 +87,7 @@
             base.OnPreviewMouseRightButtonDown(e);
         }
 
-        private bool HandleDoubleClick(MouseButtonEventArgs e)
+        private bool HandleDoubleClick([NotNull] MouseButtonEventArgs e)
         {
             Contract.Requires(e != null);
 

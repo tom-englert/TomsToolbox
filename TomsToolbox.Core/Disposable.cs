@@ -6,6 +6,8 @@
     using System.Diagnostics.Contracts;
     using System.Linq;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Helper methods to ease robust implementation of the IDisposable pattern.
     /// </summary>
@@ -41,7 +43,7 @@
         /// }
         /// ]]></code></example>
         [ContractVerification(false)]
-        public static void ReportNotDisposedObject(this IDisposable obj)
+        public static void ReportNotDisposedObject([NotNull] this IDisposable obj)
         {
             Contract.Requires(obj != null);
 
@@ -81,7 +83,7 @@
         /// </summary>
         /// <param name="items">The objects to dispose.</param>
         /// <returns><c>true</c> if any object has been disposed.</returns>
-        public static bool DisposeAll(IEnumerable items)
+        public static bool DisposeAll([NotNull] IEnumerable items)
         {
             Contract.Requires(items != null);
 

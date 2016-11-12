@@ -10,6 +10,8 @@
     using System.Text;
     using System.Windows;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Helper methods to interchange data via clipboard.
     /// </summary>
@@ -74,7 +76,8 @@
             Clipboard.SetDataObject(dataObject);
         }
 
-        internal static string ToTextString(this IList<IList<string>> table)
+        [NotNull]
+        internal static string ToTextString([NotNull] this IList<IList<string>> table)
         {
             Contract.Requires(table != null);
             Contract.Ensures(Contract.Result<string>() != null);
@@ -82,7 +85,8 @@
             return ToString(table, TextColumnSeparator);
         }
 
-        internal static string ToCsvString(this IList<IList<string>> table)
+        [NotNull]
+        internal static string ToCsvString([NotNull] this IList<IList<string>> table)
         {
             Contract.Requires(table != null);
             Contract.Ensures(Contract.Result<string>() != null);
@@ -90,7 +94,8 @@
             return ToString(table, CsvColumnSeparator);
         }
 
-        internal static string ToString(this IList<IList<string>> table, char separator)
+        [NotNull]
+        internal static string ToString([NotNull] this IList<IList<string>> table, char separator)
         {
             Contract.Requires(table != null);
             Contract.Ensures(Contract.Result<string>() != null);
@@ -114,7 +119,7 @@
             return value;
         }
 
-        internal static IList<IList<string>> ParseTable(string text, char separator)
+        internal static IList<IList<string>> ParseTable([NotNull] string text, char separator)
         {
             Contract.Requires(text != null);
             Contract.Ensures((Contract.Result<IList<IList<string>>>() == null) || Contract.Result<IList<IList<string>>>().Count > 0);
@@ -137,7 +142,8 @@
             return table.Any(columns => columns.Count != headerColumns.Count) ? null : table;
         }
 
-        internal static IList<string> ReadTableLine(TextReader reader, char separator)
+        [NotNull]
+        internal static IList<string> ReadTableLine([NotNull] TextReader reader, char separator)
         {
             Contract.Requires(reader != null);
             Contract.Ensures(Contract.Result<IList<string>>() != null);
@@ -167,7 +173,8 @@
             return columns;
         }
 
-        internal static string ReadTableColumn(TextReader reader, char separator)
+        [NotNull]
+        internal static string ReadTableColumn([NotNull] TextReader reader, char separator)
         {
             Contract.Requires(reader != null);
             Contract.Ensures(Contract.Result<string>() != null);

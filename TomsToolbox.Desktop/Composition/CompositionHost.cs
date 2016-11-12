@@ -3,9 +3,12 @@
     using System;
     using System.ComponentModel.Composition;
     using System.ComponentModel.Composition.Hosting;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Core;
 
@@ -14,6 +17,7 @@
     /// </summary>
     public sealed class CompositionHost : ICompositionHost, IServiceProvider
     {
+        [NotNull]
         private readonly CompositionContainer _container;
 
         /// <summary>
@@ -96,6 +100,7 @@
 
         [ContractInvariantMethod]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_container != null);

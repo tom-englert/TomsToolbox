@@ -3,6 +3,8 @@
     using System;
     using System.Diagnostics.Contracts;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Entry point to create the <see cref="TryCastWorker{TValue}"/>.
     /// </summary>
@@ -23,6 +25,7 @@
         ///     .ElseThrow();
         /// ]]></code>
         /// </example>
+        [NotNull]
         public static TryCastWorker<TValue> TryCast<TValue>(this TValue value)
         {
             Contract.Ensures(Contract.Result<TryCastWorker<TValue>>() != null);
@@ -52,7 +55,8 @@
         /// <remarks>
         /// If any previous method in the fluent chain has already succeeded, this method does nothing.
         /// </remarks>
-        public TryCastWorker<TValue> When<TTarget>(Action<TTarget> action)
+        [NotNull]
+        public TryCastWorker<TValue> When<TTarget>([NotNull] Action<TTarget> action)
             where TTarget : TValue
         {
             Contract.Requires(action != null);
@@ -67,7 +71,7 @@
         /// Executes the action if no previous cast has succeeded.
         /// </summary>
         /// <param name="action">The action.</param>
-        public void Else(Action<TValue> action)
+        public void Else([NotNull] Action<TValue> action)
         {
             Contract.Requires(action != null);
 
@@ -79,6 +83,7 @@
         /// </summary>
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <returns>The <see cref="TryCastWorker{TValue, TResult}"/> object.</returns>
+        [NotNull]
         public TryCastWorker<TValue, TResult> Returning<TResult>()
         {
             Contract.Ensures(Contract.Result<TryCastWorker<TValue, TResult>>() != null);
@@ -94,6 +99,7 @@
         /// <returns>
         /// The <see cref="TryCastWorker{TValue, TResult}" /> object.
         /// </returns>
+        [NotNull]
         public TryCastWorker<TValue, TResult> Returning<TResult>(TResult defaultValue)
         {
             Contract.Ensures(Contract.Result<TryCastWorker<TValue, TResult>>() != null);
@@ -104,7 +110,7 @@
         /// <summary>
         /// Wraps the action so it can be used where a function is expected.
         /// </summary>
-        private static object WrapAction<TTarget>(Action<TTarget> action, TTarget target)
+        private static object WrapAction<TTarget>([NotNull] Action<TTarget> action, TTarget target)
         {
             Contract.Requires(action != null);
 
@@ -152,7 +158,8 @@
         /// <remarks>
         /// If any previous method in the fluent chain has already succeeded, this method does nothing.
         /// </remarks>
-        public TryCastWorker<TValue, TResult> When<TTarget>(Func<TTarget, TResult> action)
+        [NotNull]
+        public TryCastWorker<TValue, TResult> When<TTarget>([NotNull] Func<TTarget, TResult> action)
             where TTarget : TValue
         {
             Contract.Requires(action != null);
@@ -168,7 +175,7 @@
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>The result.</returns>
-        public TResult Else(Func<TValue, TResult> action)
+        public TResult Else([NotNull] Func<TValue, TResult> action)
         {
             Contract.Requires(action != null);
 
@@ -248,7 +255,7 @@
         /// </summary>
         /// <typeparam name="TTarget">The type of the target.</typeparam>
         /// <param name="action">The action.</param>
-        protected void TryExecute<TTarget>(Func<TTarget, TResult> action)
+        protected void TryExecute<TTarget>([NotNull] Func<TTarget, TResult> action)
             where TTarget : TValue
         {
             Contract.Requires(action != null);

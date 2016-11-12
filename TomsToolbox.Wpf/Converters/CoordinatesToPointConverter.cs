@@ -6,6 +6,8 @@
     using System.Windows;
     using System.Windows.Data;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Desktop;
 
     /// <summary>
@@ -56,6 +58,7 @@
         /// <param name="value">The <see cref="Coordinates" /> or <see cref="Point" /> value.</param>
         /// <returns>The <see cref="Coordinates" /> or <see cref="Point" /> value.</returns>
         /// <exception cref="System.InvalidOperationException">Value is neither a Point nor a Coordinates structure.</exception>
+        [NotNull]
         public static object Convert(object value)
         {
             Contract.Ensures(Contract.Result<object>() != null);

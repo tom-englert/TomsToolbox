@@ -6,8 +6,12 @@
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Core;
 
@@ -25,7 +29,9 @@
     public class ObservableFilteredCollection<T> : ReadOnlyObservableCollectionAdapter<T, ObservableCollection<T>>, IObservableCollection<T>
     {
         private readonly IWeakEventListener _collectionChangedWeakEvent;
+        [NotNull]
         private readonly Func<T, bool> _filter;
+        [NotNull]
         private readonly string[] _liveTrackingProperties;
 
         /// <summary>
@@ -34,7 +40,7 @@
         /// <param name="sourceCollection">The source collection. This instance will not hold a reference to the source collection.</param>
         /// <param name="filter">The filter.</param>
         /// <param name="liveTrackingProperties">The live tracking properties. Whenever one of these properties in any item changes, the filter is reevaluated for the item.</param>
-        public ObservableFilteredCollection(IEnumerable sourceCollection, Func<T, bool> filter, params string[] liveTrackingProperties)
+        public ObservableFilteredCollection([NotNull] IEnumerable sourceCollection, [NotNull] Func<T, bool> filter, [NotNull] params string[] liveTrackingProperties)
             : base(new ObservableCollection<T>(sourceCollection.Cast<T>().Where(filter)))
         {
             Contract.Requires(sourceCollection != null);
@@ -57,6 +63,7 @@
         }
 
         [ContractVerification(false)]
+        [NotNull]
         private WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> CreateEvent(INotifyCollectionChanged eventSource)
         {
             Contract.Ensures(Contract.Result<WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs>>() != null);
@@ -66,14 +73,14 @@
         }
 
         [ContractVerification(false)]
-        private static void OnCollectionChanged(ObservableFilteredCollection<T> self, object sender, NotifyCollectionChangedEventArgs e)
+        private static void OnCollectionChanged([NotNull] ObservableFilteredCollection<T> self, object sender, NotifyCollectionChangedEventArgs e)
         {
             Contract.Requires(self != null);
 
             self.SourceCollection_CollectionChanged(sender, e);
         }
 
-        private static void Attach(WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, INotifyCollectionChanged sender)
+        private static void Attach([NotNull] WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, [NotNull] INotifyCollectionChanged sender)
         {
             Contract.Requires(weakEvent != null);
             Contract.Requires(sender != null);
@@ -81,7 +88,7 @@
             sender.CollectionChanged += weakEvent.OnEvent;
         }
 
-        private static void Detach(WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, INotifyCollectionChanged sender)
+        private static void Detach([NotNull] WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, [NotNull] INotifyCollectionChanged sender)
         {
             Contract.Requires(weakEvent != null);
             Contract.Requires(sender != null);
@@ -90,7 +97,7 @@
         }
 
         [ContractVerification(false)]
-        private void SourceCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void SourceCollection_CollectionChanged([NotNull] object sender, NotifyCollectionChangedEventArgs e)
         {
             Contract.Requires(sender != null);
 
@@ -168,7 +175,7 @@
                 eventSource.PropertyChanged -= Item_PropertyChanged;
         }
 
-        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Item_PropertyChanged([NotNull] object sender, PropertyChangedEventArgs e)
         {
             Contract.Requires(sender != null);
 
@@ -197,7 +204,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_filter != null);

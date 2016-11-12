@@ -5,9 +5,12 @@
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Core;
 
@@ -22,6 +25,7 @@
     /// </remarks>
     public class ObservableWrappedCollection<TSource, TTarget> : ReadOnlyObservableCollectionAdapter<TTarget, ObservableCollection<TTarget>>
     {
+        [NotNull]
         private readonly Func<TSource, TTarget> _itemGenerator;
         private readonly IWeakEventListener _collectionChangedWeakEvent;
 
@@ -30,7 +34,7 @@
         /// </summary>
         /// <param name="sourceCollection">The source collection to wrap. This instance will not hold a reference to the source collection.</param>
         /// <param name="itemGenerator">The item generator to generate the wrapper for each item.</param>
-        public ObservableWrappedCollection(IEnumerable sourceCollection, Func<TSource, TTarget> itemGenerator)
+        public ObservableWrappedCollection([NotNull] IEnumerable sourceCollection, [NotNull] Func<TSource, TTarget> itemGenerator)
             : base(new ObservableCollection<TTarget>(sourceCollection.Cast<TSource>().Select(itemGenerator)))
         {
             Contract.Requires(sourceCollection != null);
@@ -46,6 +50,7 @@
         }
 
         [ContractVerification(false)]
+        [NotNull]
         private WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> CreateEvent(INotifyCollectionChanged eventSource)
         {
             Contract.Ensures(Contract.Result<WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs>>() != null);
@@ -57,6 +62,7 @@
         /// <summary>
         /// Gets the item generator used to generate the wrapper for each item.
         /// </summary>
+        [NotNull]
         protected Func<TSource, TTarget> ItemGenerator
         {
             get
@@ -66,7 +72,7 @@
             }
         }
 
-        private static void OnCollectionChanged(ObservableWrappedCollection<TSource, TTarget> self, object sender, NotifyCollectionChangedEventArgs e)
+        private static void OnCollectionChanged([NotNull] ObservableWrappedCollection<TSource, TTarget> self, [NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
             Contract.Requires(self != null);
             Contract.Requires(sender != null);
@@ -75,7 +81,7 @@
             self.SourceItems_CollectionChanged(sender, e);
         }
 
-        private static void Attach(WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, INotifyCollectionChanged sender)
+        private static void Attach([NotNull] WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, [NotNull] INotifyCollectionChanged sender)
         {
             Contract.Requires(weakEvent != null);
             Contract.Requires(sender != null);
@@ -83,7 +89,7 @@
             sender.CollectionChanged += weakEvent.OnEvent;
         }
 
-        private static void Detach(WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, INotifyCollectionChanged sender)
+        private static void Detach([NotNull] WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, [NotNull] INotifyCollectionChanged sender)
         {
             Contract.Requires(weakEvent != null);
             Contract.Requires(sender != null);
@@ -106,7 +112,7 @@
         /// <exception cref="System.NotImplementedException">Moving more than one item is not supported</exception>
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Caused by code contracts.")]
         [ContractVerification(false)]
-        protected virtual void OnSourceCollectionChanged(IEnumerable sourceCollection, NotifyCollectionChangedEventArgs e)
+        protected virtual void OnSourceCollectionChanged([NotNull] IEnumerable sourceCollection, [NotNull] NotifyCollectionChangedEventArgs e)
         {
             Contract.Requires(sourceCollection != null);
             Contract.Requires(e != null);
@@ -197,6 +203,7 @@
 
         [ContractInvariantMethod]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_itemGenerator != null);

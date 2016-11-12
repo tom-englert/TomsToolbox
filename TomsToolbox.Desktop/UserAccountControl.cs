@@ -11,6 +11,8 @@
     using System.Text;
     using System.Windows.Interop;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
 
     /// <summary>
@@ -31,7 +33,7 @@
         /// <returns>
         /// The credentials entered by the user, or <c>null</c> if the user has canceled the operation.
         /// </returns>
-        public static NetworkCredential PromptForCredential(IWin32Window parent, string caption, string message, int authenticationError, NetworkCredential template)
+        public static NetworkCredential PromptForCredential([NotNull] IWin32Window parent, string caption, string message, int authenticationError, NetworkCredential template)
         {
             Contract.Requires(parent != null);
 
@@ -50,7 +52,7 @@
         /// 0 if the function succeeds, a HRESULT of the last error if the function fails.
         /// </returns>
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        public static int LogOnInteractiveUser(this NetworkCredential credential, out SafeTokenHandle userToken)
+        public static int LogOnInteractiveUser([NotNull] this NetworkCredential credential, out SafeTokenHandle userToken)
         {
             Contract.Requires(credential != null);
             Contract.Ensures((Contract.Result<int>() != 0) || (Contract.ValueAtReturn(out userToken) != null));
@@ -130,7 +132,7 @@
         /// <exception cref="Win32Exception">
         /// </exception>
         /// <exception cref="System.ComponentModel.Win32Exception">When any native Windows API call fails, the function throws a Win32Exception with the last error code.</exception>
-        public static bool IsUserInAdminGroup(SafeTokenHandle userToken)
+        public static bool IsUserInAdminGroup([NotNull] SafeTokenHandle userToken)
         {
             Contract.Requires(userToken != null);
 
@@ -244,7 +246,7 @@
         /// <c>true</c> if the user blongs to the specified group; otherwise <c>false</c>
         /// </returns>
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
-        public static bool IsUserInGroup(SafeTokenHandle userToken, string groupName)
+        public static bool IsUserInGroup([NotNull] SafeTokenHandle userToken, string groupName)
         {
             Contract.Requires(userToken != null);
 
@@ -454,7 +456,7 @@
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
-        private static NetworkCredential PromptForCredential(IWin32Window parent, string caption, string message, int authenticationError, SafeNativeMemory inCredBuffer)
+        private static NetworkCredential PromptForCredential([NotNull] IWin32Window parent, string caption, string message, int authenticationError, [NotNull] SafeNativeMemory inCredBuffer)
         {
             Contract.Requires(parent != null);
             Contract.Requires(inCredBuffer != null);
@@ -482,7 +484,7 @@
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
-        private static bool IsAdministrator(SafeHandle hTokenToCheck)
+        private static bool IsAdministrator([NotNull] SafeHandle hTokenToCheck)
         {
             Contract.Requires(hTokenToCheck != null);
 
@@ -498,7 +500,7 @@
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
-        private static NetworkCredential UnpackAuthenticationBuffer(SafeNativeMemory outCredBuffer)
+        private static NetworkCredential UnpackAuthenticationBuffer([NotNull] SafeNativeMemory outCredBuffer)
         {
             Contract.Requires(outCredBuffer != null);
 
@@ -666,7 +668,7 @@
             public static extern bool GetTokenInformation(SafeTokenHandle hToken, TOKEN_INFORMATION_CLASS tokenInfoClass, IntPtr pTokenInfo, int tokenInfoLength, out int returnLength);
 
             [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
-            public static bool GetTokenInformation(SafeTokenHandle hToken, TOKEN_INFORMATION_CLASS tokenInfoClass, SafeNativeMemory pTokenInfo)
+            public static bool GetTokenInformation([NotNull] SafeTokenHandle hToken, TOKEN_INFORMATION_CLASS tokenInfoClass, [NotNull] SafeNativeMemory pTokenInfo)
             {
                 Contract.Requires(hToken != null);
                 Contract.Requires(pTokenInfo != null);

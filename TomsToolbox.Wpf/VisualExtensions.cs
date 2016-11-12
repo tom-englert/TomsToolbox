@@ -6,6 +6,8 @@
     using System.Windows.Media;
     using System.Windows.Threading;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Extension methods to ease usage of <see cref="Visual"/> object.
     /// </summary>
@@ -23,7 +25,8 @@
         /// thus calling DispatcherObject.Dispatcher.BeginInvoke is considered unsafe. However <see cref="Visual"/> objects always 
         /// have a valid dispatcher, so calling Visual.BeginInvoke via this extension can be considered safe.
         /// </remarks>
-        public static DispatcherOperation BeginInvoke(this Visual visual, Action method)
+        [NotNull]
+        public static DispatcherOperation BeginInvoke([NotNull] this Visual visual, [NotNull] Action method)
         {
             Contract.Requires(visual != null);
             Contract.Requires(method != null);
@@ -48,7 +51,8 @@
         /// thus calling DispatcherObject.Dispatcher.BeginInvoke is considered unsafe. However <see cref="Visual"/> objects always 
         /// have a valid dispatcher, so calling Visual.BeginInvoke via this extension can be considered safe.
         /// </remarks>
-        public static DispatcherOperation BeginInvoke(this Visual visual, DispatcherPriority priority, Action method)
+        [NotNull]
+        public static DispatcherOperation BeginInvoke([NotNull] this Visual visual, DispatcherPriority priority, [NotNull] Action method)
         {
             Contract.Requires(visual != null);
             Contract.Requires(method != null);

@@ -2,8 +2,11 @@
 {
     using System;
     using System.ComponentModel.Composition;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Attribute to apply to view models to support visual composition.
@@ -18,13 +21,14 @@
         /// </summary>
         public const string ExportContractName = "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D";
 
+        [NotNull]
         private readonly string[] _targetRegions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VisualCompositionExportAttribute" /> class.
         /// </summary>
         /// <param name="targetRegions">The names of the region(s) where this view should appear.</param>
-        public VisualCompositionExportAttribute(params string[] targetRegions)
+        public VisualCompositionExportAttribute([NotNull] params string[] targetRegions)
             : base(ExportContractName, typeof(object))
         {
             Contract.Requires(targetRegions != null);
@@ -53,6 +57,7 @@
         /// <summary>
         /// Gets the target regions for visual composition.
         /// </summary>
+        [NotNull]
         public string[] TargetRegions
         {
             get
@@ -65,6 +70,7 @@
 
         [ContractInvariantMethod]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_targetRegions != null);

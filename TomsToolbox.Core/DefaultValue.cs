@@ -3,6 +3,8 @@
     using System;
     using System.Diagnostics.Contracts;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Helper methods to get the default value for a type when the type is only available at runtime.
     /// </summary>
@@ -13,7 +15,7 @@
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The default value.</returns>
-        public static object CreateDefault(Type type)
+        public static object CreateDefault([NotNull] Type type)
         {
             Contract.Requires(type != null);
 
@@ -34,7 +36,7 @@
         /// </remarks>
         /// <param name="type">The type.</param>
         /// <returns>The empty value.</returns>
-        public static object CreateEmpty(Type type)
+        public static object CreateEmpty([NotNull] Type type)
         {
             Contract.Requires(type != null);
 

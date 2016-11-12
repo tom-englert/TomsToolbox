@@ -1,12 +1,16 @@
 ﻿namespace TomsToolbox.Wpf.Interactivity
 {
     using System;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Windows;
     using System.Windows.Input;
     using System.Windows.Interactivity;
     using System.Windows.Media.Animation;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Core;
     using TomsToolbox.Desktop;
@@ -17,7 +21,9 @@
     /// </summary>
     public class MapZoomBehavior : Behavior<Map>
     {
+        [NotNull]
         private readonly DoubleAnimation _animation = new DoubleAnimation { Duration = new Duration(TimeSpan.FromSeconds(0.5)) };
+        [NotNull]
         private readonly Storyboard _storyboard = new Storyboard();
 
         /// <summary>
@@ -132,7 +138,8 @@
         /// Objects the invariant.
         /// </summary>
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_animation != null);

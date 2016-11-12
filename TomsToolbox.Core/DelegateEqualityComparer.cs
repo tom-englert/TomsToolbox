@@ -2,7 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// <see cref="IEqualityComparer{T}"/> implementation using a delegate function to compare the values.
@@ -10,7 +14,9 @@
     /// <typeparam name="T">The type of objects to compare.</typeparam>
     public class DelegateEqualityComparer<T> : IEqualityComparer<T>
     {
+        [NotNull]
         private readonly Func<T, T, bool> _comparer;
+        [NotNull]
         private readonly Func<T, int> _hashCodeGenerator;
 
         /// <summary>
@@ -26,7 +32,7 @@
         /// Initializes a new instance of the <see cref="DelegateEqualityComparer{T}"/> class.
         /// </summary>
         /// <param name="selector">The selector that selects the object to compare, if e.g. two objects can be compared by a single property.</param>
-        public DelegateEqualityComparer(Func<T, object> selector)
+        public DelegateEqualityComparer([NotNull] Func<T, object> selector)
         {
             Contract.Requires(selector != null);
 
@@ -39,7 +45,7 @@
         /// </summary>
         /// <param name="comparer">The compare function.</param>
         /// <param name="hashCodeGenerator">The hash code generator.</param>
-        public DelegateEqualityComparer(Func<T, T, bool> comparer, Func<T, int> hashCodeGenerator)
+        public DelegateEqualityComparer([NotNull] Func<T, T, bool> comparer, [NotNull] Func<T, int> hashCodeGenerator)
         {
             Contract.Requires(comparer != null);
             Contract.Requires(hashCodeGenerator != null);
@@ -54,7 +60,7 @@
         /// <param name="selector">The selector that selects the object to compare, if e.g. two objects can be compared by a single property.</param>
         /// <param name="comparer">The compare function.</param>
         /// <param name="hashCodeGenerator">The hash code generator.</param>
-        public DelegateEqualityComparer(Func<T, object> selector, Func<object, object, bool> comparer, Func<object, int> hashCodeGenerator)
+        public DelegateEqualityComparer([NotNull] Func<T, object> selector, [NotNull] Func<object, object, bool> comparer, [NotNull] Func<object, int> hashCodeGenerator)
         {
             Contract.Requires(selector != null);
             Contract.Requires(comparer != null);
@@ -100,7 +106,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_comparer != null);

@@ -4,6 +4,8 @@
     using System.Windows;
     using System.Windows.Input;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Desktop;
 
     /// <summary>
@@ -25,6 +27,7 @@
         /// <summary>
         /// Gets the singleton instance of the <see cref="KeyboardNavigation"/> class.
         /// </summary>
+        [NotNull]
         public static KeyboardNavigation Current
         {
             get

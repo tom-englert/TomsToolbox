@@ -5,6 +5,8 @@
     using System.Reflection;
     using System.Windows.Threading;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Extension methods to ease usage of dispatcher calls.
     /// </summary>
@@ -18,7 +20,7 @@
         /// <param name="method">The method.</param>
         /// <returns>The result of the method.</returns>
         /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
-        public static T Invoke<T>(this Dispatcher dispatcher, Func<T> method)
+        public static T Invoke<T>(this Dispatcher dispatcher, [NotNull] Func<T> method)
         {
             Contract.Requires(method != null);
 
@@ -31,14 +33,14 @@
         /// <param name="dispatcher">The dispatcher.</param>
         /// <param name="method">The method.</param>
         /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
-        public static void Invoke(this Dispatcher dispatcher, Action method)
+        public static void Invoke(this Dispatcher dispatcher, [NotNull] Action method)
         {
             Contract.Requires(method != null);
 
             InternalInvoke(dispatcher, method);
         }
 
-        private static T InternalInvoke<T>(Dispatcher dispatcher, Func<T> method)
+        private static T InternalInvoke<T>(Dispatcher dispatcher, [NotNull] Func<T> method)
         {
             Contract.Requires(method != null);
 
@@ -49,7 +51,7 @@
             return (T)result;
         }
 
-        private static object InternalInvoke(Dispatcher dispatcher, Delegate method)
+        private static object InternalInvoke(Dispatcher dispatcher, [NotNull] Delegate method)
         {
             Contract.Requires(method != null);
 
@@ -90,7 +92,8 @@
             return result;
         }
 
-        private static Exception UnwrapTargetInvocation(Exception ex)
+        [NotNull]
+        private static Exception UnwrapTargetInvocation([NotNull] Exception ex)
         {
             Contract.Requires(ex != null);
             Contract.Ensures(Contract.Result<Exception>() != null);
@@ -110,7 +113,8 @@
         /// <param name="method">The method.</param>
         /// <returns>The dispatcher operation to track the outcome of the call.</returns>
         /// <exception cref="System.InvalidOperationException">The dispatcher has already shut down.</exception>
-        public static DispatcherOperation BeginInvoke(this Dispatcher dispatcher, Action method)
+        [NotNull]
+        public static DispatcherOperation BeginInvoke([NotNull] this Dispatcher dispatcher, [NotNull] Action method)
         {
             Contract.Requires(dispatcher != null);
             Contract.Requires(method != null);
@@ -127,7 +131,8 @@
         /// <param name="method">The method.</param>
         /// <returns>The dispatcher operation to track the outcome of the call.</returns>
         /// <exception cref="System.InvalidOperationException">The dispatcher has already shut down.</exception>
-        public static DispatcherOperation BeginInvoke(this Dispatcher dispatcher, DispatcherPriority priority, Action method)
+        [NotNull]
+        public static DispatcherOperation BeginInvoke([NotNull] this Dispatcher dispatcher, DispatcherPriority priority, [NotNull] Action method)
         {
             Contract.Requires(dispatcher != null);
             Contract.Requires(method != null);
@@ -140,7 +145,7 @@
         /// Restarts the specified timer.
         /// </summary>
         /// <param name="timer">The timer.</param>
-        public static void Restart(this DispatcherTimer timer)
+        public static void Restart([NotNull] this DispatcherTimer timer)
         {
             Contract.Requires(timer != null);
 

@@ -2,8 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// A simple set of weak references.
@@ -12,6 +16,7 @@
     public class WeakReferenceSet<T> : IEnumerable<T> where T : class
     {
         private int _cleanupCycleCounter;
+        [NotNull]
         private List<WeakReference> _items = new List<WeakReference>();
 
         /// <summary>
@@ -57,7 +62,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_items != null);

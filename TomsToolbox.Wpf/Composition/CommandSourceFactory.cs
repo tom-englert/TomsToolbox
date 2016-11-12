@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Windows;
@@ -9,6 +10,8 @@
     using System.Windows.Controls.Primitives;
     using System.Windows.Input;
     using System.Windows.Media.Imaging;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Core;
     using TomsToolbox.Desktop;
@@ -117,6 +120,7 @@
         public const string GroupNameKey = "GroupName";
 
 
+        [NotNull]
         private readonly Dictionary<object, T> _commandSourcePerContext = new Dictionary<object, T>();
 
         /// <summary>
@@ -134,6 +138,7 @@
         /// </summary>
         /// <param name="compositionContext">The composition context.</param>
         /// <returns>The command source.</returns>
+        [NotNull]
         private T GetCommandSource(object compositionContext)
         {
             Contract.Ensures(Contract.Result<T>() != null);
@@ -209,7 +214,8 @@
         /// <param name="context">The context.</param>
         /// <param name="command">The command.</param>
         /// <returns>The <see cref="CommandSource"/> associated with the <paramref name="context"/></returns>
-        public T Attach(object context, ICommand command)
+        [NotNull]
+        public T Attach(object context, [NotNull] ICommand command)
         {
             Contract.Requires(command != null);
             Contract.Ensures(Contract.Result<T>() != null);
@@ -228,7 +234,8 @@
         /// <param name="command">The command.</param>
         /// <returns>The <see cref="CommandSource"/> associated with the <paramref name="context"/></returns>
         /// <exception cref="System.ArgumentException">Can't detach a command that has not been attached before;command</exception>
-        public T Detach(object context, ICommand command)
+        [NotNull]
+        public T Detach(object context, [NotNull] ICommand command)
         {
             Contract.Requires(command != null);
             Contract.Ensures(Contract.Result<T>() != null);
@@ -248,7 +255,8 @@
         /// <param name="newCommand">The new command.</param>
         /// <returns>The <see cref="CommandSource"/> associated with the <paramref name="context"/></returns>
         /// <exception cref="System.ArgumentException">Can't replace a command that has not been attached before;oldCommand</exception>
-        public T Replace(object context, ICommand oldCommand, ICommand newCommand)
+        [NotNull]
+        public T Replace(object context, [NotNull] ICommand oldCommand, [NotNull] ICommand newCommand)
         {
             Contract.Requires(oldCommand != null);
             Contract.Requires(newCommand != null);
@@ -267,6 +275,7 @@
 
         [ContractInvariantMethod]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_commandSourcePerContext != null);

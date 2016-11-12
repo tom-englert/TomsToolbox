@@ -5,6 +5,8 @@
     using System.ComponentModel;
     using System.ComponentModel.Composition;
     using System.ComponentModel.Composition.Hosting;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Reflection;
@@ -12,6 +14,8 @@
     using System.Windows.Data;
     using System.Windows.Markup;
     using System.Xaml;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Core;
     using TomsToolbox.Desktop;
@@ -35,7 +39,7 @@
         /// Initializes a new instance of the <see cref="ImportExtension" /> class.
         /// </summary>
         /// <param name="memberType">Type of the member to provide.</param>
-        public ImportExtension(Type memberType)
+        public ImportExtension([NotNull] Type memberType)
         {
             Contract.Requires(memberType != null);
             MemberType = memberType;
@@ -44,6 +48,7 @@
         /// <summary>
         /// Gets or sets the exported type of the object to provide.
         /// </summary>
+        [NotNull]
         public Type MemberType
         {
             get;
@@ -74,6 +79,7 @@
         /// <summary>
         /// Gets a list of setters that allow initializing dependency properties of the composed object.
         /// </summary>
+        [NotNull]
         public ICollection<Setter> Setters
         {
             get
@@ -220,7 +226,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(MemberType != null);

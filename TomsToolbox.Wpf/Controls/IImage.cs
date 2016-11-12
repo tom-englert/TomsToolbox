@@ -4,6 +4,8 @@
     using System.Diagnostics.Contracts;
     using System.Windows.Media;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Implemented by image providers to provide a dynamically loadable image.
     /// </summary>
@@ -35,6 +37,7 @@
     [ContractClassFor(typeof (IImage))]
     abstract class ImageContract : IImage
     {
+        [NotNull]
         ImageSource IImage.Source
         {
             get

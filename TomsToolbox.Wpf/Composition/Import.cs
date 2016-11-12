@@ -6,6 +6,8 @@ namespace TomsToolbox.Wpf.Composition
     using System.Windows;
     using System.Windows.Interactivity;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// A helper class to host attached properties for import.
     /// </summary>
@@ -17,7 +19,7 @@ namespace TomsToolbox.Wpf.Composition
         /// <param name="obj">The object.</param>
         /// <returns>The data context type.</returns>
         [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
-        public static Type GetDataContext(FrameworkElement obj)
+        public static Type GetDataContext([NotNull] FrameworkElement obj)
         {
             Contract.Requires(obj != null);
             return (Type)obj.GetValue(DataContextProperty);
@@ -27,7 +29,7 @@ namespace TomsToolbox.Wpf.Composition
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetDataContext(FrameworkElement obj, Type value)
+        public static void SetDataContext([NotNull] FrameworkElement obj, Type value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(DataContextProperty, value);

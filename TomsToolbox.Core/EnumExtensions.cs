@@ -7,6 +7,8 @@
     using System.Globalization;
     using System.Linq;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Extension methods to ease dealing with <see cref="Enum"/> types.
     /// </summary>
@@ -57,6 +59,7 @@
         /// <param name="value">The value.</param>
         /// <returns>The individual flags set on the specified value.</returns>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification="Dealing with flags")]
+        [NotNull]
         public static IEnumerable<T> GetFlags<T>(this T value) where T : struct
         {
             Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
@@ -130,7 +133,7 @@
         /// <returns>The combined flags.</returns>
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification="Dealing with flags")]
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification="Dealing with flags")]
-        public static T CombineFlags<T>(this IEnumerable<T> flags) where T : struct
+        public static T CombineFlags<T>([NotNull] this IEnumerable<T> flags) where T : struct
         {
             Contract.Requires(flags != null);
 

@@ -1,7 +1,11 @@
 ﻿namespace TomsToolbox.Core
 {
     using System;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Common interface for weak event listener.
@@ -28,6 +32,7 @@
         /// <summary>
         /// WeakReference to the object listening for the event.
         /// </summary>
+        [NotNull]
         private readonly WeakReference<TTarget> _weakTarget;
 
         /// <summary>
@@ -44,11 +49,13 @@
         /// <summary>
         /// Delegate to the method to call when the event fires.
         /// </summary>
+        [NotNull]
         private readonly Action<TTarget, object, TEventArgs> _onEventAction;
 
         /// <summary>
         /// Delegate to the method to call when detaching from the event.
         /// </summary>
+        [NotNull]
         private readonly Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> _onDetachAction;
 
         /// <summary>
@@ -59,10 +66,10 @@
         /// <param name="onEventAction">The static method to call when a event is received.</param>
         /// <param name="onAttachAction">The static action to attach to the event(s).</param>
         /// <param name="onDetachAction">The static action to detach from the event(s).</param>
-        public WeakEventListener(TTarget target, TSource source,
-            Action<TTarget, object, TEventArgs> onEventAction,
-            Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onAttachAction,
-            Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onDetachAction)
+        public WeakEventListener([NotNull] TTarget target, [NotNull] TSource source,
+            [NotNull] Action<TTarget, object, TEventArgs> onEventAction,
+            [NotNull] Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onAttachAction,
+            [NotNull] Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onDetachAction)
         {
             Contract.Requires(target != null);
             Contract.Requires(source != null);
@@ -89,10 +96,10 @@
         /// <param name="onEventAction">The static method to call when a event is received.</param>
         /// <param name="onAttachAction">The static action to attach to the event(s).</param>
         /// <param name="onDetachAction">The static action to detach from the event(s).</param>
-        public WeakEventListener(TTarget target, WeakReference<TSource> source,
-            Action<TTarget, object, TEventArgs> onEventAction,
-            Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onAttachAction,
-            Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onDetachAction)
+        public WeakEventListener([NotNull] TTarget target, [NotNull] WeakReference<TSource> source,
+            [NotNull] Action<TTarget, object, TEventArgs> onEventAction,
+            [NotNull] Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onAttachAction,
+            [NotNull] Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onDetachAction)
         {
             Contract.Requires(target != null);
             Contract.Requires(source != null);
@@ -145,7 +152,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_weakTarget != null);

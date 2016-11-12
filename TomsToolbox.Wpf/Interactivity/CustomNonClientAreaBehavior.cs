@@ -10,6 +10,8 @@
     using System.Windows.Media;
     using System.Windows.Threading;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Desktop;
 
     /// <summary>
@@ -242,7 +244,7 @@
             ApplySizeToContent(window, nonClientArea);
         }
 
-        private static void ApplySizeToContent(Window window, FrameworkElement nonClientArea)
+        private static void ApplySizeToContent([NotNull] Window window, [NotNull] FrameworkElement nonClientArea)
         {
             Contract.Requires(window != null);
             Contract.Requires(nonClientArea != null);
@@ -263,7 +265,7 @@
             });
         }
 
-        private static void ApplySizeToContent(Window window, SizeToContent sizeToContent, double width, double height)
+        private static void ApplySizeToContent([NotNull] Window window, SizeToContent sizeToContent, double width, double height)
         {
             Contract.Requires(window != null);
             Contract.Requires(width >= 0);
@@ -338,7 +340,7 @@
             nonClientArea.Margin = _window.WindowState != WindowState.Maximized ? new Thickness() : new Thickness(_maximizedPadding.X, _maximizedPadding.Y, _maximizedPadding.X, _maximizedPadding.Y);
         }
 
-        private void Unregister(Window window)
+        private void Unregister([NotNull] Window window)
         {
             Contract.Requires(window != null);
 

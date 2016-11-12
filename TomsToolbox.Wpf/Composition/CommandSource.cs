@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
@@ -11,6 +12,8 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
     using TomsToolbox.Desktop;
 
@@ -19,14 +22,16 @@
     /// </summary>
     public class CommandSource : DependencyObject
     {
+        [NotNull]
         private readonly ICommandSourceFactory _owner;
+        [NotNull]
         private readonly List<ICommand> _attachedCommands = new List<ICommand>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandSource"/> class.
         /// </summary>
         /// <param name="owner">The command source factory.</param>
-        public CommandSource(ICommandSourceFactory owner)
+        public CommandSource([NotNull] ICommandSourceFactory owner)
         {
             Contract.Requires(owner != null);
 
@@ -132,7 +137,7 @@
         /// Attaches the specified command. The last command attached will become the active command, while the previous command will be pushed on a stack.
         /// </summary>
         /// <param name="command">The command.</param>
-        internal void Attach(ICommand command)
+        internal void Attach([NotNull] ICommand command)
         {
             Contract.Requires(command != null);
 
@@ -146,7 +151,7 @@
         /// </summary>
         /// <param name="command">The command.</param>
         /// <exception cref="System.ArgumentException">Can't detach a command that has not been attached before;command</exception>
-        internal void Detach(ICommand command)
+        internal void Detach([NotNull] ICommand command)
         {
             Contract.Requires(command != null);
 
@@ -162,7 +167,7 @@
         /// <param name="oldCommand">The old command.</param>
         /// <param name="newCommand">The new command.</param>
         /// <exception cref="System.ArgumentException">Can't replace a command that has not been attached before;oldCommand</exception>
-        internal void Replace(ICommand oldCommand, ICommand newCommand)
+        internal void Replace([NotNull] ICommand oldCommand, [NotNull] ICommand newCommand)
         {
             Contract.Requires(oldCommand != null);
             Contract.Requires(newCommand != null);
@@ -195,6 +200,7 @@
 
         [ContractInvariantMethod]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_attachedCommands != null);

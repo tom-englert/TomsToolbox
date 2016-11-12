@@ -8,6 +8,8 @@
     using System.Linq;
     using System.Windows.Data;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Converts the specified enum-type into an array of the individual enum values.
     /// The converter parameter can be used to specify a comma separated exclude list.
@@ -38,7 +40,8 @@
         /// </summary>
         /// <param name="type">The enum type.</param>
         /// <returns>An array of the enum's values.</returns>
-        public static Array Convert(Type type)
+        [NotNull]
+        public static Array Convert([NotNull] Type type)
         {
             Contract.Requires(type != null);
             Contract.Ensures(Contract.Result<Array>() != null);
@@ -52,7 +55,8 @@
         /// <param name="type">The enum type.</param>
         /// <param name="excluded">A comma separated list of values to exclude.</param>
         /// <returns>An array of the enum's values.</returns>
-        public static Array Convert(Type type, string excluded)
+        [NotNull]
+        public static Array Convert([NotNull] Type type, string excluded)
         {
             Contract.Requires(type != null);
             Contract.Ensures(Contract.Result<Array>() != null);

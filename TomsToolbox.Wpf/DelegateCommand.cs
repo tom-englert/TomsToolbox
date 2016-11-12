@@ -4,6 +4,8 @@
     using System.Diagnostics.Contracts;
     using System.Windows.Input;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
 
     /// <summary>
@@ -215,7 +217,7 @@
         ///     }
         /// }
         /// ]]></code></example>
-        public DelegateCommand(Action executeCallback)
+        public DelegateCommand([NotNull] Action executeCallback)
             : this(null, executeCallback)
         {
             Contract.Requires(executeCallback != null);

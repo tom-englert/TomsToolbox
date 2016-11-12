@@ -5,6 +5,8 @@
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Some enumerators for various scenarios.
     /// </summary>
@@ -19,7 +21,8 @@
         /// <param name="second">The second collection.</param>
         /// <returns>Tuples of the elements.</returns>
         /// <remarks>If the number of elements in each collection is different, the smaller collection determines the number of enumerated items.</remarks>
-        public static IEnumerable<Tuple<T1, T2>> AsTuples<T1, T2>(IEnumerable<T1> first, IEnumerable<T2> second)
+        [NotNull]
+        public static IEnumerable<Tuple<T1, T2>> AsTuples<T1, T2>([NotNull] IEnumerable<T1> first, [NotNull] IEnumerable<T2> second)
         {
             Contract.Requires(first != null);
             Contract.Requires(second != null);
@@ -44,7 +47,8 @@
         /// <param name="second">The second collection.</param>
         /// <returns>Tuples of the elements.</returns>
         /// <remarks>If the number of elements in each collection is different, the smaller collection determines the number of enumerated items.</remarks>
-        public static IEnumerable<Tuple<object, object>> AsTuples(IEnumerable first, IEnumerable second)
+        [NotNull]
+        public static IEnumerable<Tuple<object, object>> AsTuples([NotNull] IEnumerable first, [NotNull] IEnumerable second)
         {
             Contract.Requires(first != null);
             Contract.Requires(second != null);

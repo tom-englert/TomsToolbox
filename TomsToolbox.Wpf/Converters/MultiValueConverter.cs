@@ -8,6 +8,8 @@
     using System.Windows;
     using System.Windows.Data;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// A base class for mutli value converters performing pre-check of value and error handling.
     /// </summary>
@@ -38,7 +40,7 @@
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
         /// <exception cref="System.InvalidOperationException">ConvertBack is not supported by this converter.</exception>
-        protected virtual object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        protected virtual object[] ConvertBack([NotNull] object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             Contract.Requires(value != null);
 
@@ -95,7 +97,7 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        protected override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert([NotNull] object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             Contract.Requires(values != null);
             throw new NotImplementedException();

@@ -3,10 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Windows.Data;
     using System.Windows.Markup;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// A converter composed of a chain of converters. The converters are invoked in the oder specified.
@@ -15,11 +19,13 @@
     [ValueConversion(typeof(object), typeof(object))]
     public class CompositeConverter : IValueConverter
     {
+        [NotNull]
         private readonly Collection<IValueConverter> _converters = new Collection<IValueConverter>(new List<IValueConverter>());
 
         /// <summary>
         /// Gets the chain of converters.
         /// </summary>
+        [NotNull]
         public Collection<IValueConverter> Converters
         {
             get
@@ -75,7 +81,8 @@
         #endregion
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_converters != null);

@@ -5,6 +5,8 @@
     using System.Globalization;
     using System.Reflection;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Extension methods for assemblies.
     /// </summary>
@@ -18,7 +20,8 @@
         /// <remarks>
         /// The URI is in the format "pack://application:,,,/ReferencedAssembly;component/"
         /// </remarks>
-        public static Uri GeneratePackUri(this Assembly assembly)
+        [NotNull]
+        public static Uri GeneratePackUri([NotNull] this Assembly assembly)
         {
             Contract.Requires(assembly != null);
             Contract.Ensures(Contract.Result<Uri>() != null);
@@ -39,7 +42,8 @@
         /// <remarks>
         /// The URI is in the format "pack://application:,,,/ReferencedAssembly;component/RelativeUri"
         /// </remarks>
-        public static Uri GeneratePackUri(this Assembly assembly, string relativeUri)
+        [NotNull]
+        public static Uri GeneratePackUri([NotNull] this Assembly assembly, [NotNull] string relativeUri)
         {
             Contract.Requires(assembly != null);
             Contract.Requires(relativeUri != null);
@@ -59,7 +63,8 @@
         /// <remarks>
         /// The URI is in the format "pack://application:,,,/ReferencedAssembly;component/RelativeUri"
         /// </remarks>
-        public static Uri GeneratePackUri(this Assembly assembly, Uri relativeUri)
+        [NotNull]
+        public static Uri GeneratePackUri([NotNull] this Assembly assembly, [NotNull] Uri relativeUri)
         {
             Contract.Requires(assembly != null);
             Contract.Requires(relativeUri != null);

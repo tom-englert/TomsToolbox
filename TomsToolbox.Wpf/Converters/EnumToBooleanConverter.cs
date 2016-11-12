@@ -7,6 +7,8 @@
     using System.Linq;
     using System.Windows.Data;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Tests if an enum value matches one of the given values provides as the converter parameter. 
     /// If the enum has a <see cref="FlagsAttribute"/>, the match is done with the logic "is any flag set".
@@ -38,7 +40,7 @@
         /// <param name="value">The enum value.</param>
         /// <param name="matches">A comma separated list of enum names to match.</param>
         /// <returns>True if the value matches one of the enum names.</returns>
-        public static bool Convert(object value, string matches)
+        public static bool Convert([NotNull] object value, [NotNull] string matches)
         {
             Contract.Requires(value != null);
             Contract.Requires(matches != null);

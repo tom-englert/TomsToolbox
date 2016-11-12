@@ -6,6 +6,8 @@
     using System.Linq;
     using System.Reflection;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Desktop;
 
     /// <summary>
@@ -21,7 +23,8 @@
         /// <param name="enumType">An optional type of an enum to support converting <see cref="Enum"/> where the value is given as a number or string.</param>
         /// <param name="selector">The selector to get the desired value from the attribute.</param>
         /// <returns>The converted value.</returns>
-        protected static string InternalConvert(object value, Type enumType, Func<T, string> selector)
+        [NotNull]
+        protected static string InternalConvert([NotNull] object value, Type enumType, [NotNull] Func<T, string> selector)
         {
             Contract.Requires(value != null);
             Contract.Requires(selector != null);
@@ -40,7 +43,8 @@
         /// <returns>
         /// The converted value.
         /// </returns>
-        protected static string InternalConvert(object value, Type enumType, Func<T, string> selector, Func<T, bool> predicate)
+        [NotNull]
+        protected static string InternalConvert([NotNull] object value, Type enumType, [NotNull] Func<T, string> selector, [NotNull] Func<T, bool> predicate)
         {
             Contract.Requires(value != null);
             Contract.Requires(selector != null);

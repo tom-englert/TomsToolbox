@@ -8,6 +8,8 @@
     using System.Diagnostics.Contracts;
     using System.Reflection;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
 
     /// <summary>
@@ -20,7 +22,7 @@
         /// </summary>
         /// <param name="compositionHost">The composition host.</param>
         /// <param name="catalog">The catalog.</param>
-        public static void AddCatalog(this ICompositionHost compositionHost, ComposablePartCatalog catalog)
+        public static void AddCatalog([NotNull] this ICompositionHost compositionHost, [NotNull] ComposablePartCatalog catalog)
         {
             Contract.Requires(compositionHost != null);
             Contract.Requires(catalog != null);
@@ -33,7 +35,7 @@
         /// </summary>
         /// <param name="compositionHost">The composition host.</param>
         /// <param name="assemblies">The assemblies to add.</param>
-        public static void AddCatalog(this ICompositionHost compositionHost, params Assembly[] assemblies)
+        public static void AddCatalog([NotNull] this ICompositionHost compositionHost, [NotNull] params Assembly[] assemblies)
         {
             Contract.Requires(compositionHost != null);
             Contract.Requires(assemblies != null);
@@ -55,7 +57,7 @@
         /// </summary>
         /// <param name="compositionHost">The composition host.</param>
         /// <param name="types">The types to add.</param>
-        public static void AddCatalog(this ICompositionHost compositionHost, params Type[] types)
+        public static void AddCatalog([NotNull] this ICompositionHost compositionHost, [NotNull] params Type[] types)
         {
             Contract.Requires(compositionHost != null);
             Contract.Requires(types != null);
@@ -94,7 +96,8 @@
         /// An error occurred during composition. System.ComponentModel.Composition.CompositionException.Errors
         /// will contain a collection of errors that occurred.
         /// </exception>
-        public static T GetExportedValue<T>(this ICompositionHost compositionHost) where T : class
+        [NotNull]
+        public static T GetExportedValue<T>([NotNull] this ICompositionHost compositionHost) where T : class
         {
             Contract.Requires(compositionHost != null);
             Contract.Ensures(Contract.Result<T>() != null);
@@ -134,7 +137,8 @@
         /// An error occurred during composition. System.ComponentModel.Composition.CompositionException.Errors
         /// will contain a collection of errors that occurred.
         /// </exception>
-        public static T GetExportedValue<T>(this ICompositionHost compositionHost, string contractName) where T : class
+        [NotNull]
+        public static T GetExportedValue<T>([NotNull] this ICompositionHost compositionHost, string contractName) where T : class
         {
             Contract.Requires(compositionHost != null);
             Contract.Ensures(Contract.Result<T>() != null);
@@ -169,7 +173,7 @@
         /// An error occurred during composition. System.ComponentModel.Composition.CompositionException.Errors
         /// will contain a collection of errors that occurred.
         /// </exception>
-        public static T GetExportedValueOrDefault<T>(this ICompositionHost compositionHost, string contractName) where T : class
+        public static T GetExportedValueOrDefault<T>([NotNull] this ICompositionHost compositionHost, string contractName) where T : class
         {
             Contract.Requires(compositionHost != null);
 
@@ -202,7 +206,7 @@
         /// An error occurred during composition. System.ComponentModel.Composition.CompositionException.Errors
         /// will contain a collection of errors that occurred.
         /// </exception>
-        public static T GetExportedValueOrDefault<T>(this ICompositionHost compositionHost) where T : class
+        public static T GetExportedValueOrDefault<T>([NotNull] this ICompositionHost compositionHost) where T : class
         {
             Contract.Requires(compositionHost != null);
 
@@ -215,7 +219,7 @@
         /// <typeparam name="T">The type of the new part.</typeparam>
         /// <param name="compositionHost">The composition host.</param>
         /// <param name="exportedValue">The value to compose.</param>
-        public static void ComposeExportedValue<T>(this ICompositionHost compositionHost, T exportedValue)
+        public static void ComposeExportedValue<T>([NotNull] this ICompositionHost compositionHost, T exportedValue)
         {
             Contract.Requires(compositionHost != null);
 
@@ -227,7 +231,7 @@
         /// </summary>
         /// <param name="compositionHost">The composition host.</param>
         /// <param name="attributedPart">The part to compose.</param>
-        public static void SatisfyImportsOnce(this ICompositionHost compositionHost, object attributedPart)
+        public static void SatisfyImportsOnce([NotNull] this ICompositionHost compositionHost, [NotNull] object attributedPart)
         {
             Contract.Requires(compositionHost != null);
             Contract.Requires(attributedPart != null);
@@ -246,7 +250,8 @@
         /// <exception cref="System.ObjectDisposedException">The <see cref="T:System.ComponentModel.Composition.Hosting.CompositionContainer" /> object has been disposed of.</exception>
         /// <exception cref="System.ComponentModel.Composition.CompositionContractMismatchException">One or more of the underlying exported objects cannot be cast to <typeparamref name="T" />.</exception>
         /// <exception cref="System.ComponentModel.Composition.CompositionException">An error occurred during composition. <see cref="P:System.ComponentModel.Composition.CompositionException.Errors" /> will contain a collection of errors that occurred.</exception>
-        public static IEnumerable<T> GetExportedValues<T>(this ICompositionHost compositionHost)
+        [NotNull]
+        public static IEnumerable<T> GetExportedValues<T>([NotNull] this ICompositionHost compositionHost)
         {
             Contract.Requires(compositionHost != null);
             Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
@@ -266,7 +271,8 @@
         /// <exception cref="System.ObjectDisposedException">The <see cref="T:System.ComponentModel.Composition.Hosting.CompositionContainer" /> object has been disposed of.</exception>
         /// <exception cref="System.ComponentModel.Composition.CompositionContractMismatchException">One or more of the underlying exported values cannot be cast to <typeparamref name="T" />.</exception>
         /// <exception cref="System.ComponentModel.Composition.CompositionException">An error occurred during composition. <see cref="P:System.ComponentModel.Composition.CompositionException.Errors" /> will contain a collection of errors that occurred.</exception>
-        public static IEnumerable<T> GetExportedValues<T>(this ICompositionHost compositionHost, string contractName)
+        [NotNull]
+        public static IEnumerable<T> GetExportedValues<T>([NotNull] this ICompositionHost compositionHost, string contractName)
         {
             Contract.Requires(compositionHost != null);
             Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
@@ -282,7 +288,8 @@
         /// <returns>
         /// The System.Lazy{T} objects, if found; otherwise, an empty System.Collections.Generic.IEnumerable{T} object.
         /// </returns>
-        public static IEnumerable<Lazy<T>> GetExports<T>(this ICompositionHost compositionHost)
+        [NotNull]
+        public static IEnumerable<Lazy<T>> GetExports<T>([NotNull] this ICompositionHost compositionHost)
         {
             Contract.Requires(compositionHost != null);
             Contract.Ensures(Contract.Result<IEnumerable<Lazy<T>>>() != null);
@@ -297,7 +304,8 @@
         /// <param name="compositionHost">The composition host.</param>
         /// <param name="contractName">The contract name of the System.Lazy{T} objects to return, or null or an empty string ("") to use the default contract name.</param>
         /// <returns>The System.Lazy{T} objects with the specified contract name, if found; otherwise, an empty System.Collections.Generic.IEnumerable{T} object.</returns>
-        public static IEnumerable<Lazy<T>> GetExports<T>(this ICompositionHost compositionHost, string contractName)
+        [NotNull]
+        public static IEnumerable<Lazy<T>> GetExports<T>([NotNull] this ICompositionHost compositionHost, string contractName)
         {
             Contract.Requires(compositionHost != null);
             Contract.Ensures(Contract.Result<IEnumerable<Lazy<T>>>() != null);
@@ -313,7 +321,7 @@
         /// <returns>
         /// A service object of type <typeparamref name="T"/>, or null if there is no service object of type <typeparamref name="T"/>.
         /// </returns>
-        public static T GetService<T>(this IServiceProvider serviceProvider)
+        public static T GetService<T>([NotNull] this IServiceProvider serviceProvider)
         {
             Contract.Requires(serviceProvider != null);
 

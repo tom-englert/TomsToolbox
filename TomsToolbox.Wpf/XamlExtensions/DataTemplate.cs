@@ -4,6 +4,8 @@
     using System.Windows;
     using System.Windows.Controls;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
     using TomsToolbox.Wpf.Composition;
 
@@ -20,7 +22,7 @@
         [AttachedPropertyBrowsableForType(typeof(ContentControl))]
         [AttachedPropertyBrowsableForType(typeof(TabControl))]
         [AttachedPropertyBrowsableForType(typeof(ContentPresenter))]
-        public static object GetRole(FrameworkElement obj)
+        public static object GetRole([NotNull] FrameworkElement obj)
         {
             Contract.Requires(obj != null);
             return obj.GetValue(RoleProperty);
@@ -30,7 +32,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetRole(FrameworkElement obj, object value)
+        public static void SetRole([NotNull] FrameworkElement obj, object value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(RoleProperty, value);

@@ -4,11 +4,15 @@
     using System.ComponentModel.Composition;
     using System.ComponentModel.Composition.Hosting;
     using System.ComponentModel.Composition.Registration;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
     using System.Windows.Markup;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Desktop.Composition;
     using TomsToolbox.Wpf;
@@ -19,6 +23,7 @@
     /// </summary>
     public sealed partial class App : IDisposable
     {
+        [NotNull]
         private readonly ICompositionHost _compositionHost = new CompositionHost(false);
 
         public App()
@@ -66,7 +71,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_compositionHost != null);

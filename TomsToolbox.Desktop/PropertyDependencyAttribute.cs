@@ -3,10 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.IO;
     using System.Linq;
     using System.Reflection;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Attribute to mark one property as dependent on another property.
@@ -32,13 +36,14 @@
     [CLSCompliant(false)]
     public sealed class PropertyDependencyAttribute : Attribute
     {
+        [NotNull]
         private readonly IEnumerable<string> _propertyNames;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyDependencyAttribute"/> class.
         /// </summary>
         /// <param name="propertyNames">The property names of the properties that this property depends on.</param>
-        public PropertyDependencyAttribute([Localizable(false)] params string[] propertyNames)
+        public PropertyDependencyAttribute([Localizable(false)][NotNull] params string[] propertyNames)
         {
             Contract.Requires(propertyNames != null);
             Contract.Ensures(PropertyNames == propertyNames);
@@ -49,6 +54,7 @@
         /// <summary>
         /// Gets the names of the properties that the attributed property depends on.
         /// </summary>
+        [NotNull]
         public IEnumerable<string> PropertyNames
         {
             get
@@ -64,7 +70,8 @@
         /// <param name="properties">The properties of the type.</param>
         /// <returns>A dictionary that maps the property names to all direct and indirect dependent property names.</returns>
         /// <exception cref="System.InvalidOperationException">Invalid dependency definitions, i.e. dependency to non-existing property.</exception>
-        internal static Dictionary<string, IEnumerable<string>> CreateDependencyMapping(IEnumerable<PropertyInfo> properties)
+        [NotNull]
+        internal static Dictionary<string, IEnumerable<string>> CreateDependencyMapping([NotNull] IEnumerable<PropertyInfo> properties)
         {
             Contract.Requires(properties != null);
             Contract.Ensures(Contract.Result<Dictionary<string, IEnumerable<string>>>() != null);
@@ -81,7 +88,7 @@
             return directDependencies.Keys.ToDictionary(item => item, item => GetAllDependencies(item, directDependencies));
         }
 
-        private static IEnumerable<string> GetAllDependencies(string item, IDictionary<string, string[]> directDependencies)
+        private static IEnumerable<string> GetAllDependencies([NotNull] string item, [NotNull] IDictionary<string, string[]> directDependencies)
         {
             Contract.Requires(item != null);
             Contract.Requires(directDependencies != null);
@@ -112,7 +119,8 @@
         /// <param name="entryType">Type of the entry.</param>
         /// <returns>A list of strings, each describing an invalid dependency definition. If no invalid definitions exist, the list is empty.</returns>
         /// <remarks>This method is mainly for writing unit test to detect invalid dependencies during compile time.</remarks>
-        public static IEnumerable<string> GetInvalidDependencies(Type entryType)
+        [NotNull]
+        public static IEnumerable<string> GetInvalidDependencies([NotNull] Type entryType)
         {
             Contract.Requires(entryType != null);
             Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
@@ -132,7 +140,8 @@
         /// </summary>
         /// <param name="entryType">A type contained in the entry assembly.</param>
         /// <returns>The assembly that contains the entryType plus all custom assemblies that this assembly references.</returns>
-        private static IEnumerable<Assembly> GetCustomAssemblies(Type entryType)
+        [NotNull]
+        private static IEnumerable<Assembly> GetCustomAssemblies([NotNull] Type entryType)
         {
             Contract.Requires(entryType != null);
             Contract.Ensures(Contract.Result<IEnumerable<Assembly>>() != null);
@@ -159,7 +168,7 @@
         /// <returns>
         ///   <c>true</c> if the assembly is located in the same folder or a sub folder of the specified program folder; otherwise, <c>false</c>.
         /// </returns>
-        private static bool IsAssemblyInSubfolderOf(AssemblyName assemblyName, string programFolder)
+        private static bool IsAssemblyInSubfolderOf([NotNull] AssemblyName assemblyName, [NotNull] string programFolder)
         {
             Contract.Requires(assemblyName != null);
             Contract.Requires(programFolder != null);
@@ -186,7 +195,7 @@
         }
 
 
-        private static IEnumerable<Type> SafeGetTypes(Assembly a)
+        private static IEnumerable<Type> SafeGetTypes([NotNull] Assembly a)
         {
             Contract.Requires(a != null);
 
@@ -202,7 +211,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_propertyNames != null);

@@ -4,6 +4,8 @@
     using System.Diagnostics.Contracts;
     using System.Runtime.InteropServices;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
 
     /// <summary>
@@ -133,7 +135,7 @@
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        public static explicit operator T(SafeNativeMemory<T> wrapper)
+        public static explicit operator T([NotNull] SafeNativeMemory<T> wrapper)
         {
             Contract.Requires(wrapper != null);
 

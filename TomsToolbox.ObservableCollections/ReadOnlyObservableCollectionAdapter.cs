@@ -6,6 +6,8 @@
     using System.ComponentModel;
     using System.Diagnostics.Contracts;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Similar to the <see cref="ReadOnlyObservableCollection{T}" />, except it does not require the items
     /// collection to be an <see cref="ObservableCollection{T}" /> but only an <see cref="IList{T}" /> that implements also INotifyCollectionChanged.
@@ -19,7 +21,7 @@
         /// Initializes a new instance of the <see cref="ReadOnlyObservableCollectionAdapter{T, TList}"/> class.
         /// </summary>
         /// <param name="items">The items.</param>
-        protected ReadOnlyObservableCollectionAdapter(TList items)
+        protected ReadOnlyObservableCollectionAdapter([NotNull] TList items)
             : base(items)
         {
             Contract.Requires(items != null);
@@ -31,6 +33,7 @@
         /// <summary>
         /// Returns the collection that the <see cref="ReadOnlyObservableCollectionAdapter{T, TList}"/> wraps.
         /// </summary>
+        [NotNull]
         protected new TList Items
         {
             get

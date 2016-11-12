@@ -3,6 +3,8 @@
     using System.Diagnostics.Contracts;
     using System.Windows;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// The interface to be implemented and exported by application specific theme resource providers. 
     /// Theme resource providers can load additional theme specific resources into the resource dictionary.
@@ -20,7 +22,7 @@
     [ContractClassFor(typeof(IThemeResourceProvider))]
     internal abstract class ThemeResourceProviderContract : IThemeResourceProvider
     {
-        public void LoadThemeResources(ResourceDictionary resource)
+        public void LoadThemeResources([NotNull] ResourceDictionary resource)
         {
             Contract.Requires(resource != null);
             throw new System.NotImplementedException();

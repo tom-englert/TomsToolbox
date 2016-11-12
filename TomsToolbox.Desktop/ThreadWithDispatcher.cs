@@ -1,12 +1,15 @@
 namespace TomsToolbox.Desktop
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Windows.Threading;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Core;
 
@@ -23,7 +26,7 @@ namespace TomsToolbox.Desktop
         /// Initializes a new instance of the <see cref="ForegroundThreadWithDispatcher"/> class with MTA apartment and normal thread priority.
         /// </summary>
         /// <param name="name">The name of the thread.</param>
-        public ForegroundThreadWithDispatcher(string name)
+        public ForegroundThreadWithDispatcher([NotNull] string name)
             : this(name, ApartmentState.MTA)
         {
             Contract.Requires(!string.IsNullOrEmpty(name));
@@ -34,7 +37,7 @@ namespace TomsToolbox.Desktop
         /// </summary>
         /// <param name="name">The name of the thread.</param>
         /// <param name="state">The apartment state of the thread.</param>
-        public ForegroundThreadWithDispatcher(string name, ApartmentState state)
+        public ForegroundThreadWithDispatcher([NotNull] string name, ApartmentState state)
             : this(name, state, ThreadPriority.Normal)
         {
             Contract.Requires(!string.IsNullOrEmpty(name));
@@ -46,7 +49,7 @@ namespace TomsToolbox.Desktop
         /// <param name="name">The name of the thread.</param>
         /// <param name="state">The apartment state of the thread.</param>
         /// <param name="priority">The priority of the thread.</param>
-        public ForegroundThreadWithDispatcher(string name, ApartmentState state, ThreadPriority priority)
+        public ForegroundThreadWithDispatcher([NotNull] string name, ApartmentState state, ThreadPriority priority)
             : base(name, state, priority, false)
         {
             Contract.Requires(!string.IsNullOrEmpty(name));
@@ -102,7 +105,7 @@ namespace TomsToolbox.Desktop
         /// </summary>
         /// <param name="name">The name of the thread.</param>
         /// <param name="state">The apartment state of the thread.</param>
-        public BackgroundThreadWithDispatcher(string name, ApartmentState state)
+        public BackgroundThreadWithDispatcher([NotNull] string name, ApartmentState state)
             : base(name, state, ThreadPriority.Normal, true)
         {
             Contract.Requires(!string.IsNullOrEmpty(name));
@@ -114,7 +117,7 @@ namespace TomsToolbox.Desktop
         /// <param name="name">The name of the thread.</param>
         /// <param name="state">The apartment state of the thread.</param>
         /// <param name="priority">The priority of the thread.</param>
-        public BackgroundThreadWithDispatcher(string name, ApartmentState state, ThreadPriority priority)
+        public BackgroundThreadWithDispatcher([NotNull] string name, ApartmentState state, ThreadPriority priority)
             : base(name, state, priority, true)
         {
             Contract.Requires(!string.IsNullOrEmpty(name));
@@ -130,7 +133,9 @@ namespace TomsToolbox.Desktop
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     public abstract class ThreadWithDispatcher
     {
+        [NotNull]
         private readonly Thread _thread;
+        [NotNull]
         private readonly EventWaitHandle _threadStarted = new EventWaitHandle(false, EventResetMode.ManualReset);
         private Dispatcher _dispatcher;
         private TaskScheduler _taskScheduler;
@@ -142,7 +147,7 @@ namespace TomsToolbox.Desktop
         /// <param name="state">The state.</param>
         /// <param name="priority">The priority.</param>
         /// <param name="isBackgroundThread">if set to <c>true</c> it the thread should be created as background thread.</param>
-        protected ThreadWithDispatcher(string name, ApartmentState state, ThreadPriority priority, bool isBackgroundThread)
+        protected ThreadWithDispatcher([NotNull] string name, ApartmentState state, ThreadPriority priority, bool isBackgroundThread)
         {
             Contract.Requires(!string.IsNullOrEmpty(name));
 
@@ -164,6 +169,7 @@ namespace TomsToolbox.Desktop
         /// <summary>
         /// Gets the dispatcher of the thread.
         /// </summary>
+        [NotNull]
         public Dispatcher Dispatcher
         {
             get
@@ -187,6 +193,7 @@ namespace TomsToolbox.Desktop
         /// Gets the task scheduler associated with the <see cref="Dispatcher"/>
         /// </summary>
         [ContractVerification(false)]
+        [NotNull]
         public TaskScheduler TaskScheduler
         {
             get
@@ -210,7 +217,7 @@ namespace TomsToolbox.Desktop
         /// <returns>The result of the method.</returns>
         /// <exception cref="System.InvalidOperationException">The dispatcher has already shut down.</exception>
         /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
-        public T Invoke<T>(Func<T> method)
+        public T Invoke<T>([NotNull] Func<T> method)
         {
             Contract.Requires(method != null);
 
@@ -223,7 +230,7 @@ namespace TomsToolbox.Desktop
         /// <param name="method">The method.</param>
         /// <exception cref="System.InvalidOperationException">The dispatcher has already shut down.</exception>
         /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
-        public void Invoke(Action method)
+        public void Invoke([NotNull] Action method)
         {
             Contract.Requires(method != null);
 
@@ -236,7 +243,8 @@ namespace TomsToolbox.Desktop
         /// <param name="method">The method.</param>
         /// <returns>The dispatcher operation to track the outcome of the call.</returns>
         /// <exception cref="System.InvalidOperationException">The dispatcher has already shut down.</exception>
-        public DispatcherOperation BeginInvoke(Action method)
+        [NotNull]
+        public DispatcherOperation BeginInvoke([NotNull] Action method)
         {
             Contract.Requires(method != null);
             Contract.Ensures(Contract.Result<DispatcherOperation>() != null);
@@ -251,7 +259,8 @@ namespace TomsToolbox.Desktop
         /// <param name="method">The method.</param>
         /// <returns>The dispatcher operation to track the outcome of the call.</returns>
         /// <exception cref="System.InvalidOperationException">The dispatcher has already shut down.</exception>
-        public DispatcherOperation BeginInvoke(DispatcherPriority priority, Action method)
+        [NotNull]
+        public DispatcherOperation BeginInvoke(DispatcherPriority priority, [NotNull] Action method)
         {
             Contract.Requires(method != null);
             Contract.Ensures(Contract.Result<DispatcherOperation>() != null);
@@ -334,6 +343,7 @@ namespace TomsToolbox.Desktop
 
         [ContractInvariantMethod]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_thread != null);

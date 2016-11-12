@@ -2,10 +2,14 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Core;
 
@@ -16,6 +20,7 @@
     [ValueConversion(typeof(Thickness), typeof(Thickness))]
     public class ThicknessMultiplyConverter : ValueConverter
     {
+        [NotNull]
         private static readonly TypeConverter _typeConverter = new ThicknessConverter();
 
         /// <summary>
@@ -59,6 +64,7 @@
         /// <param name="value">The value.</param>
         /// <param name="parameter">The parameter.</param>
         /// <returns>The multiplied thickness.</returns>
+        [NotNull]
         public static object Convert(object value, object parameter)
         {
             Contract.Ensures(Contract.Result<object>() != null);
@@ -85,7 +91,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_typeConverter != null);

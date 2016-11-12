@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
@@ -63,7 +64,7 @@
         /// The properties to relay must be declared with the <see cref="RelayedEventAttribute"/>.
         /// </summary>
         /// <param name="source">The source.</param>
-        protected void RelayEventsOf(INotifyPropertyChanged source)
+        protected void RelayEventsOf([NotNull] INotifyPropertyChanged source)
         {
             Contract.Requires(source != null);
 
@@ -95,7 +96,7 @@
         /// Detaches the event source.
         /// </summary>
         /// <param name="item">The item to detach.</param>
-        protected void DetachEventSource(INotifyPropertyChanged item)
+        protected void DetachEventSource([NotNull] INotifyPropertyChanged item)
         {
             Contract.Requires(item != null);
             item.PropertyChanged -= RelaySource_PropertyChanged;
@@ -108,7 +109,7 @@
         /// <typeparam name="T">The type of the property.</typeparam>
         /// <param name="propertyExpression">The expression identifying the property.</param>
         [NotifyPropertyChangedInvocator]
-        protected void OnPropertyChanged<T>(Expression<Func<T>> propertyExpression)
+        protected void OnPropertyChanged<T>([NotNull] Expression<Func<T>> propertyExpression)
         {
             Contract.Requires(propertyExpression != null);
 
@@ -123,9 +124,9 @@
         /// <param name="value">The value.</param>
         /// <param name="propertyExpression">The expression identifying the property.</param>
         /// <returns>True if value has changed and the PropertyChange event was raised.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
+        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>(ref T backingField, T value, Expression<Func<T>> propertyExpression)
+        protected bool SetProperty<T>(ref T backingField, T value, [NotNull] Expression<Func<T>> propertyExpression)
         {
             Contract.Requires(propertyExpression != null);
 
@@ -141,9 +142,9 @@
         /// <param name="propertyExpression">The expression identifying the property.</param>
         /// <param name="changeCallback">The callback that is invoked if the value has changed. Parameters are (oldValue, newValue).</param>
         /// <returns>True if value has changed and the PropertyChange event was raised.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
+        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>(ref T backingField, T value, Expression<Func<T>> propertyExpression, Action<T, T> changeCallback)
+        protected bool SetProperty<T>(ref T backingField, T value, [NotNull] Expression<Func<T>> propertyExpression, [NotNull] Action<T, T> changeCallback)
         {
             Contract.Requires(propertyExpression != null);
             Contract.Requires(changeCallback != null);
@@ -163,9 +164,9 @@
         [NotifyPropertyChangedInvocator]
 #if NETFRAMEWORK_4_5
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        protected bool SetProperty<T>(ref T backingField, T value, [System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
+        protected bool SetProperty<T>(ref T backingField, T value, [System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
 #else
-        protected bool SetProperty<T>(ref T backingField, T value, string propertyName)
+        protected bool SetProperty<T>(ref T backingField, T value, [NotNull] string propertyName)
 #endif
         {
             Contract.Requires(!string.IsNullOrEmpty(propertyName));
@@ -190,7 +191,7 @@
         /// <returns> True if value has changed and the PropertyChange event was raised. </returns>
         [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>(ref T backingField, T value, string propertyName, Action<T, T> changeCallback)
+        protected bool SetProperty<T>(ref T backingField, T value, [NotNull] string propertyName, [NotNull] Action<T, T> changeCallback)
         {
             Contract.Requires(!string.IsNullOrEmpty(propertyName));
             Contract.Requires(changeCallback != null);
@@ -217,7 +218,7 @@
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This pattern is required by the CallerMemberName attribute.")]
         [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>(ref T backingField, T value, Action<T, T> changeCallback, [System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
+        protected bool SetProperty<T>(ref T backingField, T value, [NotNull] Action<T, T> changeCallback, [System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
         {
             Contract.Requires(!string.IsNullOrEmpty(propertyName));
             Contract.Requires(changeCallback != null);
@@ -234,9 +235,9 @@
         [NotifyPropertyChangedInvocator]
 #if NETFRAMEWORK_4_5
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        protected void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
+        protected void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
 #else
-        protected void OnPropertyChanged(string propertyName)
+        protected void OnPropertyChanged([NotNull] string propertyName)
 #endif
         {
             Contract.Requires(!string.IsNullOrEmpty(propertyName));
@@ -281,7 +282,7 @@
             }
         }
 
-        private void RelaySource_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void RelaySource_PropertyChanged([NotNull] object sender, PropertyChangedEventArgs e)
         {
             Contract.Requires(sender != null);
 
@@ -301,7 +302,7 @@
             }
         }
 
-        private void InternalOnPropertyChanged(string propertyName)
+        private void InternalOnPropertyChanged([NotNull] string propertyName)
         {
             Contract.Requires(!string.IsNullOrEmpty(propertyName));
 
@@ -323,6 +324,7 @@
         /// <remarks>
         /// The default implementation returns the <see cref="ValidationAttribute"/> errors of the property.
         /// </remarks>
+        [NotNull]
         protected virtual IEnumerable<string> GetDataErrors(string propertyName)
         {
             Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
@@ -350,6 +352,7 @@
         {
         }
 
+        [NotNull]
         private IEnumerable<string> InternalGetDataErrors(string propertyName)
         {
             Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
@@ -425,11 +428,13 @@
     /// <seealso cref="TomsToolbox.Desktop.ObservableObjectBase" />
     public abstract class ObservableObject : ObservableObjectBase
     {
+        [NotNull]
         private readonly Dispatcher _dispatcher = Dispatcher.CurrentDispatcher;
 
         /// <summary>
         /// Gets the dispatcher of the thread where this object was created.
         /// </summary>
+        [NotNull]
         public Dispatcher Dispatcher
         {
             get
@@ -442,6 +447,7 @@
 
         [ContractInvariantMethod]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_dispatcher != null);

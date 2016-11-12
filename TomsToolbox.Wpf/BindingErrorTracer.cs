@@ -8,6 +8,8 @@
     using System.Linq;
     using System.Text.RegularExpressions;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Helper class to detect binding errors during debugging.<para/> 
     /// All functionality is only active if a debugger is attached.<para/> 
@@ -37,7 +39,7 @@
         /// Hooks into <see cref="PresentationTraceSources" /> to listen for binding errors with <see cref="SourceLevels.Warning"/>.
         /// </summary>
         /// <param name="errorCallback">The callback that is called in case of binding errors, to show an error message or throw an exception</param>
-        public static void Start(Action<string> errorCallback)
+        public static void Start([NotNull] Action<string> errorCallback)
         {
             Contract.Requires(errorCallback != null);
 
@@ -49,7 +51,7 @@
         /// </summary>
         /// <param name="errorCallback">The callback that is called in case of binding errors, to show an error message or throw an exception</param>
         /// <param name="sourceLevels">The source levels that trigger a warning.</param>
-        public static void Start(Action<string> errorCallback, SourceLevels sourceLevels)
+        public static void Start([NotNull] Action<string> errorCallback, SourceLevels sourceLevels)
         {
             Contract.Requires(errorCallback != null);
 
@@ -71,7 +73,7 @@
 
             private string _buffer;
 
-            public Listener(Action<string> errorCallback)
+            public Listener([NotNull] Action<string> errorCallback)
             {
                 Contract.Requires(errorCallback != null);
 

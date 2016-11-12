@@ -4,6 +4,8 @@
     using System.Windows;
     using System.Windows.Controls;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
     using TomsToolbox.Desktop;
 
@@ -18,7 +20,7 @@
         /// <param name="obj">The object on which this property was set.</param>
         /// <returns>The point.</returns>
         [AttachedPropertyBrowsableForType(typeof(UIElement))]
-        public static Point GetTopLeft(UIElement obj)
+        public static Point GetTopLeft([NotNull] UIElement obj)
         {
             Contract.Requires(obj != null);
             return obj.GetValue<Point>(TopLeftProperty);
@@ -28,7 +30,7 @@
         /// </summary>
         /// <param name="obj">The object on which to set <see cref="P:System.Windows.Controls.Canvas.Top"/> and <see cref="P:System.Windows.Controls.Canvas.Left"/>.</param>
         /// <param name="value">The point.</param>
-        public static void SetTopLeft(UIElement obj, Point value)
+        public static void SetTopLeft([NotNull] UIElement obj, Point value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(TopLeftProperty, value);
@@ -70,7 +72,7 @@
         /// <param name="obj">The object on which this property was set.</param>
         /// <returns>The point.</returns>
         [AttachedPropertyBrowsableForType(typeof(UIElement))]
-        public static Point GetTopRight(UIElement obj)
+        public static Point GetTopRight([NotNull] UIElement obj)
         {
             Contract.Requires(obj != null);
             return obj.GetValue<Point>(TopRightProperty);
@@ -81,7 +83,7 @@
         /// </summary>
         /// <param name="obj">The object on which to set <see cref="P:System.Windows.Controls.Canvas.Top"/> and <see cref="P:System.Windows.Controls.Canvas.Right"/>.</param>
         /// <param name="value">The point.</param>
-        public static void SetTopRight(UIElement obj, Point value)
+        public static void SetTopRight([NotNull] UIElement obj, Point value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(TopRightProperty, value);
@@ -122,7 +124,7 @@
         /// <param name="obj">The object on which this property was set.</param>
         /// <returns>The point.</returns>
         [AttachedPropertyBrowsableForType(typeof(UIElement))]
-        public static Point GetBottomLeft(UIElement obj)
+        public static Point GetBottomLeft([NotNull] UIElement obj)
         {
             Contract.Requires(obj != null);
             return obj.GetValue<Point>(BottomLeftProperty);
@@ -133,7 +135,7 @@
         /// </summary>
         /// <param name="obj">The object on which to set <see cref="P:System.Windows.Controls.Canvas.Bottom"/> and <see cref="P:System.Windows.Controls.Canvas.Left"/>.</param>
         /// <param name="value">The point.</param>
-        public static void SetBottomLeft(UIElement obj, Point value)
+        public static void SetBottomLeft([NotNull] UIElement obj, Point value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(BottomLeftProperty, value);
@@ -175,7 +177,7 @@
         /// <param name="obj">The object on which this property was set.</param>
         /// <returns>The point.</returns>
         [AttachedPropertyBrowsableForType(typeof(UIElement))]
-        public static Point GetBottomRight(UIElement obj)
+        public static Point GetBottomRight([NotNull] UIElement obj)
         {
             Contract.Requires(obj != null);
             return obj.GetValue<Point>(BottomRightProperty);
@@ -186,7 +188,7 @@
         /// </summary>
         /// <param name="obj">The object on which to set <see cref="P:System.Windows.Controls.Canvas.Bottom"/> and <see cref="P:System.Windows.Controls.Canvas.Right"/>.</param>
         /// <param name="value">The point.</param>
-        public static void SetBottomRight(UIElement obj, Point value)
+        public static void SetBottomRight([NotNull] UIElement obj, Point value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(BottomRightProperty, value);

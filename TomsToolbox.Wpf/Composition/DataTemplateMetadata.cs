@@ -4,6 +4,8 @@
     using System.Diagnostics.Contracts;
     using System.Windows;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Meta data for exported visuals.
     /// </summary>
@@ -34,6 +36,7 @@
         /// <summary>
         /// Gets the type of the view model that this visual has a representation for.
         /// </summary>
+        [NotNull]
         public Type ViewModel
         {
             get

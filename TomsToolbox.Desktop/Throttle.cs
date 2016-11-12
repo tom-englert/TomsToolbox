@@ -1,8 +1,12 @@
 ﻿namespace TomsToolbox.Desktop
 {
     using System;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Windows.Threading;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Implements a simple timed throttle.<para/>
@@ -11,14 +15,16 @@
     /// </summary>
     public class Throttle
     {
+        [NotNull]
         private readonly Action _target;
+        [NotNull]
         private readonly DispatcherTimer _timer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Throttle"/> class with a default timeout of 100ms.
         /// </summary>
         /// <param name="target">The target action to invoke when the throttle condition is hit.</param>
-        public Throttle(Action target)
+        public Throttle([NotNull] Action target)
             : this(TimeSpan.FromMilliseconds(100), target)
         {
             Contract.Requires(target != null);
@@ -29,7 +35,7 @@
         /// </summary>
         /// <param name="timeout">The timeout to wait for after the last <see cref="Tick()"/>.</param>
         /// <param name="target">The target action to invoke when the throttle condition is hit.</param>
-        public Throttle(TimeSpan timeout, Action target)
+        public Throttle(TimeSpan timeout, [NotNull] Action target)
         {
             Contract.Requires(target != null);
 
@@ -54,7 +60,8 @@
         }
 
         [ContractInvariantMethod]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
         {
             Contract.Invariant(_target != null);
