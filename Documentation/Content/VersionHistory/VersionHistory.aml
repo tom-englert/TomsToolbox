@@ -9,6 +9,13 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.53.0</para>
+            <list class="bullet">
+              <listItem><para>Added WPF Styles.</para></listItem>
+              <listItem><para>Added R# [NotNull] annotations to complement Code Contracts.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.52.0</para>
             <list class="bullet">
               <listItem><para>Extend CommandRoutingBehavior to track focus to update the active instance.</para></listItem>
