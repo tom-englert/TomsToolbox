@@ -25,7 +25,7 @@
         /// </summary>
         public object Role
         {
-            get { return (object)GetValue(RoleProperty); }
+            get { return GetValue(RoleProperty); }
             set { SetValue(RoleProperty, value); }
         }
         /// <summary>

@@ -1,15 +1,11 @@
 ﻿namespace TomsToolbox.Wpf.Controls
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Windows.Media;
-
-    using JetBrains.Annotations;
 
     /// <summary>
     /// Implemented by image providers to provide a dynamically loadable image.
     /// </summary>
-    [ContractClass(typeof (ImageContract))]
     public interface IImage
     {
         /// <summary>
@@ -32,37 +28,5 @@
         /// Occurs when the image is loaded.
         /// </summary>
         event EventHandler Loaded;
-    }
-
-    [ContractClassFor(typeof (IImage))]
-    abstract class ImageContract : IImage
-    {
-        [NotNull]
-        ImageSource IImage.Source
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<ImageSource>() != null);
-                throw new NotImplementedException();
-            }
-        }
-
-        bool IImage.IsLoaded
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        event EventHandler IImage.Loaded
-        {
-            add
-            {
-            }
-            remove
-            {
-            }
-        }
     }
 }

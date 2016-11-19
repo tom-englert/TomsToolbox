@@ -79,6 +79,7 @@
             AddLogicalChild(_adornerDecorator);
             AddVisualChild(_adornerDecorator);
 
+            // ReSharper disable once AssignNullToNotNullAttribute
             _adornerLayer = _adornerDecorator.AdornerLayer;
         }
 
@@ -94,7 +95,7 @@
         /// Identifies the <see cref="WhiteSpaces"/> dependency property
         /// </summary>
         public static readonly DependencyProperty WhiteSpacesProperty =
-            DependencyProperty.Register("WhiteSpaces", typeof(WhiteSpaces), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(WhiteSpaces.Paragraph, (sender, e) => ((TextBoxVisibleWhiteSpaceDecorator)sender).UpdateAdorners()));
+            DependencyProperty.Register("WhiteSpaces", typeof(WhiteSpaces), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(WhiteSpaces.Paragraph, (sender, e) => ((TextBoxVisibleWhiteSpaceDecorator)sender)?.UpdateAdorners()));
 
 
         /// <summary>
@@ -167,13 +168,7 @@
         /// <summary>
         /// Gets the number of visual child elements within this element.
         /// </summary>
-        protected override int VisualChildrenCount
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        protected override int VisualChildrenCount => 1;
 
         /// <summary>
         /// When overridden in a derived class, measures the size in layout required for child elements and determines a size for the <see cref="T:System.Windows.FrameworkElement" />-derived class.
@@ -248,16 +243,20 @@
             {
                 var oldAdorners = _adorners;
 
+                // ReSharper disable AssignNullToNotNullAttribute
+                // ReSharper disable PossibleNullReferenceException
                 _adorners = textBox.Text
                     .Select((character, index) => new { text = GetAdornerText(character), index })
                     .Where(item => item.text != null)
                     .Select(item => GetNextAdorner(adornersSource, item.index, item.text))
                     .ToArray();
 
-                foreach (var item in oldAdorners.Skip(_adorners.Count()))
+                foreach (var item in oldAdorners.Skip(_adorners.Count))
                 {
                     _adornerLayer.Remove(item);
                 }
+                // ReSharper restore PossibleNullReferenceException
+                // ReSharper restore AssignNullToNotNullAttribute
             }
         }
 
@@ -279,6 +278,7 @@
             }
         }
 
+        [NotNull]
         private TextAdorner GetNextAdorner([NotNull] IEnumerator<TextAdorner> existingAdorners, int charIndex, string text)
         {
             Contract.Requires(existingAdorners != null);
@@ -289,6 +289,7 @@
             return textAdorner.Apply(charIndex, text);
         }
 
+        [NotNull]
         private TextAdorner CreateNewAdorner()
         {
             var textBox = Child;
@@ -319,6 +320,7 @@
                 BindingOperations.SetBinding(_content, OpacityProperty, new Binding { Path = new PropertyPath(WhiteSpaceOpacityProperty), Source = owner });
             }
 
+            [NotNull]
             public TextAdorner Apply(int charIndex, string text)
             {
                 _charIndex = charIndex;
@@ -327,6 +329,7 @@
                 return this;
             }
 
+            [NotNull]
             public override GeneralTransform GetDesiredTransform(GeneralTransform transform)
             {
                 var baseTransform = base.GetDesiredTransform(transform);
@@ -340,14 +343,9 @@
                 return desiredTransform;
             }
 
-            protected override int VisualChildrenCount
-            {
-                get
-                {
-                    return 1;
-                }
-            }
+            protected override int VisualChildrenCount => 1;
 
+            [NotNull]
             protected override Visual GetVisualChild(int index)
             {
                 return _content;
@@ -377,6 +375,7 @@
                     {
                         var nextIndex = _charIndex + 1;
        
+                        // ReSharper disable once PossibleNullReferenceException
                         if (nextIndex < _textBox.Text.Length)
                         {
                             var rect2 = _textBox.GetRectFromCharacterIndex(nextIndex);

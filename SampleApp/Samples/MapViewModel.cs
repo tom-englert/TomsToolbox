@@ -48,7 +48,7 @@
             try
             {
                 _mapSourceFile = MapSourceFile.Load(_configurationFileName);
-                ImageProvider = _mapSourceFile.MapSources.FirstOrDefault();
+                ImageProvider = _mapSourceFile.MapSources?.FirstOrDefault();
             }
             catch (IOException ex)
             {
@@ -57,13 +57,7 @@
             }
         }
 
-        public IList<MapSource> MapSources
-        {
-            get
-            {
-                return _mapSourceFile.MapSources;
-            }
-        }
+        public IList<MapSource> MapSources => _mapSourceFile.MapSources;
 
         public IImageProvider ImageProvider
         {
@@ -116,13 +110,7 @@
             }
         }
 
-        public IList<Poi> Pois
-        {
-            get
-            {
-                return _pois;
-            }
-        }
+        public IList<Poi> Pois => _pois;
 
         public Rect Bounds
         {
@@ -149,13 +137,16 @@
                     if (!value.IsEmpty)
                     {
                         // Sample: Transform to WGS-84:
+                        // ReSharper disable UnusedVariable => just show how to use this..
                         var topLeft = (Coordinates)value.TopLeft;
                         var bottomRight = (Coordinates)value.BottomRight;
+                        // ReSharper restore UnusedVariable
                     }
                 }
             }
         }
 
+        [NotNull]
         public ICommand ClearSelectionCommand
         {
             get
@@ -164,6 +155,7 @@
             }
         }
 
+        [NotNull]
         public ICommand MouseDoubleClickCommand
         {
             get

@@ -51,7 +51,7 @@
 
         [ContractVerification(false)]
         [NotNull]
-        private WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> CreateEvent(INotifyCollectionChanged eventSource)
+        private WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> CreateEvent([NotNull] INotifyCollectionChanged eventSource)
         {
             Contract.Ensures(Contract.Result<WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs>>() != null);
 
@@ -98,7 +98,7 @@
         }
 
         [ContractVerification(false)] // Just mirrors the original collection
-        private void SourceItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void SourceItems_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
             OnSourceCollectionChanged((IEnumerable)sender, e);
         }

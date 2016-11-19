@@ -5,10 +5,11 @@
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
-    using TomsToolbox.Core;
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Adapter to return an <see cref="IList"/> from an <see cref="IList{T}"/>.<para/>
@@ -24,18 +25,26 @@
     [ContractVerification(false)] // Just forwarding the list....
     public class ObservableListAdapter<T> : IList, INotifyCollectionChanged, INotifyPropertyChanged
     {
+        [NotNull]
         private readonly IList<T> _source;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObservableListAdapter{T}"/> class.
         /// </summary>
         /// <param name="source">The source.</param>
-        public ObservableListAdapter(IList<T> source)
+        public ObservableListAdapter([NotNull] IList<T> source)
         {
+            Contract.Requires(source != null);
+
             _source = source;
 
-            source.Maybe().Select(s => s as INotifyCollectionChanged).Do(s => s.CollectionChanged += Source_CollectionChanged);
-            source.Maybe().Select(s => s as INotifyPropertyChanged).Do(s => s.PropertyChanged += Source_PropertyChanged);
+            var ncc = source as INotifyCollectionChanged;
+            if (ncc != null)
+                ncc.CollectionChanged += Source_CollectionChanged;
+
+            var npc = source as INotifyPropertyChanged;
+            if (npc != null)
+                npc.PropertyChanged += Source_PropertyChanged;
         }
 
         /// <summary>
@@ -67,13 +76,7 @@
         /// <returns>
         /// The number of elements contained in the <see cref="T:System.Collections.ICollection"/>.
         /// </returns>
-        public int Count
-        {
-            get
-            {
-                return _source.Count;
-            }
-        }
+        public int Count => _source.Count;
 
         /// <summary>
         /// Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
@@ -81,13 +84,7 @@
         /// <returns>
         /// An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
         /// </returns>
-        public object SyncRoot
-        {
-            get
-            {
-                return this;
-            }
-        }
+        public object SyncRoot => this;
 
         /// <summary>
         /// Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe).
@@ -95,13 +92,7 @@
         /// <returns>
         /// true if access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.
         /// </returns>
-        public bool IsSynchronized
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool IsSynchronized => false;
 
         /// <summary>
         /// Adds an item to the <see cref="T:System.Collections.IList"/>.
@@ -203,13 +194,7 @@
         /// <returns>
         /// true if the <see cref="T:System.Collections.IList"/> is read-only; otherwise, false.
         /// </returns>
-        public bool IsReadOnly
-        {
-            get
-            {
-                return _source.IsReadOnly;
-            }
-        }
+        public bool IsReadOnly => _source.IsReadOnly;
 
         /// <summary>
         /// Gets a value indicating whether the <see cref="T:System.Collections.IList"/> has a fixed size.
@@ -217,13 +202,7 @@
         /// <returns>
         /// true if the <see cref="T:System.Collections.IList"/> has a fixed size; otherwise, false.
         /// </returns>
-        public bool IsFixedSize
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool IsFixedSize => false;
 
         /// <summary>
         /// Occurs when the collection changes.
@@ -247,16 +226,20 @@
 
         private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            var handler = CollectionChanged;
-            if (handler != null)
-                handler(this, e);
+            CollectionChanged?.Invoke(this, e);
         }
 
         private void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, e);
+            PropertyChanged?.Invoke(this, e);
+        }
+
+        [ContractInvariantMethod]
+        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_source != null);
         }
     }
 }

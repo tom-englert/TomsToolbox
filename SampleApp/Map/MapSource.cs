@@ -27,11 +27,12 @@
             set;
         }
 
+        [NotNull]
         public static MapSourceFile Load([NotNull] string fileName)
         {
             using (var stream = File.OpenRead(fileName))
             {
-                return (MapSourceFile)_serializer.Deserialize(stream);
+                return (MapSourceFile)_serializer.Deserialize(stream) ?? new MapSourceFile();
             }
         }
 
@@ -49,11 +50,12 @@
     {
         private int _tileUrlIndex;
 
-        [NonSerialized]
+        [NotNull][NonSerialized]
         private readonly AutoWeakIndexer<IMapTile, Image> _imageCache;
 
         public MapSource()
         {
+            // ReSharper disable once AssignNullToNotNullAttribute
             _imageCache = new AutoWeakIndexer<IMapTile, Image>(tile => new Image(this, tile), new DelegateEqualityComparer<IMapTile>(TileEquals, GetTileHashCode));
         }
 
@@ -97,9 +99,10 @@
             return _imageCache[tile];
         }
 
-        private Uri GetImageUri(IMapTile tile)
+        [NotNull]
+        private Uri GetImageUri([NotNull] IMapTile tile)
         {
-            var pattern = TileUrl[_tileUrlIndex++ % TileUrl.Length];
+            var pattern = TileUrl[_tileUrlIndex++ % TileUrl.Length] ?? string.Empty;
 
             var str = pattern
                 .Replace("%x", tile.X.ToString(CultureInfo.InvariantCulture))
@@ -109,52 +112,41 @@
             return new Uri(str);
         }
 
-        private static int GetTileHashCode(IMapTile arg)
+        private static int GetTileHashCode([NotNull] IMapTile arg)
         {
             return arg.X + 0x1000 * arg.Y + 0x1000000 * arg.ZoomLevel;
         }
 
-        private static bool TileEquals(IMapTile left, IMapTile right)
+        private static bool TileEquals([NotNull] IMapTile left, [NotNull] IMapTile right)
         {
             return (left.X == right.X) && (left.Y == right.Y) && (left.ZoomLevel == right.ZoomLevel);
         }
 
         sealed class Image : IImage
         {
+            [NotNull]
             private readonly object _sync = new object();
-            private readonly MapSource _owner;
-            private readonly IMapTile _mapTile;
+
+            [NotNull] private readonly MapSource _owner;
+            [NotNull] private readonly IMapTile _mapTile;
+
             private BitmapImage _source;
 
-            public Image(MapSource owner, IMapTile mapTile)
+            public Image([NotNull] MapSource owner, [NotNull] IMapTile mapTile)
             {
                 _owner = owner;
                 _mapTile = mapTile;
             }
 
-            public ImageSource Source
-            {
-                get
-                {
-                    return _source ?? DownloadBitmap();
-                }
-            }
+            public ImageSource Source => _source ?? DownloadBitmap();
 
-            public bool IsLoaded
-            {
-                get
-                {
-                    return _source != null;
-                }
-            }
+            public bool IsLoaded => _source != null;
 
             public event EventHandler Loaded;
 
             private void OnLoaded()
             {
-                var handler = Loaded;
-                if (handler != null)
-                    handler(this, EventArgs.Empty);
+                Loaded?.Invoke(this, EventArgs.Empty);
             }
 
             private BitmapImage DownloadBitmap()

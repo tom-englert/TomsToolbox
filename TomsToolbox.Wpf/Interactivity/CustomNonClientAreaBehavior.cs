@@ -12,6 +12,7 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Core;
     using TomsToolbox.Desktop;
 
     /// <summary>
@@ -465,7 +466,7 @@
         [ContractVerification(false)]
         private void RegisterMinMaxInfo(IntPtr parameter)
         {
-            var mmi = (MINMAXINFO)Marshal.PtrToStructure(parameter, typeof(MINMAXINFO));
+            var mmi = Marshal.PtrToStructure(parameter, typeof(MINMAXINFO)).SafeCast<MINMAXINFO>();
 
             _maximizedPadding = -1 * (Vector)_transformFromDevice.Transform(mmi.ptMaxPosition);
         }
@@ -525,6 +526,8 @@
             return (short)(i.ToInt32() & ushort.MaxValue);
         }
 
+        // ReSharper disable MemberCanBePrivate.Local
+
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
         private struct RECT
         {
@@ -533,15 +536,9 @@
             public readonly int Right;
             public readonly int Bottom;
 
-            public POINT TopLeft
-            {
-                get { return new POINT { X = Left, Y = Top }; }
-            }
+            public POINT TopLeft => new POINT { X = Left, Y = Top };
 
-            public POINT BottomRight
-            {
-                get { return new POINT { X = Right, Y = Bottom }; }
-            }
+            public POINT BottomRight => new POINT { X = Right, Y = Bottom };
 
             public static implicit operator Rect(RECT r)
             {

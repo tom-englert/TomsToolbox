@@ -66,7 +66,7 @@
         [TestMethod]
         public void PropertyDependencyAttribute_CreateDependencyMappingTest()
         {
-            var actual = PropertyDependencyAttribute.CreateDependencyMapping(typeof(TestType).GetProperties());
+            var actual = PropertyDependencyAttribute.CreateDependencyMapping(typeof(TestType));
 
             var expectedKeys = GetPropertyNames(1, 2, 3);
             var actualKeys = actual.Keys.OrderBy(name => name);
@@ -91,7 +91,7 @@
         [TestMethod]
         public void PropertyDependencyAttribute_CreateDependencyMappingWithRecursionTest()
         {
-            var actual = PropertyDependencyAttribute.CreateDependencyMapping(typeof(TestTypeWithRecursion).GetProperties());
+            var actual = PropertyDependencyAttribute.CreateDependencyMapping(typeof(TestTypeWithRecursion));
 
             var expectedKeys = GetPropertyNames(1, 2, 3);
             var actualKeys = actual.Keys.OrderBy(name => name);
@@ -117,7 +117,7 @@
         [ExpectedException(typeof(InvalidOperationException))]
         public void PropertyDependencyAttribute_CreateDependencyMappingThrowsOnInvalidDefinitionTest()
         {
-            var actual = PropertyDependencyAttribute.CreateDependencyMapping(typeof(TestTypeWithErrors).GetProperties());
+            var actual = PropertyDependencyAttribute.CreateDependencyMapping(typeof(TestTypeWithErrors));
         }
 
         [TestMethod]

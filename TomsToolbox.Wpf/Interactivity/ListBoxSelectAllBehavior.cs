@@ -39,7 +39,7 @@
         /// Identifies the <see cref="AreAllFilesSelected"/> dependency property
         /// </summary>
         public static readonly DependencyProperty AreAllFilesSelectedProperty =
-            DependencyProperty.Register("AreAllFilesSelected", typeof(bool?), typeof(ListBoxSelectAllBehavior), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((ListBoxSelectAllBehavior)sender).AreAllFilesSelected_Changed((bool?)e.NewValue)));
+            DependencyProperty.Register("AreAllFilesSelected", typeof(bool?), typeof(ListBoxSelectAllBehavior), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((ListBoxSelectAllBehavior)sender)?.AreAllFilesSelected_Changed((bool?)e.NewValue)));
 
         /// <summary>
         /// Called after the behavior is attached to an AssociatedObject.
@@ -58,6 +58,7 @@
             listBox.SelectAll();
 
             listBox.SelectionChanged += ListBox_SelectionChanged;
+            // ReSharper disable once PossibleNullReferenceException
             ((INotifyCollectionChanged)listBox.Items).CollectionChanged += (_, __) => _collectionChangedThrottle.Tick();
         }
 
@@ -71,6 +72,7 @@
             {
                 _isListBoxUpdating = true;
 
+                // ReSharper disable once PossibleNullReferenceException
                 if (listBox.Items.Count == listBox.SelectedItems.Count)
                 {
                     AreAllFilesSelected = true;

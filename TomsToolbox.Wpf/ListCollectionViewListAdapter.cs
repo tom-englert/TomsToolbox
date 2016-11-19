@@ -72,7 +72,7 @@
         /// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
         /// </returns>
         /// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
-        public bool Contains(T item)
+        public bool Contains([NotNull] T item)
         {
             return _collectionView.Contains(item);
         }
@@ -84,7 +84,7 @@
         /// <returns>
         /// The index of <paramref name="item" /> if found in the list; otherwise, -1.
         /// </returns>
-        public int IndexOf(T item)
+        public int IndexOf([NotNull] T item)
         {
             return _collectionView.IndexOf(item);
         }
@@ -111,6 +111,7 @@
                 var value = _collectionView.GetItemAt(index);
                 return value == null ? default(T) : (T)value;
             }
+            // ReSharper disable once ValueParameterNotUsed
             set
             {
                 ReadOnlyNotSupported();
@@ -120,9 +121,9 @@
         void ICollection.CopyTo(Array array, int index)
         {
             if (array == null)
-                throw new ArgumentNullException("array");
+                throw new ArgumentNullException(nameof(array));
             if (index < 0)
-                throw new ArgumentOutOfRangeException("index");
+                throw new ArgumentOutOfRangeException(nameof(index));
             if (index + array.Length < Count)
                 throw new ArgumentException("array is too small");
             if (array.Rank != 1)
@@ -141,21 +142,9 @@
             return false;
         }
 
-        object ICollection.SyncRoot
-        {
-            get
-            {
-                return _collectionView;
-            }
-        }
+        object ICollection.SyncRoot => _collectionView;
 
-        bool ICollection.IsSynchronized
-        {
-            get
-            {
-                return false;
-            }
-        }
+        bool ICollection.IsSynchronized => false;
 
         int IList.Add(object value)
         {
@@ -181,9 +170,9 @@
         void ICollection<T>.CopyTo(T[] array, int index)
         {
             if (array == null)
-                throw new ArgumentNullException("array");
+                throw new ArgumentNullException(nameof(array));
             if (index < 0)
-                throw new ArgumentOutOfRangeException("index");
+                throw new ArgumentOutOfRangeException(nameof(index));
             if (index + array.Length < Count)
                 throw new ArgumentException("array is too small");
             if (array.Rank != 1)
@@ -240,7 +229,7 @@
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 ReadOnlyNotSupported();
             }
@@ -249,24 +238,12 @@
         /// <summary>
         /// Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1" /> is read-only.
         /// </summary>
-        public bool IsReadOnly
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public bool IsReadOnly => true;
 
         /// <summary>
         /// Gets a value indicating whether the <see cref="T:System.Collections.IList" /> has a fixed size.
         /// </summary>
-        public bool IsFixedSize
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool IsFixedSize => false;
 
         private static void ReadOnlyNotSupported()
         {
@@ -280,9 +257,7 @@
 
         private void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, e);
+            PropertyChanged?.Invoke(this, e);
         }
 
         /// <summary>
@@ -292,9 +267,7 @@
 
         private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            var handler = CollectionChanged;
-            if (handler != null)
-                handler(this, e);
+            CollectionChanged?.Invoke(this, e);
         }
 
         private void CollectionView_PropertyChanged(object sender, PropertyChangedEventArgs e)

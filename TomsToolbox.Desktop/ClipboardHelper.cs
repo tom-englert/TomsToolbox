@@ -103,9 +103,10 @@
             if ((table.Count == 1) && (table[0] != null) && (table[0].Count == 1) && string.IsNullOrWhiteSpace(table[0][0]))
                 return Quote + (table[0][0] ?? string.Empty) + Quote;
 
-            return string.Join(Environment.NewLine, table.Select(line => string.Join(separator.ToString(), line.Select(cell => Quoted(cell, separator)))));
+            return string.Join(Environment.NewLine, table.Select(line => string.Join(separator.ToString(), line?.Select(cell => Quoted(cell, separator)) ?? Enumerable.Empty<string>())));
         }
 
+        [NotNull]
         internal static string Quoted(string value, char separator)
         {
             if (string.IsNullOrEmpty(value))
@@ -139,7 +140,7 @@
 
             var headerColumns = table.First();
 
-            return table.Any(columns => columns.Count != headerColumns.Count) ? null : table;
+            return table.Any(columns => columns?.Count != headerColumns?.Count) ? null : table;
         }
 
         [NotNull]

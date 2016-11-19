@@ -10,6 +10,8 @@
     using System.Windows.Data;
     using System.Windows.Threading;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
     using TomsToolbox.Desktop;
     using TomsToolbox.Wpf.Interactivity;
@@ -26,7 +28,9 @@
     public abstract class VisualCompositionBehavior<T> : FrameworkElementBehavior<T>, IVisualCompositionBehavior
         where T : FrameworkElement
     {
+        [NotNull]
         private readonly DispatcherThrottle _deferredUpdateThrottle;
+
         private INotifyChanged _exportProviderChangeTracker;
         private ExportProvider _exportProvider;
 
@@ -50,7 +54,7 @@
         /// Identifies the <see cref="RegionId"/> dependency property
         /// </summary>
         public static readonly DependencyProperty RegionIdProperty =
-            DependencyProperty.Register("RegionId", typeof(string), typeof(VisualCompositionBehavior<T>), new FrameworkPropertyMetadata((sender, e) => ((VisualCompositionBehavior<T>)sender).RegionId_Changed()));
+            DependencyProperty.Register("RegionId", typeof(string), typeof(VisualCompositionBehavior<T>), new FrameworkPropertyMetadata((sender, e) => ((VisualCompositionBehavior<T>)sender)?.RegionId_Changed()));
 
 
         /// <summary>
@@ -65,7 +69,7 @@
         /// Identifies the <see cref="CompositionContext"/> dependency property
         /// </summary>
         public static readonly DependencyProperty CompositionContextProperty =
-            DependencyProperty.Register("CompositionContext", typeof(object), typeof(VisualCompositionBehavior<T>), new FrameworkPropertyMetadata(null, (sender, e) => ((VisualCompositionBehavior<T>)sender).Update()));
+            DependencyProperty.Register("CompositionContext", typeof(object), typeof(VisualCompositionBehavior<T>), new FrameworkPropertyMetadata(null, (sender, e) => ((VisualCompositionBehavior<T>)sender)?.Update()));
 
 
         /// <summary>
@@ -201,7 +205,7 @@
         protected IEnumerable<Lazy<object, IVisualCompositionMetadata>> GetExports(string regionId)
         {
             return ExportProvider?.GetExports<object, IVisualCompositionMetadata>(VisualCompositionExportAttribute.ExportContractName)
-                .Where(item => item.Metadata.TargetRegions.Contains(regionId));
+                .Where(item => item?.Metadata.TargetRegions.Contains(regionId) == true);
         }
 
         /// <summary>

@@ -27,7 +27,7 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        protected abstract object Convert(object[] values, Type targetType, object parameter, CultureInfo culture);
+        protected abstract object Convert([NotNull] object[] values, Type targetType, object parameter, CultureInfo culture);
 
         /// <summary>
         /// Converts a value.
@@ -97,7 +97,7 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        protected override object Convert([NotNull] object[] values, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             Contract.Requires(values != null);
             throw new NotImplementedException();

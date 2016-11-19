@@ -9,8 +9,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
-
     /// <summary>
     /// Extension for the <see cref="Image"/> class:
     /// </summary>
@@ -47,6 +45,7 @@
         /// <summary>Allows to specify a resource key instead of an Uri as the source from which the image will be loaded.</summary>
         /// </AttachedPropertyComments>
         public static readonly DependencyProperty ResourceKeyProperty =
+            // ReSharper disable once AssignNullToNotNullAttribute
             DependencyProperty.RegisterAttached("ResourceKey", typeof(object), typeof(ImageExtensions), new FrameworkPropertyMetadata((sender, e) => ResourceKey_Changed((Image)sender, e.NewValue)));
 
         private static void ResourceKey_Changed([NotNull] Image image, object resourceKey)
@@ -58,11 +57,11 @@
             image.ImageFailed += Image_ImageFailed;
         }
 
-        static void Image_ImageFailed([NotNull] object sender, ExceptionRoutedEventArgs e)
+        static void Image_ImageFailed([NotNull] object sender, [NotNull] ExceptionRoutedEventArgs e)
         {
             Contract.Requires(sender != null);
             var resourceKey = GetResourceKey((Image)sender);
-            var message = e.ErrorException.Maybe().Return(ex => ex.Message, @"No exception");
+            var message = e.ErrorException?.Message ?? @"No exception";
             Trace.TraceError(string.Format(CultureInfo.InvariantCulture, "Load image with resource key '{0}' failed: {1}", resourceKey, message));
         }
     }

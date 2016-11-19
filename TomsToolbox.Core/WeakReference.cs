@@ -5,6 +5,8 @@
     using System.Diagnostics.Contracts;
     using System.Runtime.Serialization;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// A typed version of the <see cref="WeakReference"/>
     /// </summary>
@@ -39,7 +41,7 @@
         /// </summary>
         /// <param name="info">An object that holds all the data needed to serialize or deserialize the current <see cref="T:System.WeakReference" /> object.</param>
         /// <param name="context">(Reserved) Describes the source and destination of the serialized stream specified by <paramref name="info" />.</param>
-        private WeakReference(SerializationInfo info, StreamingContext context)
+        private WeakReference([NotNull] SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
@@ -49,13 +51,7 @@
         /// Gets or sets the object (the target) referenced by the current <see cref="T:System.WeakReference" /> object.
         /// </summary>
         /// <returns>null if the object referenced by the current <see cref="T:System.WeakReference" /> object has been garbage collected; otherwise, a reference to the object referenced by the current <see cref="T:System.WeakReference" /> object.</returns>
-        public new T Target
-        {
-            get
-            {
-                return (T)base.Target;
-            }
-        }
+        public new T Target => (T)base.Target;
 
         /// <summary>
         /// Tries to the get the target.

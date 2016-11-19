@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Core
 {
     using System;
-    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
 
@@ -31,22 +30,11 @@
         /// <summary>
         /// Gets the categories for this module.
         /// </summary>
-        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification="Can't use anything else in attributes. Property must match constructor parameter.")]
+        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "Can't use anything else in attributes. Property must match constructor parameter.")]
         [NotNull]
         public string[] Categories
         {
             get;
-            private set;
         }
-
-#if !PORTABLE
-        [ContractInvariantMethod]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(Categories != null);
-        }
-#endif  
     }
 }

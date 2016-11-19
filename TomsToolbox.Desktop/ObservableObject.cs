@@ -29,11 +29,11 @@
         , INotifyDataErrorInfo
 #endif
     {
-        private static readonly AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>> DependencyMappingCache = new AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>>(type => PropertyDependencyAttribute.CreateDependencyMapping(type.GetProperties()));
+        private static readonly AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>> _dependencyMappingCache = new AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>>(PropertyDependencyAttribute.CreateDependencyMapping);
         [NonSerialized]
         private IDictionary<string, IEnumerable<string>> _dependencyMapping;
 
-        private static readonly AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>> RelayMappingCache = new AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>>(type => RelayedEventAttribute.CreateRelayMapping(type.GetProperties()));
+        private static readonly AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>> _relayMappingCache = new AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>>(RelayedEventAttribute.CreateRelayMapping);
         [NonSerialized]
         private IDictionary<Type, IDictionary<string, string>> _relayMapping;
         [NonSerialized]
@@ -69,7 +69,7 @@
             Contract.Requires(source != null);
 
             var sourceType = source.GetType();
-            if (!RelayMapping.Keys.Any(key => key.IsAssignableFrom(sourceType)))
+            if (RelayMapping.Keys.All(key => key?.IsAssignableFrom(sourceType) != true))
                 throw new InvalidOperationException(@"This class has no property with a RelayedEventAttribute for the type " + sourceType);
 
             INotifyPropertyChanged oldSource;
@@ -258,34 +258,21 @@
             }
         }
 
-        private Dictionary<Type, INotifyPropertyChanged> EventSources
-        {
-            get
-            {
-                return _eventSources ?? (_eventSources = new Dictionary<Type, INotifyPropertyChanged>());
-            }
-        }
+        [NotNull]
+        private Dictionary<Type, INotifyPropertyChanged> EventSources => _eventSources ?? (_eventSources = new Dictionary<Type, INotifyPropertyChanged>());
 
-        private IDictionary<Type, IDictionary<string, string>> RelayMapping
-        {
-            get
-            {
-                return _relayMapping ?? (_relayMapping = RelayMappingCache[GetType()]);
-            }
-        }
+        [NotNull]
+        private IDictionary<Type, IDictionary<string, string>> RelayMapping => _relayMapping ?? (_relayMapping = _relayMappingCache[GetType()]);
 
-        private IDictionary<string, IEnumerable<string>> DependencyMapping
-        {
-            get
-            {
-                return _dependencyMapping ?? (_dependencyMapping = DependencyMappingCache[GetType()]);
-            }
-        }
+        [NotNull]
+        private IDictionary<string, IEnumerable<string>> DependencyMapping => _dependencyMapping ?? (_dependencyMapping = _dependencyMappingCache[GetType()]);
 
+        // ReSharper disable once AnnotateNotNullParameter
         private void RelaySource_PropertyChanged([NotNull] object sender, PropertyChangedEventArgs e)
         {
             Contract.Requires(sender != null);
 
+            // ReSharper disable once PossibleNullReferenceException
             if (e.PropertyName == null)
                 return;
 
@@ -364,21 +351,9 @@
             return dataErrors;
         }
 
-        string IDataErrorInfo.Error
-        {
-            get
-            {
-                return InternalGetDataErrors(null).FirstOrDefault();
-            }
-        }
+        string IDataErrorInfo.Error => InternalGetDataErrors(null).FirstOrDefault();
 
-        string IDataErrorInfo.this[string columnName]
-        {
-            get
-            {
-                return InternalGetDataErrors(columnName).FirstOrDefault();
-            }
-        }
+        string IDataErrorInfo.this[string columnName] => InternalGetDataErrors(columnName).FirstOrDefault();
 
 #if NETFRAMEWORK_4_5
         private event EventHandler<DataErrorsChangedEventArgs> _errorsChanged;

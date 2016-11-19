@@ -56,7 +56,8 @@
         /// </returns>
         /// <exception cref="System.InvalidOperationException">The generator did not generate a valid item.</exception>
         /// <exception cref="System.ArgumentNullException"><paramref name="key" /> is null.</exception>
-        public TValue this[TKey key]
+        [NotNull]
+        public TValue this[[NotNull] TKey key]
         {
             get
             {
@@ -134,7 +135,7 @@
         /// true if the element is successfully found and removed; otherwise, false.  This method returns false if <paramref name="key"/> is not found in the <see cref="T:System.Collections.Generic.Dictionary`2"/>.
         /// </returns>
         /// <param name="key">The key of the element to remove.</param><exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null.</exception>
-        public bool Remove(TKey key)
+        public bool Remove([NotNull] TKey key)
         {
             Contract.Requires(!ReferenceEquals(key, null));
 
@@ -144,10 +145,12 @@
                 return false;
 
             // Remove will fire an event, index should be updated first to ensure code is re-entrant.
+            // ReSharper disable PossibleNullReferenceException
             _index = Items
                 .Where(item => !Equals(key, item.Key))
                 .Select((item, i) => new { item.Key, i })
                 .ToDictionary(x => x.Key, x => x.i, _index.Comparer);
+            // ReSharper restore PossibleNullReferenceException
 
             Contract.Assume(index >= 0);
             Contract.Assume(index < Items.Count);

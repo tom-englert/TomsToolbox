@@ -16,7 +16,8 @@
     public class WeakReferenceSet<T> : IEnumerable<T> where T : class
     {
         private int _cleanupCycleCounter;
-        [NotNull]
+
+        [NotNull, ItemNotNull]
         private List<WeakReference> _items = new List<WeakReference>();
 
         /// <summary>

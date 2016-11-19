@@ -128,6 +128,7 @@
         /// </summary>
         /// <param name="compositionContext">The composition context.</param>
         /// <returns>The part to be used in composition.</returns>
+        [NotNull]
         public object GetPart(object compositionContext)
         {
             return GetCommandSource(compositionContext);
@@ -181,7 +182,7 @@
         /// Gets a value indicating whether to show the header text when this command is bound to a button.
         /// If false, only the icon should be displayed.
         /// </summary>
-        public virtual bool ShowTextOnButtons => bool.TrueString.Equals(GetType().TryGetText(ShowTextOnButtonsKey), StringComparison.OrdinalIgnoreCase);
+        public virtual bool ShowTextOnButtons => string.Equals(bool.TrueString, GetType().TryGetText(ShowTextOnButtonsKey), StringComparison.OrdinalIgnoreCase);
 
         /// <summary>
         /// Gets the id of the region sub-items can register for.
@@ -195,7 +196,7 @@
         /// Gets a value indicating whether the control associated with this instance should be checkable, 
         /// e.g. a <see cref="MenuItem"/> with <see cref="MenuItem.IsCheckable"/> or a <see cref="ToggleButton"/> in a tool bar.
         /// </summary>
-        public virtual bool IsCheckable => bool.TrueString.Equals(GetType().TryGetText(IsCheckableKey), StringComparison.OrdinalIgnoreCase);
+        public virtual bool IsCheckable => string.Equals(bool.TrueString, GetType().TryGetText(IsCheckableKey), StringComparison.OrdinalIgnoreCase);
 
         /// <summary>
         /// Gets the name of the group that this command belongs to.
@@ -293,6 +294,7 @@
         /// <returns>
         /// The command source.
         /// </returns>
+        [NotNull]
         protected override CommandSource CreateCommandSource()
         {
             return new CommandSource(this);

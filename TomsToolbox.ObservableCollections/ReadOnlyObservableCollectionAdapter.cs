@@ -60,9 +60,7 @@
         /// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, e);
+            PropertyChanged?.Invoke(this, e);
         }
 
         /// <summary>
@@ -71,9 +69,7 @@
         /// <param name="e">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            var handler = CollectionChanged;
-            if (handler != null)
-                handler(this, e);
+            CollectionChanged?.Invoke(this, e);
         }
 
         private void Items_PropertyChanged(object sender, PropertyChangedEventArgs e)

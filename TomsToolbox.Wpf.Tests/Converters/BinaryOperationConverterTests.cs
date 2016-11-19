@@ -310,7 +310,7 @@
 
             public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
             {
-                return value.ToString();
+                return value?.ToString();
             }
         }
 

@@ -125,6 +125,7 @@
             return memberName;
         }
 
+        // ReSharper disable once UnusedParameter.Local
         private static string HandleError(bool failOnErrors, [NotNull] string errorMessage)
         {
             Contract.Requires(errorMessage != null);

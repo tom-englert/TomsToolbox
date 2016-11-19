@@ -26,7 +26,7 @@
     /// This collection does <c>not</c> hold a reference to the source collection. To keep the source collection alive, the object generating the <see cref="ObservableFilteredCollection{T}" /> must hold a reference to the source collection.<para/>
     /// When live tracking is active, Reset of the source collection is not supported.
     /// </remarks>
-    public class ObservableFilteredCollection<T> : ReadOnlyObservableCollectionAdapter<T, ObservableCollection<T>>, IObservableCollection<T>
+    public class ObservableFilteredCollection<T> : ReadOnlyObservableCollectionAdapter<T, ObservableCollection<T>>
     {
         private readonly IWeakEventListener _collectionChangedWeakEvent;
         [NotNull]
@@ -41,6 +41,7 @@
         /// <param name="filter">The filter.</param>
         /// <param name="liveTrackingProperties">The live tracking properties. Whenever one of these properties in any item changes, the filter is reevaluated for the item.</param>
         public ObservableFilteredCollection([NotNull] IEnumerable sourceCollection, [NotNull] Func<T, bool> filter, [NotNull] params string[] liveTrackingProperties)
+        // ReSharper disable PossibleMultipleEnumeration
             : base(new ObservableCollection<T>(sourceCollection.Cast<T>().Where(filter)))
         {
             Contract.Requires(sourceCollection != null);
@@ -60,11 +61,12 @@
             {
                 _collectionChangedWeakEvent = CreateEvent(eventSource);
             }
+            // ReSharper restore PossibleMultipleEnumeration
         }
 
         [ContractVerification(false)]
         [NotNull]
-        private WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> CreateEvent(INotifyCollectionChanged eventSource)
+        private WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> CreateEvent([NotNull] INotifyCollectionChanged eventSource)
         {
             Contract.Ensures(Contract.Result<WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs>>() != null);
 
@@ -73,7 +75,7 @@
         }
 
         [ContractVerification(false)]
-        private static void OnCollectionChanged([NotNull] ObservableFilteredCollection<T> self, object sender, NotifyCollectionChangedEventArgs e)
+        private static void OnCollectionChanged([NotNull] ObservableFilteredCollection<T> self, [NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
             Contract.Requires(self != null);
 
@@ -97,7 +99,7 @@
         }
 
         [ContractVerification(false)]
-        private void SourceCollection_CollectionChanged([NotNull] object sender, NotifyCollectionChangedEventArgs e)
+        private void SourceCollection_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
             Contract.Requires(sender != null);
 
@@ -175,7 +177,7 @@
                 eventSource.PropertyChanged -= Item_PropertyChanged;
         }
 
-        private void Item_PropertyChanged([NotNull] object sender, PropertyChangedEventArgs e)
+        private void Item_PropertyChanged([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
         {
             Contract.Requires(sender != null);
 

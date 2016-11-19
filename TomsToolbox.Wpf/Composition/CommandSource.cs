@@ -175,7 +175,7 @@
             var index = _attachedCommands.IndexOf(oldCommand);
 
             if (index < 0)
-                throw new ArgumentException(@"Can't replace a command that has not been attached before", "oldCommand");
+                throw new ArgumentException(@"Can't replace a command that has not been attached before", nameof(oldCommand));
 
             _attachedCommands[index] = newCommand;
 
@@ -195,7 +195,7 @@
 
             IsAnyTargetAttached = command != null;
 
-            _attachedCommands.OfType<ICommandChangedNotificationSink>().ForEach(item => item.ActiveCommandChanged(command));
+            _attachedCommands.OfType<ICommandChangedNotificationSink>().ForEach(item => item?.ActiveCommandChanged(command));
         }
 
         [ContractInvariantMethod]

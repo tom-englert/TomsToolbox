@@ -200,6 +200,7 @@ namespace TomsToolbox.Desktop
             {
                 Contract.Ensures(Contract.Result<TaskScheduler>() != null);
 
+                // ReSharper disable once AssignNullToNotNullAttribute
                 return _taskScheduler ?? (_taskScheduler = Invoke(TaskScheduler.FromCurrentSynchronizationContext));
             }
         }
@@ -296,10 +297,7 @@ namespace TomsToolbox.Desktop
 
             Dispatcher.Run();
 
-            if (Terminated != null)
-            {
-                Terminated(this, EventArgs.Empty);
-            }
+            Terminated?.Invoke(this, EventArgs.Empty);
 
             _threadStarted.Close();
         }

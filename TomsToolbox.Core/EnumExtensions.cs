@@ -280,7 +280,7 @@
             return InternalToEnum<T>(value);
         }
 
-        private static T InternalToEnum<T>(object value)
+        private static T InternalToEnum<T>([NotNull] object value)
             where T : struct
         {
             var enumType = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);

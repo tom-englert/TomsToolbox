@@ -91,10 +91,7 @@
 
         private static void InternalTrackSelection(Selector selector, bool forceSelection)
         {
-            if (selector == null)
-                return;
-
-            var dataContext = selector.DataContext;
+            var dataContext = selector?.DataContext;
             if (dataContext == null)
                 return;
 

@@ -79,12 +79,7 @@
 
         private void Value_Changed(T oldValue, T newValue)
         {
-            var eventHandler = ValueChanged;
-
-            if (eventHandler != null)
-            {
-                eventHandler(this, new PropertyBindingValueChangedEventArgs<T>(oldValue, newValue));
-            }
+            ValueChanged?.Invoke(this, new PropertyBindingValueChangedEventArgs<T>(oldValue, newValue));
         }
 
         /// <summary>
@@ -107,7 +102,7 @@
             }
 
             public static readonly DependencyProperty ValueProperty =
-                DependencyProperty.Register("Value", typeof(T), typeof(BindingHelper), new FrameworkPropertyMetadata((sender, e) => ((BindingHelper)sender)._owner.Value_Changed((T)e.OldValue, (T)e.NewValue)));
+                DependencyProperty.Register("Value", typeof(T), typeof(BindingHelper), new FrameworkPropertyMetadata((sender, e) => ((BindingHelper)sender)?._owner.Value_Changed((T)e.OldValue, (T)e.NewValue)));
 
             [ContractInvariantMethod]
             [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]

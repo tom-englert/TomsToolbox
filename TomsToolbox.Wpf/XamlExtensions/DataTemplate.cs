@@ -50,10 +50,12 @@
         {
             var newValue = e.NewValue;
 
+            // ReSharper disable PossibleNullReferenceException
             d.TryCast()
                 .When<ContentControl>(cc => cc.ContentTemplateSelector = new RoleBasedDataTemplateSelector { Role = newValue })
                 .When<TabControl>(tc => tc.ContentTemplateSelector = new RoleBasedDataTemplateSelector { Role = newValue })
                 .When<ContentPresenter>(cp => cp.ContentTemplateSelector = new RoleBasedDataTemplateSelector { Role = newValue });
+            // ReSharper restore PossibleNullReferenceException
         }
     }
 }

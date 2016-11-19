@@ -62,7 +62,7 @@
             else if (enumType != null)
             {
                 if (!enumType.IsEnum)
-                    throw new ArgumentException(@"Parameter must be an enum type or null.", "enumType");
+                    throw new ArgumentException(@"Parameter must be an enum type or null.", nameof(enumType));
 
                 var enumName = valueType == typeof(string) ? (string)value : Enum.ToObject(enumType, value).ToString();
                 fieldInfo = enumType.GetField(enumName);

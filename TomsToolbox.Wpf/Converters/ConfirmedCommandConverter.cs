@@ -28,6 +28,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
+        [NotNull]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return new CommandProxy(this, (ICommand)value);
@@ -47,16 +48,12 @@
         {
             Contract.Requires(e != null);
 
-            var handler = Executing;
-            if (handler != null)
-                handler.Invoke(this, e);
+            Executing?.Invoke(this, e);
         }
 
         private void OnError(ErrorEventArgs e)
         {
-            var handler = Error;
-            if (handler != null)
-                handler.Invoke(this, e);
+            Error?.Invoke(this, e);
         }
 
         private class CommandProxy : ICommand

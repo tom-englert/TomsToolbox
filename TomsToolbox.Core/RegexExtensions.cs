@@ -40,6 +40,9 @@
 
             foreach (var textPart in textParts)
             {
+                if (textPart == null)
+                    continue;
+
                 var startIndex = previousTextPart?.Index + previousTextPart?.Length ?? 0;
 
                 yield return itemGenerator(input.Substring(startIndex, textPart.Index - startIndex), false);

@@ -1,10 +1,13 @@
-﻿namespace TomsToolbox.ObservableCollections.Tests
+﻿// ReSharper disable PossibleNullReferenceException
+namespace TomsToolbox.ObservableCollections.Tests
 {
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
+
+    using JetBrains.Annotations;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -77,13 +80,13 @@
             Assert.IsTrue(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
         }
 
-        private static void Collection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private static void Collection_CollectionChanged(object sender, [NotNull] System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             // this is what the ItemsCollection of an ItemsControl does...
             var item = ((IList)sender)[e.NewStartingIndex];
         }
 
-        private static void CommpareAdd(ObservableCollection<Item> collection, ObservableCompositeCollection<Item> compositeCollection)
+        private static void CommpareAdd([NotNull] ObservableCollection<Item> collection, [NotNull] ObservableCompositeCollection<Item> compositeCollection)
         {
             var data = CreateData();
 

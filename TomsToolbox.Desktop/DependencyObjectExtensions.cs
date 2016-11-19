@@ -55,7 +55,6 @@
         {
             [NotNull]
             private readonly T _dependencyObject;
-            [NotNull]
             private readonly DependencyPropertyDescriptor _dependencyPropertyDescriptor;
 
             public DependencyPropertyEventWrapper([NotNull] T dependencyObject, [NotNull] DependencyProperty property)
@@ -65,18 +64,19 @@
 
                 _dependencyObject = dependencyObject;
                 _dependencyPropertyDescriptor = DependencyPropertyDescriptor.FromProperty(property, typeof(T));
-                Contract.Assume(_dependencyPropertyDescriptor != null);
             }
 
             public event EventHandler Changed
             {
                 add
                 {
-                    _dependencyPropertyDescriptor.AddValueChanged(_dependencyObject, value);
+                    // ReSharper disable once AssignNullToNotNullAttribute
+                    _dependencyPropertyDescriptor?.AddValueChanged(_dependencyObject, value);
                 }
                 remove
                 {
-                    _dependencyPropertyDescriptor.RemoveValueChanged(_dependencyObject, value);
+                    // ReSharper disable once AssignNullToNotNullAttribute
+                    _dependencyPropertyDescriptor?.RemoveValueChanged(_dependencyObject, value);
                 }
             }
 
@@ -86,7 +86,6 @@
             private void ObjectInvariant()
             {
                 Contract.Invariant(_dependencyObject != null);
-                Contract.Invariant(_dependencyPropertyDescriptor != null);
             }
         }
     }

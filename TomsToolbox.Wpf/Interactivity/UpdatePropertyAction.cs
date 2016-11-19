@@ -60,11 +60,8 @@
             }
 
             var multiBindingExpression = BindingOperations.GetMultiBindingExpression(target, property);
-            if (multiBindingExpression != null)
-            {
-                multiBindingExpression.BindingExpressions.ForEach(expr => expr.UpdateTarget());
-                return;
-            }
+
+            multiBindingExpression?.BindingExpressions.ForEach(expr => expr?.UpdateTarget());
         }
     }
 }

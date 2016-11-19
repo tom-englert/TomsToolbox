@@ -60,7 +60,7 @@
         /// </returns>
         public static IntPtr ToIntPtr(HGlobal item)
         {
-            return item == null ? IntPtr.Zero : item.Ptr;
+            return item?.Ptr ?? IntPtr.Zero;
         }
 
         /// <summary>

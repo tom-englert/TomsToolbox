@@ -1,8 +1,6 @@
 ﻿namespace TomsToolbox.Wpf.Controls
 {
     using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Windows;
@@ -69,47 +67,22 @@
         /// <summary>
         /// Gets the horizontal index of this tile.
         /// </summary>
-        public int X
-        {
-            get
-            {
-                return _x;
-            }
-        }
+        public int X => _x;
 
         /// <summary>
         /// Gets the vertical index of this tile.
         /// </summary>
-        [NotNull]
-        public int Y
-        {
-            get
-            {
-                return _y;
-            }
-        }
+        public int Y => _y;
 
         /// <summary>
         /// Gets the zoom level of this tile.
         /// </summary>
-        public int ZoomLevel
-        {
-            get
-            {
-                return _zoomLevel;
-            }
-        }
+        public int ZoomLevel => _zoomLevel;
 
         /// <summary>
         /// Gets the logical parent  element of this element.
         /// </summary>
-        IMapTile IMapTile.Parent
-        {
-            get
-            {
-                return _parent;
-            }
-        }
+        IMapTile IMapTile.Parent => _parent;
 
         /// <summary>
         /// Unloads this instance when the tile is no longer visible.
@@ -118,8 +91,9 @@
         {
             Image = null;
 
-            SubTiles.ForEach(subTile => subTile.Unload());
-            SubLevel.Children.Clear();
+            SubTiles.ForEach(subTile => subTile?.Unload());
+            // ReSharper disable once PossibleNullReferenceException
+            SubLevel?.Children.Clear();
         }
 
         /// <summary>
@@ -148,7 +122,7 @@
         /// Identifies the <see cref="ImageProvider"/> dependency property
         /// </summary>
         public static readonly DependencyProperty ImageProviderProperty =
-            DependencyProperty.Register("ImageProvider", typeof(IImageProvider), typeof(MapTile), new FrameworkPropertyMetadata((sender, e) => ((MapTile)sender).ImageProvider_Changed()));
+            DependencyProperty.Register("ImageProvider", typeof(IImageProvider), typeof(MapTile), new FrameworkPropertyMetadata((sender, e) => ((MapTile)sender)?.ImageProvider_Changed()));
 
         /// <summary>
         /// Gets or sets the image for this tile.
@@ -173,11 +147,13 @@
                 return;
 
             var viewPort = Viewport;
-            if (Viewport == null)
+            var world = World;
+
+            if ((viewPort == null) || (world == null))
                 return;
 
             Size extent;
-            if (!IsThisTileVisible(World, viewPort, out extent))
+            if (!IsThisTileVisible(world, viewPort, out extent))
             {
                 Unload();
                 return;
@@ -200,8 +176,9 @@
                 if (!Image.IsLoaded)
                     return;
 
-                SubTiles.ForEach(subTile => subTile.Unload());
-                SubLevel.Children.Clear();
+                SubTiles.ForEach(subTile => subTile?.Unload());
+                // ReSharper disable once PossibleNullReferenceException
+                SubLevel?.Children.Clear();
                 return;
             }
 
@@ -214,7 +191,8 @@
             get
             {
                 Contract.Ensures(Contract.Result<IEnumerable<IMapTile>>() != null);
-                return SubLevel.Children.Cast<IMapTile>();
+                // ReSharper disable once AssignNullToNotNullAttribute
+                return SubLevel?.Children.Cast<IMapTile>() ?? Enumerable.Empty<IMapTile>();
             }
         }
 
@@ -224,10 +202,11 @@
             Invalidate();
         }
 
-        private static void ForceSubLevel([NotNull] IMapTile tile, [NotNull] Panel subLevel)
+        private static void ForceSubLevel([NotNull] IMapTile tile, Panel subLevel)
         {
             Contract.Requires(tile != null);
-            Contract.Requires(subLevel != null);
+            if (subLevel == null)
+                return;
 
             subLevel.Visibility = Visibility.Visible;
 
@@ -275,15 +254,6 @@
         public override string ToString()
         {
             return "{" + X + "," + Y + "," + ZoomLevel + "}";
-        }
-
-        [ContractInvariantMethod]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(World != null);
-            Contract.Invariant(SubLevel != null);
         }
     }
 }

@@ -144,7 +144,7 @@
         /// </summary>
         public void Detach()
         {
-            var source = _source ?? _weakSource.Target;
+            var source = _source ?? _weakSource?.Target;
             if (source == null)
                 return;
 

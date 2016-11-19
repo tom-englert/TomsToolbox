@@ -15,6 +15,7 @@
         /// <summary>
         /// Gets the composition container.
         /// </summary>
+        [NotNull]
         CompositionContainer Container
         {
             get;
@@ -23,6 +24,7 @@
         /// <summary>
         /// Gets the catalog of the container.
         /// </summary>
+        [NotNull]
         AggregateCatalog Catalog
         {
             get;
@@ -32,7 +34,6 @@
     [ContractClassFor(typeof(ICompositionHost))]
     abstract class CompositionHostContracts : ICompositionHost
     {
-        [NotNull]
         public CompositionContainer Container
         {
             get
@@ -43,7 +44,6 @@
             }
         }
 
-        [NotNull]
         public AggregateCatalog Catalog
         {
             get

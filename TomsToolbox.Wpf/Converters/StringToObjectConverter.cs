@@ -27,9 +27,7 @@
         {
             get
             {
-                if (_typeConverter != null)
-                    return _typeConverter.GetType();
-                return null;
+                return _typeConverter?.GetType();
             }
             set
             {
@@ -84,10 +82,8 @@
         protected override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var typeConverter = GetTypeConverter(targetType);
-            if (typeConverter == null)
-                return null;
 
-            return typeConverter.ConvertToInvariantString(value);
+            return typeConverter?.ConvertToInvariantString(value);
         }
 
         private TypeConverter GetTypeConverter(Type targetType)

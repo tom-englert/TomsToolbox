@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Core
 {
     using System;
+    using System.ComponentModel;
     using System.Diagnostics.Contracts;
 
     using JetBrains.Annotations;
@@ -141,13 +142,7 @@
         /// <summary>
         /// Gets the result of the action of the first succeeded cast.
         /// </summary>
-        public TResult Result
-        {
-            get
-            {
-                return InternalResult;
-            }
-        }
+        public TResult Result => InternalResult;
 
         /// <summary>
         /// Tries to cast the value to <typeparamref name="TTarget"/>; if the cast succeeds, the action is executed and the result is stored in the <see cref="Result"/> property.
@@ -209,13 +204,7 @@
         /// <summary>
         /// Gets the value to cast.
         /// </summary>
-        protected TValue Value
-        {
-            get
-            {
-                return _value;
-            }
-        }
+        protected TValue Value => _value;
 
         /// <summary>
         /// Gets the result of the action of the first succeeded cast.
@@ -242,7 +231,7 @@
         /// <param name="message">The message of the exception.</param>
         /// <returns>This method never returns, but throws the exception.</returns>
         /// <exception cref="System.InvalidOperationException"><paramref name="message"/></exception>
-        public TResult ElseThrow(string message)
+        public TResult ElseThrow([Localizable(false)] string message)
         {
             if (!_isResolved)
                 throw new InvalidOperationException(message);

@@ -108,8 +108,10 @@ namespace TomsToolbox.Wpf.Composition
             var contentType = typeof(ComposableContentControl);
 
             context.XamlTypeMapper = new XamlTypeMapper(new string[0]);
+            // ReSharper disable AssignNullToNotNullAttribute
             context.XamlTypeMapper.AddMappingProcessingInstruction("viewModel", viewModelType.Namespace, viewModelType.Assembly.FullName);
             context.XamlTypeMapper.AddMappingProcessingInstruction("toms", contentType.Namespace, contentType.Assembly.FullName);
+            // ReSharper restore AssignNullToNotNullAttribute
 
             context.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
             context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
@@ -135,18 +137,6 @@ namespace TomsToolbox.Wpf.Composition
                 return new RoleBasedDataTemplateKey(dataType, role);
 
             return new DataTemplateKey(dataType);
-        }
-
-        /// <summary>
-        /// Gets the dynamic data template exports.
-        /// </summary>
-        /// <param name="exportProvider">The export provider.</param>
-        /// <returns>All exports.</returns>
-        private static IEnumerable<Lazy<DependencyObject, IDataTemplateMetadata>> GetDataTemplateExports([NotNull] this ExportProvider exportProvider)
-        {
-            Contract.Requires(exportProvider != null);
-
-            return exportProvider.GetExports<DependencyObject, IDataTemplateMetadata>(ContractName);
         }
 
         /// <summary>
@@ -176,6 +166,7 @@ namespace TomsToolbox.Wpf.Composition
         /// </summary>
         /// <param name="exportProvider">The export provider.</param>
         /// <returns>The meta data of all exports.</returns>
+        [NotNull]
         internal static IEnumerable<IDataTemplateMetadata> GetDataTemplateExportsMetadata([NotNull] this ExportProvider exportProvider)
         {
             Contract.Requires(exportProvider != null);
@@ -219,6 +210,7 @@ namespace TomsToolbox.Wpf.Composition
             return metadataDictionary == null ? null : AttributedModelServices.GetMetadataView<IDataTemplateMetadata>(metadataDictionary);
         }
 
+        [NotNull]
         private static Lazy<object, object> AssertCorrectCreationPolicy([NotNull] Lazy<object, object> export)
         {
             Contract.Requires(export != null);
@@ -227,6 +219,7 @@ namespace TomsToolbox.Wpf.Composition
 
             var metadata = export.Metadata as IDictionary<string, object>;
             object value;
+            // ReSharper disable once AssignNullToNotNullAttribute
             if ((metadata != null) && metadata.TryGetValue(typeof(CreationPolicy).FullName, out value) && CreationPolicy.NonShared.Equals(value))
                 return export;
 

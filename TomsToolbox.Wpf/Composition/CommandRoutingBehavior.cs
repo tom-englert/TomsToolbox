@@ -31,7 +31,7 @@
         /// Identifies the <see cref="CommandSource"/> dependency property
         /// </summary>
         public static readonly DependencyProperty CommandSourceProperty =
-            DependencyProperty.Register("CommandSource", typeof(Type), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata((sender, e) => ((CommandRoutingBehavior)sender).CommandSource_Changed((Type)e.OldValue, (Type)e.NewValue)));
+            DependencyProperty.Register("CommandSource", typeof(Type), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata((sender, e) => ((CommandRoutingBehavior)sender)?.CommandSource_Changed((Type)e.OldValue, (Type)e.NewValue)));
 
 
         /// <summary>
@@ -87,7 +87,7 @@
         /// Identifies the <see cref="CompositionContext"/> dependency property
         /// </summary>
         public static readonly DependencyProperty CompositionContextProperty =
-            DependencyProperty.Register("CompositionContext", typeof(object), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata((sender, e) => ((CommandRoutingBehavior)sender).CompositionContext_Changed(e.OldValue, e.NewValue)));
+            DependencyProperty.Register("CompositionContext", typeof(object), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata((sender, e) => ((CommandRoutingBehavior)sender)?.CompositionContext_Changed(e.OldValue, e.NewValue)));
 
 
         /// <summary>
@@ -103,7 +103,7 @@
         /// Identifies the <see cref="IsEnabled"/> dependency property
         /// </summary>
         public static readonly DependencyProperty IsEnabledProperty =
-            DependencyProperty.Register("IsEnabled", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, e) => ((CommandRoutingBehavior)sender).StateChanged()));
+            DependencyProperty.Register("IsEnabled", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, e) => ((CommandRoutingBehavior)sender)?.StateChanged()));
 
 
         /// <summary>
@@ -118,7 +118,7 @@
         /// Identifies the <see cref="IsChecked"/> dependency property
         /// </summary>
         public static readonly DependencyProperty IsCheckedProperty =
-            DependencyProperty.Register("IsChecked", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, e) => ((CommandRoutingBehavior)sender).StateChanged()));
+            DependencyProperty.Register("IsChecked", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, e) => ((CommandRoutingBehavior)sender)?.StateChanged()));
 
 
         /// <summary>
@@ -271,7 +271,7 @@
             var exportProvider = IsAlive ? element.GetExportProvider() : element.TryGetExportProvider();
 
             return exportProvider?.GetExports(commandSourceType, typeof(object), string.Empty)
-                .Select(export => export.Value)
+                .Select(export => export?.Value)
                 .OfType<CommandSourceFactory>()
                 .FirstOrDefault();
         }

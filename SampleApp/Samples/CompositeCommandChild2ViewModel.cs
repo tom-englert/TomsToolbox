@@ -3,6 +3,8 @@
     using System.Windows;
     using System.Windows.Input;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Desktop;
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;
@@ -25,6 +27,7 @@
         }
 
 
+        [NotNull]
         public ICommand CopyCommand
         {
             get
@@ -33,6 +36,7 @@
             }
         }
 
+        [NotNull]
         public ICommand PasteCommand
         {
             get
@@ -41,6 +45,7 @@
             }
         }
 
+        [NotNull]
         public ICommand CutCommand
         {
             get

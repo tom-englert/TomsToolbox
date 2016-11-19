@@ -5,7 +5,8 @@
     using System.Windows.Input;
     using System.Windows.Interactivity;
 
-    using TomsToolbox.Core;
+    using JetBrains.Annotations;
+
     using TomsToolbox.Desktop;
     using TomsToolbox.Wpf.Controls;
 
@@ -43,7 +44,7 @@
         /// Identifies the <see cref="Viewport"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty ViewportProperty =
-            DependencyProperty.Register("Viewport", typeof(FrameworkElement), typeof(SelectionRectangleBehavior), new FrameworkPropertyMetadata((sender, e) => ((SelectionRectangleBehavior)sender).Viewport_Changed((FrameworkElement)e.OldValue, (FrameworkElement)e.NewValue)));
+            DependencyProperty.Register("Viewport", typeof(FrameworkElement), typeof(SelectionRectangleBehavior), new FrameworkPropertyMetadata((sender, e) => ((SelectionRectangleBehavior)sender)?.Viewport_Changed((FrameworkElement)e.OldValue, (FrameworkElement)e.NewValue)));
 
 
         /// <summary>
@@ -58,7 +59,7 @@
         /// Identifies the <see cref="Selection"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty SelectionProperty =
-            DependencyProperty.Register("Selection", typeof(Rect), typeof(SelectionRectangleBehavior), new FrameworkPropertyMetadata(Rect.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((SelectionRectangleBehavior)sender).Selection_Changed((Rect)e.NewValue)));
+            DependencyProperty.Register("Selection", typeof(Rect), typeof(SelectionRectangleBehavior), new FrameworkPropertyMetadata(Rect.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((SelectionRectangleBehavior)sender)?.Selection_Changed((Rect)e.NewValue)));
 
 
         private void Selection_Changed(Rect value)
@@ -81,7 +82,7 @@
             Canvas.SetRight(visual, value.Right);
             Canvas.SetBottom(visual,value.Bottom);
 
-            AssociatedObject.Maybe().Do(a => a.InvalidateMeasure());
+            AssociatedObject?.InvalidateMeasure();
         }
 
 
@@ -103,12 +104,12 @@
         }
 
 
-        private void Viewport_MouseMove(object sender, MouseEventArgs e)
+        private void Viewport_MouseMove(object sender, [NotNull] MouseEventArgs e)
         {
             if (_startPosition == null)
                 return;
 
-            var worldLayer = AssociatedObject.Maybe().Return(a => a.World);
+            var worldLayer = AssociatedObject?.World;
             if (worldLayer == null)
                 return;
 
@@ -119,13 +120,13 @@
         }
 
 
-        private void Viewport_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void Viewport_MouseRightButtonDown(object sender, [NotNull] MouseButtonEventArgs e)
         {
             var viewport = Viewport;
             if (viewport == null)
                 return;
 
-            var worldLayer = AssociatedObject.Maybe().Return(a => a.World);
+            var worldLayer = AssociatedObject?.World;
             if (worldLayer == null)
                 return;
 

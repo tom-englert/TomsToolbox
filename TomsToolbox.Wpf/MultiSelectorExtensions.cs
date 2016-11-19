@@ -207,7 +207,8 @@
 
             foreach (var item in itemsToSelect)
             {
-                if (selector.Items?.Contains(item) == true)
+                // ReSharper disable once PossibleNullReferenceException
+                if (selector.Items.Contains(item))
                 {
                     selectedItems.Add(item);
                 }
@@ -245,7 +246,8 @@
             var selectedItem = sourceSelection[0];
 
             // The item is not present, e.g. because of filtering, and can't be selected at this time.
-            if (selector.Items?.Contains(selectedItem) != true)
+            // ReSharper disable once PossibleNullReferenceException
+            if (selector.Items.Contains(selectedItem) != true)
             {
                 selector.ClearSourceSelection();
             }

@@ -109,6 +109,7 @@
 
             Contract.Assume(existingInputBindings.Count == 0);
 
+            // ReSharper disable once PossibleNullReferenceException
             existingInputBindings.AddRange(newInputBindings.OfType<InputBinding>().Select(item => item.Clone()).ToArray());
         }
 
@@ -159,9 +160,7 @@
 
         private static void GroupStyle_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var groupStyle = d.Maybe()
-                .Select(i => i as ItemsControl)
-                .Return(i => i.GroupStyle);
+            var groupStyle = (d as ItemsControl)?.GroupStyle;
 
             if (groupStyle == null)
                 return;
@@ -232,9 +231,8 @@
 
         private static void GroupDescriptions_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var groupDescriptions = d.Maybe()
-                .Select(i => i as ItemsControl)
-                .Return(i => i.Items.GroupDescriptions);
+            // ReSharper disable once PossibleNullReferenceException
+            var groupDescriptions = (d as ItemsControl)?.Items.GroupDescriptions;
 
             if (groupDescriptions == null)
                 return;
@@ -298,7 +296,7 @@
                 var existingBehaviors = Interaction.GetBehaviors(d);
                 Contract.Assume(existingBehaviors != null);
                 Contract.Assume(existingBehaviors.Count == 0);
-                existingBehaviors.AddRange(newValue.Select(item => (Behavior)item.Clone()));
+                existingBehaviors.AddRange(newValue.Select(item => (Behavior)item?.Clone()).Where(item => item != null));
             }
         }
 
@@ -357,7 +355,7 @@
                 Contract.Assume(existingTriggers != null);
                 Contract.Assume(existingTriggers.Count == 0);
 
-                existingTriggers.AddRange(newValue.Select(item => (TriggerBase)item.Clone()));
+                existingTriggers.AddRange(newValue.Select(item => (TriggerBase)item?.Clone()).Where(item => item != null));
             }
         }
     }

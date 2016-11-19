@@ -32,7 +32,6 @@ namespace TomsToolbox.Wpf.Composition
         public Type ViewModel
         {
             get;
-            private set;
         }
 
         /// <summary>

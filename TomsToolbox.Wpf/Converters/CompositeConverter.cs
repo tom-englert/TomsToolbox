@@ -55,7 +55,7 @@
                 throw new InvalidOperationException("One or more converters are required.");
             }
 
-            return Converters.Aggregate(value, (current, converter) => converter.Convert(current, targetType, parameter, culture));
+            return Converters.Aggregate(value, (current, converter) => converter?.Convert(current, targetType, parameter, culture));
         }
 
         /// <summary>
@@ -75,7 +75,7 @@
                 throw new InvalidOperationException("One or more converters are required.");
             }
 
-            return Converters.Reverse().Aggregate(value, (current, converter) => converter.ConvertBack(current, targetType, parameter, culture));
+            return Converters.Reverse().Aggregate(value, (current, converter) => converter?.ConvertBack(current, targetType, parameter, culture));
         }
 
         #endregion

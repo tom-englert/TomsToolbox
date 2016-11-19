@@ -5,6 +5,8 @@
     using System.Windows;
     using System.Windows.Data;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Converts a single number to a uniform <see cref="Thickness"/>, optionally multiplying with the thickness passed as converter parameter.
     /// </summary>
@@ -27,6 +29,7 @@
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
+        [NotNull]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var thickness = ConvertNumberToThickness(value);

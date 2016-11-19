@@ -53,6 +53,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
+        [NotNull]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return Convert(parameter ?? Key, value, null);
@@ -70,7 +71,7 @@
             Contract.Requires(value != null);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return InternalConvert(value, null, attr => attr.Text, attr => Equals(attr.Key, key));
+            return InternalConvert(value, null, attr => attr?.Text, attr => Equals(attr?.Key, key));
         }
 
         /// <summary>
@@ -86,7 +87,7 @@
             Contract.Requires(value != null);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return InternalConvert(value, enumType, attr => attr.Text, attr => Equals(attr.Key, key));
+            return InternalConvert(value, enumType, attr => attr?.Text, attr => Equals(attr?.Key, key));
         }
     }
 }

@@ -42,6 +42,7 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
+        [NotNull]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return Convert(value, parameter as Type);
@@ -58,7 +59,7 @@
             Contract.Requires(value != null);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return InternalConvert(value, null, attr => attr.Description);
+            return InternalConvert(value, null, attr => attr?.Description);
         }
 
         /// <summary>
@@ -73,7 +74,7 @@
             Contract.Requires(value != null);
             Contract.Ensures(Contract.Result<string>() != null);
 
-            return InternalConvert(value, enumType, attr => attr.Description);
+            return InternalConvert(value, enumType, attr => attr?.Description);
         }
     }
 }

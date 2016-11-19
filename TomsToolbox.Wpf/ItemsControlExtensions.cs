@@ -66,7 +66,7 @@
             itemsControl.KeyDown += ItemsControl_KeyDown;
         }
 
-        static void ItemsControl_KeyDown(object sender, KeyEventArgs e)
+        static void ItemsControl_KeyDown([NotNull] object sender, [NotNull] KeyEventArgs e)
         {
             if ((e.Key != Key.Enter) || e.Handled)
                 return;
@@ -74,12 +74,12 @@
             ExecuteCommand(sender, e);
         }
 
-        static void ItemsControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        static void ItemsControl_MouseDoubleClick([NotNull] object sender, [NotNull] MouseButtonEventArgs e)
         {
             ExecuteCommand(sender, e);
         }
 
-        private static void ExecuteCommand(object sender, RoutedEventArgs e)
+        private static void ExecuteCommand([NotNull] object sender, [NotNull] RoutedEventArgs e)
         {
             var itemsControl = sender as ItemsControl;
             if (itemsControl == null)
@@ -102,6 +102,7 @@
                 if (element is GroupItem)
                     return;
 
+                // ReSharper disable once PossibleNullReferenceException
                 var item = itemsControl.ItemContainerGenerator.ItemFromContainer(element);
 
                 if ((item == null) || (item == DependencyProperty.UnsetValue))

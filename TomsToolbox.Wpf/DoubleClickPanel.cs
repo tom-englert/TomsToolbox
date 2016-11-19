@@ -25,7 +25,7 @@
         /// Raises the <see cref="Control.MouseDoubleClickEvent" /> event.
         /// </summary>
         /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnMouseDoubleClick(MouseButtonEventArgs e)
+        protected virtual void OnMouseDoubleClick([NotNull] MouseButtonEventArgs e)
         {
             RaiseEvent(e);
         }
@@ -34,7 +34,7 @@
         /// Raises the <see cref="Control.PreviewMouseDoubleClickEvent" /> event.
         /// </summary>
         /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnPreviewMouseDoubleClick(MouseButtonEventArgs e)
+        protected virtual void OnPreviewMouseDoubleClick([NotNull] MouseButtonEventArgs e)
         {
             RaiseEvent(e);
         }
@@ -94,6 +94,7 @@
             if (e.ClickCount != 2)
                 return false;
 
+            // ReSharper disable once AssignNullToNotNullAttribute
             var mouseButtonEventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton, e.StylusDevice);
 
             if ((e.RoutedEvent == PreviewMouseLeftButtonDownEvent) || (e.RoutedEvent == PreviewMouseRightButtonDownEvent))

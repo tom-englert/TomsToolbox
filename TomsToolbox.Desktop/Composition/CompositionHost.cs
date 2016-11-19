@@ -45,13 +45,7 @@
         /// <summary>
         /// Gets the container.
         /// </summary>
-        public CompositionContainer Container
-        {
-            get
-            {
-                return _container;
-            }
-        }
+        public CompositionContainer Container => _container;
 
         /// <summary>
         /// Gets the catalog of the container.
@@ -76,9 +70,9 @@
         /// A service object of type <paramref name="serviceType"/>.-or- null if there is no service object of type <paramref name="serviceType"/>.
         /// </returns>
         /// <param name="serviceType">An object that specifies the type of service object to get. </param>
-        public object GetService(Type serviceType)
+        public object GetService([NotNull] Type serviceType)
         {
-            return Container.GetExports(serviceType, null, string.Empty).Select(item => item.Value).FirstOrDefault();
+            return Container.GetExports(serviceType, null, string.Empty).Select(item => item?.Value).FirstOrDefault();
         }
 
         /// <summary>

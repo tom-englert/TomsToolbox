@@ -72,6 +72,7 @@
             if (ToggleButton == null)
                 return;
 
+            // ReSharper disable once PossibleNullReferenceException
             switch (e.Key)
             {
                 case Key.Escape:
@@ -88,10 +89,8 @@
 
             var popup = (Popup)sender;
             var child = popup.Child;
-            if (child == null)
-                return;
 
-            var focusable = child.VisualDescendantsAndSelf().OfType<UIElement>().FirstOrDefault(item => item.Focusable);
+            var focusable = child?.VisualDescendantsAndSelf().OfType<UIElement>().FirstOrDefault(item => item?.Focusable == true);
             if (focusable != null)
             {
                 popup.BeginInvoke(() => focusable.Focus());
@@ -100,7 +99,7 @@
 
         private void Popup_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (e.NewValue.Equals(false) && (ToggleButton != null))
+            if (Equals(e.NewValue, false) && (ToggleButton != null))
             {
                 ToggleButton.IsChecked = false;
             }

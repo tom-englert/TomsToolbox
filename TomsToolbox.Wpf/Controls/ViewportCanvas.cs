@@ -43,6 +43,7 @@
             if (worldLayer == null)
                 return new Size();
 
+            // ReSharper disable once PossibleNullReferenceException
             foreach (UIElement child in InternalChildren)
             {
                 if (child == null)
@@ -82,6 +83,7 @@
             if (worldLayer == null)
                 return finalSize;
 
+            // ReSharper disable once PossibleNullReferenceException
             foreach (UIElement child in Children)
             {
                 if (child == null)

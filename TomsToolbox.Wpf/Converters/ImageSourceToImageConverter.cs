@@ -6,6 +6,8 @@
     using System.Windows.Data;
     using System.Windows.Media;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Converts an <see cref="ImageSource"/> into an <see cref="Image"/>. 
     /// Needed to assign an image source to an item via a style setter, e.g. <see cref="MenuItem.Icon"/>.
@@ -29,6 +31,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
+        [NotNull]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return new Image { Source = (ImageSource)value };

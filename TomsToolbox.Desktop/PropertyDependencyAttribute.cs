@@ -65,29 +65,56 @@
         }
 
         /// <summary>
-        /// Creates the dependency mapping from the attributes of the specified properties.
+        /// Creates the dependency mapping from the attributes of the properties of the specified type.
         /// </summary>
-        /// <param name="properties">The properties of the type.</param>
+        /// <param name="type">The type.</param>
         /// <returns>A dictionary that maps the property names to all direct and indirect dependent property names.</returns>
         /// <exception cref="System.InvalidOperationException">Invalid dependency definitions, i.e. dependency to non-existing property.</exception>
-        [NotNull]
-        internal static Dictionary<string, IEnumerable<string>> CreateDependencyMapping([NotNull] IEnumerable<PropertyInfo> properties)
+        internal static Dictionary<string, IEnumerable<string>> CreateDependencyMapping(Type type)
         {
-            Contract.Requires(properties != null);
-            Contract.Ensures(Contract.Result<Dictionary<string, IEnumerable<string>>>() != null);
+            if (type == null)
+                return null;
 
-            var dependencyDefinitions = properties.Select(prop => new { prop.Name, DependsUpon = prop.GetCustomAttributes<PropertyDependencyAttribute>(true).SelectMany(attr => attr.PropertyNames).ToArray() }).ToArray();
-            var dependencySources = dependencyDefinitions.SelectMany(dependency => dependency.DependsUpon).Distinct().ToArray();
+            var properties = type.GetProperties();
 
-            var invalidDependencyDefinitions = dependencySources.Where(propertyName => !dependencyDefinitions.Select(d => d.Name).Contains(propertyName)).ToArray();
+            // ReSharper disable PossibleNullReferenceException
+            // ReSharper disable AssignNullToNotNullAttribute
+
+            var dependencyDefinitions = properties
+                .Select(prop => new
+                {
+                    prop.Name,
+                    DependsUpon = prop.GetCustomAttributes<PropertyDependencyAttribute>(true).SelectMany(attr => attr.PropertyNames).ToArray()
+                })
+                .ToArray();
+
+            var dependencySources = dependencyDefinitions
+                .SelectMany(dependency => dependency.DependsUpon)
+                .Distinct()
+                .ToArray();
+
+            var invalidDependencyDefinitions = dependencySources
+                .Where(propertyName => !dependencyDefinitions.Select(d => d.Name).Contains(propertyName))
+                .ToArray();
+
             if (invalidDependencyDefinitions.Any())
                 throw new InvalidOperationException(@"Invalid dependency definitions: " + string.Join(", ", invalidDependencyDefinitions));
 
-            var directDependencies = dependencySources.ToDictionary(source => source, source => dependencyDefinitions.Where(dependency => dependency.DependsUpon.Contains(source)).Select(dependency => dependency.Name).ToArray());
+            var directDependencies = dependencySources.ToDictionary(
+                source => source, 
+                source => dependencyDefinitions
+                    .Where(dependency => dependency.DependsUpon.Contains(source))
+                    .Select(dependency => dependency.Name)
+                    .ToArray()
+                );
 
             return directDependencies.Keys.ToDictionary(item => item, item => GetAllDependencies(item, directDependencies));
+
+            // ReSharper restore PossibleNullReferenceException
+            // ReSharper restore AssignNullToNotNullAttribute
         }
 
+        [NotNull]
         private static IEnumerable<string> GetAllDependencies([NotNull] string item, [NotNull] IDictionary<string, string[]> directDependencies)
         {
             Contract.Requires(item != null);
@@ -125,12 +152,12 @@
             Contract.Requires(entryType != null);
             Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
 
-            return from type in GetCustomAssemblies(entryType).SelectMany(SafeGetTypes)
+            return from type in GetCustomAssemblies(entryType).SelectMany(SafeGetTypes).Where(item => item != null)
                    let allProperties = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
                    from property in allProperties
                    let attribute = property.GetCustomAttributes<PropertyDependencyAttribute>(false).FirstOrDefault()
                    where attribute != null
-                   let firstInvalidDependency = attribute.PropertyNames.FirstOrDefault(referencedProperty => !allProperties.Any(p => p.Name.Equals(referencedProperty, StringComparison.Ordinal)))
+                   let firstInvalidDependency = attribute.PropertyNames.FirstOrDefault(referencedProperty => !allProperties.Any(p => string.Equals(p?.Name, referencedProperty, StringComparison.Ordinal)))
                    where firstInvalidDependency != null
                    select type.FullName + "." + property.Name + " has invalid dependency: " + firstInvalidDependency;
         }
@@ -155,6 +182,7 @@
             var referencedAssemblies = referencedAssemblyNames
                 .Select(SafeLoad)
                 .Where(assembly => assembly != null)
+                // ReSharper disable once AssignNullToNotNullAttribute
                 .Where(assembly => IsAssemblyInSubfolderOf(assembly.GetName(), programFolder));
 
             return new[] { entryAssembly }.Concat(referencedAssemblies);
@@ -178,10 +206,11 @@
 
             var assemblyDirectory = Path.GetDirectoryName(new Uri(assemblyName.CodeBase).LocalPath);
 
+            // ReSharper disable once PossibleNullReferenceException
             return assemblyDirectory.StartsWith(programFolder, StringComparison.OrdinalIgnoreCase);
         }
 
-        private static Assembly SafeLoad(AssemblyName name)
+        private static Assembly SafeLoad([NotNull] AssemblyName name)
         {
             try
             {
@@ -195,6 +224,7 @@
         }
 
 
+        [NotNull]
         private static IEnumerable<Type> SafeGetTypes([NotNull] Assembly a)
         {
             Contract.Requires(a != null);

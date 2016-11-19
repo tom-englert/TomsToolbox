@@ -12,7 +12,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
     using TomsToolbox.Desktop;
     using TomsToolbox.Wpf.Controls;
 
@@ -56,7 +55,7 @@
 
             map.MouseWheel += AssociatedObject_PreviewMouseWheel;
 
-            var focusableParent = map.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault(item => item.Focusable);
+            var focusableParent = map.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault(item => item?.Focusable == true);
             if (focusableParent != null)
             {
                 focusableParent.KeyDown += FocusableParent_KeyDown;
@@ -65,7 +64,7 @@
             Storyboard.SetTarget(_animation, map);
             Storyboard.SetTargetProperty(_animation, new PropertyPath(Map.ZoomLevelProperty));
 
-            _storyboard.Children.Maybe().Do(c => c.Add(_animation));
+            _storyboard.Children?.Add(_animation);
             _storyboard.Completed += Storyboard_Completed;
 
             CommandManager.RegisterClassCommandBinding(typeof(Map), new CommandBinding(NavigationCommands.DecreaseZoom, (_, __) => Zoom(-1)));
@@ -81,7 +80,7 @@
             _animation.To = map.ZoomLevel;
         }
 
-        private void AssociatedObject_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        private void AssociatedObject_PreviewMouseWheel([NotNull] object sender, [NotNull] MouseWheelEventArgs e)
         {
             Zoom(Math.Sign(e.Delta), e);
         }
@@ -89,21 +88,19 @@
         private void Zoom(int delta, MouseEventArgs e = null)
         {
             var map = AssociatedObject;
-            if (map == null)
-                return;
 
-            var layer = map.World;
+            var layer = map?.World;
             if (layer == null)
                 return;
 
-            map.ZoomingPoint = (e != null) ? e.GetPosition(layer) : map.Center;
+            map.ZoomingPoint = e?.GetPosition(layer) ?? map.Center;
 
             var from = _animation.To ?? map.ZoomLevel;
             _animation.To = (Math.Round(from / MouseWheelIncrement) + delta) * MouseWheelIncrement;
             _storyboard.Begin();
         }
 
-        void FocusableParent_KeyDown(object sender, KeyEventArgs e)
+        void FocusableParent_KeyDown([NotNull] object sender, [NotNull] KeyEventArgs e)
         {
             var map = AssociatedObject;
             if (map == null)

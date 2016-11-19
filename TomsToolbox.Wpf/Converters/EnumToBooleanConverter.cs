@@ -29,7 +29,8 @@
         /// A converted value.
         /// </returns>
         /// <param name="value">The value produced by the binding source.</param><param name="targetType">The type of the binding target property.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
-        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        [NotNull]
+        protected override object Convert(object value, Type targetType, [NotNull] object parameter, CultureInfo culture)
         {
             return Convert(value, (string)parameter);
         }
@@ -48,7 +49,7 @@
             var valueType = value.GetType();
             if (!valueType.IsEnum)
             {
-                throw new ArgumentException("The value is not an enum.", "value");
+                throw new ArgumentException("The value is not an enum.", nameof(value));
             }
 
             // do not catch exceptions and let it fail fast so we are not left wondering what happened

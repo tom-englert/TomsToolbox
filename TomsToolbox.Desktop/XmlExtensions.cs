@@ -73,7 +73,7 @@
 
             var attribute = element.Attribute(name);
 
-            return attribute != null ? attribute.Value : defaultValue;
+            return attribute?.Value ?? defaultValue;
         }
     }
 }

@@ -25,6 +25,7 @@
         /// <returns>An array of custom attributes applied to this member, or an array with zero (0) elements if no attributes have been applied.</returns>
         /// <exception cref="System.TypeLoadException">A custom attribute type cannot be loaded</exception>
         /// <exception cref="System.InvalidOperationException">This member belongs to a type that is loaded into the reflection-only context. See How to: Load Assemblies into the Reflection-Only Context.</exception>
+        [ItemNotNull]
         [NotNull]
         public static IEnumerable<T> GetCustomAttributes<T>([NotNull] this ICustomAttributeProvider self, bool inherit)
         {

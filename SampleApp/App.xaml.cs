@@ -40,14 +40,14 @@
 
             var context = new RegistrationBuilder();
             // Visuals can't be singletons:
-            context.ForTypesDerivedFrom<FrameworkElement>().SetCreationPolicy(CreationPolicy.NonShared);
+            context.ForTypesDerivedFrom<FrameworkElement>()?.SetCreationPolicy(CreationPolicy.NonShared);
             // To demonstrate the ImportExtension with value converters.
-            context.ForTypesDerivedFrom<IValueConverter>().Export();
+            context.ForTypesDerivedFrom<IValueConverter>()?.Export();
 
             _compositionHost.AddCatalog(new ApplicationCatalog(context));
 
             var dataTemplateResources = DataTemplateManager.CreateDynamicDataTemplates(_compositionHost.Container);
-            Resources.MergedDictionaries.Add(dataTemplateResources);
+            Resources?.MergedDictionaries.Add(dataTemplateResources);
 
             MainWindow = _compositionHost.GetExportedValue<MainWindow>();
             MainWindow.Show();
@@ -55,7 +55,7 @@
 
         private void BindingErrorCallback(string msg)
         {
-            Dispatcher.BeginInvoke((Action)(() => MessageBox.Show(msg)));
+            Dispatcher?.BeginInvoke((Action)(() => MessageBox.Show(msg)));
         }
 
         protected override void OnExit(ExitEventArgs e)

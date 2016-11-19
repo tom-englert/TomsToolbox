@@ -54,7 +54,7 @@
         public static readonly DependencyProperty IsFocusVisualVisibleProperty =
             DependencyProperty.Register("IsFocusVisualVisible", typeof(bool), typeof(KeyboardNavigation));
 
-        private void InputManager_PostProcessInput(object sender, ProcessInputEventArgs e)
+        private void InputManager_PostProcessInput([NotNull] object sender, ProcessInputEventArgs e)
         {
             var inputManager = (InputManager)sender;
             Contract.Assume(inputManager != null);

@@ -96,12 +96,13 @@
         }
 
         [ContractVerification(false)] // Too complex, checker is confused.
-        private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void Items_CollectionChanged(object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
             Contract.Requires((e.Action != NotifyCollectionChangedAction.Add) || (e.NewItems != null));
             Contract.Requires((e.Action != NotifyCollectionChangedAction.Remove) || (e.OldItems != null));
             Contract.Requires((e.Action != NotifyCollectionChangedAction.Replace) || ((e.OldItems != null) && (e.NewItems != null)));
 
+            // ReSharper disable PossibleNullReferenceException
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
@@ -137,6 +138,8 @@
 
                 case NotifyCollectionChangedAction.Reset:
                     throw new NotSupportedException("Reset collection is not supported when the ObservablePropertyChangeTracker is active.");
+                
+                // ReSharper restore PossibleNullReferenceException
             }
         }
     }

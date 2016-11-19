@@ -109,6 +109,7 @@
             Contract.Requires(appDomain != null);
             Contract.Ensures(Contract.Result<T>() != null);
 
+            // ReSharper disable once AssignNullToNotNullAttribute (every type has a full name)
             return (T)appDomain.CreateInstanceAndUnwrap(typeof(T).Assembly.FullName, typeof(T).FullName);
         }
 
@@ -139,6 +140,7 @@
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Created in another AppDomain.")]
+        // ReSharper disable once ClassNeverInstantiated.Local
         private class DomainHelper : MarshalByRefObject
         {
             [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]

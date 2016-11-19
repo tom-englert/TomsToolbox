@@ -8,6 +8,8 @@
     using System.Windows.Input;
     using System.Windows.Threading;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
     using TomsToolbox.Desktop;
 
@@ -30,7 +32,9 @@
 
         private static readonly Point LogicalCenter = new Point(0.5, 0.5);
 
+        [NotNull]
         private readonly DispatcherThrottle _updateThrottle;
+
         private bool _isUpdating;
 
         static Map()
@@ -91,7 +95,7 @@
             private set { SetValue(ZoomFactorPropertyKey, value); }
         }
         private static readonly DependencyPropertyKey ZoomFactorPropertyKey =
-            DependencyProperty.RegisterReadOnly("ZoomFactor", typeof(double), typeof(Map), new FrameworkPropertyMetadata(1.0, (sender, e) => ((Map)sender).ZoomFactor_Changed()));
+            DependencyProperty.RegisterReadOnly("ZoomFactor", typeof(double), typeof(Map), new FrameworkPropertyMetadata(1.0, (sender, e) => ((Map)sender)?.ZoomFactor_Changed()));
         /// <summary>
         /// Identifies the <see cref="ZoomFactor"/> dependency property
         /// </summary>
@@ -109,7 +113,7 @@
         /// Identifies the <see cref="ZoomLevel"/> dependency property
         /// </summary>
         public static readonly DependencyProperty ZoomLevelProperty =
-            DependencyProperty.Register("ZoomLevel", typeof(double), typeof(Map), new FrameworkPropertyMetadata(0.0, (sender, e) => ((Map)sender).ZoomLevel_Changed((double)e.NewValue), (d, baseValue) => ((Map)d).ZoomLevel_CoerceValue((double)baseValue)));
+            DependencyProperty.Register("ZoomLevel", typeof(double), typeof(Map), new FrameworkPropertyMetadata(0.0, (sender, e) => ((Map)sender)?.ZoomLevel_Changed((double)e.NewValue), (d, baseValue) => ((Map)d)?.ZoomLevel_CoerceValue(baseValue.SafeCast<double>())));
 
         /// <summary>
         /// Gets or sets the logical point of the map that is displayed in the center of the viewport.
@@ -123,7 +127,7 @@
         /// Identifies the <see cref="Center"/> dependency property
         /// </summary>
         public static readonly DependencyProperty CenterProperty =
-            DependencyProperty.Register("Center", typeof(Point), typeof(Map), new FrameworkPropertyMetadata(LogicalCenter, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((Map)sender).Center_Changed((Point)e.NewValue), (d, baseValue) => Center_CoerceValue((Point)baseValue)));
+            DependencyProperty.Register("Center", typeof(Point), typeof(Map), new FrameworkPropertyMetadata(LogicalCenter, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((Map)sender)?.Center_Changed((Point)e.NewValue), (d, baseValue) => Center_CoerceValue(baseValue.SafeCast<Point>())));
 
         /// <summary>
         /// Gets the logical offset that the map image is moved relative to it's origin.
@@ -134,7 +138,7 @@
             private set { SetValue(OffsetPropertyKey, value); }
         }
         private static readonly DependencyPropertyKey OffsetPropertyKey =
-            DependencyProperty.RegisterReadOnly("Offset", typeof(Vector), typeof(Map), new FrameworkPropertyMetadata((sender, e) => ((Map)sender).Offset_Changed()));
+            DependencyProperty.RegisterReadOnly("Offset", typeof(Vector), typeof(Map), new FrameworkPropertyMetadata((sender, e) => ((Map)sender)?.Offset_Changed()));
         /// <summary>
         /// Identifies the <see cref="Offset"/> read only dependency property
         /// </summary>
@@ -152,7 +156,7 @@
         /// Identifies the <see cref="ZoomingPoint"/> dependency property
         /// </summary>
         public static readonly DependencyProperty ZoomingPointProperty =
-            DependencyProperty.Register("ZoomingPoint", typeof(Point), typeof(Map), new FrameworkPropertyMetadata(LogicalCenter, (sender, e) => ((Map)sender).ZoomingPoint_Changed((Point)e.OldValue, (Point)e.NewValue)));
+            DependencyProperty.Register("ZoomingPoint", typeof(Point), typeof(Map), new FrameworkPropertyMetadata(LogicalCenter, (sender, e) => ((Map)sender)?.ZoomingPoint_Changed((Point)e.OldValue, (Point)e.NewValue)));
 
         /// <summary>
         /// Gets the bounds of the viewport in logical coordinates.
@@ -265,7 +269,7 @@
         /// Invoked when an unhandled <see cref="E:System.Windows.Input.Mouse.PreviewMouseMove" /> attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
         /// </summary>
         /// <param name="e">The <see cref="T:System.Windows.Input.MouseEventArgs" /> that contains the event data.</param>
-        protected override void OnPreviewMouseMove(MouseEventArgs e)
+        protected override void OnPreviewMouseMove([NotNull] MouseEventArgs e)
         {
             base.OnPreviewMouseMove(e);
 
@@ -305,8 +309,8 @@
 
         private double ZoomLevel_CoerceValue(double baseValue)
         {
-            var minLevel = ImageProvider.Maybe().Return(x => x.MinZoom, 0);
-            var maxLevel = ImageProvider.Maybe().Return(x => x.MaxZoom, 15);
+            var minLevel = ImageProvider?.MinZoom ?? 0;
+            var maxLevel = ImageProvider?.MaxZoom ?? 15;
 
             return baseValue.Clip(minLevel, maxLevel);
         }
@@ -360,6 +364,7 @@
 
             foreach (var item in this.VisualDescendants().OfType<ILayer>())
             {
+                // ReSharper disable once PossibleNullReferenceException
                 item.Invalidate();
             }
         }

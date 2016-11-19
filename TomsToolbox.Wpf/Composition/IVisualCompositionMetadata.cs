@@ -3,7 +3,7 @@
     using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
-    /// Export metadata for <see cref="IComposablePart"/> objects.
+    /// Export metadata for composable objects.
     /// </summary>
     public interface IVisualCompositionMetadata
     {

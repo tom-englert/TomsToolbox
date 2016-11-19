@@ -171,7 +171,7 @@
 
                     case NotifyCollectionChangedAction.Remove:
                         var removeIndex = e.OldStartingIndex;
-                        for (var k = 0; k < e.OldItems.Count; k++)
+                        for (var k = 0; k < e.OldItems?.Count; k++)
                         {
                             DetachEvent(removeIndex);
                         }
@@ -195,7 +195,7 @@
                 // ReSharper enable PossibleMultipleEnumeration
             }
 
-            private void SourceItem_PropertyChanged([NotNull] object sender, PropertyChangedEventArgs e)
+            private void SourceItem_PropertyChanged([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
             {
                 Contract.Requires(sender != null);
 

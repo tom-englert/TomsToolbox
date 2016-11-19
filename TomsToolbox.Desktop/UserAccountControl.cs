@@ -440,10 +440,11 @@
             }
         }
 
+        [NotNull]
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         private static SafeNativeMemory PackAuthenticationBuffer(NetworkCredential credential)
         {
-            var userName = credential.Maybe().Return(c => c.UserName);
+            var userName = credential?.UserName;
 
             if (string.IsNullOrEmpty(userName))
                 return new SafeNativeMemory();
@@ -540,6 +541,9 @@
             domain = parts[0];
             userName = parts[1];
         }
+
+        // ReSharper disable MemberCanBePrivate.Local
+        // ReSharper disable UnusedMember.Local
 
         private const int ERROR_INVALID_PARAMETER = 0x57;
         // Token Specific Access Rights

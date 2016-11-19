@@ -37,24 +37,12 @@
         /// <summary>
         /// Gets the key that classifies the usage of this text.
         /// </summary>
-        public object Key
-        {
-            get
-            {
-                return _key;
-            }
-        }
+        public object Key => _key;
 
         /// <summary>
         /// Gets the text associated with this attribute.
         /// </summary>
-        public virtual string Text
-        {
-            get
-            {
-                return TextValue;
-            }
-        }
+        public virtual string Text => TextValue;
 
         /// <summary>
         /// Gets or sets the text to be returned by the Text property.

@@ -157,10 +157,7 @@
         /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
         public void Execute(object parameter)
         {
-            if (ExecuteCallback != null)
-            {
-                ExecuteCallback(parameter.SafeCast<T>());
-            }
+            ExecuteCallback?.Invoke(parameter.SafeCast<T>());
         }
     }
 
@@ -314,10 +311,7 @@
         /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
         public void Execute(object parameter)
         {
-            if (ExecuteCallback != null)
-            {
-                ExecuteCallback();
-            }
+            ExecuteCallback?.Invoke();
         }
     }
 }

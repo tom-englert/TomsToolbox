@@ -140,7 +140,7 @@
                 return DependencyProperty.UnsetValue;
 
             if (values.Length != 2)
-                throw new ArgumentException("MultiValueConverter requires two values.", "values");
+                throw new ArgumentException("MultiValueConverter requires two values.", nameof(values));
 
             return Processor.Execute(values[0], values[1]);
         }

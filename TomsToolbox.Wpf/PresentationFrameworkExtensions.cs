@@ -92,6 +92,7 @@
 
             var transform = from.TransformToVisual(to);
 
+            // ReSharper disable once PossibleNullReferenceException
             var translated = new Rect(transform.Transform(rect.TopLeft), transform.Transform(rect.BottomRight));
             Contract.Assume(!translated.IsEmpty);
             return translated;

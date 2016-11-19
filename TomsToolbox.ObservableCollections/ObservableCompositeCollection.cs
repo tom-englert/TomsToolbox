@@ -102,7 +102,7 @@
         private class ContentManager : IList<IList<T>>
         {
             // The parts that make up the composite collection
-            [NotNull]
+            [NotNull, ItemNotNull]
             private readonly List<IList<T>> _parts = new List<IList<T>>();
             // The composite collection that we manage
             [NotNull]
@@ -116,15 +116,16 @@
             }
 
             [ContractVerification(false)]
-            private void parts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+            private void parts_CollectionChanged(object sender, [NotNull] NotifyCollectionChangedEventArgs e)
             {
                 // Monitor changes of parts and forward events properly
                 // Offset to apply is the sum of all counts of all parts preceding this part
-                var offset = _parts.TakeWhile(part => !part.Equals(sender)).Select(part => part.Count).Sum();
+                var offset = _parts.TakeWhile(part => !Equals(part, sender)).Select(part => part?.Count ?? 0).Sum();
 
                 _owner.ContentCollectionChanged(TranslateEventArgs(e, offset));
             }
 
+            [NotNull]
             private static NotifyCollectionChangedEventArgs TranslateEventArgs([NotNull] NotifyCollectionChangedEventArgs e, int offset)
             {
                 // Translate given event args by adding the given offset to the starting index
@@ -163,7 +164,7 @@
                 return _parts.IndexOf(item);
             }
 
-            public void Insert(int index, IList<T> item)
+            public void Insert(int index, [NotNull] IList<T> item)
             {
                 if (item == null)
                     throw new ArgumentNullException(nameof(item));
@@ -183,7 +184,7 @@
                     return;
 
                 // calculate the absolute offset of the first item (= sum of all preceding items in all lists before the new item)
-                var offset = (_parts.GetRange(0, index).Select(p => p.Count)).Sum();
+                var offset = _parts.GetRange(0, index).Select(p => p?.Count ?? 0).Sum();
                 var args = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, (IList)item, offset);
                 _owner.ContentCollectionChanged(args);
             }
@@ -204,16 +205,18 @@
                     return;
 
                 // calculate the absolute offset of the first item (sum of all items in all lists before the removed item)
-                var offset = (_parts.GetRange(0, index).Select(p => p.Count)).Sum();
+                var offset = _parts.GetRange(0, index).Select(p => p?.Count ?? 0).Sum();
 
                 _owner.ContentCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, (IList)part, offset));
             }
 
+            [NotNull]
             [ContractVerification(false)] // Just forwarding...
             public IList<T> this[int index]
             {
                 get
                 {
+                    // ReSharper disable once AssignNullToNotNullAttribute
                     return _parts[index];
                 }
                 set
@@ -228,7 +231,7 @@
             #region ICollection<IList<T>> Members
 
             [ContractVerification(false)] // just forwarding
-            public void Add(IList<T> item)
+            public void Add([NotNull] IList<T> item)
             {
                 Insert(_parts.Count, item);
             }
@@ -241,7 +244,7 @@
                 }
             }
 
-            public bool Contains(IList<T> item)
+            public bool Contains([NotNull] IList<T> item)
             {
                 if (item == null)
                     throw new ArgumentNullException(nameof(item));
@@ -258,7 +261,7 @@
 
             public bool IsReadOnly => false;
 
-            public bool Remove(IList<T> item)
+            public bool Remove([NotNull] IList<T> item)
             {
                 if (item == null)
                     throw new ArgumentNullException(nameof(item));
@@ -347,7 +350,7 @@
         }
 
         [ContractVerification(false)]
-        private void ContentCollectionChanged(NotifyCollectionChangedEventArgs e)
+        private void ContentCollectionChanged([NotNull] NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
             {

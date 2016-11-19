@@ -48,18 +48,18 @@
             var hwndSource = (HwndSource)PresentationSource.FromDependencyObject(item);
             if (hwndSource == null)
             {
-                throw new ArgumentException(@"Item not part of a valid visual tree.", "item");
+                throw new ArgumentException(@"Item not part of a valid visual tree.", nameof(item));
             }
             var compositionTarget = hwndSource.CompositionTarget;
             if (compositionTarget == null)
             {
-                throw new ArgumentException(@"Item not part of a valid visual tree.", "item");
+                throw new ArgumentException(@"Item not part of a valid visual tree.", nameof(item));
             }
 
             var rootVisual = (FrameworkElement)compositionTarget.RootVisual;
             if (rootVisual == null)
             {
-                throw new ArgumentException(@"Item not part of a valid visual tree.", "item");
+                throw new ArgumentException(@"Item not part of a valid visual tree.", nameof(item));
             }
 
             return rootVisual;

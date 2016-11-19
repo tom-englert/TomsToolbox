@@ -5,6 +5,8 @@
     using System.Windows.Input;
     using System.Windows.Interactivity;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Attaches default handling for the <see cref="WindowCommands"/>
     /// </summary>
@@ -49,7 +51,7 @@
             window.Close();
         }
 
-        private void CanRestore(object sender, CanExecuteRoutedEventArgs e)
+        private void CanRestore(object sender, [NotNull] CanExecuteRoutedEventArgs e)
         {
             var window = AssociatedObject;
             Contract.Assume(window != null);
@@ -65,7 +67,7 @@
             window.WindowState = WindowState.Normal;
         }
 
-        private void CanMaximize(object sender, CanExecuteRoutedEventArgs e)
+        private void CanMaximize(object sender, [NotNull] CanExecuteRoutedEventArgs e)
         {
             var window = AssociatedObject;
             Contract.Assume(window != null);

@@ -31,7 +31,8 @@
         /// </summary>
         /// <param name="tile">The tile for which to provide the image.</param>
         /// <returns>The image.</returns>
-        IImage GetImage(IMapTile tile);
+        [NotNull]
+        IImage GetImage([NotNull] IMapTile tile);
     }
 
     [ContractClassFor(typeof(IImageProvider))]
@@ -53,8 +54,7 @@
             }
         }
 
-        [NotNull]
-        IImage IImageProvider.GetImage([NotNull] IMapTile tile)
+        IImage IImageProvider.GetImage(IMapTile tile)
         {
             Contract.Requires(tile != null);
             Contract.Ensures(Contract.Result<IImage>() != null);

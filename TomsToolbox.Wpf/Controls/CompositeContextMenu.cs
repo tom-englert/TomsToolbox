@@ -8,6 +8,8 @@
     using System.Windows.Interactivity;
     using System.Windows.Markup;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Wpf.Composition;
 
     /// <summary>
@@ -57,6 +59,7 @@
         /// <returns>
         /// The object value to set on the property where the extension is applied.
         /// </returns>
+        [NotNull]
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             var compositeContextMenu = new CompositeContextMenu()

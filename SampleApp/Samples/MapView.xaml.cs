@@ -2,6 +2,8 @@
 {
     using System.ComponentModel.Composition;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Desktop.Composition;
     using TomsToolbox.Wpf.Composition;
 
@@ -13,7 +15,7 @@
     public partial class MapView
     {
         [ImportingConstructor]
-        public MapView(ICompositionHost compositionHost)
+        public MapView([NotNull] ICompositionHost compositionHost)
         {
             this.SetExportProvider(compositionHost.Container);
 

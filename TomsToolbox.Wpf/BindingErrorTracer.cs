@@ -61,14 +61,18 @@
             PresentationTraceSources.Refresh();
 
             var dataBindingSource = PresentationTraceSources.DataBindingSource;
-            Contract.Assume(dataBindingSource != null);
-            var listeners = dataBindingSource.Listeners;
-            listeners.Add(new Listener(errorCallback));
-            dataBindingSource.Switch.Level = sourceLevels;
+
+            var listeners = dataBindingSource?.Listeners;
+            listeners?.Add(new Listener(errorCallback));
+
+            var sourceSwitch = dataBindingSource?.Switch;
+            if (sourceSwitch != null)
+                sourceSwitch.Level = sourceLevels;
         }
 
         class Listener : TraceListener
         {
+            [NotNull]
             private readonly Action<string> _errorCallback;
 
             private string _buffer;
@@ -99,7 +103,7 @@
 
                 try
                 {
-                    if (IgnoredErrors.Any(err => err.Match(_buffer).Success))
+                    if (IgnoredErrors.Any(err => err?.Match(_buffer).Success == true))
                         return;
 
                     _errorCallback(_buffer);

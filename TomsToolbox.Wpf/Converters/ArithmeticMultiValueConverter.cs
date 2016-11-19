@@ -49,6 +49,7 @@
     public class ArithmeticMultiValueConverter : MultiValueConverter
     {
         // removed DefaultIfEmpty() so we are not left wondering what went wrong if one of the items cannot be resolved
+        // ReSharper disable AssignNullToNotNullAttribute
         private static readonly Func<IEnumerable<double>, double> _minOperationMethod = items => items.Min();
         private static readonly Func<IEnumerable<double>, double> _maxOperationMethod = items => items.Max();
         private static readonly Func<IEnumerable<double>, double> _sumOperationMethod = items => items.Sum();
@@ -57,6 +58,7 @@
         {
             return items.Aggregate(1.0, (current, item) => current * item);
         };
+        // ReSharper restore AssignNullToNotNullAttribute
 
         private ArithmeticOperation _operation;
         [NotNull]
@@ -119,7 +121,7 @@
                         break;
 
                     default:
-                        throw new ArgumentOutOfRangeException("value", value, null);
+                        throw new ArgumentOutOfRangeException(nameof(value), value, null);
                 }
             }
         }
@@ -135,6 +137,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
+        [NotNull]
         protected override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             return _operationMethod(values.Select(v => System.Convert.ToDouble(v, CultureInfo.InvariantCulture)));

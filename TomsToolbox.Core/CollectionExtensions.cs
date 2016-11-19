@@ -234,7 +234,7 @@
             Contract.Requires(self != null);
             Contract.Requires(items != null);
 
-            return items.Any(item => self.Contains(item, comparer));
+            return items.Any(item => item != null && self.Contains(item, comparer));
         }
 
         /// <summary>
@@ -354,7 +354,7 @@
         /// <returns>
         /// The value from the dictionary, or the default value if no item with the specified key exists.
         /// </returns>
-        public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)
+        public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, TValue defaultValue)
         {
             Contract.Requires(dictionary != null);
             Contract.Requires(!ReferenceEquals(key, null));
@@ -374,7 +374,7 @@
         /// <returns>
         /// The value from the dictionary, or the default value of <typeparamref name="TValue"/> if no item with the specified key exists.
         /// </returns>
-        public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, TKey key)
+        public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key)
         {
             Contract.Requires(dictionary != null);
             Contract.Requires(!ReferenceEquals(key, null));
@@ -391,7 +391,7 @@
         /// <param name="key">The key.</param>
         /// <param name="generator">The generator function called when a new value needs to be created.</param>
         /// <returns>The element with the specified key.</returns>
-        public static TValue ForceValue<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, TKey key, [NotNull] Func<TKey, TValue> generator)
+        public static TValue ForceValue<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [NotNull] Func<TKey, TValue> generator)
         {
             Contract.Requires(dictionary != null);
             Contract.Requires(!ReferenceEquals(key, null));
@@ -418,7 +418,7 @@
         /// <param name="key">The key.</param>
         /// <param name="defaultValue">The value that will be added to the dictionary if the dictionary does not contain a value associated with the key.</param>
         /// <returns> The element with the specified key.</returns>
-        public static TValue ForceValue<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)
+        public static TValue ForceValue<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, TValue defaultValue)
         {
             Contract.Requires(dictionary != null);
             Contract.Requires(!ReferenceEquals(key, null));

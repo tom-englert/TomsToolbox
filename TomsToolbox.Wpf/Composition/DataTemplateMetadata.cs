@@ -15,6 +15,7 @@
         /// <summary>
         /// Gets the type of the view model that this visual has a representation for.
         /// </summary>
+        [NotNull]
         Type ViewModel
         {
             get;
@@ -36,7 +37,6 @@
         /// <summary>
         /// Gets the type of the view model that this visual has a representation for.
         /// </summary>
-        [NotNull]
         public Type ViewModel
         {
             get

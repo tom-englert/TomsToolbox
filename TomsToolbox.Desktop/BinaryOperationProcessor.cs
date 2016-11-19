@@ -107,7 +107,7 @@
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException("operation", operation, null);
+                    throw new ArgumentOutOfRangeException(nameof(operation), operation, null);
             }
 
         }
@@ -115,13 +115,7 @@
         /// <summary>
         /// Gets the operation the converter is performing.
         /// </summary>
-        public BinaryOperation Operation
-        {
-            get
-            {
-                return _operation;
-            }
-        }
+        public BinaryOperation Operation => _operation;
 
         /// <summary>
         /// Executes the operation.
@@ -143,19 +137,14 @@
                 ?? ApplyOperation(value1, value2);
         }
 
-        private object ApplyOperation([NotNull] object value1, [NotNull] object value2)
+        private object ApplyOperation(object value1, object value2)
         {
-            Contract.Requires(value1 != null);
-            Contract.Requires(value2 != null);
-
             return _operationMethod(value1, value2);
         }
 
-        private object ApplyOperation([NotNull] Type valueType, [NotNull] object value1, [NotNull] object value2)
+        private object ApplyOperation([NotNull] Type valueType, object value1, object value2)
         {
             Contract.Requires(valueType != null);
-            Contract.Requires(value1 != null);
-            Contract.Requires(value2 != null);
 
             var methods = valueType.GetMethods(BindingFlags.Static | BindingFlags.Public);
 
@@ -168,34 +157,32 @@
                 .FirstOrDefault(v => v != null);
         }
 
-        private object ApplyOperationOnCastedObject([NotNull] Type targetType, [NotNull] object value1, [NotNull] object value2)
+        private object ApplyOperationOnCastedObject([NotNull] Type targetType, object value1, object value2)
         {
             Contract.Requires(targetType != null);
-            Contract.Requires(value1 != null);
-            Contract.Requires(value2 != null);
 
+            // ReSharper disable PossibleNullReferenceException
             var result = targetType
                 .GetMethods(BindingFlags.Static | BindingFlags.Public)
-                .Where(m => (m?.Name == "op_Explicit") || (m?.Name == "op_Implicit"))
+                .Where(m => (m.Name == "op_Explicit") || (m.Name == "op_Implicit"))
                 .Select(m => new { Method = m, Parameters = m.GetParameters() })
-                .Where(m => m?.Parameters.Length == 1)
+                .Where(m => m.Parameters.Length == 1)
                 .Where(m => m.Parameters[0].ParameterType == targetType)
                 .Select(m => ApplyOperation(m.Method.ReturnType, m.Method.Invoke(null, new[] { value1 }), value2))
                 .FirstOrDefault(v => v != null);
+            // ReSharper restore PossibleNullReferenceException
 
             return result;
         }
 
-        private static object ApplyOperation([NotNull] MethodInfo method, [NotNull] Type targetType, [NotNull] object value1, [NotNull] object value2)
+        private static object ApplyOperation([NotNull] MethodInfo method, [NotNull] Type targetType, object value1, object value2)
         {
             Contract.Requires(method != null);
-            Contract.Requires(value1 != null);
             Contract.Requires(targetType != null);
-            Contract.Requires(value2 != null);
 
             try
             {
-                if (value2.GetType() == targetType)
+                if (value2?.GetType() == targetType)
                 {
                     return method.Invoke(null, new[] { value1, value2 });
                 }
@@ -211,6 +198,7 @@
                 }
 
                 value2 = Convert.ChangeType(value2, targetType, CultureInfo.InvariantCulture);
+
                 return method.Invoke(null, new[] { value1, value2 });
             }
             catch

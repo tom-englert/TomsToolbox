@@ -28,7 +28,7 @@
         /// Identifies the <see cref="Role"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty RoleProperty =
-            DependencyProperty.Register("Role", typeof(object), typeof(ContentControlCompositionBehavior), new FrameworkPropertyMetadata((sender, e) => ((ContentControlCompositionBehavior)sender).Role_Changed()));
+            DependencyProperty.Register("Role", typeof(object), typeof(ContentControlCompositionBehavior), new FrameworkPropertyMetadata((sender, e) => ((ContentControlCompositionBehavior)sender)?.Role_Changed()));
 
         private void Role_Changed()
         {
@@ -56,8 +56,8 @@
                     return;
 
                 exportedItem = exports
-                    .Where(item => DataTemplateManager.RoleEquals(item.Metadata.Role, role))
-                    .Select(item => GetTarget(item.Value))
+                    .Where(item => DataTemplateManager.RoleEquals(item?.Metadata.Role, role))
+                    .Select(item => GetTarget(item?.Value))
                     .FirstOrDefault();
             }
 

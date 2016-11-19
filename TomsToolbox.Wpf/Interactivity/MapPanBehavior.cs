@@ -34,6 +34,7 @@
         /// When implemented in a derived class, creates a new instance of the Freezable derived class. 
         /// </summary>
         /// <returns>The new instance.</returns>
+        [NotNull]
         protected override Freezable CreateInstanceCore()
         {
             // ensure we don't return a copy on freeze, else the animation is gone.
@@ -169,11 +170,7 @@
         {
             _panPosition = null;
 
-            var map = AssociatedObject;
-            if (map == null)
-                return;
-
-            map.ReleaseMouseCapture();
+            AssociatedObject?.ReleaseMouseCapture();
         }
 
         [ContractInvariantMethod]

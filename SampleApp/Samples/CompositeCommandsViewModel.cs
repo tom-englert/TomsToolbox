@@ -3,12 +3,15 @@
     using System.Windows;
     using System.Windows.Input;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 4)]
     public class CompositeCommandsViewModel
     {
+        [NotNull]
         public ICommand OpenCommand
         {
             get
@@ -17,6 +20,7 @@
             }
         }
 
+        [NotNull]
         public ICommand CloseCommand
         {
             get
@@ -25,6 +29,7 @@
             }
         }
 
+        [NotNull]
         public ICommand CopyCommand
         {
             get
@@ -33,6 +38,7 @@
             }
         }
 
+        [NotNull]
         public ICommand PasteCommand
         {
             get
@@ -41,6 +47,7 @@
             }
         }
 
+        [NotNull]
         public ICommand CutCommand
         {
             get
@@ -49,6 +56,7 @@
             }
         }
 
+        [NotNull]
         public ICommand DeleteCommand
         {
             get

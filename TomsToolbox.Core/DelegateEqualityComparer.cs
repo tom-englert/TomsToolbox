@@ -37,7 +37,7 @@
             Contract.Requires(selector != null);
 
             _comparer = (a, b) => Equals(selector(a), selector(b));
-            _hashCodeGenerator = obj => selector(obj).GetHashCode();
+            _hashCodeGenerator = obj => selector(obj)?.GetHashCode() ?? 0;
         }
 
         /// <summary>
@@ -97,10 +97,10 @@
         /// </returns>
         /// <param name="obj">The <see cref="T:System.Object"/> for which a hash code is to be returned.</param>
         /// <exception cref="T:System.ArgumentNullException">The type of <paramref name="obj"/> is a reference type and <paramref name="obj"/> is null.</exception>
-        public int GetHashCode(T obj)
+        public int GetHashCode([NotNull] T obj)
         {
             if (ReferenceEquals(obj, null))
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
 
             return _hashCodeGenerator(obj);
         }

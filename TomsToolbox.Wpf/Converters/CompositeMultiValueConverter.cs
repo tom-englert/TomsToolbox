@@ -19,6 +19,7 @@
     [ValueConversion(typeof(object[]), typeof(object))]
     public class CompositeMultiValueConverter : IMultiValueConverter
     {
+        [NotNull]
         private readonly CompositeConverter _compositeConverter = new CompositeConverter();
 
         /// <summary>

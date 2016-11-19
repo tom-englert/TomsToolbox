@@ -16,13 +16,13 @@
         /// Called by the styles to loads the theme specific resources.
         /// </summary>
         /// <param name="resource">The resource where the provider can add the theme specific resource.</param>
-        void LoadThemeResources(ResourceDictionary resource);
+        void LoadThemeResources([NotNull] ResourceDictionary resource);
     }
 
     [ContractClassFor(typeof(IThemeResourceProvider))]
     internal abstract class ThemeResourceProviderContract : IThemeResourceProvider
     {
-        public void LoadThemeResources([NotNull] ResourceDictionary resource)
+        public void LoadThemeResources(ResourceDictionary resource)
         {
             Contract.Requires(resource != null);
             throw new System.NotImplementedException();

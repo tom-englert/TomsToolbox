@@ -36,8 +36,10 @@
     [ValueConversion(typeof(object[]), typeof(bool))]
     public class LogicalMultiValueConverter : MultiValueConverter
     {
+        // ReSharper disable AssignNullToNotNullAttribute
         private static readonly Func<IEnumerable<bool>, bool> _andOperationMethod = items => items.All(item => item);
         private static readonly Func<IEnumerable<bool>, bool> _orOperationMethod = items => items.Any(item => item);
+        // ReSharper restore AssignNullToNotNullAttribute
 
         private LogicalOperation _operation;
         [NotNull]
@@ -76,7 +78,7 @@
                         break;
 
                     default:
-                        throw new ArgumentOutOfRangeException("value", value, null);
+                        throw new ArgumentOutOfRangeException(nameof(value), value, null);
                 }
             }
         }
@@ -92,6 +94,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
+        [NotNull]
         protected override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             return _operationMethod(values.Select(v => System.Convert.ToBoolean(v, CultureInfo.InvariantCulture)));

@@ -19,6 +19,7 @@
     public sealed class AutoWeakIndexer<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
         where TValue : class
     {
+        [NotNull]
         private readonly object _sync = new object();
         [NotNull]
         private readonly Func<TKey, TValue> _generator;
@@ -58,7 +59,8 @@
         /// the item generator is called to create a new element with the specified key.
         /// </returns>
         /// <exception cref="System.InvalidOperationException">The generator did not generate a valid item.</exception>
-        public TValue this[TKey key]
+        [NotNull]
+        public TValue this[[NotNull] TKey key]
         {
             get
             {
@@ -99,6 +101,7 @@
         /// <returns>
         /// A <see cref="ICollection{TValue}"/> containing the values in the <see cref="AutoWeakIndexer{TKey, TValue}"/>.
         /// </returns>
+        [ItemNotNull]
         [NotNull]
         public ICollection<TValue> Values
         {
@@ -106,7 +109,7 @@
             {
                 Contract.Ensures(Contract.Result<ICollection<TValue> >() != null);
 
-                return _items.Values.Select(item => item.Target).Where(item => item != null).ToArray();
+                return _items.Values.Select(item => item?.Target).Where(item => item != null).ToArray();
             }
         }
 
@@ -116,6 +119,7 @@
         /// <returns>
         /// A <see cref="ICollection{TKey}"/> containing the keys in the <see cref="AutoWeakIndexer{TKey, TValue}"/>.
         /// </returns>
+        [ItemNotNull]
         [NotNull]
         public ICollection<TKey> Keys
         {
@@ -152,7 +156,7 @@
         /// </returns>
         /// <param name="key">The key of the value to get.</param>
         /// <param name="value">When this method returns, contains the value associated with the specified key, if the key is found; otherwise, the default value for the type of the <paramref name="value"/> parameter. This parameter is passed uninitialized.</param>
-        public bool TryGetValue(TKey key, out TValue value)
+        public bool TryGetValue([NotNull] TKey key, out TValue value)
         {
             Contract.Requires(!ReferenceEquals(key, null));
 
@@ -174,8 +178,9 @@
 
             foreach (var item in inner)
             {
-                TValue value;
-                if (item.Value.TryGetTarget(out value))
+                var value = default(TValue);
+
+                if (item.Value?.TryGetTarget(out value) == true)
                 {
                     yield return new KeyValuePair<TKey, TValue>(item.Key, value);
                 }
@@ -194,7 +199,7 @@
         /// true if the <see cref="AutoWeakIndexer{TKey, TValue}"/> contains an element with the specified key; otherwise, false.
         /// </returns>
         /// <param name="key">The key to locate in the <see cref="AutoWeakIndexer{TKey, TValue}"/>.</param>
-        public bool ContainsKey(TKey key)
+        public bool ContainsKey([NotNull] TKey key)
         {
             Contract.Requires(!ReferenceEquals(key, null));
 

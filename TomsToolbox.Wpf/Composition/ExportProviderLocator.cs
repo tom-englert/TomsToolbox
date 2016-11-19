@@ -82,11 +82,12 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns>The message.</returns>
+        [NotNull]
         internal static string GetMissingExportProviderMessage([NotNull] this DependencyObject obj)
         {
             Contract.Requires(obj != null);
 
-            return "Export provider must be registered in the visual tree " + string.Join("/", obj.AncestorsAndSelf().Reverse().Select(o => o.GetType().Name));
+            return "Export provider must be registered in the visual tree " + string.Join("/", obj.AncestorsAndSelf().Reverse().Select(o => o?.GetType().Name));
         }
     }
 }

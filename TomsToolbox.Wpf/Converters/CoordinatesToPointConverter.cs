@@ -32,6 +32,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
+        [NotNull]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return Convert(value);
@@ -47,6 +48,7 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
+        [NotNull]
         protected override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return Convert(value);
@@ -59,7 +61,7 @@
         /// <returns>The <see cref="Coordinates" /> or <see cref="Point" /> value.</returns>
         /// <exception cref="System.InvalidOperationException">Value is neither a Point nor a Coordinates structure.</exception>
         [NotNull]
-        public static object Convert(object value)
+        public static object Convert([NotNull] object value)
         {
             Contract.Ensures(Contract.Result<object>() != null);
 

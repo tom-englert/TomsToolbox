@@ -28,7 +28,9 @@
     [MarkupExtensionReturnType(typeof(object))]
     public class ImportExtension : MarkupExtension
     {
+        [NotNull]
         private readonly List<Setter> _setters = new List<Setter>();
+
         private object _targetObject;
         private object _targetProperty;
         private ExportProvider _exportProvider;
@@ -137,7 +139,11 @@
         {
             get
             {
-                var value = _exportProvider?.GetExports(MemberType, null, ContractName).Select(item => item.Value).FirstOrDefault();
+                // ReSharper disable once AssignNullToNotNullAttribute
+                var value = _exportProvider?.GetExports(MemberType, null, ContractName)
+                    .Select(item => item?.Value)
+                    .FirstOrDefault();
+
                 if (value == null)
                     return null;
 
