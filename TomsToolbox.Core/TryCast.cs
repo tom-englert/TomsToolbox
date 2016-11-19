@@ -231,7 +231,11 @@
         /// <param name="message">The message of the exception.</param>
         /// <returns>This method never returns, but throws the exception.</returns>
         /// <exception cref="System.InvalidOperationException"><paramref name="message"/></exception>
-        public TResult ElseThrow([Localizable(false)] string message)
+#if !PORTABLE
+        public TResult ElseThrow([Localizable(false)][LocalizationRequired(false)] string message)
+#else
+        public TResult ElseThrow([LocalizationRequired(false)] string message)
+#endif
         {
             if (!_isResolved)
                 throw new InvalidOperationException(message);
