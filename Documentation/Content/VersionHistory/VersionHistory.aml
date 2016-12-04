@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.54.0</para>
+            <list class="bullet">
+              <listItem><para>Remove reference to JetBrains.ExternalAnnotations.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.53.0</para>
             <list class="bullet">
               <listItem><para>Added WPF Styles.</para></listItem>
