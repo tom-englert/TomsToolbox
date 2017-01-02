@@ -1,7 +1,10 @@
 ﻿namespace TomsToolbox.Wpf
 {
+    using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics.Contracts;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -166,6 +169,28 @@
 
                 itemCollection = sourceCollection;
             }
+        }
+
+
+        /// <summary>
+        /// Gets the item containers for a items control.
+        /// </summary>
+        /// <typeparam name="T">The type of the containers.</typeparam>
+        /// <param name="itemsControl">The items control.</param>
+        /// <returns>The list of containers; contains <c>null</c> entries for unrealized containers (see <see cref="ItemContainerGenerator.ContainerFromIndex"/>).</returns>
+        [NotNull]
+        public static IEnumerable<T> GetItemContainers<T>([NotNull] this ItemsControl itemsControl)
+            where T : DependencyObject
+        {
+            Contract.Requires(itemsControl != null);
+            Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
+
+            var generator = itemsControl.ItemContainerGenerator;
+
+            var itemsCount = Math.Max(0, itemsControl.Items.Count);
+
+            return Enumerable.Range(0, itemsCount)
+                .Select(i => generator.ContainerFromIndex(i) as T);
         }
     }
 }
