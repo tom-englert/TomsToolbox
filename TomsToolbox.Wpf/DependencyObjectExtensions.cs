@@ -88,10 +88,44 @@
         }
 
         /// <summary>
-        /// Returns an enumeration of elements that contain this element, and the ancestors of this element.
+        /// Returns an enumeration of elements that contains this element, and the ancestors in the visual tree of this element.
         /// </summary>
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
+        [ItemNotNull]
+        [NotNull]
+        public static IEnumerable<DependencyObject> VisualAncestorsAndSelf([NotNull] this DependencyObject self)
+        {
+            Contract.Requires(self != null);
+            Contract.Ensures(Contract.Result<IEnumerable<DependencyObject>>() != null);
+
+            while (self != null)
+            {
+                yield return self;
+                self = VisualTreeHelper.GetParent(self);
+            }
+        }
+
+        /// <summary>
+        /// Returns an enumeration of the ancestor elements in the visual tree of this element.
+        /// </summary>
+        /// <param name="self">The starting element.</param>
+        /// <returns>The ancestor list.</returns>
+        [NotNull]
+        public static IEnumerable<DependencyObject> VisualAncestors([NotNull] this DependencyObject self)
+        {
+            Contract.Requires(self != null);
+            Contract.Ensures(Contract.Result<IEnumerable<DependencyObject>>() != null);
+
+            return self.VisualAncestorsAndSelf().Skip(1);
+        }
+
+        /// <summary>
+        /// Returns an enumeration of elements that contain this element, and the ancestors in the logical tree of this element.
+        /// </summary>
+        /// <param name="self">The starting element.</param>
+        /// <returns>The ancestor list.</returns>
+        /// <remarks>If the start element is not in the logical tree, this method return elements from the visual tree until the first element from the logical tree is found.</remarks>
         [ItemNotNull]
         [NotNull]
         public static IEnumerable<DependencyObject> AncestorsAndSelf([NotNull] this DependencyObject self)
@@ -107,10 +141,11 @@
         }
 
         /// <summary>
-        /// Returns an enumeration of the ancestor elements of this element.
+        /// Returns an enumeration of the ancestor elements in the logical tree of this element.
         /// </summary>
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
+        /// <remarks>If the start element is not in the logical tree, this method return elements from the visual tree until the first element from the logical tree is found.</remarks>
         [NotNull]
         public static IEnumerable<DependencyObject> Ancestors([NotNull] this DependencyObject self)
         {
