@@ -237,8 +237,8 @@
                   BorderBrush="{TemplateBinding BorderBrush}"
                   BorderThickness="{TemplateBinding BorderThickness}">
             <Grid>
-              <TextBlock Text="{TemplateBinding Text}" HorizontalAlignment="Left" Margin="2,0" TextTrimming="{TemplateBinding TextTrimming}" />
-              <TextBox x:Name="PART_TextBox" Visibility="Hidden" BorderThickness="0" Padding="0" />
+              <TextBlock Text="{TemplateBinding Text}" HorizontalAlignment="Stretch" Margin="2,0" TextTrimming="{TemplateBinding TextTrimming}" TextAlignment="{TemplateBinding TextAlignment}" />
+              <TextBox x:Name="PART_TextBox" Visibility="Hidden" BorderThickness="0" Padding="0" TextAlignment="{TemplateBinding TextAlignment}" />
             </Grid>
           </Border>
           <ControlTemplate.Triggers>

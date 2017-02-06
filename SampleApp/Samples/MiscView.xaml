@@ -58,7 +58,7 @@
           <Button Content="#4-4-4-4" />
         </StackPanel>
       </HeaderedContentControl>
-      <HeaderedContentControl Header="Update binding to a POCO property with a timer.">
+      <HeaderedContentControl Header="Update binding to a POCO property with a timer." Focusable="False">
         <Grid>
           <TextBlock x:Name="Time" Margin="10"
                      Text="{Binding Now, Mode=OneWay, Source={x:Static toms:DateTimeSource.Default}}"
@@ -70,7 +70,7 @@
           </ei:TimerTrigger>
         </i:Interaction.Triggers>
       </HeaderedContentControl>
-      <HeaderedContentControl Header="AggregatingMultiValueConverter">
+      <HeaderedContentControl Header="AggregatingMultiValueConverter" Focusable="False">
         <StackPanel>
           <StackPanel.Resources>
             <Style TargetType="TextBlock">
@@ -107,7 +107,7 @@
           </StackPanel>
         </StackPanel>
       </HeaderedContentControl>
-      <HeaderedContentControl Header="BinaryOperationConverter Sample">
+      <HeaderedContentControl Header="BinaryOperationConverter Sample" Focusable="False">
         <Border x:Name="OuterBorder" Margin="5" BorderBrush="Orange" BorderThickness="2">
           <Border.Resources>
             <toms:CompositeConverter x:Key="LessThanToVisibilityConverter">
@@ -142,6 +142,16 @@
             </Border>
           </Grid>
         </Border>
+      </HeaderedContentControl>
+      <HeaderedContentControl Header="InPlaceEdit standalone" Focusable="False">
+        <StackPanel Margin="5">
+          <Border Margin="5" Padding="3,2" BorderThickness="1" BorderBrush="Gray">
+            <toms:InPlaceEdit Text="left aligned text"/>
+          </Border>
+          <Border Margin="5" Padding="3,2" BorderThickness="1" BorderBrush="Gray">
+            <toms:InPlaceEdit TextAlignment="Right" Text="right aligned text"/>
+          </Border>
+        </StackPanel>
       </HeaderedContentControl>
     </StackPanel>
   </ScrollViewer>

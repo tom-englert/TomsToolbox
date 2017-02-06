@@ -44,7 +44,7 @@
         // State of mouse event handling to prevent editing when double clicking the item.
         private bool _processingMouseLeftButtonDown;
         private bool _mouseDoubleClicked;
-        
+
         // The first focusable ancestor to test for focus and to provide F2 key.
         private FrameworkElement _focusableParent;
         // The time when the parent item got the focus.
@@ -152,6 +152,21 @@
 
 
         /// <summary>
+        /// Gets or sets the text alignment.
+        /// </summary>
+        public TextAlignment TextAlignment
+        {
+            get { return this.GetValue<TextAlignment>(TextAlignmentProperty); }
+            set { SetValue(TextAlignmentProperty, value); }
+        }
+        /// <summary>
+        /// Identifies the <see cref="TextAlignment"/> dependency property
+        /// </summary>
+        public static readonly DependencyProperty TextAlignmentProperty =
+            DependencyProperty.Register("TextAlignment", typeof(TextAlignment), typeof(InPlaceEdit), new FrameworkPropertyMetadata(TextAlignment.Left));
+
+
+        /// <summary>
         /// When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate" />.
         /// </summary>
         public override void OnApplyTemplate()
@@ -163,7 +178,7 @@
                 return;
 
             _textBox = template.FindName(TextboxPartName, this) as TextBox;
-            
+
             if (_textBox == null)
                 return;
 
@@ -300,8 +315,20 @@
 
         private void Parent_KeyDown(object sender, [NotNull] KeyEventArgs e)
         {
-            if (e.Key != Key.F2)
-                return;
+            switch (e.Key)
+            {
+                case Key.F2:
+                    break;
+
+                case Key.Enter:
+                    if (sender == this)
+                        break;
+
+                    return;
+
+                default:
+                    return;
+            }
 
             IsEditing = true;
             e.Handled = true;
@@ -414,6 +441,6 @@
             [DllImport("user32.dll")]
             public static extern int GetDoubleClickTime();
         }
- 
+
     }
 }
