@@ -11,6 +11,11 @@
 
     using JetBrains.Annotations;
 
+#if NETFRAMEWORK_4_5
+    using System.Collections;
+    using TomsToolbox.Core;
+#endif
+
     /// <summary>
     /// A validation template for using Validar.Fody (<see href="https://github.com/Fody/Validar"/>) with data annotations (<see cref="N:System.ComponentModel.DataAnnotations"/>).<para/>
     /// </summary>
@@ -102,6 +107,9 @@
 
 #if NETFRAMEWORK_4_5
 
+        /// <summary>
+        /// Raised when the errors for a property has changed.
+        /// </summary>
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
         private void RaiseErrorsChanged(string propertyName)
@@ -109,14 +117,14 @@
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        public IEnumerable GetErrors(string propertyName)
+        IEnumerable INotifyDataErrorInfo.GetErrors(string propertyName)
         {
             return _validationResults
                 .Where(x => x.MemberNames.Contains(propertyName))
                 .Select(x => x.ErrorMessage);
         }
 
-        public bool HasErrors => _validationResults.Count > 0;
+        bool INotifyDataErrorInfo.HasErrors => _validationResults.Count > 0;
 
 #endif
 
