@@ -178,6 +178,7 @@
     <Compile Include="RelayedEventAttribute.cs" />
     <Compile Include="ThreadWithDispatcher.cs" />
     <Compile Include="UserAccountControl.cs" />
+    <Compile Include="ValidationTemplate.cs" />
     <Compile Include="WebHelper.cs" />
     <Compile Include="XmlExtensions.cs" />
   </ItemGroup>
