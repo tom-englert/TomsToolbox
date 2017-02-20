@@ -11,7 +11,6 @@
           <listItem>
             <para>1.0.55.0</para>
             <list class="bullet">
-              <listItem><para>Remove reference to JetBrains.ExternalAnnotations.</para></listItem>
               <listItem><para>Add GetItemContainers extension method for ItemsControl.</para></listItem>
               <listItem><para>InPlaceEdit: Support text alignment and begin edit on enter if focused.</para></listItem>
               <listItem><para>Add VisualAncestors extension method.</para></listItem>
