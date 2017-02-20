@@ -2,7 +2,7 @@ using System.Reflection;
 
 [assembly: AssemblyCompany("tom-englert.de")]
 [assembly: AssemblyProduct("Tom's Toolbox")]
-[assembly: AssemblyCopyright("© tom-englert.de 2015-2016")]
+[assembly: AssemblyCopyright("© tom-englert.de 2015-2017")]
 [assembly: AssemblyTrademark("")]
 
 [assembly: AssemblyVersion(Product.Version)]
