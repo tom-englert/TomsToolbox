@@ -2,12 +2,23 @@
 <topic id="30a05c61-ca5f-4fe9-8190-f1bd787fe2c7" revisionNumber="1">
   <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
     <introduction>
-      <para>The topics in this section describe the various changes made to Tom's Toolbox over the life of the project.</para>
+      <para>The topics in this section describe the various changes made to Tom's Toolbox over the life time of the project.</para>
     </introduction>
     <section>
       <title>Version History</title>
       <content>
         <list class="bullet">
+          <listItem>
+            <para>1.0.55.0</para>
+            <list class="bullet">
+              <listItem><para>Remove reference to JetBrains.ExternalAnnotations.</para></listItem>
+              <listItem><para>Add GetItemContainers extension method for ItemsControl.</para></listItem>
+              <listItem><para>InPlaceEdit: Support text alignment and begin edit on enter if focused.</para></listItem>
+              <listItem><para>Add VisualAncestors extension method.</para></listItem>
+              <listItem><para>Add a validation template for Validar.Fody with DataAnnotations.</para></listItem>
+              <listItem><para>Added HashCode class.</para></listItem>
+            </list>
+          </listItem>
           <listItem>
             <para>1.0.54.0</para>
             <list class="bullet">
