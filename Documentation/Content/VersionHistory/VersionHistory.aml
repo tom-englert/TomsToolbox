@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.56.0</para>
+            <list class="bullet">
+              <listItem><para>CustomNonClientAreaBehavior: Schedule a redraw after WM_NCACTIVATE; if DWM composition is disabled, DefWindowProc(...WM_NCACTIVATE..) *does* some extra drawing on the window frame.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.55.0</para>
             <list class="bullet">
               <listItem><para>Add GetItemContainers extension method for ItemsControl.</para></listItem>
