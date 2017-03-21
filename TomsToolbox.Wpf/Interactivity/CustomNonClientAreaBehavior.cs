@@ -725,6 +725,7 @@
             public static extern int EnableMenuItem(IntPtr hMenu, uint uIDEnableItem, uint uEnable);
 
             [DllImport("user32.dll")]
+            [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool RedrawWindow(IntPtr hWnd, IntPtr lprcUpdate, IntPtr hrgnUpdate, RedrawWindowFlags flags);
         }
     }
