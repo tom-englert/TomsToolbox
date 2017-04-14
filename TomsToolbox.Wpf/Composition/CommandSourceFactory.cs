@@ -131,6 +131,7 @@
         [NotNull]
         public object GetPart(object compositionContext)
         {
+            Contract.Ensures(Contract.Result<object>() != null);
             return GetCommandSource(compositionContext);
         }
 

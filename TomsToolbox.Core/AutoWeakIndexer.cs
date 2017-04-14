@@ -222,6 +222,7 @@
         {
             Contract.Invariant(_generator != null);
             Contract.Invariant(_items != null);
+            Contract.Invariant(_sync != null);
         }
     }
 }

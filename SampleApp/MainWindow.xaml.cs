@@ -1,4 +1,6 @@
-﻿namespace SampleApp
+﻿using System.Diagnostics.Contracts;
+
+namespace SampleApp
 {
     using System.ComponentModel.Composition;
     using System.Windows;
@@ -17,6 +19,7 @@
         [ImportingConstructor]
         public MainWindow([NotNull] ICompositionHost compositionHost)
         {
+            Contract.Requires(compositionHost != null);
             this.SetExportProvider(compositionHost.Container);
 
             InitializeComponent();

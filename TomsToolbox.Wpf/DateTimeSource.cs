@@ -109,6 +109,7 @@
         private void ObjectInvariant()
         {
             Contract.Invariant(_updateTimer != null);
+            Contract.Invariant(Default != null);
         }
     }
 }

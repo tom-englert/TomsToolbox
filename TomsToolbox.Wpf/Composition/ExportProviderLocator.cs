@@ -86,6 +86,7 @@
         internal static string GetMissingExportProviderMessage([NotNull] this DependencyObject obj)
         {
             Contract.Requires(obj != null);
+            Contract.Ensures(Contract.Result<string>() != null);
 
             return "Export provider must be registered in the visual tree " + string.Join("/", obj.AncestorsAndSelf().Reverse().Select(o => o?.GetType().Name));
         }

@@ -282,6 +282,7 @@
         private TextAdorner GetNextAdorner([NotNull] IEnumerator<TextAdorner> existingAdorners, int charIndex, string text)
         {
             Contract.Requires(existingAdorners != null);
+            Contract.Ensures(Contract.Result<TextAdorner>() != null);
 
             var textAdorner = existingAdorners.MoveNext() ? existingAdorners.Current : CreateNewAdorner();
             Contract.Assume(textAdorner != null);
@@ -292,6 +293,7 @@
         [NotNull]
         private TextAdorner CreateNewAdorner()
         {
+            Contract.Ensures(Contract.Result<TextAdorner>() != null);
             var textBox = Child;
             Contract.Assume(textBox != null);
 
@@ -323,6 +325,7 @@
             [NotNull]
             public TextAdorner Apply(int charIndex, string text)
             {
+                Contract.Ensures(Contract.Result<TextAdorner>() != null);
                 _charIndex = charIndex;
                 _content.Text = text;
 

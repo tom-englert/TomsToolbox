@@ -109,6 +109,7 @@
         [NotNull]
         internal static string Quoted(string value, char separator)
         {
+            Contract.Ensures(Contract.Result<string>() != null);
             if (string.IsNullOrEmpty(value))
                 return string.Empty;
 

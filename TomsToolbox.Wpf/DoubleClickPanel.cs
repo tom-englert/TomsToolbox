@@ -27,6 +27,7 @@
         /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         protected virtual void OnMouseDoubleClick([NotNull] MouseButtonEventArgs e)
         {
+            Contract.Requires(e != null);
             RaiseEvent(e);
         }
 
@@ -36,6 +37,7 @@
         /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         protected virtual void OnPreviewMouseDoubleClick([NotNull] MouseButtonEventArgs e)
         {
+            Contract.Requires(e != null);
             RaiseEvent(e);
         }
 

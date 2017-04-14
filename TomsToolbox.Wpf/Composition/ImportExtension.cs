@@ -237,6 +237,7 @@
         private void ObjectInvariant()
         {
             Contract.Invariant(MemberType != null);
+            Contract.Invariant(_setters != null);
         }
     }
 }

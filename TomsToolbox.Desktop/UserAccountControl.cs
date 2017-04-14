@@ -444,6 +444,7 @@
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         private static SafeNativeMemory PackAuthenticationBuffer(NetworkCredential credential)
         {
+            Contract.Ensures(Contract.Result<SafeNativeMemory>() != null);
             var userName = credential?.UserName;
 
             if (string.IsNullOrEmpty(userName))

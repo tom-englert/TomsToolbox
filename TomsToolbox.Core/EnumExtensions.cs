@@ -283,6 +283,7 @@
         private static T InternalToEnum<T>([NotNull] object value)
             where T : struct
         {
+            Contract.Requires(value != null);
             var enumType = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
             if (!enumType.IsEnum)
                 throw new InvalidOperationException(enumType.Name + " is not an System.Enum.");

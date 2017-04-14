@@ -1,4 +1,6 @@
-﻿namespace SampleApp.Samples
+﻿using System.Diagnostics.Contracts;
+
+namespace SampleApp.Samples
 {
     using System.ComponentModel.Composition;
 
@@ -17,6 +19,7 @@
         [ImportingConstructor]
         public MapView([NotNull] ICompositionHost compositionHost)
         {
+            Contract.Requires(compositionHost != null);
             this.SetExportProvider(compositionHost.Container);
 
             InitializeComponent();
