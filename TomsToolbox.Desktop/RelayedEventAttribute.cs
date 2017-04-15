@@ -1,4 +1,5 @@
-﻿namespace TomsToolbox.Desktop
+﻿using System.Diagnostics.Contracts;
+namespace TomsToolbox.Desktop
 {
     using System;
     using System.Collections.Generic;
@@ -72,7 +73,14 @@
         /// Gets the type of the source for the events.
         /// </summary>
         [NotNull]
-        public Type SourceType => _sourceType;
+        public Type SourceType
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<Type>() != null);
+                return _sourceType;
+            }
+        }
 
         /// <summary>
         /// Gets the name of the source property, or null if the name is the same as the target property.
