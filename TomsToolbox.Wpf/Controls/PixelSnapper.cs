@@ -35,7 +35,7 @@
         /// <summary>
         /// Identifies the <see cref="Viewport"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty ViewportProperty =
+        [NotNull] public static readonly DependencyProperty ViewportProperty =
             DependencyProperty.Register("Viewport", typeof(FrameworkElement), typeof(PixelSnapper));
 
         /// <summary>

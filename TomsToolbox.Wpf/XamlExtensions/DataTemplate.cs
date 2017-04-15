@@ -44,7 +44,7 @@
         /// <AttachedPropertyComments>
         /// <summary>Shortcut to set a <see cref="RoleBasedDataTemplateSelector"/> with the specified role as the targets <see cref="ContentControl.ContentTemplateSelector"/>.</summary>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty RoleProperty =
+        [NotNull] public static readonly DependencyProperty RoleProperty =
             DependencyProperty.RegisterAttached("Role", typeof(object), typeof(DataTemplate), new FrameworkPropertyMetadata(Role_Changed));
 
         private static void Role_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)

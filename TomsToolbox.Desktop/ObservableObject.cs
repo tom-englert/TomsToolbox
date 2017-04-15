@@ -29,11 +29,11 @@
         , INotifyDataErrorInfo
 #endif
     {
-        private static readonly AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>> _dependencyMappingCache = new AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>>(PropertyDependencyAttribute.CreateDependencyMapping);
+        [NotNull] private static readonly AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>> _dependencyMappingCache = new AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>>(PropertyDependencyAttribute.CreateDependencyMapping);
         [NonSerialized]
         private IDictionary<string, IEnumerable<string>> _dependencyMapping;
 
-        private static readonly AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>> _relayMappingCache = new AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>>(RelayedEventAttribute.CreateRelayMapping);
+        [NotNull] private static readonly AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>> _relayMappingCache = new AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>>(RelayedEventAttribute.CreateRelayMapping);
         [NonSerialized]
         private IDictionary<Type, IDictionary<string, string>> _relayMapping;
         [NonSerialized]

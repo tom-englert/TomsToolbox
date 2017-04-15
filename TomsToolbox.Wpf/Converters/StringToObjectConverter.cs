@@ -19,7 +19,7 @@
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        public static readonly IValueConverter Default = new StringToObjectConverter();
+        [NotNull] public static readonly IValueConverter Default = new StringToObjectConverter();
 
         /// <summary>
         /// Gets or sets the type of the type converter to use.

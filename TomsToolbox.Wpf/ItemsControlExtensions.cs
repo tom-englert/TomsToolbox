@@ -51,7 +51,7 @@
         /// The command parameter for the command is the item that has been clicked.
         /// </summary>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty DefaultItemCommandProperty =
+        [NotNull] public static readonly DependencyProperty DefaultItemCommandProperty =
             DependencyProperty.RegisterAttached("DefaultItemCommand", typeof(ICommand), typeof(ItemsControlExtensions), new FrameworkPropertyMetadata(DefaultItemCommand_Changed));
 
         private static void DefaultItemCommand_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -150,7 +150,7 @@
         /// The object that will be observed for changes. A change of the object will trigger a refresh on the collection view of the attached items control.
         /// </summary>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty RefreshOnSourceChangesProperty =
+        [NotNull] public static readonly DependencyProperty RefreshOnSourceChangesProperty =
             DependencyProperty.RegisterAttached("RefreshOnSourceChanges", typeof(object), typeof(ItemsControlExtensions), new FrameworkPropertyMetadata(Source_Changed));
 
         private static void Source_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)

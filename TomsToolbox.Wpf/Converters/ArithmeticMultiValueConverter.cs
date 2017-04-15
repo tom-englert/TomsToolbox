@@ -50,11 +50,11 @@
     {
         // removed DefaultIfEmpty() so we are not left wondering what went wrong if one of the items cannot be resolved
         // ReSharper disable AssignNullToNotNullAttribute
-        private static readonly Func<IEnumerable<double>, double> _minOperationMethod = items => items.Min();
-        private static readonly Func<IEnumerable<double>, double> _maxOperationMethod = items => items.Max();
-        private static readonly Func<IEnumerable<double>, double> _sumOperationMethod = items => items.Sum();
-        private static readonly Func<IEnumerable<double>, double> _averageOperationMethod = items => items.Average();
-        private static readonly Func<IEnumerable<double>, double> _productOperationMethod = items =>
+        [NotNull] private static readonly Func<IEnumerable<double>, double> _minOperationMethod = items => items.Min();
+        [NotNull] private static readonly Func<IEnumerable<double>, double> _maxOperationMethod = items => items.Max();
+        [NotNull] private static readonly Func<IEnumerable<double>, double> _sumOperationMethod = items => items.Sum();
+        [NotNull] private static readonly Func<IEnumerable<double>, double> _averageOperationMethod = items => items.Average();
+        [NotNull] private static readonly Func<IEnumerable<double>, double> _productOperationMethod = items =>
         {
             return items.Aggregate(1.0, (current, item) => current * item);
         };
@@ -67,23 +67,23 @@
         /// <summary>
         /// The default arithmetic MIN converter. 
         /// </summary>
-        public static readonly IMultiValueConverter Min = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Min };
+        [NotNull] public static readonly IMultiValueConverter Min = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Min };
         /// <summary>
         /// The default arithmetic MAX converter. 
         /// </summary>
-        public static readonly IMultiValueConverter Max = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Max };
+        [NotNull] public static readonly IMultiValueConverter Max = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Max };
         /// <summary>
         /// The default arithmetic SUM converter. 
         /// </summary>
-        public static readonly IMultiValueConverter Sum = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Sum };
+        [NotNull] public static readonly IMultiValueConverter Sum = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Sum };
         /// <summary>
         /// The default arithmetic AVERAGE converter. 
         /// </summary>
-        public static readonly IMultiValueConverter Average = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Average };
+        [NotNull] public static readonly IMultiValueConverter Average = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Average };
         /// <summary>
         /// The default arithmetic PRODUCT converter. 
         /// </summary>
-        public static readonly IMultiValueConverter Product = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Product };
+        [NotNull] public static readonly IMultiValueConverter Product = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Product };
 
         /// <summary>
         /// Gets or sets the operation to be performed on all items.

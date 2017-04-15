@@ -67,6 +67,7 @@
             }
         }
 
+        [CanBeNull]
         object[] IMultiValueConverter.ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             if (value == null)

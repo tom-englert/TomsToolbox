@@ -13,7 +13,7 @@
     /// </summary>
     public class KeyboardNavigation : DependencyObject
     {
-        private static readonly KeyboardNavigation _current = new KeyboardNavigation();
+        [NotNull] private static readonly KeyboardNavigation _current = new KeyboardNavigation();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="KeyboardNavigation"/> class.
@@ -51,7 +51,7 @@
         /// <summary>
         /// Identifies the <see cref="IsFocusVisualVisible"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty IsFocusVisualVisibleProperty =
+        [NotNull] public static readonly DependencyProperty IsFocusVisualVisibleProperty =
             DependencyProperty.Register("IsFocusVisualVisible", typeof(bool), typeof(KeyboardNavigation));
 
         private void InputManager_PostProcessInput([NotNull] object sender, [CanBeNull] ProcessInputEventArgs e)

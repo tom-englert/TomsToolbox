@@ -20,7 +20,7 @@
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        public static readonly IValueConverter Default = new EnumToValuesConverter();
+        [NotNull] public static readonly IValueConverter Default = new EnumToValuesConverter();
 
         /// <summary>
         /// Converts a value. 

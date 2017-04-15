@@ -5,6 +5,8 @@
     using System.Globalization;
     using System.Windows;
 
+    using JetBrains.Annotations;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using TomsToolbox.Desktop;
@@ -303,6 +305,7 @@
 
         class TestClassTypeConverter : TypeConverter
         {
+            [NotNull]
             public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
             {
                 return new TestClass(Convert.ToInt32(value, culture));

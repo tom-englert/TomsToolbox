@@ -18,7 +18,7 @@
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        public static readonly IValueConverter Default = new ImageSourceToImageConverter();
+        [NotNull] public static readonly IValueConverter Default = new ImageSourceToImageConverter();
 
         /// <summary>
         /// Converts a value.

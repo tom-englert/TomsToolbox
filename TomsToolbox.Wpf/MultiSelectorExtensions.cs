@@ -31,7 +31,7 @@
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Use the same term as in System.Windows.Controls.Primitives.MultiSelector")]
     public static class MultiSelectorExtensions
     {
-        private static readonly IList _emptyObjectArray = new object[0];
+        [NotNull] private static readonly IList _emptyObjectArray = new object[0];
 
         /// <summary>
         /// Gets the value of the <see cref="P:TomsToolbox.Wpf.MultiSelectorExtensions.SelectionBinding"/> attached property.
@@ -71,10 +71,10 @@
         /// ]]></code>
         /// </example>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty SelectionBindingProperty =
+        [NotNull] public static readonly DependencyProperty SelectionBindingProperty =
             DependencyProperty.RegisterAttached("SelectionBinding", typeof(IList), typeof(MultiSelectorExtensions), new FrameworkPropertyMetadata(null, SelectionBinding_Changed));
 
-        private static readonly DependencyProperty SelectionSynchronizerProperty =
+        [NotNull] private static readonly DependencyProperty SelectionSynchronizerProperty =
             DependencyProperty.RegisterAttached("SelectionSynchronizer", typeof(SelectionSynchronizer), typeof(MultiSelectorExtensions));
 
         private static void SelectionBinding_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -139,7 +139,7 @@
                 if (container == null)
                     return;
 
-                var child = container.VisualDescendantsAndSelf().OfType<UIElement>().FirstOrDefault(item => item?.Focusable == true);
+                var child = container.VisualDescendantsAndSelf().OfType<UIElement>().FirstOrDefault(item => item.Focusable);
 
                 child?.Focus();
             });

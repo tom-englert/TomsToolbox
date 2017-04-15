@@ -109,7 +109,7 @@
         /// <summary>
         /// Identifies the <see cref="Viewport"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty ViewportProperty =
+        [NotNull] public static readonly DependencyProperty ViewportProperty =
             DependencyProperty.Register("Viewport", typeof(FrameworkElement), typeof(MapTile));
 
         /// <summary>
@@ -124,7 +124,7 @@
         /// <summary>
         /// Identifies the <see cref="ImageProvider"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty ImageProviderProperty =
+        [NotNull] public static readonly DependencyProperty ImageProviderProperty =
             DependencyProperty.Register("ImageProvider", typeof(IImageProvider), typeof(MapTile), new FrameworkPropertyMetadata((sender, e) => ((MapTile)sender)?.ImageProvider_Changed()));
 
         /// <summary>
@@ -139,7 +139,7 @@
         /// <summary>
         /// Identifies the <see cref="Image"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty ImageProperty =
+        [NotNull] public static readonly DependencyProperty ImageProperty =
             DependencyProperty.Register("Image", typeof(IImage), typeof(MapTile), new FrameworkPropertyMetadata((sender, e) => Disposable.Dispose(e.OldValue)));
 
         /// <summary>

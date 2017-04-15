@@ -20,7 +20,7 @@
     /// </summary>
     public static class SelectorExtensions
     {
-        private static readonly WeakKeyIndexer<int> _cache = new WeakKeyIndexer<int>();
+        [NotNull] private static readonly WeakKeyIndexer<int> _cache = new WeakKeyIndexer<int>();
 
         /// <summary>
         /// Gets the value of the <see cref="P:TomsToolbox.Wpf.SelectorExtensions.TrackSelection"/> attached property.
@@ -60,7 +60,7 @@
         /// If no index is cached, the first item will be selected.
         /// </remarks>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty TrackSelectionProperty =
+        [NotNull] public static readonly DependencyProperty TrackSelectionProperty =
             DependencyProperty.RegisterAttached("TrackSelection", typeof(bool), typeof(SelectorExtensions), new FrameworkPropertyMetadata(TrackSelection_Changed));
 
         private static void TrackSelection_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)

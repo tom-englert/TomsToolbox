@@ -34,16 +34,16 @@
     public sealed class BinaryOperationProcessor
     {
         // ReSharper disable AssignNullToNotNullAttribute : we will never call these with a null argument.
-        private static readonly Func<object, object, object> _additionMethod = (a, b) => ToDouble(a) + ToDouble(b);
-        private static readonly Func<object, object, object> _subtractionMethod = (a, b) => ToDouble(a) - ToDouble(b);
-        private static readonly Func<object, object, object> _multiplyMethod = (a, b) => ToDouble(a) * ToDouble(b);
-        private static readonly Func<object, object, object> _divisionMethod = (a, b) => ToDouble(a) / ToDouble(b);
-        private static readonly Func<object, object, object> _equalityMethod = (a, b) => Equals(a, b);
-        private static readonly Func<object, object, object> _inequalityMethod = (a, b) => !Equals(a, b);
-        private static readonly Func<object, object, object> _greaterThanMethod = (a, b) => Compare(a, b) > 0;
-        private static readonly Func<object, object, object> _lessThanMethod = (a, b) => Compare(a, b) < 0;
-        private static readonly Func<object, object, object> _greaterThanOrEqualMethod = (a, b) => Compare(a, b) >= 0;
-        private static readonly Func<object, object, object> _lessThanOrEqualMethod = (a, b) => Compare(a, b) <= 0;
+        [NotNull] private static readonly Func<object, object, object> _additionMethod = (a, b) => ToDouble(a) + ToDouble(b);
+        [NotNull] private static readonly Func<object, object, object> _subtractionMethod = (a, b) => ToDouble(a) - ToDouble(b);
+        [NotNull] private static readonly Func<object, object, object> _multiplyMethod = (a, b) => ToDouble(a) * ToDouble(b);
+        [NotNull] private static readonly Func<object, object, object> _divisionMethod = (a, b) => ToDouble(a) / ToDouble(b);
+        [NotNull] private static readonly Func<object, object, object> _equalityMethod = (a, b) => Equals(a, b);
+        [NotNull] private static readonly Func<object, object, object> _inequalityMethod = (a, b) => !Equals(a, b);
+        [NotNull] private static readonly Func<object, object, object> _greaterThanMethod = (a, b) => Compare(a, b) > 0;
+        [NotNull] private static readonly Func<object, object, object> _lessThanMethod = (a, b) => Compare(a, b) < 0;
+        [NotNull] private static readonly Func<object, object, object> _greaterThanOrEqualMethod = (a, b) => Compare(a, b) >= 0;
+        [NotNull] private static readonly Func<object, object, object> _lessThanOrEqualMethod = (a, b) => Compare(a, b) <= 0;
         // ReSharper restore AssignNullToNotNullAttribute
 
         private readonly BinaryOperation _operation;
@@ -154,7 +154,7 @@
             return methods
                 .Where(m => _operationMethodNames.Contains(m?.Name))
                 .Select(m => new { Method = m, Parameters = m?.GetParameters() })
-                .Where(m => m?.Parameters.Length == 2)
+                .Where(m => m.Parameters.Length == 2)
                 .Where(m => m.Parameters[0].ParameterType == valueType)
                 .Select(m => ApplyOperation(m.Method, m.Parameters[1].ParameterType, value1, value2))
                 .FirstOrDefault(v => v != null);

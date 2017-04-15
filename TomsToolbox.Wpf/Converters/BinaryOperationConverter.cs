@@ -39,43 +39,43 @@
         /// <summary>
         /// The default addition converter.
         /// </summary>
-        public static readonly IValueConverter Addition = new BinaryOperationConverter { Operation = BinaryOperation.Addition };
+        [NotNull] public static readonly IValueConverter Addition = new BinaryOperationConverter { Operation = BinaryOperation.Addition };
         /// <summary>
         /// The default subtraction converter.
         /// </summary>
-        public static readonly IValueConverter Subtraction = new BinaryOperationConverter { Operation = BinaryOperation.Subtraction };
+        [NotNull] public static readonly IValueConverter Subtraction = new BinaryOperationConverter { Operation = BinaryOperation.Subtraction };
         /// <summary>
         /// The default multiplication converter.
         /// </summary>
-        public static readonly IValueConverter Multiply = new BinaryOperationConverter { Operation = BinaryOperation.Multiply };
+        [NotNull] public static readonly IValueConverter Multiply = new BinaryOperationConverter { Operation = BinaryOperation.Multiply };
         /// <summary>
         /// The default division converter.
         /// </summary>
-        public static readonly IValueConverter Division = new BinaryOperationConverter { Operation = BinaryOperation.Division };
+        [NotNull] public static readonly IValueConverter Division = new BinaryOperationConverter { Operation = BinaryOperation.Division };
         /// <summary>
         /// The default equality converter.
         /// </summary>
-        public static readonly IValueConverter Equality = new BinaryOperationConverter { Operation = BinaryOperation.Equality };
+        [NotNull] public static readonly IValueConverter Equality = new BinaryOperationConverter { Operation = BinaryOperation.Equality };
         /// <summary>
         /// The default inequality converter.
         /// </summary>
-        public static readonly IValueConverter Inequality = new BinaryOperationConverter { Operation = BinaryOperation.Inequality };
+        [NotNull] public static readonly IValueConverter Inequality = new BinaryOperationConverter { Operation = BinaryOperation.Inequality };
         /// <summary>
         /// The default greater than converter.
         /// </summary>
-        public static readonly IValueConverter GreaterThan = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThan };
+        [NotNull] public static readonly IValueConverter GreaterThan = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThan };
         /// <summary>
         /// The default less than converter.
         /// </summary>
-        public static readonly IValueConverter LessThan = new BinaryOperationConverter { Operation = BinaryOperation.LessThan };
+        [NotNull] public static readonly IValueConverter LessThan = new BinaryOperationConverter { Operation = BinaryOperation.LessThan };
         /// <summary>
         /// The default greater than or equals converter.
         /// </summary>
-        public static readonly IValueConverter GreaterThanOrEqual = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThanOrEqual };
+        [NotNull] public static readonly IValueConverter GreaterThanOrEqual = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThanOrEqual };
         /// <summary>
         /// The default less than or equals converter.
         /// </summary>
-        public static readonly IValueConverter LessThanOrEqual = new BinaryOperationConverter { Operation = BinaryOperation.LessThanOrEqual };
+        [NotNull] public static readonly IValueConverter LessThanOrEqual = new BinaryOperationConverter { Operation = BinaryOperation.LessThanOrEqual };
 
         /// <summary>
         /// Gets or sets the operation the converter is performing.

@@ -4,6 +4,8 @@
     using System.Windows;
     using System.Windows.Controls;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Desktop;
 
     /// <summary>
@@ -50,7 +52,7 @@
         /// <summary>
         /// Identifies the <see cref="HeaderPadding"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty HeaderPaddingProperty =
+        [NotNull] public static readonly DependencyProperty HeaderPaddingProperty =
             DependencyProperty.Register("HeaderPadding", typeof(Thickness), typeof(SharedWidthHeaderedContentControl));
     }
 }

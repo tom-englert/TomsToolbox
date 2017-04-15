@@ -85,7 +85,7 @@
         /// <summary>
         /// Identifies the <see cref="Text"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty TextProperty =
+        [NotNull] public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register("Text", typeof(string), typeof(InPlaceEdit), new FrameworkPropertyMetadata() { BindsTwoWayByDefault = true, DefaultUpdateSourceTrigger = UpdateSourceTrigger.LostFocus });
 
 
@@ -100,7 +100,7 @@
         /// <summary>
         /// Identifies the <see cref="IsEditing"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty IsEditingProperty =
+        [NotNull] public static readonly DependencyProperty IsEditingProperty =
             DependencyProperty.Register("IsEditing", typeof(bool), typeof(InPlaceEdit), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((InPlaceEdit)sender)?.IsEditing_Changed((bool)e.NewValue), (sender, baseValue) => ((InPlaceEdit)sender)?.IsEditing_CoerceValue(baseValue.SafeCast<bool>())));
 
 
@@ -115,7 +115,7 @@
         /// <summary>
         /// Identifies the <see cref="IsEditingDisabled"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty IsEditingDisabledProperty =
+        [NotNull] public static readonly DependencyProperty IsEditingDisabledProperty =
             DependencyProperty.Register("IsEditingDisabled", typeof(bool), typeof(InPlaceEdit), new FrameworkPropertyMetadata(false));
 
 
@@ -130,7 +130,7 @@
         /// <summary>
         /// Identifies the <see cref="HasErrors"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty HasErrorsProperty =
+        [NotNull] public static readonly DependencyProperty HasErrorsProperty =
             DependencyProperty.Register("HasErrors", typeof(bool), typeof(InPlaceEdit));
 
 
@@ -148,7 +148,7 @@
         /// <summary>
         /// Identifies the <see cref="TextTrimming"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty TextTrimmingProperty =
+        [NotNull] public static readonly DependencyProperty TextTrimmingProperty =
             DependencyProperty.Register("TextTrimming", typeof(TextTrimming), typeof(InPlaceEdit), new FrameworkPropertyMetadata(TextTrimming.CharacterEllipsis));
 
 
@@ -163,7 +163,7 @@
         /// <summary>
         /// Identifies the <see cref="TextAlignment"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty TextAlignmentProperty =
+        [NotNull] public static readonly DependencyProperty TextAlignmentProperty =
             DependencyProperty.Register("TextAlignment", typeof(TextAlignment), typeof(InPlaceEdit), new FrameworkPropertyMetadata(TextAlignment.Left));
 
 
@@ -322,7 +322,7 @@
                     break;
 
                 case Key.Enter:
-                    if (sender == this)
+                    if (ReferenceEquals(sender, this))
                         break;
 
                     return;

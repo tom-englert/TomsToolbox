@@ -10,10 +10,10 @@
     /// </summary>
     public static class WindowCommands
     {
-        private static readonly RoutedUICommand _minimize = new RoutedUICommand("Minimize", "Minimize", typeof (WindowCommands));
-        private static readonly RoutedUICommand _maximize = new RoutedUICommand("Maximize", "Maximize", typeof(WindowCommands));
-        private static readonly RoutedUICommand _restore = new RoutedUICommand("Restore", "Restore", typeof(WindowCommands));
-        private static readonly RoutedUICommand _close = new RoutedUICommand("Close", "Close", typeof(WindowCommands));
+        [NotNull] private static readonly RoutedUICommand _minimize = new RoutedUICommand("Minimize", "Minimize", typeof (WindowCommands));
+        [NotNull] private static readonly RoutedUICommand _maximize = new RoutedUICommand("Maximize", "Maximize", typeof(WindowCommands));
+        [NotNull] private static readonly RoutedUICommand _restore = new RoutedUICommand("Restore", "Restore", typeof(WindowCommands));
+        [NotNull] private static readonly RoutedUICommand _close = new RoutedUICommand("Close", "Close", typeof(WindowCommands));
 
         /// <summary>
         /// Gets the minimize window command.

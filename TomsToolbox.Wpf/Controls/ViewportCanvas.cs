@@ -28,7 +28,7 @@
         /// <summary>
         /// Identifies the <see cref="World"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty WorldProperty =
+        [NotNull] public static readonly DependencyProperty WorldProperty =
             DependencyProperty.Register("World", typeof(FrameworkElement), typeof(ViewportCanvas));
 
         /// <summary>

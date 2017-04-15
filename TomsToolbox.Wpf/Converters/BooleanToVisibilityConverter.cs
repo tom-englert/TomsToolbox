@@ -16,7 +16,7 @@
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        public static readonly IValueConverter Default = new BooleanToVisibilityConverter();
+        [NotNull] public static readonly IValueConverter Default = new BooleanToVisibilityConverter();
 
         /// <summary>
         /// The visibility value to be used when converting from a false boolean value. Defaults to Collapsed.

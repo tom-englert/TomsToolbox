@@ -45,7 +45,7 @@
         /// <AttachedPropertyComments>
         /// <summary>Allows to specify a resource key instead of an Uri as the source from which the image will be loaded.</summary>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty ResourceKeyProperty =
+        [NotNull] public static readonly DependencyProperty ResourceKeyProperty =
             // ReSharper disable once AssignNullToNotNullAttribute
             DependencyProperty.RegisterAttached("ResourceKey", typeof(object), typeof(ImageExtensions), new FrameworkPropertyMetadata((sender, e) => ResourceKey_Changed((Image)sender, e.NewValue)));
 

@@ -29,7 +29,7 @@
         /// <summary>
         /// Identifies the <see cref="TargetElement"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty TargetElementProperty =
+        [NotNull] public static readonly DependencyProperty TargetElementProperty =
             DependencyProperty.Register("TargetElement", typeof(FrameworkElement), typeof(SelectionRectangleBehavior));
 
 
@@ -45,7 +45,7 @@
         /// <summary>
         /// Identifies the <see cref="Viewport"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty ViewportProperty =
+        [NotNull] public static readonly DependencyProperty ViewportProperty =
             DependencyProperty.Register("Viewport", typeof(FrameworkElement), typeof(SelectionRectangleBehavior), new FrameworkPropertyMetadata((sender, e) => ((SelectionRectangleBehavior)sender)?.Viewport_Changed((FrameworkElement)e.OldValue, (FrameworkElement)e.NewValue)));
 
 
@@ -60,7 +60,7 @@
         /// <summary>
         /// Identifies the <see cref="Selection"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty SelectionProperty =
+        [NotNull] public static readonly DependencyProperty SelectionProperty =
             DependencyProperty.Register("Selection", typeof(Rect), typeof(SelectionRectangleBehavior), new FrameworkPropertyMetadata(Rect.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((SelectionRectangleBehavior)sender)?.Selection_Changed((Rect)e.NewValue)));
 
 

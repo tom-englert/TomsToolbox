@@ -20,13 +20,12 @@
     [ValueConversion(typeof(Thickness), typeof(Thickness))]
     public class ThicknessMultiplyConverter : ValueConverter
     {
-        [NotNull]
-        private static readonly TypeConverter _typeConverter = new ThicknessConverter();
+        [NotNull] private static readonly TypeConverter _typeConverter = new ThicknessConverter();
 
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        public static readonly IValueConverter Default = new ThicknessMultiplyConverter();
+        [NotNull] public static readonly IValueConverter Default = new ThicknessMultiplyConverter();
 
 
         /// <summary>

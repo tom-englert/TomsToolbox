@@ -17,7 +17,7 @@
         /// <summary>
         /// The singleton instance of the command.
         /// </summary>
-        public static readonly ICommand Default = new NullCommand();
+        [NotNull] public static readonly ICommand Default = new NullCommand();
 
         /// <summary>
         /// Defines the method to be called when the command is invoked.

@@ -23,6 +23,7 @@
         /// <param name="self">The dependency object from which to get the value.</param>
         /// <param name="property">The property to get.</param>
         /// <returns>The value safely casted to <typeparamref name="T"/></returns>
+        [CanBeNull]
         public static T GetValue<T>([NotNull] this DependencyObject self, [NotNull] DependencyProperty property)
         {
             Contract.Requires(self != null);

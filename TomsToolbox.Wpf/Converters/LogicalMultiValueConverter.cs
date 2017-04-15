@@ -37,8 +37,8 @@
     public class LogicalMultiValueConverter : MultiValueConverter
     {
         // ReSharper disable AssignNullToNotNullAttribute
-        private static readonly Func<IEnumerable<bool>, bool> _andOperationMethod = items => items.All(item => item);
-        private static readonly Func<IEnumerable<bool>, bool> _orOperationMethod = items => items.Any(item => item);
+        [NotNull] private static readonly Func<IEnumerable<bool>, bool> _andOperationMethod = items => items.All(item => item);
+        [NotNull] private static readonly Func<IEnumerable<bool>, bool> _orOperationMethod = items => items.Any(item => item);
         // ReSharper restore AssignNullToNotNullAttribute
 
         private LogicalOperation _operation;
@@ -48,11 +48,11 @@
         /// <summary>
         /// The default logical AND converter. 
         /// </summary>
-        public static readonly IMultiValueConverter And = new LogicalMultiValueConverter { Operation = LogicalOperation.And };
+        [NotNull] public static readonly IMultiValueConverter And = new LogicalMultiValueConverter { Operation = LogicalOperation.And };
         /// <summary>
         /// The default logical OR converter. 
         /// </summary>
-        public static readonly IMultiValueConverter Or = new LogicalMultiValueConverter { Operation = LogicalOperation.Or };
+        [NotNull] public static readonly IMultiValueConverter Or = new LogicalMultiValueConverter { Operation = LogicalOperation.Or };
 
         /// <summary>
         /// Gets or sets the operation to be performed on all items.

@@ -180,7 +180,7 @@
         /// </exception>
         // ReSharper disable once AnnotateNotNullParameter
         [CanBeNull]
-        public static T GetExportedValueOrDefault<T>([NotNull] this ICompositionHost compositionHost, string contractName) where T : class
+        public static T GetExportedValueOrDefault<T>([NotNull] this ICompositionHost compositionHost, [CanBeNull] string contractName) where T : class
         {
             Contract.Requires(compositionHost != null);
 
@@ -331,6 +331,7 @@
         /// <returns>
         /// A service object of type <typeparamref name="T"/>, or null if there is no service object of type <typeparamref name="T"/>.
         /// </returns>
+        [CanBeNull]
         public static T GetService<T>([NotNull] this IServiceProvider serviceProvider)
         {
             Contract.Requires(serviceProvider != null);

@@ -18,8 +18,7 @@
     [XmlRoot("root")]
     public class MapSourceFile
     {
-        [NotNull]
-        private static readonly XmlSerializer _serializer = new XmlSerializer(typeof(MapSourceFile));
+        [NotNull] private static readonly XmlSerializer _serializer = new XmlSerializer(typeof(MapSourceFile));
 
         [XmlArray("MapSourceList")]
         public MapSource[] MapSources

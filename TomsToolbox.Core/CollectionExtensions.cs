@@ -375,6 +375,7 @@
         /// <returns>
         /// The value from the dictionary, or the default value of <typeparamref name="TValue"/> if no item with the specified key exists.
         /// </returns>
+        [CanBeNull]
         public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key)
         {
             Contract.Requires(dictionary != null);

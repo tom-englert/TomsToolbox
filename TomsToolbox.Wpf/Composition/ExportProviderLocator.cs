@@ -75,7 +75,7 @@
         /// Makes the export provider available in the WPF visual tree.
         /// </summary>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty ExportProviderProperty =
+        [NotNull] public static readonly DependencyProperty ExportProviderProperty =
             DependencyProperty.RegisterAttached("ExportProvider", typeof(ExportProvider), typeof(ExportProviderLocator), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>

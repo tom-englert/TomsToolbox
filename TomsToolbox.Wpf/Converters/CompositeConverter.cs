@@ -48,7 +48,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        public object Convert([CanBeNull] object value, [CanBeNull] Type targetType, object parameter, [CanBeNull] System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (Converters.Count <= 0)
             {
@@ -68,7 +68,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        public object ConvertBack([CanBeNull] object value, [CanBeNull] Type targetType, object parameter, [CanBeNull] System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (Converters.Count <= 0) 
             {

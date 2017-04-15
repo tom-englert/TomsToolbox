@@ -94,7 +94,7 @@
         /// <summary>
         /// Identifies the <see cref="WhiteSpaces"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty WhiteSpacesProperty =
+        [NotNull] public static readonly DependencyProperty WhiteSpacesProperty =
             DependencyProperty.Register("WhiteSpaces", typeof(WhiteSpaces), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(WhiteSpaces.Paragraph, (sender, e) => ((TextBoxVisibleWhiteSpaceDecorator)sender)?.UpdateAdorners()));
 
 
@@ -110,7 +110,7 @@
         /// <summary>
         /// Identifies the <see cref="WhiteSpaceColor"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty WhiteSpaceColorProperty =
+        [NotNull] public static readonly DependencyProperty WhiteSpaceColorProperty =
             DependencyProperty.Register("WhiteSpaceColor", typeof(Brush), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(Brushes.Gray));
 
 
@@ -125,7 +125,7 @@
         /// <summary>
         /// Identifies the <see cref="WhiteSpaceOpacity"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty WhiteSpaceOpacityProperty =
+        [NotNull] public static readonly DependencyProperty WhiteSpaceOpacityProperty =
             DependencyProperty.Register("WhiteSpaceOpacity", typeof(double), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(1.0));
 
         /// <summary>

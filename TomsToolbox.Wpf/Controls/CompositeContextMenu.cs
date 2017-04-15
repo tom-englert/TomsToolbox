@@ -113,7 +113,7 @@
         /// <summary>
         /// Identifies the <see cref="RegionId"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty RegionIdProperty =
+        [NotNull] public static readonly DependencyProperty RegionIdProperty =
             DependencyProperty.Register("RegionId", typeof(string), typeof(CompositeContextMenu));
 
 
@@ -129,7 +129,7 @@
         /// <summary>
         /// Identifies the <see cref="CompositionContext"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty CompositionContextProperty =
+        [NotNull] public static readonly DependencyProperty CompositionContextProperty =
             DependencyProperty.Register("CompositionContext", typeof (object), typeof (CompositeContextMenu));
     }
 }

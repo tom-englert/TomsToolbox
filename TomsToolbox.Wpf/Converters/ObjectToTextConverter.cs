@@ -31,7 +31,7 @@
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        public static readonly IValueConverter Default = new ObjectToTextConverter();
+        [NotNull] public static readonly IValueConverter Default = new ObjectToTextConverter();
 
         /// <summary>
         /// Gets or sets the key used to select the <see cref="TextAttribute"/>

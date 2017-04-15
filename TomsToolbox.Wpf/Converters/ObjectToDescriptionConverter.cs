@@ -29,7 +29,7 @@
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        public static readonly IValueConverter Default = new ObjectToDescriptionConverter();
+        [NotNull] public static readonly IValueConverter Default = new ObjectToDescriptionConverter();
 
         /// <summary>
         /// Converts a value.

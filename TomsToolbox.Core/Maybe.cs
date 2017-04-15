@@ -115,6 +115,7 @@
         /// <returns>
         /// The value extracted from the specified selector if the inner value is not null, else default(TTarget).
         /// </returns>
+        [CanBeNull]
         public TTarget Return<TTarget>([NotNull] Func<T, TTarget> selector)
         {
             Contract.Requires(selector != null);

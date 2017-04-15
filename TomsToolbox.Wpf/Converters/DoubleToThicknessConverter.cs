@@ -16,7 +16,7 @@
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        public static readonly IValueConverter Default = new DoubleToThicknessConverter();
+        [NotNull] public static readonly IValueConverter Default = new DoubleToThicknessConverter();
 
         /// <summary>
         /// Converts a value. 
@@ -29,6 +29,7 @@
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
+        [NotNull]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var thickness = ConvertNumberToThickness(value);

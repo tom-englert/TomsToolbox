@@ -29,7 +29,7 @@
         /// <summary>
         /// Identifies the <see cref="ToggleButton"/> dependency property.
         /// </summary>
-        public static readonly DependencyProperty ToggleButtonProperty =
+        [NotNull] public static readonly DependencyProperty ToggleButtonProperty =
             DependencyProperty.Register("ToggleButton", typeof(ToggleButton), typeof(PopupFocusManagerBehavior));
 
         /// <summary>
@@ -91,7 +91,7 @@
             var popup = (Popup)sender;
             var child = popup.Child;
 
-            var focusable = child?.VisualDescendantsAndSelf().OfType<UIElement>().FirstOrDefault(item => item?.Focusable == true);
+            var focusable = child?.VisualDescendantsAndSelf().OfType<UIElement>().FirstOrDefault(item => item.Focusable);
             if (focusable != null)
             {
                 popup.BeginInvoke(() => focusable.Focus());

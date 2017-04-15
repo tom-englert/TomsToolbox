@@ -49,7 +49,7 @@
         /// will not affect this attached property.
         /// </remarks>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty TopLeftProperty =
+        [NotNull] public static readonly DependencyProperty TopLeftProperty =
             DependencyProperty.RegisterAttached("TopLeft", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(TopLeft_Changed));
 
         private static void TopLeft_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -102,7 +102,7 @@
         /// will not affect this attached property.
         /// </remarks>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty TopRightProperty =
+        [NotNull] public static readonly DependencyProperty TopRightProperty =
             DependencyProperty.RegisterAttached("TopRight", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(TopRight_Changed));
 
         private static void TopRight_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -154,7 +154,7 @@
         /// will not affect this attached property.
         /// </remarks>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty BottomLeftProperty =
+        [NotNull] public static readonly DependencyProperty BottomLeftProperty =
             DependencyProperty.RegisterAttached("BottomLeft", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(BottomLeft_Changed));
 
         private static void BottomLeft_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -207,7 +207,7 @@
         /// will not affect this attached property.
         /// </remarks>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty BottomRightProperty =
+        [NotNull] public static readonly DependencyProperty BottomRightProperty =
             DependencyProperty.RegisterAttached("BottomRight", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(BottomRight_Changed));
 
         private static void BottomRight_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)

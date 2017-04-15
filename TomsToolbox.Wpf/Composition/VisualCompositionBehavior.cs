@@ -54,7 +54,7 @@
         /// <summary>
         /// Identifies the <see cref="RegionId"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty RegionIdProperty =
+        [NotNull] public static readonly DependencyProperty RegionIdProperty =
             DependencyProperty.Register("RegionId", typeof(string), typeof(VisualCompositionBehavior<T>), new FrameworkPropertyMetadata((sender, e) => ((VisualCompositionBehavior<T>)sender)?.RegionId_Changed()));
 
 
@@ -70,7 +70,7 @@
         /// <summary>
         /// Identifies the <see cref="CompositionContext"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty CompositionContextProperty =
+        [NotNull] public static readonly DependencyProperty CompositionContextProperty =
             DependencyProperty.Register("CompositionContext", typeof(object), typeof(VisualCompositionBehavior<T>), new FrameworkPropertyMetadata(null, (sender, e) => ((VisualCompositionBehavior<T>)sender)?.Update()));
 
 
@@ -93,7 +93,7 @@
         /// Internally it must be a <see cref="DependencyProperty"/>, else <see cref="Freezable.Clone"/> would not clone it, 
         /// but for the framework the <see cref="RegionIdBinding"/> property must look like a regular property, else it would try to apply the binding instead of simply assigning it.
         /// </summary>
-        private static readonly DependencyProperty _regionIdBindingProperty =
+        [NotNull] private static readonly DependencyProperty _regionIdBindingProperty =
             DependencyProperty.Register("InternalRegionIdBinding", typeof(BindingBase), typeof(VisualCompositionBehavior<T>));
 
 
@@ -116,7 +116,7 @@
         /// Internally it must be a <see cref="DependencyProperty"/>, else <see cref="Freezable.Clone"/> would not clone it, 
         /// but for the framework the <see cref="CompositionContextBinding"/> property must look like a regular property, else it would try to apply the binding instead of simply assigning it.
         /// </summary>
-        private static readonly DependencyProperty _compositionContextBindingProperty =
+        [NotNull] private static readonly DependencyProperty _compositionContextBindingProperty =
             DependencyProperty.Register("InternalCompositionContextBinding", typeof(BindingBase), typeof(VisualCompositionBehavior<T>));
 
         /// <summary>

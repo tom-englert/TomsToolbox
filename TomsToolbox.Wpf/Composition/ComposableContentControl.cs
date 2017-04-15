@@ -34,7 +34,7 @@
         /// <summary>
         /// Identifies the <see cref="Role"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty RoleProperty =
+        [NotNull] public static readonly DependencyProperty RoleProperty =
             DependencyProperty.Register("Role", typeof(object), typeof(ComposableContentControl));
 
 

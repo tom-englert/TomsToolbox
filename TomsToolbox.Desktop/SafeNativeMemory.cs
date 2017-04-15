@@ -146,6 +146,7 @@
         /// Marshal the memory from native to .NET.
         /// </summary>
         /// <returns>The .NET structure.</returns>
+        [CanBeNull]
         public T ToStructure()
         {
             return Marshal.PtrToStructure(handle, typeof(T)).SafeCast<T>();

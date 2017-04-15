@@ -101,7 +101,7 @@
                 _owner = owner;
             }
 
-            public static readonly DependencyProperty ValueProperty =
+            [NotNull] public static readonly DependencyProperty ValueProperty =
                 DependencyProperty.Register("Value", typeof(T), typeof(BindingHelper), new FrameworkPropertyMetadata((sender, e) => ((BindingHelper)sender)?._owner.Value_Changed((T)e.OldValue, (T)e.NewValue)));
 
             [ContractInvariantMethod]

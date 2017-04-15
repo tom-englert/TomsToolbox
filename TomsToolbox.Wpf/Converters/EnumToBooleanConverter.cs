@@ -19,7 +19,7 @@
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        public static readonly IValueConverter Default = new EnumToBooleanConverter();
+        [NotNull] public static readonly IValueConverter Default = new EnumToBooleanConverter();
 
         /// <summary>
         /// Converts a value. 

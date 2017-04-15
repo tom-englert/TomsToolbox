@@ -27,7 +27,7 @@
         private Point? _panPosition;
         private bool _isStoryboardRunning;
 
-        private static readonly DependencyProperty AnimatedPanPositionProperty =
+        [NotNull] private static readonly DependencyProperty AnimatedPanPositionProperty =
             DependencyProperty.Register("AnimatedPanPosition", typeof(Point), typeof(MapPanBehavior), new FrameworkPropertyMetadata((sender, e) => ((MapPanBehavior)sender)?.AnimatedPanPosition_Changed((Point)e.NewValue)));
 
         /// <summary>
@@ -67,7 +67,7 @@
             map.MouseLeftButtonUp += Map_MouseLeftButtonUp;
             map.MouseMove += Map_MouseMove;
 
-            var focusableParent = map.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault(item => item?.Focusable == true);
+            var focusableParent = map.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault(item => item.Focusable);
             if (focusableParent != null)
             {
                 focusableParent.KeyDown += FocusableParent_KeyDown;

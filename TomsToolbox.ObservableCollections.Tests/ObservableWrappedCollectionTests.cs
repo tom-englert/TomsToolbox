@@ -49,6 +49,7 @@
             }
         }
 
+        [NotNull] [ItemNotNull]
         private readonly string[] _sourceStrings = Enumerable.Range(0, 10).Select(i => i.ToString()).ToArray();
 
         [TestMethod]

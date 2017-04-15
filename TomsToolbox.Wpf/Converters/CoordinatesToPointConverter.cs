@@ -19,7 +19,7 @@
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        public static readonly IValueConverter Default = new CoordinatesToPointConverter();
+        [NotNull] public static readonly IValueConverter Default = new CoordinatesToPointConverter();
 
         /// <summary>
         /// Converts a value.

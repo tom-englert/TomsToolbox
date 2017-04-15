@@ -14,7 +14,7 @@
     /// </summary>
     public static class CultureInfoExtensions
     {
-        private static readonly Dictionary<CultureInfo, CultureInfo[]> _childCache = new Dictionary<CultureInfo, CultureInfo[]>();
+        [NotNull] private static readonly Dictionary<CultureInfo, CultureInfo[]> _childCache = new Dictionary<CultureInfo, CultureInfo[]>();
 
         /// <summary>
         /// Returns an enumeration of the ancestor elements of this element.

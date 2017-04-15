@@ -17,13 +17,12 @@
     [ValueConversion(typeof(string), typeof(Brush))]
     public class ColorNameToBrushConverter : ValueConverter
     {
-        [NotNull]
-        private static readonly TypeConverter _typeConverter = new BrushConverter();
+        [NotNull] private static readonly TypeConverter _typeConverter = new BrushConverter();
 
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        public static readonly IValueConverter Default = new ColorNameToBrushConverter();
+        [NotNull] public static readonly IValueConverter Default = new ColorNameToBrushConverter();
 
         /// <summary>
         /// Converts the specified color name.

@@ -35,7 +35,7 @@
         /// <summary>
         /// Identifies the <see cref="Property"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty PropertyProperty =
+        [NotNull] public static readonly DependencyProperty PropertyProperty =
             DependencyProperty.Register("Property", typeof (DependencyProperty), typeof (UpdatePropertyAction));
 
         /// <summary>

@@ -47,7 +47,7 @@
 
             obj.SetValue(IsTextTrimmedPropertyKey, value);
         }
-        private static readonly DependencyPropertyKey IsTextTrimmedPropertyKey
+        [NotNull] private static readonly DependencyPropertyKey IsTextTrimmedPropertyKey
             = DependencyProperty.RegisterAttachedReadOnly("IsTextTrimmed", typeof(bool), typeof(TextBlockHelper), new FrameworkPropertyMetadata());
         /// <summary>
         /// Identifies the <see cref="P:TomsToolbox.Wpf.TextBlockHelper.IsTextTrimmed"/> attached property
@@ -58,7 +58,7 @@
         /// reflects if the text inside the text block is trimmed, i.e. not fully visible.
         /// </summary>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty IsTextTrimmedProperty = IsTextTrimmedPropertyKey.DependencyProperty;
+        [NotNull] public static readonly DependencyProperty IsTextTrimmedProperty = IsTextTrimmedPropertyKey.DependencyProperty;
 
         /// <summary>
         /// Gets a value indicating if the automatic tool tip is enabled on this text block or not.
@@ -93,7 +93,7 @@
         /// This property is used by the style identified with the <see cref="ResourceKeys.AutoToolTipTextBoxStyle"/> to display of a tool tip only if the text of the text block is trimmed.
         /// </summary>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty IsAutomaticToolTipEnabledProperty
+        [NotNull] public static readonly DependencyProperty IsAutomaticToolTipEnabledProperty
             = DependencyProperty.RegisterAttached("IsAutomaticToolTipEnabled", typeof(bool), typeof(TextBlockHelper), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>

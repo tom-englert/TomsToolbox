@@ -53,7 +53,7 @@
         /// 0 if the function succeeds, a HRESULT of the last error if the function fails.
         /// </returns>
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        public static int LogOnInteractiveUser([NotNull] this NetworkCredential credential, out SafeTokenHandle userToken)
+        public static int LogOnInteractiveUser([NotNull] this NetworkCredential credential, [CanBeNull] out SafeTokenHandle userToken)
         {
             Contract.Requires(credential != null);
             Contract.Ensures((Contract.Result<int>() != 0) || (Contract.ValueAtReturn(out userToken) != null));

@@ -93,7 +93,7 @@
         /// ]]>
         /// </code></example>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty InputBindingsProperty =
+        [NotNull] public static readonly DependencyProperty InputBindingsProperty =
             DependencyProperty.RegisterAttached("InputBindings", typeof(InputBindingTemplate), typeof(StyleBindings), new FrameworkPropertyMetadata((d, e) => InputBindings_Changed(d, (InputBindingTemplate)e.NewValue)));
 
         private static void InputBindings_Changed([CanBeNull] DependencyObject d, [CanBeNull] UIElement newValue)
@@ -157,7 +157,7 @@
         /// ]]>
         /// </code></example>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty GroupStyleProperty =
+        [NotNull] public static readonly DependencyProperty GroupStyleProperty =
             DependencyProperty.RegisterAttached("GroupStyle", typeof(GroupStyle), typeof(StyleBindings), new FrameworkPropertyMetadata(GroupStyle_Changed));
 
         private static void GroupStyle_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -229,7 +229,7 @@
         /// ]]>
         /// </code></example>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty GroupDescriptionsProperty =
+        [NotNull] public static readonly DependencyProperty GroupDescriptionsProperty =
             DependencyProperty.RegisterAttached("GroupDescriptions", typeof(GroupDescriptionCollection), typeof(StyleBindings), new FrameworkPropertyMetadata(GroupDescriptions_Changed));
 
         private static void GroupDescriptions_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -290,7 +290,7 @@
         /// ]]>
         /// </code></example>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty BehaviorsProperty =
+        [NotNull] public static readonly DependencyProperty BehaviorsProperty =
             DependencyProperty.RegisterAttached("Behaviors", typeof(BehaviorCollection), typeof(StyleBindings), new UIPropertyMetadata((d, e) => Behaviors_Changed(d, (BehaviorCollection)e.NewValue)));
 
         private static void Behaviors_Changed([CanBeNull] DependencyObject d, [CanBeNull] IEnumerable<Behavior> newValue)
@@ -349,7 +349,7 @@
         /// ]]>
         /// </code></example>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty TriggersProperty =
+        [NotNull] public static readonly DependencyProperty TriggersProperty =
             DependencyProperty.RegisterAttached("Triggers", typeof(TriggerCollection), typeof(StyleBindings), new UIPropertyMetadata((d, e) => Triggers_Changed(d, (TriggerCollection)e.NewValue)));
 
         private static void Triggers_Changed([CanBeNull] DependencyObject d, [CanBeNull] IEnumerable<TriggerBase> newValue)

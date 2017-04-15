@@ -129,7 +129,7 @@
         /// <summary>
         /// Identifies the <see cref="BorderSize"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty BorderSizeProperty =
+        [NotNull] public static readonly DependencyProperty BorderSizeProperty =
             DependencyProperty.Register("BorderSize", typeof(Size), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(new Size(4, 4)));
 
 
@@ -147,7 +147,7 @@
         /// <summary>
         /// Identifies the <see cref="CornerSize"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty CornerSizeProperty =
+        [NotNull] public static readonly DependencyProperty CornerSizeProperty =
             DependencyProperty.Register("CornerSize", typeof(Size), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(new Size(8, 8)));
 
 
@@ -165,14 +165,14 @@
         /// <summary>
         /// Identifies the <see cref="HasGlassFrame"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty HasGlassFrameProperty =
+        [NotNull] public static readonly DependencyProperty HasGlassFrameProperty =
             DependencyProperty.Register("HasGlassFrame", typeof(bool), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(true));
 
 
         /// <summary>
         /// The WM_NCHITTEST test event equivalent.
         /// </summary>
-        public static readonly RoutedEvent NcHitTestEvent = EventManager.RegisterRoutedEvent("NcHitTest", RoutingStrategy.Bubble, typeof(EventHandler<NcHitTestEventArgs>), typeof(CustomNonClientAreaBehavior));
+        [NotNull] public static readonly RoutedEvent NcHitTestEvent = EventManager.RegisterRoutedEvent("NcHitTest", RoutingStrategy.Bubble, typeof(EventHandler<NcHitTestEventArgs>), typeof(CustomNonClientAreaBehavior));
 
 
         /// <summary>

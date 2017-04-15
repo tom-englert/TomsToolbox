@@ -40,7 +40,7 @@
         /// <summary>
         /// Identifies the <see cref="AreAllFilesSelected"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty AreAllFilesSelectedProperty =
+        [NotNull] public static readonly DependencyProperty AreAllFilesSelectedProperty =
             DependencyProperty.Register("AreAllFilesSelected", typeof(bool?), typeof(ListBoxSelectAllBehavior), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((ListBoxSelectAllBehavior)sender)?.AreAllFilesSelected_Changed((bool?)e.NewValue)));
 
         /// <summary>

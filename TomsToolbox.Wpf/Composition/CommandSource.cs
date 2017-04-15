@@ -47,12 +47,12 @@
             get { return (ICommand)GetValue(CommandProperty); }
             private set { SetValue(_commandPropertyKey, value); }
         }
-        private static readonly DependencyPropertyKey _commandPropertyKey =
+        [NotNull] private static readonly DependencyPropertyKey _commandPropertyKey =
             DependencyProperty.RegisterReadOnly("Command", typeof(ICommand), typeof(CommandSource), new FrameworkPropertyMetadata(NullCommand.Default, null, Command_CoerceValue));
         /// <summary>
         /// Identifies the <see cref="Command"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty CommandProperty = _commandPropertyKey.DependencyProperty;
+        [NotNull] public static readonly DependencyProperty CommandProperty = _commandPropertyKey.DependencyProperty;
 
 
         /// <summary>
@@ -66,7 +66,7 @@
         /// <summary>
         /// Identifies the <see cref="IsChecked"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty IsCheckedProperty =
+        [NotNull] public static readonly DependencyProperty IsCheckedProperty =
             DependencyProperty.Register("IsChecked", typeof(bool), typeof(CommandSource));
 
 
@@ -134,12 +134,12 @@
             get { return this.GetValue<bool>(IsAnyTargetAttachedProperty); }
             private set { SetValue(_isAnyTargetAttachedPropertyKey, value); }
         }
-        private static readonly DependencyPropertyKey _isAnyTargetAttachedPropertyKey =
+        [NotNull] private static readonly DependencyPropertyKey _isAnyTargetAttachedPropertyKey =
             DependencyProperty.RegisterReadOnly("IsAnyTargetAttached", typeof(bool), typeof(CommandSource), new FrameworkPropertyMetadata(false));
         /// <summary>
         /// Identifies the <see cref="IsAnyTargetAttached"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty IsAnyTargetAttachedProperty = _isAnyTargetAttachedPropertyKey.DependencyProperty;
+        [NotNull] public static readonly DependencyProperty IsAnyTargetAttachedProperty = _isAnyTargetAttachedPropertyKey.DependencyProperty;
 
         /// <summary>
         /// Attaches the specified command. The last command attached will become the active command, while the previous command will be pushed on a stack.

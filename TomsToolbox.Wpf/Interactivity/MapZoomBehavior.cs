@@ -36,7 +36,7 @@
         /// <summary>
         /// Identifies the <see cref="MouseWheelIncrement"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty MouseWheelIncrementProperty =
+        [NotNull] public static readonly DependencyProperty MouseWheelIncrementProperty =
             DependencyProperty.Register("MouseWheelIncrement", typeof(double), typeof(MapZoomBehavior), new FrameworkPropertyMetadata(1.0));
 
 
@@ -55,7 +55,7 @@
 
             map.MouseWheel += AssociatedObject_PreviewMouseWheel;
 
-            var focusableParent = map.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault(item => item?.Focusable == true);
+            var focusableParent = map.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault(item => item.Focusable);
             if (focusableParent != null)
             {
                 focusableParent.KeyDown += FocusableParent_KeyDown;

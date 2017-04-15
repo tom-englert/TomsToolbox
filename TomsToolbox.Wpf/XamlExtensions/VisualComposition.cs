@@ -75,7 +75,7 @@
         /// Attach this property to inject a visual composition behavior with this region id into the attached object.
         /// </summary>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty RegionIdProperty =
+        [NotNull] public static readonly DependencyProperty RegionIdProperty =
             DependencyProperty.RegisterAttached("RegionId", typeof(string), typeof(VisualComposition), new FrameworkPropertyMetadata(RegionId_Changed));
 
         private static void RegionId_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)

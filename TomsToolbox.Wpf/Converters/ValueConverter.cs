@@ -17,7 +17,7 @@
         /// <summary>
         /// Gets or sets the <c>null</c> value, which is returned whenever the value to convert is <c>null</c>; the default is <c>null</c>.
         /// </summary>
-        public object ConvertNullValue { get; set; } = null;
+        public object ConvertNullValue { get; set; };
 
         /// <summary>
         /// Gets or sets the <c>unset</c> value, which is returned whenever the value to convert is <see cref="DependencyProperty.UnsetValue"/>; the default is <see cref="DependencyProperty.UnsetValue"/>.
@@ -32,7 +32,7 @@
         /// <summary>
         /// Gets or sets the <c>null</c> value, which is returned whenever the value to convert back is <c>null</c>; the default is <c>null</c>.
         /// </summary>
-        public object ConvertBackNullValue { get; set; } = null;
+        public object ConvertBackNullValue { get; set; };
 
         /// <summary>
         /// Gets or sets the <c>unset</c> value, which is returned whenever the value to convert back is <see cref="DependencyProperty.UnsetValue"/>; the default is <see cref="DependencyProperty.UnsetValue"/>.

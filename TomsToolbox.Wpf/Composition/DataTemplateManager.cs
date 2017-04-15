@@ -28,7 +28,7 @@ namespace TomsToolbox.Wpf.Composition
         /// <summary>
         /// A comparer to compare exports for dynamic data templates.
         /// </summary>
-        private static readonly IEqualityComparer<IDataTemplateMetadata> ExportsComparer = new DelegateEqualityComparer<IDataTemplateMetadata>(Equals, GetHashCode);
+        [NotNull] private static readonly IEqualityComparer<IDataTemplateMetadata> ExportsComparer = new DelegateEqualityComparer<IDataTemplateMetadata>(Equals, GetHashCode);
 
         /// <summary>
         /// Gets the role of the view.
@@ -61,7 +61,7 @@ namespace TomsToolbox.Wpf.Composition
         /// Gets or sets the role associated with the view.
         /// </summary>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty RoleProperty =
+        [NotNull] public static readonly DependencyProperty RoleProperty =
             DependencyProperty.RegisterAttached("Role", typeof(object), typeof(DataTemplateManager), new FrameworkPropertyMetadata(FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>

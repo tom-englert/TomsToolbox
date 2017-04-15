@@ -10,13 +10,13 @@
     /// </summary>
     public static class DialogCommands
     {
-        private static readonly RoutedUICommand _ok = new RoutedUICommand("OK", "OK", typeof(DialogCommands));
-        private static readonly RoutedUICommand _cancel = new RoutedUICommand("Cancel", "Cancel", typeof(DialogCommands));
-        private static readonly RoutedUICommand _yes = new RoutedUICommand("Yes", "Yes", typeof(DialogCommands));
-        private static readonly RoutedUICommand _no = new RoutedUICommand("No", "No", typeof(DialogCommands));
-        private static readonly RoutedUICommand _ignore = new RoutedUICommand("Ignore", "Ignore", typeof(DialogCommands));
-        private static readonly RoutedUICommand _retry = new RoutedUICommand("Retry", "Retry", typeof(DialogCommands));
-        private static readonly RoutedUICommand _abort = new RoutedUICommand("Abort", "Abort", typeof(DialogCommands));
+        [NotNull] private static readonly RoutedUICommand _ok = new RoutedUICommand("OK", "OK", typeof(DialogCommands));
+        [NotNull] private static readonly RoutedUICommand _cancel = new RoutedUICommand("Cancel", "Cancel", typeof(DialogCommands));
+        [NotNull] private static readonly RoutedUICommand _yes = new RoutedUICommand("Yes", "Yes", typeof(DialogCommands));
+        [NotNull] private static readonly RoutedUICommand _no = new RoutedUICommand("No", "No", typeof(DialogCommands));
+        [NotNull] private static readonly RoutedUICommand _ignore = new RoutedUICommand("Ignore", "Ignore", typeof(DialogCommands));
+        [NotNull] private static readonly RoutedUICommand _retry = new RoutedUICommand("Retry", "Retry", typeof(DialogCommands));
+        [NotNull] private static readonly RoutedUICommand _abort = new RoutedUICommand("Abort", "Abort", typeof(DialogCommands));
 
         /// <summary>
         /// Gets the OK Dialog command.

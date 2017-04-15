@@ -43,7 +43,7 @@ namespace TomsToolbox.Wpf.Composition
         /// Attach this property to inject a <see cref="ImportBehavior"/> with this type as the target for the data context into the attached object.
         /// </summary>
         /// </AttachedPropertyComments>
-        public static readonly DependencyProperty DataContextProperty =
+        [NotNull] public static readonly DependencyProperty DataContextProperty =
             DependencyProperty.RegisterAttached("DataContext", typeof(Type), typeof(Import), new FrameworkPropertyMetadata(null, DataContext_Changed));
 
 

@@ -40,7 +40,7 @@
         /// <summary>
         /// Identifies the <see cref="IsActive"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty IsActiveProperty =
+        [NotNull] public static readonly DependencyProperty IsActiveProperty =
             DependencyProperty.Register("IsActive", typeof(bool), typeof(LoadingIndicator));
 
 
@@ -56,7 +56,7 @@
         /// <summary>
         /// Identifies the <see cref="Header"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty HeaderProperty =
+        [NotNull] public static readonly DependencyProperty HeaderProperty =
             DependencyProperty.Register("Header", typeof(object), typeof(LoadingIndicator));
 
 
@@ -71,7 +71,7 @@
         /// <summary>
         /// Identifies the <see cref="ActiveBackgroundColor"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty ActiveBackgroundColorProperty =
+        [NotNull] public static readonly DependencyProperty ActiveBackgroundColorProperty =
             DependencyProperty.Register("ActiveBackgroundColor", typeof(Color), typeof(LoadingIndicator), new FrameworkPropertyMetadata(Colors.Transparent));
 
 
@@ -87,7 +87,7 @@
         /// <summary>
         /// Identifies the <see cref="AnimationLayoutTransform"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty AnimationLayoutTransformProperty =
+        [NotNull] public static readonly DependencyProperty AnimationLayoutTransformProperty =
             DependencyProperty.Register("AnimationLayoutTransform", typeof(Transform), typeof(LoadingIndicator));
     }
 }

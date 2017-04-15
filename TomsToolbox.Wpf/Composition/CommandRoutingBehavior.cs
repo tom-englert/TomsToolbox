@@ -31,7 +31,7 @@
         /// <summary>
         /// Identifies the <see cref="CommandSource"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty CommandSourceProperty =
+        [NotNull] public static readonly DependencyProperty CommandSourceProperty =
             DependencyProperty.Register("CommandSource", typeof(Type), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata((sender, e) => ((CommandRoutingBehavior)sender)?.CommandSource_Changed((Type)e.OldValue, (Type)e.NewValue)));
 
 
@@ -57,7 +57,7 @@
         /// <summary>
         /// Identifies the <see cref="CommandTarget"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty CommandTargetProperty =
+        [NotNull] public static readonly DependencyProperty CommandTargetProperty =
             DependencyProperty.Register("CommandTarget", typeof(ICommand), typeof(CommandRoutingBehavior));
 
 
@@ -73,7 +73,7 @@
         /// <summary>
         /// Identifies the <see cref="CommandParameter"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty CommandParameterProperty =
+        [NotNull] public static readonly DependencyProperty CommandParameterProperty =
             DependencyProperty.Register("CommandParameter", typeof(object), typeof(CommandRoutingBehavior));
 
 
@@ -89,7 +89,7 @@
         /// <summary>
         /// Identifies the <see cref="CompositionContext"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty CompositionContextProperty =
+        [NotNull] public static readonly DependencyProperty CompositionContextProperty =
             DependencyProperty.Register("CompositionContext", typeof(object), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata((sender, e) => ((CommandRoutingBehavior)sender)?.CompositionContext_Changed(e.OldValue, e.NewValue)));
 
 
@@ -105,7 +105,7 @@
         /// <summary>
         /// Identifies the <see cref="IsEnabled"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty IsEnabledProperty =
+        [NotNull] public static readonly DependencyProperty IsEnabledProperty =
             DependencyProperty.Register("IsEnabled", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, e) => ((CommandRoutingBehavior)sender)?.StateChanged()));
 
 
@@ -120,7 +120,7 @@
         /// <summary>
         /// Identifies the <see cref="IsChecked"/> dependency property
         /// </summary>
-        public static readonly DependencyProperty IsCheckedProperty =
+        [NotNull] public static readonly DependencyProperty IsCheckedProperty =
             DependencyProperty.Register("IsChecked", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, e) => ((CommandRoutingBehavior)sender)?.StateChanged()));
 
 
@@ -133,12 +133,12 @@
             get { return this.GetValue<bool>(IsActiveProperty); }
             private set { SetValue(_isActivePropertyKey, value); }
         }
-        private static readonly DependencyPropertyKey _isActivePropertyKey =
+        [NotNull] private static readonly DependencyPropertyKey _isActivePropertyKey =
             DependencyProperty.RegisterReadOnly("IsActive", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(false));
         /// <summary>
         /// Identifies the <see cref="IsActive"/> read only dependency property
         /// </summary>
-        public static readonly DependencyProperty IsActiveProperty = _isActivePropertyKey.DependencyProperty;
+        [NotNull] public static readonly DependencyProperty IsActiveProperty = _isActivePropertyKey.DependencyProperty;
 
 
         private void CommandSource_Changed([CanBeNull] Type oldValue, [CanBeNull] Type newValue)
