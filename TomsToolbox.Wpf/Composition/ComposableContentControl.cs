@@ -4,6 +4,8 @@
     using System.Windows;
     using System.Windows.Controls;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Wpf.XamlExtensions;
 
     /// <summary>
@@ -23,6 +25,7 @@
         /// <summary>
         /// Gets or sets the role of the template.
         /// </summary>
+        [CanBeNull]
         public object Role
         {
             get { return GetValue(RoleProperty); }

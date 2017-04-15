@@ -70,7 +70,8 @@
         /// <param name="type">The type.</param>
         /// <returns>A dictionary that maps the property names to all direct and indirect dependent property names.</returns>
         /// <exception cref="System.InvalidOperationException">Invalid dependency definitions, i.e. dependency to non-existing property.</exception>
-        internal static Dictionary<string, IEnumerable<string>> CreateDependencyMapping(Type type)
+        [CanBeNull]
+        internal static Dictionary<string, IEnumerable<string>> CreateDependencyMapping([CanBeNull] Type type)
         {
             if (type == null)
                 return null;
@@ -210,6 +211,7 @@
             return assemblyDirectory.StartsWith(programFolder, StringComparison.OrdinalIgnoreCase);
         }
 
+        [CanBeNull]
         private static Assembly SafeLoad([NotNull] AssemblyName name)
         {
             try

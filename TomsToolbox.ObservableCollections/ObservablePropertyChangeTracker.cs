@@ -90,13 +90,13 @@
             }
         }
 
-        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Item_PropertyChanged([CanBeNull] object sender, [CanBeNull] PropertyChangedEventArgs e)
         {
             ItemPropertyChanged?.Invoke(sender, e);
         }
 
         [ContractVerification(false)] // Too complex, checker is confused.
-        private void Items_CollectionChanged(object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+        private void Items_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
             Contract.Requires((e.Action != NotifyCollectionChangedAction.Add) || (e.NewItems != null));
             Contract.Requires((e.Action != NotifyCollectionChangedAction.Remove) || (e.OldItems != null));

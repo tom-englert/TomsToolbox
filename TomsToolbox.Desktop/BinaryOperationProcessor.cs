@@ -125,7 +125,8 @@
         /// <returns>
         /// The result of the operation.
         /// </returns>
-        public object Execute(object value1, object value2)
+        [CanBeNull]
+        public object Execute([CanBeNull] object value1, [CanBeNull] object value2)
         {
             if ((value1 == null) || (value2 == null))
                 return value1;
@@ -137,12 +138,14 @@
                 ?? ApplyOperation(value1, value2);
         }
 
-        private object ApplyOperation(object value1, object value2)
+        [CanBeNull]
+        private object ApplyOperation([CanBeNull] object value1, [CanBeNull] object value2)
         {
             return _operationMethod(value1, value2);
         }
 
-        private object ApplyOperation([NotNull] Type valueType, object value1, object value2)
+        [CanBeNull]
+        private object ApplyOperation([NotNull] Type valueType, [CanBeNull] object value1, [CanBeNull] object value2)
         {
             Contract.Requires(valueType != null);
 
@@ -157,7 +160,8 @@
                 .FirstOrDefault(v => v != null);
         }
 
-        private object ApplyOperationOnCastedObject([NotNull] Type targetType, object value1, object value2)
+        [CanBeNull]
+        private object ApplyOperationOnCastedObject([NotNull] Type targetType, [CanBeNull] object value1, [CanBeNull] object value2)
         {
             Contract.Requires(targetType != null);
 
@@ -175,7 +179,8 @@
             return result;
         }
 
-        private static object ApplyOperation([NotNull] MethodInfo method, [NotNull] Type targetType, object value1, object value2)
+        [CanBeNull]
+        private static object ApplyOperation([NotNull] MethodInfo method, [NotNull] Type targetType, [CanBeNull] object value1, object value2)
         {
             Contract.Requires(method != null);
             Contract.Requires(targetType != null);
@@ -209,12 +214,13 @@
             return null;
         }
 
-        private static double ToDouble(object value)
+        private static double ToDouble([CanBeNull] object value)
         {
             return Convert.ToDouble(value, CultureInfo.InvariantCulture);
         }
 
-        private static object TryChangeType(object value, [NotNull] Type targetType)
+        [CanBeNull]
+        private static object TryChangeType([CanBeNull] object value, [NotNull] Type targetType)
         {
             Contract.Requires(targetType != null);
 
@@ -230,13 +236,13 @@
             return null;
         }
 
-        private static int Compare([NotNull] object a, object b)
+        private static int Compare([NotNull] object a, [CanBeNull] object b)
         {
             Contract.Requires(a != null);
             return Comparer.DefaultInvariant.Compare(a, Convert.ChangeType(b, a.GetType(), CultureInfo.InvariantCulture));
         }
 
-        private new static bool Equals([NotNull] object a, object b)
+        private new static bool Equals([NotNull] object a, [CanBeNull] object b)
         {
             Contract.Requires(a != null);
 

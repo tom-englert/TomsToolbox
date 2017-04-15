@@ -1,5 +1,7 @@
 ﻿namespace TomsToolbox.Core
 {
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Extensions for any objects.
     /// </summary>
@@ -11,7 +13,8 @@
         /// <typeparam name="T">The target type</typeparam>
         /// <param name="value">The value.</param>
         /// <returns>The value casted to <typeparamref name="T"/>, or <c>default(T)</c> if value is <c>null</c>.</returns>
-        public static T SafeCast<T>(this object value)
+        [CanBeNull]
+        public static T SafeCast<T>([CanBeNull] this object value)
         {
             return (value == null) ? default(T) : (T)value;
         }

@@ -4,6 +4,8 @@
     using System.Windows;
     using System.Windows.Interactivity;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// A <see cref="Behavior{T}"/> with build in support for the <see cref="FrameworkElement.Loaded"/> and <see cref="FrameworkElement.Unloaded"/> events.
     /// </summary>
@@ -66,13 +68,13 @@
             AssociatedObject.Unloaded -= AssociatedObject_Unloaded;
         }
 
-        private void AssociatedObject_Loaded(object sender, RoutedEventArgs e)
+        private void AssociatedObject_Loaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
         {
             Contract.Assume(AssociatedObject != null);
             OnAssociatedObjectLoaded();
         }
 
-        private void AssociatedObject_Unloaded(object sender, RoutedEventArgs e)
+        private void AssociatedObject_Unloaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
         {
             Contract.Assume(AssociatedObject != null);
             OnAssociatedObjectUnloaded();

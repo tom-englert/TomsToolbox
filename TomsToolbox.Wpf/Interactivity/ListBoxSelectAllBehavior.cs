@@ -8,6 +8,8 @@
     using System.Windows.Controls.Primitives;
     using System.Windows.Interactivity;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Desktop;
 
     /// <summary>
@@ -62,7 +64,7 @@
             ((INotifyCollectionChanged)listBox.Items).CollectionChanged += (_, __) => _collectionChangedThrottle.Tick();
         }
 
-        private void ListBox_SelectionChanged(object sender, EventArgs e)
+        private void ListBox_SelectionChanged([CanBeNull] object sender, [CanBeNull] EventArgs e)
         {
             var listBox = AssociatedObject;
             if (listBox == null)

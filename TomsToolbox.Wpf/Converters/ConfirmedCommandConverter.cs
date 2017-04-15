@@ -51,7 +51,7 @@
             Executing?.Invoke(this, e);
         }
 
-        private void OnError(ErrorEventArgs e)
+        private void OnError([CanBeNull] ErrorEventArgs e)
         {
             Error?.Invoke(this, e);
         }
@@ -71,7 +71,7 @@
                 _command = command;
             }
 
-            public void Execute(object parameter)
+            public void Execute([CanBeNull] object parameter)
             {
                 var args = new ConfirmedCommandEventArgs { Parameter = parameter };
 
@@ -90,7 +90,7 @@
                 }
             }
 
-            public bool CanExecute(object parameter)
+            public bool CanExecute([CanBeNull] object parameter)
             {
                 return _command.CanExecute(parameter);
             }

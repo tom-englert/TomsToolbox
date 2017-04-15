@@ -29,7 +29,7 @@
         /// Initializes a new instance of the <see cref="CompositeContextMenuExtension"/> class.
         /// </summary>
         /// <param name="regionId">The region identifier.</param>
-        public CompositeContextMenuExtension(string regionId)
+        public CompositeContextMenuExtension([CanBeNull] string regionId)
         {
             RegionId = regionId;
         }
@@ -104,6 +104,7 @@
         /// <summary>
         /// Gets or sets the region identifier for which to collect all exported <see cref="CommandSourceFactory"/> objects.
         /// </summary>
+        [CanBeNull]
         public string RegionId
         {
             get { return (string)GetValue(RegionIdProperty); }
@@ -119,6 +120,7 @@
         /// <summary>
         /// Gets or sets the composition context.
         /// </summary>
+        [CanBeNull]
         public object CompositionContext
         {
             get { return GetValue(CompositionContextProperty); }

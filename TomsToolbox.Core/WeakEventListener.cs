@@ -123,7 +123,7 @@
         /// </summary>
         /// <param name="source">Event source.</param>
         /// <param name="eventArgs">Event arguments.</param>
-        public void OnEvent(object source, TEventArgs eventArgs)
+        public void OnEvent([NotNull] object source, [NotNull] TEventArgs eventArgs)
         {
             TTarget target;
 

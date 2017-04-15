@@ -66,7 +66,7 @@
         /// <param name="parameter">The parameter.</param>
         /// <returns>The multiplied thickness.</returns>
         [NotNull]
-        public static object Convert(object value, object parameter)
+        public static object Convert([CanBeNull] object value, [CanBeNull] object parameter)
         {
             Contract.Ensures(Contract.Result<object>() != null);
 
@@ -76,7 +76,7 @@
             return Multiply(target, factor);
         }
 
-        private static Thickness GetThicknessFromParameter(object parameter)
+        private static Thickness GetThicknessFromParameter([CanBeNull] object parameter)
         {
             if (parameter == null)
                 return new Thickness(1.0);

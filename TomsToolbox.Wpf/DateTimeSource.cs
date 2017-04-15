@@ -45,7 +45,7 @@
             _updateTimer.Tick += UpdateTimer_Tick;
         }
 
-        private void UpdateTimer_Tick(object sender, EventArgs eventArgs)
+        private void UpdateTimer_Tick([CanBeNull] object sender, [CanBeNull] EventArgs eventArgs)
         {
             OnPropertyChanged(nameof(Now));
             OnPropertyChanged(nameof(Today));

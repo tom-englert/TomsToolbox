@@ -71,7 +71,7 @@
             CommandManager.RegisterClassCommandBinding(typeof(Map), new CommandBinding(NavigationCommands.IncreaseZoom, (_, __) => Zoom(+1)));
         }
 
-        void Storyboard_Completed(object sender, EventArgs e)
+        void Storyboard_Completed([CanBeNull] object sender, [CanBeNull] EventArgs e)
         {
             var map = AssociatedObject;
             if (map == null)
@@ -85,7 +85,7 @@
             Zoom(Math.Sign(e.Delta), e);
         }
 
-        private void Zoom(int delta, MouseEventArgs e = null)
+        private void Zoom(int delta, [CanBeNull] MouseEventArgs e = null)
         {
             var map = AssociatedObject;
 

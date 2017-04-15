@@ -3,6 +3,8 @@
     using System;
     using System.Runtime.InteropServices;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
 
     /// <summary>
@@ -46,7 +48,7 @@
         /// <returns>
         /// The pointer to the allocated memory block.
         /// </returns>
-        public static implicit operator IntPtr(HGlobal item)
+        public static implicit operator IntPtr([CanBeNull] HGlobal item)
         {
             return ToIntPtr(item);
         }
@@ -58,7 +60,7 @@
         /// <returns>
         /// The pointer to the allocated memory block.
         /// </returns>
-        public static IntPtr ToIntPtr(HGlobal item)
+        public static IntPtr ToIntPtr([CanBeNull] HGlobal item)
         {
             return item?.Ptr ?? IntPtr.Zero;
         }

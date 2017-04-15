@@ -179,6 +179,7 @@
         /// will contain a collection of errors that occurred.
         /// </exception>
         // ReSharper disable once AnnotateNotNullParameter
+        [CanBeNull]
         public static T GetExportedValueOrDefault<T>([NotNull] this ICompositionHost compositionHost, string contractName) where T : class
         {
             Contract.Requires(compositionHost != null);
@@ -212,6 +213,7 @@
         /// An error occurred during composition. System.ComponentModel.Composition.CompositionException.Errors
         /// will contain a collection of errors that occurred.
         /// </exception>
+        [CanBeNull]
         public static T GetExportedValueOrDefault<T>([NotNull] this ICompositionHost compositionHost) where T : class
         {
             Contract.Requires(compositionHost != null);
@@ -225,7 +227,7 @@
         /// <typeparam name="T">The type of the new part.</typeparam>
         /// <param name="compositionHost">The composition host.</param>
         /// <param name="exportedValue">The value to compose.</param>
-        public static void ComposeExportedValue<T>([NotNull] this ICompositionHost compositionHost, T exportedValue)
+        public static void ComposeExportedValue<T>([NotNull] this ICompositionHost compositionHost, [CanBeNull] T exportedValue)
         {
             Contract.Requires(compositionHost != null);
 

@@ -43,7 +43,7 @@
         /// <param name="parent">The parent.</param>
         /// <param name="x">The x.</param>
         /// <param name="y">The y.</param>
-        private MapTile(IMapTile parent, int x, int y)
+        private MapTile([CanBeNull] IMapTile parent, int x, int y)
         {
             _parent = parent;
 
@@ -82,6 +82,7 @@
         /// <summary>
         /// Gets the logical parent  element of this element.
         /// </summary>
+        [CanBeNull]
         IMapTile IMapTile.Parent => _parent;
 
         /// <summary>
@@ -99,6 +100,7 @@
         /// <summary>
         /// Gets or sets the viewport where the map will be displayed.
         /// </summary>
+        [CanBeNull]
         public FrameworkElement Viewport
         {
             get { return (FrameworkElement)GetValue(ViewportProperty); }
@@ -113,6 +115,7 @@
         /// <summary>
         /// Gets or sets the image provider that can load the images.
         /// </summary>
+        [CanBeNull]
         public IImageProvider ImageProvider
         {
             get { return (IImageProvider)GetValue(ImageProviderProperty); }
@@ -127,6 +130,7 @@
         /// <summary>
         /// Gets or sets the image for this tile.
         /// </summary>
+        [CanBeNull]
         public IImage Image
         {
             get { return (IImage)GetValue(ImageProperty); }
@@ -202,7 +206,7 @@
             Invalidate();
         }
 
-        private static void ForceSubLevel([NotNull] IMapTile tile, Panel subLevel)
+        private static void ForceSubLevel([NotNull] IMapTile tile, [CanBeNull] Panel subLevel)
         {
             Contract.Requires(tile != null);
             if (subLevel == null)

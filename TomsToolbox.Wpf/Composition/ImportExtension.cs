@@ -135,6 +135,7 @@
             return Value;
         }
 
+        [CanBeNull]
         private object Value
         {
             get
@@ -226,7 +227,7 @@
             }
         }
 
-        private void ExportProvider_ExportsChanged(object sender, ExportsChangeEventArgs e)
+        private void ExportProvider_ExportsChanged([CanBeNull] object sender, [CanBeNull] ExportsChangeEventArgs e)
         {
             UpdateTarget();
         }

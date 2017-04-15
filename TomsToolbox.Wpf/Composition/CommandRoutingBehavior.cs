@@ -22,6 +22,7 @@
         /// <summary>
         /// Gets or sets the type of the command source factory defining the command.
         /// </summary>
+        [CanBeNull]
         public Type CommandSource
         {
             get { return (Type)GetValue(CommandSourceProperty); }
@@ -63,6 +64,7 @@
         /// <summary>
         /// Gets or sets the command parameter.
         /// </summary>
+        [CanBeNull]
         public object CommandParameter
         {
             get { return GetValue(CommandParameterProperty); }
@@ -78,6 +80,7 @@
         /// <summary>
         /// Gets or sets the composition context.
         /// </summary>
+        [CanBeNull]
         public object CompositionContext
         {
             get { return GetValue(CompositionContextProperty); }
@@ -138,7 +141,7 @@
         public static readonly DependencyProperty IsActiveProperty = _isActivePropertyKey.DependencyProperty;
 
 
-        private void CommandSource_Changed(Type oldValue, Type newValue)
+        private void CommandSource_Changed([CanBeNull] Type oldValue, [CanBeNull] Type newValue)
         {
             if (!typeof(CommandSourceFactory).IsAssignableFrom(newValue))
             {
@@ -171,7 +174,7 @@
             }
         }
 
-        private void CompositionContext_Changed(object oldValue, object newValue)
+        private void CompositionContext_Changed([CanBeNull] object oldValue, [CanBeNull] object newValue)
         {
             if (AssociatedObject == null)
                 return;
@@ -254,12 +257,14 @@
             commandSource?.Detach(CompositionContext, this);
         }
 
+        [CanBeNull]
         private CommandSourceFactory GetCommandSourceFactory()
         {
             return GetCommandSourceFactory(CommandSource);
         }
 
-        private CommandSourceFactory GetCommandSourceFactory(Type commandSourceType)
+        [CanBeNull]
+        private CommandSourceFactory GetCommandSourceFactory([CanBeNull] Type commandSourceType)
         {
             if (commandSourceType == null)
                 return null;
@@ -296,7 +301,7 @@
             }
         }
 
-        bool ICommand.CanExecute(object parameter)
+        bool ICommand.CanExecute([CanBeNull] object parameter)
         {
             return CommandTarget.CanExecute(CommandParameter);
         }
@@ -313,12 +318,12 @@
             }
         }
 
-        void ICommand.Execute(object parameter)
+        void ICommand.Execute([CanBeNull] object parameter)
         {
             CommandTarget.Execute(CommandParameter);
         }
 
-        void ICommandChangedNotificationSink.ActiveCommandChanged(ICommand command)
+        void ICommandChangedNotificationSink.ActiveCommandChanged([CanBeNull] ICommand command)
         {
             var oldValue = IsActive;
 

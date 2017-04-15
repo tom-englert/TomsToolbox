@@ -101,7 +101,7 @@
         /// The position into which the new element was inserted, or -1 to indicate that the item was not inserted into the collection,
         /// </returns>
         /// <param name="value">The object to add to the <see cref="T:System.Collections.IList"/>. </param><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
-        public int Add(object value)
+        public int Add([CanBeNull] object value)
         {
             _source.Add((T)value);
             return _source.Count - 1;
@@ -114,7 +114,7 @@
         /// true if the <see cref="T:System.Object"/> is found in the <see cref="T:System.Collections.IList"/>; otherwise, false.
         /// </returns>
         /// <param name="value">The object to locate in the <see cref="T:System.Collections.IList"/>. </param>
-        public bool Contains(object value)
+        public bool Contains([CanBeNull] object value)
         {
             return _source.Contains((T)value);
         }
@@ -135,7 +135,7 @@
         /// The index of <paramref name="value"/> if found in the list; otherwise, -1.
         /// </returns>
         /// <param name="value">The object to locate in the <see cref="T:System.Collections.IList"/>. </param>
-        public int IndexOf(object value)
+        public int IndexOf([CanBeNull] object value)
         {
             return _source.IndexOf((T)value);
         }
@@ -144,7 +144,7 @@
         /// Inserts an item to the <see cref="T:System.Collections.IList"/> at the specified index.
         /// </summary>
         /// <param name="index">The zero-based index at which <paramref name="value"/> should be inserted. </param><param name="value">The object to insert into the <see cref="T:System.Collections.IList"/>. </param><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.IList"/>. </exception><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception><exception cref="T:System.NullReferenceException"><paramref name="value"/> is null reference in the <see cref="T:System.Collections.IList"/>.</exception>
-        public void Insert(int index, object value)
+        public void Insert(int index, [CanBeNull] object value)
         {
             _source.Insert(index, (T)value);
         }
@@ -153,7 +153,7 @@
         /// Removes the first occurrence of a specific object from the <see cref="T:System.Collections.IList"/>.
         /// </summary>
         /// <param name="value">The object to remove from the <see cref="T:System.Collections.IList"/>. </param><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
-        public void Remove(object value)
+        public void Remove([CanBeNull] object value)
         {
             _source.Remove((T)value);
         }
@@ -214,22 +214,22 @@
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void Source_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Source_PropertyChanged([CanBeNull] object sender, [CanBeNull] PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e);
         }
 
-        private void Source_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void Source_CollectionChanged([CanBeNull] object sender, [CanBeNull] NotifyCollectionChangedEventArgs e)
         {
             OnCollectionChanged(e);
         }
 
-        private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+        private void OnCollectionChanged([CanBeNull] NotifyCollectionChangedEventArgs e)
         {
             CollectionChanged?.Invoke(this, e);
         }
 
-        private void OnPropertyChanged(PropertyChangedEventArgs e)
+        private void OnPropertyChanged([CanBeNull] PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(this, e);
         }

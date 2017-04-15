@@ -6,6 +6,8 @@
     using System.Globalization;
     using System.Windows.Data;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// A <see cref="IValueConverter" /> wrapping a <see cref="TypeConverter" />
     /// </summary>
@@ -23,6 +25,7 @@
         /// Gets or sets the type of the type converter to use.
         /// If no type is specified, the type converter will be deduced form the target type.
         /// </summary>
+        [CanBeNull]
         public Type TypeConverterType
         {
             get
@@ -56,6 +59,7 @@
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
+        [CanBeNull]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var typeConverter = GetTypeConverter(targetType);
@@ -79,6 +83,7 @@
         /// <param name="targetType">The type to convert to.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
+        [CanBeNull]
         protected override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var typeConverter = GetTypeConverter(targetType);
@@ -86,7 +91,8 @@
             return typeConverter?.ConvertToInvariantString(value);
         }
 
-        private TypeConverter GetTypeConverter(Type targetType)
+        [CanBeNull]
+        private TypeConverter GetTypeConverter([CanBeNull] Type targetType)
         {
             var typeConverter = _typeConverter;
             if (typeConverter != null)

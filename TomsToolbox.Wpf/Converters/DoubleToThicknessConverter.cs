@@ -29,7 +29,6 @@
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
-        [NotNull]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var thickness = ConvertNumberToThickness(value);
@@ -37,7 +36,7 @@
             return ThicknessMultiplyConverter.Convert(thickness, parameter);
         }
 
-        private static Thickness ConvertNumberToThickness(object value)
+        private static Thickness ConvertNumberToThickness([CanBeNull] object value)
         {
             var length = System.Convert.ToDouble(value, CultureInfo.InvariantCulture);
             var thickness = new Thickness(length);

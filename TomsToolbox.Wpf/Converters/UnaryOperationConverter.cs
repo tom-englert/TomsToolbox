@@ -103,7 +103,8 @@
             }
         }
 
-        private object ApplyOperation(object value, [NotNull] Type valueType)
+        [CanBeNull]
+        private object ApplyOperation([CanBeNull] object value, [NotNull] Type valueType)
         {
             Contract.Requires(valueType != null);
 
@@ -120,7 +121,8 @@
             // ReSharper restore PossibleNullReferenceException
         }
 
-        private static object ChangeType(string value, [NotNull] Type targetType)
+        [CanBeNull]
+        private static object ChangeType([CanBeNull] string value, [NotNull] Type targetType)
         {
             Contract.Requires(targetType != null);
 
@@ -139,6 +141,7 @@
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
         /// <exception cref="System.InvalidOperationException">ConvertBack is not supported by this converter.</exception>
+        [CanBeNull]
         protected override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return Convert(value, targetType, parameter, culture);

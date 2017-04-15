@@ -131,7 +131,8 @@
         /// A converted value.If the method returns null, the valid null value is used.A return value of <see cref="T:System.Windows.DependencyProperty" />.<see cref="F:System.Windows.DependencyProperty.UnsetValue" /> indicates that the converter did not produce a value, and that the binding will use the <see cref="P:System.Windows.Data.BindingBase.FallbackValue" /> if it is available, or else will use the default value.A return value of <see cref="T:System.Windows.Data.Binding" />.<see cref="F:System.Windows.Data.Binding.DoNothing" /> indicates that the binding does not transfer the value or use the <see cref="P:System.Windows.Data.BindingBase.FallbackValue" /> or the default value.
         /// </returns>
         /// <exception cref="System.ArgumentException">MultiValueConverter requires two values.;values</exception>
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        [CanBeNull]
+        public object Convert([CanBeNull] object[] values, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             if (values == null)
                 return null;

@@ -27,7 +27,7 @@
         /// ]]></code>
         /// </example>
         [NotNull]
-        public static TryCastWorker<TValue> TryCast<TValue>(this TValue value)
+        public static TryCastWorker<TValue> TryCast<TValue>([CanBeNull] this TValue value)
         {
             Contract.Ensures(Contract.Result<TryCastWorker<TValue>>() != null);
 
@@ -42,7 +42,7 @@
     /// <typeparam name="TValue">The type of the value.</typeparam>
     public class TryCastWorker<TValue> : TryCastWorkerBase<TValue, object>
     {
-        internal TryCastWorker(TValue value)
+        internal TryCastWorker([CanBeNull] TValue value)
             : base(value)
         {
         }
@@ -101,7 +101,7 @@
         /// The <see cref="TryCastWorker{TValue, TResult}" /> object.
         /// </returns>
         [NotNull]
-        public TryCastWorker<TValue, TResult> Returning<TResult>(TResult defaultValue)
+        public TryCastWorker<TValue, TResult> Returning<TResult>([CanBeNull] TResult defaultValue)
         {
             Contract.Ensures(Contract.Result<TryCastWorker<TValue, TResult>>() != null);
 
@@ -111,7 +111,8 @@
         /// <summary>
         /// Wraps the action so it can be used where a function is expected.
         /// </summary>
-        private static object WrapAction<TTarget>([NotNull] Action<TTarget> action, TTarget target)
+        [CanBeNull]
+        private static object WrapAction<TTarget>([NotNull] Action<TTarget> action, [CanBeNull] TTarget target)
         {
             Contract.Requires(action != null);
 
@@ -129,12 +130,12 @@
     public class TryCastWorker<TValue, TResult>
         : TryCastWorkerBase<TValue, TResult>
     {
-        internal TryCastWorker(TValue value)
+        internal TryCastWorker([CanBeNull] TValue value)
             : base(value)
         {
         }
 
-        internal TryCastWorker(TValue value, TResult defaultValue)
+        internal TryCastWorker([CanBeNull] TValue value, [CanBeNull] TResult defaultValue)
             : base(value, defaultValue)
         {
         }
@@ -190,12 +191,12 @@
         private readonly TValue _value;
         private bool _isResolved;
 
-        internal TryCastWorkerBase(TValue value)
+        internal TryCastWorkerBase([CanBeNull] TValue value)
         {
             _value = value;
         }
 
-        internal TryCastWorkerBase(TValue value, TResult defaultValue)
+        internal TryCastWorkerBase([CanBeNull] TValue value, [CanBeNull] TResult defaultValue)
             : this(value)
         {
             InternalResult = defaultValue;
@@ -232,7 +233,7 @@
         /// <returns>This method never returns, but throws the exception.</returns>
         /// <exception cref="System.InvalidOperationException"><paramref name="message"/></exception>
 #if !PORTABLE
-        public TResult ElseThrow([Localizable(false)][LocalizationRequired(false)] string message)
+        public TResult ElseThrow([CanBeNull] [Localizable(false)][LocalizationRequired(false)] string message)
 #else
         public TResult ElseThrow([LocalizationRequired(false)] string message)
 #endif

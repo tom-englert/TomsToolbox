@@ -20,6 +20,7 @@
         /// <summary>
         /// Gets or sets the target element that displays the selection.
         /// </summary>
+        [CanBeNull]
         public FrameworkElement TargetElement
         {
             get { return (FrameworkElement)GetValue(TargetElementProperty); }
@@ -35,6 +36,7 @@
         /// <summary>
         /// Gets or sets the view port in which the target element is displayed.
         /// </summary>
+        [CanBeNull]
         public FrameworkElement Viewport
         {
             get { return (FrameworkElement)GetValue(ViewportProperty); }
@@ -86,7 +88,7 @@
         }
 
 
-        private void Viewport_Changed(FrameworkElement oldValue, FrameworkElement newValue)
+        private void Viewport_Changed([CanBeNull] FrameworkElement oldValue, [CanBeNull] FrameworkElement newValue)
         {
             if (oldValue != null)
             {
@@ -104,7 +106,7 @@
         }
 
 
-        private void Viewport_MouseMove(object sender, [NotNull] MouseEventArgs e)
+        private void Viewport_MouseMove([CanBeNull] object sender, [NotNull] MouseEventArgs e)
         {
             if (_startPosition == null)
                 return;
@@ -120,7 +122,7 @@
         }
 
 
-        private void Viewport_MouseRightButtonDown(object sender, [NotNull] MouseButtonEventArgs e)
+        private void Viewport_MouseRightButtonDown([CanBeNull] object sender, [NotNull] MouseButtonEventArgs e)
         {
             var viewport = Viewport;
             if (viewport == null)
@@ -136,7 +138,7 @@
             viewport.CaptureMouse();
         }
 
-        private void Viewport_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        private void Viewport_MouseRightButtonUp([CanBeNull] object sender, [CanBeNull] MouseButtonEventArgs e)
         {
             _startPosition = null;
 

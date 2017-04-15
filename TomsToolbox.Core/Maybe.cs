@@ -21,7 +21,7 @@
         /// <param name="selector">The selector to get the target from the value.</param>
         /// <returns>The <see cref="Maybe{T}"/> with the target as value.</returns>
         [NotNull]
-        public static Maybe<TTarget> Maybe<TSource, TTarget>(this TSource value, [NotNull] Func<TSource, TTarget> selector)
+        public static Maybe<TTarget> Maybe<TSource, TTarget>([CanBeNull] this TSource value, [NotNull] Func<TSource, TTarget> selector)
             where TSource:class
             where TTarget:class
         {
@@ -38,7 +38,7 @@
         /// <param name="value">The value.</param>
         /// <returns>The <see cref="Maybe{T}"/> with the value.</returns>
         [NotNull]
-        public static Maybe<TValue> Maybe<TValue>(this TValue value)
+        public static Maybe<TValue> Maybe<TValue>([CanBeNull] this TValue value)
             where TValue : class
         {
             Contract.Ensures(Contract.Result<Maybe<TValue>>() != null);
@@ -61,7 +61,7 @@
         /// Initializes a new instance of the <see cref="Maybe{T}"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
-        public Maybe(T value)
+        public Maybe([CanBeNull] T value)
         {
             _value = value;
         }
@@ -88,6 +88,7 @@
         /// <returns>
         /// The inner value if not null, else default(T).
         /// </returns>
+        [CanBeNull]
         public T Return()
         {
             return Return(default(T));
@@ -100,7 +101,8 @@
         /// <returns>
         /// The inner value if not null, else default(T).
         /// </returns>
-        public T Return(T defaultValue)
+        [CanBeNull]
+        public T Return([CanBeNull] T defaultValue)
         {
             return _value ?? defaultValue;
         }
@@ -129,7 +131,8 @@
         /// <returns>
         /// The value extracted from the specified selector if the inner value is not null, else default(TTarget).
         /// </returns>
-        public TTarget Return<TTarget>([NotNull] Func<T, TTarget> selector, TTarget defaultValue)
+        [CanBeNull]
+        public TTarget Return<TTarget>([NotNull] Func<T, TTarget> selector, [CanBeNull] TTarget defaultValue)
         {
             Contract.Requires(selector != null);
 

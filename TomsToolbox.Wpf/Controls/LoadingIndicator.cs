@@ -4,6 +4,8 @@
     using System.Windows.Controls;
     using System.Windows.Media;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Desktop;
 
     /// <summary>
@@ -45,6 +47,7 @@
         /// <summary>
         /// Gets or sets the header that is displayed centered above the graphics.
         /// </summary>
+        [CanBeNull]
         public object Header
         {
             get { return GetValue(HeaderProperty); }
@@ -75,6 +78,7 @@
         /// <summary>
         /// Gets or sets the layout transform applied to the animation.
         /// </summary>
+        [CanBeNull]
         public Transform AnimationLayoutTransform
         {
             get { return (Transform)GetValue(AnimationLayoutTransformProperty); }

@@ -41,6 +41,7 @@
         /// </summary>
         /// <param name="item">The item to lookup. This can be a MemberInfo like FieldInfo, PropertyInfo...</param>
         /// <returns>The associated display name, or null if the item does not have a DisplayName attribute.</returns>
+        [CanBeNull]
         public static string TryGetDisplayName([NotNull] this ICustomAttributeProvider item)
         {
             Contract.Requires(item != null);
@@ -55,6 +56,7 @@
         /// </summary>
         /// <param name="item">The item to lookup. This can be a MemberInfo like FieldInfo, PropertyInfo...</param>
         /// <returns>The associated description, or null if the item does not have a Description attribute.</returns>
+        [CanBeNull]
         public static string TryGetDescription([NotNull] this ICustomAttributeProvider item)
         {
             Contract.Requires(item != null);
@@ -70,6 +72,7 @@
         /// <param name="item">The item to lookup. This can be a MemberInfo like FieldInfo, PropertyInfo...</param>
         /// <param name="key">The key.</param>
         /// <returns>The associated text, or null if the item does not have a text attribute with this key.</returns>
+        [CanBeNull]
         public static string TryGetText([NotNull] this ICustomAttributeProvider item, [NotNull] object key)
         {
             Contract.Requires(item != null);
@@ -88,6 +91,7 @@
         /// <returns>
         /// The custom type converter, or null if the item has no custom type converter attribute.
         /// </returns>
+        [CanBeNull]
         public static TypeConverter GetCustomTypeConverter([NotNull] this ICustomAttributeProvider item)
         {
             Contract.Requires(item != null);

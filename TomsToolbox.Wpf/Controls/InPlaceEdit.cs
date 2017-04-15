@@ -76,6 +76,7 @@
         /// <summary>
         /// Gets or sets the text to be edited.
         /// </summary>
+        [CanBeNull]
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
@@ -236,7 +237,7 @@
             base.OnMouseDoubleClick(e);
         }
 
-        private void Self_Loaded(object sender, RoutedEventArgs e)
+        private void Self_Loaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
         {
             _focusableParent = this.TryFindAncestorOrSelf<FrameworkElement>(item => item?.Focusable == true);
             if (_focusableParent != null)
@@ -247,12 +248,12 @@
             }
         }
 
-        private void FocusableParent_GotFocus(object sender, RoutedEventArgs e)
+        private void FocusableParent_GotFocus([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
         {
             _parentGotFocusTime = DateTime.Now;
         }
 
-        private void Self_Unloaded(object sender, RoutedEventArgs e)
+        private void Self_Unloaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
         {
             if (_focusableParent != null)
             {
@@ -262,7 +263,7 @@
             }
         }
 
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        private void TextBox_KeyDown([CanBeNull] object sender, [CanBeNull] KeyEventArgs e)
         {
             if (_textBox == null)
                 return;
@@ -283,12 +284,12 @@
             }
         }
 
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void TextBox_LostFocus([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
         {
             IsEditing = false;
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextBox_TextChanged([CanBeNull] object sender, [CanBeNull] TextChangedEventArgs e)
         {
             OnValidate();
         }
@@ -313,7 +314,7 @@
             }
         }
 
-        private void Parent_KeyDown(object sender, [NotNull] KeyEventArgs e)
+        private void Parent_KeyDown([CanBeNull] object sender, [NotNull] KeyEventArgs e)
         {
             switch (e.Key)
             {
@@ -398,7 +399,7 @@
             }
         }
 
-        private void Self_PreviewMouseDoubleClick(object sender, [NotNull] MouseButtonEventArgs e)
+        private void Self_PreviewMouseDoubleClick([CanBeNull] object sender, [NotNull] MouseButtonEventArgs e)
         {
             if (_textBox == null)
                 return;
@@ -411,7 +412,7 @@
             e.Handled = true;
         }
 
-        private void Window_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void Window_IsKeyboardFocusWithinChanged([CanBeNull] object sender, DependencyPropertyChangedEventArgs e)
         {
             if (Equals(e.NewValue, false))
             {
@@ -419,7 +420,7 @@
             }
         }
 
-        private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void Window_PreviewMouseDown([CanBeNull] object sender, [CanBeNull] MouseButtonEventArgs e)
         {
             if (_textBox == null)
                 return;
@@ -431,7 +432,7 @@
             }
         }
 
-        private void Window_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        private void Window_PreviewMouseWheel([CanBeNull] object sender, [CanBeNull] MouseWheelEventArgs e)
         {
             IsEditing = false;
         }

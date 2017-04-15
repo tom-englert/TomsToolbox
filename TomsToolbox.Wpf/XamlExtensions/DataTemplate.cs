@@ -19,6 +19,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns>The role.</returns>
+        [CanBeNull]
         [AttachedPropertyBrowsableForType(typeof(ContentControl))]
         [AttachedPropertyBrowsableForType(typeof(TabControl))]
         [AttachedPropertyBrowsableForType(typeof(ContentPresenter))]
@@ -32,7 +33,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetRole([NotNull] FrameworkElement obj, object value)
+        public static void SetRole([NotNull] FrameworkElement obj, [CanBeNull] object value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(RoleProperty, value);
@@ -46,7 +47,7 @@
         public static readonly DependencyProperty RoleProperty =
             DependencyProperty.RegisterAttached("Role", typeof(object), typeof(DataTemplate), new FrameworkPropertyMetadata(Role_Changed));
 
-        private static void Role_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void Role_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var newValue = e.NewValue;
 

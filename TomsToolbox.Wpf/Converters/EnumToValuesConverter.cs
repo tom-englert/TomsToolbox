@@ -57,7 +57,7 @@
         /// <param name="excluded">A comma separated list of values to exclude.</param>
         /// <returns>An array of the enum's values.</returns>
         [NotNull]
-        public static Array Convert([NotNull] Type type, string excluded)
+        public static Array Convert([NotNull] Type type, [CanBeNull] string excluded)
         {
             Contract.Requires(type != null);
             Contract.Ensures(Contract.Result<Array>() != null);

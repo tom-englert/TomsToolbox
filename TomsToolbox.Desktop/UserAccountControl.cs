@@ -33,7 +33,8 @@
         /// <returns>
         /// The credentials entered by the user, or <c>null</c> if the user has canceled the operation.
         /// </returns>
-        public static NetworkCredential PromptForCredential([NotNull] IWin32Window parent, string caption, string message, int authenticationError, NetworkCredential template)
+        [CanBeNull]
+        public static NetworkCredential PromptForCredential([NotNull] IWin32Window parent, [CanBeNull] string caption, [CanBeNull] string message, int authenticationError, [CanBeNull] NetworkCredential template)
         {
             Contract.Requires(parent != null);
 
@@ -71,7 +72,7 @@
         /// 0 if the function succeeds, a HRESULT of the last error if the function fails.
         /// </returns>
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "3#")]
-        public static int LogOnInteractiveUser(string userName, string domain, string password, out SafeTokenHandle userToken)
+        public static int LogOnInteractiveUser(string userName, string domain, [CanBeNull] string password, [CanBeNull] out SafeTokenHandle userToken)
         {
             Contract.Ensures((Contract.Result<int>() != 0) || (Contract.ValueAtReturn(out userToken) != null));
 
@@ -227,7 +228,7 @@
         /// <returns>
         /// <c>true</c> if the user blongs to the specified group; otherwise <c>false</c>
         /// </returns>
-        public static bool IsCurrentUserInGroup(string groupName)
+        public static bool IsCurrentUserInGroup([CanBeNull] string groupName)
         {
             using (var id = WindowsIdentity.GetCurrent())
             {
@@ -246,7 +247,7 @@
         /// <c>true</c> if the user blongs to the specified group; otherwise <c>false</c>
         /// </returns>
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
-        public static bool IsUserInGroup([NotNull] SafeTokenHandle userToken, string groupName)
+        public static bool IsUserInGroup([NotNull] SafeTokenHandle userToken, [CanBeNull] string groupName)
         {
             Contract.Requires(userToken != null);
 
@@ -442,7 +443,7 @@
 
         [NotNull]
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
-        private static SafeNativeMemory PackAuthenticationBuffer(NetworkCredential credential)
+        private static SafeNativeMemory PackAuthenticationBuffer([CanBeNull] NetworkCredential credential)
         {
             Contract.Ensures(Contract.Result<SafeNativeMemory>() != null);
             var userName = credential?.UserName;
@@ -457,8 +458,9 @@
             return buffer;
         }
 
+        [CanBeNull]
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
-        private static NetworkCredential PromptForCredential([NotNull] IWin32Window parent, string caption, string message, int authenticationError, [NotNull] SafeNativeMemory inCredBuffer)
+        private static NetworkCredential PromptForCredential([NotNull] IWin32Window parent, [CanBeNull] string caption, [CanBeNull] string message, int authenticationError, [NotNull] SafeNativeMemory inCredBuffer)
         {
             Contract.Requires(parent != null);
             Contract.Requires(inCredBuffer != null);
@@ -501,6 +503,7 @@
             }
         }
 
+        [CanBeNull]
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         private static NetworkCredential UnpackAuthenticationBuffer([NotNull] SafeNativeMemory outCredBuffer)
         {

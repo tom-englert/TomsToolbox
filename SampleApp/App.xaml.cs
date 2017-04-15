@@ -53,7 +53,7 @@
             MainWindow.Show();
         }
 
-        private void BindingErrorCallback(string msg)
+        private void BindingErrorCallback([CanBeNull] string msg)
         {
             Dispatcher?.BeginInvoke((Action)(() => MessageBox.Show(msg)));
         }

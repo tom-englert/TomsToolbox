@@ -4,6 +4,8 @@
     using System.Windows;
     using System.Windows.Controls;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// A template selector that finds the <see cref="DataTemplate"/> by the <see cref="RoleBasedDataTemplateKey"/>.
     /// </summary>
@@ -36,7 +38,7 @@
         /// <returns>
         /// Returns a <see cref="T:System.Windows.DataTemplate" /> or null. The default value is null.
         /// </returns>
-        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        public override DataTemplate SelectTemplate(object item, [CanBeNull] DependencyObject container)
         {
             if ((item == null) || (container == null))
                 return null;

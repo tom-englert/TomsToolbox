@@ -31,7 +31,8 @@
         /// </summary>
         /// <param name="colorName">The color name.</param>
         /// <returns>The corresponding brush if the conversion was successful; otherwise <c>null</c>.</returns>
-        public static Brush Convert(string colorName)
+        [CanBeNull]
+        public static Brush Convert([CanBeNull] string colorName)
         {
             // let it fail fast so we are not left wondering what went wrong
             return colorName != null ? _typeConverter.ConvertFromInvariantString(colorName) as Brush : null;

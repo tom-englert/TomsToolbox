@@ -66,7 +66,7 @@
         /// <param name="value">The value.</param>
         /// <returns>The text of the value.</returns>
         [NotNull]
-        public static string Convert(object key, [NotNull] object value)
+        public static string Convert([CanBeNull] object key, [NotNull] object value)
         {
             Contract.Requires(value != null);
             Contract.Ensures(Contract.Result<string>() != null);
@@ -82,7 +82,7 @@
         /// <param name="enumType">An optional type of an enum to support converting <see cref="Enum"/> where the value is given as a number or string.</param>
         /// <returns>The text of the value.</returns>
         [NotNull]
-        public static string Convert(object key, [NotNull] object value, Type enumType)
+        public static string Convert([CanBeNull] object key, [NotNull] object value, [CanBeNull] Type enumType)
         {
             Contract.Requires(value != null);
             Contract.Ensures(Contract.Result<string>() != null);

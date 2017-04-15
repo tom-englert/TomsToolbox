@@ -134,7 +134,7 @@
             }
         }
 
-        private void AddItems(IEnumerable<T> newItems)
+        private void AddItems([CanBeNull] IEnumerable<T> newItems)
         {
             if (newItems == null)
                 return;
@@ -149,14 +149,14 @@
             }
         }
 
-        private void AttachItemEvents(T newItem)
+        private void AttachItemEvents([CanBeNull] T newItem)
         {
             var eventSource = newItem as INotifyPropertyChanged;
             if (eventSource != null)
                 eventSource.PropertyChanged += Item_PropertyChanged;
         }
 
-        private void RemoveItems(IEnumerable<T> oldItems)
+        private void RemoveItems([CanBeNull] IEnumerable<T> oldItems)
         {
             if (oldItems == null)
                 return;
@@ -170,7 +170,7 @@
             }
         }
 
-        private void DetachItemEvents(T oldItem)
+        private void DetachItemEvents([CanBeNull] T oldItem)
         {
             var eventSource = oldItem as INotifyPropertyChanged;
             if (eventSource != null)

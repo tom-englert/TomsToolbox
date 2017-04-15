@@ -4,6 +4,8 @@
     using System.Windows.Controls;
     using System.Windows.Media;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Moves the view port by fractional pixels, so the control's top left point is always aligned on a pixel boundary.
     /// See e.g. <see href="https://msdn.microsoft.com/de-de/library/aa970908.aspx"/>.
@@ -24,6 +26,7 @@
         /// <summary>
         /// Gets or sets the view port displaying this control.
         /// </summary>
+        [CanBeNull]
         public FrameworkElement Viewport
         {
             get { return (FrameworkElement)GetValue(ViewportProperty); }

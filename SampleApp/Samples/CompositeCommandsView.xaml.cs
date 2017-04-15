@@ -3,6 +3,8 @@
     using System.ComponentModel.Composition;
     using System.ComponentModel.Composition.Hosting;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Wpf.Composition;
 
     /// <summary>
@@ -12,7 +14,7 @@
     public partial class CompositeCommandsView
     {
         [ImportingConstructor]
-        public CompositeCommandsView(ExportProvider exportProvider)
+        public CompositeCommandsView([CanBeNull] ExportProvider exportProvider)
         {
             this.SetExportProvider(exportProvider);
 

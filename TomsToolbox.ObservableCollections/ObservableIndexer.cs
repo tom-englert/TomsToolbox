@@ -37,7 +37,7 @@
         /// </summary>
         /// <param name="generator">The generator.</param>
         /// <param name="comparer">The comparer.</param>
-        public ObservableIndexer([NotNull] Func<TKey, TValue> generator, IEqualityComparer<TKey> comparer)
+        public ObservableIndexer([NotNull] Func<TKey, TValue> generator, [CanBeNull] IEqualityComparer<TKey> comparer)
             : base(new ObservableCollection<KeyValuePair<TKey, TValue>>())
         {
             Contract.Requires(generator != null);

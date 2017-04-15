@@ -1,5 +1,7 @@
 ﻿namespace SampleApp.Samples
 {
+    using JetBrains.Annotations;
+
     using TomsToolbox.Desktop;
     using TomsToolbox.Wpf.Composition;
 
@@ -8,6 +10,7 @@
     {
         private string _longText = "This is a long text";
 
+        [CanBeNull]
         public string LongText
         {
             get

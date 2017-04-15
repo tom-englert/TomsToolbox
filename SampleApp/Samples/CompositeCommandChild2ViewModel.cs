@@ -14,6 +14,7 @@
     {
         private string _text = "Greetings from child #2";
 
+        [CanBeNull]
         public string Text
         {
             get

@@ -4,6 +4,8 @@
     using System.Collections.ObjectModel;
     using System.Linq;
 
+    using JetBrains.Annotations;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -30,7 +32,7 @@
 
         private class StringWrapper
         {
-            public StringWrapper(string wrapped)
+            public StringWrapper([CanBeNull] string wrapped)
             {
                 Wrapped = wrapped;
             }

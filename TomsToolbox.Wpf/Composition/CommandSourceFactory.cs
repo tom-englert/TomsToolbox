@@ -129,7 +129,7 @@
         /// <param name="compositionContext">The composition context.</param>
         /// <returns>The part to be used in composition.</returns>
         [NotNull]
-        public object GetPart(object compositionContext)
+        public object GetPart([CanBeNull] object compositionContext)
         {
             Contract.Ensures(Contract.Result<object>() != null);
             return GetCommandSource(compositionContext);
@@ -141,7 +141,7 @@
         /// <param name="compositionContext">The composition context.</param>
         /// <returns>The command source.</returns>
         [NotNull]
-        private T GetCommandSource(object compositionContext)
+        private T GetCommandSource([CanBeNull] object compositionContext)
         {
             Contract.Ensures(Contract.Result<T>() != null);
 
@@ -159,16 +159,19 @@
         /// <summary>
         /// Gets the header to be shown in the UI. Usually this is a localized text naming the command.
         /// </summary>
+        [CanBeNull]
         public virtual object Header => GetType().TryGetDisplayName();
 
         /// <summary>
         /// Gets the tool tip to be shown in the UI. Usually this is a localized text describing the command.
         /// </summary>
+        [CanBeNull]
         public virtual object Description => GetType().TryGetDescription();
 
         /// <summary>
         /// Gets the icon to be shown in the UI, or null to show no icon.
         /// </summary>
+        [CanBeNull]
         public virtual object Icon
         {
             get
@@ -191,6 +194,7 @@
         /// <remarks>
         /// This is used to build up menus with sub menu entries.
         /// </remarks>
+        [CanBeNull]
         public virtual string SubRegionId => GetType().TryGetText(SubRegionIdKey);
 
         /// <summary>
@@ -203,11 +207,13 @@
         /// Gets the name of the group that this command belongs to.
         /// If different group names are specified for a target region, the commands can be grouped and the groups separated by a <see cref="Separator" />.
         /// </summary>
+        [CanBeNull]
         public virtual object GroupName => GetType().TryGetText(GroupNameKey);
 
         /// <summary>
         /// Gets a tag that can be bound to the target objects tag.
         /// </summary>
+        [CanBeNull]
         public virtual object Tag => null;
 
         /// <summary>
@@ -217,7 +223,7 @@
         /// <param name="command">The command.</param>
         /// <returns>The <see cref="CommandSource"/> associated with the <paramref name="context"/></returns>
         [NotNull]
-        public T Attach(object context, [NotNull] ICommand command)
+        public T Attach([CanBeNull] object context, [NotNull] ICommand command)
         {
             Contract.Requires(command != null);
             Contract.Ensures(Contract.Result<T>() != null);
@@ -237,7 +243,7 @@
         /// <returns>The <see cref="CommandSource"/> associated with the <paramref name="context"/></returns>
         /// <exception cref="System.ArgumentException">Can't detach a command that has not been attached before;command</exception>
         [NotNull]
-        public T Detach(object context, [NotNull] ICommand command)
+        public T Detach([CanBeNull] object context, [NotNull] ICommand command)
         {
             Contract.Requires(command != null);
             Contract.Ensures(Contract.Result<T>() != null);
@@ -258,7 +264,7 @@
         /// <returns>The <see cref="CommandSource"/> associated with the <paramref name="context"/></returns>
         /// <exception cref="System.ArgumentException">Can't replace a command that has not been attached before;oldCommand</exception>
         [NotNull]
-        public T Replace(object context, [NotNull] ICommand oldCommand, [NotNull] ICommand newCommand)
+        public T Replace([CanBeNull] object context, [NotNull] ICommand oldCommand, [NotNull] ICommand newCommand)
         {
             Contract.Requires(oldCommand != null);
             Contract.Requires(newCommand != null);

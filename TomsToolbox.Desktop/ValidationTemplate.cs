@@ -93,7 +93,7 @@
         /// The error message for the property. The default is an empty string ("").
         /// </returns>
         [NotNull]
-        public string this[string columnName]
+        public string this[[CanBeNull] string columnName]
         {
             get
             {

@@ -15,6 +15,7 @@
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The default value.</returns>
+        [CanBeNull]
         public static object CreateDefault([NotNull] Type type)
         {
             Contract.Requires(type != null);
@@ -36,6 +37,7 @@
         /// </remarks>
         /// <param name="type">The type.</param>
         /// <returns>The empty value.</returns>
+        [CanBeNull]
         public static object CreateEmpty([NotNull] Type type)
         {
             Contract.Requires(type != null);

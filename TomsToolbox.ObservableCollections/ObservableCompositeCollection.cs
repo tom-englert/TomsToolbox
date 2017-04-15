@@ -28,7 +28,7 @@
         /// <param name="singleItem">The first single item in the collection</param>
         /// <returns>A new <see cref="ObservableCompositeCollection{T}"/> containing one fixed list with one single item.</returns>
         [NotNull]
-        public static ObservableCompositeCollection<T> FromSingleItem<T>(T singleItem)
+        public static ObservableCompositeCollection<T> FromSingleItem<T>([CanBeNull] T singleItem)
         {
             Contract.Requires(!ReferenceEquals(singleItem, null));
             Contract.Ensures(Contract.Result<ObservableCompositeCollection<T>>() != null);
@@ -45,7 +45,7 @@
         /// <param name="list">The list to add after the single item.</param>
         /// <returns>A new <see cref="ObservableCompositeCollection{T}"/> containing one fixed list with the single item plus all items from the list.</returns>
         [NotNull]
-        public static ObservableCompositeCollection<T> FromSingleItemAndList<T, TItem>(T singleItem, [NotNull] IList<TItem> list)
+        public static ObservableCompositeCollection<T> FromSingleItemAndList<T, TItem>([CanBeNull] T singleItem, [NotNull] IList<TItem> list)
             where TItem : T
         {
             Contract.Requires(list != null);
@@ -66,7 +66,7 @@
         /// <param name="singleItem">The last single item in the collection</param>
         /// <returns>A new <see cref="ObservableCompositeCollection{T}"/> containing all items from the list plus one fixed list with the single item at the end.</returns>
         [NotNull]
-        public static ObservableCompositeCollection<T> FromListAndSingleItem<TItem, T>([NotNull] IList<TItem> list, T singleItem)
+        public static ObservableCompositeCollection<T> FromListAndSingleItem<TItem, T>([NotNull] IList<TItem> list, [CanBeNull] T singleItem)
             where TItem : T
         {
             Contract.Requires(list != null);
@@ -116,7 +116,7 @@
             }
 
             [ContractVerification(false)]
-            private void parts_CollectionChanged(object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+            private void parts_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
             {
                 // Monitor changes of parts and forward events properly
                 // Offset to apply is the sum of all counts of all parts preceding this part
@@ -159,7 +159,7 @@
             #region IList<IList<T>> Members
 
             [ContractVerification(false)] // Just forwarding...
-            public int IndexOf(IList<T> item)
+            public int IndexOf([CanBeNull] IList<T> item)
             {
                 return _parts.IndexOf(item);
             }

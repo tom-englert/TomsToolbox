@@ -35,7 +35,7 @@
             window.CommandBindings.Add(new CommandBinding(WindowCommands.Restore, Restore, CanRestore));
         }
 
-        private void Minimize(object sender, ExecutedRoutedEventArgs e)
+        private void Minimize([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
         {
             var window = AssociatedObject;
             Contract.Assume(window != null);
@@ -43,7 +43,7 @@
             window.WindowState = WindowState.Minimized;
         }
 
-        private void Close(object sender, ExecutedRoutedEventArgs e)
+        private void Close([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
         {
             var window = AssociatedObject;
             Contract.Assume(window != null);
@@ -51,7 +51,7 @@
             window.Close();
         }
 
-        private void CanRestore(object sender, [NotNull] CanExecuteRoutedEventArgs e)
+        private void CanRestore([CanBeNull] object sender, [NotNull] CanExecuteRoutedEventArgs e)
         {
             var window = AssociatedObject;
             Contract.Assume(window != null);
@@ -59,7 +59,7 @@
             e.CanExecute = window.WindowState != WindowState.Normal;
         }
 
-        private void Restore(object sender, ExecutedRoutedEventArgs e)
+        private void Restore([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
         {
             var window = AssociatedObject;
             Contract.Assume(window != null);
@@ -67,7 +67,7 @@
             window.WindowState = WindowState.Normal;
         }
 
-        private void CanMaximize(object sender, [NotNull] CanExecuteRoutedEventArgs e)
+        private void CanMaximize([CanBeNull] object sender, [NotNull] CanExecuteRoutedEventArgs e)
         {
             var window = AssociatedObject;
             Contract.Assume(window != null);
@@ -75,7 +75,7 @@
             e.CanExecute = (window.WindowState == WindowState.Normal) && ((window.ResizeMode == ResizeMode.CanResize) || (window.ResizeMode == ResizeMode.CanResizeWithGrip));
         }
 
-        private void Maximize(object sender, ExecutedRoutedEventArgs e)
+        private void Maximize([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
         {
             var window = AssociatedObject;
             Contract.Assume(window != null);

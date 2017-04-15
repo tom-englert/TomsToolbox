@@ -80,7 +80,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             Assert.IsTrue(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
         }
 
-        private static void Collection_CollectionChanged(object sender, [NotNull] System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private static void Collection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             // this is what the ItemsCollection of an ItemsControl does...
             var item = ((IList)sender)[e.NewStartingIndex];
@@ -114,6 +114,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             Assert.IsTrue(collection.SequenceEqual(compositeCollection));
         }
 
+        [NotNull]
         private static IList<ObservableCollection<Item>> CreateData()
         {
             return Enumerable.Range(0, 1000).Select(i1 => new ObservableCollection<Item>(Enumerable.Range(0, 1000).Select(i2 => new Item { Index = 1000 * i1 + i2 }))).ToList();

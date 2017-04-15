@@ -61,7 +61,7 @@
         ///     }
         /// }
         /// ]]></code></example>
-        public DelegateCommand(Action<T> executeCallback)
+        public DelegateCommand([CanBeNull] Action<T> executeCallback)
             : this(null, executeCallback)
         {
         }
@@ -84,7 +84,7 @@
         /// {
         ///     .....
         /// ]]></code></example>
-        public DelegateCommand(Predicate<T> canExecuteCallback, Action<T> executeCallback)
+        public DelegateCommand([CanBeNull] Predicate<T> canExecuteCallback, [CanBeNull] Action<T> executeCallback)
         {
             ExecuteCallback = executeCallback;
             CanExecuteCallback = canExecuteCallback;
@@ -136,7 +136,7 @@
         /// <returns>
         /// true if this command can be executed; otherwise, false.
         /// </returns>
-        public bool CanExecute(object parameter)
+        public bool CanExecute([CanBeNull] object parameter)
         {
             if (ExecuteCallback == null)
             {
@@ -155,7 +155,7 @@
         /// Defines the method to be called when the command is invoked.
         /// </summary>
         /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
-        public void Execute(object parameter)
+        public void Execute([CanBeNull] object parameter)
         {
             ExecuteCallback?.Invoke(parameter.SafeCast<T>());
         }
@@ -238,7 +238,7 @@
         /// {
         ///     .....
         /// ]]></code></example>
-        public DelegateCommand(Func<bool> canExecuteCallback, Action executeCallback)
+        public DelegateCommand([CanBeNull] Func<bool> canExecuteCallback, [CanBeNull] Action executeCallback)
         {
             CanExecuteCallback = canExecuteCallback;
             ExecuteCallback = executeCallback;
@@ -290,7 +290,7 @@
         /// <returns>
         /// true if this command can be executed; otherwise, false.
         /// </returns>
-        public bool CanExecute(object parameter)
+        public bool CanExecute([CanBeNull] object parameter)
         {
             if (ExecuteCallback == null)
             {
@@ -309,7 +309,7 @@
         /// Defines the method to be called when the command is invoked.
         /// </summary>
         /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
-        public void Execute(object parameter)
+        public void Execute([CanBeNull] object parameter)
         {
             ExecuteCallback?.Invoke();
         }

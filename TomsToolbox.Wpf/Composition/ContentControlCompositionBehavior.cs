@@ -19,6 +19,7 @@
         /// <remarks>
         /// The first exported item matching RegionId and Role will be set as the content of the content control.
         /// </remarks>
+        [CanBeNull]
         public object Role
         {
             get { return GetValue(RoleProperty); }
@@ -64,7 +65,7 @@
             UpdateContent(contentControl, exportedItem);
         }
 
-        private void UpdateContent([NotNull] ContentControl contentControl, object targetItem)
+        private void UpdateContent([NotNull] ContentControl contentControl, [CanBeNull] object targetItem)
         {
             Contract.Requires(contentControl != null);
 
@@ -79,7 +80,7 @@
             ApplyContext(targetItem as IComposablePartWithContext, CompositionContext);
         }
 
-        private static void ApplyContext(IComposablePartWithContext item, object context)
+        private static void ApplyContext([CanBeNull] IComposablePartWithContext item, [CanBeNull] object context)
         {
             if (item == null)
                 return;

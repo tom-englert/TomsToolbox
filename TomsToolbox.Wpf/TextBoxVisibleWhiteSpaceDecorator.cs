@@ -101,6 +101,7 @@
         /// <summary>
         /// Gets or sets the color of the white space visualization.
         /// </summary>
+        [CanBeNull]
         public Brush WhiteSpaceColor
         {
             get { return (Brush)GetValue(WhiteSpaceColorProperty); }
@@ -130,6 +131,7 @@
         /// <summary>
         /// Gets or sets the inner text box.
         /// </summary>
+        [CanBeNull]
         public TextBox Child
         {
             get
@@ -196,7 +198,7 @@
             return finalSize;
         }
 
-        private void Self_Loaded(object sender, RoutedEventArgs e)
+        private void Self_Loaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
         {
             var textBox = Child;
             if (textBox == null)
@@ -217,12 +219,12 @@
             UpdateAdorners();
         }
 
-        private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        private void ScrollViewer_ScrollChanged([CanBeNull] object sender, [CanBeNull] ScrollChangedEventArgs e)
         {
             this.BeginInvoke(DispatcherPriority.Background, _adornerLayer.Update);
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextBox_TextChanged([CanBeNull] object sender, [CanBeNull] TextChangedEventArgs e)
         {
             this.BeginInvoke( DispatcherPriority.Background, _adornerLayer.Update);
 
@@ -234,7 +236,7 @@
             UpdateAdorners(Child);
         }
 
-        private void UpdateAdorners(TextBox textBox)
+        private void UpdateAdorners([CanBeNull] TextBox textBox)
         {
             if (textBox == null)
                 return;
@@ -260,6 +262,7 @@
             }
         }
 
+        [CanBeNull]
         private string GetAdornerText(char character)
         {
             switch (character)
@@ -279,7 +282,7 @@
         }
 
         [NotNull]
-        private TextAdorner GetNextAdorner([NotNull] IEnumerator<TextAdorner> existingAdorners, int charIndex, string text)
+        private TextAdorner GetNextAdorner([NotNull] IEnumerator<TextAdorner> existingAdorners, int charIndex, [CanBeNull] string text)
         {
             Contract.Requires(existingAdorners != null);
             Contract.Ensures(Contract.Result<TextAdorner>() != null);
@@ -323,7 +326,7 @@
             }
 
             [NotNull]
-            public TextAdorner Apply(int charIndex, string text)
+            public TextAdorner Apply(int charIndex, [CanBeNull] string text)
             {
                 Contract.Ensures(Contract.Result<TextAdorner>() != null);
                 _charIndex = charIndex;

@@ -58,7 +58,7 @@
         /// Raises the <see cref="INotifyPropertyChanged.PropertyChanged" /> event.
         /// </summary>
         /// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
+        protected virtual void OnPropertyChanged([CanBeNull] PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(this, e);
         }
@@ -67,17 +67,17 @@
         /// Raises the <see cref="INotifyCollectionChanged.CollectionChanged" /> event.
         /// </summary>
         /// <param name="e">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+        protected virtual void OnCollectionChanged([CanBeNull] NotifyCollectionChangedEventArgs e)
         {
             CollectionChanged?.Invoke(this, e);
         }
 
-        private void Items_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Items_PropertyChanged([CanBeNull] object sender, [CanBeNull] PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e);
         }
 
-        private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void Items_CollectionChanged([CanBeNull] object sender, [CanBeNull] NotifyCollectionChangedEventArgs e)
         {
             OnCollectionChanged(e);
         }

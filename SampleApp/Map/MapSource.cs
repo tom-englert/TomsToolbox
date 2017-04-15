@@ -18,6 +18,7 @@
     [XmlRoot("root")]
     public class MapSourceFile
     {
+        [NotNull]
         private static readonly XmlSerializer _serializer = new XmlSerializer(typeof(MapSourceFile));
 
         [XmlArray("MapSourceList")]
@@ -36,7 +37,7 @@
             }
         }
 
-        public void Save(string fileName)
+        public void Save([NotNull] string fileName)
         {
             using (var stream = File.OpenWrite(fileName))
             {
@@ -138,6 +139,7 @@
                 _mapTile = mapTile;
             }
 
+            [CanBeNull]
             public ImageSource Source => _source ?? DownloadBitmap();
 
             public bool IsLoaded => _source != null;
@@ -149,6 +151,7 @@
                 Loaded?.Invoke(this, EventArgs.Empty);
             }
 
+            [CanBeNull]
             private BitmapImage DownloadBitmap()
             {
                 try

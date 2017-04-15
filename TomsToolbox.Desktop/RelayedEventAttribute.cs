@@ -39,15 +39,19 @@
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class RelayedEventAttribute : Attribute
     {
+        [NotNull]
         private readonly Type _sourceType;
+        [CanBeNull]
         private readonly string _sourceName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RelayedEventAttribute"/> class.
         /// </summary>
         /// <param name="sourceType">Type of the source for the events.</param>
-        public RelayedEventAttribute(Type sourceType)
+        public RelayedEventAttribute([NotNull] Type sourceType)
         {
+            Contract.Requires(sourceType != null);
+
             _sourceType = sourceType;
         }
 
@@ -56,23 +60,28 @@
         /// </summary>
         /// <param name="sourceType">Type of the source for the events.</param>
         /// <param name="sourceName">Name of the source property. You need to specify this only if the source property name is different.</param>
-        public RelayedEventAttribute(Type sourceType, string sourceName)
+        public RelayedEventAttribute([NotNull] Type sourceType, [CanBeNull] string sourceName)
             : this(sourceType)
         {
+            Contract.Requires(sourceType != null);
+
             _sourceName = sourceName;
         }
 
         /// <summary>
         /// Gets the type of the source for the events.
         /// </summary>
+        [NotNull]
         public Type SourceType => _sourceType;
 
         /// <summary>
         /// Gets the name of the source property, or null if the name is the same as the target property.
         /// </summary>
+        [CanBeNull]
         public string SourceName => _sourceName;
 
-        internal static IDictionary<Type, IDictionary<string, string>> CreateRelayMapping(Type type)
+        [CanBeNull]
+        internal static IDictionary<Type, IDictionary<string, string>> CreateRelayMapping([CanBeNull] Type type)
         {
             if (type == null)
                 return null;

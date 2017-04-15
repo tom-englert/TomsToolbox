@@ -66,7 +66,7 @@
         /// </summary>
         /// <param name="item">The object to dispose.</param>
         /// <returns><c>true</c> if the object has been disposed.</returns>
-        public static bool Dispose(object item)
+        public static bool Dispose([CanBeNull] object item)
         {
             var disposable = item as IDisposable;
             if (disposable != null)

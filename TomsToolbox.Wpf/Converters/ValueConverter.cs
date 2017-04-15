@@ -54,7 +54,7 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        protected abstract object Convert([NotNull] object value, Type targetType, object parameter, CultureInfo culture);
+        protected abstract object Convert([NotNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture);
 
         /// <summary>
         /// Converts a value.
@@ -67,7 +67,7 @@
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
         /// <exception cref="System.InvalidOperationException">ConvertBack is not supported by this converter.</exception>
-        protected virtual object ConvertBack([NotNull] object value, Type targetType, object parameter, CultureInfo culture)
+        protected virtual object ConvertBack([NotNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             Contract.Requires(value != null);
 

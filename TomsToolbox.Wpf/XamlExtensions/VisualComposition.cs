@@ -28,14 +28,14 @@
         /// </summary>
         public static event EventHandler<TextEventArgs> Error;
 
-        internal static void OnError(object sender, [NotNull] Exception ex)
+        internal static void OnError([CanBeNull] object sender, [NotNull] Exception ex)
         {
             Contract.Requires(ex != null);
 
             OnError(sender, ex.ToString());
         }
 
-        internal static void OnError(object sender, [NotNull] string message)
+        internal static void OnError([CanBeNull] object sender, [NotNull] string message)
         {
             Contract.Requires(message != null);
 
@@ -49,6 +49,7 @@
         /// </summary>
         /// <param name="obj">The target object.</param>
         /// <returns>The region identifier</returns>
+        [CanBeNull]
         [AttachedPropertyBrowsableForType(typeof(ContentControl))]
         [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
         public static string GetRegionId([NotNull] Control obj)
@@ -61,7 +62,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetRegionId([NotNull] Control obj, string value)
+        public static void SetRegionId([NotNull] Control obj, [CanBeNull] string value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(RegionIdProperty, value);
@@ -77,7 +78,7 @@
         public static readonly DependencyProperty RegionIdProperty =
             DependencyProperty.RegisterAttached("RegionId", typeof(string), typeof(VisualComposition), new FrameworkPropertyMetadata(RegionId_Changed));
 
-        private static void RegionId_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void RegionId_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var id = e.NewValue as string;
             if (id == null)
@@ -89,7 +90,7 @@
                 .ElseThrow();
         }
 
-        private static void SetRegionId<T>(DependencyObject d, string id)
+        private static void SetRegionId<T>([CanBeNull] DependencyObject d, [CanBeNull] string id)
             where T : Behavior, IVisualCompositionBehavior, new()
         {
             var behaviors = Interaction.GetBehaviors(d);

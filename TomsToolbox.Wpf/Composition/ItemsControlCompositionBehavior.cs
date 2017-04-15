@@ -97,7 +97,7 @@
             }
         }
 
-        private static void ApplyContext([NotNull] IEnumerable composables, object context)
+        private static void ApplyContext([NotNull] IEnumerable composables, [CanBeNull] object context)
         {
             Contract.Requires(composables != null);
 
@@ -144,7 +144,7 @@
             }
         }
 
-        private void DetachSelectables(IEnumerable viewModels)
+        private void DetachSelectables([CanBeNull] IEnumerable viewModels)
         {
             if (viewModels == null)
                 return;
@@ -158,7 +158,7 @@
             }
         }
 
-        private void Selectable_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Selectable_PropertyChanged([CanBeNull] object sender, [CanBeNull] PropertyChangedEventArgs e)
         {
             var selector = AssociatedObject as Selector;
             if (selector == null)
@@ -175,7 +175,7 @@
             }
         }
 
-        private static void Selector_SelectionChanged(object sender, [NotNull] SelectionChangedEventArgs e)
+        private static void Selector_SelectionChanged([CanBeNull] object sender, [NotNull] SelectionChangedEventArgs e)
         {
             if (e.RemovedItems != null)
             {

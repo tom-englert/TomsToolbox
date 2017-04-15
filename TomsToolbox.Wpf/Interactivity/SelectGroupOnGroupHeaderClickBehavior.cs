@@ -48,7 +48,7 @@
         }
 
         [ContractVerification(false)] // because of dynamic
-        private static void GroupHeader_OnMouseLeftButtonDown([NotNull] object sender, MouseButtonEventArgs e)
+        private static void GroupHeader_OnMouseLeftButtonDown([NotNull] object sender, [CanBeNull] MouseButtonEventArgs e)
         {
             Contract.Requires(sender != null);
 

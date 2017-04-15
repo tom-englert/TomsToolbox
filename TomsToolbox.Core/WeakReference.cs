@@ -20,7 +20,7 @@
         /// Initializes a new instance of the <see cref="WeakReference{T}"/> class.
         /// </summary>
         /// <param name="target">An object to track.</param>
-        public WeakReference(T target)
+        public WeakReference([CanBeNull] T target)
             : base(target)
         {
         }
@@ -30,7 +30,7 @@
         /// </summary>
         /// <param name="target"> An object to track.</param>
         /// <param name="trackResurrection">Indicates when to stop tracking the object. If true, the object is tracked after finalization; if false, the object is only tracked until finalization.</param>
-        public WeakReference(T target, bool trackResurrection)
+        public WeakReference([CanBeNull] T target, bool trackResurrection)
             : base(target, trackResurrection)
         {
         }
@@ -51,6 +51,7 @@
         /// Gets or sets the object (the target) referenced by the current <see cref="T:System.WeakReference" /> object.
         /// </summary>
         /// <returns>null if the object referenced by the current <see cref="T:System.WeakReference" /> object has been garbage collected; otherwise, a reference to the object referenced by the current <see cref="T:System.WeakReference" /> object.</returns>
+        [CanBeNull]
         public new T Target => (T)base.Target;
 
         /// <summary>
@@ -58,7 +59,7 @@
         /// </summary>
         /// <param name="target">The target.</param>
         /// <returns>True if target is valid.</returns>
-        public bool TryGetTarget(out T target)
+        public bool TryGetTarget([CanBeNull] out T target)
         {
             Contract.Ensures((Contract.Result<bool>() == false) || (Contract.ValueAtReturn(out target) != null));
 

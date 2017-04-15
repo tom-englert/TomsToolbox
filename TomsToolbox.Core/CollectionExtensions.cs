@@ -34,7 +34,7 @@
         /// <param name="target">The list to synchronize.</param>
         /// <param name="source">The items that should be in the target list.</param>
         /// <param name="comparer">The comparer used to compare the items. If comparer is <c>null</c>, the default equality comparer is used to compare values.</param>
-        public static void SynchronizeWith<T>([NotNull] this ICollection<T> target, [NotNull] ICollection<T> source, IEqualityComparer<T> comparer)
+        public static void SynchronizeWith<T>([NotNull] this ICollection<T> target, [NotNull] ICollection<T> source, [CanBeNull] IEqualityComparer<T> comparer)
         {
             Contract.Requires(target != null);
             Contract.Requires(source != null);
@@ -70,7 +70,7 @@
         /// <param name="firstItem">The first item to add.</param>
         /// <param name="secondItem">The second item to add.</param>
         /// <param name="moreItems">Any more items to add.</param>
-        public static void AddRange<T>([NotNull] this ICollection<T> target, T firstItem, T secondItem, [NotNull] params T[] moreItems)
+        public static void AddRange<T>([NotNull] this ICollection<T> target, [CanBeNull] T firstItem, [CanBeNull] T secondItem, [NotNull] params T[] moreItems)
         {
             Contract.Requires(target != null);
             Contract.Requires(moreItems != null);
@@ -229,7 +229,7 @@
         /// <param name="items">The items to test for.</param>
         /// <param name="comparer">The comparer to compare the individual items.</param>
         /// <returns><c>true</c> if any of the items is contained in the specified object; otherwise <c>false</c>.</returns>
-        public static bool ContainsAny<T>([NotNull] this IEnumerable<T> self, IEqualityComparer<T> comparer, [NotNull] params T[] items)
+        public static bool ContainsAny<T>([NotNull] this IEnumerable<T> self, [CanBeNull] IEqualityComparer<T> comparer, [NotNull] params T[] items)
         {
             Contract.Requires(self != null);
             Contract.Requires(items != null);
@@ -246,7 +246,7 @@
         /// <returns>
         /// The zero-based index of the first occurrence of <paramref name="item" />, if found; otherwise, –1.
         /// </returns>
-        public static int IndexOf<T>([NotNull] this IEnumerable<T> collection, T item)
+        public static int IndexOf<T>([NotNull] this IEnumerable<T> collection, [CanBeNull] T item)
         {
             Contract.Requires(collection != null);
 
@@ -273,7 +273,7 @@
         /// <returns>
         /// The zero-based index of the first occurrence of <paramref name="item" />, if found; otherwise, –1.
         /// </returns>
-        public static int IndexOf<T>([NotNull] this IEnumerable<T> collection, T item, [NotNull] IEqualityComparer<T> comparer)
+        public static int IndexOf<T>([NotNull] this IEnumerable<T> collection, [CanBeNull] T item, [NotNull] IEqualityComparer<T> comparer)
         {
             Contract.Requires(collection != null);
             Contract.Requires(comparer != null);
@@ -354,7 +354,8 @@
         /// <returns>
         /// The value from the dictionary, or the default value if no item with the specified key exists.
         /// </returns>
-        public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, TValue defaultValue)
+        [CanBeNull]
+        public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [CanBeNull] TValue defaultValue)
         {
             Contract.Requires(dictionary != null);
             Contract.Requires(!ReferenceEquals(key, null));
@@ -418,7 +419,7 @@
         /// <param name="key">The key.</param>
         /// <param name="defaultValue">The value that will be added to the dictionary if the dictionary does not contain a value associated with the key.</param>
         /// <returns> The element with the specified key.</returns>
-        public static TValue ForceValue<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, TValue defaultValue)
+        public static TValue ForceValue<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [CanBeNull] TValue defaultValue)
         {
             Contract.Requires(dictionary != null);
             Contract.Requires(!ReferenceEquals(key, null));
@@ -465,6 +466,7 @@
         /// <param name="source">The collection to be repeated.</param>
         /// <param name="count">The number of times to repeat the source sequence.</param>
         /// <returns>An <see cref="IEnumerable{T}"/> that contains the repeated source sequence.</returns>
+        [ItemCanBeNull]
         [NotNull]
         public static IEnumerable<T> Repeat<T>([NotNull] ICollection<T> source, int count)
         {

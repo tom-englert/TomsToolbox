@@ -44,7 +44,7 @@
         /// </summary>
         /// <param name="oldSource"></param>
         /// <param name="newSource"></param>
-        protected void RelayEventsOf(INotifyPropertyChanged oldSource, INotifyPropertyChanged newSource)
+        protected void RelayEventsOf([CanBeNull] INotifyPropertyChanged oldSource, [CanBeNull] INotifyPropertyChanged newSource)
         {
             if (ReferenceEquals(oldSource, newSource))
                 return;
@@ -126,7 +126,7 @@
         /// <returns>True if value has changed and the PropertyChange event was raised.</returns>
         [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>(ref T backingField, T value, [NotNull] Expression<Func<T>> propertyExpression)
+        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Expression<Func<T>> propertyExpression)
         {
             Contract.Requires(propertyExpression != null);
 
@@ -144,7 +144,7 @@
         /// <returns>True if value has changed and the PropertyChange event was raised.</returns>
         [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>(ref T backingField, T value, [NotNull] Expression<Func<T>> propertyExpression, [NotNull] Action<T, T> changeCallback)
+        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Expression<Func<T>> propertyExpression, [NotNull] Action<T, T> changeCallback)
         {
             Contract.Requires(propertyExpression != null);
             Contract.Requires(changeCallback != null);
@@ -166,7 +166,7 @@
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         protected bool SetProperty<T>(ref T backingField, T value, [System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
 #else
-        protected bool SetProperty<T>(ref T backingField, T value, [NotNull] string propertyName)
+        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] string propertyName)
 #endif
         {
             Contract.Requires(!string.IsNullOrEmpty(propertyName));
@@ -191,7 +191,7 @@
         /// <returns> True if value has changed and the PropertyChange event was raised. </returns>
         [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>(ref T backingField, T value, [NotNull] string propertyName, [NotNull] Action<T, T> changeCallback)
+        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] string propertyName, [NotNull] Action<T, T> changeCallback)
         {
             Contract.Requires(!string.IsNullOrEmpty(propertyName));
             Contract.Requires(changeCallback != null);
@@ -312,7 +312,7 @@
         /// The default implementation returns the <see cref="ValidationAttribute"/> errors of the property.
         /// </remarks>
         [NotNull]
-        protected virtual IEnumerable<string> GetDataErrors(string propertyName)
+        protected virtual IEnumerable<string> GetDataErrors([CanBeNull] string propertyName)
         {
             Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
 
@@ -335,12 +335,12 @@
         /// </summary>
         /// <param name="propertyName">Name of the property, or <c>null</c> if the errors .</param>
         /// <param name="dataErrors">The data errors for the property.</param>
-        protected virtual void OnDataErrorsEvaluated(string propertyName, IEnumerable<string> dataErrors)
+        protected virtual void OnDataErrorsEvaluated([CanBeNull] string propertyName, [CanBeNull] IEnumerable<string> dataErrors)
         {
         }
 
         [NotNull]
-        private IEnumerable<string> InternalGetDataErrors(string propertyName)
+        private IEnumerable<string> InternalGetDataErrors([CanBeNull] string propertyName)
         {
             Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
 
@@ -351,9 +351,11 @@
             return dataErrors;
         }
 
+        [CanBeNull]
         string IDataErrorInfo.Error => InternalGetDataErrors(null).FirstOrDefault();
 
-        string IDataErrorInfo.this[string columnName] => InternalGetDataErrors(columnName).FirstOrDefault();
+        [CanBeNull]
+        string IDataErrorInfo.this[[CanBeNull] string columnName] => InternalGetDataErrors(columnName).FirstOrDefault();
 
 #if NETFRAMEWORK_4_5
         private event EventHandler<DataErrorsChangedEventArgs> _errorsChanged;

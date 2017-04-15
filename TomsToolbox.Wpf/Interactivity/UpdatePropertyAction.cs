@@ -4,6 +4,8 @@
     using System.Windows.Data;
     using System.Windows.Interactivity;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
 
     /// <summary>
@@ -24,6 +26,7 @@
         /// <summary>
         /// Gets the property that should be refreshed.
         /// </summary>
+        [CanBeNull]
         public DependencyProperty Property
         {
             get { return (DependencyProperty)GetValue(PropertyProperty); }
@@ -42,7 +45,7 @@
         /// The parameter to the action. If the action does not require a parameter, the parameter may be
         /// set to a null reference.
         /// </param>
-        protected override void Invoke(object parameter)
+        protected override void Invoke([CanBeNull] object parameter)
         {
             var target = Target;
             if ((target == null) || !target.IsLoaded)

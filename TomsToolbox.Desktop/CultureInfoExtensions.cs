@@ -75,7 +75,7 @@
         }
 
         [NotNull]
-        private static CultureInfo[] CreateChildList(CultureInfo parent)
+        private static CultureInfo[] CreateChildList([CanBeNull] CultureInfo parent)
         {
             Contract.Ensures(Contract.Result<CultureInfo[]>() != null);
 

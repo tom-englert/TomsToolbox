@@ -6,6 +6,8 @@
     using System.Windows;
     using System.Windows.Interactivity;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Core;
     using TomsToolbox.Desktop;
 
@@ -23,6 +25,7 @@
         /// <summary>
         /// Gets or sets the exported type of the object to provide.
         /// </summary>
+        [CanBeNull]
         public Type MemberType
         {
             get
@@ -39,6 +42,7 @@
         /// <summary>
         /// Gets or sets the optional contract name of the exported object.
         /// </summary>
+        [CanBeNull]
         public string ContractName
         {
             get
@@ -55,6 +59,7 @@
         /// <summary>
         /// Gets or sets the target property to set. The default is <see cref="FrameworkElement.DataContextProperty"/>.
         /// </summary>
+        [CanBeNull]
         public DependencyProperty TargetProperty
         {
             get

@@ -20,6 +20,7 @@
         /// <summary>
         /// Gets or sets the toggle button that controls the popup.
         /// </summary>
+        [CanBeNull]
         public ToggleButton ToggleButton
         {
             get { return (ToggleButton)GetValue(ToggleButtonProperty); }
@@ -67,7 +68,7 @@
             popup.KeyDown -= Popup_KeyDown;
         }
 
-        private void Popup_KeyDown(object sender, KeyEventArgs e)
+        private void Popup_KeyDown([CanBeNull] object sender, [CanBeNull] KeyEventArgs e)
         {
             if (ToggleButton == null)
                 return;
@@ -83,7 +84,7 @@
             }
         }
 
-        private void Popup_Opened([NotNull] object sender, EventArgs e)
+        private void Popup_Opened([NotNull] object sender, [CanBeNull] EventArgs e)
         {
             Contract.Requires(sender != null);
 
@@ -97,7 +98,7 @@
             }
         }
 
-        private void Popup_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void Popup_IsKeyboardFocusWithinChanged([CanBeNull] object sender, DependencyPropertyChangedEventArgs e)
         {
             if (Equals(e.NewValue, false) && (ToggleButton != null))
             {

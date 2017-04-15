@@ -33,7 +33,7 @@
         /// <param name="func">The function.</param>
         /// <param name="arg1">The argument of the function.</param>
         /// <returns>The result of the function.</returns>
-        public static T InvokeInSeparateDomain<TA1, T>([NotNull] this Func<TA1, T> func, TA1 arg1)
+        public static T InvokeInSeparateDomain<TA1, T>([NotNull] this Func<TA1, T> func, [CanBeNull] TA1 arg1)
         {
             Contract.Requires(func != null);
 
@@ -50,7 +50,7 @@
         /// <param name="arg1">The arguments of the function.</param>
         /// <param name="arg2">The arguments of the function.</param>
         /// <returns>The result of the function.</returns>
-        public static T InvokeInSeparateDomain<TA1, TA2, T>([NotNull] this Func<TA1, TA2, T> func, TA1 arg1, TA2 arg2)
+        public static T InvokeInSeparateDomain<TA1, TA2, T>([NotNull] this Func<TA1, TA2, T> func, [CanBeNull] TA1 arg1, [CanBeNull] TA2 arg2)
         {
             Contract.Requires(func != null);
 
@@ -69,7 +69,7 @@
         /// <param name="arg2">The arguments of the function.</param>
         /// <param name="arg3">The arguments of the function.</param>
         /// <returns>The result of the function.</returns>
-        public static T InvokeInSeparateDomain<TA1, TA2, TA3, T>([NotNull] this Func<TA1, TA2, TA3, T> func, TA1 arg1, TA2 arg2, TA3 arg3)
+        public static T InvokeInSeparateDomain<TA1, TA2, TA3, T>([NotNull] this Func<TA1, TA2, TA3, T> func, [CanBeNull] TA1 arg1, [CanBeNull] TA2 arg2, [CanBeNull] TA3 arg3)
         {
             Contract.Requires(func != null);
 
@@ -90,7 +90,7 @@
         /// <param name="arg3">The arguments of the function.</param>
         /// <param name="arg4">The arguments of the function.</param>
         /// <returns>The result of the function.</returns>
-        public static T InvokeInSeparateDomain<TA1, TA2, TA3, TA4, T>([NotNull] this Func<TA1, TA2, TA3, TA4, T> func, TA1 arg1, TA2 arg2, TA3 arg3, TA4 arg4)
+        public static T InvokeInSeparateDomain<TA1, TA2, TA3, TA4, T>([NotNull] this Func<TA1, TA2, TA3, TA4, T> func, [CanBeNull] TA1 arg1, [CanBeNull] TA2 arg2, [CanBeNull] TA3 arg3, [CanBeNull] TA4 arg4)
         {
             Contract.Requires(func != null);
 
@@ -143,8 +143,9 @@
         // ReSharper disable once ClassNeverInstantiated.Local
         private class DomainHelper : MarshalByRefObject
         {
+            [CanBeNull]
             [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-            public object Invoke([NotNull] MethodInfo method, object target, object[] args)
+            public object Invoke([NotNull] MethodInfo method, [CanBeNull] object target, [CanBeNull] object[] args)
             {
                 Contract.Requires(method != null);
                 return method.Invoke(target, args);

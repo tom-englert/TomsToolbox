@@ -50,6 +50,7 @@
         /// <returns>
         /// The exports provider.
         /// </returns>
+        [CanBeNull]
         public static ExportProvider TryGetExportProvider([NotNull] this DependencyObject obj)
         {
             Contract.Requires(obj != null);
@@ -61,7 +62,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetExportProvider([NotNull] this DependencyObject obj, ExportProvider value)
+        public static void SetExportProvider([NotNull] this DependencyObject obj, [CanBeNull] ExportProvider value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(ExportProviderProperty, value);

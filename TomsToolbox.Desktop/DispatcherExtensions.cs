@@ -20,7 +20,7 @@
         /// <param name="method">The method.</param>
         /// <returns>The result of the method.</returns>
         /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
-        public static T Invoke<T>(this Dispatcher dispatcher, [NotNull] Func<T> method)
+        public static T Invoke<T>([CanBeNull] this Dispatcher dispatcher, [NotNull] Func<T> method)
         {
             Contract.Requires(method != null);
 
@@ -33,14 +33,15 @@
         /// <param name="dispatcher">The dispatcher.</param>
         /// <param name="method">The method.</param>
         /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
-        public static void Invoke(this Dispatcher dispatcher, [NotNull] Action method)
+        public static void Invoke([CanBeNull] this Dispatcher dispatcher, [NotNull] Action method)
         {
             Contract.Requires(method != null);
 
             InternalInvoke(dispatcher, method);
         }
 
-        private static T InternalInvoke<T>(Dispatcher dispatcher, [NotNull] Func<T> method)
+        [CanBeNull]
+        private static T InternalInvoke<T>([CanBeNull] Dispatcher dispatcher, [NotNull] Func<T> method)
         {
             Contract.Requires(method != null);
 
@@ -51,7 +52,8 @@
             return (T)result;
         }
 
-        private static object InternalInvoke(Dispatcher dispatcher, [NotNull] Delegate method)
+        [CanBeNull]
+        private static object InternalInvoke([CanBeNull] Dispatcher dispatcher, [NotNull] Delegate method)
         {
             Contract.Requires(method != null);
 

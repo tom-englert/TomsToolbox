@@ -40,6 +40,7 @@
         /// <typeparam name="TProperty">The property type.</typeparam>
         /// <param name="propertyExpression">The property expression (e.g. () => p.PropertyName) to extract the property name from.</param>
         /// <returns>The name of the property, or null if the extraction fails.</returns>
+        [CanBeNull]
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Works only with exactly this kind of expression, so we don't want to allow to pass something else!")]
         public static string TryExtractPropertyName<TProperty>([NotNull] Expression<Func<TProperty>> propertyExpression)
         {
@@ -75,6 +76,7 @@
         /// <typeparam name="TProperty">The property type.</typeparam>
         /// <param name="propertyExpression">The property expression (e.g. p => p.PropertyName) to extract the property name from.</param>
         /// <returns>The name of the property, or null if the extraction fails.</returns>
+        [CanBeNull]
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Works only with exactly this kind of expression, so we don't want to allow to pass something else!")]
         public static string TryExtractPropertyName<T, TProperty>([NotNull] Expression<Func<T, TProperty>> propertyExpression)
         {
@@ -126,6 +128,7 @@
         }
 
         // ReSharper disable once UnusedParameter.Local
+        [CanBeNull]
         private static string HandleError(bool failOnErrors, [NotNull] string errorMessage)
         {
             Contract.Requires(errorMessage != null);

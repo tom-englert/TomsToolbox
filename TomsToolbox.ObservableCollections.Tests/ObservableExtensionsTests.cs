@@ -7,6 +7,8 @@ namespace TomsToolbox.ObservableCollections.Tests
     using System.Collections.Specialized;
     using System.Linq;
 
+    using JetBrains.Annotations;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using TomsToolbox.Core;
@@ -20,6 +22,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             private IList<int> _inner;
             private int _value;
 
+            [CanBeNull]
             public IList<int> Inner
             {
                 get

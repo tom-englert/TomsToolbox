@@ -56,7 +56,8 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        [CanBeNull]
+        public object Convert([CanBeNull] object[] values, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             if (MultiValueConverter == null)
                 throw new InvalidOperationException("A MultiValueConverter must be set.");

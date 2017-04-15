@@ -21,6 +21,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns>The command.</returns>
+        [CanBeNull]
         [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
         public static ICommand GetDefaultItemCommand([NotNull] this ItemsControl obj)
         {
@@ -33,7 +34,7 @@
         /// <param name="obj">The object.</param>
         /// <param name="value">The command.</param>
         [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
-        public static void SetDefaultItemCommand([NotNull] this ItemsControl obj, ICommand value)
+        public static void SetDefaultItemCommand([NotNull] this ItemsControl obj, [CanBeNull] ICommand value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(DefaultItemCommandProperty, value);
@@ -53,7 +54,7 @@
         public static readonly DependencyProperty DefaultItemCommandProperty =
             DependencyProperty.RegisterAttached("DefaultItemCommand", typeof(ICommand), typeof(ItemsControlExtensions), new FrameworkPropertyMetadata(DefaultItemCommand_Changed));
 
-        private static void DefaultItemCommand_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void DefaultItemCommand_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var itemsControl = d as ItemsControl;
             if (itemsControl == null)
@@ -124,6 +125,7 @@
         /// </summary>
         /// <param name="obj">The <see cref="ItemsControl"/> to refresh.</param>
         /// <returns>The object to observe.</returns>
+        [CanBeNull]
         public static object GetRefreshOnSourceChanges([NotNull] ItemsControl obj)
         {
             Contract.Requires(obj != null);
@@ -135,7 +137,7 @@
         /// </summary>
         /// <param name="obj">The <see cref="ItemsControl"/> to refresh.</param>
         /// <param name="value">The object to observe.</param>
-        public static void SetRefreshOnSourceChanges([NotNull] ItemsControl obj, object value)
+        public static void SetRefreshOnSourceChanges([NotNull] ItemsControl obj, [CanBeNull] object value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(RefreshOnSourceChangesProperty, value);
@@ -151,7 +153,7 @@
         public static readonly DependencyProperty RefreshOnSourceChangesProperty =
             DependencyProperty.RegisterAttached("RefreshOnSourceChanges", typeof(object), typeof(ItemsControlExtensions), new FrameworkPropertyMetadata(Source_Changed));
 
-        private static void Source_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void Source_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var itemsControl = d as ItemsControl;
             if (itemsControl == null)

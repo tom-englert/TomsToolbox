@@ -38,6 +38,7 @@
         /// </summary>
         /// <param name="obj">The object to attach to.</param>
         /// <returns>The current selection.</returns>
+        [CanBeNull]
         [AttachedPropertyBrowsableForType(typeof(Selector))]
         public static IList GetSelectionBinding([NotNull] this Selector obj)
         {
@@ -50,7 +51,7 @@
         /// <param name="obj">The object to attach to.</param>
         /// <param name="value">The new selection.</param>
         [AttachedPropertyBrowsableForType(typeof(Selector))]
-        public static void SetSelectionBinding([NotNull] this Selector obj, IList value)
+        public static void SetSelectionBinding([NotNull] this Selector obj, [CanBeNull] IList value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(SelectionBindingProperty, value);
@@ -98,7 +99,7 @@
             d.SetValue(SelectionSynchronizerProperty, new SelectionSynchronizer((Selector)d, sourceSelection));
         }
 
-        private static void CommitEdit(this Selector selector)
+        private static void CommitEdit([CanBeNull] this Selector selector)
         {
             var dataGrid = selector as DataGrid;
             if (dataGrid != null)
@@ -121,14 +122,14 @@
         }
 
         [ContractVerification(false)] // because of dynamic
-        private static void ScrollIntoView([NotNull] this Selector selector, object selectedItem)
+        private static void ScrollIntoView([NotNull] this Selector selector, [CanBeNull] object selectedItem)
         {
             Contract.Requires(selector != null);
 
             ((dynamic)selector).ScrollIntoView(selectedItem);
         }
 
-        private static void BeginSetFocus([NotNull] this ItemsControl selector, object selectedItem)
+        private static void BeginSetFocus([NotNull] this ItemsControl selector, [CanBeNull] object selectedItem)
         {
             Contract.Requires(selector != null);
 

@@ -24,7 +24,7 @@
         /// <param name="selector">The selector to get the desired value from the attribute.</param>
         /// <returns>The converted value.</returns>
         [NotNull]
-        protected static string InternalConvert([NotNull] object value, Type enumType, [NotNull] Func<T, string> selector)
+        protected static string InternalConvert([NotNull] object value, [CanBeNull] Type enumType, [NotNull] Func<T, string> selector)
         {
             Contract.Requires(value != null);
             Contract.Requires(selector != null);
@@ -44,7 +44,7 @@
         /// The converted value.
         /// </returns>
         [NotNull]
-        protected static string InternalConvert([NotNull] object value, Type enumType, [NotNull] Func<T, string> selector, [NotNull] Func<T, bool> predicate)
+        protected static string InternalConvert([NotNull] object value, [CanBeNull] Type enumType, [NotNull] Func<T, string> selector, [NotNull] Func<T, bool> predicate)
         {
             Contract.Requires(value != null);
             Contract.Requires(selector != null);

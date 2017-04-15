@@ -5,6 +5,8 @@
     using System.Text.RegularExpressions;
     using System.Windows.Data;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// A converter that converts the specified value by replacing text using a regular expression.
     /// </summary>
@@ -31,7 +33,8 @@
         /// </summary>
         public bool ReplaceAll { get; set; }
 
-        private object Convert(string value)
+        [CanBeNull]
+        private object Convert([CanBeNull] string value)
         {
             return Convert(value, Pattern, Replacement, Options, ReplaceAll);
         }
@@ -45,7 +48,8 @@
         /// <param name="options">The options for the regular expression.</param>
         /// <param name="replaceAll">if set to <c>true</c> all occurrences will be replaces; otherwise only the first.</param>
         /// <returns>The converted value.</returns>
-        public static object Convert(string value, string pattern, string replacement, RegexOptions options, bool replaceAll)
+        [CanBeNull]
+        public static object Convert([CanBeNull] string value, [CanBeNull] string pattern, string replacement, RegexOptions options, bool replaceAll)
         {
             if (value == null)
                 return null;
@@ -72,6 +76,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
+        [CanBeNull]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return Convert((string)value);

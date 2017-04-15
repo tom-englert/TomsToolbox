@@ -16,6 +16,7 @@
         /// <param name="element">The element.</param>
         /// <param name="name">The name of the attribute.</param>
         /// <returns>The value of the attribute, or <c>null</c> if no such attribute exists</returns>
+        [CanBeNull]
         public static string GetAttribute([NotNull] this XElement element, [NotNull] string name)
         {
             Contract.Requires(element != null);
@@ -33,7 +34,8 @@
         /// <returns>
         /// The value of the attribute, or the <paramref name="defaultValue" /> if no such attribute exists
         /// </returns>
-        public static string GetAttribute([NotNull] this XElement element, [NotNull] string name, string defaultValue)
+        [CanBeNull]
+        public static string GetAttribute([NotNull] this XElement element, [NotNull] string name, [CanBeNull] string defaultValue)
         {
             Contract.Requires(element != null);
             Contract.Requires(!string.IsNullOrEmpty(name));
@@ -48,6 +50,7 @@
         /// <param name="element">The element.</param>
         /// <param name="name">The name of the attribute.</param>
         /// <returns>The value of the attribute, or <c>null</c> if no such attribute exists</returns>
+        [CanBeNull]
         public static string GetAttribute([NotNull] this XElement element, [NotNull] XName name)
         {
             Contract.Requires(element != null);
@@ -65,7 +68,8 @@
         /// <returns>
         /// The value of the attribute, or the <paramref name="defaultValue"/> if no such attribute exists
         /// </returns>
-        public static string GetAttribute([NotNull] this XElement element, [NotNull] XName name, string defaultValue)
+        [CanBeNull]
+        public static string GetAttribute([NotNull] this XElement element, [NotNull] XName name, [CanBeNull] string defaultValue)
         {
             Contract.Requires(element != null);
             Contract.Requires(name != null);

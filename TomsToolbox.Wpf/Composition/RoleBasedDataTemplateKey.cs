@@ -3,6 +3,8 @@
     using System;
     using System.Windows;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// A resource key for data templates, like the <see cref="DataTemplateKey"/>, but adding a <see cref="Role"/> property to distinguish
     /// several data templates for different roles.
@@ -27,7 +29,7 @@
         /// </summary>
         /// <param name="dataType">Type of the data.</param>
         /// <param name="role">The role.</param>
-        public RoleBasedDataTemplateKey(object dataType, object role)
+        public RoleBasedDataTemplateKey([CanBeNull] object dataType, [CanBeNull] object role)
             : base(TemplateType.DataTemplate, dataType)
         {
             _role = role;
@@ -37,6 +39,7 @@
         /// Gets or sets the role. The role is immutable and can be set only once.
         /// </summary>
         /// <exception cref="System.InvalidOperationException">Object is immutable.</exception>
+        [CanBeNull]
         public object Role
         {
             get

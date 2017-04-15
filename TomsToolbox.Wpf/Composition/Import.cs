@@ -18,6 +18,7 @@ namespace TomsToolbox.Wpf.Composition
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns>The data context type.</returns>
+        [CanBeNull]
         [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         public static Type GetDataContext([NotNull] FrameworkElement obj)
         {
@@ -29,7 +30,7 @@ namespace TomsToolbox.Wpf.Composition
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetDataContext([NotNull] FrameworkElement obj, Type value)
+        public static void SetDataContext([NotNull] FrameworkElement obj, [CanBeNull] Type value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(DataContextProperty, value);

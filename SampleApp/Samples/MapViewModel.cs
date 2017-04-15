@@ -57,8 +57,10 @@
             }
         }
 
+        [CanBeNull]
         public IList<MapSource> MapSources => _mapSourceFile.MapSources;
 
+        [CanBeNull]
         public IImageProvider ImageProvider
         {
             get
@@ -95,6 +97,7 @@
             }
         }
 
+        [CanBeNull]
         public Poi SelectedPoi
         {
             get
@@ -110,6 +113,7 @@
             }
         }
 
+        [CanBeNull]
         public IList<Poi> Pois => _pois;
 
         public Rect Bounds

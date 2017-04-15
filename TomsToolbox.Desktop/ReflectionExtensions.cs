@@ -35,7 +35,7 @@
         /// <param name="assembly">The assembly. If assmbly is null, an empty list is returned.</param>
         /// <returns>The types in the assembly.</returns>
         [NotNull]
-        public static IEnumerable<Type> EnumerateAllTypes(this Assembly assembly)
+        public static IEnumerable<Type> EnumerateAllTypes([CanBeNull] this Assembly assembly)
         {
             Contract.Ensures(Contract.Result<IEnumerable<Type>>() != null);
 
@@ -43,7 +43,7 @@
         }
 
         [NotNull]
-        private static IEnumerable<Type> GetSelfAndNestedTypes(Type type)
+        private static IEnumerable<Type> GetSelfAndNestedTypes([CanBeNull] Type type)
         {
             Contract.Ensures(Contract.Result<IEnumerable<Type>>() != null);
 
@@ -87,8 +87,9 @@
         /// </summary>
         /// <param name="assemblyFile">The assembly file.</param>
         /// <returns>The assembly if the assembly could be loaded; otherwise <c>null</c>.</returns>
+        [CanBeNull]
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFile")]
-        public static Assembly TryLoadAssembly(this FileSystemInfo assemblyFile)
+        public static Assembly TryLoadAssembly([CanBeNull] this FileSystemInfo assemblyFile)
         {
             if (assemblyFile == null)
                 return null;
@@ -114,8 +115,9 @@
         /// </summary>
         /// <param name="assemblyFile">The assembly file.</param>
         /// <returns>The assembly if the assembly could be loaded; otherwise <c>null</c>.</returns>
+        [CanBeNull]
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFile")]
-        public static Assembly TryLoadAssemblyForReflectionOnly(this FileSystemInfo assemblyFile)
+        public static Assembly TryLoadAssemblyForReflectionOnly([CanBeNull] this FileSystemInfo assemblyFile)
         {
             if (assemblyFile == null)
                 return null;

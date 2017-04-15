@@ -41,6 +41,7 @@
         /// <summary>
         /// Gets the command represented by this <see cref="CommandSourceFactory" />. This can be bound to a menu's or button's Command property.
         /// </summary>
+        [CanBeNull]
         public ICommand Command
         {
             get { return (ICommand)GetValue(CommandProperty); }
@@ -69,7 +70,8 @@
             DependencyProperty.Register("IsChecked", typeof(bool), typeof(CommandSource));
 
 
-        private static object Command_CoerceValue(DependencyObject d, object basevalue)
+        [CanBeNull]
+        private static object Command_CoerceValue([CanBeNull] DependencyObject d, [CanBeNull] object basevalue)
         {
             return basevalue ?? NullCommand.Default;
         }
@@ -77,16 +79,19 @@
         /// <summary>
         /// Gets the header to be shown in the UI. Usually this is a localized text naming the command.
         /// </summary>
+        [CanBeNull]
         public object Header => _owner.Header;
 
         /// <summary>
         /// Gets the tool tip to be shown in the UI. Usually this is a localized text describing the command.
         /// </summary>
+        [CanBeNull]
         public object Description => _owner.Description;
 
         /// <summary>
         /// Gets the icon to be shown in the UI, or null to show no icon.
         /// </summary>
+        [CanBeNull]
         public object Icon => _owner.Icon;
 
         /// <summary>
@@ -98,6 +103,7 @@
         /// <summary>
         /// Gets the id of the region sub-items can register for.
         /// </summary>
+        [CanBeNull]
         public string SubRegionId => _owner.SubRegionId;
 
         /// <summary>
@@ -110,11 +116,13 @@
         /// Gets the name of the group that this command belongs to.
         /// If different group names are specified for a target region, the commands can be grouped and the groups separated by a <see cref="Separator" />.
         /// </summary>
+        [CanBeNull]
         public virtual object GroupName => _owner.GroupName;
 
         /// <summary>
         /// Gets a tag that can be bound to the target objects tag.
         /// </summary>
+        [CanBeNull]
         public object Tag => _owner.Tag;
 
         /// <summary>
@@ -182,7 +190,7 @@
             SetCommand(_attachedCommands.FirstOrDefault());
         }
 
-        private void SetCommand(ICommand command)
+        private void SetCommand([CanBeNull] ICommand command)
         {
             Command = command;
 

@@ -45,6 +45,7 @@
         /// <summary>
         /// Gets or sets the id of the region. The region id is used to select candidates for composition.
         /// </summary>
+        [CanBeNull]
         public string RegionId
         {
             get { return (string)GetValue(RegionIdProperty); }
@@ -60,6 +61,7 @@
         /// <summary>
         /// Gets or sets the composition context.
         /// </summary>
+        [CanBeNull]
         public object CompositionContext
         {
             get { return GetValue(CompositionContextProperty); }
@@ -79,6 +81,7 @@
         /// <remarks>
         /// Use this property instead of setting a direct binding to the <see cref="RegionId"/> property if the direct binding will generate binding error message, e.g. in style setters.
         /// </remarks>
+        [CanBeNull]
         public BindingBase RegionIdBinding
         {
             get { return (BindingBase)GetValue(_regionIdBindingProperty); }
@@ -101,6 +104,7 @@
         /// <remarks>
         /// Use this property instead of setting a direct binding to the <see cref="RegionId"/> property if the direct binding will generate binding error message, e.g. in style setters.
         /// </remarks>
+        [CanBeNull]
         public BindingBase CompositionContextBinding
         {
             get { return (BindingBase)GetValue(_compositionContextBindingProperty); }
@@ -118,6 +122,7 @@
         /// <summary>
         /// Gets or sets the export provider (IOC). The export provider must be registered with the <see cref="ExportProviderLocator"/>.
         /// </summary>
+        [CanBeNull]
         protected ExportProvider ExportProvider
         {
             get
@@ -130,6 +135,7 @@
             }
         }
 
+        [CanBeNull]
         private ExportProvider InternalExportProvider
         {
             get
@@ -202,7 +208,8 @@
         /// </summary>
         /// <param name="regionId">The region identifier.</param>
         /// <returns>The exports for the region, or <c>null</c> if the export provider is not set yet.</returns>
-        protected IEnumerable<Lazy<object, IVisualCompositionMetadata>> GetExports(string regionId)
+        [CanBeNull]
+        protected IEnumerable<Lazy<object, IVisualCompositionMetadata>> GetExports([CanBeNull] string regionId)
         {
             return ExportProvider?.GetExports<object, IVisualCompositionMetadata>(VisualCompositionExportAttribute.ExportContractName)
                 .Where(item => item?.Metadata.TargetRegions.Contains(regionId) == true);
@@ -215,7 +222,8 @@
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns>The item or the factory generated item.</returns>
-        protected object GetTarget(object item)
+        [CanBeNull]
+        protected object GetTarget([CanBeNull] object item)
         {
             var partFactory = item as IComposablePartFactory;
 
@@ -245,6 +253,7 @@
         /// </remarks>
         protected abstract void OnUpdate();
 
+        [CanBeNull]
         private ExportProvider GetExportProvider()
         {
             var associatedObject = AssociatedObject;
@@ -266,7 +275,7 @@
             Update();
         }
 
-        private void ExportProvider_ExportsChanged(object sender, ExportsChangeEventArgs e)
+        private void ExportProvider_ExportsChanged([CanBeNull] object sender, [CanBeNull] ExportsChangeEventArgs e)
         {
             // Defer update using a throttle:
             // - Export events may come from any thread, must dispatch to UI thread anyhow.
@@ -274,7 +283,7 @@
             _deferredUpdateThrottle.Tick();
         }
 
-        private void ExportProvider_Changed(object sender, EventArgs e)
+        private void ExportProvider_Changed([CanBeNull] object sender, [CanBeNull] EventArgs e)
         {
             ExportProvider = AssociatedObject?.TryGetExportProvider();
         }

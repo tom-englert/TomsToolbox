@@ -104,6 +104,7 @@
         /// </summary>
         /// <param name="index">The index.</param>
         /// <returns></returns>
+        [CanBeNull]
         public T this[int index]
         {
             get
@@ -136,7 +137,7 @@
             }
         }
 
-        bool ICollection<T>.Remove(T item)
+        bool ICollection<T>.Remove([CanBeNull] T item)
         {
             ReadOnlyNotSupported();
             return false;
@@ -146,18 +147,18 @@
 
         bool ICollection.IsSynchronized => false;
 
-        int IList.Add(object value)
+        int IList.Add([CanBeNull] object value)
         {
             ReadOnlyNotSupported();
             return 0;
         }
 
-        bool IList.Contains(object value)
+        bool IList.Contains([CanBeNull] object value)
         {
             return value != null && _collectionView.Contains(value);
         }
 
-        void ICollection<T>.Add(T item)
+        void ICollection<T>.Add([CanBeNull] T item)
         {
             ReadOnlyNotSupported();
         }
@@ -190,22 +191,22 @@
             ReadOnlyNotSupported();
         }
 
-        int IList.IndexOf(object value)
+        int IList.IndexOf([CanBeNull] object value)
         {
             return value == null ? -1 : _collectionView.IndexOf(value);
         }
 
-        void IList.Insert(int index, object value)
+        void IList.Insert(int index, [CanBeNull] object value)
         {
             ReadOnlyNotSupported();
         }
 
-        void IList.Remove(object value)
+        void IList.Remove([CanBeNull] object value)
         {
             ReadOnlyNotSupported();
         }
 
-        void IList<T>.Insert(int index, T item)
+        void IList<T>.Insert(int index, [CanBeNull] T item)
         {
             ReadOnlyNotSupported();
         }
@@ -220,6 +221,7 @@
             ReadOnlyNotSupported();
         }
 
+        [CanBeNull]
         object IList.this[int index]
         {
             get
@@ -255,7 +257,7 @@
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChanged(PropertyChangedEventArgs e)
+        private void OnPropertyChanged([CanBeNull] PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(this, e);
         }
@@ -265,17 +267,17 @@
         /// </summary>
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-        private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+        private void OnCollectionChanged([CanBeNull] NotifyCollectionChangedEventArgs e)
         {
             CollectionChanged?.Invoke(this, e);
         }
 
-        private void CollectionView_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void CollectionView_PropertyChanged([CanBeNull] object sender, [CanBeNull] PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e);
         }
 
-        private void CollectionView_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void CollectionView_CollectionChanged([CanBeNull] object sender, [CanBeNull] NotifyCollectionChangedEventArgs e)
         {
             OnCollectionChanged(e);
         }

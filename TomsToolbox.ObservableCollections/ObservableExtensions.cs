@@ -226,7 +226,7 @@
                 _propertyChangeEventListeners.RemoveAt(itemIndex);
             }
 
-            private void AttachEvent(int itemIndex, INotifyPropertyChanged item)
+            private void AttachEvent(int itemIndex, [CanBeNull] INotifyPropertyChanged item)
             {
                 Contract.Requires(_propertyChangeEventListeners != null);
                 Contract.Requires(itemIndex >= -1);
@@ -247,8 +247,9 @@
                 }
             }
 
+            [CanBeNull]
             [ContractVerification(false)]
-            private WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> GeneratePropertyChangedEventListener(INotifyPropertyChanged item)
+            private WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> GeneratePropertyChangedEventListener([CanBeNull] INotifyPropertyChanged item)
             {
                 return (item == null) ? null :
                     new WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs>(this,item, OnCollectionChanged, Attach, Detach);
@@ -317,7 +318,7 @@
             }
 
             [ContractVerification(false)]
-            private void Source_CollectionChanged(object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+            private void Source_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
             {
                 Contract.Requires(e != null);
 

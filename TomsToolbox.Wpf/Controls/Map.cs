@@ -75,6 +75,7 @@
         /// <summary>
         /// Gets or sets the image provider.
         /// </summary>
+        [CanBeNull]
         public IImageProvider ImageProvider
         {
             get { return (IImageProvider)GetValue(ImageProviderProperty); }
@@ -178,6 +179,7 @@
         /// <summary>
         /// Gets the element representing the map layer.
         /// </summary>
+        [CanBeNull]
         public FrameworkElement World
         {
             get { return (FrameworkElement)GetValue(WorldProperty); }
@@ -193,6 +195,7 @@
         /// <summary>
         /// Gets the element representing the viewport.
         /// </summary>
+        [CanBeNull]
         public FrameworkElement Viewport
         {
             get { return (FrameworkElement)GetValue(ViewportProperty); }
@@ -226,6 +229,7 @@
         /// Gets or sets the double click command. The command will be executed when the user double clicks on the map.
         /// The command parameter is a <see cref="Point"/> containing the logical coordinates.
         /// </summary>
+        [CanBeNull]
         public ICommand MouseDoubleClickCommand
         {
             get { return (ICommand)GetValue(MouseDoubleClickCommandProperty); }

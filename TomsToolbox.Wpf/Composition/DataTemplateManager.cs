@@ -35,6 +35,7 @@ namespace TomsToolbox.Wpf.Composition
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns>The role</returns>
+        [CanBeNull]
         public static object GetRole([NotNull] DependencyObject obj)
         {
             Contract.Requires(obj != null);
@@ -46,7 +47,7 @@ namespace TomsToolbox.Wpf.Composition
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetRole([NotNull] DependencyObject obj, object value)
+        public static void SetRole([NotNull] DependencyObject obj, [CanBeNull] object value)
         {
             Contract.Requires(obj != null);
 
@@ -96,7 +97,8 @@ namespace TomsToolbox.Wpf.Composition
             return dataTemplateResources;
         }
 
-        private static DataTemplate CreateTemplate([NotNull] Type viewModelType, object role)
+        [CanBeNull]
+        private static DataTemplate CreateTemplate([NotNull] Type viewModelType, [CanBeNull] object role)
         {
             Contract.Requires(viewModelType != null);
 
@@ -128,7 +130,7 @@ namespace TomsToolbox.Wpf.Composition
         /// <param name="role">The optional role.</param>
         /// <returns>The key for the specified parameters.</returns>
         [NotNull]
-        public static TemplateKey CreateKey([NotNull] Type dataType, object role)
+        public static TemplateKey CreateKey([NotNull] Type dataType, [CanBeNull] object role)
         {
             Contract.Requires(dataType != null);
             Contract.Ensures(Contract.Result<TemplateKey>() != null);
@@ -146,7 +148,8 @@ namespace TomsToolbox.Wpf.Composition
         /// <param name="viewModel">The view model.</param>
         /// <param name="role">The role.</param>
         /// <returns>The view</returns>
-        internal static DependencyObject GetDataTemplateView([NotNull] this ExportProvider exportProvider, [NotNull] Type viewModel, object role)
+        [CanBeNull]
+        internal static DependencyObject GetDataTemplateView([NotNull] this ExportProvider exportProvider, [NotNull] Type viewModel, [CanBeNull] object role)
         {
             Contract.Requires(exportProvider != null);
             Contract.Requires(viewModel != null);
@@ -193,7 +196,7 @@ namespace TomsToolbox.Wpf.Composition
             return metadata.ViewModel.GetHashCode() + (metadata.Role ?? 0).GetHashCode();
         }
 
-        private static bool IsViewModelForType(this Lazy<object, object> item, Type viewModel, object role)
+        private static bool IsViewModelForType([CanBeNull] this Lazy<object, object> item, [CanBeNull] Type viewModel, [CanBeNull] object role)
         {
             var metadata = GetMetadataView(item);
 
@@ -203,7 +206,8 @@ namespace TomsToolbox.Wpf.Composition
             return (metadata.ViewModel == viewModel) && RoleEquals(metadata.Role, role);
         }
 
-        private static IDataTemplateMetadata GetMetadataView(Lazy<object, object> item)
+        [CanBeNull]
+        private static IDataTemplateMetadata GetMetadataView([CanBeNull] Lazy<object, object> item)
         {
             var metadataDictionary = item?.Metadata as IDictionary<string, object>;
 
@@ -238,7 +242,7 @@ namespace TomsToolbox.Wpf.Composition
         /// <param name="left">The left role.</param>
         /// <param name="right">The right role.</param>
         /// <returns>True it both objects are equal.</returns>
-        public static bool RoleEquals(object left, object right)
+        public static bool RoleEquals([CanBeNull] object left, [CanBeNull] object right)
         {
             if (left == null)
                 return right == null;

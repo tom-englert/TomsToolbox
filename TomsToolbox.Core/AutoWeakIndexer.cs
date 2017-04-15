@@ -42,7 +42,7 @@
         /// </summary>
         /// <param name="generator">The generator.</param>
         /// <param name="comparer">The comparer.</param>
-        public AutoWeakIndexer([NotNull] Func<TKey, TValue> generator, IEqualityComparer<TKey> comparer)
+        public AutoWeakIndexer([NotNull] Func<TKey, TValue> generator, [CanBeNull] IEqualityComparer<TKey> comparer)
         {
             Contract.Requires(generator != null);
 
@@ -156,7 +156,7 @@
         /// </returns>
         /// <param name="key">The key of the value to get.</param>
         /// <param name="value">When this method returns, contains the value associated with the specified key, if the key is found; otherwise, the default value for the type of the <paramref name="value"/> parameter. This parameter is passed uninitialized.</param>
-        public bool TryGetValue([NotNull] TKey key, out TValue value)
+        public bool TryGetValue([NotNull] TKey key, [CanBeNull] out TValue value)
         {
             Contract.Requires(!ReferenceEquals(key, null));
 

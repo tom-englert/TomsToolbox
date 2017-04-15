@@ -218,7 +218,7 @@
             Unregister(_window);
         }
 
-        private void Window_SourceInitialized(object sender, EventArgs e)
+        private void Window_SourceInitialized([CanBeNull] object sender, [CanBeNull] EventArgs e)
         {
             var nonClientArea = AssociatedObject;
             Contract.Assume(nonClientArea != null);
@@ -327,7 +327,7 @@
             compositionTarget.BackgroundColor = SystemColors.WindowColor;
         }
 
-        private void WindowState_Changed(object sender, EventArgs e)
+        private void WindowState_Changed([CanBeNull] object sender, [CanBeNull] EventArgs e)
         {
             Contract.Assume(_window != null);
 

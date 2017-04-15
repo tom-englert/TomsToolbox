@@ -4,6 +4,8 @@
     using System.Diagnostics.Contracts;
     using System.Windows.Input;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// A <see cref="ICommand"/> implementation that does nothing and can't be executed. 
     /// </summary>
@@ -21,7 +23,7 @@
         /// Defines the method to be called when the command is invoked.
         /// </summary>
         /// <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
-        public void Execute(object parameter)
+        public void Execute([CanBeNull] object parameter)
         {
         }
 
@@ -32,7 +34,7 @@
         /// true if this command can be executed; otherwise, false.
         /// </returns>
         /// <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
-        public bool CanExecute(object parameter)
+        public bool CanExecute([CanBeNull] object parameter)
         {
             Contract.Ensures(Contract.Result<bool>() == false);
             return false;
