@@ -208,11 +208,11 @@
         /// </summary>
         /// <param name="regionId">The region identifier.</param>
         /// <returns>The exports for the region, or <c>null</c> if the export provider is not set yet.</returns>
-        [CanBeNull]
+        [CanBeNull, ItemNotNull]
         protected IEnumerable<Lazy<object, IVisualCompositionMetadata>> GetExports([CanBeNull] string regionId)
         {
             return ExportProvider?.GetExports<object, IVisualCompositionMetadata>(VisualCompositionExportAttribute.ExportContractName)
-                .Where(item => item?.Metadata.TargetRegions.Contains(regionId) == true);
+                .Where(item => item?.Metadata?.TargetRegions?.Contains(regionId) == true);
         }
 
         /// <summary>

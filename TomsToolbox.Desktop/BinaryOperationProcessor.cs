@@ -154,7 +154,7 @@
             return methods
                 .Where(m => _operationMethodNames.Contains(m?.Name))
                 .Select(m => new { Method = m, Parameters = m?.GetParameters() })
-                .Where(m => m.Parameters.Length == 2)
+                .Where(m => m.Parameters?.Length == 2)
                 .Where(m => m.Parameters[0].ParameterType == valueType)
                 .Select(m => ApplyOperation(m.Method, m.Parameters[1].ParameterType, value1, value2))
                 .FirstOrDefault(v => v != null);

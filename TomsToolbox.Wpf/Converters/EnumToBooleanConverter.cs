@@ -32,7 +32,7 @@
         [NotNull]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Convert(value, (string)parameter);
+            return Convert(value, parameter as string ?? string.Empty);
         }
 
         /// <summary>

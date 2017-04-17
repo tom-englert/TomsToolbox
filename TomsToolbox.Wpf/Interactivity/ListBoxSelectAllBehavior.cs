@@ -18,6 +18,7 @@
     /// <seealso cref="Behavior{T}" />
     public class ListBoxSelectAllBehavior : Behavior<ListBox>
     {
+        [NotNull]
         private readonly DispatcherThrottle _collectionChangedThrottle;
         private bool _isListBoxUpdating;
 

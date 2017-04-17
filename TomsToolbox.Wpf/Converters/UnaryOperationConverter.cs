@@ -31,7 +31,7 @@
     /// </returns>
     public class UnaryOperationConverter : ValueConverter
     {
-        private readonly string[] _operationMethodNames = new[] { "op_UnaryNegation" };
+        [NotNull] private static readonly string[] _operationMethodNames = { "op_UnaryNegation" };
 
         /// <summary>
         /// The default negation converter.
@@ -104,7 +104,7 @@
         }
 
         [CanBeNull]
-        private object ApplyOperation([CanBeNull] object value, [NotNull] Type valueType)
+        private static object ApplyOperation([CanBeNull] object value, [NotNull] Type valueType)
         {
             Contract.Requires(valueType != null);
 

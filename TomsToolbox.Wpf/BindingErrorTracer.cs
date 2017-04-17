@@ -20,6 +20,7 @@
         /// The errors to be ignored during error handling.
         /// </summary>
         [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
+        [NotNull]
         public static IList<Regex> IgnoredErrors = new List<Regex>
         {
             // There are no more validation errors, but Validation.HasError is still true!

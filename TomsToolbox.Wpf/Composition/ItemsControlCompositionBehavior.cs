@@ -59,7 +59,7 @@
                 return;
 
             var exportedItems = exports
-                .OrderBy(item => item?.Metadata.Sequence)
+                .OrderBy(item => item.Metadata?.Sequence)
                 .Select(item => GetTarget(item?.Value))
                 .ToArray();
 

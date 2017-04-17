@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Desktop
 {
     using System;
     using System.Collections.Generic;

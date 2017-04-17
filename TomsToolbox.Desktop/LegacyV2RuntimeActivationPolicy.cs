@@ -19,8 +19,8 @@
         public static void Activate()
         {
             var clrRuntimeInfo = (ICLRRuntimeInfo)RuntimeEnvironment.GetRuntimeInterfaceAsObject(Guid.Empty, typeof(ICLRRuntimeInfo).GUID);
-            Contract.Assume(clrRuntimeInfo != null);
-            clrRuntimeInfo.BindAsLegacyV2Runtime();
+
+            clrRuntimeInfo?.BindAsLegacyV2Runtime();
         }
 
         [ComImport]

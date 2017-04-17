@@ -300,17 +300,19 @@
             if (eventHandler == null)
                 return;
 
-            if (_textBox == null)
+            var textBox = _textBox;
+
+            if (textBox == null)
                 return;
 
-            var args = new TextValidationEventArgs(_textBox.Text);
+            var args = new TextValidationEventArgs(textBox.Text);
             eventHandler(this, args);
 
             HasErrors = args.Action != TextValidationAction.None;
 
             if (args.Action == TextValidationAction.Undo)
             {
-                this.BeginInvoke(() => _textBox.Undo());
+                this.BeginInvoke(() => textBox.Undo());
             }
         }
 
@@ -347,15 +349,17 @@
 
         private void IsEditing_Changed(bool newValue)
         {
-            if (_textBox == null)
+            var textBox = _textBox;
+
+            if (textBox == null)
                 return;
 
             if (newValue)
             {
                 // Start editing: Set text of text box manually since we need to keep the original text any how.
-                _textBox.Text = Text;
-                _textBox.SelectAll();
-                _textBox.Visibility = Visibility.Visible;
+                textBox.Text = Text;
+                textBox.SelectAll();
+                textBox.Visibility = Visibility.Visible;
 
                 // Subscribe to any mouse action in the hosting window to properly exit editing state
                 var window = this.Ancestors().LastOrDefault() as FrameworkElement;
@@ -369,14 +373,14 @@
                 PreviewMouseDoubleClick += Self_PreviewMouseDoubleClick;
 
                 // Delay setting the focus to ensure no one else in the call chain grabs it - this would stop editing immediately.
-                this.BeginInvoke(() => _textBox.Focus());
+                this.BeginInvoke(() => textBox.Focus());
             }
             else
             {
                 // Stop editing: Manually update source if it's valid.
                 if (!HasErrors)
                 {
-                    Text = _textBox.Text;
+                    Text = textBox.Text;
                 }
 
                 // Set focus to parent before it will get lost when we hide the TextBox
@@ -385,7 +389,7 @@
                     _focusableParent?.Focus();
                 }
 
-                _textBox.Visibility = Visibility.Hidden;
+                textBox.Visibility = Visibility.Hidden;
 
                 var window = this.Ancestors().LastOrDefault() as FrameworkElement;
                 if (null != window)
