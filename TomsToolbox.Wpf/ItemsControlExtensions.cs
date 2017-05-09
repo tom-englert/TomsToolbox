@@ -5,6 +5,7 @@
     using System.ComponentModel;
     using System.Diagnostics.Contracts;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -16,6 +17,9 @@
     /// </summary>
     public static class ItemsControlExtensions
     {
+        private static readonly TimeSpan _doubleClickTime = TimeSpan.FromMilliseconds(NativeMethods.GetDoubleClickTime());
+        private static DateTime _lastClickHandled;
+
         /// <summary>
         /// Gets the default item command. See <see cref="P:TomsToolbox.Wpf.ItemsControlExtensions.DefaultItemCommand"/> attached property for details.
         /// </summary>
@@ -44,7 +48,7 @@
         /// </summary>
         /// <AttachedPropertyComments>
         /// <summary>
-        /// The default item command is the command that will be executed when an item of the items control has received a mouse double click or enter key. 
+        /// The default item command is the command that will be executed when an item of the items control has received a mouse double click or enter key.
         /// It is not executed when the double-click is on the background or on the scrollbar.
         /// This command avoids the ubiquitous wrong implementations as well as code duplication when handling double-clicks in items controls like the <see cref="ListBox"/>
         /// <para/>
@@ -89,6 +93,9 @@
 
         private static void ExecuteCommand([NotNull] object sender, [NotNull] RoutedEventArgs e)
         {
+            if (DateTime.Now < (_lastClickHandled + _doubleClickTime))
+                return; // avoid duplicate actions on nested controls, EVERY items control will receive the double click event.
+
             var itemsControl = sender as ItemsControl;
             if (itemsControl == null)
                 return;
@@ -120,13 +127,14 @@
                     command.Execute(item);
 
                 e.Handled = true;
+                _lastClickHandled = DateTime.Now;
 
                 return;
             }
         }
 
         /// <summary>
-        /// Gets the object that will be observed for changes. 
+        /// Gets the object that will be observed for changes.
         /// A change of the object will trigger a refresh on the collection view of the attached items control.
         /// </summary>
         /// <param name="obj">The <see cref="ItemsControl"/> to refresh.</param>
@@ -138,7 +146,7 @@
             return obj.GetValue(RefreshOnSourceChangesProperty);
         }
         /// <summary>
-        /// Sets the object that will be observed for changes. 
+        /// Sets the object that will be observed for changes.
         /// A change of the object will trigger a refresh on the collection view of the attached items control.
         /// </summary>
         /// <param name="obj">The <see cref="ItemsControl"/> to refresh.</param>
@@ -200,6 +208,12 @@
 
             return Enumerable.Range(0, itemsCount)
                 .Select(i => generator.ContainerFromIndex(i) as T);
+        }
+
+        private static class NativeMethods
+        {
+            [DllImport("user32.dll")]
+            public static extern int GetDoubleClickTime();
         }
     }
 }

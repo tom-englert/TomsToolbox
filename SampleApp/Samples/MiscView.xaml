@@ -2,11 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="500"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="500"
              xmlns:toms="urn:TomsToolbox"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              xmlns:samples="clr-namespace:SampleApp.Samples"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              d:DataContext="{d:DesignInstance samples:MiscViewModel}">
   <UserControl.Resources>
     <toms:DateTimeSource UpdateInterval="00:00:01" x:Key="LiveDateTime"/>
@@ -151,6 +152,33 @@
           <Border Margin="5" Padding="3,2" BorderThickness="1" BorderBrush="Gray">
             <toms:InPlaceEdit TextAlignment="Right" Text="right aligned text"/>
           </Border>
+        </StackPanel>
+      </HeaderedContentControl>
+      <HeaderedContentControl Header="Nested items control with default command" Focusable="False">
+        <StackPanel Margin="5">
+          <ListBox Height="100" toms:ItemsControlExtensions.DefaultItemCommand="{Binding ItemsControlDefaultCommand}" Background="BlanchedAlmond">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <ListBox Margin="2" toms:ItemsControlExtensions.DefaultItemCommand="{Binding DataContext.ItemsControlDefaultCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" BorderThickness="0" Background="{x:Null}">
+                  <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <StackPanel Orientation="Horizontal"/>                      
+                    </ItemsPanelTemplate>
+                  </ListBox.ItemsPanel>
+                  <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                      <Setter Property="Margin" Value="10"/>
+                    </Style>
+                  </ListBox.ItemContainerStyle>
+                  <system:String>Inner1</system:String>
+                  <system:String>Inner2</system:String>
+                  <system:String>Inner3</system:String>
+                </ListBox>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+            <system:String>Outer1</system:String>
+            <system:String>Outer2</system:String>
+          </ListBox>
         </StackPanel>
       </HeaderedContentControl>
     </StackPanel>

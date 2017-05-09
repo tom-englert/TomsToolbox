@@ -1,8 +1,13 @@
 ﻿namespace SampleApp.Samples
 {
     using System;
+    using System.Windows;
+    using System.Windows.Input;
+
+    using JetBrains.Annotations;
 
     using TomsToolbox.Desktop;
+    using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 99)]
@@ -39,5 +44,8 @@
                 SetProperty(ref _minimumDuration, value, "MinimumDuration");
             }
         }
+
+        [NotNull]
+        public ICommand ItemsControlDefaultCommand => new DelegateCommand<string>(item => MessageBox.Show(item + " clicked."));
     }
 }
