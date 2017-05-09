@@ -51,7 +51,8 @@
         /// The command parameter for the command is the item that has been clicked.
         /// </summary>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty DefaultItemCommandProperty =
+        [NotNull]
+        public static readonly DependencyProperty DefaultItemCommandProperty =
             DependencyProperty.RegisterAttached("DefaultItemCommand", typeof(ICommand), typeof(ItemsControlExtensions), new FrameworkPropertyMetadata(DefaultItemCommand_Changed));
 
         private static void DefaultItemCommand_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -80,6 +81,9 @@
 
         static void ItemsControl_MouseDoubleClick([NotNull] object sender, [NotNull] MouseButtonEventArgs e)
         {
+            if (e.Handled)
+                return;
+
             ExecuteCommand(sender, e);
         }
 
@@ -114,6 +118,8 @@
 
                 if (command.CanExecute(item))
                     command.Execute(item);
+
+                e.Handled = true;
 
                 return;
             }
@@ -150,7 +156,8 @@
         /// The object that will be observed for changes. A change of the object will trigger a refresh on the collection view of the attached items control.
         /// </summary>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty RefreshOnSourceChangesProperty =
+        [NotNull]
+        public static readonly DependencyProperty RefreshOnSourceChangesProperty =
             DependencyProperty.RegisterAttached("RefreshOnSourceChanges", typeof(object), typeof(ItemsControlExtensions), new FrameworkPropertyMetadata(Source_Changed));
 
         private static void Source_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
