@@ -18,7 +18,7 @@
         /// <returns>The exception and all inner exceptions.</returns>
         [ItemNotNull]
         [NotNull]
-        public static IEnumerable<Exception> ExceptionChain(this Exception ex)
+        public static IEnumerable<Exception> ExceptionChain([CanBeNull] this Exception ex)
         {
             Contract.Ensures(Contract.Result<IEnumerable<Exception>>() != null);
 

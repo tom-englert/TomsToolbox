@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">          
           <listItem>
+            <para>1.0.59.0</para>
+            <list class="bullet">
+              <listItem><para>Add a VirtualizingDoubleClickPanel (same as DoubleClickPanel, but derived from VirtualizingPanel).</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.58.0</para>
             <list class="bullet">
               <listItem><para>Fix ItemsControlExtensions.DefaultItemCommand: Avoid duplicate executions on nested controls.</para></listItem>
