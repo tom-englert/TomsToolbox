@@ -9,13 +9,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TomsToolbox.Core</RootNamespace>
     <AssemblyName>TomsToolbox.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile Condition=" '$(TargetFrameworkProfile)' == '' ">Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion Condition=" '$(TargetFrameworkVersion)' == '' ">v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile Condition=" '$(TargetFrameworkVersion)' == 'v4.0' AND '$(TargetFrameworkProfile)' == '' ">Client</TargetFrameworkProfile>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <WarningLevel>4</WarningLevel>
-    <OutputPath>bin\$(Configuration)\$(TargetFrameworkProfile)\</OutputPath>
-    <IntermediateOutputPath>obj\$(Configuration)\$(TargetFrameworkProfile)\</IntermediateOutputPath>
+    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)\$(TargetFrameworkProfile)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\$(TargetFrameworkVersion)\$(TargetFrameworkProfile)\</IntermediateOutputPath>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
   </PropertyGroup>
@@ -130,7 +130,7 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\TomsToolbox.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  <ItemGroup Condition=" '$(TargetFrameworkProfile)' == 'Client' ">
+  <ItemGroup Condition=" '$(TargetFrameworkProfile)' != 'Profile328' ">
     <!-- A reference to the entire .NET Framework is automatically included for portable libraries -->
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -183,8 +183,8 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <Import Condition=" '$(TargetFrameworkProfile)' == 'Client' " Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Condition=" '$(TargetFrameworkProfile)' != 'Client' " Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Condition=" '$(TargetFrameworkProfile)' != 'Profile328' " Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Condition=" '$(TargetFrameworkProfile)' == 'Profile328' " Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <PropertyGroup>
     <DeployOutput Condition=" '$(Configuration)' == 'Release' ">true</DeployOutput>
     <PostBuildEvent>if not "$(DeployOutput)"=="true" goto :eof

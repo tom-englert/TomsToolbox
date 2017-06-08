@@ -11,17 +11,23 @@
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>A set of classes and functions to ease our daily .Net development tasks.</description>
     <summary>Core Tools for .Net development.</summary>
-    <copyright>© 2012-2016 tom-englert.de</copyright>
+    <copyright>© 2012-2017 tom-englert.de</copyright>
     <tags>.Net Tools Extensions</tags>
     <references>
       <reference file="TomsToolbox.Core.dll" />
     </references>
   </metadata>
   <files>
-    <file src="bin\Release\Client\CodeContracts\$id$.*.dll" target="lib\net40-Client\CodeContracts" />
+    <file src="bin\Release\v4.0\Client\CodeContracts\$id$.*.dll" target="lib\net40-Client\CodeContracts" />
 
-    <file src="bin\Release\Profile328\$id$.dll" target="lib\portable-net40+sl50+win+wpa81+wp80" />
-    <file src="bin\Release\Profile328\$id$.xml" target="lib\portable-net40+sl50+win+wpa81+wp80" />
-    <file src="bin\Release\Profile328\CodeContracts\$id$.*.dll" target="lib\portable-net40+sl50+win+wpa81+wp80\CodeContracts" />
+    <file src="bin\Release\v4.0\Profile328\$id$.dll" target="lib\portable-net40+sl50+win+wpa81+wp80" />
+    <file src="bin\Release\v4.0\Profile328\$id$.xml" target="lib\portable-net40+sl50+win+wpa81+wp80" />
+    <file src="bin\Release\v4.0\Profile328\CodeContracts\$id$.*.dll" target="lib\portable-net40+sl50+win+wpa81+wp80\CodeContracts" />
+
+<!--
+    <file src="bin\Release\v4.5\$id$.dll" target="lib\net45" />
+    <file src="bin\Release\v4.5\$id$.xml" target="lib\net45" />
+    <file src="bin\Release\v4.5\CodeContracts\$id$.*.dll" target="lib\net45\CodeContracts" />
+-->
   </files>
 </package>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.12
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CD367555-C8E1-4F5D-9BCF-50396D0D2F1B}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,6 +21,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Core", "TomsToolbox.Core\TomsToolbox.Core.csproj", "{AE305312-7637-43BF-9156-7EC513C55135}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0350DFCD-5BFF-46BD-ABF4-568EF308D5B6} = {0350DFCD-5BFF-46BD-ABF4-568EF308D5B6}
+		{968765F8-75CC-426E-A75B-86544982074B} = {968765F8-75CC-426E-A75B-86544982074B}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Desktop", "TomsToolbox.Desktop\TomsToolbox.Desktop.csproj", "{3647CD2D-2A4E-4859-9BBD-606A73C14801}"
@@ -54,6 +55,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Wpf.Tests", "TomsToolbox.Wpf.Tests\TomsToolbox.Wpf.Tests.csproj", "{726D085F-C3E1-444B-96AB-0B40C3DC0311}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Wpf.Styles", "TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj", "{E5D732D2-0294-48FD-8314-63DC1A9155FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Core.45", "TomsToolbox.Core\TomsToolbox.Core.45.csproj", "{968765F8-75CC-426E-A75B-86544982074B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,6 +116,10 @@ Global
 		{E5D732D2-0294-48FD-8314-63DC1A9155FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5D732D2-0294-48FD-8314-63DC1A9155FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5D732D2-0294-48FD-8314-63DC1A9155FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{968765F8-75CC-426E-A75B-86544982074B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{968765F8-75CC-426E-A75B-86544982074B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{968765F8-75CC-426E-A75B-86544982074B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{968765F8-75CC-426E-A75B-86544982074B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
