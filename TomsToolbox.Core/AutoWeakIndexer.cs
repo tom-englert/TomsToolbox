@@ -11,11 +11,14 @@
     using JetBrains.Annotations;
 
     /// <summary>
-    /// A Dictionary like implementation that populates it's content on demand, i.e. calling indexer[key] will never return null.
-    /// The indexer has only weak references to the values, so the values may come and go.
+    /// A thread safe, <see cref="Dictionary{TKey,TValue}"/> like implementation that populates it's content on demand, i.e. calling indexer[key] will never return null.
+    /// The cache has only weak references to the values, so the values may come and go.
     /// </summary>
     /// <typeparam name="TKey">The type of the key.</typeparam>
     /// <typeparam name="TValue">The type of the value.</typeparam>
+    /// <remarks>
+    /// This implementation is thread safe; the draw back is that generating new items is slow, so this type is not suitable for caching a large amount of items.
+    /// </remarks>
     public sealed class AutoWeakIndexer<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
         where TValue : class
     {

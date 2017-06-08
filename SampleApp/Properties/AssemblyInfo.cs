@@ -9,7 +9,7 @@ using TomsToolbox.Core;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("tom-englert.de")]
 [assembly: AssemblyProduct("Tom's Toolbox")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyVersion("1.0.0.0")]
