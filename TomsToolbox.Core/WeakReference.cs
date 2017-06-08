@@ -58,6 +58,7 @@
         /// </summary>
         /// <param name="target">The target.</param>
         /// <returns>True if target is valid.</returns>
+        [ContractAnnotation("target: notnull => true")]
         public bool TryGetTarget([CanBeNull] out T target)
         {
             Contract.Ensures((Contract.Result<bool>() == false) || (Contract.ValueAtReturn(out target) != null));

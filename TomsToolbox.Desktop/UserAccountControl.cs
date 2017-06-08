@@ -72,7 +72,7 @@
         /// 0 if the function succeeds, a HRESULT of the last error if the function fails.
         /// </returns>
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "3#")]
-        public static int LogOnInteractiveUser(string userName, string domain, [CanBeNull] string password, [CanBeNull] out SafeTokenHandle userToken)
+        public static int LogOnInteractiveUser([CanBeNull] string userName, [CanBeNull] string domain, [CanBeNull] string password, [CanBeNull] out SafeTokenHandle userToken)
         {
             Contract.Ensures((Contract.Result<int>() != 0) || (Contract.ValueAtReturn(out userToken) != null));
 
@@ -141,7 +141,7 @@
             // systems (major version >= 6) because they support linked tokens, but 
             // previous versions (major version < 6) do not.
             var version = Environment.OSVersion.Version;
-            
+
             if ((version != null) && (version.Major >= 6))
             {
                 // Running Windows Vista or later (major version >= 6). 
@@ -216,7 +216,7 @@
             using (var id = WindowsIdentity.GetCurrent())
             {
                 var principal = new WindowsPrincipal(id);
-                
+
                 return principal.IsInRole(WindowsBuiltInRole.Administrator);
             }
         }
@@ -233,7 +233,7 @@
             using (var id = WindowsIdentity.GetCurrent())
             {
                 var principal = new WindowsPrincipal(id);
-                
+
                 return principal.IsInRole(groupName);
             }
         }
@@ -256,7 +256,7 @@
                 return false;
 
             using (var id = new WindowsIdentity(token))
-            { 
+            {
                 var principal = new WindowsPrincipal(id);
                 return principal.IsInRole(groupName);
             }
@@ -437,7 +437,7 @@
                     SHGSI.SHGSI_ICON | SHGSI.SHGSI_SMALLICON,
                     ref iconInfo);
 
-                return  hr != 0 ? IntPtr.Zero : iconInfo.hIcon;
+                return hr != 0 ? IntPtr.Zero : iconInfo.hIcon;
             }
         }
 
@@ -530,7 +530,7 @@
             };
         }
 
-        private static void ParseUserDomain(ref string userName, ref string domain)
+        private static void ParseUserDomain([CanBeNull] ref string userName, [CanBeNull] ref string domain)
         {
             if (string.IsNullOrEmpty(userName))
                 return;
