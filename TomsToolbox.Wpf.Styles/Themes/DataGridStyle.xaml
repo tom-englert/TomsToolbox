@@ -89,7 +89,7 @@
     </Setter>
   </Style>
 
-  <Style x:Key="{ComponentResourceKey TypeInTargetAssembly=styles:ResourceKeys, ResourceId=DataGridColumnHeaderStyle}" BasedOn="{StaticResource DataGridColumnHeaderStyle}" />
+  <Style TargetType="DataGridColumnHeader" x:Key="{x:Static styles:ResourceKeys.DataGridColumnHeaderStyle}" BasedOn="{StaticResource DataGridColumnHeaderStyle}" />
 
   <Style x:Key="DataGridRowHeaderStyle" TargetType="{x:Type DataGridRowHeader}">
     <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -146,7 +146,7 @@
     </Setter>
   </Style>
 
-  <Style x:Key="{ComponentResourceKey TypeInTargetAssembly=styles:ResourceKeys, ResourceId=DataGridRowHeaderStyle}" BasedOn="{StaticResource DataGridRowHeaderStyle}" />
+  <Style TargetType="DataGridRowHeader" x:Key="{x:Static styles:ResourceKeys.DataGridRowHeaderStyle}" BasedOn="{StaticResource DataGridRowHeaderStyle}" />
 
   <Style x:Key="DataGridSelectAllButtonStyle" TargetType="{x:Type Button}">
     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
@@ -176,7 +176,7 @@
     </Setter>
   </Style>
 
-  <Style x:Key="{ComponentResourceKey TypeInTargetAssembly=styles:ResourceKeys, ResourceId=DataGridCellStyle}" TargetType="{x:Type DataGridCell}">
+  <Style x:Key="{x:Static styles:ResourceKeys.DataGridCellStyle}" TargetType="{x:Type DataGridCell}">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderBrush" Value="Transparent" />
     <Setter Property="BorderThickness" Value="1" />
@@ -203,7 +203,7 @@
     </Style.Triggers>
   </Style>
 
-  <Style x:Key="{ComponentResourceKey TypeInTargetAssembly=styles:ResourceKeys, ResourceId=DataGridRowStyle}" TargetType="DataGridRow">
+  <Style x:Key="{x:Static styles:ResourceKeys.DataGridRowStyle}" TargetType="DataGridRow">
     <Style.Triggers>
       <Trigger Property="IsSelected" Value="True">
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
@@ -217,7 +217,7 @@
     </Style.Triggers>
   </Style>
 
-  <Style x:Key="{ComponentResourceKey TypeInTargetAssembly=styles:ResourceKeys, ResourceId=DataGridStyle}" TargetType="{x:Type DataGrid}">
+  <Style x:Key="{x:Static styles:ResourceKeys.DataGridStyle}" TargetType="{x:Type DataGrid}">
     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
     <Setter Property="BorderBrush" Value="{DynamicResource {x:Static styles:ResourceKeys.BorderBrush}}" />
     <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -303,10 +303,10 @@
     <Style.Triggers>
       <MultiTrigger>
         <MultiTrigger.Conditions>
-          <Condition Property="ItemsControl.IsGrouping" Value="True"/>
-          <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="False"/>
+          <Condition Property="ItemsControl.IsGrouping" Value="True" />
+          <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="False" />
         </MultiTrigger.Conditions>
-        <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
       </MultiTrigger>
     </Style.Triggers>
   </Style>

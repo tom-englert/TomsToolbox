@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:toms="urn:TomsToolbox"
                     xmlns:styles="clr-namespace:TomsToolbox.Wpf.Styles">
-  <Style x:Key="{ComponentResourceKey TypeInTargetAssembly=styles:ResourceKeys, ResourceId=CheckBoxStyle}" TargetType="{x:Type CheckBox}">
+  <Style x:Key="{x:Static styles:ResourceKeys.CheckBoxStyle}" TargetType="{x:Type CheckBox}">
     <Setter Property="SnapsToDevicePixels" Value="True" />
     <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
@@ -43,8 +43,8 @@
           <ControlTemplate.Triggers>
             <MultiTrigger>
               <MultiTrigger.Conditions>
-                <Condition Property="IsMouseOver" Value="True"/>
-                <Condition Property="IsEnabled" Value="True"/>
+                <Condition Property="IsMouseOver" Value="True" />
+                <Condition Property="IsEnabled" Value="True" />
               </MultiTrigger.Conditions>
               <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
             </MultiTrigger>
@@ -74,12 +74,12 @@
     </Setter>
   </Style>
 
-  <Style TargetType="CheckBox" x:Key="{ComponentResourceKey TypeInTargetAssembly=styles:ResourceKeys, ResourceId=DataGridCheckBoxEditingElementStyle}" BasedOn="{StaticResource {x:Static styles:ResourceKeys.CheckBoxStyle}}">
+  <Style TargetType="CheckBox" x:Key="{x:Static styles:ResourceKeys.DataGridCheckBoxEditingElementStyle}" BasedOn="{StaticResource {x:Static styles:ResourceKeys.CheckBoxStyle}}">
     <Setter Property="HorizontalAlignment" Value="Center" />
     <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
 
-  <Style TargetType="CheckBox" x:Key="{ComponentResourceKey TypeInTargetAssembly=styles:ResourceKeys, ResourceId=DataGridCheckBoxElementStyle}" BasedOn="{StaticResource {x:Static styles:ResourceKeys.CheckBoxStyle}}">
+  <Style TargetType="CheckBox" x:Key="{x:Static styles:ResourceKeys.DataGridCheckBoxElementStyle}" BasedOn="{StaticResource {x:Static styles:ResourceKeys.CheckBoxStyle}}">
     <Setter Property="HorizontalAlignment" Value="Center" />
     <Setter Property="VerticalAlignment" Value="Center" />
     <Setter Property="IsHitTestVisible" Value="False" />

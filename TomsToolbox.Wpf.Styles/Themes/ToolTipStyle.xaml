@@ -3,7 +3,7 @@
                     xmlns:styles="clr-namespace:TomsToolbox.Wpf.Styles">
 
   <!--  Default ToolTip Style  -->
-  <Style x:Key="{ComponentResourceKey TypeInTargetAssembly=styles:ResourceKeys, ResourceId=ToolTipStyle}" TargetType="{x:Type ToolTip}">
+  <Style x:Key="{x:Static styles:ResourceKeys.ToolTipStyle}" TargetType="{x:Type ToolTip}">
     <Setter Property="SnapsToDevicePixels" Value="True" />
     <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" />
@@ -15,11 +15,11 @@
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type ToolTip}">
           <Grid>
-            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
               <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
             </Border>
           </Grid>
         </ControlTemplate>

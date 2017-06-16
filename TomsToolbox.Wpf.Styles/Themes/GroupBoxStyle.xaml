@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:styles="clr-namespace:TomsToolbox.Wpf.Styles">
 
-  <Style x:Key="{ComponentResourceKey TypeInTargetAssembly=styles:ResourceKeys, ResourceId=GroupBoxStyle}" TargetType="{x:Type GroupBox}">
+  <Style x:Key="{x:Static styles:ResourceKeys.GroupBoxStyle}" TargetType="{x:Type GroupBox}">
     <Setter Property="SnapsToDevicePixels" Value="True" />
     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
     <Setter Property="Background" Value="Transparent" />

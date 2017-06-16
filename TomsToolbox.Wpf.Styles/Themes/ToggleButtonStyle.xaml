@@ -3,7 +3,7 @@
                     xmlns:styles="clr-namespace:TomsToolbox.Wpf.Styles">
 
   <!--  Default ToggleButton Style  -->
-  <Style x:Key="{ComponentResourceKey TypeInTargetAssembly=styles:ResourceKeys, ResourceId=ToggleButtonStyle}" TargetType="{x:Type ToggleButton}">
+  <Style x:Key="{x:Static styles:ResourceKeys.ToggleButtonStyle}" TargetType="{x:Type ToggleButton}">
     <Setter Property="SnapsToDevicePixels" Value="True" />
     <Setter Property="BorderBrush" Value="{DynamicResource {x:Static styles:ResourceKeys.BorderBrush}}" />
     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
