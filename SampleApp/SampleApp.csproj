@@ -27,7 +27,7 @@
     <UpdatePeriodically>true</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://clickonce-tom-englert.azurewebsites.net/ResXResourceManager/</InstallUrl>
+    <InstallUrl>https://clickonce-tom-englert.azurewebsites.net/TomsToolbox/</InstallUrl>
     <SupportUrl>https://tomstoolbox.codeplex.com/workitem/list/basic</SupportUrl>
     <ProductName>Tom%27s Toolbox</ProductName>
     <PublisherName>tom-englert</PublisherName>
