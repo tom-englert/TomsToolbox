@@ -27,7 +27,7 @@
     <UpdatePeriodically>true</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://tomstoolbox.codeplex.com/releases/clickonce/</InstallUrl>
+    <InstallUrl>https://clickonce-tom-englert.azurewebsites.net/ResXResourceManager/</InstallUrl>
     <SupportUrl>https://tomstoolbox.codeplex.com/workitem/list/basic</SupportUrl>
     <ProductName>Tom%27s Toolbox</ProductName>
     <PublisherName>tom-englert</PublisherName>
@@ -303,11 +303,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+  <Target Name="AfterPublish">
+    <ItemGroup>
+      <ZipFiles Include="$(PublishDir)*.*" />
+    </ItemGroup>
+    <Exec Command="PowerShell -command Compress-Archive -Path '$(PublishDir)Application Files',@(ZipFiles, ',') -DestinationPath '$(OutDir)Publish.zip' -Force" />
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
