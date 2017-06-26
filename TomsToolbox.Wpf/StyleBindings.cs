@@ -48,6 +48,13 @@
     }
 
     /// <summary>
+    /// A collection of <see cref="GroupStyle"/> objects.
+    /// </summary>
+    public class GroupStyleCollection : Collection<GroupStyle>
+    {
+    }
+
+    /// <summary>
     /// Extensions to support style binding of some read only collection properties.
     /// </summary>
     public static class StyleBindings
@@ -116,6 +123,71 @@
 
 
         /// <summary>
+        /// Gets the group styles attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.GroupStyles"/> attached property.
+        /// </summary>
+        /// <param name="obj">The object the group style is attached to.</param>
+        /// <returns>The group styles.</returns>
+        [CanBeNull, ItemNotNull]
+        public static GroupStyleCollection GetGroupStyles([NotNull] DependencyObject obj)
+        {
+            Contract.Requires(obj != null);
+
+            return (GroupStyleCollection)obj.GetValue(GroupStylesProperty);
+        }
+        /// <summary>
+        /// Sets the group style attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.GroupStyles"/> attached property.
+        /// </summary>
+        /// <param name="obj">The object the group style is attached to.</param>
+        /// <param name="value">The group styles.</param>
+        public static void SetGroupStyles([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] GroupStyleCollection value)
+        {
+            Contract.Requires(obj != null);
+
+            obj.SetValue(GroupStylesProperty, value);
+        }
+        /// <summary>
+        /// Identifies the <see cref="P:TomsToolbox.Wpf.StyleBindings.GroupStyles"/> attached property.
+        /// </summary>
+        /// <AttachedPropertyComments>
+        /// <summary>
+        /// This property is needed to set <see cref="ItemsControl.GroupStyle"/> via a <see cref="Style"/>
+        /// </summary>
+        /// <example><code language="XAML"><![CDATA[
+        /// <Style TargetType="ListBox">
+        ///   <Setter Property="wpf:StyleBindings.GroupStyle">
+        ///     <Setter.Value>
+        ///       <GroupStyleCollection>
+        ///         <GroupStyle>
+        ///           < .... />
+        ///         <GroupStyle>
+        ///       </GroupStyleCollection>
+        ///     </Setter.Value>
+        ///   </Setter>
+        /// ]]>
+        /// </code></example>
+        /// </AttachedPropertyComments>
+        [NotNull] public static readonly DependencyProperty GroupStylesProperty =
+            DependencyProperty.RegisterAttached("GroupStyles", typeof(GroupStyleCollection), typeof(StyleBindings), new FrameworkPropertyMetadata(GroupStyles_Changed));
+
+        private static void GroupStyles_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var groupStyle = (d as ItemsControl)?.GroupStyle;
+
+            if (groupStyle == null)
+                return;
+
+            groupStyle.Clear();
+
+            var newGroupStyles = e.NewValue as GroupStyleCollection;
+            if (newGroupStyles != null)
+            {
+                groupStyle.AddRange(newGroupStyles);
+                return;
+            }
+        }
+
+
+        /// <summary>
         /// Gets the group style attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.GroupStyle"/> attached property.
         /// </summary>
         /// <param name="obj">The object the group style is attached to.</param>
@@ -143,7 +215,8 @@
         /// </summary>
         /// <AttachedPropertyComments>
         /// <summary>
-        /// This property is needed to set <see cref="ItemsControl.GroupStyle"/> via a <see cref="Style"/>
+        /// This property is needed to set a single <see cref="ItemsControl.GroupStyle"/> via a <see cref="Style"/>. 
+        /// This a shortcut to <see cref="P:TomsToolbox.Wpf.StyleBindings.GroupStyles"/> to simplify usage when only one group style is needed.
         /// </summary>
         /// <example><code language="XAML"><![CDATA[
         /// <Style TargetType="ListBox">
@@ -157,7 +230,8 @@
         /// ]]>
         /// </code></example>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty GroupStyleProperty =
+        [NotNull]
+        public static readonly DependencyProperty GroupStyleProperty =
             DependencyProperty.RegisterAttached("GroupStyle", typeof(GroupStyle), typeof(StyleBindings), new FrameworkPropertyMetadata(GroupStyle_Changed));
 
         private static void GroupStyle_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -173,19 +247,8 @@
             if (newGroupStyle != null)
             {
                 groupStyle.Add(newGroupStyle);
-                return;
-            }
-
-            var groupStyles = e.NewValue as IEnumerable;
-            if (groupStyles != null)
-            {
-                foreach (var item in groupStyles.OfType<GroupStyle>())
-                {
-                    groupStyle.Add(item);
-                }
             }
         }
-
 
         /// <summary>
         /// Gets the group descriptions attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.GroupDescriptions"/> attached property.
