@@ -62,7 +62,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>35A3F470805B8977A18C111E2D13AE735D6074B2</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>42980DDA6CA350D95B2D7407255078070A089BA7</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' != 'Debug'">
     <ManifestKeyFile>SampleAppKey.pfx</ManifestKeyFile>
