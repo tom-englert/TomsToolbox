@@ -154,7 +154,7 @@
         /// </summary>
         /// <example><code language="XAML"><![CDATA[
         /// <Style TargetType="ListBox">
-        ///   <Setter Property="wpf:StyleBindings.GroupStyle">
+        ///   <Setter Property="wpf:StyleBindings.GroupStyles">
         ///     <Setter.Value>
         ///       <GroupStyleCollection>
         ///         <GroupStyle>
@@ -215,7 +215,7 @@
         /// </summary>
         /// <AttachedPropertyComments>
         /// <summary>
-        /// This property is needed to set a single <see cref="ItemsControl.GroupStyle"/> via a <see cref="Style"/>. 
+        /// This property is needed to set a single <see cref="ItemsControl.GroupStyle"/> via a <see cref="Style"/>.
         /// This a shortcut to <see cref="P:TomsToolbox.Wpf.StyleBindings.GroupStyles"/> to simplify usage when only one group style is needed.
         /// </summary>
         /// <example><code language="XAML"><![CDATA[
