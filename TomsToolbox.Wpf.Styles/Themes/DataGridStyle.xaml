@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System"
                     xmlns:toms="urn:TomsToolbox"
-                    xmlns:dgx="urn:tom-englert.de/DataGridExtensions"
                     xmlns:styles="clr-namespace:TomsToolbox.Wpf.Styles">
 
   <Style x:Key="DataGridColumnHeaderThumbStyle" TargetType="{x:Type Thumb}">
@@ -225,17 +224,16 @@
     <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource {x:Static styles:ResourceKeys.BorderBrush}}" />
     <Setter Property="RowHeaderStyle" Value="{StaticResource DataGridRowHeaderStyle}" />
     <Setter Property="ColumnHeaderStyle" Value="{StaticResource DataGridColumnHeaderStyle}" />
-    <Setter Property="dgx:Tools.ApplyInitialSorting" Value="True" />
-    <Setter Property="dgx:ColumnStyles.DefaultColumnStyles">
+    <Setter Property="toms:ColumnStyles.DefaultColumnStyles">
       <Setter.Value>
-        <dgx:DataGridColumnStyleCollection>
-          <dgx:DataGridColumnStyle ColumnType="DataGridComboBoxColumn"
+        <toms:DataGridColumnStyleCollection>
+          <toms:DataGridColumnStyle ColumnType="DataGridComboBoxColumn"
                                    ElementStyle="{DynamicResource {x:Static styles:ResourceKeys.DataGridComboBoxElementStyle}}"
                                    EditingElementStyle="{DynamicResource {x:Static styles:ResourceKeys.DataGridComboBoxEditingElementStyle}}" />
-          <dgx:DataGridColumnStyle ColumnType="DataGridCheckBoxColumn"
+          <toms:DataGridColumnStyle ColumnType="DataGridCheckBoxColumn"
                                    ElementStyle="{DynamicResource {x:Static styles:ResourceKeys.DataGridCheckBoxElementStyle}}"
                                    EditingElementStyle="{DynamicResource {x:Static styles:ResourceKeys.DataGridCheckBoxEditingElementStyle}}" />
-        </dgx:DataGridColumnStyleCollection>
+        </toms:DataGridColumnStyleCollection>
       </Setter.Value>
     </Setter>
     <Setter Property="RowValidationErrorTemplate">

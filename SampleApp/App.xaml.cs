@@ -17,6 +17,7 @@
     using TomsToolbox.Desktop.Composition;
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;
+    using TomsToolbox.Wpf.Styles;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -43,11 +44,12 @@
             context.ForTypesDerivedFrom<FrameworkElement>()?.SetCreationPolicy(CreationPolicy.NonShared);
             // To demonstrate the ImportExtension with value converters.
             context.ForTypesDerivedFrom<IValueConverter>()?.Export();
-
             _compositionHost.AddCatalog(new ApplicationCatalog(context));
 
             var dataTemplateResources = DataTemplateManager.CreateDynamicDataTemplates(_compositionHost.Container);
-            Resources?.MergedDictionaries.Add(dataTemplateResources);
+            Resources.MergedDictionaries.Add(dataTemplateResources);
+
+            Resources.MergedDictionaries.Insert(0, WpfStyles.Defaults());
 
             MainWindow = _compositionHost.GetExportedValue<MainWindow>();
             MainWindow.Show();

@@ -1,8 +1,7 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace SampleApp
+﻿namespace SampleApp
 {
     using System.ComponentModel.Composition;
+    using System.Diagnostics.Contracts;
     using System.Windows;
 
     using JetBrains.Annotations;

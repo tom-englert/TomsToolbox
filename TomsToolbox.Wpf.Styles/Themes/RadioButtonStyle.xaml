@@ -10,22 +10,20 @@
     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
     <Setter Property="HorizontalContentAlignment" Value="Left" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
-    <Setter Property="Padding" Value="4,1,0,0" />
+    <Setter Property="Padding" Value="0" />
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="RadioButton">
-          <BulletDecorator Background="Transparent">
-            <BulletDecorator.Bullet>
-              <Grid>
-                <Ellipse x:Name="Bullet" Width="12" Height="12"
-                         Fill="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
-                         Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
-                         StrokeThickness="1" />
-                <Ellipse x:Name="CheckMark" Width="6" Height="6" HorizontalAlignment="Center" VerticalAlignment="Center"
-                         Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" Visibility="Hidden" />
-              </Grid>
-            </BulletDecorator.Bullet>
+          <DockPanel Background="Transparent">
+            <Grid DockPanel.Dock="Left" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="True">
+              <Ellipse x:Name="Bullet" Width="12" Height="12"
+                       Fill="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                       Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                       StrokeThickness="1" />
+              <Ellipse x:Name="CheckMark" Width="6" Height="6" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" Visibility="Hidden" />
+            </Grid>
             <Grid Margin="{TemplateBinding Padding}"
                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
@@ -34,8 +32,11 @@
                          Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
                          StrokeDashArray="1 2" Margin="-2,-1" SnapsToDevicePixels="True" />
             </Grid>
-          </BulletDecorator>
+          </DockPanel>
           <ControlTemplate.Triggers>
+            <Trigger Property="ContentControl.HasContent" Value="true">
+              <Setter Property="Control.Padding" Value="4,1,0,0" />
+            </Trigger>
             <MultiTrigger>
               <MultiTrigger.Conditions>
                 <Condition Property="IsMouseOver" Value="True" />

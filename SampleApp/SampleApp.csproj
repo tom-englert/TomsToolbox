@@ -76,6 +76,9 @@
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>16x16.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="JetBrains.Annotations, Version=10.4.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.10.4.0\lib\net\JetBrains.Annotations.dll</HintPath>
@@ -215,6 +218,7 @@
     <EmbeddedResource Include="Properties\Resources.de.resx" />
     <EmbeddedResource Include="Properties\Resources.resx" />
     <Resource Include="16x16.png" />
+    <Resource Include="16x16.ico" />
     <Content Include="Properties\Resources.Designer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -259,6 +263,10 @@
     <ProjectReference Include="..\TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj">
       <Project>{e3ee79ea-50ec-4d54-b59f-799d50e8b221}</Project>
       <Name>TomsToolbox.ObservableCollections</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj">
+      <Project>{E5D732D2-0294-48FD-8314-63DC1A9155FE}</Project>
+      <Name>TomsToolbox.Wpf.Styles</Name>
     </ProjectReference>
     <ProjectReference Include="..\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj">
       <Project>{ec9f9418-877f-49ba-af91-f456fbc5ad57}</Project>

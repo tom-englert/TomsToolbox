@@ -7,12 +7,7 @@
         ResizeMode="NoResize"
         ShowInTaskbar="False" 
         SizeToContent="WidthAndHeight" 
-        WindowStyle="SingleBorderWindow"
-        Style="{DynamicResource WindowStyle}"
-        >
-  <!--<WindowChrome.WindowChrome>
-    <WindowChrome GlassFrameThickness="-1"/>
-  </WindowChrome.WindowChrome>-->
+        WindowStyle="ToolWindow">
   <Grid>
     <Border Background="Orange" Margin="20" Width="200" Height="150" MouseDown="UIElement_OnMouseDown"/>
   </Grid>

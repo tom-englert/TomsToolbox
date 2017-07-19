@@ -181,6 +181,7 @@
     <Compile Include="DialogCommands.cs" />
     <Compile Include="Interactivity\ListBoxSelectAllBehavior.cs" />
     <Compile Include="VirtualizingDoubleClickPanel.cs" />
+    <Compile Include="XamlExtensions\ColumnStyles.cs" />
     <Compile Include="XamlExtensions\VisualComposition.cs" />
     <Compile Include="Controls\CompositeContextMenu.cs" />
     <Compile Include="Composition\ICheckableCommand.cs" />

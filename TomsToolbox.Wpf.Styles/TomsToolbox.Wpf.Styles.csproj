@@ -143,9 +143,6 @@
     <AssemblyOriginatorKeyFile>..\TomsToolbox.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataGridExtensions, Version=1.0.36.0, Culture=neutral, PublicKeyToken=43de855f87de903a, processorArchitecture=MSIL">
-      <HintPath>..\packages\DataGridExtensions.1.0.36.0\lib\net40-Client\DataGridExtensions.dll</HintPath>
-    </Reference>
     <Reference Include="JetBrains.Annotations, Version=10.4.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.10.4.0\lib\net\JetBrains.Annotations.dll</HintPath>
     </Reference>
@@ -184,6 +181,7 @@
     </Compile>
     <AppDesigner Include="Properties\" />
     <Compile Include="ResourceKeys.cs" />
+    <Compile Include="WpfStyles.cs" />
     <Compile Include="ThemeResourceLoaderBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +202,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\IconControlStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\MenuStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -212,6 +214,10 @@
       <Link>TomsToolbox.snk</Link>
     </None>
     <None Include="Effects\Build.cmd" />
+    <Page Include="Themes\WindowStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Resource Include="Effects\invertGray.ps" />
     <None Include="packages.config" />
     <Page Include="Themes\generic.xaml">

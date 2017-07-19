@@ -118,9 +118,6 @@
       <Trigger Property="IsHighlighted" Value="True">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
       </Trigger>
-      <Trigger SourceName="Popup" Property="AllowsTransparency" Value="True">
-        <Setter TargetName="SubmenuBorder" Property="CornerRadius" Value="0,0,4,4" />
-      </Trigger>
       <Trigger Property="IsEnabled" Value="False">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
       </Trigger>
@@ -218,9 +215,6 @@
       <Trigger Property="IsHighlighted" Value="True">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
       </Trigger>
-      <Trigger SourceName="Popup" Property="AllowsTransparency" Value="True">
-        <Setter TargetName="SubmenuBorder" Property="CornerRadius" Value="0" />
-      </Trigger>
       <Trigger Property="IsEnabled" Value="False">
         <Setter Property="Foreground"
                 Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
@@ -269,11 +263,6 @@
                   BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
             <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle" />
           </Border>
-          <ControlTemplate.Triggers>
-            <Trigger Property="HasDropShadow" Value="False">
-              <Setter TargetName="Border" Property="CornerRadius" Value="0" />
-            </Trigger>
-          </ControlTemplate.Triggers>
         </ControlTemplate>
       </Setter.Value>
     </Setter>

@@ -16,6 +16,8 @@
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/ToggleButtonStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/ToolTipStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/DataGridStyle.xaml" />
+    <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/IconControlStyle.xaml" />
+    <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/WindowStyle.xaml" />
   </ResourceDictionary.MergedDictionaries>
 
   <!--  Brushes -->
