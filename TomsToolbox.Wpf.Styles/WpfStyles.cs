@@ -17,7 +17,7 @@
     /// <summary>
     /// Helper methods to ease dealing with the styles.
     /// </summary>
-    public class WpfStyles
+    public static class WpfStyles
     {
         /// <summary>
         /// Returns a resource dictionary with the default styles for the window and the common controls.
@@ -110,10 +110,10 @@
 
         private static class NativeMethods
         {
-            [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+            [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
             private static extern IntPtr LoadImage(IntPtr hinst, IntPtr lpszName, uint uType, int cxDesired, int cyDesired, uint fuLoad);
 
-            [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
+            [DllImport("kernel32.dll", CharSet = CharSet.Unicode, ThrowOnUnmappableChar = false)]
             private static extern IntPtr GetModuleHandle([CanBeNull] string lpModuleName);
 
             // ReSharper disable once InconsistentNaming
