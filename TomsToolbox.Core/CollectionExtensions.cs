@@ -344,6 +344,42 @@
         }
 
         /// <summary>
+        /// Creates a Dictionary{TKey, TValue} from an IEnumerable{KeyValuePair{TKey, TValue}}.
+        /// </summary>
+        /// <typeparam name="TKey">The type of the key.</typeparam>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="items">The items containing the key-value pairs.</param>
+        /// <returns>The dictionary</returns>
+        /// <exception cref="ArgumentNullException">Any of the keys is null.</exception>
+        /// <exception cref="ArgumentException">Any of the keys is duplicate.</exception>
+        [NotNull]
+        public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>([NotNull] this IEnumerable<KeyValuePair<TKey, TValue>> items)
+        {
+            Contract.Requires(items != null);
+            Contract.Ensures(Contract.Result<Dictionary<TKey, TValue>>() != null);
+
+            return items.ToDictionary(item => item.Key, item => item.Value);
+        }
+
+        /// <summary>
+        /// Creates a Dictionary{TKey, TValue} from an IEnumerable{KeyValuePair{TKey, TValue}}.
+        /// </summary>
+        /// <typeparam name="TKey">The type of the key.</typeparam>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="items">The items containing the key-value pairs.</param>
+        /// <returns>The dictionary</returns>
+        /// <exception cref="ArgumentNullException">Any of the keys is null.</exception>
+        /// <exception cref="ArgumentException">Any of the keys is duplicate.</exception>
+        [NotNull]
+        public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>([NotNull] this IEnumerable<KeyValuePair<TKey, TValue>> items, IEqualityComparer<TKey> comparer)
+        {
+            Contract.Requires(items != null);
+            Contract.Ensures(Contract.Result<Dictionary<TKey, TValue>>() != null);
+
+            return items.ToDictionary(item => item.Key, item => item.Value, comparer);
+        }
+
+        /// <summary>
         /// Gets the value from the dictionary, or the default value if no item with the specified key exists.
         /// </summary>
         /// <typeparam name="TKey">The type of the key.</typeparam>
@@ -393,6 +429,7 @@
         /// <param name="key">The key.</param>
         /// <param name="generator">The generator function called when a new value needs to be created.</param>
         /// <returns>The element with the specified key.</returns>
+        [CanBeNull]
         public static TValue ForceValue<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [NotNull] Func<TKey, TValue> generator)
         {
             Contract.Requires(dictionary != null);
@@ -419,7 +456,8 @@
         /// <param name="dictionary">The dictionary.</param>
         /// <param name="key">The key.</param>
         /// <param name="defaultValue">The value that will be added to the dictionary if the dictionary does not contain a value associated with the key.</param>
-        /// <returns> The element with the specified key.</returns>
+        /// <returns>The element with the specified key.</returns>
+        [CanBeNull]
         public static TValue ForceValue<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [CanBeNull] TValue defaultValue)
         {
             Contract.Requires(dictionary != null);
