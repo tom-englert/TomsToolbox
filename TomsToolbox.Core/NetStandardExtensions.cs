@@ -9,8 +9,16 @@ namespace TomsToolbox.Core
 
     using JetBrains.Annotations;
 
-    internal static class NetStandardExtensions
+    /// <summary>
+    /// Some emulations of .NetStandard methods
+    /// </summary>
+    public static class NetStandardExtensions
     {
+        /// <summary>
+        /// Gets the method information from a delegate.
+        /// </summary>
+        /// <param name="d">The delegate.</param>
+        /// <returns>The <see cref="MethodInfo"/></returns>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "CA seems to be wrong about this!")]
         [NotNull] 
         public static MethodInfo GetMethodInfo([NotNull] this Delegate d)
@@ -22,6 +30,11 @@ namespace TomsToolbox.Core
             return d.Method;
         }
 
+        /// <summary>
+        /// Gets the type information for a type.
+        /// </summary>
+        /// <param name="t">The type.</param>
+        /// <returns>The specified type.</returns>
         [NotNull] 
         public static Type GetTypeInfo([NotNull] this Type t)
         {
