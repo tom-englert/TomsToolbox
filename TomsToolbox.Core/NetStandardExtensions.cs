@@ -20,7 +20,8 @@ namespace TomsToolbox.Core
         /// <param name="delegate">The delegate.</param>
         /// <returns>The <see cref="MethodInfo"/></returns>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "CA seems to be wrong about this!")]
-        [NotNull] 
+        [NotNull]
+        [System.Diagnostics.Contracts.Pure]
         public static MethodInfo GetMethodInfo([NotNull] this Delegate @delegate)
         {
             Contract.Requires(@delegate != null);
@@ -35,7 +36,8 @@ namespace TomsToolbox.Core
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The specified type.</returns>
-        [NotNull] 
+        [NotNull]
+        [System.Diagnostics.Contracts.Pure]
         public static Type GetTypeInfo([NotNull] this Type type)
         {
             Contract.Requires(type != null);
