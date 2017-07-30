@@ -367,6 +367,7 @@
         /// <typeparam name="TKey">The type of the key.</typeparam>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="items">The items containing the key-value pairs.</param>
+        /// <param name="comparer">The comparer.</param>
         /// <returns>The dictionary</returns>
         /// <exception cref="ArgumentNullException">Any of the keys is null.</exception>
         /// <exception cref="ArgumentException">Any of the keys is duplicate.</exception>
