@@ -20,10 +20,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Core", "TomsToolbox.Core\TomsToolbox.Core.csproj", "{AE305312-7637-43BF-9156-7EC513C55135}"
-	ProjectSection(ProjectDependencies) = postProject
-		{2B2D1D5C-6CF4-4DE6-8228-12A2AEF182BE} = {2B2D1D5C-6CF4-4DE6-8228-12A2AEF182BE}
-		{0350DFCD-5BFF-46BD-ABF4-568EF308D5B6} = {0350DFCD-5BFF-46BD-ABF4-568EF308D5B6}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Desktop", "TomsToolbox.Desktop\TomsToolbox.Desktop.csproj", "{3647CD2D-2A4E-4859-9BBD-606A73C14801}"
 	ProjectSection(ProjectDependencies) = postProject
