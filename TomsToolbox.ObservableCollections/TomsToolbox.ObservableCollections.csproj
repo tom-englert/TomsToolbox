@@ -23,7 +23,7 @@
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <DocumentationFile>obj\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
     <CodeAnalysisRuleSet>..\CodeContracts.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -56,28 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Version.cs">
-      <Link>Properties\Version.cs</Link>
-    </Compile>
-    <Compile Include="ObservableFilteredCollection.cs" />
-    <Compile Include="IObservableCollection.cs" />
-    <Compile Include="ObservablePropertyChangeTracker.cs" />
-    <Compile Include="ObservableListAdapter.cs" />
-    <Compile Include="ObservableCompositeCollection.cs" />
-    <Compile Include="ObservableExtensions.cs" />
-    <Compile Include="ObservableIndexer.cs" />
-    <Compile Include="ObservableWrappedCollection.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReadOnlyObservableCollectionAdapter.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\TomsToolbox.snk">
-      <Link>TomsToolbox.snk</Link>
-    </None>
-    <None Include="packages.config" />
-    <None Include="TomsToolbox.ObservableCollections.nuspec" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Core\TomsToolbox.Core.csproj">
       <Project>{AE305312-7637-43BF-9156-7EC513C55135}</Project>
       <Name>TomsToolbox.Core</Name>
@@ -87,6 +65,17 @@
       <Name>TomsToolbox.Desktop</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**;bin\**" />
+    <Compile Include="..\Version.cs">
+      <Link>Properties\Version.cs</Link>
+    </Compile>
+    <None Include="..\TomsToolbox.snk">
+      <Link>TomsToolbox.snk</Link>
+    </None>
+    <None Include="packages.config" />
+    <None Include="TomsToolbox.ObservableCollections.nuspec" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <DeployOutput Condition=" '$(Configuration)' == 'Release' ">true</DeployOutput>
@@ -95,11 +84,4 @@ if not "$(TargetFrameworkVersion)" == "v4.0" goto :eof
 "$(SolutionDir).nuget\nuget" pack -symbols "$(ProjectPath)" -IncludeReferencedProjects -Prop Configuration=$(ConfigurationName)
 xcopy /R /Y /I /F "$(TargetDir)*.nupkg" "$(SolutionDir)Deploy\"</PostBuildEvent>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

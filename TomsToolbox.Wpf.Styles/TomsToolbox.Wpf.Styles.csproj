@@ -70,104 +70,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Version.cs">
-      <Link>Version.cs</Link>
-    </Compile>
-    <Compile Include="Effects\InvertGrayEffect.cs" />
-    <Compile Include="IThemeResourceProvider.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <AppDesigner Include="Properties\" />
-    <Compile Include="ResourceKeys.cs" />
-    <Compile Include="WpfStyles.cs" />
-    <Compile Include="ThemeResourceLoaderBehavior.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="TomsToolbox.Wpf.Styles.nuspec" />
-    <Page Include="Themes\ButtonStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\CheckBoxStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\ComboBoxStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\DataGridStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\IconControlStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\MenuStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <None Include="..\TomsToolbox.snk">
-      <Link>TomsToolbox.snk</Link>
-    </None>
-    <None Include="Effects\Build.cmd" />
-    <Page Include="Themes\WindowStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Resource Include="Effects\invertGray.ps" />
-    <None Include="packages.config" />
-    <Page Include="Themes\generic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\GridSplitterStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\GroupBoxStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\ListBoxStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\RadioButtonStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\TabControlStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\TextBoxStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\ToggleButtonStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\ToolTipStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
-      <Link>CustomDictionary.xml</Link>
-    </CodeAnalysisDictionary>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Effects\InvertGray.fx" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Core\TomsToolbox.Core.csproj">
       <Project>{ae305312-7637-43bf-9156-7ec513c55135}</Project>
       <Name>TomsToolbox.Core</Name>
@@ -180,6 +82,34 @@
       <Project>{ec9f9418-877f-49ba-af91-f456fbc5ad57}</Project>
       <Name>TomsToolbox.Wpf</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**;bin\**" />
+    <Page Include="**\*.xaml" Exclude="obj\**;bin\**" >
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="..\Version.cs">
+      <Link>Version.cs</Link>
+    </Compile>
+    <Resource Include="Effects\invertGray.ps" />
+    <None Include="TomsToolbox.Wpf.Styles.nuspec" />
+    <None Include="..\TomsToolbox.snk">
+      <Link>TomsToolbox.snk</Link>
+    </None>
+    <None Include="Effects\Build.cmd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Effects\InvertGray.fx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

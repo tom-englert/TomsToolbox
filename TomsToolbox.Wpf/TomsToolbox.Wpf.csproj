@@ -26,7 +26,7 @@
     <Optimize>false</Optimize>
     <DefineConstants>$(AdditionalConstants)DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <DocumentationFile>obj\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
     <CodeAnalysisRuleSet>..\CodeContracts.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -71,135 +71,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\MapTile.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\Version.cs">
-      <Link>Properties\Version.cs</Link>
-    </Compile>
-    <Compile Include="Composition\Import.cs" />
-    <Compile Include="Composition\ImportBehavior.cs" />
-    <Compile Include="Composition\IVisualCompositionBehavior.cs" />
-    <Compile Include="Converters\AggregatingMultiValueConverter.cs" />
-    <Compile Include="Converters\MultiValueConverter.cs" />
-    <Compile Include="Converters\UnaryOperationConverter.cs" />
-    <Compile Include="Converters\ValueConverter.cs" />
-    <Compile Include="Converters\ValueConverterExtensions.cs" />
-    <Compile Include="DialogCommands.cs" />
-    <Compile Include="Interactivity\ListBoxSelectAllBehavior.cs" />
-    <Compile Include="VirtualizingDoubleClickPanel.cs" />
-    <Compile Include="XamlExtensions\ColumnStyles.cs" />
-    <Compile Include="XamlExtensions\VisualComposition.cs" />
-    <Compile Include="Controls\CompositeContextMenu.cs" />
-    <Compile Include="Composition\ICheckableCommand.cs" />
-    <Compile Include="Converters\CompositeMultiValueConverter.cs" />
-    <Compile Include="Converters\ArithmeticMultiValueConverter.cs" />
-    <Compile Include="Converters\ImageSourceToImageConverter.cs" />
-    <Compile Include="Converters\LogicalMultiValueConverter.cs" />
-    <Compile Include="XamlExtensions\DataTemplate.cs" />
-    <Compile Include="Converters\BinaryOperationConverter.cs" />
-    <Compile Include="Interactivity\CustomNonClientAreaBehavior.cs" />
-    <Compile Include="DateTimeSource.cs" />
-    <Compile Include="DoubleClickPanel.cs" />
-    <Compile Include="Interactivity\UpdatePropertyAction.cs" />
-    <Compile Include="Interactivity\FrameworkElementBehavior.cs" />
-    <Compile Include="Interactivity\MapPanBehavior.cs" />
-    <Compile Include="Interactivity\PopupFocusManagerBehavior.cs" />
-    <Compile Include="Interactivity\SelectGroupOnGroupHeaderClickBehavior.cs" />
-    <Compile Include="Interactivity\SelectionRectangleBehavior.cs" />
-    <Compile Include="Interactivity\MapZoomBehavior.cs" />
-    <Compile Include="Interactivity\WindowButtonsHandlingBehavior.cs" />
-    <Compile Include="Interactivity\ZoomFontSizeOnMouseWheelBehavior.cs" />
-    <Compile Include="BindingErrorTracer.cs" />
-    <Compile Include="CanvasAnchor.cs" />
-    <Compile Include="Composition\CommandRoutingBehavior.cs" />
-    <Compile Include="Composition\CommandSource.cs" />
-    <Compile Include="Composition\CommandSourceFactory.cs" />
-    <Compile Include="Composition\ComposableContentControl.cs" />
-    <Compile Include="Composition\ComposablePartWithContext.cs" />
-    <Compile Include="Composition\ContentControlCompositionBehavior.cs" />
-    <Compile Include="Composition\DataTemplateAttribute.cs" />
-    <Compile Include="Composition\DataTemplateManager.cs" />
-    <Compile Include="Composition\DataTemplateMetadata.cs" />
-    <Compile Include="Composition\ExportProviderLocator.cs" />
-    <Compile Include="Composition\IComposablePart.cs" />
-    <Compile Include="Composition\ISelectableComposablePart.cs" />
-    <Compile Include="Composition\ImportExtension.cs" />
-    <Compile Include="Composition\ItemsControlCompositionBehavior.cs" />
-    <Compile Include="Composition\IVisualCompositionMetadata.cs" />
-    <Compile Include="Composition\ModuleResourceUriAttribute.cs" />
-    <Compile Include="Composition\RoleBasedDataTemplateKey.cs" />
-    <Compile Include="Composition\RoleBasedDataTemplateSelector.cs" />
-    <Compile Include="Composition\VisualCompositionBehavior.cs" />
-    <Compile Include="Composition\VisualCompositionExportAttribute.cs" />
-    <Compile Include="Controls\IImage.cs" />
-    <Compile Include="Controls\IImageProvider.cs" />
-    <Compile Include="Controls\IMapTile.cs" />
-    <Compile Include="Controls\InPlaceEdit.cs" />
-    <Compile Include="Controls\LoadingIndicator.cs" />
-    <Compile Include="Controls\Map.cs" />
-    <Compile Include="Controls\MapTile.xaml.cs">
-      <DependentUpon>MapTile.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Converters\ColorNameToBrushConverter.cs" />
-    <Compile Include="Converters\CompositeConverter.cs" />
-    <Compile Include="Converters\ConfirmedCommandConverter.cs" />
-    <Compile Include="Converters\ConfirmedCommandEventArgs.cs" />
-    <Compile Include="Converters\CoordinatesToPointConverter.cs" />
-    <Compile Include="Converters\DoubleToThicknessConverter.cs" />
-    <Compile Include="Converters\EnumToBooleanConverter.cs" />
-    <Compile Include="Converters\EnumToValuesConverter.cs" />
-    <Compile Include="Converters\ObjectToAttributeConverter.cs" />
-    <Compile Include="Converters\ObjectToDescriptionConverter.cs" />
-    <Compile Include="Converters\ObjectToDisplayNameConverter.cs" />
-    <Compile Include="Converters\ObjectToTextConverter.cs" />
-    <Compile Include="Converters\ReplaceTextConverter.cs" />
-    <Compile Include="Converters\ThicknessMultiplyConverter.cs" />
-    <Compile Include="Converters\StringToObjectConverter.cs" />
-    <Compile Include="Converters\VisibilityToBooleanConverter.cs" />
-    <Compile Include="DelegateCommand.cs" />
-    <Compile Include="ImageExtensions.cs" />
-    <Compile Include="ILayer.cs" />
-    <Compile Include="ItemsControlExtensions.cs" />
-    <Compile Include="Controls\ViewportCanvas.cs" />
-    <Compile Include="ListCollectionViewListAdapter.cs" />
-    <Compile Include="MultiSelectorExtensions.cs" />
-    <Compile Include="DependencyObjectExtensions.cs" />
-    <Compile Include="NullCommand.cs" />
-    <Compile Include="PresentationFrameworkExtensions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Controls\PixelSnapper.cs" />
-    <Compile Include="PropertyBinding.cs" />
-    <Compile Include="PropertyBindingValueChangedEventArgs.cs" />
-    <Compile Include="SelectorExtensions.cs" />
-    <Compile Include="Controls\SharedWidthHeaderedContentControl.cs" />
-    <Compile Include="StyleBindings.cs" />
-    <Compile Include="TextBlockHelper.cs" />
-    <Compile Include="ResourceKeys.cs" />
-    <Compile Include="TextBoxVisibleWhiteSpaceDecorator.cs" />
-    <Compile Include="TextValidationEventArgs.cs" />
-    <Compile Include="VisualExtensions.cs" />
-    <Compile Include="WaitCursor.cs" />
-    <Compile Include="WindowCommands.cs" />
-    <Compile Include="XamlExtensions\KeyboardNavigation.cs" />
-    <None Include="..\TomsToolbox.snk">
-      <Link>TomsToolbox.snk</Link>
-    </None>
-    <None Include="packages.config" />
-    <AppDesigner Include="Properties\" />
-    <None Include="TomsToolbox.Wpf.nuspec" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Core\TomsToolbox.Core.csproj">
       <Project>{ae305312-7637-43bf-9156-7ec513c55135}</Project>
       <Name>TomsToolbox.Core</Name>
@@ -214,6 +85,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**;bin\**" />
+    <Page Include="**\*.xaml" Exclude="obj\**;bin\**" >
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="..\Version.cs">
+      <Link>Properties\Version.cs</Link>
+    </Compile>
+    <None Include="..\TomsToolbox.snk">
+      <Link>TomsToolbox.snk</Link>
+    </None>
+    <None Include="packages.config" />
+    <AppDesigner Include="Properties\" />
+    <None Include="TomsToolbox.Wpf.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
@@ -226,11 +113,4 @@ if not "$(TargetFrameworkVersion)" == "v4.0" goto :eof
 "$(SolutionDir).nuget\nuget" pack -symbols "$(ProjectPath)" -IncludeReferencedProjects -Prop Configuration=$(ConfigurationName)
 xcopy /R /Y /I /F "$(TargetDir)*.nupkg" "$(SolutionDir)Deploy\"</PostBuildEvent>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

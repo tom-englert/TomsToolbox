@@ -25,7 +25,7 @@
     <Optimize>false</Optimize>
     <DefineConstants>$(AdditionalConstants)DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <DocumentationFile>obj\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
     <CodeAnalysisRuleSet>..\CodeContracts.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -50,51 +50,20 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=10.4.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.10.4.0\lib\net\JetBrains.Annotations.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**;bin\**" />
     <Compile Include="..\Version.cs">
       <Link>Properties\Version.cs</Link>
     </Compile>
-    <Compile Include="AutoWeakIndexer.cs" />
-    <Compile Include="AssemblyExtensions.cs" />
-    <Compile Include="CollectionExtensions.cs" />
-    <Compile Include="DateTimeOperations.cs" />
-    <Compile Include="HashCode.cs" />
-    <Compile Include="INotifyChanged.cs" />
-    <Compile Include="ITimeService.cs" />
-    <Compile Include="MathExtensions.cs" />
-    <Compile Include="PluginModuleAttribute.cs" />
-    <Compile Include="ObjectExtensions.cs" />
-    <Compile Include="DefaultValue.cs" />
-    <Compile Include="DelegateComparer.cs" />
-    <Compile Include="DelegateEqualityComparer.cs" />
-    <Compile Include="Disposable.cs" />
-    <Compile Include="Enumerate.cs" />
-    <Compile Include="EnumExtensions.cs" />
-    <Compile Include="ExceptionExtensions.cs" />
-    <Compile Include="Maybe.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertySupport.cs" />
-    <Compile Include="RealTimeService.cs" />
-    <Compile Include="RegexExtensions.cs" />
-    <Compile Include="SequenceAttribute.cs" />
-    <Compile Include="TextEventArgs.cs" />
-    <Compile Include="TryCast.cs" />
-    <Compile Include="WeakEventListener.cs" />
-    <Compile Include="WeakReference.cs" />
-    <Compile Include="WeakReferenceSet.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\TomsToolbox.snk">
       <Link>TomsToolbox.snk</Link>
     </None>
     <None Include="packages.config" />
-    <None Include="TomsToolbox.Core.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="JetBrains.Annotations, Version=10.4.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.Annotations.10.4.0\lib\net\JetBrains.Annotations.dll</HintPath>
-    </Reference>
+    <None Include="TomsToolbox.Core.nuspec" />
   </ItemGroup>
   <Import Condition=" '$(TargetFrameworkProfile)' != 'Profile328' " Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Condition=" '$(TargetFrameworkProfile)' == 'Profile328' " Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -106,11 +75,4 @@ if not "$(TargetFrameworkProfile)" == "Client" goto :eof
 "$(SolutionDir).nuget\nuget" pack -symbols "$(ProjectPath)" -IncludeReferencedProjects -Prop Configuration=$(ConfigurationName)
 xcopy /R /Y /I /F "$(TargetDir)*.nupkg" "$(SolutionDir)Deploy\"</PostBuildEvent>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
