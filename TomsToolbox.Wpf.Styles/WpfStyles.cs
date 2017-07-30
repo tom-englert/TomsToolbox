@@ -68,8 +68,6 @@
             return Defaults(helperWindow);
         }
 
-
-
         /// <summary>
         /// Gets the applications title from the <see cref="AssemblyTitleAttribute"/>.
         /// </summary>

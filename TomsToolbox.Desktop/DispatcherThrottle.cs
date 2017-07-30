@@ -52,14 +52,14 @@
         /// </summary>
         public void Tick()
         {
-            Interlocked.Increment(ref _counter);
+            if (Interlocked.CompareExchange(ref _counter, 1, 0) != 0)
+                return;
 
             _dispatcher.BeginInvoke(_priority, delegate
             {
-                if (Interlocked.Decrement(ref _counter) != 0)
-                    return;
-
                 _target();
+
+                Interlocked.Exchange(ref _counter, 0);
             });
 
         }
