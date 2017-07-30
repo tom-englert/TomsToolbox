@@ -4,6 +4,7 @@
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using System.Reflection;
 
     using JetBrains.Annotations;
 
@@ -76,9 +77,9 @@
             Contract.Requires(onEventAction != null);
             Contract.Requires(onAttachAction != null);
             Contract.Requires(onDetachAction != null);
-            Contract.Requires(onEventAction.Method.IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
-            Contract.Requires(onAttachAction.Method.IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
-            Contract.Requires(onDetachAction.Method.IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
+            Contract.Requires(onEventAction.GetMethodInfo().IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
+            Contract.Requires(onAttachAction.GetMethodInfo().IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
+            Contract.Requires(onDetachAction.GetMethodInfo().IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
 
             _weakTarget = new WeakReference<TTarget>(target);
             _source = source;
@@ -106,9 +107,9 @@
             Contract.Requires(onEventAction != null);
             Contract.Requires(onAttachAction != null);
             Contract.Requires(onDetachAction != null);
-            Contract.Requires(onEventAction.Method.IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
-            Contract.Requires(onAttachAction.Method.IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
-            Contract.Requires(onDetachAction.Method.IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
+            Contract.Requires(onEventAction.GetMethodInfo().IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
+            Contract.Requires(onAttachAction.GetMethodInfo().IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
+            Contract.Requires(onDetachAction.GetMethodInfo().IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
 
             _weakTarget = new WeakReference<TTarget>(target);
             _weakSource = source;

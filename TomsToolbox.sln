@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CD367555-C8E1-4F5D-9BCF-50396D0D2F1B}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,8 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Core", "TomsToolbox.Core\TomsToolbox.Core.csproj", "{AE305312-7637-43BF-9156-7EC513C55135}"
 	ProjectSection(ProjectDependencies) = postProject
+		{2B2D1D5C-6CF4-4DE6-8228-12A2AEF182BE} = {2B2D1D5C-6CF4-4DE6-8228-12A2AEF182BE}
 		{0350DFCD-5BFF-46BD-ABF4-568EF308D5B6} = {0350DFCD-5BFF-46BD-ABF4-568EF308D5B6}
-		{968765F8-75CC-426E-A75B-86544982074B} = {968765F8-75CC-426E-A75B-86544982074B}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Desktop", "TomsToolbox.Desktop\TomsToolbox.Desktop.csproj", "{3647CD2D-2A4E-4859-9BBD-606A73C14801}"
@@ -57,7 +57,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Wpf.Tests", "To
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Wpf.Styles", "TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj", "{E5D732D2-0294-48FD-8314-63DC1A9155FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Core.45", "TomsToolbox.Core\TomsToolbox.Core.45.csproj", "{968765F8-75CC-426E-A75B-86544982074B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Core.Netstandard", "TomsToolbox.Core\TomsToolbox.Core.Netstandard.csproj", "{2B2D1D5C-6CF4-4DE6-8228-12A2AEF182BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -138,10 +138,12 @@ Global
 		{E5D732D2-0294-48FD-8314-63DC1A9155FE}.Publish|Any CPU.Build.0 = Release|Any CPU
 		{E5D732D2-0294-48FD-8314-63DC1A9155FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5D732D2-0294-48FD-8314-63DC1A9155FE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{968765F8-75CC-426E-A75B-86544982074B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{968765F8-75CC-426E-A75B-86544982074B}.Publish|Any CPU.ActiveCfg = Release|Any CPU
-		{968765F8-75CC-426E-A75B-86544982074B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{968765F8-75CC-426E-A75B-86544982074B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B2D1D5C-6CF4-4DE6-8228-12A2AEF182BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B2D1D5C-6CF4-4DE6-8228-12A2AEF182BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B2D1D5C-6CF4-4DE6-8228-12A2AEF182BE}.Publish|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B2D1D5C-6CF4-4DE6-8228-12A2AEF182BE}.Publish|Any CPU.Build.0 = Debug|Any CPU
+		{2B2D1D5C-6CF4-4DE6-8228-12A2AEF182BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B2D1D5C-6CF4-4DE6-8228-12A2AEF182BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

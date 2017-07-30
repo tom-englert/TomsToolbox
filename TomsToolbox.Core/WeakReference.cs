@@ -2,15 +2,16 @@
 {
     using System;
     using System.Diagnostics.Contracts;
+#if !PORTABLE && !NETSTANDARD1_0
     using System.Runtime.Serialization;
-
+#endif
     using JetBrains.Annotations;
 
     /// <summary>
     /// A typed version of the <see cref="WeakReference"/>
     /// </summary>
     /// <typeparam name="T">The type of the object that is tracked.</typeparam>
-#if !PORTABLE
+#if !PORTABLE && !NETSTANDARD1_0
     [Serializable]
 #endif
     public sealed class WeakReference<T> : WeakReference where T : class
@@ -34,7 +35,7 @@
         {
         }
 
-#if !PORTABLE
+#if !PORTABLE && !NETSTANDARD1_0
         /// <summary>
         /// Initializes a new instance of the <see cref="WeakReference{T}"/> class.
         /// </summary>

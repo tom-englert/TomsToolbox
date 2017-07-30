@@ -2,6 +2,7 @@
 {
     using System;
     using System.Diagnostics.Contracts;
+    using System.Reflection;
 
     using JetBrains.Annotations;
 
@@ -21,7 +22,7 @@
             Contract.Requires(type != null);
 
             // every value type has a default constructor, default for reference types is always null
-            return type.IsValueType ? Activator.CreateInstance(type) : null;
+            return type.GetTypeInfo().IsValueType ? Activator.CreateInstance(type) : null;
         }
 
         /// <summary>

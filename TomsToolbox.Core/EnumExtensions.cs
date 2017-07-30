@@ -6,6 +6,7 @@
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
+    using System.Reflection;
 
     using JetBrains.Annotations;
 
@@ -285,7 +286,7 @@
         {
             Contract.Requires(value != null);
             var enumType = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
-            if (!enumType.IsEnum)
+            if (!enumType.GetTypeInfo().IsEnum)
                 throw new InvalidOperationException(enumType.Name + " is not an System.Enum.");
 
             try
@@ -305,7 +306,7 @@
 
         private static void VerifyIsEnum<T>()
         {
-            if (!typeof(T).IsEnum)
+            if (!typeof(T).GetTypeInfo().IsEnum)
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Type '{0}' is not an System.Enum", typeof(T).FullName));
         }
 
@@ -313,8 +314,9 @@
         {
             VerifyIsEnum<T>();
 
-            if (!Attribute.IsDefined(typeof(T), typeof(FlagsAttribute)))
+            if (!typeof(T).GetTypeInfo().GetCustomAttributes(true).OfType<FlagsAttribute>().Any())
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Type '{0}' doesn't have the 'Flags' attribute", typeof(T).FullName));
         }
     }
 }
+

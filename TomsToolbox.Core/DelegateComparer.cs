@@ -5,6 +5,7 @@
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using System.Reflection;
 
     using JetBrains.Annotations;
 
@@ -37,7 +38,7 @@
         /// <param name="x">The first object to compare.</param><param name="y">The second object to compare.</param>
         public int Compare(T x, T y)
         {
-            if (!typeof(T).IsValueType)
+            if (!typeof(T).GetTypeInfo().IsValueType)
             {
                 if (ReferenceEquals(x, null))
                     return ReferenceEquals(y, null) ? 0 : -1;

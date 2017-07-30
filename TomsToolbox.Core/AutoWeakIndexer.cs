@@ -70,10 +70,8 @@
                 Contract.Requires(!ReferenceEquals(key, null));
                 Contract.Ensures(Contract.Result<TValue>() != null);
 
-                TValue target;
-                WeakReference<TValue> value;
                 var items1 = _items;
-                if (items1.TryGetValue(key, out value) && (value != null) && (value.TryGetTarget(out target)))
+                if (items1.TryGetValue(key, out var value) && (value != null) && (value.TryGetTarget(out var target)))
                     return target;
 
                 lock (_sync)
@@ -163,10 +161,9 @@
         {
             Contract.Requires(!ReferenceEquals(key, null));
 
-            WeakReference<TValue> reference;
             value = default(TValue);
 
-            return _items.TryGetValue(key, out reference) && (reference != null) && reference.TryGetTarget(out value);
+            return _items.TryGetValue(key, out var reference) && (reference != null) && reference.TryGetTarget(out value);
         }
 
         /// <summary>
@@ -206,8 +203,7 @@
         {
             Contract.Requires(!ReferenceEquals(key, null));
 
-            WeakReference<TValue> reference;
-            return _items.TryGetValue(key, out reference) && (reference != null) &&  reference.IsAlive;
+            return _items.TryGetValue(key, out var reference) && (reference != null) && reference.IsAlive;
         }
 
         /// <summary>
