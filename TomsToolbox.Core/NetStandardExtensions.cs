@@ -17,31 +17,31 @@ namespace TomsToolbox.Core
         /// <summary>
         /// Gets the method information from a delegate.
         /// </summary>
-        /// <param name="d">The delegate.</param>
+        /// <param name="delegate">The delegate.</param>
         /// <returns>The <see cref="MethodInfo"/></returns>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "CA seems to be wrong about this!")]
         [NotNull] 
-        public static MethodInfo GetMethodInfo([NotNull] this Delegate d)
+        public static MethodInfo GetMethodInfo([NotNull] this Delegate @delegate)
         {
-            Contract.Requires(d != null);
+            Contract.Requires(@delegate != null);
             Contract.Ensures(Contract.Result<MethodInfo>() != null);
 
             // ReSharper disable once AssignNullToNotNullAttribute
-            return d.Method;
+            return @delegate.Method;
         }
 
         /// <summary>
         /// Gets the type information for a type.
         /// </summary>
-        /// <param name="t">The type.</param>
+        /// <param name="type">The type.</param>
         /// <returns>The specified type.</returns>
         [NotNull] 
-        public static Type GetTypeInfo([NotNull] this Type t)
+        public static Type GetTypeInfo([NotNull] this Type type)
         {
-            Contract.Requires(t != null);
+            Contract.Requires(type != null);
             Contract.Ensures(Contract.Result<Type>() != null);
 
-            return t;
+            return type;
         }
     }
 #endif
