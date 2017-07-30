@@ -233,9 +233,9 @@
         /// <returns>This method never returns, but throws the exception.</returns>
         /// <exception cref="System.InvalidOperationException"><paramref name="message"/></exception>
 #if !PORTABLE
-        public TResult ElseThrow([CanBeNull] [Localizable(false)][LocalizationRequired(false)] string message)
+        public TResult ElseThrow([CanBeNull][Localizable(false)][LocalizationRequired(false)] string message)
 #else
-        public TResult ElseThrow([LocalizationRequired(false)] string message)
+        public TResult ElseThrow([CanBeNull][LocalizationRequired(false)] string message)
 #endif
         {
             if (!_isResolved)
