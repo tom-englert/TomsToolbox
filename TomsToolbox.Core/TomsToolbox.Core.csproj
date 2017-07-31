@@ -68,9 +68,4 @@
   </ItemGroup>
   <Import Condition=" '$(TargetFrameworkProfile)' != 'Profile328' " Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Condition=" '$(TargetFrameworkProfile)' == 'Profile328' " Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <PropertyGroup>
-    <DeployOutput Condition=" '$(Configuration)' == 'Release' ">true</DeployOutput>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
 </Project>

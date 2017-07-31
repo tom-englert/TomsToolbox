@@ -26,7 +26,5 @@
 
     <file src="bin\Release\Netstandard1.0\$id$.dll" target="lib\Netstandard1.0" />
     <file src="bin\Release\Netstandard1.0\$id$.xml" target="lib\Netstandard1.0" />
-    <file src="bin\Release\Netstandard1.0\CodeContracts\$id$.*.dll" target="lib\Netstandard1.0\CodeContracts" />
-
   </files>
 </package>
