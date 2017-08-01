@@ -9,6 +9,21 @@
       <content>
         <list class="bullet">          
           <listItem>
+            <para>1.0.60.0</para>
+            <list class="bullet">
+              <listItem><para>Fix data grid header styles</para></listItem>
+              <listItem><para>Add possibility to set more than on group style via StyleBindings</para></listItem>
+              <listItem><para>Add style for Window class</para></listItem>
+              <listItem><para>Add ToDictionary from IEnumerable{KeyValuePair} extension method</para></listItem>
+              <listItem><para>Improve DispatcherThrottle implementation</para></listItem>
+              <listItem><para>Support NetStandard (TomsToolbox.Core)</para></listItem>
+              <listItem><para></para></listItem>
+              <listItem><para></para></listItem>
+              <listItem><para></para></listItem>
+              <listItem><para></para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.59.0</para>
             <list class="bullet">
               <listItem><para>Add a VirtualizingDoubleClickPanel (same as DoubleClickPanel, but derived from VirtualizingPanel).</para></listItem>
