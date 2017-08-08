@@ -18,4 +18,9 @@
     <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.0.0" />
     <PackageReference Include="System.Diagnostics.Contracts" Version="4.3.0" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="TomsToolbox.Core.ExternalAnnotations.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

@@ -164,7 +164,7 @@
         [NotifyPropertyChangedInvocator]
 #if NETFRAMEWORK_4_5
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        protected bool SetProperty<T>(ref T backingField, T value, [System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
+        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
 #else
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] string propertyName)
 #endif
@@ -205,27 +205,30 @@
             return true;
         }
 
-#if NETFRAMEWORK_4_5
         /// <summary>
         /// Sets the property and raises the <see cref="PropertyChanged" /> event for the property identified by the specified property expression.
         /// </summary>
         /// <typeparam name="T">The type of the property.</typeparam>
         /// <param name="backingField">The backing field for the property.</param>
         /// <param name="value">The value.</param>
-        /// <param name="propertyName">Name of the property; omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
         /// <param name="changeCallback">The callback that is invoked if the value has changed. Parameters are (oldValue, newValue).</param>
+        /// <param name="propertyName">Name of the property; omit this parameter to use the callers name provided by the CallerMemberNameAttribute (.Net4.5 only)</param>
         /// <returns> True if value has changed and the PropertyChange event was raised. </returns>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This pattern is required by the CallerMemberName attribute.")]
         [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>(ref T backingField, T value, [NotNull] Action<T, T> changeCallback, [System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
+        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Action<T, T> changeCallback,
+#if !NETFRAMEWORK_4_5
+            [NotNull] string propertyName)
+#else
+            [System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
+#endif
         {
             Contract.Requires(!string.IsNullOrEmpty(propertyName));
             Contract.Requires(changeCallback != null);
 
             return SetProperty<T>(ref backingField, value, propertyName, changeCallback);
         }
-#endif
 
         /// <summary>
         /// Raises the <see cref="PropertyChanged"/> event for the property with the specified name.

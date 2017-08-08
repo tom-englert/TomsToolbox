@@ -18,6 +18,7 @@
     </references>
   </metadata>
   <files>
+    <file src="bin\Release\$id$.ExternalAnnotations.xml" target="lib\net40-Client" />
     <file src="bin\Release\CodeContracts\*.dll" target="lib\net40-Client\CodeContracts" />
   </files>
 </package>

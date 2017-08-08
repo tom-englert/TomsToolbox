@@ -18,13 +18,16 @@
     </references>
   </metadata>
   <files>
-    <file src="bin\Release\v4.0\Client\CodeContracts\$id$.*.dll" target="lib\net40-Client\CodeContracts" />
+    <file src="bin\Release\v4.0\Client\CodeContracts\$id$.Contracts.dll" target="lib\net40-Client\CodeContracts" />
+    <file src="bin\Release\v4.0\Client\$id$.ExternalAnnotations.xml" target="lib\net40-Client" />
 
     <file src="bin\Release\v4.0\Profile328\$id$.dll" target="lib\portable-net40+sl50+win+wpa81+wp80" />
     <file src="bin\Release\v4.0\Profile328\$id$.xml" target="lib\portable-net40+sl50+win+wpa81+wp80" />
-    <file src="bin\Release\v4.0\Profile328\CodeContracts\$id$.*.dll" target="lib\portable-net40+sl50+win+wpa81+wp80\CodeContracts" />
+    <file src="bin\Release\v4.0\Profile328\$id$.ExternalAnnotations.xml" target="lib\portable-net40+sl50+win+wpa81+wp80" />
+    <file src="bin\Release\v4.0\Profile328\CodeContracts\$id$.Contracts.dll" target="lib\portable-net40+sl50+win+wpa81+wp80\CodeContracts" />
 
     <file src="bin\Release\Netstandard1.0\$id$.dll" target="lib\Netstandard1.0" />
+    <file src="bin\Release\Netstandard1.0\$id$.ExternalAnnotations.xml" target="lib\Netstandard1.0" />
     <file src="bin\Release\Netstandard1.0\$id$.xml" target="lib\Netstandard1.0" />
   </files>
 </package>

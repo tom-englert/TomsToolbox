@@ -18,10 +18,12 @@
     </references>
   </metadata>
   <files>
+    <file src="bin\Release\v4.0\$id$.ExternalAnnotations.xml" target="lib\net40-Client" />
     <file src="bin\Release\v4.0\CodeContracts\*.dll" target="lib\net40-Client\CodeContracts" />
 
-    <file src="bin\Release\v4.5\TomsToolbox.Desktop.dll" target="lib\net45" />
-    <file src="bin\Release\v4.5\TomsToolbox.Desktop.xml" target="lib\net45" />
+    <file src="bin\Release\v4.5\$id$.dll" target="lib\net45" />
+    <file src="bin\Release\v4.5\$id$.xml" target="lib\net45" />
+    <file src="bin\Release\v4.5\$id$.ExternalAnnotations.xml" target="lib\net45" />
     <file src="bin\Release\v4.5\CodeContracts\*.dll" target="lib\net45\CodeContracts" />
   </files>
 </package>
