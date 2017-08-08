@@ -4,7 +4,9 @@
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+#if NETSTANDARD1_0
     using System.Reflection;
+#endif
 
     using JetBrains.Annotations;
 

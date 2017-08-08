@@ -41,7 +41,9 @@
         /// </summary>
         /// <param name="info">An object that holds all the data needed to serialize or deserialize the current <see cref="T:System.WeakReference" /> object.</param>
         /// <param name="context">(Reserved) Describes the source and destination of the serialized stream specified by <paramref name="info" />.</param>
-        private WeakReference([NotNull] SerializationInfo info, StreamingContext context)
+        // ReSharper disable once AnnotateNotNullParameter
+        private WeakReference(SerializationInfo info, StreamingContext context)
+            // ReSharper disable once AssignNullToNotNullAttribute
             : base(info, context)
         {
         }
