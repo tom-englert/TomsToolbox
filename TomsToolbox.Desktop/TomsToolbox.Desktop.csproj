@@ -23,7 +23,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <DefineConstants>$(AdditionalConstants)DEBUG;TRACE</DefineConstants>
+    <DefineConstants>$(AdditionalConstants)DEBUG;TRACE;JETBRAINS_ANNOTATIONS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <DocumentationFile>obj\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
@@ -32,7 +32,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <DefineConstants>$(AdditionalConstants)TRACE;CODE_ANALYSIS;JETBRAINS_ANNOTATIONS</DefineConstants>
+    <DefineConstants>$(AdditionalConstants)TRACE;JETBRAINS_ANNOTATIONS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <DocumentationFile>obj\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
