@@ -73,7 +73,7 @@
                 var target = default(TValue);
 
                 var items1 = _items;
-                if (items1.TryGetValue(key, out var value) && value.TryGetTarget(out target))
+                if (items1.TryGetValue(key, out var value) && (value?.TryGetTarget(out target) == true))
                     // ReSharper disable once AssignNullToNotNullAttribute
                     return target;
 

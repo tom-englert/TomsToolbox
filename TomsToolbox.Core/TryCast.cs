@@ -143,6 +143,7 @@
         /// <summary>
         /// Gets the result of the action of the first succeeded cast.
         /// </summary>
+        [CanBeNull]
         public TResult Result => InternalResult;
 
         /// <summary>
@@ -171,6 +172,7 @@
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>The result.</returns>
+        [CanBeNull]
         public TResult Else([NotNull] Func<TValue, TResult> action)
         {
             Contract.Requires(action != null);
@@ -205,11 +207,13 @@
         /// <summary>
         /// Gets the value to cast.
         /// </summary>
+        [CanBeNull]
         protected TValue Value => _value;
 
         /// <summary>
         /// Gets the result of the action of the first succeeded cast.
         /// </summary>
+        [CanBeNull]
         protected TResult InternalResult
         {
             get;
@@ -220,10 +224,11 @@
         /// Throws an <see cref="InvalidOperationException"/> if none of the casts have succeeded.
         /// </summary>
         /// <returns>This method never returns, but throws the exception.</returns>
-        /// <exception cref="System.InvalidOperationException">Encountered an unexpected type: 'type name'</exception>
+        /// <exception cref="InvalidOperationException">Encountered an unexpected type: 'type name'</exception>
+        [CanBeNull]
         public TResult ElseThrow()
         {
-            return ElseThrow("Encountered an unexpected type: " + ((_value == null) ? "(null)" : _value.GetType().FullName));
+            return ElseThrow("Encountered an unexpected type: " + (ReferenceEquals(_value, null) ? "(null)" : _value.GetType().FullName));
         }
 
         /// <summary>
@@ -231,7 +236,8 @@
         /// </summary>
         /// <param name="message">The message of the exception.</param>
         /// <returns>This method never returns, but throws the exception.</returns>
-        /// <exception cref="System.InvalidOperationException"><paramref name="message"/></exception>
+        /// <exception cref="InvalidOperationException"><paramref name="message"/></exception>
+        [CanBeNull]
 #if !PORTABLE && !NETSTANDARD1_0
         public TResult ElseThrow([CanBeNull][Localizable(false)][LocalizationRequired(false)] string message)
 #else

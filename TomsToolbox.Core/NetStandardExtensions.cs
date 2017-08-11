@@ -1,7 +1,11 @@
 ﻿namespace TomsToolbox.Core
 {
-#if !NETSTANDARD1_0
     // ReSharper disable All
+#pragma warning disable CCRSI_NotNullForContract // Element with not-null contract does not have a corresponding [NotNull] attribute.
+#pragma warning disable CCRSI_ContractForNotNull // Element with not-null contract does not have a corresponding [NotNull] attribute.
+
+#if !NETSTANDARD1_0
+
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
@@ -33,7 +37,7 @@
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The specified type.</returns>
-        [System.Diagnostics.Contracts.Pure]
+        [Pure]
         public static Type GetTypeInfo(this Type type)
         {
             Contract.Requires(type != null);
