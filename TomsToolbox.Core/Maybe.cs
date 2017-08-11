@@ -55,6 +55,7 @@
     /// <typeparam name="T"></typeparam>
     public class Maybe<T> where T:class
     {
+        [CanBeNull]
         private readonly T _value;
 
         /// <summary>

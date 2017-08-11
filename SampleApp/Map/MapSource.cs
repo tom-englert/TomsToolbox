@@ -87,6 +87,7 @@
             set;
         }
 
+        [CanBeNull]
         [XmlElement]
         public string[] TileUrl
         {
@@ -102,7 +103,8 @@
         [NotNull]
         private Uri GetImageUri([NotNull] IMapTile tile)
         {
-            var pattern = TileUrl[_tileUrlIndex++ % TileUrl.Length] ?? string.Empty;
+            var tileUrl = TileUrl ?? new string[0];
+            var pattern = tileUrl[_tileUrlIndex++ % tileUrl.Length] ?? string.Empty;
 
             var str = pattern
                 .Replace("%x", tile.X.ToString(CultureInfo.InvariantCulture))

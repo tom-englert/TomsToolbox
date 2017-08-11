@@ -229,12 +229,12 @@
         /// <param name="items">The items to test for.</param>
         /// <param name="comparer">The comparer to compare the individual items.</param>
         /// <returns><c>true</c> if any of the items is contained in the specified object; otherwise <c>false</c>.</returns>
-        public static bool ContainsAny<T>([NotNull] this IEnumerable<T> self, [CanBeNull] IEqualityComparer<T> comparer, [NotNull] params T[] items)
+        public static bool ContainsAny<T>([NotNull, ItemNotNull] this IEnumerable<T> self, [CanBeNull] IEqualityComparer<T> comparer, [NotNull, ItemCanBeNull] params T[] items)
         {
             Contract.Requires(self != null);
             Contract.Requires(items != null);
 
-            return items.Any(item => item != null && self.Contains(item, comparer));
+            return items.Any(item => self.Contains(item, comparer));
         }
 
         /// <summary>
@@ -246,7 +246,7 @@
         /// <returns>
         /// The zero-based index of the first occurrence of <paramref name="item" />, if found; otherwise, –1.
         /// </returns>
-        public static int IndexOf<T>([NotNull] this IEnumerable<T> collection, [CanBeNull] T item)
+        public static int IndexOf<T>([NotNull, ItemCanBeNull] this IEnumerable<T> collection, [CanBeNull] T item)
         {
             Contract.Requires(collection != null);
 
@@ -273,10 +273,11 @@
         /// <returns>
         /// The zero-based index of the first occurrence of <paramref name="item" />, if found; otherwise, –1.
         /// </returns>
-        public static int IndexOf<T>([NotNull] this IEnumerable<T> collection, [CanBeNull] T item, [NotNull] IEqualityComparer<T> comparer)
+        public static int IndexOf<T>([NotNull, ItemCanBeNull] this IEnumerable<T> collection, [CanBeNull] T item, [CanBeNull] IEqualityComparer<T> comparer)
         {
             Contract.Requires(collection != null);
-            Contract.Requires(comparer != null);
+
+            comparer = comparer ?? EqualityComparer<T>.Default;
 
             var index = 0;
 
@@ -297,7 +298,7 @@
         /// <typeparam name="T">The type of elements in the collection.</typeparam>
         /// <param name="collection">The collection.</param>
         /// <param name="action">The action.</param>
-        public static void ForEach<T>([NotNull] this IEnumerable<T> collection, [NotNull] Action<T> action)
+        public static void ForEach<T>([NotNull, ItemCanBeNull] this IEnumerable<T> collection, [NotNull] Action<T> action)
         {
             Contract.Requires(collection != null);
             Contract.Requires(action != null);
@@ -314,7 +315,7 @@
         /// <typeparam name="T">The type of elements in the collection.</typeparam>
         /// <param name="collection">The collection.</param>
         /// <param name="action">The action.</param>
-        public static void ForEach<T>([NotNull] this IEnumerable<T> collection, [NotNull] Action<T, int> action)
+        public static void ForEach<T>([NotNull, ItemCanBeNull] this IEnumerable<T> collection, [NotNull] Action<T, int> action)
         {
             Contract.Requires(collection != null);
             Contract.Requires(action != null);

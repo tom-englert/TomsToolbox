@@ -30,6 +30,7 @@
         public App()
         {
             // Thread.CurrentThread.CurrentUICulture = new CultureInfo("de-DE");
+            // ReSharper disable once PossibleNullReferenceException
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
         }
 

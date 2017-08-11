@@ -9,6 +9,7 @@
     <AssemblyOriginatorKeyFile>..\TomsToolbox.snk</AssemblyOriginatorKeyFile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <DefineConstants>JETBRAINS_ANNOTATIONS</DefineConstants>
+    <RootNamespace>TomsToolbox.Core</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\Version.cs" Link="Version.cs" />

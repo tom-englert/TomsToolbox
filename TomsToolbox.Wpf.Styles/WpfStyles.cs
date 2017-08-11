@@ -54,13 +54,16 @@
         }
 
         /// <summary>
-        /// Returns a resource dictionary whth the default styles for the window and the common controls.
+        /// Returns a resource dictionary with the default styles for the window and the common controls.
         /// </summary>
         /// <remarks>
         /// This method will created a temporary, hidden helper window.
         /// </remarks>
+        [NotNull]
         public static ResourceDictionary Defaults()
         {
+            Contract.Ensures(Contract.Result<ResourceDictionary>() != null);
+
             var helperWindow = new Window();
 
             helperWindow.BeginInvoke(DispatcherPriority.Background, helperWindow.Close);

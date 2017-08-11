@@ -70,8 +70,11 @@
                 Contract.Requires(!ReferenceEquals(key, null));
                 Contract.Ensures(Contract.Result<TValue>() != null);
 
+                var target = default(TValue);
+
                 var items1 = _items;
-                if (items1.TryGetValue(key, out var value) && (value != null) && (value.TryGetTarget(out var target)))
+                if (items1.TryGetValue(key, out var value) && value.TryGetTarget(out target))
+                    // ReSharper disable once AssignNullToNotNullAttribute
                     return target;
 
                 lock (_sync)
@@ -79,6 +82,7 @@
                     var items2 = _items;
 
                     if (!ReferenceEquals(items2, items1) && items2.TryGetValue(key, out value) && value.TryGetTarget(out target))
+                        // ReSharper disable once AssignNullToNotNullAttribute
                         return target;
 
                     target = _generator(key);
@@ -86,6 +90,7 @@
                         throw new InvalidOperationException("The generator did not generate a valid item.");
 
                     var newItems = new Dictionary<TKey, WeakReference<TValue>>(items2.Comparer);
+                    // ReSharper disable once PossibleNullReferenceException
                     newItems.AddRange(items2.Where(item => item.Value.IsAlive));
                     newItems[key] = new WeakReference<TValue>(target);
 
@@ -128,6 +133,7 @@
             {
                 Contract.Ensures(Contract.Result<ICollection<TKey>>() != null);
 
+                // ReSharper disable once PossibleNullReferenceException
                 return _items.Where(item => item.Value.IsAlive).Select(item => item.Key).ToArray();
             }
         }

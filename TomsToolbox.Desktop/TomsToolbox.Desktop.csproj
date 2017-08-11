@@ -87,6 +87,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\ResharperCodeContractNullability.1.0.8\analyzers\dotnet\cs\CodeContractNullability.dll" />
+    <Analyzer Include="..\packages\ResharperCodeContractNullability.1.0.8\analyzers\dotnet\cs\MsgPack.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.2.1.2\build\portable-net+sl+win+wpa+wp\Fody.targets" Condition="Exists('..\packages\Fody.2.1.2\build\portable-net+sl+win+wpa+wp\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

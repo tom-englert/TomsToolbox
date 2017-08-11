@@ -118,12 +118,14 @@
   <member name="M:TomsToolbox.Core.CollectionExtensions.ContainsAny``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0},``0[])">
     <parameter name="self">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     </parameter>
     <parameter name="comparer">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="items">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.CollectionExtensions.ForceValue``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
@@ -153,6 +155,7 @@
   <member name="M:TomsToolbox.Core.CollectionExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0,System.Int32})">
     <parameter name="collection">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="action">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -161,6 +164,7 @@
   <member name="M:TomsToolbox.Core.CollectionExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
     <parameter name="collection">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="action">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -190,6 +194,7 @@
   <member name="M:TomsToolbox.Core.CollectionExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},``0)">
     <parameter name="collection">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="item">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
@@ -198,12 +203,13 @@
   <member name="M:TomsToolbox.Core.CollectionExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},``0,System.Collections.Generic.IEqualityComparer{``0})">
     <parameter name="collection">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="item">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="comparer">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.CollectionExtensions.RemoveRange(System.Collections.IList,System.Collections.IEnumerable)">
@@ -497,6 +503,12 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:TomsToolbox.Core.NetStandardExtensions.GetMethodInfo(System.Delegate)">
+    <attribute ctor="M:System.Diagnostics.Contracts.PureAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Core.NetStandardExtensions.GetTypeInfo(System.Type)">
+    <attribute ctor="M:System.Diagnostics.Contracts.PureAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Core.ObjectExtensions.SafeCast``1(System.Object)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="value">
@@ -668,7 +680,7 @@
   </member>
   <member name="M:TomsToolbox.Core.WeakReference`1.TryGetTarget(`0@)">
     <attribute ctor="M:JetBrains.Annotations.ContractAnnotationAttribute.#ctor(System.String)">
-      <argument>target: notnull =&gt; true</argument>
+      <argument>target:notnull =&gt; true</argument>
     </attribute>
     <parameter name="target">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />

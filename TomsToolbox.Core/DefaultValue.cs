@@ -2,7 +2,10 @@
 {
     using System;
     using System.Diagnostics.Contracts;
+
+#if NETSTANDARD1_0
     using System.Reflection;
+#endif
 
     using JetBrains.Annotations;
 
@@ -22,6 +25,7 @@
             Contract.Requires(type != null);
 
             // every value type has a default constructor, default for reference types is always null
+            // ReSharper disable once PossibleNullReferenceException
             return type.GetTypeInfo().IsValueType ? Activator.CreateInstance(type) : null;
         }
 
