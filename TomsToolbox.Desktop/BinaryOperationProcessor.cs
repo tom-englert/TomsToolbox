@@ -254,7 +254,7 @@
             return Math.Abs(ToDouble(a) - ToDouble(b)) < double.Epsilon;
         }
 
-        [ContractInvariantMethod]
+        [ContractInvariantMethod, UsedImplicitly]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
         [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()

@@ -26,7 +26,6 @@
         private readonly object _sync = new object();
         [NotNull]
         private readonly Func<TKey, TValue> _generator;
-
         [NotNull]
         private Dictionary<TKey, WeakReference<TValue>> _items;
 
@@ -115,6 +114,7 @@
             {
                 Contract.Ensures(Contract.Result<ICollection<TValue> >() != null);
 
+                // ReSharper disable once AssignNullToNotNullAttribute
                 return _items.Values.Select(item => item?.Target).Where(item => item != null).ToArray();
             }
         }
@@ -220,7 +220,7 @@
             _items = new Dictionary<TKey, WeakReference<TValue>>(_items.Comparer);
         }
 
-        [ContractInvariantMethod]
+        [ContractInvariantMethod, UsedImplicitly]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
         [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()

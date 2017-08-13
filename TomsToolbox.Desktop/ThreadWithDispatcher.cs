@@ -339,7 +339,7 @@ namespace TomsToolbox.Desktop
             _thread.Abort();
         }
 
-        [ContractInvariantMethod]
+        [ContractInvariantMethod, UsedImplicitly]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
         [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()

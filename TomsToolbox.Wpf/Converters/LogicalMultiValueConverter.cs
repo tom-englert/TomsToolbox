@@ -97,7 +97,7 @@
             return _operationMethod(values.Select(v => System.Convert.ToBoolean(v, CultureInfo.InvariantCulture)));
         }
 
-        [ContractInvariantMethod]
+        [ContractInvariantMethod, UsedImplicitly]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
         [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()

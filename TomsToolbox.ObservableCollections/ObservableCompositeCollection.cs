@@ -291,7 +291,7 @@
 
             #region Contracts Invariant
 
-            [ContractInvariantMethod]
+            [ContractInvariantMethod, UsedImplicitly]
             [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
             [Conditional("CONTRACTS_FULL")]
             private void ObjectInvariant()
@@ -407,7 +407,7 @@
             remove => base.PropertyChanged -= value;
         }
 
-        [ContractInvariantMethod]
+        [ContractInvariantMethod, UsedImplicitly]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
         [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()

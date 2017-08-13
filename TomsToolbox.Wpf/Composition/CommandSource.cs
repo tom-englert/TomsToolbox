@@ -206,7 +206,7 @@
             _attachedCommands.OfType<ICommandChangedNotificationSink>().ForEach(item => item?.ActiveCommandChanged(command));
         }
 
-        [ContractInvariantMethod]
+        [ContractInvariantMethod, UsedImplicitly]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
         [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()

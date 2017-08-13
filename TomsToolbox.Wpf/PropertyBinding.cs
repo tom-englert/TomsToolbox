@@ -104,7 +104,7 @@
             [NotNull] public static readonly DependencyProperty ValueProperty =
                 DependencyProperty.Register("Value", typeof(T), typeof(BindingHelper), new FrameworkPropertyMetadata((sender, e) => ((BindingHelper)sender)?._owner.Value_Changed((T)e.OldValue, (T)e.NewValue)));
 
-            [ContractInvariantMethod]
+            [ContractInvariantMethod, UsedImplicitly]
             [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
             [Conditional("CONTRACTS_FULL")]
             private void ObjectInvariant()
@@ -113,7 +113,7 @@
             }
         }
 
-        [ContractInvariantMethod]
+        [ContractInvariantMethod, UsedImplicitly]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
         [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()

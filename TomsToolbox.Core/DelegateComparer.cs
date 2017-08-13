@@ -5,7 +5,9 @@
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+#if NETSTANDARD1_0
     using System.Reflection;
+#endif
 
     using JetBrains.Annotations;
 
@@ -38,7 +40,7 @@
         /// <param name="x">The first object to compare.</param><param name="y">The second object to compare.</param>
         public int Compare(T x, T y)
         {
-            if (!typeof(T).GetTypeInfo().IsValueType)
+            if (typeof(T).GetTypeInfo()?.IsValueType != true)
             {
                 if (ReferenceEquals(x, null))
                     return ReferenceEquals(y, null) ? 0 : -1;
@@ -50,7 +52,7 @@
             return _comparer(x, y);
         }
 
-        [ContractInvariantMethod]
+        [ContractInvariantMethod, UsedImplicitly]
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
         [Conditional("CONTRACTS_FULL")]
         private void ObjectInvariant()
