@@ -503,12 +503,6 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="M:TomsToolbox.Core.NetStandardExtensions.GetMethodInfo(System.Delegate)">
-    <attribute ctor="M:System.Diagnostics.Contracts.PureAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Core.NetStandardExtensions.GetTypeInfo(System.Type)">
-    <attribute ctor="M:System.Diagnostics.Contracts.PureAttribute.#ctor" />
-  </member>
   <member name="M:TomsToolbox.Core.ObjectExtensions.SafeCast``1(System.Object)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="value">
@@ -600,9 +594,13 @@
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.TryCastWorker`2.Else(System.Func{`0,`1})">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="action">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
+  </member>
+  <member name="P:TomsToolbox.Core.TryCastWorker`2.Result">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Core.TryCastWorker`2.When``1(System.Func{``0,`1})">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -610,7 +608,11 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:TomsToolbox.Core.TryCastWorkerBase`2.ElseThrow">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Core.TryCastWorkerBase`2.ElseThrow(System.String)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="message">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
       <attribute ctor="M:JetBrains.Annotations.LocalizationRequiredAttribute.#ctor(System.Boolean)">
@@ -618,10 +620,16 @@
       </attribute>
     </parameter>
   </member>
+  <member name="P:TomsToolbox.Core.TryCastWorkerBase`2.InternalResult">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Core.TryCastWorkerBase`2.TryExecute``1(System.Func{``0,`1})">
     <parameter name="action">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
+  </member>
+  <member name="P:TomsToolbox.Core.TryCastWorkerBase`2.Value">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Core.WeakEventListener`3.#ctor(`0,`1,System.Action{`0,System.Object,`2},System.Action{TomsToolbox.Core.WeakEventListener{`0,`1,`2},`1},System.Action{TomsToolbox.Core.WeakEventListener{`0,`1,`2},`1})">
     <parameter name="target">

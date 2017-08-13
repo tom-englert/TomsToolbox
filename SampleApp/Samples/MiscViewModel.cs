@@ -6,44 +6,23 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop;
+    using PropertyChanged;
+
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 99)]
-    internal class MiscViewModel : ObservableObject
+    [AddINotifyPropertyChangedInterface]
+    internal class MiscViewModel
     {
-        private DateTime _operationStarted = DateTime.Now;
-        private TimeSpan _minimumDuration = TimeSpan.FromMinutes(0.2);
-
         public override string ToString()
         {
             return "Misc.";
         }
 
-        public DateTime OperationStarted
-        {
-            get
-            {
-                return _operationStarted;
-            }
-            set
-            {
-                SetProperty(ref _operationStarted, value, "OperationStarted");
-            }
-        }
+        public DateTime OperationStarted { get; set; } = DateTime.Now;
 
-        public TimeSpan MinimumDuration
-        {
-            get
-            {
-                return _minimumDuration;
-            }
-            set
-            {
-                SetProperty(ref _minimumDuration, value, "MinimumDuration");
-            }
-        }
+        public TimeSpan MinimumDuration { get; set; } = TimeSpan.FromMinutes(0.2);
 
         [NotNull]
         public ICommand ItemsControlDefaultCommand => new DelegateCommand<string>(item => MessageBox.Show(item + " clicked."));

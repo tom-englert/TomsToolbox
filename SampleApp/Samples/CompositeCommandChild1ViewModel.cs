@@ -5,54 +5,25 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop;
+    using PropertyChanged;
+
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;
 
     [VisualCompositionExport(RegionId.CommandViewContainer)]
-    class CompositeCommandChild1ViewModel : ObservableObject
+    [AddINotifyPropertyChangedInterface]
+    class CompositeCommandChild1ViewModel
     {
-        private string _text = "Greetings from child #1";
-
         [CanBeNull]
-        public string Text
-        {
-            get
-            {
-                return _text;
-            }
-            set
-            {
-                SetProperty(ref _text, value, nameof(Text));
-            }
-        }
-
+        public string Text { get; set; } = "Greetings from child #1";
 
         [NotNull]
-        public ICommand CopyCommand
-        {
-            get
-            {
-                return new DelegateCommand(() => MessageBox.Show("Copy: " + Text));
-            }
-        }
+        public ICommand CopyCommand => new DelegateCommand(() => MessageBox.Show("Copy: " + Text));
 
         [NotNull]
-        public ICommand PasteCommand
-        {
-            get
-            {
-                return new DelegateCommand(() => MessageBox.Show("Paste: " + Text));
-            }
-        }
+        public ICommand PasteCommand => new DelegateCommand(() => MessageBox.Show("Paste: " + Text));
 
         [NotNull]
-        public ICommand CutCommand
-        {
-            get
-            {
-                return new DelegateCommand(() => MessageBox.Show("Cut: " + Text));
-            }
-        }
+        public ICommand CutCommand => new DelegateCommand(() => MessageBox.Show("Cut: " + Text));
     }
 }

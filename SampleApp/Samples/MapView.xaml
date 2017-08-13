@@ -17,7 +17,7 @@
         </DataTemplate>
       </ListBox.ItemTemplate>
     </ListBox>
-    <Grid x:Name="Root">
+    <Grid>
       <toms:Map x:Name="MapControl" ImageProvider="{Binding ImageProvider}" ZoomLevel="10"
                 Center="{Binding Center, Converter={toms:Import toms:CoordinatesToPointConverter}}"
                 MousePosition="{Binding MousePosition, Converter={toms:Import toms:CoordinatesToPointConverter}}"
@@ -36,6 +36,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>
               <Style TargetType="ContentPresenter">
+                <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                 <Setter Property="toms:CanvasAnchor.BottomLeft" Value="{Binding Coordinates, Converter={toms:Import toms:CoordinatesToPointConverter}}" />
               </Style>
             </ItemsControl.ItemContainerStyle>
@@ -48,7 +49,7 @@
           <toms:ViewportCanvas World="{Binding Path=World, ElementName=MapControl}">
             <Border x:Name="SelectionBorder" BorderBrush="Red" BorderThickness="2" />
             <i:Interaction.Behaviors>
-              <toms:SelectionRectangleBehavior x:Name="Selection" Viewport="{Binding ElementName=MapControl}"
+              <toms:SelectionRectangleBehavior Viewport="{Binding ElementName=MapControl}"
                                                TargetElement="{Binding ElementName=SelectionBorder}"
                                                Selection="{Binding Selection}" />
             </i:Interaction.Behaviors>

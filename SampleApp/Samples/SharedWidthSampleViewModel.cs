@@ -2,26 +2,16 @@
 {
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop;
+    using PropertyChanged;
+
     using TomsToolbox.Wpf.Composition;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 4)]
-    class SharedWidthSampleViewModel : ObservableObject
+    [AddINotifyPropertyChangedInterface]
+    class SharedWidthSampleViewModel
     {
-        private string _longText = "This is a long text";
-
         [CanBeNull]
-        public string LongText
-        {
-            get
-            {
-                return _longText;
-            }
-            set
-            {
-                SetProperty(ref _longText, value, () => LongText);
-            }
-        }
+        public string LongText { get; set; } = "This is a long text";
 
         public override string ToString()
         {
