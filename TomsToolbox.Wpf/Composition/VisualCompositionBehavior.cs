@@ -48,8 +48,8 @@
         [CanBeNull]
         public string RegionId
         {
-            get { return (string)GetValue(RegionIdProperty); }
-            set { SetValue(RegionIdProperty, value); }
+            get => (string)GetValue(RegionIdProperty);
+            set => SetValue(RegionIdProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="RegionId"/> dependency property
@@ -64,8 +64,8 @@
         [CanBeNull]
         public object CompositionContext
         {
-            get { return GetValue(CompositionContextProperty); }
-            set { SetValue(CompositionContextProperty, value); }
+            get => GetValue(CompositionContextProperty);
+            set => SetValue(CompositionContextProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="CompositionContext"/> dependency property
@@ -84,8 +84,8 @@
         [CanBeNull]
         public BindingBase RegionIdBinding
         {
-            get { return (BindingBase)GetValue(_regionIdBindingProperty); }
-            set { SetValue(_regionIdBindingProperty, value); }
+            get => (BindingBase)GetValue(_regionIdBindingProperty);
+            set => SetValue(_regionIdBindingProperty, value);
         }
 
         /// <summary>
@@ -107,8 +107,8 @@
         [CanBeNull]
         public BindingBase CompositionContextBinding
         {
-            get { return (BindingBase)GetValue(_compositionContextBindingProperty); }
-            set { SetValue(_compositionContextBindingProperty, value); }
+            get => (BindingBase)GetValue(_compositionContextBindingProperty);
+            set => SetValue(_compositionContextBindingProperty, value);
         }
 
         /// <summary>
@@ -125,23 +125,14 @@
         [CanBeNull]
         protected ExportProvider ExportProvider
         {
-            get
-            {
-                return InternalExportProvider ?? (InternalExportProvider = GetExportProvider());
-            }
-            private set
-            {
-                InternalExportProvider = value;
-            }
+            get => InternalExportProvider ?? (InternalExportProvider = GetExportProvider());
+            private set => InternalExportProvider = value;
         }
 
         [CanBeNull]
         private ExportProvider InternalExportProvider
         {
-            get
-            {
-                return _exportProvider;
-            }
+            get => _exportProvider;
             set
             {
                 if (_exportProvider != null)

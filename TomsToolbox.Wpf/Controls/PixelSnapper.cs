@@ -29,8 +29,8 @@
         [CanBeNull]
         public FrameworkElement Viewport
         {
-            get { return (FrameworkElement)GetValue(ViewportProperty); }
-            set { SetValue(ViewportProperty, value); }
+            get => (FrameworkElement)GetValue(ViewportProperty);
+            set => SetValue(ViewportProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Viewport"/> dependency property

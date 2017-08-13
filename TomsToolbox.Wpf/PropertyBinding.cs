@@ -68,8 +68,8 @@
         /// </summary>
         public T Value
         {
-            get { return _bindingHelper.GetValue<T>(BindingHelper.ValueProperty); }
-            set { _bindingHelper.SetValue(BindingHelper.ValueProperty, value); }
+            get => _bindingHelper.GetValue<T>(BindingHelper.ValueProperty);
+            set => _bindingHelper.SetValue(BindingHelper.ValueProperty, value);
         }
 
         /// <summary>

@@ -79,8 +79,8 @@
         [CanBeNull]
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Text"/> dependency property.
@@ -95,8 +95,8 @@
         /// </summary>
         public bool IsEditing
         {
-            get { return this.GetValue<bool>(IsEditingProperty); }
-            set { SetValue(IsEditingProperty, value); }
+            get => this.GetValue<bool>(IsEditingProperty);
+            set => SetValue(IsEditingProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="IsEditing"/> dependency property.
@@ -111,8 +111,8 @@
         /// </summary>
         public bool IsEditingDisabled
         {
-            get { return this.GetValue<bool>(IsEditingDisabledProperty); }
-            set { SetValue(IsEditingDisabledProperty, value); }
+            get => this.GetValue<bool>(IsEditingDisabledProperty);
+            set => SetValue(IsEditingDisabledProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="IsEditingDisabled"/> dependency property.
@@ -127,8 +127,8 @@
         /// </summary>
         public bool HasErrors
         {
-            get { return this.GetValue<bool>(HasErrorsProperty); }
-            set { SetValue(HasErrorsProperty, value); }
+            get => this.GetValue<bool>(HasErrorsProperty);
+            set => SetValue(HasErrorsProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="HasErrors"/> dependency property
@@ -146,8 +146,8 @@
         /// </value>
         public TextTrimming TextTrimming
         {
-            get { return this.GetValue<TextTrimming>(TextTrimmingProperty); }
-            set { SetValue(TextTrimmingProperty, value); }
+            get => this.GetValue<TextTrimming>(TextTrimmingProperty);
+            set => SetValue(TextTrimmingProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="TextTrimming"/> dependency property
@@ -162,8 +162,8 @@
         /// </summary>
         public TextAlignment TextAlignment
         {
-            get { return this.GetValue<TextAlignment>(TextAlignmentProperty); }
-            set { SetValue(TextAlignmentProperty, value); }
+            get => this.GetValue<TextAlignment>(TextAlignmentProperty);
+            set => SetValue(TextAlignmentProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="TextAlignment"/> dependency property

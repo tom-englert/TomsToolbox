@@ -97,8 +97,8 @@
 
             public event EventHandler CanExecuteChanged
             {
-                add { _command.CanExecuteChanged += value; }
-                remove { _command.CanExecuteChanged -= value; }
+                add => _command.CanExecuteChanged += value;
+                remove => _command.CanExecuteChanged -= value;
             }
 
             [ContractInvariantMethod]

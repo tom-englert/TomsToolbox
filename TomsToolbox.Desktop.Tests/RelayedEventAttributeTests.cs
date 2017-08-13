@@ -15,10 +15,7 @@
 
             public int Value
             {
-                get
-                {
-                    return _value;
-                }
+                get => _value;
                 set
                 {
                     if (_value == value)
@@ -37,10 +34,7 @@
 
             public int Value
             {
-                get
-                {
-                    return _value;
-                }
+                get => _value;
                 set
                 {
                     if (_value == value)
@@ -53,10 +47,7 @@
 
             public int OtherValue
             {
-                get
-                {
-                    return _otherValue;
-                }
+                get => _otherValue;
                 set
                 {
                     if (_otherValue == value)
@@ -89,22 +80,10 @@
             }
 
             [RelayedEvent(typeof(GoverningClass1))]
-            public int Value
-            {
-                get
-                {
-                    return _governingClass1.Value;
-                }
-            }
+            public int Value => _governingClass1.Value;
 
             [RelayedEvent(typeof(GoverningClass2), "OtherValue")]
-            public int MyOtherValue
-            {
-                get
-                {
-                    return _governingClass2.OtherValue;
-                }
-            }
+            public int MyOtherValue => _governingClass2.OtherValue;
         }
 
         class BadRelayingClass1 : ObservableObject
@@ -131,13 +110,7 @@
 
             // Invalid attribute, GoverningClass1 does not have a property "MyValue".
             [RelayedEvent(typeof(GoverningClass1))]
-            public int MyValue
-            {
-                get
-                {
-                    return _governingClass1.Value;
-                }
-            }
+            public int MyValue => _governingClass1.Value;
         }
 
         [TestMethod]

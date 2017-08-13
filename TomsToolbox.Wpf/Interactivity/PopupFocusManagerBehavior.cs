@@ -23,8 +23,8 @@
         [CanBeNull]
         public ToggleButton ToggleButton
         {
-            get { return (ToggleButton)GetValue(ToggleButtonProperty); }
-            set { SetValue(ToggleButtonProperty, value); }
+            get => (ToggleButton)GetValue(ToggleButtonProperty);
+            set => SetValue(ToggleButtonProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="ToggleButton"/> dependency property.

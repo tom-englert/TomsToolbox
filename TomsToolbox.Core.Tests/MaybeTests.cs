@@ -102,13 +102,7 @@ namespace TomsToolbox.Core.Tests
                 return new C2();
             }
 
-            public int this[int index]
-            {
-                get
-                {
-                    return index + 1;
-                }
-            }
+            public int this[int index] => index + 1;
         }
 
         private class C2
@@ -136,13 +130,7 @@ namespace TomsToolbox.Core.Tests
                 return C2F1;
             }
 
-            public int this[string index]
-            {
-                get
-                {
-                    return index.Length;
-                }
-            }
+            public int this[string index] => index.Length;
         }
     }
 }

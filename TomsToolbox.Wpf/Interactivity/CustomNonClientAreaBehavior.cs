@@ -92,10 +92,7 @@
         /// </summary>
         public HitTest HitTest
         {
-            get
-            {
-                return _hitTest;
-            }
+            get => _hitTest;
             set
             {
                 _hitTest = value;
@@ -123,8 +120,8 @@
         /// </value>
         public Size BorderSize
         {
-            get { return this.GetValue<Size>(BorderSizeProperty); }
-            set { SetValue(BorderSizeProperty, value); }
+            get => this.GetValue<Size>(BorderSizeProperty);
+            set => SetValue(BorderSizeProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="BorderSize"/> dependency property
@@ -141,8 +138,8 @@
         /// </value>
         public Size CornerSize
         {
-            get { return this.GetValue<Size>(CornerSizeProperty); }
-            set { SetValue(CornerSizeProperty, value); }
+            get => this.GetValue<Size>(CornerSizeProperty);
+            set => SetValue(CornerSizeProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="CornerSize"/> dependency property
@@ -159,8 +156,8 @@
         /// </value>
         public bool HasGlassFrame
         {
-            get { return this.GetValue<bool>(HasGlassFrameProperty); }
-            set { SetValue(HasGlassFrameProperty, value); }
+            get => this.GetValue<bool>(HasGlassFrameProperty);
+            set => SetValue(HasGlassFrameProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="HasGlassFrame"/> dependency property

@@ -41,6 +41,7 @@
                     </Trigger>
                     <MultiDataTrigger>
                       <MultiDataTrigger.Conditions>
+                        <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                         <Condition Binding="{Binding IsKeyboardFocusWithin, RelativeSource={RelativeSource Self}}" Value="True" />
                         <Condition Binding="{Binding IsFocusVisualVisible, Source={x:Static toms:KeyboardNavigation.Current}}" Value="True" />
                       </MultiDataTrigger.Conditions>

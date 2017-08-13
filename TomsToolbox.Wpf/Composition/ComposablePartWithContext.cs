@@ -23,10 +23,7 @@ namespace TomsToolbox.Wpf.Composition
         [CanBeNull]
         object IComposablePartWithContext.CompositionContext
         {
-            get
-            {
-                return CompositionContext;
-            }
+            get => CompositionContext;
             set
             {
                 var oldValue = CompositionContext;

@@ -90,10 +90,7 @@
         /// </summary>
         public ArithmeticOperation Operation
         {
-            get
-            {
-                return _operation;
-            }
+            get => _operation;
             set
             {
                 _operation = value;

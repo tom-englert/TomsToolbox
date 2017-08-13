@@ -46,8 +46,8 @@
         /// </summary>
         public Thickness HeaderPadding
         {
-            get { return this.GetValue<Thickness>(HeaderPaddingProperty); }
-            set { SetValue(HeaderPaddingProperty, value); }
+            get => this.GetValue<Thickness>(HeaderPaddingProperty);
+            set => SetValue(HeaderPaddingProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="HeaderPadding"/> dependency property

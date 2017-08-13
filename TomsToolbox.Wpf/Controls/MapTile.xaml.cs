@@ -103,8 +103,8 @@
         [CanBeNull]
         public FrameworkElement Viewport
         {
-            get { return (FrameworkElement)GetValue(ViewportProperty); }
-            set { SetValue(ViewportProperty, value); }
+            get => (FrameworkElement)GetValue(ViewportProperty);
+            set => SetValue(ViewportProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Viewport"/> dependency property
@@ -118,8 +118,8 @@
         [CanBeNull]
         public IImageProvider ImageProvider
         {
-            get { return (IImageProvider)GetValue(ImageProviderProperty); }
-            set { SetValue(ImageProviderProperty, value); }
+            get => (IImageProvider)GetValue(ImageProviderProperty);
+            set => SetValue(ImageProviderProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="ImageProvider"/> dependency property
@@ -133,8 +133,8 @@
         [CanBeNull]
         public IImage Image
         {
-            get { return (IImage)GetValue(ImageProperty); }
-            set { SetValue(ImageProperty, value); }
+            get => (IImage)GetValue(ImageProperty);
+            set => SetValue(ImageProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Image"/> dependency property

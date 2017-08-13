@@ -42,10 +42,7 @@
         [CanBeNull]
         public object Role
         {
-            get
-            {
-                return _role;
-            }
+            get => _role;
             set
             {
                 if ((_role != null) && (_role != value))

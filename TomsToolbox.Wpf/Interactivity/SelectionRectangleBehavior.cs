@@ -23,8 +23,8 @@
         [CanBeNull]
         public FrameworkElement TargetElement
         {
-            get { return (FrameworkElement)GetValue(TargetElementProperty); }
-            set { SetValue(TargetElementProperty, value); }
+            get => (FrameworkElement)GetValue(TargetElementProperty);
+            set => SetValue(TargetElementProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="TargetElement"/> dependency property.
@@ -39,8 +39,8 @@
         [CanBeNull]
         public FrameworkElement Viewport
         {
-            get { return (FrameworkElement)GetValue(ViewportProperty); }
-            set { SetValue(ViewportProperty, value); }
+            get => (FrameworkElement)GetValue(ViewportProperty);
+            set => SetValue(ViewportProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Viewport"/> dependency property.
@@ -54,8 +54,8 @@
         /// </summary>
         public Rect Selection
         {
-            get { return this.GetValue<Rect>(SelectionProperty); }
-            set { SetValue(SelectionProperty, value); }
+            get => this.GetValue<Rect>(SelectionProperty);
+            set => SetValue(SelectionProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Selection"/> dependency property.

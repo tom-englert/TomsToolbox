@@ -29,8 +29,8 @@
         [CanBeNull]
         public DependencyProperty Property
         {
-            get { return (DependencyProperty)GetValue(PropertyProperty); }
-            set { SetValue(PropertyProperty, value); }
+            get => (DependencyProperty)GetValue(PropertyProperty);
+            set => SetValue(PropertyProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Property"/> dependency property

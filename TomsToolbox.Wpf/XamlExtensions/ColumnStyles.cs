@@ -132,8 +132,8 @@
         /// </summary>
         public Style ElementStyle
         {
-            get { return (Style)GetValue(ElementStyleProperty); }
-            set { SetValue(ElementStyleProperty, value); }
+            get => (Style)GetValue(ElementStyleProperty);
+            set => SetValue(ElementStyleProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="ElementStyle"/> dependency property
@@ -146,8 +146,8 @@
         /// </summary>
         public Style EditingElementStyle
         {
-            get { return (Style)GetValue(EditingElementStyleProperty); }
-            set { SetValue(EditingElementStyleProperty, value); }
+            get => (Style)GetValue(EditingElementStyleProperty);
+            set => SetValue(EditingElementStyleProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="EditingElementStyle"/> dependency property

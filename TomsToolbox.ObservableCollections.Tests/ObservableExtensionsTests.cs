@@ -25,10 +25,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             [CanBeNull]
             public IList<int> Inner
             {
-                get
-                {
-                    return _inner;
-                }
+                get => _inner;
                 set
                 {
                     SetProperty(ref _inner, value, () => Inner);
@@ -37,10 +34,7 @@ namespace TomsToolbox.ObservableCollections.Tests
 
             public int Value
             {
-                get
-                {
-                    return _value;
-                }
+                get => _value;
                 set
                 {
                     SetProperty(ref _value, value, () => Value);

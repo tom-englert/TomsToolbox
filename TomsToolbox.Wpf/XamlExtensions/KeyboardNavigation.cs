@@ -45,9 +45,10 @@
         /// </value>
         public bool IsFocusVisualVisible
         {
-            get { return this.GetValue<bool>(IsFocusVisualVisibleProperty); }
-            set { SetValue(IsFocusVisualVisibleProperty, value); }
+            get => this.GetValue<bool>(IsFocusVisualVisibleProperty);
+            set => SetValue(IsFocusVisualVisibleProperty, value);
         }
+
         /// <summary>
         /// Identifies the <see cref="IsFocusVisualVisible"/> dependency property
         /// </summary>

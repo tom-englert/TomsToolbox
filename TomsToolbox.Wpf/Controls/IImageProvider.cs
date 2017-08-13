@@ -38,21 +38,9 @@
     [ContractClassFor(typeof(IImageProvider))]
     abstract class ImageProviderContract : IImageProvider
     {
-        int IImageProvider.MinZoom
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-        }
+        int IImageProvider.MinZoom => throw new System.NotImplementedException();
 
-        int IImageProvider.MaxZoom
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-        }
+        int IImageProvider.MaxZoom => throw new System.NotImplementedException();
 
         IImage IImageProvider.GetImage(IMapTile tile)
         {

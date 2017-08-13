@@ -28,10 +28,7 @@
         [CanBeNull]
         public Type MemberType
         {
-            get
-            {
-                return _memberType;
-            }
+            get => _memberType;
             set
             {
                 _memberType = value;
@@ -45,10 +42,7 @@
         [CanBeNull]
         public string ContractName
         {
-            get
-            {
-                return _contractName;
-            }
+            get => _contractName;
             set
             {
                 _contractName = value;
@@ -62,10 +56,7 @@
         [CanBeNull]
         public DependencyProperty TargetProperty
         {
-            get
-            {
-                return _targetProperty;
-            }
+            get => _targetProperty;
             set
             {
                 _targetProperty = value;

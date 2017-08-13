@@ -44,8 +44,8 @@
         [CanBeNull]
         public ICommand Command
         {
-            get { return (ICommand)GetValue(CommandProperty); }
-            private set { SetValue(_commandPropertyKey, value); }
+            get => (ICommand)GetValue(CommandProperty);
+            private set => SetValue(_commandPropertyKey, value);
         }
         [NotNull] private static readonly DependencyPropertyKey _commandPropertyKey =
             DependencyProperty.RegisterReadOnly("Command", typeof(ICommand), typeof(CommandSource), new FrameworkPropertyMetadata(NullCommand.Default, null, Command_CoerceValue));
@@ -60,8 +60,8 @@
         /// </summary>
         public bool IsChecked
         {
-            get { return this.GetValue<bool>(IsCheckedProperty); }
-            set { SetValue(IsCheckedProperty, value); }
+            get => this.GetValue<bool>(IsCheckedProperty);
+            set => SetValue(IsCheckedProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="IsChecked"/> dependency property
@@ -131,8 +131,8 @@
         /// </summary>
         public bool IsAnyTargetAttached
         {
-            get { return this.GetValue<bool>(IsAnyTargetAttachedProperty); }
-            private set { SetValue(_isAnyTargetAttachedPropertyKey, value); }
+            get => this.GetValue<bool>(IsAnyTargetAttachedProperty);
+            private set => SetValue(_isAnyTargetAttachedPropertyKey, value);
         }
         [NotNull] private static readonly DependencyPropertyKey _isAnyTargetAttachedPropertyKey =
             DependencyProperty.RegisterReadOnly("IsAnyTargetAttached", typeof(bool), typeof(CommandSource), new FrameworkPropertyMetadata(false));

@@ -30,8 +30,8 @@
         /// </summary>
         public double MouseWheelIncrement
         {
-            get { return this.GetValue<double>(MouseWheelIncrementProperty); }
-            set { SetValue(MouseWheelIncrementProperty, value); }
+            get => this.GetValue<double>(MouseWheelIncrementProperty);
+            set => SetValue(MouseWheelIncrementProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="MouseWheelIncrement"/> dependency property

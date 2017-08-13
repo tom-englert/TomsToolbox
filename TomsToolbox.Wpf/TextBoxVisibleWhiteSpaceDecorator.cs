@@ -88,8 +88,8 @@
         /// </summary>
         public WhiteSpaces WhiteSpaces
         {
-            get { return this.GetValue<WhiteSpaces>(WhiteSpacesProperty); }
-            set { SetValue(WhiteSpacesProperty, value); }
+            get => this.GetValue<WhiteSpaces>(WhiteSpacesProperty);
+            set => SetValue(WhiteSpacesProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="WhiteSpaces"/> dependency property
@@ -104,8 +104,8 @@
         [CanBeNull]
         public Brush WhiteSpaceColor
         {
-            get { return (Brush)GetValue(WhiteSpaceColorProperty); }
-            set { SetValue(WhiteSpaceColorProperty, value); }
+            get => (Brush)GetValue(WhiteSpaceColorProperty);
+            set => SetValue(WhiteSpaceColorProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="WhiteSpaceColor"/> dependency property
@@ -119,8 +119,8 @@
         /// </summary>
         public double WhiteSpaceOpacity
         {
-            get { return this.GetValue<double>(WhiteSpaceOpacityProperty); }
-            set { SetValue(WhiteSpaceOpacityProperty, value); }
+            get => this.GetValue<double>(WhiteSpaceOpacityProperty);
+            set => SetValue(WhiteSpaceOpacityProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="WhiteSpaceOpacity"/> dependency property
@@ -134,14 +134,8 @@
         [CanBeNull]
         public TextBox Child
         {
-            get
-            {
-                return _adornerDecorator.Child as TextBox;
-            }
-            set
-            {
-                _adornerDecorator.Child = value;
-            }
+            get => _adornerDecorator.Child as TextBox;
+            set => _adornerDecorator.Child = value;
         }
 
         /// <summary>

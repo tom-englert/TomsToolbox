@@ -214,11 +214,7 @@
             [ContractVerification(false)] // Just forwarding...
             public IList<T> this[int index]
             {
-                get
-                {
-                    // ReSharper disable once AssignNullToNotNullAttribute
-                    return _parts[index];
-                }
+                get => _parts[index];
                 set
                 {
                     RemoveAt(index);
@@ -398,14 +394,8 @@
         /// </summary>
         public new event NotifyCollectionChangedEventHandler CollectionChanged
         {
-            add
-            {
-                base.CollectionChanged += value;
-            }
-            remove
-            {
-                base.CollectionChanged -= value;
-            }
+            add => base.CollectionChanged += value;
+            remove => base.CollectionChanged -= value;
         }
 
         /// <summary>
@@ -413,14 +403,8 @@
         /// </summary>
         public new event PropertyChangedEventHandler PropertyChanged
         {
-            add
-            {
-                base.PropertyChanged += value;
-            }
-            remove
-            {
-                base.PropertyChanged -= value;
-            }
+            add => base.PropertyChanged += value;
+            remove => base.PropertyChanged -= value;
         }
 
         [ContractInvariantMethod]

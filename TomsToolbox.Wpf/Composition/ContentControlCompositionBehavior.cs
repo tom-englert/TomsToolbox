@@ -22,8 +22,8 @@
         [CanBeNull]
         public object Role
         {
-            get { return GetValue(RoleProperty); }
-            set { SetValue(RoleProperty, value); }
+            get => GetValue(RoleProperty);
+            set => SetValue(RoleProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Role"/> dependency property.

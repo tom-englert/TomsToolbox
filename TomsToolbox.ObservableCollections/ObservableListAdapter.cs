@@ -178,14 +178,8 @@
         /// <exception cref="T:System.NotSupportedException">The property is set and the <see cref="T:System.Collections.IList"/> is read-only. </exception>
         public object this[int index]
         {
-            get
-            {
-                return _source[index];
-            }
-            set
-            {
-                _source[index] = (T)value;
-            }
+            get => _source[index];
+            set => _source[index] = (T)value;
         }
 
         /// <summary>

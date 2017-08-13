@@ -113,10 +113,7 @@
                 return value == null ? default(T) : (T)value;
             }
             // ReSharper disable once ValueParameterNotUsed
-            set
-            {
-                ReadOnlyNotSupported();
-            }
+            set => ReadOnlyNotSupported();
         }
 
         void ICollection.CopyTo(Array array, int index)
@@ -224,10 +221,7 @@
         [CanBeNull]
         object IList.this[int index]
         {
-            get
-            {
-                return _collectionView.GetItemAt(index);
-            }
+            get => _collectionView.GetItemAt(index);
             set
             {
                 if (value == null)

@@ -26,14 +26,8 @@
         /// </summary>
         public bool ForceSelection
         {
-            get
-            {
-                return _forceSelection;
-            }
-            set
-            {
-                _forceSelection = value;
-            }
+            get => _forceSelection;
+            set => _forceSelection = value;
         }
 
         /// <summary>

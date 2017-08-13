@@ -69,16 +69,8 @@
 
             public event EventHandler Changed
             {
-                add
-                {
-                    // ReSharper disable once AssignNullToNotNullAttribute
-                    _dependencyPropertyDescriptor?.AddValueChanged(_dependencyObject, value);
-                }
-                remove
-                {
-                    // ReSharper disable once AssignNullToNotNullAttribute
-                    _dependencyPropertyDescriptor?.RemoveValueChanged(_dependencyObject, value);
-                }
+                add => _dependencyPropertyDescriptor?.AddValueChanged(_dependencyObject, value);
+                remove => _dependencyPropertyDescriptor?.RemoveValueChanged(_dependencyObject, value);
             }
 
             [ContractInvariantMethod]

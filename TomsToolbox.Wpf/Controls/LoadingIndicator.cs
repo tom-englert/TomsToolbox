@@ -15,7 +15,7 @@
     {
         static LoadingIndicator()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(LoadingIndicator), new FrameworkPropertyMetadata(typeof(LoadingIndicator)));
+            DefaultStyleKeyProperty?.OverrideMetadata(typeof(LoadingIndicator), new FrameworkPropertyMetadata(typeof(LoadingIndicator)));
         }
 
         /// <summary>
@@ -34,8 +34,8 @@
         /// </value>
         public bool IsActive
         {
-            get { return this.GetValue<bool>(IsActiveProperty); }
-            set { SetValue(IsActiveProperty, value); }
+            get => this.GetValue<bool>(IsActiveProperty);
+            set => SetValue(IsActiveProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="IsActive"/> dependency property
@@ -50,8 +50,8 @@
         [CanBeNull]
         public object Header
         {
-            get { return GetValue(HeaderProperty); }
-            set { SetValue(HeaderProperty, value); }
+            get => GetValue(HeaderProperty);
+            set => SetValue(HeaderProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Header"/> dependency property
@@ -65,8 +65,8 @@
         /// </summary>
         public Color ActiveBackgroundColor
         {
-            get { return this.GetValue<Color>(ActiveBackgroundColorProperty); }
-            set { SetValue(ActiveBackgroundColorProperty, value); }
+            get => this.GetValue<Color>(ActiveBackgroundColorProperty);
+            set => SetValue(ActiveBackgroundColorProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="ActiveBackgroundColor"/> dependency property
@@ -81,8 +81,8 @@
         [CanBeNull]
         public Transform AnimationLayoutTransform
         {
-            get { return (Transform)GetValue(AnimationLayoutTransformProperty); }
-            set { SetValue(AnimationLayoutTransformProperty, value); }
+            get => (Transform)GetValue(AnimationLayoutTransformProperty);
+            set => SetValue(AnimationLayoutTransformProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="AnimationLayoutTransform"/> dependency property

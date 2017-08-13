@@ -59,10 +59,7 @@
         /// </summary>
         public LogicalOperation Operation
         {
-            get
-            {
-                return _operation;
-            }
+            get => _operation;
             set
             {
                 _operation = value;

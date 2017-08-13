@@ -57,10 +57,7 @@
         /// </summary>
         public TimeSpan UpdateInterval
         {
-            get
-            {
-                return _updateTimer.Interval;
-            }
+            get => _updateTimer.Interval;
             set
             {
                 if (value > TimeSpan.Zero)

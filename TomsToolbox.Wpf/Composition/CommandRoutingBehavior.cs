@@ -25,8 +25,8 @@
         [CanBeNull]
         public Type CommandSource
         {
-            get { return (Type)GetValue(CommandSourceProperty); }
-            set { SetValue(CommandSourceProperty, value); }
+            get => (Type)GetValue(CommandSourceProperty);
+            set => SetValue(CommandSourceProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="CommandSource"/> dependency property
@@ -49,10 +49,7 @@
                 Contract.Ensures(Contract.Result<ICommand>() != null);
                 return (ICommand)GetValue(CommandTargetProperty) ?? NullCommand.Default;
             }
-            set
-            {
-                SetValue(CommandTargetProperty, value);
-            }
+            set => SetValue(CommandTargetProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="CommandTarget"/> dependency property
@@ -67,8 +64,8 @@
         [CanBeNull]
         public object CommandParameter
         {
-            get { return GetValue(CommandParameterProperty); }
-            set { SetValue(CommandParameterProperty, value); }
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="CommandParameter"/> dependency property
@@ -83,8 +80,8 @@
         [CanBeNull]
         public object CompositionContext
         {
-            get { return GetValue(CompositionContextProperty); }
-            set { SetValue(CompositionContextProperty, value); }
+            get => GetValue(CompositionContextProperty);
+            set => SetValue(CompositionContextProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="CompositionContext"/> dependency property
@@ -99,8 +96,8 @@
         /// </summary>
         public bool IsEnabled
         {
-            get { return this.GetValue<bool>(IsEnabledProperty); }
-            set { SetValue(IsEnabledProperty, value); }
+            get => this.GetValue<bool>(IsEnabledProperty);
+            set => SetValue(IsEnabledProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="IsEnabled"/> dependency property
@@ -114,8 +111,8 @@
         /// </summary>
         public bool IsChecked
         {
-            get { return this.GetValue<bool>(IsCheckedProperty); }
-            set { SetValue(IsCheckedProperty, value); }
+            get => this.GetValue<bool>(IsCheckedProperty);
+            set => SetValue(IsCheckedProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="IsChecked"/> dependency property
@@ -130,8 +127,8 @@
         /// </summary>
         public bool IsActive
         {
-            get { return this.GetValue<bool>(IsActiveProperty); }
-            private set { SetValue(_isActivePropertyKey, value); }
+            get => this.GetValue<bool>(IsActiveProperty);
+            private set => SetValue(_isActivePropertyKey, value);
         }
         [NotNull] private static readonly DependencyPropertyKey _isActivePropertyKey =
             DependencyProperty.RegisterReadOnly("IsActive", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(false));
@@ -308,14 +305,8 @@
 
         event EventHandler ICommand.CanExecuteChanged
         {
-            add
-            {
-                CommandTarget.CanExecuteChanged += value;
-            }
-            remove
-            {
-                CommandTarget.CanExecuteChanged -= value;
-            }
+            add => CommandTarget.CanExecuteChanged += value;
+            remove => CommandTarget.CanExecuteChanged -= value;
         }
 
         void ICommand.Execute([CanBeNull] object parameter)

@@ -39,7 +39,7 @@
 
         static Map()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(Map), new FrameworkPropertyMetadata(typeof(Map)));
+            DefaultStyleKeyProperty?.OverrideMetadata(typeof(Map), new FrameworkPropertyMetadata(typeof(Map)));
         }
 
         /// <summary>
@@ -61,8 +61,8 @@
         /// </summary>
         public Vector ViewportSize
         {
-            get { return this.GetValue<Vector>(ViewportSizeProperty); }
-            private set { SetValue(ViewportSizePropertyKey, value); }
+            get => this.GetValue<Vector>(ViewportSizeProperty);
+            private set => SetValue(ViewportSizePropertyKey, value);
         }
         [NotNull] private static readonly DependencyPropertyKey ViewportSizePropertyKey =
             DependencyProperty.RegisterReadOnly("ViewportSize", typeof(Vector), typeof(Map), new FrameworkPropertyMetadata(new Vector(512, 512)));
@@ -78,8 +78,8 @@
         [CanBeNull]
         public IImageProvider ImageProvider
         {
-            get { return (IImageProvider)GetValue(ImageProviderProperty); }
-            set { SetValue(ImageProviderProperty, value); }
+            get => (IImageProvider)GetValue(ImageProviderProperty);
+            set => SetValue(ImageProviderProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="ImageProvider"/> dependency property
@@ -92,8 +92,8 @@
         /// </summary>
         public double ZoomFactor
         {
-            get { return this.GetValue<double>(ZoomFactorProperty); }
-            private set { SetValue(ZoomFactorPropertyKey, value); }
+            get => this.GetValue<double>(ZoomFactorProperty);
+            private set => SetValue(ZoomFactorPropertyKey, value);
         }
         [NotNull] private static readonly DependencyPropertyKey ZoomFactorPropertyKey =
             DependencyProperty.RegisterReadOnly("ZoomFactor", typeof(double), typeof(Map), new FrameworkPropertyMetadata(1.0, (sender, e) => ((Map)sender)?.ZoomFactor_Changed()));
@@ -107,8 +107,8 @@
         /// </summary>
         public double ZoomLevel
         {
-            get { return this.GetValue<double>(ZoomLevelProperty); }
-            set { SetValue(ZoomLevelProperty, value); }
+            get => this.GetValue<double>(ZoomLevelProperty);
+            set => SetValue(ZoomLevelProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="ZoomLevel"/> dependency property
@@ -121,8 +121,8 @@
         /// </summary>
         public Point Center
         {
-            get { return this.GetValue<Point>(CenterProperty); }
-            set { SetValue(CenterProperty, value); }
+            get => this.GetValue<Point>(CenterProperty);
+            set => SetValue(CenterProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Center"/> dependency property
@@ -135,8 +135,8 @@
         /// </summary>
         public Vector Offset
         {
-            get { return this.GetValue<Vector>(OffsetProperty); }
-            private set { SetValue(OffsetPropertyKey, value); }
+            get => this.GetValue<Vector>(OffsetProperty);
+            private set => SetValue(OffsetPropertyKey, value);
         }
         [NotNull] private static readonly DependencyPropertyKey OffsetPropertyKey =
             DependencyProperty.RegisterReadOnly("Offset", typeof(Vector), typeof(Map), new FrameworkPropertyMetadata((sender, e) => ((Map)sender)?.Offset_Changed()));
@@ -150,8 +150,8 @@
         /// </summary>
         public Point ZoomingPoint
         {
-            get { return this.GetValue<Point>(ZoomingPointProperty); }
-            set { SetValue(ZoomingPointProperty, value); }
+            get => this.GetValue<Point>(ZoomingPointProperty);
+            set => SetValue(ZoomingPointProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="ZoomingPoint"/> dependency property
@@ -167,8 +167,8 @@
         /// </remarks>
         public Rect Bounds
         {
-            get { return this.GetValue<Rect>(BoundsProperty); }
-            set { SetValue(BoundsProperty, value); }
+            get => this.GetValue<Rect>(BoundsProperty);
+            set => SetValue(BoundsProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Bounds"/> dependency property
@@ -182,8 +182,8 @@
         [CanBeNull]
         public FrameworkElement World
         {
-            get { return (FrameworkElement)GetValue(WorldProperty); }
-            private set { SetValue(WorldPropertyKey, value); }
+            get => (FrameworkElement)GetValue(WorldProperty);
+            private set => SetValue(WorldPropertyKey, value);
         }
         [NotNull] private static readonly DependencyPropertyKey WorldPropertyKey =
             DependencyProperty.RegisterReadOnly("World", typeof(FrameworkElement), typeof(Map), new FrameworkPropertyMetadata());
@@ -198,8 +198,8 @@
         [CanBeNull]
         public FrameworkElement Viewport
         {
-            get { return (FrameworkElement)GetValue(ViewportProperty); }
-            private set { SetValue(ViewportPropertyKey, value); }
+            get => (FrameworkElement)GetValue(ViewportProperty);
+            private set => SetValue(ViewportPropertyKey, value);
         }
         [NotNull] private static readonly DependencyPropertyKey ViewportPropertyKey =
             DependencyProperty.RegisterReadOnly("Viewport", typeof(FrameworkElement), typeof(Map), new FrameworkPropertyMetadata());
@@ -216,8 +216,8 @@
         /// </remarks>
         public Point MousePosition
         {
-            get { return this.GetValue<Point>(MousePositionProperty); }
-            set { SetValue(MousePositionProperty, value); }
+            get => this.GetValue<Point>(MousePositionProperty);
+            set => SetValue(MousePositionProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="MousePosition"/> dependency property.
@@ -232,8 +232,8 @@
         [CanBeNull]
         public ICommand MouseDoubleClickCommand
         {
-            get { return (ICommand)GetValue(MouseDoubleClickCommandProperty); }
-            set { SetValue(MouseDoubleClickCommandProperty, value); }
+            get => (ICommand)GetValue(MouseDoubleClickCommandProperty);
+            set => SetValue(MouseDoubleClickCommandProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="MouseDoubleClickCommand"/> dependency property.

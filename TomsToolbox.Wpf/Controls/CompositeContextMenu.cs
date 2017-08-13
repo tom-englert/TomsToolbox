@@ -107,8 +107,8 @@
         [CanBeNull]
         public string RegionId
         {
-            get { return (string)GetValue(RegionIdProperty); }
-            set { SetValue(RegionIdProperty, value); }
+            get => (string)GetValue(RegionIdProperty);
+            set => SetValue(RegionIdProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="RegionId"/> dependency property
@@ -123,8 +123,8 @@
         [CanBeNull]
         public object CompositionContext
         {
-            get { return GetValue(CompositionContextProperty); }
-            set { SetValue(CompositionContextProperty, value); }
+            get => GetValue(CompositionContextProperty);
+            set => SetValue(CompositionContextProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="CompositionContext"/> dependency property

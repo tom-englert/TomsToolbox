@@ -82,14 +82,8 @@
         /// </summary>
         public BinaryOperation Operation
         {
-            get
-            {
-                return Processor.Operation;
-            }
-            set
-            {
-                _processor = new BinaryOperationProcessor(value);
-            }
+            get => Processor.Operation;
+            set => _processor = new BinaryOperationProcessor(value);
         }
 
         [NotNull]

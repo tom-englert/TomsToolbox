@@ -22,8 +22,8 @@
         [CanBeNull]
         public FrameworkElement World
         {
-            get { return (FrameworkElement)GetValue(WorldProperty); }
-            set { SetValue(WorldProperty, value); }
+            get => (FrameworkElement)GetValue(WorldProperty);
+            set => SetValue(WorldProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="World"/> dependency property.

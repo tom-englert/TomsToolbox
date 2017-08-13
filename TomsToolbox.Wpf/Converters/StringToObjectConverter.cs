@@ -28,10 +28,7 @@
         [CanBeNull]
         public Type TypeConverterType
         {
-            get
-            {
-                return _typeConverter?.GetType();
-            }
+            get => _typeConverter?.GetType();
             set
             {
                 if (value != null)
