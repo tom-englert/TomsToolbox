@@ -36,14 +36,14 @@
     [CLSCompliant(false)]
     public sealed class PropertyDependencyAttribute : Attribute
     {
-        [NotNull]
+        [NotNull, ItemNotNull]
         private readonly IEnumerable<string> _propertyNames;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyDependencyAttribute"/> class.
         /// </summary>
         /// <param name="propertyNames">The property names of the properties that this property depends on.</param>
-        public PropertyDependencyAttribute([Localizable(false)][NotNull] params string[] propertyNames)
+        public PropertyDependencyAttribute([Localizable(false)][NotNull, ItemNotNull] params string[] propertyNames)
         {
             Contract.Requires(propertyNames != null);
             Contract.Ensures(PropertyNames == propertyNames);
@@ -54,7 +54,7 @@
         /// <summary>
         /// Gets the names of the properties that the attributed property depends on.
         /// </summary>
-        [NotNull]
+        [NotNull, ItemNotNull]
         public IEnumerable<string> PropertyNames
         {
             get
@@ -115,11 +115,12 @@
             // ReSharper restore AssignNullToNotNullAttribute
         }
 
-        [NotNull]
+        [NotNull, ItemNotNull]
         private static IEnumerable<string> GetAllDependencies([NotNull] string item, [NotNull] IDictionary<string, string[]> directDependencies)
         {
             Contract.Requires(item != null);
             Contract.Requires(directDependencies != null);
+            Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
 
             var allDependenciesAndSelf = new List<string> { item };
 
@@ -147,7 +148,7 @@
         /// <param name="entryType">Type of the entry.</param>
         /// <returns>A list of strings, each describing an invalid dependency definition. If no invalid definitions exist, the list is empty.</returns>
         /// <remarks>This method is mainly for writing unit test to detect invalid dependencies during compile time.</remarks>
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static IEnumerable<string> GetInvalidDependencies([NotNull] Type entryType)
         {
             Contract.Requires(entryType != null);
@@ -168,7 +169,7 @@
         /// </summary>
         /// <param name="entryType">A type contained in the entry assembly.</param>
         /// <returns>The assembly that contains the entryType plus all custom assemblies that this assembly references.</returns>
-        [NotNull]
+        [NotNull, ItemNotNull]
         private static IEnumerable<Assembly> GetCustomAssemblies([NotNull] Type entryType)
         {
             Contract.Requires(entryType != null);
@@ -226,7 +227,7 @@
         }
 
 
-        [NotNull]
+        [NotNull, ItemNotNull]
         private static IEnumerable<Type> SafeGetTypes([NotNull] Assembly a)
         {
             Contract.Requires(a != null);

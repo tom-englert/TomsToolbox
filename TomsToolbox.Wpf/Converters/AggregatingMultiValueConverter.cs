@@ -50,7 +50,7 @@
     [ContentProperty("Converters")]
     public class AggregatingMultiValueConverter : MultiValueConverter
     {
-        [NotNull]
+        [NotNull, ItemNotNull]
         private readonly Collection<object> _converters = new Collection<object>();
 
         /// <summary>
@@ -109,7 +109,7 @@
         /// <summary>
         /// Gets the aggregating converters. Must be all <see cref="IValueConverter"/>, only the last might be a <see cref="IMultiValueConverter"/>.
         /// </summary>
-        [NotNull]
+        [NotNull, ItemNotNull]
         public Collection<object> Converters
         {
             get

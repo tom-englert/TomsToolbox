@@ -75,7 +75,7 @@
         {
             [NotNull]
             private readonly Action<string> _errorCallback;
-
+            [CanBeNull]
             private string _buffer;
 
             public Listener([NotNull] Action<string> errorCallback)

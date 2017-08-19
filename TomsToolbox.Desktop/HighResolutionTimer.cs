@@ -22,6 +22,7 @@
         private readonly Action<TimeSpan> _timerCallback;
 
         private TimeSpan _startTimeStamp;
+        [CanBeNull]
         private Thread _timerThread;
 
         /// <summary>

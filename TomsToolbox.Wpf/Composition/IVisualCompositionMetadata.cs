@@ -2,6 +2,8 @@
 {
     using System.Diagnostics.CodeAnalysis;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Export metadata for composable objects.
     /// </summary>
@@ -10,6 +12,7 @@
         /// <summary>
         /// Gets the id of the item for visual composition.
         /// </summary>
+        [CanBeNull]
         object Role
         {
             get;
@@ -27,6 +30,7 @@
         /// Gets the target regions for visual composition.
         /// </summary>
         [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "Export metadata requires array.")]
+        [CanBeNull, ItemCanBeNull]
         string[] TargetRegions
         {
             get;

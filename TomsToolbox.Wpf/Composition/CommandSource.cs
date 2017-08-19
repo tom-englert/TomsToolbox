@@ -24,7 +24,7 @@
     {
         [NotNull]
         private readonly ICommandSourceFactory _owner;
-        [NotNull]
+        [NotNull, ItemNotNull]
         private readonly List<ICommand> _attachedCommands = new List<ICommand>();
 
         /// <summary>

@@ -56,6 +56,7 @@
         {
             [NotNull]
             private readonly T _dependencyObject;
+            [CanBeNull]
             private readonly DependencyPropertyDescriptor _dependencyPropertyDescriptor;
 
             public DependencyPropertyEventWrapper([NotNull] T dependencyObject, [NotNull] DependencyProperty property)

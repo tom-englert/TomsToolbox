@@ -28,13 +28,18 @@
     [MarkupExtensionReturnType(typeof(object))]
     public class ImportExtension : MarkupExtension
     {
-        [NotNull]
+        [NotNull, ItemNotNull]
         private readonly List<Setter> _setters = new List<Setter>();
 
+        [CanBeNull]
         private object _targetObject;
+        [CanBeNull]
         private object _targetProperty;
+        [CanBeNull]
         private ExportProvider _exportProvider;
+        [CanBeNull]
         private DependencyObject _rootObject;
+        [CanBeNull]
         private INotifyChanged _tracker;
 
         /// <summary>
@@ -60,6 +65,7 @@
         /// <summary>
         /// Gets or sets the optional contract name of the exported object.
         /// </summary>
+        [CanBeNull]
         public string ContractName
         {
             get;
@@ -81,7 +87,7 @@
         /// <summary>
         /// Gets a list of setters that allow initializing dependency properties of the composed object.
         /// </summary>
-        [NotNull]
+        [NotNull, ItemNotNull]
         public ICollection<Setter> Setters
         {
             get

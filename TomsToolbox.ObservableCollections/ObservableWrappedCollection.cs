@@ -27,6 +27,7 @@
     {
         [NotNull]
         private readonly Func<TSource, TTarget> _itemGenerator;
+        [CanBeNull]
         private readonly IWeakEventListener _collectionChangedWeakEvent;
 
         /// <summary>
@@ -34,7 +35,7 @@
         /// </summary>
         /// <param name="sourceCollection">The source collection to wrap. This instance will not hold a reference to the source collection.</param>
         /// <param name="itemGenerator">The item generator to generate the wrapper for each item.</param>
-        public ObservableWrappedCollection([NotNull] IEnumerable sourceCollection, [NotNull] Func<TSource, TTarget> itemGenerator)
+        public ObservableWrappedCollection([NotNull, ItemNotNull] IEnumerable sourceCollection, [NotNull] Func<TSource, TTarget> itemGenerator)
             : base(new ObservableCollection<TTarget>(sourceCollection.Cast<TSource>().Select(itemGenerator)))
         {
             Contract.Requires(sourceCollection != null);
@@ -72,7 +73,7 @@
             }
         }
 
-        private static void OnCollectionChanged([NotNull] ObservableWrappedCollection<TSource, TTarget> self, [NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+        private static void OnCollectionChanged([NotNull, ItemCanBeNull] ObservableWrappedCollection<TSource, TTarget> self, [NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
             Contract.Requires(self != null);
             Contract.Requires(sender != null);
@@ -112,7 +113,7 @@
         /// <exception cref="System.NotImplementedException">Moving more than one item is not supported</exception>
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Caused by code contracts.")]
         [ContractVerification(false)]
-        protected virtual void OnSourceCollectionChanged([NotNull] IEnumerable sourceCollection, [NotNull] NotifyCollectionChangedEventArgs e)
+        protected virtual void OnSourceCollectionChanged([NotNull, ItemCanBeNull] IEnumerable sourceCollection, [NotNull] NotifyCollectionChangedEventArgs e)
         {
             Contract.Requires(sourceCollection != null);
             Contract.Requires(e != null);

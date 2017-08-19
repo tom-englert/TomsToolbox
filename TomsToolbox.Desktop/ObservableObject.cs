@@ -317,7 +317,7 @@
         /// <remarks>
         /// The default implementation returns the <see cref="ValidationAttribute"/> errors of the property.
         /// </remarks>
-        [NotNull]
+        [NotNull, ItemNotNull]
         protected virtual IEnumerable<string> GetDataErrors([CanBeNull] string propertyName)
         {
             Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
@@ -341,11 +341,11 @@
         /// </summary>
         /// <param name="propertyName">Name of the property, or <c>null</c> if the errors .</param>
         /// <param name="dataErrors">The data errors for the property.</param>
-        protected virtual void OnDataErrorsEvaluated([CanBeNull] string propertyName, [CanBeNull] IEnumerable<string> dataErrors)
+        protected virtual void OnDataErrorsEvaluated([CanBeNull] string propertyName, [CanBeNull, ItemNotNull] IEnumerable<string> dataErrors)
         {
         }
 
-        [NotNull]
+        [NotNull, ItemNotNull]
         private IEnumerable<string> InternalGetDataErrors([CanBeNull] string propertyName)
         {
             Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);

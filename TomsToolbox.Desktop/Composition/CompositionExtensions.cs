@@ -36,7 +36,7 @@
         /// </summary>
         /// <param name="compositionHost">The composition host.</param>
         /// <param name="assemblies">The assemblies to add.</param>
-        public static void AddCatalog([NotNull] this ICompositionHost compositionHost, [NotNull] params Assembly[] assemblies)
+        public static void AddCatalog([NotNull] this ICompositionHost compositionHost, [NotNull, ItemCanBeNull] params Assembly[] assemblies)
         {
             Contract.Requires(compositionHost != null);
             Contract.Requires(assemblies != null);
@@ -58,7 +58,7 @@
         /// </summary>
         /// <param name="compositionHost">The composition host.</param>
         /// <param name="types">The types to add.</param>
-        public static void AddCatalog([NotNull] this ICompositionHost compositionHost, [NotNull] params Type[] types)
+        public static void AddCatalog([NotNull] this ICompositionHost compositionHost, [NotNull, ItemNotNull] params Type[] types)
         {
             Contract.Requires(compositionHost != null);
             Contract.Requires(types != null);
@@ -141,7 +141,7 @@
         /// </exception>
         [NotNull]
         // ReSharper disable once AnnotateNotNullParameter
-        public static T GetExportedValue<T>([NotNull] this ICompositionHost compositionHost, string contractName) where T : class
+        public static T GetExportedValue<T>([NotNull] this ICompositionHost compositionHost, [CanBeNull] string contractName) where T : class
         {
             Contract.Requires(compositionHost != null);
             Contract.Ensures(Contract.Result<T>() != null);
@@ -258,7 +258,7 @@
         /// <exception cref="System.ObjectDisposedException">The <see cref="T:System.ComponentModel.Composition.Hosting.CompositionContainer" /> object has been disposed of.</exception>
         /// <exception cref="System.ComponentModel.Composition.CompositionContractMismatchException">One or more of the underlying exported objects cannot be cast to <typeparamref name="T" />.</exception>
         /// <exception cref="System.ComponentModel.Composition.CompositionException">An error occurred during composition. <see cref="P:System.ComponentModel.Composition.CompositionException.Errors" /> will contain a collection of errors that occurred.</exception>
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static IEnumerable<T> GetExportedValues<T>([NotNull] this ICompositionHost compositionHost)
         {
             Contract.Requires(compositionHost != null);
@@ -279,9 +279,9 @@
         /// <exception cref="System.ObjectDisposedException">The <see cref="T:System.ComponentModel.Composition.Hosting.CompositionContainer" /> object has been disposed of.</exception>
         /// <exception cref="System.ComponentModel.Composition.CompositionContractMismatchException">One or more of the underlying exported values cannot be cast to <typeparamref name="T" />.</exception>
         /// <exception cref="System.ComponentModel.Composition.CompositionException">An error occurred during composition. <see cref="P:System.ComponentModel.Composition.CompositionException.Errors" /> will contain a collection of errors that occurred.</exception>
-        [NotNull]
+        [NotNull, ItemNotNull]
         // ReSharper disable once AnnotateNotNullParameter
-        public static IEnumerable<T> GetExportedValues<T>([NotNull] this ICompositionHost compositionHost, string contractName)
+        public static IEnumerable<T> GetExportedValues<T>([NotNull] this ICompositionHost compositionHost, [CanBeNull] string contractName)
         {
             Contract.Requires(compositionHost != null);
             Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
@@ -297,7 +297,7 @@
         /// <returns>
         /// The System.Lazy{T} objects, if found; otherwise, an empty System.Collections.Generic.IEnumerable{T} object.
         /// </returns>
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static IEnumerable<Lazy<T>> GetExports<T>([NotNull] this ICompositionHost compositionHost)
         {
             Contract.Requires(compositionHost != null);
@@ -313,9 +313,9 @@
         /// <param name="compositionHost">The composition host.</param>
         /// <param name="contractName">The contract name of the System.Lazy{T} objects to return, or null or an empty string ("") to use the default contract name.</param>
         /// <returns>The System.Lazy{T} objects with the specified contract name, if found; otherwise, an empty System.Collections.Generic.IEnumerable{T} object.</returns>
-        [NotNull]
+        [NotNull, ItemNotNull]
         // ReSharper disable once AnnotateNotNullParameter
-        public static IEnumerable<Lazy<T>> GetExports<T>([NotNull] this ICompositionHost compositionHost, string contractName)
+        public static IEnumerable<Lazy<T>> GetExports<T>([NotNull] this ICompositionHost compositionHost, [CanBeNull] string contractName)
         {
             Contract.Requires(compositionHost != null);
             Contract.Ensures(Contract.Result<IEnumerable<Lazy<T>>>() != null);

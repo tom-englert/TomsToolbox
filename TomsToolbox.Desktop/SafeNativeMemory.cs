@@ -135,6 +135,7 @@
         /// <returns>
         /// The result of the conversion.
         /// </returns>
+        [CanBeNull]
         public static explicit operator T([NotNull] SafeNativeMemory<T> wrapper)
         {
             Contract.Requires(wrapper != null);

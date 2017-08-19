@@ -27,10 +27,9 @@
         /// <typeparam name="T">The type of elements in the list.</typeparam>
         /// <param name="singleItem">The first single item in the collection</param>
         /// <returns>A new <see cref="ObservableCompositeCollection{T}"/> containing one fixed list with one single item.</returns>
-        [NotNull]
-        public static ObservableCompositeCollection<T> FromSingleItem<T>([CanBeNull][NotNull] T singleItem)
+        [NotNull, ItemCanBeNull]
+        public static ObservableCompositeCollection<T> FromSingleItem<T>([CanBeNull] T singleItem)
         {
-            Contract.Requires(!ReferenceEquals(singleItem, null));
             Contract.Ensures(Contract.Result<ObservableCompositeCollection<T>>() != null);
 
             return new ObservableCompositeCollection<T>(new[] { singleItem });
@@ -44,12 +43,11 @@
         /// <param name="singleItem">The first single item in the collection</param>
         /// <param name="list">The list to add after the single item.</param>
         /// <returns>A new <see cref="ObservableCompositeCollection{T}"/> containing one fixed list with the single item plus all items from the list.</returns>
-        [NotNull]
-        public static ObservableCompositeCollection<T> FromSingleItemAndList<T, TItem>([CanBeNull][NotNull] T singleItem, [NotNull] IList<TItem> list)
+        [NotNull, ItemCanBeNull]
+        public static ObservableCompositeCollection<T> FromSingleItemAndList<T, TItem>([CanBeNull] T singleItem, [NotNull, ItemCanBeNull] IList<TItem> list)
             where TItem : T
         {
             Contract.Requires(list != null);
-            Contract.Requires(!ReferenceEquals(singleItem, null));
             Contract.Ensures(Contract.Result<ObservableCompositeCollection<T>>() != null);
 
             return typeof(T) == typeof(TItem)
@@ -65,12 +63,11 @@
         /// <param name="list">The list to add before the single item.</param>
         /// <param name="singleItem">The last single item in the collection</param>
         /// <returns>A new <see cref="ObservableCompositeCollection{T}"/> containing all items from the list plus one fixed list with the single item at the end.</returns>
-        [NotNull]
-        public static ObservableCompositeCollection<T> FromListAndSingleItem<TItem, T>([NotNull] IList<TItem> list, [CanBeNull][NotNull] T singleItem)
+        [NotNull, ItemCanBeNull]
+        public static ObservableCompositeCollection<T> FromListAndSingleItem<TItem, T>([NotNull, ItemCanBeNull] IList<TItem> list, [CanBeNull] T singleItem)
             where TItem : T
         {
             Contract.Requires(list != null);
-            Contract.Requires(!ReferenceEquals(singleItem, null));
             Contract.Ensures(Contract.Result<ObservableCompositeCollection<T>>() != null);
 
             return typeof(T) == typeof(TItem)
@@ -93,7 +90,7 @@
     public sealed class ObservableCompositeCollection<T> : ReadOnlyObservableCollection<T>, IObservableCollection<T>
     {
         [ContractPublicPropertyName("Content")]
-        [NotNull]
+        [NotNull, ItemNotNull]
         private readonly ContentManager _content;
 
         /// <summary>
@@ -105,10 +102,10 @@
             [NotNull, ItemNotNull]
             private readonly List<IList<T>> _parts = new List<IList<T>>();
             // The composite collection that we manage
-            [NotNull]
+            [NotNull, ItemCanBeNull]
             private readonly ObservableCompositeCollection<T> _owner;
 
-            public ContentManager([NotNull] ObservableCompositeCollection<T> owner)
+            public ContentManager([NotNull, ItemCanBeNull] ObservableCompositeCollection<T> owner)
             {
                 Contract.Requires(owner != null);
 
@@ -317,14 +314,16 @@
         /// </summary>
         /// <param name="parts">The lists to wrap</param>
         /// <exception cref="System.ArgumentException">None of the parts may be null!</exception>
-        public ObservableCompositeCollection([NotNull] params IList<T>[] parts)
+        public ObservableCompositeCollection([NotNull, ItemNotNull] params IList<T>[] parts)
             : this()
         {
             Contract.Requires(parts != null);
 
             foreach (var part in parts)
             {
+                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                 if (part == null)
+                    // ReSharper disable once HeuristicUnreachableCode
                     throw new ArgumentException(@"None of the parts may be null!");
 
                 _content.Add(part);
@@ -334,7 +333,7 @@
         /// <summary>
         /// Access to the physical layer of the content
         /// </summary>
-        [NotNull]
+        [NotNull, ItemNotNull]
         public IList<IList<T>> Content
         {
             get

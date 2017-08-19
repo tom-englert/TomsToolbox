@@ -31,14 +31,14 @@
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Use the same term as in System.Windows.Controls.Primitives.MultiSelector")]
     public static class MultiSelectorExtensions
     {
-        [NotNull] private static readonly IList _emptyObjectArray = new object[0];
+        [NotNull, ItemNotNull] private static readonly IList _emptyObjectArray = new object[0];
 
         /// <summary>
         /// Gets the value of the <see cref="P:TomsToolbox.Wpf.MultiSelectorExtensions.SelectionBinding"/> attached property.
         /// </summary>
         /// <param name="obj">The object to attach to.</param>
         /// <returns>The current selection.</returns>
-        [CanBeNull]
+        [CanBeNull, ItemCanBeNull]
         [AttachedPropertyBrowsableForType(typeof(Selector))]
         public static IList GetSelectionBinding([NotNull] this Selector obj)
         {
@@ -51,7 +51,7 @@
         /// <param name="obj">The object to attach to.</param>
         /// <param name="value">The new selection.</param>
         [AttachedPropertyBrowsableForType(typeof(Selector))]
-        public static void SetSelectionBinding([NotNull] this Selector obj, [CanBeNull] IList value)
+        public static void SetSelectionBinding([NotNull] this Selector obj, [CanBeNull, ItemCanBeNull] IList value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(SelectionBindingProperty, value);
@@ -71,10 +71,11 @@
         /// ]]></code>
         /// </example>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty SelectionBindingProperty =
+        [NotNull]
+        public static readonly DependencyProperty SelectionBindingProperty =
             DependencyProperty.RegisterAttached("SelectionBinding", typeof(IList), typeof(MultiSelectorExtensions), new FrameworkPropertyMetadata(null, SelectionBinding_Changed));
-
-        [NotNull] private static readonly DependencyProperty SelectionSynchronizerProperty =
+        [NotNull]
+        private static readonly DependencyProperty SelectionSynchronizerProperty =
             DependencyProperty.RegisterAttached("SelectionSynchronizer", typeof(SelectionSynchronizer), typeof(MultiSelectorExtensions));
 
         private static void SelectionBinding_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -110,7 +111,7 @@
         }
 
         [ContractVerification(false)] // because of dynamic
-        [NotNull]
+        [NotNull, ItemCanBeNull]
         private static IList GetSelectedItems([NotNull] this Selector selector)
         {
             Contract.Requires(selector != null);
@@ -164,7 +165,7 @@
             }
         }
 
-        private static bool All([NotNull] this IEnumerable items, [NotNull] Func<object, bool> condition)
+        private static bool All([NotNull, ItemCanBeNull] this IEnumerable items, [NotNull] Func<object, bool> condition)
         {
             Contract.Requires(items != null);
             Contract.Requires(condition != null);
@@ -172,7 +173,7 @@
             return Enumerable.All(items.Cast<object>(), condition);
         }
 
-        private static void SynchronizeWithSource([NotNull] this Selector selector, [NotNull] IList sourceSelection)
+        private static void SynchronizeWithSource([NotNull] this Selector selector, [NotNull, ItemCanBeNull] IList sourceSelection)
         {
             Contract.Requires(selector != null);
             Contract.Requires(sourceSelection != null);
@@ -197,7 +198,7 @@
             }
         }
 
-        private static void AddItemsToSelection([NotNull] this Selector selector, [NotNull] IList itemsToSelect)
+        private static void AddItemsToSelection([NotNull] this Selector selector, [NotNull, ItemNotNull] IList itemsToSelect)
         {
             Contract.Requires(selector != null);
             Contract.Requires(itemsToSelect != null);
@@ -237,7 +238,7 @@
             }
         }
 
-        private static void SelectSingleItem([NotNull] this Selector selector, [NotNull] IList sourceSelection)
+        private static void SelectSingleItem([NotNull] this Selector selector, [NotNull, ItemCanBeNull] IList sourceSelection)
         {
             Contract.Requires(selector != null);
             Contract.Requires(sourceSelection != null);
@@ -282,7 +283,7 @@
             private readonly INotifyCollectionChanged _observableSourceSelection;
             private readonly bool _selectorHasItemsSourceBinding;
 
-            public SelectionSynchronizer([NotNull] Selector selector, [NotNull] IList sourceSelection)
+            public SelectionSynchronizer([NotNull] Selector selector, [NotNull, ItemCanBeNull] IList sourceSelection)
             {
                 Contract.Requires(selector != null);
                 Contract.Requires(sourceSelection != null);

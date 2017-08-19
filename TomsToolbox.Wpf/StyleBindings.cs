@@ -253,7 +253,7 @@
         /// </summary>
         /// <param name="obj">The object the group descriptions are attached to.</param>
         /// <returns>The group descriptions.</returns>
-        [CanBeNull]
+        [CanBeNull, ItemNotNull]
         public static GroupDescriptionCollection GetGroupDescriptions([NotNull] DependencyObject obj)
         {
             Contract.Requires(obj != null);
@@ -265,7 +265,7 @@
         /// </summary>
         /// <param name="obj">The object the group descriptions are attached to.</param>
         /// <param name="value">The group descriptions.</param>
-        public static void SetGroupDescriptions([NotNull] DependencyObject obj, [CanBeNull] ICollection<GroupDescription> value)
+        public static void SetGroupDescriptions([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] ICollection<GroupDescription> value)
         {
             Contract.Requires(obj != null);
 
@@ -316,7 +316,7 @@
         /// </summary>
         /// <param name="obj">The object the behaviors are attached to.</param>
         /// <returns>The behaviors.</returns>
-        [CanBeNull]
+        [CanBeNull, ItemNotNull]
         public static BehaviorCollection GetBehaviors([NotNull] DependencyObject obj)
         {
             Contract.Requires(obj != null);
@@ -327,7 +327,7 @@
         /// </summary>
         /// <param name="obj">The object the behaviors are attached to.</param>
         /// <param name="value">The behaviors to attach.</param>
-        public static void SetBehaviors([NotNull] DependencyObject obj, [CanBeNull] BehaviorCollection value)
+        public static void SetBehaviors([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] BehaviorCollection value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(BehaviorsProperty, value);
@@ -354,7 +354,7 @@
         [NotNull] public static readonly DependencyProperty BehaviorsProperty =
             DependencyProperty.RegisterAttached("Behaviors", typeof(BehaviorCollection), typeof(StyleBindings), new UIPropertyMetadata((d, e) => Behaviors_Changed(d, (BehaviorCollection)e.NewValue)));
 
-        private static void Behaviors_Changed([CanBeNull] DependencyObject d, [CanBeNull] IEnumerable<Behavior> newValue)
+        private static void Behaviors_Changed([CanBeNull] DependencyObject d, [CanBeNull, ItemNotNull] IEnumerable<Behavior> newValue)
         {
             if (newValue != null)
             {
@@ -371,7 +371,7 @@
         /// </summary>
         /// <param name="obj">The object the triggers are attached to.</param>
         /// <returns>The triggers.</returns>
-        [CanBeNull]
+        [CanBeNull, ItemNotNull]
         public static TriggerCollection GetTriggers([NotNull] DependencyObject obj)
         {
             Contract.Requires(obj != null);
@@ -382,7 +382,7 @@
         /// </summary>
         /// <param name="obj">The obj.</param>
         /// <param name="value">The value.</param>
-        public static void SetTriggers([NotNull] DependencyObject obj, [CanBeNull] TriggerCollection value)
+        public static void SetTriggers([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] TriggerCollection value)
         {
             Contract.Requires(obj != null);
             obj.SetValue(TriggersProperty, value);
@@ -413,7 +413,7 @@
         [NotNull] public static readonly DependencyProperty TriggersProperty =
             DependencyProperty.RegisterAttached("Triggers", typeof(TriggerCollection), typeof(StyleBindings), new UIPropertyMetadata((d, e) => Triggers_Changed(d, (TriggerCollection)e.NewValue)));
 
-        private static void Triggers_Changed([CanBeNull] DependencyObject d, [CanBeNull] IEnumerable<TriggerBase> newValue)
+        private static void Triggers_Changed([CanBeNull] DependencyObject d, [CanBeNull, ItemNotNull] IEnumerable<TriggerBase> newValue)
         {
             if (newValue != null)
             {

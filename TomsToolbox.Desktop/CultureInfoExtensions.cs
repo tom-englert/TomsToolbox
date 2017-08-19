@@ -63,7 +63,7 @@
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns>The immediate children of the specified item.</returns>
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static ICollection<CultureInfo> GetChildren([NotNull] this CultureInfo item)
         {
             Contract.Requires(item != null);
@@ -74,7 +74,7 @@
             return children;
         }
 
-        [NotNull]
+        [NotNull, ItemNotNull]
         private static CultureInfo[] CreateChildList([CanBeNull] CultureInfo parent)
         {
             Contract.Ensures(Contract.Result<CultureInfo[]>() != null);
@@ -87,8 +87,7 @@
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns>The descendants of the item.</returns>
-        [ItemNotNull]
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static IEnumerable<CultureInfo> GetDescendants([NotNull] this CultureInfo item)
         {
             Contract.Requires(item != null);
@@ -96,9 +95,6 @@
 
             foreach (var child in item.GetChildren())
             {
-                if (child == null)
-                    continue;
-
                 yield return child;
 
                 foreach (var d in child.GetDescendants())

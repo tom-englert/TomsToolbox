@@ -16,7 +16,7 @@
         /// Called by the styles to loads the theme specific resources.
         /// </summary>
         /// <param name="resource">The resource where the provider can add the theme specific resource.</param>
-        void LoadThemeResources([NotNull] ResourceDictionary resource);
+        void LoadThemeResources([NotNull, ItemCanBeNull] ResourceDictionary resource);
     }
 
     [ContractClassFor(typeof(IThemeResourceProvider))]

@@ -19,7 +19,7 @@
         /// <typeparam name="T">The type of elements in the list.</typeparam>
         /// <param name="target">The list to synchronize.</param>
         /// <param name="source">The items that should be in the target list.</param>
-        public static void SynchronizeWith<T>([NotNull] this ICollection<T> target, [NotNull] ICollection<T> source)
+        public static void SynchronizeWith<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull, ItemCanBeNull] ICollection<T> source)
         {
             Contract.Requires(target != null);
             Contract.Requires(source != null);
@@ -34,7 +34,7 @@
         /// <param name="target">The list to synchronize.</param>
         /// <param name="source">The items that should be in the target list.</param>
         /// <param name="comparer">The comparer used to compare the items. If comparer is <c>null</c>, the default equality comparer is used to compare values.</param>
-        public static void SynchronizeWith<T>([NotNull] this ICollection<T> target, [NotNull] ICollection<T> source, [CanBeNull] IEqualityComparer<T> comparer)
+        public static void SynchronizeWith<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull, ItemCanBeNull] ICollection<T> source, [CanBeNull] IEqualityComparer<T> comparer)
         {
             Contract.Requires(target != null);
             Contract.Requires(source != null);
@@ -51,7 +51,7 @@
         /// </summary>
         /// <param name="target">The target list.</param>
         /// <param name="items">The collection whose elements should be added to the end of the list. The collection itself cannot be null, but it can contain elements that are null, if type T is a reference type.</param>
-        public static void AddRange([NotNull] this IList target, [NotNull] IEnumerable items)
+        public static void AddRange([NotNull, ItemCanBeNull] this IList target, [NotNull, ItemCanBeNull] IEnumerable items)
         {
             Contract.Requires(target != null);
             Contract.Requires(items != null);
@@ -70,7 +70,7 @@
         /// <param name="firstItem">The first item to add.</param>
         /// <param name="secondItem">The second item to add.</param>
         /// <param name="moreItems">Any more items to add.</param>
-        public static void AddRange<T>([NotNull] this ICollection<T> target, [CanBeNull] T firstItem, [CanBeNull] T secondItem, [NotNull] params T[] moreItems)
+        public static void AddRange<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [CanBeNull] T firstItem, [CanBeNull] T secondItem, [NotNull, ItemCanBeNull] params T[] moreItems)
         {
             Contract.Requires(target != null);
             Contract.Requires(moreItems != null);
@@ -86,7 +86,7 @@
         /// <typeparam name="T">The type of elements in the list.</typeparam>
         /// <param name="target">The target list.</param>
         /// <param name="items">The collection whose elements should be added to the end of the list. The collection itself cannot be null, but it can contain elements that are null, if type T is a reference type.</param>
-        public static void AddRange<T>([NotNull] this ICollection<T> target, [NotNull] IEnumerable<T> items)
+        public static void AddRange<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull, ItemCanBeNull] IEnumerable<T> items)
         {
             Contract.Requires(target != null);
             Contract.Requires(items != null);
@@ -103,7 +103,7 @@
         /// <typeparam name="T">The type of elements in the list.</typeparam>
         /// <param name="target">The target list.</param>
         /// <param name="items">The collection whose elements should be added to the end of the list. The collection itself cannot be null, but it can contain elements that are null, if type T is a reference type.</param>
-        public static void TryAddRange<T>([NotNull] this ICollection<T> target, [NotNull] IEnumerable<T> items)
+        public static void TryAddRange<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull, ItemCanBeNull] IEnumerable<T> items)
         {
             Contract.Requires(target != null);
             Contract.Requires(items != null);
@@ -125,7 +125,7 @@
         /// </summary>
         /// <param name="target">The target list.</param>
         /// <param name="items">The items to remove.</param>
-        public static void RemoveRange([NotNull] this IList target, [NotNull] IEnumerable items)
+        public static void RemoveRange([NotNull, ItemCanBeNull] this IList target, [NotNull, ItemCanBeNull] IEnumerable items)
         {
             Contract.Requires(target != null);
             Contract.Requires(items != null);
@@ -142,7 +142,7 @@
         /// <typeparam name="T">The type of elements in the list.</typeparam>
         /// <param name="target">The target.</param>
         /// <param name="items">The items to remove.</param>
-        public static void RemoveRange<T>([NotNull] this ICollection<T> target, [NotNull] IEnumerable<T> items)
+        public static void RemoveRange<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull, ItemCanBeNull] IEnumerable<T> items)
         {
             Contract.Requires(target != null);
             Contract.Requires(items != null);
@@ -159,7 +159,7 @@
         /// <typeparam name="T">The type of elements in the list.</typeparam>
         /// <param name="target">The target.</param>
         /// <param name="condition">The condition; all items that fulfill this condition will be removed.</param>
-        public static void RemoveRange<T>([NotNull] this ICollection<T> target, [NotNull] Func<T, bool> condition)
+        public static void RemoveRange<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull] Func<T, bool> condition)
         {
             Contract.Requires(target != null);
             Contract.Requires(condition != null);
@@ -174,7 +174,7 @@
         /// <param name="source">The source enumerator to retrieve the items from. The enumerator position will be incremented by the number of items returned.</param>
         /// <param name="numberOfItems">The number of items to retrieve.</param>
         /// <returns>A list that contains up to n items from the source.</returns>
-        [NotNull]
+        [NotNull, ItemCanBeNull]
         public static IList<T> Take<T>([NotNull] this IEnumerator<T> source, int numberOfItems)
         {
             Contract.Requires(source != null);
@@ -213,7 +213,7 @@
         /// <param name="self">The object to analyze.</param>
         /// <param name="items">The items to test for.</param>
         /// <returns><c>true</c> if any of the items is contained in the specified object; otherwise <c>false</c>.</returns>
-        public static bool ContainsAny<T>([NotNull] this IEnumerable<T> self, [NotNull] params T[] items)
+        public static bool ContainsAny<T>([NotNull, ItemCanBeNull] this IEnumerable<T> self, [NotNull, ItemCanBeNull] params T[] items)
         {
             Contract.Requires(self != null);
             Contract.Requires(items != null);
@@ -373,7 +373,7 @@
         /// <exception cref="ArgumentNullException">Any of the keys is null.</exception>
         /// <exception cref="ArgumentException">Any of the keys is duplicate.</exception>
         [NotNull]
-        public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>([NotNull] this IEnumerable<KeyValuePair<TKey, TValue>> items, IEqualityComparer<TKey> comparer)
+        public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>([NotNull] this IEnumerable<KeyValuePair<TKey, TValue>> items, [CanBeNull] IEqualityComparer<TKey> comparer)
         {
             Contract.Requires(items != null);
             Contract.Ensures(Contract.Result<Dictionary<TKey, TValue>>() != null);
@@ -398,9 +398,7 @@
             Contract.Requires(dictionary != null);
             Contract.Requires(!ReferenceEquals(key, null));
 
-            TValue value;
-
-            return dictionary.TryGetValue(key, out value) ? value : defaultValue;
+            return dictionary.TryGetValue(key, out var value) ? value : defaultValue;
         }
 
         /// <summary>
@@ -438,9 +436,7 @@
             Contract.Requires(!ReferenceEquals(key, null));
             Contract.Requires(generator != null);
 
-            TValue result;
-
-            if (dictionary.TryGetValue(key, out result))
+            if (dictionary.TryGetValue(key, out var result))
                 return result;
 
             result = generator(key);
@@ -477,8 +473,8 @@
         /// <param name="items"> A System.Collections.Generic.ICollection{TSource} to create an array from.</param>
         /// <param name="selector">The selector to select the elements in the array.</param>
         /// <returns>An array that contains the selected elements from the input sequence.</returns>
-        [NotNull]
-        public static TTarget[] ToArray<TSource, TTarget>([NotNull] this ICollection<TSource> items, [NotNull] Func<TSource, TTarget> selector)
+        [NotNull, ItemCanBeNull]
+        public static TTarget[] ToArray<TSource, TTarget>([NotNull, ItemCanBeNull] this ICollection<TSource> items, [NotNull] Func<TSource, TTarget> selector)
         {
             Contract.Requires(items != null);
             Contract.Requires(selector != null);
@@ -509,7 +505,7 @@
         /// <returns>An <see cref="IEnumerable{T}"/> that contains the repeated source sequence.</returns>
         [ItemCanBeNull]
         [NotNull]
-        public static IEnumerable<T> Repeat<T>([NotNull] ICollection<T> source, int count)
+        public static IEnumerable<T> Repeat<T>([NotNull, ItemCanBeNull] ICollection<T> source, int count)
         {
             Contract.Requires(source != null);
             Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);

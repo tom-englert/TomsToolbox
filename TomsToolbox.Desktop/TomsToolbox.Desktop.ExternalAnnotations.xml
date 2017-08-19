@@ -7,11 +7,13 @@
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.AppDomainHelper.InvokeInSeparateDomain``1(System.Func{``0})">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="func">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.AppDomainHelper.InvokeInSeparateDomain``2(System.Func{``0,``1},``0)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="func">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -20,6 +22,7 @@
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.AppDomainHelper.InvokeInSeparateDomain``3(System.Func{``0,``1,``2},``0,``1)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="func">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -31,6 +34,7 @@
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.AppDomainHelper.InvokeInSeparateDomain``4(System.Func{``0,``1,``2,``3},``0,``1,``2)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="func">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -45,6 +49,7 @@
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.AppDomainHelper.InvokeInSeparateDomain``5(System.Func{``0,``1,``2,``3,``4},``0,``1,``2,``3)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="func">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -82,10 +87,12 @@
   </member>
   <member name="M:TomsToolbox.Desktop.ClipboardHelper.GetClipboardDataAsTable">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Desktop.ClipboardHelper.SetClipboardData(System.Collections.Generic.IList{System.Collections.Generic.IList{System.String}})">
     <parameter name="table">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.Composition.CompositionExtensions.AddCatalog(TomsToolbox.Desktop.Composition.ICompositionHost,System.ComponentModel.Composition.Primitives.ComposablePartCatalog)">
@@ -102,6 +109,7 @@
     </parameter>
     <parameter name="assemblies">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.Composition.CompositionExtensions.AddCatalog(TomsToolbox.Desktop.Composition.ICompositionHost,System.Type[])">
@@ -110,6 +118,7 @@
     </parameter>
     <parameter name="types">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.Composition.CompositionExtensions.ComposeExportedValue``1(TomsToolbox.Desktop.Composition.ICompositionHost,``0)">
@@ -131,6 +140,9 @@
     <parameter name="compositionHost">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
+    <parameter name="contractName">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.Composition.CompositionExtensions.GetExportedValueOrDefault``1(TomsToolbox.Desktop.Composition.ICompositionHost)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
@@ -149,26 +161,36 @@
   </member>
   <member name="M:TomsToolbox.Desktop.Composition.CompositionExtensions.GetExportedValues``1(TomsToolbox.Desktop.Composition.ICompositionHost)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="compositionHost">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.Composition.CompositionExtensions.GetExportedValues``1(TomsToolbox.Desktop.Composition.ICompositionHost,System.String)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="compositionHost">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="contractName">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.Composition.CompositionExtensions.GetExports``1(TomsToolbox.Desktop.Composition.ICompositionHost)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="compositionHost">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.Composition.CompositionExtensions.GetExports``1(TomsToolbox.Desktop.Composition.ICompositionHost,System.String)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="compositionHost">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="contractName">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.Composition.CompositionExtensions.GetService``1(System.IServiceProvider)">
@@ -213,13 +235,14 @@
   </member>
   <member name="M:TomsToolbox.Desktop.CultureInfoExtensions.GetChildren(System.Globalization.CultureInfo)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="item">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.CultureInfoExtensions.GetDescendants(System.Globalization.CultureInfo)">
-    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="item">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -376,6 +399,7 @@
   </member>
   <member name="M:TomsToolbox.Desktop.ObservableObjectBase.GetDataErrors(System.String)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="propertyName">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
@@ -386,6 +410,7 @@
     </parameter>
     <parameter name="dataErrors">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.ObservableObjectBase.OnPropertyChanged(System.String)">
@@ -485,31 +510,38 @@
   <member name="M:TomsToolbox.Desktop.PropertyDependencyAttribute.#ctor(System.String[])">
     <parameter name="propertyNames">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.PropertyDependencyAttribute.GetInvalidDependencies(System.Type)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="entryType">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="P:TomsToolbox.Desktop.PropertyDependencyAttribute.PropertyNames">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Desktop.ReflectionExtensions.EnumerateAllTypes(System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="assemblies">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.ReflectionExtensions.EnumerateAllTypes(System.IO.DirectoryInfo)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="directory">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.ReflectionExtensions.EnumerateAllTypes(System.IO.DirectoryInfo,System.String)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="directory">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -519,6 +551,7 @@
   </member>
   <member name="M:TomsToolbox.Desktop.ReflectionExtensions.EnumerateAllTypes(System.Reflection.Assembly)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="assembly">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
@@ -561,6 +594,7 @@
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Desktop.SafeNativeMemory`1.op_Explicit(TomsToolbox.Desktop.SafeNativeMemory{`0})~`0">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="wrapper">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -585,6 +619,9 @@
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="P:TomsToolbox.Desktop.TextAttribute.Text">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Desktop.TextAttribute.TextValue">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Desktop.ThreadWithDispatcher.#ctor(System.String,System.Threading.ApartmentState,System.Threading.ThreadPriority,System.Boolean)">
@@ -613,6 +650,7 @@
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.ThreadWithDispatcher.Invoke``1(System.Func{``0})">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="method">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>

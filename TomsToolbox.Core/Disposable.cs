@@ -68,14 +68,11 @@
         /// <returns><c>true</c> if the object has been disposed.</returns>
         public static bool Dispose([CanBeNull] object item)
         {
-            var disposable = item as IDisposable;
-            if (disposable != null)
-            {
-                disposable.Dispose();
-                return true;
-            }
+            if (!(item is IDisposable disposable))
+                return false;
 
-            return false;
+            disposable.Dispose();
+            return true;
         }
 
         /// <summary>
@@ -83,7 +80,7 @@
         /// </summary>
         /// <param name="items">The objects to dispose.</param>
         /// <returns><c>true</c> if any object has been disposed.</returns>
-        public static bool DisposeAll([NotNull] IEnumerable items)
+        public static bool DisposeAll([NotNull, ItemCanBeNull] IEnumerable items)
         {
             Contract.Requires(items != null);
 

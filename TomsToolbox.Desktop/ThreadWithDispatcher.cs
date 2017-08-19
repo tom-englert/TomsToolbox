@@ -137,7 +137,9 @@ namespace TomsToolbox.Desktop
         private readonly Thread _thread;
         [NotNull]
         private readonly EventWaitHandle _threadStarted = new EventWaitHandle(false, EventResetMode.ManualReset);
+        [CanBeNull]
         private Dispatcher _dispatcher;
+        [CanBeNull]
         private TaskScheduler _taskScheduler;
 
         /// <summary>
@@ -218,6 +220,7 @@ namespace TomsToolbox.Desktop
         /// <returns>The result of the method.</returns>
         /// <exception cref="System.InvalidOperationException">The dispatcher has already shut down.</exception>
         /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
+        [CanBeNull]
         public T Invoke<T>([NotNull] Func<T> method)
         {
             Contract.Requires(method != null);

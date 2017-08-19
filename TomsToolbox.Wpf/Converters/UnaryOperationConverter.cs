@@ -31,12 +31,14 @@
     /// </returns>
     public class UnaryOperationConverter : ValueConverter
     {
-        [NotNull] private static readonly string[] _operationMethodNames = { "op_UnaryNegation" };
+        [NotNull, ItemNotNull]
+        private static readonly string[] _operationMethodNames = { "op_UnaryNegation" };
 
         /// <summary>
         /// The default negation converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Negation = new UnaryOperationConverter();
+        [NotNull]
+        public static readonly IValueConverter Negation = new UnaryOperationConverter();
 
         /// <summary>
         /// Gets or sets the operation performed by this converter.<para/>

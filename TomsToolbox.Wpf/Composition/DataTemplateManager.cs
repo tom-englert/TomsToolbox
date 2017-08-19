@@ -72,7 +72,7 @@ namespace TomsToolbox.Wpf.Composition
         /// <returns>
         /// The resource dictionary containing the dynamic data templates. This is usually added to the merged dictionaries of your application's resources.
         /// </returns>
-        [NotNull]
+        [NotNull, ItemCanBeNull]
         public static ResourceDictionary CreateDynamicDataTemplates([NotNull] ExportProvider exportProvider)
         {
             Contract.Requires(exportProvider != null);
@@ -169,10 +169,11 @@ namespace TomsToolbox.Wpf.Composition
         /// </summary>
         /// <param name="exportProvider">The export provider.</param>
         /// <returns>The meta data of all exports.</returns>
-        [NotNull]
-        internal static IEnumerable<IDataTemplateMetadata> GetDataTemplateExportsMetadata([NotNull] this ExportProvider exportProvider)
+        [NotNull, ItemNotNull]
+        private static IEnumerable<IDataTemplateMetadata> GetDataTemplateExportsMetadata([NotNull] this ExportProvider exportProvider)
         {
             Contract.Requires(exportProvider != null);
+            Contract.Ensures(Contract.Result<IEnumerable<IDataTemplateMetadata>>() != null);
 
             return exportProvider.GetExports(typeof(DependencyObject), null, ContractName)
                 .Select(AssertCorrectCreationPolicy)

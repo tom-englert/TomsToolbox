@@ -234,7 +234,7 @@
         /// <param name="others">The transformations to merge.</param>
         /// <returns>The merged transformation.</returns>
         [NotNull]
-        public static GeneralTransform MergeWith([NotNull] this GeneralTransform first, [NotNull] params GeneralTransform[] others)
+        public static GeneralTransform MergeWith([NotNull] this GeneralTransform first, [NotNull, ItemNotNull] params GeneralTransform[] others)
         {
             Contract.Requires(first != null);
             Contract.Requires(others != null);

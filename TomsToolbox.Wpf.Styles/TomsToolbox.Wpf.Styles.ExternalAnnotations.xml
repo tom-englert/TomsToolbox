@@ -3,6 +3,7 @@
   <member name="M:TomsToolbox.Wpf.Styles.IThemeResourceProvider.LoadThemeResources(System.Windows.ResourceDictionary)">
     <parameter name="resource">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.AccentDarkBrush">
@@ -106,9 +107,11 @@
   </member>
   <member name="M:TomsToolbox.Wpf.Styles.WpfStyles.Defaults">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.Styles.WpfStyles.Defaults(System.Windows.Window)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     <parameter name="helperWindow">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>

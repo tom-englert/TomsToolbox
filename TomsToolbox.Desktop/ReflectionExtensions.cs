@@ -20,8 +20,8 @@
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
         /// <returns>The types in all assemblies.</returns>
-        [NotNull]
-        public static IEnumerable<Type> EnumerateAllTypes([NotNull] this IEnumerable<Assembly> assemblies)
+        [NotNull, ItemNotNull]
+        public static IEnumerable<Type> EnumerateAllTypes([NotNull, ItemCanBeNull] this IEnumerable<Assembly> assemblies)
         {
             Contract.Requires(assemblies != null);
             Contract.Ensures(Contract.Result<IEnumerable<Type>>() != null);
@@ -34,7 +34,7 @@
         /// </summary>
         /// <param name="assembly">The assembly. If assmbly is null, an empty list is returned.</param>
         /// <returns>The types in the assembly.</returns>
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static IEnumerable<Type> EnumerateAllTypes([CanBeNull] this Assembly assembly)
         {
             Contract.Ensures(Contract.Result<IEnumerable<Type>>() != null);
@@ -42,7 +42,7 @@
             return assembly?.GetTypes().SelectMany(GetSelfAndNestedTypes) ?? Enumerable.Empty<Type>();
         }
 
-        [NotNull]
+        [NotNull, ItemNotNull]
         private static IEnumerable<Type> GetSelfAndNestedTypes([CanBeNull] Type type)
         {
             Contract.Ensures(Contract.Result<IEnumerable<Type>>() != null);
@@ -55,7 +55,7 @@
         /// </summary>
         /// <param name="directory">The directory.</param>
         /// <returns>All types in all assemblies in the specified directory</returns>
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static IEnumerable<Type> EnumerateAllTypes([NotNull] this DirectoryInfo directory)
         {
             Contract.Requires(directory != null);
@@ -70,7 +70,7 @@
         /// <param name="directory">The directory.</param>
         /// <param name="searchPattern">The search string. The default pattern is "*", which returns all files.</param>
         /// <returns>All types in all assemblies in the specified directory</returns>
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static IEnumerable<Type> EnumerateAllTypes([NotNull] this DirectoryInfo directory, [NotNull] string searchPattern)
         {
             Contract.Requires(directory != null);

@@ -24,14 +24,14 @@
     [ContractVerification(false)] // Just wrapping inner object
     public sealed class ListCollectionViewListAdapter<T> : IObservableCollection<T>, IList
     {
-        [NotNull]
+        [NotNull, ItemCanBeNull]
         private readonly ListCollectionView _collectionView;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ListCollectionViewListAdapter{T}"/> class.
         /// </summary>
         /// <param name="collectionView">The collection view.</param>
-        public ListCollectionViewListAdapter([NotNull] ListCollectionView collectionView)
+        public ListCollectionViewListAdapter([NotNull, ItemCanBeNull] ListCollectionView collectionView)
         {
             Contract.Requires(collectionView != null);
             _collectionView = collectionView;
@@ -42,7 +42,7 @@
         /// <summary>
         /// Gets the underlying collection view.
         /// </summary>
-        [NotNull]
+        [NotNull, ItemCanBeNull]
         public ListCollectionView CollectionView
         {
             get

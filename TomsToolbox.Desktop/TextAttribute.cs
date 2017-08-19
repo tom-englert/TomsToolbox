@@ -14,6 +14,7 @@
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     public class TextAttribute : Attribute
     {
+        [CanBeNull]
         private readonly object _key;
 
         /// <summary>
@@ -51,6 +52,7 @@
         /// <summary>
         /// Gets or sets the text to be returned by the Text property.
         /// </summary>
+        [CanBeNull]
         protected string TextValue
         {
             get;

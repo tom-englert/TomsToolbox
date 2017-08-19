@@ -189,7 +189,7 @@
             ForceSubLevel(this, SubLevel);
         }
 
-        [NotNull]
+        [NotNull, ItemNotNull]
         private IEnumerable<IMapTile> SubTiles
         {
             get

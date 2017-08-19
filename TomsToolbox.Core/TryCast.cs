@@ -192,6 +192,7 @@
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public abstract class TryCastWorkerBase<TValue, TResult>
     {
+        [CanBeNull]
         private readonly TValue _value;
         private bool _isResolved;
 

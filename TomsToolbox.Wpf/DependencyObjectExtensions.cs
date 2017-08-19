@@ -93,8 +93,7 @@
         /// </summary>
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
-        [ItemNotNull]
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> VisualAncestorsAndSelf([NotNull] this DependencyObject self)
         {
             Contract.Requires(self != null);
@@ -112,7 +111,7 @@
         /// </summary>
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> VisualAncestors([NotNull] this DependencyObject self)
         {
             Contract.Requires(self != null);
@@ -127,8 +126,7 @@
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
         /// <remarks>If the start element is not in the logical tree, this method return elements from the visual tree until the first element from the logical tree is found.</remarks>
-        [ItemNotNull]
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> AncestorsAndSelf([NotNull] this DependencyObject self)
         {
             Contract.Requires(self != null);
@@ -147,7 +145,7 @@
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
         /// <remarks>If the start element is not in the logical tree, this method return elements from the visual tree until the first element from the logical tree is found.</remarks>
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> Ancestors([NotNull] this DependencyObject self)
         {
             Contract.Requires(self != null);
@@ -224,8 +222,7 @@
         /// <remarks>
         /// Uses <see cref="VisualTreeHelper.GetChildrenCount"/> and <see cref="VisualTreeHelper.GetChild"/>.
         /// </remarks>
-        [ItemNotNull]
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> VisualChildren([NotNull] this DependencyObject item)
         {
             Contract.Requires(item != null);
@@ -247,8 +244,7 @@
         /// <remarks>
         /// Uses <see cref="VisualTreeHelper.GetChildrenCount"/> and <see cref="VisualTreeHelper.GetChild"/>.
         /// </remarks>
-        [ItemNotNull]
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> VisualChildrenAndSelf([NotNull] this DependencyObject item)
         {
             Contract.Requires(item != null);
@@ -270,8 +266,7 @@
         /// <remarks>
         /// Uses <see cref="VisualTreeHelper.GetChildrenCount"/> and <see cref="VisualTreeHelper.GetChild"/>.
         /// </remarks>
-        [ItemCanBeNull]
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> VisualDescendants([NotNull] this DependencyObject item)
         {
             Contract.Requires(item != null);
@@ -296,8 +291,7 @@
         /// <remarks>
         /// Uses <see cref="VisualTreeHelper.GetChildrenCount"/> and <see cref="VisualTreeHelper.GetChild"/>.
         /// </remarks>
-        [ItemCanBeNull]
-        [NotNull]
+        [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> VisualDescendantsAndSelf([NotNull] this DependencyObject item)
         {
             Contract.Requires(item != null);

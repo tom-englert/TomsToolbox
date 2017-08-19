@@ -34,6 +34,7 @@
     [ValueConversion(typeof(object), typeof(object))]
     public class BinaryOperationConverter : ValueConverter, IMultiValueConverter
     {
+        [CanBeNull]
         private BinaryOperationProcessor _processor;
 
         /// <summary>

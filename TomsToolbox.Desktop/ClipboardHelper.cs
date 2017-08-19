@@ -34,7 +34,7 @@
         /// </summary>
         /// <returns>The parsed clipboard data as a table, or <c>null</c> if the clipboard is empty or does not contain normalized table data.</returns>
         /// <remarks>If no TEXT is present in the clipboard, CSV data is used.</remarks>
-        [CanBeNull]
+        [CanBeNull, ItemNotNull]
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public static IList<IList<string>> GetClipboardDataAsTable()
         {
@@ -44,6 +44,7 @@
             if (!string.IsNullOrEmpty(text))
                 return ParseTable(text, TextColumnSeparator);
 
+            // ReSharper disable once AssignNullToNotNullAttribute
             var csv = Clipboard.GetData(DataFormats.CommaSeparatedValue) as string;
             if (!string.IsNullOrEmpty(csv))
                 return ParseTable(csv, CsvColumnSeparator);
@@ -58,7 +59,7 @@
         /// <remarks>
         /// This method sets the TEXT (tab delimited) and CSV data. Like in Excel the CSV delimiter is either comma or semicolon, depending on the current culture.
         /// </remarks>
-        public static void SetClipboardData([CanBeNull] this IList<IList<string>> table)
+        public static void SetClipboardData([CanBeNull, ItemNotNull] this IList<IList<string>> table)
         {
             if (table == null)
             {
@@ -78,7 +79,7 @@
         }
 
         [NotNull]
-        internal static string ToTextString([NotNull] this IList<IList<string>> table)
+        private static string ToTextString([NotNull, ItemNotNull] this IList<IList<string>> table)
         {
             Contract.Requires(table != null);
             Contract.Ensures(Contract.Result<string>() != null);
@@ -87,7 +88,7 @@
         }
 
         [NotNull]
-        internal static string ToCsvString([NotNull] this IList<IList<string>> table)
+        internal static string ToCsvString([NotNull, ItemNotNull] this IList<IList<string>> table)
         {
             Contract.Requires(table != null);
             Contract.Ensures(Contract.Result<string>() != null);
@@ -96,7 +97,7 @@
         }
 
         [NotNull]
-        internal static string ToString([NotNull] this IList<IList<string>> table, char separator)
+        private static string ToString([NotNull, ItemNotNull] this IList<IList<string>> table, char separator)
         {
             Contract.Requires(table != null);
             Contract.Ensures(Contract.Result<string>() != null);
@@ -122,7 +123,7 @@
             return value;
         }
 
-        [CanBeNull]
+        [CanBeNull, ItemNotNull]
         internal static IList<IList<string>> ParseTable([NotNull] string text, char separator)
         {
             Contract.Requires(text != null);
@@ -146,12 +147,11 @@
             return table.Any(columns => columns?.Count != headerColumns?.Count) ? null : table;
         }
 
-        [NotNull]
-        internal static IList<string> ReadTableLine([NotNull] TextReader reader, char separator)
+        [NotNull, ItemNotNull]
+        private static IList<string> ReadTableLine([NotNull] TextReader reader, char separator)
         {
             Contract.Requires(reader != null);
             Contract.Ensures(Contract.Result<IList<string>>() != null);
-            // TODO: crashes CC 1.10.10126.2-rc1 Contract.Ensures(Contract.ForAll(Contract.Result<IList<string>>(), item => item != null));
 
             var columns = new List<string>();
 

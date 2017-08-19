@@ -195,7 +195,7 @@
         /// <typeparam name="T">The type of the containers.</typeparam>
         /// <param name="itemsControl">The items control.</param>
         /// <returns>The list of containers; contains <c>null</c> entries for unrealized containers (see <see cref="ItemContainerGenerator.ContainerFromIndex"/>).</returns>
-        [NotNull]
+        [NotNull, ItemCanBeNull]
         public static IEnumerable<T> GetItemContainers<T>([NotNull] this ItemsControl itemsControl)
             where T : DependencyObject
         {

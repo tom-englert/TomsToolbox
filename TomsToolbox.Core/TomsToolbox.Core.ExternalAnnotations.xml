@@ -72,14 +72,17 @@
   <member name="M:TomsToolbox.Core.CollectionExtensions.AddRange(System.Collections.IList,System.Collections.IEnumerable)">
     <parameter name="target">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="items">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.CollectionExtensions.AddRange``1(System.Collections.Generic.ICollection{``0},``0,``0,``0[])">
     <parameter name="target">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="firstItem">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
@@ -89,14 +92,17 @@
     </parameter>
     <parameter name="moreItems">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.CollectionExtensions.AddRange``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
     <parameter name="target">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="items">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.CollectionExtensions.ContainsAny(System.String,System.Char[])">
@@ -110,9 +116,11 @@
   <member name="M:TomsToolbox.Core.CollectionExtensions.ContainsAny``1(System.Collections.Generic.IEnumerable{``0},``0[])">
     <parameter name="self">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="items">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.CollectionExtensions.ContainsAny``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0},``0[])">
@@ -215,22 +223,27 @@
   <member name="M:TomsToolbox.Core.CollectionExtensions.RemoveRange(System.Collections.IList,System.Collections.IEnumerable)">
     <parameter name="target">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="items">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.CollectionExtensions.RemoveRange``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
     <parameter name="target">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="items">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.CollectionExtensions.RemoveRange``1(System.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
     <parameter name="target">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="condition">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -241,22 +254,27 @@
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="source">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.CollectionExtensions.SynchronizeWith``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.ICollection{``0})">
     <parameter name="target">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="source">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.CollectionExtensions.SynchronizeWith``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEqualityComparer{``0})">
     <parameter name="target">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="source">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="comparer">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
@@ -264,14 +282,17 @@
   </member>
   <member name="M:TomsToolbox.Core.CollectionExtensions.Take``1(System.Collections.Generic.IEnumerator{``0},System.Int32)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     <parameter name="source">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.CollectionExtensions.ToArray``2(System.Collections.Generic.ICollection{``0},System.Func{``0,``1})">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     <parameter name="items">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="selector">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -288,6 +309,9 @@
     <parameter name="items">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
+    <parameter name="comparer">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
   </member>
   <member name="M:TomsToolbox.Core.CollectionExtensions.Transpose``2(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}})">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -298,9 +322,11 @@
   <member name="M:TomsToolbox.Core.CollectionExtensions.TryAddRange``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
     <parameter name="target">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="items">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.DateTimeOperations.GetDaysOfWeek(System.Globalization.CultureInfo)">
@@ -406,6 +432,7 @@
   <member name="M:TomsToolbox.Core.Disposable.DisposeAll(System.Collections.IEnumerable)">
     <parameter name="items">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.Disposable.ReportNotDisposedObject(System.IDisposable)">
@@ -418,9 +445,11 @@
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="first">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="second">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.Enumerate.AsTuples``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1})">
@@ -428,9 +457,11 @@
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="first">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="second">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Core.EnumExtensions.CombineFlags``1(System.Collections.Generic.IEnumerable{``0})">
@@ -513,6 +544,18 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:TomsToolbox.Core.NetStandardExtensions.GetMethodInfo(System.Delegate)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="delegate">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Core.NetStandardExtensions.GetTypeInfo(System.Type)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="type">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="M:TomsToolbox.Core.ObjectExtensions.SafeCast``1(System.Object)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="value">
@@ -522,10 +565,12 @@
   <member name="M:TomsToolbox.Core.PluginModuleAttribute.#ctor(System.String[])">
     <parameter name="categories">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="P:TomsToolbox.Core.PluginModuleAttribute.Categories">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Core.PropertySupport.ExtractPropertyName``1(System.Linq.Expressions.Expression{System.Func{``0}})">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -559,6 +604,7 @@
   </member>
   <member name="M:TomsToolbox.Core.RegexExtensions.Split``1(System.Text.RegularExpressions.Regex,System.String,System.Func{System.String,System.Boolean,``0})">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     <parameter name="regex">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>

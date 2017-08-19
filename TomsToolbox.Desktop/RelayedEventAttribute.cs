@@ -112,7 +112,7 @@
             return relayMapping;
         }
 
-        internal static bool AreAllPropertiesValid([NotNull] Type sourceType, [NotNull] IEnumerable<string> propertyNames)
+        private static bool AreAllPropertiesValid([NotNull] Type sourceType, [NotNull, ItemNotNull] IEnumerable<string> propertyNames)
         {
             Contract.Requires(sourceType != null);
             Contract.Requires(propertyNames != null);

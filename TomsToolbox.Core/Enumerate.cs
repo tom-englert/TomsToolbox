@@ -23,7 +23,7 @@
         /// <remarks>If the number of elements in each collection is different, the smaller collection determines the number of enumerated items.</remarks>
         [ItemNotNull]
         [NotNull]
-        public static IEnumerable<Tuple<T1, T2>> AsTuples<T1, T2>([NotNull] IEnumerable<T1> first, [NotNull] IEnumerable<T2> second)
+        public static IEnumerable<Tuple<T1, T2>> AsTuples<T1, T2>([NotNull, ItemCanBeNull] IEnumerable<T1> first, [NotNull, ItemCanBeNull] IEnumerable<T2> second)
         {
             Contract.Requires(first != null);
             Contract.Requires(second != null);
@@ -50,7 +50,7 @@
         /// <remarks>If the number of elements in each collection is different, the smaller collection determines the number of enumerated items.</remarks>
         [ItemNotNull]
         [NotNull]
-        public static IEnumerable<Tuple<object, object>> AsTuples([NotNull] IEnumerable first, [NotNull] IEnumerable second)
+        public static IEnumerable<Tuple<object, object>> AsTuples([NotNull, ItemCanBeNull] IEnumerable first, [NotNull, ItemCanBeNull] IEnumerable second)
         {
             Contract.Requires(first != null);
             Contract.Requires(second != null);

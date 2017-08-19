@@ -1,5 +1,6 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
+    using System.Diagnostics;
     using System;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
@@ -26,6 +27,7 @@
         /// Gets or sets the multi value converter.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Use the same term as in IMultiValueConverter")]
+        [CanBeNull]
         public IMultiValueConverter MultiValueConverter
         {
             get; 
@@ -35,7 +37,7 @@
         /// <summary>
         /// Gets the list of converters.
         /// </summary>
-        [NotNull]
+        [NotNull, ItemNotNull]
         public Collection<IValueConverter> Converters
         {
             get
@@ -79,6 +81,14 @@
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new InvalidOperationException();
+        }
+
+        [ContractInvariantMethod]
+        [SuppressMessage("Microsoft.Performance", "CA1822: MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_compositeConverter != null);
         }
     }
 }

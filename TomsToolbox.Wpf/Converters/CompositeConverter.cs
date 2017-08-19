@@ -19,13 +19,13 @@
     [ValueConversion(typeof(object), typeof(object))]
     public class CompositeConverter : IValueConverter
     {
-        [NotNull]
+        [NotNull, ItemNotNull]
         private readonly Collection<IValueConverter> _converters = new Collection<IValueConverter>(new List<IValueConverter>());
 
         /// <summary>
         /// Gets the chain of converters.
         /// </summary>
-        [NotNull]
+        [NotNull, ItemNotNull]
         public Collection<IValueConverter> Converters
         {
             get

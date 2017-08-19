@@ -18,6 +18,7 @@
         /// <typeparam name="T">Return type of the function.</typeparam>
         /// <param name="func">The function.</param>
         /// <returns>The result of the function.</returns>
+        [CanBeNull]
         public static T InvokeInSeparateDomain<T>([NotNull] this Func<T> func)
         {
             Contract.Requires(func != null);
@@ -33,6 +34,7 @@
         /// <param name="func">The function.</param>
         /// <param name="arg1">The argument of the function.</param>
         /// <returns>The result of the function.</returns>
+        [CanBeNull]
         public static T InvokeInSeparateDomain<TA1, T>([NotNull] this Func<TA1, T> func, [CanBeNull] TA1 arg1)
         {
             Contract.Requires(func != null);
@@ -50,6 +52,7 @@
         /// <param name="arg1">The arguments of the function.</param>
         /// <param name="arg2">The arguments of the function.</param>
         /// <returns>The result of the function.</returns>
+        [CanBeNull]
         public static T InvokeInSeparateDomain<TA1, TA2, T>([NotNull] this Func<TA1, TA2, T> func, [CanBeNull] TA1 arg1, [CanBeNull] TA2 arg2)
         {
             Contract.Requires(func != null);
@@ -69,6 +72,7 @@
         /// <param name="arg2">The arguments of the function.</param>
         /// <param name="arg3">The arguments of the function.</param>
         /// <returns>The result of the function.</returns>
+        [CanBeNull]
         public static T InvokeInSeparateDomain<TA1, TA2, TA3, T>([NotNull] this Func<TA1, TA2, TA3, T> func, [CanBeNull] TA1 arg1, [CanBeNull] TA2 arg2, [CanBeNull] TA3 arg3)
         {
             Contract.Requires(func != null);
@@ -90,6 +94,7 @@
         /// <param name="arg3">The arguments of the function.</param>
         /// <param name="arg4">The arguments of the function.</param>
         /// <returns>The result of the function.</returns>
+        [CanBeNull]
         public static T InvokeInSeparateDomain<TA1, TA2, TA3, TA4, T>([NotNull] this Func<TA1, TA2, TA3, TA4, T> func, [CanBeNull] TA1 arg1, [CanBeNull] TA2 arg2, [CanBeNull] TA3 arg3, [CanBeNull] TA4 arg4)
         {
             Contract.Requires(func != null);
@@ -113,7 +118,8 @@
             return (T)appDomain.CreateInstanceAndUnwrap(typeof(T).Assembly.FullName, typeof(T).FullName);
         }
 
-        private static T InternalInvokeInSeparateDomain<T>([NotNull] Delegate func, [NotNull] params object[] args)
+        [CanBeNull]
+        private static T InternalInvokeInSeparateDomain<T>([NotNull] Delegate func, [NotNull, ItemCanBeNull] params object[] args)
         {
             Contract.Requires(func != null);
             Contract.Requires(args != null);
@@ -145,7 +151,7 @@
         {
             [CanBeNull]
             [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-            public object Invoke([NotNull] MethodInfo method, [CanBeNull] object target, [CanBeNull] object[] args)
+            public object Invoke([NotNull] MethodInfo method, [CanBeNull] object target, [CanBeNull, ItemCanBeNull] object[] args)
             {
                 Contract.Requires(method != null);
                 return method.Invoke(target, args);

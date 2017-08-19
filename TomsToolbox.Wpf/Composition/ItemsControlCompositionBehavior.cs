@@ -91,7 +91,7 @@
             }
         }
 
-        private static void ApplyContext([NotNull] IEnumerable composables, [CanBeNull] object context)
+        private static void ApplyContext([NotNull, ItemCanBeNull] IEnumerable composables, [CanBeNull] object context)
         {
             Contract.Requires(composables != null);
 
@@ -125,7 +125,7 @@
             base.OnDetaching();
         }
 
-        private void AttachSelectables([NotNull] IEnumerable viewModels)
+        private void AttachSelectables([NotNull, ItemCanBeNull] IEnumerable viewModels)
         {
             Contract.Requires(viewModels != null);
 
@@ -138,7 +138,7 @@
             }
         }
 
-        private void DetachSelectables([CanBeNull] IEnumerable viewModels)
+        private void DetachSelectables([CanBeNull, ItemCanBeNull] IEnumerable viewModels)
         {
             if (viewModels == null)
                 return;

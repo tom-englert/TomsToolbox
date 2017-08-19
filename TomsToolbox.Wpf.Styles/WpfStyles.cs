@@ -24,7 +24,7 @@
         /// </summary>
         /// <param name="helperWindow">A helper window used to access global theme resources.</param>
         [ContractVerification(false)]
-        [NotNull]
+        [NotNull, ItemCanBeNull]
         public static ResourceDictionary Defaults([NotNull] Window helperWindow)
         {
             Contract.Requires(helperWindow != null);
@@ -59,7 +59,7 @@
         /// <remarks>
         /// This method will created a temporary, hidden helper window.
         /// </remarks>
-        [NotNull]
+        [NotNull, ItemCanBeNull]
         public static ResourceDictionary Defaults()
         {
             Contract.Ensures(Contract.Result<ResourceDictionary>() != null);

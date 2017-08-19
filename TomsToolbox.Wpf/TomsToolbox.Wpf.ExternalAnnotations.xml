@@ -218,6 +218,7 @@
   </member>
   <member name="M:TomsToolbox.Wpf.Composition.DataTemplateManager.CreateDynamicDataTemplates(System.ComponentModel.Composition.Hosting.ExportProvider)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     <parameter name="exportProvider">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -318,17 +319,28 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="P:TomsToolbox.Wpf.Composition.ImportExtension.ContractName">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
   <member name="P:TomsToolbox.Wpf.Composition.ImportExtension.MemberType">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
   <member name="P:TomsToolbox.Wpf.Composition.ImportExtension.Setters">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
   </member>
   <member name="P:TomsToolbox.Wpf.Composition.IVisualCompositionBehavior.CompositionContext">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="P:TomsToolbox.Wpf.Composition.IVisualCompositionBehavior.RegionId">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.IVisualCompositionMetadata.Role">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.IVisualCompositionMetadata.TargetRegions">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.Composition.ModuleResourceUriAttribute.#ctor(System.String)">
     <parameter name="uri">
@@ -385,6 +397,7 @@
   <member name="M:TomsToolbox.Wpf.Composition.VisualCompositionExportAttribute.#ctor(System.String[])">
     <parameter name="targetRegions">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="P:TomsToolbox.Wpf.Composition.VisualCompositionExportAttribute.TargetRegions">
@@ -538,6 +551,7 @@
   </member>
   <member name="P:TomsToolbox.Wpf.Converters.AggregatingMultiValueConverter.Converters">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
   </member>
   <member name="F:TomsToolbox.Wpf.Converters.ArithmeticMultiValueConverter.Average">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -622,6 +636,7 @@
   </member>
   <member name="P:TomsToolbox.Wpf.Converters.CompositeConverter.Converters">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.Converters.CompositeMultiValueConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
@@ -640,6 +655,10 @@
   </member>
   <member name="P:TomsToolbox.Wpf.Converters.CompositeMultiValueConverter.Converters">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Converters.CompositeMultiValueConverter.MultiValueConverter">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.Converters.ConfirmedCommandConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -684,12 +703,14 @@
   </member>
   <member name="M:TomsToolbox.Wpf.Converters.EnumToValuesConverter.Convert(System.Type)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="type">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.Converters.EnumToValuesConverter.Convert(System.Type,System.String)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="type">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -723,6 +744,16 @@
   <member name="M:TomsToolbox.Wpf.Converters.MultiValueConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
     <parameter name="value">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="targetTypes">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="parameter">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="culture">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.Converters.ObjectToAttributeConverter`1.InternalConvert(System.Object,System.Type,System.Func{`0,System.String})">
@@ -976,13 +1007,14 @@
   </member>
   <member name="M:TomsToolbox.Wpf.DependencyObjectExtensions.Ancestors(System.Windows.DependencyObject)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="self">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.DependencyObjectExtensions.AncestorsAndSelf(System.Windows.DependencyObject)">
-    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="self">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -1036,41 +1068,42 @@
   </member>
   <member name="M:TomsToolbox.Wpf.DependencyObjectExtensions.VisualAncestors(System.Windows.DependencyObject)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="self">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.DependencyObjectExtensions.VisualAncestorsAndSelf(System.Windows.DependencyObject)">
-    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="self">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.DependencyObjectExtensions.VisualChildren(System.Windows.DependencyObject)">
-    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="item">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.DependencyObjectExtensions.VisualChildrenAndSelf(System.Windows.DependencyObject)">
-    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="item">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.DependencyObjectExtensions.VisualDescendants(System.Windows.DependencyObject)">
-    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="item">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.DependencyObjectExtensions.VisualDescendantsAndSelf(System.Windows.DependencyObject)">
-    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="item">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -1184,6 +1217,7 @@
   </member>
   <member name="M:TomsToolbox.Wpf.ItemsControlExtensions.GetItemContainers``1(System.Windows.Controls.ItemsControl)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     <parameter name="itemsControl">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -1216,16 +1250,19 @@
   <member name="M:TomsToolbox.Wpf.ListCollectionViewListAdapter`1.#ctor(System.Windows.Data.ListCollectionView)">
     <parameter name="collectionView">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="P:TomsToolbox.Wpf.ListCollectionViewListAdapter`1.CollectionView">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
   </member>
   <member name="P:TomsToolbox.Wpf.ListCollectionViewListAdapter`1.Item(System.Int32)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.MultiSelectorExtensions.GetSelectionBinding(System.Windows.Controls.Primitives.Selector)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     <parameter name="obj">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -1239,6 +1276,7 @@
     </parameter>
     <parameter name="value">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.NullCommand.CanExecute(System.Object)">
@@ -1297,6 +1335,7 @@
     </parameter>
     <parameter name="others">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.PresentationFrameworkExtensions.ProcessMessages(System.Windows.Media.Visual)">
@@ -1438,12 +1477,14 @@
   </member>
   <member name="M:TomsToolbox.Wpf.StyleBindings.GetBehaviors(System.Windows.DependencyObject)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="obj">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.StyleBindings.GetGroupDescriptions(System.Windows.DependencyObject)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="obj">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -1469,6 +1510,7 @@
   </member>
   <member name="M:TomsToolbox.Wpf.StyleBindings.GetTriggers(System.Windows.DependencyObject)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="obj">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -1491,6 +1533,7 @@
     </parameter>
     <parameter name="value">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.StyleBindings.SetGroupDescriptions(System.Windows.DependencyObject,System.Collections.Generic.ICollection{System.ComponentModel.GroupDescription})">
@@ -1499,6 +1542,7 @@
     </parameter>
     <parameter name="value">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.StyleBindings.SetGroupStyle(System.Windows.DependencyObject,System.Windows.Controls.GroupStyle)">
@@ -1532,6 +1576,7 @@
     </parameter>
     <parameter name="value">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="F:TomsToolbox.Wpf.StyleBindings.TriggersProperty">

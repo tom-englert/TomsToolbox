@@ -47,7 +47,7 @@
         // ReSharper restore AssignNullToNotNullAttribute
 
         private readonly BinaryOperation _operation;
-        [NotNull]
+        [NotNull, ItemNotNull]
         private readonly string[] _operationMethodNames;
         [NotNull]
         private readonly Func<object, object, object> _operationMethod;
@@ -180,7 +180,7 @@
         }
 
         [CanBeNull]
-        private static object ApplyOperation([NotNull] MethodInfo method, [NotNull] Type targetType, [CanBeNull] object value1, object value2)
+        private static object ApplyOperation([NotNull] MethodInfo method, [NotNull] Type targetType, [CanBeNull] object value1, [CanBeNull] object value2)
         {
             Contract.Requires(method != null);
             Contract.Requires(targetType != null);
@@ -192,8 +192,7 @@
                     return method.Invoke(null, new[] { value1, value2 });
                 }
 
-                var parameterString = value2 as string;
-                if (parameterString != null)
+                if (value2 is string parameterString)
                 {
                     var typeConverter = TypeDescriptor.GetConverter(targetType);
 
@@ -261,6 +260,16 @@
         {
             Contract.Invariant(_operationMethodNames != null);
             Contract.Invariant(_operationMethod != null);
+            Contract.Invariant(_additionMethod != null);
+            Contract.Invariant(_subtractionMethod != null);
+            Contract.Invariant(_multiplyMethod != null);
+            Contract.Invariant(_divisionMethod != null);
+            Contract.Invariant(_equalityMethod != null);
+            Contract.Invariant(_inequalityMethod != null);
+            Contract.Invariant(_greaterThanMethod != null);
+            Contract.Invariant(_lessThanMethod != null);
+            Contract.Invariant(_greaterThanOrEqualMethod != null);
+            Contract.Invariant(_lessThanOrEqualMethod != null);
         }
     }
 }

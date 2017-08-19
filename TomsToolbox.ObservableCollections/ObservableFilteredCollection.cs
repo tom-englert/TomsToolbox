@@ -28,10 +28,11 @@
     /// </remarks>
     public class ObservableFilteredCollection<T> : ReadOnlyObservableCollectionAdapter<T, ObservableCollection<T>>
     {
+        [CanBeNull]
         private readonly IWeakEventListener _collectionChangedWeakEvent;
         [NotNull]
         private readonly Func<T, bool> _filter;
-        [NotNull]
+        [NotNull, ItemNotNull]
         private readonly string[] _liveTrackingProperties;
 
         /// <summary>
@@ -40,7 +41,7 @@
         /// <param name="sourceCollection">The source collection. This instance will not hold a reference to the source collection.</param>
         /// <param name="filter">The filter.</param>
         /// <param name="liveTrackingProperties">The live tracking properties. Whenever one of these properties in any item changes, the filter is reevaluated for the item.</param>
-        public ObservableFilteredCollection([NotNull] IEnumerable sourceCollection, [NotNull] Func<T, bool> filter, [NotNull] params string[] liveTrackingProperties)
+        public ObservableFilteredCollection([NotNull, ItemCanBeNull] IEnumerable sourceCollection, [NotNull] Func<T, bool> filter, [NotNull, ItemNotNull] params string[] liveTrackingProperties)
         // ReSharper disable PossibleMultipleEnumeration
             : base(new ObservableCollection<T>(sourceCollection.Cast<T>().Where(filter)))
         {
@@ -75,9 +76,11 @@
         }
 
         [ContractVerification(false)]
-        private static void OnCollectionChanged([NotNull] ObservableFilteredCollection<T> self, [NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+        private static void OnCollectionChanged([NotNull, ItemCanBeNull] ObservableFilteredCollection<T> self, [NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
             Contract.Requires(self != null);
+            Contract.Requires(sender != null);
+            Contract.Requires(e != null);
 
             self.SourceCollection_CollectionChanged(sender, e);
         }
@@ -134,7 +137,7 @@
             }
         }
 
-        private void AddItems([CanBeNull] IEnumerable<T> newItems)
+        private void AddItems([CanBeNull, ItemCanBeNull] IEnumerable<T> newItems)
         {
             if (newItems == null)
                 return;
@@ -156,7 +159,7 @@
                 eventSource.PropertyChanged += Item_PropertyChanged;
         }
 
-        private void RemoveItems([CanBeNull] IEnumerable<T> oldItems)
+        private void RemoveItems([CanBeNull, ItemCanBeNull] IEnumerable<T> oldItems)
         {
             if (oldItems == null)
                 return;

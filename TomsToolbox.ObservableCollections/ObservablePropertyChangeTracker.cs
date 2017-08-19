@@ -45,7 +45,7 @@
         /// Initializes a new instance of the <see cref="ObservablePropertyChangeTracker{T}"/> class.
         /// </summary>
         /// <param name="collection">The collection.</param>
-        public ObservablePropertyChangeTracker([NotNull] IObservableCollection<T> collection)
+        public ObservablePropertyChangeTracker([NotNull, ItemNotNull] IObservableCollection<T> collection)
             : this(collection, collection)
         {
             Contract.Requires(collection != null);
@@ -55,7 +55,7 @@
         /// Initializes a new instance of the <see cref="ObservablePropertyChangeTracker{T}"/> class.
         /// </summary>
         /// <param name="collection">The collection.</param>
-        public ObservablePropertyChangeTracker([NotNull] ObservableCollection<T> collection)
+        public ObservablePropertyChangeTracker([NotNull, ItemNotNull] ObservableCollection<T> collection)
             : this(collection, collection)
         {
             Contract.Requires(collection != null);
@@ -65,7 +65,7 @@
         /// Initializes a new instance of the <see cref="ObservablePropertyChangeTracker{T}"/> class.
         /// </summary>
         /// <param name="collection">The collection.</param>
-        public ObservablePropertyChangeTracker([NotNull] ReadOnlyObservableCollection<T> collection)
+        public ObservablePropertyChangeTracker([NotNull, ItemNotNull] ReadOnlyObservableCollection<T> collection)
             : this(collection, collection)
         {
             Contract.Requires(collection != null);
@@ -76,7 +76,7 @@
         /// </summary>
         public event EventHandler<PropertyChangedEventArgs> ItemPropertyChanged;
 
-        internal ObservablePropertyChangeTracker([NotNull] IList<T> items, [NotNull] INotifyCollectionChanged eventSource)
+        internal ObservablePropertyChangeTracker([NotNull, ItemNotNull] IList<T> items, [NotNull] INotifyCollectionChanged eventSource)
         {
             Contract.Requires(items != null);
             Contract.Requires(eventSource != null);

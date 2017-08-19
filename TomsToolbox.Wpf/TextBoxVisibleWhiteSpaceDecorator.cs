@@ -65,8 +65,9 @@
         private readonly AdornerDecorator _adornerDecorator = new AdornerDecorator { ClipToBounds = true };
         [NotNull]
         private readonly AdornerLayer _adornerLayer;
+        [CanBeNull]
         private ScrollViewer _scrollViewer;
-        [NotNull]
+        [NotNull, ItemNotNull]
         private IList<TextAdorner> _adorners = new TextAdorner[0];
 
         /// <summary>

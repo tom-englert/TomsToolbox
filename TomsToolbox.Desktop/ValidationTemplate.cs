@@ -112,7 +112,7 @@
         /// </summary>
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
-        private void RaiseErrorsChanged(string propertyName)
+        private void RaiseErrorsChanged([CanBeNull] string propertyName)
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }

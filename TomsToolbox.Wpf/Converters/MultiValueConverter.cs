@@ -40,7 +40,7 @@
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
         /// <exception cref="System.InvalidOperationException">ConvertBack is not supported by this converter.</exception>
-        protected virtual object[] ConvertBack([NotNull] object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        protected virtual object[] ConvertBack([NotNull] object value, [CanBeNull, ItemCanBeNull] Type[] targetTypes, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             Contract.Requires(value != null);
 
@@ -67,7 +67,6 @@
             }
         }
 
-        [CanBeNull]
         object[] IMultiValueConverter.ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             if (value == null)

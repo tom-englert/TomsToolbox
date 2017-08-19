@@ -25,14 +25,14 @@
     [ContractVerification(false)] // Just forwarding the list....
     public class ObservableListAdapter<T> : IList, INotifyCollectionChanged, INotifyPropertyChanged
     {
-        [NotNull]
+        [NotNull, ItemCanBeNull]
         private readonly IList<T> _source;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObservableListAdapter{T}"/> class.
         /// </summary>
         /// <param name="source">The source.</param>
-        public ObservableListAdapter([NotNull] IList<T> source)
+        public ObservableListAdapter([NotNull, ItemCanBeNull] IList<T> source)
         {
             Contract.Requires(source != null);
 

@@ -21,7 +21,7 @@
         /// Initializes a new instance of the <see cref="PluginModuleAttribute"/> class.
         /// </summary>
         /// <param name="categories">The categories.</param>
-        public PluginModuleAttribute([NotNull] params string[] categories)
+        public PluginModuleAttribute([NotNull, ItemNotNull] params string[] categories)
         {
             Contract.Requires(categories != null);
             Categories = categories;
@@ -31,7 +31,7 @@
         /// Gets the categories for this module.
         /// </summary>
         [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "Can't use anything else in attributes. Property must match constructor parameter.")]
-        [NotNull]
+        [NotNull, ItemNotNull]
         public string[] Categories
         {
             get;
