@@ -1,4 +1,5 @@
-﻿namespace TomsToolbox.Desktop.Tests
+﻿// ReSharper disable All
+namespace TomsToolbox.Desktop.Tests
 {
     using System;
     using System.Collections.Generic;

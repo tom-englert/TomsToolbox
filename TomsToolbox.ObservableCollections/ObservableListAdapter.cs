@@ -101,7 +101,7 @@
         /// The position into which the new element was inserted, or -1 to indicate that the item was not inserted into the collection,
         /// </returns>
         /// <param name="value">The object to add to the <see cref="T:System.Collections.IList"/>. </param><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
-        public int Add([CanBeNull] object value)
+        public int Add(object value)
         {
             _source.Add((T)value);
             return _source.Count - 1;
@@ -114,7 +114,7 @@
         /// true if the <see cref="T:System.Object"/> is found in the <see cref="T:System.Collections.IList"/>; otherwise, false.
         /// </returns>
         /// <param name="value">The object to locate in the <see cref="T:System.Collections.IList"/>. </param>
-        public bool Contains([CanBeNull] object value)
+        public bool Contains(object value)
         {
             return _source.Contains((T)value);
         }

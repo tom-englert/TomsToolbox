@@ -15,7 +15,7 @@
             {
                 using (var thread1 = new ForegroundThreadWithDispatcher("Test1", System.Threading.ApartmentState.MTA))
                 {
-                    thread1.Dispatcher.Invoke(() => { throw new TestException(); });
+                    thread1.Dispatcher.Invoke(() => throw new TestException());
                 }
 
                 Assert.Fail("We should never get here");
@@ -34,7 +34,7 @@
                 using (var thread1 = new ForegroundThreadWithDispatcher("Test1", System.Threading.ApartmentState.MTA))
                 {
                     var t = thread1;
-                    thread1.Dispatcher.Invoke(() => t.Invoke(() => { throw new TestException(); }));
+                    thread1.Dispatcher.Invoke(() => t.Invoke(() => throw new TestException()));
                 }
 
                 Assert.Fail("We should never get here");

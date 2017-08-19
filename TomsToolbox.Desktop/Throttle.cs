@@ -53,7 +53,7 @@
             _timer.Start();
         }
 
-        private void Timer_Tick(object sender, EventArgs eventArgs)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             _timer.Stop();
             _target();

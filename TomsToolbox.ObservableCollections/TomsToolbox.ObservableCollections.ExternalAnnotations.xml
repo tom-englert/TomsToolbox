@@ -7,18 +7,21 @@
     </parameter>
     <parameter name="singleItem">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.ObservableCollections.ObservableCompositeCollection.FromSingleItem``1(``0)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="singleItem">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.ObservableCollections.ObservableCompositeCollection.FromSingleItemAndList``2(``0,System.Collections.Generic.IList{``1})">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="singleItem">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
     <parameter name="list">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -116,16 +119,6 @@
   <member name="M:TomsToolbox.ObservableCollections.ObservableListAdapter`1.#ctor(System.Collections.Generic.IList{`0})">
     <parameter name="source">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.ObservableCollections.ObservableListAdapter`1.Add(System.Object)">
-    <parameter name="value">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.ObservableCollections.ObservableListAdapter`1.Contains(System.Object)">
-    <parameter name="value">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.ObservableCollections.ObservableListAdapter`1.IndexOf(System.Object)">

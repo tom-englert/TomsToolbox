@@ -2,6 +2,7 @@
 <assembly name="TomsToolbox.Wpf">
   <member name="F:TomsToolbox.Wpf.BindingErrorTracer.IgnoredErrors">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.BindingErrorTracer.Start(System.Action{System.String})">
     <parameter name="errorCallback">
@@ -323,6 +324,12 @@
   <member name="P:TomsToolbox.Wpf.Composition.ImportExtension.Setters">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="P:TomsToolbox.Wpf.Composition.IVisualCompositionBehavior.CompositionContext">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.IVisualCompositionBehavior.RegionId">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Wpf.Composition.ModuleResourceUriAttribute.#ctor(System.String)">
     <parameter name="uri">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -347,9 +354,6 @@
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="P:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.CompositionContext">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
   <member name="P:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.CompositionContextBinding">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
@@ -371,9 +375,6 @@
     <parameter name="item">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.RegionId">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="P:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.RegionIdBinding">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
@@ -477,11 +478,6 @@
   </member>
   <member name="F:TomsToolbox.Wpf.Controls.Map.OffsetProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Controls.Map.OnPreviewMouseMove(System.Windows.Input.MouseEventArgs)">
-    <parameter name="e">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
   </member>
   <member name="P:TomsToolbox.Wpf.Controls.Map.Viewport">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
@@ -1142,9 +1138,6 @@
   <member name="F:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior.AreAllFilesSelectedProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
-  <member name="M:TomsToolbox.Wpf.Interactivity.MapPanBehavior.CreateInstanceCore">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
   <member name="F:TomsToolbox.Wpf.Interactivity.MapZoomBehavior.MouseWheelIncrementProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
@@ -1227,16 +1220,6 @@
   </member>
   <member name="P:TomsToolbox.Wpf.ListCollectionViewListAdapter`1.CollectionView">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.ListCollectionViewListAdapter`1.Contains(`0)">
-    <parameter name="item">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.ListCollectionViewListAdapter`1.IndexOf(`0)">
-    <parameter name="item">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
   </member>
   <member name="P:TomsToolbox.Wpf.ListCollectionViewListAdapter`1.Item(System.Int32)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
@@ -1383,6 +1366,9 @@
     <parameter name="propertyPath">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
+  </member>
+  <member name="P:TomsToolbox.Wpf.PropertyBinding`1.Value">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.PropertyBindingValueChangedEventArgs`1.#ctor(`0,`0)">
     <parameter name="oldValue">
@@ -1653,6 +1639,40 @@
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
   <member name="P:TomsToolbox.Wpf.WindowCommands.Restore">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.XamlExtensions.ColumnStyles.DefaultColumnStylesProperty">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Wpf.XamlExtensions.ColumnStyles.GetDefaultColumnStyles(System.Windows.Controls.DataGrid)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <parameter name="dataGrid">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.XamlExtensions.ColumnStyles.SetDefaultColumnStyles(System.Windows.Controls.DataGrid,TomsToolbox.Wpf.XamlExtensions.DataGridColumnStyleCollection)">
+    <parameter name="dataGrid">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="value">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Wpf.XamlExtensions.DataGridColumnStyle.ColumnType">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.XamlExtensions.DataGridColumnStyle.EditingElementStyle">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.XamlExtensions.DataGridColumnStyle.EditingElementStyleProperty">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.XamlExtensions.DataGridColumnStyle.ElementStyle">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.XamlExtensions.DataGridColumnStyle.ElementStyleProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.XamlExtensions.DataTemplate.GetRole(System.Windows.FrameworkElement)">

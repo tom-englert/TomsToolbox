@@ -235,9 +235,6 @@
             for (var i = 0; i < numberOfChildren; i++)
             {
                 var child = VisualTreeHelper.GetChild(item, i);
-                if (child == null)
-                    continue;
-
                 yield return child;
             }
         }

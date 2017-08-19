@@ -151,6 +151,7 @@
             {
                 Contract.Ensures(Contract.Result<IEqualityComparer<TKey>>() != null);
 
+                // ReSharper disable once AssignNullToNotNullAttribute
                 return _items.Comparer;
             }
         }

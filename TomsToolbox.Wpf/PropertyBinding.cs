@@ -66,6 +66,7 @@
         /// <summary>
         /// Gets or sets the value.
         /// </summary>
+        [CanBeNull]
         public T Value
         {
             get => _bindingHelper.GetValue<T>(BindingHelper.ValueProperty);

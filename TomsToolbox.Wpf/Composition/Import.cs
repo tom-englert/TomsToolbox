@@ -47,8 +47,10 @@ namespace TomsToolbox.Wpf.Composition
             DependencyProperty.RegisterAttached("DataContext", typeof(Type), typeof(Import), new FrameworkPropertyMetadata(null, DataContext_Changed));
 
 
-        private static void DataContext_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void DataContext_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            Contract.Requires(d != null);
+
             var behaviors = Interaction.GetBehaviors(d);
             Contract.Assume(behaviors != null);
 

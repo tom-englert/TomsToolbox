@@ -58,7 +58,7 @@
 
                 exportedItem = exports
                     .Where(item => DataTemplateManager.RoleEquals(item.Metadata?.Role, role))
-                    .Select(item => GetTarget(item?.Value))
+                    .Select(item => GetTarget(item.Value))
                     .FirstOrDefault();
             }
 

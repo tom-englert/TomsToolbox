@@ -1,6 +1,5 @@
 ﻿namespace TomsToolbox.Wpf
 {
-    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -182,7 +181,6 @@
             if (newGroupStyles != null)
             {
                 groupStyle.AddRange(newGroupStyles);
-                return;
             }
         }
 

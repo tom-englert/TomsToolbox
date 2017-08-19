@@ -5,7 +5,9 @@
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
-
+#if NETSTANDARD1_0
+    using System.Reflection;
+#endif
     using JetBrains.Annotations;
 
     /// <summary>
@@ -78,13 +80,17 @@
         /// </returns>
         /// <param name="x">The first object of type <typeparamref name="T"/> to compare.</param>
         /// <param name="y">The second object of type <typeparamref name="T"/> to compare.</param>
-        public bool Equals(T x, T y)
+        public bool Equals([CanBeNull] T x, [CanBeNull] T y)
         {
-            if (ReferenceEquals(x, null))
-                return ReferenceEquals(y, null);
+            // ReSharper disable once PossibleNullReferenceException
+            if (!typeof(T).GetTypeInfo().IsValueType)
+            {
+                if (ReferenceEquals(x, null))
+                    return ReferenceEquals(y, null);
 
-            if (ReferenceEquals(y, null))
-                return false;
+                if (ReferenceEquals(y, null))
+                    return false;
+            }
 
             return _comparer(x, y);
         }
@@ -97,12 +103,17 @@
         /// </returns>
         /// <param name="obj">The <see cref="T:System.Object"/> for which a hash code is to be returned.</param>
         /// <exception cref="T:System.ArgumentNullException">The type of <paramref name="obj"/> is a reference type and <paramref name="obj"/> is null.</exception>
-        public int GetHashCode(T obj)
+        public int GetHashCode([CanBeNull] T obj)
         {
-            if (ReferenceEquals(obj, null))
-                return 0;
+            // ReSharper disable All
+            if (!typeof(T).GetTypeInfo().IsValueType)
+            {
+                if (ReferenceEquals(obj, null))
+                    return 0;
+            }
 
             return _hashCodeGenerator(obj);
+            // ReSharper enable All
         }
 
         [ContractInvariantMethod, UsedImplicitly]

@@ -1,10 +1,10 @@
-﻿namespace TomsToolbox.Core
+﻿#if !NETSTANDARD1_0
+
+namespace TomsToolbox.Core
 {
     // ReSharper disable All
 #pragma warning disable CCRSI_NotNullForContract // Element with not-null contract does not have a corresponding [NotNull] attribute.
 #pragma warning disable CCRSI_ContractForNotNull // Element with not-null contract does not have a corresponding [NotNull] attribute.
-
-#if !NETSTANDARD1_0
 
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -46,5 +46,6 @@
             return type;
         }
     }
-#endif
 }
+
+#endif

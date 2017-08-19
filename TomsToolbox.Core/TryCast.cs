@@ -1,7 +1,9 @@
 ﻿namespace TomsToolbox.Core
 {
     using System;
+#if !PORTABLE && !NETSTANDARD1_0
     using System.ComponentModel;
+#endif
     using System.Diagnostics.Contracts;
 
     using JetBrains.Annotations;

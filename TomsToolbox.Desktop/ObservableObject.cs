@@ -29,14 +29,17 @@
         , INotifyDataErrorInfo
 #endif
     {
-        [NotNull] private static readonly AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>> _dependencyMappingCache = new AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>>(PropertyDependencyAttribute.CreateDependencyMapping);
-        [NonSerialized]
+        [NotNull]
+        private static readonly AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>> _dependencyMappingCache = new AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>>(PropertyDependencyAttribute.CreateDependencyMapping);
+        [NonSerialized, CanBeNull]
         private IDictionary<string, IEnumerable<string>> _dependencyMapping;
 
-        [NotNull] private static readonly AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>> _relayMappingCache = new AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>>(RelayedEventAttribute.CreateRelayMapping);
-        [NonSerialized]
+        [NotNull]
+        private static readonly AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>> _relayMappingCache = new AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>>(RelayedEventAttribute.CreateRelayMapping);
+        [NonSerialized, CanBeNull]
         private IDictionary<Type, IDictionary<string, string>> _relayMapping;
-        [NonSerialized]
+
+        [NonSerialized, CanBeNull]
         private Dictionary<Type, INotifyPropertyChanged> _eventSources;
 
         /// <summary>
@@ -227,7 +230,7 @@
             Contract.Requires(!string.IsNullOrEmpty(propertyName));
             Contract.Requires(changeCallback != null);
 
-            return SetProperty<T>(ref backingField, value, propertyName, changeCallback);
+            return SetProperty(ref backingField, value, propertyName, changeCallback);
         }
 
         /// <summary>

@@ -3,6 +3,8 @@
     using System.Diagnostics.Contracts;
     using System.Windows.Interactivity;
 
+    using JetBrains.Annotations;
+
     using TomsToolbox.Wpf.Controls;
 
     /// <summary>
@@ -26,11 +28,12 @@
             map.ManipulationDelta += Map_ManipulationDelta;
         }
 
-        private void Map_ManipulationDelta(object sender, System.Windows.Input.ManipulationDeltaEventArgs e)
+        private void Map_ManipulationDelta([NotNull] object sender, [NotNull] System.Windows.Input.ManipulationDeltaEventArgs e)
         {
             var map = AssociatedObject;
             Contract.Assume(map != null);
 
+            // ReSharper disable once PossibleNullReferenceException
             map.Center += e.DeltaManipulation.Translation;
         }
     }

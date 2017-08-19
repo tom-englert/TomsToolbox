@@ -1,4 +1,5 @@
-﻿namespace TomsToolbox.ObservableCollections.Tests
+﻿// ReSharper disable All
+namespace TomsToolbox.ObservableCollections.Tests
 {
     using System;
     using System.Collections.ObjectModel;

@@ -20,8 +20,8 @@
         /// The errors to be ignored during error handling.
         /// </summary>
         [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
-        [NotNull]
-        public static IList<Regex> IgnoredErrors = new List<Regex>
+        [NotNull, ItemNotNull]
+        public static readonly IList<Regex> IgnoredErrors = new List<Regex>
         {
             // There are no more validation errors, but Validation.HasError is still true!
             new Regex(@"Cannot get 'Item\[\]' value \(type 'ValidationError'\) from '\(Validation.Errors\)' \(type 'ReadOnlyObservableCollection`1'\)."),
@@ -104,7 +104,7 @@
 
                 try
                 {
-                    if (IgnoredErrors.Any(err => err?.Match(_buffer).Success == true))
+                    if (IgnoredErrors.Any(err => err.Match(_buffer).Success))
                         return;
 
                     _errorCallback(_buffer);

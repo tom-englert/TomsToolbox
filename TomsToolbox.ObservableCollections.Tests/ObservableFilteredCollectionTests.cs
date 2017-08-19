@@ -1,4 +1,5 @@
-﻿namespace TomsToolbox.ObservableCollections.Tests
+﻿// ReSharper disable All
+namespace TomsToolbox.ObservableCollections.Tests
 {
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
@@ -19,9 +20,7 @@
             var target = new ObservableFilteredCollection<int>(source, s => (s & 1) != 0);
 
             NotifyCollectionChangedEventArgs lastEventArgs = null;
-            NotifyCollectionChangedEventHandler callback = (_, e) => lastEventArgs = e;
-
-            target.CollectionChanged += callback;
+            target.CollectionChanged += (_, e) => lastEventArgs = e;
 
             source.Remove(2);
             Assert.IsTrue(target.SequenceEqual(new[] { 1, 3, 5, 7, 9 }));

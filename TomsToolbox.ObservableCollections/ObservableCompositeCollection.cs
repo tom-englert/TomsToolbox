@@ -28,7 +28,7 @@
         /// <param name="singleItem">The first single item in the collection</param>
         /// <returns>A new <see cref="ObservableCompositeCollection{T}"/> containing one fixed list with one single item.</returns>
         [NotNull]
-        public static ObservableCompositeCollection<T> FromSingleItem<T>([CanBeNull] T singleItem)
+        public static ObservableCompositeCollection<T> FromSingleItem<T>([CanBeNull][NotNull] T singleItem)
         {
             Contract.Requires(!ReferenceEquals(singleItem, null));
             Contract.Ensures(Contract.Result<ObservableCompositeCollection<T>>() != null);
@@ -45,7 +45,7 @@
         /// <param name="list">The list to add after the single item.</param>
         /// <returns>A new <see cref="ObservableCompositeCollection{T}"/> containing one fixed list with the single item plus all items from the list.</returns>
         [NotNull]
-        public static ObservableCompositeCollection<T> FromSingleItemAndList<T, TItem>([CanBeNull] T singleItem, [NotNull] IList<TItem> list)
+        public static ObservableCompositeCollection<T> FromSingleItemAndList<T, TItem>([CanBeNull][NotNull] T singleItem, [NotNull] IList<TItem> list)
             where TItem : T
         {
             Contract.Requires(list != null);
@@ -66,7 +66,7 @@
         /// <param name="singleItem">The last single item in the collection</param>
         /// <returns>A new <see cref="ObservableCompositeCollection{T}"/> containing all items from the list plus one fixed list with the single item at the end.</returns>
         [NotNull]
-        public static ObservableCompositeCollection<T> FromListAndSingleItem<TItem, T>([NotNull] IList<TItem> list, [CanBeNull] T singleItem)
+        public static ObservableCompositeCollection<T> FromListAndSingleItem<TItem, T>([NotNull] IList<TItem> list, [CanBeNull][NotNull] T singleItem)
             where TItem : T
         {
             Contract.Requires(list != null);
@@ -159,12 +159,12 @@
             #region IList<IList<T>> Members
 
             [ContractVerification(false)] // Just forwarding...
-            public int IndexOf([CanBeNull] IList<T> item)
+            public int IndexOf(IList<T> item)
             {
                 return _parts.IndexOf(item);
             }
 
-            public void Insert(int index, [NotNull] IList<T> item)
+            public void Insert(int index, IList<T> item)
             {
                 if (item == null)
                     throw new ArgumentNullException(nameof(item));
@@ -210,7 +210,7 @@
                 _owner.ContentCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, (IList)part, offset));
             }
 
-            [NotNull]
+            [CanBeNull]
             [ContractVerification(false)] // Just forwarding...
             public IList<T> this[int index]
             {
@@ -227,7 +227,7 @@
             #region ICollection<IList<T>> Members
 
             [ContractVerification(false)] // just forwarding
-            public void Add([NotNull] IList<T> item)
+            public void Add(IList<T> item)
             {
                 Insert(_parts.Count, item);
             }
@@ -240,7 +240,7 @@
                 }
             }
 
-            public bool Contains([NotNull] IList<T> item)
+            public bool Contains(IList<T> item)
             {
                 if (item == null)
                     throw new ArgumentNullException(nameof(item));
@@ -257,7 +257,7 @@
 
             public bool IsReadOnly => false;
 
-            public bool Remove([NotNull] IList<T> item)
+            public bool Remove(IList<T> item)
             {
                 if (item == null)
                     throw new ArgumentNullException(nameof(item));

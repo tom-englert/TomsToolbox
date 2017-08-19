@@ -1,5 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Composition
 {
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -31,7 +33,9 @@
         [NotNull]
         private readonly DispatcherThrottle _deferredUpdateThrottle;
 
+        [CanBeNull]
         private INotifyChanged _exportProviderChangeTracker;
+        [CanBeNull]
         private ExportProvider _exportProvider;
 
         /// <summary>
@@ -45,7 +49,6 @@
         /// <summary>
         /// Gets or sets the id of the region. The region id is used to select candidates for composition.
         /// </summary>
-        [CanBeNull]
         public string RegionId
         {
             get => (string)GetValue(RegionIdProperty);
@@ -54,14 +57,14 @@
         /// <summary>
         /// Identifies the <see cref="RegionId"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty RegionIdProperty =
+        [NotNull]
+        public static readonly DependencyProperty RegionIdProperty =
             DependencyProperty.Register("RegionId", typeof(string), typeof(VisualCompositionBehavior<T>), new FrameworkPropertyMetadata((sender, e) => ((VisualCompositionBehavior<T>)sender)?.RegionId_Changed()));
 
 
         /// <summary>
         /// Gets or sets the composition context.
         /// </summary>
-        [CanBeNull]
         public object CompositionContext
         {
             get => GetValue(CompositionContextProperty);
@@ -70,7 +73,8 @@
         /// <summary>
         /// Identifies the <see cref="CompositionContext"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty CompositionContextProperty =
+        [NotNull]
+        public static readonly DependencyProperty CompositionContextProperty =
             DependencyProperty.Register("CompositionContext", typeof(object), typeof(VisualCompositionBehavior<T>), new FrameworkPropertyMetadata(null, (sender, e) => ((VisualCompositionBehavior<T>)sender)?.Update()));
 
 
@@ -277,6 +281,14 @@
         private void ExportProvider_Changed([CanBeNull] object sender, [CanBeNull] EventArgs e)
         {
             ExportProvider = AssociatedObject?.TryGetExportProvider();
+        }
+
+        [ContractInvariantMethod]
+        [SuppressMessage("Microsoft.Performance", "CA1822: MarkMembersAsStatic", Justification = "Required for code contracts.")]
+        [Conditional("CONTRACTS_FULL")]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(_deferredUpdateThrottle != null);
         }
     }
 }

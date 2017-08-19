@@ -84,18 +84,6 @@
         }
 
         /// <summary>
-        /// Returns the inner value if not null, else returns default(T).
-        /// </summary>
-        /// <returns>
-        /// The inner value if not null, else default(T).
-        /// </returns>
-        [CanBeNull]
-        public T Return()
-        {
-            return Return(default(T));
-        }
-
-        /// <summary>
         /// Returns the if the inner value if not null, else returns the default value.
         /// </summary>
         /// <param name="defaultValue">The default value.</param>
@@ -103,7 +91,7 @@
         /// The inner value if not null, else default(T).
         /// </returns>
         [CanBeNull]
-        public T Return([CanBeNull] T defaultValue)
+        public T Return([CanBeNull] T defaultValue = default(T))
         {
             return _value ?? defaultValue;
         }

@@ -6,7 +6,9 @@
     using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
+#if NETSTANDARD1_0
     using System.Reflection;
+#endif
 
     using JetBrains.Annotations;
 

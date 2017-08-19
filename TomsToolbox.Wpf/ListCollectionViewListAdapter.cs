@@ -72,7 +72,7 @@
         /// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
         /// </returns>
         /// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
-        public bool Contains([NotNull] T item)
+        public bool Contains(T item)
         {
             return _collectionView.Contains(item);
         }
@@ -84,7 +84,7 @@
         /// <returns>
         /// The index of <paramref name="item" /> if found in the list; otherwise, -1.
         /// </returns>
-        public int IndexOf([NotNull] T item)
+        public int IndexOf(T item)
         {
             return _collectionView.IndexOf(item);
         }
@@ -110,6 +110,7 @@
             get
             {
                 var value = _collectionView.GetItemAt(index);
+                // ReSharper disable once MergeConditionalExpression : R# is wrong, remove the null value check will cause error for value types!
                 return value == null ? default(T) : (T)value;
             }
             // ReSharper disable once ValueParameterNotUsed
@@ -134,7 +135,7 @@
             }
         }
 
-        bool ICollection<T>.Remove([CanBeNull] T item)
+        bool ICollection<T>.Remove(T item)
         {
             ReadOnlyNotSupported();
             return false;
@@ -144,18 +145,18 @@
 
         bool ICollection.IsSynchronized => false;
 
-        int IList.Add([CanBeNull] object value)
+        int IList.Add(object value)
         {
             ReadOnlyNotSupported();
             return 0;
         }
 
-        bool IList.Contains([CanBeNull] object value)
+        bool IList.Contains(object value)
         {
             return value != null && _collectionView.Contains(value);
         }
 
-        void ICollection<T>.Add([CanBeNull] T item)
+        void ICollection<T>.Add(T item)
         {
             ReadOnlyNotSupported();
         }
@@ -203,7 +204,7 @@
             ReadOnlyNotSupported();
         }
 
-        void IList<T>.Insert(int index, [CanBeNull] T item)
+        void IList<T>.Insert(int index, T item)
         {
             ReadOnlyNotSupported();
         }
