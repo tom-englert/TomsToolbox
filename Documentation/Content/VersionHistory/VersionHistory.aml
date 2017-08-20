@@ -9,6 +9,13 @@
       <content>
         <list class="bullet">          
           <listItem>
+            <para>1.0.61.0</para>
+            <list class="bullet">
+              <listItem><para>Remove runtime dependency to Jetbrains.Annotations, replace with external annotations</para></listItem>
+              <listItem><para>Add missing nullability annotations</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.60.0</para>
             <list class="bullet">
               <listItem><para>Fix data grid header styles</para></listItem>
