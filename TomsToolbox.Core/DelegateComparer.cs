@@ -40,7 +40,7 @@
         /// <param name="x">The first object to compare.</param><param name="y">The second object to compare.</param>
         public int Compare(T x, T y)
         {
-            if (typeof(T).GetTypeInfo()?.IsValueType != true)
+            if (typeof(T).GetTypeInfo().IsValueType != true)
             {
                 if (ReferenceEquals(x, null))
                     return ReferenceEquals(y, null) ? 0 : -1;

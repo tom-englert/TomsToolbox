@@ -82,7 +82,6 @@
         /// <param name="y">The second object of type <typeparamref name="T"/> to compare.</param>
         public bool Equals([CanBeNull] T x, [CanBeNull] T y)
         {
-            // ReSharper disable once PossibleNullReferenceException
             if (!typeof(T).GetTypeInfo().IsValueType)
             {
                 if (ReferenceEquals(x, null))
@@ -105,7 +104,6 @@
         /// <exception cref="T:System.ArgumentNullException">The type of <paramref name="obj"/> is a reference type and <paramref name="obj"/> is null.</exception>
         public int GetHashCode([CanBeNull] T obj)
         {
-            // ReSharper disable All
             if (!typeof(T).GetTypeInfo().IsValueType)
             {
                 if (ReferenceEquals(obj, null))
@@ -113,7 +111,6 @@
             }
 
             return _hashCodeGenerator(obj);
-            // ReSharper enable All
         }
 
         [ContractInvariantMethod, UsedImplicitly]

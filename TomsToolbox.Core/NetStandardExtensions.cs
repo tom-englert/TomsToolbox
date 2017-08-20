@@ -30,8 +30,12 @@
             return @delegate.Method;
         }
 #else
+        // stub to generate the same external annotations, should not be used at all
         public static MethodInfo GetMethodInfo([NotNull] Delegate @delegate)
         {
+            Contract.Requires(@delegate != null);
+            Contract.Ensures(Contract.Result<MethodInfo>() != null);
+
             throw new NotImplementedException();
         }
 #endif
@@ -52,8 +56,12 @@
             return type;
         }
 #else
+        // stub to generate the same external annotations, should not be used at all
         public static Type GetTypeInfo([NotNull] Type type)
         {
+            Contract.Requires(type != null);
+            Contract.Ensures(Contract.Result<Type>() != null);
+
             throw new NotImplementedException();
         }
 #endif
