@@ -4,6 +4,7 @@
     using System.Windows.Interactivity;
 
     using TomsToolbox.Core;
+    using TomsToolbox.Desktop;
     using TomsToolbox.Wpf.Composition;
 
     /// <summary>
@@ -23,9 +24,12 @@
 
             var window = AssociatedObject;
 
-            window?.GetExportProvider()
-                .GetExportedValues<IThemeResourceProvider>()
-                .ForEach(resourceProvider => resourceProvider?.LoadThemeResources(window.Resources));
+            Dispatcher?.BeginInvoke(() =>
+            {
+                window?.TryGetExportProvider()?
+                    .GetExportedValues<IThemeResourceProvider>()
+                    .ForEach(resourceProvider => resourceProvider?.LoadThemeResources(window.Resources));
+            });
         }
     }
 }

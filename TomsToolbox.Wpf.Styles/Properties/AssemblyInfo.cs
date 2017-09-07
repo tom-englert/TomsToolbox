@@ -16,3 +16,4 @@ using System.Windows.Markup;
 
 [assembly: XmlnsPrefix("urn:TomsToolbox.Wpf.Styles", "styles")]
 [assembly: XmlnsDefinition("urn:TomsToolbox.Wpf.Styles", "TomsToolbox.Wpf.Styles")]
+[assembly: XmlnsDefinition("urn:TomsToolbox.Wpf.Styles", "TomsToolbox.Wpf.Styles.Effects")]

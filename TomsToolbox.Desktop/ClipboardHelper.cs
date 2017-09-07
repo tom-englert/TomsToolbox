@@ -105,7 +105,7 @@
             if ((table.Count == 1) && (table[0] != null) && (table[0].Count == 1) && string.IsNullOrWhiteSpace(table[0][0]))
                 return Quote + (table[0][0] ?? string.Empty) + Quote;
 
-            return string.Join(Environment.NewLine, table.Select(line => string.Join(separator.ToString(), line?.Select(cell => Quoted(cell, separator)) ?? Enumerable.Empty<string>())));
+            return string.Join(Environment.NewLine, table.Select(line => string.Join(separator.ToString(), line.Select(cell => Quoted(cell, separator)))));
         }
 
         [NotNull]
