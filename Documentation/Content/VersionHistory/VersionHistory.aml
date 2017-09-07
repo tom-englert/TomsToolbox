@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">          
           <listItem>
+            <para>1.0.62.0</para>
+            <list class="bullet">
+              <listItem><para>Add ThemeResourceLoader support to window style</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.61.0</para>
             <list class="bullet">
               <listItem><para>Remove runtime dependency to Jetbrains.Annotations, replace with external annotations</para></listItem>
