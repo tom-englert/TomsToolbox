@@ -24,19 +24,13 @@
         /// <summary>
         /// Gets the old value.
         /// </summary>
-        public T OldValue
-        {
-            get;
-            private set;
-        }
+        [CanBeNull]
+        public T OldValue { get; }
 
         /// <summary>
         /// Gets the new value.
         /// </summary>
-        public T NewValue
-        {
-            get;
-            private set;
-        }
+        [CanBeNull]
+        public T NewValue { get; }
     }
 }

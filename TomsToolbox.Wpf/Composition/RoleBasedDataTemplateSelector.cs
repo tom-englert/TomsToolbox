@@ -14,6 +14,7 @@
         /// <summary>
         /// Gets or sets the role to use in the lookup.
         /// </summary>
+        [CanBeNull]
         public object Role
         {
             get;
@@ -24,6 +25,7 @@
         /// <summary>
         /// Gets or sets the template used as fallback if no template for the specified role is found.
         /// </summary>
+        [CanBeNull]
         public DataTemplate FallbackValue
         {
             get;

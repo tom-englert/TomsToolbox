@@ -31,12 +31,14 @@
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Default = new ObjectToTextConverter();
+        [NotNull]
+        public static readonly IValueConverter Default = new ObjectToTextConverter();
 
         /// <summary>
         /// Gets or sets the key used to select the <see cref="TextAttribute"/>
         /// The converter parameter can override this value.
         /// </summary>
+        [CanBeNull]
         public object Key
         {
             get;
@@ -53,7 +55,6 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        [NotNull]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return Convert(parameter ?? Key, value, null);

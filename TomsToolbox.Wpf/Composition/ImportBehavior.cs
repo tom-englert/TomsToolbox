@@ -17,9 +17,13 @@
     /// <seealso cref="System.Windows.Interactivity.Behavior{FrameworkElement}" />
     public class ImportBehavior : Behavior<FrameworkElement>
     {
+        [CanBeNull]
         private INotifyChanged _tracker;
+        [CanBeNull]
         private Type _memberType;
+        [CanBeNull]
         private string _contractName;
+        [CanBeNull]
         private DependencyProperty _targetProperty = FrameworkElement.DataContextProperty;
 
         /// <summary>
@@ -97,7 +101,7 @@
             base.OnDetaching();
         }
 
-        private void ExportProvider_Changed(object sender, EventArgs e)
+        private void ExportProvider_Changed([NotNull] object sender, [NotNull] EventArgs e)
         {
             Update();
         }

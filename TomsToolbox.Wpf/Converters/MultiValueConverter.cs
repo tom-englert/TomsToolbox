@@ -27,7 +27,8 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        protected abstract object Convert([NotNull] object[] values, Type targetType, object parameter, CultureInfo culture);
+        [CanBeNull]
+        protected abstract object Convert([NotNull, ItemCanBeNull] object[] values, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture);
 
         /// <summary>
         /// Converts a value.
@@ -39,7 +40,8 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        /// <exception cref="System.InvalidOperationException">ConvertBack is not supported by this converter.</exception>
+        /// <exception cref="InvalidOperationException">ConvertBack is not supported by this converter.</exception>
+        [CanBeNull, ItemCanBeNull]
         protected virtual object[] ConvertBack([NotNull] object value, [CanBeNull, ItemCanBeNull] Type[] targetTypes, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             Contract.Requires(value != null);
@@ -49,7 +51,7 @@
 
         object IMultiValueConverter.Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values == null) 
+            if (values == null)
                 return null;
             if (values.Any(x => x == null))
                 return null;
@@ -84,7 +86,7 @@
         }
     }
 
-    [ContractClassFor(typeof (MultiValueConverter))]
+    [ContractClassFor(typeof(MultiValueConverter))]
     abstract class MultiValueConverterContract : MultiValueConverter
     {
         /// <summary>

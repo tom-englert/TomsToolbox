@@ -24,6 +24,7 @@
         /// <summary>
         /// Gets the header to be shown in the UI. Usually this is a localized text naming the command.
         /// </summary>
+        [CanBeNull]
         object Header
         {
             get;
@@ -32,6 +33,7 @@
         /// <summary>
         /// Gets the tool tip to be shown in the UI. Usually this is a localized text describing the command.
         /// </summary>
+        [CanBeNull]
         object Description
         {
             get;
@@ -40,6 +42,7 @@
         /// <summary>
         /// Gets the icon to be shown in the UI, or null to show no icon.
         /// </summary>
+        [CanBeNull]
         object Icon
         {
             get;
@@ -60,6 +63,7 @@
         /// <remarks>
         /// This is used to build up menus with sub menu entries.
         /// </remarks>
+        [CanBeNull]
         string SubRegionId
         {
             get;
@@ -78,6 +82,7 @@
         /// Gets the name of the group that this command belongs to. 
         /// If different group names are specified for a target region, the commands can be grouped and the groups separated by a <see cref="Separator"/>.
         /// </summary>
+        [CanBeNull]
         object GroupName
         {
             get;
@@ -86,6 +91,7 @@
         /// <summary>
         /// Gets a tag that can be bound to the target objects tag.
         /// </summary>
+        [CanBeNull]
         object Tag
         {
             get;
@@ -129,7 +135,7 @@
         /// <param name="compositionContext">The composition context.</param>
         /// <returns>The part to be used in composition.</returns>
         [NotNull]
-        public object GetPart([CanBeNull] object compositionContext)
+        public object GetPart(object compositionContext)
         {
             Contract.Ensures(Contract.Result<object>() != null);
             return GetCommandSource(compositionContext);
@@ -154,24 +160,22 @@
         /// Creates a new <see cref="CommandSource"/> or derived object.
         /// </summary>
         /// <returns>The command source.</returns>
+        [NotNull]
         protected abstract T CreateCommandSource();
 
         /// <summary>
         /// Gets the header to be shown in the UI. Usually this is a localized text naming the command.
         /// </summary>
-        [CanBeNull]
         public virtual object Header => GetType().TryGetDisplayName();
 
         /// <summary>
         /// Gets the tool tip to be shown in the UI. Usually this is a localized text describing the command.
         /// </summary>
-        [CanBeNull]
         public virtual object Description => GetType().TryGetDescription();
 
         /// <summary>
         /// Gets the icon to be shown in the UI, or null to show no icon.
         /// </summary>
-        [CanBeNull]
         public virtual object Icon
         {
             get
@@ -194,7 +198,6 @@
         /// <remarks>
         /// This is used to build up menus with sub menu entries.
         /// </remarks>
-        [CanBeNull]
         public virtual string SubRegionId => GetType().TryGetText(SubRegionIdKey);
 
         /// <summary>
@@ -207,13 +210,11 @@
         /// Gets the name of the group that this command belongs to.
         /// If different group names are specified for a target region, the commands can be grouped and the groups separated by a <see cref="Separator" />.
         /// </summary>
-        [CanBeNull]
         public virtual object GroupName => GetType().TryGetText(GroupNameKey);
 
         /// <summary>
         /// Gets a tag that can be bound to the target objects tag.
         /// </summary>
-        [CanBeNull]
         public virtual object Tag => null;
 
         /// <summary>
@@ -301,7 +302,6 @@
         /// <returns>
         /// The command source.
         /// </returns>
-        [NotNull]
         protected override CommandSource CreateCommandSource()
         {
             return new CommandSource(this);

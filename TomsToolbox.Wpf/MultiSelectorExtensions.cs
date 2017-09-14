@@ -102,8 +102,7 @@
 
         private static void CommitEdit([CanBeNull] this Selector selector)
         {
-            var dataGrid = selector as DataGrid;
-            if (dataGrid != null)
+            if (selector is DataGrid dataGrid)
             {
                 dataGrid.CommitEdit(); // cell
                 dataGrid.CommitEdit(); // row
@@ -265,8 +264,8 @@
             }
         }
 
-        [NotNull]
-        private static IList ArrayCopy([NotNull] ICollection source)
+        [NotNull, ItemCanBeNull]
+        private static IList ArrayCopy([NotNull, ItemCanBeNull] ICollection source)
         {
             Contract.Requires(source != null);
             Contract.Ensures(Contract.Result<IList>() != null);
@@ -280,7 +279,9 @@
         {
             [NotNull]
             private readonly Selector _selector;
+            [CanBeNull]
             private readonly INotifyCollectionChanged _observableSourceSelection;
+
             private readonly bool _selectorHasItemsSourceBinding;
 
             public SelectionSynchronizer([NotNull] Selector selector, [NotNull, ItemCanBeNull] IList sourceSelection)

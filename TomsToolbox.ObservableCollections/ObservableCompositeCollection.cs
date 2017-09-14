@@ -115,7 +115,7 @@
             }
 
             [ContractVerification(false)]
-            private void parts_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+            private void Parts_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
             {
                 // Monitor changes of parts and forward events properly
                 // Offset to apply is the sum of all counts of all parts preceding this part
@@ -178,7 +178,7 @@
                 // If this list implements INotifyCollectionChanged monitor changes so they can be forwarded properly.
                 // If it does not implement INotifyCollectionChanged, no notification should be neccesary.
                 if (item is INotifyCollectionChanged dynamicPart)
-                    dynamicPart.CollectionChanged += parts_CollectionChanged;
+                    dynamicPart.CollectionChanged += Parts_CollectionChanged;
 
                 if (item.Count == 0)
                     return;
@@ -198,7 +198,7 @@
 
                 // If this list implements INotifyCollectionChanged events must be unregistered!
                 if (part is INotifyCollectionChanged dynamicPart)
-                    dynamicPart.CollectionChanged -= parts_CollectionChanged;
+                    dynamicPart.CollectionChanged -= Parts_CollectionChanged;
 
                 if (part.Count == 0)
                     return;

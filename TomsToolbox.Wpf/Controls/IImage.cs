@@ -3,6 +3,8 @@
     using System;
     using System.Windows.Media;
 
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Implemented by image providers to provide a dynamically loadable image.
     /// </summary>
@@ -11,6 +13,7 @@
         /// <summary>
         /// Gets the source of the image.
         /// </summary>
+        [NotNull]
         ImageSource Source
         {
             get;

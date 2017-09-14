@@ -295,7 +295,7 @@
             }
         }
 
-        private void AssociatedObject_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void AssociatedObject_IsKeyboardFocusWithinChanged([NotNull] object sender, DependencyPropertyChangedEventArgs e)
         {
             if (AssociatedObject?.IsKeyboardFocusWithin == true)
             {
@@ -319,7 +319,7 @@
             CommandTarget.Execute(CommandParameter);
         }
 
-        void ICommandChangedNotificationSink.ActiveCommandChanged([CanBeNull] ICommand command)
+        void ICommandChangedNotificationSink.ActiveCommandChanged(ICommand command)
         {
             var oldValue = IsActive;
 
@@ -336,6 +336,6 @@
 
     internal interface ICommandChangedNotificationSink
     {
-        void ActiveCommandChanged(ICommand command);
+        void ActiveCommandChanged([CanBeNull] ICommand command);
     }
 }

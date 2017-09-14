@@ -220,9 +220,7 @@
         [CanBeNull]
         protected object GetTarget([CanBeNull] object item)
         {
-            var partFactory = item as IComposablePartFactory;
-
-            return (partFactory != null) ? partFactory.GetPart(CompositionContext) : item;
+            return (item is IComposablePartFactory partFactory) ? partFactory.GetPart(CompositionContext) : item;
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
-﻿namespace TomsToolbox.Wpf.Composition
+﻿using JetBrains.Annotations;
+
+namespace TomsToolbox.Wpf.Composition
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -20,6 +22,7 @@
         /// <summary>
         /// Gets or sets the composition context.
         /// </summary>
+        [CanBeNull]
         object CompositionContext { get; set; }
     }
 
@@ -33,6 +36,7 @@
         /// </summary>
         /// <param name="compositionContext">The composition context.</param>
         /// <returns>The part to be used in composition.</returns>
-        object GetPart(object compositionContext);
+        [CanBeNull]
+        object GetPart([CanBeNull] object compositionContext);
     }
 }

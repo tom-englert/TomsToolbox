@@ -1,4 +1,6 @@
-﻿namespace TomsToolbox.Wpf.Converters
+﻿using JetBrains.Annotations;
+
+namespace TomsToolbox.Wpf.Converters
 {
     using System.ComponentModel;
 
@@ -10,6 +12,7 @@
         /// <summary>
         /// Gets or sets the parameter that will be passed to the command when it's executed.
         /// </summary>
+        [CanBeNull]
         public object Parameter
         {
             get;

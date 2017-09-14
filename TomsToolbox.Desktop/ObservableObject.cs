@@ -274,7 +274,7 @@
         private IDictionary<string, IEnumerable<string>> DependencyMapping => _dependencyMapping ?? (_dependencyMapping = _dependencyMappingCache[GetType()]);
 
         // ReSharper disable once AnnotateNotNullParameter
-        private void RelaySource_PropertyChanged([NotNull] object sender, PropertyChangedEventArgs e)
+        private void RelaySource_PropertyChanged([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
         {
             Contract.Requires(sender != null);
 

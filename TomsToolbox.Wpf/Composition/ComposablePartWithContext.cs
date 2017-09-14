@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Scope = "member", Target = "TomsToolbox.Wpf.Composition.ComposablePartWithContext`1.#TomsToolbox.Wpf.Composition.IComposablePartWithContext.CompositionContext", Justification="Is accessible by the corresponding typed property.")]
+[assembly: SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Scope = "member", Target = "TomsToolbox.Wpf.Composition.ComposablePartWithContext`1.#TomsToolbox.Wpf.Composition.IComposablePartWithContext.CompositionContext", Justification = "Is accessible by the corresponding typed property.")]
 
 namespace TomsToolbox.Wpf.Composition
 {
@@ -20,7 +20,6 @@ namespace TomsToolbox.Wpf.Composition
         /// <summary>
         /// Gets or sets the composition context.
         /// </summary>
-        [CanBeNull]
         object IComposablePartWithContext.CompositionContext
         {
             get => CompositionContext;
@@ -40,6 +39,7 @@ namespace TomsToolbox.Wpf.Composition
         /// <summary>
         /// Gets the composition context.
         /// </summary>
+        [CanBeNull]
         public T CompositionContext
         {
             get;

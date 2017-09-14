@@ -134,9 +134,6 @@
   <member name="P:TomsToolbox.Wpf.Composition.CommandSource.Tag">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
-  <member name="M:TomsToolbox.Wpf.Composition.CommandSourceFactory.CreateCommandSource">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
   <member name="M:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Attach(System.Object,System.Windows.Input.ICommand)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="context">
@@ -146,8 +143,8 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Description">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  <member name="M:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.CreateCommandSource">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Detach(System.Object,System.Windows.Input.ICommand)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -160,18 +157,6 @@
   </member>
   <member name="M:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.GetPart(System.Object)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    <parameter name="compositionContext">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.GroupName">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Header">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Icon">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Replace(System.Object,System.Windows.Input.ICommand,System.Windows.Input.ICommand)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -185,17 +170,14 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.SubRegionId">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Tag">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
   <member name="P:TomsToolbox.Wpf.Composition.ComposableContentControl.Role">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="F:TomsToolbox.Wpf.Composition.ComposableContentControl.RoleProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.ComposablePartWithContext`1.CompositionContext">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.Composition.ComposablePartWithContext`1.OnCompositionContextChanged(`0,`0)">
     <parameter name="oldValue">
@@ -285,6 +267,36 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="P:TomsToolbox.Wpf.Composition.ICommandSourceFactory.Description">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.ICommandSourceFactory.GroupName">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.ICommandSourceFactory.Header">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.ICommandSourceFactory.Icon">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.ICommandSourceFactory.SubRegionId">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.ICommandSourceFactory.Tag">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Wpf.Composition.IComposablePartFactory.GetPart(System.Object)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="compositionContext">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.IComposablePartWithContext.CompositionContext">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.IDataTemplateMetadata.Role">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
   <member name="P:TomsToolbox.Wpf.Composition.IDataTemplateMetadata.ViewModel">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
@@ -361,6 +373,12 @@
   <member name="P:TomsToolbox.Wpf.Composition.RoleBasedDataTemplateKey.Role">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
+  <member name="P:TomsToolbox.Wpf.Composition.RoleBasedDataTemplateSelector.FallbackValue">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.RoleBasedDataTemplateSelector.Role">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Wpf.Composition.RoleBasedDataTemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
     <parameter name="container">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
@@ -429,11 +447,17 @@
   <member name="P:TomsToolbox.Wpf.Controls.CompositeContextMenuExtension.RegionId">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
+  <member name="P:TomsToolbox.Wpf.Controls.IImage.Source">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Wpf.Controls.IImageProvider.GetImage(TomsToolbox.Wpf.Controls.IMapTile)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="tile">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
+  </member>
+  <member name="P:TomsToolbox.Wpf.Controls.IMapTile.Parent">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="F:TomsToolbox.Wpf.Controls.InPlaceEdit.HasErrorsProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -669,6 +693,9 @@
   <member name="M:TomsToolbox.Wpf.Converters.ConfirmedCommandConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="P:TomsToolbox.Wpf.Converters.ConfirmedCommandEventArgs.Parameter">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Wpf.Converters.CoordinatesToPointConverter.Convert(System.Object)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="value">
@@ -743,11 +770,24 @@
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.Converters.MultiValueConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="values">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="targetType">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="parameter">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="culture">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.Converters.MultiValueConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     <parameter name="value">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -852,13 +892,10 @@
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="M:TomsToolbox.Wpf.Converters.ObjectToTextConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
   <member name="F:TomsToolbox.Wpf.Converters.ObjectToTextConverter.Default">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
-  <member name="M:TomsToolbox.Wpf.Converters.ReplaceTextConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+  <member name="P:TomsToolbox.Wpf.Converters.ObjectToTextConverter.Key">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.Converters.ReplaceTextConverter.Convert(System.String,System.String,System.String,System.Text.RegularExpressions.RegexOptions,System.Boolean)">
@@ -869,11 +906,14 @@
     <parameter name="pattern">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
+    <parameter name="replacement">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
   </member>
-  <member name="M:TomsToolbox.Wpf.Converters.StringToObjectConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+  <member name="P:TomsToolbox.Wpf.Converters.ReplaceTextConverter.Pattern">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
-  <member name="M:TomsToolbox.Wpf.Converters.StringToObjectConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+  <member name="P:TomsToolbox.Wpf.Converters.ReplaceTextConverter.Replacement">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="F:TomsToolbox.Wpf.Converters.StringToObjectConverter.Default">
@@ -897,13 +937,11 @@
   <member name="F:TomsToolbox.Wpf.Converters.ThicknessMultiplyConverter.Default">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
-  <member name="M:TomsToolbox.Wpf.Converters.UnaryOperationConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
   <member name="F:TomsToolbox.Wpf.Converters.UnaryOperationConverter.Negation">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.Converters.ValueConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="value">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -918,6 +956,7 @@
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.Converters.ValueConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="value">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -930,6 +969,24 @@
     <parameter name="culture">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
+  </member>
+  <member name="P:TomsToolbox.Wpf.Converters.ValueConverter.ConvertBackErrorValue">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Converters.ValueConverter.ConvertBackNullValue">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Converters.ValueConverter.ConvertBackUnsetValue">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Converters.ValueConverter.ConvertErrorValue">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Converters.ValueConverter.ConvertNullValue">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Converters.ValueConverter.ConvertUnsetValue">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.Converters.ValueConverterExtensions.TraceError(System.Windows.Data.IMultiValueConverter,System.String,System.String)">
     <parameter name="converter">
@@ -983,10 +1040,16 @@
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="P:TomsToolbox.Wpf.DelegateCommand.CanExecuteCallback">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Wpf.DelegateCommand.Execute(System.Object)">
     <parameter name="parameter">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
+  </member>
+  <member name="P:TomsToolbox.Wpf.DelegateCommand.ExecuteCallback">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.DelegateCommand`1.#ctor(System.Action{`0})">
     <parameter name="executeCallback">
@@ -1006,10 +1069,16 @@
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="P:TomsToolbox.Wpf.DelegateCommand`1.CanExecuteCallback">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Wpf.DelegateCommand`1.Execute(System.Object)">
     <parameter name="parameter">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
+  </member>
+  <member name="P:TomsToolbox.Wpf.DelegateCommand`1.ExecuteCallback">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.DependencyObjectExtensions.Ancestors(System.Windows.DependencyObject)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -1422,6 +1491,12 @@
     <parameter name="newValue">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
+  </member>
+  <member name="P:TomsToolbox.Wpf.PropertyBindingValueChangedEventArgs`1.NewValue">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.PropertyBindingValueChangedEventArgs`1.OldValue">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="F:TomsToolbox.Wpf.ResourceKeys.AutoToolTipTextBoxStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />

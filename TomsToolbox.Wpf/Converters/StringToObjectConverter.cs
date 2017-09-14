@@ -14,6 +14,7 @@
     [ValueConversion(typeof(string), typeof(object))]
     public class StringToObjectConverter : ValueConverter
     {
+        [CanBeNull]
         private TypeConverter _typeConverter;
 
         /// <summary>
@@ -56,7 +57,6 @@
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
-        [CanBeNull]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var typeConverter = GetTypeConverter(targetType);
@@ -80,7 +80,6 @@
         /// <param name="targetType">The type to convert to.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
-        [CanBeNull]
         protected override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var typeConverter = GetTypeConverter(targetType);

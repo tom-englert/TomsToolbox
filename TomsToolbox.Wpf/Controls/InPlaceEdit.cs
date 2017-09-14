@@ -41,18 +41,18 @@
 
         [NotNull]
         private readonly Throttle _mouseDoubleClickThrottle;
+        [CanBeNull]
+        private TextBox _textBox;
+        // The first focusable ancestor to test for focus and to provide F2 key.
+        [CanBeNull]
+        private FrameworkElement _focusableParent;
 
+        // The time when the parent item got the focus.
+        private DateTime _parentGotFocusTime = DateTime.MinValue;
         // State of mouse event handling to prevent editing when double clicking the item.
         private bool _processingMouseLeftButtonDown;
         private bool _mouseDoubleClicked;
 
-        // The first focusable ancestor to test for focus and to provide F2 key.
-        private FrameworkElement _focusableParent;
-        // The time when the parent item got the focus.
-        private DateTime _parentGotFocusTime = DateTime.MinValue;
-        // The systems double click time as a time span.
-
-        private TextBox _textBox;
 
         static InPlaceEdit()
         {

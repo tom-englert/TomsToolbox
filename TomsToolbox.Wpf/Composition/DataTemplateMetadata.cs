@@ -25,6 +25,7 @@
         /// Gets the role of this visual. 
         /// If a role is set, a <see cref="RoleBasedDataTemplateKey"/> will be created for this view; else a simple <see cref="DataTemplateKey"/> is used.
         /// </summary>
+        [CanBeNull]
         object Role
         {
             get;

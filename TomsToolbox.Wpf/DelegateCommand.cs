@@ -94,6 +94,7 @@
         /// Gets or sets the predicate to handle the ICommand.CanExecute method.
         /// If unset, ICommand.CanExecute will always return true if ExecuteCallback is set.
         /// </summary>
+        [CanBeNull]
         public Predicate<T> CanExecuteCallback
         {
             get;
@@ -104,6 +105,7 @@
         /// Gets or sets the action to handle the ICommand.Execute method.
         /// If unset, ICommand.CanExecute will always return false.
         /// </summary>
+        [CanBeNull]
         public Action<T> ExecuteCallback
         {
             get;
@@ -242,6 +244,7 @@
         /// Gets or sets the predicate to handle the ICommand.CanExecute method.
         /// If unset, ICommand.CanExecute will always return true if ExecuteCallback is set.
         /// </summary>
+        [CanBeNull]
         public Func<bool> CanExecuteCallback
         {
             get;
@@ -252,6 +255,7 @@
         /// Gets or sets the action to handle the ICommand.Execute method.
         /// If unset, ICommand.CanExecute will always return false.
         /// </summary>
+        [CanBeNull]
         public Action ExecuteCallback
         {
             get;

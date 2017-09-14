@@ -107,9 +107,10 @@
     /// </summary>
     public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
     {
+        [CanBeNull]
+        private Window _window;
         private Matrix _transformFromDevice = Matrix.Identity;
         private Matrix _transformToDevice = Matrix.Identity;
-        private Window _window;
         private Vector _maximizedPadding;
 
 
@@ -127,7 +128,8 @@
         /// <summary>
         /// Identifies the <see cref="BorderSize"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty BorderSizeProperty =
+        [NotNull]
+        public static readonly DependencyProperty BorderSizeProperty =
             DependencyProperty.Register("BorderSize", typeof(Size), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(new Size(4, 4)));
 
 
@@ -145,7 +147,8 @@
         /// <summary>
         /// Identifies the <see cref="CornerSize"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty CornerSizeProperty =
+        [NotNull]
+        public static readonly DependencyProperty CornerSizeProperty =
             DependencyProperty.Register("CornerSize", typeof(Size), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(new Size(8, 8)));
 
 
@@ -163,7 +166,8 @@
         /// <summary>
         /// Identifies the <see cref="HasGlassFrame"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty HasGlassFrameProperty =
+        [NotNull]
+        public static readonly DependencyProperty HasGlassFrameProperty =
             DependencyProperty.Register("HasGlassFrame", typeof(bool), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(true));
 
 

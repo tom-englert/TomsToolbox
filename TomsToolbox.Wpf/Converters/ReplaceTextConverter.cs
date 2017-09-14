@@ -16,11 +16,13 @@
         /// <summary>
         /// Gets or sets the regular expression to find.
         /// </summary>
+        [CanBeNull]
         public string Pattern { get; set; }
 
         /// <summary>
         /// Gets or sets the text to replace.
         /// </summary>
+        [CanBeNull]
         public string Replacement { get; set; }
 
         /// <summary>
@@ -49,7 +51,7 @@
         /// <param name="replaceAll">if set to <c>true</c> all occurrences will be replaces; otherwise only the first.</param>
         /// <returns>The converted value.</returns>
         [CanBeNull]
-        public static object Convert([CanBeNull] string value, [CanBeNull] string pattern, string replacement, RegexOptions options, bool replaceAll)
+        public static object Convert([CanBeNull] string value, [CanBeNull] string pattern, [CanBeNull] string replacement, RegexOptions options, bool replaceAll)
         {
             if (value == null)
                 return null;
@@ -76,7 +78,6 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        [CanBeNull]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return Convert((string)value);

@@ -52,12 +52,11 @@
         [NotNull] public static readonly DependencyProperty TopLeftProperty =
             DependencyProperty.RegisterAttached("TopLeft", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(TopLeft_Changed));
 
-        private static void TopLeft_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void TopLeft_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var point = e.NewValue.SafeCast<Point>();
-            
-            var uiElement = d as UIElement;
-            if (uiElement == null)
+
+            if (!(d is UIElement uiElement))
                 return;
 
             Canvas.SetTop(uiElement, point.Y);
@@ -105,12 +104,11 @@
         [NotNull] public static readonly DependencyProperty TopRightProperty =
             DependencyProperty.RegisterAttached("TopRight", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(TopRight_Changed));
 
-        private static void TopRight_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void TopRight_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var point = e.NewValue.SafeCast<Point>();
 
-            var uiElement = d as UIElement;
-            if (uiElement == null)
+            if (!(d is UIElement uiElement))
                 return;
 
             Canvas.SetTop(uiElement, point.Y);
@@ -157,12 +155,11 @@
         [NotNull] public static readonly DependencyProperty BottomLeftProperty =
             DependencyProperty.RegisterAttached("BottomLeft", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(BottomLeft_Changed));
 
-        private static void BottomLeft_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void BottomLeft_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var point = e.NewValue.SafeCast<Point>();
 
-            var uiElement = d as UIElement;
-            if (uiElement == null)
+            if (!(d is UIElement uiElement))
                 return;
 
             Canvas.SetBottom(uiElement, point.Y);
@@ -210,12 +207,11 @@
         [NotNull] public static readonly DependencyProperty BottomRightProperty =
             DependencyProperty.RegisterAttached("BottomRight", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(BottomRight_Changed));
 
-        private static void BottomRight_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void BottomRight_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var point = e.NewValue.SafeCast<Point>();
 
-            var uiElement = d as UIElement;
-            if (uiElement == null)
+            if (!(d is UIElement uiElement))
                 return;
 
             Canvas.SetBottom(uiElement, point.Y);

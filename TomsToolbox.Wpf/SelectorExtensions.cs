@@ -60,7 +60,8 @@
         /// If no index is cached, the first item will be selected.
         /// </remarks>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty TrackSelectionProperty =
+        [NotNull]
+        public static readonly DependencyProperty TrackSelectionProperty =
             DependencyProperty.RegisterAttached("TrackSelection", typeof(bool), typeof(SelectorExtensions), new FrameworkPropertyMetadata(TrackSelection_Changed));
 
         private static void TrackSelection_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -109,10 +110,12 @@
 
         private class WeakKeyIndexer<T>
         {
-            private int _cleanupCycleCounter;
             [NotNull]
             private Dictionary<WeakReference, T> _items = new Dictionary<WeakReference, T>();
 
+            private int _cleanupCycleCounter;
+
+            [CanBeNull]
             public T this[[NotNull] object key]
             {
                 get

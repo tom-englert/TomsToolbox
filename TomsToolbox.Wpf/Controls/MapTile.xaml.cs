@@ -24,7 +24,7 @@
         private static readonly Rect TileRect = new Rect(0, 0, TileSize, TileSize);
         private Size _subLevelTreshold = (Size)(1.5 * TileSize * new Vector(1, 1));
 
-        private readonly IMapTile _parent;
+        [CanBeNull] private readonly IMapTile _parent;
         private readonly int _x;
         private readonly int _y;
         private readonly int _zoomLevel;
@@ -82,7 +82,6 @@
         /// <summary>
         /// Gets the logical parent  element of this element.
         /// </summary>
-        [CanBeNull]
         IMapTile IMapTile.Parent => _parent;
 
         /// <summary>
@@ -156,8 +155,7 @@
             if ((viewPort == null) || (world == null))
                 return;
 
-            Size extent;
-            if (!IsThisTileVisible(world, viewPort, out extent))
+            if (!IsThisTileVisible(world, viewPort, out var extent))
             {
                 Unload();
                 return;

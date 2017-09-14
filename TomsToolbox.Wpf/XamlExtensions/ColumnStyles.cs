@@ -112,8 +112,7 @@
             if (activeStyle != defaultStyle)
                 return;
 
-            var targetProperty = columnType.GetField(propertyName + "Property", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)?.GetValue(null) as DependencyProperty;
-            if (targetProperty != null)
+            if (columnType.GetField(propertyName + "Property", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)?.GetValue(null) is DependencyProperty targetProperty)
             {
                 BindingOperations.SetBinding(column, targetProperty, new Binding(propertyName) { Source = style, FallbackValue = defaultStyle });
             }

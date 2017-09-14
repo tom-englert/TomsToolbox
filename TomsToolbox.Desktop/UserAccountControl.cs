@@ -78,8 +78,7 @@
 
             ParseUserDomain(ref userName, ref domain);
 
-            IntPtr pUserToken;
-            if (NativeMethods.LogonUser(userName, domain, password, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, out pUserToken))
+            if (NativeMethods.LogonUser(userName, domain, password, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, out var pUserToken))
             {
                 userToken = new SafeTokenHandle(pUserToken);
                 return 0;
@@ -105,10 +104,8 @@
         /// </exception>
         public static bool IsCurrentUserInAdminGroup()
         {
-            IntPtr phToken;
-
             // Open the access token of the current process for query and duplicate.
-            if (!NativeMethods.OpenProcessToken(Process.GetCurrentProcess().Handle, TOKEN_QUERY | TOKEN_DUPLICATE, out phToken))
+            if (!NativeMethods.OpenProcessToken(Process.GetCurrentProcess().Handle, TOKEN_QUERY | TOKEN_DUPLICATE, out var phToken))
             {
                 throw new Win32Exception();
             }
@@ -186,9 +183,8 @@
             // a linked token, it already is an impersonation token.  If we did not 
             // get a linked token, duplicate the original into an impersonation 
             // token for CheckTokenMembership.
-            IntPtr phTokenToCheck;
 
-            if (!NativeMethods.DuplicateToken(userToken, SECURITY_IMPERSONATION_LEVEL.SecurityIdentification, out phTokenToCheck))
+            if (!NativeMethods.DuplicateToken(userToken, SECURITY_IMPERSONATION_LEVEL.SecurityIdentification, out var phTokenToCheck))
             {
                 throw new Win32Exception();
             }
@@ -289,10 +285,8 @@
         [SuppressMessage("Microsoft.Interoperability", "CA1404:CallGetLastErrorImmediatelyAfterPInvoke")]
         public static bool IsProcessElevated()
         {
-            IntPtr phToken;
-
             // Open the access token of the current process with TOKEN_QUERY.
-            if (!NativeMethods.OpenProcessToken(Process.GetCurrentProcess().Handle, TOKEN_QUERY, out phToken))
+            if (!NativeMethods.OpenProcessToken(Process.GetCurrentProcess().Handle, TOKEN_QUERY, out var phToken))
             {
                 throw new Win32Exception();
             }
@@ -366,9 +360,8 @@
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public static int GetProcessIntegrityLevel()
         {
-            IntPtr phToken;
             // Open the access token of the current process with TOKEN_QUERY.
-            if (!NativeMethods.OpenProcessToken(Process.GetCurrentProcess().Handle, TOKEN_QUERY, out phToken))
+            if (!NativeMethods.OpenProcessToken(Process.GetCurrentProcess().Handle, TOKEN_QUERY, out var phToken))
             {
                 throw new Win32Exception();
             }
@@ -380,8 +373,7 @@
                 // to return false with the ERROR_INSUFFICIENT_BUFFER error code 
                 // because we've given it a null buffer. On exit cbTokenIntegrityLevel will tell 
                 // the size of the group information.
-                int cbTokenIntegrityLevel;
-                if (!NativeMethods.GetTokenInformation(hToken, TOKEN_INFORMATION_CLASS.TokenIntegrityLevel, IntPtr.Zero, 0, out cbTokenIntegrityLevel))
+                if (!NativeMethods.GetTokenInformation(hToken, TOKEN_INFORMATION_CLASS.TokenIntegrityLevel, IntPtr.Zero, 0, out var cbTokenIntegrityLevel))
                 {
                     var error = Marshal.GetLastWin32Error();
                     if (error != ERROR_INSUFFICIENT_BUFFER)
@@ -467,8 +459,6 @@
 
             var save = true;
             uint authPackage = 0;
-            IntPtr outCredBufferPtr;
-            int outCredSize;
 
             var credui = new CREDUI_INFO
             {
@@ -478,7 +468,7 @@
                 hwndParent = parent.Handle
             };
 
-            if (0 != NativeMethods.CredUIPromptForWindowsCredentials(ref credui, authenticationError, ref authPackage, inCredBuffer.DangerousGetHandle(), inCredBuffer.Size, out outCredBufferPtr, out outCredSize, ref save, 0))
+            if (0 != NativeMethods.CredUIPromptForWindowsCredentials(ref credui, authenticationError, ref authPackage, inCredBuffer.DangerousGetHandle(), inCredBuffer.Size, out var outCredBufferPtr, out int outCredSize, ref save, 0))
                 return null;
 
             using (var outCredBuffer = new SafeNativeMemory(outCredBufferPtr, outCredSize))
@@ -630,9 +620,9 @@
         {
             public int cbSize;
             public IntPtr hwndParent;
-            [MarshalAs(UnmanagedType.LPWStr)]
+            [MarshalAs(UnmanagedType.LPWStr), CanBeNull]
             public string pszMessageText;
-            [MarshalAs(UnmanagedType.LPWStr)]
+            [MarshalAs(UnmanagedType.LPWStr), CanBeNull]
             public string pszCaptionText;
             public readonly IntPtr hbmBanner;
         }
@@ -658,6 +648,7 @@
             public readonly int iIcon;
 
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
+            [CanBeNull]
             public readonly string szPath;
         }
 
@@ -669,11 +660,11 @@
 
             [DllImport("advapi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool DuplicateToken(SafeTokenHandle existingTokenHandle, SECURITY_IMPERSONATION_LEVEL impersonationLevel, out IntPtr duplicateTokenHandle);
+            public static extern bool DuplicateToken([NotNull] SafeTokenHandle existingTokenHandle, SECURITY_IMPERSONATION_LEVEL impersonationLevel, out IntPtr duplicateTokenHandle);
 
             [DllImport("advapi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool GetTokenInformation(SafeTokenHandle hToken, TOKEN_INFORMATION_CLASS tokenInfoClass, IntPtr pTokenInfo, int tokenInfoLength, out int returnLength);
+            public static extern bool GetTokenInformation([NotNull] SafeTokenHandle hToken, TOKEN_INFORMATION_CLASS tokenInfoClass, IntPtr pTokenInfo, int tokenInfoLength, out int returnLength);
 
             [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
             public static bool GetTokenInformation([NotNull] SafeTokenHandle hToken, TOKEN_INFORMATION_CLASS tokenInfoClass, [NotNull] SafeNativeMemory pTokenInfo)
@@ -689,7 +680,7 @@
 
             [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool LogonUser(string lpszUsername, string lpszDomain, string lpszPassword, int dwLogonType, int dwLogonProvider, out IntPtr phToken);
+            public static extern bool LogonUser([CanBeNull] string lpszUsername, [CanBeNull] string lpszDomain, [CanBeNull] string lpszPassword, int dwLogonType, int dwLogonProvider, out IntPtr phToken);
 
             [DllImport("credui.dll", CharSet = CharSet.Unicode)]
             [return: MarshalAs(UnmanagedType.U4)]
@@ -698,11 +689,11 @@
 
             [DllImport("credui.dll", CharSet = CharSet.Unicode)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool CredUnPackAuthenticationBuffer(int dwFlags, IntPtr pAuthBuffer, int cbAuthBuffer, StringBuilder pszUserName, ref int pcchMaxUserName, StringBuilder pszDomainName, ref int pcchMaxDomainame, StringBuilder pszPassword, ref int pcchMaxPassword);
+            public static extern bool CredUnPackAuthenticationBuffer(int dwFlags, IntPtr pAuthBuffer, int cbAuthBuffer, [CanBeNull] StringBuilder pszUserName, ref int pcchMaxUserName, [CanBeNull] StringBuilder pszDomainName, ref int pcchMaxDomainame, [CanBeNull] StringBuilder pszPassword, ref int pcchMaxPassword);
 
             [DllImport("credui.dll", CharSet = CharSet.Unicode)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool CredPackAuthenticationBuffer(int dwFlags, string pszUserName, string pszPassword, IntPtr pPackedCredentials, ref int pcbPackedCredentials);
+            public static extern bool CredPackAuthenticationBuffer(int dwFlags, [CanBeNull] string pszUserName, [CanBeNull] string pszPassword, IntPtr pPackedCredentials, ref int pcbPackedCredentials);
 
             [DllImport("Shell32.dll", SetLastError = false)]
             public static extern int SHGetStockIconInfo(SHSTOCKICONID siid, SHGSI uFlags, ref SHSTOCKICONINFO psii);

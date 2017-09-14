@@ -14,6 +14,7 @@
     /// </remarks>
     public class RoleBasedDataTemplateKey : TemplateKey, IEquatable<RoleBasedDataTemplateKey>
     {
+        [CanBeNull]
         private object _role;
 
         /// <summary>
