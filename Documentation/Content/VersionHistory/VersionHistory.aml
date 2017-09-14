@@ -9,6 +9,13 @@
       <content>
         <list class="bullet">          
           <listItem>
+            <para>1.0.63.0</para>
+            <list class="bullet">
+              <listItem><para>Rename private method SetRegionId, R# gets confused and shows false errors.</para></listItem>
+              <listItem><para>Add missing nullability annotations</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.62.0</para>
             <list class="bullet">
               <listItem><para>Add ThemeResourceLoader support to window style</para></listItem>
