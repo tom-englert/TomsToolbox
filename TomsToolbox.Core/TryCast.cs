@@ -37,9 +37,10 @@
         }
     }
 
+    /// <inheritdoc />
     /// <summary>
-    /// Provide fluent notation for try-casting types.<para/>
-    /// Create this object using <see cref="TryCastExtension.TryCast{T}"/>
+    /// Provide fluent notation for try-casting types.<para />
+    /// Create this object using <see cref="M:TomsToolbox.Core.TryCastExtension.TryCast``1(``0)" />
     /// </summary>
     /// <typeparam name="TValue">The type of the value.</typeparam>
     public class TryCastWorker<TValue> : TryCastWorkerBase<TValue, object>
@@ -123,9 +124,10 @@
         }
     }
 
+    /// <inheritdoc />
     /// <summary>
-    /// Provide fluent notation for try-casting types and returning a result.<para/>
-    /// Create this object using <see cref="TryCastWorker{T}.Returning{TResult}()"/>
+    /// Provide fluent notation for try-casting types and returning a result.<para />
+    /// Create this object using <see cref="M:TomsToolbox.Core.TryCastWorker`1.Returning``1" />
     /// </summary>
     /// <typeparam name="TValue">The type of the value.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
@@ -231,6 +233,7 @@
         [CanBeNull]
         public TResult ElseThrow()
         {
+            // ReSharper disable once PossibleNullReferenceException
             return ElseThrow("Encountered an unexpected type: " + (ReferenceEquals(_value, null) ? "(null)" : _value.GetType().FullName));
         }
 

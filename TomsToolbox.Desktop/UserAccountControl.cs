@@ -681,8 +681,7 @@
                 Contract.Requires(hToken != null);
                 Contract.Requires(pTokenInfo != null);
 
-                int cbReturned;
-                return GetTokenInformation(hToken, tokenInfoClass, pTokenInfo.DangerousGetHandle(), pTokenInfo.Size, out cbReturned);
+                return GetTokenInformation(hToken, tokenInfoClass, pTokenInfo.DangerousGetHandle(), pTokenInfo.Size, out _);
             }
 
             [DllImport("advapi32.dll", CharSet = CharSet.Auto, SetLastError = true)]

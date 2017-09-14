@@ -17,6 +17,7 @@
     using TomsToolbox.Core;
     using TomsToolbox.Desktop;
 
+    /// <inheritdoc />
     /// <summary>
     /// Command declaration to be used with visual composition.
     /// </summary>
@@ -27,8 +28,9 @@
         [NotNull, ItemNotNull]
         private readonly List<ICommand> _attachedCommands = new List<ICommand>();
 
+        /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the <see cref="CommandSource"/> class.
+        /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Composition.CommandSource" /> class.
         /// </summary>
         /// <param name="owner">The command source factory.</param>
         public CommandSource([NotNull] ICommandSourceFactory owner)
@@ -47,12 +49,16 @@
             get => (ICommand)GetValue(CommandProperty);
             private set => SetValue(_commandPropertyKey, value);
         }
-        [NotNull] private static readonly DependencyPropertyKey _commandPropertyKey =
+        [NotNull]
+        private static readonly DependencyPropertyKey _commandPropertyKey =
             DependencyProperty.RegisterReadOnly("Command", typeof(ICommand), typeof(CommandSource), new FrameworkPropertyMetadata(NullCommand.Default, null, Command_CoerceValue));
         /// <summary>
         /// Identifies the <see cref="Command"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty CommandProperty = _commandPropertyKey.DependencyProperty;
+        // ReSharper disable once AssignNullToNotNullAttribute
+        [NotNull]
+        // ReSharper disable once AssignNullToNotNullAttribute
+        public static readonly DependencyProperty CommandProperty = _commandPropertyKey.DependencyProperty;
 
 
         /// <summary>
@@ -66,7 +72,8 @@
         /// <summary>
         /// Identifies the <see cref="IsChecked"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty IsCheckedProperty =
+        [NotNull]
+        public static readonly DependencyProperty IsCheckedProperty =
             DependencyProperty.Register("IsChecked", typeof(bool), typeof(CommandSource));
 
 
@@ -134,12 +141,15 @@
             get => this.GetValue<bool>(IsAnyTargetAttachedProperty);
             private set => SetValue(_isAnyTargetAttachedPropertyKey, value);
         }
-        [NotNull] private static readonly DependencyPropertyKey _isAnyTargetAttachedPropertyKey =
+        [NotNull]
+        private static readonly DependencyPropertyKey _isAnyTargetAttachedPropertyKey =
             DependencyProperty.RegisterReadOnly("IsAnyTargetAttached", typeof(bool), typeof(CommandSource), new FrameworkPropertyMetadata(false));
         /// <summary>
         /// Identifies the <see cref="IsAnyTargetAttached"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty IsAnyTargetAttachedProperty = _isAnyTargetAttachedPropertyKey.DependencyProperty;
+        [NotNull]
+        // ReSharper disable once AssignNullToNotNullAttribute
+        public static readonly DependencyProperty IsAnyTargetAttachedProperty = _isAnyTargetAttachedPropertyKey.DependencyProperty;
 
         /// <summary>
         /// Attaches the specified command. The last command attached will become the active command, while the previous command will be pushed on a stack.

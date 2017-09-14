@@ -16,11 +16,12 @@
     using TomsToolbox.Core;
 #endif
 
+    /// <inheritdoc />
     /// <summary>
-    /// A validation template for using Validar.Fody (<see href="https://github.com/Fody/Validar"/>) with data annotations (<see cref="N:System.ComponentModel.DataAnnotations"/>).<para/>
+    /// A validation template for using Validar.Fody (<see href="https://github.com/Fody/Validar" />) with data annotations (<see cref="N:System.ComponentModel.DataAnnotations" />).<para />
     /// </summary>
     /// <example>
-    /// To activate the validation template just add this line to your AssemblyInfo.cs after you have installed the Validar.Fody package:<para/>
+    /// To activate the validation template just add this line to your AssemblyInfo.cs after you have installed the Validar.Fody package:<para />
     /// <code language="CS">
     /// [assembly: ValidationTemplateAttribute(typeof(TomsToolbox.Desktop.ValidationTemplate))]
     /// </code>
@@ -55,7 +56,7 @@
             target.PropertyChanged += Validate;
         }
 
-        private void Validate(object sender, PropertyChangedEventArgs e)
+        private void Validate([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
         {
             _validationResults = new List<ValidationResult>();
 
@@ -70,9 +71,7 @@
 #endif 
         }
 
-        /// <summary>
-        /// Gets an error message indicating what is wrong with this object.
-        /// </summary>
+        /// <inheritdoc />
         [NotNull]
         public string Error
         {
@@ -85,19 +84,14 @@
             }
         }
 
-        /// <summary>
-        /// Gets the error message for the property with the given name.
-        /// </summary>
-        /// <param name="columnName">The name of the property whose error message to get.</param>
-        /// <returns>
-        /// The error message for the property. The default is an empty string ("").
-        /// </returns>
+        /// <inheritdoc />
         [NotNull]
         public string this[[CanBeNull] string columnName]
         {
             get
             {
                 var strings = _validationResults
+                    // ReSharper disable once AssignNullToNotNullAttribute
                     .Where(x => x.MemberNames.Contains(columnName))
                     .Select(x => x.ErrorMessage);
 

@@ -40,6 +40,7 @@
                           <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" />
                           <Setter Property="Focusable" Value="False" />
                           <Setter Property="VerticalAlignment" Value="Stretch" />
+                          <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
                           <Setter Property="ToolTip" Value="{Binding Command.Text, RelativeSource={RelativeSource Self}}" />
                           <Setter Property="Template">
                             <Setter.Value>

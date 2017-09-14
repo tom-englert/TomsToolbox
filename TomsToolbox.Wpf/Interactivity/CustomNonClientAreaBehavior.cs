@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Runtime.InteropServices;
     using System.Windows;
@@ -188,12 +189,12 @@
             if (DesignerProperties.GetIsInDesignMode(nonClientArea))
                 return;
 
-            _window = nonClientArea.TryFindAncestor<Window>();
-            if (_window == null)
+            var window = _window = nonClientArea.TryFindAncestor<Window>();
+            if (window == null)
                 return;
 
-            _window.SourceInitialized += Window_SourceInitialized;
-            _window.StateChanged += WindowState_Changed;
+            window.SourceInitialized += Window_SourceInitialized;
+            window.StateChanged += WindowState_Changed;
         }
 
         /// <summary>
@@ -206,13 +207,14 @@
         {
             base.OnDetaching();
 
-            if (_window == null)
+            var window = _window;
+
+            if (window == null)
                 return;
 
-            _window.SourceInitialized -= Window_SourceInitialized;
-            _window.StateChanged -= WindowState_Changed;
-
-            Unregister(_window);
+            window.SourceInitialized -= Window_SourceInitialized;
+            window.StateChanged -= WindowState_Changed;
+            Unregister(window);
         }
 
         private void Window_SourceInitialized([CanBeNull] object sender, [CanBeNull] EventArgs e)
@@ -229,10 +231,8 @@
                 throw new InvalidOperationException("Window needs to be initialized");
 
             var compositionTarget = messageSource.CompositionTarget;
-            if (compositionTarget == null)
-                throw new InvalidOperationException("Window needs to be initialized");
 
-            _transformFromDevice = compositionTarget.TransformFromDevice;
+            _transformFromDevice = compositionTarget?.TransformFromDevice ?? throw new InvalidOperationException("Window needs to be initialized");
             _transformToDevice = compositionTarget.TransformToDevice;
 
             messageSource.AddHook(WindowProc);
@@ -394,8 +394,7 @@
             // Arguments are absolute native coordinates
             var hitPoint = new POINT((short)lParam, (short)((uint)lParam >> 16));
 
-            RECT windowRect;
-            NativeMethods.GetWindowRect(windowHandle, out windowRect);
+            NativeMethods.GetWindowRect(windowHandle, out var windowRect);
 
             var topLeft = windowRect.TopLeft;
             var bottomRight = windowRect.BottomRight;
@@ -437,13 +436,11 @@
             // Now check Tag or send an internal NcHitTest event, so any element can override the behavior.
             // The caption must e.g. return HitTest.Caption
             var clientPoint = _transformFromDevice.Transform(hitPoint - topLeft);
-            var element = nonClientArea.InputHitTest(clientPoint) as FrameworkElement;
 
-            if (element != null)
+            if (nonClientArea.InputHitTest(clientPoint) is FrameworkElement element)
             {
-                if (element.Tag is HitTest)
+                if (element.Tag is HitTest value)
                 {
-                    var value = (HitTest)element.Tag;
                     if (Enum.IsDefined(typeof(HitTest), value))
                         return value;
                 }
@@ -643,6 +640,7 @@
         };
 
         [Flags]
+        [SuppressMessage("ReSharper", "UnusedMember.Local")]
         private enum RedrawWindowFlags : uint
         {
             /// <summary>

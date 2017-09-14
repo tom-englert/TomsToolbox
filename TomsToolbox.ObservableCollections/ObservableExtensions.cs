@@ -124,8 +124,9 @@
             [CanBeNull, ItemNotNull]
             private List<WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs>> _propertyChangeEventListeners;
 
+            /// <inheritdoc />
             /// <summary>
-            /// Initializes a new instance of the <see cref="ObservableSelectImpl{TSource, TTarget}" /> class.
+            /// Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.ObservableExtensions.ObservableSelectImpl`2" /> class.
             /// </summary>
             /// <param name="sourceCollection">The source collection to wrap.</param>
             /// <param name="itemGeneratorExpression">The item generator to generate the wrapper for each item.</param>
@@ -146,6 +147,7 @@
 
             [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Caused by code contracts.")]
             [ContractVerification(false)]
+            [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
             protected override void OnSourceCollectionChanged(IEnumerable sourceCollection, NotifyCollectionChangedEventArgs e)
             {
                 // ReSharper disable PossibleMultipleEnumeration
@@ -204,10 +206,12 @@
                 if (e.PropertyName != _propertyName)
                     return;
 
-                IList<TSource> sourceCollection;
-                if (!_sourceReference.TryGetTarget(out sourceCollection))
+                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+                if (!_sourceReference.TryGetTarget(out var sourceCollection))
+                    // ReSharper disable once HeuristicUnreachableCode
                     return;
 
+                // ReSharper disable once PossibleNullReferenceException
                 var index = sourceCollection.IndexOf((TSource)sender);
 
                 if (index == -1)
@@ -224,8 +228,13 @@
                 Contract.Requires((itemIndex >= 0) && (itemIndex < _propertyChangeEventListeners.Count));
                 Contract.Ensures(_propertyChangeEventListeners.Count == Contract.OldValue(_propertyChangeEventListeners.Count) - 1);
 
-                _propertyChangeEventListeners[itemIndex]?.Detach();
-                _propertyChangeEventListeners.RemoveAt(itemIndex);
+                var propertyChangeEventListeners = _propertyChangeEventListeners;
+
+                if (propertyChangeEventListeners == null)
+                    return;
+
+                propertyChangeEventListeners[itemIndex].Detach();
+                propertyChangeEventListeners.RemoveAt(itemIndex);
             }
 
             private void AttachEvent(int itemIndex, [CanBeNull] INotifyPropertyChanged item)
@@ -320,6 +329,7 @@
             }
 
             [ContractVerification(false)]
+            [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
             private void Source_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
             {
                 Contract.Requires(e != null);

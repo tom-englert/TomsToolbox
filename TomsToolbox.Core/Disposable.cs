@@ -48,6 +48,7 @@
             Contract.Requires(obj != null);
 
             var objectType = obj.GetType();
+            // ReSharper disable once PossibleNullReferenceException
             var message = "Object not disposed: " + objectType.Name;
 
             var eventHandler = NotDisposedObject;

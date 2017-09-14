@@ -32,6 +32,7 @@
 
             var baseStyles = typeof(ResourceKeys)
                 .GetFields()
+                // ReSharper disable once AssignNullToNotNullAttribute
                 .Where(field => field.GetCustomAttributes<DefaultStyleAttribute>(false).Any())
                 .Select(field => field.GetValue(null) as ComponentResourceKey)
                 .Where(key => key != null)
@@ -43,11 +44,15 @@
 
             foreach (var style in baseStyles)
             {
+                // ReSharper disable once AssignNullToNotNullAttribute
+                // ReSharper disable once PossibleNullReferenceException
                 mergedDictionary.Add(style.TargetType, style);
             }
 
+            // ReSharper disable once AssignNullToNotNullAttribute
             mergedDictionary.Add(MenuItem.SeparatorStyleKey, helperWindow.FindResource(ResourceKeys.MenuItemSeparatorStyle));
 
+            // ReSharper disable once PossibleNullReferenceException
             FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata(helperWindow.FindResource(ResourceKeys.WindowStyle)));
 
             return mergedDictionary;
@@ -141,11 +146,5 @@
     [AttributeUsage(AttributeTargets.Field)]
     internal sealed class DefaultStyleAttribute : Attribute
     {
-        public DefaultStyleAttribute([CanBeNull] Type targetType)
-        {
-            TargetType = targetType;
-        }
-
-        public Type TargetType { get; }
     }
 }

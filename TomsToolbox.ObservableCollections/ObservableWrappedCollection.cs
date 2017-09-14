@@ -14,6 +14,7 @@
 
     using TomsToolbox.Core;
 
+    /// <inheritdoc />
     /// <summary>
     /// A read only observable collection of type TTarget where TTarget is a wrapper for type TSource.
     /// </summary>
@@ -21,7 +22,7 @@
     /// <typeparam name="TTarget">The type of elements in the wrapped collection.</typeparam>
     /// <remarks>
     /// This collection does <c>not</c> hold a reference to the source collection.
-    /// To keep the source collection alive, the object generating the <see cref="ObservableWrappedCollection{TTarget, TSource}" /> must hold a reference to the source collection.
+    /// To keep the source collection alive, the object generating the <see cref="T:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2" /> must hold a reference to the source collection.
     /// </remarks>
     public class ObservableWrappedCollection<TSource, TTarget> : ReadOnlyObservableCollectionAdapter<TTarget, ObservableCollection<TTarget>>
     {
@@ -30,8 +31,9 @@
         [CanBeNull]
         private readonly IWeakEventListener _collectionChangedWeakEvent;
 
+        /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObservableWrappedCollection{TTarget, TSource}" /> class.
+        /// Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2" /> class.
         /// </summary>
         /// <param name="sourceCollection">The source collection to wrap. This instance will not hold a reference to the source collection.</param>
         /// <param name="itemGenerator">The item generator to generate the wrapper for each item.</param>
@@ -43,8 +45,7 @@
 
             _itemGenerator = itemGenerator;
 
-            var eventSource = sourceCollection as INotifyCollectionChanged;
-            if (eventSource != null)
+            if (sourceCollection is INotifyCollectionChanged eventSource)
             {
                 _collectionChangedWeakEvent = CreateEvent(eventSource);
             }
@@ -113,6 +114,8 @@
         /// <exception cref="System.NotImplementedException">Moving more than one item is not supported</exception>
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Caused by code contracts.")]
         [ContractVerification(false)]
+        [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         protected virtual void OnSourceCollectionChanged([NotNull, ItemCanBeNull] IEnumerable sourceCollection, [NotNull] NotifyCollectionChangedEventArgs e)
         {
             Contract.Requires(sourceCollection != null);

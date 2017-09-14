@@ -12,21 +12,24 @@
 
     using TomsToolbox.Wpf.Composition;
 
+    /// <inheritdoc />
     /// <summary>
-    /// A markup extension to create a <see cref="CompositeContextMenu"/> in XAML.
+    /// A markup extension to create a <see cref="T:TomsToolbox.Wpf.Controls.CompositeContextMenu" /> in XAML.
     /// </summary>
     [MarkupExtensionReturnType(typeof(ContextMenu))]
     public class CompositeContextMenuExtension : MarkupExtension
     {
+        /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the <see cref="CompositeContextMenuExtension"/> class.
+        /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Controls.CompositeContextMenuExtension" /> class.
         /// </summary>
         public CompositeContextMenuExtension()
         {
         }
 
+        /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the <see cref="CompositeContextMenuExtension"/> class.
+        /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Controls.CompositeContextMenuExtension" /> class.
         /// </summary>
         /// <param name="regionId">The region identifier.</param>
         public CompositeContextMenuExtension([CanBeNull] string regionId)
@@ -37,6 +40,7 @@
         /// <summary>
         /// Gets or sets the region identifier.
         /// </summary>
+        [CanBeNull]
         public string RegionId
         {
             get;
@@ -46,12 +50,14 @@
         /// <summary>
         /// Gets or sets a binding to seed the <see cref="IVisualCompositionBehavior.CompositionContext"/>.
         /// </summary>
+        [CanBeNull]
         public Binding CompositionContextBinding
         {
             get;
             set;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// When implemented in a derived class, returns an object that is provided as the value of the target property for this markup extension.
         /// </summary>
@@ -76,20 +82,23 @@
         }
     }
 
+    /// <inheritdoc />
     /// <summary>
     /// A context menu that uses the composition framework to build it's content 
-    /// dynamically by collecting all exported <see cref="CommandSourceFactory"/> objects 
+    /// dynamically by collecting all exported <see cref="T:TomsToolbox.Wpf.Composition.CommandSourceFactory" /> objects 
     /// with the matching region.
     /// </summary>
     public class CompositeContextMenu : ContextMenu
     {
         static CompositeContextMenu()
         {
+            // ReSharper disable once PossibleNullReferenceException
             DefaultStyleKeyProperty.OverrideMetadata(typeof(CompositeContextMenu), new FrameworkPropertyMetadata(typeof(CompositeContextMenu)));
         }
 
+        /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the <see cref="CompositeContextMenu" /> class.
+        /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Controls.CompositeContextMenu" /> class.
         /// </summary>
         public CompositeContextMenu()
         {

@@ -283,12 +283,12 @@
                 return;
 
             var sourceType = sender.GetType();
+            // ReSharper disable once PossibleNullReferenceException
             foreach (var mapping in RelayMapping.Where(item => item.Key.IsAssignableFrom(sourceType)).Select(item => item.Value))
             {
                 Contract.Assume(mapping != null);
 
-                string targetPropertyName;
-                if (mapping.TryGetValue(e.PropertyName, out targetPropertyName) && !string.IsNullOrEmpty(targetPropertyName))
+                if (mapping.TryGetValue(e.PropertyName, out var targetPropertyName) && !string.IsNullOrEmpty(targetPropertyName))
                 {
                     OnPropertyChanged(targetPropertyName);
                 }

@@ -91,8 +91,7 @@
             Contract.Requires(propertyExpression != null);
             Contract.Ensures((failOnErrors == false) || !string.IsNullOrEmpty(Contract.Result<string>()));
 
-            var memberExpression = propertyExpression.Body as MemberExpression;
-            if (memberExpression == null)
+            if (!(propertyExpression.Body is MemberExpression memberExpression))
                 return HandleError(failOnErrors, @"Expression is not a member access expression");
 
             var property = memberExpression.Member as PropertyInfo;
@@ -112,8 +111,7 @@
             Contract.Requires(propertyExpression != null);
             Contract.Ensures((failOnErrors == false) || !string.IsNullOrEmpty(Contract.Result<string>()));
 
-            var memberExpression = propertyExpression.Body as MemberExpression;
-            if (memberExpression == null)
+            if (!(propertyExpression.Body is MemberExpression memberExpression))
                 return HandleError(failOnErrors, @"Expression is not a member access expression");
 
             var property = memberExpression.Member as PropertyInfo;
@@ -129,6 +127,7 @@
 
         // ReSharper disable once UnusedParameter.Local
         [CanBeNull]
+        // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
         private static string HandleError(bool failOnErrors, [NotNull] string errorMessage)
         {
             Contract.Requires(errorMessage != null);

@@ -10,8 +10,9 @@
 #endif
     using JetBrains.Annotations;
 
+    /// <inheritdoc />
     /// <summary>
-    /// <see cref="IEqualityComparer{T}"/> implementation using a delegate function to compare the values.
+    /// <see cref="T:System.Collections.Generic.IEqualityComparer`1" /> implementation using a delegate function to compare the values.
     /// </summary>
     /// <typeparam name="T">The type of objects to compare.</typeparam>
     public class DelegateEqualityComparer<T> : IEqualityComparer<T>
@@ -21,9 +22,10 @@
         [NotNull]
         private readonly Func<T, int> _hashCodeGenerator;
 
+        /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the <see cref="DelegateEqualityComparer{T}"/> class,
-        /// using <see cref="object.Equals(object, object)"/> and <see cref="object.GetHashCode()"/>
+        /// Initializes a new instance of the <see cref="T:TomsToolbox.Core.DelegateEqualityComparer`1" /> class,
+        /// using <see cref="M:System.Object.Equals(System.Object,System.Object)" /> and <see cref="M:System.Object.GetHashCode" />
         /// </summary>
         public DelegateEqualityComparer()
             : this((a, b) => object.Equals(a, b), x => ReferenceEquals(x, null) ? 0 : x.GetHashCode())
@@ -72,15 +74,8 @@
             _hashCodeGenerator = obj => hashCodeGenerator(selector(obj));
         }
 
-        /// <summary>
-        /// Determines whether the specified objects are equal.
-        /// </summary>
-        /// <returns>
-        /// true if the specified objects are equal; otherwise, false.
-        /// </returns>
-        /// <param name="x">The first object of type <typeparamref name="T"/> to compare.</param>
-        /// <param name="y">The second object of type <typeparamref name="T"/> to compare.</param>
-        public bool Equals([CanBeNull] T x, [CanBeNull] T y)
+        /// <inheritdoc />
+        public bool Equals(T x, T y)
         {
             if (!typeof(T).GetTypeInfo().IsValueType)
             {
@@ -94,14 +89,7 @@
             return _comparer(x, y);
         }
 
-        /// <summary>
-        /// Returns a hash code for the specified object.
-        /// </summary>
-        /// <returns>
-        /// A hash code for the specified object.
-        /// </returns>
-        /// <param name="obj">The <see cref="T:System.Object"/> for which a hash code is to be returned.</param>
-        /// <exception cref="T:System.ArgumentNullException">The type of <paramref name="obj"/> is a reference type and <paramref name="obj"/> is null.</exception>
+        /// <inheritdoc />
         public int GetHashCode([CanBeNull] T obj)
         {
             if (!typeof(T).GetTypeInfo().IsValueType)

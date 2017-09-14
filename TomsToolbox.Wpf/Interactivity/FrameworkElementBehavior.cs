@@ -44,12 +44,13 @@
         {
             base.OnAttached();
 
-            Contract.Assume(AssociatedObject != null);
+            var associatedObject = AssociatedObject;
+            Contract.Assume(associatedObject != null);
 
-            AssociatedObject.Loaded += AssociatedObject_Loaded;
-            AssociatedObject.Unloaded += AssociatedObject_Unloaded;
+            associatedObject.Loaded += AssociatedObject_Loaded;
+            associatedObject.Unloaded += AssociatedObject_Unloaded;
 
-            Contract.Assume(!AssociatedObject.IsLoaded);
+            Contract.Assume(!associatedObject.IsLoaded);
         }
 
         /// <summary>
@@ -62,10 +63,11 @@
         {
             base.OnDetaching();
 
-            Contract.Assume(AssociatedObject != null);
+            var associatedObject = AssociatedObject;
+            Contract.Assume(associatedObject != null);
 
-            AssociatedObject.Loaded -= AssociatedObject_Loaded;
-            AssociatedObject.Unloaded -= AssociatedObject_Unloaded;
+            associatedObject.Loaded -= AssociatedObject_Loaded;
+            associatedObject.Unloaded -= AssociatedObject_Unloaded;
         }
 
         private void AssociatedObject_Loaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)

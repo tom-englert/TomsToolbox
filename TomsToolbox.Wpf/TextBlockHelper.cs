@@ -26,7 +26,9 @@
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static TextBlockHelper()
         {
+            // ReSharper disable once AssignNullToNotNullAttribute
             EventManager.RegisterClassHandler(typeof(TextBlock), FrameworkElement.SizeChangedEvent, new SizeChangedEventHandler(TextBlock_SizeChanged), true);
+            // ReSharper disable once AssignNullToNotNullAttribute
             EventManager.RegisterClassHandler(typeof(TextBlock), Binding.TargetUpdatedEvent, new EventHandler<DataTransferEventArgs>(Binding_TargetUpdated), true);
         }
 
@@ -58,6 +60,7 @@
         /// reflects if the text inside the text block is trimmed, i.e. not fully visible.
         /// </summary>
         /// </AttachedPropertyComments>
+        // ReSharper disable once AssignNullToNotNullAttribute
         [NotNull] public static readonly DependencyProperty IsTextTrimmedProperty = IsTextTrimmedPropertyKey.DependencyProperty;
 
         /// <summary>
@@ -103,8 +106,7 @@
         /// <param name="e">Event data</param>
         private static void TextBlock_SizeChanged([NotNull] object sender, [NotNull] SizeChangedEventArgs e)
         {
-            var textBlock = sender as TextBlock;
-            if (null == textBlock)
+            if (!(sender is TextBlock textBlock))
                 return;
 
             if (!e.WidthChanged)
@@ -124,9 +126,7 @@
         /// <param name="e">Event data</param>
         private static void Binding_TargetUpdated([NotNull] object sender, [NotNull] DataTransferEventArgs e)
         {
-            var textBlock = sender as TextBlock;
-
-            if (null == textBlock)
+            if (!(sender is TextBlock textBlock))
                 return;
 
             if (e.Property != TextBlock.TextProperty)

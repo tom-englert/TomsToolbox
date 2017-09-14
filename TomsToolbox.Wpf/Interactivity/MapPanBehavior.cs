@@ -28,6 +28,7 @@
         private bool _isStoryboardRunning;
 
         [NotNull] private static readonly DependencyProperty AnimatedPanPositionProperty =
+            // ReSharper disable once PossibleNullReferenceException
             DependencyProperty.Register("AnimatedPanPosition", typeof(Point), typeof(MapPanBehavior), new FrameworkPropertyMetadata((sender, e) => ((MapPanBehavior)sender)?.AnimatedPanPosition_Changed((Point)e.NewValue)));
 
         /// <summary>
@@ -77,10 +78,12 @@
             _storyboard.Children?.Add(_panAnimation);
             _storyboard.Completed += Storyboard_Completed;
 
+            // ReSharper disable AssignNullToNotNullAttribute
             CommandManager.RegisterClassCommandBinding(typeof(Map), new CommandBinding(ComponentCommands.MoveLeft, (_, __) => Pan(1, 0)));
             CommandManager.RegisterClassCommandBinding(typeof(Map), new CommandBinding(ComponentCommands.MoveRight, (_, __) => Pan(-1, 0)));
             CommandManager.RegisterClassCommandBinding(typeof(Map), new CommandBinding(ComponentCommands.MoveUp, (_, __) => Pan(0, 1)));
             CommandManager.RegisterClassCommandBinding(typeof(Map), new CommandBinding(ComponentCommands.MoveDown, (_, __) => Pan(0, -1)));
+            // ReSharper restore AssignNullToNotNullAttribute
         }
 
         void FocusableParent_KeyDown([NotNull] object sender, [NotNull] KeyEventArgs e)

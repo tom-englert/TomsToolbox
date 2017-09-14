@@ -65,8 +65,7 @@
 
         private static void TrackSelection_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var selector = d as Selector;
-            if (selector == null)
+            if (!(d is Selector selector))
                 return;
 
             selector.SelectionChanged -= Selector_SelectionChanged;
@@ -123,7 +122,7 @@
                     if ((++_cleanupCycleCounter & 0x7F) == 0)
                         Cleanup();
 
-                    var target = _items.FirstOrDefault(item => item.Key.Target == key);
+                    var target = _items.FirstOrDefault(item => item.Key?.Target == key);
 
                     return target.Value;
                 }
@@ -140,7 +139,7 @@
 
             private void Cleanup()
             {
-                _items = _items.Where(item => item.Key.IsAlive).ToDictionary(item => item.Key, item => item.Value);
+                _items = _items.Where(item => item.Key?.IsAlive == true).ToDictionary(item => item.Key, item => item.Value);
             }
 
             [ContractInvariantMethod, UsedImplicitly]

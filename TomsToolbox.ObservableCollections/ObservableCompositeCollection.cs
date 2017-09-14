@@ -76,9 +76,10 @@
         }
     }
 
+    /// <inheritdoc cref="ReadOnlyObservableCollection{T}"/>
     /// <summary>
     /// View a set of collections as one continuous list.
-    /// <para/>
+    /// <para />
     /// Similar to the System.Windows.Data.CompositeCollection, plus:
     /// <list type="bullet">
     /// <item>Generic type</item>
@@ -93,6 +94,7 @@
         [NotNull, ItemNotNull]
         private readonly ContentManager _content;
 
+        /// <inheritdoc />
         /// <summary>
         /// Taking care of the physical content
         /// </summary>
@@ -146,7 +148,9 @@
                         return new NotifyCollectionChangedEventArgs(e.Action, e.NewItems, e.NewStartingIndex + offset, e.OldStartingIndex + offset);
 
                     case NotifyCollectionChangedAction.Replace:
+                        // ReSharper disable AssignNullToNotNullAttribute
                         return new NotifyCollectionChangedEventArgs(e.Action, e.NewItems, e.OldItems, e.OldStartingIndex + offset);
+                    // ReSharper restore AssignNullToNotNullAttribute
 
                     default:
                         throw new NotImplementedException();
@@ -173,8 +177,7 @@
 
                 // If this list implements INotifyCollectionChanged monitor changes so they can be forwarded properly.
                 // If it does not implement INotifyCollectionChanged, no notification should be neccesary.
-                var dynamicPart = item as INotifyCollectionChanged;
-                if (dynamicPart != null)
+                if (item is INotifyCollectionChanged dynamicPart)
                     dynamicPart.CollectionChanged += parts_CollectionChanged;
 
                 if (item.Count == 0)
@@ -194,8 +197,7 @@
                 _parts.RemoveAt(index);
 
                 // If this list implements INotifyCollectionChanged events must be unregistered!
-                var dynamicPart = part as INotifyCollectionChanged;
-                if (dynamicPart != null)
+                if (part is INotifyCollectionChanged dynamicPart)
                     dynamicPart.CollectionChanged -= parts_CollectionChanged;
 
                 if (part.Count == 0)
@@ -300,6 +302,7 @@
             #endregion
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Create an empty collection
         /// </summary>
@@ -309,11 +312,13 @@
             _content = new ContentManager(this);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Create a collection initially wrapping a set of lists
         /// </summary>
         /// <param name="parts">The lists to wrap</param>
-        /// <exception cref="System.ArgumentException">None of the parts may be null!</exception>
+        /// <exception cref="T:System.ArgumentException">None of the parts may be null!</exception>
+        [SuppressMessage("ReSharper", "HeuristicUnreachableCode")]
         public ObservableCompositeCollection([NotNull, ItemNotNull] params IList<T>[] parts)
             : this()
         {
@@ -323,7 +328,6 @@
             {
                 // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                 if (part == null)
-                    // ReSharper disable once HeuristicUnreachableCode
                     throw new ArgumentException(@"None of the parts may be null!");
 
                 _content.Add(part);
@@ -345,6 +349,8 @@
         }
 
         [ContractVerification(false)]
+        [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         private void ContentCollectionChanged([NotNull] NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
@@ -359,7 +365,9 @@
 
                 case NotifyCollectionChangedAction.Remove:
                     var removeIndex = e.OldStartingIndex;
+                    // ReSharper disable PossibleNullReferenceException
                     for (var k = 0; k < e.OldItems.Count; k++)
+                        // ReSharper restore PossibleNullReferenceException
                     {
                         Items.RemoveAt(removeIndex);
                     }

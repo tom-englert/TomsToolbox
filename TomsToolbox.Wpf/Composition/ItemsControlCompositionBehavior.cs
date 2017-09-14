@@ -10,10 +10,11 @@
 
     using JetBrains.Annotations;
 
+    /// <inheritdoc />
     /// <summary>
-    /// Retrieves all exported items with the  <see cref="VisualCompositionExportAttribute"/> that match the RegionId from the composition container and assigns them as the items source of the associated <see cref="ItemsControl"/>
-    /// <para/>
-    /// If the items control is a <see cref="Selector"/>, and the composable object implement <see cref="ISelectableComposablePart"/>, the selection of the selector is synchronized with the <see cref="ISelectableComposablePart.IsSelected"/> property.
+    /// Retrieves all exported items with the  <see cref="T:TomsToolbox.Wpf.Composition.VisualCompositionExportAttribute" /> that match the RegionId from the composition container and assigns them as the items source of the associated <see cref="T:System.Windows.Controls.ItemsControl" />
+    /// <para />
+    /// If the items control is a <see cref="T:System.Windows.Controls.Primitives.Selector" />, and the composable object implement <see cref="T:TomsToolbox.Wpf.Composition.ISelectableComposablePart" />, the selection of the selector is synchronized with the <see cref="P:TomsToolbox.Wpf.Composition.ISelectableComposablePart.IsSelected" /> property.
     /// </summary>
     public class ItemsControlCompositionBehavior : VisualCompositionBehavior<ItemsControl>
     {
@@ -30,6 +31,7 @@
             set => _forceSelection = value;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Updates this instance.
         /// </summary>
@@ -54,7 +56,7 @@
 
             var exportedItems = exports
                 .OrderBy(item => item.Metadata?.Sequence)
-                .Select(item => GetTarget(item?.Value))
+                .Select(item => GetTarget(item.Value))
                 .ToArray();
 
             // ReSharper disable once AssignNullToNotNullAttribute
@@ -102,6 +104,7 @@
             }
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Called when the behavior is being detached from its AssociatedObject, but before it has actually occurred.
         /// </summary>
@@ -112,8 +115,7 @@
         {
             var itemsControl = AssociatedObject;
 
-            var selector = itemsControl as Selector;
-            if (selector == null)
+            if (!(itemsControl is Selector))
                 return;
 
             var items = itemsControl.ItemsSource;
@@ -154,8 +156,7 @@
 
         private void Selectable_PropertyChanged([CanBeNull] object sender, [CanBeNull] PropertyChangedEventArgs e)
         {
-            var selector = AssociatedObject as Selector;
-            if (selector == null)
+            if (!(AssociatedObject is Selector selector))
                 return;
 
             var selectable = (ISelectableComposablePart)sender;

@@ -5,6 +5,7 @@
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
     using System.Linq;
 
@@ -95,7 +96,9 @@
             ItemPropertyChanged?.Invoke(sender, e);
         }
 
-        [ContractVerification(false)] // Too complex, checker is confused.
+        [ContractVerification(false)]
+        [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
+// Too complex, checker is confused.
         private void Items_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
             Contract.Requires((e.Action != NotifyCollectionChangedAction.Add) || (e.NewItems != null));

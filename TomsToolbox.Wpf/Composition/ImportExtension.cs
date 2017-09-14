@@ -21,9 +21,10 @@
     using TomsToolbox.Desktop;
     using TomsToolbox.Desktop.Composition;
 
+    /// <inheritdoc />
     /// <summary>
-    /// The XAML equivalent of the <see cref="ImportAttribute"/>. Use like the <see cref="System.Windows.Markup.StaticExtension"/>;
-    /// uses the MEF <see cref="ExportProvider"/> to create the object.
+    /// The XAML equivalent of the <see cref="T:System.ComponentModel.Composition.ImportAttribute" />. Use like the <see cref="T:System.Windows.Markup.StaticExtension" />;
+    /// uses the MEF <see cref="T:System.ComponentModel.Composition.Hosting.ExportProvider" /> to create the object.
     /// </summary>
     [MarkupExtensionReturnType(typeof(object))]
     public class ImportExtension : MarkupExtension
@@ -42,8 +43,9 @@
         [CanBeNull]
         private INotifyChanged _tracker;
 
+        /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the <see cref="ImportExtension" /> class.
+        /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Composition.ImportExtension" /> class.
         /// </summary>
         /// <param name="memberType">Type of the member to provide.</param>
         public ImportExtension([NotNull] Type memberType)
@@ -59,6 +61,7 @@
         public Type MemberType
         {
             get;
+            // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
             set;
         }
 
@@ -69,6 +72,7 @@
         public string ContractName
         {
             get;
+            // ReSharper disable once UnusedAutoPropertyAccessor.Global
             set;
         }
 
@@ -81,6 +85,7 @@
         public bool AllowRecomposition
         {
             get;
+            // ReSharper disable once UnusedAutoPropertyAccessor.Global
             set;
         }
 
@@ -97,6 +102,7 @@
             }
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// When implemented in a derived class, returns an object that is provided as the value of the target property for this markup extension.
         /// </summary>
@@ -154,15 +160,11 @@
                 if (value == null)
                     return null;
 
-                var target = value as DependencyObject;
-                if (target == null)
+                if (!(value is DependencyObject target))
                     return value;
 
                 foreach (var setter in Setters)
                 {
-                    if (setter == null)
-                        continue;
-
                     var binding = setter.Value as BindingBase;
                     var dependencyProperty = setter.Property;
                     if (dependencyProperty == null)
@@ -187,12 +189,9 @@
             if (_targetObject == null)
                 return;
 
-            var frameworkProperty = _targetProperty as DependencyProperty;
-
-            if (frameworkProperty != null)
+            if (_targetProperty is DependencyProperty frameworkProperty)
             {
-                var frameworkTarget = _targetObject as DependencyObject;
-                if (frameworkTarget != null)
+                if (_targetObject is DependencyObject frameworkTarget)
                 {
                     frameworkTarget.SetValue(frameworkProperty, Value);
                     return;

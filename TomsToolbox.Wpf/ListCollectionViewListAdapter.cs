@@ -74,6 +74,7 @@
         /// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
         public bool Contains(T item)
         {
+            // ReSharper disable once AssignNullToNotNullAttribute
             return _collectionView.Contains(item);
         }
 
@@ -86,6 +87,7 @@
         /// </returns>
         public int IndexOf(T item)
         {
+            // ReSharper disable once AssignNullToNotNullAttribute
             return _collectionView.IndexOf(item);
         }
 

@@ -69,11 +69,9 @@
                 Contract.Requires(!ReferenceEquals(key, null));
                 Contract.Ensures(Contract.Result<TValue>() != null);
 
-                var target = default(TValue);
-
                 var items1 = _items;
-                if (items1.TryGetValue(key, out var value) && (value?.TryGetTarget(out target) == true))
-                    // ReSharper disable once AssignNullToNotNullAttribute
+                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+                if (items1.TryGetValue(key, out var value) && value.TryGetTarget(out var target) && (target != null))
                     return target;
 
                 lock (_sync)

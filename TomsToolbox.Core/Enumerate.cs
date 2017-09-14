@@ -33,10 +33,12 @@
             {
                 using (var e2 = second.GetEnumerator())
                 {
+                    // ReSharper disable PossibleNullReferenceException
                     while (e1.MoveNext() && e2.MoveNext())
                     {
                         yield return new Tuple<T1, T2>(e1.Current, e2.Current);
                     }
+                    // ReSharper restore PossibleNullReferenceException
                 }
             }
         }
@@ -61,11 +63,12 @@
 
             try
             {
+                // ReSharper disable PossibleNullReferenceException
                 while (e1.MoveNext() && e2.MoveNext())
                 {
                     yield return new Tuple<object, object>(e1.Current, e2.Current);
                 }
-
+                // ReSharper restore PossibleNullReferenceException
             }
             finally
             {

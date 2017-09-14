@@ -107,8 +107,7 @@
             if (newValue == null)
                 return;
 
-            var target = d as UIElement;
-            if (target == null)
+            if (!(d is UIElement target))
                 return;
 
             var existingInputBindings = target.InputBindings;
@@ -177,8 +176,7 @@
 
             groupStyle.Clear();
 
-            var newGroupStyles = e.NewValue as GroupStyleCollection;
-            if (newGroupStyles != null)
+            if (e.NewValue is GroupStyleCollection newGroupStyles)
             {
                 groupStyle.AddRange(newGroupStyles);
             }
@@ -241,8 +239,7 @@
 
             groupStyle.Clear();
 
-            var newGroupStyle = e.NewValue as GroupStyle;
-            if (newGroupStyle != null)
+            if (e.NewValue is GroupStyle newGroupStyle)
             {
                 groupStyle.Add(newGroupStyle);
             }
@@ -303,8 +300,7 @@
 
             groupDescriptions.Clear();
 
-            var newGroupDescriptions = e.NewValue as GroupDescriptionCollection;
-            if (newGroupDescriptions == null)
+            if (!(e.NewValue is GroupDescriptionCollection newGroupDescriptions))
                 return;
 
             groupDescriptions.AddRange(newGroupDescriptions);
@@ -361,7 +357,7 @@
                 var existingBehaviors = Interaction.GetBehaviors(d);
                 Contract.Assume(existingBehaviors != null);
                 Contract.Assume(existingBehaviors.Count == 0);
-                existingBehaviors.AddRange(newValue.Select(item => (Behavior)item?.Clone()).Where(item => item != null));
+                existingBehaviors.AddRange(newValue.Select(item => (Behavior)item.Clone()));
             }
         }
 
@@ -421,7 +417,7 @@
                 Contract.Assume(existingTriggers != null);
                 Contract.Assume(existingTriggers.Count == 0);
 
-                existingTriggers.AddRange(newValue.Select(item => (TriggerBase)item?.Clone()).Where(item => item != null));
+                existingTriggers.AddRange(newValue.Select(item => (TriggerBase)item.Clone()));
             }
         }
     }

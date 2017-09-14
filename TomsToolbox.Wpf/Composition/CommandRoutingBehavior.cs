@@ -117,7 +117,8 @@
         /// <summary>
         /// Identifies the <see cref="IsChecked"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty IsCheckedProperty =
+        [NotNull]
+        public static readonly DependencyProperty IsCheckedProperty =
             DependencyProperty.Register("IsChecked", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, e) => ((CommandRoutingBehavior)sender)?.StateChanged()));
 
 
@@ -130,12 +131,15 @@
             get => this.GetValue<bool>(IsActiveProperty);
             private set => SetValue(_isActivePropertyKey, value);
         }
-        [NotNull] private static readonly DependencyPropertyKey _isActivePropertyKey =
+        [NotNull]
+        private static readonly DependencyPropertyKey _isActivePropertyKey =
             DependencyProperty.RegisterReadOnly("IsActive", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(false));
         /// <summary>
         /// Identifies the <see cref="IsActive"/> read only dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty IsActiveProperty = _isActivePropertyKey.DependencyProperty;
+        [NotNull]
+        // ReSharper disable once AssignNullToNotNullAttribute
+        public static readonly DependencyProperty IsActiveProperty = _isActivePropertyKey.DependencyProperty;
 
 
         private void CommandSource_Changed([CanBeNull] Type oldValue, [CanBeNull] Type newValue)
@@ -196,6 +200,7 @@
             CompositionContext_Changed(compositionContext, compositionContext);
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Called after the behavior is attached to an AssociatedObject.
         /// </summary>

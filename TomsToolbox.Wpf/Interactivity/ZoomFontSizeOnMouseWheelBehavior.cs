@@ -57,9 +57,13 @@
 
             var newZoomOffset = _zoomOffset + Math.Sign(e.Delta);
 
+            var frameworkElement = AssociatedObject;
+            if (frameworkElement == null)
+                return;
+
             if (!_initialFontSize.HasValue)
             {
-                _initialFontSize = TextElement.GetFontSize(AssociatedObject);
+                _initialFontSize = TextElement.GetFontSize(frameworkElement);
             }
 
             var newFontSize = _initialFontSize.Value + newZoomOffset;
@@ -68,7 +72,7 @@
                 return;
 
             _zoomOffset = newZoomOffset;
-            TextElement.SetFontSize(AssociatedObject, newFontSize);
+            TextElement.SetFontSize(frameworkElement, newFontSize);
 
             if (newZoomOffset == 0)
             {

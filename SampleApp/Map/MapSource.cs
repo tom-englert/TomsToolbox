@@ -97,6 +97,7 @@
 
         public IImage GetImage(IMapTile tile)
         {
+            // ReSharper disable once AssignNullToNotNullAttribute
             return _imageCache[tile];
         }
 

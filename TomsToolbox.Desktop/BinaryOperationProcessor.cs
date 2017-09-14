@@ -155,7 +155,9 @@
                 .Where(m => _operationMethodNames.Contains(m?.Name))
                 .Select(m => new { Method = m, Parameters = m?.GetParameters() })
                 .Where(m => m.Parameters?.Length == 2)
+                // ReSharper disable once PossibleNullReferenceException
                 .Where(m => m.Parameters[0].ParameterType == valueType)
+                // ReSharper disable once PossibleNullReferenceException
                 .Select(m => ApplyOperation(m.Method, m.Parameters[1].ParameterType, value1, value2))
                 .FirstOrDefault(v => v != null);
         }
@@ -238,6 +240,7 @@
         private static int Compare([NotNull] object a, [CanBeNull] object b)
         {
             Contract.Requires(a != null);
+            // ReSharper disable once PossibleNullReferenceException
             return Comparer.DefaultInvariant.Compare(a, Convert.ChangeType(b, a.GetType(), CultureInfo.InvariantCulture));
         }
 

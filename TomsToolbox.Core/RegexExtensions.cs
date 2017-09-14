@@ -34,6 +34,7 @@
             Contract.Requires(itemGenerator != null);
             Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
 
+            // ReSharper disable once AssignNullToNotNullAttribute
             var textParts = regex.Matches(input).Cast<Match>().ToArray();
 
             Match previousTextPart = null;

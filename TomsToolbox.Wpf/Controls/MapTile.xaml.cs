@@ -177,6 +177,7 @@
                     Image.Loaded += (_, __) => this.BeginInvoke(Invalidate);
                 }
 
+                // ReSharper disable once PossibleNullReferenceException
                 if (!Image.IsLoaded)
                     return;
 

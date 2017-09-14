@@ -13,16 +13,17 @@
     using TomsToolbox.Core;
     using TomsToolbox.Desktop;
 
+    /// <inheritdoc />
     /// <summary>
     /// Text control supporting in place editing.
-    /// <para/>
+    /// <para />
     /// Editing starts
     /// <list type="bullet">
     /// <item>by deferred mouse double click</item>
     /// <item>by pressing F2</item>
     /// <item>setting IsEditing to true</item>
     /// </list>
-    /// <para/>
+    /// <para />
     /// Editing terminates
     /// <list type="bullet">
     /// <item>when the focus gets lost (changes accepted)</item>
@@ -55,11 +56,13 @@
 
         static InPlaceEdit()
         {
+            // ReSharper disable once PossibleNullReferenceException
             DefaultStyleKeyProperty.OverrideMetadata(typeof(InPlaceEdit), new FrameworkPropertyMetadata(typeof(InPlaceEdit)));
         }
 
+        /// <inheritdoc />
         /// <summary>
-        /// Initializes a new instance of the <see cref="InPlaceEdit"/> class.
+        /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Controls.InPlaceEdit" /> class.
         /// </summary>
         public InPlaceEdit()
         {
@@ -103,6 +106,7 @@
         /// </summary>
         [NotNull]
         public static readonly DependencyProperty IsEditingProperty =
+            // ReSharper disable once PossibleNullReferenceException
             DependencyProperty.Register("IsEditing", typeof(bool), typeof(InPlaceEdit), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((InPlaceEdit)sender)?.IsEditing_Changed((bool)e.NewValue), (sender, baseValue) => ((InPlaceEdit)sender)?.IsEditing_CoerceValue(baseValue.SafeCast<bool>())));
 
 
@@ -173,9 +177,7 @@
             DependencyProperty.Register("TextAlignment", typeof(TextAlignment), typeof(InPlaceEdit), new FrameworkPropertyMetadata(TextAlignment.Left));
 
 
-        /// <summary>
-        /// When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate" />.
-        /// </summary>
+        /// <inheritdoc />
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -184,20 +186,17 @@
             if (template == null)
                 return;
 
-            _textBox = template.FindName(TextboxPartName, this) as TextBox;
+            var textBox = _textBox = template.FindName(TextboxPartName, this) as TextBox;
 
-            if (_textBox == null)
+            if (textBox == null)
                 return;
 
-            _textBox.KeyDown += TextBox_KeyDown;
-            _textBox.LostFocus += TextBox_LostFocus;
-            _textBox.TextChanged += TextBox_TextChanged;
+            textBox.KeyDown += TextBox_KeyDown;
+            textBox.LostFocus += TextBox_LostFocus;
+            textBox.TextChanged += TextBox_TextChanged;
         }
 
-        /// <summary>
-        /// Invoked when an unhandled <see cref="E:System.Windows.UIElement.MouseLeftButtonDown"/> routed event is raised on this element. Implement this method to add class handling for this event.
-        /// </summary>
-        /// <param name="e">The <see cref="T:System.Windows.Input.MouseButtonEventArgs"/> that contains the event data. The event data reports that the left mouse button was pressed.</param>
+        /// <inheritdoc />
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             if (Focusable)
@@ -233,10 +232,7 @@
             _processingMouseLeftButtonDown = false;
         }
 
-        /// <summary>
-        /// Raises the <see cref="E:System.Windows.Controls.Control.MouseDoubleClick"/> routed event.
-        /// </summary>
-        /// <param name="e">The event data.</param>
+        /// <inheritdoc />
         protected override void OnMouseDoubleClick(MouseButtonEventArgs e)
         {
             _mouseDoubleClicked = true;
@@ -245,13 +241,13 @@
 
         private void Self_Loaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
         {
-            _focusableParent = this.TryFindAncestorOrSelf<FrameworkElement>(item => item?.Focusable == true);
-            if (_focusableParent != null)
-            {
-                // This is needed to handle the F2 key.
-                _focusableParent.KeyDown += Parent_KeyDown;
-                _focusableParent.GotFocus += FocusableParent_GotFocus;
-            }
+            var focusableParent = _focusableParent = this.TryFindAncestorOrSelf<FrameworkElement>(item => item?.Focusable == true);
+            if (focusableParent == null)
+                return;
+
+            // This is needed to handle the F2 key.
+            focusableParent.KeyDown += Parent_KeyDown;
+            focusableParent.GotFocus += FocusableParent_GotFocus;
         }
 
         private void FocusableParent_GotFocus([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
@@ -261,24 +257,24 @@
 
         private void Self_Unloaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
         {
-            if (_focusableParent != null)
-            {
-                _focusableParent.KeyDown -= Parent_KeyDown;
-                _focusableParent.GotFocus -= FocusableParent_GotFocus;
-                _focusableParent = null;
-            }
+            var focusableParent = _focusableParent;
+            if (focusableParent == null)
+                return;
+
+            focusableParent.KeyDown -= Parent_KeyDown;
+            focusableParent.GotFocus -= FocusableParent_GotFocus;
+            _focusableParent = null;
         }
 
-        private void TextBox_KeyDown([CanBeNull] object sender, [CanBeNull] KeyEventArgs e)
+        private void TextBox_KeyDown([NotNull] object sender, [NotNull] KeyEventArgs e)
         {
             if (_textBox == null)
                 return;
 
-            // ReSharper disable once PossibleNullReferenceException
             switch (e.Key)
             {
                 case Key.Escape:
-                    _textBox.Text = Text;
+                    _textBox.Text = Text ?? string.Empty;
                     IsEditing = false;
                     e.Handled = true;
                     break;
@@ -363,13 +359,12 @@
             if (newValue)
             {
                 // Start editing: Set text of text box manually since we need to keep the original text any how.
-                textBox.Text = Text;
+                textBox.Text = Text ?? string.Empty;
                 textBox.SelectAll();
                 textBox.Visibility = Visibility.Visible;
 
                 // Subscribe to any mouse action in the hosting window to properly exit editing state
-                var window = this.Ancestors().LastOrDefault() as FrameworkElement;
-                if (null != window)
+                if (this.Ancestors().LastOrDefault() is FrameworkElement window)
                 {
                     window.IsKeyboardFocusWithinChanged += Window_IsKeyboardFocusWithinChanged;
                     window.PreviewMouseDown += Window_PreviewMouseDown;
@@ -397,8 +392,7 @@
 
                 textBox.Visibility = Visibility.Hidden;
 
-                var window = this.Ancestors().LastOrDefault() as FrameworkElement;
-                if (null != window)
+                if (this.Ancestors().LastOrDefault() is FrameworkElement window)
                 {
                     window.IsKeyboardFocusWithinChanged -= Window_IsKeyboardFocusWithinChanged;
                     window.PreviewMouseDown -= Window_PreviewMouseDown;

@@ -315,9 +315,11 @@
                 Contract.Requires(adornedElement != null);
 
                 _textBox = adornedElement;
+                // ReSharper disable AssignNullToNotNullAttribute
                 BindingOperations.SetBinding(_content, TextBlock.FontSizeProperty, new Binding { Path = new PropertyPath(TextBlock.FontSizeProperty), Source = adornedElement });
                 BindingOperations.SetBinding(_content, TextBlock.ForegroundProperty, new Binding { Path = new PropertyPath(WhiteSpaceColorProperty), Source = owner });
                 BindingOperations.SetBinding(_content, OpacityProperty, new Binding { Path = new PropertyPath(WhiteSpaceOpacityProperty), Source = owner });
+                // ReSharper restore AssignNullToNotNullAttribute
             }
 
             [NotNull]

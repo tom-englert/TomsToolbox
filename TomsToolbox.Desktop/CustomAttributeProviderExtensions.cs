@@ -98,6 +98,7 @@
 
             return item
                 .GetCustomAttributes<TypeConverterAttribute>(false)
+                // ReSharper disable once AssignNullToNotNullAttribute
                 .Select(attr => Type.GetType(attr.ConverterTypeName))
                 .Where(type => (type != null) && typeof(TypeConverter).IsAssignableFrom(type))
                 .Select(type => (TypeConverter)Activator.CreateInstance(type))

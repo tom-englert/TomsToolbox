@@ -97,6 +97,7 @@
                 lValue &= (~lFlag);
             }
 
+            // ReSharper disable once PossibleNullReferenceException
             return (T)Enum.ToObject(typeof(T), lValue);
         }
 
@@ -146,6 +147,7 @@
                 .Select(flag => ToInt64(flag))
                 .Aggregate<long, long>(0, (current, lFlag) => current | lFlag);
 
+            // ReSharper disable once PossibleNullReferenceException
             return (T)Enum.ToObject(typeof(T), lValue);
         }
 
@@ -293,6 +295,7 @@
 
             try
             {
+                // ReSharper disable once PossibleNullReferenceException
                 return (T)Enum.ToObject(enumType, value);
             }
             catch (ArgumentException)
@@ -308,6 +311,7 @@
 
         private static void VerifyIsEnum<T>()
         {
+            // ReSharper disable once PossibleNullReferenceException
             if (!typeof(T).GetTypeInfo().IsEnum)
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Type '{0}' is not an System.Enum", typeof(T).FullName));
         }
@@ -316,6 +320,7 @@
         {
             VerifyIsEnum<T>();
 
+            // ReSharper disable once AssignNullToNotNullAttribute
             if (!typeof(T).GetTypeInfo().GetCustomAttributes(true).OfType<FlagsAttribute>().Any())
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Type '{0}' doesn't have the 'Flags' attribute", typeof(T).FullName));
         }
