@@ -20,3 +20,7 @@
 
 # Nuget
 [Pp]ackages/
+
+# Visual Studio
+.vs/
+

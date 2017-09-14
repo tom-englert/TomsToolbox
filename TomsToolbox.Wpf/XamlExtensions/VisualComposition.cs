@@ -80,17 +80,16 @@
 
         private static void RegionId_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var id = e.NewValue as string;
-            if (id == null)
+            if (!(e.NewValue is string id))
                 return;
 
             d.TryCast()
-                .When<ItemsControl>(i => SetRegionId<ItemsControlCompositionBehavior>(d, id))
-                .When<ContentControl>(c => SetRegionId<ContentControlCompositionBehavior>(d, id))
+                .When<ItemsControl>(i => SetRegionIdInternal<ItemsControlCompositionBehavior>(d, id))
+                .When<ContentControl>(c => SetRegionIdInternal<ContentControlCompositionBehavior>(d, id))
                 .ElseThrow();
         }
 
-        private static void SetRegionId<T>([CanBeNull] DependencyObject d, [CanBeNull] string id)
+        private static void SetRegionIdInternal<T>([CanBeNull] DependencyObject d, [CanBeNull] string id)
             where T : Behavior, IVisualCompositionBehavior, new()
         {
             var behaviors = Interaction.GetBehaviors(d);
