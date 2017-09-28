@@ -6,18 +6,16 @@
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
     using System.Windows.Documents;
     using System.Windows.Markup;
     using System.Windows.Media;
     using System.Windows.Threading;
 
     using JetBrains.Annotations;
-
-    using Throttle;
 
     using TomsToolbox.Desktop;
 
@@ -66,9 +64,7 @@
         [NotNull]
         private readonly AdornerDecorator _adornerDecorator = new AdornerDecorator { ClipToBounds = true };
         [CanBeNull]
-        private ScrollViewer _scrollViewer;
-        [NotNull, ItemNotNull]
-        private IList<TextAdorner> _adorners = new TextAdorner[0];
+        private WhiteSpaceDecoratorAdorner _adorner;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TextBoxVisibleWhiteSpaceDecorator"/> class.
@@ -98,7 +94,7 @@
         /// </summary>
         [NotNull]
         public static readonly DependencyProperty WhiteSpacesProperty =
-            DependencyProperty.Register("WhiteSpaces", typeof(WhiteSpaces), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(WhiteSpaces.Paragraph, (sender, e) => ((TextBoxVisibleWhiteSpaceDecorator)sender)?.UpdateAdorners()));
+            DependencyProperty.Register("WhiteSpaces", typeof(WhiteSpaces), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(WhiteSpaces.Paragraph, (sender, e) => ((TextBoxVisibleWhiteSpaceDecorator)sender)?._adorner?.UpdateWhiteSpaces()));
 
 
         /// <summary>
@@ -115,7 +111,7 @@
         /// </summary>
         [NotNull]
         public static readonly DependencyProperty WhiteSpaceColorProperty =
-            DependencyProperty.Register("WhiteSpaceColor", typeof(Brush), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(Brushes.Gray));
+            DependencyProperty.Register("WhiteSpaceColor", typeof(Brush), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(Brushes.Gray, (sender, e) => ((TextBoxVisibleWhiteSpaceDecorator)sender)?._adorner?.InvalidateVisual()));
 
 
         /// <summary>
@@ -131,7 +127,7 @@
         /// </summary>
         [NotNull]
         public static readonly DependencyProperty WhiteSpaceOpacityProperty =
-            DependencyProperty.Register("WhiteSpaceOpacity", typeof(double), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(1.0));
+            DependencyProperty.Register("WhiteSpaceOpacity", typeof(double), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(1.0, (sender, e) => ((TextBoxVisibleWhiteSpaceDecorator)sender)?._adorner?.InvalidateVisual()));
 
         /// <summary>
         /// Gets or sets the inner text box.
@@ -143,9 +139,7 @@
             set => _adornerDecorator.Child = value;
         }
 
-        /// <summary>
-        /// Gets an enumerator for logical child elements of this element.
-        /// </summary>
+        /// <inheritdoc />
         protected override IEnumerator LogicalChildren
         {
             get
@@ -154,97 +148,23 @@
             }
         }
 
-        /// <summary>
-        /// Overrides <see cref="M:System.Windows.Media.Visual.GetVisualChild(System.Int32)" />, and returns a child at the specified index from a collection of child elements.
-        /// </summary>
-        /// <param name="index">The zero-based index of the requested child element in the collection.</param>
-        /// <returns>
-        /// The requested child element. This should not return null; if the provided index is out of range, an exception is thrown.
-        /// </returns>
+        /// <inheritdoc />
         protected override Visual GetVisualChild(int index)
         {
             return (index == 0) ? _adornerDecorator : null;
         }
 
-        /// <summary>
-        /// Gets the number of visual child elements within this element.
-        /// </summary>
+        /// <inheritdoc />
         protected override int VisualChildrenCount => 1;
 
-        /// <summary>
-        /// When overridden in a derived class, measures the size in layout required for child elements and determines a size for the <see cref="T:System.Windows.FrameworkElement" />-derived class.
-        /// </summary>
-        /// <param name="availableSize">The available size that this element can give to child elements. Infinity can be specified as a value to indicate that the element will size to whatever content is available.</param>
-        /// <returns>
-        /// The size that this element determines it needs during layout, based on its calculations of child element sizes.
-        /// </returns>
+        /// <inheritdoc />
         protected override Size MeasureOverride(Size availableSize)
         {
             _adornerDecorator.Measure(availableSize);
-
-            var desiredSize = _adornerDecorator.DesiredSize;
-
-            var textBox = Child;
-            if (textBox == null)
-                return desiredSize;
-
-            var activeAdorners = AdornerLayer.GetAdorners(textBox);
-            if (activeAdorners != null)
-            {
-                foreach (var adorner in activeAdorners)
-                {
-                    AdornerLayer.Remove(adorner);
-                }
-            }
-
-            AddAdorners(0, _adorners.Count, desiredSize);
-
-            return desiredSize;
+            return _adornerDecorator.DesiredSize;
         }
 
-        private void AddAdorners(int bottomIndex, int topIndex, Size desiredSize)
-        {
-            while (true)
-            {
-                if (topIndex <= bottomIndex)
-                    return;
-
-                var mid = (topIndex + bottomIndex) / 2;
-
-                var adorner = _adorners[mid];
-                var rect = adorner.GetDesiredRect();
-                if (rect.IsEmpty)
-                    return;
-
-                if (rect.Top < 0)
-                {
-                    bottomIndex = mid + 1;
-                    continue;
-                }
-
-                if (rect.Bottom > desiredSize.Height)
-                {
-                    topIndex = mid;
-                    continue;
-                }
-
-                if ((rect.Right >= 0) && (rect.Left <= desiredSize.Width))
-                {
-                    AdornerLayer.Add(adorner);
-                }
-
-                AddAdorners(mid + 1, topIndex, desiredSize);
-                topIndex = mid;
-            }
-        }
-
-        /// <summary>
-        /// When overridden in a derived class, positions child elements and determines a size for a <see cref="T:System.Windows.FrameworkElement" /> derived class.
-        /// </summary>
-        /// <param name="finalSize">The final area within the parent that this element should use to arrange itself and its children.</param>
-        /// <returns>
-        /// The actual size used.
-        /// </returns>
+        /// <inheritdoc />
         protected override Size ArrangeOverride(Size finalSize)
         {
             _adornerDecorator.Arrange(new Rect(finalSize));
@@ -257,165 +177,147 @@
             if (textBox == null)
                 return;
 
-            textBox.TextChanged += TextBox_TextChanged;
-
-            var template = textBox.Template;
-            if (template == null)
-                return;
-
-            _scrollViewer = template.FindName("PART_ContentHost", textBox) as ScrollViewer;
-            if (_scrollViewer == null)
-                return;
-
-            _scrollViewer.ScrollChanged += ScrollViewer_ScrollChanged;
-
-            UpdateAdorners();
+            AdornerLayer.Add(_adorner = new WhiteSpaceDecoratorAdorner(this, textBox));
         }
 
-        private void ScrollViewer_ScrollChanged([CanBeNull] object sender, [CanBeNull] ScrollChangedEventArgs e)
+        private class WhiteSpaceDecoratorAdorner : Adorner
         {
-            InvalidateMeasure();
-        }
-
-        private void TextBox_TextChanged([CanBeNull] object sender, [CanBeNull] TextChangedEventArgs e)
-        {
-            UpdateAdorners();
-        }
-
-        [Throttled(typeof(Throttle), 200)]
-        private void UpdateAdorners()
-        {
-            var textBox = Child;
-            if (textBox == null)
-                return;
-
-            // ReSharper disable AssignNullToNotNullAttribute
-            // ReSharper disable PossibleNullReferenceException
-            _adorners = textBox.Text
-                .Select((character, index) => new { text = GetAdornerText(character), index })
-                .Where(item => item.text != null)
-                .Select(item => new TextAdorner(this, textBox, item.index, item.text))
-                .ToArray();
-            // ReSharper restore PossibleNullReferenceException
-            // ReSharper restore AssignNullToNotNullAttribute
-
-            InvalidateMeasure();
-        }
-
-        [CanBeNull]
-        private string GetAdornerText(char character)
-        {
-            switch (character)
-            {
-                case '\n':
-                    return (WhiteSpaces & WhiteSpaces.Paragraph) != 0 ? "¶" : null;
-                case ' ':
-                    return (WhiteSpaces & WhiteSpaces.Space) != 0 ? "∙" : null;
-                case '\xA0':
-                    return (WhiteSpaces & WhiteSpaces.Space) != 0 ? "°" : null;
-                case '\t':
-                    return (WhiteSpaces & WhiteSpaces.Tab) != 0 ? "→" : null;
-
-                default:
-                    return null;
-            }
-        }
-
-        private class TextAdorner : Adorner
-        {
+            [NotNull]
+            private readonly TextBoxVisibleWhiteSpaceDecorator _owner;
             [NotNull]
             private readonly TextBox _textBox;
-            [NotNull]
-            private readonly TextBlock _content = new TextBlock();
+            [NotNull, ItemNotNull]
+            private IList<WhiteSpace> _whiteSpaces = new WhiteSpace[0];
 
-            private readonly int _charIndex;
-
-            public TextAdorner([NotNull] TextBoxVisibleWhiteSpaceDecorator owner, [NotNull] TextBox adornedElement, int charIndex, [CanBeNull] string text)
-                : base(adornedElement)
+            public WhiteSpaceDecoratorAdorner([NotNull] TextBoxVisibleWhiteSpaceDecorator owner, [NotNull] TextBox textBox)
+                : base(textBox)
             {
                 Contract.Requires(owner != null);
-                Contract.Requires(adornedElement != null);
+                Contract.Requires(textBox != null);
 
-                _textBox = adornedElement;
-                _charIndex = charIndex;
-                _content.Text = text;
+                _owner = owner;
+                _textBox = textBox;
 
-                // ReSharper disable AssignNullToNotNullAttribute
-                BindingOperations.SetBinding(_content, TextBlock.FontSizeProperty, new Binding { Path = new PropertyPath(TextBlock.FontSizeProperty), Source = adornedElement });
-                BindingOperations.SetBinding(_content, TextBlock.ForegroundProperty, new Binding { Path = new PropertyPath(WhiteSpaceColorProperty), Source = owner });
-                BindingOperations.SetBinding(_content, OpacityProperty, new Binding { Path = new PropertyPath(WhiteSpaceOpacityProperty), Source = owner });
-                // ReSharper restore AssignNullToNotNullAttribute
+                textBox.TextChanged += TextBox_TextChanged;
+
+                if (textBox.Template?.FindName("PART_ContentHost", textBox) is ScrollViewer scrollViewer)
+                    scrollViewer.ScrollChanged += ScrollViewer_ScrollChanged;
+
+                UpdateWhiteSpaces();
             }
 
-            [NotNull]
-            public override GeneralTransform GetDesiredTransform(GeneralTransform transform)
+            private void ScrollViewer_ScrollChanged([CanBeNull] object sender, [CanBeNull] ScrollChangedEventArgs e)
             {
-                var baseTransform = base.GetDesiredTransform(transform);
-                var desiredTransform = CreateTransform();
+                InvalidateVisual();
+            }
 
-                if ((baseTransform != null) && !baseTransform.Equals(Transform.Identity))
+            private void TextBox_TextChanged([CanBeNull] object sender, [CanBeNull] TextChangedEventArgs e)
+            {
+                UpdateWhiteSpaces();
+            }
+
+            internal void UpdateWhiteSpaces()
+            {
+                var textBox = _textBox;
+                var whiteSpaces = _owner.WhiteSpaces;
+
+                _whiteSpaces = textBox.Text
+                    .Select((character, index) => GetWhiteSpace(character, index, whiteSpaces))
+                    .Where(item => item != null)
+                    .ToArray();
+
+                this.BeginInvoke(DispatcherPriority.Background, InvalidateVisual);
+            }
+
+            [CanBeNull]
+            private static WhiteSpace GetWhiteSpace(char character, int index, WhiteSpaces whiteSpaces)
+            {
+                switch (character)
                 {
-                    return baseTransform.MergeWith(desiredTransform);
+                    case '\n':
+                        return (whiteSpaces & WhiteSpaces.Paragraph) != 0 ? new WhiteSpace(index, "¶") : null;
+                    case ' ':
+                        return (whiteSpaces & WhiteSpaces.Space) != 0 ? new WhiteSpace(index, "∙") : null;
+                    case '\xA0':
+                        return (whiteSpaces & WhiteSpaces.Space) != 0 ? new WhiteSpace(index, "°") : null;
+                    case '\t':
+                        return (whiteSpaces & WhiteSpaces.Tab) != 0 ? new WhiteSpace(index, "→") : null;
+
+                    default:
+                        return null;
                 }
-
-                return desiredTransform;
             }
 
-            protected override int VisualChildrenCount => 1;
-
-            [NotNull]
-            protected override Visual GetVisualChild(int index)
+            private static void DrawAdorners([NotNull] DrawingContext drawingContext, [NotNull] TextBox textBox, [NotNull] [ItemNotNull] IList<WhiteSpace> adorners, int firstIndex, int lastIndex, Size desiredSize, [NotNull] Typeface typeface, double fontSize, [NotNull] Brush brush)
             {
-                return _content;
-            }
-
-            protected override Size MeasureOverride(Size constraint)
-            {
-                _content.Measure(constraint);
-                return _content.DesiredSize;
-            }
-
-            protected override Size ArrangeOverride(Size finalSize)
-            {
-                _content.Arrange(new Rect(finalSize));
-                return finalSize;
-            }
-
-            [NotNull]
-            private GeneralTransform CreateTransform()
-            {
-                Contract.Ensures(Contract.Result<GeneralTransform>() != null);
-
-                try
+                while (true)
                 {
-                    var rect = GetDesiredRect();
-                    if (!rect.IsEmpty)
+                    if (lastIndex <= firstIndex)
+                        return;
+
+                    var index = (lastIndex + firstIndex) / 2;
+
+                    var adorner = adorners[index];
+                    var rect = adorner.GetDesiredRect(textBox);
+                    if (rect.IsEmpty)
+                        return;
+
+                    if (rect.Top < 0)
                     {
-                        var nextIndex = _charIndex + 1;
-
-                        // ReSharper disable once PossibleNullReferenceException
-                        if (nextIndex < _textBox.Text.Length)
-                        {
-                            var rect2 = _textBox.GetRectFromCharacterIndex(nextIndex);
-                            if (!rect2.IsEmpty && (Math.Abs(rect2.Top - rect.Top) < double.Epsilon))
-                            {
-                                return new TranslateTransform { X = (rect.Left + rect2.Left - _content.DesiredSize.Width) / 2, Y = rect.Top };
-                            }
-                        }
-
-                        return new TranslateTransform { X = rect.Left + 1, Y = rect.Top };
+                        firstIndex = index + 1;
+                        continue;
                     }
-                }
-                catch (ArgumentException)
-                {
-                }
 
-                return Transform.Identity;
+                    if (rect.Bottom > desiredSize.Height)
+                    {
+                        lastIndex = index;
+                        continue;
+                    }
+
+                    if ((rect.Right >= 0) && (rect.Left <= desiredSize.Width))
+                    {
+                        drawingContext.DrawText(new FormattedText(adorner.Text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, fontSize, brush), rect.TopLeft);
+                    }
+
+                    DrawAdorners(drawingContext, textBox, adorners, index + 1, lastIndex, desiredSize, typeface, fontSize, brush);
+
+                    lastIndex = index;
+                }
             }
 
-            public Rect GetDesiredRect()
+            protected override int VisualChildrenCount => 0;
+
+            protected override void OnRender(DrawingContext drawingContext)
             {
-                return _textBox.Text.Length <= _charIndex ? Rect.Empty : _textBox.GetRectFromCharacterIndex(_charIndex);
+                base.OnRender(drawingContext);
+
+                drawingContext.PushOpacity(_owner.WhiteSpaceOpacity);
+
+                var typefaceName = _textBox.FontFamily?.Source ?? "Segoe UI";
+                var brush = _owner.WhiteSpaceColor ?? Brushes.Gray; Contract.Assume(brush != null);
+
+                DrawAdorners(drawingContext, _textBox, _whiteSpaces, 0, _whiteSpaces.Count, RenderSize, new Typeface(typefaceName), _textBox.FontSize, brush);
+
+                drawingContext.Pop();
+            }
+
+            private class WhiteSpace
+            {
+                private readonly int _charIndex;
+
+                public WhiteSpace(int charIndex, [NotNull] string text)
+                {
+                    _charIndex = charIndex;
+                    Text = text;
+                }
+
+                [NotNull]
+                public string Text { get; }
+
+                public Rect GetDesiredRect([NotNull] TextBox textBox)
+                {
+                    return textBox.Text.Length <= _charIndex ? Rect.Empty : textBox.GetRectFromCharacterIndex(_charIndex);
+                }
             }
 
             [ContractInvariantMethod, UsedImplicitly]
@@ -424,7 +326,6 @@
             private void ObjectInvariant()
             {
                 Contract.Invariant(_textBox != null);
-                Contract.Invariant(_content != null);
             }
         }
 
@@ -435,7 +336,6 @@
         {
             Contract.Invariant(_adornerDecorator != null);
             Contract.Invariant(AdornerLayer != null);
-            Contract.Invariant(_adorners != null);
         }
     }
 }
