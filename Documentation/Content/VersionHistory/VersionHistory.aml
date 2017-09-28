@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">          
           <listItem>
+            <para>1.0.64.0</para>
+            <list class="bullet">
+              <listItem><para>Speedup TextBoxVisibleWhiteSpaceDecorator</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.63.0</para>
             <list class="bullet">
               <listItem><para>Rename private method SetRegionId, R# gets confused and shows false errors.</para></listItem>
