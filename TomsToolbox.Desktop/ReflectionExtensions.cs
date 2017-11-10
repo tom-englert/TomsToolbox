@@ -100,11 +100,9 @@
                 Contract.Assume(!string.IsNullOrEmpty(fullName));
                 return Assembly.LoadFile(fullName);
             }
-            catch (BadImageFormatException)
+            catch 
             {
-            }
-            catch (IOException)
-            {
+				// there are various different exceptions that can happen here, not really predictable
             }
 
             return null;
@@ -126,11 +124,9 @@
             {
                 return Assembly.ReflectionOnlyLoadFrom(assemblyFile.FullName);
             }
-            catch (BadImageFormatException)
+            catch 
             {
-            }
-            catch (IOException)
-            {
+				// there are various different exceptions that can happen here, not really predictable
             }
 
             return null;
