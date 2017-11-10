@@ -1767,6 +1767,19 @@
   <member name="P:TomsToolbox.Wpf.WindowCommands.Restore">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="F:TomsToolbox.Wpf.XamlExtensions.Button.DialogResultProperty">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Wpf.XamlExtensions.Button.GetDialogResult(System.Windows.Controls.Button)">
+    <parameter name="button">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.XamlExtensions.Button.SetDialogResult(System.Windows.Controls.Button,System.Nullable{System.Boolean})">
+    <parameter name="button">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="F:TomsToolbox.Wpf.XamlExtensions.ColumnStyles.DefaultColumnStylesProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
