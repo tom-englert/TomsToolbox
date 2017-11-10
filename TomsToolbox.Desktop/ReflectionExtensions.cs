@@ -100,9 +100,9 @@
                 Contract.Assume(!string.IsNullOrEmpty(fullName));
                 return Assembly.LoadFile(fullName);
             }
-            catch 
+            catch
             {
-				// there are various different exceptions that can happen here, not really predictable
+                // there are various different exceptions that can happen here, not really predictable
             }
 
             return null;
@@ -124,9 +124,9 @@
             {
                 return Assembly.ReflectionOnlyLoadFrom(assemblyFile.FullName);
             }
-            catch 
+            catch
             {
-				// there are various different exceptions that can happen here, not really predictable
+                // there are various different exceptions that can happen here, not really predictable
             }
 
             return null;
