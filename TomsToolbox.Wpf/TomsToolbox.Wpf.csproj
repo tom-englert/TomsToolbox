@@ -92,7 +92,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="obj\**;bin\**" />
-    <Compile Include="XamlExtensions\Button.cs" />
     <Page Include="**\*.xaml" Exclude="obj\**;bin\**">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
