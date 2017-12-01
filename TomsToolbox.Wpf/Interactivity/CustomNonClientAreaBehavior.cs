@@ -691,7 +691,7 @@
             return monitorInfo;
         }
 
-        private WINDOWINFO GetWindowInfo(IntPtr hWnd)
+        private static WINDOWINFO GetWindowInfo(IntPtr hWnd)
         {
             var pwi = new WINDOWINFO { cbSize = Marshal.SizeOf(typeof(WINDOWINFO)) };
             NativeMethods.GetWindowInfo(hWnd, ref pwi);
