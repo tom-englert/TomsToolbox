@@ -343,13 +343,16 @@
                         var structure1 = (RECT)Marshal.PtrToStructure(lParam, typeof(RECT));
                         NativeMethods.DefWindowProc(windowHandle, WM_NCCALCSIZE, wParam, lParam);
                         var structure2 = (RECT)Marshal.PtrToStructure(lParam, typeof(RECT));
-                        var monitorinfo = MonitorInfoFromWindow(windowHandle);
-                        if (monitorinfo.rcMonitor.Height == monitorinfo.rcWork.Height 
-                            && monitorinfo.rcMonitor.Width == monitorinfo.rcWork.Width)
-                        {
-                            structure2.Bottom -= 1;
-                        }
                         structure2.Top = structure1.Top + (int)GetWindowInfo(windowHandle).cyWindowBorders;
+                        if (_window?.WindowStyle == WindowStyle.ThreeDBorderWindow)
+                        {
+                            var x = NativeMethods.GetSystemMetrics(SM_CXEDGE);
+                            var y = NativeMethods.GetSystemMetrics(SM_CYEDGE);
+                            structure2.Bottom += y;
+                            structure2.Right += 2 * x;
+                            structure2.Left -= x;
+                        }
+
                         Marshal.StructureToPtr(structure2, lParam, true);
                     }
 
@@ -495,6 +498,9 @@
         private const uint MF_ENABLED = 0;
         private const uint MF_GRAYED = 1;
         private const uint MF_DISABLED = 2;
+
+        private const int SM_CXEDGE = 45;
+        private const int SM_CYEDGE = 46;
 
         private static uint MenuFlags(bool enabled)
         {
@@ -790,6 +796,10 @@
             [DllImport("user32.dll")]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool GetWindowInfo(IntPtr hwnd, ref WINDOWINFO pwi);
+
+            [DllImport("user32.dll")]
+            public static extern int GetSystemMetrics(int nIndex);
+
         }
     }
 }
