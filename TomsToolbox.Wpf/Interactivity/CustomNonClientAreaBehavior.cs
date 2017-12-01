@@ -111,8 +111,6 @@
         private Window _window;
         private Matrix _transformFromDevice = Matrix.Identity;
         private Matrix _transformToDevice = Matrix.Identity;
-        private Vector _maximizedPadding;
-
 
         /// <summary>
         /// Gets or sets the size of the border used to size the window.
@@ -198,7 +196,6 @@
                 return;
 
             window.SourceInitialized += Window_SourceInitialized;
-            window.StateChanged += WindowState_Changed;
         }
 
         /// <summary>
@@ -217,7 +214,6 @@
                 return;
 
             window.SourceInitialized -= Window_SourceInitialized;
-            window.StateChanged -= WindowState_Changed;
             Unregister(window);
         }
 
@@ -328,17 +324,6 @@
             compositionTarget.BackgroundColor = SystemColors.WindowColor;
         }
 
-        private void WindowState_Changed([CanBeNull] object sender, [CanBeNull] EventArgs e)
-        {
-            Contract.Assume(_window != null);
-
-            var nonClientArea = AssociatedObject;
-
-            Contract.Assume(nonClientArea != null);
-
-            nonClientArea.Margin = _window.WindowState != WindowState.Maximized ? new Thickness() : new Thickness(_maximizedPadding.X, _maximizedPadding.Y, _maximizedPadding.X, _maximizedPadding.Y);
-        }
-
         private void Unregister([NotNull] Window window)
         {
             Contract.Requires(window != null);
@@ -353,6 +338,21 @@
             switch (msg)
             {
                 case WM_NCCALCSIZE:
+                    if (GetWindowPlacement(windowHandle).showCmd == SW_MAXIMIZE)
+                    {
+                        var structure1 = (RECT)Marshal.PtrToStructure(lParam, typeof(RECT));
+                        NativeMethods.DefWindowProc(windowHandle, WM_NCCALCSIZE, wParam, lParam);
+                        var structure2 = (RECT)Marshal.PtrToStructure(lParam, typeof(RECT));
+                        var monitorinfo = MonitorInfoFromWindow(windowHandle);
+                        if (monitorinfo.rcMonitor.Height == monitorinfo.rcWork.Height 
+                            && monitorinfo.rcMonitor.Width == monitorinfo.rcWork.Width)
+                        {
+                            structure2.Bottom -= 1;
+                        }
+                        structure2.Top = structure1.Top + (int)GetWindowInfo(windowHandle).cyWindowBorders;
+                        Marshal.StructureToPtr(structure2, lParam, true);
+                    }
+
                     // We do all drawings...
                     handled = true;
                     break;
@@ -373,10 +373,6 @@
                     var hitTest = wParam.ToInt32();
                     if ((hitTest == (int)HitTest.SysMenu) || (hitTest == (int)HitTest.Caption))
                         ShowSystemMenu(windowHandle, LOWORD(lParam), HIWORD(lParam));
-                    break;
-
-                case WM_GETMINMAXINFO:
-                    RegisterMinMaxInfo(lParam);
                     break;
 
                 case WM_DWMCOMPOSITIONCHANGED:
@@ -460,14 +456,6 @@
             return HitTest.Client;
         }
 
-        [ContractVerification(false)]
-        private void RegisterMinMaxInfo(IntPtr parameter)
-        {
-            var mmi = Marshal.PtrToStructure(parameter, typeof(MINMAXINFO)).SafeCast<MINMAXINFO>();
-
-            _maximizedPadding = -1 * (Vector)_transformFromDevice.Transform(mmi.ptMaxPosition);
-        }
-
         private void ShowSystemMenu(IntPtr handle, int x, int y)
         {
             var systemMenu = NativeMethods.GetSystemMenu(handle, false);
@@ -489,8 +477,8 @@
         }
 
         // ReSharper disable InconsistentNaming
+        private const int SW_MAXIMIZE = 3;
 
-        private const int WM_GETMINMAXINFO = 0x0024;
         private const int WM_NCHITTEST = 0x0084;
         private const int WM_NCCALCSIZE = 0x0083;
         private const int WM_NCACTIVATE = 0x0086;
@@ -528,14 +516,18 @@
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
         private struct RECT
         {
-            public readonly int Left;
-            public readonly int Top;
-            public readonly int Right;
-            public readonly int Bottom;
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
 
             public POINT TopLeft => new POINT { X = Left, Y = Top };
 
             public POINT BottomRight => new POINT { X = Right, Y = Bottom };
+
+            public int Width => Right - Left;
+
+            public int Height => Bottom - Top;
 
             public static implicit operator Rect(RECT r)
             {
@@ -643,6 +635,63 @@
             public readonly POINT ptMaxTrackSize;
         };
 
+        [StructLayout(LayoutKind.Sequential)]
+        private class WINDOWPLACEMENT
+        {
+            public int length = Marshal.SizeOf(typeof(WINDOWPLACEMENT));
+            public int flags;
+            public int showCmd;
+            public POINT ptMinPosition;
+            public POINT ptMaxPosition;
+            public RECT rcNormalPosition;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct MONITORINFO
+        {
+            public uint cbSize;
+            public RECT rcMonitor;
+            public RECT rcWork;
+            public uint dwFlags;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct WINDOWINFO
+        {
+            public int cbSize;
+            public RECT rcWindow;
+            public RECT rcClient;
+            public int dwStyle;
+            public int dwExStyle;
+            public uint dwWindowStatus;
+            public uint cxWindowBorders;
+            public uint cyWindowBorders;
+            public ushort atomWindowType;
+            public ushort wCreatorVersion;
+        }
+
+        private static WINDOWPLACEMENT GetWindowPlacement(IntPtr hwnd)
+        {
+            var lpwndpl = new WINDOWPLACEMENT();
+            NativeMethods.GetWindowPlacement(hwnd, lpwndpl);
+            return lpwndpl;
+        }
+
+        private static MONITORINFO MonitorInfoFromWindow(IntPtr hWnd)
+        {
+            var hMonitor = NativeMethods.MonitorFromWindow(hWnd, 2);
+            var monitorInfo = new MONITORINFO { cbSize = (uint)Marshal.SizeOf(typeof(MONITORINFO)) };
+            NativeMethods.GetMonitorInfo(hMonitor, ref monitorInfo);
+            return monitorInfo;
+        }
+
+        private WINDOWINFO GetWindowInfo(IntPtr hWnd)
+        {
+            var pwi = new WINDOWINFO { cbSize = Marshal.SizeOf(typeof(WINDOWINFO)) };
+            NativeMethods.GetWindowInfo(hWnd, ref pwi);
+            return pwi;
+        }
+
         [Flags]
         [SuppressMessage("ReSharper", "UnusedMember.Local")]
         private enum RedrawWindowFlags : uint
@@ -726,6 +775,21 @@
             [DllImport("user32.dll")]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool RedrawWindow(IntPtr hWnd, IntPtr lprcUpdate, IntPtr hrgnUpdate, RedrawWindowFlags flags);
+
+            [DllImport("user32.dll", SetLastError = true)]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool GetWindowPlacement(IntPtr hwnd, WINDOWPLACEMENT lpwndpl);
+
+            [DllImport("user32.dll")]
+            public static extern IntPtr MonitorFromWindow(IntPtr handle, int flags);
+
+            [DllImport("user32.dll")]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            internal static extern bool GetMonitorInfo(IntPtr hMonitor, ref MONITORINFO monitorInfo);
+
+            [DllImport("user32.dll")]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool GetWindowInfo(IntPtr hwnd, ref WINDOWINFO pwi);
         }
     }
 }
