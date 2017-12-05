@@ -13,7 +13,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
     using TomsToolbox.Desktop;
 
     /// <summary>
@@ -109,6 +108,7 @@
     {
         [CanBeNull]
         private Window _window;
+        private POINT _windowOffset;
         private Matrix _transformFromDevice = Matrix.Identity;
         private Matrix _transformToDevice = Matrix.Identity;
 
@@ -173,7 +173,6 @@
         /// The WM_NCHITTEST test event equivalent.
         /// </summary>
         [NotNull] public static readonly RoutedEvent NcHitTestEvent = EventManager.RegisterRoutedEvent("NcHitTest", RoutingStrategy.Bubble, typeof(EventHandler<NcHitTestEventArgs>), typeof(CustomNonClientAreaBehavior));
-
 
         /// <summary>
         /// Called after the behavior is attached to an AssociatedObject.
@@ -338,22 +337,32 @@
             switch (msg)
             {
                 case WM_NCCALCSIZE:
-                    if (GetWindowPlacement(windowHandle).showCmd == SW_MAXIMIZE)
+                    var windowPlacement = GetWindowPlacement(windowHandle);
+                    if (windowPlacement.showCmd == SW_MAXIMIZE)
                     {
-                        var structure1 = (RECT)Marshal.PtrToStructure(lParam, typeof(RECT));
+                        var windowInfo = GetWindowInfo(windowHandle);
+
+                        var before = PtrToStructure<RECT>(lParam);
                         NativeMethods.DefWindowProc(windowHandle, WM_NCCALCSIZE, wParam, lParam);
-                        var structure2 = (RECT)Marshal.PtrToStructure(lParam, typeof(RECT));
-                        structure2.Top = structure1.Top + (int)GetWindowInfo(windowHandle).cyWindowBorders;
-                        if (_window?.WindowStyle == WindowStyle.ThreeDBorderWindow)
+                        var after = PtrToStructure<RECT>(lParam);
+                        after.Top = before.Top + (int)windowInfo.cyWindowBorders;
+
+                        if ((windowInfo.dwExStyle & WS_EX_CLIENTEDGE) != 0)
                         {
                             var x = NativeMethods.GetSystemMetrics(SM_CXEDGE);
                             var y = NativeMethods.GetSystemMetrics(SM_CYEDGE);
-                            structure2.Bottom += y;
-                            structure2.Right += 2 * x;
-                            structure2.Left -= x;
+                            after.Bottom += y;
+                            after.Right += 2 * x;
+                            after.Left -= x;
                         }
 
-                        Marshal.StructureToPtr(structure2, lParam, true);
+                        Marshal.StructureToPtr(after, lParam, true);
+
+                        _windowOffset = after.TopLeft - before.TopLeft;
+                    }
+                    else
+                    {
+                        _windowOffset = new POINT();
                     }
 
                     // We do all drawings...
@@ -399,13 +408,7 @@
 
             NativeMethods.GetWindowRect(windowHandle, out var windowRect);
 
-            var topLeft = windowRect.TopLeft;
-            var bottomRight = windowRect.BottomRight;
-
-            var left = topLeft.X;
-            var top = topLeft.Y;
-            var right = bottomRight.X;
-            var bottom = bottomRight.Y;
+            var topLeft = windowRect.TopLeft + _windowOffset;
 
             var cornerSize = (SIZE)_transformToDevice.Transform((Point)CornerSize);
             var borderSize = (SIZE)_transformToDevice.Transform((Point)BorderSize);
@@ -414,6 +417,12 @@
             {
                 if (WindowState.Maximized != window.WindowState)
                 {
+                    var bottomRight = windowRect.BottomRight;
+                    var left = topLeft.X;
+                    var top = topLeft.Y;
+                    var right = bottomRight.X;
+                    var bottom = bottomRight.Y;
+
                     if ((hitPoint.Y < top) || (hitPoint.Y > bottom) || (hitPoint.X < left) || (hitPoint.X > right))
                         return HitTest.Transparent;
 
@@ -502,6 +511,8 @@
         private const int SM_CXEDGE = 45;
         private const int SM_CYEDGE = 46;
 
+        private const int WS_EX_CLIENTEDGE = 0x00000200;
+
         private static uint MenuFlags(bool enabled)
         {
             return enabled ? MF_ENABLED : MF_DISABLED | MF_GRAYED;
@@ -518,6 +529,10 @@
         }
 
         // ReSharper disable MemberCanBePrivate.Local
+        // ReSharper disable FieldCanBeMadeReadOnly.Local
+        // ReSharper disable UnusedMember.Local
+#pragma warning disable 169 // field is never used
+#pragma warning disable 649 // field is never assigned
 
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
         private struct RECT
@@ -530,10 +545,6 @@
             public POINT TopLeft => new POINT { X = Left, Y = Top };
 
             public POINT BottomRight => new POINT { X = Right, Y = Bottom };
-
-            public int Width => Right - Left;
-
-            public int Height => Bottom - Top;
 
             public static implicit operator Rect(RECT r)
             {
@@ -676,6 +687,7 @@
             public ushort wCreatorVersion;
         }
 
+        [NotNull]
         private static WINDOWPLACEMENT GetWindowPlacement(IntPtr hwnd)
         {
             var lpwndpl = new WINDOWPLACEMENT();
@@ -696,6 +708,11 @@
             var pwi = new WINDOWINFO { cbSize = Marshal.SizeOf(typeof(WINDOWINFO)) };
             NativeMethods.GetWindowInfo(hWnd, ref pwi);
             return pwi;
+        }
+
+        private static T PtrToStructure<T>(IntPtr ptr)
+        {
+            return (T)Marshal.PtrToStructure(ptr, typeof(T));
         }
 
         [Flags]
