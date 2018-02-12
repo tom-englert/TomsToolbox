@@ -61,6 +61,7 @@
             _storyboard.Completed += Storyboard_Completed;
         }
 
+        /// <inheritdoc />
         protected override void OnAssociatedObjectLoaded()
         {
             base.OnAssociatedObjectLoaded();

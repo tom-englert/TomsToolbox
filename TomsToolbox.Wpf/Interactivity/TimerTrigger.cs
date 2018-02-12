@@ -13,7 +13,7 @@
     /// </summary>
     public sealed class TimerTrigger : System.Windows.Interactivity.TriggerBase<FrameworkElement>
     {
-        [CanBeNull] 
+        [CanBeNull]
         private DispatcherTimer _timer;
 
         /// <summary>

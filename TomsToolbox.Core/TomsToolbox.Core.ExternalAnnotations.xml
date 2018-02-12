@@ -721,6 +721,16 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:TomsToolbox.Core.WeakEventSource`1.Subscribe(System.EventHandler{`0})">
+    <parameter name="handler">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Core.WeakEventSource`1.Unsubscribe(System.EventHandler{`0})">
+    <parameter name="handler">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="M:TomsToolbox.Core.WeakReference`1.#ctor(`0)">
     <parameter name="target">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
