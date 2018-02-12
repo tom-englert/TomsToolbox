@@ -139,6 +139,9 @@
             get => _exportProvider;
             set
             {
+                if (_exportProvider == value)
+                    return;
+
                 if (_exportProvider != null)
                 {
                     _exportProvider.ExportsChanged -= ExportProvider_ExportsChanged;
@@ -154,12 +157,7 @@
             }
         }
 
-        /// <summary>
-        /// Called after the behavior is attached to an AssociatedObject.
-        /// </summary>
-        /// <remarks>
-        /// Override this to hook up functionality to the AssociatedObject.
-        /// </remarks>
+        /// <inheritdoc />
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -177,20 +175,26 @@
                 return;
 
             _exportProviderChangeTracker = associatedObject.Track(ExportProviderLocator.ExportProviderProperty);
-            _exportProviderChangeTracker.Changed += ExportProvider_Changed;
-
-            ExportProvider = associatedObject.TryGetExportProvider();
         }
 
-        /// <summary>
-        /// Called when the behavior is being detached from its AssociatedObject, but before it has actually occurred.
-        /// </summary>
-        /// <remarks>
-        /// Override this to unhook functionality from the AssociatedObject.
-        /// </remarks>
-        protected override void OnDetaching()
+        /// <inheritdoc />
+        protected override void OnAssociatedObjectLoaded()
         {
-            base.OnDetaching();
+            base.OnAssociatedObjectLoaded();
+
+            if (_exportProviderChangeTracker != null)
+            {
+                _exportProviderChangeTracker.Changed -= ExportProvider_Changed;
+                _exportProviderChangeTracker.Changed += ExportProvider_Changed;
+            }
+
+            ExportProvider = AssociatedObject?.TryGetExportProvider();
+        }
+
+        /// <inheritdoc />
+        protected override void OnAssociatedObjectUnloaded()
+        {
+            base.OnAssociatedObjectUnloaded();
 
             if (_exportProviderChangeTracker != null)
                 _exportProviderChangeTracker.Changed -= ExportProvider_Changed;
@@ -279,6 +283,7 @@
         private void ExportProvider_Changed([CanBeNull] object sender, [CanBeNull] EventArgs e)
         {
             ExportProvider = AssociatedObject?.TryGetExportProvider();
+            _deferredUpdateThrottle.Tick();
         }
 
         [ContractInvariantMethod]

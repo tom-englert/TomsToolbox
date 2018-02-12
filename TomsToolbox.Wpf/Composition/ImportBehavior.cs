@@ -1,4 +1,6 @@
-﻿namespace TomsToolbox.Wpf.Composition
+﻿using TomsToolbox.Wpf.Interactivity;
+
+namespace TomsToolbox.Wpf.Composition
 {
     using System;
     using System.ComponentModel;
@@ -14,8 +16,8 @@
     /// <summary>
     /// A behavior to set a dependency property of the associated object to a value retrieved from the IOC. The default target property is the <see cref="FrameworkElement.DataContextProperty"/>.
     /// </summary>
-    /// <seealso cref="System.Windows.Interactivity.Behavior{FrameworkElement}" />
-    public class ImportBehavior : Behavior<FrameworkElement>
+    /// <seealso cref="FrameworkElementBehavior{FrameworkElement}" />
+    public class ImportBehavior : FrameworkElementBehavior<FrameworkElement>
     {
         [CanBeNull]
         private INotifyChanged _tracker;
@@ -82,23 +84,31 @@
                 return;
 
             _tracker = AssociatedObject.Track(ExportProviderLocator.ExportProviderProperty);
-            _tracker.Changed += ExportProvider_Changed;
 
             Update();
         }
 
-        /// <summary>
-        /// Called when the behavior is being detached from its AssociatedObject, but before it has actually occurred.
-        /// </summary>
-        /// <remarks>
-        /// Override this to unhook functionality from the AssociatedObject.
-        /// </remarks>
-        protected override void OnDetaching()
+        /// <inheritdoc />
+        protected override void OnAssociatedObjectLoaded()
         {
-            if (_tracker != null)
-                _tracker.Changed -= ExportProvider_Changed;
+            base.OnAssociatedObjectLoaded();
 
-            base.OnDetaching();
+            if (_tracker != null)
+            {
+                _tracker.Changed -= ExportProvider_Changed;
+                _tracker.Changed += ExportProvider_Changed;
+            }
+        }
+
+        /// <inheritdoc />
+        protected override void OnAssociatedObjectUnloaded()
+        {
+            base.OnAssociatedObjectUnloaded();
+
+            if (_tracker != null)
+            {
+                _tracker.Changed -= ExportProvider_Changed;
+            }
         }
 
         private void ExportProvider_Changed([NotNull] object sender, [NotNull] EventArgs e)

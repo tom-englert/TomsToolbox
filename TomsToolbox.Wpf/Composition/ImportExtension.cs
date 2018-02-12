@@ -39,7 +39,7 @@
         [CanBeNull]
         private ExportProvider _exportProvider;
         [CanBeNull]
-        private DependencyObject _rootObject;
+        private FrameworkElement _rootObject;
         [CanBeNull]
         private INotifyChanged _tracker;
 
@@ -118,7 +118,7 @@
             if (rootObjectProvider == null)
                 return null;
 
-            _rootObject = rootObjectProvider.RootObject as DependencyObject;
+            _rootObject = rootObjectProvider.RootObject as FrameworkElement;
             if (_rootObject == null)
                 return null;
 
@@ -135,9 +135,9 @@
                 }
 
                 _tracker = _rootObject.Track(ExportProviderLocator.ExportProviderProperty);
-                _tracker.Changed += (_, __) => ExportProvider_Changed();
 
-                RegisterForChangeEvents();
+                _rootObject.Loaded += RootObject_Loaded;
+                _rootObject.Unloaded += RootObject_Unloaded;
             }
             else
             {
@@ -145,6 +145,27 @@
             }
 
             return Value;
+        }
+
+        private void RootObject_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (_tracker != null)
+            {
+                _tracker.Changed -= ExportProvider_Changed;
+                _tracker.Changed += ExportProvider_Changed;
+            }
+
+            SetExportProvider(_rootObject?.TryGetExportProvider());
+        }
+
+        private void RootObject_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (_tracker != null)
+            {
+                _tracker.Changed -= ExportProvider_Changed;
+            }
+
+            SetExportProvider(null);
         }
 
         [CanBeNull]
@@ -205,26 +226,20 @@
             }
         }
 
-        private void ExportProvider_Changed()
+        private void ExportProvider_Changed(object sender, EventArgs e)
         {
-            RegisterForChangeEvents();
+            SetExportProvider(_rootObject?.TryGetExportProvider());
             UpdateTarget();
         }
 
-        private void RegisterForChangeEvents()
+        private void SetExportProvider(ExportProvider exportProvider)
         {
             if (_exportProvider != null)
             {
                 _exportProvider.ExportsChanged -= ExportProvider_ExportsChanged;
             }
 
-            if (_rootObject == null)
-            {
-                _exportProvider = null;
-                return;
-            }
-
-            _exportProvider = _rootObject.TryGetExportProvider();
+            _exportProvider = exportProvider;
 
             if (_exportProvider != null)
             {
