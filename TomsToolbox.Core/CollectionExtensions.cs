@@ -520,5 +520,22 @@
                 }
             }
         }
+
+        /// <summary>
+        /// Searches for an element that matches the conditions defined by the specified predicate, 
+        /// and returns the zero-based index of the first occurrence within the entire <see cref="T:System.Collections.Generic.IEnumerable`1" />.
+        /// </summary>
+        /// <param name="match">The <see cref="T:System.Predicate`1" /> delegate that defines the conditions of the element to search for.</param>
+        /// <returns>
+        /// The zero-based index of the first occurrence of an element that matches the conditions 
+        /// defined by <paramref name="match" />, if found; otherwise, –1.
+        /// </returns>
+        public static int FindIndex<T>([NotNull] this IEnumerable<T> source, [NotNull] Predicate<T> match)
+        {
+            return source
+                .Select((item, index) => new { item, index })
+                .FirstOrDefault(item => match(item.item))?.index ?? -1;
+
+        }
     }
 }
