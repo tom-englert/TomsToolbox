@@ -9,6 +9,17 @@
       <content>
         <list class="bullet">          
           <listItem>
+            <para>1.0.65.0</para>
+            <list class="bullet">
+              <listItem><para>Add XAML extensions for Button</para></listItem>
+              <listItem><para>CustomNonClientAreaBehavior: Fix Maximized window handling</para></listItem>
+              <listItem><para>Fix memory leaks in visual composition</para></listItem>
+              <listItem><para>Add a TimerTrigger that continuously fires and avoids the memory leak of the Microsoft.Expression.Interactivity version.</para></listItem>
+              <listItem><para>Add a WeakEventSource class</para></listItem>
+              <listItem><para>Drop CodeContracts support</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.64.0</para>
             <list class="bullet">
               <listItem><para>Speedup TextBoxVisibleWhiteSpaceDecorator</para></listItem>

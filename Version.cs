@@ -2,7 +2,7 @@ using System.Reflection;
 
 [assembly: AssemblyCompany("tom-englert.de")]
 [assembly: AssemblyProduct("Tom's Toolbox")]
-[assembly: AssemblyCopyright("© tom-englert.de 2012-2017")]
+[assembly: AssemblyCopyright("© tom-englert.de 2012-2018")]
 [assembly: AssemblyTrademark("")]
 
 [assembly: AssemblyVersion(Product.Version)]
@@ -10,5 +10,5 @@ using System.Reflection;
 
 internal static class Product
 {
-    public const string Version = "1.0.64.0";
+    public const string Version = "1.0.65.0";
 }
