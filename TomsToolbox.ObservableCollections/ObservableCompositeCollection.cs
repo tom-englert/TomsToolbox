@@ -76,25 +76,19 @@
         }
     }
 
-    /// <inheritdoc cref="ReadOnlyObservableCollection{T}"/>
     /// <summary>
     /// View a set of collections as one continuous list.
     /// <para />
     /// Similar to the System.Windows.Data.CompositeCollection, plus:
-    /// <list type="bullet">
-    /// <item>Generic type</item>
-    /// <item>Transparent separation of the real content and the resulting list</item>
-    /// <item>Nestable, i.e. composite collections of composite collections</item>
-    /// </list>
-    /// </summary>
+    /// <list type="bullet"><item>Generic type</item><item>Transparent separation of the real content and the resulting list</item><item>Nestable, i.e. composite collections of composite collections</item></list></summary>
     /// <typeparam name="T">Type of the items in the collection</typeparam>
+    /// <inheritdoc cref="ReadOnlyObservableCollection{T}" />
     public sealed class ObservableCompositeCollection<T> : ReadOnlyObservableCollection<T>, IObservableCollection<T>
     {
         [ContractPublicPropertyName("Content")]
         [NotNull, ItemNotNull]
         private readonly ContentManager _content;
 
-        /// <inheritdoc />
         /// <summary>
         /// Taking care of the physical content
         /// </summary>
@@ -312,12 +306,13 @@
             _content = new ContentManager(this);
         }
 
-        /// <inheritdoc />
         /// <summary>
         /// Create a collection initially wrapping a set of lists
         /// </summary>
         /// <param name="parts">The lists to wrap</param>
+        /// <exception cref="System.ArgumentException">None of the parts may be null!</exception>
         /// <exception cref="T:System.ArgumentException">None of the parts may be null!</exception>
+        /// <inheritdoc />
         [SuppressMessage("ReSharper", "HeuristicUnreachableCode")]
         public ObservableCompositeCollection([NotNull, ItemNotNull] params IList<T>[] parts)
             : this()
@@ -367,7 +362,7 @@
                     var removeIndex = e.OldStartingIndex;
                     // ReSharper disable PossibleNullReferenceException
                     for (var k = 0; k < e.OldItems.Count; k++)
-                        // ReSharper restore PossibleNullReferenceException
+                    // ReSharper restore PossibleNullReferenceException
                     {
                         Items.RemoveAt(removeIndex);
                     }

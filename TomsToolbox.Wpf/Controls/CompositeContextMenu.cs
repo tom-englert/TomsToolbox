@@ -12,26 +12,27 @@
 
     using TomsToolbox.Wpf.Composition;
 
-    /// <inheritdoc />
     /// <summary>
     /// A markup extension to create a <see cref="T:TomsToolbox.Wpf.Controls.CompositeContextMenu" /> in XAML.
     /// </summary>
+    /// <seealso cref="System.Windows.Markup.MarkupExtension" />
+    /// <inheritdoc />
     [MarkupExtensionReturnType(typeof(ContextMenu))]
     public class CompositeContextMenuExtension : MarkupExtension
     {
-        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Controls.CompositeContextMenuExtension" /> class.
         /// </summary>
+        /// <inheritdoc />
         public CompositeContextMenuExtension()
         {
         }
 
-        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Controls.CompositeContextMenuExtension" /> class.
         /// </summary>
         /// <param name="regionId">The region identifier.</param>
+        /// <inheritdoc />
         public CompositeContextMenuExtension([CanBeNull] string regionId)
         {
             RegionId = regionId;

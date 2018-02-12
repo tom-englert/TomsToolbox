@@ -14,7 +14,6 @@
 
     using TomsToolbox.Core;
 
-    /// <inheritdoc />
     /// <summary>
     /// A read only observable collection of type TTarget where TTarget is a wrapper for type TSource.
     /// </summary>
@@ -24,6 +23,7 @@
     /// This collection does <c>not</c> hold a reference to the source collection.
     /// To keep the source collection alive, the object generating the <see cref="T:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2" /> must hold a reference to the source collection.
     /// </remarks>
+    /// <inheritdoc />
     public class ObservableWrappedCollection<TSource, TTarget> : ReadOnlyObservableCollectionAdapter<TTarget, ObservableCollection<TTarget>>
     {
         [NotNull]
@@ -31,12 +31,12 @@
         [CanBeNull]
         private readonly IWeakEventListener _collectionChangedWeakEvent;
 
-        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2" /> class.
         /// </summary>
         /// <param name="sourceCollection">The source collection to wrap. This instance will not hold a reference to the source collection.</param>
         /// <param name="itemGenerator">The item generator to generate the wrapper for each item.</param>
+        /// <inheritdoc />
         public ObservableWrappedCollection([NotNull, ItemNotNull] IEnumerable sourceCollection, [NotNull] Func<TSource, TTarget> itemGenerator)
             : base(new ObservableCollection<TTarget>(sourceCollection.Cast<TSource>().Select(itemGenerator)))
         {

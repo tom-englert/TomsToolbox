@@ -21,11 +21,12 @@
     using TomsToolbox.Desktop;
     using TomsToolbox.Desktop.Composition;
 
-    /// <inheritdoc />
     /// <summary>
     /// The XAML equivalent of the <see cref="T:System.ComponentModel.Composition.ImportAttribute" />. Use like the <see cref="T:System.Windows.Markup.StaticExtension" />;
     /// uses the MEF <see cref="T:System.ComponentModel.Composition.Hosting.ExportProvider" /> to create the object.
     /// </summary>
+    /// <seealso cref="System.Windows.Markup.MarkupExtension" />
+    /// <inheritdoc />
     [MarkupExtensionReturnType(typeof(object))]
     public class ImportExtension : MarkupExtension
     {
@@ -43,11 +44,11 @@
         [CanBeNull]
         private INotifyChanged _tracker;
 
-        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Composition.ImportExtension" /> class.
         /// </summary>
         /// <param name="memberType">Type of the member to provide.</param>
+        /// <inheritdoc />
         public ImportExtension([NotNull] Type memberType)
         {
             Contract.Requires(memberType != null);

@@ -17,10 +17,11 @@
     using TomsToolbox.Core;
     using TomsToolbox.Desktop;
 
-    /// <inheritdoc />
     /// <summary>
     /// Command declaration to be used with visual composition.
     /// </summary>
+    /// <seealso cref="System.Windows.DependencyObject" />
+    /// <inheritdoc />
     public class CommandSource : DependencyObject
     {
         [NotNull]
@@ -28,11 +29,11 @@
         [NotNull, ItemNotNull]
         private readonly List<ICommand> _attachedCommands = new List<ICommand>();
 
-        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Composition.CommandSource" /> class.
         /// </summary>
         /// <param name="owner">The command source factory.</param>
+        /// <inheritdoc />
         public CommandSource([NotNull] ICommandSourceFactory owner)
         {
             Contract.Requires(owner != null);
