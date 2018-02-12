@@ -21,7 +21,7 @@
       <toms:Map x:Name="MapControl" ImageProvider="{Binding ImageProvider}" ZoomLevel="10"
                 Center="{Binding Center, Converter={toms:Import toms:CoordinatesToPointConverter}}"
                 MousePosition="{Binding MousePosition, Converter={toms:Import toms:CoordinatesToPointConverter}}"
-                Bounds="{Binding Bounds}"
+                Bounds="{Binding Bounds}" Focusable="True"
                 MouseDoubleClickCommand="{Binding MouseDoubleClickCommand}">
         <i:Interaction.Behaviors>
           <toms:MapPanBehavior />

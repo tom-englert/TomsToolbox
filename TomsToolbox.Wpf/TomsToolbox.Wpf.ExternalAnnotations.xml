@@ -1270,6 +1270,9 @@
   <member name="F:TomsToolbox.Wpf.Interactivity.SelectionRectangleBehavior.ViewportProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="F:TomsToolbox.Wpf.Interactivity.TimerTrigger.IntervalProperty">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction.Invoke(System.Object)">
     <parameter name="parameter">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />

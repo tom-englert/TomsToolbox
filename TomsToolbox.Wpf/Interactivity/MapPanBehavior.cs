@@ -7,7 +7,6 @@
     using System.Linq;
     using System.Windows;
     using System.Windows.Input;
-    using System.Windows.Interactivity;
     using System.Windows.Media.Animation;
 
     using JetBrains.Annotations;
@@ -17,7 +16,7 @@
     /// <summary>
     /// Implements pan behavior for the <see cref="Map"/> control.
     /// </summary>
-    public class MapPanBehavior : Behavior<Map>
+    public class MapPanBehavior : FrameworkElementBehavior<Map>
     {
         [NotNull]
         private readonly PointAnimation _panAnimation = new PointAnimation { Duration = new Duration(TimeSpan.FromSeconds(0.25)) };
@@ -27,7 +26,8 @@
         private Point? _panPosition;
         private bool _isStoryboardRunning;
 
-        [NotNull] private static readonly DependencyProperty AnimatedPanPositionProperty =
+        [NotNull]
+        private static readonly DependencyProperty AnimatedPanPositionProperty =
             // ReSharper disable once PossibleNullReferenceException
             DependencyProperty.Register("AnimatedPanPosition", typeof(Point), typeof(MapPanBehavior), new FrameworkPropertyMetadata((sender, e) => ((MapPanBehavior)sender)?.AnimatedPanPosition_Changed((Point)e.NewValue)));
 
@@ -38,7 +38,7 @@
         protected override Freezable CreateInstanceCore()
         {
             // ensure we don't return a copy on freeze, else the animation is gone.
-            return this;    
+            return this;
         }
 
         private void AnimatedPanPosition_Changed(Point newValue)
@@ -67,19 +67,26 @@
             map.MouseLeftButtonUp += Map_MouseLeftButtonUp;
             map.MouseMove += Map_MouseMove;
 
-            var focusableParent = map.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault(item => item.Focusable);
-            if (focusableParent != null)
-            {
-                focusableParent.KeyDown += FocusableParent_KeyDown;
-            }
-
             Storyboard.SetTarget(_panAnimation, this);
             Storyboard.SetTargetProperty(_panAnimation, new PropertyPath(AnimatedPanPositionProperty));
             _storyboard.Children?.Add(_panAnimation);
             _storyboard.Completed += Storyboard_Completed;
         }
 
-        void FocusableParent_KeyDown([NotNull] object sender, [NotNull] KeyEventArgs e)
+        protected override void OnAssociatedObjectLoaded()
+        {
+            base.OnAssociatedObjectLoaded();
+
+            var map = AssociatedObject;
+            Contract.Assume(map != null);
+            var focusableParent = map.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault(item => item.Focusable);
+            if (focusableParent != null)
+            {
+                focusableParent.KeyDown += FocusableParent_KeyDown;
+            }
+        }
+
+        private void FocusableParent_KeyDown([NotNull] object sender, [NotNull] KeyEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                 return;
@@ -104,7 +111,12 @@
                 case Key.Down:
                     Pan(0, +1);
                     break;
+
+                default:
+                    return;
             }
+
+            e.Handled = true;
         }
 
         private void Pan(double dx, double dy)
@@ -116,7 +128,7 @@
         {
             if (_isStoryboardRunning)
                 return;
-            
+
             var map = AssociatedObject;
             if (map == null)
                 return;
@@ -127,7 +139,7 @@
             _storyboard.Begin();
         }
 
-        void Storyboard_Completed([NotNull] object sender, [NotNull] EventArgs e)
+        private void Storyboard_Completed([NotNull] object sender, [NotNull] EventArgs e)
         {
             _isStoryboardRunning = false;
         }

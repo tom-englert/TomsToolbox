@@ -7,7 +7,6 @@
     using System.Linq;
     using System.Windows;
     using System.Windows.Input;
-    using System.Windows.Interactivity;
     using System.Windows.Media.Animation;
 
     using JetBrains.Annotations;
@@ -18,7 +17,7 @@
     /// <summary>
     /// Implements zooming behavior for the <see cref="Map"/> control.
     /// </summary>
-    public class MapZoomBehavior : Behavior<Map>
+    public class MapZoomBehavior : FrameworkElementBehavior<Map>
     {
         [NotNull]
         private readonly DoubleAnimation _animation = new DoubleAnimation { Duration = new Duration(TimeSpan.FromSeconds(0.5)) };
@@ -55,17 +54,25 @@
 
             map.MouseWheel += AssociatedObject_PreviewMouseWheel;
 
-            var focusableParent = map.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault(item => item.Focusable);
-            if (focusableParent != null)
-            {
-                focusableParent.KeyDown += FocusableParent_KeyDown;
-            }
-
             Storyboard.SetTarget(_animation, map);
             Storyboard.SetTargetProperty(_animation, new PropertyPath(Map.ZoomLevelProperty));
 
             _storyboard.Children?.Add(_animation);
             _storyboard.Completed += Storyboard_Completed;
+        }
+
+        protected override void OnAssociatedObjectLoaded()
+        {
+            base.OnAssociatedObjectLoaded();
+            
+            var map = AssociatedObject;
+            Contract.Assume(map != null);
+
+            var focusableParent = map.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault(item => item.Focusable);
+            if (focusableParent != null)
+            {
+                focusableParent.KeyDown += FocusableParent_KeyDown;
+            }
         }
 
         void Storyboard_Completed([CanBeNull] object sender, [CanBeNull] EventArgs e)
@@ -97,7 +104,7 @@
             _storyboard.Begin();
         }
 
-        void FocusableParent_KeyDown([NotNull] object sender, [NotNull] KeyEventArgs e)
+        private void FocusableParent_KeyDown([NotNull] object sender, [NotNull] KeyEventArgs e)
         {
             var map = AssociatedObject;
             if (map == null)
@@ -126,6 +133,8 @@
             var from = _animation.To ?? map.ZoomLevel;
             _animation.To = Math.Round(from) + delta;
             _storyboard.Begin();
+
+            e.Handled = true;
         }
 
         /// <summary>

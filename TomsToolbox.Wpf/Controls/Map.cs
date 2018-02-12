@@ -324,6 +324,16 @@
             command.Execute(mousePosition);
         }
 
+        /// <inheritdoc />
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+
+            var focusableParent = this.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault(item => item.Focusable);
+
+            focusableParent?.Focus();
+        }
+
         private void ZoomLevel_Changed(double newValue)
         {
             ZoomFactor = Math.Pow(2, newValue);

@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="500"
              xmlns:toms="urn:TomsToolbox"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              xmlns:samples="clr-namespace:SampleApp.Samples"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              d:DataContext="{d:DesignInstance samples:MiscViewModel}">
@@ -67,9 +66,9 @@
                      VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" />
         </Grid>
         <i:Interaction.Triggers>
-          <ei:TimerTrigger MillisecondsPerTick="1000">
+          <toms:TimerTrigger Interval="00:00:01" >
             <toms:UpdatePropertyAction TargetName="Time" Property="{x:Static TextBlock.TextProperty}" />
-          </ei:TimerTrigger>
+          </toms:TimerTrigger>
         </i:Interaction.Triggers>
       </HeaderedContentControl>
       <HeaderedContentControl Header="AggregatingMultiValueConverter" Focusable="False">

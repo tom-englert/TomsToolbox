@@ -20,6 +20,7 @@
         /// </summary>
         public PixelSnapper()
         {
+            Focusable = false;
             Loaded += (_, __) => _physicalPixelSize = this.GetPhysicalPixelSize();
         }
 
