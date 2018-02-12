@@ -182,6 +182,9 @@
           </ListBox>
         </StackPanel>
       </HeaderedContentControl>
+      <HeaderedContentControl Header="Memory testing">
+        <Button Content="GC Collect" Margin="10" Command="{Binding GCCollectCommand}"/>
+      </HeaderedContentControl>
     </StackPanel>
   </ScrollViewer>
 </UserControl> 

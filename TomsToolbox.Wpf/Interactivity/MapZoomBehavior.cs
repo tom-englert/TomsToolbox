@@ -66,11 +66,6 @@
 
             _storyboard.Children?.Add(_animation);
             _storyboard.Completed += Storyboard_Completed;
-
-            // ReSharper disable AssignNullToNotNullAttribute
-            CommandManager.RegisterClassCommandBinding(typeof(Map), new CommandBinding(NavigationCommands.DecreaseZoom, (_, __) => Zoom(-1)));
-            CommandManager.RegisterClassCommandBinding(typeof(Map), new CommandBinding(NavigationCommands.IncreaseZoom, (_, __) => Zoom(+1)));
-            // ReSharper restore AssignNullToNotNullAttribute
         }
 
         void Storyboard_Completed([CanBeNull] object sender, [CanBeNull] EventArgs e)

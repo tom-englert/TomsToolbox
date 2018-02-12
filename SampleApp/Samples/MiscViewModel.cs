@@ -26,5 +26,8 @@
 
         [NotNull]
         public ICommand ItemsControlDefaultCommand => new DelegateCommand<string>(item => MessageBox.Show(item + " clicked."));
+
+        [NotNull]
+        public ICommand GCCollectCommand => new DelegateCommand(GC.Collect);
     }
 }
