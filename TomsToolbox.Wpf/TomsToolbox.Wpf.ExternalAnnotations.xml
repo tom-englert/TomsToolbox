@@ -1370,6 +1370,15 @@
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:TomsToolbox.Wpf.PresentationFrameworkExtensions.ChangeTracker``1(``0,System.Windows.DependencyProperty)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="frameworkElement">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="property">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="M:TomsToolbox.Wpf.PresentationFrameworkExtensions.GetClientRect(System.Windows.FrameworkElement)">
     <parameter name="self">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
