@@ -1,6 +1,8 @@
 ﻿namespace TomsToolbox.Wpf
 {
     using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics.Contracts;
     using System.Windows;
     using System.Windows.Media;
@@ -248,6 +250,100 @@
             children.AddRange(others);
 
             return transformGroup;
+        }
+
+        /// <summary>
+        /// Tracks the changes of the specified property. 
+        /// Unlike the <see cref="Desktop.DependencyObjectExtensions.Track{T}"/>, it tracks events only while the <paramref name="frameworkElement"/> is loaded, 
+        /// to avoid memory leaks because the event handlers are referenced by the global <see cref="DependencyPropertyDescriptor"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the framework element to track.</typeparam>
+        /// <param name="frameworkElement">The framework element.</param>
+        /// <param name="property">The property to track.</param>
+        /// <returns>The object providing the changed event.</returns>
+        [NotNull]
+        public static INotifyChanged ChangeTracker<T>([NotNull] this T frameworkElement, [NotNull] DependencyProperty property)
+            where T : FrameworkElement
+        {
+            Contract.Requires(frameworkElement != null);
+            Contract.Requires(property != null);
+            Contract.Ensures(Contract.Result<INotifyChanged>() != null);
+
+            return new DependencyPropertyEventWrapper<T>(frameworkElement, property);
+        }
+
+        private class DependencyPropertyEventWrapper<T> : INotifyChanged
+            where T : FrameworkElement
+        {
+            [NotNull]
+            private readonly T _frameworkElement;
+            [NotNull]
+            private readonly DependencyPropertyDescriptor _dependencyPropertyDescriptor;
+            [NotNull, ItemNotNull]
+            private readonly HashSet<EventHandler> _eventHandlers = new HashSet<EventHandler>();
+
+            public DependencyPropertyEventWrapper([NotNull] T frameworkElement, [NotNull] DependencyProperty property)
+            {
+                Contract.Requires(frameworkElement != null);
+                Contract.Requires(property != null);
+
+                _frameworkElement = frameworkElement;
+                // ReSharper disable once AssignNullToNotNullAttribute
+                _dependencyPropertyDescriptor = DependencyPropertyDescriptor.FromProperty(property, typeof(T));
+
+                _frameworkElement.Loaded += FrameworkElement_Loaded;
+                _frameworkElement.Unloaded += FrameworkElement_Unloaded;
+            }
+
+            private void FrameworkElement_Loaded(object sender, RoutedEventArgs e)
+            {
+                foreach (var eventHandler in _eventHandlers)
+                {
+                    _dependencyPropertyDescriptor.RemoveValueChanged(_frameworkElement, eventHandler);
+                    _dependencyPropertyDescriptor.AddValueChanged(_frameworkElement, eventHandler);
+                }
+            }
+
+            private void FrameworkElement_Unloaded(object sender, RoutedEventArgs routedEventArgs)
+            {
+                foreach (var eventHandler in _eventHandlers)
+                {
+                    _dependencyPropertyDescriptor.RemoveValueChanged(_frameworkElement, eventHandler);
+                }
+            }
+
+            public event EventHandler Changed
+            {
+                add => Subscribe(value);
+                remove => Unsubscribe(value);
+            }
+
+            private void Subscribe(EventHandler value)
+            {
+                if (value == null)
+                    return;
+
+                _frameworkElement.VerifyAccess();
+
+                if (!_eventHandlers.Add(value))
+                    return;
+
+                if (!_frameworkElement.IsLoaded) 
+                    return;
+
+                _dependencyPropertyDescriptor.AddValueChanged(_frameworkElement, value);
+            }
+
+            private void Unsubscribe(EventHandler value)
+            {
+                if (value == null)
+                    return;
+
+                _frameworkElement.VerifyAccess();
+
+                _eventHandlers.Remove(value);
+                _dependencyPropertyDescriptor.RemoveValueChanged(_frameworkElement, value);
+            }
         }
     }
 }

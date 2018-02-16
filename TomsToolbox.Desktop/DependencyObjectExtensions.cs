@@ -50,8 +50,7 @@
             return new DependencyPropertyEventWrapper<T>(dependencyObject, property);
         }
 
-
-        class DependencyPropertyEventWrapper<T> : INotifyChanged
+        private class DependencyPropertyEventWrapper<T> : INotifyChanged
             where T : DependencyObject
         {
             [NotNull]
