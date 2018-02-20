@@ -80,16 +80,24 @@
             if (EventSources.TryGetValue(sourceType, out var oldListern))
                 oldListern?.Detach();
 
-            var newListener = new WeakEventListener(this, source,
-                // ReSharper disable PossibleNullReferenceException
-                // ReSharper disable AssignNullToNotNullAttribute
-                (target, sender, e) => target.RelaySource_PropertyChanged(sender, e),
-                (listener, sender) => sender.PropertyChanged += listener.OnEvent,
-                (listener, sender) => sender.PropertyChanged -= listener.OnEvent);
-                // ReSharper restore PossibleNullReferenceException
-                // ReSharper restore AssignNullToNotNullAttribute
+            var newListener = new WeakEventListener(this, source, OnWeakEvent, OnAttach, OnDetach);
 
             EventSources[sourceType] = newListener;
+        }
+
+        private static void OnDetach([NotNull] WeakEventListener listener, [NotNull] INotifyPropertyChanged sender)
+        {
+            sender.PropertyChanged -= listener.OnEvent;
+        }
+
+        private static void OnAttach([NotNull] WeakEventListener listener, [NotNull] INotifyPropertyChanged sender)
+        {
+            sender.PropertyChanged += listener.OnEvent;
+        }
+
+        private static void OnWeakEvent([NotNull] ObservableObjectBase target, [NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
+        {
+            target.RelaySource_PropertyChanged(sender, e);
         }
 
         /// <summary>
