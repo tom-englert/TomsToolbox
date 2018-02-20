@@ -176,6 +176,42 @@ namespace TomsToolbox.Desktop.Tests
             Assert.AreEqual(2, receivedEvents["Value"]);
             Assert.AreEqual(1, receivedEvents["MyOtherValue"]);
         }
+[TestMethod]
+        public void RelayedEventAttribute_MultipleGoverningWeakReferenceGetsReleasedTest()
+        {
+            var receivedEvents = new ObservableIndexer<string, int>(_ => 0);
+            var governing1 = new GoverningClass1();
+            var governing2 = new GoverningClass2();
+            var relaying = new RelayingClass(governing1, governing2);
+
+            relaying.PropertyChanged += (sender, e) => receivedEvents[e.PropertyName] += 1;
+
+            governing1.Value = 5;
+
+            Assert.AreEqual(5, relaying.Value);
+            Assert.AreEqual(0, relaying.MyOtherValue);
+            Assert.AreEqual(1, receivedEvents.Count);
+            Assert.AreEqual(1, receivedEvents["Value"]);
+
+            governing2.OtherValue = 8;
+
+            Assert.AreEqual(5, relaying.Value);
+            Assert.AreEqual(8, relaying.MyOtherValue);
+            Assert.AreEqual(2, receivedEvents.Count);
+            Assert.AreEqual(1, receivedEvents["Value"]);
+            Assert.AreEqual(1, receivedEvents["MyOtherValue"]);
+
+            relaying = null;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            governing1.Value = 5;
+            governing2.OtherValue = 8;
+
+            Assert.AreEqual(2, receivedEvents.Count);
+            Assert.AreEqual(1, receivedEvents["Value"]);
+            Assert.AreEqual(1, receivedEvents["MyOtherValue"]);
+        }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]

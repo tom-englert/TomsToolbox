@@ -15,6 +15,8 @@
 
     using TomsToolbox.Core;
 
+    using WeakEventListener = TomsToolbox.Core.WeakEventListener<ObservableObjectBase, System.ComponentModel.INotifyPropertyChanged, System.ComponentModel.PropertyChangedEventArgs>;
+
     /// <summary>
     /// Base class implementing <see cref="INotifyPropertyChanged"/>.<para/>
     /// Supports declarative dependencies specified by the <see cref="PropertyDependencyAttribute"/> and
@@ -40,7 +42,7 @@
         private IDictionary<Type, IDictionary<string, string>> _relayMapping;
 
         [NonSerialized, CanBeNull]
-        private Dictionary<Type, INotifyPropertyChanged> _eventSources;
+        private Dictionary<Type, WeakEventListener> _eventSources;
 
         /// <summary>
         /// Relays the property changed events of the source object (if not null) and detaches the old source (if not null).
@@ -75,12 +77,19 @@
             if (RelayMapping.Keys.All(key => key?.IsAssignableFrom(sourceType) != true))
                 throw new InvalidOperationException(@"This class has no property with a RelayedEventAttribute for the type " + sourceType);
 
-            INotifyPropertyChanged oldSource;
-            if (EventSources.TryGetValue(sourceType, out oldSource) && (oldSource != null))
-                oldSource.PropertyChanged -= RelaySource_PropertyChanged;
+            if (EventSources.TryGetValue(sourceType, out var oldListern))
+                oldListern?.Detach();
 
-            source.PropertyChanged += RelaySource_PropertyChanged;
-            EventSources[sourceType] = source;
+            var newListener = new WeakEventListener(this, source,
+                // ReSharper disable PossibleNullReferenceException
+                // ReSharper disable AssignNullToNotNullAttribute
+                (target, sender, e) => target.RelaySource_PropertyChanged(sender, e),
+                (listener, sender) => sender.PropertyChanged += listener.OnEvent,
+                (listener, sender) => sender.PropertyChanged -= listener.OnEvent);
+                // ReSharper restore PossibleNullReferenceException
+                // ReSharper restore AssignNullToNotNullAttribute
+
+            EventSources[sourceType] = newListener;
         }
 
         /// <summary>
@@ -91,8 +100,10 @@
             foreach (var item in EventSources.Values.ToArray())
             {
                 Contract.Assume(item != null);
-                DetachEventSource(item);
+                item.Detach();
             }
+
+            EventSources.Clear();
         }
 
         /// <summary>
@@ -102,8 +113,14 @@
         protected void DetachEventSource([NotNull] INotifyPropertyChanged item)
         {
             Contract.Requires(item != null);
-            item.PropertyChanged -= RelaySource_PropertyChanged;
-            EventSources.Remove(item.GetType());
+
+            var sourceType = item.GetType();
+
+            if (EventSources.TryGetValue(sourceType, out var oldListern))
+            {
+                oldListern?.Detach();
+                EventSources.Remove(sourceType);
+            }
         }
 
         /// <summary>
@@ -265,7 +282,7 @@
         }
 
         [NotNull]
-        private Dictionary<Type, INotifyPropertyChanged> EventSources => _eventSources ?? (_eventSources = new Dictionary<Type, INotifyPropertyChanged>());
+        private Dictionary<Type, WeakEventListener> EventSources => _eventSources ?? (_eventSources = new Dictionary<Type, WeakEventListener>());
 
         [NotNull]
         private IDictionary<Type, IDictionary<string, string>> RelayMapping => _relayMapping ?? (_relayMapping = _relayMappingCache[GetType()]);
@@ -278,7 +295,6 @@
         {
             Contract.Requires(sender != null);
 
-            // ReSharper disable once PossibleNullReferenceException
             if (e.PropertyName == null)
                 return;
 
@@ -363,6 +379,12 @@
         [CanBeNull]
         string IDataErrorInfo.this[[CanBeNull] string columnName] => InternalGetDataErrors(columnName).FirstOrDefault();
 
+        /// <inheritdoc />
+        ~ObservableObjectBase()
+        {
+            DetachEventSources();
+        }
+
 #if NETFRAMEWORK_4_5
         private event EventHandler<DataErrorsChangedEventArgs> _errorsChanged;
 
@@ -372,9 +394,7 @@
         /// <param name="propertyName">The name of the property where validation errors have changed; or null or <see cref="F:System.String.Empty"/>, when entity-level errors have changed.</param>
         protected void OnErrorsChanged(string propertyName)
         {
-            var eventHandler = _errorsChanged;
-            if (eventHandler != null)
-                eventHandler(this, new DataErrorsChangedEventArgs(propertyName));
+            _errorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
         System.Collections.IEnumerable INotifyDataErrorInfo.GetErrors(string propertyName)
