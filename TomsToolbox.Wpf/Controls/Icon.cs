@@ -44,6 +44,7 @@
         /// <summary>
         /// Gets or sets the image sources that are candidates for the target image.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "Required, is used via XAML")]
         [CanBeNull]
         public IList<ImageSource> Sources
         {
