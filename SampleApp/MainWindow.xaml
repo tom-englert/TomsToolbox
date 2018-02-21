@@ -10,7 +10,12 @@
     </ContextMenu>
   </Window.ContextMenu>
 
-  <TabControl toms:VisualComposition.RegionId="{x:Static sampleApp:RegionId.Main}"
-              toms:DataTemplate.Role="{x:Static sampleApp:TemplateRoles.Content}" Margin="-1"/>
+  <TabControl toms:VisualComposition.RegionId="{x:Static sampleApp:RegionId.Main}" Margin="-1">
+    <TabControl.ItemTemplate>
+      <DataTemplate>
+        <TextBlock Text="{Binding}"/>
+      </DataTemplate>
+    </TabControl.ItemTemplate>
+  </TabControl>
 
 </Window>

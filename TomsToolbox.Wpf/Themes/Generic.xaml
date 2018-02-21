@@ -371,5 +371,15 @@
   <Style x:Key="{ComponentResourceKey {x:Type local:ResourceKeys}, {x:Static local:ResourceKeys.CompositeMenuStyleKeyName}}" TargetType="{x:Type Menu}">
     <Setter Property="ItemContainerStyle" Value="{StaticResource CompositeMenuItemStyle}"/>
   </Style>
+  
+  <Style TargetType="{x:Type controls:Icon}">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type controls:Icon}">
+          <Image x:Name="PART_Image" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
 
 </ResourceDictionary>

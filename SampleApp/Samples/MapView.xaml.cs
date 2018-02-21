@@ -12,7 +12,7 @@ namespace SampleApp.Samples
     /// <summary>
     /// Interaction logic for MapView.xaml
     /// </summary>
-    [DataTemplate(typeof(MapViewModel), Role = TemplateRoles.Content)]
+    [DataTemplate(typeof(MapViewModel))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class MapView
     {

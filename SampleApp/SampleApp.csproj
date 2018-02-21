@@ -138,6 +138,9 @@
       <DependentUpon>CompositeCommandsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Samples\CompositeCommandsViewModel.cs" />
+    <Compile Include="Samples\IconView.xaml.cs">
+      <DependentUpon>IconView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Samples\MapViewModel.cs" />
     <Compile Include="Samples\MapView.xaml.cs">
       <DependentUpon>MapView.xaml</DependentUpon>
@@ -189,6 +192,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Samples\IconView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Samples\MapView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -226,6 +233,9 @@
     <Resource Include="16x16.png" />
     <Resource Include="16x16.ico" />
     <None Include="FodyWeavers.xml" />
+    <Resource Include="Assets\icon_16.png" />
+    <Resource Include="Assets\icon_24.png" />
+    <Resource Include="Assets\icon_32.png" />
     <Content Include="Properties\Resources.Designer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

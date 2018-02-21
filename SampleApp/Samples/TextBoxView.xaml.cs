@@ -7,7 +7,7 @@
     /// <summary>
     /// Interaction logic for TextBoxView.xaml
     /// </summary>
-    [DataTemplate(typeof(TextBoxViewModel), Role = TemplateRoles.Content)]
+    [DataTemplate(typeof(TextBoxViewModel))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class TextBoxView
     {

@@ -10,7 +10,7 @@
     /// <summary>
     /// Interaction logic for CompositeCommandsView.xaml
     /// </summary>
-    [DataTemplate(typeof(CompositeCommandsViewModel), Role = TemplateRoles.Content)]
+    [DataTemplate(typeof(CompositeCommandsViewModel))]
     public partial class CompositeCommandsView
     {
         [ImportingConstructor]

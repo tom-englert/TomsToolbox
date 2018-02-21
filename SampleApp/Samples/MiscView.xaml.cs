@@ -7,7 +7,7 @@
     /// <summary>
     /// Interaction logic for MiscView.xaml
     /// </summary>
-    [DataTemplate(typeof(MiscViewModel), Role = TemplateRoles.Content)]
+    [DataTemplate(typeof(MiscViewModel))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class MiscView
     {

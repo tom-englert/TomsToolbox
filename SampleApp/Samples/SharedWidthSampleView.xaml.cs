@@ -7,7 +7,7 @@
     /// <summary>
     /// Interaction logic for SharedWidthSampleView.xaml
     /// </summary>
-    [DataTemplate(typeof(SharedWidthSampleViewModel), Role = TemplateRoles.Content)]
+    [DataTemplate(typeof(SharedWidthSampleViewModel))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class SharedWidthSampleView
     {

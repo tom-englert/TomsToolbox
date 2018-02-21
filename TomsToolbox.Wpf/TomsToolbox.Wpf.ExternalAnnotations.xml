@@ -447,6 +447,18 @@
   <member name="P:TomsToolbox.Wpf.Controls.CompositeContextMenuExtension.RegionId">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
+  <member name="P:TomsToolbox.Wpf.Controls.Icon.Sources">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Controls.Icon.SourcesProperty">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Controls.Icon.Viewport">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Controls.Icon.ViewportProperty">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="P:TomsToolbox.Wpf.Controls.IImage.Source">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
