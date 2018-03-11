@@ -209,7 +209,7 @@
             }
             catch
             {
-                // Catch all and don't make asumptions about exceptions, we can't know what the method could throw.
+                // Catch all and don't make assumptions about exceptions, we can't know what the method could throw.
             }
 
             return null;
