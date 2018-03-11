@@ -23,7 +23,6 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Controls.CompositeContextMenuExtension" /> class.
         /// </summary>
-        /// <inheritdoc />
         public CompositeContextMenuExtension()
         {
         }
@@ -32,7 +31,6 @@
         /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Controls.CompositeContextMenuExtension" /> class.
         /// </summary>
         /// <param name="regionId">The region identifier.</param>
-        /// <inheritdoc />
         public CompositeContextMenuExtension([CanBeNull] string regionId)
         {
             RegionId = regionId;
@@ -97,7 +95,6 @@
             DefaultStyleKeyProperty.OverrideMetadata(typeof(CompositeContextMenu), new FrameworkPropertyMetadata(typeof(CompositeContextMenu)));
         }
 
-        /// <inheritdoc />
         /// <summary>
         /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Controls.CompositeContextMenu" /> class.
         /// </summary>

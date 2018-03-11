@@ -36,7 +36,6 @@
         /// </summary>
         /// <param name="sourceCollection">The source collection to wrap. This instance will not hold a reference to the source collection.</param>
         /// <param name="itemGenerator">The item generator to generate the wrapper for each item.</param>
-        /// <inheritdoc />
         public ObservableWrappedCollection([NotNull, ItemNotNull] IEnumerable sourceCollection, [NotNull] Func<TSource, TTarget> itemGenerator)
             : base(new ObservableCollection<TTarget>(sourceCollection.Cast<TSource>().Select(itemGenerator)))
         {

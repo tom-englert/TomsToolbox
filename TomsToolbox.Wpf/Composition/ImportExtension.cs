@@ -48,7 +48,6 @@
         /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Composition.ImportExtension" /> class.
         /// </summary>
         /// <param name="memberType">Type of the member to provide.</param>
-        /// <inheritdoc />
         public ImportExtension([NotNull] Type memberType)
         {
             Contract.Requires(memberType != null);

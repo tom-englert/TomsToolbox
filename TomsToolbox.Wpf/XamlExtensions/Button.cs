@@ -5,7 +5,7 @@
     using JetBrains.Annotations;
 
     /// <summary>
-    /// Xaml extensions for the <see cref="System.Windows.Controls.Button"/>
+    /// XAML extensions for the <see cref="System.Windows.Controls.Button"/>
     /// </summary>
     public static class Button
     {
@@ -29,7 +29,7 @@
             button.SetValue(DialogResultProperty, value);
         }
         /// <summary>
-        /// Identifies the <see cref="P:TomsToolbox.Wpf.XamlExtensions.DialogResult"/> attached property.
+        /// Identifies the <see cref="P:TomsToolbox.Wpf.XamlExtensions.Button.DialogResult"/> attached property.
         /// </summary>
         /// <AttachedPropertyComments>
         /// <summary>
@@ -46,9 +46,7 @@
 
         private static void DialogResult_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var button = d as System.Windows.Controls.Button;
-
-            if (button == null)
+            if (!(d is System.Windows.Controls.Button button))
                 return;
 
             button.Click += Button_Click;
@@ -56,8 +54,7 @@
 
         private static void Button_Click([NotNull] object sender, [NotNull] RoutedEventArgs e)
         {
-            var button = sender as System.Windows.Controls.Button;
-            if (button == null)
+            if (!(sender is System.Windows.Controls.Button button))
                 return;
             var window = Window.GetWindow(button);
             if (window == null)

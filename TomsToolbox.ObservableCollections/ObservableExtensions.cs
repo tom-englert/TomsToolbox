@@ -124,7 +124,6 @@
             [CanBeNull, ItemNotNull]
             private List<WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs>> _propertyChangeEventListeners;
 
-            /// <inheritdoc />
             /// <summary>
             /// Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.ObservableExtensions.ObservableSelectImpl`2" /> class.
             /// </summary>

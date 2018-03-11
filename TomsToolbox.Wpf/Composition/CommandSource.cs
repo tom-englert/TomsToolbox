@@ -33,7 +33,6 @@
         /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Composition.CommandSource" /> class.
         /// </summary>
         /// <param name="owner">The command source factory.</param>
-        /// <inheritdoc />
         public CommandSource([NotNull] ICommandSourceFactory owner)
         {
             Contract.Requires(owner != null);

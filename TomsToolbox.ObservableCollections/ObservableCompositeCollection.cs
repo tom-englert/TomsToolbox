@@ -296,7 +296,6 @@
             #endregion
         }
 
-        /// <inheritdoc />
         /// <summary>
         /// Create an empty collection
         /// </summary>
@@ -312,7 +311,6 @@
         /// <param name="parts">The lists to wrap</param>
         /// <exception cref="System.ArgumentException">None of the parts may be null!</exception>
         /// <exception cref="T:System.ArgumentException">None of the parts may be null!</exception>
-        /// <inheritdoc />
         [SuppressMessage("ReSharper", "HeuristicUnreachableCode")]
         public ObservableCompositeCollection([NotNull, ItemNotNull] params IList<T>[] parts)
             : this()
