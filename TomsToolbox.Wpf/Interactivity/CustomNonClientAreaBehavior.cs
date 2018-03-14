@@ -310,7 +310,7 @@
 
                         var m = new MARGINS(-1);
                         NativeMethods.DwmExtendFrameIntoClientArea(handle, ref m);
-
+                        NativeMethods.SetWindowRgn(handle, IntPtr.Zero, true);
                         return;
                     }
                 }
@@ -321,6 +321,7 @@
             }
 
             compositionTarget.BackgroundColor = SystemColors.WindowColor;
+            NativeMethods.SetWindowRgn(handle, IntPtr.Zero, true);
         }
 
         private void Unregister([NotNull] Window window)
@@ -768,6 +769,9 @@
 
         private static class NativeMethods
         {
+            [DllImport("user32.dll", EntryPoint = "SetWindowRgn", SetLastError = true)]
+            public static extern int SetWindowRgn(IntPtr hWnd, IntPtr hRgn, [MarshalAs(UnmanagedType.Bool)] bool bRedraw);
+
             [DllImport("user32.dll", CharSet = CharSet.Unicode)]
             public static extern IntPtr DefWindowProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
 
