@@ -54,8 +54,8 @@
         /// <summary>
         /// Identifies the <see cref="Sources"/> dependency property
         /// </summary>
-        [NotNull] 
-        public static readonly DependencyProperty SourcesProperty = 
+        [NotNull]
+        public static readonly DependencyProperty SourcesProperty =
             DependencyProperty.Register("Sources", typeof(IList<ImageSource>), typeof(Icon), new FrameworkPropertyMetadata((sender, e) => ((Icon)sender).Update()));
 
         /// <inheritdoc />
@@ -64,6 +64,8 @@
             base.OnApplyTemplate();
 
             _image = Template?.FindName(ImagePartName, this) as Image;
+
+            Update();
         }
 
         /// <inheritdoc />
@@ -72,6 +74,26 @@
             base.OnRenderSizeChanged(sizeInfo);
 
             Update();
+        }
+
+        /// <inheritdoc />
+        protected override Size MeasureOverride(Size constraint)
+        {
+            var size = base.MeasureOverride(constraint);
+
+            Update();
+
+            return size;
+        }
+
+        /// <inheritdoc />
+        protected override Size ArrangeOverride(Size arrangeBounds)
+        {
+            var size = base.ArrangeOverride(arrangeBounds);
+
+            Update();
+
+            return size;
         }
 
         private void Update()
@@ -84,13 +106,16 @@
             if (sources == null)
                 return;
 
-            var rect = new Rect(0, 0, ActualWidth, ActualHeight);
+            var clientRect = new Rect(0, 0, ActualWidth, ActualHeight);
+            if (clientRect.Height < double.Epsilon)
+                return;
+
             var viewport = Viewport ?? Window.GetWindow(this);
             if (viewport == null)
                 return;
 
             var visualTransform = image.TransformToVisual(viewport);
-            var extent = visualTransform.TransformBounds(rect).Size;
+            var extent = visualTransform.TransformBounds(clientRect).Size;
 
             // ReSharper disable once PossibleNullReferenceException
             var imageSources = sources.OrderBy(source => source.Height).ToArray();
