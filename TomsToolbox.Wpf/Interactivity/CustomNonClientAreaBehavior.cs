@@ -9,7 +9,6 @@
     using System.Windows.Interactivity;
     using System.Windows.Interop;
     using System.Windows.Media;
-    using System.Windows.Threading;
 
     using JetBrains.Annotations;
 
@@ -174,35 +173,25 @@
         /// </summary>
         [NotNull] public static readonly RoutedEvent NcHitTestEvent = EventManager.RegisterRoutedEvent("NcHitTest", RoutingStrategy.Bubble, typeof(EventHandler<NcHitTestEventArgs>), typeof(CustomNonClientAreaBehavior));
 
-        /// <summary>
-        /// Called after the behavior is attached to an AssociatedObject.
-        /// </summary>
-        /// <remarks>
-        /// Override this to hook up functionality to the AssociatedObject.
-        /// </remarks>
+        /// <inheritdoc />
         protected override void OnAttached()
         {
             base.OnAttached();
 
-            var nonClientArea = AssociatedObject;
-            Contract.Assume(nonClientArea != null);
+            var frameworkElement = AssociatedObject;
+            Contract.Assume(frameworkElement != null);
 
-            if (DesignerProperties.GetIsInDesignMode(nonClientArea))
+            if (DesignerProperties.GetIsInDesignMode(frameworkElement))
                 return;
 
-            var window = _window = nonClientArea.TryFindAncestor<Window>();
+            var window = _window = frameworkElement.TryFindAncestorOrSelf<Window>();
             if (window == null)
                 return;
 
             window.SourceInitialized += Window_SourceInitialized;
         }
 
-        /// <summary>
-        /// Called when the behavior is being detached from its AssociatedObject, but before it has actually occurred.
-        /// </summary>
-        /// <remarks>
-        /// Override this to unhook functionality from the AssociatedObject.
-        /// </remarks>
+        /// <inheritdoc />
         protected override void OnDetaching()
         {
             base.OnDetaching();
@@ -218,9 +207,6 @@
 
         private void Window_SourceInitialized([CanBeNull] object sender, [CanBeNull] EventArgs e)
         {
-            var nonClientArea = AssociatedObject;
-            Contract.Assume(nonClientArea != null);
-
             var window = _window;
             Contract.Assume(window != null);
 
@@ -236,70 +222,29 @@
 
             messageSource.AddHook(WindowProc);
 
-            ShowGlassFrame();
+            var handle = messageSource.Handle;
 
-            ApplySizeToContent(window, nonClientArea);
-        }
-
-        private static void ApplySizeToContent([NotNull] Window window, [NotNull] FrameworkElement nonClientArea)
-        {
-            Contract.Requires(window != null);
-            Contract.Requires(nonClientArea != null);
-
-            var sizeToContent = window.SizeToContent;
-
-            if (sizeToContent == SizeToContent.Manual)
-                return;
-
-            window.SizeToContent = SizeToContent.Manual;
-
-            var width = nonClientArea.ActualWidth;
-            var height = nonClientArea.ActualHeight;
-
-            window.Dispatcher?.BeginInvoke(DispatcherPriority.Loaded, () => ApplySizeToContent(window, sizeToContent, width, height));
-        }
-
-        private static void ApplySizeToContent([NotNull] Window window, SizeToContent sizeToContent, double width, double height)
-        {
-            Contract.Requires(window != null);
-            Contract.Requires(width >= 0);
-            Contract.Requires(height >= 0);
-
-            switch (sizeToContent)
+            using (new DeferSizeToContent(window))
             {
-                case SizeToContent.Manual:
-                    break;
-
-                case SizeToContent.Width:
-                    window.Width = width;
-                    break;
-
-                case SizeToContent.Height:
-                    window.Height = height;
-                    break;
-
-                case SizeToContent.WidthAndHeight:
-                    window.Width = width;
-                    window.Height = height;
-                    break;
+                ShowGlassFrame(compositionTarget, handle);
+                NativeMethods.SetWindowRgn(handle, IntPtr.Zero, true);
             }
         }
 
-        private void ShowGlassFrame()
+        private void ShowGlassFrame(IntPtr handle)
         {
-            Contract.Assume(_window != null);
+            var window = _window;
+            Contract.Assume(window != null);
 
-            var messageSource = (HwndSource)PresentationSource.FromDependencyObject(_window);
-
+            var messageSource = (HwndSource)PresentationSource.FromDependencyObject(window);
             if (messageSource == null)
                 throw new InvalidOperationException("Window needs to be initialized");
 
-            var compositionTarget = messageSource.CompositionTarget;
-            if (compositionTarget == null)
-                throw new InvalidOperationException("Window needs to be initialized");
+            ShowGlassFrame(messageSource.CompositionTarget, handle);
+        }
 
-            var handle = messageSource.Handle;
-
+        private void ShowGlassFrame([NotNull] HwndTarget compositionTarget, IntPtr handle)
+        {
             if (HasGlassFrame)
             {
                 try
@@ -310,7 +255,6 @@
 
                         var m = new MARGINS(-1);
                         NativeMethods.DwmExtendFrameIntoClientArea(handle, ref m);
-                        NativeMethods.SetWindowRgn(handle, IntPtr.Zero, true);
                         return;
                     }
                 }
@@ -321,7 +265,6 @@
             }
 
             compositionTarget.BackgroundColor = SystemColors.WindowColor;
-            NativeMethods.SetWindowRgn(handle, IntPtr.Zero, true);
         }
 
         private void Unregister([NotNull] Window window)
@@ -390,7 +333,7 @@
 
                 case WM_DWMCOMPOSITIONCHANGED:
                     handled = true;
-                    ShowGlassFrame();
+                    ShowGlassFrame(windowHandle);
                     break;
             }
 
@@ -399,8 +342,6 @@
 
         private HitTest NcHitTest(IntPtr windowHandle, IntPtr lParam)
         {
-            var nonClientArea = AssociatedObject;
-            Contract.Assume(nonClientArea != null);
             var window = _window;
             Contract.Assume(window != null);
 
@@ -450,7 +391,7 @@
             // The caption must e.g. return HitTest.Caption
             var clientPoint = _transformFromDevice.Transform(hitPoint - topLeft);
 
-            if (nonClientArea.InputHitTest(clientPoint) is FrameworkElement element)
+            if (window.InputHitTest(clientPoint) is FrameworkElement element)
             {
                 if (element.Tag is HitTest value)
                 {
@@ -546,6 +487,10 @@
             public POINT TopLeft => new POINT { X = Left, Y = Top };
 
             public POINT BottomRight => new POINT { X = Right, Y = Bottom };
+
+            public int Width => Right - Left;
+
+            public int Height => Bottom - Top;
 
             public static implicit operator Rect(RECT r)
             {
@@ -767,11 +712,29 @@
             NoFrame = 0x800
         }
 
+        private sealed class DeferSizeToContent : IDisposable
+        {
+            [NotNull]
+            private Window _window;
+
+            private SizeToContent _sizeToContent;
+
+            public DeferSizeToContent([NotNull] Window window)
+            {
+                _window = window;
+                _sizeToContent = window.SizeToContent;
+
+                window.SizeToContent = SizeToContent.Manual;
+            }
+
+            public void Dispose()
+            {
+                _window.SizeToContent = _sizeToContent;
+            }
+        }
+
         private static class NativeMethods
         {
-            [DllImport("user32.dll", EntryPoint = "SetWindowRgn", SetLastError = true)]
-            public static extern int SetWindowRgn(IntPtr hWnd, IntPtr hRgn, [MarshalAs(UnmanagedType.Bool)] bool bRedraw);
-
             [DllImport("user32.dll", CharSet = CharSet.Unicode)]
             public static extern IntPtr DefWindowProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
 
@@ -821,6 +784,8 @@
             [DllImport("user32.dll")]
             public static extern int GetSystemMetrics(int nIndex);
 
+            [DllImport("user32.dll", SetLastError = true)]
+            public static extern int SetWindowRgn(IntPtr hWnd, IntPtr hRgn, [MarshalAs(UnmanagedType.Bool)] bool bRedraw);
         }
     }
 }
