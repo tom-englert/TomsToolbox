@@ -18,7 +18,6 @@
         /// <returns>The <see cref="MethodInfo"/></returns>
         [NotNull]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "CA seems to be wrong about this!")]
-        [System.Diagnostics.Contracts.Pure]
 #if !NETSTANDARD1_0
         public static MethodInfo GetMethodInfo([NotNull] this Delegate @delegate)
         {
@@ -30,9 +29,6 @@
         // stub to generate the same external annotations, should not be used at all
         public static MethodInfo GetMethodInfo([NotNull] Delegate @delegate)
         {
-            Contract.Requires(@delegate != null);
-            Contract.Ensures(Contract.Result<MethodInfo>() != null);
-
             throw new NotImplementedException();
         }
 #endif
@@ -43,7 +39,6 @@
         /// <param name="type">The type.</param>
         /// <returns>The specified type.</returns>
         [NotNull]
-        [System.Diagnostics.Contracts.Pure]
 #if !NETSTANDARD1_0
         public static Type GetTypeInfo([NotNull] this Type type)
         {
@@ -54,9 +49,6 @@
         // stub to generate the same external annotations, should not be used at all
         public static Type GetTypeInfo([NotNull] Type type)
         {
-            Contract.Requires(type != null);
-            Contract.Ensures(Contract.Result<Type>() != null);
-
             throw new NotImplementedException();
         }
 #endif
