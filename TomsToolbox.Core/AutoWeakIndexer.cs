@@ -3,9 +3,6 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using JetBrains.Annotations;
@@ -36,7 +33,6 @@
         public AutoWeakIndexer([NotNull] Func<TKey, TValue> generator)
             : this(generator, null)
         {
-            Contract.Requires(generator != null);
         }
 
         /// <summary>
@@ -46,8 +42,6 @@
         /// <param name="comparer">The comparer.</param>
         public AutoWeakIndexer([NotNull] Func<TKey, TValue> generator, [CanBeNull] IEqualityComparer<TKey> comparer)
         {
-            Contract.Requires(generator != null);
-
             _generator = generator;
             _items = new Dictionary<TKey, WeakReference<TValue>>(comparer);
         }
@@ -66,9 +60,6 @@
         {
             get
             {
-                Contract.Requires(!ReferenceEquals(key, null));
-                Contract.Ensures(Contract.Result<TValue>() != null);
-
                 var items1 = _items;
                 // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                 if (items1.TryGetValue(key, out var value) && value.TryGetTarget(out var target) && (target != null))
@@ -110,8 +101,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<ICollection<TValue> >() != null);
-
                 // ReSharper disable once AssignNullToNotNullAttribute
                 return _items.Values.Select(item => item?.Target).Where(item => item != null).ToArray();
             }
@@ -129,8 +118,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<ICollection<TKey>>() != null);
-
                 // ReSharper disable once PossibleNullReferenceException
                 return _items.Where(item => item.Value.IsAlive).Select(item => item.Key).ToArray();
             }
@@ -147,8 +134,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<IEqualityComparer<TKey>>() != null);
-
                 // ReSharper disable once AssignNullToNotNullAttribute
                 return _items.Comparer;
             }
@@ -164,8 +149,6 @@
         /// <param name="value">When this method returns, contains the value associated with the specified key, if the key is found; otherwise, the default value for the type of the <paramref name="value"/> parameter. This parameter is passed uninitialized.</param>
         public bool TryGetValue([NotNull] TKey key, [CanBeNull] out TValue value)
         {
-            Contract.Requires(!ReferenceEquals(key, null));
-
             value = default(TValue);
 
             return _items.TryGetValue(key, out var reference) && (reference != null) && reference.TryGetTarget(out value);
@@ -206,8 +189,6 @@
         /// <param name="key">The key to locate in the <see cref="AutoWeakIndexer{TKey, TValue}"/>.</param>
         public bool ContainsKey([NotNull] TKey key)
         {
-            Contract.Requires(!ReferenceEquals(key, null));
-
             return _items.TryGetValue(key, out var reference) && (reference != null) && reference.IsAlive;
         }
 
@@ -217,16 +198,6 @@
         public void Clear()
         {
             _items = new Dictionary<TKey, WeakReference<TValue>>(_items.Comparer);
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_generator != null);
-            Contract.Invariant(_items != null);
-            Contract.Invariant(_sync != null);
         }
     }
 }

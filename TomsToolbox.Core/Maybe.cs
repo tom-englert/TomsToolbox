@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Core
 {
     using System;
-    using System.Diagnostics.Contracts;
 
     using JetBrains.Annotations;
 
@@ -25,8 +24,6 @@
             where TSource:class
             where TTarget:class
         {
-            Contract.Requires(selector != null);
-            Contract.Ensures(Contract.Result<Maybe<TTarget>>() != null);
 
             return new Maybe<TSource>(value).Select(selector);
         }
@@ -41,7 +38,6 @@
         public static Maybe<TValue> Maybe<TValue>([CanBeNull] this TValue value)
             where TValue : class
         {
-            Contract.Ensures(Contract.Result<Maybe<TValue>>() != null);
 
             return new Maybe<TValue>(value);
         }
@@ -77,8 +73,6 @@
         public Maybe<TTarget> Select<TTarget>([NotNull] Func<T, TTarget> selector)
             where TTarget : class
         {
-            Contract.Requires(selector != null);
-            Contract.Ensures(Contract.Result<Maybe<TTarget>>() != null);
 
             return new Maybe<TTarget>((_value != null) ? selector(_value) : null);
         }
@@ -107,7 +101,6 @@
         [CanBeNull]
         public TTarget Return<TTarget>([NotNull] Func<T, TTarget> selector)
         {
-            Contract.Requires(selector != null);
 
             return Return(selector, default(TTarget));
         }
@@ -124,7 +117,6 @@
         [CanBeNull]
         public TTarget Return<TTarget>([NotNull] Func<T, TTarget> selector, [CanBeNull] TTarget defaultValue)
         {
-            Contract.Requires(selector != null);
 
             return (_value != null) ? selector(_value) : defaultValue;
         }
@@ -137,8 +129,6 @@
         [NotNull]
         public Maybe<T> Do([NotNull] Action<T> action)
         {
-            Contract.Requires(action != null);
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             if (_value != null)
                 action(_value);
@@ -154,8 +144,6 @@
         [NotNull]
         public Maybe<T> If([NotNull] Func<T, bool> condition)
         {
-            Contract.Requires(condition != null);
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             if ((_value != null) && !condition(_value))
             {
@@ -173,8 +161,6 @@
         [NotNull]
         public Maybe<T> Unless([NotNull] Func<T, bool> condition)
         {
-            Contract.Requires(condition != null);
-            Contract.Ensures(Contract.Result<Maybe<T>>() != null);
 
             if ((_value != null) && condition(_value))
             {

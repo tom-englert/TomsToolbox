@@ -1,13 +1,11 @@
 ﻿namespace TomsToolbox.Core
 {
     using System;
-    using System.Diagnostics.Contracts;
 
+    using JetBrains.Annotations;
 #if NETSTANDARD1_0
     using System.Reflection;
 #endif
-
-    using JetBrains.Annotations;
 
     /// <summary>
     /// Helper methods to get the default value for a type when the type is only available at runtime.
@@ -22,7 +20,6 @@
         [CanBeNull]
         public static object CreateDefault([NotNull] Type type)
         {
-            Contract.Requires(type != null);
 
             // every value type has a default constructor, default for reference types is always null
             // ReSharper disable once PossibleNullReferenceException
@@ -45,7 +42,6 @@
         [CanBeNull]
         public static object CreateEmpty([NotNull] Type type)
         {
-            Contract.Requires(type != null);
 
             return type == typeof(string) ? string.Empty : CreateDefault(type);
         }

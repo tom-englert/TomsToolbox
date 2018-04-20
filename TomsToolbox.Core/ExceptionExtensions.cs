@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
 
     using JetBrains.Annotations;
 
@@ -20,7 +19,6 @@
         [NotNull]
         public static IEnumerable<Exception> ExceptionChain([CanBeNull] this Exception ex)
         {
-            Contract.Ensures(Contract.Result<IEnumerable<Exception>>() != null);
 
             while (ex != null)
             {

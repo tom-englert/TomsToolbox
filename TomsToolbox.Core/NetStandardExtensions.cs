@@ -2,7 +2,6 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Reflection;
 
     using JetBrains.Annotations;
@@ -23,8 +22,6 @@
 #if !NETSTANDARD1_0
         public static MethodInfo GetMethodInfo([NotNull] this Delegate @delegate)
         {
-            Contract.Requires(@delegate != null);
-            Contract.Ensures(Contract.Result<MethodInfo>() != null);
 
             // ReSharper disable once AssignNullToNotNullAttribute
             return @delegate.Method;
@@ -50,8 +47,6 @@
 #if !NETSTANDARD1_0
         public static Type GetTypeInfo([NotNull] this Type type)
         {
-            Contract.Requires(type != null);
-            Contract.Ensures(Contract.Result<Type>() != null);
 
             return type;
         }

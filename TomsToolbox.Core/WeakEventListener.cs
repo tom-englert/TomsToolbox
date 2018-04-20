@@ -1,14 +1,11 @@
 ﻿namespace TomsToolbox.Core
 {
     using System;
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
+
+    using JetBrains.Annotations;
 #if NETSTANDARD1_0
     using System.Reflection;
 #endif
-
-    using JetBrains.Annotations;
 
     /// <summary>
     /// Common interface for weak event listener.
@@ -76,14 +73,8 @@
             [NotNull] Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onAttachAction,
             [NotNull] Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onDetachAction)
         {
-            Contract.Requires(target != null);
-            Contract.Requires(source != null);
-            Contract.Requires(onEventAction != null);
-            Contract.Requires(onAttachAction != null);
-            Contract.Requires(onDetachAction != null);
-            Contract.Requires(onEventAction.GetMethodInfo().IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
-            Contract.Requires(onAttachAction.GetMethodInfo().IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
-            Contract.Requires(onDetachAction.GetMethodInfo().IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
+            if (!onEventAction.GetMethodInfo().IsStatic || !onAttachAction.GetMethodInfo().IsStatic || !onDetachAction.GetMethodInfo().IsStatic)
+                throw new ArgumentException("Methods must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
 
             _weakTarget = new WeakReference<TTarget>(target);
             _source = source;
@@ -106,14 +97,8 @@
             [NotNull] Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onAttachAction,
             [NotNull] Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onDetachAction)
         {
-            Contract.Requires(target != null);
-            Contract.Requires(source != null);
-            Contract.Requires(onEventAction != null);
-            Contract.Requires(onAttachAction != null);
-            Contract.Requires(onDetachAction != null);
-            Contract.Requires(onEventAction.GetMethodInfo().IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
-            Contract.Requires(onAttachAction.GetMethodInfo().IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
-            Contract.Requires(onDetachAction.GetMethodInfo().IsStatic, "Method must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
+            if (!onEventAction.GetMethodInfo().IsStatic || !onAttachAction.GetMethodInfo().IsStatic || !onDetachAction.GetMethodInfo().IsStatic)
+                throw new ArgumentException("Methods must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
 
             _weakTarget = new WeakReference<TTarget>(target);
             _weakSource = source;
@@ -154,17 +139,6 @@
                 return;
 
             _onDetachAction(this, source);
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_weakTarget != null);
-            Contract.Invariant((_source != null) || (_weakSource != null));
-            Contract.Invariant(_onEventAction != null);
-            Contract.Invariant(_onDetachAction != null);
         }
     }
 }

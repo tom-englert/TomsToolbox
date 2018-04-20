@@ -3,7 +3,6 @@
     using System;
     using System.Collections;
     using System.Diagnostics;
-    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using JetBrains.Annotations;
@@ -14,7 +13,7 @@
     public static class Disposable
     {
         /// <summary>
-        /// Occurs when <see cref="ReportNotDisposedObject"/> has been called, i.e. a not disposed object had been detected. 
+        /// Occurs when <see cref="ReportNotDisposedObject"/> has been called, i.e. a not disposed object had been detected.
         /// Use this event to do some custom error handling, e.g. logging or throwing an exception.
         /// The <see cref="TextEventArgs.Text"/> will contain the name of the class of the object that was not disposed.
         /// </summary>
@@ -23,8 +22,8 @@
         /// <summary>
         /// Handle reporting of a not disposed object.<para/>
         /// Using this pattern is a good practice to avoid code where disposable objects get never disposed.<para/>
-        /// Calling this method will raise the <see cref="NotDisposedObject"/> event if any event handler is attached; 
-        /// otherwise it will throw an <see cref="InvalidOperationException"/> if a debugger is attached. 
+        /// Calling this method will raise the <see cref="NotDisposedObject"/> event if any event handler is attached;
+        /// otherwise it will throw an <see cref="InvalidOperationException"/> if a debugger is attached.
         /// If the application does not run in a debugger and no event handler is attached, calling this method does nothing.
         /// </summary>
         /// <param name="obj">The object for which to report the missing dispose call.</param>
@@ -36,16 +35,14 @@
         ///     Dispose(true);
         ///     GC.SuppressFinalize(this);
         /// }
-        /// 
+        ///
         /// ~MyClass()
         /// {
         ///     this.ReportNotDisposedObject();
         /// }
         /// ]]></code></example>
-        [ContractVerification(false)]
         public static void ReportNotDisposedObject([NotNull] this IDisposable obj)
         {
-            Contract.Requires(obj != null);
 
             var objectType = obj.GetType();
             // ReSharper disable once PossibleNullReferenceException
@@ -83,7 +80,6 @@
         /// <returns><c>true</c> if any object has been disposed.</returns>
         public static bool DisposeAll([NotNull, ItemCanBeNull] IEnumerable items)
         {
-            Contract.Requires(items != null);
 
             return items.Cast<object>().Count(Dispose) > 0;
         }

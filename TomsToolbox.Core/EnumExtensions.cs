@@ -3,14 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
+
+    using JetBrains.Annotations;
 #if NETSTANDARD1_0
     using System.Reflection;
 #endif
-
-    using JetBrains.Annotations;
 
     /// <summary>
     /// Extension methods to ease dealing with <see cref="Enum"/> types.
@@ -65,7 +64,6 @@
         [NotNull]
         public static IEnumerable<T> GetFlags<T>(this T value) where T : struct
         {
-            Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
 
             VerifyIsFlagsEnum<T>();
 
@@ -139,7 +137,6 @@
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification="Dealing with flags")]
         public static T CombineFlags<T>([NotNull] this IEnumerable<T> flags) where T : struct
         {
-            Contract.Requires(flags != null);
 
             VerifyIsFlagsEnum<T>();
 
@@ -288,7 +285,6 @@
         private static T InternalToEnum<T>([NotNull] object value)
             where T : struct
         {
-            Contract.Requires(value != null);
             var enumType = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
             if (!enumType.GetTypeInfo().IsEnum)
                 throw new InvalidOperationException(enumType.Name + " is not an System.Enum.");

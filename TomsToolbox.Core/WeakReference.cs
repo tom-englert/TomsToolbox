@@ -1,11 +1,11 @@
 ﻿namespace TomsToolbox.Core
 {
     using System;
-    using System.Diagnostics.Contracts;
+
+    using JetBrains.Annotations;
 #if !PORTABLE && !NETSTANDARD1_0
     using System.Runtime.Serialization;
 #endif
-    using JetBrains.Annotations;
 
     /// <summary>
     /// A typed version of the <see cref="WeakReference"/>
@@ -64,7 +64,6 @@
         [ContractAnnotation("target:notnull => true")]
         public bool TryGetTarget([CanBeNull] out T target)
         {
-            Contract.Ensures((Contract.Result<bool>() == false) || (Contract.ValueAtReturn(out target) != null));
 
             target = Target;
             return (target != null);

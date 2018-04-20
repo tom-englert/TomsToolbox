@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Core
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Reflection;
 
@@ -23,8 +22,6 @@
         [NotNull]
         public static Uri GeneratePackUri([NotNull] this Assembly assembly)
         {
-            Contract.Requires(assembly != null);
-            Contract.Ensures(Contract.Result<Uri>() != null);
 
             var name = new AssemblyName(assembly.FullName).Name;
 
@@ -45,9 +42,6 @@
         [NotNull]
         public static Uri GeneratePackUri([NotNull] this Assembly assembly, [NotNull] string relativeUri)
         {
-            Contract.Requires(assembly != null);
-            Contract.Requires(relativeUri != null);
-            Contract.Ensures(Contract.Result<Uri>() != null);
 
             return assembly.GeneratePackUri(new Uri(relativeUri, UriKind.Relative));
         }
@@ -66,9 +60,6 @@
         [NotNull]
         public static Uri GeneratePackUri([NotNull] this Assembly assembly, [NotNull] Uri relativeUri)
         {
-            Contract.Requires(assembly != null);
-            Contract.Requires(relativeUri != null);
-            Contract.Ensures(Contract.Result<Uri>() != null);
 
             return new Uri(assembly.GeneratePackUri(), relativeUri);
         }

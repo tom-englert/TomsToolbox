@@ -2,14 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
+
+    using JetBrains.Annotations;
 #if NETSTANDARD1_0
     using System.Reflection;
 #endif
-
-    using JetBrains.Annotations;
 
     /// <inheritdoc />
     /// <summary>
@@ -26,8 +23,6 @@
         /// <param name="comparer">The comparer.</param>
         public DelegateComparer([NotNull] Func<T, T, int> comparer)
         {
-            Contract.Requires(comparer != null);
-
             _comparer = comparer;
         }
 
@@ -44,14 +39,6 @@
             }
 
             return _comparer(x, y);
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_comparer != null);
         }
     }
 }

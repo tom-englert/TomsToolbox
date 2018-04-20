@@ -3,7 +3,6 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
 
     using JetBrains.Annotations;
 
@@ -25,9 +24,6 @@
         [NotNull]
         public static IEnumerable<Tuple<T1, T2>> AsTuples<T1, T2>([NotNull, ItemCanBeNull] IEnumerable<T1> first, [NotNull, ItemCanBeNull] IEnumerable<T2> second)
         {
-            Contract.Requires(first != null);
-            Contract.Requires(second != null);
-            Contract.Ensures(Contract.Result<IEnumerable<Tuple<T1, T2>>>() != null);
 
             using (var e1 = first.GetEnumerator())
             {
@@ -54,9 +50,6 @@
         [NotNull]
         public static IEnumerable<Tuple<object, object>> AsTuples([NotNull, ItemCanBeNull] IEnumerable first, [NotNull, ItemCanBeNull] IEnumerable second)
         {
-            Contract.Requires(first != null);
-            Contract.Requires(second != null);
-            Contract.Ensures(Contract.Result<IEnumerable<Tuple<object, object>>>() != null);
 
             var e1 = first.GetEnumerator();
             var e2 = second.GetEnumerator();

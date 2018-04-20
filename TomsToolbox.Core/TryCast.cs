@@ -1,12 +1,11 @@
 ﻿namespace TomsToolbox.Core
 {
     using System;
+
+    using JetBrains.Annotations;
 #if !PORTABLE && !NETSTANDARD1_0
     using System.ComponentModel;
 #endif
-    using System.Diagnostics.Contracts;
-
-    using JetBrains.Annotations;
 
     /// <summary>
     /// Entry point to create the <see cref="TryCastWorker{TValue}"/>.
@@ -31,7 +30,6 @@
         [NotNull]
         public static TryCastWorker<TValue> TryCast<TValue>([CanBeNull] this TValue value)
         {
-            Contract.Ensures(Contract.Result<TryCastWorker<TValue>>() != null);
 
             return new TryCastWorker<TValue>(value);
         }
@@ -63,8 +61,6 @@
         public TryCastWorker<TValue> When<TTarget>([NotNull] Action<TTarget> action)
             where TTarget : TValue
         {
-            Contract.Requires(action != null);
-            Contract.Ensures(Contract.Result<TryCastWorker<TValue>>() != null);
 
             TryExecute<TTarget>(target => WrapAction(action, target));
 
@@ -77,7 +73,6 @@
         /// <param name="action">The action.</param>
         public void Else([NotNull] Action<TValue> action)
         {
-            Contract.Requires(action != null);
 
             TryExecute<TValue>(target => WrapAction(action, target));
         }
@@ -90,7 +85,6 @@
         [NotNull]
         public TryCastWorker<TValue, TResult> Returning<TResult>()
         {
-            Contract.Ensures(Contract.Result<TryCastWorker<TValue, TResult>>() != null);
 
             return new TryCastWorker<TValue, TResult>(Value);
         }
@@ -106,7 +100,6 @@
         [NotNull]
         public TryCastWorker<TValue, TResult> Returning<TResult>([CanBeNull] TResult defaultValue)
         {
-            Contract.Ensures(Contract.Result<TryCastWorker<TValue, TResult>>() != null);
 
             return new TryCastWorker<TValue, TResult>(Value, defaultValue);
         }
@@ -117,7 +110,6 @@
         [CanBeNull]
         private static object WrapAction<TTarget>([NotNull] Action<TTarget> action, [CanBeNull] TTarget target)
         {
-            Contract.Requires(action != null);
 
             action(target);
             return null;
@@ -163,8 +155,6 @@
         public TryCastWorker<TValue, TResult> When<TTarget>([NotNull] Func<TTarget, TResult> action)
             where TTarget : TValue
         {
-            Contract.Requires(action != null);
-            Contract.Ensures(Contract.Result<TryCastWorker<TValue, TResult>>() != null);
 
             TryExecute(action);
 
@@ -179,7 +169,6 @@
         [CanBeNull]
         public TResult Else([NotNull] Func<TValue, TResult> action)
         {
-            Contract.Requires(action != null);
 
             TryExecute(action);
 
@@ -264,7 +253,6 @@
         protected void TryExecute<TTarget>([NotNull] Func<TTarget, TResult> action)
             where TTarget : TValue
         {
-            Contract.Requires(action != null);
 
             if (_isResolved)
                 return;

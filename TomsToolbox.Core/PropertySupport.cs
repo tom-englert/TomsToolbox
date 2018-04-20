@@ -3,7 +3,6 @@
     using System;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Linq.Expressions;
     using System.Reflection;
 
@@ -28,8 +27,6 @@
         [NotNull]
         public static string ExtractPropertyName<TProperty>([NotNull] Expression<Func<TProperty>> propertyExpression)
         {
-            Contract.Requires(propertyExpression != null);
-            Contract.Ensures(!string.IsNullOrEmpty(Contract.Result<string>()));
 
             return ExtractPropertyName(propertyExpression, true);
         }
@@ -44,7 +41,6 @@
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Works only with exactly this kind of expression, so we don't want to allow to pass something else!")]
         public static string TryExtractPropertyName<TProperty>([NotNull] Expression<Func<TProperty>> propertyExpression)
         {
-            Contract.Requires(propertyExpression != null);
 
             return ExtractPropertyName(propertyExpression, false);
         }
@@ -63,8 +59,6 @@
         [NotNull]
         public static string ExtractPropertyName<T, TProperty>([NotNull] Expression<Func<T, TProperty>> propertyExpression)
         {
-            Contract.Requires(propertyExpression != null);
-            Contract.Ensures(!string.IsNullOrEmpty(Contract.Result<string>()));
 
             return ExtractPropertyName(propertyExpression, true);
         }
@@ -80,7 +74,6 @@
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Works only with exactly this kind of expression, so we don't want to allow to pass something else!")]
         public static string TryExtractPropertyName<T, TProperty>([NotNull] Expression<Func<T, TProperty>> propertyExpression)
         {
-            Contract.Requires(propertyExpression != null);
 
             return ExtractPropertyName(propertyExpression, false);
         }
@@ -89,8 +82,6 @@
         [CanBeNull]
         private static string ExtractPropertyName<T>([NotNull] Expression<Func<T>> propertyExpression, bool failOnErrors)
         {
-            Contract.Requires(propertyExpression != null);
-            Contract.Ensures((failOnErrors == false) || !string.IsNullOrEmpty(Contract.Result<string>()));
 
             if (!(propertyExpression.Body is MemberExpression memberExpression))
                 return HandleError(failOnErrors, @"Expression is not a member access expression");
@@ -110,8 +101,6 @@
         [ContractAnnotation("failOnErrors:true => notnull")]
         private static string ExtractPropertyName<T, TR>([NotNull] Expression<Func<T, TR>> propertyExpression, bool failOnErrors)
         {
-            Contract.Requires(propertyExpression != null);
-            Contract.Ensures((failOnErrors == false) || !string.IsNullOrEmpty(Contract.Result<string>()));
 
             if (!(propertyExpression.Body is MemberExpression memberExpression))
                 return HandleError(failOnErrors, @"Expression is not a member access expression");
@@ -132,8 +121,6 @@
         // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
         private static string HandleError(bool failOnErrors, [NotNull] string errorMessage)
         {
-            Contract.Requires(errorMessage != null);
-            Contract.Ensures((failOnErrors == false) || !string.IsNullOrEmpty(Contract.Result<string>()));
 
             if (failOnErrors)
                 throw new ArgumentException(errorMessage);
@@ -151,13 +138,9 @@
         ///     Not a <see cref="MemberExpression"/><br/>
         ///     The <see cref="MemberExpression"/> does not represent a property.<br/>
         /// </exception>
-        [ContractVerification(false)]
         [NotNull]
         public static PropertyChangedEventArgs GetEventArgs<T>([NotNull] Expression<Func<T>> propertyExpression)
         {
-            Contract.Requires(propertyExpression != null);
-            Contract.Ensures(Contract.Result<PropertyChangedEventArgs>() != null);
-            Contract.Ensures(!string.IsNullOrEmpty(Contract.Result<PropertyChangedEventArgs>().PropertyName));
 
             return new PropertyChangedEventArgs(ExtractPropertyName(propertyExpression));
         }

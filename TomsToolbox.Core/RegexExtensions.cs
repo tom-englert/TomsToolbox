@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Text.RegularExpressions;
 
@@ -29,10 +28,6 @@
         [NotNull, ItemCanBeNull]
         public static IEnumerable<T> Split<T>([NotNull] this Regex regex, [NotNull] string input, [NotNull] Func<string, bool, T> itemGenerator)
         {
-            Contract.Requires(input != null);
-            Contract.Requires(regex != null);
-            Contract.Requires(itemGenerator != null);
-            Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
 
             // ReSharper disable once AssignNullToNotNullAttribute
             var textParts = regex.Matches(input).Cast<Match>().ToArray();

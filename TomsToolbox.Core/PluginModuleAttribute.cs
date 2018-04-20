@@ -2,7 +2,6 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
 
     using JetBrains.Annotations;
 
@@ -23,7 +22,6 @@
         /// <param name="categories">The categories.</param>
         public PluginModuleAttribute([NotNull, ItemNotNull] params string[] categories)
         {
-            Contract.Requires(categories != null);
             Categories = categories;
         }
 
