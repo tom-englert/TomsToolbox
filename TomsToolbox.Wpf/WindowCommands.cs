@@ -23,7 +23,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<RoutedUICommand>() != null);
                 return _minimize;
             }
         }
@@ -36,7 +35,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<RoutedUICommand>() != null);
                 return _maximize;
             }
         }
@@ -49,7 +47,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<RoutedUICommand>() != null);
                 return _close;
             }
         }
@@ -62,7 +59,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<RoutedUICommand>() != null);
                 return _restore;
             }
         }

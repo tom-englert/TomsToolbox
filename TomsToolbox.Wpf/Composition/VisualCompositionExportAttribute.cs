@@ -31,7 +31,6 @@
         public VisualCompositionExportAttribute([NotNull, ItemNotNull] params string[] targetRegions)
             : base(ExportContractName, typeof(object))
         {
-            Contract.Requires(targetRegions != null);
 
             _targetRegions = targetRegions;
         }
@@ -62,18 +61,9 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<object[]>() != null);
 
                 return _targetRegions;
             }
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_targetRegions != null);
         }
     }
 }

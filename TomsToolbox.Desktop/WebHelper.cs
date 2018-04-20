@@ -20,8 +20,6 @@
         [NotNull]
         public static WebRequest CreateHttpWebRequest([NotNull] Uri uri)
         {
-            Contract.Requires(uri != null);
-            Contract.Ensures(Contract.Result<WebRequest>() != null);
 
             var webRequest = WebRequest.Create(uri);
             var webProxy = WebRequest.DefaultWebProxy ?? new WebProxy();
@@ -39,8 +37,6 @@
         [NotNull]
         public static MemoryStream Download([NotNull] Uri uri)
         {
-            Contract.Requires(uri != null);
-            Contract.Ensures(Contract.Result<MemoryStream>() != null);
 
             var webRequest = CreateHttpWebRequest(uri);
             var localStream = new MemoryStream();
@@ -48,7 +44,6 @@
             using (var webResponse = webRequest.GetResponse())
             {
                 var responseStream = webResponse.GetResponseStream();
-                Contract.Assume(responseStream != null);
                 responseStream.CopyTo(localStream);
             }
 

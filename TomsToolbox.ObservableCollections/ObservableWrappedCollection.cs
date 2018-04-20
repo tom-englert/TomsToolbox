@@ -39,8 +39,6 @@
         public ObservableWrappedCollection([NotNull, ItemNotNull] IEnumerable sourceCollection, [NotNull] Func<TSource, TTarget> itemGenerator)
             : base(new ObservableCollection<TTarget>(sourceCollection.Cast<TSource>().Select(itemGenerator)))
         {
-            Contract.Requires(sourceCollection != null);
-            Contract.Requires(itemGenerator != null);
 
             _itemGenerator = itemGenerator;
 
@@ -49,12 +47,9 @@
                 _collectionChangedWeakEvent = CreateEvent(eventSource);
             }
         }
-
-        [ContractVerification(false)]
         [NotNull]
         private WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> CreateEvent([NotNull] INotifyCollectionChanged eventSource)
         {
-            Contract.Ensures(Contract.Result<WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs>>() != null);
 
             return new WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs>(
                 this, eventSource, OnCollectionChanged, Attach, Detach);
@@ -68,37 +63,27 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<Func<TSource, TTarget>>() != null);
                 return _itemGenerator;
             }
         }
 
         private static void OnCollectionChanged([NotNull, ItemCanBeNull] ObservableWrappedCollection<TSource, TTarget> self, [NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
-            Contract.Requires(self != null);
-            Contract.Requires(sender != null);
-            Contract.Requires(e != null);
 
             self.SourceItems_CollectionChanged(sender, e);
         }
 
         private static void Attach([NotNull] WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, [NotNull] INotifyCollectionChanged sender)
         {
-            Contract.Requires(weakEvent != null);
-            Contract.Requires(sender != null);
 
             sender.CollectionChanged += weakEvent.OnEvent;
         }
 
         private static void Detach([NotNull] WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, [NotNull] INotifyCollectionChanged sender)
         {
-            Contract.Requires(weakEvent != null);
-            Contract.Requires(sender != null);
 
             sender.CollectionChanged -= weakEvent.OnEvent;
         }
-
-        [ContractVerification(false)] // Just mirrors the original collection
         private void SourceItems_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
             OnSourceCollectionChanged((IEnumerable)sender, e);
@@ -112,17 +97,10 @@
         /// <exception cref="System.ArgumentException">Event source must provide index!</exception>
         /// <exception cref="System.NotImplementedException">Moving more than one item is not supported</exception>
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Caused by code contracts.")]
-        [ContractVerification(false)]
         [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
         [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         protected virtual void OnSourceCollectionChanged([NotNull, ItemCanBeNull] IEnumerable sourceCollection, [NotNull] NotifyCollectionChangedEventArgs e)
         {
-            Contract.Requires(sourceCollection != null);
-            Contract.Requires(e != null);
-            Contract.Requires((e.Action != NotifyCollectionChangedAction.Add) || ((e.NewStartingIndex >= 0) && (e.NewStartingIndex <= Items.Count) && (e.NewItems != null)));
-            Contract.Requires((e.Action != NotifyCollectionChangedAction.Move) || ((e.OldItems != null) && (e.OldItems.Count == 1) && (e.OldStartingIndex >= 0) && (e.OldStartingIndex < Items.Count) && (e.NewStartingIndex >= 0) && (e.NewStartingIndex < Items.Count)));
-            Contract.Requires((e.Action != NotifyCollectionChangedAction.Remove) || ((e.OldStartingIndex >= 0) && (e.OldStartingIndex < Items.Count) && (e.OldItems != null)));
-            Contract.Requires((e.Action != NotifyCollectionChangedAction.Replace) || ((e.NewStartingIndex >= 0) && (e.NewStartingIndex < Items.Count) && (e.NewItems != null)));
 
             switch (e.Action)
             {
@@ -145,7 +123,6 @@
                     var removeIndex = e.OldStartingIndex;
                     for (var k = 0; k < e.OldItems.Count; k++)
                     {
-                        Contract.Assume(removeIndex < Items.Count);
                         Items.RemoveAt(removeIndex);
                     }
                     break;
@@ -190,14 +167,6 @@
         ~ObservableWrappedCollection()
         {
             _collectionChangedWeakEvent?.Detach();
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_itemGenerator != null);
         }
     }
 }

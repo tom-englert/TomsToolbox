@@ -9,7 +9,6 @@
     /// <summary>
     /// Class hosting a <see cref="CompositionContainer"/> with an <see cref="AggregateCatalog"/>.
     /// </summary>
-    [ContractClass(typeof(CompositionHostContracts))]
     public interface ICompositionHost : IDisposable
     {
         /// <summary>
@@ -28,36 +27,6 @@
         AggregateCatalog Catalog
         {
             get;
-        }
-    }
-
-    [ContractClassFor(typeof(ICompositionHost))]
-    abstract class CompositionHostContracts : ICompositionHost
-    {
-        public CompositionContainer Container
-        {
-            get
-            {
-
-                Contract.Ensures(Contract.Result<CompositionContainer>() != null);
-                throw new NotImplementedException();
-            }
-        }
-
-        public AggregateCatalog Catalog
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<AggregateCatalog>() != null);
-                Contract.Ensures(Contract.Result<AggregateCatalog>().Catalogs != null);
-
-                throw new NotImplementedException();
-            }
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
     }
 }

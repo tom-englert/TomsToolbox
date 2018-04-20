@@ -42,7 +42,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<Collection<IValueConverter>>() != null);
 
                 return _compositeConverter.Converters;
             }
@@ -81,14 +80,6 @@
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new InvalidOperationException();
-        }
-
-        [ContractInvariantMethod]
-        [SuppressMessage("Microsoft.Performance", "CA1822: MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_compositeConverter != null);
         }
     }
 }

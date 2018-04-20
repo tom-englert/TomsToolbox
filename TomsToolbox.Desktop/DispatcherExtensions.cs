@@ -23,7 +23,6 @@
         [CanBeNull]
         public static T Invoke<T>([CanBeNull] this Dispatcher dispatcher, [NotNull] Func<T> method)
         {
-            Contract.Requires(method != null);
 
             return InternalInvoke(dispatcher, method);
         }
@@ -36,7 +35,6 @@
         /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
         public static void Invoke([CanBeNull] this Dispatcher dispatcher, [NotNull] Action method)
         {
-            Contract.Requires(method != null);
 
             InternalInvoke(dispatcher, method);
         }
@@ -44,7 +42,6 @@
         [CanBeNull]
         private static T InternalInvoke<T>([CanBeNull] Dispatcher dispatcher, [NotNull] Func<T> method)
         {
-            Contract.Requires(method != null);
 
             var result = InternalInvoke(dispatcher, (Delegate)method);
             if (result == null)
@@ -56,7 +53,6 @@
         [CanBeNull]
         private static object InternalInvoke([CanBeNull] Dispatcher dispatcher, [NotNull] Delegate method)
         {
-            Contract.Requires(method != null);
 
             if ((dispatcher == null) || dispatcher.CheckAccess())
             {
@@ -98,8 +94,6 @@
         [NotNull]
         private static Exception UnwrapTargetInvocation([NotNull] Exception ex)
         {
-            Contract.Requires(ex != null);
-            Contract.Ensures(Contract.Result<Exception>() != null);
 
             if (ex is TargetInvocationException)
             {
@@ -119,9 +113,6 @@
         [NotNull]
         public static DispatcherOperation BeginInvoke([NotNull] this Dispatcher dispatcher, [NotNull] Action method)
         {
-            Contract.Requires(dispatcher != null);
-            Contract.Requires(method != null);
-            Contract.Ensures(Contract.Result<DispatcherOperation>() != null);
 
             return BeginInvoke(dispatcher, DispatcherPriority.Normal, method);
         }
@@ -137,9 +128,6 @@
         [NotNull]
         public static DispatcherOperation BeginInvoke([NotNull] this Dispatcher dispatcher, DispatcherPriority priority, [NotNull] Action method)
         {
-            Contract.Requires(dispatcher != null);
-            Contract.Requires(method != null);
-            Contract.Ensures(Contract.Result<DispatcherOperation>() != null);
 
             return dispatcher.BeginInvoke(method, priority, null);
         }
@@ -150,7 +138,6 @@
         /// <param name="timer">The timer.</param>
         public static void Restart([NotNull] this DispatcherTimer timer)
         {
-            Contract.Requires(timer != null);
 
             timer.Stop();
             timer.Start();

@@ -21,7 +21,6 @@
         [CanBeNull]
         public static T InvokeInSeparateDomain<T>([NotNull] this Func<T> func)
         {
-            Contract.Requires(func != null);
 
             return InternalInvokeInSeparateDomain<T>(func);
         }
@@ -37,7 +36,6 @@
         [CanBeNull]
         public static T InvokeInSeparateDomain<TA1, T>([NotNull] this Func<TA1, T> func, [CanBeNull] TA1 arg1)
         {
-            Contract.Requires(func != null);
 
             return InternalInvokeInSeparateDomain<T>(func, arg1);
         }
@@ -55,7 +53,6 @@
         [CanBeNull]
         public static T InvokeInSeparateDomain<TA1, TA2, T>([NotNull] this Func<TA1, TA2, T> func, [CanBeNull] TA1 arg1, [CanBeNull] TA2 arg2)
         {
-            Contract.Requires(func != null);
 
             return InternalInvokeInSeparateDomain<T>(func, arg1, arg2);
         }
@@ -75,7 +72,6 @@
         [CanBeNull]
         public static T InvokeInSeparateDomain<TA1, TA2, TA3, T>([NotNull] this Func<TA1, TA2, TA3, T> func, [CanBeNull] TA1 arg1, [CanBeNull] TA2 arg2, [CanBeNull] TA3 arg3)
         {
-            Contract.Requires(func != null);
 
             return InternalInvokeInSeparateDomain<T>(func, arg1, arg2, arg3);
         }
@@ -97,7 +93,6 @@
         [CanBeNull]
         public static T InvokeInSeparateDomain<TA1, TA2, TA3, TA4, T>([NotNull] this Func<TA1, TA2, TA3, TA4, T> func, [CanBeNull] TA1 arg1, [CanBeNull] TA2 arg2, [CanBeNull] TA3 arg3, [CanBeNull] TA4 arg4)
         {
-            Contract.Requires(func != null);
 
             return InternalInvokeInSeparateDomain<T>(func, arg1, arg2, arg3, arg4);
         }
@@ -111,8 +106,6 @@
         [NotNull]
         public static T CreateInstanceAndUnwrap<T>([NotNull] this AppDomain appDomain) where T : class
         {
-            Contract.Requires(appDomain != null);
-            Contract.Ensures(Contract.Result<T>() != null);
 
             // ReSharper disable once AssignNullToNotNullAttribute (every type has a full name)
             return (T)appDomain.CreateInstanceAndUnwrap(typeof(T).Assembly.FullName, typeof(T).FullName);
@@ -121,13 +114,10 @@
         [CanBeNull]
         private static T InternalInvokeInSeparateDomain<T>([NotNull] Delegate func, [NotNull, ItemCanBeNull] params object[] args)
         {
-            Contract.Requires(func != null);
-            Contract.Requires(args != null);
 
             var friendlyName = "Temporary domain for " + func.Method.Name;
             var currentDomain = AppDomain.CurrentDomain;
             var appDomain = AppDomain.CreateDomain(friendlyName, currentDomain.Evidence, currentDomain.BaseDirectory, currentDomain.RelativeSearchPath, false);
-            Contract.Assume(appDomain != null);
 
             try
             {
@@ -153,7 +143,6 @@
             [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
             public object Invoke([NotNull] MethodInfo method, [CanBeNull] object target, [CanBeNull, ItemCanBeNull] object[] args)
             {
-                Contract.Requires(method != null);
                 return method.Invoke(target, args);
             }
         }

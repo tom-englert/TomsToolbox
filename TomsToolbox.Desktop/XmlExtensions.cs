@@ -19,8 +19,6 @@
         [CanBeNull]
         public static string GetAttribute([NotNull] this XElement element, [NotNull] string name)
         {
-            Contract.Requires(element != null);
-            Contract.Requires(!string.IsNullOrEmpty(name));
 
             return GetAttribute(element, name, null);
         }
@@ -37,9 +35,6 @@
         [CanBeNull]
         public static string GetAttribute([NotNull] this XElement element, [NotNull] string name, [CanBeNull] string defaultValue)
         {
-            Contract.Requires(element != null);
-            Contract.Requires(!string.IsNullOrEmpty(name));
-            Contract.Ensures((defaultValue == null) || (Contract.Result<string>() != null));
 
             return GetAttribute(element, XName.Get(name), defaultValue);
         }
@@ -53,8 +48,6 @@
         [CanBeNull]
         public static string GetAttribute([NotNull] this XElement element, [NotNull] XName name)
         {
-            Contract.Requires(element != null);
-            Contract.Requires(name != null);
 
             return GetAttribute(element, name, null);
         }
@@ -71,9 +64,6 @@
         [CanBeNull]
         public static string GetAttribute([NotNull] this XElement element, [NotNull] XName name, [CanBeNull] string defaultValue)
         {
-            Contract.Requires(element != null);
-            Contract.Requires(name != null);
-            Contract.Ensures((defaultValue == null) || (Contract.Result<string>() != null));
 
             var attribute = element.Attribute(name);
 

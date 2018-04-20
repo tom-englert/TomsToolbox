@@ -44,8 +44,6 @@
         [NotNull, ItemNotNull]
         public static Array Convert([NotNull] Type type)
         {
-            Contract.Requires(type != null);
-            Contract.Ensures(Contract.Result<Array>() != null);
 
             return Convert(type, null);
         }
@@ -59,8 +57,6 @@
         [NotNull, ItemNotNull]
         public static Array Convert([NotNull] Type type, [CanBeNull] string excluded)
         {
-            Contract.Requires(type != null);
-            Contract.Ensures(Contract.Result<Array>() != null);
 
             var values = Enum.GetValues(type);
 

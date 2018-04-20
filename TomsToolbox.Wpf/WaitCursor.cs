@@ -19,7 +19,6 @@
         /// <param name="frameworkElement">The element on which to set the cursor.</param>
         public static void StartLocal([NotNull] FrameworkElement frameworkElement)
         {
-            Contract.Requires(frameworkElement != null);
 
             StartLocal(frameworkElement, DispatcherPriority.Background);
         }
@@ -32,7 +31,6 @@
         /// <param name="priority">The dispatcher priority used for waiting.</param>
         public static void StartLocal([NotNull] FrameworkElement frameworkElement, DispatcherPriority priority)
         {
-            Contract.Requires(frameworkElement != null);
 
             if (frameworkElement.Cursor == Cursors.Wait)
                 return;
@@ -53,7 +51,6 @@
         /// </remarks>
         public static void Start([NotNull] FrameworkElement frameworkElement)
         {
-            Contract.Requires(frameworkElement != null);
 
             Start(frameworkElement, DispatcherPriority.Background);
         }
@@ -69,7 +66,6 @@
         /// </remarks>
         public static void Start([NotNull] FrameworkElement frameworkElement, DispatcherPriority priority)
         {
-            Contract.Requires(frameworkElement != null);
 
             StartLocal(frameworkElement.GetRootVisual(), priority);
         }

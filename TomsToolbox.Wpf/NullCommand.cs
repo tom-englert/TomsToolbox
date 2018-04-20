@@ -36,7 +36,6 @@
         /// <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
         public bool CanExecute([CanBeNull] object parameter)
         {
-            Contract.Ensures(Contract.Result<bool>() == false);
             return false;
         }
 

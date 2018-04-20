@@ -18,7 +18,6 @@
         /// <param name="uri">The URI of the resource.</param>
         public ModuleResourceUriAttribute([NotNull] string uri)
         {
-            Contract.Requires(uri != null);
             Uri = uri;
         }
 

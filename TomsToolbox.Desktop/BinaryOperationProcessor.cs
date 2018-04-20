@@ -5,7 +5,6 @@
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
@@ -147,8 +146,6 @@
         [CanBeNull]
         private object ApplyOperation([NotNull] Type valueType, [CanBeNull] object value1, [CanBeNull] object value2)
         {
-            Contract.Requires(valueType != null);
-
             var methods = valueType.GetMethods(BindingFlags.Static | BindingFlags.Public);
 
             return methods
@@ -165,8 +162,6 @@
         [CanBeNull]
         private object ApplyOperationOnCastedObject([NotNull] Type targetType, [CanBeNull] object value1, [CanBeNull] object value2)
         {
-            Contract.Requires(targetType != null);
-
             // ReSharper disable PossibleNullReferenceException
             var result = targetType
                 .GetMethods(BindingFlags.Static | BindingFlags.Public)
@@ -184,9 +179,6 @@
         [CanBeNull]
         private static object ApplyOperation([NotNull] MethodInfo method, [NotNull] Type targetType, [CanBeNull] object value1, [CanBeNull] object value2)
         {
-            Contract.Requires(method != null);
-            Contract.Requires(targetType != null);
-
             try
             {
                 if (value2?.GetType() == targetType)
@@ -223,8 +215,6 @@
         [CanBeNull]
         private static object TryChangeType([CanBeNull] object value, [NotNull] Type targetType)
         {
-            Contract.Requires(targetType != null);
-
             try
             {
                 return Convert.ChangeType(value, targetType, CultureInfo.InvariantCulture);
@@ -239,40 +229,18 @@
 
         private static int Compare([NotNull] object a, [CanBeNull] object b)
         {
-            Contract.Requires(a != null);
             // ReSharper disable once PossibleNullReferenceException
             return Comparer.DefaultInvariant.Compare(a, Convert.ChangeType(b, a.GetType(), CultureInfo.InvariantCulture));
         }
 
         private new static bool Equals([NotNull] object a, [CanBeNull] object b)
         {
-            Contract.Requires(a != null);
-
             object c;
 
             if ((c = TryChangeType(b, a.GetType())) != null)
                 return a.Equals(c);
 
             return Math.Abs(ToDouble(a) - ToDouble(b)) < double.Epsilon;
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_operationMethodNames != null);
-            Contract.Invariant(_operationMethod != null);
-            Contract.Invariant(_additionMethod != null);
-            Contract.Invariant(_subtractionMethod != null);
-            Contract.Invariant(_multiplyMethod != null);
-            Contract.Invariant(_divisionMethod != null);
-            Contract.Invariant(_equalityMethod != null);
-            Contract.Invariant(_inequalityMethod != null);
-            Contract.Invariant(_greaterThanMethod != null);
-            Contract.Invariant(_lessThanMethod != null);
-            Contract.Invariant(_greaterThanOrEqualMethod != null);
-            Contract.Invariant(_lessThanOrEqualMethod != null);
         }
     }
 }

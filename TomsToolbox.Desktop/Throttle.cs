@@ -27,7 +27,6 @@
         public Throttle([NotNull] Action target)
             : this(TimeSpan.FromMilliseconds(100), target)
         {
-            Contract.Requires(target != null);
         }
 
         /// <summary>
@@ -37,7 +36,6 @@
         /// <param name="target">The target action to invoke when the throttle condition is hit.</param>
         public Throttle(TimeSpan timeout, [NotNull] Action target)
         {
-            Contract.Requires(target != null);
 
             _target = target;
             _timer = new DispatcherTimer { Interval = timeout };
@@ -57,15 +55,6 @@
         {
             _timer.Stop();
             _target();
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_target != null);
-            Contract.Invariant(_timer != null);
         }
     }
 }

@@ -104,7 +104,6 @@
             BindingOperations.SetBinding(compositionBehavior, ItemsControlCompositionBehavior.RegionIdProperty, new Binding() { Source = this, Path = new PropertyPath(RegionIdProperty) });
 
             var behaviors = Interaction.GetBehaviors(this);
-            Contract.Assume(behaviors != null);
             behaviors.Add(compositionBehavior);
         }
 

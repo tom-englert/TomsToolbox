@@ -1,4 +1,4 @@
-namespace TomsToolbox.Wpf.Composition
+﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
     using System.Collections.Generic;
@@ -38,7 +38,6 @@ namespace TomsToolbox.Wpf.Composition
         [CanBeNull]
         public static object GetRole([NotNull] DependencyObject obj)
         {
-            Contract.Requires(obj != null);
 
             return obj.GetValue(RoleProperty);
         }
@@ -49,7 +48,6 @@ namespace TomsToolbox.Wpf.Composition
         /// <param name="value">The value.</param>
         public static void SetRole([NotNull] DependencyObject obj, [CanBeNull] object value)
         {
-            Contract.Requires(obj != null);
 
             obj.SetValue(RoleProperty, value);
         }
@@ -75,8 +73,6 @@ namespace TomsToolbox.Wpf.Composition
         [NotNull, ItemCanBeNull]
         public static ResourceDictionary CreateDynamicDataTemplates([NotNull] ExportProvider exportProvider)
         {
-            Contract.Requires(exportProvider != null);
-            Contract.Ensures(Contract.Result<ResourceDictionary>() != null);
 
             var dataTemplateResources = new ResourceDictionary();
 
@@ -84,7 +80,6 @@ namespace TomsToolbox.Wpf.Composition
 
             foreach (var item in exportMetaData)
             {
-                Contract.Assume(item != null);
 
                 var viewModel = item.ViewModel;
                 var role = item.Role;
@@ -100,7 +95,6 @@ namespace TomsToolbox.Wpf.Composition
         [CanBeNull]
         private static DataTemplate CreateTemplate([NotNull] Type viewModelType, [CanBeNull] object role)
         {
-            Contract.Requires(viewModelType != null);
 
             const string xamlTemplate = "<DataTemplate DataType=\"{{x:Type viewModel:{0}}}\"><toms:ComposableContentControl {1}/></DataTemplate>";
             var roleParameter = role == null ? string.Empty : string.Format(CultureInfo.InvariantCulture, "Role=\"{0}\"", role);
@@ -132,8 +126,6 @@ namespace TomsToolbox.Wpf.Composition
         [NotNull]
         public static TemplateKey CreateKey([NotNull] Type dataType, [CanBeNull] object role)
         {
-            Contract.Requires(dataType != null);
-            Contract.Ensures(Contract.Result<TemplateKey>() != null);
 
             if (role != null)
                 return new RoleBasedDataTemplateKey(dataType, role);
@@ -151,8 +143,6 @@ namespace TomsToolbox.Wpf.Composition
         [CanBeNull]
         internal static DependencyObject GetDataTemplateView([NotNull] this ExportProvider exportProvider, [NotNull] Type viewModel, [CanBeNull] object role)
         {
-            Contract.Requires(exportProvider != null);
-            Contract.Requires(viewModel != null);
 
             return exportProvider.GetExports(typeof(DependencyObject), null, ContractName)
                 .Where(item => item.IsViewModelForType(viewModel, role))
@@ -172,8 +162,6 @@ namespace TomsToolbox.Wpf.Composition
         [NotNull, ItemNotNull]
         private static IEnumerable<IDataTemplateMetadata> GetDataTemplateExportsMetadata([NotNull] this ExportProvider exportProvider)
         {
-            Contract.Requires(exportProvider != null);
-            Contract.Ensures(Contract.Result<IEnumerable<IDataTemplateMetadata>>() != null);
 
             return exportProvider.GetExports(typeof(DependencyObject), null, ContractName)
                 .Select(AssertCorrectCreationPolicy)
@@ -184,15 +172,12 @@ namespace TomsToolbox.Wpf.Composition
 
         private static bool Equals([NotNull] IDataTemplateMetadata left, [NotNull] IDataTemplateMetadata right)
         {
-            Contract.Requires(left != null);
-            Contract.Requires(right != null);
 
             return (left.ViewModel == right.ViewModel) && RoleEquals(left.Role, right.Role);
         }
 
         private static int GetHashCode([NotNull] IDataTemplateMetadata metadata)
         {
-            Contract.Requires(metadata != null);
 
             return metadata.ViewModel.GetHashCode() + (metadata.Role ?? 0).GetHashCode();
         }
@@ -218,7 +203,6 @@ namespace TomsToolbox.Wpf.Composition
         [NotNull]
         private static Lazy<object, object> AssertCorrectCreationPolicy([NotNull] Lazy<object, object> export)
         {
-            Contract.Requires(export != null);
 
             // Ensure views are created non-shared!
 

@@ -67,7 +67,6 @@
 
         private void UpdateContent([NotNull] ContentControl contentControl, [CanBeNull] object targetItem)
         {
-            Contract.Requires(contentControl != null);
 
             var currentItem = contentControl.Content;
 

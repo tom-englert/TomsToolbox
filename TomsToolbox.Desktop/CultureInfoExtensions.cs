@@ -25,8 +25,6 @@
         [NotNull]
         public static IEnumerable<CultureInfo> GetAncestors([NotNull] this CultureInfo self)
         {
-            Contract.Requires(self != null);
-            Contract.Ensures(Contract.Result<IEnumerable<CultureInfo>>() != null);
 
             var item = self.Parent;
 
@@ -46,8 +44,6 @@
         [NotNull]
         public static IEnumerable<CultureInfo> GetAncestorsAndSelf([NotNull] this CultureInfo self)
         {
-            Contract.Requires(self != null);
-            Contract.Ensures(Contract.Result<IEnumerable<CultureInfo>>() != null);
 
             var item = self;
 
@@ -66,18 +62,14 @@
         [NotNull, ItemNotNull]
         public static ICollection<CultureInfo> GetChildren([NotNull] this CultureInfo item)
         {
-            Contract.Requires(item != null);
-            Contract.Ensures(Contract.Result<ICollection<CultureInfo>>() != null);
 
             var children = _childCache.ForceValue(item, CreateChildList);
-            Contract.Assume(children != null); // because CreateChildList always returns != null
             return children;
         }
 
         [NotNull, ItemNotNull]
         private static CultureInfo[] CreateChildList([CanBeNull] CultureInfo parent)
         {
-            Contract.Ensures(Contract.Result<CultureInfo[]>() != null);
 
             return CultureInfo.GetCultures(CultureTypes.AllCultures).Where(child => child?.Parent.Equals(parent) == true).ToArray();
         }
@@ -90,8 +82,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<CultureInfo> GetDescendants([NotNull] this CultureInfo item)
         {
-            Contract.Requires(item != null);
-            Contract.Ensures(Contract.Result<IEnumerable<CultureInfo>>() != null);
 
             foreach (var child in item.GetChildren())
             {

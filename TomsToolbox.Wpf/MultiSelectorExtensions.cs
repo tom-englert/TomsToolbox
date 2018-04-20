@@ -42,7 +42,6 @@
         [AttachedPropertyBrowsableForType(typeof(Selector))]
         public static IList GetSelectionBinding([NotNull] this Selector obj)
         {
-            Contract.Requires(obj != null);
             return (IList)obj.GetValue(SelectionBindingProperty);
         }
         /// <summary>
@@ -53,7 +52,6 @@
         [AttachedPropertyBrowsableForType(typeof(Selector))]
         public static void SetSelectionBinding([NotNull] this Selector obj, [CanBeNull, ItemCanBeNull] IList value)
         {
-            Contract.Requires(obj != null);
             obj.SetValue(SelectionBindingProperty, value);
         }
         /// <summary>
@@ -80,7 +78,6 @@
 
         private static void SelectionBinding_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            Contract.Requires(d != null);
 
             // The selector is the target of the binding, and the ViewModel property is the source.
             var synchronizer = (SelectionSynchronizer)d.GetValue(SelectionSynchronizerProperty);
@@ -108,30 +105,21 @@
                 dataGrid.CommitEdit(); // row
             }
         }
-
-        [ContractVerification(false)] // because of dynamic
         [NotNull, ItemCanBeNull]
         private static IList GetSelectedItems([NotNull] this Selector selector)
         {
-            Contract.Requires(selector != null);
-            Contract.Ensures(Contract.Result<IList>() != null);
 
             var selectedItems = (IList)((dynamic)selector).SelectedItems;
-            Contract.Assume(selectedItems != null);
             return selectedItems;
         }
-
-        [ContractVerification(false)] // because of dynamic
         private static void ScrollIntoView([NotNull] this Selector selector, [CanBeNull] object selectedItem)
         {
-            Contract.Requires(selector != null);
 
             ((dynamic)selector).ScrollIntoView(selectedItem);
         }
 
         private static void BeginSetFocus([NotNull] this ItemsControl selector, [CanBeNull] object selectedItem)
         {
-            Contract.Requires(selector != null);
 
             selector.BeginInvoke(() =>
             {
@@ -147,7 +135,6 @@
 
         private static void ClearSourceSelection([NotNull] this Selector selector)
         {
-            Contract.Requires(selector != null);
 
             var sourceSelection = selector.GetSelectionBinding();
 
@@ -166,16 +153,12 @@
 
         private static bool All([NotNull, ItemCanBeNull] this IEnumerable items, [NotNull] Func<object, bool> condition)
         {
-            Contract.Requires(items != null);
-            Contract.Requires(condition != null);
 
             return Enumerable.All(items.Cast<object>(), condition);
         }
 
         private static void SynchronizeWithSource([NotNull] this Selector selector, [NotNull, ItemCanBeNull] IList sourceSelection)
         {
-            Contract.Requires(selector != null);
-            Contract.Requires(sourceSelection != null);
 
             var selectedItems = selector.GetSelectedItems();
 
@@ -199,8 +182,6 @@
 
         private static void AddItemsToSelection([NotNull] this Selector selector, [NotNull, ItemNotNull] IList itemsToSelect)
         {
-            Contract.Requires(selector != null);
-            Contract.Requires(itemsToSelect != null);
 
             var isSourceInvalid = false;
             var selectedItems = selector.GetSelectedItems();
@@ -239,9 +220,6 @@
 
         private static void SelectSingleItem([NotNull] this Selector selector, [NotNull, ItemCanBeNull] IList sourceSelection)
         {
-            Contract.Requires(selector != null);
-            Contract.Requires(sourceSelection != null);
-            Contract.Requires(sourceSelection.Count == 1);
 
             // Special handling, maybe list box is in single selection mode where we can't call selectedItems.Add().
             var selectedItem = sourceSelection[0];
@@ -267,8 +245,6 @@
         [NotNull, ItemCanBeNull]
         private static IList ArrayCopy([NotNull, ItemCanBeNull] ICollection source)
         {
-            Contract.Requires(source != null);
-            Contract.Ensures(Contract.Result<IList>() != null);
 
             var target = new object[source.Count];
             source.CopyTo(target, 0);
@@ -286,8 +262,6 @@
 
             public SelectionSynchronizer([NotNull] Selector selector, [NotNull, ItemCanBeNull] IList sourceSelection)
             {
-                Contract.Requires(selector != null);
-                Contract.Requires(sourceSelection != null);
 
                 _selector = selector;
                 _selectorHasItemsSourceBinding = selector.ItemsSource != null;
@@ -333,12 +307,10 @@
                     {
                         case NotifyCollectionChangedAction.Reset:
                             var sourceSelection = (IList)sender;
-                            Contract.Assume(sourceSelection != null);
                             _selector.SynchronizeWithSource(sourceSelection);
                             break;
 
                         case NotifyCollectionChangedAction.Add:
-                            Contract.Assume(itemsToSelect != null);
                             if ((selectedItems.Count == 0) && (itemsToSelect.Count == 1))
                                 _selector.SelectSingleItem(itemsToSelect);
                             else
@@ -346,13 +318,10 @@
                             break;
 
                         case NotifyCollectionChangedAction.Remove:
-                            Contract.Assume(itemsToDeselect != null);
                             selectedItems.RemoveRange(itemsToDeselect);
                             break;
 
                         case NotifyCollectionChangedAction.Replace:
-                            Contract.Assume(itemsToSelect != null);
-                            Contract.Assume(itemsToDeselect != null);
                             if ((selectedItems.Count == 1) && (itemsToSelect.Count == 1))
                             {
                                 _selector.SelectSingleItem(itemsToSelect);
@@ -416,14 +385,6 @@
                 {
                     _observableSourceSelection.CollectionChanged -= SourceSelection_CollectionChanged;
                 }
-            }
-
-            [ContractInvariantMethod, UsedImplicitly]
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-            [Conditional("CONTRACTS_FULL")]
-            private void ObjectInvariant()
-            {
-                Contract.Invariant(_selector != null);
             }
         }
     }

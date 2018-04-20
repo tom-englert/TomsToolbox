@@ -23,7 +23,6 @@
         [AttachedPropertyBrowsableForType(typeof(Image))]
         public static object GetResourceKey([NotNull] this Image obj)
         {
-            Contract.Requires(obj != null);
 
             return obj.GetValue(ResourceKeyProperty);
         }
@@ -35,7 +34,6 @@
         [AttachedPropertyBrowsableForType(typeof(Image))]
         public static void SetResourceKey([NotNull] this Image obj, [CanBeNull] object value)
         {
-            Contract.Requires(obj != null);
 
             obj.SetValue(ResourceKeyProperty, value);
         }
@@ -51,7 +49,6 @@
 
         private static void ResourceKey_Changed([NotNull] Image image, [CanBeNull] object resourceKey)
         {
-            Contract.Requires(image != null);
 
             image.Source = (resourceKey != null) ? image.TryFindResource(resourceKey) as ImageSource : null;
             image.ImageFailed -= Image_ImageFailed;
@@ -60,7 +57,6 @@
 
         static void Image_ImageFailed([NotNull] object sender, [NotNull] ExceptionRoutedEventArgs e)
         {
-            Contract.Requires(sender != null);
             var resourceKey = GetResourceKey((Image)sender);
             var message = e.ErrorException?.Message ?? @"No exception";
             Trace.TraceError(string.Format(CultureInfo.InvariantCulture, "Load image with resource key '{0}' failed: {1}", resourceKey, message));

@@ -28,12 +28,8 @@
         [NotNull]
         public static DispatcherOperation BeginInvoke([NotNull] this Visual visual, [NotNull] Action method)
         {
-            Contract.Requires(visual != null);
-            Contract.Requires(method != null);
-            Contract.Ensures(Contract.Result<DispatcherOperation>() != null);
 
             var dispatcher = visual.Dispatcher;
-            Contract.Assume(dispatcher != null); // visuals always have a dispatcher.
 
             return dispatcher.BeginInvoke(DispatcherPriority.Normal, method);
         }
@@ -54,12 +50,8 @@
         [NotNull]
         public static DispatcherOperation BeginInvoke([NotNull] this Visual visual, DispatcherPriority priority, [NotNull] Action method)
         {
-            Contract.Requires(visual != null);
-            Contract.Requires(method != null);
-            Contract.Ensures(Contract.Result<DispatcherOperation>() != null);
 
             var dispatcher = visual.Dispatcher;
-            Contract.Assume(dispatcher != null); // visuals always have a dispatcher.
 
             return dispatcher.BeginInvoke(method, priority, null);
         }

@@ -31,7 +31,6 @@
         public DispatcherThrottle([NotNull] Action target)
             : this(DispatcherPriority.Normal, target)
         {
-            Contract.Requires(target != null);
         }
 
         /// <summary>
@@ -41,7 +40,6 @@
         /// <param name="target">The target action to invoke when the throttle condition is hit.</param>
         public DispatcherThrottle(DispatcherPriority priority, [NotNull] Action target)
         {
-            Contract.Requires(target != null);
 
             _target = target;
             _priority = priority;
@@ -62,15 +60,6 @@
                 Interlocked.Exchange(ref _counter, 0);
             });
 
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_target != null);
-            Contract.Invariant(_dispatcher != null);
         }
     }
 }

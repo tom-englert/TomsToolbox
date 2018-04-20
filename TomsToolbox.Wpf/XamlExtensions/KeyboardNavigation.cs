@@ -32,7 +32,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<KeyboardNavigation>() != null);
                 return _current;
             }
         }
@@ -58,7 +57,6 @@
         private void InputManager_PostProcessInput([NotNull] object sender, [CanBeNull] ProcessInputEventArgs e)
         {
             var inputManager = (InputManager)sender;
-            Contract.Assume(inputManager != null);
             IsFocusVisualVisible = SystemParameters.KeyboardCues || (inputManager.MostRecentInputDevice is KeyboardDevice);
         }
     }

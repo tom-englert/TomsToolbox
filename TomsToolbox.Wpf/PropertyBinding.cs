@@ -98,28 +98,11 @@
 
             public BindingHelper([NotNull] PropertyBinding<T> owner)
             {
-                Contract.Requires(owner != null);
                 _owner = owner;
             }
 
             [NotNull] public static readonly DependencyProperty ValueProperty =
                 DependencyProperty.Register("Value", typeof(T), typeof(BindingHelper), new FrameworkPropertyMetadata((sender, e) => ((BindingHelper)sender)?._owner.Value_Changed((T)e.OldValue, (T)e.NewValue)));
-
-            [ContractInvariantMethod, UsedImplicitly]
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-            [Conditional("CONTRACTS_FULL")]
-            private void ObjectInvariant()
-            {
-                Contract.Invariant(_owner != null);
-            }
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_bindingHelper != null);
         }
     }
 }

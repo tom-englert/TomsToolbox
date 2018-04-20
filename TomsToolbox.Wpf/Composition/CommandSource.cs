@@ -35,7 +35,6 @@
         /// <param name="owner">The command source factory.</param>
         public CommandSource([NotNull] ICommandSourceFactory owner)
         {
-            Contract.Requires(owner != null);
 
             _owner = owner;
         }
@@ -157,7 +156,6 @@
         /// <param name="command">The command.</param>
         internal void Attach([NotNull] ICommand command)
         {
-            Contract.Requires(command != null);
 
             _attachedCommands.Insert(0, command);
 
@@ -171,7 +169,6 @@
         /// <exception cref="System.ArgumentException">Can't detach a command that has not been attached before;command</exception>
         internal void Detach([NotNull] ICommand command)
         {
-            Contract.Requires(command != null);
 
             if (!_attachedCommands.Remove(command))
                 return;
@@ -187,8 +184,6 @@
         /// <exception cref="System.ArgumentException">Can't replace a command that has not been attached before;oldCommand</exception>
         internal void Replace([NotNull] ICommand oldCommand, [NotNull] ICommand newCommand)
         {
-            Contract.Requires(oldCommand != null);
-            Contract.Requires(newCommand != null);
 
             var index = _attachedCommands.IndexOf(oldCommand);
 
@@ -214,15 +209,6 @@
             IsAnyTargetAttached = command != null;
 
             _attachedCommands.OfType<ICommandChangedNotificationSink>().ForEach(item => item?.ActiveCommandChanged(command));
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_attachedCommands != null);
-            Contract.Invariant(_owner != null);
         }
     }
 }

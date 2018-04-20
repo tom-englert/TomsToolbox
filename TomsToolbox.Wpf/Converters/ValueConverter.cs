@@ -11,7 +11,6 @@
     /// <summary>
     /// A base class for value converters performing pre-check of value and error handling.
     /// </summary>
-    [ContractClass(typeof(ValueConverterContract))]
     public abstract class ValueConverter : IValueConverter
     {
         /// <summary>
@@ -77,7 +76,6 @@
         [CanBeNull]
         protected virtual object ConvertBack([NotNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
-            Contract.Requires(value != null);
 
             throw new InvalidOperationException("ConvertBack is not supported by this converter.");
         }
@@ -117,27 +115,6 @@
                 this.TraceError(ex.Message, "ConvertBack");
                 return ConvertBackErrorValue;
             }
-        }
-    }
-
-    [ContractClassFor(typeof(ValueConverter))]
-    abstract class ValueConverterContract : ValueConverter
-    {
-        /// <summary>
-        /// Converts a value.
-        /// </summary>
-        /// <param name="value">The value produced by the binding source.</param>
-        /// <param name="targetType">The type of the binding target property.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
-        /// </returns>
-        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            Contract.Requires(value != null);
-
-            throw new NotImplementedException();
         }
     }
 }

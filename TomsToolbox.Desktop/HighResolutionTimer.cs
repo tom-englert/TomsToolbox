@@ -32,7 +32,6 @@
         public HighResolutionTimer([NotNull] Action<TimeSpan> timerCallback)
             : this(timerCallback, TimeSpan.FromSeconds(1))
         {
-            Contract.Requires(timerCallback != null);
         }
 
         /// <summary>
@@ -42,7 +41,6 @@
         /// <param name="interval">The interval.</param>
         public HighResolutionTimer([NotNull] Action<TimeSpan> timerCallback, TimeSpan interval)
         {
-            Contract.Requires(timerCallback != null);
 
             _timerCallback = timerCallback;
             
@@ -138,16 +136,6 @@
             {
                 Trace.TraceError(ex.ToString());
             }
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_stopwatch != null);
-            Contract.Invariant(_stopEvent != null);
-            Contract.Invariant(_timerCallback != null);
         }
     }
 }

@@ -14,7 +14,6 @@
     /// A base class for mutli value converters performing pre-check of value and error handling.
     /// </summary>
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi")]
-    [ContractClass(typeof(MultiValueConverterContract))]
     public abstract class MultiValueConverter : IMultiValueConverter
     {
         /// <summary>
@@ -44,7 +43,6 @@
         [CanBeNull, ItemCanBeNull]
         protected virtual object[] ConvertBack([NotNull] object value, [CanBeNull, ItemCanBeNull] Type[] targetTypes, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
-            Contract.Requires(value != null);
 
             throw new InvalidOperationException("ConvertBack is not supported by this converter.");
         }
@@ -83,26 +81,6 @@
                 this.TraceError(ex.Message, "ConvertBack");
                 return null;
             }
-        }
-    }
-
-    [ContractClassFor(typeof(MultiValueConverter))]
-    abstract class MultiValueConverterContract : MultiValueConverter
-    {
-        /// <summary>
-        /// Converts a value.
-        /// </summary>
-        /// <param name="values">The values produced by the binding source.</param>
-        /// <param name="targetType">The type of the binding target property.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
-        /// </returns>
-        protected override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            Contract.Requires(values != null);
-            throw new NotImplementedException();
         }
     }
 }

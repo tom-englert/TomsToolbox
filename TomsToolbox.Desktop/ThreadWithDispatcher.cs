@@ -1,4 +1,4 @@
-namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Desktop
 {
     using System;
     using System.Diagnostics;
@@ -29,7 +29,6 @@ namespace TomsToolbox.Desktop
         public ForegroundThreadWithDispatcher([NotNull] string name)
             : this(name, ApartmentState.MTA)
         {
-            Contract.Requires(!string.IsNullOrEmpty(name));
         }
 
         /// <summary>
@@ -40,7 +39,6 @@ namespace TomsToolbox.Desktop
         public ForegroundThreadWithDispatcher([NotNull] string name, ApartmentState state)
             : this(name, state, ThreadPriority.Normal)
         {
-            Contract.Requires(!string.IsNullOrEmpty(name));
         }
 
         /// <summary>
@@ -52,7 +50,6 @@ namespace TomsToolbox.Desktop
         public ForegroundThreadWithDispatcher([NotNull] string name, ApartmentState state, ThreadPriority priority)
             : base(name, state, priority, false)
         {
-            Contract.Requires(!string.IsNullOrEmpty(name));
 
             ShutdownPriority = DispatcherPriority.Normal;
         }
@@ -108,7 +105,6 @@ namespace TomsToolbox.Desktop
         public BackgroundThreadWithDispatcher([NotNull] string name, ApartmentState state)
             : base(name, state, ThreadPriority.Normal, true)
         {
-            Contract.Requires(!string.IsNullOrEmpty(name));
         }
 
         /// <summary>
@@ -120,7 +116,6 @@ namespace TomsToolbox.Desktop
         public BackgroundThreadWithDispatcher([NotNull] string name, ApartmentState state, ThreadPriority priority)
             : base(name, state, priority, true)
         {
-            Contract.Requires(!string.IsNullOrEmpty(name));
         }
     }
 
@@ -151,7 +146,6 @@ namespace TomsToolbox.Desktop
         /// <param name="isBackgroundThread">if set to <c>true</c> it the thread should be created as background thread.</param>
         protected ThreadWithDispatcher([NotNull] string name, ApartmentState state, ThreadPriority priority, bool isBackgroundThread)
         {
-            Contract.Requires(!string.IsNullOrEmpty(name));
 
             var currentThread = Thread.CurrentThread;
 
@@ -176,7 +170,6 @@ namespace TomsToolbox.Desktop
         {
             get
             {
-                Contract.Ensures(Contract.Result<Dispatcher>() != null);
 
                 try
                 {
@@ -185,8 +178,6 @@ namespace TomsToolbox.Desktop
                 catch (ObjectDisposedException)
                 {
                 }
-
-                Contract.Assume(_dispatcher != null);
                 return _dispatcher;
             }
         }
@@ -194,13 +185,11 @@ namespace TomsToolbox.Desktop
         /// <summary>
         /// Gets the task scheduler associated with the <see cref="Dispatcher"/>
         /// </summary>
-        [ContractVerification(false)]
         [NotNull]
         public TaskScheduler TaskScheduler
         {
             get
             {
-                Contract.Ensures(Contract.Result<TaskScheduler>() != null);
 
                 // ReSharper disable once AssignNullToNotNullAttribute
                 return _taskScheduler ?? (_taskScheduler = Invoke(TaskScheduler.FromCurrentSynchronizationContext));
@@ -223,7 +212,6 @@ namespace TomsToolbox.Desktop
         [CanBeNull]
         public T Invoke<T>([NotNull] Func<T> method)
         {
-            Contract.Requires(method != null);
 
             return Dispatcher.Invoke<T>(method);
         }
@@ -236,7 +224,6 @@ namespace TomsToolbox.Desktop
         /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
         public void Invoke([NotNull] Action method)
         {
-            Contract.Requires(method != null);
 
             DispatcherExtensions.Invoke(Dispatcher, method);
         }
@@ -250,8 +237,6 @@ namespace TomsToolbox.Desktop
         [NotNull]
         public DispatcherOperation BeginInvoke([NotNull] Action method)
         {
-            Contract.Requires(method != null);
-            Contract.Ensures(Contract.Result<DispatcherOperation>() != null);
 
             return BeginInvoke(DispatcherPriority.Normal, method);
         }
@@ -266,8 +251,6 @@ namespace TomsToolbox.Desktop
         [NotNull]
         public DispatcherOperation BeginInvoke(DispatcherPriority priority, [NotNull] Action method)
         {
-            Contract.Requires(method != null);
-            Contract.Ensures(Contract.Result<DispatcherOperation>() != null);
 
             return Dispatcher.BeginInvoke(method, priority, null);
         }
@@ -340,15 +323,6 @@ namespace TomsToolbox.Desktop
         public void Abort()
         {
             _thread.Abort();
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_thread != null);
-            Contract.Invariant(_threadStarted != null);
         }
     }
 }

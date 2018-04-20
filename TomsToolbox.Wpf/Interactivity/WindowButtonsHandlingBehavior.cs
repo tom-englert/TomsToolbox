@@ -23,7 +23,6 @@
             base.OnAttached();
 
             var window = AssociatedObject;
-            Contract.Assume(window != null);
 
             window.CommandBindings.Add(new CommandBinding(WindowCommands.Close, Close));
 
@@ -38,7 +37,6 @@
         private void Minimize([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
         {
             var window = AssociatedObject;
-            Contract.Assume(window != null);
 
             window.WindowState = WindowState.Minimized;
         }
@@ -46,7 +44,6 @@
         private void Close([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
         {
             var window = AssociatedObject;
-            Contract.Assume(window != null);
 
             window.Close();
         }
@@ -54,7 +51,6 @@
         private void CanRestore([CanBeNull] object sender, [NotNull] CanExecuteRoutedEventArgs e)
         {
             var window = AssociatedObject;
-            Contract.Assume(window != null);
 
             e.CanExecute = window.WindowState != WindowState.Normal;
         }
@@ -62,7 +58,6 @@
         private void Restore([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
         {
             var window = AssociatedObject;
-            Contract.Assume(window != null);
 
             window.WindowState = WindowState.Normal;
         }
@@ -70,7 +65,6 @@
         private void CanMaximize([CanBeNull] object sender, [NotNull] CanExecuteRoutedEventArgs e)
         {
             var window = AssociatedObject;
-            Contract.Assume(window != null);
 
             e.CanExecute = (window.WindowState == WindowState.Normal) && ((window.ResizeMode == ResizeMode.CanResize) || (window.ResizeMode == ResizeMode.CanResizeWithGrip));
         }
@@ -78,7 +72,6 @@
         private void Maximize([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
         {
             var window = AssociatedObject;
-            Contract.Assume(window != null);
 
             window.WindowState = WindowState.Maximized;
         }

@@ -28,8 +28,6 @@
             where TList : IList<T>, INotifyCollectionChanged
             where T : INotifyPropertyChanged
         {
-            Contract.Requires(collection != null);
-            Contract.Ensures(Contract.Result<ObservablePropertyChangeTracker<T>>() != null);
 
             return new ObservablePropertyChangeTracker<T>(collection, collection);
         }
@@ -49,7 +47,6 @@
         public ObservablePropertyChangeTracker([NotNull, ItemNotNull] IObservableCollection<T> collection)
             : this(collection, collection)
         {
-            Contract.Requires(collection != null);
         }
 
         /// <summary>
@@ -59,7 +56,6 @@
         public ObservablePropertyChangeTracker([NotNull, ItemNotNull] ObservableCollection<T> collection)
             : this(collection, collection)
         {
-            Contract.Requires(collection != null);
         }
 
         /// <summary>
@@ -69,7 +65,6 @@
         public ObservablePropertyChangeTracker([NotNull, ItemNotNull] ReadOnlyObservableCollection<T> collection)
             : this(collection, collection)
         {
-            Contract.Requires(collection != null);
         }
 
         /// <summary>
@@ -79,14 +74,11 @@
 
         internal ObservablePropertyChangeTracker([NotNull, ItemNotNull] IList<T> items, [NotNull] INotifyCollectionChanged eventSource)
         {
-            Contract.Requires(items != null);
-            Contract.Requires(eventSource != null);
 
             eventSource.CollectionChanged += Items_CollectionChanged;
 
             foreach (var item in items)
             {
-                Contract.Assume(item != null);
                 item.PropertyChanged += Item_PropertyChanged;
             }
         }
@@ -95,15 +87,10 @@
         {
             ItemPropertyChanged?.Invoke(sender, e);
         }
-
-        [ContractVerification(false)]
         [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
 // Too complex, checker is confused.
         private void Items_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
-            Contract.Requires((e.Action != NotifyCollectionChangedAction.Add) || (e.NewItems != null));
-            Contract.Requires((e.Action != NotifyCollectionChangedAction.Remove) || (e.OldItems != null));
-            Contract.Requires((e.Action != NotifyCollectionChangedAction.Replace) || ((e.OldItems != null) && (e.NewItems != null)));
 
             // ReSharper disable PossibleNullReferenceException
             switch (e.Action)

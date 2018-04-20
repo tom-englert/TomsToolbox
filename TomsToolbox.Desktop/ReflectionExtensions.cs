@@ -23,8 +23,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<Type> EnumerateAllTypes([NotNull, ItemCanBeNull] this IEnumerable<Assembly> assemblies)
         {
-            Contract.Requires(assemblies != null);
-            Contract.Ensures(Contract.Result<IEnumerable<Type>>() != null);
 
             return assemblies.SelectMany(EnumerateAllTypes);
         }
@@ -37,7 +35,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<Type> EnumerateAllTypes([CanBeNull] this Assembly assembly)
         {
-            Contract.Ensures(Contract.Result<IEnumerable<Type>>() != null);
 
             return assembly?.GetTypes().SelectMany(GetSelfAndNestedTypes) ?? Enumerable.Empty<Type>();
         }
@@ -45,7 +42,6 @@
         [NotNull, ItemNotNull]
         private static IEnumerable<Type> GetSelfAndNestedTypes([CanBeNull] Type type)
         {
-            Contract.Ensures(Contract.Result<IEnumerable<Type>>() != null);
 
             return type == null ? Enumerable.Empty<Type>() : new[] { type }.Concat(type.GetNestedTypes().SelectMany(GetSelfAndNestedTypes));
         }
@@ -58,8 +54,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<Type> EnumerateAllTypes([NotNull] this DirectoryInfo directory)
         {
-            Contract.Requires(directory != null);
-            Contract.Ensures(Contract.Result<IEnumerable<Type>>() != null);
 
             return EnumerateAllTypes(directory, "*.dll");
         }
@@ -73,9 +67,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<Type> EnumerateAllTypes([NotNull] this DirectoryInfo directory, [NotNull] string searchPattern)
         {
-            Contract.Requires(directory != null);
-            Contract.Requires(searchPattern != null);
-            Contract.Ensures(Contract.Result<IEnumerable<Type>>() != null);
 
             var assemblyFiles = directory.EnumerateFiles(searchPattern);
 
@@ -97,7 +88,6 @@
             try
             {
                 var fullName = assemblyFile.FullName;
-                Contract.Assume(!string.IsNullOrEmpty(fullName));
                 return Assembly.LoadFile(fullName);
             }
             catch
@@ -140,12 +130,8 @@
         [NotNull]
         public static DirectoryInfo GetAssemblyDirectory([NotNull] this Assembly assembly)
         {
-            Contract.Requires(assembly != null);
-            Contract.Ensures(Contract.Result<DirectoryInfo>() != null);
 
             var assemblyLocation = Path.GetDirectoryName(assembly.Location);
-
-            Contract.Assume(!string.IsNullOrEmpty(assemblyLocation));
 
             return new DirectoryInfo(assemblyLocation);
         }

@@ -45,7 +45,6 @@
         /// <param name="target">The target.</param>
         public ValidationTemplate([NotNull] INotifyPropertyChanged target)
         {
-            Contract.Requires(target != null);
 
             _target = target;
             _validationContext = new ValidationContext(target, null, null);
@@ -68,7 +67,7 @@
                 .SelectMany(x => x.MemberNames)
                 .Distinct()
                 .ForEach(RaiseErrorsChanged);
-#endif 
+#endif
         }
 
         /// <inheritdoc />
@@ -121,15 +120,5 @@
         bool INotifyDataErrorInfo.HasErrors => _validationResults.Count > 0;
 
 #endif
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822: MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_target != null);
-            Contract.Invariant(_validationContext != null);
-            Contract.Invariant(_validationResults != null);
-        }
     }
 }

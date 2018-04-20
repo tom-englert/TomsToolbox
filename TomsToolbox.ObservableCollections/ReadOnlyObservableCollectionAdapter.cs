@@ -24,7 +24,6 @@
         protected ReadOnlyObservableCollectionAdapter([NotNull] TList items)
             : base(items)
         {
-            Contract.Requires(items != null);
 
             items.CollectionChanged += Items_CollectionChanged;
             items.PropertyChanged += Items_PropertyChanged;
@@ -38,7 +37,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<TList>() != null);
 
                 return (TList)base.Items;
             }

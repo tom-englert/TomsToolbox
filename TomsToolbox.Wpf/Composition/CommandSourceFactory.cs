@@ -137,7 +137,6 @@
         [NotNull]
         public object GetPart(object compositionContext)
         {
-            Contract.Ensures(Contract.Result<object>() != null);
             return GetCommandSource(compositionContext);
         }
 
@@ -149,10 +148,8 @@
         [NotNull]
         private T GetCommandSource([CanBeNull] object compositionContext)
         {
-            Contract.Ensures(Contract.Result<T>() != null);
 
             var commandSource = _commandSourcePerContext.ForceValue(compositionContext ?? typeof(NullKey), context => CreateCommandSource());
-            Contract.Assume(commandSource != null);
             return commandSource;
         }
 
@@ -226,8 +223,6 @@
         [NotNull]
         public T Attach([CanBeNull] object context, [NotNull] ICommand command)
         {
-            Contract.Requires(command != null);
-            Contract.Ensures(Contract.Result<T>() != null);
 
             var commandSource = GetCommandSource(context);
 
@@ -246,8 +241,6 @@
         [NotNull]
         public T Detach([CanBeNull] object context, [NotNull] ICommand command)
         {
-            Contract.Requires(command != null);
-            Contract.Ensures(Contract.Result<T>() != null);
 
             var commandSource = GetCommandSource(context);
 
@@ -267,9 +260,6 @@
         [NotNull]
         public T Replace([CanBeNull] object context, [NotNull] ICommand oldCommand, [NotNull] ICommand newCommand)
         {
-            Contract.Requires(oldCommand != null);
-            Contract.Requires(newCommand != null);
-            Contract.Ensures(Contract.Result<T>() != null);
 
             var commandSource = GetCommandSource(context);
 
@@ -280,14 +270,6 @@
 
         private class NullKey
         {
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_commandSourcePerContext != null);
         }
     }
 

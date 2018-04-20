@@ -92,7 +92,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<BinaryOperationProcessor>() != null);
                 return _processor ?? (_processor = new BinaryOperationProcessor(BinaryOperation.Addition));
             }
         }
@@ -155,14 +154,6 @@
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new InvalidOperationException();
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(Processor != null);
         }
     }
 }

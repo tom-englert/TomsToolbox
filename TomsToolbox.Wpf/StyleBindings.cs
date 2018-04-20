@@ -66,7 +66,6 @@
         [CanBeNull]
         public static InputBindingTemplate GetInputBindings([NotNull] DependencyObject obj)
         {
-            Contract.Requires(obj != null);
             return (InputBindingTemplate)obj.GetValue(InputBindingsProperty);
         }
         /// <summary>
@@ -76,7 +75,6 @@
         /// <param name="value">The inputBindings to attach.</param>
         public static void SetInputBindings([NotNull] DependencyObject obj, [CanBeNull] InputBindingTemplate value)
         {
-            Contract.Requires(obj != null);
             obj.SetValue(InputBindingsProperty, value);
         }
         /// <summary>
@@ -113,8 +111,6 @@
             var existingInputBindings = target.InputBindings;
             var newInputBindings = newValue.InputBindings;
 
-            Contract.Assume(existingInputBindings.Count == 0);
-
             // ReSharper disable once PossibleNullReferenceException
             existingInputBindings.AddRange(newInputBindings.OfType<InputBinding>().Select(item => item.Clone()).ToArray());
         }
@@ -128,7 +124,6 @@
         [CanBeNull, ItemNotNull]
         public static GroupStyleCollection GetGroupStyles([NotNull] DependencyObject obj)
         {
-            Contract.Requires(obj != null);
 
             return (GroupStyleCollection)obj.GetValue(GroupStylesProperty);
         }
@@ -139,7 +134,6 @@
         /// <param name="value">The group styles.</param>
         public static void SetGroupStyles([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] GroupStyleCollection value)
         {
-            Contract.Requires(obj != null);
 
             obj.SetValue(GroupStylesProperty, value);
         }
@@ -191,7 +185,6 @@
         [CanBeNull]
         public static GroupStyle GetGroupStyle([NotNull] DependencyObject obj)
         {
-            Contract.Requires(obj != null);
 
             return (GroupStyle)obj.GetValue(GroupStyleProperty);
         }
@@ -202,7 +195,6 @@
         /// <param name="value">The group style.</param>
         public static void SetGroupStyle([NotNull] DependencyObject obj, [CanBeNull] GroupStyle value)
         {
-            Contract.Requires(obj != null);
 
             obj.SetValue(GroupStyleProperty, value);
         }
@@ -253,7 +245,6 @@
         [CanBeNull, ItemNotNull]
         public static GroupDescriptionCollection GetGroupDescriptions([NotNull] DependencyObject obj)
         {
-            Contract.Requires(obj != null);
 
             return (GroupDescriptionCollection)obj.GetValue(GroupDescriptionsProperty);
         }
@@ -264,7 +255,6 @@
         /// <param name="value">The group descriptions.</param>
         public static void SetGroupDescriptions([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] ICollection<GroupDescription> value)
         {
-            Contract.Requires(obj != null);
 
             obj.SetValue(GroupDescriptionsProperty, value);
         }
@@ -315,7 +305,6 @@
         [CanBeNull, ItemNotNull]
         public static BehaviorCollection GetBehaviors([NotNull] DependencyObject obj)
         {
-            Contract.Requires(obj != null);
             return (BehaviorCollection)obj.GetValue(BehaviorsProperty);
         }
         /// <summary>
@@ -325,7 +314,6 @@
         /// <param name="value">The behaviors to attach.</param>
         public static void SetBehaviors([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] BehaviorCollection value)
         {
-            Contract.Requires(obj != null);
             obj.SetValue(BehaviorsProperty, value);
         }
         /// <summary>
@@ -355,8 +343,6 @@
             if (newValue != null)
             {
                 var existingBehaviors = Interaction.GetBehaviors(d);
-                Contract.Assume(existingBehaviors != null);
-                Contract.Assume(existingBehaviors.Count == 0);
                 existingBehaviors.AddRange(newValue.Select(item => (Behavior)item.Clone()));
             }
         }
@@ -370,7 +356,6 @@
         [CanBeNull, ItemNotNull]
         public static TriggerCollection GetTriggers([NotNull] DependencyObject obj)
         {
-            Contract.Requires(obj != null);
             return (TriggerCollection)obj.GetValue(TriggersProperty);
         }
         /// <summary>
@@ -380,7 +365,6 @@
         /// <param name="value">The value.</param>
         public static void SetTriggers([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] TriggerCollection value)
         {
-            Contract.Requires(obj != null);
             obj.SetValue(TriggersProperty, value);
         }
         /// <summary>
@@ -414,8 +398,6 @@
             if (newValue != null)
             {
                 var existingTriggers = Interaction.GetTriggers(d);
-                Contract.Assume(existingTriggers != null);
-                Contract.Assume(existingTriggers.Count == 0);
 
                 existingTriggers.AddRange(newValue.Select(item => (TriggerBase)item.Clone()));
             }

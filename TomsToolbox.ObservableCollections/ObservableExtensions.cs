@@ -39,9 +39,6 @@
         [NotNull, ItemCanBeNull]
         public static IObservableCollection<TTarget> ObservableSelectMany<TSource, TTarget>([NotNull, ItemCanBeNull] this IList<TSource> source, [NotNull] Expression<Func<TSource, IList<TTarget>>> itemGeneratorExpression)
         {
-            Contract.Requires(source != null);
-            Contract.Requires(itemGeneratorExpression != null);
-            Contract.Ensures(Contract.Result<IObservableCollection<TTarget>>() != null);
 
             return new ObservableSelectManyImpl<TSource, TTarget>(source, itemGeneratorExpression);
         }
@@ -65,9 +62,6 @@
         [NotNull, ItemCanBeNull]
         public static IObservableCollection<TTarget> ObservableSelect<TSource, TTarget>([NotNull, ItemCanBeNull] this IList<TSource> source, [NotNull] Expression<Func<TSource, TTarget>> itemGeneratorExpression)
         {
-            Contract.Requires(source != null);
-            Contract.Requires(itemGeneratorExpression != null);
-            Contract.Ensures(Contract.Result<IObservableCollection<TTarget>>() != null);
 
             return new ObservableSelectImpl<TSource, TTarget>(source, itemGeneratorExpression);
         }
@@ -84,8 +78,6 @@
         [NotNull, ItemCanBeNull]
         public static IObservableCollection<TTarget> ObservableCast<TTarget>([NotNull, ItemCanBeNull] this IEnumerable source)
         {
-            Contract.Requires(source != null);
-            Contract.Ensures(Contract.Result<IObservableCollection<TTarget>>() != null);
 
             return new ObservableWrappedCollection<object, TTarget>(source, item => (TTarget)item);
         }
@@ -107,10 +99,6 @@
         [NotNull, ItemCanBeNull]
         public static IObservableCollection<T> ObservableWhere<T>([NotNull, ItemCanBeNull] this IList<T> source, [NotNull] Func<T, bool> predicate, [NotNull, ItemNotNull] params string[] liveTrackingProperties)
         {
-            Contract.Requires(source != null);
-            Contract.Requires(predicate != null);
-            Contract.Requires(liveTrackingProperties != null);
-            Contract.Ensures(Contract.Result<IObservableCollection<T>>() != null);
 
             return new ObservableFilteredCollection<T>(source, predicate, liveTrackingProperties);
         }
@@ -132,8 +120,6 @@
             public ObservableSelectImpl([NotNull, ItemCanBeNull] IList<TSource> sourceCollection, [NotNull] Expression<Func<TSource, TTarget>> itemGeneratorExpression)
                 : base(sourceCollection, itemGeneratorExpression.Compile())
             {
-                Contract.Requires(sourceCollection != null);
-                Contract.Requires(itemGeneratorExpression != null);
 
                 _propertyName = PropertySupport.TryExtractPropertyName(itemGeneratorExpression);
                 _sourceReference = new WeakReference<IList<TSource>>(sourceCollection);
@@ -145,7 +131,6 @@
             }
 
             [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Caused by code contracts.")]
-            [ContractVerification(false)]
             [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
             protected override void OnSourceCollectionChanged(IEnumerable sourceCollection, NotifyCollectionChangedEventArgs e)
             {
@@ -200,7 +185,6 @@
 
             private void SourceItem_PropertyChanged([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
             {
-                Contract.Requires(sender != null);
 
                 if (e.PropertyName != _propertyName)
                     return;
@@ -216,16 +200,11 @@
                 if (index == -1)
                     return;
 
-                Contract.Assume(index < Items.Count);
-
                 Items[index] = ItemGenerator((TSource)sender);
             }
 
             private void DetachEvent(int itemIndex)
             {
-                Contract.Requires(_propertyChangeEventListeners != null);
-                Contract.Requires((itemIndex >= 0) && (itemIndex < _propertyChangeEventListeners.Count));
-                Contract.Ensures(_propertyChangeEventListeners.Count == Contract.OldValue(_propertyChangeEventListeners.Count) - 1);
 
                 var propertyChangeEventListeners = _propertyChangeEventListeners;
 
@@ -238,13 +217,8 @@
 
             private void AttachEvent(int itemIndex, [CanBeNull] INotifyPropertyChanged item)
             {
-                Contract.Requires(_propertyChangeEventListeners != null);
-                Contract.Requires(itemIndex >= -1);
-                Contract.Requires(itemIndex <= _propertyChangeEventListeners.Count);
 
                 var weakEventListener = GeneratePropertyChangedEventListener(item);
-
-                Contract.Assume(_propertyChangeEventListeners != null); // else we didn't register for events.
 
                 if (itemIndex == -1)
                 {
@@ -252,13 +226,11 @@
                 }
                 else
                 {
-                    Contract.Assume(itemIndex <= _propertyChangeEventListeners.Count);
                     _propertyChangeEventListeners.Insert(itemIndex, weakEventListener);
                 }
             }
 
             [CanBeNull]
-            [ContractVerification(false)]
             private WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> GeneratePropertyChangedEventListener([CanBeNull] INotifyPropertyChanged item)
             {
                 return (item == null) ? null :
@@ -267,25 +239,18 @@
 
             private static void OnCollectionChanged([NotNull, ItemCanBeNull] ObservableSelectImpl<TSource, TTarget> self, [NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
             {
-                Contract.Requires(self != null);
-                Contract.Requires(sender != null);
-                Contract.Requires(e != null);
 
                 self.SourceItem_PropertyChanged(sender, e);
             }
 
             private static void Attach([NotNull] WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> weakEvent, [NotNull] INotifyPropertyChanged sender)
             {
-                Contract.Requires(weakEvent != null);
-                Contract.Requires(sender != null);
 
                 sender.PropertyChanged += weakEvent.OnEvent;
             }
 
             private static void Detach([NotNull] WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> weakEvent, [NotNull] INotifyPropertyChanged sender)
             {
-                Contract.Requires(weakEvent != null);
-                Contract.Requires(sender != null);
 
                 sender.PropertyChanged -= weakEvent.OnEvent;
             }
@@ -293,20 +258,10 @@
             [NotNull, ItemCanBeNull]
             private List<WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs>> GeneratePropertyChangeEventListeners([NotNull, ItemCanBeNull] IEnumerable sourceList)
             {
-                Contract.Requires(sourceList != null);
-                Contract.Ensures(Contract.Result<List<WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs>>>() != null);
 
                 return sourceList.Cast<object>()
                     .Select(item => GeneratePropertyChangedEventListener(item as INotifyPropertyChanged))
                     .ToList();
-            }
-
-            [ContractInvariantMethod, UsedImplicitly]
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-            [Conditional("CONTRACTS_FULL")]
-            private void ObjectInvariant()
-            {
-                Contract.Invariant(_sourceReference != null);
             }
         }
 
@@ -318,20 +273,15 @@
             public ObservableSelectManyImpl([NotNull, ItemCanBeNull] IList<TSource> items, [NotNull] Expression<Func<TSource, IList<TTarget>>> itemGeneratorExpression)
                 : base(new ObservableCompositeCollection<TTarget>())
             {
-                Contract.Requires(items != null);
-                Contract.Requires(itemGeneratorExpression != null);
 
                 _source = items.ObservableSelect(itemGeneratorExpression);
                 _source.CollectionChanged += Source_CollectionChanged;
 
                 Items.Content.AddRange(_source);
             }
-
-            [ContractVerification(false)]
             [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
             private void Source_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
             {
-                Contract.Requires(e != null);
 
                 var newStartingIndex = e.NewStartingIndex;
                 var oldStartingIndex = e.OldStartingIndex;
@@ -340,7 +290,6 @@
                 switch (e.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        Contract.Assume(e.NewItems != null);
                         foreach (IList<TTarget> item in e.NewItems)
                         {
                             content.Insert(newStartingIndex++, item);
@@ -348,7 +297,6 @@
                         break;
 
                     case NotifyCollectionChangedAction.Remove:
-                        Contract.Assume(e.OldItems != null);
                         for (var i = 0; i < e.OldItems.Count; i++)
                         {
                             content.RemoveAt(oldStartingIndex);
@@ -361,7 +309,6 @@
                         break;
 
                     case NotifyCollectionChangedAction.Replace:
-                        Contract.Assume(e.NewItems != null);
                         foreach (IList<TTarget> item in e.NewItems)
                         {
                             content[newStartingIndex++] = item;
@@ -376,14 +323,6 @@
                     default:
                         throw new InvalidOperationException("Invalid NotifyCollectionChangedEventArgs.Action");
                 }
-            }
-
-            [ContractInvariantMethod, UsedImplicitly]
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-            [Conditional("CONTRACTS_FULL")]
-            private void ObjectInvariant()
-            {
-                Contract.Invariant(_source != null);
             }
         }
     }

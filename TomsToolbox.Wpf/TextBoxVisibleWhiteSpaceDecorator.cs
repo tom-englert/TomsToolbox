@@ -192,8 +192,6 @@
             public WhiteSpaceDecoratorAdorner([NotNull] TextBoxVisibleWhiteSpaceDecorator owner, [NotNull] TextBox textBox)
                 : base(textBox)
             {
-                Contract.Requires(owner != null);
-                Contract.Requires(textBox != null);
 
                 _owner = owner;
                 _textBox = textBox;
@@ -294,8 +292,7 @@
                 drawingContext.PushOpacity(_owner.WhiteSpaceOpacity);
 
                 var typefaceName = _textBox.FontFamily?.Source ?? "Segoe UI";
-                var brush = _owner.WhiteSpaceColor ?? Brushes.Gray; Contract.Assume(brush != null);
-
+                var brush = _owner.WhiteSpaceColor ?? Brushes.Gray; 
                 DrawAdorners(drawingContext, _textBox, _whiteSpaces, 0, _whiteSpaces.Count, RenderSize, new Typeface(typefaceName), _textBox.FontSize, brush);
 
                 drawingContext.Pop();
@@ -319,23 +316,6 @@
                     return textBox.Text.Length <= _charIndex ? Rect.Empty : textBox.GetRectFromCharacterIndex(_charIndex);
                 }
             }
-
-            [ContractInvariantMethod, UsedImplicitly]
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-            [Conditional("CONTRACTS_FULL")]
-            private void ObjectInvariant()
-            {
-                Contract.Invariant(_textBox != null);
-            }
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_adornerDecorator != null);
-            Contract.Invariant(AdornerLayer != null);
         }
     }
 }

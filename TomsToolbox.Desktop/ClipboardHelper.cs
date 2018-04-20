@@ -38,7 +38,6 @@
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public static IList<IList<string>> GetClipboardDataAsTable()
         {
-            Contract.Ensures((Contract.Result<IList<IList<string>>>() == null) || (Contract.Result<IList<IList<string>>>().Count > 0));
 
             var text = Clipboard.GetText();
             if (!string.IsNullOrEmpty(text))
@@ -81,8 +80,6 @@
         [NotNull]
         private static string ToTextString([NotNull, ItemNotNull] this IList<IList<string>> table)
         {
-            Contract.Requires(table != null);
-            Contract.Ensures(Contract.Result<string>() != null);
 
             return ToString(table, TextColumnSeparator);
         }
@@ -90,8 +87,6 @@
         [NotNull]
         internal static string ToCsvString([NotNull, ItemNotNull] this IList<IList<string>> table)
         {
-            Contract.Requires(table != null);
-            Contract.Ensures(Contract.Result<string>() != null);
 
             return ToString(table, CsvColumnSeparator);
         }
@@ -99,8 +94,6 @@
         [NotNull]
         private static string ToString([NotNull, ItemNotNull] this IList<IList<string>> table, char separator)
         {
-            Contract.Requires(table != null);
-            Contract.Ensures(Contract.Result<string>() != null);
 
             if ((table.Count == 1) && (table[0] != null) && (table[0].Count == 1) && string.IsNullOrWhiteSpace(table[0][0]))
                 return Quote + (table[0][0] ?? string.Empty) + Quote;
@@ -111,7 +104,6 @@
         [NotNull]
         internal static string Quoted([CanBeNull] string value, char separator)
         {
-            Contract.Ensures(Contract.Result<string>() != null);
             if (string.IsNullOrEmpty(value))
                 return string.Empty;
 
@@ -126,8 +118,6 @@
         [CanBeNull, ItemNotNull]
         internal static IList<IList<string>> ParseTable([NotNull] string text, char separator)
         {
-            Contract.Requires(text != null);
-            Contract.Ensures((Contract.Result<IList<IList<string>>>() == null) || Contract.Result<IList<IList<string>>>().Count > 0);
 
             var table = new List<IList<string>>();
 
@@ -150,8 +140,6 @@
         [NotNull, ItemNotNull]
         private static IList<string> ReadTableLine([NotNull] TextReader reader, char separator)
         {
-            Contract.Requires(reader != null);
-            Contract.Ensures(Contract.Result<IList<string>>() != null);
 
             var columns = new List<string>();
 
@@ -172,16 +160,12 @@
 
                 break;
             }
-
-            Contract.Assume(Contract.ForAll(columns, item => item != null));
             return columns;
         }
 
         [NotNull]
         internal static string ReadTableColumn([NotNull] TextReader reader, char separator)
         {
-            Contract.Requires(reader != null);
-            Contract.Ensures(Contract.Result<string>() != null);
 
             var stringBuilder = new StringBuilder();
             int nextChar;

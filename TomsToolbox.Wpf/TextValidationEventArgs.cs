@@ -32,7 +32,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<string>() != null);
 
                 return _text;
             }
@@ -45,14 +44,6 @@
         {
             get;
             set;
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_text != null);
         }
     }
 

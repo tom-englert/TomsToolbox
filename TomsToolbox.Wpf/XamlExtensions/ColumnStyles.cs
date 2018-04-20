@@ -28,7 +28,6 @@
         [AttachedPropertyBrowsableForType(typeof(DataGrid))]
         public static DataGridColumnStyleCollection GetDefaultColumnStyles([NotNull] DataGrid dataGrid)
         {
-            Contract.Requires(dataGrid != null);
             return (DataGridColumnStyleCollection)dataGrid.GetValue(DefaultColumnStylesProperty);
         }
         /// <summary>
@@ -38,7 +37,6 @@
         /// <param name="value">The styles.</param>
         public static void SetDefaultColumnStyles([NotNull] DataGrid dataGrid, [CanBeNull, ItemNotNull] DataGridColumnStyleCollection value)
         {
-            Contract.Requires(dataGrid != null);
             dataGrid.SetValue(DefaultColumnStylesProperty, value);
         }
         /// <summary>
@@ -47,8 +45,6 @@
         [NotNull]
         public static readonly DependencyProperty DefaultColumnStylesProperty =
             DependencyProperty.RegisterAttached("DefaultColumnStyles", typeof(DataGridColumnStyleCollection), typeof(ColumnStyles), new FrameworkPropertyMetadata(null, DefaultColumnStyles_Changed));
-
-        [ContractVerification(false)]
         private static void DefaultColumnStyles_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var dataGrid = (DataGrid)d;
@@ -62,12 +58,8 @@
             // ReSharper disable once AssignNullToNotNullAttribute
             dataGrid.Columns.CollectionChanged += (_, args) => Columns_CollectionChanged(styles, args);
         }
-
-        [ContractVerification(false)]
         private static void Columns_CollectionChanged([NotNull, ItemNotNull] DataGridColumnStyleCollection styles, [NotNull] NotifyCollectionChangedEventArgs args)
         {
-            Contract.Requires(styles != null);
-            Contract.Requires(args != null);
 
             if (args.Action != NotifyCollectionChangedAction.Add)
                 return;
@@ -81,8 +73,6 @@
 
         private static void ApplyStyle([NotNull, ItemNotNull] DataGridColumnStyleCollection styles, [NotNull] DependencyObject column)
         {
-            Contract.Requires(styles != null);
-            Contract.Requires(column != null);
 
             var style = styles.FirstOrDefault(s => s.ColumnType == column.GetType());
 
@@ -95,15 +85,11 @@
 
         private static void SetStyleBinding([NotNull] DependencyObject column, [NotNull] DependencyProperty property, [NotNull] DataGridColumnStyle style)
         {
-            Contract.Requires(column != null);
-            Contract.Requires(property != null);
-            Contract.Requires(style != null);
 
             // ElementStyle and EditingElementStyle are not defined at the base class, but are different property for e.g. bound and combo box column
             // => use reflection to get the effective property for the specified column.
 
             var propertyName = property.Name;
-            Contract.Assume(propertyName != null);
             var columnType = column.GetType();
 
             var defaultStyle = columnType.GetProperty("Default" + propertyName, BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)?.GetValue(null, null) as Style;

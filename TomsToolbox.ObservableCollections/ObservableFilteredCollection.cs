@@ -45,9 +45,6 @@
         // ReSharper disable PossibleMultipleEnumeration
             : base(new ObservableCollection<T>(sourceCollection.Cast<T>().Where(filter)))
         {
-            Contract.Requires(sourceCollection != null);
-            Contract.Requires(filter != null);
-            Contract.Requires(liveTrackingProperties != null);
 
             _filter = filter;
             _liveTrackingProperties = liveTrackingProperties;
@@ -64,47 +61,32 @@
             }
             // ReSharper restore PossibleMultipleEnumeration
         }
-
-        [ContractVerification(false)]
         [NotNull]
         private WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> CreateEvent([NotNull] INotifyCollectionChanged eventSource)
         {
-            Contract.Ensures(Contract.Result<WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs>>() != null);
 
             return new WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs>(
                 this, eventSource, OnCollectionChanged, Attach, Detach);
         }
-
-        [ContractVerification(false)]
         private static void OnCollectionChanged([NotNull, ItemCanBeNull] ObservableFilteredCollection<T> self, [NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
-            Contract.Requires(self != null);
-            Contract.Requires(sender != null);
-            Contract.Requires(e != null);
 
             self.SourceCollection_CollectionChanged(sender, e);
         }
 
         private static void Attach([NotNull] WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, [NotNull] INotifyCollectionChanged sender)
         {
-            Contract.Requires(weakEvent != null);
-            Contract.Requires(sender != null);
 
             sender.CollectionChanged += weakEvent.OnEvent;
         }
 
         private static void Detach([NotNull] WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, [NotNull] INotifyCollectionChanged sender)
         {
-            Contract.Requires(weakEvent != null);
-            Contract.Requires(sender != null);
 
             sender.CollectionChanged -= weakEvent.OnEvent;
         }
-
-        [ContractVerification(false)]
         private void SourceCollection_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
-            Contract.Requires(sender != null);
 
             switch (e.Action)
             {
@@ -182,7 +164,6 @@
 
         private void Item_PropertyChanged([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
         {
-            Contract.Requires(sender != null);
 
             var item = (T)sender;
 
@@ -206,15 +187,6 @@
         ~ObservableFilteredCollection()
         {
             _collectionChangedWeakEvent?.Detach();
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_filter != null);
-            Contract.Invariant(_liveTrackingProperties != null);
         }
     }
 }

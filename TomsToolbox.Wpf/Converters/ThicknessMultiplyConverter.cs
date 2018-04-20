@@ -67,7 +67,6 @@
         [NotNull]
         public static object Convert([CanBeNull] object value, [CanBeNull] object parameter)
         {
-            Contract.Ensures(Contract.Result<object>() != null);
 
             var target = value.SafeCast<Thickness>();
             var factor = GetThicknessFromParameter(parameter);
@@ -88,14 +87,6 @@
                 return _typeConverter.ConvertFromInvariantString(parameterString).SafeCast<Thickness>();
 
             throw new ArgumentException("Invalid thickness parameter.", nameof(parameter));
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_typeConverter != null);
         }
     }
 }

@@ -25,7 +25,6 @@
         [AttachedPropertyBrowsableForType(typeof(ContentPresenter))]
         public static object GetRole([NotNull] FrameworkElement obj)
         {
-            Contract.Requires(obj != null);
             return obj.GetValue(RoleProperty);
         }
         /// <summary>
@@ -35,7 +34,6 @@
         /// <param name="value">The value.</param>
         public static void SetRole([NotNull] FrameworkElement obj, [CanBeNull] object value)
         {
-            Contract.Requires(obj != null);
             obj.SetValue(RoleProperty, value);
         }
         /// <summary>

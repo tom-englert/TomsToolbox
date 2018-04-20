@@ -69,8 +69,6 @@
         [NotNull]
         public static string Convert([CanBeNull] object key, [NotNull] object value)
         {
-            Contract.Requires(value != null);
-            Contract.Ensures(Contract.Result<string>() != null);
 
             return InternalConvert(value, null, attr => attr?.Text, attr => Equals(attr?.Key, key));
         }
@@ -85,8 +83,6 @@
         [NotNull]
         public static string Convert([CanBeNull] object key, [NotNull] object value, [CanBeNull] Type enumType)
         {
-            Contract.Requires(value != null);
-            Contract.Ensures(Contract.Result<string>() != null);
 
             return InternalConvert(value, enumType, attr => attr?.Text, attr => Equals(attr?.Key, key));
         }

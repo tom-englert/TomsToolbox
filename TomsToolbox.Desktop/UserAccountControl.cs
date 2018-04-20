@@ -36,7 +36,6 @@
         [CanBeNull]
         public static NetworkCredential PromptForCredential([NotNull] IWin32Window parent, [CanBeNull] string caption, [CanBeNull] string message, int authenticationError, [CanBeNull] NetworkCredential template)
         {
-            Contract.Requires(parent != null);
 
             using (var inCredBuffer = PackAuthenticationBuffer(template))
             {
@@ -55,8 +54,6 @@
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         public static int LogOnInteractiveUser([NotNull] this NetworkCredential credential, [CanBeNull] out SafeTokenHandle userToken)
         {
-            Contract.Requires(credential != null);
-            Contract.Ensures((Contract.Result<int>() != 0) || (Contract.ValueAtReturn(out userToken) != null));
 
             return LogOnInteractiveUser(credential.UserName, credential.Domain, credential.Password, out userToken);
         }
@@ -74,7 +71,6 @@
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "3#")]
         public static int LogOnInteractiveUser([CanBeNull] string userName, [CanBeNull] string domain, [CanBeNull] string password, [CanBeNull] out SafeTokenHandle userToken)
         {
-            Contract.Ensures((Contract.Result<int>() != 0) || (Contract.ValueAtReturn(out userToken) != null));
 
             ParseUserDomain(ref userName, ref domain);
 
@@ -132,7 +128,6 @@
         /// <exception cref="System.ComponentModel.Win32Exception">When any native Windows API call fails, the function throws a Win32Exception with the last error code.</exception>
         public static bool IsUserInAdminGroup([NotNull] SafeTokenHandle userToken)
         {
-            Contract.Requires(userToken != null);
 
             // Determine whether system is running Windows Vista or later operating 
             // systems (major version >= 6) because they support linked tokens, but 
@@ -245,7 +240,6 @@
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         public static bool IsUserInGroup([NotNull] SafeTokenHandle userToken, [CanBeNull] string groupName)
         {
-            Contract.Requires(userToken != null);
 
             var token = userToken.DangerousGetHandle();
             if (token == IntPtr.Zero)
@@ -437,7 +431,6 @@
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         private static SafeNativeMemory PackAuthenticationBuffer([CanBeNull] NetworkCredential credential)
         {
-            Contract.Ensures(Contract.Result<SafeNativeMemory>() != null);
             var userName = credential?.UserName;
 
             if (string.IsNullOrEmpty(userName))
@@ -454,8 +447,6 @@
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         private static NetworkCredential PromptForCredential([NotNull] IWin32Window parent, [CanBeNull] string caption, [CanBeNull] string message, int authenticationError, [NotNull] SafeNativeMemory inCredBuffer)
         {
-            Contract.Requires(parent != null);
-            Contract.Requires(inCredBuffer != null);
 
             var save = true;
             uint authPackage = 0;
@@ -480,7 +471,6 @@
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         private static bool IsAdministrator([NotNull] SafeHandle hTokenToCheck)
         {
-            Contract.Requires(hTokenToCheck != null);
 
             var token = hTokenToCheck.DangerousGetHandle();
             if (token == IntPtr.Zero)
@@ -497,7 +487,6 @@
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         private static NetworkCredential UnpackAuthenticationBuffer([NotNull] SafeNativeMemory outCredBuffer)
         {
-            Contract.Requires(outCredBuffer != null);
 
             const int maxLen = 100;
 
@@ -669,8 +658,6 @@
             [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
             public static bool GetTokenInformation([NotNull] SafeTokenHandle hToken, TOKEN_INFORMATION_CLASS tokenInfoClass, [NotNull] SafeNativeMemory pTokenInfo)
             {
-                Contract.Requires(hToken != null);
-                Contract.Requires(pTokenInfo != null);
 
                 return GetTokenInformation(hToken, tokenInfoClass, pTokenInfo.DangerousGetHandle(), pTokenInfo.Size, out _);
             }

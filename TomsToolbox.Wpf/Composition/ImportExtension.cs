@@ -50,7 +50,6 @@
         /// <param name="memberType">Type of the member to provide.</param>
         public ImportExtension([NotNull] Type memberType)
         {
-            Contract.Requires(memberType != null);
             MemberType = memberType;
         }
 
@@ -97,7 +96,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<ICollection<Setter>>() != null);
                 return _setters;
             }
         }
@@ -112,7 +110,6 @@
         /// </returns>
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            Contract.Assume(serviceProvider != null);
 
             var rootObjectProvider = serviceProvider.GetService<IRootObjectProvider>();
             if (rootObjectProvider == null)
@@ -250,15 +247,6 @@
         private void ExportProvider_ExportsChanged([CanBeNull] object sender, [CanBeNull] ExportsChangeEventArgs e)
         {
             UpdateTarget();
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(MemberType != null);
-            Contract.Invariant(_setters != null);
         }
     }
 }

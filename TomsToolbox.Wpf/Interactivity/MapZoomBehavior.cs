@@ -50,7 +50,6 @@
             base.OnAttached();
 
             var map = AssociatedObject;
-            Contract.Assume(map != null);
 
             map.MouseWheel += AssociatedObject_PreviewMouseWheel;
 
@@ -67,7 +66,6 @@
             base.OnAssociatedObjectLoaded();
             
             var map = AssociatedObject;
-            Contract.Assume(map != null);
 
             var focusableParent = map.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault(item => item.Focusable);
             if (focusableParent != null)
@@ -136,18 +134,6 @@
             _storyboard.Begin();
 
             e.Handled = true;
-        }
-
-        /// <summary>
-        /// Objects the invariant.
-        /// </summary>
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_animation != null);
-            Contract.Invariant(_storyboard != null);
         }
     }
 }

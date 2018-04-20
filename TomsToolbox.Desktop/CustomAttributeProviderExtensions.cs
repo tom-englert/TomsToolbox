@@ -29,8 +29,6 @@
         [NotNull]
         public static IEnumerable<T> GetCustomAttributes<T>([NotNull] this ICustomAttributeProvider self, bool inherit)
         {
-            Contract.Requires(self != null);
-            Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
 
             return self.GetCustomAttributes(typeof(T), inherit).Cast<T>();
         }
@@ -44,7 +42,6 @@
         [CanBeNull]
         public static string TryGetDisplayName([NotNull] this ICustomAttributeProvider item)
         {
-            Contract.Requires(item != null);
 
             return item.GetCustomAttributes<DisplayNameAttribute>(false)
                 .Select(attr => attr.DisplayName)
@@ -59,7 +56,6 @@
         [CanBeNull]
         public static string TryGetDescription([NotNull] this ICustomAttributeProvider item)
         {
-            Contract.Requires(item != null);
 
             return item.GetCustomAttributes<DescriptionAttribute>(false)
                 .Select(attr => attr.Description)
@@ -75,8 +71,6 @@
         [CanBeNull]
         public static string TryGetText([NotNull] this ICustomAttributeProvider item, [NotNull] object key)
         {
-            Contract.Requires(item != null);
-            Contract.Requires(key != null);
 
             return item.GetCustomAttributes<TextAttribute>(false)
                 .Where(attr => Equals(attr.Key, key))
@@ -94,7 +88,6 @@
         [CanBeNull]
         public static TypeConverter GetCustomTypeConverter([NotNull] this ICustomAttributeProvider item)
         {
-            Contract.Requires(item != null);
 
             return item
                 .GetCustomAttributes<TypeConverterAttribute>(false)
@@ -113,7 +106,6 @@
         /// <returns>The associated sequence.</returns>
         public static double GetSequence([NotNull] this ICustomAttributeProvider target, double defaultValue)
         {
-            Contract.Requires(target != null);
 
             return target.GetCustomAttributes<SequenceAttribute>(false)
                 .Select(attr => attr.Value)

@@ -179,7 +179,6 @@
             base.OnAttached();
 
             var frameworkElement = AssociatedObject;
-            Contract.Assume(frameworkElement != null);
 
             if (DesignerProperties.GetIsInDesignMode(frameworkElement))
                 return;
@@ -208,7 +207,6 @@
         private void Window_SourceInitialized([CanBeNull] object sender, [CanBeNull] EventArgs e)
         {
             var window = _window;
-            Contract.Assume(window != null);
 
             var messageSource = (HwndSource)PresentationSource.FromDependencyObject(window);
 
@@ -234,7 +232,6 @@
         private void ShowGlassFrame(IntPtr handle)
         {
             var window = _window;
-            Contract.Assume(window != null);
 
             var messageSource = (HwndSource)PresentationSource.FromDependencyObject(window);
             if (messageSource == null)
@@ -269,7 +266,6 @@
 
         private void Unregister([NotNull] Window window)
         {
-            Contract.Requires(window != null);
 
             var messageSource = (HwndSource)PresentationSource.FromDependencyObject(window);
 
@@ -343,7 +339,6 @@
         private HitTest NcHitTest(IntPtr windowHandle, IntPtr lParam)
         {
             var window = _window;
-            Contract.Assume(window != null);
 
             // Arguments are absolute native coordinates
             var hitPoint = new POINT((short)lParam, (short)((uint)lParam >> 16));
@@ -502,8 +497,6 @@
                 return ((Rect)this).ToString();
             }
         }
-
-        [ContractVerification(false)]
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
         private struct POINT
         {
@@ -541,8 +534,6 @@
                 return ((Point)this).ToString();
             }
         }
-
-        [ContractVerification(false)]
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
         private struct SIZE
         {

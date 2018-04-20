@@ -22,7 +22,6 @@
     /// <typeparam name="T">The type of elements in the list.</typeparam>
     [SuppressMessage("Microsoft.Design", "CA1035:ICollectionImplementationsHaveStronglyTypedMembers", Justification = "It's an adapter to an untyped list!")]
     [SuppressMessage("Microsoft.Design", "CA1039:ListsAreStronglyTyped", Justification = "It's an adapter to an untyped list!")]
-    [ContractVerification(false)] // Just forwarding the list....
     public class ObservableListAdapter<T> : IList, INotifyCollectionChanged, INotifyPropertyChanged
     {
         [NotNull, ItemCanBeNull]
@@ -34,7 +33,6 @@
         /// <param name="source">The source.</param>
         public ObservableListAdapter([NotNull, ItemCanBeNull] IList<T> source)
         {
-            Contract.Requires(source != null);
 
             _source = source;
 
@@ -226,14 +224,6 @@
         private void OnPropertyChanged([CanBeNull] PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(this, e);
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_source != null);
         }
     }
 }

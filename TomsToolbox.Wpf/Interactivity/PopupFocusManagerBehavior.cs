@@ -43,7 +43,6 @@
             base.OnAttached();
 
             var popup = AssociatedObject;
-            Contract.Assume(popup != null);
 
             popup.IsKeyboardFocusWithinChanged += Popup_IsKeyboardFocusWithinChanged;
             popup.Opened += Popup_Opened;
@@ -61,7 +60,6 @@
             base.OnDetaching();
 
             var popup = AssociatedObject;
-            Contract.Assume(popup != null);
 
             popup.IsKeyboardFocusWithinChanged -= Popup_IsKeyboardFocusWithinChanged;
             popup.Opened -= Popup_Opened;
@@ -86,7 +84,6 @@
 
         private void Popup_Opened([NotNull] object sender, [CanBeNull] EventArgs e)
         {
-            Contract.Requires(sender != null);
 
             var popup = (Popup)sender;
             var child = popup.Child;

@@ -99,14 +99,5 @@
         /// </returns>
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Should only be accessible via the Default singleton.")]
         public DateTime UtcNow => DateTime.UtcNow;
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_updateTimer != null);
-            Contract.Invariant(Default != null);
-        }
     }
 }

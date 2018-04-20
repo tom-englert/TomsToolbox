@@ -46,7 +46,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<ICommand>() != null);
                 return (ICommand)GetValue(CommandTargetProperty) ?? NullCommand.Default;
             }
             set => SetValue(CommandTargetProperty, value);
@@ -211,8 +210,6 @@
         {
             base.OnAttached();
 
-            Contract.Assume(AssociatedObject != null);
-
             AssociatedObject.IsKeyboardFocusWithinChanged += AssociatedObject_IsKeyboardFocusWithinChanged;
         }
 
@@ -225,8 +222,6 @@
         protected override void OnDetaching()
         {
             base.OnDetaching();
-
-            Contract.Assume(AssociatedObject != null);
 
             AssociatedObject.IsKeyboardFocusWithinChanged -= AssociatedObject_IsKeyboardFocusWithinChanged;
         }
@@ -287,7 +282,6 @@
         {
             get
             {
-                Contract.Ensures((Contract.Result<bool>() == false) || (AssociatedObject != null));
 
                 var associatedObject = AssociatedObject;
 

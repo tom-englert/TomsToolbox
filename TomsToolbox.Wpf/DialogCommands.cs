@@ -26,7 +26,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<RoutedUICommand>() != null);
                 return _ok;
             }
         }
@@ -39,7 +38,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<RoutedUICommand>() != null);
                 return _cancel;
             }
         }
@@ -52,7 +50,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<RoutedUICommand>() != null);
                 return _yes;
             }
         }
@@ -65,7 +62,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<RoutedUICommand>() != null);
                 return _no;
             }
         }
@@ -78,7 +74,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<RoutedUICommand>() != null);
                 return _ignore;
             }
         }
@@ -91,7 +86,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<RoutedUICommand>() != null);
                 return _retry;
             }
         }
@@ -104,7 +98,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<RoutedUICommand>() != null);
                 return _abort;
             }
         }

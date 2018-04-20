@@ -24,7 +24,6 @@
         /// <param name="visual">The dispatcher object to wait on.</param>
         public static void ProcessMessages([NotNull] this Visual visual)
         {
-            Contract.Requires(visual != null);
 
             ProcessMessages(visual, DispatcherPriority.Background);
         }
@@ -36,10 +35,8 @@
         /// <param name="priority">The priority up to which all messages should be processed.</param>
         public static void ProcessMessages([NotNull] this Visual visual, DispatcherPriority priority)
         {
-            Contract.Requires(visual != null);
 
             var dispatcher = visual.Dispatcher;
-            Contract.Assume(dispatcher != null);
 
             ProcessMessages(dispatcher, priority);
         }
@@ -50,7 +47,6 @@
         /// <param name="dispatcher">The dispatcher to wait on.</param>
         public static void ProcessMessages([NotNull] this Dispatcher dispatcher)
         {
-            Contract.Requires(dispatcher != null);
 
             ProcessMessages(dispatcher, DispatcherPriority.Background);
         }
@@ -62,7 +58,6 @@
         /// <param name="priority">The priority up to which all messages should be processed.</param>
         public static void ProcessMessages([NotNull] this Dispatcher dispatcher, DispatcherPriority priority)
         {
-            Contract.Requires(dispatcher != null);
 
             var frame = new DispatcherFrame();
             dispatcher.BeginInvoke(priority, () => frame.Continue = false);
@@ -88,15 +83,11 @@
         /// <returns>The translated rectangle</returns>
         public static Rect Translate(this Rect rect, [NotNull] Visual from, [NotNull] Visual to)
         {
-            Contract.Requires(from != null);
-            Contract.Requires(to != null);
-            Contract.Ensures(!Contract.Result<Rect>().IsEmpty);
 
             var transform = from.TransformToVisual(to);
 
             // ReSharper disable once PossibleNullReferenceException
             var translated = new Rect(transform.Transform(rect.TopLeft), transform.Transform(rect.BottomRight));
-            Contract.Assume(!translated.IsEmpty);
             return translated;
         }
 
@@ -109,8 +100,6 @@
         /// <returns>The translated point</returns>
         public static Point Translate(this Point point, [NotNull] UIElement from, [NotNull] UIElement to)
         {
-            Contract.Requires(from != null);
-            Contract.Requires(to != null);
 
             return from.TranslatePoint(point, to);
         }
@@ -122,7 +111,6 @@
         /// <returns>The client rectangle</returns>
         public static Rect GetClientRect([NotNull] this FrameworkElement self)
         {
-            Contract.Requires(self != null);
 
             return new Rect(0, 0, self.ActualWidth, self.ActualHeight);
         }
@@ -137,8 +125,6 @@
         /// </returns>
         public static Rect GetClientRect([NotNull] this FrameworkElement self, [NotNull] Visual relativeTo)
         {
-            Contract.Requires(self != null);
-            Contract.Requires(relativeTo != null);
 
             return self.GetClientRect().Translate(self, relativeTo);
         }
@@ -150,7 +136,6 @@
         /// <returns>The extent.</returns>
         public static Size GetExtent([NotNull] this FrameworkElement self)
         {
-            Contract.Requires(self != null);
 
             return new Size(self.ActualWidth, self.ActualHeight);
         }
@@ -165,8 +150,6 @@
         /// </returns>
         public static Size GetExtent([NotNull] this FrameworkElement self, [NotNull] FrameworkElement relativeTo)
         {
-            Contract.Requires(self != null);
-            Contract.Requires(relativeTo != null);
 
             return (Size)self.TranslatePoint(new Point(self.ActualWidth, self.ActualHeight), relativeTo);
         }
@@ -179,7 +162,6 @@
         /// <exception cref="System.ArgumentException">The framework element is not loaded in the visual tree.</exception>
         public static Size GetPhysicalPixelSize([NotNull] this FrameworkElement self)
         {
-            Contract.Requires(self != null);
 
             var source = PresentationSource.FromVisual(self);
 
@@ -194,8 +176,6 @@
 
             var width = transformFromDevice.M11;
             var height = transformFromDevice.M22;
-            Contract.Assume(width >= 0.0);
-            Contract.Assume(height >= 0.0);
 
             return new Size(width, height);
         }
@@ -208,7 +188,6 @@
         /// <exception cref="System.ArgumentException">The framework element is not loaded in the visual tree.</exception>
         public static Size GetDesignUnitSize([NotNull] this FrameworkElement self)
         {
-            Contract.Requires(self != null);
 
             var source = PresentationSource.FromVisual(self);
 
@@ -223,8 +202,6 @@
 
             var width = transformFromDevice.M11;
             var height = transformFromDevice.M22;
-            Contract.Assume(width >= 0.0);
-            Contract.Assume(height >= 0.0);
 
             return new Size(width, height);
         }
@@ -238,13 +215,9 @@
         [NotNull]
         public static GeneralTransform MergeWith([NotNull] this GeneralTransform first, [NotNull, ItemNotNull] params GeneralTransform[] others)
         {
-            Contract.Requires(first != null);
-            Contract.Requires(others != null);
-            Contract.Ensures(Contract.Result<GeneralTransform>() != null);
 
             var transformGroup = new GeneralTransformGroup();
             var children = transformGroup.Children;
-            Contract.Assume(children != null);
 
             children.Add(first);
             children.AddRange(others);
@@ -265,9 +238,6 @@
         public static INotifyChanged ChangeTracker<T>([NotNull] this T frameworkElement, [NotNull] DependencyProperty property)
             where T : FrameworkElement
         {
-            Contract.Requires(frameworkElement != null);
-            Contract.Requires(property != null);
-            Contract.Ensures(Contract.Result<INotifyChanged>() != null);
 
             return new DependencyPropertyEventWrapper<T>(frameworkElement, property);
         }
@@ -284,8 +254,6 @@
 
             public DependencyPropertyEventWrapper([NotNull] T frameworkElement, [NotNull] DependencyProperty property)
             {
-                Contract.Requires(frameworkElement != null);
-                Contract.Requires(property != null);
 
                 _frameworkElement = frameworkElement;
                 // ReSharper disable once AssignNullToNotNullAttribute

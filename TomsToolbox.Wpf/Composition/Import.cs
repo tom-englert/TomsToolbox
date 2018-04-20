@@ -1,4 +1,4 @@
-namespace TomsToolbox.Wpf.Composition
+﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
     using System.Diagnostics.Contracts;
@@ -22,7 +22,6 @@ namespace TomsToolbox.Wpf.Composition
         [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         public static Type GetDataContext([NotNull] FrameworkElement obj)
         {
-            Contract.Requires(obj != null);
             return (Type)obj.GetValue(DataContextProperty);
         }
         /// <summary>
@@ -32,7 +31,6 @@ namespace TomsToolbox.Wpf.Composition
         /// <param name="value">The value.</param>
         public static void SetDataContext([NotNull] FrameworkElement obj, [CanBeNull] Type value)
         {
-            Contract.Requires(obj != null);
             obj.SetValue(DataContextProperty, value);
         }
         /// <summary>
@@ -49,10 +47,8 @@ namespace TomsToolbox.Wpf.Composition
 
         private static void DataContext_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            Contract.Requires(d != null);
 
             var behaviors = Interaction.GetBehaviors(d);
-            Contract.Assume(behaviors != null);
 
             var behavior = behaviors.OfType<ImportBehavior>().FirstOrDefault();
             if (behavior == null)

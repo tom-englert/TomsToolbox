@@ -30,7 +30,6 @@
         [AttachedPropertyBrowsableForType(typeof(Selector))]
         public static bool GetTrackSelection([NotNull] DependencyObject obj)
         {
-            Contract.Requires(obj != null);
             return obj.GetValue<bool>(TrackSelectionProperty);
         }
         /// <summary>
@@ -41,7 +40,6 @@
         [AttachedPropertyBrowsableForType(typeof(Selector))]
         public static void SetTrackSelection([NotNull] DependencyObject obj, bool value)
         {
-            Contract.Requires(obj != null);
             obj.SetValue(TrackSelectionProperty, value);
         }
         /// <summary>
@@ -120,7 +118,6 @@
             {
                 get
                 {
-                    Contract.Requires(key != null);
 
                     if ((++_cleanupCycleCounter & 0x7F) == 0)
                         Cleanup();
@@ -143,14 +140,6 @@
             private void Cleanup()
             {
                 _items = _items.Where(item => item.Key?.IsAlive == true).ToDictionary(item => item.Key, item => item.Value);
-            }
-
-            [ContractInvariantMethod, UsedImplicitly]
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-            [Conditional("CONTRACTS_FULL")]
-            private void ObjectInvariant()
-            {
-                Contract.Invariant(_items != null);
             }
         }
     }

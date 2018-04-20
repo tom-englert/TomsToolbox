@@ -30,14 +30,12 @@
 
         internal static void OnError([CanBeNull] object sender, [NotNull] Exception ex)
         {
-            Contract.Requires(ex != null);
 
             OnError(sender, ex.ToString());
         }
 
         internal static void OnError([CanBeNull] object sender, [NotNull] string message)
         {
-            Contract.Requires(message != null);
 
             PresentationTraceSources.DataBindingSource?.TraceEvent(TraceEventType.Error, ErrorNumber, message);
 
@@ -54,7 +52,6 @@
         [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
         public static string GetRegionId([NotNull] Control obj)
         {
-            Contract.Requires(obj != null);
             return (string)obj.GetValue(RegionIdProperty);
         }
         /// <summary>
@@ -64,7 +61,6 @@
         /// <param name="value">The value.</param>
         public static void SetRegionId([NotNull] Control obj, [CanBeNull] string value)
         {
-            Contract.Requires(obj != null);
             obj.SetValue(RegionIdProperty, value);
         }
         /// <summary>
@@ -93,7 +89,6 @@
             where T : Behavior, IVisualCompositionBehavior, new()
         {
             var behaviors = Interaction.GetBehaviors(d);
-            Contract.Assume(behaviors != null);
 
             var behavior = behaviors.OfType<T>().FirstOrDefault();
             if (behavior == null)

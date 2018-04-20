@@ -169,7 +169,6 @@
                 BindingOperations.SetBinding(this, CompositionContextProperty, CompositionContextBinding);
 
             var associatedObject = AssociatedObject;
-            Contract.Assume(associatedObject != null);
 
             if (DesignerProperties.GetIsInDesignMode(associatedObject))
                 return;
@@ -284,14 +283,6 @@
         {
             ExportProvider = AssociatedObject?.TryGetExportProvider();
             _deferredUpdateThrottle.Tick();
-        }
-
-        [ContractInvariantMethod]
-        [SuppressMessage("Microsoft.Performance", "CA1822: MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_deferredUpdateThrottle != null);
         }
     }
 }

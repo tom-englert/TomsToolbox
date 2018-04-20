@@ -18,7 +18,6 @@
         [ImportingConstructor]
         public MainWindow([NotNull] ICompositionHost compositionHost)
         {
-            Contract.Requires(compositionHost != null);
             this.SetExportProvider(compositionHost.Container);
 
             InitializeComponent();

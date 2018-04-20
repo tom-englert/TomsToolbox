@@ -26,9 +26,6 @@
         /// <param name="methodName">Name of the calling method.</param>
         public static void TraceError([NotNull] this IValueConverter converter, [NotNull] string message, [NotNull] string methodName)
         {
-            Contract.Requires(converter != null);
-            Contract.Requires(message != null);
-            Contract.Requires(methodName != null);
 
             InternalTraceError(converter, message, methodName);
         }
@@ -41,18 +38,12 @@
         /// <param name="methodName">Name of the calling method.</param>
         public static void TraceError([NotNull] this IMultiValueConverter converter, [NotNull] string message, [NotNull] string methodName)
         {
-            Contract.Requires(converter != null);
-            Contract.Requires(message != null);
-            Contract.Requires(methodName != null);
 
             InternalTraceError(converter, message, methodName);
         }
 
         private static void InternalTraceError([NotNull] object converter, [NotNull] string message, [NotNull] string methodName)
         {
-            Contract.Requires(converter != null);
-            Contract.Requires(message != null);
-            Contract.Requires(methodName != null);
 
             var traceSource = PresentationTraceSources.DataBindingSource;
 

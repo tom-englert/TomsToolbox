@@ -19,7 +19,6 @@
         /// <param name="exportProvider">The export provider.</param>
         public static void Register([NotNull] ExportProvider exportProvider)
         {
-            Contract.Requires(exportProvider != null);
             ExportProviderProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(exportProvider, FrameworkPropertyMetadataOptions.Inherits));
         }
 
@@ -34,8 +33,6 @@
         [NotNull]
         public static ExportProvider GetExportProvider([NotNull] this DependencyObject obj)
         {
-            Contract.Requires(obj != null);
-            Contract.Ensures(Contract.Result<ExportProvider>() != null);
 
             var exportProvider = (ExportProvider)obj.GetValue(ExportProviderProperty);
             if (exportProvider == null)
@@ -53,7 +50,6 @@
         [CanBeNull]
         public static ExportProvider TryGetExportProvider([NotNull] this DependencyObject obj)
         {
-            Contract.Requires(obj != null);
 
             return (ExportProvider)obj.GetValue(ExportProviderProperty);
         }
@@ -64,7 +60,6 @@
         /// <param name="value">The value.</param>
         public static void SetExportProvider([NotNull] this DependencyObject obj, [CanBeNull] ExportProvider value)
         {
-            Contract.Requires(obj != null);
             obj.SetValue(ExportProviderProperty, value);
         }
         /// <summary>
@@ -86,8 +81,6 @@
         [NotNull]
         internal static string GetMissingExportProviderMessage([NotNull] this DependencyObject obj)
         {
-            Contract.Requires(obj != null);
-            Contract.Ensures(Contract.Result<string>() != null);
 
             return "Export provider must be registered in the visual tree " + string.Join("/", obj.AncestorsAndSelf().Reverse().Select(o => o?.GetType().Name));
         }

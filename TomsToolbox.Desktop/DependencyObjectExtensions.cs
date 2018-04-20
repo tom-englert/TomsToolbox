@@ -26,8 +26,6 @@
         [CanBeNull]
         public static T GetValue<T>([NotNull] this DependencyObject self, [NotNull] DependencyProperty property)
         {
-            Contract.Requires(self != null);
-            Contract.Requires(property != null);
 
             return self.GetValue(property).SafeCast<T>();
         }
@@ -43,9 +41,6 @@
         public static INotifyChanged Track<T>([NotNull] this T dependencyObject, [NotNull] DependencyProperty property)
             where T : DependencyObject
         {
-            Contract.Requires(dependencyObject != null);
-            Contract.Requires(property != null);
-            Contract.Ensures(Contract.Result<INotifyChanged>() != null);
 
             return new DependencyPropertyEventWrapper<T>(dependencyObject, property);
         }
@@ -60,8 +55,6 @@
 
             public DependencyPropertyEventWrapper([NotNull] T dependencyObject, [NotNull] DependencyProperty property)
             {
-                Contract.Requires(dependencyObject != null);
-                Contract.Requires(property != null);
 
                 _dependencyObject = dependencyObject;
                 _dependencyPropertyDescriptor = DependencyPropertyDescriptor.FromProperty(property, typeof(T));
@@ -73,14 +66,6 @@
                 add => _dependencyPropertyDescriptor?.AddValueChanged(_dependencyObject, value);
                 // ReSharper disable once AssignNullToNotNullAttribute
                 remove => _dependencyPropertyDescriptor?.RemoveValueChanged(_dependencyObject, value);
-            }
-
-            [ContractInvariantMethod, UsedImplicitly]
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-            [Conditional("CONTRACTS_FULL")]
-            private void ObjectInvariant()
-            {
-                Contract.Invariant(_dependencyObject != null);
             }
         }
     }

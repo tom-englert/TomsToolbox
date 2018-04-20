@@ -95,7 +95,6 @@
 
         private static void ApplyContext([NotNull, ItemCanBeNull] IEnumerable composables, [CanBeNull] object context)
         {
-            Contract.Requires(composables != null);
 
             foreach (var item in composables.OfType<IComposablePartWithContext>())
             {
@@ -129,7 +128,6 @@
 
         private void AttachSelectables([NotNull, ItemCanBeNull] IEnumerable viewModels)
         {
-            Contract.Requires(viewModels != null);
 
             var selectables = viewModels.OfType<ISelectableComposablePart>();
 

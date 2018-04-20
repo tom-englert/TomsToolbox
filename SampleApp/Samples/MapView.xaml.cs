@@ -19,7 +19,6 @@ namespace SampleApp.Samples
         [ImportingConstructor]
         public MapView([NotNull] ICompositionHost compositionHost)
         {
-            Contract.Requires(compositionHost != null);
             this.SetExportProvider(compositionHost.Container);
 
             InitializeComponent();

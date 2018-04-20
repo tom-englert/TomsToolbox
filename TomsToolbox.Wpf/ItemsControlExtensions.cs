@@ -29,7 +29,6 @@
         [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
         public static ICommand GetDefaultItemCommand([NotNull] this ItemsControl obj)
         {
-            Contract.Requires(obj != null);
             return (ICommand)obj.GetValue(DefaultItemCommandProperty);
         }
         /// <summary>
@@ -40,7 +39,6 @@
         [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
         public static void SetDefaultItemCommand([NotNull] this ItemsControl obj, [CanBeNull] ICommand value)
         {
-            Contract.Requires(obj != null);
             obj.SetValue(DefaultItemCommandProperty, value);
         }
         /// <summary>
@@ -142,7 +140,6 @@
         [CanBeNull]
         public static object GetRefreshOnSourceChanges([NotNull] ItemsControl obj)
         {
-            Contract.Requires(obj != null);
             return obj.GetValue(RefreshOnSourceChangesProperty);
         }
         /// <summary>
@@ -153,7 +150,6 @@
         /// <param name="value">The object to observe.</param>
         public static void SetRefreshOnSourceChanges([NotNull] ItemsControl obj, [CanBeNull] object value)
         {
-            Contract.Requires(obj != null);
             obj.SetValue(RefreshOnSourceChangesProperty, value);
         }
         /// <summary>
@@ -199,8 +195,6 @@
         public static IEnumerable<T> GetItemContainers<T>([NotNull] this ItemsControl itemsControl)
             where T : DependencyObject
         {
-            Contract.Requires(itemsControl != null);
-            Contract.Ensures(Contract.Result<IEnumerable<T>>() != null);
 
             var generator = itemsControl.ItemContainerGenerator;
 

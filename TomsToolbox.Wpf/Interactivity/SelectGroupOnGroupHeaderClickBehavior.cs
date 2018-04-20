@@ -27,8 +27,6 @@
         {
             base.OnAttached();
 
-            Contract.Assume(AssociatedObject != null);
-
             AssociatedObject.MouseLeftButtonDown += GroupHeader_OnMouseLeftButtonDown;
         }
 
@@ -42,15 +40,10 @@
         {
             base.OnDetaching();
 
-            Contract.Assume(AssociatedObject != null);
-
             AssociatedObject.MouseLeftButtonDown -= GroupHeader_OnMouseLeftButtonDown;
         }
-
-        [ContractVerification(false)] // because of dynamic
         private static void GroupHeader_OnMouseLeftButtonDown([NotNull] object sender, [CanBeNull] MouseButtonEventArgs e)
         {
-            Contract.Requires(sender != null);
 
             var visual = sender as FrameworkElement;
 

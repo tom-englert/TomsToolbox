@@ -45,8 +45,6 @@
         /// <param name="propertyNames">The property names of the properties that this property depends on.</param>
         public PropertyDependencyAttribute([Localizable(false)][NotNull, ItemNotNull] params string[] propertyNames)
         {
-            Contract.Requires(propertyNames != null);
-            Contract.Ensures(PropertyNames == propertyNames);
 
             _propertyNames = propertyNames;
         }
@@ -59,7 +57,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
                 return _propertyNames;
             }
         }
@@ -118,9 +115,6 @@
         [NotNull, ItemNotNull]
         private static IEnumerable<string> GetAllDependencies([NotNull] string item, [NotNull] IDictionary<string, string[]> directDependencies)
         {
-            Contract.Requires(item != null);
-            Contract.Requires(directDependencies != null);
-            Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
 
             var allDependenciesAndSelf = new List<string> { item };
 
@@ -129,8 +123,6 @@
                 string[] indirectDependencies;
 
                 var key = allDependenciesAndSelf[i];
-
-                Contract.Assume(!ReferenceEquals(key, null));
                 if (!directDependencies.TryGetValue(key, out indirectDependencies) || (indirectDependencies == null))
                 {
                     continue;
@@ -151,8 +143,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<string> GetInvalidDependencies([NotNull] Type entryType)
         {
-            Contract.Requires(entryType != null);
-            Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
 
             return from type in GetCustomAssemblies(entryType).SelectMany(SafeGetTypes).Where(item => item != null)
                    let allProperties = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
@@ -172,8 +162,6 @@
         [NotNull, ItemNotNull]
         private static IEnumerable<Assembly> GetCustomAssemblies([NotNull] Type entryType)
         {
-            Contract.Requires(entryType != null);
-            Contract.Ensures(Contract.Result<IEnumerable<Assembly>>() != null);
 
             var entryAssembly = entryType.Assembly;
 
@@ -200,8 +188,6 @@
         /// </returns>
         private static bool IsAssemblyInSubfolderOf([NotNull] AssemblyName assemblyName, [NotNull] string programFolder)
         {
-            Contract.Requires(assemblyName != null);
-            Contract.Requires(programFolder != null);
 
             if (assemblyName.CodeBase == null)
                 return false;
@@ -230,7 +216,6 @@
         [NotNull, ItemNotNull]
         private static IEnumerable<Type> SafeGetTypes([NotNull] Assembly a)
         {
-            Contract.Requires(a != null);
 
             try
             {
@@ -241,14 +226,6 @@
             }
 
             return new Type[0];
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_propertyNames != null);
         }
     }
 }

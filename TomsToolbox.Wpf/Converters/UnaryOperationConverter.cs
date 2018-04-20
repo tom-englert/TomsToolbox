@@ -60,7 +60,6 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        [ContractVerification(false)]
         protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             while (true)
@@ -108,7 +107,6 @@
         [CanBeNull]
         private static object ApplyOperation([CanBeNull] object value, [NotNull] Type valueType)
         {
-            Contract.Requires(valueType != null);
 
             var methods = valueType.GetMethods(BindingFlags.Static | BindingFlags.Public);
 
@@ -126,7 +124,6 @@
         [CanBeNull]
         private static object ChangeType([CanBeNull] string value, [NotNull] Type targetType)
         {
-            Contract.Requires(targetType != null);
 
             var typeConverter = TypeDescriptor.GetConverter(targetType);
             return typeConverter.ConvertFromInvariantString(value);

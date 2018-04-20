@@ -213,7 +213,6 @@
         public DelegateCommand([NotNull] Action executeCallback)
             : this(null, executeCallback)
         {
-            Contract.Requires(executeCallback != null);
         }
 
         /// <summary>

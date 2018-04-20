@@ -29,7 +29,6 @@
         public ObservableIndexer([NotNull] Func<TKey, TValue> generator)
             : this(generator, null)
         {
-            Contract.Requires(generator != null);
         }
 
         /// <summary>
@@ -40,7 +39,6 @@
         public ObservableIndexer([NotNull] Func<TKey, TValue> generator, [CanBeNull] IEqualityComparer<TKey> comparer)
             : base(new ObservableCollection<KeyValuePair<TKey, TValue>>())
         {
-            Contract.Requires(generator != null);
 
             _generator = generator;
             _index = new Dictionary<TKey, int>(comparer);
@@ -61,20 +59,14 @@
         {
             get
             {
-                Contract.Requires(!ReferenceEquals(key, null));
-                Contract.Ensures(!ReferenceEquals(Contract.Result<TValue>(), null));
 
                 int index;
                 TValue value;
 
                 if (_index.TryGetValue(key, out index))
                 {
-                    Contract.Assume(index >= 0);
-                    Contract.Assume(index < Items.Count);
 
                     value = Items[index].Value;
-
-                    Contract.Assume(!ReferenceEquals(value, null));
                 }
                 else
                 {
@@ -91,15 +83,11 @@
             }
             set
             {
-                Contract.Requires(!ReferenceEquals(key, null));
-                Contract.Requires(!ReferenceEquals(value, null));
 
                 int index;
 
                 if (_index.TryGetValue(key, out index))
                 {
-                    Contract.Assume(index >= 0);
-                    Contract.Assume(index < Items.Count);
 
                     Items[index] = new KeyValuePair<TKey, TValue>(key, value);
                 }
@@ -123,7 +111,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<IEqualityComparer<TKey>>() != null);
                 return _index.Comparer;
             }
         }
@@ -137,7 +124,6 @@
         /// <param name="key">The key of the element to remove.</param><exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null.</exception>
         public bool Remove([NotNull] TKey key)
         {
-            Contract.Requires(!ReferenceEquals(key, null));
 
             int index;
 
@@ -152,8 +138,6 @@
                 .ToDictionary(x => x.Key, x => x.i, _index.Comparer);
             // ReSharper restore PossibleNullReferenceException
 
-            Contract.Assume(index >= 0);
-            Contract.Assume(index < Items.Count);
 
             Items.RemoveAt(index);
 
@@ -167,15 +151,6 @@
         {
             _index = new Dictionary<TKey, int>(_index.Comparer);
             Items.Clear();
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_generator != null);
-            Contract.Invariant(_index != null);
         }
     }
 }

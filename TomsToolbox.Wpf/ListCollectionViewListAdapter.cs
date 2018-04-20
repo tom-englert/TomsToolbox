@@ -21,7 +21,6 @@
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
     [SuppressMessage("Microsoft.Design", "CA1035:ICollectionImplementationsHaveStronglyTypedMembers", Justification = "ListCollectionView is not strongly typed.")]
     [SuppressMessage("Microsoft.Design", "CA1039:ListsAreStronglyTyped", Justification = "ListCollectionView is not strongly typed.")]
-    [ContractVerification(false)] // Just wrapping inner object
     public sealed class ListCollectionViewListAdapter<T> : IObservableCollection<T>, IList
     {
         [NotNull, ItemCanBeNull]
@@ -33,7 +32,6 @@
         /// <param name="collectionView">The collection view.</param>
         public ListCollectionViewListAdapter([NotNull, ItemCanBeNull] ListCollectionView collectionView)
         {
-            Contract.Requires(collectionView != null);
             _collectionView = collectionView;
             ((INotifyCollectionChanged)collectionView).CollectionChanged += CollectionView_CollectionChanged;
             ((INotifyPropertyChanged)collectionView).PropertyChanged += CollectionView_PropertyChanged;
@@ -47,7 +45,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<ICollectionView>() != null);
                 return _collectionView;
             }
         }
@@ -60,7 +57,6 @@
             get
             {
                 var count = _collectionView.Count;
-                Contract.Assume(count >= 0);
                 return count;
             }
         }
@@ -132,7 +128,6 @@
 
             foreach (var item in _collectionView)
             {
-                Contract.Assume(index < array.Length);
                 array.SetValue(item, index++);
             }
         }
@@ -181,7 +176,6 @@
 
             foreach (var item in _collectionView)
             {
-                Contract.Assume(index < array.Length);
                 array.SetValue(item, index++);
             }
         }
@@ -277,14 +271,6 @@
         private void CollectionView_CollectionChanged([CanBeNull] object sender, [CanBeNull] NotifyCollectionChangedEventArgs e)
         {
             OnCollectionChanged(e);
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_collectionView != null);
         }
     }
 }

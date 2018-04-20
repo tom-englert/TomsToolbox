@@ -46,7 +46,6 @@
 
         private void QueryCancelExecution([NotNull] ConfirmedCommandEventArgs e)
         {
-            Contract.Requires(e != null);
 
             Executing?.Invoke(this, e);
         }
@@ -65,8 +64,6 @@
 
             public CommandProxy([NotNull] ConfirmedCommandConverter owner, [NotNull] ICommand command)
             {
-                Contract.Requires(owner != null);
-                Contract.Requires(command != null);
                 _owner = owner;
                 _command = command;
             }
@@ -99,15 +96,6 @@
             {
                 add => _command.CanExecuteChanged += value;
                 remove => _command.CanExecuteChanged -= value;
-            }
-
-            [ContractInvariantMethod, UsedImplicitly]
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-            [Conditional("CONTRACTS_FULL")]
-            private void ObjectInvariant()
-            {
-                Contract.Invariant(_owner != null);
-                Contract.Invariant(_command != null);
             }
         }
     }

@@ -1,4 +1,4 @@
-namespace TomsToolbox.Wpf.Composition
+﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
     using System.ComponentModel.Composition;
@@ -21,7 +21,6 @@ namespace TomsToolbox.Wpf.Composition
         public DataTemplateAttribute([NotNull] Type viewModel)
             : base(DataTemplateManager.ContractName, typeof(DependencyObject))
         {
-            Contract.Requires(viewModel != null);
 
             ViewModel = viewModel;
         }

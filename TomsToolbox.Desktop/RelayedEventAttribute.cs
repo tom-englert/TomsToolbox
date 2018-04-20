@@ -50,7 +50,6 @@
         /// <param name="sourceType">Type of the source for the events.</param>
         public RelayedEventAttribute([NotNull] Type sourceType)
         {
-            Contract.Requires(sourceType != null);
 
             _sourceType = sourceType;
         }
@@ -63,7 +62,6 @@
         public RelayedEventAttribute([NotNull] Type sourceType, [CanBeNull] string sourceName)
             : this(sourceType)
         {
-            Contract.Requires(sourceType != null);
 
             _sourceName = sourceName;
         }
@@ -76,7 +74,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<Type>() != null);
                 return _sourceType;
             }
         }
@@ -114,8 +111,6 @@
 
         private static bool AreAllPropertiesValid([NotNull] Type sourceType, [NotNull, ItemNotNull] IEnumerable<string> propertyNames)
         {
-            Contract.Requires(sourceType != null);
-            Contract.Requires(propertyNames != null);
 
             var existingPropertyNames = sourceType.GetProperties()
                 .Select(p => p?.Name)

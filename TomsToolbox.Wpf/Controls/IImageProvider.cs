@@ -7,7 +7,6 @@
     /// <summary>
     /// Implemented by image providers for the <see cref="Map"/> control.
     /// </summary>
-    [ContractClass(typeof (ImageProviderContract))]
     public interface IImageProvider
     {
         /// <summary>
@@ -33,21 +32,5 @@
         /// <returns>The image.</returns>
         [NotNull]
         IImage GetImage([NotNull] IMapTile tile);
-    }
-
-    [ContractClassFor(typeof(IImageProvider))]
-    abstract class ImageProviderContract : IImageProvider
-    {
-        int IImageProvider.MinZoom => throw new System.NotImplementedException();
-
-        int IImageProvider.MaxZoom => throw new System.NotImplementedException();
-
-        IImage IImageProvider.GetImage(IMapTile tile)
-        {
-            Contract.Requires(tile != null);
-            Contract.Ensures(Contract.Result<IImage>() != null);
-
-            throw new System.NotImplementedException();
-        }
     }
 }

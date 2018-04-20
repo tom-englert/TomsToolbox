@@ -23,7 +23,6 @@
         /// </summary>
         protected virtual void OnAssociatedObjectLoaded()
         {
-            Contract.Requires(AssociatedObject != null);
         }
 
         /// <summary>
@@ -31,7 +30,6 @@
         /// </summary>
         protected virtual void OnAssociatedObjectUnloaded()
         {
-            Contract.Requires(AssociatedObject != null);
         }
 
         /// <summary>
@@ -45,12 +43,9 @@
             base.OnAttached();
 
             var associatedObject = AssociatedObject;
-            Contract.Assume(associatedObject != null);
 
             associatedObject.Loaded += AssociatedObject_Loaded;
             associatedObject.Unloaded += AssociatedObject_Unloaded;
-
-            Contract.Assume(!associatedObject.IsLoaded);
         }
 
         /// <summary>
@@ -64,7 +59,6 @@
             base.OnDetaching();
 
             var associatedObject = AssociatedObject;
-            Contract.Assume(associatedObject != null);
 
             associatedObject.Loaded -= AssociatedObject_Loaded;
             associatedObject.Unloaded -= AssociatedObject_Unloaded;
@@ -72,13 +66,11 @@
 
         private void AssociatedObject_Loaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
         {
-            Contract.Assume(AssociatedObject != null);
             OnAssociatedObjectLoaded();
         }
 
         private void AssociatedObject_Unloaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
         {
-            Contract.Assume(AssociatedObject != null);
             OnAssociatedObjectUnloaded();
         }
     }

@@ -193,7 +193,6 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<IEnumerable<IMapTile>>() != null);
                 // ReSharper disable once AssignNullToNotNullAttribute
                 return SubLevel?.Children.Cast<IMapTile>() ?? Enumerable.Empty<IMapTile>();
             }
@@ -207,7 +206,6 @@
 
         private static void ForceSubLevel([NotNull] IMapTile tile, [CanBeNull] Panel subLevel)
         {
-            Contract.Requires(tile != null);
             if (subLevel == null)
                 return;
 
@@ -237,8 +235,6 @@
 
         private static bool IsThisTileVisible([NotNull] Visual visual, [NotNull] FrameworkElement viewPort, out Size extent)
         {
-            Contract.Requires(visual != null);
-            Contract.Requires(viewPort != null);
 
             var tileRect = TileRect.Translate(visual, viewPort);
             var viewPortRect = viewPort.GetClientRect();

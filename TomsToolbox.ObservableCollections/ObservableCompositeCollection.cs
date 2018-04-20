@@ -30,7 +30,6 @@
         [NotNull, ItemCanBeNull]
         public static ObservableCompositeCollection<T> FromSingleItem<T>([CanBeNull] T singleItem)
         {
-            Contract.Ensures(Contract.Result<ObservableCompositeCollection<T>>() != null);
 
             return new ObservableCompositeCollection<T>(new[] { singleItem });
         }
@@ -47,8 +46,6 @@
         public static ObservableCompositeCollection<T> FromSingleItemAndList<T, TItem>([CanBeNull] T singleItem, [NotNull, ItemCanBeNull] IList<TItem> list)
             where TItem : T
         {
-            Contract.Requires(list != null);
-            Contract.Ensures(Contract.Result<ObservableCompositeCollection<T>>() != null);
 
             return typeof(T) == typeof(TItem)
                 ? new ObservableCompositeCollection<T>(new[] { singleItem }, (IList<T>)list)
@@ -67,8 +64,6 @@
         public static ObservableCompositeCollection<T> FromListAndSingleItem<TItem, T>([NotNull, ItemCanBeNull] IList<TItem> list, [CanBeNull] T singleItem)
             where TItem : T
         {
-            Contract.Requires(list != null);
-            Contract.Ensures(Contract.Result<ObservableCompositeCollection<T>>() != null);
 
             return typeof(T) == typeof(TItem)
             ? new ObservableCompositeCollection<T>((IList<T>)list, new[] { singleItem })
@@ -85,7 +80,6 @@
     /// <inheritdoc cref="ReadOnlyObservableCollection{T}" />
     public sealed class ObservableCompositeCollection<T> : ReadOnlyObservableCollection<T>, IObservableCollection<T>
     {
-        [ContractPublicPropertyName("Content")]
         [NotNull, ItemNotNull]
         private readonly ContentManager _content;
 
@@ -103,12 +97,9 @@
 
             public ContentManager([NotNull, ItemCanBeNull] ObservableCompositeCollection<T> owner)
             {
-                Contract.Requires(owner != null);
 
                 _owner = owner;
             }
-
-            [ContractVerification(false)]
             private void Parts_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
             {
                 // Monitor changes of parts and forward events properly
@@ -122,7 +113,6 @@
             private static NotifyCollectionChangedEventArgs TranslateEventArgs([NotNull] NotifyCollectionChangedEventArgs e, int offset)
             {
                 // Translate given event args by adding the given offset to the starting index
-                Contract.Requires(e != null);
 
                 if (offset == 0)
                     return e; // no offset - nothing to translate
@@ -150,10 +140,8 @@
                         throw new NotImplementedException();
                 }
             }
-
             #region IList<IList<T>> Members
 
-            [ContractVerification(false)] // Just forwarding...
             public int IndexOf(IList<T> item)
             {
                 return _parts.IndexOf(item);
@@ -187,7 +175,6 @@
             public void RemoveAt(int index)
             {
                 var part = _parts[index];
-                Contract.Assume(part != null);
                 _parts.RemoveAt(index);
 
                 // If this list implements INotifyCollectionChanged events must be unregistered!
@@ -204,7 +191,6 @@
             }
 
             [CanBeNull]
-            [ContractVerification(false)] // Just forwarding...
             public IList<T> this[int index]
             {
                 get => _parts[index];
@@ -219,7 +205,6 @@
 
             #region ICollection<IList<T>> Members
 
-            [ContractVerification(false)] // just forwarding
             public void Add(IList<T> item)
             {
                 Insert(_parts.Count, item);
@@ -281,19 +266,6 @@
             }
 
             #endregion
-
-            #region Contracts Invariant
-
-            [ContractInvariantMethod, UsedImplicitly]
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-            [Conditional("CONTRACTS_FULL")]
-            private void ObjectInvariant()
-            {
-                Contract.Invariant(_owner != null);
-                Contract.Invariant(_parts != null);
-            }
-
-            #endregion
         }
 
         /// <summary>
@@ -315,7 +287,6 @@
         public ObservableCompositeCollection([NotNull, ItemNotNull] params IList<T>[] parts)
             : this()
         {
-            Contract.Requires(parts != null);
 
             foreach (var part in parts)
             {
@@ -335,13 +306,10 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<IList<IList<T>>>() != null);
 
                 return _content;
             }
         }
-
-        [ContractVerification(false)]
         [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
         [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         private void ContentCollectionChanged([NotNull] NotifyCollectionChangedEventArgs e)
@@ -375,7 +343,6 @@
                     break;
 
                 case NotifyCollectionChangedAction.Move:
-                    Contract.Assume(e.OldItems.Count == 1);
                     ((ObservableCollection<T>)Items).Move(e.OldStartingIndex, e.NewStartingIndex);
                     break;
 
@@ -405,14 +372,6 @@
         {
             add => base.PropertyChanged += value;
             remove => base.PropertyChanged -= value;
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_content != null);
         }
     }
 }

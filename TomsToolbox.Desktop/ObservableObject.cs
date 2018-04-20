@@ -71,7 +71,6 @@
         /// <param name="source">The source.</param>
         protected void RelayEventsOf([NotNull] INotifyPropertyChanged source)
         {
-            Contract.Requires(source != null);
 
             var sourceType = source.GetType();
             if (RelayMapping.Keys.All(key => key?.IsAssignableFrom(sourceType) != true))
@@ -107,7 +106,6 @@
         {
             foreach (var item in EventSources.Values.ToArray())
             {
-                Contract.Assume(item != null);
                 item.Detach();
             }
 
@@ -120,7 +118,6 @@
         /// <param name="item">The item to detach.</param>
         protected void DetachEventSource([NotNull] INotifyPropertyChanged item)
         {
-            Contract.Requires(item != null);
 
             var sourceType = item.GetType();
 
@@ -139,7 +136,6 @@
         [NotifyPropertyChangedInvocator]
         protected void OnPropertyChanged<T>([NotNull] Expression<Func<T>> propertyExpression)
         {
-            Contract.Requires(propertyExpression != null);
 
             OnPropertyChanged(PropertySupport.ExtractPropertyName(propertyExpression));
         }
@@ -156,7 +152,6 @@
         [NotifyPropertyChangedInvocator]
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Expression<Func<T>> propertyExpression)
         {
-            Contract.Requires(propertyExpression != null);
 
             return SetProperty(ref backingField, value, PropertySupport.ExtractPropertyName(propertyExpression));
         }
@@ -174,8 +169,6 @@
         [NotifyPropertyChangedInvocator]
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Expression<Func<T>> propertyExpression, [NotNull] Action<T, T> changeCallback)
         {
-            Contract.Requires(propertyExpression != null);
-            Contract.Requires(changeCallback != null);
 
             return SetProperty(ref backingField, value, PropertySupport.ExtractPropertyName(propertyExpression), changeCallback);
         }
@@ -197,7 +190,6 @@
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] string propertyName)
 #endif
         {
-            Contract.Requires(!string.IsNullOrEmpty(propertyName));
 
             if (Equals(backingField, value))
                 return false;
@@ -221,8 +213,6 @@
         [NotifyPropertyChangedInvocator]
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] string propertyName, [NotNull] Action<T, T> changeCallback)
         {
-            Contract.Requires(!string.IsNullOrEmpty(propertyName));
-            Contract.Requires(changeCallback != null);
 
             var oldValue = backingField;
 
@@ -252,8 +242,6 @@
             [System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
 #endif
         {
-            Contract.Requires(!string.IsNullOrEmpty(propertyName));
-            Contract.Requires(changeCallback != null);
 
             return SetProperty(ref backingField, value, propertyName, changeCallback);
         }
@@ -271,7 +259,6 @@
         protected void OnPropertyChanged([NotNull] string propertyName)
 #endif
         {
-            Contract.Requires(!string.IsNullOrEmpty(propertyName));
 
             InternalOnPropertyChanged(propertyName);
 
@@ -280,11 +267,8 @@
             if (!DependencyMapping.TryGetValue(propertyName, out dependentProperties))
                 return;
 
-            Contract.Assume(dependentProperties != null);
-
             foreach (var dependentProperty in dependentProperties)
             {
-                Contract.Assume(!string.IsNullOrEmpty(dependentProperty));
                 InternalOnPropertyChanged(dependentProperty);
             }
         }
@@ -301,7 +285,6 @@
         // ReSharper disable once AnnotateNotNullParameter
         private void RelaySource_PropertyChanged([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
         {
-            Contract.Requires(sender != null);
 
             if (e.PropertyName == null)
                 return;
@@ -310,7 +293,6 @@
             // ReSharper disable once PossibleNullReferenceException
             foreach (var mapping in RelayMapping.Where(item => item.Key.IsAssignableFrom(sourceType)).Select(item => item.Value))
             {
-                Contract.Assume(mapping != null);
 
                 if (mapping.TryGetValue(e.PropertyName, out var targetPropertyName) && !string.IsNullOrEmpty(targetPropertyName))
                 {
@@ -321,7 +303,6 @@
 
         private void InternalOnPropertyChanged([NotNull] string propertyName)
         {
-            Contract.Requires(!string.IsNullOrEmpty(propertyName));
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -344,7 +325,6 @@
         [NotNull, ItemNotNull]
         protected virtual IEnumerable<string> GetDataErrors([CanBeNull] string propertyName)
         {
-            Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
 
             if (string.IsNullOrEmpty(propertyName))
                 return Enumerable.Empty<string>();
@@ -372,7 +352,6 @@
         [NotNull, ItemNotNull]
         private IEnumerable<string> InternalGetDataErrors([CanBeNull] string propertyName)
         {
-            Contract.Ensures(Contract.Result<IEnumerable<string>>() != null);
 
             var dataErrors = GetDataErrors(propertyName).ToArray();
 
@@ -450,18 +429,8 @@
         {
             get
             {
-                Contract.Ensures(Contract.Result<Dispatcher>() != null);
                 return _dispatcher;
             }
-        }
-
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_dispatcher != null);
         }
     }
 }

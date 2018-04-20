@@ -35,7 +35,6 @@
         public CompositionHost(bool isThreadSafe)
         {
             var catalog = new AggregateCatalog();
-            Contract.Assume(catalog.Catalogs != null);
             _container = new CompositionContainer(catalog, isThreadSafe);
             _container.ComposeExportedValue((ICompositionHost)this);
             _container.ComposeExportedValue((IServiceProvider)this);
@@ -55,9 +54,6 @@
             get
             {
                 var result = (AggregateCatalog)Container.Catalog;
-
-                Contract.Assume(result != null);
-                Contract.Assume(result.Catalogs != null);
 
                 return result;
             }
@@ -91,14 +87,6 @@
         ~CompositionHost()
         {
             this.ReportNotDisposedObject();
-        }
-
-        [ContractInvariantMethod, UsedImplicitly]
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Required for code contracts.")]
-        [Conditional("CONTRACTS_FULL")]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(_container != null);
         }
     }
 }

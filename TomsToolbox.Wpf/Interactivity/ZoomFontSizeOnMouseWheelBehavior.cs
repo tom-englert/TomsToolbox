@@ -28,8 +28,6 @@
         {
             base.OnAttached();
 
-            Contract.Assume(AssociatedObject != null);
-
             AssociatedObject.PreviewMouseWheel += AssociatedObject_PreviewMouseWheel;
         }
 
@@ -42,8 +40,6 @@
         protected override void OnDetaching()
         {
             base.OnDetaching();
-
-            Contract.Assume(AssociatedObject != null);
 
             AssociatedObject.PreviewMouseWheel -= AssociatedObject_PreviewMouseWheel;
         }

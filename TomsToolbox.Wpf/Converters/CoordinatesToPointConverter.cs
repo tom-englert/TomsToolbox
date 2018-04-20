@@ -63,8 +63,6 @@
         [NotNull]
         public static object Convert([NotNull] object value)
         {
-            Contract.Requires(value != null);
-            Contract.Ensures(Contract.Result<object>() != null);
 
             if (value is Point)
             {

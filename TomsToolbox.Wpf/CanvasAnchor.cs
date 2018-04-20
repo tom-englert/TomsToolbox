@@ -22,7 +22,6 @@
         [AttachedPropertyBrowsableForType(typeof(UIElement))]
         public static Point GetTopLeft([NotNull] UIElement obj)
         {
-            Contract.Requires(obj != null);
             return obj.GetValue<Point>(TopLeftProperty);
         }
         /// <summary>
@@ -32,7 +31,6 @@
         /// <param name="value">The point.</param>
         public static void SetTopLeft([NotNull] UIElement obj, Point value)
         {
-            Contract.Requires(obj != null);
             obj.SetValue(TopLeftProperty, value);
         }
 
@@ -73,7 +71,6 @@
         [AttachedPropertyBrowsableForType(typeof(UIElement))]
         public static Point GetTopRight([NotNull] UIElement obj)
         {
-            Contract.Requires(obj != null);
             return obj.GetValue<Point>(TopRightProperty);
         }
 
@@ -84,7 +81,6 @@
         /// <param name="value">The point.</param>
         public static void SetTopRight([NotNull] UIElement obj, Point value)
         {
-            Contract.Requires(obj != null);
             obj.SetValue(TopRightProperty, value);
         }
 
@@ -124,7 +120,6 @@
         [AttachedPropertyBrowsableForType(typeof(UIElement))]
         public static Point GetBottomLeft([NotNull] UIElement obj)
         {
-            Contract.Requires(obj != null);
             return obj.GetValue<Point>(BottomLeftProperty);
         }
 
@@ -135,7 +130,6 @@
         /// <param name="value">The point.</param>
         public static void SetBottomLeft([NotNull] UIElement obj, Point value)
         {
-            Contract.Requires(obj != null);
             obj.SetValue(BottomLeftProperty, value);
         }
 
@@ -176,7 +170,6 @@
         [AttachedPropertyBrowsableForType(typeof(UIElement))]
         public static Point GetBottomRight([NotNull] UIElement obj)
         {
-            Contract.Requires(obj != null);
             return obj.GetValue<Point>(BottomRightProperty);
         }
 
@@ -187,7 +180,6 @@
         /// <param name="value">The point.</param>
         public static void SetBottomRight([NotNull] UIElement obj, Point value)
         {
-            Contract.Requires(obj != null);
             obj.SetValue(BottomRightProperty, value);
         }
 
