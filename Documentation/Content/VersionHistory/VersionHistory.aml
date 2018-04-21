@@ -7,7 +7,15 @@
     <section>
       <title>Version History</title>
       <content>
-        <list class="bullet">          
+        <list class="bullet">
+          <listItem>
+            <para>1.0.68.0</para>
+            <list class="bullet">
+              <listItem><para>Add an icon control that dynamically displays the image best fitting the actual size.</para></listItem>
+              <listItem><para>Fix possible flickering of window when using the custom style.</para></listItem>
+              <listItem><para>Provide an explicit .net45 version with all packages to fix issues with referenced packages (e.g. System.Windows.Interactivity).</para></listItem>
+            </list>
+          </listItem>
           <listItem>
             <para>1.0.67.0</para>
             <list class="bullet">
