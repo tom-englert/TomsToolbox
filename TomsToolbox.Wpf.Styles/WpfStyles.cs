@@ -23,6 +23,9 @@
         /// Returns a resource dictionary with the default styles for the window and the common controls.
         /// </summary>
         /// <param name="helperWindow">A helper window used to access global theme resources.</param>
+        /// <returns>
+        /// A resource dictionary containing the default styles.
+        /// </returns>
         [ContractVerification(false)]
         [NotNull, ItemCanBeNull]
         public static ResourceDictionary Defaults([NotNull] Window helperWindow)
@@ -64,6 +67,9 @@
         /// <remarks>
         /// This method will created a temporary, hidden helper window.
         /// </remarks>
+        /// <returns>
+        /// A resource dictionary containing the default styles.
+        /// </returns>
         [NotNull, ItemCanBeNull]
         public static ResourceDictionary Defaults()
         {

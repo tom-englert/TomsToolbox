@@ -14,7 +14,7 @@
     <RootNamespace>Documentation</RootNamespace>
     <Name>Documentation</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>.NET Framework 4.0</FrameworkVersion>
+    <FrameworkVersion>.NET Framework 4.5.2</FrameworkVersion>
     <OutputPath>.\Help\</OutputPath>
     <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
@@ -32,6 +32,7 @@
       <DocumentationSource sourceFile="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj" />
       <DocumentationSource sourceFile="..\TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj" />
       <DocumentationSource sourceFile="..\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj" />
+      <DocumentationSource sourceFile="..\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj" />
     </DocumentationSources>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
@@ -53,20 +54,21 @@
     <ProjectSummary>A set of simple but useful classes and functions to ease our daily .Net development tasks.</ProjectSummary>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
-      <NamespaceSummaryItem name="TomsToolbox.Core" isDocumented="True">Core clases and functions that only depend on System functions. Available as .Net4.0 client and also as portable class library for Silverlight, WindowsPhone, etc.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="TomsToolbox.Desktop" isDocumented="True">Classes and functions that use functionality avaiable in desktop environments using .Net 4.0 client profile. This assembly has e.g. a reference to WindwosBase.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="TomsToolbox.ObservableCollections" isDocumented="True">Classes and functions around observable collections.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="TomsToolbox.Wpf" isDocumented="True">Classes and functions for WPF applications.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="TomsToolbox.Wpf.Themes" isDocumented="True">Theme resources</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="XamlGeneratedNamespace" isDocumented="False" />
-      <NamespaceSummaryItem name="TomsToolbox.Wpf.Controls" isDocumented="True">Controls</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="TomsToolbox.Wpf.Converters" isDocumented="True">Converters</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="TomsToolbox.Wpf.Interactivity" isDocumented="True">System.Windows.Interactivity extensions</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="TomsToolbox.Wpf.Composition" isDocumented="True">Visual composition framework base on MEF (System.ComponentModel.Composition)</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="TomsToolbox.Desktop.Composition" isDocumented="True">Core extensions for the MEF (System.ComponentModel.Composition) framework</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="TomsToolbox.Wpf.XamlExtensions" isDocumented="True">Special namespace that contains classes that are usually used only in XAML and not by code. 
+<NamespaceSummaryItem name="TomsToolbox.Core" isDocumented="True">Core clases and functions that only depend on System functions. Available as .Net4.0 client and also as portable class library for Silverlight, WindowsPhone, etc.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="TomsToolbox.Desktop" isDocumented="True">Classes and functions that use functionality avaiable in desktop environments using .Net 4.0 client profile. This assembly has e.g. a reference to WindwosBase.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="TomsToolbox.ObservableCollections" isDocumented="True">Classes and functions around observable collections.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="TomsToolbox.Wpf" isDocumented="True">Classes and functions for WPF applications.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="TomsToolbox.Wpf.Themes" isDocumented="True">Theme resources</NamespaceSummaryItem>
+<NamespaceSummaryItem name="XamlGeneratedNamespace" isDocumented="False" />
+<NamespaceSummaryItem name="TomsToolbox.Wpf.Controls" isDocumented="True">Controls</NamespaceSummaryItem>
+<NamespaceSummaryItem name="TomsToolbox.Wpf.Converters" isDocumented="True">Converters</NamespaceSummaryItem>
+<NamespaceSummaryItem name="TomsToolbox.Wpf.Interactivity" isDocumented="True">System.Windows.Interactivity extensions</NamespaceSummaryItem>
+<NamespaceSummaryItem name="TomsToolbox.Wpf.Composition" isDocumented="True">Visual composition framework base on MEF (System.ComponentModel.Composition)</NamespaceSummaryItem>
+<NamespaceSummaryItem name="TomsToolbox.Desktop.Composition" isDocumented="True">Core extensions for the MEF (System.ComponentModel.Composition) framework</NamespaceSummaryItem>
+<NamespaceSummaryItem name="TomsToolbox.Wpf.XamlExtensions" isDocumented="True">Special namespace that contains classes that are usually used only in XAML and not by code. 
 In code the class names would be ambiguous, while in XAML a namespace prefixes is needed anyhow, so the useage is clear.</NamespaceSummaryItem>
-    </NamespaceSummaries>
+<NamespaceSummaryItem name="TomsToolbox.Wpf.Styles" isDocumented="True">Custom window and control styles</NamespaceSummaryItem>
+<NamespaceSummaryItem name="TomsToolbox.Wpf.Styles.Effects" isDocumented="True">Effects that can be used in styles</NamespaceSummaryItem></NamespaceSummaries>
     <FeedbackEMailLinkText>https://github.com/tom-englert/TomsToolbox/issues</FeedbackEMailLinkText>
     <CopyrightText>&amp;#169%3b tom-englert.de 2012-2018</CopyrightText>
     <CopyrightHref>https://github.com/tom-englert/TomsToolbox/blob/master/LICENSE</CopyrightHref>
@@ -96,6 +98,7 @@ In code the class names would be ambiguous, while in XAML a namespace prefixes i
     </ComponentConfigurations>
     <VisibleItems>Attributes, InheritedMembers, Protected, ProtectedInternalAsProtected, EditorBrowsableNever, NonBrowsable</VisibleItems>
     <HelpFileVersion>1.0.0.0</HelpFileVersion>
+    <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->

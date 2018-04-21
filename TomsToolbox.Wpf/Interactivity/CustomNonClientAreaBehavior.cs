@@ -172,7 +172,9 @@
         /// </summary>
         [NotNull] public static readonly RoutedEvent NcHitTestEvent = EventManager.RegisterRoutedEvent("NcHitTest", RoutingStrategy.Bubble, typeof(EventHandler<NcHitTestEventArgs>), typeof(CustomNonClientAreaBehavior));
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Called when the element is attached.
+        /// </summary>
         protected override void OnAttached()
         {
             base.OnAttached();
@@ -189,7 +191,9 @@
             window.SourceInitialized += Window_SourceInitialized;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Called when the element is detached.
+        /// </summary>
         protected override void OnDetaching()
         {
             base.OnDetaching();
