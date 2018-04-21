@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <Target Name="TfmSpecificContent">
+    <ItemGroup>
+      <ExternalAnnotations Include="$(TargetDir)$(PackageId).ExternalAnnotations.xml" />
+    </ItemGroup>
+    <CreateItem Include="@(ExternalAnnotations)" AdditionalMetadata="PackagePath=lib\$(TargetFramework)">
+      <Output TaskParameter="Include" ItemName="TfmSpecificPackageFile" />
+    </CreateItem>
+  </Target>
+
+</Project>

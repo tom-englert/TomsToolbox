@@ -1,81 +1,28 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EC9F9418-877F-49BA-AF91-F456FBC5AD57}</ProjectGuid>
-    <OutputType>library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TomsToolbox.Wpf</RootNamespace>
-    <AssemblyName>TomsToolbox.Wpf</AssemblyName>
-    <TargetFrameworkVersion Condition=" '$(TargetFrameworkVersion)' == '' ">v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile Condition=" '$(TargetFrameworkVersion)' == 'v4.0' ">Client</TargetFrameworkProfile>
-    <OutputPath>bin\$(Configuration)\$(TargetFrameworkVersion)\</OutputPath>
-    <IntermediateOutputPath>obj\$(Configuration)\$(TargetFrameworkVersion)\</IntermediateOutputPath>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <TargetFrameworks>net40-client;net45</TargetFrameworks>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)\CodeContracts.props" />
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>$(AdditionalConstants)DEBUG;TRACE;JETBRAINS_ANNOTATIONS</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-    <DocumentationFile>obj\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
-    <CodeAnalysisRuleSet>..\CodeContracts.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>$(AdditionalConstants)TRACE;JETBRAINS_ANNOTATIONS</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <DocumentationFile>obj\$(Configuration)\$(AssemblyName).XML</DocumentationFile>
-    <CodeAnalysisRuleSet>..\CodeContracts.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <Title>Tom's Toolbox WPF Module</Title>
   </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\TomsToolbox.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="Throttle, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4d0e9a1cbec0d397, processorArchitecture=MSIL">
-      <HintPath>..\packages\Throttle.Fody.1.0.0.0\lib\portable-net40+sl50+win+wpa81+wp80\Throttle.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Core\TomsToolbox.Core.csproj">
       <Project>{ae305312-7637-43bf-9156-7ec513c55135}</Project>
@@ -90,41 +37,19 @@
       <Name>TomsToolbox.ObservableCollections</Name>
     </ProjectReference>
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="**\*.cs" Exclude="obj\**;bin\**" />
+    <PackageReference Include="Fody" Version="*" PrivateAssets="All" />
+    <PackageReference Include="JetBrainsAnnotations.Fody" Version="*" PrivateAssets="All" />
+    <PackageReference Include="Throttle.Fody" Version="*" PrivateAssets="All" />
+    <PackageReference Include="Expression.Blend.Sdk" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Include="**\*.xaml" Exclude="obj\**;bin\**">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="..\Version.cs">
-      <Link>Properties\Version.cs</Link>
-    </Compile>
-    <None Include="..\TomsToolbox.snk">
-      <Link>TomsToolbox.snk</Link>
-    </None>
-    <None Include="packages.config" />
-    <AppDesigner Include="Properties\" />
-    <None Include="TomsToolbox.Wpf.nuspec" />
   </ItemGroup>
-  <ItemGroup>
-    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
-      <Link>CustomDictionary.xml</Link>
-    </CodeAnalysisDictionary>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="FodyWeavers.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="TomsToolbox.Wpf.ExternalAnnotations.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Fody.2.4.6\build\Fody.targets" Condition="Exists('..\packages\Fody.2.4.6\build\Fody.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.2.4.6\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.4.6\build\Fody.targets'))" />
-  </Target>
+
 </Project>

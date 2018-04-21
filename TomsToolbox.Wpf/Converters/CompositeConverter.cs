@@ -76,5 +76,7 @@
 
             return Converters.Reverse().Aggregate(value, (current, converter) => converter?.ConvertBack(current, targetType, parameter, culture));
         }
+
+        #endregion
     }
 }

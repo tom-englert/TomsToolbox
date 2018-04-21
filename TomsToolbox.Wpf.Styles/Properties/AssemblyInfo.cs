@@ -5,9 +5,6 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Markup;
 
-[assembly: AssemblyTitle("TomsToolbox.Wpf.Styles")]
-[assembly: AssemblyDescription("WPF style resources")]
-[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: NeutralResourcesLanguage("en-US")]

@@ -9,7 +9,7 @@
 
 namespace SampleApp.Properties {
     using System;
-    using Jetbrains.Annotations;
+    using JetBrains.Annotations;
 
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.

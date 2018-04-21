@@ -5,9 +5,7 @@
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Linq.Expressions;
 
@@ -106,7 +104,7 @@
         private class ObservableSelectImpl<TSource, TTarget> : ObservableWrappedCollection<TSource, TTarget>
         {
             [NotNull]
-            private readonly WeakReference<IList<TSource>> _sourceReference;
+            private readonly TomsToolbox.Core.WeakReference<IList<TSource>> _sourceReference;
             [CanBeNull]
             private readonly string _propertyName;
             [CanBeNull, ItemNotNull]
@@ -122,7 +120,7 @@
             {
 
                 _propertyName = PropertySupport.TryExtractPropertyName(itemGeneratorExpression);
-                _sourceReference = new WeakReference<IList<TSource>>(sourceCollection);
+                _sourceReference = new TomsToolbox.Core.WeakReference<IList<TSource>>(sourceCollection);
 
                 if (_propertyName == null)
                     return;

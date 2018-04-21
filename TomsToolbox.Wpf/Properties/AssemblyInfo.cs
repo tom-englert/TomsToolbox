@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Markup;
 
-[assembly: AssemblyTitle("TomsToolbox.Wpf")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]

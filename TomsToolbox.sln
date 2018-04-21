@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		CodeContracts.ruleset = CodeContracts.ruleset
 		Directory.Build.props = Directory.Build.props
+		LICENSE = LICENSE
 		Publish.cmd = Publish.cmd
 		README.md = README.md
 		Resources.Designer.t4 = Resources.Designer.t4
@@ -16,17 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Core", "TomsToolbox.Core\TomsToolbox.Core.csproj", "{AE305312-7637-43BF-9156-7EC513C55135}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Desktop", "TomsToolbox.Desktop\TomsToolbox.Desktop.csproj", "{3647CD2D-2A4E-4859-9BBD-606A73C14801}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F22B1781-138C-400D-85FC-5C70EE7BAA56} = {F22B1781-138C-400D-85FC-5C70EE7BAA56}
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Desktop", "TomsToolbox.Desktop\TomsToolbox.Desktop.csproj", "{3647CD2D-2A4E-4859-9BBD-606A73C14801}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Wpf", "TomsToolbox.Wpf\TomsToolbox.Wpf.csproj", "{EC9F9418-877F-49BA-AF91-F456FBC5AD57}"
-	ProjectSection(ProjectDependencies) = postProject
-		{FBE436B4-7624-41CF-AC88-E4CB759FBA65} = {FBE436B4-7624-41CF-AC88-E4CB759FBA65}
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf", "TomsToolbox.Wpf\TomsToolbox.Wpf.csproj", "{EC9F9418-877F-49BA-AF91-F456FBC5AD57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.ObservableCollections", "TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj", "{E3EE79EA-50EC-4D54-B59F-799D50E8B221}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.ObservableCollections", "TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj", "{E3EE79EA-50EC-4D54-B59F-799D50E8B221}"
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation\Documentation.shfbproj", "{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}"
 EndProject
@@ -38,13 +33,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.ObservableColle
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp", "SampleApp\SampleApp.csproj", "{31D12A42-C0C6-4B45-82D3-E896BB2E00E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Wpf.45", "TomsToolbox.Wpf\TomsToolbox.Wpf.45.csproj", "{FBE436B4-7624-41CF-AC88-E4CB759FBA65}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Desktop.45", "TomsToolbox.Desktop\TomsToolbox.Desktop.45.csproj", "{F22B1781-138C-400D-85FC-5C70EE7BAA56}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Wpf.Tests", "TomsToolbox.Wpf.Tests\TomsToolbox.Wpf.Tests.csproj", "{726D085F-C3E1-444B-96AB-0B40C3DC0311}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Wpf.Styles", "TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj", "{E5D732D2-0294-48FD-8314-63DC1A9155FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Styles", "TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj", "{E5D732D2-0294-48FD-8314-63DC1A9155FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,12 +78,6 @@ Global
 		{31D12A42-C0C6-4B45-82D3-E896BB2E00E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31D12A42-C0C6-4B45-82D3-E896BB2E00E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31D12A42-C0C6-4B45-82D3-E896BB2E00E0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FBE436B4-7624-41CF-AC88-E4CB759FBA65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBE436B4-7624-41CF-AC88-E4CB759FBA65}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FBE436B4-7624-41CF-AC88-E4CB759FBA65}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F22B1781-138C-400D-85FC-5C70EE7BAA56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F22B1781-138C-400D-85FC-5C70EE7BAA56}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F22B1781-138C-400D-85FC-5C70EE7BAA56}.Release|Any CPU.Build.0 = Release|Any CPU
 		{726D085F-C3E1-444B-96AB-0B40C3DC0311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{726D085F-C3E1-444B-96AB-0B40C3DC0311}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{726D085F-C3E1-444B-96AB-0B40C3DC0311}.Release|Any CPU.ActiveCfg = Release|Any CPU
