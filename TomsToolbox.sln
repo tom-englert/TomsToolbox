@@ -21,9 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Desktop", "Toms
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf", "TomsToolbox.Wpf\TomsToolbox.Wpf.csproj", "{EC9F9418-877F-49BA-AF91-F456FBC5AD57}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.ObservableCollections", "TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj", "{E3EE79EA-50EC-4D54-B59F-799D50E8B221}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Styles", "TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj", "{E5D732D2-0294-48FD-8314-63DC1A9155FE}"
 EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation\Documentation.shfbproj", "{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.ObservableCollections", "TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj", "{E3EE79EA-50EC-4D54-B59F-799D50E8B221}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Desktop.Tests", "TomsToolbox.Desktop.Tests\TomsToolbox.Desktop.Tests.csproj", "{53966F8B-9898-47D4-AD7A-2FBF84BA431C}"
 EndProject
@@ -35,7 +35,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp", "SampleApp\Samp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Wpf.Tests", "TomsToolbox.Wpf.Tests\TomsToolbox.Wpf.Tests.csproj", "{726D085F-C3E1-444B-96AB-0B40C3DC0311}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Styles", "TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj", "{E5D732D2-0294-48FD-8314-63DC1A9155FE}"
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation\Documentation.shfbproj", "{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
