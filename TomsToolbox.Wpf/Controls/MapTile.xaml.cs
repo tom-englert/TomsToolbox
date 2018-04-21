@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Controls.Primitives;
     using System.Windows.Data;
     using System.Windows.Media;
 
@@ -14,7 +15,7 @@
     /// <summary>
     /// Represents on tile in the map.
     /// </summary>
-    public partial class MapTile : IMapTile, ILayer
+    public class MapTile : Viewbox, IMapTile, ILayer
     {
         /// <summary>
         /// The size of one tile in pixels.
@@ -27,6 +28,9 @@
         private readonly int _x;
         private readonly int _y;
         private readonly int _zoomLevel;
+
+        private readonly Panel _world = new Grid { Width = TileSize, Height = TileSize };
+        private readonly Panel _subLevel = new UniformGrid { Rows = 2, Columns = 2 };
 
         /// <summary>
         /// Initializes a new root instance of the <see cref="MapTile"/> class.
@@ -92,7 +96,7 @@
 
             SubTiles.ForEach(subTile => subTile?.Unload());
             // ReSharper disable once PossibleNullReferenceException
-            SubLevel?.Children.Clear();
+            _subLevel?.Children.Clear();
         }
 
         /// <summary>
@@ -107,7 +111,8 @@
         /// <summary>
         /// Identifies the <see cref="Viewport"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty ViewportProperty =
+        [NotNull]
+        public static readonly DependencyProperty ViewportProperty =
             DependencyProperty.Register("Viewport", typeof(FrameworkElement), typeof(MapTile));
 
         /// <summary>
@@ -122,7 +127,8 @@
         /// <summary>
         /// Identifies the <see cref="ImageProvider"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty ImageProviderProperty =
+        [NotNull]
+        public static readonly DependencyProperty ImageProviderProperty =
             DependencyProperty.Register("ImageProvider", typeof(IImageProvider), typeof(MapTile), new FrameworkPropertyMetadata((sender, e) => ((MapTile)sender)?.ImageProvider_Changed()));
 
         /// <summary>
@@ -137,7 +143,8 @@
         /// <summary>
         /// Identifies the <see cref="Image"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty ImageProperty =
+        [NotNull]
+        public static readonly DependencyProperty ImageProperty =
             DependencyProperty.Register("Image", typeof(IImage), typeof(MapTile), new FrameworkPropertyMetadata((sender, e) => Disposable.Dispose(e.OldValue)));
 
         /// <summary>
@@ -149,7 +156,7 @@
                 return;
 
             var viewPort = Viewport;
-            var world = World;
+            var world = _world;
 
             if ((viewPort == null) || (world == null))
                 return;
@@ -180,11 +187,11 @@
 
                 SubTiles.ForEach(subTile => subTile?.Unload());
                 // ReSharper disable once PossibleNullReferenceException
-                SubLevel?.Children.Clear();
+                _subLevel?.Children.Clear();
                 return;
             }
 
-            ForceSubLevel(this, SubLevel);
+            ForceSubLevel(this, _subLevel);
         }
 
         [NotNull, ItemNotNull]
@@ -193,8 +200,21 @@
             get
             {
                 // ReSharper disable once AssignNullToNotNullAttribute
-                return SubLevel?.Children.Cast<IMapTile>() ?? Enumerable.Empty<IMapTile>();
+                return _subLevel?.Children.Cast<IMapTile>() ?? Enumerable.Empty<IMapTile>();
             }
+        }
+
+        private void InitializeComponent()
+        {
+            Stretch = Stretch.Uniform;
+
+            var image = new Image { Stretch = Stretch.None };
+            BindingOperations.SetBinding(image, System.Windows.Controls.Image.SourceProperty, new Binding(nameof(Image) + "." + nameof(Image.Source)) { IsAsync = true, Source = this });
+
+            _world.Children.Add(image);
+            _world.Children.Add(_subLevel);
+
+            Child = _world;
         }
 
         private void ImageProvider_Changed()

@@ -13,7 +13,7 @@
   <TabControl toms:VisualComposition.RegionId="{x:Static sampleApp:RegionId.Main}" Margin="-1">
     <TabControl.ItemTemplate>
       <DataTemplate>
-        <TextBlock Text="{Binding}"/>
+        <TextBlock Text="{Binding}" />
       </DataTemplate>
     </TabControl.ItemTemplate>
   </TabControl>

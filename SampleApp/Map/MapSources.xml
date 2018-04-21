@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <MapSourceList>
 
@@ -24,7 +24,7 @@
       <MaxZoom>17</MaxZoom>
       <TileUrl>http://maps.benzinpreis.de/osm/%z/%x/%y.png</TileUrl>
     </MapSource>
-    
+
     <MapSource ID="HikeBikeMap">
       <Copyright>http://hikebikemap.org</Copyright>
       <MinZoom>1</MinZoom>
@@ -60,6 +60,6 @@
       <TileUrl>http://b.tile.thunderforest.com/neighbourhood/%z/%x/%y.png</TileUrl>
       <TileUrl>http://c.tile.thunderforest.com/neighbourhood/%z/%x/%y.png</TileUrl>
     </MapSource>
-    
+
   </MapSourceList>
 </root>

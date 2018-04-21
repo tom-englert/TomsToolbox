@@ -6,7 +6,7 @@
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate>
-          <Image x:Name="image" Source="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
+          <Image x:Name="image" Source="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
           <ControlTemplate.Triggers>
             <DataTrigger Binding="{Binding Icon, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Value="{x:Null}">
               <Setter TargetName="image" Property="Source" Value="{x:Static styles:WpfStyles.SmallApplicationIcon}" />
@@ -16,5 +16,5 @@
       </Setter.Value>
     </Setter>
   </Style>
-  
+
 </ResourceDictionary>

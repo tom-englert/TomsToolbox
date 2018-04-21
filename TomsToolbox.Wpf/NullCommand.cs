@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Wpf
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Windows.Input;
 
     using JetBrains.Annotations;

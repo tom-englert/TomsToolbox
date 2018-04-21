@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Wpf.Controls
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;

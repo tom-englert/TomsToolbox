@@ -4,6 +4,7 @@
     using System.Collections.Generic;
 
     using JetBrains.Annotations;
+
 #if NETSTANDARD1_0
     using System.Reflection;
 #endif

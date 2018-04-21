@@ -2,7 +2,6 @@
 {
     using System;
     using System.ComponentModel.Composition.Hosting;
-    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Windows;
 

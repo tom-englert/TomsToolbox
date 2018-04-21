@@ -1,6 +1,5 @@
 ﻿namespace TomsToolbox.Wpf.XamlExtensions
 {
-    using System.Diagnostics.Contracts;
     using System.Windows;
     using System.Windows.Input;
 

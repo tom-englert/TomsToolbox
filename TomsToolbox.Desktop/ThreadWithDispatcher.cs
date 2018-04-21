@@ -1,9 +1,7 @@
 ﻿namespace TomsToolbox.Desktop
 {
     using System;
-    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;

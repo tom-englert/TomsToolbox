@@ -1,8 +1,8 @@
-﻿using JetBrains.Annotations;
-
-namespace TomsToolbox.Wpf.Converters
+﻿namespace TomsToolbox.Wpf.Converters
 {
     using System.ComponentModel;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Event arguments for the <see cref="ConfirmedCommandConverter.Executing"/> event.

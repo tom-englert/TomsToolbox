@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace SampleApp.Samples
+﻿namespace SampleApp.Samples
 {
     using System.ComponentModel.Composition;
 

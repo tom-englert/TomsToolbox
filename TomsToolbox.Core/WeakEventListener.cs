@@ -3,6 +3,7 @@
     using System;
 
     using JetBrains.Annotations;
+
 #if NETSTANDARD1_0
     using System.Reflection;
 #endif

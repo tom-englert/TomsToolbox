@@ -1,7 +1,5 @@
 ﻿namespace TomsToolbox.Wpf.Controls
 {
-    using System.Diagnostics.Contracts;
-
     using JetBrains.Annotations;
 
     /// <summary>

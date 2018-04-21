@@ -6,16 +6,16 @@
              UseLayoutRounding="False" SnapsToDevicePixels="False">
   <Grid>
     <Grid.Resources>
-      <SolidColorBrush Color="Chocolate" x:Key="DarkFieldBrush"/>
+      <SolidColorBrush Color="Chocolate" x:Key="DarkFieldBrush" />
       <Storyboard x:Key="Move" Duration="0:0:6" RepeatBehavior="Forever" AutoReverse="False">
-        <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" To="3" BeginTime="0:0:1" Duration="0:0:1" Storyboard.TargetName="Player1"/>
-        <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" To="4" BeginTime="0:0:2" Duration="0:0:1" Storyboard.TargetName="Player2"/>
-        <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" To="4" BeginTime="0:0:3" Duration="0:0:1" Storyboard.TargetName="Player1"/>
-        <DoubleAnimation Storyboard.TargetProperty="(Canvas.Left)" To="2" BeginTime="0:0:3" Duration="0:0:1" Storyboard.TargetName="Player1"/>
-        <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" To="9" BeginTime="0:0:3.6" Duration="0:0:0.5" Storyboard.TargetName="Player2"/>
-        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Angle" To="360" BeginTime="0:0:3.6" Duration="0:0:0.5" Storyboard.TargetName="Player2"/>
+        <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" To="3" BeginTime="0:0:1" Duration="0:0:1" Storyboard.TargetName="Player1" />
+        <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" To="4" BeginTime="0:0:2" Duration="0:0:1" Storyboard.TargetName="Player2" />
+        <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" To="4" BeginTime="0:0:3" Duration="0:0:1" Storyboard.TargetName="Player1" />
+        <DoubleAnimation Storyboard.TargetProperty="(Canvas.Left)" To="2" BeginTime="0:0:3" Duration="0:0:1" Storyboard.TargetName="Player1" />
+        <DoubleAnimation Storyboard.TargetProperty="(Canvas.Top)" To="9" BeginTime="0:0:3.6" Duration="0:0:0.5" Storyboard.TargetName="Player2" />
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Angle" To="360" BeginTime="0:0:3.6" Duration="0:0:0.5" Storyboard.TargetName="Player2" />
       </Storyboard>
-      <RotateTransform x:Key="RotateTransform"/>
+      <RotateTransform x:Key="RotateTransform" />
       <PathGeometry x:Key="Pawn" Figures="M2.5,82.5 L82.5,82.5 C80,75 75,65
 			    62.5,62.5 65,52.5 67.5,35
 			    52.5,27.5 58,22.5 58,17.5
@@ -24,35 +24,35 @@
 			    27,15 27,17.5 27,22.5
 			    32.5,27.5 17.5,35 20,52.5
 			    22.5,62.5 10,65 5,75
-			    2.5,82.5 z"/>
+			    2.5,82.5 z" />
     </Grid.Resources>
     <Grid.Triggers>
       <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-        <BeginStoryboard Storyboard="{StaticResource Move}"/>
+        <BeginStoryboard Storyboard="{StaticResource Move}" />
       </EventTrigger>
     </Grid.Triggers>
     <Grid>
-		  <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+      <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Viewbox>
           <UniformGrid Rows="8" Columns="8" Width="64" Height="64">
-            <Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/>
-            <Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/>
-            <Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/>
-            <Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/>
-            <Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/>
-            <Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/>
-            <Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/>
-            <Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/><Rectangle/><Rectangle Fill="{StaticResource DarkFieldBrush}"/>
+            <Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle />
+            <Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" />
+            <Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle />
+            <Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" />
+            <Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle />
+            <Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" />
+            <Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle />
+            <Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" />
           </UniformGrid>
         </Viewbox>
-		  </Border>
+      </Border>
       <Viewbox>
         <Canvas Width="8" Height="8">
           <Viewbox Width="1" Height="1" x:Name="Player2" Canvas.Top="5" Canvas.Left="2" RenderTransformOrigin="0.5,0.5" RenderTransform="{StaticResource RotateTransform}">
-            <Path Data="{StaticResource Pawn}" Width="85" Height="85" Margin="10" Fill="White" Stroke="Black" StrokeThickness="3"/>
+            <Path Data="{StaticResource Pawn}" Width="85" Height="85" Margin="10" Fill="White" Stroke="Black" StrokeThickness="3" />
           </Viewbox>
           <Viewbox Width="1" Height="1" x:Name="Player1" Canvas.Top="2" Canvas.Left="3">
-            <Path Data="{StaticResource Pawn}" Width="85" Height="85" Margin="10" Fill="Black" Stroke="Black" StrokeThickness="3"/>
+            <Path Data="{StaticResource Pawn}" Width="85" Height="85" Margin="10" Fill="Black" Stroke="Black" StrokeThickness="3" />
           </Viewbox>
         </Canvas>
       </Viewbox>

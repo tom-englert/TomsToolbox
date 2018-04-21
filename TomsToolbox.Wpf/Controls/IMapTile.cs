@@ -1,8 +1,8 @@
-using JetBrains.Annotations;
-
 namespace TomsToolbox.Wpf.Controls
 {
     using System.Diagnostics.CodeAnalysis;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Implemented by representations of a map tile.

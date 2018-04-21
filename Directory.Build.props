@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/tom-englert/TomsToolbox.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <LanguageTargets>$(MSBuildExtensionsPath)\$(VisualStudioVersion)\Bin\Microsoft.CSharp.targets</LanguageTargets>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
@@ -54,7 +54,7 @@
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="*" PrivateAssets="All" />
-    <PackageReference Include="SourceLink.Create.CommandLine" Version="*" PrivateAssets="All" /> 
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="*" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
@@ -65,5 +65,5 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  
+
 </Project>

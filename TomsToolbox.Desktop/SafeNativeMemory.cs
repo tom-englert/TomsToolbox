@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Desktop
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Runtime.InteropServices;
 
     using JetBrains.Annotations;

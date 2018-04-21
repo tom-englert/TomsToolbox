@@ -1,10 +1,8 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
-    using System.Diagnostics;
     using System;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Windows.Data;
     using System.Windows.Markup;

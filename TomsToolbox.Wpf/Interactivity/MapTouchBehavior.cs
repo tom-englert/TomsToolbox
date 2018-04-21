@@ -1,6 +1,5 @@
 ﻿namespace TomsToolbox.Wpf.Interactivity
 {
-    using System.Diagnostics.Contracts;
     using System.Windows.Interactivity;
 
     using JetBrains.Annotations;

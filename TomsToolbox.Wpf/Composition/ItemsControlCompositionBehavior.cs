@@ -3,7 +3,6 @@
     using System;
     using System.Collections;
     using System.ComponentModel;
-    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;

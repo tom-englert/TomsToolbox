@@ -1,7 +1,6 @@
 ﻿namespace SampleApp
 {
     using System.ComponentModel.Composition;
-    using System.Diagnostics.Contracts;
     using System.Windows;
 
     using JetBrains.Annotations;

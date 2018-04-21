@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Wpf.Interactivity
 {
     using System;
-    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls.Primitives;

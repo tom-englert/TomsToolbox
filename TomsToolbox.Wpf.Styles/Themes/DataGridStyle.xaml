@@ -228,11 +228,11 @@
       <Setter.Value>
         <toms:DataGridColumnStyleCollection>
           <toms:DataGridColumnStyle ColumnType="DataGridComboBoxColumn"
-                                   ElementStyle="{DynamicResource {x:Static styles:ResourceKeys.DataGridComboBoxElementStyle}}"
-                                   EditingElementStyle="{DynamicResource {x:Static styles:ResourceKeys.DataGridComboBoxEditingElementStyle}}" />
+                                    ElementStyle="{DynamicResource {x:Static styles:ResourceKeys.DataGridComboBoxElementStyle}}"
+                                    EditingElementStyle="{DynamicResource {x:Static styles:ResourceKeys.DataGridComboBoxEditingElementStyle}}" />
           <toms:DataGridColumnStyle ColumnType="DataGridCheckBoxColumn"
-                                   ElementStyle="{DynamicResource {x:Static styles:ResourceKeys.DataGridCheckBoxElementStyle}}"
-                                   EditingElementStyle="{DynamicResource {x:Static styles:ResourceKeys.DataGridCheckBoxEditingElementStyle}}" />
+                                    ElementStyle="{DynamicResource {x:Static styles:ResourceKeys.DataGridCheckBoxElementStyle}}"
+                                    EditingElementStyle="{DynamicResource {x:Static styles:ResourceKeys.DataGridCheckBoxEditingElementStyle}}" />
         </toms:DataGridColumnStyleCollection>
       </Setter.Value>
     </Setter>

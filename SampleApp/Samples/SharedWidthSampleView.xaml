@@ -32,7 +32,7 @@
       </StackPanel>
     </Grid>
     <StackPanel Margin="10" Grid.IsSharedSizeScope="True">
-      <TextBlock Text="Demonstration of the SharedWidthHeaderedContentControl and the SharedWidthContainerStyle" TextWrapping="Wrap"/>
+      <TextBlock Text="Demonstration of the SharedWidthHeaderedContentControl and the SharedWidthContainerStyle" TextWrapping="Wrap" />
       <Decorator Height="10" />
       <TextBlock Text="Edit the text to see the effect" />
       <Decorator Height="10" />

@@ -49,7 +49,7 @@
               <ContentControl DockPanel.Dock="Left" Style="{DynamicResource {x:Static local:ResourceKeys.SharedWidthContainerStyle}}"
                               Margin="{TemplateBinding HeaderPadding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                               Content="{TemplateBinding Header}" ContentStringFormat="{TemplateBinding HeaderStringFormat}"
-                              ContentTemplate="{TemplateBinding HeaderTemplate}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"/>
+                              ContentTemplate="{TemplateBinding HeaderTemplate}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}" />
               <Decorator DockPanel.Dock="Left" Width="10" />
               <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}"
@@ -279,14 +279,14 @@
                   <controls:PixelSnapper Viewport="{Binding ElementName=PART_Viewport}">
                     <Grid>
                       <controls:MapTile x:Name="PART_World"
-                                             Viewport="{Binding ElementName=PART_Viewport}"
-                                             ImageProvider="{TemplateBinding ImageProvider}" />
+                                        Viewport="{Binding ElementName=PART_Viewport}"
+                                        ImageProvider="{TemplateBinding ImageProvider}" />
                       <controls:MapTile Viewport="{Binding ElementName=PART_Viewport}"
-                                             ImageProvider="{TemplateBinding ImageProvider}"
-                                             RenderTransform="{StaticResource LeftShadowOffsetTransform}" />
+                                        ImageProvider="{TemplateBinding ImageProvider}"
+                                        RenderTransform="{StaticResource LeftShadowOffsetTransform}" />
                       <controls:MapTile Viewport="{Binding ElementName=PART_Viewport}"
-                                             ImageProvider="{TemplateBinding ImageProvider}"
-                                             RenderTransform="{StaticResource RightShadowOffsetTransform}" />
+                                        ImageProvider="{TemplateBinding ImageProvider}"
+                                        RenderTransform="{StaticResource RightShadowOffsetTransform}" />
                     </Grid>
                   </controls:PixelSnapper>
                 </Grid>
@@ -301,7 +301,7 @@
 
   <ControlTemplate x:Key="MenuGroupItemTemplate" TargetType="{x:Type GroupItem}">
     <StackPanel>
-      <Separator Style="{DynamicResource {x:Static MenuItem.SeparatorStyleKey}}"/>
+      <Separator Style="{DynamicResource {x:Static MenuItem.SeparatorStyleKey}}" />
       <ItemsPresenter />
     </StackPanel>
   </ControlTemplate>
@@ -313,10 +313,10 @@
   <GroupStyle x:Key="MenuGroupStyle">
     <GroupStyle.ContainerStyle>
       <Style TargetType="GroupItem">
-        <Setter Property="Template" Value="{StaticResource MenuGroupItemTemplate}"/>
+        <Setter Property="Template" Value="{StaticResource MenuGroupItemTemplate}" />
         <Style.Triggers>
           <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
-            <Setter Property="Template" Value="{StaticResource FirstMenuGroupItemTemplate}"/>
+            <Setter Property="Template" Value="{StaticResource FirstMenuGroupItemTemplate}" />
           </DataTrigger>
         </Style.Triggers>
       </Style>
@@ -324,54 +324,54 @@
   </GroupStyle>
 
   <Style x:Key="CompositeMenuItemStyle" TargetType="{x:Type MenuItem}">
-    <Setter Property="Header" Value="{Binding Header}"/>
-    <Setter Property="Icon" Value="{Binding Icon, Converter={x:Static converters:ImageSourceToImageConverter.Default}}"/>
-    <Setter Property="ToolTip" Value="{Binding Description}"/>
-    <Setter Property="IsCheckable" Value="{Binding IsCheckable}"/>
-    <Setter Property="local:StyleBindings.GroupStyle" Value="{StaticResource MenuGroupStyle}"/>
+    <Setter Property="Header" Value="{Binding Header}" />
+    <Setter Property="Icon" Value="{Binding Icon, Converter={x:Static converters:ImageSourceToImageConverter.Default}}" />
+    <Setter Property="ToolTip" Value="{Binding Description}" />
+    <Setter Property="IsCheckable" Value="{Binding IsCheckable}" />
+    <Setter Property="local:StyleBindings.GroupStyle" Value="{StaticResource MenuGroupStyle}" />
     <Setter Property="local:StyleBindings.GroupDescriptions">
       <Setter.Value>
         <local:GroupDescriptionCollection>
-          <PropertyGroupDescription PropertyName="GroupName"/>
+          <PropertyGroupDescription PropertyName="GroupName" />
         </local:GroupDescriptionCollection>
       </Setter.Value>
     </Setter>
     <Setter Property="local:StyleBindings.Behaviors">
       <Setter.Value>
         <local:BehaviorCollection>
-          <composition:ItemsControlCompositionBehavior RegionIdBinding="{Binding SubRegionId}"/>
+          <composition:ItemsControlCompositionBehavior RegionIdBinding="{Binding SubRegionId}" />
         </local:BehaviorCollection>
       </Setter.Value>
     </Setter>
     <Style.Triggers>
       <DataTrigger Binding="{Binding IsCheckable}" Value="True">
-        <Setter Property="IsChecked" Value="{Binding IsChecked}"/>
+        <Setter Property="IsChecked" Value="{Binding IsChecked}" />
       </DataTrigger>
       <Trigger Property="Role" Value="SubmenuItem">
-        <Setter Property="Command" Value="{Binding Command}"/>
+        <Setter Property="Command" Value="{Binding Command}" />
       </Trigger>
       <Trigger Property="Role" Value="TopLevelItem">
-        <Setter Property="Command" Value="{Binding Command}"/>
+        <Setter Property="Command" Value="{Binding Command}" />
       </Trigger>
     </Style.Triggers>
   </Style>
 
   <Style TargetType="{x:Type controls:CompositeContextMenu}" BasedOn="{StaticResource {x:Type ContextMenu}}">
-    <Setter Property="local:StyleBindings.GroupStyle" Value="{StaticResource MenuGroupStyle}"/>
+    <Setter Property="local:StyleBindings.GroupStyle" Value="{StaticResource MenuGroupStyle}" />
     <Setter Property="local:StyleBindings.GroupDescriptions">
       <Setter.Value>
         <local:GroupDescriptionCollection>
-          <PropertyGroupDescription PropertyName="GroupName"/>
+          <PropertyGroupDescription PropertyName="GroupName" />
         </local:GroupDescriptionCollection>
       </Setter.Value>
     </Setter>
-    <Setter Property="ItemContainerStyle" Value="{StaticResource CompositeMenuItemStyle}"/>
+    <Setter Property="ItemContainerStyle" Value="{StaticResource CompositeMenuItemStyle}" />
   </Style>
 
   <Style x:Key="{ComponentResourceKey {x:Type local:ResourceKeys}, {x:Static local:ResourceKeys.CompositeMenuStyleKeyName}}" TargetType="{x:Type Menu}">
-    <Setter Property="ItemContainerStyle" Value="{StaticResource CompositeMenuItemStyle}"/>
+    <Setter Property="ItemContainerStyle" Value="{StaticResource CompositeMenuItemStyle}" />
   </Style>
-  
+
   <Style TargetType="{x:Type controls:Icon}">
     <Setter Property="Template">
       <Setter.Value>

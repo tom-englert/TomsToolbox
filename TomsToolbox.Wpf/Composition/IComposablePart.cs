@@ -1,9 +1,9 @@
-﻿using JetBrains.Annotations;
-
-namespace TomsToolbox.Wpf.Composition
+﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+
+    using JetBrains.Annotations;
 
     /// <summary>
     /// Interface to be implemented by all objects supporting visual composition.

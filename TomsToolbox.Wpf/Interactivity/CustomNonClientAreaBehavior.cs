@@ -3,7 +3,6 @@
     using System;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Runtime.InteropServices;
     using System.Windows;
     using System.Windows.Interactivity;

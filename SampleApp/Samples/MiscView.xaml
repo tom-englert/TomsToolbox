@@ -9,7 +9,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              d:DataContext="{d:DesignInstance samples:MiscViewModel}">
   <UserControl.Resources>
-    <toms:DateTimeSource UpdateInterval="00:00:01" x:Key="LiveDateTime"/>
+    <toms:DateTimeSource UpdateInterval="00:00:01" x:Key="LiveDateTime" />
   </UserControl.Resources>
   <ScrollViewer VerticalScrollBarVisibility="Auto">
     <StackPanel Margin="10">
@@ -66,7 +66,7 @@
                      VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" />
         </Grid>
         <i:Interaction.Triggers>
-          <toms:TimerTrigger Interval="00:00:01" >
+          <toms:TimerTrigger Interval="00:00:01">
             <toms:UpdatePropertyAction TargetName="Time" Property="{x:Static TextBlock.TextProperty}" />
           </toms:TimerTrigger>
         </i:Interaction.Triggers>
@@ -75,36 +75,36 @@
         <StackPanel>
           <StackPanel.Resources>
             <Style TargetType="TextBlock">
-              <Setter Property="VerticalAlignment" Value="Center"/>
+              <Setter Property="VerticalAlignment" Value="Center" />
             </Style>
             <toms:CompositeMultiValueConverter x:Key="ThresholdConverter">
               <toms:CompositeMultiValueConverter.MultiValueConverter>
                 <toms:AggregatingMultiValueConverter>
-                  <toms:BinaryOperationConverter Operation="Subtraction"/>
-                  <toms:BinaryOperationConverter Operation="LessThanOrEqual"/>
+                  <toms:BinaryOperationConverter Operation="Subtraction" />
+                  <toms:BinaryOperationConverter Operation="LessThanOrEqual" />
                 </toms:AggregatingMultiValueConverter>
               </toms:CompositeMultiValueConverter.MultiValueConverter>
-              <toms:BooleanToVisibilityConverter/>
+              <toms:BooleanToVisibilityConverter />
             </toms:CompositeMultiValueConverter>
           </StackPanel.Resources>
           <StackPanel Orientation="Horizontal" Margin="5">
-            <TextBlock Text="Start time: "/>
-            <TextBox Text="{Binding OperationStarted, UpdateSourceTrigger=PropertyChanged}"/>
-            <Decorator Width="20"/>
-            <TextBlock Text="Min. Duration: "/>
-            <TextBox Text="{Binding MinimumDuration, UpdateSourceTrigger=PropertyChanged}"/>
-            <Decorator Width="20"/>
-            <TextBlock Text="The threshold is "/>
+            <TextBlock Text="Start time: " />
+            <TextBox Text="{Binding OperationStarted, UpdateSourceTrigger=PropertyChanged}" />
+            <Decorator Width="20" />
+            <TextBlock Text="Min. Duration: " />
+            <TextBox Text="{Binding MinimumDuration, UpdateSourceTrigger=PropertyChanged}" />
+            <Decorator Width="20" />
+            <TextBlock Text="The threshold is " />
             <TextBlock x:Name="ThresholdText" Text="NOT " FontWeight="Bold">
               <TextBlock.Visibility>
                 <MultiBinding Converter="{StaticResource ThresholdConverter}">
-                  <Binding Path="Now" Source="{StaticResource LiveDateTime}"/>
+                  <Binding Path="Now" Source="{StaticResource LiveDateTime}" />
                   <Binding Path="OperationStarted" />
                   <Binding Path="MinimumDuration" />
                 </MultiBinding>
               </TextBlock.Visibility>
             </TextBlock>
-            <TextBlock Text="reached."/>
+            <TextBlock Text="reached." />
           </StackPanel>
         </StackPanel>
       </HeaderedContentControl>
@@ -147,10 +147,10 @@
       <HeaderedContentControl Header="InPlaceEdit standalone" Focusable="False">
         <StackPanel Margin="5">
           <Border Margin="5" Padding="3,2" BorderThickness="1" BorderBrush="Gray">
-            <toms:InPlaceEdit Text="left aligned text"/>
+            <toms:InPlaceEdit Text="left aligned text" />
           </Border>
           <Border Margin="5" Padding="3,2" BorderThickness="1" BorderBrush="Gray">
-            <toms:InPlaceEdit TextAlignment="Right" Text="right aligned text"/>
+            <toms:InPlaceEdit TextAlignment="Right" Text="right aligned text" />
           </Border>
         </StackPanel>
       </HeaderedContentControl>
@@ -162,12 +162,12 @@
                 <ListBox Margin="2" toms:ItemsControlExtensions.DefaultItemCommand="{Binding DataContext.ItemsControlDefaultCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" BorderThickness="0" Background="{x:Null}">
                   <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                      <StackPanel Orientation="Horizontal"/>                      
+                      <StackPanel Orientation="Horizontal" />
                     </ItemsPanelTemplate>
                   </ListBox.ItemsPanel>
                   <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
-                      <Setter Property="Margin" Value="10"/>
+                      <Setter Property="Margin" Value="10" />
                     </Style>
                   </ListBox.ItemContainerStyle>
                   <system:String>Inner1</system:String>
@@ -182,8 +182,8 @@
         </StackPanel>
       </HeaderedContentControl>
       <HeaderedContentControl Header="Memory testing">
-        <Button Content="GC Collect" Margin="10" Command="{Binding GCCollectCommand}"/>
+        <Button Content="GC Collect" Margin="10" Command="{Binding GCCollectCommand}" />
       </HeaderedContentControl>
     </StackPanel>
   </ScrollViewer>
-</UserControl> 
+</UserControl>
