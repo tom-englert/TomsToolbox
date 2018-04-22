@@ -8,7 +8,7 @@
 
     using JetBrains.Annotations;
 
-#if NETFRAMEWORK_4_5
+#if NET45
     using System.Collections;
     using TomsToolbox.Core;
 #endif
@@ -25,7 +25,7 @@
     /// </example>
     /// <remarks>When using the net45 package, INotifyDataErrorInfo is supported as well.</remarks>
     public class ValidationTemplate : IDataErrorInfo
-#if NETFRAMEWORK_4_5
+#if NET45
         , INotifyDataErrorInfo
 #endif
     {
@@ -58,7 +58,7 @@
 
             Validator.TryValidateObject(_target, _validationContext, _validationResults, true);
 
-#if NETFRAMEWORK_4_5
+#if NET45
 
             _validationResults
                 .SelectMany(x => x.MemberNames)
@@ -95,7 +95,7 @@
             }
         }
 
-#if NETFRAMEWORK_4_5
+#if NET45
 
         /// <summary>
         /// Raised when the errors for a property has changed.

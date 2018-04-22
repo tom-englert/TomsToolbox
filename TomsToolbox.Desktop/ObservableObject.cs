@@ -25,7 +25,7 @@
     /// </remarks>
     [Serializable]
     public abstract class ObservableObjectBase : INotifyPropertyChanged, IDataErrorInfo
-#if NETFRAMEWORK_4_5
+#if NET45
         , INotifyDataErrorInfo
 #endif
     {
@@ -181,7 +181,7 @@
         /// <returns>True if value has changed and the PropertyChange event was raised. </returns>
         [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
-#if NETFRAMEWORK_4_5
+#if NET45
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
 #else
@@ -234,7 +234,7 @@
         [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Action<T, T> changeCallback,
-#if !NETFRAMEWORK_4_5
+#if !NET45
             [NotNull] string propertyName)
 #else
             [System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
@@ -250,7 +250,7 @@
         /// <param name="propertyName">Name of the property; <c>.Net 4.5 only:</c> omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This pattern is required by the CallerMemberName attribute.")]
         [NotifyPropertyChangedInvocator]
-#if NETFRAMEWORK_4_5
+#if NET45
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         protected void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
 #else
@@ -370,7 +370,7 @@
             DetachEventSources();
         }
 
-#if NETFRAMEWORK_4_5
+#if NET45
         private event EventHandler<DataErrorsChangedEventArgs> _errorsChanged;
 
         /// <summary>
