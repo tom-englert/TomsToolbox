@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.69.0</para>
+            <list class="bullet">
+              <listItem><para>Fix: missing 4.5 extensions in TomsToolbox.Desktop</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.68.0</para>
             <list class="bullet">
               <listItem><para>Add an icon control that dynamically displays the image best fitting the actual size.</para></listItem>
