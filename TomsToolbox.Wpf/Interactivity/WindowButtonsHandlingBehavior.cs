@@ -28,6 +28,9 @@
             if (window.ResizeMode == ResizeMode.NoResize)
                 return;
 
+            // to ensure min/max/restore buttons are updated correctly.
+            window.StateChanged += (_, __) => CommandManager.InvalidateRequerySuggested();
+
             window.CommandBindings.Add(new CommandBinding(WindowCommands.Minimize, Minimize));
             window.CommandBindings.Add(new CommandBinding(WindowCommands.Maximize, Maximize, CanMaximize));
             window.CommandBindings.Add(new CommandBinding(WindowCommands.Restore, Restore, CanRestore));
