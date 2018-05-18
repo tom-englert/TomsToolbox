@@ -269,7 +269,6 @@
 
         private void Unregister([NotNull] Window window)
         {
-
             var messageSource = (HwndSource)PresentationSource.FromDependencyObject(window);
 
             messageSource?.RemoveHook(WindowProc);
@@ -288,13 +287,19 @@
                         var before = PtrToStructure<RECT>(lParam);
                         NativeMethods.DefWindowProc(windowHandle, WM_NCCALCSIZE, wParam, lParam);
                         var after = PtrToStructure<RECT>(lParam);
+
+                        // Fix for taskbar: taskbar location = bottom, auto hide taskbar, show taskbar on all displays, 3 displays active => on main monitor the task bar does not restore when hovering with the mouse.
+                        var monitorinfo = MonitorInfoFromWindow(windowHandle);
+                        if (monitorinfo.rcMonitor.Height == monitorinfo.rcWork.Height && monitorinfo.rcMonitor.Width == monitorinfo.rcWork.Width)
+                        {
+                            --after.Bottom;
+                        }
+
                         after.Top = before.Top + (int)windowInfo.cyWindowBorders;
 
                         if ((windowInfo.dwExStyle & WS_EX_CLIENTEDGE) != 0)
                         {
                             var x = NativeMethods.GetSystemMetrics(SM_CXEDGE);
-                            var y = NativeMethods.GetSystemMetrics(SM_CYEDGE);
-                            after.Bottom += y;
                             after.Right += 2 * x;
                             after.Left -= x;
                         }
