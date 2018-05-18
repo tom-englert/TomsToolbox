@@ -505,6 +505,7 @@
                 return ((Rect)this).ToString();
             }
         }
+
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
         private struct POINT
         {
@@ -542,6 +543,7 @@
                 return ((Point)this).ToString();
             }
         }
+
         [StructLayout(LayoutKind.Sequential, Pack = 0)]
         private struct SIZE
         {

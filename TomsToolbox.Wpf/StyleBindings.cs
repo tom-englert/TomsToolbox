@@ -123,7 +123,6 @@
         [CanBeNull, ItemNotNull]
         public static GroupStyleCollection GetGroupStyles([NotNull] DependencyObject obj)
         {
-
             return (GroupStyleCollection)obj.GetValue(GroupStylesProperty);
         }
         /// <summary>
@@ -133,7 +132,6 @@
         /// <param name="value">The group styles.</param>
         public static void SetGroupStyles([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] GroupStyleCollection value)
         {
-
             obj.SetValue(GroupStylesProperty, value);
         }
         /// <summary>
@@ -184,7 +182,6 @@
         [CanBeNull]
         public static GroupStyle GetGroupStyle([NotNull] DependencyObject obj)
         {
-
             return (GroupStyle)obj.GetValue(GroupStyleProperty);
         }
         /// <summary>
@@ -194,7 +191,6 @@
         /// <param name="value">The group style.</param>
         public static void SetGroupStyle([NotNull] DependencyObject obj, [CanBeNull] GroupStyle value)
         {
-
             obj.SetValue(GroupStyleProperty, value);
         }
         /// <summary>
@@ -244,7 +240,6 @@
         [CanBeNull, ItemNotNull]
         public static GroupDescriptionCollection GetGroupDescriptions([NotNull] DependencyObject obj)
         {
-
             return (GroupDescriptionCollection)obj.GetValue(GroupDescriptionsProperty);
         }
         /// <summary>
@@ -254,7 +249,6 @@
         /// <param name="value">The group descriptions.</param>
         public static void SetGroupDescriptions([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] ICollection<GroupDescription> value)
         {
-
             obj.SetValue(GroupDescriptionsProperty, value);
         }
         /// <summary>
