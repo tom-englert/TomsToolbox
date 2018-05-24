@@ -57,7 +57,7 @@
                 _zoomLevel = parent.ZoomLevel + 1;
             }
 
-            InitializeComponent();
+            Initialize();
 
             Loaded += (_, __) =>
             {
@@ -204,7 +204,7 @@
             }
         }
 
-        private void InitializeComponent()
+        private void Initialize()
         {
             Stretch = Stretch.Uniform;
 
