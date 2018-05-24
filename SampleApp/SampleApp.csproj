@@ -29,7 +29,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>https://clickonce-tom-englert.azurewebsites.net/TomsToolbox/</InstallUrl>
-    <SupportUrl>https://tomstoolbox.codeplex.com/workitem/list/basic</SupportUrl>
+    <SupportUrl>https://github.com/tom-englert/TomsToolbox/issues</SupportUrl>
     <ProductName>Tom%27s Toolbox</ProductName>
     <PublisherName>tom-englert</PublisherName>
     <ApplicationRevision>0</ApplicationRevision>
