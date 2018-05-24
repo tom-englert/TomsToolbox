@@ -5,6 +5,8 @@
     using System.ComponentModel.Composition.Hosting;
     using System.ComponentModel.Composition.Registration;
     using System.Globalization;
+    using System.Linq;
+    using System.Reflection;
     using System.Windows;
     using System.Windows.Data;
     using System.Windows.Markup;
@@ -42,7 +44,15 @@
             context.ForTypesDerivedFrom<FrameworkElement>()?.SetCreationPolicy(CreationPolicy.NonShared);
             // To demonstrate the ImportExtension with value converters.
             context.ForTypesDerivedFrom<IValueConverter>()?.Export();
-            _compositionHost.AddCatalog(new ApplicationCatalog(context));
+            try
+            {
+                _compositionHost.AddCatalog(new ApplicationCatalog(context));
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                MessageBox.Show(ex.Message + "\n" + string.Join("\n", ex.LoaderExceptions.Select(le => le.Message)));
+            }
+
 
             var dataTemplateResources = DataTemplateManager.CreateDynamicDataTemplates(_compositionHost.Container);
             Resources.MergedDictionaries.Add(dataTemplateResources);
