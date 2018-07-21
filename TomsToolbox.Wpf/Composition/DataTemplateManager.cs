@@ -194,9 +194,7 @@
         [CanBeNull]
         private static IDataTemplateMetadata GetMetadataView([CanBeNull] Lazy<object, object> item)
         {
-            var metadataDictionary = item?.Metadata as IDictionary<string, object>;
-
-            return metadataDictionary == null ? null : AttributedModelServices.GetMetadataView<IDataTemplateMetadata>(metadataDictionary);
+            return item?.Metadata is IDictionary<string, object> metadataDictionary ? AttributedModelServices.GetMetadataView<IDataTemplateMetadata>(metadataDictionary) : null;
         }
 
         [NotNull]
@@ -205,15 +203,13 @@
 
             // Ensure views are created non-shared!
 
-            var metadata = export.Metadata as IDictionary<string, object>;
-            object value;
             // ReSharper disable once AssignNullToNotNullAttribute
-            if ((metadata != null) && metadata.TryGetValue(typeof(CreationPolicy).FullName, out value) && CreationPolicy.NonShared.Equals(value))
+            if ((export.Metadata is IDictionary<string, object> metadata) && metadata.TryGetValue(typeof(CreationPolicy).FullName, out var value) && CreationPolicy.NonShared.Equals(value))
                 return export;
 
             var target = export.Value;
             var typeName = target?.GetType().Name ?? "<null>";
-            var message = "Creation policy of views must be CreationPolicy.NonShared: " + typeName;
+            var message = "Creation policy of views should be CreationPolicy.NonShared: " + typeName;
 
             Trace.TraceError(message);
 

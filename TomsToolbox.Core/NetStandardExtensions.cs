@@ -9,7 +9,7 @@
     /// <summary>
     /// Some emulations of .NetStandard methods
     /// </summary>
-    public static class NetStandardExtensions
+    internal static class NetStandardExtensions
     {
         /// <summary>
         /// Gets the method information from a delegate.
