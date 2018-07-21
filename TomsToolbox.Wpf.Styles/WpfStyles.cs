@@ -1,13 +1,15 @@
 ﻿namespace TomsToolbox.Wpf.Styles
 {
     using System;
-    using System.Diagnostics.Contracts;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.Linq;
     using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Interop;
+    using System.Windows.Markup;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using System.Windows.Threading;
@@ -26,12 +28,10 @@
         /// <returns>
         /// A resource dictionary containing the default styles.
         /// </returns>
-        [ContractVerification(false)]
         [NotNull, ItemCanBeNull]
+        [Obsolete("Use GetDefaultStyles() and RegisterDefaultWindowStyle() instead.", true)]
         public static ResourceDictionary Defaults([NotNull] Window helperWindow)
         {
-            Contract.Requires(helperWindow != null);
-            Contract.Ensures(Contract.Result<ResourceDictionary>() != null);
 
             var baseStyles = typeof(ResourceKeys)
                 .GetFields()
@@ -71,15 +71,87 @@
         /// A resource dictionary containing the default styles.
         /// </returns>
         [NotNull, ItemCanBeNull]
+        [Obsolete("Use GetDefaultStyles() and RegisterDefaultWindowStyle() instead.", true)]
         public static ResourceDictionary Defaults()
         {
-            Contract.Ensures(Contract.Result<ResourceDictionary>() != null);
-
             var helperWindow = new Window();
 
             helperWindow.BeginInvoke(DispatcherPriority.Background, helperWindow.Close);
 
             return Defaults(helperWindow);
+        }
+
+        /// <summary>
+        /// Returns a resource dictionary with the default styles for the window and the common controls.
+        /// </summary>
+        /// <returns>
+        /// A resource dictionary containing the default styles.
+        /// </returns>
+        /// <remarks>
+        /// Typical usage is:
+        /// <code language="C#"><![CDATA[
+        /// Resources.MergedDictionaries.Add(GetDefaultStyles());
+        /// ]]></code></remarks>
+        [NotNull, ItemCanBeNull]
+        public static ResourceDictionary GetDefaultStyles()
+        {
+            var resourceKeysType = typeof(ResourceKeys);
+
+            var baseStyleKeys = resourceKeysType
+                .GetFields()
+                .Where(field => field != null)
+                .Where(field => field.GetCustomAttributes<DefaultStyleAttribute>(false).Any());
+
+            var styleFragments = baseStyleKeys.Select(GenerateDefaultStyleFragment).ToList();
+
+            styleFragments.Add("<Style x:Key=\"{x:Static MenuItem.SeparatorStyleKey}\" TargetType=\"Separator\" BasedOn=\"{StaticResource {x:Static styles:ResourceKeys.MenuItemSeparatorStyle}}\" />");
+
+            var xaml = string.Format(CultureInfo.InvariantCulture, "<ResourceDictionary>\n{0}\n</ResourceDictionary>", string.Join("\n", styleFragments));
+
+            var xamlTypeMapper = new XamlTypeMapper(new string[0]);
+            xamlTypeMapper.AddMappingProcessingInstruction("styles", resourceKeysType.Namespace, resourceKeysType.Assembly.FullName);
+
+            var context = new ParserContext { XamlTypeMapper = xamlTypeMapper };
+
+            context.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
+            context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
+            context.XmlnsDictionary.Add("styles", "styles");
+
+            // ReSharper disable once AssignNullToNotNullAttribute
+            return (ResourceDictionary)XamlReader.Parse(xaml, context);
+        }
+
+        /// <summary>
+        /// Registers the default window style from the window style found in the specified <paramref name="resourceDictionary"/>.
+        /// </summary>
+        /// <param name="resourceDictionary">The resource dictionary containing the window style.</param>
+        /// <returns>The <paramref name="resourceDictionary"/> to enable fluent notation.</returns>
+        /// <remarks>
+        /// Typical usage is:
+        /// <code language="C#"><![CDATA[
+        /// Resources.MergedDictionaries.Add(GetDefaultStyles().RegisterDefaultWindowStyle());
+        /// ]]></code></remarks>
+        [NotNull, ItemCanBeNull]
+        public static ResourceDictionary RegisterDefaultWindowStyle([NotNull] this ResourceDictionary resourceDictionary)
+        {
+            //// ReSharper disable once PossibleNullReferenceException
+            FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata(resourceDictionary[typeof(Window)]));
+
+            return resourceDictionary;
+        }
+
+
+        [NotNull]
+        private static string GenerateDefaultStyleFragment([NotNull] FieldInfo field)
+        {
+            const string styleNameSuffix = "Style";
+            var fieldName = field.Name;
+
+            Debug.Assert(fieldName.EndsWith(styleNameSuffix));
+
+            var typeName = fieldName.Substring(0, fieldName.Length - styleNameSuffix.Length);
+
+            return string.Format(CultureInfo.InvariantCulture, "<Style TargetType=\"{0}\" BasedOn=\"{{StaticResource {{x:Static styles:ResourceKeys.{0}Style}}}}\" />", typeName);
         }
 
         /// <summary>
@@ -146,7 +218,6 @@
                 }
             }
         }
-
     }
 
     [AttributeUsage(AttributeTargets.Field)]

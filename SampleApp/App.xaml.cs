@@ -54,10 +54,8 @@
             }
 
 
-            var dataTemplateResources = DataTemplateManager.CreateDynamicDataTemplates(_compositionHost.Container);
-            Resources.MergedDictionaries.Add(dataTemplateResources);
-
-            Resources.MergedDictionaries.Insert(0, WpfStyles.Defaults());
+            Resources.MergedDictionaries.Insert(0, WpfStyles.GetDefaultStyles().RegisterDefaultWindowStyle());
+            Resources.MergedDictionaries.Add(DataTemplateManager.CreateDynamicDataTemplates(_compositionHost.Container));
 
             MainWindow = _compositionHost.GetExportedValue<MainWindow>();
             MainWindow.Show();
