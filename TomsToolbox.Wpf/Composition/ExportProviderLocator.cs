@@ -49,7 +49,6 @@
         [CanBeNull]
         public static ExportProvider TryGetExportProvider([NotNull] this DependencyObject obj)
         {
-
             return (ExportProvider)obj.GetValue(ExportProviderProperty);
         }
         /// <summary>

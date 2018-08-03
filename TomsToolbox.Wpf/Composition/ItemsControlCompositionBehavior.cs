@@ -9,6 +9,8 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Wpf.XamlExtensions;
+
     /// <inheritdoc />
     /// <summary>
     /// Retrieves all exported items with the  <see cref="T:TomsToolbox.Wpf.Composition.VisualCompositionExportAttribute" /> that match the RegionId from the composition container and assigns them as the items source of the associated <see cref="T:System.Windows.Controls.ItemsControl" />
@@ -40,6 +42,8 @@
             var itemsControl = AssociatedObject;
             var selector = itemsControl as Selector;
 
+            VisualComposition.OnTrace(this, $"Update {GetType()}, RegionId={regionId}, ItemsControl={itemsControl}");
+
             if (itemsControl == null)
                 return;
 
@@ -51,12 +55,17 @@
 
             var exports = GetExports(regionId);
             if (exports == null)
+            {
+                VisualComposition.OnTrace(this, $"Update {GetType()}: No exports for RegionId={regionId} found");
                 return;
+            }
 
             var exportedItems = exports
                 .OrderBy(item => item.Metadata?.Sequence)
                 .Select(item => GetTarget(item.Value))
                 .ToArray();
+
+            VisualComposition.OnTrace(this, $"Update {GetType()}, Found {exportedItems.Length} items");
 
             // ReSharper disable once AssignNullToNotNullAttribute
             var currentItems = itemsControl.Items.Cast<object>().ToArray();

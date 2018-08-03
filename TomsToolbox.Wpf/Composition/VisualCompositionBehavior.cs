@@ -159,6 +159,8 @@
         {
             base.OnAttached();
 
+            VisualComposition.OnTrace(this, $"Attached {GetType()} to {AssociatedObject?.GetType()}");
+
             if (RegionIdBinding != null)
                 BindingOperations.SetBinding(this, RegionIdProperty, RegionIdBinding);
 
@@ -176,15 +178,24 @@
         /// <inheritdoc />
         protected override void OnAssociatedObjectLoaded()
         {
-            base.OnAssociatedObjectLoaded();
-
-            if (_exportProviderChangeTracker != null)
+            try
             {
-                _exportProviderChangeTracker.Changed -= ExportProvider_Changed;
-                _exportProviderChangeTracker.Changed += ExportProvider_Changed;
-            }
+                base.OnAssociatedObjectLoaded();
 
-            ExportProvider = AssociatedObject?.TryGetExportProvider();
+                if (_exportProviderChangeTracker != null)
+                {
+                    _exportProviderChangeTracker.Changed -= ExportProvider_Changed;
+                    _exportProviderChangeTracker.Changed += ExportProvider_Changed;
+                }
+
+                ExportProvider = AssociatedObject?.TryGetExportProvider();
+
+                VisualComposition.OnTrace(this, $"AssociatedObject loaded, export provider is {ExportProvider?.GetType()}");
+            }
+            catch (Exception ex)
+            {
+                VisualComposition.OnError(this, ex);
+            }
         }
 
         /// <inheritdoc />
@@ -196,6 +207,8 @@
                 _exportProviderChangeTracker.Changed -= ExportProvider_Changed;
 
             ExportProvider = null;
+
+            VisualComposition.OnTrace(this, "AssociatedObject unloaded");
         }
 
         /// <summary>
@@ -265,6 +278,7 @@
 
         private void RegionId_Changed()
         {
+            VisualComposition.OnTrace(this, "RegionId changed: " + RegionId);
             Update();
         }
 
@@ -279,6 +293,9 @@
         private void ExportProvider_Changed([CanBeNull] object sender, [CanBeNull] EventArgs e)
         {
             ExportProvider = AssociatedObject?.TryGetExportProvider();
+
+            VisualComposition.OnTrace(this, "ExportProvider changed: " + ExportProvider?.GetType());
+            
             _deferredUpdateThrottle.Tick();
         }
     }

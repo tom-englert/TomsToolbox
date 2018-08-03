@@ -6,6 +6,8 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Wpf.XamlExtensions;
+
     /// <summary>
     /// Retrieves the exported object that matches RegionId and Role from the composition container
     /// and assigns it as the content of the associated <see cref="ContentControl"/>
@@ -32,6 +34,7 @@
 
         private void Role_Changed()
         {
+            VisualComposition.OnTrace(this, "Role changed: " + Role);
             Update();
         }
 
@@ -44,6 +47,8 @@
             var role = Role;
             var contentControl = AssociatedObject;
 
+            VisualComposition.OnTrace(this, $"Update {GetType()}, RegionId={regionId}, Role={role}, ContentControl={contentControl}");
+
             if (contentControl == null)
                 return;
 
@@ -53,7 +58,10 @@
             {
                 var exports = GetExports(regionId);
                 if (exports == null)
+                {
+                    VisualComposition.OnTrace(this, $"Update {GetType()}: No exports for RegionId={regionId} found");
                     return;
+                }
 
                 exportedItem = exports
                     .Where(item => DataTemplateManager.RoleEquals(item.Metadata?.Role, role))
@@ -61,12 +69,13 @@
                     .FirstOrDefault();
             }
 
+            VisualComposition.OnTrace(this, $"Update {contentControl.GetType()}, Content={exportedItem?.GetType()}");
+
             UpdateContent(contentControl, exportedItem);
         }
 
         private void UpdateContent([NotNull] ContentControl contentControl, [CanBeNull] object targetItem)
         {
-
             var currentItem = contentControl.Content;
 
             if (targetItem != currentItem)

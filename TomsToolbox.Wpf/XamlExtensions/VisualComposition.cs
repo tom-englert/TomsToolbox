@@ -26,6 +26,10 @@
         /// Occurs when the visual composition framework has detected an error.
         /// </summary>
         public static event EventHandler<TextEventArgs> Error;
+        /// <summary>
+        /// Occurs when the visual compositing framework logs some action.
+        /// </summary>
+        public static event EventHandler<TextEventArgs> Trace;
 
         internal static void OnError([CanBeNull] object sender, [NotNull] Exception ex)
         {
@@ -39,6 +43,11 @@
             PresentationTraceSources.DataBindingSource?.TraceEvent(TraceEventType.Error, ErrorNumber, message);
 
             Error?.Invoke(sender, new TextEventArgs(message));
+        }
+
+        internal static void OnTrace([CanBeNull] object sender, [NotNull] string message)
+        {
+            Trace?.Invoke(sender, new TextEventArgs(message));
         }
 
         /// <summary>
@@ -84,7 +93,7 @@
                 .ElseThrow();
         }
 
-        private static void SetRegionIdInternal<T>([CanBeNull] DependencyObject d, [CanBeNull] string id)
+        private static void SetRegionIdInternal<T>([NotNull] DependencyObject d, [CanBeNull] string id)
             where T : Behavior, IVisualCompositionBehavior, new()
         {
             var behaviors = Interaction.GetBehaviors(d);
