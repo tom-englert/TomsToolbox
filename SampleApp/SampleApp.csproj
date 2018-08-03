@@ -84,7 +84,7 @@
     <PackageReference Include="Fody" Version="*" PrivateAssets="All" />
     <PackageReference Include="JetBrainsAnnotations.Fody" Version="*" PrivateAssets="All" />
     <PackageReference Include="Throttle.Fody" Version="*" PrivateAssets="All" />
-    <PackageReference Include="PropertyChanged.Fody" Version="*" PrivateAssets="All" />
+    <PackageReference Include="PropertyChanged2.Fody" Version="*" PrivateAssets="All" />
     <PackageReference Include="Expression.Blend.Sdk" Version="1.0.2" />
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@
     using TomsToolbox.Wpf.Composition;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 99)]
-    [AddINotifyPropertyChangedInterface]
+    [ImplementPropertyChanged]
     internal class MiscViewModel
     {
         public override string ToString()

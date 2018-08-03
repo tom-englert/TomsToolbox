@@ -22,7 +22,7 @@ namespace SampleApp.Samples
     using TomsToolbox.Wpf.Controls;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 1)]
-    [AddINotifyPropertyChangedInterface]
+    [ImplementPropertyChanged]
     public class MapViewModel
     {
         // ReSharper disable once AssignNullToNotNullAttribute

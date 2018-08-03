@@ -7,7 +7,7 @@
     using TomsToolbox.Wpf.Composition;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 4)]
-    [AddINotifyPropertyChangedInterface]
+    [ImplementPropertyChanged]
     class SharedWidthSampleViewModel
     {
         [CanBeNull]

@@ -11,7 +11,7 @@
     using TomsToolbox.Wpf.Composition;
 
     [VisualCompositionExport(RegionId.CommandViewContainer)]
-    [AddINotifyPropertyChangedInterface]
+    [ImplementPropertyChanged]
     class CompositeCommandChild2ViewModel
     {
         [CanBeNull]
