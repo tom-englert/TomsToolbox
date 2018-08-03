@@ -4,6 +4,7 @@
     using System.ComponentModel.Composition;
     using System.ComponentModel.Composition.Hosting;
     using System.ComponentModel.Composition.Registration;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
@@ -17,6 +18,7 @@
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;
     using TomsToolbox.Wpf.Styles;
+    using TomsToolbox.Wpf.XamlExtensions;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -37,6 +39,7 @@
         {
             base.OnStartup(e);
 
+            VisualComposition.Trace += (sender, args) => Trace.WriteLine(args.Text);
             BindingErrorTracer.Start(BindingErrorCallback);
 
             var context = new RegistrationBuilder();
