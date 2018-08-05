@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.71.0</para>
+            <list class="bullet">
+              <listItem><para>Add trace capabilities to VisualComposition</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.70.0</para>
             <list class="bullet">
               <listItem><para>Correctly redraw window resize buttons when resizing window via mouse drag</para></listItem>
