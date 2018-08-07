@@ -96,16 +96,25 @@
         private static void SetRegionIdInternal<T>([NotNull] DependencyObject d, [CanBeNull] string id)
             where T : Behavior, IVisualCompositionBehavior, new()
         {
-            var behaviors = Interaction.GetBehaviors(d);
+            try
+            {
+                var behaviors = Interaction.GetBehaviors(d);
 
-            var behavior = behaviors.OfType<T>().FirstOrDefault();
-            if (behavior == null)
-            {
-                behaviors.Add(new T { RegionId = id });
+                var behavior = behaviors.OfType<T>().FirstOrDefault();
+                if (behavior == null)
+                {
+                    behaviors.Add(new T {RegionId = id});
+                    OnTrace(d, $"Attach the behavior {typeof(T)} to the target {d.GetType()}");
+                }
+                else
+                {
+                    behavior.RegionId = id;
+                    OnTrace(d, $"Updated the region id of behavior {typeof(T)} on the target {d.GetType()}");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                behavior.RegionId = id;
+                OnError(d, $"Failed to attach the behavior {typeof(T)} to the target {d.GetType()}: " + ex);
             }
         }
     }
