@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.72.0</para>
+            <list class="bullet">
+              <listItem><para>Extend tracing of VisualComposition</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.71.0</para>
             <list class="bullet">
               <listItem><para>Add trace capabilities to VisualComposition</para></listItem>

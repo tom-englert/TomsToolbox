@@ -21,7 +21,7 @@
     /// </summary>
     /// <typeparam name="T">The type the VisualCompositionBehavior can be attached to.</typeparam>
     /// <remarks>
-    /// ViewModels declare themselves as candidates for visual composition by adding the <see cref="VisualCompositionExportAttribute"/>, 
+    /// ViewModels declare themselves as candidates for visual composition by adding the <see cref="VisualCompositionExportAttribute"/>,
     /// and the visual composition behaviors dynamically link the view models to the views with the matching region ids.
     /// </remarks>
     public abstract class VisualCompositionBehavior<T> : FrameworkElementBehavior<T>, IVisualCompositionBehavior
@@ -76,7 +76,7 @@
 
 
         /// <summary>
-        /// Gets or sets the region identifier binding; 
+        /// Gets or sets the region identifier binding;
         /// the binding will be applied to the <see cref="RegionId"/> property only after the behavior is attached to the logical tree, so you don't get misleading binding errors.
         /// </summary>
         /// <remarks>
@@ -90,8 +90,8 @@
         }
 
         /// <summary>
-        /// Backing "field" for the <see cref="RegionIdBinding"/> property. 
-        /// Internally it must be a <see cref="DependencyProperty"/>, else <see cref="Freezable.Clone"/> would not clone it, 
+        /// Backing "field" for the <see cref="RegionIdBinding"/> property.
+        /// Internally it must be a <see cref="DependencyProperty"/>, else <see cref="Freezable.Clone"/> would not clone it,
         /// but for the framework the <see cref="RegionIdBinding"/> property must look like a regular property, else it would try to apply the binding instead of simply assigning it.
         /// </summary>
         [NotNull] private static readonly DependencyProperty _regionIdBindingProperty =
@@ -113,8 +113,8 @@
         }
 
         /// <summary>
-        /// Backing "field" for the <see cref="CompositionContextBinding"/> property. 
-        /// Internally it must be a <see cref="DependencyProperty"/>, else <see cref="Freezable.Clone"/> would not clone it, 
+        /// Backing "field" for the <see cref="CompositionContextBinding"/> property.
+        /// Internally it must be a <see cref="DependencyProperty"/>, else <see cref="Freezable.Clone"/> would not clone it,
         /// but for the framework the <see cref="CompositionContextBinding"/> property must look like a regular property, else it would try to apply the binding instead of simply assigning it.
         /// </summary>
         [NotNull] private static readonly DependencyProperty _compositionContextBindingProperty =
@@ -159,7 +159,7 @@
         {
             base.OnAttached();
 
-            VisualComposition.OnTrace(this, $"Attached {GetType()} to {AssociatedObject?.GetType()}");
+            VisualComposition.OnTrace(this, $"OnAttached: {GetType()} to {AssociatedObject?.GetType()}");
 
             if (RegionIdBinding != null)
                 BindingOperations.SetBinding(this, RegionIdProperty, RegionIdBinding);
@@ -224,8 +224,8 @@
         }
 
         /// <summary>
-        /// Gets the target object for the item. 
-        /// If the item implements <see cref="IComposablePartFactory"/>, the element returned by the factory is returned; 
+        /// Gets the target object for the item.
+        /// If the item implements <see cref="IComposablePartFactory"/>, the element returned by the factory is returned;
         /// otherwise the item itself is returned.
         /// </summary>
         /// <param name="item">The item.</param>
@@ -295,7 +295,7 @@
             ExportProvider = AssociatedObject?.TryGetExportProvider();
 
             VisualComposition.OnTrace(this, "ExportProvider changed: " + ExportProvider?.GetType());
-            
+
             _deferredUpdateThrottle.Tick();
         }
     }

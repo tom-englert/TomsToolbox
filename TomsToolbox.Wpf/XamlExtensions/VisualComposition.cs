@@ -104,17 +104,17 @@
                 if (behavior == null)
                 {
                     behaviors.Add(new T {RegionId = id});
-                    OnTrace(d, $"Attach the behavior {typeof(T)} to the target {d.GetType()}");
+                    OnTrace(d, $"SetRegion: Attached the behavior {typeof(T)} to the target {d.GetType()}");
                 }
                 else
                 {
                     behavior.RegionId = id;
-                    OnTrace(d, $"Updated the region id of behavior {typeof(T)} on the target {d.GetType()}");
+                    OnTrace(d, $"SetRegion: Updated the region id of behavior {typeof(T)} on the target {d.GetType()}");
                 }
             }
             catch (Exception ex)
             {
-                OnError(d, $"Failed to attach the behavior {typeof(T)} to the target {d.GetType()}: " + ex);
+                OnError(d, $"SetRegion: Failed to attach the behavior {typeof(T)} to the target {d.GetType()}: " + ex);
             }
         }
     }
