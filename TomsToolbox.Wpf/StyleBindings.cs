@@ -53,6 +53,20 @@
     }
 
     /// <summary>
+    /// A collection of <see cref="ColumnDefinition"/> objects.
+    /// </summary>
+    public class ColumnDefinitionCollection : Collection<ColumnDefinition>
+    {
+    }
+
+    /// <summary>
+    /// A collection of <see cref="RowDefinition"/> objects.
+    /// </summary>
+    public class RowDefinitionCollection : Collection<RowDefinition>
+    {
+    }
+
+    /// <summary>
     /// Extensions to support style binding of some read only collection properties.
     /// </summary>
     public static class StyleBindings
@@ -395,5 +409,146 @@
                 existingTriggers.AddRange(newValue.Select(item => (TriggerBase)item.Clone()));
             }
         }
+
+
+        /// <summary>
+        /// Gets the column definitions attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.ColumnDefinitions"/> attached property.
+        /// </summary>
+        /// <param name="obj">The object the column definitions are attached to.</param>
+        /// <returns>The column definitions.</returns>
+        [CanBeNull, ItemNotNull]
+        public static ColumnDefinitionCollection GetColumnDefinitions([NotNull] DependencyObject obj)
+        {
+            return (ColumnDefinitionCollection)obj.GetValue(ColumnDefinitionsProperty);
+        }
+        /// <summary>
+        /// Sets the columnDefinitions attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.ColumnDefinitions"/> attached property.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <param name="value">The value.</param>
+        public static void SetColumnDefinitions([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] ColumnDefinitionCollection value)
+        {
+            obj.SetValue(ColumnDefinitionsProperty, value);
+        }
+        /// <summary>
+        /// Identifies the <see cref="P:TomsToolbox.Wpf.StyleBindings.ColumnDefinitions"/> attached property.
+        /// </summary>
+        /// <AttachedPropertyComments>
+        /// <summary>
+        /// This property is needed to set column definitions via a <see cref="Style"/> or from a resource.
+        /// </summary>
+        /// <example><code language="XAML"><![CDATA[
+        /// <Style TargetType="Grid">
+        ///   <Setter Property="core:StyleBindings.ColumnDefinitions">
+        ///     <Setter.Value>
+        ///       <core:ColumnDefinitionCollection>
+        ///         <ColumnDefinition Width="Auto" SharedSizeGroup="Col1" />
+        ///         <ColumnDefinition Width="20" />
+        ///         <ColumnDefinition Width="*" />
+        ///       </core:ColumnDefinitionCollection>
+        ///     </Setter.Value>
+        ///   </Setter>
+        /// ]]>
+        /// </code></example>
+        /// </AttachedPropertyComments>
+        [NotNull]
+        public static readonly DependencyProperty ColumnDefinitionsProperty =
+            DependencyProperty.RegisterAttached("ColumnDefinitionCollection", typeof(ColumnDefinitionCollection), typeof(StyleBindings), new FrameworkPropertyMetadata(ColumnDefinitions_Changed));
+
+        private static void ColumnDefinitions_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var columnDefinitions = (d as Grid)?.ColumnDefinitions;
+
+            if (columnDefinitions == null)
+                return;
+
+            columnDefinitions.Clear();
+
+            if (e.NewValue is ColumnDefinitionCollection newColumnDefinitions)
+            {
+                foreach (var columnDefinition in newColumnDefinitions)
+                {
+                    columnDefinitions.Add(new ColumnDefinition
+                    {
+                        MinWidth = columnDefinition.MinWidth,
+                        MaxWidth = columnDefinition.MaxWidth,
+                        Width =  columnDefinition.Width,
+                        Name = columnDefinition.Name,
+                        SharedSizeGroup = columnDefinition.SharedSizeGroup,
+                    });
+                }
+            }
+        }
+        
+        
+        /// <summary>
+        /// Gets the row definitions attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.RowDefinitions"/> attached property.
+        /// </summary>
+        /// <param name="obj">The object the row definitions are attached to.</param>
+        /// <returns>The row definitions.</returns>
+        [CanBeNull, ItemNotNull]
+        public static RowDefinitionCollection GetRowDefinitions([NotNull] DependencyObject obj)
+        {
+            return (RowDefinitionCollection)obj.GetValue(RowDefinitionsProperty);
+        }
+        /// <summary>
+        /// Sets the row definitions attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.RowDefinitions"/> attached property.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <param name="value">The value.</param>
+        public static void SetRowDefinitions([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] RowDefinitionCollection value)
+        {
+            obj.SetValue(RowDefinitionsProperty, value);
+        }
+        /// <summary>
+        /// Identifies the <see cref="P:TomsToolbox.Wpf.StyleBindings.RowDefinitions"/> attached property.
+        /// </summary>
+        /// <AttachedPropertyComments>
+        /// <summary>
+        /// This property is needed to set row definitions via a <see cref="Style"/> or from a resource.
+        /// </summary>
+        /// <example><code language="XAML"><![CDATA[
+        /// <Style TargetType="Grid">
+        ///   <Setter Property="core:StyleBindings.RowDefinitions">
+        ///     <Setter.Value>
+        ///       <core:RowDefinitionCollection>
+        ///         <RowDefinition Height="Auto" SharedSizeGroup="Col1" />
+        ///         <RowDefinition Height="20" />
+        ///         <RowDefinition Height="*" />
+        ///       </core:RowDefinitionCollection>
+        ///     </Setter.Value>
+        ///   </Setter>
+        /// ]]>
+        /// </code></example>
+        /// </AttachedPropertyComments>
+        [NotNull]
+        public static readonly DependencyProperty RowDefinitionsProperty =
+            DependencyProperty.RegisterAttached("RowDefinitionCollection", typeof(RowDefinitionCollection), typeof(StyleBindings), new FrameworkPropertyMetadata(RowDefinitions_Changed));
+
+        private static void RowDefinitions_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var rowDefinitions = (d as Grid)?.RowDefinitions;
+
+            if (rowDefinitions == null)
+                return;
+
+            rowDefinitions.Clear();
+
+            if (e.NewValue is RowDefinitionCollection newRowDefinitions)
+            {
+                foreach (var rowDefinition in newRowDefinitions)
+                {
+                    rowDefinitions.Add(new RowDefinition
+                    {
+                        MinHeight = rowDefinition.MinHeight,
+                        MaxHeight = rowDefinition.MaxHeight,
+                        Height =  rowDefinition.Height,
+                        Name = rowDefinition.Name,
+                        SharedSizeGroup = rowDefinition.SharedSizeGroup,
+                    });
+                }
+            }
+        }
+
     }
 }
