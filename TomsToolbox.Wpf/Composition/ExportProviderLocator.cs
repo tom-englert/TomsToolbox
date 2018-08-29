@@ -79,7 +79,6 @@
         [NotNull]
         internal static string GetMissingExportProviderMessage([NotNull] this DependencyObject obj)
         {
-
             return "Export provider must be registered in the visual tree " + string.Join("/", obj.AncestorsAndSelf().Reverse().Select(o => o?.GetType().Name));
         }
     }

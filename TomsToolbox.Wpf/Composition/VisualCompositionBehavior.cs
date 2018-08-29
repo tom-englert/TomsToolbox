@@ -94,7 +94,8 @@
         /// Internally it must be a <see cref="DependencyProperty"/>, else <see cref="Freezable.Clone"/> would not clone it,
         /// but for the framework the <see cref="RegionIdBinding"/> property must look like a regular property, else it would try to apply the binding instead of simply assigning it.
         /// </summary>
-        [NotNull] private static readonly DependencyProperty _regionIdBindingProperty =
+        [NotNull]
+        private static readonly DependencyProperty _regionIdBindingProperty =
             DependencyProperty.Register("InternalRegionIdBinding", typeof(BindingBase), typeof(VisualCompositionBehavior<T>));
 
 
@@ -117,7 +118,8 @@
         /// Internally it must be a <see cref="DependencyProperty"/>, else <see cref="Freezable.Clone"/> would not clone it,
         /// but for the framework the <see cref="CompositionContextBinding"/> property must look like a regular property, else it would try to apply the binding instead of simply assigning it.
         /// </summary>
-        [NotNull] private static readonly DependencyProperty _compositionContextBindingProperty =
+        [NotNull]
+        private static readonly DependencyProperty _compositionContextBindingProperty =
             DependencyProperty.Register("InternalCompositionContextBinding", typeof(BindingBase), typeof(VisualCompositionBehavior<T>));
 
         /// <summary>
@@ -268,10 +270,13 @@
 
             var exportProvider = associatedObject.TryGetExportProvider();
 
-            if (IsLoaded && (exportProvider == null))
+            Dispatcher?.BeginInvoke(DispatcherPriority.Input, () =>
             {
-                VisualComposition.OnError(this, associatedObject.GetMissingExportProviderMessage());
-            }
+                if (IsLoaded && (exportProvider == null))
+                {
+                    VisualComposition.OnError(this, associatedObject.GetMissingExportProviderMessage());
+                }
+            });
 
             return exportProvider;
         }
