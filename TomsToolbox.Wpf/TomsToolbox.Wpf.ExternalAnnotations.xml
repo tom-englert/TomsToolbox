@@ -1580,7 +1580,17 @@
   <member name="F:TomsToolbox.Wpf.StyleBindings.BehaviorsProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="F:TomsToolbox.Wpf.StyleBindings.ColumnDefinitionsProperty">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Wpf.StyleBindings.GetBehaviors(System.Windows.DependencyObject)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <parameter name="obj">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.StyleBindings.GetColumnDefinitions(System.Windows.DependencyObject)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="obj">
@@ -1613,6 +1623,13 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:TomsToolbox.Wpf.StyleBindings.GetRowDefinitions(System.Windows.DependencyObject)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <parameter name="obj">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="M:TomsToolbox.Wpf.StyleBindings.GetTriggers(System.Windows.DependencyObject)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
@@ -1632,7 +1649,19 @@
   <member name="F:TomsToolbox.Wpf.StyleBindings.InputBindingsProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="F:TomsToolbox.Wpf.StyleBindings.RowDefinitionsProperty">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Wpf.StyleBindings.SetBehaviors(System.Windows.DependencyObject,TomsToolbox.Wpf.BehaviorCollection)">
+    <parameter name="obj">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="value">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.StyleBindings.SetColumnDefinitions(System.Windows.DependencyObject,TomsToolbox.Wpf.ColumnDefinitionCollection)">
     <parameter name="obj">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -1673,6 +1702,15 @@
     </parameter>
     <parameter name="value">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.StyleBindings.SetRowDefinitions(System.Windows.DependencyObject,TomsToolbox.Wpf.RowDefinitionCollection)">
+    <parameter name="obj">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="value">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.StyleBindings.SetTriggers(System.Windows.DependencyObject,TomsToolbox.Wpf.TriggerCollection)">
