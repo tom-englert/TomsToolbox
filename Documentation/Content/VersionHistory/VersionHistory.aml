@@ -9,6 +9,13 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.73.0</para>
+            <list class="bullet">
+              <listItem><para>Added StyleBindings also for Column- and RowDefinitions</para></listItem>
+              <listItem><para>VisualCompositionBehavior: Defer ExportProvider check to avoid false warnings; during unload export provider is released while the visual is still loaded.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.72.0</para>
             <list class="bullet">
               <listItem><para>Extend tracing of VisualComposition</para></listItem>
