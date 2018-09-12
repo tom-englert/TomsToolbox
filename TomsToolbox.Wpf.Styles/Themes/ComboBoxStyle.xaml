@@ -112,7 +112,7 @@
           <TextBox x:Name="PART_EditableTextBox"
                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                   BorderThickness="0" Padding="0" Background="Transparent"
+                   BorderThickness="0" Padding="0" Background="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}"
                    IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}" />
         </Grid>
         <ToggleButton Grid.Column="1"
