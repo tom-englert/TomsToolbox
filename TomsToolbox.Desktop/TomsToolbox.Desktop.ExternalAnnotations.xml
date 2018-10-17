@@ -624,6 +624,9 @@
   <member name="P:TomsToolbox.Desktop.TextAttribute.TextValue">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
+  <member name="P:TomsToolbox.Desktop.ThreadBoundTaskScheduler.TaskFactory">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Desktop.ThreadWithDispatcher.#ctor(System.String,System.Threading.ApartmentState,System.Threading.ThreadPriority,System.Boolean)">
     <parameter name="name">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />

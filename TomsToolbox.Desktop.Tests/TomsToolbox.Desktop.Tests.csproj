@@ -61,6 +61,7 @@
     <Compile Include="PropertyDependencyAttributeTests.cs" />
     <Compile Include="RelayedEventAttributeTests.cs" />
     <Compile Include="ClipboardHelperTests.cs" />
+    <Compile Include="TaskSchedulerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj">
