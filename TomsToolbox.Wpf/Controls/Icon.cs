@@ -15,7 +15,7 @@
     /// </summary>
     /// <seealso cref="System.Windows.Controls.Control" />
     [TemplatePart(Name = ImagePartName, Type = typeof(Image))]
-    [ContentProperty(nameof(Icon.Sources))]
+    [ContentProperty(nameof(Sources))]
     public class Icon : Control
     {
         private const string ImagePartName = "PART_Image";
