@@ -9,6 +9,12 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>1.0.75.0</para>
+            <list class="bullet">
+              <listItem><para>Add ThreadBoundTaskScheduler and BindingRelay class.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>1.0.74.0</para>
             <list class="bullet">
               <listItem><para>Fix ComboBoxStyle: Cursor of editable combo box is not visible in dark mode.</para></listItem>
