@@ -277,7 +277,7 @@
         }
 
         /// <summary>
-        /// Adds the specified number of hours to the value of this instance.
+        /// Adds the specified number of days to the value of this instance.
         /// </summary>
         /// <param name="timeSpan">The time span.</param>
         /// <param name="value">A number of whole and fractional days. The <paramref name="value"/> parameter can be negative or positive.</param>
