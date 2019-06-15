@@ -22,8 +22,8 @@
     /// 
     ///     public event EventHandler AnyAction
     ///     {
-    ///         add => _sentEventSource.Subscribe(value);
-    ///         remove => _sentEventSource.Unsubscribe(value);
+    ///         add => _source.Subscribe(value);
+    ///         remove => _source.Unsubscribe(value);
     ///     }
     /// 
     ///     private void OnAnyAction()
