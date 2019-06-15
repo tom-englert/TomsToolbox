@@ -82,6 +82,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Fody" Version="*" PrivateAssets="All" />
+    <PackageReference Include="JetBrains.Annotations" Version="*" PrivateAssets="All" />
     <PackageReference Include="JetBrainsAnnotations.Fody" Version="*" PrivateAssets="All" />
     <PackageReference Include="Throttle.Fody" Version="*" PrivateAssets="All" />
     <PackageReference Include="PropertyChanged2.Fody" Version="*" PrivateAssets="All" />

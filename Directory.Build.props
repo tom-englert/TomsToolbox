@@ -54,11 +54,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="*" PrivateAssets="All" />
-    <PackageReference Include="SourceLink.Create.CommandLine" Version="*" PrivateAssets="All" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\TomsToolbox.snk">
       <Link>TomsToolbox.snk</Link>
     </None>
