@@ -17,12 +17,9 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <LanguageTargets>$(MSBuildExtensionsPath)\$(VisualStudioVersion)\Bin\Microsoft.CSharp.targets</LanguageTargets>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\TomsToolbox.snk</AssemblyOriginatorKeyFile>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <TargetsForTfmSpecificContentInPackage>TfmSpecificContent</TargetsForTfmSpecificContentInPackage>
     <PackageOutputPath>$(SolutionDir)Deploy</PackageOutputPath>
   </PropertyGroup>
