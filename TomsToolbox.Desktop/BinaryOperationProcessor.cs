@@ -20,11 +20,11 @@
     /// This processor works with different types on both sides.<para/>
     /// Either<para/>
     /// - both values must be convertible to a double<para/>
-    /// or<para/> 
+    /// or<para/>
     /// - value1 must have an explicit operator for the specified operation and value2 has a type converter matching the expected operator parameter.<para/>
     /// If the value supports implicit or explicit casts, the operation is retried on all types that the type can be casted to. This enables the converter to handle most operations on <see cref="Vector"/>, <see cref="Size"/>, <see cref="Point"/>, etc...<para/>
-    /// <para/> 
-    /// For <see cref="Rect"/> the <see cref="BinaryOperation.Addition"/> is mapped to "Rect.Offset(Vector)" and
+    /// <para/>
+    /// E.g. for <see cref="Rect"/> the <see cref="BinaryOperation.Addition"/> is mapped to "Rect.Offset(Vector)" and
     /// the <see cref="BinaryOperation.Multiply"/> is mapped to "Rect.Transform(Matrix)"
     /// </remarks>
     public sealed class BinaryOperationProcessor
