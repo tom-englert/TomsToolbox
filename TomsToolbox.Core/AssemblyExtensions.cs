@@ -22,7 +22,6 @@
         [NotNull]
         public static Uri GeneratePackUri([NotNull] this Assembly assembly)
         {
-
             var name = new AssemblyName(assembly.FullName).Name;
 
             return new Uri(string.Format(CultureInfo.InvariantCulture, "pack://application:,,,/{0};component/", name), UriKind.Absolute);
@@ -42,7 +41,6 @@
         [NotNull]
         public static Uri GeneratePackUri([NotNull] this Assembly assembly, [NotNull] string relativeUri)
         {
-
             return assembly.GeneratePackUri(new Uri(relativeUri, UriKind.Relative));
         }
 
@@ -60,7 +58,6 @@
         [NotNull]
         public static Uri GeneratePackUri([NotNull] this Assembly assembly, [NotNull] Uri relativeUri)
         {
-
             return new Uri(assembly.GeneratePackUri(), relativeUri);
         }
     }

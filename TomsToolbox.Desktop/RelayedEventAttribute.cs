@@ -49,7 +49,6 @@
         /// <param name="sourceType">Type of the source for the events.</param>
         public RelayedEventAttribute([NotNull] Type sourceType)
         {
-
             _sourceType = sourceType;
         }
 
@@ -61,7 +60,6 @@
         public RelayedEventAttribute([NotNull] Type sourceType, [CanBeNull] string sourceName)
             : this(sourceType)
         {
-
             _sourceName = sourceName;
         }
 
@@ -110,7 +108,6 @@
 
         private static bool AreAllPropertiesValid([NotNull] Type sourceType, [NotNull, ItemNotNull] IEnumerable<string> propertyNames)
         {
-
             var existingPropertyNames = sourceType.GetProperties()
                 .Select(p => p?.Name)
                 .Where(name => name != null)

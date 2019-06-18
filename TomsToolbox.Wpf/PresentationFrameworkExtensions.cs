@@ -23,7 +23,6 @@
         /// <param name="visual">The dispatcher object to wait on.</param>
         public static void ProcessMessages([NotNull] this Visual visual)
         {
-
             ProcessMessages(visual, DispatcherPriority.Background);
         }
 
@@ -34,7 +33,6 @@
         /// <param name="priority">The priority up to which all messages should be processed.</param>
         public static void ProcessMessages([NotNull] this Visual visual, DispatcherPriority priority)
         {
-
             var dispatcher = visual.Dispatcher;
 
             ProcessMessages(dispatcher, priority);
@@ -46,7 +44,6 @@
         /// <param name="dispatcher">The dispatcher to wait on.</param>
         public static void ProcessMessages([NotNull] this Dispatcher dispatcher)
         {
-
             ProcessMessages(dispatcher, DispatcherPriority.Background);
         }
 
@@ -57,7 +54,6 @@
         /// <param name="priority">The priority up to which all messages should be processed.</param>
         public static void ProcessMessages([NotNull] this Dispatcher dispatcher, DispatcherPriority priority)
         {
-
             var frame = new DispatcherFrame();
             dispatcher.BeginInvoke(priority, () => frame.Continue = false);
             Dispatcher.PushFrame(frame);
@@ -82,7 +78,6 @@
         /// <returns>The translated rectangle</returns>
         public static Rect Translate(this Rect rect, [NotNull] Visual from, [NotNull] Visual to)
         {
-
             var transform = from.TransformToVisual(to);
 
             // ReSharper disable once PossibleNullReferenceException
@@ -99,7 +94,6 @@
         /// <returns>The translated point</returns>
         public static Point Translate(this Point point, [NotNull] UIElement from, [NotNull] UIElement to)
         {
-
             return from.TranslatePoint(point, to);
         }
 
@@ -110,7 +104,6 @@
         /// <returns>The client rectangle</returns>
         public static Rect GetClientRect([NotNull] this FrameworkElement self)
         {
-
             return new Rect(0, 0, self.ActualWidth, self.ActualHeight);
         }
 
@@ -124,7 +117,6 @@
         /// </returns>
         public static Rect GetClientRect([NotNull] this FrameworkElement self, [NotNull] Visual relativeTo)
         {
-
             return self.GetClientRect().Translate(self, relativeTo);
         }
 
@@ -135,7 +127,6 @@
         /// <returns>The extent.</returns>
         public static Size GetExtent([NotNull] this FrameworkElement self)
         {
-
             return new Size(self.ActualWidth, self.ActualHeight);
         }
 
@@ -149,7 +140,6 @@
         /// </returns>
         public static Size GetExtent([NotNull] this FrameworkElement self, [NotNull] FrameworkElement relativeTo)
         {
-
             return (Size)self.TranslatePoint(new Point(self.ActualWidth, self.ActualHeight), relativeTo);
         }
 
@@ -161,7 +151,6 @@
         /// <exception cref="System.ArgumentException">The framework element is not loaded in the visual tree.</exception>
         public static Size GetPhysicalPixelSize([NotNull] this FrameworkElement self)
         {
-
             var source = PresentationSource.FromVisual(self);
 
             if (source == null)
@@ -187,7 +176,6 @@
         /// <exception cref="System.ArgumentException">The framework element is not loaded in the visual tree.</exception>
         public static Size GetDesignUnitSize([NotNull] this FrameworkElement self)
         {
-
             var source = PresentationSource.FromVisual(self);
 
             if (source == null)
@@ -214,7 +202,6 @@
         [NotNull]
         public static GeneralTransform MergeWith([NotNull] this GeneralTransform first, [NotNull, ItemNotNull] params GeneralTransform[] others)
         {
-
             var transformGroup = new GeneralTransformGroup();
             var children = transformGroup.Children;
 
@@ -237,7 +224,6 @@
         public static INotifyChanged ChangeTracker<T>([NotNull] this T frameworkElement, [NotNull] DependencyProperty property)
             where T : FrameworkElement
         {
-
             return new DependencyPropertyEventWrapper<T>(frameworkElement, property);
         }
 
@@ -253,7 +239,6 @@
 
             public DependencyPropertyEventWrapper([NotNull] T frameworkElement, [NotNull] DependencyProperty property)
             {
-
                 _frameworkElement = frameworkElement;
                 // ReSharper disable once AssignNullToNotNullAttribute
                 _dependencyPropertyDescriptor = DependencyPropertyDescriptor.FromProperty(property, typeof(T));

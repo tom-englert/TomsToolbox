@@ -18,7 +18,6 @@
         [CanBeNull]
         public static string GetAttribute([NotNull] this XElement element, [NotNull] string name)
         {
-
             return GetAttribute(element, name, null);
         }
 
@@ -34,7 +33,6 @@
         [CanBeNull]
         public static string GetAttribute([NotNull] this XElement element, [NotNull] string name, [CanBeNull] string defaultValue)
         {
-
             return GetAttribute(element, XName.Get(name), defaultValue);
         }
 
@@ -47,7 +45,6 @@
         [CanBeNull]
         public static string GetAttribute([NotNull] this XElement element, [NotNull] XName name)
         {
-
             return GetAttribute(element, name, null);
         }
 
@@ -63,7 +60,6 @@
         [CanBeNull]
         public static string GetAttribute([NotNull] this XElement element, [NotNull] XName name, [CanBeNull] string defaultValue)
         {
-
             var attribute = element.Attribute(name);
 
             return attribute?.Value ?? defaultValue;

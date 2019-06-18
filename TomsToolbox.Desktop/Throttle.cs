@@ -33,7 +33,6 @@
         /// <param name="target">The target action to invoke when the throttle condition is hit.</param>
         public Throttle(TimeSpan timeout, [NotNull] Action target)
         {
-
             _target = target;
             _timer = new DispatcherTimer { Interval = timeout };
             _timer.Tick += Timer_Tick;

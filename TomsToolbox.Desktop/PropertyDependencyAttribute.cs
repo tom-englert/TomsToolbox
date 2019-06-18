@@ -42,7 +42,6 @@
         /// <param name="propertyNames">The property names of the properties that this property depends on.</param>
         public PropertyDependencyAttribute([Localizable(false)][NotNull, ItemNotNull] params string[] propertyNames)
         {
-
             _propertyNames = propertyNames;
         }
 
@@ -112,7 +111,6 @@
         [NotNull, ItemNotNull]
         private static IEnumerable<string> GetAllDependencies([NotNull] string item, [NotNull] IDictionary<string, string[]> directDependencies)
         {
-
             var allDependenciesAndSelf = new List<string> { item };
 
             for (var i = 0; i < allDependenciesAndSelf.Count; i++)
@@ -140,7 +138,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<string> GetInvalidDependencies([NotNull] Type entryType)
         {
-
             return from type in GetCustomAssemblies(entryType).SelectMany(SafeGetTypes).Where(item => item != null)
                    let allProperties = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
                    from property in allProperties
@@ -159,7 +156,6 @@
         [NotNull, ItemNotNull]
         private static IEnumerable<Assembly> GetCustomAssemblies([NotNull] Type entryType)
         {
-
             var entryAssembly = entryType.Assembly;
 
             var programFolder = Path.GetDirectoryName(new Uri(entryAssembly.CodeBase).LocalPath);
@@ -185,7 +181,6 @@
         /// </returns>
         private static bool IsAssemblyInSubfolderOf([NotNull] AssemblyName assemblyName, [NotNull] string programFolder)
         {
-
             if (assemblyName.CodeBase == null)
                 return false;
 
@@ -213,7 +208,6 @@
         [NotNull, ItemNotNull]
         private static IEnumerable<Type> SafeGetTypes([NotNull] Assembly a)
         {
-
             try
             {
                 return a.GetTypes();

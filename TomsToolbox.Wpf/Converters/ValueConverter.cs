@@ -75,7 +75,6 @@
         [CanBeNull]
         protected virtual object ConvertBack([NotNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
-
             throw new InvalidOperationException("ConvertBack is not supported by this converter.");
         }
 

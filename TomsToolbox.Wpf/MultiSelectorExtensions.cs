@@ -76,7 +76,6 @@
 
         private static void SelectionBinding_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-
             // The selector is the target of the binding, and the ViewModel property is the source.
             var synchronizer = (SelectionSynchronizer)d.GetValue(SelectionSynchronizerProperty);
 
@@ -106,19 +105,16 @@
         [NotNull, ItemCanBeNull]
         private static IList GetSelectedItems([NotNull] this Selector selector)
         {
-
             var selectedItems = (IList)((dynamic)selector).SelectedItems;
             return selectedItems;
         }
         private static void ScrollIntoView([NotNull] this Selector selector, [CanBeNull] object selectedItem)
         {
-
             ((dynamic)selector).ScrollIntoView(selectedItem);
         }
 
         private static void BeginSetFocus([NotNull] this ItemsControl selector, [CanBeNull] object selectedItem)
         {
-
             selector.BeginInvoke(() =>
             {
                 var container = selector.ItemContainerGenerator.ContainerFromItem(selectedItem) as FrameworkElement;
@@ -133,7 +129,6 @@
 
         private static void ClearSourceSelection([NotNull] this Selector selector)
         {
-
             var sourceSelection = selector.GetSelectionBinding();
 
             if (sourceSelection == null)
@@ -151,13 +146,11 @@
 
         private static bool All([NotNull, ItemCanBeNull] this IEnumerable items, [NotNull] Func<object, bool> condition)
         {
-
             return Enumerable.All(items.Cast<object>(), condition);
         }
 
         private static void SynchronizeWithSource([NotNull] this Selector selector, [NotNull, ItemCanBeNull] IList sourceSelection)
         {
-
             var selectedItems = selector.GetSelectedItems();
 
             if ((selectedItems.Count == sourceSelection.Count) && sourceSelection.All(selectedItems.Contains))
@@ -180,7 +173,6 @@
 
         private static void AddItemsToSelection([NotNull] this Selector selector, [NotNull, ItemNotNull] IList itemsToSelect)
         {
-
             var isSourceInvalid = false;
             var selectedItems = selector.GetSelectedItems();
             var itemsToRemove = new List<object>();
@@ -218,7 +210,6 @@
 
         private static void SelectSingleItem([NotNull] this Selector selector, [NotNull, ItemCanBeNull] IList sourceSelection)
         {
-
             // Special handling, maybe list box is in single selection mode where we can't call selectedItems.Add().
             var selectedItem = sourceSelection[0];
 
@@ -243,7 +234,6 @@
         [NotNull, ItemCanBeNull]
         private static IList ArrayCopy([NotNull, ItemCanBeNull] ICollection source)
         {
-
             var target = new object[source.Count];
             source.CopyTo(target, 0);
             return target;
@@ -260,7 +250,6 @@
 
             public SelectionSynchronizer([NotNull] Selector selector, [NotNull, ItemCanBeNull] IList sourceSelection)
             {
-
                 _selector = selector;
                 _selectorHasItemsSourceBinding = selector.ItemsSource != null;
 

@@ -36,7 +36,6 @@
         public ObservableIndexer([NotNull] Func<TKey, TValue> generator, [CanBeNull] IEqualityComparer<TKey> comparer)
             : base(new ObservableCollection<KeyValuePair<TKey, TValue>>())
         {
-
             _generator = generator;
             _index = new Dictionary<TKey, int>(comparer);
         }
@@ -56,13 +55,11 @@
         {
             get
             {
-
                 int index;
                 TValue value;
 
                 if (_index.TryGetValue(key, out index))
                 {
-
                     value = Items[index].Value;
                 }
                 else
@@ -80,12 +77,10 @@
             }
             set
             {
-
                 int index;
 
                 if (_index.TryGetValue(key, out index))
                 {
-
                     Items[index] = new KeyValuePair<TKey, TValue>(key, value);
                 }
                 else
@@ -121,7 +116,6 @@
         /// <param name="key">The key of the element to remove.</param><exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null.</exception>
         public bool Remove([NotNull] TKey key)
         {
-
             int index;
 
             if (!_index.TryGetValue(key, out index))

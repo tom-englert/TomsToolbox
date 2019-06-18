@@ -22,7 +22,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<Type> EnumerateAllTypes([NotNull, ItemCanBeNull] this IEnumerable<Assembly> assemblies)
         {
-
             return assemblies.SelectMany(EnumerateAllTypes);
         }
 
@@ -34,14 +33,12 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<Type> EnumerateAllTypes([CanBeNull] this Assembly assembly)
         {
-
             return assembly?.GetTypes().SelectMany(GetSelfAndNestedTypes) ?? Enumerable.Empty<Type>();
         }
 
         [NotNull, ItemNotNull]
         private static IEnumerable<Type> GetSelfAndNestedTypes([CanBeNull] Type type)
         {
-
             return type == null ? Enumerable.Empty<Type>() : new[] { type }.Concat(type.GetNestedTypes().SelectMany(GetSelfAndNestedTypes));
         }
 
@@ -53,7 +50,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<Type> EnumerateAllTypes([NotNull] this DirectoryInfo directory)
         {
-
             return EnumerateAllTypes(directory, "*.dll");
         }
 
@@ -66,7 +62,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<Type> EnumerateAllTypes([NotNull] this DirectoryInfo directory, [NotNull] string searchPattern)
         {
-
             var assemblyFiles = directory.EnumerateFiles(searchPattern);
 
             return assemblyFiles.Select(TryLoadAssembly).EnumerateAllTypes();
@@ -129,7 +124,6 @@
         [NotNull]
         public static DirectoryInfo GetAssemblyDirectory([NotNull] this Assembly assembly)
         {
-
             var assemblyLocation = Path.GetDirectoryName(assembly.Location);
 
             return new DirectoryInfo(assemblyLocation);

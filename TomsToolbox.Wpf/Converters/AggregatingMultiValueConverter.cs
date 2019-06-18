@@ -112,7 +112,6 @@
         {
             get
             {
-
                 return _converters;
             }
         }

@@ -27,7 +27,6 @@
         {
             get
             {
-
                 return _converters;
             }
         }

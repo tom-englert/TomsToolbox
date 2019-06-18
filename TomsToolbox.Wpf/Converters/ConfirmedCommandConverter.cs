@@ -43,7 +43,6 @@
 
         private void QueryCancelExecution([NotNull] ConfirmedCommandEventArgs e)
         {
-
             Executing?.Invoke(this, e);
         }
 

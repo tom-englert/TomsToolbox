@@ -21,7 +21,6 @@
         /// <returns>The window handle, if the item is part of a valid visual tree, otherwise IntPtr.Zero.</returns>
         public static IntPtr GetWindowHandle([NotNull] this DependencyObject self)
         {
-
             var hwndSource = PresentationSource.FromDependencyObject(self) as HwndSource;
 
             return hwndSource?.Handle ?? IntPtr.Zero;
@@ -40,7 +39,6 @@
         [NotNull]
         public static FrameworkElement GetRootVisual([NotNull] this DependencyObject item)
         {
-
             var hwndSource = (HwndSource)PresentationSource.FromDependencyObject(item);
             if (hwndSource == null)
             {
@@ -74,7 +72,6 @@
         [CanBeNull]
         public static FrameworkElement TryGetRootVisual([NotNull] this DependencyObject item)
         {
-
             var hwndSource = (HwndSource)PresentationSource.FromDependencyObject(item);
             var compositionTarget = hwndSource?.CompositionTarget;
 
@@ -91,7 +88,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> VisualAncestorsAndSelf([NotNull] this DependencyObject self)
         {
-
             while (self != null)
             {
                 yield return self;
@@ -107,7 +103,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> VisualAncestors([NotNull] this DependencyObject self)
         {
-
             return self.VisualAncestorsAndSelf().Skip(1);
         }
 
@@ -120,7 +115,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> AncestorsAndSelf([NotNull] this DependencyObject self)
         {
-
             while (self != null)
             {
                 yield return self;
@@ -137,7 +131,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> Ancestors([NotNull] this DependencyObject self)
         {
-
             return self.AncestorsAndSelf().Skip(1);
         }
 
@@ -150,7 +143,6 @@
         [CanBeNull]
         public static T TryFindAncestorOrSelf<T>([NotNull] this DependencyObject self)
         {
-
             return self.AncestorsAndSelf().OfType<T>().FirstOrDefault();
         }
 
@@ -164,7 +156,6 @@
         [CanBeNull]
         public static T TryFindAncestorOrSelf<T>([NotNull] this DependencyObject self, [NotNull] Func<T, bool> match)
         {
-
             return self.AncestorsAndSelf().OfType<T>().FirstOrDefault(match);
         }
 
@@ -177,7 +168,6 @@
         [CanBeNull]
         public static T TryFindAncestor<T>([NotNull] this DependencyObject self)
         {
-
             return self.Ancestors().OfType<T>().FirstOrDefault();
         }
 
@@ -191,7 +181,6 @@
         [CanBeNull]
         public static T TryFindAncestor<T>([NotNull] this DependencyObject self, [NotNull] Func<T, bool> match)
         {
-
             return self.Ancestors().OfType<T>().FirstOrDefault(match);
         }
 
@@ -206,7 +195,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> VisualChildren([NotNull] this DependencyObject item)
         {
-
             var numberOfChildren = VisualTreeHelper.GetChildrenCount(item);
             for (var i = 0; i < numberOfChildren; i++)
             {
@@ -226,7 +214,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> VisualChildrenAndSelf([NotNull] this DependencyObject item)
         {
-
             yield return item;
 
             foreach (var x in item.VisualChildren())
@@ -246,7 +233,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> VisualDescendants([NotNull] this DependencyObject item)
         {
-
             foreach (var child in item.VisualChildren())
             {
                 yield return child;
@@ -269,7 +255,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<DependencyObject> VisualDescendantsAndSelf([NotNull] this DependencyObject item)
         {
-
             yield return item;
 
             foreach (var x in item.VisualDescendants())

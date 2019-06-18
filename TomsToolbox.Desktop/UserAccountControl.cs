@@ -35,7 +35,6 @@
         [CanBeNull]
         public static NetworkCredential PromptForCredential([NotNull] IWin32Window parent, [CanBeNull] string caption, [CanBeNull] string message, int authenticationError, [CanBeNull] NetworkCredential template)
         {
-
             using (var inCredBuffer = PackAuthenticationBuffer(template))
             {
                 return PromptForCredential(parent, caption, message, authenticationError, inCredBuffer);
@@ -53,7 +52,6 @@
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         public static int LogOnInteractiveUser([NotNull] this NetworkCredential credential, [CanBeNull] out SafeTokenHandle userToken)
         {
-
             return LogOnInteractiveUser(credential.UserName, credential.Domain, credential.Password, out userToken);
         }
 
@@ -70,7 +68,6 @@
         [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "3#")]
         public static int LogOnInteractiveUser([CanBeNull] string userName, [CanBeNull] string domain, [CanBeNull] string password, [CanBeNull] out SafeTokenHandle userToken)
         {
-
             ParseUserDomain(ref userName, ref domain);
 
             if (NativeMethods.LogonUser(userName, domain, password, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, out var pUserToken))
@@ -127,7 +124,6 @@
         /// <exception cref="System.ComponentModel.Win32Exception">When any native Windows API call fails, the function throws a Win32Exception with the last error code.</exception>
         public static bool IsUserInAdminGroup([NotNull] SafeTokenHandle userToken)
         {
-
             // Determine whether system is running Windows Vista or later operating 
             // systems (major version >= 6) because they support linked tokens, but 
             // previous versions (major version < 6) do not.
@@ -239,7 +235,6 @@
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         public static bool IsUserInGroup([NotNull] SafeTokenHandle userToken, [CanBeNull] string groupName)
         {
-
             var token = userToken.DangerousGetHandle();
             if (token == IntPtr.Zero)
                 return false;
@@ -446,7 +441,6 @@
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         private static NetworkCredential PromptForCredential([NotNull] IWin32Window parent, [CanBeNull] string caption, [CanBeNull] string message, int authenticationError, [NotNull] SafeNativeMemory inCredBuffer)
         {
-
             var save = true;
             uint authPackage = 0;
 
@@ -470,7 +464,6 @@
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         private static bool IsAdministrator([NotNull] SafeHandle hTokenToCheck)
         {
-
             var token = hTokenToCheck.DangerousGetHandle();
             if (token == IntPtr.Zero)
                 return false;
@@ -486,7 +479,6 @@
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         private static NetworkCredential UnpackAuthenticationBuffer([NotNull] SafeNativeMemory outCredBuffer)
         {
-
             const int maxLen = 100;
 
             var usernameBuf = new StringBuilder(maxLen);
@@ -657,7 +649,6 @@
             [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
             public static bool GetTokenInformation([NotNull] SafeTokenHandle hToken, TOKEN_INFORMATION_CLASS tokenInfoClass, [NotNull] SafeNativeMemory pTokenInfo)
             {
-
                 return GetTokenInformation(hToken, tokenInfoClass, pTokenInfo.DangerousGetHandle(), pTokenInfo.Size, out _);
             }
 

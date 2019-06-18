@@ -107,7 +107,6 @@
         /// </returns>
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-
             var rootObjectProvider = serviceProvider.GetService<IRootObjectProvider>();
             if (rootObjectProvider == null)
                 return null;

@@ -48,7 +48,6 @@
         public ForegroundThreadWithDispatcher([NotNull] string name, ApartmentState state, ThreadPriority priority)
             : base(name, state, priority, false)
         {
-
             ShutdownPriority = DispatcherPriority.Normal;
         }
 
@@ -144,7 +143,6 @@
         /// <param name="isBackgroundThread">if set to <c>true</c> it the thread should be created as background thread.</param>
         protected ThreadWithDispatcher([NotNull] string name, ApartmentState state, ThreadPriority priority, bool isBackgroundThread)
         {
-
             var currentThread = Thread.CurrentThread;
 
             _thread = new Thread(ThreadMethod)
@@ -168,7 +166,6 @@
         {
             get
             {
-
                 try
                 {
                     _threadStarted.WaitOne();
@@ -188,7 +185,6 @@
         {
             get
             {
-
                 // ReSharper disable once AssignNullToNotNullAttribute
                 return _taskScheduler ?? (_taskScheduler = Invoke(TaskScheduler.FromCurrentSynchronizationContext));
             }
@@ -210,7 +206,6 @@
         [CanBeNull]
         public T Invoke<T>([NotNull] Func<T> method)
         {
-
             return Dispatcher.Invoke<T>(method);
         }
 
@@ -222,7 +217,6 @@
         /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
         public void Invoke([NotNull] Action method)
         {
-
             DispatcherExtensions.Invoke(Dispatcher, method);
         }
 
@@ -235,7 +229,6 @@
         [NotNull]
         public DispatcherOperation BeginInvoke([NotNull] Action method)
         {
-
             return BeginInvoke(DispatcherPriority.Normal, method);
         }
 
@@ -249,7 +242,6 @@
         [NotNull]
         public DispatcherOperation BeginInvoke(DispatcherPriority priority, [NotNull] Action method)
         {
-
             return Dispatcher.BeginInvoke(method, priority, null);
         }
 

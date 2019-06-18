@@ -145,7 +145,6 @@
         [NotNull]
         private T GetCommandSource([CanBeNull] object compositionContext)
         {
-
             var commandSource = _commandSourcePerContext.ForceValue(compositionContext ?? typeof(NullKey), context => CreateCommandSource());
             return commandSource;
         }
@@ -220,7 +219,6 @@
         [NotNull]
         public T Attach([CanBeNull] object context, [NotNull] ICommand command)
         {
-
             var commandSource = GetCommandSource(context);
 
             commandSource.Attach(command);
@@ -238,7 +236,6 @@
         [NotNull]
         public T Detach([CanBeNull] object context, [NotNull] ICommand command)
         {
-
             var commandSource = GetCommandSource(context);
 
             commandSource.Detach(command);
@@ -257,7 +254,6 @@
         [NotNull]
         public T Replace([CanBeNull] object context, [NotNull] ICommand oldCommand, [NotNull] ICommand newCommand)
         {
-
             var commandSource = GetCommandSource(context);
 
             commandSource.Replace(oldCommand, newCommand);

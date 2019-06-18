@@ -37,7 +37,6 @@
         [CanBeNull]
         public static object GetRole([NotNull] DependencyObject obj)
         {
-
             return obj.GetValue(RoleProperty);
         }
         /// <summary>
@@ -47,7 +46,6 @@
         /// <param name="value">The value.</param>
         public static void SetRole([NotNull] DependencyObject obj, [CanBeNull] object value)
         {
-
             obj.SetValue(RoleProperty, value);
         }
         /// <summary>
@@ -72,14 +70,12 @@
         [NotNull, ItemCanBeNull]
         public static ResourceDictionary CreateDynamicDataTemplates([NotNull] ExportProvider exportProvider)
         {
-
             var dataTemplateResources = new ResourceDictionary();
 
             var exportMetaData = exportProvider.GetDataTemplateExportsMetadata();
 
             foreach (var item in exportMetaData)
             {
-
                 var viewModel = item.ViewModel;
                 var role = item.Role;
 
@@ -94,7 +90,6 @@
         [CanBeNull]
         private static DataTemplate CreateTemplate([NotNull] Type viewModelType, [CanBeNull] object role)
         {
-
             const string xamlTemplate = "<DataTemplate DataType=\"{{x:Type viewModel:{0}}}\"><toms:ComposableContentControl {1}/></DataTemplate>";
             var roleParameter = role == null ? string.Empty : string.Format(CultureInfo.InvariantCulture, "Role=\"{0}\"", role);
             var xaml = string.Format(CultureInfo.InvariantCulture, xamlTemplate, viewModelType.Name, roleParameter);
@@ -125,7 +120,6 @@
         [NotNull]
         public static TemplateKey CreateKey([NotNull] Type dataType, [CanBeNull] object role)
         {
-
             if (role != null)
                 return new RoleBasedDataTemplateKey(dataType, role);
 
@@ -142,7 +136,6 @@
         [CanBeNull]
         internal static DependencyObject GetDataTemplateView([NotNull] this ExportProvider exportProvider, [NotNull] Type viewModel, [CanBeNull] object role)
         {
-
             return exportProvider.GetExports(typeof(DependencyObject), null, ContractName)
                 .Where(item => item.IsViewModelForType(viewModel, role))
                 .Reverse()  // if multiple exports exist, use the top one, e.g. s.o. wants to override in a special layout module.
@@ -161,7 +154,6 @@
         [NotNull, ItemNotNull]
         private static IEnumerable<IDataTemplateMetadata> GetDataTemplateExportsMetadata([NotNull] this ExportProvider exportProvider)
         {
-
             return exportProvider.GetExports(typeof(DependencyObject), null, ContractName)
                 .Select(AssertCorrectCreationPolicy)
                 .Select(GetMetadataView)
@@ -171,13 +163,11 @@
 
         private static bool Equals([NotNull] IDataTemplateMetadata left, [NotNull] IDataTemplateMetadata right)
         {
-
             return (left.ViewModel == right.ViewModel) && RoleEquals(left.Role, right.Role);
         }
 
         private static int GetHashCode([NotNull] IDataTemplateMetadata metadata)
         {
-
             return metadata.ViewModel.GetHashCode() + (metadata.Role ?? 0).GetHashCode();
         }
 
@@ -200,7 +190,6 @@
         [NotNull]
         private static Lazy<object, object> AssertCorrectCreationPolicy([NotNull] Lazy<object, object> export)
         {
-
             // Ensure views are created non-shared!
 
             // ReSharper disable once AssignNullToNotNullAttribute

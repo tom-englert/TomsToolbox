@@ -32,7 +32,6 @@
         [NotNull]
         public static ExportProvider GetExportProvider([NotNull] this DependencyObject obj)
         {
-
             var exportProvider = (ExportProvider)obj.GetValue(ExportProviderProperty);
             if (exportProvider == null)
                 throw new InvalidOperationException(GetMissingExportProviderMessage(obj));

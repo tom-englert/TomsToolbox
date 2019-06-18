@@ -38,12 +38,10 @@
         /// <returns><c>true</c> if text trimmed inside the text block; otherwise <c>false</c></returns>
         public static bool GetIsTextTrimmed([NotNull] DependencyObject obj)
         {
-
             return obj.GetValue<bool>(IsTextTrimmedProperty);
         }
         private static void SetIsTextTrimmed([NotNull] DependencyObject obj, bool value)
         {
-
             obj.SetValue(IsTextTrimmedPropertyKey, value);
         }
         [NotNull] private static readonly DependencyPropertyKey IsTextTrimmedPropertyKey
@@ -68,7 +66,6 @@
         [AttachedPropertyBrowsableForType(typeof(TextBlock))]
         public static Boolean GetIsAutomaticToolTipEnabled([NotNull] DependencyObject obj)
         {
-
             return obj.GetValue<bool>(IsAutomaticToolTipEnabledProperty);
         }
         /// <summary>
@@ -79,7 +76,6 @@
         [AttachedPropertyBrowsableForType(typeof(TextBlock))]
         public static void SetIsAutomaticToolTipEnabled([NotNull] DependencyObject obj, bool value)
         {
-
             obj.SetValue(IsAutomaticToolTipEnabledProperty, value);
         }
         /// <summary>
@@ -136,7 +132,6 @@
         /// <param name="textBlock">The text block</param>
         private static void UpdateIsTextTrimmed([NotNull] TextBlock textBlock)
         {
-
             SetIsTextTrimmed(textBlock, (textBlock.TextTrimming != TextTrimming.None) && EvaluateIsTextTrimmed(textBlock));
         }
 
@@ -147,7 +142,6 @@
         /// <returns><c>true</c> if the text is currently being trimmed; otherwise <c>false</c></returns>
         private static bool EvaluateIsTextTrimmed([NotNull] TextBlock textBlock)
         {
-
             var fontFamily = textBlock.FontFamily;
             var text = textBlock.Text;
 

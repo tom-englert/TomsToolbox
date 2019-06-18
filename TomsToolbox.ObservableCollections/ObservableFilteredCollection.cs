@@ -42,7 +42,6 @@
         // ReSharper disable PossibleMultipleEnumeration
             : base(new ObservableCollection<T>(sourceCollection.Cast<T>().Where(filter)))
         {
-
             _filter = filter;
             _liveTrackingProperties = liveTrackingProperties;
 
@@ -61,30 +60,25 @@
         [NotNull]
         private WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> CreateEvent([NotNull] INotifyCollectionChanged eventSource)
         {
-
             return new WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs>(
                 this, eventSource, OnCollectionChanged, Attach, Detach);
         }
         private static void OnCollectionChanged([NotNull, ItemCanBeNull] ObservableFilteredCollection<T> self, [NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
-
             self.SourceCollection_CollectionChanged(sender, e);
         }
 
         private static void Attach([NotNull] WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, [NotNull] INotifyCollectionChanged sender)
         {
-
             sender.CollectionChanged += weakEvent.OnEvent;
         }
 
         private static void Detach([NotNull] WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, [NotNull] INotifyCollectionChanged sender)
         {
-
             sender.CollectionChanged -= weakEvent.OnEvent;
         }
         private void SourceCollection_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
-
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
@@ -161,7 +155,6 @@
 
         private void Item_PropertyChanged([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
         {
-
             var item = (T)sender;
 
             if (!_liveTrackingProperties.Contains(e.PropertyName))

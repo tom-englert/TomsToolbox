@@ -30,7 +30,6 @@
         [NotNull]
         public static TryCastWorker<TValue> TryCast<TValue>([CanBeNull] this TValue value)
         {
-
             return new TryCastWorker<TValue>(value);
         }
     }
@@ -61,7 +60,6 @@
         public TryCastWorker<TValue> When<TTarget>([NotNull] Action<TTarget> action)
             where TTarget : TValue
         {
-
             TryExecute<TTarget>(target => WrapAction(action, target));
 
             return this;
@@ -73,7 +71,6 @@
         /// <param name="action">The action.</param>
         public void Else([NotNull] Action<TValue> action)
         {
-
             TryExecute<TValue>(target => WrapAction(action, target));
         }
 
@@ -85,7 +82,6 @@
         [NotNull]
         public TryCastWorker<TValue, TResult> Returning<TResult>()
         {
-
             return new TryCastWorker<TValue, TResult>(Value);
         }
 
@@ -100,7 +96,6 @@
         [NotNull]
         public TryCastWorker<TValue, TResult> Returning<TResult>([CanBeNull] TResult defaultValue)
         {
-
             return new TryCastWorker<TValue, TResult>(Value, defaultValue);
         }
 
@@ -110,7 +105,6 @@
         [CanBeNull]
         private static object WrapAction<TTarget>([NotNull] Action<TTarget> action, [CanBeNull] TTarget target)
         {
-
             action(target);
             return null;
         }
@@ -155,7 +149,6 @@
         public TryCastWorker<TValue, TResult> When<TTarget>([NotNull] Func<TTarget, TResult> action)
             where TTarget : TValue
         {
-
             TryExecute(action);
 
             return this;
@@ -169,7 +162,6 @@
         [CanBeNull]
         public TResult Else([NotNull] Func<TValue, TResult> action)
         {
-
             TryExecute(action);
 
             return InternalResult;
@@ -253,7 +245,6 @@
         protected void TryExecute<TTarget>([NotNull] Func<TTarget, TResult> action)
             where TTarget : TValue
         {
-
             if (_isResolved)
                 return;
 

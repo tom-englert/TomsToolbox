@@ -20,7 +20,6 @@
         public DataTemplateAttribute([NotNull] Type viewModel)
             : base(DataTemplateManager.ContractName, typeof(DependencyObject))
         {
-
             ViewModel = viewModel;
         }
 

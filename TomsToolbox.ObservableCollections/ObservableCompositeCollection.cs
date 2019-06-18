@@ -29,7 +29,6 @@
         [NotNull, ItemCanBeNull]
         public static ObservableCompositeCollection<T> FromSingleItem<T>([CanBeNull] T singleItem)
         {
-
             return new ObservableCompositeCollection<T>(new[] { singleItem });
         }
 
@@ -45,7 +44,6 @@
         public static ObservableCompositeCollection<T> FromSingleItemAndList<T, TItem>([CanBeNull] T singleItem, [NotNull, ItemCanBeNull] IList<TItem> list)
             where TItem : T
         {
-
             return typeof(T) == typeof(TItem)
                 ? new ObservableCompositeCollection<T>(new[] { singleItem }, (IList<T>)list)
                 : new ObservableCompositeCollection<T>(new[] { singleItem }, list.ObservableCast<T>());
@@ -63,7 +61,6 @@
         public static ObservableCompositeCollection<T> FromListAndSingleItem<TItem, T>([NotNull, ItemCanBeNull] IList<TItem> list, [CanBeNull] T singleItem)
             where TItem : T
         {
-
             return typeof(T) == typeof(TItem)
             ? new ObservableCompositeCollection<T>((IList<T>)list, new[] { singleItem })
             : new ObservableCompositeCollection<T>(list.ObservableCast<T>(), new[] { singleItem });
@@ -96,7 +93,6 @@
 
             public ContentManager([NotNull, ItemCanBeNull] ObservableCompositeCollection<T> owner)
             {
-
                 _owner = owner;
             }
             private void Parts_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
@@ -286,7 +282,6 @@
         public ObservableCompositeCollection([NotNull, ItemNotNull] params IList<T>[] parts)
             : this()
         {
-
             foreach (var part in parts)
             {
                 // ReSharper disable once ConditionIsAlwaysTrueOrFalse
@@ -305,7 +300,6 @@
         {
             get
             {
-
                 return _content;
             }
         }

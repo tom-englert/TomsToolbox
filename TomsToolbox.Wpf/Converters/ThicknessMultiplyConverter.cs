@@ -64,7 +64,6 @@
         [NotNull]
         public static object Convert([CanBeNull] object value, [CanBeNull] object parameter)
         {
-
             var target = value.SafeCast<Thickness>();
             var factor = GetThicknessFromParameter(parameter);
 

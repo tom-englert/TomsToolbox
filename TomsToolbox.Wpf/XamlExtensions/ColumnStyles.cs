@@ -74,7 +74,6 @@
 
         private static void ApplyStyle([NotNull, ItemNotNull] DataGridColumnStyleCollection styles, [NotNull] DependencyObject column)
         {
-
             var style = styles.FirstOrDefault(s => s.ColumnType == column.GetType());
 
             if (style == null)
@@ -86,7 +85,6 @@
 
         private static void SetStyleBinding([NotNull] DependencyObject column, [NotNull] DependencyProperty property, [NotNull] DataGridColumnStyle style)
         {
-
             // ElementStyle and EditingElementStyle are not defined at the base class, but are different property for e.g. bound and combo box column
             // => use reflection to get the effective property for the specified column.
 
@@ -111,7 +109,6 @@
     /// </summary>
     public class DataGridColumnStyleCollection : Collection<DataGridColumnStyle>
     {
-
     }
 
     /// <summary>

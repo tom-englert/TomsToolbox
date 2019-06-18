@@ -27,7 +27,6 @@
         [NotNull]
         public static DispatcherOperation BeginInvoke([NotNull] this Visual visual, [NotNull] Action method)
         {
-
             var dispatcher = visual.Dispatcher;
 
             return dispatcher.BeginInvoke(DispatcherPriority.Normal, method);
@@ -49,7 +48,6 @@
         [NotNull]
         public static DispatcherOperation BeginInvoke([NotNull] this Visual visual, DispatcherPriority priority, [NotNull] Action method)
         {
-
             var dispatcher = visual.Dispatcher;
 
             return dispatcher.BeginInvoke(method, priority, null);

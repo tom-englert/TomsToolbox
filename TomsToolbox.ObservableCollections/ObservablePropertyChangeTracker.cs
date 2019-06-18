@@ -27,7 +27,6 @@
             where TList : IList<T>, INotifyCollectionChanged
             where T : INotifyPropertyChanged
         {
-
             return new ObservablePropertyChangeTracker<T>(collection, collection);
         }
     }
@@ -73,7 +72,6 @@
 
         internal ObservablePropertyChangeTracker([NotNull, ItemNotNull] IList<T> items, [NotNull] INotifyCollectionChanged eventSource)
         {
-
             eventSource.CollectionChanged += Items_CollectionChanged;
 
             foreach (var item in items)
@@ -90,7 +88,6 @@
 // Too complex, checker is confused.
         private void Items_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
-
             // ReSharper disable PossibleNullReferenceException
             switch (e.Action)
             {

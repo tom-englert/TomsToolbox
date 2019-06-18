@@ -83,7 +83,6 @@
 
         private void Popup_Opened([NotNull] object sender, [CanBeNull] EventArgs e)
         {
-
             var popup = (Popup)sender;
             var child = popup.Child;
 

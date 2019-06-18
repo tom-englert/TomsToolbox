@@ -254,7 +254,6 @@
 
         private static bool IsThisTileVisible([NotNull] Visual visual, [NotNull] FrameworkElement viewPort, out Size extent)
         {
-
             var tileRect = TileRect.Translate(visual, viewPort);
             var viewPortRect = viewPort.GetClientRect();
 

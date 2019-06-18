@@ -64,7 +64,6 @@
         [ContractAnnotation("target:notnull => true")]
         public bool TryGetTarget([CanBeNull] out T target)
         {
-
             target = Target;
             return (target != null);
         }

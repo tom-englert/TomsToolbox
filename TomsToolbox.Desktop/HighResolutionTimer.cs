@@ -39,7 +39,6 @@
         /// <param name="interval">The interval.</param>
         public HighResolutionTimer([NotNull] Action<TimeSpan> timerCallback, TimeSpan interval)
         {
-
             _timerCallback = timerCallback;
             
             Interval = interval;

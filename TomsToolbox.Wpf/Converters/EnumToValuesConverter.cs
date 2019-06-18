@@ -43,7 +43,6 @@
         [NotNull, ItemNotNull]
         public static Array Convert([NotNull] Type type)
         {
-
             return Convert(type, null);
         }
 
@@ -56,7 +55,6 @@
         [NotNull, ItemNotNull]
         public static Array Convert([NotNull] Type type, [CanBeNull] string excluded)
         {
-
             var values = Enum.GetValues(type);
 
             if (excluded == null)

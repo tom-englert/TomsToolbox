@@ -42,7 +42,6 @@
         [CanBeNull, ItemCanBeNull]
         protected virtual object[] ConvertBack([NotNull] object value, [CanBeNull, ItemCanBeNull] Type[] targetTypes, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
-
             throw new InvalidOperationException("ConvertBack is not supported by this converter.");
         }
 

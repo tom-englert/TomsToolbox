@@ -22,7 +22,6 @@
         [CanBeNull]
         public static T Invoke<T>([CanBeNull] this Dispatcher dispatcher, [NotNull] Func<T> method)
         {
-
             return InternalInvoke(dispatcher, method);
         }
 
@@ -34,14 +33,12 @@
         /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
         public static void Invoke([CanBeNull] this Dispatcher dispatcher, [NotNull] Action method)
         {
-
             InternalInvoke(dispatcher, method);
         }
 
         [CanBeNull]
         private static T InternalInvoke<T>([CanBeNull] Dispatcher dispatcher, [NotNull] Func<T> method)
         {
-
             var result = InternalInvoke(dispatcher, (Delegate)method);
             if (result == null)
                 return default(T);
@@ -52,7 +49,6 @@
         [CanBeNull]
         private static object InternalInvoke([CanBeNull] Dispatcher dispatcher, [NotNull] Delegate method)
         {
-
             if ((dispatcher == null) || dispatcher.CheckAccess())
             {
                 // No thread affinity, or already in the correct thread: call method directly.
@@ -93,7 +89,6 @@
         [NotNull]
         private static Exception UnwrapTargetInvocation([NotNull] Exception ex)
         {
-
             if (ex is TargetInvocationException)
             {
                 return ex.InnerException ?? ex;
@@ -112,7 +107,6 @@
         [NotNull]
         public static DispatcherOperation BeginInvoke([NotNull] this Dispatcher dispatcher, [NotNull] Action method)
         {
-
             return BeginInvoke(dispatcher, DispatcherPriority.Normal, method);
         }
 
@@ -127,7 +121,6 @@
         [NotNull]
         public static DispatcherOperation BeginInvoke([NotNull] this Dispatcher dispatcher, DispatcherPriority priority, [NotNull] Action method)
         {
-
             return dispatcher.BeginInvoke(method, priority, null);
         }
 
@@ -137,7 +130,6 @@
         /// <param name="timer">The timer.</param>
         public static void Restart([NotNull] this DispatcherTimer timer)
         {
-
             timer.Stop();
             timer.Start();
         }

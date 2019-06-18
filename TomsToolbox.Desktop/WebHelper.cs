@@ -19,7 +19,6 @@
         [NotNull]
         public static WebRequest CreateHttpWebRequest([NotNull] Uri uri)
         {
-
             var webRequest = WebRequest.Create(uri);
             var webProxy = WebRequest.DefaultWebProxy ?? new WebProxy();
             webProxy.Credentials = CredentialCache.DefaultNetworkCredentials;
@@ -36,7 +35,6 @@
         [NotNull]
         public static MemoryStream Download([NotNull] Uri uri)
         {
-
             var webRequest = CreateHttpWebRequest(uri);
             var localStream = new MemoryStream();
 

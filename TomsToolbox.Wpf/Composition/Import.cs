@@ -46,7 +46,6 @@
 
         private static void DataContext_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-
             var behaviors = Interaction.GetBehaviors(d);
 
             var behavior = behaviors.OfType<ImportBehavior>().FirstOrDefault();

@@ -25,7 +25,6 @@
         /// <param name="methodName">Name of the calling method.</param>
         public static void TraceError([NotNull] this IValueConverter converter, [NotNull] string message, [NotNull] string methodName)
         {
-
             InternalTraceError(converter, message, methodName);
         }
 
@@ -37,13 +36,11 @@
         /// <param name="methodName">Name of the calling method.</param>
         public static void TraceError([NotNull] this IMultiValueConverter converter, [NotNull] string message, [NotNull] string methodName)
         {
-
             InternalTraceError(converter, message, methodName);
         }
 
         private static void InternalTraceError([NotNull] object converter, [NotNull] string message, [NotNull] string methodName)
         {
-
             var traceSource = PresentationTraceSources.DataBindingSource;
 
             traceSource?.TraceEvent(TraceEventType.Error, ConverterErrorNumber, "{0}.{1} failed: {2}", converter.GetType().Name, methodName, message);

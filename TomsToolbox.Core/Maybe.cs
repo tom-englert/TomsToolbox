@@ -24,7 +24,6 @@
             where TSource:class
             where TTarget:class
         {
-
             return new Maybe<TSource>(value).Select(selector);
         }
 
@@ -38,7 +37,6 @@
         public static Maybe<TValue> Maybe<TValue>([CanBeNull] this TValue value)
             where TValue : class
         {
-
             return new Maybe<TValue>(value);
         }
     }
@@ -73,7 +71,6 @@
         public Maybe<TTarget> Select<TTarget>([NotNull] Func<T, TTarget> selector)
             where TTarget : class
         {
-
             return new Maybe<TTarget>((_value != null) ? selector(_value) : null);
         }
 
@@ -101,7 +98,6 @@
         [CanBeNull]
         public TTarget Return<TTarget>([NotNull] Func<T, TTarget> selector)
         {
-
             return Return(selector, default(TTarget));
         }
 
@@ -117,7 +113,6 @@
         [CanBeNull]
         public TTarget Return<TTarget>([NotNull] Func<T, TTarget> selector, [CanBeNull] TTarget defaultValue)
         {
-
             return (_value != null) ? selector(_value) : defaultValue;
         }
 
@@ -129,7 +124,6 @@
         [NotNull]
         public Maybe<T> Do([NotNull] Action<T> action)
         {
-
             if (_value != null)
                 action(_value);
 
@@ -144,7 +138,6 @@
         [NotNull]
         public Maybe<T> If([NotNull] Func<T, bool> condition)
         {
-
             if ((_value != null) && !condition(_value))
             {
                 return new Maybe<T>(null);
@@ -161,7 +154,6 @@
         [NotNull]
         public Maybe<T> Unless([NotNull] Func<T, bool> condition)
         {
-
             if ((_value != null) && condition(_value))
             {
                 return new Maybe<T>(null);

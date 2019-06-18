@@ -37,7 +37,6 @@
         public ObservableWrappedCollection([NotNull, ItemNotNull] IEnumerable sourceCollection, [NotNull] Func<TSource, TTarget> itemGenerator)
             : base(new ObservableCollection<TTarget>(sourceCollection.Cast<TSource>().Select(itemGenerator)))
         {
-
             _itemGenerator = itemGenerator;
 
             if (sourceCollection is INotifyCollectionChanged eventSource)
@@ -48,7 +47,6 @@
         [NotNull]
         private WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> CreateEvent([NotNull] INotifyCollectionChanged eventSource)
         {
-
             return new WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs>(
                 this, eventSource, OnCollectionChanged, Attach, Detach);
         }
@@ -67,19 +65,16 @@
 
         private static void OnCollectionChanged([NotNull, ItemCanBeNull] ObservableWrappedCollection<TSource, TTarget> self, [NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
-
             self.SourceItems_CollectionChanged(sender, e);
         }
 
         private static void Attach([NotNull] WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, [NotNull] INotifyCollectionChanged sender)
         {
-
             sender.CollectionChanged += weakEvent.OnEvent;
         }
 
         private static void Detach([NotNull] WeakEventListener<ObservableWrappedCollection<TSource, TTarget>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, [NotNull] INotifyCollectionChanged sender)
         {
-
             sender.CollectionChanged -= weakEvent.OnEvent;
         }
         private void SourceItems_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
@@ -99,7 +94,6 @@
         [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         protected virtual void OnSourceCollectionChanged([NotNull, ItemCanBeNull] IEnumerable sourceCollection, [NotNull] NotifyCollectionChangedEventArgs e)
         {
-
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:

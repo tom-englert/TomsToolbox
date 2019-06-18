@@ -28,7 +28,6 @@
         public VisualCompositionExportAttribute([NotNull, ItemNotNull] params string[] targetRegions)
             : base(ExportContractName, typeof(object))
         {
-
             _targetRegions = targetRegions;
         }
 
@@ -58,7 +57,6 @@
         {
             get
             {
-
                 return _targetRegions;
             }
         }

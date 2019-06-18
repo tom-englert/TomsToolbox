@@ -41,7 +41,6 @@
         /// <param name="errorCallback">The callback that is called in case of binding errors, to show an error message or throw an exception</param>
         public static void Start([NotNull] Action<string> errorCallback)
         {
-
             Start(errorCallback, SourceLevels.Warning);
         }
 
@@ -52,7 +51,6 @@
         /// <param name="sourceLevels">The source levels that trigger a warning.</param>
         public static void Start([NotNull] Action<string> errorCallback, SourceLevels sourceLevels)
         {
-
             if (!Debugger.IsAttached)
                 return;
 
@@ -77,7 +75,6 @@
 
             public Listener([NotNull] Action<string> errorCallback)
             {
-
                 _errorCallback = errorCallback;
             }
 

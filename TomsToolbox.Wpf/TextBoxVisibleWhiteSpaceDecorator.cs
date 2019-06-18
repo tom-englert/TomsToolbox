@@ -189,7 +189,6 @@
             public WhiteSpaceDecoratorAdorner([NotNull] TextBoxVisibleWhiteSpaceDecorator owner, [NotNull] TextBox textBox)
                 : base(textBox)
             {
-
                 _owner = owner;
                 _textBox = textBox;
 

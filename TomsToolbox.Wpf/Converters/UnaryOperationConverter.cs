@@ -106,7 +106,6 @@
         [CanBeNull]
         private static object ApplyOperation([CanBeNull] object value, [NotNull] Type valueType)
         {
-
             var methods = valueType.GetMethods(BindingFlags.Static | BindingFlags.Public);
 
             // ReSharper disable PossibleNullReferenceException
@@ -123,7 +122,6 @@
         [CanBeNull]
         private static object ChangeType([CanBeNull] string value, [NotNull] Type targetType)
         {
-
             var typeConverter = TypeDescriptor.GetConverter(targetType);
             return typeConverter.ConvertFromInvariantString(value);
         }

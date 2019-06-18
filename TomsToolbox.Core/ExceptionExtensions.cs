@@ -19,7 +19,6 @@
         [NotNull]
         public static IEnumerable<Exception> ExceptionChain([CanBeNull] this Exception ex)
         {
-
             while (ex != null)
             {
                 yield return ex;

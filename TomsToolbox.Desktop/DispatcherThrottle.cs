@@ -37,7 +37,6 @@
         /// <param name="target">The target action to invoke when the throttle condition is hit.</param>
         public DispatcherThrottle(DispatcherPriority priority, [NotNull] Action target)
         {
-
             _target = target;
             _priority = priority;
         }

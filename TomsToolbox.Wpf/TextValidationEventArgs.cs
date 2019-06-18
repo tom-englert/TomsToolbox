@@ -29,7 +29,6 @@
         {
             get
             {
-
                 return _text;
             }
         }

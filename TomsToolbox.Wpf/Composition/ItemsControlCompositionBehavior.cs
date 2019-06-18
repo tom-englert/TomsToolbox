@@ -103,7 +103,6 @@
 
         private static void ApplyContext([NotNull, ItemCanBeNull] IEnumerable composables, [CanBeNull] object context)
         {
-
             foreach (var item in composables.OfType<IComposablePartWithContext>())
             {
                 // ReSharper disable once PossibleNullReferenceException
@@ -136,7 +135,6 @@
 
         private void AttachSelectables([NotNull, ItemCanBeNull] IEnumerable viewModels)
         {
-
             var selectables = viewModels.OfType<ISelectableComposablePart>();
 
             foreach (var selectable in selectables)

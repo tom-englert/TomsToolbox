@@ -20,7 +20,6 @@
         [CanBeNull]
         public static T InvokeInSeparateDomain<T>([NotNull] this Func<T> func)
         {
-
             return InternalInvokeInSeparateDomain<T>(func);
         }
 
@@ -35,7 +34,6 @@
         [CanBeNull]
         public static T InvokeInSeparateDomain<TA1, T>([NotNull] this Func<TA1, T> func, [CanBeNull] TA1 arg1)
         {
-
             return InternalInvokeInSeparateDomain<T>(func, arg1);
         }
 
@@ -52,7 +50,6 @@
         [CanBeNull]
         public static T InvokeInSeparateDomain<TA1, TA2, T>([NotNull] this Func<TA1, TA2, T> func, [CanBeNull] TA1 arg1, [CanBeNull] TA2 arg2)
         {
-
             return InternalInvokeInSeparateDomain<T>(func, arg1, arg2);
         }
 
@@ -71,7 +68,6 @@
         [CanBeNull]
         public static T InvokeInSeparateDomain<TA1, TA2, TA3, T>([NotNull] this Func<TA1, TA2, TA3, T> func, [CanBeNull] TA1 arg1, [CanBeNull] TA2 arg2, [CanBeNull] TA3 arg3)
         {
-
             return InternalInvokeInSeparateDomain<T>(func, arg1, arg2, arg3);
         }
 
@@ -92,7 +88,6 @@
         [CanBeNull]
         public static T InvokeInSeparateDomain<TA1, TA2, TA3, TA4, T>([NotNull] this Func<TA1, TA2, TA3, TA4, T> func, [CanBeNull] TA1 arg1, [CanBeNull] TA2 arg2, [CanBeNull] TA3 arg3, [CanBeNull] TA4 arg4)
         {
-
             return InternalInvokeInSeparateDomain<T>(func, arg1, arg2, arg3, arg4);
         }
 
@@ -105,7 +100,6 @@
         [NotNull]
         public static T CreateInstanceAndUnwrap<T>([NotNull] this AppDomain appDomain) where T : class
         {
-
             // ReSharper disable once AssignNullToNotNullAttribute (every type has a full name)
             return (T)appDomain.CreateInstanceAndUnwrap(typeof(T).Assembly.FullName, typeof(T).FullName);
         }
@@ -113,7 +107,6 @@
         [CanBeNull]
         private static T InternalInvokeInSeparateDomain<T>([NotNull] Delegate func, [NotNull, ItemCanBeNull] params object[] args)
         {
-
             var friendlyName = "Temporary domain for " + func.Method.Name;
             var currentDomain = AppDomain.CurrentDomain;
             var appDomain = AppDomain.CreateDomain(friendlyName, currentDomain.Evidence, currentDomain.BaseDirectory, currentDomain.RelativeSearchPath, false);

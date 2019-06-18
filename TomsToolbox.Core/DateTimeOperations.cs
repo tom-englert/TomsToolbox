@@ -66,7 +66,6 @@
         [NotNull]
         public static IList<DayOfWeek> GetDaysOfWeek([NotNull] this CultureInfo cultureInfo)
         {
-
             // ReSharper disable once AssignNullToNotNullAttribute
             var values = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>();
 
@@ -95,7 +94,6 @@
         /// <returns> The time span with no fractional seconds.</returns>
         public static TimeSpan RoundToSeconds(this TimeSpan timeSpan, [NotNull] Func<double, double> roundingOperation)
         {
-
             return TimeSpan.FromSeconds(roundingOperation(timeSpan.TotalSeconds));
         }
 
@@ -117,7 +115,6 @@
         /// <returns>The time with no fractional seconds.</returns>
         public static DateTime RoundToSeconds(this DateTime time, [NotNull] Func<double, double> roundingOperation)
         {
-
             return time.Date + TimeSpan.FromSeconds(roundingOperation(time.TimeOfDay.TotalSeconds));
         }
 
@@ -139,7 +136,6 @@
         /// <returns> The time span with no fractional minutes.</returns>
         public static TimeSpan RoundToMinutes(this TimeSpan timeSpan, [NotNull] Func<double, double> roundingOperation)
         {
-
             return TimeSpan.FromMinutes(roundingOperation(timeSpan.TotalMinutes));
         }
 
@@ -161,7 +157,6 @@
         /// <returns>The time with no fractional minutes.</returns>
         public static DateTime RoundToMinutes(this DateTime time, [NotNull] Func<double, double> roundingOperation)
         {
-
             return time.Date + TimeSpan.FromMinutes(roundingOperation(time.TimeOfDay.TotalMinutes));
         }
 
@@ -184,7 +179,6 @@
         /// <returns> The time span with no fractional hours.</returns>
         public static TimeSpan RoundToHours(this TimeSpan timeSpan, [NotNull] Func<double, double> roundingOperation)
         {
-
             return TimeSpan.FromHours(roundingOperation(timeSpan.TotalHours));
         }
 
@@ -206,7 +200,6 @@
         /// <returns>The time with no fractional hours.</returns>
         public static DateTime RoundToHours(this DateTime time, [NotNull] Func<double, double> roundingOperation)
         {
-
             return time.Date + TimeSpan.FromHours(roundingOperation(time.TimeOfDay.TotalHours));
         }
 
@@ -230,7 +223,6 @@
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "ToDays")]
         public static DateTime RoundToDays(this DateTime time, [NotNull] Func<double, double> roundingOperation)
         {
-
             return time.Date + TimeSpan.FromDays(roundingOperation(time.TimeOfDay.TotalDays));
         }
 

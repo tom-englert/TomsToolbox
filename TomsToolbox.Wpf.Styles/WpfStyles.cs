@@ -32,7 +32,6 @@
         [Obsolete("Use GetDefaultStyles() and RegisterDefaultWindowStyle() instead.", true)]
         public static ResourceDictionary Defaults([NotNull] Window helperWindow)
         {
-
             var baseStyles = typeof(ResourceKeys)
                 .GetFields()
                 // ReSharper disable once AssignNullToNotNullAttribute

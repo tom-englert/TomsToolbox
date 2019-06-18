@@ -65,7 +65,6 @@
         [NotNull]
         public static IEnumerable<T> GetFlags<T>(this T value) where T : struct
         {
-
             VerifyIsFlagsEnum<T>();
 
             return Enum.GetValues(typeof(T)).Cast<T>().Where(flag => value.IsAnyFlagSet(flag));
@@ -138,7 +137,6 @@
         [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification="Dealing with flags")]
         public static T CombineFlags<T>([NotNull] this IEnumerable<T> flags) where T : struct
         {
-
             VerifyIsFlagsEnum<T>();
 
             var lValue = flags

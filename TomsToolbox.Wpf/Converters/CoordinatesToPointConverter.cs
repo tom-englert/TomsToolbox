@@ -62,7 +62,6 @@
         [NotNull]
         public static object Convert([NotNull] object value)
         {
-
             if (value is Point)
             {
                 return (Coordinates)(Point)value;

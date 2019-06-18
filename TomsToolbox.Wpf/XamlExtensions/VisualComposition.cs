@@ -33,13 +33,11 @@
 
         internal static void OnError([CanBeNull] object sender, [NotNull] Exception ex)
         {
-
             OnError(sender, ex.ToString());
         }
 
         internal static void OnError([CanBeNull] object sender, [NotNull] string message)
         {
-
             PresentationTraceSources.DataBindingSource?.TraceEvent(TraceEventType.Error, ErrorNumber, message);
 
             Error?.Invoke(sender, new TextEventArgs(message));

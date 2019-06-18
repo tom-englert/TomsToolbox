@@ -23,7 +23,6 @@
         protected ReadOnlyObservableCollectionAdapter([NotNull] TList items)
             : base(items)
         {
-
             items.CollectionChanged += Items_CollectionChanged;
             items.PropertyChanged += Items_PropertyChanged;
         }
@@ -36,7 +35,6 @@
         {
             get
             {
-
                 return (TList)base.Items;
             }
         }

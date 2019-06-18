@@ -40,7 +40,6 @@
         {
             get
             {
-
                 return _compositeConverter.Converters;
             }
         }

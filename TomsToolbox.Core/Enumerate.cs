@@ -24,7 +24,6 @@
         [NotNull]
         public static IEnumerable<Tuple<T1, T2>> AsTuples<T1, T2>([NotNull, ItemCanBeNull] IEnumerable<T1> first, [NotNull, ItemCanBeNull] IEnumerable<T2> second)
         {
-
             using (var e1 = first.GetEnumerator())
             {
                 using (var e2 = second.GetEnumerator())
@@ -50,7 +49,6 @@
         [NotNull]
         public static IEnumerable<Tuple<object, object>> AsTuples([NotNull, ItemCanBeNull] IEnumerable first, [NotNull, ItemCanBeNull] IEnumerable second)
         {
-
             var e1 = first.GetEnumerator();
             var e2 = second.GetEnumerator();
 

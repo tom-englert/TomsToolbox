@@ -281,7 +281,6 @@
         {
             get
             {
-
                 var associatedObject = AssociatedObject;
 
                 return (associatedObject != null) && IsEnabled && associatedObject.IsLoaded && associatedObject.IsVisible;

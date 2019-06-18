@@ -43,7 +43,6 @@
         }
         private static void GroupHeader_OnMouseLeftButtonDown([NotNull] object sender, [CanBeNull] MouseButtonEventArgs e)
         {
-
             var visual = sender as FrameworkElement;
 
             var items = (visual?.DataContext as CollectionViewGroup)?.Items;

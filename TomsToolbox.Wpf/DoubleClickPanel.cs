@@ -88,7 +88,6 @@
 
         private bool HandleDoubleClick([NotNull] MouseButtonEventArgs e)
         {
-
             if (e.ClickCount != 2)
                 return false;
 

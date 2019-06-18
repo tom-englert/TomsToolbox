@@ -25,7 +25,6 @@
         [NotNull]
         protected static string InternalConvert([NotNull] object value, [CanBeNull] Type enumType, [NotNull] Func<T, string> selector)
         {
-
             return InternalConvert(value, enumType, selector, _ => true);
         }
 
@@ -42,7 +41,6 @@
         [NotNull]
         protected static string InternalConvert([NotNull] object value, [CanBeNull] Type enumType, [NotNull] Func<T, string> selector, [NotNull] Func<T, bool> predicate)
         {
-
             var valueType = value.GetType();
             var valueString = value.ToString();
 

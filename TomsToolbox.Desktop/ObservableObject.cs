@@ -69,7 +69,6 @@
         /// <param name="source">The source.</param>
         protected void RelayEventsOf([NotNull] INotifyPropertyChanged source)
         {
-
             var sourceType = source.GetType();
             if (RelayMapping.Keys.All(key => key?.IsAssignableFrom(sourceType) != true))
                 throw new InvalidOperationException(@"This class has no property with a RelayedEventAttribute for the type " + sourceType);
@@ -116,7 +115,6 @@
         /// <param name="item">The item to detach.</param>
         protected void DetachEventSource([NotNull] INotifyPropertyChanged item)
         {
-
             var sourceType = item.GetType();
 
             if (EventSources.TryGetValue(sourceType, out var oldListern))
@@ -134,7 +132,6 @@
         [NotifyPropertyChangedInvocator]
         protected void OnPropertyChanged<T>([NotNull] Expression<Func<T>> propertyExpression)
         {
-
             OnPropertyChanged(PropertySupport.ExtractPropertyName(propertyExpression));
         }
 
@@ -150,7 +147,6 @@
         [NotifyPropertyChangedInvocator]
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Expression<Func<T>> propertyExpression)
         {
-
             return SetProperty(ref backingField, value, PropertySupport.ExtractPropertyName(propertyExpression));
         }
 
@@ -167,7 +163,6 @@
         [NotifyPropertyChangedInvocator]
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Expression<Func<T>> propertyExpression, [NotNull] Action<T, T> changeCallback)
         {
-
             return SetProperty(ref backingField, value, PropertySupport.ExtractPropertyName(propertyExpression), changeCallback);
         }
 
@@ -188,7 +183,6 @@
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] string propertyName)
 #endif
         {
-
             if (Equals(backingField, value))
                 return false;
 
@@ -211,7 +205,6 @@
         [NotifyPropertyChangedInvocator]
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] string propertyName, [NotNull] Action<T, T> changeCallback)
         {
-
             var oldValue = backingField;
 
             if (!SetProperty(ref backingField, value, propertyName))
@@ -240,7 +233,6 @@
             [System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
 #endif
         {
-
             return SetProperty(ref backingField, value, propertyName, changeCallback);
         }
 
@@ -257,7 +249,6 @@
         protected void OnPropertyChanged([NotNull] string propertyName)
 #endif
         {
-
             InternalOnPropertyChanged(propertyName);
 
             IEnumerable<string> dependentProperties;
@@ -283,7 +274,6 @@
         // ReSharper disable once AnnotateNotNullParameter
         private void RelaySource_PropertyChanged([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
         {
-
             if (e.PropertyName == null)
                 return;
 
@@ -291,7 +281,6 @@
             // ReSharper disable once PossibleNullReferenceException
             foreach (var mapping in RelayMapping.Where(item => item.Key.IsAssignableFrom(sourceType)).Select(item => item.Value))
             {
-
                 if (mapping.TryGetValue(e.PropertyName, out var targetPropertyName) && !string.IsNullOrEmpty(targetPropertyName))
                 {
                     OnPropertyChanged(targetPropertyName);
@@ -301,7 +290,6 @@
 
         private void InternalOnPropertyChanged([NotNull] string propertyName)
         {
-
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
@@ -323,7 +311,6 @@
         [NotNull, ItemNotNull]
         protected virtual IEnumerable<string> GetDataErrors([CanBeNull] string propertyName)
         {
-
             if (string.IsNullOrEmpty(propertyName))
                 return Enumerable.Empty<string>();
 
@@ -350,7 +337,6 @@
         [NotNull, ItemNotNull]
         private IEnumerable<string> InternalGetDataErrors([CanBeNull] string propertyName)
         {
-
             var dataErrors = GetDataErrors(propertyName).ToArray();
 
             OnDataErrorsEvaluated(propertyName, dataErrors);

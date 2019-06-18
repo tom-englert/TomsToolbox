@@ -23,7 +23,6 @@
         /// <param name="catalog">The catalog.</param>
         public static void AddCatalog([NotNull] this ICompositionHost compositionHost, [NotNull] ComposablePartCatalog catalog)
         {
-
             // ReSharper disable once PossibleNullReferenceException
             compositionHost.Catalog.Catalogs.Add(catalog);
         }
@@ -35,7 +34,6 @@
         /// <param name="assemblies">The assemblies to add.</param>
         public static void AddCatalog([NotNull] this ICompositionHost compositionHost, [NotNull, ItemCanBeNull] params Assembly[] assemblies)
         {
-
             foreach (var assembly in assemblies)
             {
                 if (assembly == null)
@@ -55,7 +53,6 @@
         /// <param name="types">The types to add.</param>
         public static void AddCatalog([NotNull] this ICompositionHost compositionHost, [NotNull, ItemNotNull] params Type[] types)
         {
-
             compositionHost.AddCatalog(new TypeCatalog(types));
         }
 
@@ -93,7 +90,6 @@
         [NotNull]
         public static T GetExportedValue<T>([NotNull] this ICompositionHost compositionHost) where T : class
         {
-
             // ReSharper disable once AssignNullToNotNullAttribute => GetExportedValue never returns null.
             return compositionHost.Container.GetExportedValue<T>();
         }
@@ -134,7 +130,6 @@
         // ReSharper disable once AnnotateNotNullParameter
         public static T GetExportedValue<T>([NotNull] this ICompositionHost compositionHost, [CanBeNull] string contractName) where T : class
         {
-
             // ReSharper disable AssignNullToNotNullAttribute => null is a legal parameter!
             return compositionHost.Container.GetExportedValue<T>(contractName);
             // ReSharper restor AssignNullToNotNullAttribute
@@ -171,7 +166,6 @@
         [CanBeNull]
         public static T GetExportedValueOrDefault<T>([NotNull] this ICompositionHost compositionHost, [CanBeNull] string contractName) where T : class
         {
-
             return compositionHost.Container.GetExportedValueOrDefault<T>(contractName);
         }
 
@@ -204,7 +198,6 @@
         [CanBeNull]
         public static T GetExportedValueOrDefault<T>([NotNull] this ICompositionHost compositionHost) where T : class
         {
-
             return compositionHost.Container.GetExportedValueOrDefault<T>();
         }
 
@@ -216,7 +209,6 @@
         /// <param name="exportedValue">The value to compose.</param>
         public static void ComposeExportedValue<T>([NotNull] this ICompositionHost compositionHost, [CanBeNull] T exportedValue)
         {
-
             compositionHost.Container.ComposeExportedValue(exportedValue);
         }
 
@@ -227,7 +219,6 @@
         /// <param name="attributedPart">The part to compose.</param>
         public static void SatisfyImportsOnce([NotNull] this ICompositionHost compositionHost, [NotNull] object attributedPart)
         {
-
             compositionHost.Container.SatisfyImportsOnce(attributedPart);
         }
 
@@ -245,7 +236,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<T> GetExportedValues<T>([NotNull] this ICompositionHost compositionHost)
         {
-
             return compositionHost.Container.GetExportedValues<T>();
         }
 
@@ -265,7 +255,6 @@
         // ReSharper disable once AnnotateNotNullParameter
         public static IEnumerable<T> GetExportedValues<T>([NotNull] this ICompositionHost compositionHost, [CanBeNull] string contractName)
         {
-
             return compositionHost.Container.GetExportedValues<T>(contractName);
         }
 
@@ -280,7 +269,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<Lazy<T>> GetExports<T>([NotNull] this ICompositionHost compositionHost)
         {
-
             return compositionHost.Container.GetExports<T>();
         }
 
@@ -295,7 +283,6 @@
         // ReSharper disable once AnnotateNotNullParameter
         public static IEnumerable<Lazy<T>> GetExports<T>([NotNull] this ICompositionHost compositionHost, [CanBeNull] string contractName)
         {
-
             return compositionHost.Container.GetExports<T>(contractName);
         }
 
@@ -310,7 +297,6 @@
         [CanBeNull]
         public static T GetService<T>([NotNull] this IServiceProvider serviceProvider)
         {
-
             return serviceProvider.GetService(typeof(T)).SafeCast<T>();
         }
     }

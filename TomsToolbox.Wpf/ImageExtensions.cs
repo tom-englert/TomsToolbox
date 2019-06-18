@@ -22,7 +22,6 @@
         [AttachedPropertyBrowsableForType(typeof(Image))]
         public static object GetResourceKey([NotNull] this Image obj)
         {
-
             return obj.GetValue(ResourceKeyProperty);
         }
         /// <summary>
@@ -33,7 +32,6 @@
         [AttachedPropertyBrowsableForType(typeof(Image))]
         public static void SetResourceKey([NotNull] this Image obj, [CanBeNull] object value)
         {
-
             obj.SetValue(ResourceKeyProperty, value);
         }
         /// <summary>
@@ -48,7 +46,6 @@
 
         private static void ResourceKey_Changed([NotNull] Image image, [CanBeNull] object resourceKey)
         {
-
             image.Source = (resourceKey != null) ? image.TryFindResource(resourceKey) as ImageSource : null;
             image.ImageFailed -= Image_ImageFailed;
             image.ImageFailed += Image_ImageFailed;

@@ -37,7 +37,6 @@
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public static IList<IList<string>> GetClipboardDataAsTable()
         {
-
             var text = Clipboard.GetText();
             if (!string.IsNullOrEmpty(text))
                 return ParseTable(text, TextColumnSeparator);
@@ -79,21 +78,18 @@
         [NotNull]
         private static string ToTextString([NotNull, ItemNotNull] this IList<IList<string>> table)
         {
-
             return ToString(table, TextColumnSeparator);
         }
 
         [NotNull]
         internal static string ToCsvString([NotNull, ItemNotNull] this IList<IList<string>> table)
         {
-
             return ToString(table, CsvColumnSeparator);
         }
 
         [NotNull]
         private static string ToString([NotNull, ItemNotNull] this IList<IList<string>> table, char separator)
         {
-
             if ((table.Count == 1) && (table[0] != null) && (table[0].Count == 1) && string.IsNullOrWhiteSpace(table[0][0]))
                 return Quote + (table[0][0] ?? string.Empty) + Quote;
 
@@ -117,7 +113,6 @@
         [CanBeNull, ItemNotNull]
         internal static IList<IList<string>> ParseTable([NotNull] string text, char separator)
         {
-
             var table = new List<IList<string>>();
 
             using (var reader = new StringReader(text))
@@ -139,7 +134,6 @@
         [NotNull, ItemNotNull]
         private static IList<string> ReadTableLine([NotNull] TextReader reader, char separator)
         {
-
             var columns = new List<string>();
 
             while (true)
@@ -165,7 +159,6 @@
         [NotNull]
         internal static string ReadTableColumn([NotNull] TextReader reader, char separator)
         {
-
             var stringBuilder = new StringBuilder();
             int nextChar;
 

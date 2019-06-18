@@ -55,7 +55,6 @@
         [NotNull]
         public static string Convert([NotNull] object value)
         {
-
             return InternalConvert(value, null, attr => attr?.DisplayName);
         }
 
@@ -68,7 +67,6 @@
         [NotNull]
         public static string Convert([NotNull] object value, [CanBeNull] Type enumType)
         {
-
             return InternalConvert(value, enumType, attr => attr?.DisplayName);
         }
     }

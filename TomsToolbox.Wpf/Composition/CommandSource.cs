@@ -32,7 +32,6 @@
         /// <param name="owner">The command source factory.</param>
         public CommandSource([NotNull] ICommandSourceFactory owner)
         {
-
             _owner = owner;
         }
 
@@ -153,7 +152,6 @@
         /// <param name="command">The command.</param>
         internal void Attach([NotNull] ICommand command)
         {
-
             _attachedCommands.Insert(0, command);
 
             SetCommand(_attachedCommands.FirstOrDefault());
@@ -166,7 +164,6 @@
         /// <exception cref="System.ArgumentException">Can't detach a command that has not been attached before;command</exception>
         internal void Detach([NotNull] ICommand command)
         {
-
             if (!_attachedCommands.Remove(command))
                 return;
 
@@ -181,7 +178,6 @@
         /// <exception cref="System.ArgumentException">Can't replace a command that has not been attached before;oldCommand</exception>
         internal void Replace([NotNull] ICommand oldCommand, [NotNull] ICommand newCommand)
         {
-
             var index = _attachedCommands.IndexOf(oldCommand);
 
             if (index < 0)

@@ -137,7 +137,6 @@
         [CanBeNull]
         public static explicit operator T([NotNull] SafeNativeMemory<T> wrapper)
         {
-
             return wrapper.ToStructure();
         }
 

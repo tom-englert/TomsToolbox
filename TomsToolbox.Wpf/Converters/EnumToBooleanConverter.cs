@@ -42,7 +42,6 @@
         /// <returns>True if the value matches one of the enum names.</returns>
         public static bool Convert([NotNull] object value, [NotNull] string matches)
         {
-
             var valueType = value.GetType();
             if (!valueType.IsEnum)
             {

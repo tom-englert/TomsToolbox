@@ -194,7 +194,6 @@
         public static IEnumerable<T> GetItemContainers<T>([NotNull] this ItemsControl itemsControl)
             where T : DependencyObject
         {
-
             var generator = itemsControl.ItemContainerGenerator;
 
             var itemsCount = Math.Max(0, itemsControl.Items.Count);

@@ -68,7 +68,6 @@
         [NotNull]
         public static string Convert([CanBeNull] object key, [NotNull] object value)
         {
-
             return InternalConvert(value, null, attr => attr?.Text, attr => Equals(attr?.Key, key));
         }
 
@@ -82,7 +81,6 @@
         [NotNull]
         public static string Convert([CanBeNull] object key, [NotNull] object value, [CanBeNull] Type enumType)
         {
-
             return InternalConvert(value, enumType, attr => attr?.Text, attr => Equals(attr?.Key, key));
         }
     }

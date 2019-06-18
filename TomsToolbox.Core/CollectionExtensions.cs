@@ -20,7 +20,6 @@
         /// <param name="source">The items that should be in the target list.</param>
         public static void SynchronizeWith<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull, ItemCanBeNull] ICollection<T> source)
         {
-
             SynchronizeWith(target, source, null);
         }
 
@@ -33,7 +32,6 @@
         /// <param name="comparer">The comparer used to compare the items. If comparer is <c>null</c>, the default equality comparer is used to compare values.</param>
         public static void SynchronizeWith<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull, ItemCanBeNull] ICollection<T> source, [CanBeNull] IEqualityComparer<T> comparer)
         {
-
             var removedItems = target.Except(source, comparer).ToArray();
             var addedItems = source.Except(target, comparer).ToArray();
 
@@ -48,7 +46,6 @@
         /// <param name="items">The collection whose elements should be added to the end of the list. The collection itself cannot be null, but it can contain elements that are null, if type T is a reference type.</param>
         public static void AddRange([NotNull, ItemCanBeNull] this IList target, [NotNull, ItemCanBeNull] IEnumerable items)
         {
-
             foreach (var i in items)
             {
                 target.Add(i);
@@ -65,7 +62,6 @@
         /// <param name="moreItems">Any more items to add.</param>
         public static void AddRange<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [CanBeNull] T firstItem, [CanBeNull] T secondItem, [NotNull, ItemCanBeNull] params T[] moreItems)
         {
-
             target.Add(firstItem);
             target.Add(secondItem);
             AddRange(target, moreItems);
@@ -79,7 +75,6 @@
         /// <param name="items">The collection whose elements should be added to the end of the list. The collection itself cannot be null, but it can contain elements that are null, if type T is a reference type.</param>
         public static void AddRange<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull, ItemCanBeNull] IEnumerable<T> items)
         {
-
             foreach (var i in items)
             {
                 target.Add(i);
@@ -94,7 +89,6 @@
         /// <param name="items">The collection whose elements should be added to the end of the list. The collection itself cannot be null, but it can contain elements that are null, if type T is a reference type.</param>
         public static void TryAddRange<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull, ItemCanBeNull] IEnumerable<T> items)
         {
-
             foreach (var i in items)
             {
                 try
@@ -114,7 +108,6 @@
         /// <param name="items">The items to remove.</param>
         public static void RemoveRange([NotNull, ItemCanBeNull] this IList target, [NotNull, ItemCanBeNull] IEnumerable items)
         {
-
             foreach (var i in items)
             {
                 target.Remove(i);
@@ -129,7 +122,6 @@
         /// <param name="items">The items to remove.</param>
         public static void RemoveRange<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull, ItemCanBeNull] IEnumerable<T> items)
         {
-
             foreach (var i in items)
             {
                 target.Remove(i);
@@ -144,7 +136,6 @@
         /// <param name="condition">The condition; all items that fulfill this condition will be removed.</param>
         public static void RemoveRange<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull] Func<T, bool> condition)
         {
-
             target.RemoveRange(target.Where(condition).ToArray());
         }
 
@@ -158,7 +149,6 @@
         [NotNull, ItemCanBeNull]
         public static IList<T> Take<T>([NotNull] this IEnumerator<T> source, int numberOfItems)
         {
-
             var result = new List<T>(numberOfItems);
 
             while ((numberOfItems > 0) && (source.MoveNext()))
@@ -178,7 +168,6 @@
         /// <returns><c>true</c> if any of the characters is contained in the specified string; otherwise <c>false</c>.</returns>
         public static bool ContainsAny([NotNull] this string self, [NotNull] params char[] characters)
         {
-
             return self.IndexOfAny(characters) >= 0;
         }
 
@@ -191,7 +180,6 @@
         /// <returns><c>true</c> if any of the items is contained in the specified object; otherwise <c>false</c>.</returns>
         public static bool ContainsAny<T>([NotNull, ItemCanBeNull] this IEnumerable<T> self, [NotNull, ItemCanBeNull] params T[] items)
         {
-
             return items.Any(self.Contains);
         }
 
@@ -205,7 +193,6 @@
         /// <returns><c>true</c> if any of the items is contained in the specified object; otherwise <c>false</c>.</returns>
         public static bool ContainsAny<T>([NotNull, ItemNotNull] this IEnumerable<T> self, [CanBeNull] IEqualityComparer<T> comparer, [NotNull, ItemCanBeNull] params T[] items)
         {
-
             // ReSharper disable once AssignNullToNotNullAttribute
             return items.Any(item => self.Contains(item, comparer));
         }
@@ -221,7 +208,6 @@
         /// </returns>
         public static int IndexOf<T>([NotNull, ItemCanBeNull] this IEnumerable<T> collection, [CanBeNull] T item)
         {
-
             var index = 0;
 
             foreach (var element in collection)
@@ -247,7 +233,6 @@
         /// </returns>
         public static int IndexOf<T>([NotNull, ItemCanBeNull] this IEnumerable<T> collection, [CanBeNull] T item, [CanBeNull] IEqualityComparer<T> comparer)
         {
-
             comparer = comparer ?? EqualityComparer<T>.Default;
 
             var index = 0;
@@ -272,7 +257,6 @@
         /// <param name="action">The action.</param>
         public static void ForEach<T>([NotNull, ItemCanBeNull] this IEnumerable<T> collection, [NotNull] Action<T> action)
         {
-
             foreach (var item in collection)
             {
                 action(item);
@@ -287,10 +271,8 @@
         /// <param name="action">The action.</param>
         public static void ForEach<T>([NotNull, ItemCanBeNull] this IEnumerable<T> collection, [NotNull] Action<T, int> action)
         {
-
             foreach (var i in collection.Select((item, index) => new { item, index }))
             {
-
                 action(i.item, i.index);
             }
         }
@@ -305,7 +287,6 @@
         [NotNull]
         public static IEnumerable<KeyValuePair<TValue, TKey>> Transpose<TKey, TValue>([NotNull] this IEnumerable<KeyValuePair<TKey, TValue>> items)
         {
-
             return items.Select(item => new KeyValuePair<TValue, TKey>(item.Value, item.Key));
         }
 
@@ -321,7 +302,6 @@
         [NotNull]
         public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>([NotNull] this IEnumerable<KeyValuePair<TKey, TValue>> items)
         {
-
             return items.ToDictionary(item => item.Key, item => item.Value);
         }
 
@@ -338,7 +318,6 @@
         [NotNull]
         public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>([NotNull] this IEnumerable<KeyValuePair<TKey, TValue>> items, [CanBeNull] IEqualityComparer<TKey> comparer)
         {
-
             return items.ToDictionary(item => item.Key, item => item.Value, comparer);
         }
 
@@ -356,7 +335,6 @@
         [CanBeNull]
         public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [CanBeNull] TValue defaultValue)
         {
-
             return dictionary.TryGetValue(key, out var value) ? value : defaultValue;
         }
 
@@ -373,7 +351,6 @@
         [CanBeNull]
         public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key)
         {
-
             return dictionary.GetValueOrDefault(key, default(TValue));
         }
 
@@ -389,7 +366,6 @@
         [CanBeNull]
         public static TValue ForceValue<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [NotNull] Func<TKey, TValue> generator)
         {
-
             if (dictionary.TryGetValue(key, out var result))
                 return result;
 
@@ -412,7 +388,6 @@
         [CanBeNull]
         public static TValue ForceValue<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [CanBeNull] TValue defaultValue)
         {
-
             return ForceValue(dictionary, key, _ => defaultValue);
         }
 
@@ -428,7 +403,6 @@
         [NotNull, ItemCanBeNull]
         public static TTarget[] ToArray<TSource, TTarget>([NotNull, ItemCanBeNull] this ICollection<TSource> items, [NotNull] Func<TSource, TTarget> selector)
         {
-
             var count = items.Count;
 
             var result = new TTarget[count];
@@ -455,7 +429,6 @@
         [NotNull]
         public static IEnumerable<T> Repeat<T>([NotNull, ItemCanBeNull] ICollection<T> source, int count)
         {
-
             for (var i = 0; i < count; i++)
             {
                 foreach (var item in source)

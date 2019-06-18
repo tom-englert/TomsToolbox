@@ -18,7 +18,6 @@
         /// <param name="frameworkElement">The element on which to set the cursor.</param>
         public static void StartLocal([NotNull] FrameworkElement frameworkElement)
         {
-
             StartLocal(frameworkElement, DispatcherPriority.Background);
         }
 
@@ -30,7 +29,6 @@
         /// <param name="priority">The dispatcher priority used for waiting.</param>
         public static void StartLocal([NotNull] FrameworkElement frameworkElement, DispatcherPriority priority)
         {
-
             if (frameworkElement.Cursor == Cursors.Wait)
                 return;
 
@@ -50,7 +48,6 @@
         /// </remarks>
         public static void Start([NotNull] FrameworkElement frameworkElement)
         {
-
             Start(frameworkElement, DispatcherPriority.Background);
         }
 
@@ -65,7 +62,6 @@
         /// </remarks>
         public static void Start([NotNull] FrameworkElement frameworkElement, DispatcherPriority priority)
         {
-
             StartLocal(frameworkElement.GetRootVisual(), priority);
         }
     }

@@ -23,7 +23,6 @@
         [CanBeNull]
         public static T GetValue<T>([NotNull] this DependencyObject self, [NotNull] DependencyProperty property)
         {
-
             return self.GetValue(property).SafeCast<T>();
         }
 
@@ -38,7 +37,6 @@
         public static INotifyChanged Track<T>([NotNull] this T dependencyObject, [NotNull] DependencyProperty property)
             where T : DependencyObject
         {
-
             return new DependencyPropertyEventWrapper<T>(dependencyObject, property);
         }
 
@@ -52,7 +50,6 @@
 
             public DependencyPropertyEventWrapper([NotNull] T dependencyObject, [NotNull] DependencyProperty property)
             {
-
                 _dependencyObject = dependencyObject;
                 _dependencyPropertyDescriptor = DependencyPropertyDescriptor.FromProperty(property, typeof(T));
             }

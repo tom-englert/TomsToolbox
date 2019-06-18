@@ -24,7 +24,6 @@
         [NotNull]
         public static IEnumerable<CultureInfo> GetAncestors([NotNull] this CultureInfo self)
         {
-
             var item = self.Parent;
 
             while (!string.IsNullOrEmpty(item.Name))
@@ -43,7 +42,6 @@
         [NotNull]
         public static IEnumerable<CultureInfo> GetAncestorsAndSelf([NotNull] this CultureInfo self)
         {
-
             var item = self;
 
             while (!string.IsNullOrEmpty(item.Name))
@@ -61,7 +59,6 @@
         [NotNull, ItemNotNull]
         public static ICollection<CultureInfo> GetChildren([NotNull] this CultureInfo item)
         {
-
             var children = _childCache.ForceValue(item, CreateChildList);
             return children;
         }
@@ -69,7 +66,6 @@
         [NotNull, ItemNotNull]
         private static CultureInfo[] CreateChildList([CanBeNull] CultureInfo parent)
         {
-
             return CultureInfo.GetCultures(CultureTypes.AllCultures).Where(child => child?.Parent.Equals(parent) == true).ToArray();
         }
 
@@ -81,7 +77,6 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<CultureInfo> GetDescendants([NotNull] this CultureInfo item)
         {
-
             foreach (var child in item.GetChildren())
             {
                 yield return child;

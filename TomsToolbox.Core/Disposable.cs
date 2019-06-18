@@ -43,7 +43,6 @@
         /// ]]></code></example>
         public static void ReportNotDisposedObject([NotNull] this IDisposable obj)
         {
-
             var objectType = obj.GetType();
             // ReSharper disable once PossibleNullReferenceException
             var message = "Object not disposed: " + objectType.Name;
@@ -80,7 +79,6 @@
         /// <returns><c>true</c> if any object has been disposed.</returns>
         public static bool DisposeAll([NotNull, ItemCanBeNull] IEnumerable items)
         {
-
             return items.Cast<object>().Count(Dispose) > 0;
         }
     }

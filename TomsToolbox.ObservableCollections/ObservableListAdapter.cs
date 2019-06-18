@@ -31,7 +31,6 @@
         /// <param name="source">The source.</param>
         public ObservableListAdapter([NotNull, ItemCanBeNull] IList<T> source)
         {
-
             _source = source;
 
             var ncc = source as INotifyCollectionChanged;

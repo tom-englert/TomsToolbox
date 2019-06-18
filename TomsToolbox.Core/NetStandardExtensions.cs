@@ -22,7 +22,6 @@ namespace TomsToolbox.Core
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "CA seems to be wrong about this!")]
         public static MethodInfo GetMethodInfo([NotNull] this Delegate @delegate)
         {
-
             // ReSharper disable once AssignNullToNotNullAttribute
             return @delegate.Method;
         }
@@ -35,7 +34,6 @@ namespace TomsToolbox.Core
         [NotNull]
         public static Type GetTypeInfo([NotNull] this Type type)
         {
-
             return type;
         }
     }

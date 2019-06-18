@@ -28,7 +28,6 @@
         [NotNull]
         public static IEnumerable<T> GetCustomAttributes<T>([NotNull] this ICustomAttributeProvider self, bool inherit)
         {
-
             return self.GetCustomAttributes(typeof(T), inherit).Cast<T>();
         }
 
@@ -41,7 +40,6 @@
         [CanBeNull]
         public static string TryGetDisplayName([NotNull] this ICustomAttributeProvider item)
         {
-
             return item.GetCustomAttributes<DisplayNameAttribute>(false)
                 .Select(attr => attr.DisplayName)
                 .FirstOrDefault();
@@ -55,7 +53,6 @@
         [CanBeNull]
         public static string TryGetDescription([NotNull] this ICustomAttributeProvider item)
         {
-
             return item.GetCustomAttributes<DescriptionAttribute>(false)
                 .Select(attr => attr.Description)
                 .FirstOrDefault();
@@ -70,7 +67,6 @@
         [CanBeNull]
         public static string TryGetText([NotNull] this ICustomAttributeProvider item, [NotNull] object key)
         {
-
             return item.GetCustomAttributes<TextAttribute>(false)
                 .Where(attr => Equals(attr.Key, key))
                 .Select(attr => attr.Text)
@@ -87,7 +83,6 @@
         [CanBeNull]
         public static TypeConverter GetCustomTypeConverter([NotNull] this ICustomAttributeProvider item)
         {
-
             return item
                 .GetCustomAttributes<TypeConverterAttribute>(false)
                 // ReSharper disable once AssignNullToNotNullAttribute
@@ -105,7 +100,6 @@
         /// <returns>The associated sequence.</returns>
         public static double GetSequence([NotNull] this ICustomAttributeProvider target, double defaultValue)
         {
-
             return target.GetCustomAttributes<SequenceAttribute>(false)
                 .Select(attr => attr.Value)
                 .DefaultIfEmpty(defaultValue)

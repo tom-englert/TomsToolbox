@@ -27,7 +27,6 @@
         [NotNull]
         public static string ExtractPropertyName<TProperty>([NotNull] Expression<Func<TProperty>> propertyExpression)
         {
-
             return ExtractPropertyName(propertyExpression, true);
         }
 
@@ -41,7 +40,6 @@
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Works only with exactly this kind of expression, so we don't want to allow to pass something else!")]
         public static string TryExtractPropertyName<TProperty>([NotNull] Expression<Func<TProperty>> propertyExpression)
         {
-
             return ExtractPropertyName(propertyExpression, false);
         }
 
@@ -59,7 +57,6 @@
         [NotNull]
         public static string ExtractPropertyName<T, TProperty>([NotNull] Expression<Func<T, TProperty>> propertyExpression)
         {
-
             return ExtractPropertyName(propertyExpression, true);
         }
 
@@ -74,7 +71,6 @@
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Works only with exactly this kind of expression, so we don't want to allow to pass something else!")]
         public static string TryExtractPropertyName<T, TProperty>([NotNull] Expression<Func<T, TProperty>> propertyExpression)
         {
-
             return ExtractPropertyName(propertyExpression, false);
         }
 
@@ -82,7 +78,6 @@
         [CanBeNull]
         private static string ExtractPropertyName<T>([NotNull] Expression<Func<T>> propertyExpression, bool failOnErrors)
         {
-
             if (!(propertyExpression.Body is MemberExpression memberExpression))
                 return HandleError(failOnErrors, @"Expression is not a member access expression");
 
@@ -101,7 +96,6 @@
         [ContractAnnotation("failOnErrors:true => notnull")]
         private static string ExtractPropertyName<T, TR>([NotNull] Expression<Func<T, TR>> propertyExpression, bool failOnErrors)
         {
-
             if (!(propertyExpression.Body is MemberExpression memberExpression))
                 return HandleError(failOnErrors, @"Expression is not a member access expression");
 
@@ -121,7 +115,6 @@
         // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
         private static string HandleError(bool failOnErrors, [NotNull] string errorMessage)
         {
-
             if (failOnErrors)
                 throw new ArgumentException(errorMessage);
 
@@ -141,7 +134,6 @@
         [NotNull]
         public static PropertyChangedEventArgs GetEventArgs<T>([NotNull] Expression<Func<T>> propertyExpression)
         {
-
             return new PropertyChangedEventArgs(ExtractPropertyName(propertyExpression));
         }
     }

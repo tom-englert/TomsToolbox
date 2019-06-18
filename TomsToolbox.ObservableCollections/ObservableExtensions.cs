@@ -37,7 +37,6 @@
         [NotNull, ItemCanBeNull]
         public static IObservableCollection<TTarget> ObservableSelectMany<TSource, TTarget>([NotNull, ItemCanBeNull] this IList<TSource> source, [NotNull] Expression<Func<TSource, IList<TTarget>>> itemGeneratorExpression)
         {
-
             return new ObservableSelectManyImpl<TSource, TTarget>(source, itemGeneratorExpression);
         }
 
@@ -60,7 +59,6 @@
         [NotNull, ItemCanBeNull]
         public static IObservableCollection<TTarget> ObservableSelect<TSource, TTarget>([NotNull, ItemCanBeNull] this IList<TSource> source, [NotNull] Expression<Func<TSource, TTarget>> itemGeneratorExpression)
         {
-
             return new ObservableSelectImpl<TSource, TTarget>(source, itemGeneratorExpression);
         }
 
@@ -76,7 +74,6 @@
         [NotNull, ItemCanBeNull]
         public static IObservableCollection<TTarget> ObservableCast<TTarget>([NotNull, ItemCanBeNull] this IEnumerable source)
         {
-
             return new ObservableWrappedCollection<object, TTarget>(source, item => (TTarget)item);
         }
 
@@ -97,7 +94,6 @@
         [NotNull, ItemCanBeNull]
         public static IObservableCollection<T> ObservableWhere<T>([NotNull, ItemCanBeNull] this IList<T> source, [NotNull] Func<T, bool> predicate, [NotNull, ItemNotNull] params string[] liveTrackingProperties)
         {
-
             return new ObservableFilteredCollection<T>(source, predicate, liveTrackingProperties);
         }
 
@@ -118,7 +114,6 @@
             public ObservableSelectImpl([NotNull, ItemCanBeNull] IList<TSource> sourceCollection, [NotNull] Expression<Func<TSource, TTarget>> itemGeneratorExpression)
                 : base(sourceCollection, itemGeneratorExpression.Compile())
             {
-
                 _propertyName = PropertySupport.TryExtractPropertyName(itemGeneratorExpression);
                 _sourceReference = new TomsToolbox.Core.WeakReference<IList<TSource>>(sourceCollection);
 
@@ -183,7 +178,6 @@
 
             private void SourceItem_PropertyChanged([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
             {
-
                 if (e.PropertyName != _propertyName)
                     return;
 
@@ -203,7 +197,6 @@
 
             private void DetachEvent(int itemIndex)
             {
-
                 var propertyChangeEventListeners = _propertyChangeEventListeners;
 
                 if (propertyChangeEventListeners == null)
@@ -215,7 +208,6 @@
 
             private void AttachEvent(int itemIndex, [CanBeNull] INotifyPropertyChanged item)
             {
-
                 var weakEventListener = GeneratePropertyChangedEventListener(item);
 
                 if (itemIndex == -1)
@@ -237,26 +229,22 @@
 
             private static void OnCollectionChanged([NotNull, ItemCanBeNull] ObservableSelectImpl<TSource, TTarget> self, [NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
             {
-
                 self.SourceItem_PropertyChanged(sender, e);
             }
 
             private static void Attach([NotNull] WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> weakEvent, [NotNull] INotifyPropertyChanged sender)
             {
-
                 sender.PropertyChanged += weakEvent.OnEvent;
             }
 
             private static void Detach([NotNull] WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs> weakEvent, [NotNull] INotifyPropertyChanged sender)
             {
-
                 sender.PropertyChanged -= weakEvent.OnEvent;
             }
 
             [NotNull, ItemCanBeNull]
             private List<WeakEventListener<ObservableSelectImpl<TSource, TTarget>, INotifyPropertyChanged, PropertyChangedEventArgs>> GeneratePropertyChangeEventListeners([NotNull, ItemCanBeNull] IEnumerable sourceList)
             {
-
                 return sourceList.Cast<object>()
                     .Select(item => GeneratePropertyChangedEventListener(item as INotifyPropertyChanged))
                     .ToList();
@@ -271,7 +259,6 @@
             public ObservableSelectManyImpl([NotNull, ItemCanBeNull] IList<TSource> items, [NotNull] Expression<Func<TSource, IList<TTarget>>> itemGeneratorExpression)
                 : base(new ObservableCompositeCollection<TTarget>())
             {
-
                 _source = items.ObservableSelect(itemGeneratorExpression);
                 _source.CollectionChanged += Source_CollectionChanged;
 
@@ -280,7 +267,6 @@
             [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
             private void Source_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
             {
-
                 var newStartingIndex = e.NewStartingIndex;
                 var oldStartingIndex = e.OldStartingIndex;
                 var content = Items.Content;

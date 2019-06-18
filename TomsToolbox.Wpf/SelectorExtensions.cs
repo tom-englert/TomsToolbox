@@ -115,7 +115,6 @@
             {
                 get
                 {
-
                     if ((++_cleanupCycleCounter & 0x7F) == 0)
                         Cleanup();
 
