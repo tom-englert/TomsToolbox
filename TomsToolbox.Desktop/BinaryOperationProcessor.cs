@@ -7,7 +7,6 @@
     using System.Linq;
     using System.Reflection;
     using System.Windows;
-    using System.Windows.Media;
 
     using JetBrains.Annotations;
 
@@ -25,8 +24,8 @@
     /// - value1 must have an explicit operator for the specified operation and value2 has a type converter matching the expected operator parameter.<para/>
     /// If the value supports implicit or explicit casts, the operation is retried on all types that the type can be casted to. This enables the converter to handle most operations on <see cref="Vector"/>, <see cref="Size"/>, <see cref="Point"/>, etc...<para/>
     /// <para/> 
-    /// For <see cref="Rect"/> the <see cref="BinaryOperation.Addition"/> is mapped to <see cref="Rect.Offset(Vector)"/> and
-    /// the <see cref="BinaryOperation.Multiply"/> is mapped to <see cref="Rect.Transform(Matrix)"/>
+    /// For <see cref="Rect"/> the <see cref="BinaryOperation.Addition"/> is mapped to "Rect.Offset(Vector)" and
+    /// the <see cref="BinaryOperation.Multiply"/> is mapped to "Rect.Transform(Matrix)"
     /// </remarks>
     public sealed class BinaryOperationProcessor
     {
