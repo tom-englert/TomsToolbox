@@ -1,11 +1,9 @@
 ﻿namespace TomsToolbox.Core
 {
     using System;
+    using System.ComponentModel;
 
     using JetBrains.Annotations;
-#if !PORTABLE && !NETSTANDARD1_0
-    using System.ComponentModel;
-#endif
 
     /// <summary>
     /// Entry point to create the <see cref="TryCastWorker{TValue}"/>.
@@ -16,6 +14,10 @@
         /// Creates the <see cref="TryCastWorker{TValue}"/> object to get a fluent notation for try-casting types.<para/>
         /// This pattern avoids heavily nested if (class is type) / else chains when testing for more than one possible cast.
         /// </summary>
+        /// <remarks>
+        /// This has been somewhat superseded by the new C# language feature switch() { case Type variable: ... },
+        /// but for some complex scenarios it might still have some advantages.
+        /// </remarks>
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="value">The value.</param>
         /// <returns>The <see cref="TryCastWorker{TValue}"/> object.</returns>
@@ -225,11 +227,7 @@
         /// <returns>This method never returns, but throws the exception.</returns>
         /// <exception cref="InvalidOperationException"><paramref name="message"/></exception>
         [CanBeNull]
-#if !PORTABLE && !NETSTANDARD1_0
         public TResult ElseThrow([CanBeNull][Localizable(false)][LocalizationRequired(false)] string message)
-#else
-        public TResult ElseThrow([CanBeNull][LocalizationRequired(false)] string message)
-#endif
         {
             if (!_isResolved)
                 throw new InvalidOperationException(message);

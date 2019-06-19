@@ -11,9 +11,7 @@
     /// </summary>
     [CLSCompliant(false)]
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Module)]
-#if !PORTABLE && !NETSTANDARD1_0
     [Serializable]
-#endif
     public sealed class PluginModuleAttribute : Attribute
     {
         /// <summary>

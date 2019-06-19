@@ -15,7 +15,7 @@
         private int _cleanupCycleCounter;
 
         [NotNull, ItemNotNull]
-        private List<WeakReference> _items = new List<WeakReference>();
+        private List<WeakReference<T>> _items = new List<WeakReference<T>>();
 
         /// <summary>
         /// Adds the specified element to the set.
@@ -32,7 +32,7 @@
             if ((++_cleanupCycleCounter & 0x7F) == 0)
                 Cleanup();
 
-            _items.Add(new WeakReference(item));
+            _items.Add(new WeakReference<T>(item));
             return true;
         }
 
@@ -44,9 +44,11 @@
         /// </returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return _items.Where(reference => reference.IsAlive)
-                .Select(reference => (T)reference.Target)
-                .GetEnumerator();
+            foreach (var item in _items)
+            {
+                if (item.TryGetTarget(out var target))
+                    yield return target;
+            }
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -56,7 +58,7 @@
 
         private void Cleanup()
         {
-            _items = new List<WeakReference>(_items.Where(reference => reference.IsAlive));
+            _items = new List<WeakReference<T>>(_items.Where(reference => reference.TryGetTarget(out _)));
         }
     }
 }

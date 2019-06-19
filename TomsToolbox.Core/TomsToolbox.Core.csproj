@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net40-client;netstandard1.0;portable40-net40+sl5+win8+wp8+wpa81</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Title>Tom's Toolbox Core Module</Title>
+    <Title>Tom's Toolbox 2 Essentials Module</Title>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFrameworkProfile)' == 'net40-client' ">

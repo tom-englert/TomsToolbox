@@ -2,12 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Reflection;
 
     using JetBrains.Annotations;
-
-#if NETSTANDARD1_0
-    using System.Reflection;
-#endif
 
     /// <inheritdoc />
     /// <summary>
@@ -65,7 +62,7 @@
         }
 
         /// <inheritdoc />
-        public bool Equals(T x, T y)
+        public bool Equals([CanBeNull] T x, [CanBeNull] T y)
         {
             if (!typeof(T).GetTypeInfo().IsValueType)
             {

@@ -28,7 +28,6 @@
         [NotNull, ItemCanBeNull]
         public static IEnumerable<T> Split<T>([NotNull] this Regex regex, [NotNull] string input, [NotNull] Func<string, bool, T> itemGenerator)
         {
-            // ReSharper disable once AssignNullToNotNullAttribute
             var textParts = regex.Matches(input).Cast<Match>().ToArray();
 
             Match previousTextPart = null;

@@ -66,7 +66,14 @@
         public static bool Dispose([CanBeNull] object item)
         {
             if (!(item is IDisposable disposable))
+            {
+                if (item is IEnumerable list)
+                {
+                    return DisposeAll(list);
+                }
+
                 return false;
+            }
 
             disposable.Dispose();
             return true;

@@ -5,12 +5,9 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
+    using System.Reflection;
 
     using JetBrains.Annotations;
-
-#if NETSTANDARD1_0
-    using System.Reflection;
-#endif
 
     /// <summary>
     /// Extension methods to ease dealing with <see cref="Enum"/> types.

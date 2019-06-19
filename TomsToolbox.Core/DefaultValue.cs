@@ -1,12 +1,9 @@
 ﻿namespace TomsToolbox.Core
 {
     using System;
+    using System.Reflection;
 
     using JetBrains.Annotations;
-
-#if NETSTANDARD1_0
-    using System.Reflection;
-#endif
 
     /// <summary>
     /// Helper methods to get the default value for a type when the type is only available at runtime.

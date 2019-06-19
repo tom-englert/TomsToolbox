@@ -134,9 +134,9 @@
         /// <typeparam name="T">The type of elements in the list.</typeparam>
         /// <param name="target">The target.</param>
         /// <param name="condition">The condition; all items that fulfill this condition will be removed.</param>
-        public static void RemoveRange<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull] Func<T, bool> condition)
+        public static void RemoveWhere<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull] Func<T, bool> condition)
         {
-            target.RemoveRange(target.Where(condition).ToArray());
+            target.RemoveRange(target.Where(condition).ToList());
         }
 
         /// <summary>

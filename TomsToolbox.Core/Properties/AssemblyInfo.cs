@@ -4,9 +4,6 @@ using System.Resources;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyCulture("")]
-[assembly: NeutralResourcesLanguage("en")]
+[assembly: NeutralResourcesLanguage("en-US")]
 [assembly: CLSCompliant(true)]
-
-#if !PORTABLE
 [assembly: ComVisible(false)]
-#endif

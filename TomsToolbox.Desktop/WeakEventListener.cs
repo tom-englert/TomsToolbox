@@ -1,12 +1,9 @@
 ﻿namespace TomsToolbox.Core
 {
     using System;
+    using System.Reflection;
 
     using JetBrains.Annotations;
-
-#if NETSTANDARD1_0
-    using System.Reflection;
-#endif
 
     /// <summary>
     /// Common interface for weak event listener.
@@ -75,7 +72,7 @@
             [NotNull] Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onDetachAction)
         {
             if (!onEventAction.GetMethodInfo().IsStatic || !onAttachAction.GetMethodInfo().IsStatic || !onDetachAction.GetMethodInfo().IsStatic)
-                throw new ArgumentException("Methods must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
+                throw new ArgumentException("Methods must be static, otherwise the event WeakEventListener class does not prevent memory leaks.");
 
             _weakTarget = new WeakReference<TTarget>(target);
             _source = source;
@@ -99,14 +96,17 @@
             [NotNull] Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onDetachAction)
         {
             if (!onEventAction.GetMethodInfo().IsStatic || !onAttachAction.GetMethodInfo().IsStatic || !onDetachAction.GetMethodInfo().IsStatic)
-                throw new ArgumentException("Methods must be static, otherwise the event WeakEventListner class does not prevent memory leaks.");
+                throw new ArgumentException("Methods must be static, otherwise the event WeakEventListener class does not prevent memory leaks.");
+
+            if (!source.TryGetTarget(out var sourceObject))
+                throw new ArgumentException("Source object is already detached!");
 
             _weakTarget = new WeakReference<TTarget>(target);
             _weakSource = source;
             _onEventAction = onEventAction;
             _onDetachAction = onDetachAction;
 
-            onAttachAction(this, source.Target);
+            onAttachAction(this, sourceObject);
         }
 
         /// <summary>
@@ -135,7 +135,11 @@
         /// </summary>
         public void Detach()
         {
-            var source = _source ?? _weakSource?.Target;
+            var source = _source;
+            if (source == null)
+            {
+                _weakSource?.TryGetTarget(out source);
+            }
             if (source == null)
                 return;
 
