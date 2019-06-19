@@ -9,7 +9,7 @@
     <Version>1.0.75.0</Version>
     <PackageTags>.Net Tools Extensions</PackageTags>
     <Description>A set of classes and functions to ease our daily .Net development tasks.</Description>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/tom-englert/TomsToolbox/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageIconUrl>https://raw.githubusercontent.com/tom-englert/TomsToolbox/master/Icon.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/tom-englert/TomsToolbox</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tom-englert/TomsToolbox.git</RepositoryUrl>
@@ -23,6 +23,7 @@
     <TargetsForTfmSpecificContentInPackage>TfmSpecificContent</TargetsForTfmSpecificContentInPackage>
     <PackageOutputPath>$(SolutionDir)Deploy</PackageOutputPath>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <CodeAnalysisRuleSet>..\CodeContracts.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -52,6 +53,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AdditionalFiles Include="..\ResharperCodeContractNullability.config" />
+    <None Include="..\LICENSE" Link="LICENSE" Pack="true" PackagePath="" />
     <None Include="..\TomsToolbox.snk">
       <Link>TomsToolbox.snk</Link>
     </None>
