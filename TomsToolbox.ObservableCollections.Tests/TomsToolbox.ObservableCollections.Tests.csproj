@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net45</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.1" PrivateAssets="All" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TomsToolbox.Core\TomsToolbox.Core.csproj">
+      <Project>{AE305312-7637-43BF-9156-7EC513C55135}</Project>
+      <Name>TomsToolbox.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj">
+      <Project>{3647CD2D-2A4E-4859-9BBD-606A73C14801}</Project>
+      <Name>TomsToolbox.Desktop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj">
+      <Project>{E3EE79EA-50EC-4D54-B59F-799D50E8B221}</Project>
+      <Name>TomsToolbox.ObservableCollections</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

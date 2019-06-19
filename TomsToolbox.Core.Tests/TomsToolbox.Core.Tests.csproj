@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net45</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TomsToolbox.Core\TomsToolbox.Core.csproj">
+      <Project>{AE305312-7637-43BF-9156-7EC513C55135}</Project>
+      <Name>TomsToolbox.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,189 @@
+﻿<UserControl x:Class="SampleApp.Samples.MiscView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="500"
+             xmlns:toms="urn:TomsToolbox"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:samples="clr-namespace:SampleApp.Samples"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             d:DataContext="{d:DesignInstance samples:MiscViewModel}">
+  <UserControl.Resources>
+    <toms:DateTimeSource UpdateInterval="00:00:01" x:Key="LiveDateTime" />
+  </UserControl.Resources>
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Margin="10">
+      <HeaderedContentControl Header="Custom focus visual that aligns with the content (use keyboard navigation to see it)" Focusable="False">
+        <HeaderedContentControl.Resources>
+          <Style TargetType="Button">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="MinWidth" Value="70" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="15,3" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="Template">
+              <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                  <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Background="White">
+                    <Grid Margin="{TemplateBinding Padding}"
+                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                      <ContentPresenter />
+                      <Rectangle x:Name="FocusVisual" Margin="-3,-1"
+                                 Stroke="Transparent" StrokeThickness="1" StrokeDashArray="2"
+                                 IsHitTestVisible="False" />
+                    </Grid>
+                  </Border>
+                  <ControlTemplate.Triggers>
+                    <Trigger Property="IsPressed" Value="True">
+                      <Setter Property="BorderBrush" Value="Black" />
+                    </Trigger>
+                    <MultiDataTrigger>
+                      <MultiDataTrigger.Conditions>
+                        <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                        <Condition Binding="{Binding IsKeyboardFocusWithin, RelativeSource={RelativeSource Self}}" Value="True" />
+                        <Condition Binding="{Binding IsFocusVisualVisible, Source={x:Static toms:KeyboardNavigation.Current}}" Value="True" />
+                      </MultiDataTrigger.Conditions>
+                      <Setter TargetName="FocusVisual" Property="Stroke" Value="Green" />
+                    </MultiDataTrigger>
+                  </ControlTemplate.Triggers>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </Style>
+        </HeaderedContentControl.Resources>
+        <StackPanel Orientation="Horizontal" Margin="5">
+          <Button Content="#1" />
+          <Button Content="#2-2" />
+          <Button Content="#3-3-3" />
+          <Button Content="#4-4-4-4" />
+        </StackPanel>
+      </HeaderedContentControl>
+      <HeaderedContentControl Header="Update binding to a POCO property with a timer." Focusable="False">
+        <Grid>
+          <TextBlock x:Name="Time" Margin="10"
+                     Text="{Binding Now, Mode=OneWay, Source={x:Static toms:DateTimeSource.Default}}"
+                     VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" />
+        </Grid>
+        <i:Interaction.Triggers>
+          <toms:TimerTrigger Interval="00:00:01">
+            <toms:UpdatePropertyAction TargetName="Time" Property="{x:Static TextBlock.TextProperty}" />
+          </toms:TimerTrigger>
+        </i:Interaction.Triggers>
+      </HeaderedContentControl>
+      <HeaderedContentControl Header="AggregatingMultiValueConverter" Focusable="False">
+        <StackPanel>
+          <StackPanel.Resources>
+            <Style TargetType="TextBlock">
+              <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            <toms:CompositeMultiValueConverter x:Key="ThresholdConverter">
+              <toms:CompositeMultiValueConverter.MultiValueConverter>
+                <toms:AggregatingMultiValueConverter>
+                  <toms:BinaryOperationConverter Operation="Subtraction" />
+                  <toms:BinaryOperationConverter Operation="LessThanOrEqual" />
+                </toms:AggregatingMultiValueConverter>
+              </toms:CompositeMultiValueConverter.MultiValueConverter>
+              <toms:BooleanToVisibilityConverter />
+            </toms:CompositeMultiValueConverter>
+          </StackPanel.Resources>
+          <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock Text="Start time: " />
+            <TextBox Text="{Binding OperationStarted, UpdateSourceTrigger=PropertyChanged}" />
+            <Decorator Width="20" />
+            <TextBlock Text="Min. Duration: " />
+            <TextBox Text="{Binding MinimumDuration, UpdateSourceTrigger=PropertyChanged}" />
+            <Decorator Width="20" />
+            <TextBlock Text="The threshold is " />
+            <TextBlock x:Name="ThresholdText" Text="NOT " FontWeight="Bold">
+              <TextBlock.Visibility>
+                <MultiBinding Converter="{StaticResource ThresholdConverter}">
+                  <Binding Path="Now" Source="{StaticResource LiveDateTime}" />
+                  <Binding Path="OperationStarted" />
+                  <Binding Path="MinimumDuration" />
+                </MultiBinding>
+              </TextBlock.Visibility>
+            </TextBlock>
+            <TextBlock Text="reached." />
+          </StackPanel>
+        </StackPanel>
+      </HeaderedContentControl>
+      <HeaderedContentControl Header="BinaryOperationConverter Sample" Focusable="False">
+        <Border x:Name="OuterBorder" Margin="5" BorderBrush="Orange" BorderThickness="2">
+          <Border.Resources>
+            <toms:CompositeConverter x:Key="LessThanToVisibilityConverter">
+              <toms:BinaryOperationConverter Operation="LessThan" />
+              <BooleanToVisibilityConverter />
+            </toms:CompositeConverter>
+            <Style TargetType="ListBoxItem" x:Key="ListBoxItemStyle">
+              <Setter Property="Template">
+                <Setter.Value>
+                  <ControlTemplate TargetType="ListBoxItem">
+                    <DockPanel>
+                      <CheckBox DockPanel.Dock="Left" Style="{StaticResource {x:Static toms:ResourceKeys.ListBoxItemCheckBoxStyle}}" />
+                      <Decorator Width="5" DockPanel.Dock="Left" />
+                      <ContentPresenter VerticalAlignment="Center" />
+                    </DockPanel>
+                  </ControlTemplate>
+                </Setter.Value>
+              </Setter>
+            </Style>
+          </Border.Resources>
+          <Grid>
+            <ListBox x:Name="ListBox" ItemContainerStyle="{StaticResource ListBoxItemStyle}" SelectionMode="Extended">
+              <TextBlock Text="#1" />
+              <TextBlock Text="#2" />
+              <TextBlock Text="#3" />
+              <TextBlock Text="#4" />
+            </ListBox>
+            <Border Margin="5" BorderBrush="Goldenrod" BorderThickness="2" Width="{Binding ActualWidth, ElementName=OuterBorder, Converter={x:Static toms:BinaryOperationConverter.Division}, ConverterParameter=2 }">
+              <TextBlock Margin="5" Text="Please select at least two items"
+                         TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center"
+                         Visibility="{Binding SelectedItems.Count, ElementName=ListBox, Converter={StaticResource LessThanToVisibilityConverter}, ConverterParameter=2}" />
+            </Border>
+          </Grid>
+        </Border>
+      </HeaderedContentControl>
+      <HeaderedContentControl Header="InPlaceEdit standalone" Focusable="False">
+        <StackPanel Margin="5">
+          <Border Margin="5" Padding="3,2" BorderThickness="1" BorderBrush="Gray">
+            <toms:InPlaceEdit Text="left aligned text" />
+          </Border>
+          <Border Margin="5" Padding="3,2" BorderThickness="1" BorderBrush="Gray">
+            <toms:InPlaceEdit TextAlignment="Right" Text="right aligned text" />
+          </Border>
+        </StackPanel>
+      </HeaderedContentControl>
+      <HeaderedContentControl Header="Nested items control with default command" Focusable="False">
+        <StackPanel Margin="5">
+          <ListBox Height="100" toms:ItemsControlExtensions.DefaultItemCommand="{Binding ItemsControlDefaultCommand}" Background="BlanchedAlmond">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <ListBox Margin="2" toms:ItemsControlExtensions.DefaultItemCommand="{Binding DataContext.ItemsControlDefaultCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" BorderThickness="0" Background="{x:Null}">
+                  <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                  </ListBox.ItemsPanel>
+                  <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                      <Setter Property="Margin" Value="10" />
+                    </Style>
+                  </ListBox.ItemContainerStyle>
+                  <system:String>Inner1</system:String>
+                  <system:String>Inner2</system:String>
+                  <system:String>Inner3</system:String>
+                </ListBox>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+            <system:String>Outer1</system:String>
+            <system:String>Outer2</system:String>
+          </ListBox>
+        </StackPanel>
+      </HeaderedContentControl>
+      <HeaderedContentControl Header="Memory testing">
+        <Button Content="GC Collect" Margin="10" Command="{Binding GCCollectCommand}" />
+      </HeaderedContentControl>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

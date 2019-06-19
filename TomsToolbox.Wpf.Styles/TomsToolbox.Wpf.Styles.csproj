@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net45</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Title>Tom's Toolbox WPF Styles Module</Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TomsToolbox.Core\TomsToolbox.Core.csproj">
+      <Project>{ae305312-7637-43bf-9156-7ec513c55135}</Project>
+      <Name>TomsToolbox.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj">
+      <Project>{3647cd2d-2a4e-4859-9bbd-606a73c14801}</Project>
+      <Name>TomsToolbox.Desktop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj">
+      <Project>{ec9f9418-877f-49ba-af91-f456fbc5ad57}</Project>
+      <Name>TomsToolbox.Wpf</Name>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Fody" Version="5.0.6" PrivateAssets="All" />
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.1" PrivateAssets="All" />
+    <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.13.0" PrivateAssets="All" />
+    <PackageReference Include="Expression.Blend.Sdk" Version="1.0.2" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19270-01" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="**\*.xaml" Exclude="obj\**;bin\**">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="Effects\invertGray.ps" />
+  </ItemGroup>
+
+</Project>

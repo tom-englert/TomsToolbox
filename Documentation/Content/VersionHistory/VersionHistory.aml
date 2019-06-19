@@ -1,0 +1,533 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="30a05c61-ca5f-4fe9-8190-f1bd787fe2c7" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>The topics in this section describe the various changes made to Tom's Toolbox over the life time of the project.</para>
+    </introduction>
+    <section>
+      <title>Version History</title>
+      <content>
+        <list class="bullet">
+          <listItem>
+            <para>1.0.75.0</para>
+            <list class="bullet">
+              <listItem><para>Add ThreadBoundTaskScheduler and BindingRelay class.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.74.0</para>
+            <list class="bullet">
+              <listItem><para>Fix ComboBoxStyle: Cursor of editable combo box is not visible in dark mode.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.73.0</para>
+            <list class="bullet">
+              <listItem><para>Added StyleBindings also for Column- and RowDefinitions</para></listItem>
+              <listItem><para>VisualCompositionBehavior: Defer ExportProvider check to avoid false warnings; during unload export provider is released while the visual is still loaded.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.72.0</para>
+            <list class="bullet">
+              <listItem><para>Extend tracing of VisualComposition</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.71.0</para>
+            <list class="bullet">
+              <listItem><para>Add trace capabilities to VisualComposition</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.70.0</para>
+            <list class="bullet">
+              <listItem><para>Correctly redraw window resize buttons when resizing window via mouse drag</para></listItem>
+              <listItem><para>Fix in CustomNonClientAreaBehavior: When taskbar is set to auto-hide, it sometimes does not appear when window is maximized.</para></listItem>
+              <listItem><para>Fix SampleApp click once prerequisites</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.69.0</para>
+            <list class="bullet">
+              <listItem><para>Fix: missing 4.5 extensions in TomsToolbox.Desktop</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.68.0</para>
+            <list class="bullet">
+              <listItem><para>Add an icon control that dynamically displays the image best fitting the actual size.</para></listItem>
+              <listItem><para>Fix possible flickering of window when using the custom style.</para></listItem>
+              <listItem><para>Provide an explicit .net45 version with all packages to fix issues with referenced packages (e.g. System.Windows.Interactivity).</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.67.0</para>
+            <list class="bullet">
+              <listItem><para>Use weak reference in ObservableObjectBase.RelayEvents to avoid memory leaks</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.66.0</para>
+            <list class="bullet">
+              <listItem><para>Add dependency property change tracker for framework elements that avoids accidental memory leaks</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.65.0</para>
+            <list class="bullet">
+              <listItem><para>Add XAML extensions for Button</para></listItem>
+              <listItem><para>CustomNonClientAreaBehavior: Fix Maximized window handling</para></listItem>
+              <listItem><para>Fix memory leaks in visual composition</para></listItem>
+              <listItem><para>Add a TimerTrigger that continuously fires and avoids the memory leak of the Microsoft.Expression.Interactivity version.</para></listItem>
+              <listItem><para>Add a WeakEventSource class</para></listItem>
+              <listItem><para>Drop CodeContracts support</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.64.0</para>
+            <list class="bullet">
+              <listItem><para>Speedup TextBoxVisibleWhiteSpaceDecorator</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.63.0</para>
+            <list class="bullet">
+              <listItem><para>Rename private method SetRegionId, R# gets confused and shows false errors.</para></listItem>
+              <listItem><para>Add missing nullability annotations</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.62.0</para>
+            <list class="bullet">
+              <listItem><para>Add ThemeResourceLoader support to window style</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.61.0</para>
+            <list class="bullet">
+              <listItem><para>Remove runtime dependency to Jetbrains.Annotations, replace with external annotations</para></listItem>
+              <listItem><para>Add missing nullability annotations</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.60.0</para>
+            <list class="bullet">
+              <listItem><para>Fix data grid header styles</para></listItem>
+              <listItem><para>Add possibility to set more than on group style via StyleBindings</para></listItem>
+              <listItem><para>Add style for Window class</para></listItem>
+              <listItem><para>Add ToDictionary from IEnumerable{KeyValuePair} extension method</para></listItem>
+              <listItem><para>Improve DispatcherThrottle implementation</para></listItem>
+              <listItem><para>Support NetStandard (TomsToolbox.Core)</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.59.0</para>
+            <list class="bullet">
+              <listItem><para>Add a VirtualizingDoubleClickPanel (same as DoubleClickPanel, but derived from VirtualizingPanel).</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.58.0</para>
+            <list class="bullet">
+              <listItem><para>Fix ItemsControlExtensions.DefaultItemCommand: Avoid duplicate executions on nested controls.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.57.0</para>
+            <list class="bullet">
+              <listItem><para>Added R# [CanBeNull] on all unannotated parameters.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.56.0</para>
+            <list class="bullet">
+              <listItem><para>CustomNonClientAreaBehavior: Schedule a redraw after WM_NCACTIVATE; if DWM composition is disabled, DefWindowProc(...WM_NCACTIVATE..) *does* some extra drawing on the window frame.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.55.0</para>
+            <list class="bullet">
+              <listItem><para>Add GetItemContainers extension method for ItemsControl.</para></listItem>
+              <listItem><para>InPlaceEdit: Support text alignment and begin edit on enter if focused.</para></listItem>
+              <listItem><para>Add VisualAncestors extension method.</para></listItem>
+              <listItem><para>Add a validation template for Validar.Fody with DataAnnotations.</para></listItem>
+              <listItem><para>Added HashCode class.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.54.0</para>
+            <list class="bullet">
+              <listItem><para>Remove reference to JetBrains.ExternalAnnotations.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.53.0</para>
+            <list class="bullet">
+              <listItem><para>Added WPF Styles.</para></listItem>
+              <listItem><para>Added R# [NotNull] annotations to complement Code Contracts.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.52.0</para>
+            <list class="bullet">
+              <listItem><para>Extend CommandRoutingBehavior to track focus to update the active instance.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.51.0</para>
+            <list class="bullet">
+              <listItem><para>Change resource keys to workaround https://connect.microsoft.com/VisualStudio/feedback/details/2993889/.</para></listItem>
+              <listItem><para>Remove WeakReference&lt;T&gt; in .Net45.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.50.0</para>
+            <list class="bullet">
+              <listItem><para>ObservableObject: Pass validation context to ValidationAttribute.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.49.0</para>
+            <list class="bullet">
+              <listItem><para>Speed up SelectGroupOnGroupHeaderClickBehavior.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.48.0</para>
+            <list class="bullet">
+              <listItem><para>VisualComposition runtime error handling.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.47.0</para>
+            <list class="bullet">
+              <listItem><para>Add ListBoxSelectAllBehavior.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.46.0</para>
+            <list class="bullet">
+              <listItem><para>CustomNonClientAreaBehavior: Handle SizeToContent.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.45.0</para>
+            <list class="bullet">
+              <listItem><para>Add liveTrackingProperties parameter also to ObservableWhere extension.</para></listItem>
+              <listItem><para>Use DWM to draw the glass frame in custom windows + minor fixes.</para></listItem>
+              <listItem><para>Add generic dialog commands to build generic dialogs.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.44.0</para>
+            <list class="bullet">
+              <listItem><para>Support live filtering in ObservableFilteredCollection/ObservableWhere.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.43.0</para>
+            <list class="bullet">
+              <listItem><para>Fix performance issues of the ObservableCompositeCollection indexer.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.42.0</para>
+            <list class="bullet">
+              <listItem><para>Add ImportBehavior.</para></listItem>
+              <listItem><para>DataTemplate.Role also works with ContentPresenter.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.41.0</para>
+            <list class="bullet">
+              <listItem><para>Refactor visual composition to not require the IComposablePart interface and allow lazy setting of the export provider.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.40.0</para>
+            <list class="bullet">
+              <listItem><para>Extend ObservableObject to enable validation error tracking.</para></listItem>
+              <listItem><para>Add additional classes.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.39.0</para>
+            <list class="bullet">
+              <listItem><para>ObservableCompositeCollection: Property changed for Count property not always raised.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.38.0</para>
+            <list class="bullet">
+              <listItem><para>Split ObservableObject to have a serializable base class.</para></listItem>
+              <listItem><para>Focus not set when MultiSelectorExtensions selects single item via SourceSelection_CollectionChanged.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.37.0</para>
+            <list class="bullet">
+              <listItem><para>Fix command routing behavior: Detach does not work if called after unloading.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.36.0</para>
+            <list class="bullet">
+              <listItem><para>Role property should be of type object everywhere.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.35.0</para>
+            <list class="bullet">
+              <listItem><para>Make attributes serializable.</para></listItem>
+              <listItem><para>Define xmlns prefix.</para></listItem>
+              <listItem><para>Fix missing parameters in AppDomainHelper.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.34.0</para>
+            <list class="bullet">
+              <listItem><para>Add UnaryOperationConverter and AggregatingMultiValueConverter.</para></listItem>
+              <listItem><para>Enhance DateTimeSource and UpdatePropertyAction.</para></listItem>
+              <listItem><para>Fix BinaryOperationConverter for DateTime operations.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.33.0</para>
+            <list class="bullet">
+              <listItem><para>Attributed validation support for ObservableObject.</para></listItem>
+              <listItem><para>ClipoardHelper: Default to TEXT, as CSV is not Unicode.</para></listItem>
+              <listItem><para>Enhance all converters (usage, error handling, tracing).</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.32.0</para>
+            <list class="bullet">
+              <listItem><para>UpdatePropertyAction: Stop updating the binding when the target has been unloaded.</para></listItem>
+              <listItem><para>Added: AssemblyExtensions, HighResolutionTimer.</para></listItem>
+              <listItem><para>Fix ClipboardHelper (broken parsing of quoted strings).</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.31.0</para>
+            <list class="bullet">
+              <listItem><para>Clipboard helper: proper handling for a single cell that contains only white space.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.30.0</para>
+            <list class="bullet">
+              <listItem><para>Add clipboard helper to support table data exchange via clipboard.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.29.0</para>
+            <list class="bullet">
+              <listItem><para>Fix raise condition in ThreadWithDispatcher.</para></listItem>
+              <listItem><para>Visual composition behavior works with free threaded export provider.</para></listItem>
+              <listItem><para>ItemsControlCompositionBehavior forces the selection of the first element after applying the content if the target is a selector.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.28.0</para>
+            <list class="bullet">
+              <listItem><para>Fix/Rename ObservableFilteredCollection and add ObservableWhere extension.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.27.0</para>
+            <list class="bullet">
+              <listItem><para>Improve ObjectToText converter.</para></listItem>
+              <listItem><para>Add StringToObject converter.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.26.0</para>
+            <list class="bullet">
+              <listItem><para>Fix typo in CommandRoutingBehavior.IsChecked property.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.25.0</para>
+            <list class="bullet">
+              <listItem><para>Composite commands re-factored.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.24.0</para>
+            <list class="bullet">
+              <listItem><para>Add Logical, Arithmetic, and Composite MultiValueConverters.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.23.0</para>
+            <list class="bullet">
+              <listItem><para>Add KeyboardNavigation helper class.</para></listItem>
+              <listItem><para>Add BinaryOperationConverter class.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.22.0</para>
+            <list class="bullet">
+              <listItem><para>UpdatePropertiesAction => UpdatePropertyAction, improves usability; add usage sample.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.21.0</para>
+            <list class="bullet">
+              <listItem><para>Extend CommandRoutingBehavior by CommandParameter.</para></listItem>
+              <listItem><para>Add WindowButtonsBehavior for default button handling.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.20.0</para>
+            <list class="bullet">
+              <listItem><para>Add DataTemplate helper.</para></listItem>
+              <listItem><para>Add Interactivity style bindings.</para></listItem>
+              <listItem><para>Add CustomNonClientAreaBehavior class.</para></listItem>
+              <listItem><para>Add DateTimeSource class.</para></listItem>
+              <listItem><para>Add DoubleClickPanel class.</para></listItem>
+              <listItem><para>Add WindowsCommands class.</para></listItem>
+              <listItem><para>AllowRecomposition in ImportExtension class.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.19.0</para>
+            <list class="bullet">
+              <listItem><para>Improve import error messages.</para></listItem>
+              <listItem><para>Add composite command handling.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.18.0</para>
+            <list class="bullet">
+              <listItem><para>Add LegacyV2RuntimeActivationPolicy helper.</para></listItem>
+              <listItem><para>Restructure composition framework, fix export provider locator issues and adapt sample application to use dynamic export provider locator.</para></listItem>
+              <listItem><para>Add portable version of Core and .Net45 version of Desktop.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.17.0</para>
+            <list class="bullet">
+              <listItem><para>Add Import markup extension.</para></listItem>
+              <listItem><para>Simplify ComposableContentControl, improve loading behavior.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.16.0</para>
+            <list class="bullet">
+              <listItem><para>Add FrameworkElementBehavior and UpdatePropertiesAction.</para></listItem>
+              <listItem><para>Fix ComposableContentControl loading behavior.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.15.0</para>
+            <list class="bullet">
+              <listItem><para>Add performant ToArray() for collections.</para></listItem>
+              <listItem><para>Add HGlobal class for proper handling of unmanaged memory.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.14.0</para>
+            <list class="bullet">
+              <listItem><para>Added optional change callback to ObservableObject.SetProperty.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.13.0</para>
+            <list class="bullet">
+              <listItem><para>Fix alignment problem in SharedWidthHeaderedContentControl.</para></listItem>
+              <listItem><para>Clean up/improve the sample application.</para></listItem>
+              <listItem><para>MultiSelectorExtensions - no more updating if items control is about to be unloaded.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.12.0</para>
+            <list class="bullet">
+              <listItem><para>Adapt DependencyObject usage and extensions after fixing CodeContract.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.11.0</para>
+            <list class="bullet">
+              <listItem><para>Add VisualComposition framework.</para></listItem>
+              <listItem><para>Add TextBoxVisibleWhiteSpaceDecorator.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.10.0</para>
+            <list class="bullet">
+              <listItem><para>Preserve Jetbrains.Annotations attributes.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.9.0</para>
+            <list class="bullet">
+              <listItem><para>Fix a bug in MultiSelectorExtensions.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.8.0</para>
+            <list class="bullet">
+              <listItem><para>Add FilteredObservableCollection, XmlExtensions, and dependency property change tracking.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.7.0</para>
+            <list class="bullet">
+              <listItem><para>Add new features.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.6.0</para>
+            <list class="bullet">
+              <listItem><para>Upgrade JetBrains.Annotations.</para></listItem>
+              <listItem><para>Add culture info helper extensions.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.5.0</para>
+            <list class="bullet">
+              <listItem><para>Add type converter support and ObservablePropertyChangeTracker.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.4.0</para>
+            <list class="bullet">
+              <listItem><para>Add map control and various behaviors.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.3.0</para>
+            <list class="bullet">
+              <listItem><para>Add controls and converters.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.2.0</para>
+            <list class="bullet">
+              <listItem><para>Simplified non-generic DelegateCommand (risk of recursive calls).</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.1.0</para>
+            <list class="bullet">
+              <listItem><para>Fixed NuGet packages: CodeContract libraries were added as reference.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>1.0.0.0</para>
+            <list class="bullet">
+              <listItem><para>Initial version.</para></listItem>
+            </list>
+          </listItem>
+        </list>
+      </content>
+    </section>
+
+    <relatedTopics>
+      <link xlink:href="70e0e697-583b-46c1-94a3-a992d398d79a" />
+    </relatedTopics>
+
+  </developerConceptualDocument>
+</topic>

@@ -1,0 +1,21 @@
+﻿<Window x:Class="SampleApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:toms="urn:TomsToolbox"
+        xmlns:sampleApp="clr-namespace:SampleApp"
+        Height="600" Width="800">
+  <Window.ContextMenu>
+    <ContextMenu>
+      <MenuItem Header="Show Popup" Click="ShowPopup_Click" />
+    </ContextMenu>
+  </Window.ContextMenu>
+
+  <TabControl toms:VisualComposition.RegionId="{x:Static sampleApp:RegionId.Main}" Margin="-1">
+    <TabControl.ItemTemplate>
+      <DataTemplate>
+        <TextBlock Text="{Binding}" />
+      </DataTemplate>
+    </TabControl.ItemTemplate>
+  </TabControl>
+
+</Window>

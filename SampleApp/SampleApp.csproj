@@ -1,0 +1,92 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>Net462</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.Composition.Registration" />
+    <Reference Include="System.Reflection.Context" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Fody" Version="5.0.6" PrivateAssets="all" />
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.1" PrivateAssets="all" />
+    <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.13.0" PrivateAssets="all" />
+    <PackageReference Include="Throttle.Fody" Version="1.4.0" PrivateAssets="all" />
+    <PackageReference Include="PropertyChanged2.Fody" Version="2.6.0" PrivateAssets="all" />
+    <PackageReference Include="Expression.Blend.Sdk" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TomsToolbox.Core\TomsToolbox.Core.csproj">
+      <Project>{ae305312-7637-43bf-9156-7ec513c55135}</Project>
+      <Name>TomsToolbox.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj">
+      <Project>{3647cd2d-2a4e-4859-9bbd-606a73c14801}</Project>
+      <Name>TomsToolbox.Desktop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj">
+      <Project>{e3ee79ea-50ec-4d54-b59f-799d50e8b221}</Project>
+      <Name>TomsToolbox.ObservableCollections</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj">
+      <Project>{E5D732D2-0294-48FD-8314-63DC1A9155FE}</Project>
+      <Name>TomsToolbox.Wpf.Styles</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj">
+      <Project>{ec9f9418-877f-49ba-af91-f456fbc5ad57}</Project>
+      <Name>TomsToolbox.Wpf</Name>
+    </ProjectReference>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="**//*.xaml" Exclude="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Properties\Resources.Designer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </None>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.Designer.tt</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Resource Include="**/*.png" />
+    <Resource Include="**/*.ico" />
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <Content Include="Map\MapSources.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+
+</Project>
