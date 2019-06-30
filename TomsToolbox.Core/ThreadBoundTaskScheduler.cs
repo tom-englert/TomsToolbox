@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Core
 {
     using System;
     using System.Collections.Concurrent;
@@ -54,6 +54,7 @@
         /// <returns>
         /// An enumerable that allows a debugger to traverse the tasks currently queued to this scheduler.
         /// </returns>
+        [NotNull]
         protected override IEnumerable<Task> GetScheduledTasks()
         {
             return _tasksCollection.ToArray();

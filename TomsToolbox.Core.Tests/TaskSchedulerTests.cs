@@ -6,6 +6,8 @@
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using TomsToolbox.Core;
+
     [TestClass]
     public class TaskSchedulerTests
     {

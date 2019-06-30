@@ -79,7 +79,7 @@
 
                     var newItems = new Dictionary<TKey, WeakReference<TValue>>(items2.Comparer);
                     // ReSharper disable once PossibleNullReferenceException
-                    newItems.AddRange(items2.Where(item => item.Value.IsAlive));
+                    newItems.AddRange(items2.Where(item => item.Value.TryGetTarget(out _)));
                     newItems[key] = new WeakReference<TValue>(target);
 
                     _items = newItems;
@@ -101,8 +101,15 @@
         {
             get
             {
-                // ReSharper disable once AssignNullToNotNullAttribute
-                return _items.Values.Select(item => item?.Target).Where(item => item != null).ToArray();
+                TValue GetTargetOrDefault(WeakReference<TValue> item)
+                {
+                    if (item == null)
+                        return null;
+
+                    return item.TryGetTarget(out var value) ? value : null;
+                }
+
+                return _items.Values.Select(GetTargetOrDefault).Where(item => item != null).ToArray();
             }
         }
 
@@ -119,7 +126,7 @@
             get
             {
                 // ReSharper disable once PossibleNullReferenceException
-                return _items.Where(item => item.Value.IsAlive).Select(item => item.Key).ToArray();
+                return _items.Where(item => item.Value.TryGetTarget(out _)).Select(item => item.Key).ToArray();
             }
         }
 
@@ -189,7 +196,7 @@
         /// <param name="key">The key to locate in the <see cref="AutoWeakIndexer{TKey, TValue}"/>.</param>
         public bool ContainsKey([NotNull] TKey key)
         {
-            return _items.TryGetValue(key, out var reference) && (reference != null) && reference.IsAlive;
+            return _items.TryGetValue(key, out var reference) && (reference != null) && reference.TryGetTarget(out _);
         }
 
         /// <summary>
