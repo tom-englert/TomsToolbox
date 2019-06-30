@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Wpf
 {
     using System;
     using System.Windows.Threading;

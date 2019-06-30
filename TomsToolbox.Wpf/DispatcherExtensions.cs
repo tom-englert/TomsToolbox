@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Wpf
 {
     using System;
     using System.Reflection;
@@ -41,7 +41,7 @@
         {
             var result = InternalInvoke(dispatcher, (Delegate)method);
             if (result == null)
-                return default(T);
+                return default;
 
             return (T)result;
         }
@@ -64,19 +64,18 @@
 
             Exception innerException = null;
 
-            var result = dispatcher.Invoke(new Func<object>(
-                delegate
+            var result = dispatcher.Invoke(delegate
+            {
+                try
                 {
-                    try
-                    {
-                        return method.DynamicInvoke();
-                    }
-                    catch (Exception ex)
-                    {
-                        innerException = ex;
-                        return null;
-                    }
-                }));
+                    return method.DynamicInvoke();
+                }
+                catch (Exception ex)
+                {
+                    innerException = ex;
+                    return null;
+                }
+            });
 
             if (innerException != null)
             {

@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Wpf
 {
     using System;
     using System.Collections.Generic;
@@ -7,9 +7,12 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Core;
+    using TomsToolbox.Desktop;
+
     /// <summary>
     /// Attribute to mark one property to relay the property changed events of another property from the governing class.
-    /// If you call <see cref="ObservableObjectBase.OnPropertyChanged(string)"/> for a property of the governing class,
+    /// If you call <see cref="ObservableObjectBase.OnPropertyChanged"/> for a property of the governing class,
     /// the property change event will also be raised for the relayed property.
     /// </summary>
     /// <example>
