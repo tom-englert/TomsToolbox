@@ -71,7 +71,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             source.Add(11);
             Assert.IsTrue(target.SequenceEqual(new[] { 11 }));
             Assert.AreEqual(NotifyCollectionChangedAction.Add, lastEventArgs.Action);
-            Assert.AreEqual(11, lastEventArgs.NewItems.Cast<TestObject>().Single().Value);
+            Assert.AreEqual(11, lastEventArgs.NewItems.Cast<int>().Single());
             lastEventArgs = null;
 
             source.Add(12);
@@ -82,7 +82,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             source.Add(13);
             Assert.IsTrue(target.SequenceEqual(new[] { 11, 13 }));
             Assert.AreEqual(NotifyCollectionChangedAction.Add, lastEventArgs.Action);
-            Assert.AreEqual(13, lastEventArgs.NewItems.Cast<TestObject>().Single().Value);
+            Assert.AreEqual(13, lastEventArgs.NewItems.Cast<int>().Single());
             lastEventArgs = null;
 
         }
