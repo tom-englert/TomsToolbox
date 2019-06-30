@@ -5,6 +5,7 @@ namespace TomsToolbox.ObservableCollections.Tests
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Linq;
 
     using JetBrains.Annotations;
@@ -12,12 +13,11 @@ namespace TomsToolbox.ObservableCollections.Tests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using TomsToolbox.Core;
-    using TomsToolbox.Desktop;
 
     [TestClass]
     public class ObservableExtensionsTests
     {
-        class TestObject : ObservableObject
+        class TestObject : INotifyPropertyChanged
         {
             private IList<int> _inner;
             private int _value;
@@ -28,7 +28,11 @@ namespace TomsToolbox.ObservableCollections.Tests
                 get => _inner;
                 set
                 {
-                    SetProperty(ref _inner, value, () => Inner);
+                    if (_inner == value)
+                        return;
+
+                    _inner = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Inner)));
                 }
             }
 
@@ -37,9 +41,15 @@ namespace TomsToolbox.ObservableCollections.Tests
                 get => _value;
                 set
                 {
-                    SetProperty(ref _value, value, () => Value);
+                    if (_value == value)
+                        return;
+
+                    _value = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Value)));
                 }
             }
+
+            public event PropertyChangedEventHandler PropertyChanged;
         }
 
         [TestMethod]

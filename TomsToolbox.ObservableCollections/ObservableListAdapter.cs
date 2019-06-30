@@ -5,7 +5,6 @@
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
 
     using JetBrains.Annotations;
 
@@ -18,8 +17,6 @@
     /// Use e.g. for ListCollectionView to feed it with an <see cref="IObservableCollection{T}"/>.
     /// </summary>
     /// <typeparam name="T">The type of elements in the list.</typeparam>
-    [SuppressMessage("Microsoft.Design", "CA1035:ICollectionImplementationsHaveStronglyTypedMembers", Justification = "It's an adapter to an untyped list!")]
-    [SuppressMessage("Microsoft.Design", "CA1039:ListsAreStronglyTyped", Justification = "It's an adapter to an untyped list!")]
     public class ObservableListAdapter<T> : IList, INotifyCollectionChanged, INotifyPropertyChanged
     {
         [NotNull, ItemCanBeNull]
@@ -33,12 +30,10 @@
         {
             _source = source;
 
-            var ncc = source as INotifyCollectionChanged;
-            if (ncc != null)
+            if (source is INotifyCollectionChanged ncc)
                 ncc.CollectionChanged += Source_CollectionChanged;
 
-            var npc = source as INotifyPropertyChanged;
-            if (npc != null)
+            if (source is INotifyPropertyChanged npc)
                 npc.PropertyChanged += Source_PropertyChanged;
         }
 
@@ -96,7 +91,7 @@
         /// The position into which the new element was inserted, or -1 to indicate that the item was not inserted into the collection,
         /// </returns>
         /// <param name="value">The object to add to the <see cref="T:System.Collections.IList"/>. </param><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
-        public int Add(object value)
+        public int Add([CanBeNull] object value)
         {
             _source.Add((T)value);
             return _source.Count - 1;
@@ -109,7 +104,7 @@
         /// true if the <see cref="T:System.Object"/> is found in the <see cref="T:System.Collections.IList"/>; otherwise, false.
         /// </returns>
         /// <param name="value">The object to locate in the <see cref="T:System.Collections.IList"/>. </param>
-        public bool Contains(object value)
+        public bool Contains([CanBeNull] object value)
         {
             return _source.Contains((T)value);
         }
@@ -171,6 +166,7 @@
         /// <param name="index">The zero-based index of the element to get or set. </param>
         /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.IList"/>.</exception>
         /// <exception cref="T:System.NotSupportedException">The property is set and the <see cref="T:System.Collections.IList"/> is read-only. </exception>
+        [CanBeNull]
         public object this[int index]
         {
             get => _source[index];

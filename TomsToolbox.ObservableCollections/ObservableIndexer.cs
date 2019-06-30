@@ -55,10 +55,9 @@
         {
             get
             {
-                int index;
                 TValue value;
 
-                if (_index.TryGetValue(key, out index))
+                if (_index.TryGetValue(key, out var index))
                 {
                     value = Items[index].Value;
                 }
@@ -77,9 +76,7 @@
             }
             set
             {
-                int index;
-
-                if (_index.TryGetValue(key, out index))
+                if (_index.TryGetValue(key, out int index))
                 {
                     Items[index] = new KeyValuePair<TKey, TValue>(key, value);
                 }
@@ -99,13 +96,7 @@
         /// The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> generic interface implementation that is used to determine equality of keys for the current <see cref="T:System.Collections.Generic.Dictionary`2"/> and to provide hash values for the keys.
         /// </returns>
         [NotNull]
-        public IEqualityComparer<TKey> Comparer
-        {
-            get
-            {
-                return _index.Comparer;
-            }
-        }
+        public IEqualityComparer<TKey> Comparer => _index.Comparer;
 
         /// <summary>
         /// Removes the value with the specified key from the <see cref="T:System.Collections.Generic.Dictionary`2"/>.
@@ -116,18 +107,14 @@
         /// <param name="key">The key of the element to remove.</param><exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null.</exception>
         public bool Remove([NotNull] TKey key)
         {
-            int index;
-
-            if (!_index.TryGetValue(key, out index))
+            if (!_index.TryGetValue(key, out var index))
                 return false;
 
             // Remove will fire an event, index should be updated first to ensure code is re-entrant.
-            // ReSharper disable PossibleNullReferenceException
             _index = Items
                 .Where(item => !Equals(key, item.Key))
                 .Select((item, i) => new { item.Key, i })
                 .ToDictionary(x => x.Key, x => x.i, _index.Comparer);
-            // ReSharper restore PossibleNullReferenceException
 
 
             Items.RemoveAt(index);

@@ -1,28 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net40-client;net45</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Title>Tom's Toolbox ObservableCollections Module</Title>
+    <Title>Tom's Toolbox 2 ObservableCollections Module</Title>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Core\TomsToolbox.Core.csproj">
@@ -36,6 +22,11 @@
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.1" PrivateAssets="All" />
     <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.13.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19270-01" PrivateAssets="All" />
+    <PackageReference Include="WeakEventHandler.Fody" Version="1.4.0" />
+    <!--<Reference Include="WeakEventHandler">
+      <HintPath>..\..\WeakEventHandler.Fody\WeakEventHandler\bin\Debug\net45\WeakEventHandler.dll</HintPath>
+    </Reference>
+    <WeaverFiles Include="D:\Develop\My Open Source\GitHub\WeakEventHandler.Fody\WeakEventHandler.Fody\bin\Debug\net46\WeakEventHandler.Fody.dll" />-->
   </ItemGroup>
 
 </Project>

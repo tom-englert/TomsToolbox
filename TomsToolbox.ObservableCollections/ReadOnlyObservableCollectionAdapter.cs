@@ -31,13 +31,7 @@
         /// Returns the collection that the <see cref="ReadOnlyObservableCollectionAdapter{T, TList}"/> wraps.
         /// </summary>
         [NotNull]
-        protected new TList Items
-        {
-            get
-            {
-                return (TList)base.Items;
-            }
-        }
+        protected new TList Items => (TList)base.Items;
 
         /// <summary>
         /// Occurs when the collection changes.

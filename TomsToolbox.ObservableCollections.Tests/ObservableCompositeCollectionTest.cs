@@ -69,7 +69,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             data[42].AddRange(new[] { new Item(), new Item(), new Item() });
             Assert.IsTrue(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
             // remove
-            data[218].RemoveRange(item => (item.Index & 1) == 0);
+            data[218].RemoveWhere(item => (item.Index & 1) == 0);
             Assert.IsTrue(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
             // reset
             data[698].Clear();

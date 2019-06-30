@@ -5,7 +5,6 @@
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using JetBrains.Annotations;
@@ -84,11 +83,9 @@
         {
             ItemPropertyChanged?.Invoke(sender, e);
         }
-        [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
-// Too complex, checker is confused.
+
         private void Items_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
-            // ReSharper disable PossibleNullReferenceException
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
@@ -124,8 +121,6 @@
 
                 case NotifyCollectionChangedAction.Reset:
                     throw new NotSupportedException("Reset collection is not supported when the ObservablePropertyChangeTracker is active.");
-                
-                // ReSharper restore PossibleNullReferenceException
             }
         }
     }

@@ -127,9 +127,7 @@
                         return new NotifyCollectionChangedEventArgs(e.Action, e.NewItems, e.NewStartingIndex + offset, e.OldStartingIndex + offset);
 
                     case NotifyCollectionChangedAction.Replace:
-                        // ReSharper disable AssignNullToNotNullAttribute
                         return new NotifyCollectionChangedEventArgs(e.Action, e.NewItems, e.OldItems, e.OldStartingIndex + offset);
-                    // ReSharper restore AssignNullToNotNullAttribute
 
                     default:
                         throw new NotImplementedException();
@@ -137,12 +135,12 @@
             }
             #region IList<IList<T>> Members
 
-            public int IndexOf(IList<T> item)
+            public int IndexOf([CanBeNull] IList<T> item)
             {
                 return _parts.IndexOf(item);
             }
 
-            public void Insert(int index, IList<T> item)
+            public void Insert(int index, [CanBeNull] IList<T> item)
             {
                 if (item == null)
                     throw new ArgumentNullException(nameof(item));
@@ -153,7 +151,7 @@
                 _parts.Insert(index, item);
 
                 // If this list implements INotifyCollectionChanged monitor changes so they can be forwarded properly.
-                // If it does not implement INotifyCollectionChanged, no notification should be neccesary.
+                // If it does not implement INotifyCollectionChanged, no notification should be necessary.
                 if (item is INotifyCollectionChanged dynamicPart)
                     dynamicPart.CollectionChanged += Parts_CollectionChanged;
 
@@ -200,8 +198,11 @@
 
             #region ICollection<IList<T>> Members
 
-            public void Add(IList<T> item)
+            public void Add([CanBeNull] IList<T> item)
             {
+                if (item == null)
+                    throw new ArgumentException(@"None of the parts may be null!");
+
                 Insert(_parts.Count, item);
             }
 
@@ -213,7 +214,7 @@
                 }
             }
 
-            public bool Contains(IList<T> item)
+            public bool Contains([CanBeNull] IList<T> item)
             {
                 if (item == null)
                     throw new ArgumentNullException(nameof(item));
@@ -230,7 +231,7 @@
 
             public bool IsReadOnly => false;
 
-            public bool Remove(IList<T> item)
+            public bool Remove([CanBeNull] IList<T> item)
             {
                 if (item == null)
                     throw new ArgumentNullException(nameof(item));
@@ -278,16 +279,11 @@
         /// <param name="parts">The lists to wrap</param>
         /// <exception cref="System.ArgumentException">None of the parts may be null!</exception>
         /// <exception cref="T:System.ArgumentException">None of the parts may be null!</exception>
-        [SuppressMessage("ReSharper", "HeuristicUnreachableCode")]
         public ObservableCompositeCollection([NotNull, ItemNotNull] params IList<T>[] parts)
             : this()
         {
             foreach (var part in parts)
             {
-                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-                if (part == null)
-                    throw new ArgumentException(@"None of the parts may be null!");
-
                 _content.Add(part);
             }
         }
@@ -303,8 +299,7 @@
                 return _content;
             }
         }
-        [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
-        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
+
         private void ContentCollectionChanged([NotNull] NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
@@ -319,9 +314,7 @@
 
                 case NotifyCollectionChangedAction.Remove:
                     var removeIndex = e.OldStartingIndex;
-                    // ReSharper disable PossibleNullReferenceException
                     for (var k = 0; k < e.OldItems.Count; k++)
-                    // ReSharper restore PossibleNullReferenceException
                     {
                         Items.RemoveAt(removeIndex);
                     }

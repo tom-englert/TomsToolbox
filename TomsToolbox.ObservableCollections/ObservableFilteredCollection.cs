@@ -6,11 +6,15 @@
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using JetBrains.Annotations;
 
     using TomsToolbox.Core;
+
+    using WeakEventHandler;
 
     /// <summary>
     /// A simple filtered collection implementation.<para/>
@@ -21,12 +25,9 @@
     /// Changes in the source collection will be tracked always, changes in the individual objects that would affect the filter will be tracked when any of the live tracking properties changes.<para/>
     /// The order of the elements may be different than the order in the source collection; also changes that affect the items order in the source collection (see <see cref="NotifyCollectionChangedAction.Move"/>, <see cref="IList.Insert"/>) will be ignored.<para/>
     /// This collection does <c>not</c> hold a reference to the source collection. To keep the source collection alive, the object generating the <see cref="ObservableFilteredCollection{T}" /> must hold a reference to the source collection.<para/>
-    /// When live tracking is active, Reset of the source collection is not supported.
     /// </remarks>
     public class ObservableFilteredCollection<T> : ReadOnlyObservableCollectionAdapter<T, ObservableCollection<T>>
     {
-        [CanBeNull]
-        private readonly IWeakEventListener _collectionChangedWeakEvent;
         [NotNull]
         private readonly Func<T, bool> _filter;
         [NotNull, ItemNotNull]
@@ -38,8 +39,8 @@
         /// <param name="sourceCollection">The source collection. This instance will not hold a reference to the source collection.</param>
         /// <param name="filter">The filter.</param>
         /// <param name="liveTrackingProperties">The live tracking properties. Whenever one of these properties in any item changes, the filter is reevaluated for the item.</param>
+        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public ObservableFilteredCollection([NotNull, ItemCanBeNull] IEnumerable sourceCollection, [NotNull] Func<T, bool> filter, [NotNull, ItemNotNull] params string[] liveTrackingProperties)
-        // ReSharper disable PossibleMultipleEnumeration
             : base(new ObservableCollection<T>(sourceCollection.Cast<T>().Where(filter)))
         {
             _filter = filter;
@@ -50,33 +51,18 @@
                 sourceCollection.Cast<T>().ForEach(AttachItemEvents);
             }
 
-            var eventSource = sourceCollection as INotifyCollectionChanged;
-            if (eventSource != null)
-            {
-                _collectionChangedWeakEvent = CreateEvent(eventSource);
-            }
-            // ReSharper restore PossibleMultipleEnumeration
-        }
-        [NotNull]
-        private WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> CreateEvent([NotNull] INotifyCollectionChanged eventSource)
-        {
-            return new WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs>(
-                this, eventSource, OnCollectionChanged, Attach, Detach);
-        }
-        private static void OnCollectionChanged([NotNull, ItemCanBeNull] ObservableFilteredCollection<T> self, [NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
-        {
-            self.SourceCollection_CollectionChanged(sender, e);
+            AttachCollectionEvents(sourceCollection as INotifyCollectionChanged);
         }
 
-        private static void Attach([NotNull] WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, [NotNull] INotifyCollectionChanged sender)
+        private void AttachCollectionEvents([CanBeNull] INotifyCollectionChanged sender)
         {
-            sender.CollectionChanged += weakEvent.OnEvent;
+            if (sender == null)
+                return;
+
+            sender.CollectionChanged += SourceCollection_CollectionChanged;
         }
 
-        private static void Detach([NotNull] WeakEventListener<ObservableFilteredCollection<T>, INotifyCollectionChanged, NotifyCollectionChangedEventArgs> weakEvent, [NotNull] INotifyCollectionChanged sender)
-        {
-            sender.CollectionChanged -= weakEvent.OnEvent;
-        }
+        [MakeWeak]
         private void SourceCollection_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
@@ -90,11 +76,9 @@
                     break;
 
                 case NotifyCollectionChangedAction.Reset:
-                    if (_liveTrackingProperties.Any())
-                        throw new NotSupportedException("NotifyCollectionChangedAction.Reset is not supported when the ObservableFilteredCollection is in live tracking mode.");
-
+                    WeakEvents.Unsubscribe(this);
                     Items.Clear();
-                    AddItems(((IEnumerable)sender).Cast<T>());
+                    AttachCollectionEvents((INotifyCollectionChanged)sender);
                     break;
 
                 case NotifyCollectionChangedAction.Replace:
@@ -127,9 +111,10 @@
 
         private void AttachItemEvents([CanBeNull] T newItem)
         {
-            var eventSource = newItem as INotifyPropertyChanged;
-            if (eventSource != null)
+            if (newItem is INotifyPropertyChanged eventSource)
+            {
                 eventSource.PropertyChanged += Item_PropertyChanged;
+            }
         }
 
         private void RemoveItems([CanBeNull, ItemCanBeNull] IEnumerable<T> oldItems)
@@ -148,11 +133,13 @@
 
         private void DetachItemEvents([CanBeNull] T oldItem)
         {
-            var eventSource = oldItem as INotifyPropertyChanged;
-            if (eventSource != null)
+            if (oldItem is INotifyPropertyChanged eventSource)
+            {
                 eventSource.PropertyChanged -= Item_PropertyChanged;
+            }
         }
 
+        [MakeWeak]
         private void Item_PropertyChanged([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
         {
             var item = (T)sender;
@@ -169,14 +156,6 @@
             {
                 Items.Remove(item);
             }
-        }
-
-        /// <summary>
-        /// Finalizes an instance of the <see cref="ObservableFilteredCollection{T}"/> class.
-        /// </summary>
-        ~ObservableFilteredCollection()
-        {
-            _collectionChangedWeakEvent?.Detach();
         }
     }
 }
