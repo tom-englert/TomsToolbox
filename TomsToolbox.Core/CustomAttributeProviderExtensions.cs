@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Core
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,6 @@
     using System.Reflection;
 
     using JetBrains.Annotations;
-
-    using TomsToolbox.Core;
 
     /// <summary>
     /// Various extension methods.
@@ -85,24 +83,9 @@
         {
             return item
                 .GetCustomAttributes<TypeConverterAttribute>(false)
-                // ReSharper disable once AssignNullToNotNullAttribute
                 .Select(attr => Type.GetType(attr.ConverterTypeName))
                 .Where(type => (type != null) && typeof(TypeConverter).IsAssignableFrom(type))
                 .Select(type => (TypeConverter)Activator.CreateInstance(type))
-                .FirstOrDefault();
-        }
-
-        /// <summary>
-        /// Gets the sequence associated with the specified target.
-        /// </summary>
-        /// <param name="target">The target object.</param>
-        /// <param name="defaultValue">The default value, if the object has no sequence attribute.</param>
-        /// <returns>The associated sequence.</returns>
-        public static double GetSequence([NotNull] this ICustomAttributeProvider target, double defaultValue)
-        {
-            return target.GetCustomAttributes<SequenceAttribute>(false)
-                .Select(attr => attr.Value)
-                .DefaultIfEmpty(defaultValue)
                 .FirstOrDefault();
         }
     }

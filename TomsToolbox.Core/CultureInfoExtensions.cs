@@ -1,12 +1,10 @@
-﻿namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Core
 {
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
 
     using JetBrains.Annotations;
-
-    using TomsToolbox.Core;
 
     /// <summary>
     /// Extension methods for the <see cref="CultureInfo"/> class.
