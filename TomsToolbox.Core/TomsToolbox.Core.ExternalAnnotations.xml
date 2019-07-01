@@ -24,6 +24,46 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:TomsToolbox.Core.AutoWeakIndexer`2.#ctor(System.Func{`0,`1},System.Collections.Generic.IEqualityComparer{`0})">
+    <parameter name="generator">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="comparer">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Core.AutoWeakIndexer`2.Comparer">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Core.AutoWeakIndexer`2.ContainsKey(`0)">
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Core.AutoWeakIndexer`2.get_Item(`0)">
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Core.AutoWeakIndexer`2.Item(`0)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Core.AutoWeakIndexer`2.Keys">
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Core.AutoWeakIndexer`2.TryGetValue(`0,`1@)">
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="value">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Core.AutoWeakIndexer`2.Values">
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Core.CollectionExtensions.AddRange(System.Collections.IList,System.Collections.IEnumerable)">
     <parameter name="target">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -292,6 +332,68 @@
       <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:TomsToolbox.Core.CultureInfoExtensions.GetAncestors(System.Globalization.CultureInfo)">
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="self">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Core.CultureInfoExtensions.GetAncestorsAndSelf(System.Globalization.CultureInfo)">
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="self">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Core.CultureInfoExtensions.GetChildren(System.Globalization.CultureInfo)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Core.CultureInfoExtensions.GetDescendants(System.Globalization.CultureInfo)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Core.CustomAttributeProviderExtensions.GetCustomAttributes``1(System.Reflection.ICustomAttributeProvider,System.Boolean)">
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="self">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Core.CustomAttributeProviderExtensions.GetCustomTypeConverter(System.Reflection.ICustomAttributeProvider)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Core.CustomAttributeProviderExtensions.TryGetDescription(System.Reflection.ICustomAttributeProvider)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Core.CustomAttributeProviderExtensions.TryGetDisplayName(System.Reflection.ICustomAttributeProvider)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Core.CustomAttributeProviderExtensions.TryGetText(System.Reflection.ICustomAttributeProvider,System.Object)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="M:TomsToolbox.Core.DateTimeOperations.GetDaysOfWeek(System.Globalization.CultureInfo)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="cultureInfo">
@@ -509,6 +611,28 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:TomsToolbox.Core.TextAttribute.#ctor(System.Object)">
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Core.TextAttribute.#ctor(System.Object,System.String)">
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="text">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Core.TextAttribute.Key">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Core.TextAttribute.Text">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Core.TextAttribute.TextValue">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Core.TextEventArgs.#ctor(System.String)">
     <parameter name="text">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -516,5 +640,41 @@
   </member>
   <member name="P:TomsToolbox.Core.TextEventArgs.Text">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Core.ThreadBoundTaskScheduler.GetScheduledTasks">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Core.ThreadBoundTaskScheduler.TaskFactory">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Core.WeakReferenceExtensions.GetTargetOrDefault``1(System.WeakReference{``0})">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="weakReference">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Core.XmlExtensions.GetAttribute(System.Xml.Linq.XElement,System.String,System.String)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="element">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="name">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="defaultValue">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Core.XmlExtensions.GetAttribute(System.Xml.Linq.XElement,System.Xml.Linq.XName,System.String)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="element">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="name">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="defaultValue">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
   </member>
 </assembly>

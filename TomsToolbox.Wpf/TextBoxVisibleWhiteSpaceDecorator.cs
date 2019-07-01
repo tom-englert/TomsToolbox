@@ -14,7 +14,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop;
 
     /// <summary>
     /// Classifies white spaces in plain text.

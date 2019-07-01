@@ -1,4 +1,4 @@
-namespace TomsToolbox.Desktop
+namespace TomsToolbox.Wpf.Converters
 {
     /// <summary>
     /// Binary operations supported by the <see cref="BinaryOperationProcessor"/>

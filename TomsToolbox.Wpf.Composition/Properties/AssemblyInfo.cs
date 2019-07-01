@@ -13,9 +13,6 @@ using System.Windows.Markup;
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 
 [assembly: XmlnsPrefix("urn:TomsToolbox", "toms")]
-[assembly: XmlnsDefinition("urn:TomsToolbox", "TomsToolbox.Wpf")]
-[assembly: XmlnsDefinition("urn:TomsToolbox", "TomsToolbox.Wpf.Interactivity")]
+[assembly: XmlnsDefinition("urn:TomsToolbox", "TomsToolbox.Wpf.Composition")]
 [assembly: XmlnsDefinition("urn:TomsToolbox", "TomsToolbox.Wpf.XamlExtensions")]
-[assembly: XmlnsDefinition("urn:TomsToolbox", "TomsToolbox.Wpf.Controls")]
-[assembly: XmlnsDefinition("urn:TomsToolbox", "TomsToolbox.Wpf.Converters")]
 

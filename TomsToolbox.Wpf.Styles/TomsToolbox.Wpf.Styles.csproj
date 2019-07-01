@@ -26,18 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TomsToolbox.Core\TomsToolbox.Core.csproj">
-      <Project>{ae305312-7637-43bf-9156-7ec513c55135}</Project>
-      <Name>TomsToolbox.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj">
-      <Project>{3647cd2d-2a4e-4859-9bbd-606a73c14801}</Project>
-      <Name>TomsToolbox.Desktop</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj">
-      <Project>{ec9f9418-877f-49ba-af91-f456fbc5ad57}</Project>
-      <Name>TomsToolbox.Wpf</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Core\TomsToolbox.Core.csproj" />
+    <ProjectReference Include="..\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj" />
   </ItemGroup>
 
   <ItemGroup>

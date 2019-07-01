@@ -21,9 +21,6 @@
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ComboBoxStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
-  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.CompositeContextMenuStyle">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ContextMenuStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>

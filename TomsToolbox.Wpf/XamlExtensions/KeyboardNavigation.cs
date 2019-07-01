@@ -5,7 +5,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop;
 
     /// <summary>
     /// XAML helpers for keyboard navigation.

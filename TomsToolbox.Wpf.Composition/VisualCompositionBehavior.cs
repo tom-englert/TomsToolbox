@@ -12,7 +12,6 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Core;
-    using TomsToolbox.Desktop;
     using TomsToolbox.Wpf.Interactivity;
     using TomsToolbox.Wpf.XamlExtensions;
 

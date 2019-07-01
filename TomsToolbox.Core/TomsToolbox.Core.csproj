@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
@@ -9,12 +9,6 @@
   <PropertyGroup>
     <Title>Tom's Toolbox 2 Essentials Module</Title>
   </PropertyGroup>
-
-  <ItemGroup Condition=" '$(TargetFrameworkProfile)' == 'net40-client' ">
-    <!-- A reference to the entire .NET Framework is automatically included for portable libraries -->
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Fody" Version="5.0.6" PrivateAssets="All" />

@@ -8,8 +8,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop;
-
     /// <summary>
     /// Provides values for date and time suitable for bindings.
     /// </summary>

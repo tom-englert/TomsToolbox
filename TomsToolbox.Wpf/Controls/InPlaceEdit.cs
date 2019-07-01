@@ -11,7 +11,6 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Core;
-    using TomsToolbox.Desktop;
 
     /// <inheritdoc />
     /// <summary>

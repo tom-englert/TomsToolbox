@@ -10,7 +10,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop;
 
     /// <summary>
     /// Extensions for the <see cref="Selector"/>

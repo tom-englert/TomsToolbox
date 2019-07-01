@@ -27,7 +27,7 @@
         /// </summary>
         public static event EventHandler<TextEventArgs> Error;
         /// <summary>
-        /// Occurs when the visual compositing framework logs some action.
+        /// Occurs when the visual composition framework logs some action.
         /// </summary>
         public static event EventHandler<TextEventArgs> Trace;
 
@@ -77,7 +77,8 @@
         /// Attach this property to inject a visual composition behavior with this region id into the attached object.
         /// </summary>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty RegionIdProperty =
+        [NotNull]
+        public static readonly DependencyProperty RegionIdProperty =
             DependencyProperty.RegisterAttached("RegionId", typeof(string), typeof(VisualComposition), new FrameworkPropertyMetadata(RegionId_Changed));
 
         private static void RegionId_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -85,10 +86,17 @@
             if (!(e.NewValue is string id))
                 return;
 
-            d.TryCast()
-                .When<ItemsControl>(i => SetRegionIdInternal<ItemsControlCompositionBehavior>(d, id))
-                .When<ContentControl>(c => SetRegionIdInternal<ContentControlCompositionBehavior>(d, id))
-                .ElseThrow();
+            switch (d)
+            {
+                case ItemsControl i:
+                    SetRegionIdInternal<ItemsControlCompositionBehavior>(d, id);
+                    break;
+                case ContentControl c:
+                    SetRegionIdInternal<ContentControlCompositionBehavior>(d, id);
+                    break;
+                default: 
+                    throw new InvalidOperationException("unsupported type: " + d?.GetType());
+            }
         }
 
         private static void SetRegionIdInternal<T>([NotNull] DependencyObject d, [CanBeNull] string id)
@@ -101,7 +109,7 @@
                 var behavior = behaviors.OfType<T>().FirstOrDefault();
                 if (behavior == null)
                 {
-                    behaviors.Add(new T {RegionId = id});
+                    behaviors.Add(new T { RegionId = id });
                     OnTrace(d, $"SetRegion: Attached the behavior {typeof(T)} to the target {d.GetType()}");
                 }
                 else

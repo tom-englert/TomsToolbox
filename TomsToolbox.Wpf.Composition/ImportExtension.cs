@@ -15,8 +15,6 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Core;
-    using TomsToolbox.Desktop;
-    using TomsToolbox.Desktop.Composition;
 
     /// <summary>
     /// The XAML equivalent of the <see cref="T:System.ComponentModel.Composition.ImportAttribute" />. Use like the <see cref="T:System.Windows.Markup.StaticExtension" />;
@@ -107,7 +105,7 @@
         /// </returns>
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            var rootObjectProvider = serviceProvider.GetService<IRootObjectProvider>();
+            var rootObjectProvider = (IRootObjectProvider)serviceProvider.GetService(typeof(IRootObjectProvider));
             if (rootObjectProvider == null)
                 return null;
 
@@ -120,7 +118,7 @@
 
             if (AllowRecomposition)
             {
-                var provideValueTarget = serviceProvider.GetService<IProvideValueTarget>();
+                var provideValueTarget = (IProvideValueTarget)serviceProvider.GetService(typeof(IProvideValueTarget));
                 if (provideValueTarget != null)
                 {
                     _targetObject = provideValueTarget.TargetObject;

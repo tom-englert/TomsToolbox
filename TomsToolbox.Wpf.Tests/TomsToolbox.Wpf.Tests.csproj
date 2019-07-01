@@ -13,13 +13,6 @@
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj">
-      <Project>{3647CD2D-2A4E-4859-9BBD-606A73C14801}</Project>
-      <Name>TomsToolbox.Desktop</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj">
-      <Project>{EC9F9418-877F-49BA-AF91-F456FBC5AD57}</Project>
-      <Name>TomsToolbox.Wpf</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj" />
   </ItemGroup>
 </Project>

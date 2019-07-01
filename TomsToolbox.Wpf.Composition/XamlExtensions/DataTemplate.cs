@@ -41,19 +41,26 @@
         /// <AttachedPropertyComments>
         /// <summary>Shortcut to set a <see cref="RoleBasedDataTemplateSelector"/> with the specified role as the targets <see cref="ContentControl.ContentTemplateSelector"/>.</summary>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty RoleProperty =
+        [NotNull]
+        public static readonly DependencyProperty RoleProperty =
             DependencyProperty.RegisterAttached("Role", typeof(object), typeof(DataTemplate), new FrameworkPropertyMetadata(Role_Changed));
 
         private static void Role_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var newValue = e.NewValue;
 
-            // ReSharper disable PossibleNullReferenceException
-            d.TryCast()
-                .When<ContentControl>(cc => cc.ContentTemplateSelector = new RoleBasedDataTemplateSelector { Role = newValue })
-                .When<TabControl>(tc => tc.ContentTemplateSelector = new RoleBasedDataTemplateSelector { Role = newValue })
-                .When<ContentPresenter>(cp => cp.ContentTemplateSelector = new RoleBasedDataTemplateSelector { Role = newValue });
-            // ReSharper restore PossibleNullReferenceException
+            switch (d)
+            {
+                case ContentControl cc:
+                    cc.ContentTemplateSelector = new RoleBasedDataTemplateSelector { Role = newValue };
+                    break;
+                case TabControl tc:
+                    tc.ContentTemplateSelector = new RoleBasedDataTemplateSelector { Role = newValue };
+                    break;
+                case ContentPresenter cp: 
+                    cp.ContentTemplateSelector = new RoleBasedDataTemplateSelector { Role = newValue };
+                    break;
+            }
         }
     }
 }

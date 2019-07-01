@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Wpf
 {
     using System;
     using System.Collections.Generic;
@@ -7,13 +7,12 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Runtime.CompilerServices;
     using System.Windows.Threading;
 
     using JetBrains.Annotations;
 
     using TomsToolbox.Core;
-
-    using WeakEventListener = TomsToolbox.Core.WeakEventListener<ObservableObjectBase, System.ComponentModel.INotifyPropertyChanged, System.ComponentModel.PropertyChangedEventArgs>;
 
     /// <summary>
     /// Base class implementing <see cref="INotifyPropertyChanged"/>.<para/>
@@ -40,7 +39,7 @@
         private IDictionary<Type, IDictionary<string, string>> _relayMapping;
 
         [NonSerialized, CanBeNull]
-        private Dictionary<Type, WeakEventListener> _eventSources;
+        private Dictionary<Type, WeakReference<INotifyPropertyChanged>> _eventSources;
 
         /// <summary>
         /// Relays the property changed events of the source object (if not null) and detaches the old source (if not null).
@@ -73,27 +72,14 @@
             if (RelayMapping.Keys.All(key => key?.IsAssignableFrom(sourceType) != true))
                 throw new InvalidOperationException(@"This class has no property with a RelayedEventAttribute for the type " + sourceType);
 
-            if (EventSources.TryGetValue(sourceType, out var oldListern))
-                oldListern?.Detach();
+            if (EventSources.TryGetValue(sourceType, out var oldListener) && oldListener.TryGetTarget(out var oldTarget))
+            {
+                oldTarget.PropertyChanged -= RelaySource_PropertyChanged;
+            }
 
-            var newListener = new WeakEventListener(this, source, OnWeakEvent, OnAttach, OnDetach);
+            source.PropertyChanged += RelaySource_PropertyChanged;
 
-            EventSources[sourceType] = newListener;
-        }
-
-        private static void OnDetach([NotNull] WeakEventListener listener, [NotNull] INotifyPropertyChanged sender)
-        {
-            sender.PropertyChanged -= listener.OnEvent;
-        }
-
-        private static void OnAttach([NotNull] WeakEventListener listener, [NotNull] INotifyPropertyChanged sender)
-        {
-            sender.PropertyChanged += listener.OnEvent;
-        }
-
-        private static void OnWeakEvent([NotNull] ObservableObjectBase target, [NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
-        {
-            target.RelaySource_PropertyChanged(sender, e);
+            EventSources[sourceType] = new WeakReference<INotifyPropertyChanged>(source);
         }
 
         /// <summary>
@@ -101,9 +87,9 @@
         /// </summary>
         protected void DetachEventSources()
         {
-            foreach (var item in EventSources.Values.ToArray())
+            foreach (var item in EventSources.Values.Select(item => item.GetTargetOrDefault()).Where(item => item != null))
             {
-                item.Detach();
+                item.PropertyChanged -= RelaySource_PropertyChanged;
             }
 
             EventSources.Clear();
@@ -117,9 +103,9 @@
         {
             var sourceType = item.GetType();
 
-            if (EventSources.TryGetValue(sourceType, out var oldListern))
+            if (EventSources.TryGetValue(sourceType, out var oldListener) && oldListener.TryGetTarget(out var target))
             {
-                oldListern?.Detach();
+                target.PropertyChanged -= RelaySource_PropertyChanged;
                 EventSources.Remove(sourceType);
             }
         }
@@ -159,7 +145,6 @@
         /// <param name="propertyExpression">The expression identifying the property.</param>
         /// <param name="changeCallback">The callback that is invoked if the value has changed. Parameters are (oldValue, newValue).</param>
         /// <returns>True if value has changed and the PropertyChange event was raised.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Expression<Func<T>> propertyExpression, [NotNull] Action<T, T> changeCallback)
         {
@@ -174,20 +159,17 @@
         /// <param name="value">The value.</param>
         /// <param name="propertyName">Name of the property; <c>.Net 4.5 only:</c> omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
         /// <returns>True if value has changed and the PropertyChange event was raised. </returns>
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
-#if NET45
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
-#else
-        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] string propertyName)
-#endif
+        // ReSharper disable once NotNullOnImplicitCanBeNull
+        // ReSharper disable once AssignNullToNotNullAttribute
+        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [CallerMemberName][NotNull] string propertyName = null)
         {
             if (Equals(backingField, value))
                 return false;
 
             backingField = value;
 
+            // ReSharper disable once AssignNullToNotNullAttribute
             OnPropertyChanged(propertyName);
             return true;
         }
@@ -226,12 +208,7 @@
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This pattern is required by the CallerMemberName attribute.")]
         [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Action<T, T> changeCallback,
-#if !NET45
-            [NotNull] string propertyName)
-#else
-            [System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
-#endif
+        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Action<T, T> changeCallback, [NotNull] string propertyName)
         {
             return SetProperty(ref backingField, value, propertyName, changeCallback);
         }
@@ -242,18 +219,15 @@
         /// <param name="propertyName">Name of the property; <c>.Net 4.5 only:</c> omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This pattern is required by the CallerMemberName attribute.")]
         [NotifyPropertyChangedInvocator]
-#if NET45
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
-        protected void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName][NotNull] string propertyName = null)
-#else
-        protected void OnPropertyChanged([NotNull] string propertyName)
-#endif
+        // ReSharper disable once NotNullOnImplicitCanBeNull
+        // ReSharper disable once AssignNullToNotNullAttribute
+        protected void OnPropertyChanged([CallerMemberName][NotNull] string propertyName = null)
         {
+            // ReSharper disable once AssignNullToNotNullAttribute
             InternalOnPropertyChanged(propertyName);
 
-            IEnumerable<string> dependentProperties;
-
-            if (!DependencyMapping.TryGetValue(propertyName, out dependentProperties))
+            if (!DependencyMapping.TryGetValue(propertyName, out var dependentProperties))
                 return;
 
             foreach (var dependentProperty in dependentProperties)
@@ -263,7 +237,7 @@
         }
 
         [NotNull]
-        private Dictionary<Type, WeakEventListener> EventSources => _eventSources ?? (_eventSources = new Dictionary<Type, WeakEventListener>());
+        private Dictionary<Type, WeakReference<INotifyPropertyChanged>> EventSources => _eventSources ?? (_eventSources = new Dictionary<Type, WeakReference<INotifyPropertyChanged>>());
 
         [NotNull]
         private IDictionary<Type, IDictionary<string, string>> RelayMapping => _relayMapping ?? (_relayMapping = _relayMappingCache[GetType()]);
@@ -309,6 +283,7 @@
         /// The default implementation returns the <see cref="ValidationAttribute"/> errors of the property.
         /// </remarks>
         [NotNull, ItemNotNull]
+        // ReSharper disable once VirtualMemberNeverOverridden.Global
         protected virtual IEnumerable<string> GetDataErrors([CanBeNull] string propertyName)
         {
             if (string.IsNullOrEmpty(propertyName))
@@ -330,6 +305,7 @@
         /// </summary>
         /// <param name="propertyName">Name of the property, or <c>null</c> if the errors .</param>
         /// <param name="dataErrors">The data errors for the property.</param>
+        // ReSharper disable once VirtualMemberNeverOverridden.Global
         protected virtual void OnDataErrorsEvaluated([CanBeNull] string propertyName, [CanBeNull, ItemNotNull] IEnumerable<string> dataErrors)
         {
         }
@@ -368,38 +344,26 @@
             _errorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        System.Collections.IEnumerable INotifyDataErrorInfo.GetErrors(string propertyName)
+        System.Collections.IEnumerable INotifyDataErrorInfo.GetErrors([CanBeNull] string propertyName)
         {
             return InternalGetDataErrors(propertyName);
         }
 
-        bool INotifyDataErrorInfo.HasErrors
-        {
-            get
-            {
-                return InternalGetDataErrors(null).Any();
-            }
-        }
+        bool INotifyDataErrorInfo.HasErrors => InternalGetDataErrors(null).Any();
 
         event EventHandler<DataErrorsChangedEventArgs> INotifyDataErrorInfo.ErrorsChanged
         {
-            add
-            {
-                _errorsChanged += value;
-            }
-            remove
-            {
-                _errorsChanged -= value;
-            }
+            add => _errorsChanged += value;
+            remove => _errorsChanged -= value;
         }
 #endif
     }
 
     /// <summary>
-    /// Like <see cref="TomsToolbox.Desktop.ObservableObjectBase" />, with an additional dispatcher field to track the owning thread.
+    /// Like <see cref="ObservableObjectBase" />, with an additional dispatcher field to track the owning thread.
     /// This version is not serializable, since <see cref="Dispatcher"/> is not.
     /// </summary>
-    /// <seealso cref="TomsToolbox.Desktop.ObservableObjectBase" />
+    /// <seealso cref="ObservableObjectBase" />
     public abstract class ObservableObject : ObservableObjectBase
     {
         [NotNull]

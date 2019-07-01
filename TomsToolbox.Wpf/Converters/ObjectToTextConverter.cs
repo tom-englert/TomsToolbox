@@ -6,7 +6,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop;
+    using TomsToolbox.Core;
 
     /// <summary>
     /// Takes an object and returns the text taken from it's <see cref="TextAttribute"/>

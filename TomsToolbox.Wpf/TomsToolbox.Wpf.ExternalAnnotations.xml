@@ -69,179 +69,6 @@
   <member name="F:TomsToolbox.Wpf.CanvasAnchor.TopRightProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandRoutingBehavior.CommandParameter">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.CommandRoutingBehavior.CommandParameterProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandRoutingBehavior.CommandSource">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.CommandRoutingBehavior.CommandSourceProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandRoutingBehavior.CommandTarget">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.CommandRoutingBehavior.CommandTargetProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandRoutingBehavior.CompositionContext">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.CommandRoutingBehavior.CompositionContextProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.CommandRoutingBehavior.IsActiveProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.CommandRoutingBehavior.IsCheckedProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.CommandRoutingBehavior.IsEnabledProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.CommandSource.#ctor(TomsToolbox.Wpf.Composition.ICommandSourceFactory)">
-    <parameter name="owner">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandSource.Command">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.CommandSource.CommandProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandSource.Description">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandSource.GroupName">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandSource.Header">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandSource.Icon">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.CommandSource.IsAnyTargetAttachedProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.CommandSource.IsCheckedProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandSource.SubRegionId">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.CommandSource.Tag">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Attach(System.Object,System.Windows.Input.ICommand)">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    <parameter name="context">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="command">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.CreateCommandSource">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Detach(System.Object,System.Windows.Input.ICommand)">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    <parameter name="context">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="command">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.GetPart(System.Object)">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Replace(System.Object,System.Windows.Input.ICommand,System.Windows.Input.ICommand)">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    <parameter name="context">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="oldCommand">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="newCommand">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ComposableContentControl.Role">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.ComposableContentControl.RoleProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ComposablePartWithContext`1.CompositionContext">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.ComposablePartWithContext`1.OnCompositionContextChanged(`0,`0)">
-    <parameter name="oldValue">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="newValue">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ContentControlCompositionBehavior.Role">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.ContentControlCompositionBehavior.RoleProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.DataTemplateAttribute.#ctor(System.Type)">
-    <parameter name="viewModel">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.DataTemplateManager.CreateDynamicDataTemplates(System.ComponentModel.Composition.Hosting.ExportProvider)">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
-    <parameter name="exportProvider">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.DataTemplateManager.CreateKey(System.Type,System.Object)">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    <parameter name="dataType">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="role">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.DataTemplateManager.GetRole(System.Windows.DependencyObject)">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    <parameter name="obj">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.DataTemplateManager.RoleEquals(System.Object,System.Object)">
-    <parameter name="left">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="right">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.DataTemplateManager.RoleProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.DataTemplateManager.SetRole(System.Windows.DependencyObject,System.Object)">
-    <parameter name="obj">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="value">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
   <member name="F:TomsToolbox.Wpf.Composition.ExportProviderLocator.ExportProviderProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
@@ -251,12 +78,12 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="M:TomsToolbox.Wpf.Composition.ExportProviderLocator.Register(System.ComponentModel.Composition.Hosting.ExportProvider)">
+  <member name="M:TomsToolbox.Wpf.Composition.ExportProviderLocator.Register(TomsToolbox.Wpf.IExportProvider)">
     <parameter name="exportProvider">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="M:TomsToolbox.Wpf.Composition.ExportProviderLocator.SetExportProvider(System.Windows.DependencyObject,System.ComponentModel.Composition.Hosting.ExportProvider)">
+  <member name="M:TomsToolbox.Wpf.Composition.ExportProviderLocator.SetExportProvider(System.Windows.DependencyObject,TomsToolbox.Wpf.IExportProvider)">
     <parameter name="obj">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -269,186 +96,6 @@
     <parameter name="obj">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ICommandSourceFactory.Description">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ICommandSourceFactory.GroupName">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ICommandSourceFactory.Header">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ICommandSourceFactory.Icon">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ICommandSourceFactory.SubRegionId">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ICommandSourceFactory.Tag">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.IComposablePartFactory.GetPart(System.Object)">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    <parameter name="compositionContext">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.IComposablePartWithContext.CompositionContext">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.IDataTemplateMetadata.Role">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.IDataTemplateMetadata.ViewModel">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.Import.DataContextProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.Import.GetDataContext(System.Windows.FrameworkElement)">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    <parameter name="obj">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.Import.SetDataContext(System.Windows.FrameworkElement,System.Type)">
-    <parameter name="obj">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="value">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ImportBehavior.ContractName">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ImportBehavior.MemberType">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ImportBehavior.TargetProperty">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.ImportExtension.#ctor(System.Type)">
-    <parameter name="memberType">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ImportExtension.ContractName">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ImportExtension.MemberType">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ImportExtension.Setters">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.IVisualCompositionBehavior.CompositionContext">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.IVisualCompositionBehavior.RegionId">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.IVisualCompositionMetadata.Role">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.IVisualCompositionMetadata.TargetRegions">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.ModuleResourceUriAttribute.#ctor(System.String)">
-    <parameter name="uri">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.ModuleResourceUriAttribute.Uri">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.RoleBasedDataTemplateKey.#ctor(System.Object,System.Object)">
-    <parameter name="dataType">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="role">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.RoleBasedDataTemplateKey.Role">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.RoleBasedDataTemplateSelector.FallbackValue">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.RoleBasedDataTemplateSelector.Role">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.RoleBasedDataTemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
-    <parameter name="container">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.CompositionContextBinding">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.CompositionContextProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.ExportProvider">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.GetExports(System.String)">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
-    <parameter name="regionId">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.GetTarget(System.Object)">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    <parameter name="item">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.RegionIdBinding">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.RegionIdProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Composition.VisualCompositionExportAttribute.#ctor(System.String[])">
-    <parameter name="targetRegions">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.VisualCompositionExportAttribute.TargetRegions">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Controls.CompositeContextMenu.CompositionContext">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Controls.CompositeContextMenu.CompositionContextProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Controls.CompositeContextMenu.RegionId">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="F:TomsToolbox.Wpf.Controls.CompositeContextMenu.RegionIdProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Controls.CompositeContextMenuExtension.#ctor(System.String)">
-    <parameter name="regionId">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Controls.CompositeContextMenuExtension.CompositionContextBinding">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.Controls.CompositeContextMenuExtension.ProvideValue(System.IServiceProvider)">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.Controls.CompositeContextMenuExtension.RegionId">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="P:TomsToolbox.Wpf.Controls.Icon.Sources">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
@@ -660,6 +307,15 @@
   </member>
   <member name="F:TomsToolbox.Wpf.Converters.BinaryOperationConverter.Subtraction">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Wpf.Converters.BinaryOperationProcessor.Execute(System.Object,System.Object)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="value1">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="value2">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.Converters.BooleanToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -1115,8 +771,26 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:TomsToolbox.Wpf.DependencyObjectExtensions.GetValue``1(System.Windows.DependencyObject,System.Windows.DependencyProperty)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="self">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="property">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="M:TomsToolbox.Wpf.DependencyObjectExtensions.GetWindowHandle(System.Windows.DependencyObject)">
     <parameter name="self">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.DependencyObjectExtensions.Track``1(``0,System.Windows.DependencyProperty)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="dependencyObject">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="property">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
@@ -1218,6 +892,56 @@
   </member>
   <member name="P:TomsToolbox.Wpf.DialogCommands.Yes">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Wpf.DispatcherExtensions.BeginInvoke(System.Windows.Threading.Dispatcher,System.Action)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="dispatcher">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="method">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.DispatcherExtensions.BeginInvoke(System.Windows.Threading.Dispatcher,System.Windows.Threading.DispatcherPriority,System.Action)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="dispatcher">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="method">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.DispatcherExtensions.Invoke(System.Windows.Threading.Dispatcher,System.Action)">
+    <parameter name="dispatcher">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="method">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.DispatcherExtensions.Invoke``1(System.Windows.Threading.Dispatcher,System.Func{``0})">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="dispatcher">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="method">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.DispatcherExtensions.Restart(System.Windows.Threading.DispatcherTimer)">
+    <parameter name="timer">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.DispatcherThrottle.#ctor(System.Action)">
+    <parameter name="target">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.DispatcherThrottle.#ctor(System.Windows.Threading.DispatcherPriority,System.Action)">
+    <parameter name="target">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.DoubleClickPanel.OnMouseDoubleClick(System.Windows.Input.MouseButtonEventArgs)">
     <parameter name="e">
@@ -1385,6 +1109,124 @@
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="P:TomsToolbox.Wpf.ObservableObject.Dispatcher">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.DetachEventSource(System.ComponentModel.INotifyPropertyChanged)">
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.GetDataErrors(System.String)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <parameter name="propertyName">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.OnDataErrorsEvaluated(System.String,System.Collections.Generic.IEnumerable{System.String})">
+    <parameter name="propertyName">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="dataErrors">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.OnPropertyChanged(System.String)">
+    <attribute ctor="M:JetBrains.Annotations.NotifyPropertyChangedInvocatorAttribute.#ctor" />
+    <parameter name="propertyName">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.OnPropertyChanged``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+    <attribute ctor="M:JetBrains.Annotations.NotifyPropertyChangedInvocatorAttribute.#ctor" />
+    <parameter name="propertyExpression">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.RelayEventsOf(System.ComponentModel.INotifyPropertyChanged)">
+    <parameter name="source">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.RelayEventsOf(System.ComponentModel.INotifyPropertyChanged,System.ComponentModel.INotifyPropertyChanged)">
+    <parameter name="oldSource">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="newSource">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.Action{``0,``0},System.String)">
+    <attribute ctor="M:JetBrains.Annotations.NotifyPropertyChangedInvocatorAttribute.#ctor" />
+    <parameter name="backingField">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="value">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="changeCallback">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="propertyName">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.Linq.Expressions.Expression{System.Func{``0}})">
+    <attribute ctor="M:JetBrains.Annotations.NotifyPropertyChangedInvocatorAttribute.#ctor" />
+    <parameter name="backingField">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="value">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="propertyExpression">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.Linq.Expressions.Expression{System.Func{``0}},System.Action{``0,``0})">
+    <attribute ctor="M:JetBrains.Annotations.NotifyPropertyChangedInvocatorAttribute.#ctor" />
+    <parameter name="backingField">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="value">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="propertyExpression">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="changeCallback">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.String)">
+    <attribute ctor="M:JetBrains.Annotations.NotifyPropertyChangedInvocatorAttribute.#ctor" />
+    <parameter name="backingField">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="value">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="propertyName">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.String,System.Action{``0,``0})">
+    <attribute ctor="M:JetBrains.Annotations.NotifyPropertyChangedInvocatorAttribute.#ctor" />
+    <parameter name="backingField">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="value">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="propertyName">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="changeCallback">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="M:TomsToolbox.Wpf.PresentationFrameworkExtensions.ChangeTracker``1(``0,System.Windows.DependencyProperty)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="frameworkElement">
@@ -1524,6 +1366,42 @@
   </member>
   <member name="P:TomsToolbox.Wpf.PropertyBindingValueChangedEventArgs`1.OldValue">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Wpf.PropertyDependencyAttribute.#ctor(System.String[])">
+    <parameter name="propertyNames">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.PropertyDependencyAttribute.GetInvalidDependencies(System.Type)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <parameter name="entryType">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Wpf.PropertyDependencyAttribute.PropertyNames">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Wpf.RelayedEventAttribute.#ctor(System.Type)">
+    <parameter name="sourceType">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.RelayedEventAttribute.#ctor(System.Type,System.String)">
+    <parameter name="sourceType">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="sourceName">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Wpf.RelayedEventAttribute.SourceName">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.RelayedEventAttribute.SourceType">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
   <member name="F:TomsToolbox.Wpf.ResourceKeys.AutoToolTipTextBoxStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -1772,6 +1650,16 @@
   <member name="P:TomsToolbox.Wpf.TextValidationEventArgs.Text">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="M:TomsToolbox.Wpf.Throttle.#ctor(System.Action)">
+    <parameter name="target">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.Throttle.#ctor(System.TimeSpan,System.Action)">
+    <parameter name="target">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="M:TomsToolbox.Wpf.VirtualizingDoubleClickPanel.OnMouseDoubleClick(System.Windows.Input.MouseButtonEventArgs)">
     <parameter name="e">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -1879,44 +1767,10 @@
   <member name="F:TomsToolbox.Wpf.XamlExtensions.DataGridColumnStyle.ElementStyleProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
-  <member name="M:TomsToolbox.Wpf.XamlExtensions.DataTemplate.GetRole(System.Windows.FrameworkElement)">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    <parameter name="obj">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="F:TomsToolbox.Wpf.XamlExtensions.DataTemplate.RoleProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.XamlExtensions.DataTemplate.SetRole(System.Windows.FrameworkElement,System.Object)">
-    <parameter name="obj">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="value">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
   <member name="P:TomsToolbox.Wpf.XamlExtensions.KeyboardNavigation.Current">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
   <member name="F:TomsToolbox.Wpf.XamlExtensions.KeyboardNavigation.IsFocusVisualVisibleProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.XamlExtensions.VisualComposition.GetRegionId(System.Windows.Controls.Control)">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    <parameter name="obj">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="F:TomsToolbox.Wpf.XamlExtensions.VisualComposition.RegionIdProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.XamlExtensions.VisualComposition.SetRegionId(System.Windows.Controls.Control,System.String)">
-    <parameter name="obj">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="value">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
   </member>
 </assembly>

@@ -7,7 +7,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop;
     using TomsToolbox.Wpf.Controls;
 
     /// <summary>

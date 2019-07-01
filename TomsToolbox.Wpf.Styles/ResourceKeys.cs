@@ -77,11 +77,6 @@
         [NotNull] public static readonly ResourceKey ContextMenuStyle = new ComponentResourceKey(typeof(ResourceKeys), "ContextMenuStyle");
 
         /// <summary>
-        /// The resource key for a composite <see cref="ContextMenu"/> style.
-        /// </summary>
-        [NotNull] public static readonly ResourceKey CompositeContextMenuStyle = new ComponentResourceKey(typeof(ResourceKeys), "CompositeContextMenuStyle");
-
-        /// <summary>
         /// The resource key for the <see cref="Menu"/> style.
         /// </summary>
         [DefaultStyle]

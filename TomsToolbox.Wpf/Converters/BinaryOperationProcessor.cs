@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
     using System.Collections;

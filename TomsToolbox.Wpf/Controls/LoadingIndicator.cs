@@ -6,7 +6,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop;
 
     /// <summary>
     /// A loading indicator showing a rotating animation when active.

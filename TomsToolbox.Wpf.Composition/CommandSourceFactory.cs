@@ -11,7 +11,6 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Core;
-    using TomsToolbox.Desktop;
 
     /// <summary>
     /// Interface of the public properties implemented by <see cref="CommandSourceFactory{T}"/>.

@@ -12,7 +12,6 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Core;
-    using TomsToolbox.Desktop;
 
     /// <summary>
     /// Command declaration to be used with visual composition.

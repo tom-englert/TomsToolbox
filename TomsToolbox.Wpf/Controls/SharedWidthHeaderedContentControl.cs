@@ -6,7 +6,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop;
 
     /// <summary>
     /// A headered content control with it's header on the left side.

@@ -4,7 +4,6 @@
     using System.Windows.Interactivity;
 
     using TomsToolbox.Core;
-    using TomsToolbox.Desktop;
     using TomsToolbox.Wpf.Composition;
 
     /// <summary>

@@ -30,17 +30,8 @@
         /// Initializes a new instance of the <see cref="AutoWeakIndexer{TKey, TValue}"/> class.
         /// </summary>
         /// <param name="generator">The generator.</param>
-        public AutoWeakIndexer([NotNull] Func<TKey, TValue> generator)
-            : this(generator, null)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AutoWeakIndexer{TKey, TValue}"/> class.
-        /// </summary>
-        /// <param name="generator">The generator.</param>
         /// <param name="comparer">The comparer.</param>
-        public AutoWeakIndexer([NotNull] Func<TKey, TValue> generator, [CanBeNull] IEqualityComparer<TKey> comparer)
+        public AutoWeakIndexer([NotNull] Func<TKey, TValue> generator, [CanBeNull] IEqualityComparer<TKey> comparer = null)
         {
             _generator = generator;
             _items = new Dictionary<TKey, WeakReference<TValue>>(comparer);
@@ -125,8 +116,11 @@
         {
             get
             {
-                // ReSharper disable once PossibleNullReferenceException
-                return _items.Where(item => item.Value.TryGetTarget(out _)).Select(item => item.Key).ToArray();
+                return _items
+                    .Where(item => item.Value.TryGetTarget(out _))
+                    .Select(item => item.Key)
+                    .ToList()
+                    .AsReadOnly();
             }
         }
 
@@ -137,14 +131,7 @@
         /// The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> generic interface implementation that is used to determine equality of keys for the current <see cref="AutoWeakIndexer{TKey, TValue}"/> and to provide hash values for the keys.
         /// </returns>
         [NotNull]
-        public IEqualityComparer<TKey> Comparer
-        {
-            get
-            {
-                // ReSharper disable once AssignNullToNotNullAttribute
-                return _items.Comparer;
-            }
-        }
+        public IEqualityComparer<TKey> Comparer => _items.Comparer;
 
         /// <summary>
         /// Gets the value associated with the specified key.
@@ -156,7 +143,7 @@
         /// <param name="value">When this method returns, contains the value associated with the specified key, if the key is found; otherwise, the default value for the type of the <paramref name="value"/> parameter. This parameter is passed uninitialized.</param>
         public bool TryGetValue([NotNull] TKey key, [CanBeNull] out TValue value)
         {
-            value = default(TValue);
+            value = default;
 
             return _items.TryGetValue(key, out var reference) && (reference != null) && reference.TryGetTarget(out value);
         }

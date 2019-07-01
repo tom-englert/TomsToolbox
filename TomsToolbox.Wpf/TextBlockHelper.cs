@@ -10,7 +10,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop;
 
     /// <summary>
     /// Attached property provider which adds the read-only attached property <see cref="IsTextTrimmedProperty"/> to

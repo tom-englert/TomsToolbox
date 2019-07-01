@@ -28,7 +28,7 @@
         /// <summary>
         /// Gets all types in the assembly, including nested types.
         /// </summary>
-        /// <param name="assembly">The assembly. If assmbly is null, an empty list is returned.</param>
+        /// <param name="assembly">The assembly. If assembly is null, an empty list is returned.</param>
         /// <returns>The types in the assembly.</returns>
         [NotNull, ItemNotNull]
         public static IEnumerable<Type> EnumerateAllTypes([CanBeNull] this Assembly assembly)

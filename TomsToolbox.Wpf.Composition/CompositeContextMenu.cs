@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Wpf.Controls
+﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
     using System.Windows;
@@ -9,10 +9,8 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Wpf.Composition;
-
     /// <summary>
-    /// A markup extension to create a <see cref="T:TomsToolbox.Wpf.Controls.CompositeContextMenu" /> in XAML.
+    /// A markup extension to create a <see cref="T:TomsToolbox.Wpf.Composition.CompositeContextMenu" /> in XAML.
     /// </summary>
     /// <seealso cref="System.Windows.Markup.MarkupExtension" />
     /// <inheritdoc />
@@ -20,14 +18,14 @@
     public class CompositeContextMenuExtension : MarkupExtension
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Controls.CompositeContextMenuExtension" /> class.
+        /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Composition.CompositeContextMenuExtension" /> class.
         /// </summary>
         public CompositeContextMenuExtension()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Controls.CompositeContextMenuExtension" /> class.
+        /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Composition.CompositeContextMenuExtension" /> class.
         /// </summary>
         /// <param name="regionId">The region identifier.</param>
         public CompositeContextMenuExtension([CanBeNull] string regionId)
@@ -95,7 +93,7 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Controls.CompositeContextMenu" /> class.
+        /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Composition.CompositeContextMenu" /> class.
         /// </summary>
         public CompositeContextMenu()
         {

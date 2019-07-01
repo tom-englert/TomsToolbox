@@ -6,7 +6,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop;
 
     /// <summary>
     /// Support binding to a property of an element when the target is not a <see cref="DependencyObject"/>

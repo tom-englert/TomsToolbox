@@ -10,7 +10,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop;
 
     /// <summary>
     /// A behavior for a list box to handle the interaction betwen the list box and a "select all" checkbox.

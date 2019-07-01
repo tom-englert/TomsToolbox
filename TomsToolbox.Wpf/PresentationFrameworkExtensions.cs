@@ -10,7 +10,6 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Core;
-    using TomsToolbox.Desktop;
 
     /// <summary>
     /// Common extension methods for presentation framework objects.
@@ -213,7 +212,7 @@
 
         /// <summary>
         /// Tracks the changes of the specified property. 
-        /// Unlike the <see cref="Desktop.DependencyObjectExtensions.Track{T}"/>, it tracks events only while the <paramref name="frameworkElement"/> is loaded, 
+        /// Unlike the <see cref="TomsToolbox.Wpf.DependencyObjectExtensions.Track{T}"/>, it tracks events only while the <paramref name="frameworkElement"/> is loaded, 
         /// to avoid memory leaks because the event handlers are referenced by the global <see cref="DependencyPropertyDescriptor"/>.
         /// </summary>
         /// <typeparam name="T">The type of the framework element to track.</typeparam>
@@ -270,7 +269,7 @@
                 remove => Unsubscribe(value);
             }
 
-            private void Subscribe(EventHandler value)
+            private void Subscribe([CanBeNull] EventHandler value)
             {
                 if (value == null)
                     return;
@@ -286,7 +285,7 @@
                 _dependencyPropertyDescriptor.AddValueChanged(_frameworkElement, value);
             }
 
-            private void Unsubscribe(EventHandler value)
+            private void Unsubscribe([CanBeNull] EventHandler value)
             {
                 if (value == null)
                     return;

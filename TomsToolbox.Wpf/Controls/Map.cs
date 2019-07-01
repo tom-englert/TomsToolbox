@@ -11,7 +11,6 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Core;
-    using TomsToolbox.Desktop;
 
     /// <summary>
     /// A control showing maps represented in a tile system, e.g. Open Street Map, Bing or Google maps.

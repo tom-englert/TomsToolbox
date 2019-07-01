@@ -11,7 +11,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop;
 
     /// <summary>
     /// Hit test values for the <see cref="NcHitTestEventArgs"/>
