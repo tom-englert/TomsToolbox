@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.ComponentModel.Composition;
-    using System.ComponentModel.Composition.Hosting;
     using System.Linq;
     using System.Reflection;
     using System.Windows;
@@ -18,7 +16,7 @@
 
     /// <summary>
     /// The XAML equivalent of the <see cref="T:System.ComponentModel.Composition.ImportAttribute" />. Use like the <see cref="T:System.Windows.Markup.StaticExtension" />;
-    /// uses the MEF <see cref="T:System.ComponentModel.Composition.Hosting.ExportProvider" /> to create the object.
+    /// uses the MEF <see cref="T:System.ComponentModel.Composition.Hosting.IExportProvider" /> to create the object.
     /// </summary>
     /// <seealso cref="System.Windows.Markup.MarkupExtension" />
     /// <inheritdoc />
@@ -33,7 +31,7 @@
         [CanBeNull]
         private object _targetProperty;
         [CanBeNull]
-        private ExportProvider _exportProvider;
+        private IExportProvider _exportProvider;
         [CanBeNull]
         private FrameworkElement _rootObject;
         [CanBeNull]
@@ -71,7 +69,7 @@
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether recomposition is enabled when the container changes, just like <see cref="ImportAttribute.AllowRecomposition"/>.
+        /// Gets or sets a value indicating whether recomposition is enabled when the container changes, just like System.ComponentModel.Composition.ImportAttribute.AllowRecomposition
         /// </summary>
         /// <value>
         ///   <c>true</c> if recomposition is enabled; otherwise, <c>false</c>. The default is <c>false</c>.
@@ -177,12 +175,11 @@
 
                 foreach (var setter in Setters)
                 {
-                    var binding = setter.Value as BindingBase;
                     var dependencyProperty = setter.Property;
                     if (dependencyProperty == null)
                         continue;
 
-                    if (binding != null)
+                    if (setter.Value is BindingBase binding)
                     {
                         BindingOperations.SetBinding(target, dependencyProperty, binding);
                     }
@@ -223,7 +220,7 @@
             UpdateTarget();
         }
 
-        private void SetExportProvider(ExportProvider exportProvider)
+        private void SetExportProvider([CanBeNull] IExportProvider exportProvider)
         {
             if (_exportProvider != null)
             {
@@ -238,7 +235,7 @@
             }
         }
 
-        private void ExportProvider_ExportsChanged([CanBeNull] object sender, [CanBeNull] ExportsChangeEventArgs e)
+        private void ExportProvider_ExportsChanged([CanBeNull] object sender, [CanBeNull] EventArgs e)
         {
             UpdateTarget();
         }

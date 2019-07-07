@@ -24,7 +24,7 @@
         /// <summary>
         /// Prompts the user for credential.
         /// </summary>
-        /// <param name="parent">The parent for the dialog.</param>
+        /// <param name="parentHandle">The parent for the dialog.</param>
         /// <param name="caption">The caption.</param>
         /// <param name="message">The message.</param>
         /// <param name="authenticationError">The previous authentication error, if any; 0 to hide previous error information.</param>
@@ -33,11 +33,11 @@
         /// The credentials entered by the user, or <c>null</c> if the user has canceled the operation.
         /// </returns>
         [CanBeNull]
-        public static NetworkCredential PromptForCredential([NotNull] IWin32Window parent, [CanBeNull] string caption, [CanBeNull] string message, int authenticationError, [CanBeNull] NetworkCredential template)
+        public static NetworkCredential PromptForCredential(IntPtr parentHandle, [CanBeNull] string caption, [CanBeNull] string message, int authenticationError, [CanBeNull] NetworkCredential template)
         {
             using (var inCredBuffer = PackAuthenticationBuffer(template))
             {
-                return PromptForCredential(parent, caption, message, authenticationError, inCredBuffer);
+                return PromptForCredential(parentHandle, caption, message, authenticationError, inCredBuffer);
             }
         }
 
@@ -439,7 +439,7 @@
 
         [CanBeNull]
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
-        private static NetworkCredential PromptForCredential([NotNull] IWin32Window parent, [CanBeNull] string caption, [CanBeNull] string message, int authenticationError, [NotNull] SafeNativeMemory inCredBuffer)
+        private static NetworkCredential PromptForCredential(IntPtr parentHandle, [CanBeNull] string caption, [CanBeNull] string message, int authenticationError, [NotNull] SafeNativeMemory inCredBuffer)
         {
             var save = true;
             uint authPackage = 0;
@@ -449,7 +449,7 @@
                 cbSize = Marshal.SizeOf(typeof(CREDUI_INFO)),
                 pszCaptionText = caption,
                 pszMessageText = message,
-                hwndParent = parent.Handle
+                hwndParent = parentHandle
             };
 
             if (0 != NativeMethods.CredUIPromptForWindowsCredentials(ref credui, authenticationError, ref authPackage, inCredBuffer.DangerousGetHandle(), inCredBuffer.Size, out var outCredBufferPtr, out int outCredSize, ref save, 0))

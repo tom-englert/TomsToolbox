@@ -7,6 +7,7 @@
              xmlns:toms="urn:TomsToolbox"
              xmlns:samples="clr-namespace:SampleApp.Samples"
              xmlns:map="clr-namespace:SampleApp.Map"
+             xmlns:composition="urn:TomsToolbox.Composition"
              d:DataContext="{d:DesignInstance samples:MapViewModel}">
   <DockPanel>
     <ListBox DockPanel.Dock="Right" Width="200" ItemsSource="{Binding Pois}"
@@ -19,8 +20,8 @@
     </ListBox>
     <Grid>
       <toms:Map x:Name="MapControl" ImageProvider="{Binding ImageProvider}" ZoomLevel="10"
-                Center="{Binding Center, Converter={toms:Import toms:CoordinatesToPointConverter}}"
-                MousePosition="{Binding MousePosition, Converter={toms:Import toms:CoordinatesToPointConverter}}"
+                Center="{Binding Center, Converter={composition:Import toms:CoordinatesToPointConverter}}"
+                MousePosition="{Binding MousePosition, Converter={composition:Import toms:CoordinatesToPointConverter}}"
                 Bounds="{Binding Bounds}" Focusable="True"
                 MouseDoubleClickCommand="{Binding MouseDoubleClickCommand}">
         <i:Interaction.Behaviors>
@@ -37,7 +38,7 @@
             <ItemsControl.ItemContainerStyle>
               <Style TargetType="ContentPresenter">
                 <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
-                <Setter Property="toms:CanvasAnchor.BottomLeft" Value="{Binding Coordinates, Converter={toms:Import toms:CoordinatesToPointConverter}}" />
+                <Setter Property="toms:CanvasAnchor.BottomLeft" Value="{Binding Coordinates, Converter={composition:Import toms:CoordinatesToPointConverter}}" />
               </Style>
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>

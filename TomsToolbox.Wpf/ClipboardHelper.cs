@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Wpf
 {
     using System;
     using System.Collections.Generic;
@@ -24,7 +24,7 @@
         public const char TextColumnSeparator = '\t';
 
         /// <summary>
-        /// Gets the effectove CSV column separator for the current culture.
+        /// Gets the effective CSV column separator for the current culture.
         /// </summary>
         public static char CsvColumnSeparator => CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == "," ? ';' : ',';
 
@@ -76,19 +76,19 @@
         }
 
         [NotNull]
-        private static string ToTextString([NotNull, ItemNotNull] this IList<IList<string>> table)
+        public static string ToTextString([NotNull, ItemNotNull] this IList<IList<string>> table)
         {
             return ToString(table, TextColumnSeparator);
         }
 
         [NotNull]
-        internal static string ToCsvString([NotNull, ItemNotNull] this IList<IList<string>> table)
+        public static string ToCsvString([NotNull, ItemNotNull] this IList<IList<string>> table)
         {
             return ToString(table, CsvColumnSeparator);
         }
 
         [NotNull]
-        private static string ToString([NotNull, ItemNotNull] this IList<IList<string>> table, char separator)
+        public static string ToString([NotNull, ItemNotNull] this IList<IList<string>> table, char separator)
         {
             if ((table.Count == 1) && (table[0] != null) && (table[0].Count == 1) && string.IsNullOrWhiteSpace(table[0][0]))
                 return Quote + (table[0][0] ?? string.Empty) + Quote;
@@ -97,7 +97,7 @@
         }
 
         [NotNull]
-        internal static string Quoted([CanBeNull] string value, char separator)
+        public static string Quoted([CanBeNull] string value, char separator)
         {
             if (string.IsNullOrEmpty(value))
                 return string.Empty;
@@ -111,7 +111,7 @@
         }
 
         [CanBeNull, ItemNotNull]
-        internal static IList<IList<string>> ParseTable([NotNull] string text, char separator)
+        public static IList<IList<string>> ParseTable([NotNull] string text, char separator)
         {
             var table = new List<IList<string>>();
 
@@ -157,7 +157,7 @@
         }
 
         [NotNull]
-        internal static string ReadTableColumn([NotNull] TextReader reader, char separator)
+        private static string ReadTableColumn([NotNull] TextReader reader, char separator)
         {
             var stringBuilder = new StringBuilder();
             int nextChar;

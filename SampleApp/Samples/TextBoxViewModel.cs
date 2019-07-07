@@ -1,6 +1,6 @@
 ﻿namespace SampleApp.Samples
 {
-    using TomsToolbox.Wpf.Composition;
+    using TomsToolbox.Wpf.Composition.Mef;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 3)]
     class TextBoxViewModel

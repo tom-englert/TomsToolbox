@@ -5,8 +5,8 @@
     using SampleApp.Properties;
 
     using TomsToolbox.Core;
-    using TomsToolbox.Desktop;
     using TomsToolbox.Wpf.Composition;
+    using TomsToolbox.Wpf.Composition.Mef;
 
     [Export]
     [VisualCompositionExport(RegionId.Menu)]

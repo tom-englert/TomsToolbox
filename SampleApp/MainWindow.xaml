@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:toms="urn:TomsToolbox"
         xmlns:sampleApp="clr-namespace:SampleApp"
+        xmlns:composition="urn:TomsToolbox.Composition"
         Height="600" Width="800">
   <Window.ContextMenu>
     <ContextMenu>
@@ -10,7 +11,7 @@
     </ContextMenu>
   </Window.ContextMenu>
 
-  <TabControl toms:VisualComposition.RegionId="{x:Static sampleApp:RegionId.Main}" Margin="-1">
+  <TabControl composition:VisualComposition.RegionId="{x:Static sampleApp:RegionId.Main}" Margin="-1">
     <TabControl.ItemTemplate>
       <DataTemplate>
         <TextBlock Text="{Binding}" />

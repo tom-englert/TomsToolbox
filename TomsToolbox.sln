@@ -24,17 +24,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Styles", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.ObservableCollections", "TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj", "{E3EE79EA-50EC-4D54-B59F-799D50E8B221}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Desktop.Tests", "TomsToolbox.Desktop.Tests\TomsToolbox.Desktop.Tests.csproj", "{53966F8B-9898-47D4-AD7A-2FBF84BA431C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Desktop.Tests", "TomsToolbox.Desktop.Tests\TomsToolbox.Desktop.Tests.csproj", "{53966F8B-9898-47D4-AD7A-2FBF84BA431C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Core.Tests", "TomsToolbox.Core.Tests\TomsToolbox.Core.Tests.csproj", "{E8095803-2DE6-4023-8981-66DCEE62F18D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Core.Tests", "TomsToolbox.Core.Tests\TomsToolbox.Core.Tests.csproj", "{E8095803-2DE6-4023-8981-66DCEE62F18D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.ObservableCollections.Tests", "TomsToolbox.ObservableCollections.Tests\TomsToolbox.ObservableCollections.Tests.csproj", "{D061A57E-38E3-4F2A-B392-FB344C71F7F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.ObservableCollections.Tests", "TomsToolbox.ObservableCollections.Tests\TomsToolbox.ObservableCollections.Tests.csproj", "{D061A57E-38E3-4F2A-B392-FB344C71F7F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp", "SampleApp\SampleApp.csproj", "{31D12A42-C0C6-4B45-82D3-E896BB2E00E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Wpf.Tests", "TomsToolbox.Wpf.Tests\TomsToolbox.Wpf.Tests.csproj", "{726D085F-C3E1-444B-96AB-0B40C3DC0311}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Tests", "TomsToolbox.Wpf.Tests\TomsToolbox.Wpf.Tests.csproj", "{726D085F-C3E1-444B-96AB-0B40C3DC0311}"
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation\Documentation.shfbproj", "{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Composition", "TomsToolbox.Wpf.Composition\TomsToolbox.Wpf.Composition.csproj", "{250EB66A-EECD-449E-90C7-15DC8683A5C4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Composition.Mef", "TomsToolbox.Wpf.Composition.Mef\TomsToolbox.Wpf.Composition.Mef.csproj", "{1680AC6F-65F1-4F6B-8835-2E109C0BD4F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Composition.Styles", "TomsToolbox.Wpf.Compostition.Styles\TomsToolbox.Wpf.Composition.Styles.csproj", "{8A996B96-7062-49D1-BACD-6DD8B33AA599}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +91,18 @@ Global
 		{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{250EB66A-EECD-449E-90C7-15DC8683A5C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{250EB66A-EECD-449E-90C7-15DC8683A5C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{250EB66A-EECD-449E-90C7-15DC8683A5C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{250EB66A-EECD-449E-90C7-15DC8683A5C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1680AC6F-65F1-4F6B-8835-2E109C0BD4F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1680AC6F-65F1-4F6B-8835-2E109C0BD4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1680AC6F-65F1-4F6B-8835-2E109C0BD4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1680AC6F-65F1-4F6B-8835-2E109C0BD4F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A996B96-7062-49D1-BACD-6DD8B33AA599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A996B96-7062-49D1-BACD-6DD8B33AA599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A996B96-7062-49D1-BACD-6DD8B33AA599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A996B96-7062-49D1-BACD-6DD8B33AA599}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

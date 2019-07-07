@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net45</TargetFramework>
+    <TargetFramework>net462</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
   </ItemGroup>
@@ -13,10 +14,6 @@
     <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj">
       <Project>{3647CD2D-2A4E-4859-9BBD-606A73C14801}</Project>
       <Name>TomsToolbox.Desktop</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj">
-      <Project>{E3EE79EA-50EC-4D54-B59F-799D50E8B221}</Project>
-      <Name>TomsToolbox.ObservableCollections</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

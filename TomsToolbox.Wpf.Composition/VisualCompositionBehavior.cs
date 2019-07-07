@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.ComponentModel.Composition.Hosting;
     using System.Linq;
     using System.Windows;
     using System.Windows.Data;
@@ -12,6 +11,7 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Core;
+    using TomsToolbox.Wpf.Composition.XamlExtensions;
     using TomsToolbox.Wpf.Interactivity;
     using TomsToolbox.Wpf.XamlExtensions;
 
@@ -32,7 +32,7 @@
         [CanBeNull]
         private INotifyChanged _exportProviderChangeTracker;
         [CanBeNull]
-        private ExportProvider _exportProvider;
+        private IExportProvider _exportProvider;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VisualCompositionBehavior{T}"/> class.
@@ -125,14 +125,14 @@
         /// Gets or sets the export provider (IOC). The export provider must be registered with the <see cref="ExportProviderLocator"/>.
         /// </summary>
         [CanBeNull]
-        protected ExportProvider ExportProvider
+        protected IExportProvider IExportProvider
         {
             get => InternalExportProvider ?? (InternalExportProvider = GetExportProvider());
             private set => InternalExportProvider = value;
         }
 
         [CanBeNull]
-        private ExportProvider InternalExportProvider
+        private IExportProvider InternalExportProvider
         {
             get => _exportProvider;
             set
@@ -189,9 +189,9 @@
                     _exportProviderChangeTracker.Changed += ExportProvider_Changed;
                 }
 
-                ExportProvider = AssociatedObject?.TryGetExportProvider();
+                IExportProvider = AssociatedObject?.TryGetExportProvider();
 
-                VisualComposition.OnTrace(this, $"AssociatedObject loaded, export provider is {ExportProvider?.GetType()}");
+                VisualComposition.OnTrace(this, $"AssociatedObject loaded, export provider is {IExportProvider?.GetType()}");
             }
             catch (Exception ex)
             {
@@ -207,7 +207,7 @@
             if (_exportProviderChangeTracker != null)
                 _exportProviderChangeTracker.Changed -= ExportProvider_Changed;
 
-            ExportProvider = null;
+            IExportProvider = null;
 
             VisualComposition.OnTrace(this, "AssociatedObject unloaded");
         }
@@ -218,10 +218,10 @@
         /// <param name="regionId">The region identifier.</param>
         /// <returns>The exports for the region, or <c>null</c> if the export provider is not set yet.</returns>
         [CanBeNull, ItemNotNull]
-        protected IEnumerable<Lazy<object, IVisualCompositionMetadata>> GetExports([CanBeNull] string regionId)
+        protected IEnumerable<ILazy<object, IVisualCompositionMetadata>> GetExports([CanBeNull] string regionId)
         {
-            return ExportProvider?.GetExports<object, IVisualCompositionMetadata>(VisualCompositionExportAttribute.ExportContractName)
-                .Where(item => item?.Metadata?.TargetRegions?.Contains(regionId) == true);
+            return IExportProvider?.GetExports<object, IVisualCompositionMetadata>(VisualComposition.ExportContractName)
+                .Where(item => item.Metadata?.TargetRegions?.Contains(regionId) == true);
         }
 
         /// <summary>
@@ -261,7 +261,7 @@
         protected abstract void OnUpdate();
 
         [CanBeNull]
-        private ExportProvider GetExportProvider()
+        private IExportProvider GetExportProvider()
         {
             var associatedObject = AssociatedObject;
             if (associatedObject == null)
@@ -286,7 +286,7 @@
             Update();
         }
 
-        private void ExportProvider_ExportsChanged([CanBeNull] object sender, [CanBeNull] ExportsChangeEventArgs e)
+        private void ExportProvider_ExportsChanged([CanBeNull] object sender, [CanBeNull] EventArgs e)
         {
             // Defer update using a throttle:
             // - Export events may come from any thread, must dispatch to UI thread anyhow.
@@ -296,9 +296,9 @@
 
         private void ExportProvider_Changed([CanBeNull] object sender, [CanBeNull] EventArgs e)
         {
-            ExportProvider = AssociatedObject?.TryGetExportProvider();
+            IExportProvider = AssociatedObject?.TryGetExportProvider();
 
-            VisualComposition.OnTrace(this, "ExportProvider changed: " + ExportProvider?.GetType());
+            VisualComposition.OnTrace(this, "IExportProvider changed: " + IExportProvider?.GetType());
 
             _deferredUpdateThrottle.Tick();
         }

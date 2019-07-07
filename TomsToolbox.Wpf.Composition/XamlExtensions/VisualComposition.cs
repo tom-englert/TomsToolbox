@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Wpf.XamlExtensions
+﻿namespace TomsToolbox.Wpf.Composition.XamlExtensions
 {
     using System;
     using System.Diagnostics;
@@ -17,6 +17,11 @@
     /// </summary>
     public static class VisualComposition
     {
+        /// <summary>
+        /// The contract name for visual composition exports.
+        /// </summary>
+        public const string ExportContractName = "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D";
+
         /// <summary>
         /// The error number shown in trace messages.
         /// </summary>

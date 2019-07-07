@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Linq;
     using System.Windows;
@@ -9,6 +10,7 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Core;
     using TomsToolbox.Wpf.Interactivity;
 
     /// <summary>
@@ -141,9 +143,10 @@
 
         private void CommandSource_Changed([CanBeNull] Type oldValue, [CanBeNull] Type newValue)
         {
-            if (!typeof(CommandSourceFactory).IsAssignableFrom(newValue))
+            // Type.IsAssignableFrom does not work in design mode!
+            if (newValue != null && newValue.GetSelfAndBaseTypes().All(t => t.FullName != typeof(CommandSourceFactory).FullName))
             {
-                throw new InvalidOperationException(@"Only objects deriving from CommandSourceFactory can be assigned");
+                throw new InvalidOperationException(newValue + @": Only objects deriving from CommandSourceFactory can be assigned.");
             }
 
             if (AssociatedObject == null)

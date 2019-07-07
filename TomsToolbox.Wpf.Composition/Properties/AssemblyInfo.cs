@@ -12,7 +12,7 @@ using System.Windows.Markup;
 [assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)]
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 
-[assembly: XmlnsPrefix("urn:TomsToolbox", "toms")]
-[assembly: XmlnsDefinition("urn:TomsToolbox", "TomsToolbox.Wpf.Composition")]
-[assembly: XmlnsDefinition("urn:TomsToolbox", "TomsToolbox.Wpf.XamlExtensions")]
+[assembly: XmlnsPrefix("urn:TomsToolbox.Composition", "composition")]
+[assembly: XmlnsDefinition("urn:TomsToolbox.Composition", "TomsToolbox.Wpf.Composition")]
+[assembly: XmlnsDefinition("urn:TomsToolbox.Composition", "TomsToolbox.Wpf.Composition.XamlExtensions")]
 

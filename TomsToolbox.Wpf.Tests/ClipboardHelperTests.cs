@@ -5,6 +5,8 @@ namespace TomsToolbox.Desktop.Tests
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using TomsToolbox.Wpf;
+
     [TestClass]
     public class ClipboardHelperTests
     {

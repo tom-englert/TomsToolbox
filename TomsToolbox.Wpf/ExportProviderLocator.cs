@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Wpf.Composition
+﻿namespace TomsToolbox.Wpf
 {
     using System;
     using System.Linq;
@@ -75,7 +75,7 @@
         /// <param name="obj">The object.</param>
         /// <returns>The message.</returns>
         [NotNull]
-        internal static string GetMissingExportProviderMessage([NotNull] this DependencyObject obj)
+        public static string GetMissingExportProviderMessage([NotNull] this DependencyObject obj)
         {
             return "Export provider must be registered in the visual tree " + string.Join("/", obj.AncestorsAndSelf().Reverse().Select(o => o?.GetType().Name));
         }

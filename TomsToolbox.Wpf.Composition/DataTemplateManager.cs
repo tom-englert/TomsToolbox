@@ -2,9 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.ComponentModel.Composition.Hosting;
-    using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
     using System.Windows;
@@ -19,11 +16,6 @@
     /// </summary>
     public static class DataTemplateManager
     {
-        /// <summary>
-        /// The contract name used for export.
-        /// </summary>
-        internal const string ContractName = "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}";
-
         /// <summary>
         /// A comparer to compare exports for dynamic data templates.
         /// </summary>
@@ -60,7 +52,7 @@
             DependencyProperty.RegisterAttached("Role", typeof(object), typeof(DataTemplateManager), new FrameworkPropertyMetadata(FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>
-        /// Creates dynamic data templates by looking up all MEF exports with the <see cref="DataTemplateAttribute"/> attribute, 
+        /// Creates dynamic data templates by looking up all MEF exports with the <see cref="DataTemplateAttribute"/> attribute,
         /// creating a <see cref="T:System.Windows.DataTemplate"/> resource dictionary entry for every export.
         /// </summary>
         /// <param name="exportProvider">The export provider to search for exports with the <see cref="DataTemplateAttribute"/>.</param>
@@ -68,7 +60,7 @@
         /// The resource dictionary containing the dynamic data templates. This is usually added to the merged dictionaries of your application's resources.
         /// </returns>
         [NotNull, ItemCanBeNull]
-        public static ResourceDictionary CreateDynamicDataTemplates([NotNull] ExportProvider exportProvider)
+        public static ResourceDictionary CreateDynamicDataTemplates([NotNull] IExportProvider exportProvider)
         {
             var dataTemplateResources = new ResourceDictionary();
 
@@ -134,12 +126,12 @@
         /// <param name="role">The role.</param>
         /// <returns>The view</returns>
         [CanBeNull]
-        internal static DependencyObject GetDataTemplateView([NotNull] this ExportProvider exportProvider, [NotNull] Type viewModel, [CanBeNull] object role)
+        internal static DependencyObject GetDataTemplateView([NotNull] this IExportProvider exportProvider, [NotNull] Type viewModel, [CanBeNull] object role)
         {
-            return exportProvider.GetExports(typeof(DependencyObject), null, ContractName)
-                .Where(item => item.IsViewModelForType(viewModel, role))
+            return exportProvider.GetExports(typeof(DependencyObject), null, XamlExtensions.DataTemplate.ContractName)
+                .Where(item => item.IsViewModelForType(exportProvider, viewModel, role))
                 .Reverse()  // if multiple exports exist, use the top one, e.g. s.o. wants to override in a special layout module.
-                .Select(AssertCorrectCreationPolicy)
+                // .Select(AssertCorrectCreationPolicy)
                 .Where(item => item != null)
                 .Select(item => item.Value)
                 .OfType<DependencyObject>()
@@ -152,11 +144,11 @@
         /// <param name="exportProvider">The export provider.</param>
         /// <returns>The meta data of all exports.</returns>
         [NotNull, ItemNotNull]
-        private static IEnumerable<IDataTemplateMetadata> GetDataTemplateExportsMetadata([NotNull] this ExportProvider exportProvider)
+        private static IEnumerable<IDataTemplateMetadata> GetDataTemplateExportsMetadata([NotNull] this IExportProvider exportProvider)
         {
-            return exportProvider.GetExports(typeof(DependencyObject), null, ContractName)
-                .Select(AssertCorrectCreationPolicy)
-                .Select(GetMetadataView)
+            return exportProvider.GetExports(typeof(DependencyObject), null, XamlExtensions.DataTemplate.ContractName)
+                // .Select(AssertCorrectCreationPolicy)
+                .Select(exportProvider.GetMetadataView<IDataTemplateMetadata>)
                 .Where(item => item != null)
                 .Distinct(ExportsComparer);
         }
@@ -171,9 +163,9 @@
             return metadata.ViewModel.GetHashCode() + (metadata.Role ?? 0).GetHashCode();
         }
 
-        private static bool IsViewModelForType([CanBeNull] this Lazy<object, object> item, [CanBeNull] Type viewModel, [CanBeNull] object role)
+        private static bool IsViewModelForType([CanBeNull] this ILazy<object, object> item, IExportProvider exportProvider, [CanBeNull] Type viewModel, [CanBeNull] object role)
         {
-            var metadata = GetMetadataView(item);
+            var metadata = exportProvider.GetMetadataView<IDataTemplateMetadata>(item);
 
             if (metadata == null)
                 return false;
@@ -181,14 +173,15 @@
             return (metadata.ViewModel == viewModel) && RoleEquals(metadata.Role, role);
         }
 
+        /*
         [CanBeNull]
-        private static IDataTemplateMetadata GetMetadataView([CanBeNull] Lazy<object, object> item)
+        private static IDataTemplateMetadata GetMetadataView([CanBeNull] ILazy<object, object> item)
         {
             return item?.Metadata is IDictionary<string, object> metadataDictionary ? AttributedModelServices.GetMetadataView<IDataTemplateMetadata>(metadataDictionary) : null;
         }
 
         [NotNull]
-        private static Lazy<object, object> AssertCorrectCreationPolicy([NotNull] Lazy<object, object> export)
+        private static ILazy<object, object> AssertCorrectCreationPolicy([NotNull] ILazy<object, object> export)
         {
             // Ensure views are created non-shared!
 
@@ -204,6 +197,7 @@
 
             return export;
         }
+        */
 
         /// <summary>
         /// Compares two roles.

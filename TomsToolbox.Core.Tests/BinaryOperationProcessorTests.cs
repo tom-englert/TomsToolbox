@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Desktop.Tests
+﻿namespace TomsToolbox.Core.Tests
 {
     using System;
     using System.ComponentModel;
@@ -6,6 +6,8 @@
     using System.Windows;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using TomsToolbox.Core;
 
     [TestClass]
     public class BinaryOperationProcessorTests
@@ -83,7 +85,7 @@
         }
 
         [TestMethod]
-        public void BinaryOperationProcessor_Substract_Vector_VectorString_Test()
+        public void BinaryOperationProcessor_Subtract_Vector_VectorString_Test()
         {
             var target = new BinaryOperationProcessor(BinaryOperation.Subtraction);
             var result = target.Execute(new Vector(2, 5), "2,3");

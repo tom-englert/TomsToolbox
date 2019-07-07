@@ -14,11 +14,11 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop.Composition;
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;
+    using TomsToolbox.Wpf.Composition.Mef;
+    using TomsToolbox.Wpf.Composition.XamlExtensions;
     using TomsToolbox.Wpf.Styles;
-    using TomsToolbox.Wpf.XamlExtensions;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -26,16 +26,23 @@
     public sealed partial class App : IDisposable
     {
         [NotNull]
-        private readonly ICompositionHost _compositionHost = new CompositionHost(false);
+        private readonly AggregateCatalog _compositionCatalog = new AggregateCatalog();
+        private readonly CompositionContainer _compositionContainer;
+        private readonly IExportProvider _exportProvider;
+
 
         public App()
         {
             // Thread.CurrentThread.CurrentUICulture = new CultureInfo("de-DE");
             // ReSharper disable once PossibleNullReferenceException
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+
+            _compositionContainer = new CompositionContainer(_compositionCatalog, true);
+            _exportProvider = new ExportProviderAdapter(_compositionContainer);
+            _compositionContainer.ComposeExportedValue(_exportProvider);
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        protected override void OnStartup([CanBeNull] StartupEventArgs e)
         {
             base.OnStartup(e);
 
@@ -47,9 +54,10 @@
             context.ForTypesDerivedFrom<FrameworkElement>()?.SetCreationPolicy(CreationPolicy.NonShared);
             // To demonstrate the ImportExtension with value converters.
             context.ForTypesDerivedFrom<IValueConverter>()?.Export();
+
             try
             {
-                _compositionHost.AddCatalog(new ApplicationCatalog(context));
+                _compositionCatalog.Catalogs.Add(new ApplicationCatalog(context));
             }
             catch (ReflectionTypeLoadException ex)
             {
@@ -58,9 +66,9 @@
 
 
             Resources.MergedDictionaries.Insert(0, WpfStyles.GetDefaultStyles().RegisterDefaultWindowStyle());
-            Resources.MergedDictionaries.Add(DataTemplateManager.CreateDynamicDataTemplates(_compositionHost.Container));
+            Resources.MergedDictionaries.Add(DataTemplateManager.CreateDynamicDataTemplates(_exportProvider));
 
-            MainWindow = _compositionHost.GetExportedValue<MainWindow>();
+            MainWindow = _compositionContainer.GetExportedValue<MainWindow>();
             MainWindow.Show();
         }
 
@@ -69,7 +77,7 @@
             Dispatcher?.BeginInvoke((Action)(() => MessageBox.Show(msg)));
         }
 
-        protected override void OnExit(ExitEventArgs e)
+        protected override void OnExit([CanBeNull] ExitEventArgs e)
         {
             Dispose();
 
@@ -78,9 +86,8 @@
 
         public void Dispose()
         {
-            _compositionHost.Dispose();
+            _compositionCatalog.Dispose();
+            _compositionContainer.Dispose();
         }
-        
-        
     }
 }

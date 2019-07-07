@@ -37,6 +37,9 @@
       <Project>{e3ee79ea-50ec-4d54-b59f-799d50e8b221}</Project>
       <Name>TomsToolbox.ObservableCollections</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Wpf.Composition.Mef\TomsToolbox.Wpf.Composition.Mef.csproj" />
+    <ProjectReference Include="..\TomsToolbox.Wpf.Composition\TomsToolbox.Wpf.Composition.csproj" />
+    <ProjectReference Include="..\TomsToolbox.Wpf.Compostition.Styles\TomsToolbox.Wpf.Composition.Styles.csproj" />
     <ProjectReference Include="..\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj">
       <Project>{E5D732D2-0294-48FD-8314-63DC1A9155FE}</Project>
       <Name>TomsToolbox.Wpf.Styles</Name>
@@ -80,6 +83,7 @@
     </Compile>
     <Resource Include="**/*.png" />
     <Resource Include="**/*.ico" />
+    <EmbeddedResource Update="Properties\Resources.de.resx" />
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator></Generator>
     </EmbeddedResource>

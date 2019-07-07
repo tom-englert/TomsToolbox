@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Wpf.Converters
+﻿namespace TomsToolbox.Wpf
 {
     using System;
     using System.Windows;

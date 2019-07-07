@@ -4,7 +4,7 @@
     using System.Windows.Interactivity;
 
     using TomsToolbox.Core;
-    using TomsToolbox.Wpf.Composition;
+    using TomsToolbox.Wpf;
 
     /// <summary>
     /// A behavior to call all external theme resource providers. Theme resource providers must implement and export <see cref="IThemeResourceProvider"/>.

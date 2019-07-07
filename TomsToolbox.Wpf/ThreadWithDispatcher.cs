@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Wpf
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -89,7 +89,7 @@
     /// The thread will be created as background thread, so it does not need to be shut down explicitly.
     /// </summary>
     /// <remarks>
-    /// Use this thread to dispatch or serialize background operations, or to performant host COM objects that don't have a free threaded marshaller.
+    /// Use this thread to dispatch or serialize background operations, or to host COM objects that don't have a free threaded marshaller.
     /// A background thread will be killed by the system when the application terminates, so do not host objects in a background thread that need cleanup!
     /// </remarks>
     public class BackgroundThreadWithDispatcher : ThreadWithDispatcher

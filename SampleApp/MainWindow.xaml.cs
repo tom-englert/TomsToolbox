@@ -5,8 +5,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop.Composition;
-    using TomsToolbox.Wpf.Composition;
+    using TomsToolbox.Wpf;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -15,9 +14,9 @@
     public partial class MainWindow
     {
         [ImportingConstructor]
-        public MainWindow([NotNull] ICompositionHost compositionHost)
+        public MainWindow([NotNull] IExportProvider exportProvider)
         {
-            this.SetExportProvider(compositionHost.Container);
+            this.SetExportProvider(exportProvider);
 
             InitializeComponent();
         }

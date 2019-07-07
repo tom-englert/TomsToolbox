@@ -9,6 +9,7 @@
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using TomsToolbox.Core;
     using TomsToolbox.Wpf.Converters;
 
     [TestClass]

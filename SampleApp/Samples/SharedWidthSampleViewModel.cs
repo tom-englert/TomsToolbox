@@ -4,7 +4,7 @@
 
     using PropertyChanged;
 
-    using TomsToolbox.Wpf.Composition;
+    using TomsToolbox.Wpf.Composition.Mef;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 4)]
     [ImplementPropertyChanged]

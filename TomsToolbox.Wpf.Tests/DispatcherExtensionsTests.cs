@@ -1,9 +1,11 @@
-﻿namespace TomsToolbox.Desktop.Tests
+﻿namespace TomsToolbox.Wpf.Tests
 {
     using System;
     using System.Runtime.Serialization;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using TomsToolbox.Wpf;
 
     [TestClass]
     public class DispatcherExtensionsTests

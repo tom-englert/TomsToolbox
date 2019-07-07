@@ -64,6 +64,15 @@
     <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="M:TomsToolbox.Core.BinaryOperationProcessor.Execute(System.Object,System.Object)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="value1">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="value2">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="M:TomsToolbox.Core.CollectionExtensions.AddRange(System.Collections.IList,System.Collections.IEnumerable)">
     <parameter name="target">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -646,6 +655,13 @@
   </member>
   <member name="P:TomsToolbox.Core.ThreadBoundTaskScheduler.TaskFactory">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Core.TypeExtensions.GetSelfAndBaseTypes(System.Type)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <parameter name="type">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
   </member>
   <member name="M:TomsToolbox.Core.WeakReferenceExtensions.GetTargetOrDefault``1(System.WeakReference{``0})">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />

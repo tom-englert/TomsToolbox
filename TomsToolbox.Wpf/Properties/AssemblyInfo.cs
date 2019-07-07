@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Resources;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Markup;
@@ -14,8 +15,7 @@ using System.Windows.Markup;
 
 [assembly: XmlnsPrefix("urn:TomsToolbox", "toms")]
 [assembly: XmlnsDefinition("urn:TomsToolbox", "TomsToolbox.Wpf")]
-[assembly: XmlnsDefinition("urn:TomsToolbox", "TomsToolbox.Wpf.Interactivity")]
-[assembly: XmlnsDefinition("urn:TomsToolbox", "TomsToolbox.Wpf.XamlExtensions")]
 [assembly: XmlnsDefinition("urn:TomsToolbox", "TomsToolbox.Wpf.Controls")]
 [assembly: XmlnsDefinition("urn:TomsToolbox", "TomsToolbox.Wpf.Converters")]
-
+[assembly: XmlnsDefinition("urn:TomsToolbox", "TomsToolbox.Wpf.Interactivity")]
+[assembly: XmlnsDefinition("urn:TomsToolbox", "TomsToolbox.Wpf.XamlExtensions")]

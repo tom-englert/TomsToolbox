@@ -4,8 +4,8 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Desktop.Composition;
-    using TomsToolbox.Wpf.Composition;
+    using TomsToolbox.Wpf;
+    using TomsToolbox.Wpf.Composition.Mef;
 
     /// <summary>
     /// Interaction logic for MapView.xaml
@@ -15,9 +15,9 @@
     public partial class MapView
     {
         [ImportingConstructor]
-        public MapView([NotNull] ICompositionHost compositionHost)
+        public MapView([NotNull] IExportProvider exportProvider)
         {
-            this.SetExportProvider(compositionHost.Container);
+            this.SetExportProvider(exportProvider);
 
             InitializeComponent();
         }

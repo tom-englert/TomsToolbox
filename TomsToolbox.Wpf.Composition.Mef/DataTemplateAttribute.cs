@@ -1,10 +1,12 @@
-﻿namespace TomsToolbox.Wpf.Composition
+﻿namespace TomsToolbox.Wpf.Composition.Mef
 {
     using System;
     using System.ComponentModel.Composition;
     using System.Windows;
 
     using JetBrains.Annotations;
+
+    using DataTemplate = TomsToolbox.Wpf.Composition.XamlExtensions.DataTemplate;
 
     /// <summary>
     /// Attribute to apply to views to dynamically generate the <see cref="System.Windows.DataTemplate"/> that associates the view with it's view model.
@@ -18,7 +20,7 @@
         /// </summary>
         /// <param name="viewModel">The type of the view model for which the template is designed.</param>
         public DataTemplateAttribute([NotNull] Type viewModel)
-            : base(DataTemplateManager.ContractName, typeof(DependencyObject))
+            : base(DataTemplate.ContractName, typeof(DependencyObject))
         {
             ViewModel = viewModel;
         }

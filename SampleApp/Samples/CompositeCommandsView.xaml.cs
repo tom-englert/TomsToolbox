@@ -5,7 +5,8 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Wpf.Composition;
+    using TomsToolbox.Wpf;
+    using TomsToolbox.Wpf.Composition.Mef;
 
     /// <summary>
     /// Interaction logic for CompositeCommandsView.xaml
@@ -14,7 +15,7 @@
     public partial class CompositeCommandsView
     {
         [ImportingConstructor]
-        public CompositeCommandsView([CanBeNull] ExportProvider exportProvider)
+        public CompositeCommandsView([CanBeNull] IExportProvider exportProvider)
         {
             this.SetExportProvider(exportProvider);
 

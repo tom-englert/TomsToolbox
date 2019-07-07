@@ -1,23 +1,19 @@
-﻿namespace TomsToolbox.Wpf.Composition
+﻿namespace TomsToolbox.Wpf.Composition.Mef
 {
     using System;
     using System.ComponentModel.Composition;
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Wpf.Composition.XamlExtensions;
+
     /// <summary>
     /// Attribute to apply to view models to support visual composition.
     /// </summary>
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class)]
-    [CLSCompliant(false)] // attributes must used arrays, even as properties.
     public sealed class VisualCompositionExportAttribute : ExportAttribute, IVisualCompositionMetadata
     {
-        /// <summary>
-        /// The contract name for visual composition exports.
-        /// </summary>
-        public const string ExportContractName = "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D";
-
         [NotNull, ItemNotNull]
         private readonly string[] _targetRegions;
 
@@ -26,7 +22,7 @@
         /// </summary>
         /// <param name="targetRegions">The names of the region(s) where this view should appear.</param>
         public VisualCompositionExportAttribute([NotNull, ItemNotNull] params string[] targetRegions)
-            : base(ExportContractName, typeof(object))
+            : base(VisualComposition.ExportContractName, typeof(object))
         {
             _targetRegions = targetRegions;
         }

@@ -2,7 +2,7 @@
 {
     using System.Windows.Controls;
 
-    using TomsToolbox.Wpf.Composition;
+    using TomsToolbox.Wpf.Composition.Mef;
 
     /// <summary>
     /// Interaction logic for IconView.xaml

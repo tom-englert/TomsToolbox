@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Wpf.Composition
+﻿namespace TomsToolbox.Wpf.Composition.Styles
 {
     using System.Windows;
     using System.Windows.Controls;
@@ -14,5 +14,10 @@
         /// The resource key for a composite <see cref="ContextMenu"/> style.
         /// </summary>
         [NotNull] public static readonly ResourceKey CompositeContextMenuStyle = new ComponentResourceKey(typeof(ResourceKeys), "CompositeContextMenuStyle");
+
+        /// <summary>
+        /// A style to build composite menus.
+        /// </summary>
+        [NotNull] public static readonly ResourceKey CompositeMenuStyle = new ComponentResourceKey(typeof(ResourceKeys), "CompositeMenuStyle");
     }
 }

@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.Composition;
 
-    using TomsToolbox.Wpf.Composition;
+    using TomsToolbox.Wpf.Composition.Mef;
 
     /// <summary>
     /// Interaction logic for ChessView.xaml

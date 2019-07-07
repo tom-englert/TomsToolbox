@@ -9,6 +9,8 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Core;
+
 
     /// <summary>
     /// Applies the <see cref="BinaryOperationConverter.Operation"/> on the value and the converter parameter.<para/>

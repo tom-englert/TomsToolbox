@@ -1,11 +1,10 @@
-﻿namespace TomsToolbox.Wpf.XamlExtensions
+﻿namespace TomsToolbox.Wpf.Composition.XamlExtensions
 {
     using System.Windows;
     using System.Windows.Controls;
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
     using TomsToolbox.Wpf.Composition;
 
     /// <summary>
@@ -13,6 +12,11 @@
     /// </summary>
     public static class DataTemplate
     {
+        /// <summary>
+        /// The contract name used for export.
+        /// </summary>
+        public const string ContractName = "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}";
+
         /// <summary>
         /// Gets the role associated with a data template.
         /// </summary>

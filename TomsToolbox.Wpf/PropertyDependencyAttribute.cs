@@ -64,7 +64,7 @@
         /// <returns>A dictionary that maps the property names to all direct and indirect dependent property names.</returns>
         /// <exception cref="System.InvalidOperationException">Invalid dependency definitions, i.e. dependency to non-existing property.</exception>
         [CanBeNull]
-        internal static Dictionary<string, IEnumerable<string>> CreateDependencyMapping([CanBeNull] Type type)
+        public static Dictionary<string, IEnumerable<string>> CreateDependencyMapping([CanBeNull] Type type)
         {
             if (type == null)
                 return null;
@@ -115,10 +115,8 @@
 
             for (var i = 0; i < allDependenciesAndSelf.Count; i++)
             {
-                string[] indirectDependencies;
-
                 var key = allDependenciesAndSelf[i];
-                if (!directDependencies.TryGetValue(key, out indirectDependencies) || (indirectDependencies == null))
+                if (!directDependencies.TryGetValue(key, out var indirectDependencies) || (indirectDependencies == null))
                 {
                     continue;
                 }
