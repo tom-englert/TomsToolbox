@@ -14,6 +14,8 @@
 
     using TomsToolbox.Core;
 
+    using TriggerBase = System.Windows.Interactivity.TriggerBase;
+
     /// <summary>
     /// A container to host the source <see cref="InputBindingCollection"/>. Must be a <see cref="FrameworkElement"/> to minimize binding errors.
     /// </summary>

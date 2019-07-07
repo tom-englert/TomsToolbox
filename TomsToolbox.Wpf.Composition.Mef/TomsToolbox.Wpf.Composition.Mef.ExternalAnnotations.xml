@@ -10,11 +10,6 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="M:TomsToolbox.Wpf.Composition.Mef.LazyAdapter`2.#ctor(System.Lazy{`0,`1})">
-    <parameter name="lazy">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
   <member name="M:TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute.#ctor(System.String[])">
     <parameter name="targetRegions">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />

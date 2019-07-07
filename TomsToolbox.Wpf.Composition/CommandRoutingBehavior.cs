@@ -272,8 +272,8 @@
 
             var exportProvider = IsAlive ? element.GetExportProvider() : element.TryGetExportProvider();
 
-            return exportProvider?.GetExports(commandSourceType, typeof(object), string.Empty)
-                .Select(export => export?.Value)
+            return exportProvider?.GetExports(commandSourceType)
+                .Select(export => export.Value)
                 .OfType<CommandSourceFactory>()
                 .FirstOrDefault();
         }

@@ -19,7 +19,7 @@
     /// </summary>
     /// <typeparam name="T">The type the VisualCompositionBehavior can be attached to.</typeparam>
     /// <remarks>
-    /// ViewModels declare themselves as candidates for visual composition by adding the <see cref="VisualCompositionExportAttribute"/>,
+    /// ViewModels declare themselves as candidates for visual composition by adding the VisualCompositionExportAttribute,
     /// and the visual composition behaviors dynamically link the view models to the views with the matching region ids.
     /// </remarks>
     public abstract class VisualCompositionBehavior<T> : FrameworkElementBehavior<T>, IVisualCompositionBehavior
@@ -124,7 +124,7 @@
         /// Gets or sets the export provider (IOC). The export provider must be registered with the <see cref="ExportProviderLocator"/>.
         /// </summary>
         [CanBeNull]
-        protected IExportProvider IExportProvider
+        protected IExportProvider ExportProvider
         {
             get => InternalExportProvider ?? (InternalExportProvider = GetExportProvider());
             private set => InternalExportProvider = value;
@@ -188,9 +188,9 @@
                     _exportProviderChangeTracker.Changed += ExportProvider_Changed;
                 }
 
-                IExportProvider = AssociatedObject?.TryGetExportProvider();
+                ExportProvider = AssociatedObject?.TryGetExportProvider();
 
-                VisualComposition.OnTrace(this, $"AssociatedObject loaded, export provider is {IExportProvider?.GetType()}");
+                VisualComposition.OnTrace(this, $"AssociatedObject loaded, export provider is {ExportProvider?.GetType()}");
             }
             catch (Exception ex)
             {
@@ -206,7 +206,7 @@
             if (_exportProviderChangeTracker != null)
                 _exportProviderChangeTracker.Changed -= ExportProvider_Changed;
 
-            IExportProvider = null;
+            ExportProvider = null;
 
             VisualComposition.OnTrace(this, "AssociatedObject unloaded");
         }
@@ -219,7 +219,8 @@
         [CanBeNull, ItemNotNull]
         protected IEnumerable<ILazy<object, IVisualCompositionMetadata>> GetExports([CanBeNull] string regionId)
         {
-            return IExportProvider?.GetExports<object, IVisualCompositionMetadata>(VisualComposition.ExportContractName)
+            return ExportProvider?
+                .GetExports<IVisualCompositionMetadata>(typeof(object), VisualComposition.ExportContractName, item => new VisualCompositionMetadata(item))
                 .Where(item => item.Metadata?.TargetRegions?.Contains(regionId) == true);
         }
 
@@ -295,9 +296,9 @@
 
         private void ExportProvider_Changed([CanBeNull] object sender, [CanBeNull] EventArgs e)
         {
-            IExportProvider = AssociatedObject?.TryGetExportProvider();
+            ExportProvider = AssociatedObject?.TryGetExportProvider();
 
-            VisualComposition.OnTrace(this, "IExportProvider changed: " + IExportProvider?.GetType());
+            VisualComposition.OnTrace(this, "IExportProvider changed: " + ExportProvider?.GetType());
 
             _deferredUpdateThrottle.Tick();
         }

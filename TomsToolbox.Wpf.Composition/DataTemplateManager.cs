@@ -52,10 +52,10 @@
             DependencyProperty.RegisterAttached("Role", typeof(object), typeof(DataTemplateManager), new FrameworkPropertyMetadata(FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>
-        /// Creates dynamic data templates by looking up all MEF exports with the <see cref="DataTemplateAttribute"/> attribute,
+        /// Creates dynamic data templates by looking up all MEF exports with the DataTemplateAttribute attribute,
         /// creating a <see cref="T:System.Windows.DataTemplate"/> resource dictionary entry for every export.
         /// </summary>
-        /// <param name="exportProvider">The export provider to search for exports with the <see cref="DataTemplateAttribute"/>.</param>
+        /// <param name="exportProvider">The export provider to search for exports with the DataTemplateAttribute.</param>
         /// <returns>
         /// The resource dictionary containing the dynamic data templates. This is usually added to the merged dictionaries of your application's resources.
         /// </returns>
@@ -128,11 +128,10 @@
         [CanBeNull]
         internal static DependencyObject GetDataTemplateView([NotNull] this IExportProvider exportProvider, [NotNull] Type viewModel, [CanBeNull] object role)
         {
-            return exportProvider.GetExports(typeof(DependencyObject), null, XamlExtensions.DataTemplate.ContractName)
-                .Where(item => item.IsViewModelForType(exportProvider, viewModel, role))
+            return exportProvider.GetExports(typeof(DependencyObject), XamlExtensions.DataTemplate.ContractName)
+                .Where(item => item.IsViewModelForType(viewModel, role))
                 .Reverse()  // if multiple exports exist, use the top one, e.g. s.o. wants to override in a special layout module.
                 // .Select(AssertCorrectCreationPolicy)
-                .Where(item => item != null)
                 .Select(item => item.Value)
                 .OfType<DependencyObject>()
                 .FirstOrDefault();
@@ -146,10 +145,10 @@
         [NotNull, ItemNotNull]
         private static IEnumerable<IDataTemplateMetadata> GetDataTemplateExportsMetadata([NotNull] this IExportProvider exportProvider)
         {
-            return exportProvider.GetExports(typeof(DependencyObject), null, XamlExtensions.DataTemplate.ContractName)
+            return exportProvider
+                .GetExports<IDataTemplateMetadata>(typeof(DependencyObject), XamlExtensions.DataTemplate.ContractName, item => new DataTemplateMetadata(item))
+                .Select(item => item.Metadata)
                 // .Select(AssertCorrectCreationPolicy)
-                .Select(exportProvider.GetMetadataView<IDataTemplateMetadata>)
-                .Where(item => item != null)
                 .Distinct(ExportsComparer);
         }
 
@@ -163,12 +162,9 @@
             return metadata.ViewModel.GetHashCode() + (metadata.Role ?? 0).GetHashCode();
         }
 
-        private static bool IsViewModelForType([CanBeNull] this ILazy<object, object> item, IExportProvider exportProvider, [CanBeNull] Type viewModel, [CanBeNull] object role)
+        private static bool IsViewModelForType([CanBeNull] this ILazy<object> item, [CanBeNull] Type viewModel, [CanBeNull] object role)
         {
-            var metadata = exportProvider.GetMetadataView<IDataTemplateMetadata>(item);
-
-            if (metadata == null)
-                return false;
+            var metadata = new DataTemplateMetadata(item?.Metadata);
 
             return (metadata.ViewModel == viewModel) && RoleEquals(metadata.Role, role);
         }

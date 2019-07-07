@@ -163,7 +163,7 @@
             get
             {
                 // ReSharper disable once AssignNullToNotNullAttribute
-                var value = _exportProvider?.GetExports(MemberType, null, ContractName)
+                var value = _exportProvider?.GetExports(MemberType, ContractName)
                     .Select(item => item?.Value)
                     .FirstOrDefault();
 

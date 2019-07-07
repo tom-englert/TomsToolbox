@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
+    using System.Collections.Generic;
     using System.Windows;
 
     using JetBrains.Annotations;
@@ -13,7 +14,7 @@
         /// <summary>
         /// Gets the type of the view model that this visual has a representation for.
         /// </summary>
-        [NotNull]
+        [CanBeNull]
         Type ViewModel
         {
             get;
@@ -28,5 +29,30 @@
         {
             get;
         }
+    }
+
+    internal class DataTemplateMetadata : IDataTemplateMetadata
+    {
+        public DataTemplateMetadata([CanBeNull] IDictionary<string, object>  metadata)
+        {
+            if (metadata == null)
+                return;
+
+            if (metadata.TryGetValue(nameof(ViewModel), out var viewModel))
+            {
+                ViewModel = viewModel as Type;
+            }
+
+            if (metadata.TryGetValue(nameof(Role), out var role))
+            {
+                Role = role;
+            }
+        }
+
+        [CanBeNull]
+        public Type ViewModel { get; }
+        
+        [CanBeNull]
+        public object Role { get; }
     }
 }

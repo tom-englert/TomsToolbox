@@ -225,7 +225,7 @@
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="P:TomsToolbox.Wpf.Composition.IDataTemplateMetadata.ViewModel">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="F:TomsToolbox.Wpf.Composition.Import.DataContextProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -317,6 +317,9 @@
   <member name="F:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.CompositionContextProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="P:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.ExportProvider">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.GetExports(System.String)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
@@ -329,9 +332,6 @@
     <parameter name="item">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.IExportProvider">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="P:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1.RegionIdBinding">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
