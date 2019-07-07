@@ -7,7 +7,6 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Wpf.Composition.XamlExtensions;
-    using TomsToolbox.Wpf.XamlExtensions;
 
     /// <summary>
     /// Retrieves the exported object that matches RegionId and Role from the composition container

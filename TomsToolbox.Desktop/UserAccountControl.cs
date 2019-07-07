@@ -8,7 +8,6 @@
     using System.Runtime.InteropServices;
     using System.Security.Principal;
     using System.Text;
-    using System.Windows.Interop;
 
     using JetBrains.Annotations;
 

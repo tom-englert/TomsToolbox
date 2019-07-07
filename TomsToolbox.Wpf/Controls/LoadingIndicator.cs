@@ -6,7 +6,6 @@
 
     using JetBrains.Annotations;
 
-
     /// <summary>
     /// A loading indicator showing a rotating animation when active.
     /// </summary>

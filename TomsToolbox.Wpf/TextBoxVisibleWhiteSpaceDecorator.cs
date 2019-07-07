@@ -14,7 +14,6 @@
 
     using JetBrains.Annotations;
 
-
     /// <summary>
     /// Classifies white spaces in plain text.
     /// </summary>

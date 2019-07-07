@@ -8,7 +8,6 @@ namespace TomsToolbox.Wpf.Composition
 
     using JetBrains.Annotations;
 
-
     /// <summary>
     /// Base class for a view model with a typed composition context.
     /// </summary>

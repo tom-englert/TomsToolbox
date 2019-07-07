@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Desktop
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
@@ -8,10 +9,7 @@
 
     using JetBrains.Annotations;
 
-#if NET45
-    using System.Collections;
     using TomsToolbox.Core;
-#endif
 
     /// <inheritdoc />
     /// <summary>

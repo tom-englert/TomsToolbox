@@ -10,7 +10,6 @@
 
     using JetBrains.Annotations;
 
-
     /// <summary>
     /// Extensions for the <see cref="Selector"/>
     /// </summary>

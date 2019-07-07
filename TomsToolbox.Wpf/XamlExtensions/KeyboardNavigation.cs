@@ -5,7 +5,6 @@
 
     using JetBrains.Annotations;
 
-
     /// <summary>
     /// XAML helpers for keyboard navigation.
     /// </summary>

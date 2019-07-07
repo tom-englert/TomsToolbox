@@ -6,7 +6,6 @@
 
     using JetBrains.Annotations;
 
-
     /// <summary>
     /// A headered content control with it's header on the left side.
     /// Host in a panel with the <see cref="Grid.IsSharedSizeScopeProperty"/> set to <c>true</c> to use the same width for all headers.

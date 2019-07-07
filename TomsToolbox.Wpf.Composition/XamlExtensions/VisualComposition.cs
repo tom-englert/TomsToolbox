@@ -10,7 +10,6 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Core;
-    using TomsToolbox.Wpf.Composition;
 
     /// <summary>
     /// XAML helpers to ease visual composition usage.

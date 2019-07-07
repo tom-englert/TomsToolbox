@@ -82,9 +82,9 @@
       <Border Background="Orange" ContextMenu="{composition:CompositeContextMenu RegionId={x:Static local:RegionId.ContextMenu}}">
         <StackPanel Margin="10">
           <TextBlock>
-                        Sample of composite commands with menu, tool bar and context menu.<LineBreak />
-                        <LineBreak />
-                        Right-Click to open the context menu.
+            Sample of composite commands with menu, tool bar and context menu.<LineBreak />
+            <LineBreak />
+            Right-Click to open the context menu.
           </TextBlock>
         </StackPanel>
       </Border>

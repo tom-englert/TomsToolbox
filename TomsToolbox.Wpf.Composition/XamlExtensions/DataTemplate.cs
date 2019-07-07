@@ -5,8 +5,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Wpf.Composition;
-
     /// <summary>
     /// Attached properties to simplify data template handling.
     /// </summary>

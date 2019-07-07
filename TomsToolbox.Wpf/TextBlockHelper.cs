@@ -10,7 +10,6 @@
 
     using JetBrains.Annotations;
 
-
     /// <summary>
     /// Attached property provider which adds the read-only attached property <see cref="IsTextTrimmedProperty"/> to
     /// the framework's <see cref="TextBlock"/> control.

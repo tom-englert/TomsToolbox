@@ -10,7 +10,6 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Wpf.Composition.XamlExtensions;
-    using TomsToolbox.Wpf.XamlExtensions;
 
     /// <inheritdoc />
     /// <summary>

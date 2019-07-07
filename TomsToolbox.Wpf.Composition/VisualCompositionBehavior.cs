@@ -13,7 +13,6 @@
     using TomsToolbox.Core;
     using TomsToolbox.Wpf.Composition.XamlExtensions;
     using TomsToolbox.Wpf.Interactivity;
-    using TomsToolbox.Wpf.XamlExtensions;
 
     /// <summary>
     /// Base class to implement visual composition behaviors.

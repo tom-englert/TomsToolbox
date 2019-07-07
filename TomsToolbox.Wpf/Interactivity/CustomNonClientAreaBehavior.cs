@@ -11,7 +11,6 @@
 
     using JetBrains.Annotations;
 
-
     /// <summary>
     /// Hit test values for the <see cref="NcHitTestEventArgs"/>
     /// </summary>

@@ -11,7 +11,6 @@
 
     using TomsToolbox.Core;
 
-
     /// <summary>
     /// Applies the <see cref="BinaryOperationConverter.Operation"/> on the value and the converter parameter.<para/>
     /// May also be used as <see cref="IMultiValueConverter"/> where both operands are specified using bindings.

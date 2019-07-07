@@ -7,7 +7,6 @@
 
     using JetBrains.Annotations;
 
-
     /// <summary>
     /// Converts WGS-84 coordinates (<see cref="Coordinates"/> ) into normalized logical XY coordinates (<see cref="Point"/>) in the range 0..1 and back.
     /// </summary>

@@ -6,8 +6,8 @@
     using System.Reflection;
 
     using JetBrains.Annotations;
-    using TomsToolbox.Core;
 
+    using TomsToolbox.Core;
 
     /// <summary>
     /// Converts an object to a value derived from an attribute of the object.

@@ -6,7 +6,6 @@
 
     using JetBrains.Annotations;
 
-
     /// <summary>
     /// A trigger that continuously fires while the associated object is loaded.
     /// </summary>

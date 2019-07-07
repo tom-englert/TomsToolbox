@@ -7,7 +7,6 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Wpf.Composition.XamlExtensions;
-    using TomsToolbox.Wpf.XamlExtensions;
 
     /// <summary>
     /// A control used to create dynamic content from an IOC container.

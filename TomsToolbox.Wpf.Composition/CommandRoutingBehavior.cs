@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
-    using System.ComponentModel;
     using System.Diagnostics;
     using System.Linq;
     using System.Windows;

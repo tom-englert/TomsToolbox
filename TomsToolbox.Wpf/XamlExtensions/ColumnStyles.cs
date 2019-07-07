@@ -11,8 +11,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
-
     /// <summary>
     /// A class to manage the column styles of a <see cref="DataGrid"/>
     /// </summary>
