@@ -5,7 +5,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Shader effect that inverts all gray values but leaves colors untouched.

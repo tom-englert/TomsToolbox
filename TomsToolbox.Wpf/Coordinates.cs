@@ -3,7 +3,7 @@
     using System;
     using System.Windows;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// WGS-84 coordinates in degrees.

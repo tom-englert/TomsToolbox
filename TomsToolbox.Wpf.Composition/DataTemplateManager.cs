@@ -9,7 +9,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Access methods for composite data template exports.

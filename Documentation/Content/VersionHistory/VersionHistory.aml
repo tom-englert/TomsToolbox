@@ -118,7 +118,7 @@
               <listItem><para>Add style for Window class</para></listItem>
               <listItem><para>Add ToDictionary from IEnumerable{KeyValuePair} extension method</para></listItem>
               <listItem><para>Improve DispatcherThrottle implementation</para></listItem>
-              <listItem><para>Support NetStandard (TomsToolbox.Core)</para></listItem>
+              <listItem><para>Support NetStandard (TomsToolbox.Essentials)</para></listItem>
             </list>
           </listItem>
           <listItem>

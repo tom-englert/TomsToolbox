@@ -83,7 +83,6 @@
     </Compile>
     <Resource Include="**/*.png" />
     <Resource Include="**/*.ico" />
-    <EmbeddedResource Update="Properties\Resources.de.resx" />
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator></Generator>
     </EmbeddedResource>

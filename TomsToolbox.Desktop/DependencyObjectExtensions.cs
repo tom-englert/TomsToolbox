@@ -6,7 +6,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Extension methods for the <see cref="DependencyObject"/>.

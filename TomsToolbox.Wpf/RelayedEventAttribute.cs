@@ -7,7 +7,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Attribute to mark one property to relay the property changed events of another property from the governing class.

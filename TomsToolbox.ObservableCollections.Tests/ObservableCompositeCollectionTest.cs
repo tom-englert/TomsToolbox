@@ -11,7 +11,7 @@ namespace TomsToolbox.ObservableCollections.Tests
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Summary description for ObservableCompositeCollectionTest

@@ -12,7 +12,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Extensions for multi selectors like ListBox or DataGrid:

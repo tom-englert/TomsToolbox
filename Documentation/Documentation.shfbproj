@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
   <PropertyGroup>
     <PublishableProject>false</PublishableProject>
     <!-- The configuration and platform will be used to determine which assemblies to include from solution and
@@ -28,11 +28,15 @@
       <Argument Key="maxVersionParts" Value="" xmlns="" />
     </TransformComponentArguments>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\TomsToolbox.Core\TomsToolbox.Core.csproj" />
+      <DocumentationSource sourceFile="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj" />
       <DocumentationSource sourceFile="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj" />
       <DocumentationSource sourceFile="..\TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj" />
       <DocumentationSource sourceFile="..\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj" />
       <DocumentationSource sourceFile="..\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj" />
+      <DocumentationSource sourceFile="..\TomsToolbox.Wpf.Composition\TomsToolbox.Wpf.Composition.csproj" />
+      <DocumentationSource sourceFile="..\TomsToolbox.Wpf.Compostition.Styles\TomsToolbox.Wpf.Composition.Styles.csproj" />
+      <DocumentationSource sourceFile="..\TomsToolbox.Wpf.Composition.Mef\TomsToolbox.Wpf.Composition.Mef.csproj" />
+      <DocumentationSource sourceFile="..\TomsToolbox.Wpf.Composition.Mef2\TomsToolbox.Wpf.Composition.Mef2.csproj" />
     </DocumentationSources>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
@@ -54,21 +58,22 @@
     <ProjectSummary>A set of simple but useful classes and functions to ease our daily .Net development tasks.</ProjectSummary>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
-<NamespaceSummaryItem name="TomsToolbox.Core" isDocumented="True">Core clases and functions that only depend on System functions. Available as .Net4.0 client and also as portable class library for Silverlight, WindowsPhone, etc.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Desktop" isDocumented="True">Classes and functions that use functionality avaiable in desktop environments using .Net 4.0 client profile. This assembly has e.g. a reference to WindwosBase.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.ObservableCollections" isDocumented="True">Classes and functions around observable collections.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf" isDocumented="True">Classes and functions for WPF applications.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Themes" isDocumented="True">Theme resources</NamespaceSummaryItem>
-<NamespaceSummaryItem name="XamlGeneratedNamespace" isDocumented="False" />
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Controls" isDocumented="True">Controls</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Converters" isDocumented="True">Converters</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Interactivity" isDocumented="True">System.Windows.Interactivity extensions</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Composition" isDocumented="True">Visual composition framework base on MEF (System.ComponentModel.Composition)</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Desktop.Composition" isDocumented="True">Core extensions for the MEF (System.ComponentModel.Composition) framework</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.XamlExtensions" isDocumented="True">Special namespace that contains classes that are usually used only in XAML and not by code. 
+      <NamespaceSummaryItem name="TomsToolbox.Essentials" isDocumented="True">Core clases and functions that only depend on System functions. Available as .Net4.0 client and also as portable class library for Silverlight, WindowsPhone, etc.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Desktop" isDocumented="True">Classes and functions that use functionality avaiable in desktop environments using .Net 4.0 client profile. This assembly has e.g. a reference to WindwosBase.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.ObservableCollections" isDocumented="True">Classes and functions around observable collections.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf" isDocumented="True">Classes and functions for WPF applications.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Themes" isDocumented="True">Theme resources</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="XamlGeneratedNamespace" isDocumented="False" />
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Controls" isDocumented="True">Controls</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Converters" isDocumented="True">Converters</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Interactivity" isDocumented="True">System.Windows.Interactivity extensions</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Composition" isDocumented="True">Visual composition framework base on MEF (System.ComponentModel.Composition)</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Desktop.Composition" isDocumented="True">Core extensions for the MEF (System.ComponentModel.Composition) framework</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.XamlExtensions" isDocumented="True">Special namespace that contains classes that are usually used only in XAML and not by code. 
 In code the class names would be ambiguous, while in XAML a namespace prefixes is needed anyhow, so the useage is clear.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Styles" isDocumented="True">Custom window and control styles</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Styles.Effects" isDocumented="True">Effects that can be used in styles</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Styles" isDocumented="True">Custom window and control styles</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Styles.Effects" isDocumented="True">Effects that can be used in styles</NamespaceSummaryItem>
+    </NamespaceSummaries>
     <FeedbackEMailLinkText>https://github.com/tom-englert/TomsToolbox/issues</FeedbackEMailLinkText>
     <CopyrightText>&amp;#169%3b tom-englert.de 2012-2018</CopyrightText>
     <CopyrightHref>https://github.com/tom-englert/TomsToolbox/blob/master/LICENSE</CopyrightHref>
@@ -123,8 +128,8 @@ In code the class names would be ambiguous, while in XAML a namespace prefixes i
     <Content Include="icons\Help.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TomsToolbox.Core\TomsToolbox.Core.csproj">
-      <Name>TomsToolbox.Core</Name>
+    <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj">
+      <Name>TomsToolbox.Essentials</Name>
       <Project>{ae305312-7637-43bf-9156-7ec513c55135}</Project>
       <Private>True</Private>
     </ProjectReference>

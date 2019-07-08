@@ -12,7 +12,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Factory methods for the <see cref="ObservableCompositeCollection{T}"/>

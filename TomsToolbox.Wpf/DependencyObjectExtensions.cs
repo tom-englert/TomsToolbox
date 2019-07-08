@@ -10,7 +10,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Extensions methods to ease dealing with dependency objects.

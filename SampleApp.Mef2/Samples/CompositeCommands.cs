@@ -4,7 +4,7 @@
 
     using SampleApp.Mef2.Properties;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
     using TomsToolbox.Wpf.Composition;
     using TomsToolbox.Wpf.Composition.Mef2;
 

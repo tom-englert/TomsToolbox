@@ -12,7 +12,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Base class implementing <see cref="INotifyPropertyChanged"/>.<para/>

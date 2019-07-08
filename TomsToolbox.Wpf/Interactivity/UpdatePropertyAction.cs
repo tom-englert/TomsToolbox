@@ -6,7 +6,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Updates the associated objects binding of the specified property; e.g. display computed properties like current time without the need to

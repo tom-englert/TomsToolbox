@@ -10,7 +10,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
     using TomsToolbox.Wpf.Composition.XamlExtensions;
     using TomsToolbox.Wpf.Interactivity;
 

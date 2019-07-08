@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Core
+﻿namespace TomsToolbox.Essentials
 {
     using System;
     using System.Reflection;

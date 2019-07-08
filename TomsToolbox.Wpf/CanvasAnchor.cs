@@ -5,7 +5,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Anchors for a canvas to specify two coordinates in one single operation specifying a <see cref="Point"/>.

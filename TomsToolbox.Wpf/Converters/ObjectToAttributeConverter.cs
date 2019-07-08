@@ -7,7 +7,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Converts an object to a value derived from an attribute of the object.

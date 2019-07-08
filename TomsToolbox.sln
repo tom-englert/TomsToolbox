@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Documentation\Content\VersionHistory\VersionHistory.aml = Documentation\Content\VersionHistory\VersionHistory.aml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Core", "TomsToolbox.Core\TomsToolbox.Core.csproj", "{AE305312-7637-43BF-9156-7EC513C55135}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Essentials", "TomsToolbox.Essentials\TomsToolbox.Essentials.csproj", "{AE305312-7637-43BF-9156-7EC513C55135}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Desktop", "TomsToolbox.Desktop\TomsToolbox.Desktop.csproj", "{3647CD2D-2A4E-4859-9BBD-606A73C14801}"
 EndProject
@@ -26,7 +26,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.ObservableColle
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Desktop.Tests", "TomsToolbox.Desktop.Tests\TomsToolbox.Desktop.Tests.csproj", "{53966F8B-9898-47D4-AD7A-2FBF84BA431C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Core.Tests", "TomsToolbox.Core.Tests\TomsToolbox.Core.Tests.csproj", "{E8095803-2DE6-4023-8981-66DCEE62F18D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Essentials.Tests", "TomsToolbox.Essentials.Tests\TomsToolbox.Essentials.Tests.csproj", "{E8095803-2DE6-4023-8981-66DCEE62F18D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.ObservableCollections.Tests", "TomsToolbox.ObservableCollections.Tests\TomsToolbox.ObservableCollections.Tests.csproj", "{D061A57E-38E3-4F2A-B392-FB344C71F7F6}"
 EndProject

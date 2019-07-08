@@ -10,7 +10,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Interface of the public properties implemented by <see cref="CommandSourceFactory{T}"/>.

@@ -8,7 +8,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Multiplies all corresponding members of two <see cref="Thickness"/>. structures. 

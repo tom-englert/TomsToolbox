@@ -9,7 +9,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// A dedicated thread hosting an active dispatcher.

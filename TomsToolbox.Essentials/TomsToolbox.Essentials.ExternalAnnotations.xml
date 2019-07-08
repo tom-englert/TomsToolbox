@@ -1,0 +1,696 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assembly name="TomsToolbox.Essentials">
+  <member name="M:TomsToolbox.Essentials.AssemblyExtensions.GeneratePackUri(System.Reflection.Assembly)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="assembly">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.AssemblyExtensions.GeneratePackUri(System.Reflection.Assembly,System.String)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="assembly">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="relativeUri">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.AssemblyExtensions.GeneratePackUri(System.Reflection.Assembly,System.Uri)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="assembly">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="relativeUri">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.AutoWeakIndexer`2.#ctor(System.Func{`0,`1},System.Collections.Generic.IEqualityComparer{`0})">
+    <parameter name="generator">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="comparer">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Essentials.AutoWeakIndexer`2.Comparer">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Essentials.AutoWeakIndexer`2.ContainsKey(`0)">
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.AutoWeakIndexer`2.get_Item(`0)">
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Essentials.AutoWeakIndexer`2.Item(`0)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Essentials.AutoWeakIndexer`2.Keys">
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Essentials.AutoWeakIndexer`2.TryGetValue(`0,`1@)">
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="value">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Essentials.AutoWeakIndexer`2.Values">
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Essentials.BinaryOperationProcessor.Execute(System.Object,System.Object)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="value1">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="value2">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.AddRange(System.Collections.IList,System.Collections.IEnumerable)">
+    <parameter name="target">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="items">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.AddRange``1(System.Collections.Generic.ICollection{``0},``0,``0,``0[])">
+    <parameter name="target">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="firstItem">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="secondItem">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="moreItems">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.AddRange``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
+    <parameter name="target">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="items">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.ContainsAny(System.String,System.Char[])">
+    <parameter name="self">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="characters">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.ContainsAny``1(System.Collections.Generic.IEnumerable{``0},``0[])">
+    <parameter name="self">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="items">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.ContainsAny``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0},``0[])">
+    <parameter name="self">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="comparer">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="items">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.FindIndex``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})">
+    <parameter name="source">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="match">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.ForceValue``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="dictionary">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="defaultValue">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.ForceValue``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``0,``1})">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="dictionary">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="generator">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0,System.Int32})">
+    <parameter name="collection">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="action">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+    <parameter name="collection">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="action">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.GetValueOrDefault``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="dictionary">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.GetValueOrDefault``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="dictionary">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="defaultValue">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},``0)">
+    <parameter name="collection">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},``0,System.Collections.Generic.IEqualityComparer{``0})">
+    <parameter name="collection">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="comparer">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.RemoveRange(System.Collections.IList,System.Collections.IEnumerable)">
+    <parameter name="target">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="items">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.RemoveRange``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
+    <parameter name="target">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="items">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.RemoveWhere``1(System.Collections.Generic.ICollection{``0},System.Func{``0,System.Boolean})">
+    <parameter name="target">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="condition">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.Repeat``1(System.Collections.Generic.ICollection{``0},System.Int32)">
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="source">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.SynchronizeWith``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.ICollection{``0})">
+    <parameter name="target">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="source">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.SynchronizeWith``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEqualityComparer{``0})">
+    <parameter name="target">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="source">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="comparer">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.Take``1(System.Collections.Generic.IEnumerator{``0},System.Int32)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    <parameter name="source">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.ToArray``2(System.Collections.Generic.ICollection{``0},System.Func{``0,``1})">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    <parameter name="items">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="selector">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.ToDictionary``2(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}})">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="items">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.ToDictionary``2(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}},System.Collections.Generic.IEqualityComparer{``0})">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="items">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="comparer">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.Transpose``2(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}})">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="items">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CollectionExtensions.TryAddRange``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
+    <parameter name="target">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="items">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CultureInfoExtensions.GetAncestors(System.Globalization.CultureInfo)">
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="self">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CultureInfoExtensions.GetAncestorsAndSelf(System.Globalization.CultureInfo)">
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="self">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CultureInfoExtensions.GetChildren(System.Globalization.CultureInfo)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CultureInfoExtensions.GetDescendants(System.Globalization.CultureInfo)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CustomAttributeProviderExtensions.GetCustomAttributes``1(System.Reflection.ICustomAttributeProvider,System.Boolean)">
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="self">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CustomAttributeProviderExtensions.GetCustomTypeConverter(System.Reflection.ICustomAttributeProvider)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CustomAttributeProviderExtensions.TryGetDescription(System.Reflection.ICustomAttributeProvider)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CustomAttributeProviderExtensions.TryGetDisplayName(System.Reflection.ICustomAttributeProvider)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.CustomAttributeProviderExtensions.TryGetText(System.Reflection.ICustomAttributeProvider,System.Object)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DateTimeOperations.GetDaysOfWeek(System.Globalization.CultureInfo)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="cultureInfo">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DateTimeOperations.RoundToDays(System.DateTime,System.Func{System.Double,System.Double})">
+    <parameter name="roundingOperation">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DateTimeOperations.RoundToHours(System.DateTime,System.Func{System.Double,System.Double})">
+    <parameter name="roundingOperation">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DateTimeOperations.RoundToHours(System.TimeSpan,System.Func{System.Double,System.Double})">
+    <parameter name="roundingOperation">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DateTimeOperations.RoundToMinutes(System.DateTime,System.Func{System.Double,System.Double})">
+    <parameter name="roundingOperation">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DateTimeOperations.RoundToMinutes(System.TimeSpan,System.Func{System.Double,System.Double})">
+    <parameter name="roundingOperation">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DateTimeOperations.RoundToSeconds(System.DateTime,System.Func{System.Double,System.Double})">
+    <parameter name="roundingOperation">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DateTimeOperations.RoundToSeconds(System.TimeSpan,System.Func{System.Double,System.Double})">
+    <parameter name="roundingOperation">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DefaultValue.CreateDefault(System.Type)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="type">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DefaultValue.CreateEmpty(System.Type)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="type">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DelegateComparer`1.#ctor(System.Func{`0,`0,System.Int32})">
+    <parameter name="comparer">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DelegateComparer`1.Compare(`0,`0)">
+    <parameter name="x">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="y">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DelegateEqualityComparer`1.#ctor(System.Func{`0,`0,System.Boolean},System.Func{`0,System.Int32})">
+    <parameter name="comparer">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="hashCodeGenerator">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DelegateEqualityComparer`1.#ctor(System.Func{`0,System.Object})">
+    <parameter name="selector">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DelegateEqualityComparer`1.#ctor(System.Func{`0,System.Object},System.Func{System.Object,System.Object,System.Boolean},System.Func{System.Object,System.Int32})">
+    <parameter name="selector">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="comparer">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="hashCodeGenerator">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DelegateEqualityComparer`1.Equals(`0,`0)">
+    <parameter name="x">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="y">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.DelegateEqualityComparer`1.GetHashCode(`0)">
+    <parameter name="obj">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.Disposable.Dispose(System.Object)">
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.Disposable.DisposeAll(System.Collections.IEnumerable)">
+    <parameter name="items">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.Disposable.ReportNotDisposedObject(System.IDisposable)">
+    <parameter name="obj">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.Enumerate.AsTuples(System.Collections.IEnumerable,System.Collections.IEnumerable)">
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="first">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="second">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.Enumerate.AsTuples``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1})">
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="first">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="second">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.EnumExtensions.CombineFlags``1(System.Collections.Generic.IEnumerable{``0})">
+    <parameter name="flags">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.EnumExtensions.GetFlags``1(``0)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Essentials.ExceptionExtensions.ExceptionChain(System.Exception)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <parameter name="ex">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.ObjectExtensions.SafeCast``1(System.Object)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="value">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.PluginModuleAttribute.#ctor(System.String[])">
+    <parameter name="categories">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Essentials.PluginModuleAttribute.Categories">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Essentials.PropertySupport.ExtractPropertyName``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="propertyExpression">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.PropertySupport.ExtractPropertyName``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="propertyExpression">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.PropertySupport.GetEventArgs``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="propertyExpression">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.PropertySupport.TryExtractPropertyName``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="propertyExpression">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.PropertySupport.TryExtractPropertyName``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="propertyExpression">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.RegexExtensions.Split``1(System.Text.RegularExpressions.Regex,System.String,System.Func{System.String,System.Boolean,``0})">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    <parameter name="regex">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="input">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="itemGenerator">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.TextAttribute.#ctor(System.Object)">
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.TextAttribute.#ctor(System.Object,System.String)">
+    <parameter name="key">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="text">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Essentials.TextAttribute.Key">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Essentials.TextAttribute.Text">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Essentials.TextAttribute.TextValue">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Essentials.TextEventArgs.#ctor(System.String)">
+    <parameter name="text">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Essentials.TextEventArgs.Text">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Essentials.ThreadBoundTaskScheduler.GetScheduledTasks">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Essentials.ThreadBoundTaskScheduler.TaskFactory">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Essentials.TypeExtensions.GetSelfAndBaseTypes(System.Type)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <parameter name="type">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.WeakReferenceExtensions.GetTargetOrDefault``1(System.WeakReference{``0})">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="weakReference">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.XmlExtensions.GetAttribute(System.Xml.Linq.XElement,System.String,System.String)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="element">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="name">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="defaultValue">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.XmlExtensions.GetAttribute(System.Xml.Linq.XElement,System.Xml.Linq.XName,System.String)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="element">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="name">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="defaultValue">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+</assembly>

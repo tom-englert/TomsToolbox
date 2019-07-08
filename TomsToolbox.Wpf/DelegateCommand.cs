@@ -5,7 +5,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// A simple, straight forward delegate command implementation. For usage see MVVM concepts.

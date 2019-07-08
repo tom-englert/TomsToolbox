@@ -5,7 +5,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Core;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Represents a wrapper class for a buffer allocated with <see cref="Marshal.AllocHGlobal(int)"/>

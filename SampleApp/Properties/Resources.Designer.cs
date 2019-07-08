@@ -319,7 +319,7 @@ namespace SampleApp.Properties {
     [global::System.CodeDom.Compiler.GeneratedCode("ResXResourceManager", "1.0.0.0")]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
-    public sealed class LocalizedTextAttribute : global::TomsToolbox.Core.TextAttribute
+    public sealed class LocalizedTextAttribute : global::TomsToolbox.Essentials.TextAttribute
     {
         private readonly StringResourceKey _resourceKey;
 
