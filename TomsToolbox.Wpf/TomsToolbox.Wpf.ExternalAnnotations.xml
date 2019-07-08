@@ -136,7 +136,7 @@
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
   <member name="P:TomsToolbox.Wpf.Controls.IImage.Source">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.Controls.IImageProvider.GetImage(TomsToolbox.Wpf.Controls.IMapTile)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />

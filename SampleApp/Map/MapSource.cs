@@ -129,9 +129,10 @@
         {
             [NotNull]
             private readonly object _sync = new object();
-
-            [NotNull] private readonly MapSource _owner;
-            [NotNull] private readonly IMapTile _mapTile;
+            [NotNull] 
+            private readonly MapSource _owner;
+            [NotNull] 
+            private readonly IMapTile _mapTile;
 
             private BitmapImage _source;
 

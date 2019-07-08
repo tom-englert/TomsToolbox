@@ -9,7 +9,6 @@
 
 namespace SampleApp.Mef2.Properties {
     using System;
-
     using JetBrains.Annotations;
 
     /// <summary>
