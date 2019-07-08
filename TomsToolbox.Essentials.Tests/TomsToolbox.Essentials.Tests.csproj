@@ -6,14 +6,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.1" />
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TomsToolbox.Core\TomsToolbox.Core.csproj">
+    <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj">
       <Project>{AE305312-7637-43BF-9156-7EC513C55135}</Project>
-      <Name>TomsToolbox.Core</Name>
+      <Name>TomsToolbox.Essentials</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

@@ -1,11 +1,13 @@
 ﻿namespace TomsToolbox.Wpf.Tests
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Serialization;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
+    [SuppressMessage("ReSharper", "UnusedMember.Local")]
     public class DispatcherExtensionsTests
     {
         [TestMethod]
@@ -13,7 +15,7 @@
         {
             try
             {
-                using (var thread1 = new ForegroundThreadWithDispatcher("Test1", System.Threading.ApartmentState.MTA))
+                using (var thread1 = new ForegroundThreadWithDispatcher("Test1"))
                 {
                     thread1.Dispatcher.Invoke(() => throw new TestException());
                 }
@@ -31,7 +33,7 @@
         {
             try
             {
-                using (var thread1 = new ForegroundThreadWithDispatcher("Test1", System.Threading.ApartmentState.MTA))
+                using (var thread1 = new ForegroundThreadWithDispatcher("Test1"))
                 {
                     var t = thread1;
                     thread1.Dispatcher.Invoke(() => t.Invoke(() => throw new TestException()));

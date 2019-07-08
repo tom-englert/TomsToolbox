@@ -127,9 +127,8 @@
             if (exportProvider == null)
                 return;
 
-            // ReSharper disable once AssignNullToNotNullAttribute
             var value = exportProvider.GetExports(memberType, ContractName)
-                .Select(item => item?.Value)
+                .Select(item => item.Value)
                 .FirstOrDefault();
 
             frameworkElement.SetValue(dependencyProperty, value);

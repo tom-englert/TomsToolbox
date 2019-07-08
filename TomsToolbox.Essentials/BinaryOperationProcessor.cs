@@ -145,8 +145,8 @@
             var methods = valueType.GetMethods(BindingFlags.Static | BindingFlags.Public);
 
             return methods
-                .Where(m => _operationMethodNames.Contains(m?.Name))
-                .Select(m => new { Method = m, Parameters = m?.GetParameters() })
+                .Where(m => _operationMethodNames.Contains(m.Name))
+                .Select(m => new { Method = m, Parameters = m.GetParameters() })
                 .Where(m => m.Parameters?.Length == 2)
                 // ReSharper disable once PossibleNullReferenceException
                 .Where(m => m.Parameters[0].ParameterType == valueType)

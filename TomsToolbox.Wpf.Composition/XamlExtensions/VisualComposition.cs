@@ -93,10 +93,10 @@
             switch (d)
             {
                 case ItemsControl i:
-                    SetRegionIdInternal<ItemsControlCompositionBehavior>(d, id);
+                    SetRegionIdInternal<ItemsControlCompositionBehavior>(i, id);
                     break;
                 case ContentControl c:
-                    SetRegionIdInternal<ContentControlCompositionBehavior>(d, id);
+                    SetRegionIdInternal<ContentControlCompositionBehavior>(c, id);
                     break;
                 default: 
                     throw new InvalidOperationException("unsupported type: " + d?.GetType());

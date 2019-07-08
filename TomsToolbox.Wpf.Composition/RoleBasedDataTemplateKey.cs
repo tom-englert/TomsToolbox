@@ -5,6 +5,8 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Essentials;
+
     /// <summary>
     /// A resource key for data templates, like the <see cref="DataTemplateKey"/>, but adding a <see cref="Role"/> property to distinguish
     /// several data templates for different roles.
@@ -60,7 +62,7 @@
         /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
         /// <param name="other">An object to compare with this object.</param>
-        public bool Equals(RoleBasedDataTemplateKey other)
+        public bool Equals([CanBeNull] RoleBasedDataTemplateKey other)
         {
             return (other != null) && base.Equals(other) && Equals(_role, other._role);
         }
@@ -72,7 +74,7 @@
         /// <returns>
         ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals(object o)
+        public override bool Equals([CanBeNull] object o)
         {
             return Equals(o as RoleBasedDataTemplateKey);
         }
@@ -86,7 +88,7 @@
         public override int GetHashCode()
         {
             // ReSharper disable once NonReadonlyMemberInGetHashCode : Must be settable by property to use it in XAML; during lifetime it's immutable.
-            return base.GetHashCode() + (_role ?? 0).GetHashCode();
+            return HashCode.Aggregate(base.GetHashCode(), (_role ?? 0).GetHashCode());
         }
     }
 }

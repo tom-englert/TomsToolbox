@@ -61,10 +61,12 @@
             }
         }
 
+        [CanBeNull]
         public object Role { get; }
 
         public double Sequence { get; }
 
+        [CanBeNull]
         public string[] TargetRegions { get; }
     }
 }

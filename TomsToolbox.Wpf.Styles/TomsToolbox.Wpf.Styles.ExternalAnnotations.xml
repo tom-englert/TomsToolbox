@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assembly name="TomsToolbox.Wpf.Styles">
+  <member name="M:TomsToolbox.Wpf.Styles.IThemeResourceProvider.LoadThemeResources(System.Windows.ResourceDictionary)">
+    <parameter name="resource">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.AccentDarkBrush">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.BorderBrush">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ButtonStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.CheckBoxStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ComboBoxStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ContextMenuStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.DataGridCellStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.DataGridCheckBoxEditingElementStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.DataGridCheckBoxElementStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.DataGridColumnHeaderStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.DataGridComboBoxEditingElementStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.DataGridComboBoxElementStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.DataGridRowHeaderStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.DataGridRowStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.DataGridStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.DisabledBrush">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.GridSplitterStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.GroupBoxStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.IconControlStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ListBoxItemStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ListBoxStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.MenuItemSeparatorStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.MenuItemStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.MenuStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.RadioButtonStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.TabControlStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.TabItemStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.TextBoxStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ToggleButtonStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ToolTipStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.WindowStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Styles.WpfStyles.ApplicationTitle">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Wpf.Styles.WpfStyles.Defaults">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Wpf.Styles.WpfStyles.Defaults(System.Windows.Window)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    <parameter name="helperWindow">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.Styles.WpfStyles.GetDefaultStyles">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Styles.WpfStyles.LargeApplicationIcon">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Styles.WpfStyles.MediumApplicationIcon">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Wpf.Styles.WpfStyles.RegisterDefaultWindowStyle(System.Windows.ResourceDictionary)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    <parameter name="resourceDictionary">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Wpf.Styles.WpfStyles.SmallApplicationIcon">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+</assembly>

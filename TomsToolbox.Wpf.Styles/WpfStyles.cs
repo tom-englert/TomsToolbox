@@ -98,7 +98,6 @@
 
             var baseStyleKeys = resourceKeysType
                 .GetFields()
-                .Where(field => field != null)
                 .Where(field => field.GetCustomAttributes<DefaultStyleAttribute>(false).Any());
 
             var styleFragments = baseStyleKeys.Select(GenerateDefaultStyleFragment).ToList();
@@ -108,7 +107,7 @@
             var xaml = string.Format(CultureInfo.InvariantCulture, "<ResourceDictionary>\n{0}\n</ResourceDictionary>", string.Join("\n", styleFragments));
 
             var xamlTypeMapper = new XamlTypeMapper(new string[0]);
-            xamlTypeMapper.AddMappingProcessingInstruction("styles", resourceKeysType.Namespace, resourceKeysType.Assembly.FullName);
+            xamlTypeMapper.AddMappingProcessingInstruction("styles", resourceKeysType.Namespace ?? string.Empty, resourceKeysType.Assembly.FullName);
 
             var context = new ParserContext { XamlTypeMapper = xamlTypeMapper };
 

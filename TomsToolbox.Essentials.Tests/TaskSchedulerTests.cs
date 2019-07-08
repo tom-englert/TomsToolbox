@@ -1,12 +1,10 @@
-﻿namespace TomsToolbox.Desktop.Tests
+﻿namespace TomsToolbox.Essentials.Tests
 {
     using System.Collections.Concurrent;
     using System.Linq;
     using System.Threading;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using TomsToolbox.Essentials;
 
     [TestClass]
     public class TaskSchedulerTests

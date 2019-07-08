@@ -101,6 +101,7 @@
         /// <returns>
         /// The object value to set on the property where the extension is applied.
         /// </returns>
+        [CanBeNull]
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             var rootObjectProvider = (IRootObjectProvider)serviceProvider.GetService(typeof(IRootObjectProvider));
@@ -162,9 +163,8 @@
         {
             get
             {
-                // ReSharper disable once AssignNullToNotNullAttribute
                 var value = _exportProvider?.GetExports(MemberType, ContractName)
-                    .Select(item => item?.Value)
+                    .Select(item => item.Value)
                     .FirstOrDefault();
 
                 if (value == null)

@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Essentials
+﻿namespace TomsToolbox.Desktop
 {
     using System;
     using System.Reflection;

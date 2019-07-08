@@ -1,9 +1,12 @@
-﻿namespace TomsToolbox.Essentials.Tests
+﻿// ReSharper disable UnusedVariable
+namespace TomsToolbox.Essentials.Tests
 {
     using System;
     using System.ComponentModel;
     using System.Globalization;
     using System.Windows;
+
+    using JetBrains.Annotations;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -282,14 +285,16 @@
 
         class TestClassTypeConverter : TypeConverter
         {
-            public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+            [CanBeNull]
+            public override object ConvertFrom([CanBeNull] ITypeDescriptorContext context, CultureInfo culture, [CanBeNull] object value)
             {
                 return new TestClass(Convert.ToInt32(value, culture));
             }
 
-            public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+            [CanBeNull]
+            public override object ConvertTo([CanBeNull] ITypeDescriptorContext context, [CanBeNull] CultureInfo culture, [CanBeNull] object value, Type destinationType)
             {
-                return value.ToString();
+                return value?.ToString();
             }
         }
 
@@ -340,7 +345,7 @@
             /// </summary>
             /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
             /// <returns><c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.</returns>
-            public override bool Equals(object obj)
+            public override bool Equals([CanBeNull] object obj)
             {
                 if (!(obj is TestClass))
                     return false;

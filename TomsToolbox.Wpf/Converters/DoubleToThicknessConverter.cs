@@ -30,7 +30,7 @@
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         [NotNull]
-        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             var thickness = ConvertNumberToThickness(value);
 

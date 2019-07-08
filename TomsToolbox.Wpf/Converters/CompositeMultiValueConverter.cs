@@ -74,7 +74,8 @@
         /// An array of values that have been converted from the target value back to the source values.
         /// </returns>
         /// <exception cref="System.InvalidOperationException"></exception>
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        [CanBeNull]
+        public object[] ConvertBack([CanBeNull] object value, [CanBeNull] Type[] targetTypes, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             throw new InvalidOperationException();
         }

@@ -78,7 +78,8 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        [CanBeNull]
+        protected override object Convert([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             return Convert((string)value);
         }

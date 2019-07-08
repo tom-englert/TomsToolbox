@@ -124,7 +124,10 @@
         [NotNull]
         public static DirectoryInfo GetAssemblyDirectory([NotNull] this Assembly assembly)
         {
-            var assemblyLocation = Path.GetDirectoryName(assembly.Location);
+            var codeBase = assembly.CodeBase;
+
+            var assemblyLocation = Path.GetDirectoryName(new Uri(codeBase).LocalPath) 
+                                   ?? throw new InvalidOperationException("Can't evaluate assembly code base: " + codeBase);
 
             return new DirectoryInfo(assemblyLocation);
         }

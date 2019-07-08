@@ -26,13 +26,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TomsToolbox.Core\TomsToolbox.Core.csproj" />
+    <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj" />
     <ProjectReference Include="..\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Fody" Version="5.0.6" PrivateAssets="All" />
-    <PackageReference Include="JetBrains.Annotations" Version="2019.1.1" PrivateAssets="All" />
+    <PackageReference Include="Fody" Version="5.1.1" PrivateAssets="All" />
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="All" />
     <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.13.0" PrivateAssets="All" />
     <PackageReference Include="Expression.Blend.Sdk" Version="1.0.2" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19270-01" PrivateAssets="All" />

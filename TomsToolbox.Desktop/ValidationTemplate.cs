@@ -11,7 +11,6 @@
 
     using TomsToolbox.Essentials;
 
-    /// <inheritdoc />
     /// <summary>
     /// A validation template for using Validar.Fody (<see href="https://github.com/Fody/Validar" />) with data annotations (<see cref="N:System.ComponentModel.DataAnnotations" />).<para />
     /// </summary>
@@ -105,7 +104,7 @@
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        IEnumerable INotifyDataErrorInfo.GetErrors(string propertyName)
+        IEnumerable INotifyDataErrorInfo.GetErrors([CanBeNull] string propertyName)
         {
             return _validationResults
                 .Where(x => x.MemberNames.Contains(propertyName))

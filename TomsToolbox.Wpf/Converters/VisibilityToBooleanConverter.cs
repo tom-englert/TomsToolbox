@@ -34,7 +34,7 @@
         /// A converted value.
         /// </returns>
         [NotNull]
-        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             return Visibility.Visible.Equals(value);
         }
@@ -50,7 +50,7 @@
         /// A converted value.
         /// </returns>
         [NotNull]
-        protected override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override object ConvertBack([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             return true.Equals(value) ? Visibility.Visible : VisibilityWhenBooleanIsFalse;
         }

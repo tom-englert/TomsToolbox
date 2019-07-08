@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
     using System.Windows;
@@ -209,6 +210,7 @@
         {
             var window = _window;
 
+            Debug.Assert(window != null, nameof(window) + " != null");
             var messageSource = (HwndSource)PresentationSource.FromDependencyObject(window);
 
             if (messageSource == null)
@@ -234,6 +236,7 @@
         {
             var window = _window;
 
+            Debug.Assert(window != null, nameof(window) + " != null");
             var messageSource = (HwndSource)PresentationSource.FromDependencyObject(window);
             if (messageSource == null)
                 throw new InvalidOperationException("Window needs to be initialized");
@@ -241,8 +244,11 @@
             ShowGlassFrame(messageSource.CompositionTarget, handle);
         }
 
-        private void ShowGlassFrame([NotNull] HwndTarget compositionTarget, IntPtr handle)
+        private void ShowGlassFrame([CanBeNull] HwndTarget compositionTarget, IntPtr handle)
         {
+            if (compositionTarget == null)
+                return;
+            
             if (HasGlassFrame)
             {
                 try
@@ -345,6 +351,7 @@
         private HitTest NcHitTest(IntPtr windowHandle, IntPtr lParam)
         {
             var window = _window;
+            Debug.Assert(window != null, nameof(window) + " != null");
 
             // Arguments are absolute native coordinates
             var hitPoint = new POINT((short)lParam, (short)((uint)lParam >> 16));
@@ -452,7 +459,7 @@
         private const uint MF_DISABLED = 2;
 
         private const int SM_CXEDGE = 45;
-        private const int SM_CYEDGE = 46;
+        // private const int SM_CYEDGE = 46;
 
         private const int WS_EX_CLIENTEDGE = 0x00000200;
 

@@ -28,7 +28,7 @@ namespace TomsToolbox.ObservableCollections.Tests
                 get => _inner;
                 set
                 {
-                    if (_inner == value)
+                    if (Equals(_inner, value))
                         return;
 
                     _inner = value;

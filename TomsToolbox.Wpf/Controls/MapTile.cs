@@ -22,12 +22,10 @@
         /// </summary>
         public const double TileSize = 256;
         private static readonly Rect TileRect = new Rect(0, 0, TileSize, TileSize);
-        private Size _subLevelTreshold = (Size)(1.5 * TileSize * new Vector(1, 1));
+        private Size _subLevelThreshold = (Size)(1.5 * TileSize * new Vector(1, 1));
 
-        [CanBeNull] private readonly IMapTile _parent;
-        private readonly int _x;
-        private readonly int _y;
-        private readonly int _zoomLevel;
+        [CanBeNull] 
+        private readonly IMapTile _parent;
 
         private readonly Panel _world = new Grid { Width = TileSize, Height = TileSize };
         private readonly Panel _subLevel = new UniformGrid { Rows = 2, Columns = 2 };
@@ -52,9 +50,9 @@
 
             if (parent != null)
             {
-                _x = 2 * parent.X + x;
-                _y = 2 * parent.Y + y;
-                _zoomLevel = parent.ZoomLevel + 1;
+                X = 2 * parent.X + x;
+                Y = 2 * parent.Y + y;
+                ZoomLevel = parent.ZoomLevel + 1;
             }
 
             Initialize();
@@ -62,7 +60,7 @@
             Loaded += (_, __) =>
             {
                 var designUnitSize = this.GetDesignUnitSize();
-                _subLevelTreshold = (Size)(1.5 * TileSize * (Vector)designUnitSize);
+                _subLevelThreshold = (Size)(1.5 * TileSize * (Vector)designUnitSize);
                 Invalidate();
             };
         }
@@ -70,21 +68,22 @@
         /// <summary>
         /// Gets the horizontal index of this tile.
         /// </summary>
-        public int X => _x;
+        public int X { get; }
 
         /// <summary>
         /// Gets the vertical index of this tile.
         /// </summary>
-        public int Y => _y;
+        public int Y { get; }
 
         /// <summary>
         /// Gets the zoom level of this tile.
         /// </summary>
-        public int ZoomLevel => _zoomLevel;
+        public int ZoomLevel { get; }
 
         /// <summary>
         /// Gets the logical parent  element of this element.
         /// </summary>
+        [CanBeNull]
         IMapTile IMapTile.Parent => _parent;
 
         /// <summary>
@@ -95,8 +94,7 @@
             Image = null;
 
             SubTiles.ForEach(subTile => subTile?.Unload());
-            // ReSharper disable once PossibleNullReferenceException
-            _subLevel?.Children.Clear();
+            _subLevel.Children.Clear();
         }
 
         /// <summary>
@@ -158,7 +156,7 @@
             var viewPort = Viewport;
             var world = _world;
 
-            if ((viewPort == null) || (world == null))
+            if (viewPort == null)
                 return;
 
             if (!IsThisTileVisible(world, viewPort, out var extent))
@@ -186,8 +184,7 @@
                     return;
 
                 SubTiles.ForEach(subTile => subTile?.Unload());
-                // ReSharper disable once PossibleNullReferenceException
-                _subLevel?.Children.Clear();
+                _subLevel.Children.Clear();
                 return;
             }
 
@@ -195,14 +192,7 @@
         }
 
         [NotNull, ItemNotNull]
-        private IEnumerable<IMapTile> SubTiles
-        {
-            get
-            {
-                // ReSharper disable once AssignNullToNotNullAttribute
-                return _subLevel?.Children.Cast<IMapTile>() ?? Enumerable.Empty<IMapTile>();
-            }
-        }
+        private IEnumerable<IMapTile> SubTiles => _subLevel.Children.Cast<IMapTile>();
 
         private void Initialize()
         {
@@ -249,7 +239,7 @@
 
         private bool IsSubLevelVisible(Size extent, int maxZoom)
         {
-            return (_zoomLevel < maxZoom) && (extent.Width > _subLevelTreshold.Width) && (extent.Height > _subLevelTreshold.Height);
+            return (ZoomLevel < maxZoom) && (extent.Width > _subLevelThreshold.Width) && (extent.Height > _subLevelThreshold.Height);
         }
 
         private static bool IsThisTileVisible([NotNull] Visual visual, [NotNull] FrameworkElement viewPort, out Size extent)

@@ -54,7 +54,8 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        [CanBeNull]
+        protected override object Convert([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             return Convert(parameter ?? Key, value, null);
         }
@@ -65,8 +66,8 @@
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
         /// <returns>The text of the value.</returns>
-        [NotNull]
-        public static string Convert([CanBeNull] object key, [NotNull] object value)
+        [CanBeNull]
+        public static string Convert([CanBeNull] object key, [CanBeNull] object value)
         {
             return InternalConvert(value, null, attr => attr?.Text, attr => Equals(attr?.Key, key));
         }
@@ -78,8 +79,8 @@
         /// <param name="value">The value.</param>
         /// <param name="enumType">An optional type of an enum to support converting <see cref="Enum"/> where the value is given as a number or string.</param>
         /// <returns>The text of the value.</returns>
-        [NotNull]
-        public static string Convert([CanBeNull] object key, [NotNull] object value, [CanBeNull] Type enumType)
+        [CanBeNull]
+        public static string Convert([CanBeNull] object key, [CanBeNull] object value, [CanBeNull] Type enumType)
         {
             return InternalConvert(value, enumType, attr => attr?.Text, attr => Equals(attr?.Key, key));
         }

@@ -57,13 +57,14 @@
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
-        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        [CanBeNull]
+        protected override object Convert([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             var typeConverter = GetTypeConverter(targetType);
             if (typeConverter == null)
                 return null;
 
-            var text = value.ToString();
+            var text = value?.ToString();
             if (string.IsNullOrEmpty(text))
                 return null;
 
@@ -80,11 +81,12 @@
         /// <param name="targetType">The type to convert to.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
-        protected override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        [CanBeNull]
+        protected override object ConvertBack([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             var typeConverter = GetTypeConverter(targetType);
 
-            return typeConverter?.ConvertToInvariantString(value);
+            return typeConverter?.ConvertToInvariantString(value ?? string.Empty);
         }
 
         [CanBeNull]

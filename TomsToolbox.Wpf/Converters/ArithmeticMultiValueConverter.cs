@@ -133,7 +133,7 @@
         /// A converted value.
         /// </returns>
         [NotNull]
-        protected override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        protected override object Convert(object[] values, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             return _operationMethod(values.Select(v => System.Convert.ToDouble(v, CultureInfo.InvariantCulture)));
         }

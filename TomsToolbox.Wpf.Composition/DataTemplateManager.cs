@@ -71,6 +71,9 @@
                 var viewModel = item.ViewModel;
                 var role = item.Role;
 
+                if (viewModel == null)
+                    continue;
+
                 var template = CreateTemplate(viewModel, role);
 
                 dataTemplateResources.Add(CreateKey(viewModel, role), template);
@@ -159,7 +162,7 @@
 
         private static int GetHashCode([NotNull] IDataTemplateMetadata metadata)
         {
-            return metadata.ViewModel.GetHashCode() + (metadata.Role ?? 0).GetHashCode();
+            return HashCode.Aggregate(metadata.ViewModel?.GetHashCode() ?? 0, (metadata.Role ?? 0).GetHashCode());
         }
 
         private static bool IsViewModelForType([CanBeNull] this ILazy<object> item, [CanBeNull] Type viewModel, [CanBeNull] object role)

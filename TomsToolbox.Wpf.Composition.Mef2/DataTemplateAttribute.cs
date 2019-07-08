@@ -28,6 +28,7 @@
         /// <summary>
         /// Gets the type of the view model that this visual has a representation for.
         /// </summary>
+        [CanBeNull]
         public Type ViewModel
         {
             get;

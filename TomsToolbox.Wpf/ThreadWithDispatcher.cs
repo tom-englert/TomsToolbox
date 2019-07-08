@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf
 {
     using System;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
     using System.Threading;
@@ -21,20 +22,11 @@
     public sealed class ForegroundThreadWithDispatcher : ThreadWithDispatcher, IDisposable
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ForegroundThreadWithDispatcher"/> class with MTA apartment and normal thread priority.
-        /// </summary>
-        /// <param name="name">The name of the thread.</param>
-        public ForegroundThreadWithDispatcher([NotNull] string name)
-            : this(name, ApartmentState.MTA)
-        {
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ForegroundThreadWithDispatcher"/> class with normal thread priority.
         /// </summary>
         /// <param name="name">The name of the thread.</param>
         /// <param name="state">The apartment state of the thread.</param>
-        public ForegroundThreadWithDispatcher([NotNull] string name, ApartmentState state)
+        public ForegroundThreadWithDispatcher([NotNull] string name, ApartmentState state = ApartmentState.MTA)
             : this(name, state, ThreadPriority.Normal)
         {
         }
@@ -173,6 +165,8 @@
                 catch (ObjectDisposedException)
                 {
                 }
+
+                Debug.Assert(_dispatcher != null, nameof(_dispatcher) + " != null");
                 return _dispatcher;
             }
         }
@@ -206,7 +200,7 @@
         [CanBeNull]
         public T Invoke<T>([NotNull] Func<T> method)
         {
-            return Dispatcher.Invoke<T>(method);
+            return Dispatcher.Invoke(method);
         }
 
         /// <summary>

@@ -103,7 +103,8 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        [CanBeNull]
+        protected override object Convert(object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             if (parameter == null)
                 return value;
@@ -148,7 +149,8 @@
         /// An array of values that have been converted from the target value back to the source values.
         /// </returns>
         /// <exception cref="System.InvalidOperationException">This operation is not supported.</exception>
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        [CanBeNull]
+        public object[] ConvertBack([CanBeNull] object value, [CanBeNull] Type[] targetTypes, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             throw new InvalidOperationException();
         }

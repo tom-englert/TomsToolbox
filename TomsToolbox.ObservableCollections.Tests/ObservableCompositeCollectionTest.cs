@@ -1,4 +1,5 @@
 ﻿// ReSharper disable PossibleNullReferenceException
+// ReSharper disable UnusedVariable
 namespace TomsToolbox.ObservableCollections.Tests
 {
     using System.Collections;

@@ -28,7 +28,7 @@
             VerifyConvert(DependencyProperty.UnsetValue);
         }
 
-        private static void VerifyConvert(object source)
+        private static void VerifyConvert([CanBeNull] object source)
         {
             var expected = _reference.Convert(source, null, null, null);
             var result = _target.Convert(source, null, null, null);

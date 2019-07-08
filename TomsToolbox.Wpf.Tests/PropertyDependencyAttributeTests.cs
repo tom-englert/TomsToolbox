@@ -1,5 +1,5 @@
 ﻿// ReSharper disable All
-namespace TomsToolbox.Desktop.Tests
+namespace TomsToolbox.Wpf.Tests
 {
     using System;
     using System.Collections.Generic;

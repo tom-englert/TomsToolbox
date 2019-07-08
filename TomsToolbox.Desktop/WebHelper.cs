@@ -40,8 +40,10 @@
 
             using (var webResponse = webRequest.GetResponse())
             {
-                var responseStream = webResponse.GetResponseStream();
-                responseStream.CopyTo(localStream);
+                using (var responseStream = webResponse.GetResponseStream())
+                {
+                    responseStream?.CopyTo(localStream);
+                }
             }
 
             localStream.Position = 0;

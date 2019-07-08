@@ -44,7 +44,8 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        protected override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        [CanBeNull]
+        protected override object Convert([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             return Convert((string)value);
         }

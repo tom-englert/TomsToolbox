@@ -1,5 +1,5 @@
 ﻿// ReSharper disable All
-namespace TomsToolbox.Desktop.Tests
+namespace TomsToolbox.Wpf.Tests
 {
     using System.Linq;
 
@@ -15,7 +15,7 @@ namespace TomsToolbox.Desktop.Tests
         {
             const string sourceText = "\"\"\"$(SolutionDir).nuget\\nuget.exe\"\" pack \"\"$(ProjectPath)\"\" -OutputDirectory \"\"$(SolutionDir)..\\Bin\\Deploy\\.\"\" -IncludeReferencedProjects -Prop Configuration=$(ConfigurationName)\"";
             const string targetText = "\"$(SolutionDir).nuget\\nuget.exe\" pack \"$(ProjectPath)\" -OutputDirectory \"$(SolutionDir)..\\Bin\\Deploy\\.\" -IncludeReferencedProjects -Prop Configuration=$(ConfigurationName)";
-            var table = ClipboardHelper.ParseTable(sourceText, '\t');
+            var table = TableHelper.ParseTable(sourceText, '\t');
 
             Assert.AreEqual(1, table.Count);
             Assert.AreEqual(1, table[0].Count);
@@ -28,11 +28,11 @@ namespace TomsToolbox.Desktop.Tests
             var sourceTable = new[] { new[] { "L1\r\nC1", "L1C2\r\n" }, new[] { "L2C1", "\r\nL2C2" } };
             var expected = "\"L1\r\nC1\";\"L1C2\r\n\"\r\nL2C1;\"\r\nL2C2\"";
 
-            var target1 = sourceTable.ToCsvString();
+            var target1 = TableHelper.ToCsvString(sourceTable);
 
-            Assert.AreEqual(target1, expected.Replace(";", ClipboardHelper.CsvColumnSeparator.ToString()));
+            Assert.AreEqual(target1, expected.Replace(";", TableHelper.CsvColumnSeparator.ToString()));
 
-            var target2 = ClipboardHelper.ParseTable(expected, ';');
+            var target2 = TableHelper.ParseTable(expected, ';');
 
             Assert.AreEqual(sourceTable.Length, target2.Count);
             Assert.IsTrue(sourceTable[0].SequenceEqual(target2[0]));

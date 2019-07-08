@@ -312,7 +312,7 @@
             CommandTarget.Execute(CommandParameter);
         }
 
-        void ICommandChangedNotificationSink.ActiveCommandChanged(ICommand command)
+        void ICommandChangedNotificationSink.ActiveCommandChanged([CanBeNull] ICommand command)
         {
             var oldValue = IsActive;
 

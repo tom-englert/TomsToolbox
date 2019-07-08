@@ -135,6 +135,7 @@
         }
 
         /// <inheritdoc />
+        [CanBeNull]
         protected override IEnumerator LogicalChildren
         {
             get
@@ -144,6 +145,7 @@
         }
 
         /// <inheritdoc />
+        [CanBeNull]
         protected override Visual GetVisualChild(int index)
         {
             return (index == 0) ? _adornerDecorator : null;

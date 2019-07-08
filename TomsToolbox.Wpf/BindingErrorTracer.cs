@@ -82,7 +82,7 @@
             /// When overridden in a derived class, writes the specified message to the listener you create in the derived class.
             /// </summary>
             /// <param name="message">A message to write. </param>
-            public override void Write(string message)
+            public override void Write([CanBeNull] string message)
             {
                 _buffer += message;
             }
@@ -91,7 +91,7 @@
             /// When overridden in a derived class, writes a message to the listener you create in the derived class, followed by a line terminator.
             /// </summary>
             /// <param name="message">A message to write. </param>
-            public override void WriteLine(string message)
+            public override void WriteLine([CanBeNull] string message)
             {
                 _buffer += message;
 

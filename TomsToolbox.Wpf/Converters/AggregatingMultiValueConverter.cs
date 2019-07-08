@@ -61,7 +61,8 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        protected override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        [CanBeNull]
+        protected override object Convert(object[] values, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             if (!_converters.Any())
                 throw new InvalidOperationException("Need at least one converter");

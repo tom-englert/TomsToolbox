@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Linq;
     using System.Windows;
     using System.Windows.Data;
@@ -169,6 +170,7 @@
 
             var associatedObject = AssociatedObject;
 
+            Debug.Assert(associatedObject != null, nameof(associatedObject) + " != null");
             if (DesignerProperties.GetIsInDesignMode(associatedObject))
                 return;
 

@@ -45,7 +45,8 @@
             throw new InvalidOperationException("ConvertBack is not supported by this converter.");
         }
 
-        object IMultiValueConverter.Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        [CanBeNull]
+        object IMultiValueConverter.Convert([CanBeNull] object[] values, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             if (values == null)
                 return null;
@@ -65,7 +66,8 @@
             }
         }
 
-        object[] IMultiValueConverter.ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        [CanBeNull]
+        object[] IMultiValueConverter.ConvertBack([CanBeNull] object value, [CanBeNull] Type[] targetTypes, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
         {
             if (value == null)
                 return null;

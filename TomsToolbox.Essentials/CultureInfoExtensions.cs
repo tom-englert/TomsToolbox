@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Essentials
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
 
@@ -58,6 +59,7 @@
         public static ICollection<CultureInfo> GetChildren([NotNull] this CultureInfo item)
         {
             var children = _childCache.ForceValue(item, CreateChildList);
+            Debug.Assert(children != null, nameof(children) + " != null");
             return children;
         }
 

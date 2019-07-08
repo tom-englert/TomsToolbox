@@ -23,9 +23,7 @@
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static TextBlockHelper()
         {
-            // ReSharper disable once AssignNullToNotNullAttribute
             EventManager.RegisterClassHandler(typeof(TextBlock), FrameworkElement.SizeChangedEvent, new SizeChangedEventHandler(TextBlock_SizeChanged), true);
-            // ReSharper disable once AssignNullToNotNullAttribute
             EventManager.RegisterClassHandler(typeof(TextBlock), Binding.TargetUpdatedEvent, new EventHandler<DataTransferEventArgs>(Binding_TargetUpdated), true);
         }
 
@@ -42,7 +40,8 @@
         {
             obj.SetValue(IsTextTrimmedPropertyKey, value);
         }
-        [NotNull] private static readonly DependencyPropertyKey IsTextTrimmedPropertyKey
+        [NotNull] 
+        private static readonly DependencyPropertyKey IsTextTrimmedPropertyKey
             = DependencyProperty.RegisterAttachedReadOnly("IsTextTrimmed", typeof(bool), typeof(TextBlockHelper), new FrameworkPropertyMetadata());
         /// <summary>
         /// Identifies the <see cref="P:TomsToolbox.Wpf.TextBlockHelper.IsTextTrimmed"/> attached property
@@ -53,8 +52,8 @@
         /// reflects if the text inside the text block is trimmed, i.e. not fully visible.
         /// </summary>
         /// </AttachedPropertyComments>
-        // ReSharper disable once AssignNullToNotNullAttribute
-        [NotNull] public static readonly DependencyProperty IsTextTrimmedProperty = IsTextTrimmedPropertyKey.DependencyProperty;
+        [NotNull] 
+        public static readonly DependencyProperty IsTextTrimmedProperty = IsTextTrimmedPropertyKey.DependencyProperty;
 
         /// <summary>
         /// Gets a value indicating if the automatic tool tip is enabled on this text block or not.
@@ -62,7 +61,7 @@
         /// <param name="obj">The <see cref="TextBlock"/> to evaluate.</param>
         /// <returns><c>true</c> if the automatic tool tip is enabled; otherwise <c>false</c></returns>
         [AttachedPropertyBrowsableForType(typeof(TextBlock))]
-        public static Boolean GetIsAutomaticToolTipEnabled([NotNull] DependencyObject obj)
+        public static bool GetIsAutomaticToolTipEnabled([NotNull] DependencyObject obj)
         {
             return obj.GetValue<bool>(IsAutomaticToolTipEnabledProperty);
         }

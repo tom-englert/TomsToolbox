@@ -111,9 +111,9 @@
         private static bool AreAllPropertiesValid([NotNull] Type sourceType, [NotNull, ItemNotNull] IEnumerable<string> propertyNames)
         {
             var existingPropertyNames = sourceType.GetProperties()
-                .Select(p => p?.Name)
-                .Where(name => name != null)
+                .Select(p => p.Name)
                 .ToArray();
+
             var invalidPropertyNames = propertyNames
                 .Where(name => !existingPropertyNames.Contains(name))
                 .ToArray();
