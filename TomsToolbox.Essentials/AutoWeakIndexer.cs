@@ -61,7 +61,6 @@
                     var items2 = _items;
 
                     if (!ReferenceEquals(items2, items1) && items2.TryGetValue(key, out value) && value.TryGetTarget(out target))
-                        // ReSharper disable once AssignNullToNotNullAttribute
                         return target;
 
                     target = _generator(key);
@@ -69,7 +68,6 @@
                         throw new InvalidOperationException("The generator did not generate a valid item.");
 
                     var newItems = new Dictionary<TKey, WeakReference<TValue>>(items2.Comparer);
-                    // ReSharper disable once PossibleNullReferenceException
                     newItems.AddRange(items2.Where(item => item.Value.TryGetTarget(out _)));
                     newItems[key] = new WeakReference<TValue>(target);
 

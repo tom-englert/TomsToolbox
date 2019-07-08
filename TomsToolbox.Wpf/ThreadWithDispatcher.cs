@@ -49,6 +49,7 @@
         public DispatcherPriority ShutdownPriority
         {
             get;
+            // ReSharper disable once AutoPropertyCanBeMadeGetOnly.Global
             set;
         }
 
@@ -175,14 +176,8 @@
         /// Gets the task scheduler associated with the <see cref="Dispatcher"/>
         /// </summary>
         [NotNull]
-        public TaskScheduler TaskScheduler
-        {
-            get
-            {
-                // ReSharper disable once AssignNullToNotNullAttribute
-                return _taskScheduler ?? (_taskScheduler = Invoke(TaskScheduler.FromCurrentSynchronizationContext));
-            }
-        }
+        // ReSharper disable once AssignNullToNotNullAttribute
+        public TaskScheduler TaskScheduler => _taskScheduler ?? (_taskScheduler = Invoke(TaskScheduler.FromCurrentSynchronizationContext));
 
         /// <summary>
         /// Occurs when the dispatcher is terminated.

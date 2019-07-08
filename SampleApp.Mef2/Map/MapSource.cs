@@ -55,7 +55,6 @@
 
         public MapSource()
         {
-            // ReSharper disable once AssignNullToNotNullAttribute
             _imageCache = new AutoWeakIndexer<IMapTile, Image>(tile => new Image(this, tile), new DelegateEqualityComparer<IMapTile>(TileEquals, GetTileHashCode));
         }
 
@@ -97,7 +96,6 @@
 
         public IImage GetImage(IMapTile tile)
         {
-            // ReSharper disable once AssignNullToNotNullAttribute
             return _imageCache[tile];
         }
 

@@ -30,7 +30,6 @@
         {
             var map = AssociatedObject;
 
-            // ReSharper disable once PossibleNullReferenceException
             map.Center += e.DeltaManipulation.Translation;
         }
     }

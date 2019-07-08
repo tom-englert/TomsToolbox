@@ -9,6 +9,8 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Essentials;
+
     /// <summary>
     /// Attribute to mark one property as dependent on another property.
     /// If you call <see cref="ObservableObjectBase.OnPropertyChanged(string)"/> for one property, the property change event will also be raised for all dependent properties.
@@ -49,13 +51,7 @@
         /// Gets the names of the properties that the attributed property depends on.
         /// </summary>
         [NotNull, ItemNotNull]
-        public IEnumerable<string> PropertyNames
-        {
-            get
-            {
-                return _propertyNames;
-            }
-        }
+        public IEnumerable<string> PropertyNames => _propertyNames;
 
         /// <summary>
         /// Creates the dependency mapping from the attributes of the properties of the specified type.
@@ -64,15 +60,13 @@
         /// <returns>A dictionary that maps the property names to all direct and indirect dependent property names.</returns>
         /// <exception cref="System.InvalidOperationException">Invalid dependency definitions, i.e. dependency to non-existing property.</exception>
         [CanBeNull]
+        [ContractAnnotation("notnull => notnull")]
         public static Dictionary<string, IEnumerable<string>> CreateDependencyMapping([CanBeNull] Type type)
         {
             if (type == null)
                 return null;
 
             var properties = type.GetProperties();
-
-            // ReSharper disable PossibleNullReferenceException
-            // ReSharper disable AssignNullToNotNullAttribute
 
             var dependencyDefinitions = properties
                 .Select(prop => new
@@ -103,9 +97,6 @@
                 );
 
             return directDependencies.Keys.ToDictionary(item => item, item => GetAllDependencies(item, directDependencies));
-
-            // ReSharper restore PossibleNullReferenceException
-            // ReSharper restore AssignNullToNotNullAttribute
         }
 
         [NotNull, ItemNotNull]
@@ -156,7 +147,7 @@
         {
             var entryAssembly = entryType.Assembly;
 
-            var programFolder = Path.GetDirectoryName(new Uri(entryAssembly.CodeBase).LocalPath);
+            var programFolder = Path.GetDirectoryName(entryAssembly.GetAssemblyDirectory().FullName);
 
             var referencedAssemblyNames = entryAssembly.GetReferencedAssemblies();
 
@@ -182,7 +173,7 @@
             if (assemblyName.CodeBase == null)
                 return false;
 
-            var assemblyDirectory = Path.GetDirectoryName(new Uri(assemblyName.CodeBase).LocalPath);
+            var assemblyDirectory = Path.GetDirectoryName(assemblyName.GetAssemblyDirectory().FullName);
 
             // ReSharper disable once PossibleNullReferenceException
             return assemblyDirectory.StartsWith(programFolder, StringComparison.OrdinalIgnoreCase);

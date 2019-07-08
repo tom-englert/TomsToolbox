@@ -25,7 +25,6 @@
 
         [NotNull]
         private static readonly DependencyProperty AnimatedPanPositionProperty =
-            // ReSharper disable once PossibleNullReferenceException
             DependencyProperty.Register("AnimatedPanPosition", typeof(Point), typeof(MapPanBehavior), new FrameworkPropertyMetadata((sender, e) => ((MapPanBehavior)sender)?.AnimatedPanPosition_Changed((Point)e.NewValue)));
 
         /// <summary>

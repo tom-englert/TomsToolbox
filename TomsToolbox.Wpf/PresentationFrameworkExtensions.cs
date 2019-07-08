@@ -79,7 +79,6 @@
         {
             var transform = from.TransformToVisual(to);
 
-            // ReSharper disable once PossibleNullReferenceException
             var translated = new Rect(transform.Transform(rect.TopLeft), transform.Transform(rect.BottomRight));
             return translated;
         }
@@ -239,7 +238,6 @@
             public DependencyPropertyEventWrapper([NotNull] T frameworkElement, [NotNull] DependencyProperty property)
             {
                 _frameworkElement = frameworkElement;
-                // ReSharper disable once AssignNullToNotNullAttribute
                 _dependencyPropertyDescriptor = DependencyPropertyDescriptor.FromProperty(property, typeof(T));
 
                 _frameworkElement.Loaded += FrameworkElement_Loaded;

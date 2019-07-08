@@ -47,7 +47,6 @@
     public class ArithmeticMultiValueConverter : MultiValueConverter
     {
         // removed DefaultIfEmpty() so we are not left wondering what went wrong if one of the items cannot be resolved
-        // ReSharper disable AssignNullToNotNullAttribute
         [NotNull] private static readonly Func<IEnumerable<double>, double> _minOperationMethod = items => items.Min();
         [NotNull] private static readonly Func<IEnumerable<double>, double> _maxOperationMethod = items => items.Max();
         [NotNull] private static readonly Func<IEnumerable<double>, double> _sumOperationMethod = items => items.Sum();
@@ -56,7 +55,6 @@
         {
             return items.Aggregate(1.0, (current, item) => current * item);
         };
-        // ReSharper restore AssignNullToNotNullAttribute
 
         private ArithmeticOperation _operation;
         [NotNull]

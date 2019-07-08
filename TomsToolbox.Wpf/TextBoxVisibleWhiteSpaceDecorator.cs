@@ -73,7 +73,6 @@
         }
 
         [NotNull]
-        // ReSharper disable once AssignNullToNotNullAttribute
         private AdornerLayer AdornerLayer => _adornerDecorator.AdornerLayer;
 
         /// <summary>

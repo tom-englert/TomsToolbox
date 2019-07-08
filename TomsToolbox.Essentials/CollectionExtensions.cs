@@ -193,7 +193,6 @@
         /// <returns><c>true</c> if any of the items is contained in the specified object; otherwise <c>false</c>.</returns>
         public static bool ContainsAny<T>([NotNull, ItemNotNull] this IEnumerable<T> self, [CanBeNull] IEqualityComparer<T> comparer, [NotNull, ItemCanBeNull] params T[] items)
         {
-            // ReSharper disable once AssignNullToNotNullAttribute
             return items.Any(item => self.Contains(item, comparer));
         }
 
@@ -239,7 +238,6 @@
 
             foreach (var element in collection)
             {
-                // ReSharper disable once PossibleNullReferenceException
                 if (comparer.Equals(element, item))
                     return index;
 

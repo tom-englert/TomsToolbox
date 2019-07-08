@@ -55,7 +55,6 @@
 
         static InPlaceEdit()
         {
-            // ReSharper disable once PossibleNullReferenceException
             DefaultStyleKeyProperty.OverrideMetadata(typeof(InPlaceEdit), new FrameworkPropertyMetadata(typeof(InPlaceEdit)));
         }
 
@@ -105,7 +104,6 @@
         /// </summary>
         [NotNull]
         public static readonly DependencyProperty IsEditingProperty =
-            // ReSharper disable once PossibleNullReferenceException
             DependencyProperty.Register("IsEditing", typeof(bool), typeof(InPlaceEdit), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((InPlaceEdit)sender)?.IsEditing_Changed((bool)e.NewValue), (sender, baseValue) => ((InPlaceEdit)sender)?.IsEditing_CoerceValue(baseValue.SafeCast<bool>())));
 
 

@@ -24,7 +24,6 @@
             if (!string.IsNullOrEmpty(text))
                 return TableHelper.ParseTable(text, TableHelper.TextColumnSeparator);
 
-            // ReSharper disable once AssignNullToNotNullAttribute
             var csv = Clipboard.GetData(DataFormats.CommaSeparatedValue) as string;
             if (!string.IsNullOrEmpty(csv))
                 return TableHelper.ParseTable(csv, TableHelper.CsvColumnSeparator);

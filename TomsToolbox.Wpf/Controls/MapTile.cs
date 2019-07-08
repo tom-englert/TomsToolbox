@@ -24,7 +24,7 @@
         private static readonly Rect TileRect = new Rect(0, 0, TileSize, TileSize);
         private Size _subLevelThreshold = (Size)(1.5 * TileSize * new Vector(1, 1));
 
-        [CanBeNull] 
+        [CanBeNull]
         private readonly IMapTile _parent;
 
         private readonly Panel _world = new Grid { Width = TileSize, Height = TileSize };
@@ -173,14 +173,15 @@
 
             if ((ZoomLevel >= imageProvider.MinZoom) && !isSubLevelVisible)
             {
-                if (Image == null)
+                var image = Image;
+
+                if (image == null)
                 {
-                    Image = imageProvider.GetImage(this);
-                    Image.Loaded += (_, __) => this.BeginInvoke(Invalidate);
+                    Image = image = imageProvider.GetImage(this);
+                    image.Loaded += (_, __) => this.BeginInvoke(Invalidate);
                 }
 
-                // ReSharper disable once PossibleNullReferenceException
-                if (!Image.IsLoaded)
+                if (!image.IsLoaded)
                     return;
 
                 SubTiles.ForEach(subTile => subTile?.Unload());

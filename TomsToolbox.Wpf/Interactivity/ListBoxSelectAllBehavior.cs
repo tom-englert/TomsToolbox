@@ -59,7 +59,6 @@
             listBox.SelectAll();
 
             listBox.SelectionChanged += ListBox_SelectionChanged;
-            // ReSharper disable once PossibleNullReferenceException
             ((INotifyCollectionChanged)listBox.Items).CollectionChanged += (_, __) => _collectionChangedThrottle.Tick();
         }
 
@@ -73,7 +72,6 @@
             {
                 _isListBoxUpdating = true;
 
-                // ReSharper disable once PossibleNullReferenceException
                 if (listBox.Items.Count == listBox.SelectedItems.Count)
                 {
                     AreAllFilesSelected = true;

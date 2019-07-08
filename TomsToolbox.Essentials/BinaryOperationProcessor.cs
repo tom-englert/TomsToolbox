@@ -28,7 +28,6 @@
     /// </remarks>
     public sealed class BinaryOperationProcessor
     {
-        // ReSharper disable AssignNullToNotNullAttribute : we will never call these with a null argument.
         [NotNull] private static readonly Func<object, object, object> _additionMethod = (a, b) => ToDouble(a) + ToDouble(b);
         [NotNull] private static readonly Func<object, object, object> _subtractionMethod = (a, b) => ToDouble(a) - ToDouble(b);
         [NotNull] private static readonly Func<object, object, object> _multiplyMethod = (a, b) => ToDouble(a) * ToDouble(b);
@@ -39,7 +38,6 @@
         [NotNull] private static readonly Func<object, object, object> _lessThanMethod = (a, b) => Compare(a, b) < 0;
         [NotNull] private static readonly Func<object, object, object> _greaterThanOrEqualMethod = (a, b) => Compare(a, b) >= 0;
         [NotNull] private static readonly Func<object, object, object> _lessThanOrEqualMethod = (a, b) => Compare(a, b) <= 0;
-        // ReSharper restore AssignNullToNotNullAttribute
 
         private readonly BinaryOperation _operation;
         [NotNull, ItemNotNull]
@@ -148,9 +146,7 @@
                 .Where(m => _operationMethodNames.Contains(m.Name))
                 .Select(m => new { Method = m, Parameters = m.GetParameters() })
                 .Where(m => m.Parameters?.Length == 2)
-                // ReSharper disable once PossibleNullReferenceException
                 .Where(m => m.Parameters[0].ParameterType == valueType)
-                // ReSharper disable once PossibleNullReferenceException
                 .Select(m => ApplyOperation(m.Method, m.Parameters[1].ParameterType, value1, value2))
                 .FirstOrDefault(v => v != null);
         }
@@ -158,7 +154,6 @@
         [CanBeNull]
         private object ApplyOperationOnCastedObject([NotNull] Type targetType, [CanBeNull] object value1, [CanBeNull] object value2)
         {
-            // ReSharper disable PossibleNullReferenceException
             var result = targetType
                 .GetMethods(BindingFlags.Static | BindingFlags.Public)
                 .Where(m => (m.Name == "op_Explicit") || (m.Name == "op_Implicit"))
@@ -167,7 +162,6 @@
                 .Where(m => m.Parameters[0].ParameterType == targetType)
                 .Select(m => ApplyOperation(m.Method.ReturnType, m.Method.Invoke(null, new[] { value1 }), value2))
                 .FirstOrDefault(v => v != null);
-            // ReSharper restore PossibleNullReferenceException
 
             return result;
         }
@@ -225,7 +219,6 @@
 
         private static int Compare([NotNull] object a, [CanBeNull] object b)
         {
-            // ReSharper disable once PossibleNullReferenceException
             return Comparer.DefaultInvariant.Compare(a, Convert.ChangeType(b, a.GetType(), CultureInfo.InvariantCulture));
         }
 

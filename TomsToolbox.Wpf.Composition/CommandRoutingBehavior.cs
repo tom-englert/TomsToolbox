@@ -136,7 +136,6 @@
         /// Identifies the <see cref="IsActive"/> read only dependency property
         /// </summary>
         [NotNull]
-        // ReSharper disable once AssignNullToNotNullAttribute
         public static readonly DependencyProperty IsActiveProperty = _isActivePropertyKey.DependencyProperty;
 
 

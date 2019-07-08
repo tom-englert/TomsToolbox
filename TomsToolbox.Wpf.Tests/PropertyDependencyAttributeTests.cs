@@ -1,4 +1,5 @@
-﻿// ReSharper disable All
+﻿// ReSharper disable UnusedMember.Local
+// ReSharper disable UnusedVariable
 namespace TomsToolbox.Wpf.Tests
 {
     using System;
@@ -60,7 +61,7 @@ namespace TomsToolbox.Wpf.Tests
         [TestMethod]
         public void PropertyDependencyAttribute_ConstructorTest()
         {
-            new PropertyDependencyAttribute("Test");
+            var target = new PropertyDependencyAttribute("Test");
         }
 
         /// <summary>

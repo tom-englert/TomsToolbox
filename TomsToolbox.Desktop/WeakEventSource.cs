@@ -54,7 +54,6 @@
         where TEventArgs : EventArgs
     {
         [NotNull, ItemNotNull]
-        // ReSharper disable once AssignNullToNotNullAttribute
         private readonly List<WeakDelegate> _handlers = new List<WeakDelegate>();
 
         /// <summary>
@@ -81,10 +80,8 @@
         /// <param name="handler">The handler.</param>
         public void Subscribe([NotNull] EventHandler<TEventArgs> handler)
         {
-            // ReSharper disable once AssignNullToNotNullAttribute
             var weakHandlers = handler
                 .GetInvocationList()
-                // ReSharper disable once AssignNullToNotNullAttribute
                 .Select(d => new WeakDelegate(d))
                 .ToArray();
 
@@ -124,7 +121,6 @@
             public WeakDelegate([NotNull] Delegate handler)
             {
                 _weakTarget = handler.Target != null ? new WeakReference(handler.Target) : null;
-                // ReSharper disable once AssignNullToNotNullAttribute
                 _method = handler.GetMethodInfo();
             }
 

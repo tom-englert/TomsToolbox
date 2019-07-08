@@ -216,7 +216,6 @@
         [CanBeNull]
         public TResult ElseThrow()
         {
-            // ReSharper disable once PossibleNullReferenceException
             return ElseThrow("Encountered an unexpected type: " + (ReferenceEquals(_value, null) ? "(null)" : _value.GetType().FullName));
         }
 

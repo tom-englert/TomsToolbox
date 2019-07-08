@@ -24,7 +24,6 @@ namespace SampleApp.Mef2.Samples
     [ImplementPropertyChanged]
     public class MapViewModel
     {
-        // ReSharper disable once AssignNullToNotNullAttribute
         [NotNull] private static readonly string _configurationFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Map", "MapSources.xml");
 
         [NotNull] private readonly MapSourceFile _mapSourceFile;

@@ -70,8 +70,7 @@
             if (ToggleButton == null)
                 return;
 
-            // ReSharper disable once PossibleNullReferenceException
-            switch (e.Key)
+            switch (e?.Key)
             {
                 case Key.Escape:
                 case Key.Enter:

@@ -1,7 +1,11 @@
-﻿// ReSharper disable All
+﻿// ReSharper disable NotAccessedField.Local
+// ReSharper disable UnusedVariable
+// ReSharper disable UnusedMember.Local
 namespace TomsToolbox.Wpf.Tests
 {
     using System;
+
+    using JetBrains.Annotations;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -64,6 +68,7 @@ namespace TomsToolbox.Wpf.Tests
         class RelayingClass : ObservableObject
         {
             private readonly GoverningClass1 _governingClass1;
+            [CanBeNull]
             private readonly GoverningClass2 _governingClass2;
 
             public RelayingClass(GoverningClass1 governingClass)
@@ -85,7 +90,7 @@ namespace TomsToolbox.Wpf.Tests
             public int Value => _governingClass1.Value;
 
             [RelayedEvent(typeof(GoverningClass2), "OtherValue")]
-            public int MyOtherValue => _governingClass2.OtherValue;
+            public int MyOtherValue => _governingClass2?.OtherValue ?? int.MinValue;
         }
 
         class BadRelayingClass1 : ObservableObject
@@ -202,7 +207,6 @@ namespace TomsToolbox.Wpf.Tests
             Assert.AreEqual(1, receivedEvents["Value"]);
             Assert.AreEqual(1, receivedEvents["MyOtherValue"]);
 
-            relaying = null;
             GC.Collect();
             GC.WaitForPendingFinalizers();
 

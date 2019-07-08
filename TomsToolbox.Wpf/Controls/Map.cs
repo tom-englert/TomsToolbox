@@ -69,7 +69,6 @@
         /// <summary>
         /// Identifies the <see cref="ViewportSize"/> dependency property
         /// </summary>
-        // ReSharper disable once AssignNullToNotNullAttribute
         [NotNull] public static readonly DependencyProperty ViewportSizeProperty = ViewportSizePropertyKey.DependencyProperty;
 
 
@@ -103,7 +102,6 @@
         /// <summary>
         /// Identifies the <see cref="ZoomFactor"/> dependency property
         /// </summary>
-        // ReSharper disable once AssignNullToNotNullAttribute
         [NotNull] public static readonly DependencyProperty ZoomFactorProperty = ZoomFactorPropertyKey.DependencyProperty;
 
         /// <summary>
@@ -119,7 +117,6 @@
         /// </summary>
         [NotNull]
         public static readonly DependencyProperty ZoomLevelProperty =
-            // ReSharper disable once PossibleNullReferenceException
             DependencyProperty.Register("ZoomLevel", typeof(double), typeof(Map), new FrameworkPropertyMetadata(0.0, (sender, e) => ((Map)sender)?.ZoomLevel_Changed((double)e.NewValue), (d, baseValue) => ((Map)d)?.ZoomLevel_CoerceValue(baseValue.SafeCast<double>())));
 
         /// <summary>
@@ -135,7 +132,6 @@
         /// </summary>
         [NotNull]
         public static readonly DependencyProperty CenterProperty =
-            // ReSharper disable once PossibleNullReferenceException
             DependencyProperty.Register("Center", typeof(Point), typeof(Map), new FrameworkPropertyMetadata(LogicalCenter, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((Map)sender)?.Center_Changed((Point)e.NewValue), (d, baseValue) => Center_CoerceValue(baseValue.SafeCast<Point>())));
 
         /// <summary>
@@ -152,7 +148,6 @@
         /// <summary>
         /// Identifies the <see cref="Offset"/> read only dependency property
         /// </summary>
-        // ReSharper disable once AssignNullToNotNullAttribute
         [NotNull] public static readonly DependencyProperty OffsetProperty = OffsetPropertyKey.DependencyProperty;
 
         /// <summary>
@@ -167,10 +162,8 @@
         /// Identifies the <see cref="ZoomingPoint"/> dependency property
         /// </summary>
         [NotNull]
-        // ReSharper disable PossibleNullReferenceException
         public static readonly DependencyProperty ZoomingPointProperty =
             DependencyProperty.Register("ZoomingPoint", typeof(Point), typeof(Map), new FrameworkPropertyMetadata(LogicalCenter, (sender, e) => ((Map)sender)?.ZoomingPoint_Changed((Point)e.OldValue, (Point)e.NewValue)));
-        // ReSharper restore PossibleNullReferenceException
 
         /// <summary>
         /// Gets the bounds of the viewport in logical coordinates.
@@ -205,7 +198,6 @@
         /// <summary>
         /// Identifies the <see cref="World"/> dependency property.
         /// </summary>
-        // ReSharper disable once AssignNullToNotNullAttribute
         [NotNull] public static readonly DependencyProperty WorldProperty = WorldPropertyKey.DependencyProperty;
 
         /// <summary>
@@ -223,7 +215,6 @@
         /// <summary>
         /// Identifies the <see cref="Viewport"/> dependency property.
         /// </summary>
-        // ReSharper disable once AssignNullToNotNullAttribute
         [NotNull] public static readonly DependencyProperty ViewportProperty = ViewportPropertyKey.DependencyProperty;
 
         /// <summary>
@@ -397,7 +388,6 @@
 
             foreach (var item in this.VisualDescendants().OfType<ILayer>())
             {
-                // ReSharper disable once PossibleNullReferenceException
                 item.Invalidate();
             }
         }

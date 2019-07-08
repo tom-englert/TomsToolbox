@@ -91,9 +91,6 @@
 
             var properties = type.GetProperties();
 
-            // ReSharper disable PossibleNullReferenceException
-            // ReSharper disable AssignNullToNotNullAttribute
-
             var relayMapping = properties
                 .Select(prop => new { TargetName = prop.Name, RelayFrom = prop.GetCustomAttributes<RelayedEventAttribute>(true).FirstOrDefault() })
                 .Where(item => item.RelayFrom != null)
@@ -101,9 +98,6 @@
                 .GroupBy(item => item.SourceType)
                 .Where(group => AreAllPropertiesValid(group.Key, group.Select(item => item.SourceName)))
                 .ToDictionary(group => group.Key, group => (IDictionary<string, string>)group.ToDictionary(item => item.SourceName, item => item.TargetName));
-
-            // ReSharper restore PossibleNullReferenceException
-            // ReSharper restore AssignNullToNotNullAttribute
 
             return relayMapping;
         }

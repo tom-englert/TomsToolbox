@@ -114,7 +114,6 @@
                 if (element is GroupItem)
                     return;
 
-                // ReSharper disable once PossibleNullReferenceException
                 var item = itemsControl.ItemContainerGenerator.ItemFromContainer(element);
 
                 if ((item == null) || (item == DependencyProperty.UnsetValue))

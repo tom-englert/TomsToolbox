@@ -56,9 +56,7 @@
 
             public event EventHandler Changed
             {
-                // ReSharper disable once AssignNullToNotNullAttribute
                 add => _dependencyPropertyDescriptor?.AddValueChanged(_dependencyObject, value);
-                // ReSharper disable once AssignNullToNotNullAttribute
                 remove => _dependencyPropertyDescriptor?.RemoveValueChanged(_dependencyObject, value);
             }
         }

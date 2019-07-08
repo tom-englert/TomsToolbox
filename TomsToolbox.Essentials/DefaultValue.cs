@@ -19,7 +19,6 @@
         public static object CreateDefault([NotNull] Type type)
         {
             // every value type has a default constructor, default for reference types is always null
-            // ReSharper disable once PossibleNullReferenceException
             return type.GetTypeInfo().IsValueType ? Activator.CreateInstance(type) : null;
         }
 

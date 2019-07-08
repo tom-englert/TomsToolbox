@@ -36,7 +36,6 @@
     {
         static SharedWidthHeaderedContentControl()
         {
-            // ReSharper disable once PossibleNullReferenceException
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SharedWidthHeaderedContentControl), new FrameworkPropertyMetadata(typeof(SharedWidthHeaderedContentControl)));
         }
 

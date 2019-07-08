@@ -66,10 +66,8 @@
         [NotNull]
         public static IList<DayOfWeek> GetDaysOfWeek([NotNull] this CultureInfo cultureInfo)
         {
-            // ReSharper disable once AssignNullToNotNullAttribute
             var values = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>();
 
-            // ReSharper disable once PossibleNullReferenceException
             var firstDayOfWeek = cultureInfo.DateTimeFormat.FirstDayOfWeek;
 
             return values.OrderBy(d => d < firstDayOfWeek ? (int)d + 7 : (int)d).ToArray();

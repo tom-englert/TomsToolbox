@@ -80,6 +80,9 @@
   <member name="M:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.CreateCommandSource">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="P:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Description">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Detach(System.Object,System.Windows.Input.ICommand)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="context">
@@ -91,6 +94,18 @@
   </member>
   <member name="M:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.GetPart(System.Object)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="compositionContext">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.GroupName">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Header">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Icon">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Replace(System.Object,System.Windows.Input.ICommand,System.Windows.Input.ICommand)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -103,6 +118,12 @@
     <parameter name="newCommand">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.SubRegionId">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Wpf.Composition.CommandSourceFactory`1.Tag">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="P:TomsToolbox.Wpf.Composition.ComposableContentControl.Role">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
@@ -264,6 +285,9 @@
   <member name="P:TomsToolbox.Wpf.Composition.ImportExtension.MemberType">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="M:TomsToolbox.Wpf.Composition.ImportExtension.ProvideValue(System.IServiceProvider)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
   <member name="P:TomsToolbox.Wpf.Composition.ImportExtension.Setters">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
@@ -297,6 +321,16 @@
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:TomsToolbox.Wpf.Composition.RoleBasedDataTemplateKey.Equals(System.Object)">
+    <parameter name="o">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.Composition.RoleBasedDataTemplateKey.Equals(TomsToolbox.Wpf.Composition.RoleBasedDataTemplateKey)">
+    <parameter name="other">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="P:TomsToolbox.Wpf.Composition.RoleBasedDataTemplateKey.Role">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
@@ -307,6 +341,10 @@
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.Composition.RoleBasedDataTemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
     <parameter name="container">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>

@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Essentials
 {
     using System;
     using System.Collections.Generic;
@@ -114,22 +114,6 @@
             }
 
             return null;
-        }
-
-        /// <summary>
-        /// Gets the directory in which the given assembly is stored.
-        /// </summary>
-        /// <param name="assembly">The assembly.</param>
-        /// <returns>The directory in which the given assembly is stored.</returns>
-        [NotNull]
-        public static DirectoryInfo GetAssemblyDirectory([NotNull] this Assembly assembly)
-        {
-            var codeBase = assembly.CodeBase;
-
-            var assemblyLocation = Path.GetDirectoryName(new Uri(codeBase).LocalPath) 
-                                   ?? throw new InvalidOperationException("Can't evaluate assembly code base: " + codeBase);
-
-            return new DirectoryInfo(assemblyLocation);
         }
     }
 }

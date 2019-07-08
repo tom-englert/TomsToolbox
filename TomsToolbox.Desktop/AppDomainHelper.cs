@@ -128,7 +128,6 @@
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Created in another AppDomain.")]
-        // ReSharper disable once ClassNeverInstantiated.Local
         private class DomainHelper : MarshalByRefObject
         {
             [CanBeNull]

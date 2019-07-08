@@ -93,10 +93,10 @@
             var contentType = typeof(ComposableContentControl);
 
             context.XamlTypeMapper = new XamlTypeMapper(new string[0]);
-            // ReSharper disable AssignNullToNotNullAttribute
+            // ReSharper disable once AssignNullToNotNullAttribute
             context.XamlTypeMapper.AddMappingProcessingInstruction("viewModel", viewModelType.Namespace, viewModelType.Assembly.FullName);
+            // ReSharper disable once AssignNullToNotNullAttribute
             context.XamlTypeMapper.AddMappingProcessingInstruction("toms", contentType.Namespace, contentType.Assembly.FullName);
-            // ReSharper restore AssignNullToNotNullAttribute
 
             context.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
             context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
@@ -171,32 +171,6 @@
 
             return (metadata.ViewModel == viewModel) && RoleEquals(metadata.Role, role);
         }
-
-        /*
-        [CanBeNull]
-        private static IDataTemplateMetadata GetMetadataView([CanBeNull] ILazy<object, object> item)
-        {
-            return item?.Metadata is IDictionary<string, object> metadataDictionary ? AttributedModelServices.GetMetadataView<IDataTemplateMetadata>(metadataDictionary) : null;
-        }
-
-        [NotNull]
-        private static ILazy<object, object> AssertCorrectCreationPolicy([NotNull] ILazy<object, object> export)
-        {
-            // Ensure views are created non-shared!
-
-            // ReSharper disable once AssignNullToNotNullAttribute
-            if ((export.Metadata is IDictionary<string, object> metadata) && metadata.TryGetValue(typeof(CreationPolicy).FullName, out var value) && CreationPolicy.NonShared.Equals(value))
-                return export;
-
-            var target = export.Value;
-            var typeName = target?.GetType().Name ?? "<null>";
-            var message = "Creation policy of views should be CreationPolicy.NonShared: " + typeName;
-
-            Trace.TraceError(message);
-
-            return export;
-        }
-        */
 
         /// <summary>
         /// Compares two roles.

@@ -42,6 +42,7 @@
         protected static string InternalConvert([CanBeNull] object value, [CanBeNull] Type enumType, [NotNull] Func<T, string> selector, [NotNull] Func<T, bool> predicate)
         {
             if (value == null)
+                // ReSharper disable once AssignNullToNotNullAttribute
                 return null;
 
             var valueType = value.GetType();

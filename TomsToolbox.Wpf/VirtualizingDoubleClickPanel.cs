@@ -92,7 +92,6 @@
             if (e.ClickCount != 2)
                 return false;
 
-            // ReSharper disable once AssignNullToNotNullAttribute
             var mouseButtonEventArg = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton, e.StylusDevice);
 
             if ((e.RoutedEvent == PreviewMouseLeftButtonDownEvent) || (e.RoutedEvent == PreviewMouseRightButtonDownEvent))

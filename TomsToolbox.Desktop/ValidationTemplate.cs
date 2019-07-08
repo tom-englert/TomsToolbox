@@ -84,7 +84,6 @@
             get
             {
                 var strings = _validationResults
-                    // ReSharper disable once AssignNullToNotNullAttribute
                     .Where(x => x.MemberNames.Contains(columnName))
                     .Select(x => x.ErrorMessage);
 

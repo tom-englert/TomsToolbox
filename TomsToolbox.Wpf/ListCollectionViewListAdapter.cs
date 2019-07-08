@@ -39,13 +39,7 @@
         /// Gets the underlying collection view.
         /// </summary>
         [NotNull, ItemCanBeNull]
-        public ListCollectionView CollectionView
-        {
-            get
-            {
-                return _collectionView;
-            }
-        }
+        public ListCollectionView CollectionView => _collectionView;
 
         /// <summary>
         /// Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1" />.
@@ -106,7 +100,6 @@
             get
             {
                 var value = _collectionView.GetItemAt(index);
-                // ReSharper disable once MergeConditionalExpression : R# is wrong, remove the null value check will cause error for value types!
                 return value == null ? default : (T)value;
             }
             // ReSharper disable once ValueParameterNotUsed

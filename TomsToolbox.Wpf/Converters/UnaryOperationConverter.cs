@@ -112,7 +112,6 @@
         {
             var methods = valueType.GetMethods(BindingFlags.Static | BindingFlags.Public);
 
-            // ReSharper disable PossibleNullReferenceException
             return methods
                 .Where(m => _operationMethodNames.Contains(m.Name))
                 .Select(m => new { Method = m, Parameters = m.GetParameters() })
@@ -120,7 +119,6 @@
                 .Where(m => m.Parameters[0].ParameterType == valueType)
                 .Select(m => m.Method.Invoke(null, new[] { value }))
                 .FirstOrDefault(v => v != null);
-            // ReSharper restore PossibleNullReferenceException
         }
 
         [CanBeNull]

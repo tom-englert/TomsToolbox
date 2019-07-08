@@ -1,14 +1,11 @@
-﻿// ReSharper disable All
+﻿// ReSharper disable PossibleNullReferenceException
 namespace TomsToolbox.ObservableCollections.Tests
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Linq;
-
-    using JetBrains.Annotations;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

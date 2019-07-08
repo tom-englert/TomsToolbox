@@ -88,7 +88,6 @@
     {
         static CompositeContextMenu()
         {
-            // ReSharper disable once PossibleNullReferenceException
             DefaultStyleKeyProperty.OverrideMetadata(typeof(CompositeContextMenu), new FrameworkPropertyMetadata(typeof(CompositeContextMenu)));
         }
 

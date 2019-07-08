@@ -34,10 +34,8 @@
     [ValueConversion(typeof(object[]), typeof(bool))]
     public class LogicalMultiValueConverter : MultiValueConverter
     {
-        // ReSharper disable AssignNullToNotNullAttribute
         [NotNull] private static readonly Func<IEnumerable<bool>, bool> _andOperationMethod = items => items.All(item => item);
         [NotNull] private static readonly Func<IEnumerable<bool>, bool> _orOperationMethod = items => items.Any(item => item);
-        // ReSharper restore AssignNullToNotNullAttribute
 
         private LogicalOperation _operation;
         [NotNull]

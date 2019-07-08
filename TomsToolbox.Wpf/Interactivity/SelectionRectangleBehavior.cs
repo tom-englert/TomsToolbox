@@ -60,7 +60,6 @@
         /// Identifies the <see cref="Selection"/> dependency property.
         /// </summary>
         [NotNull] public static readonly DependencyProperty SelectionProperty =
-            // ReSharper disable once PossibleNullReferenceException
             DependencyProperty.Register("Selection", typeof(Rect), typeof(SelectionRectangleBehavior), new FrameworkPropertyMetadata(Rect.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((SelectionRectangleBehavior)sender)?.Selection_Changed((Rect)e.NewValue)));
 
 

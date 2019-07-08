@@ -2,6 +2,7 @@
 {
     using System;
     using System.Globalization;
+    using System.IO;
     using System.Reflection;
 
     using JetBrains.Annotations;
@@ -11,6 +12,39 @@
     /// </summary>
     public static class AssemblyExtensions
     {
+
+        /// <summary>
+        /// Gets the directory in which the given assembly is stored.
+        /// </summary>
+        /// <param name="assembly">The assembly.</param>
+        /// <returns>The directory in which the given assembly is stored.</returns>
+        [NotNull]
+        public static DirectoryInfo GetAssemblyDirectory([NotNull] this Assembly assembly)
+        {
+            var codeBase = assembly.CodeBase;
+
+            var assemblyLocation = Path.GetDirectoryName(new Uri(codeBase).LocalPath) 
+                                   ?? throw new InvalidOperationException("Can't evaluate assembly code base: " + codeBase);
+
+            return new DirectoryInfo(assemblyLocation);
+        }
+
+        /// <summary>
+        /// Gets the directory in which the given assembly is stored.
+        /// </summary>
+        /// <param name="assemblyName">The assembly.</param>
+        /// <returns>The directory in which the given assembly is stored.</returns>
+        [NotNull]
+        public static DirectoryInfo GetAssemblyDirectory([NotNull] this AssemblyName assemblyName)
+        {
+            var codeBase = assemblyName.CodeBase;
+
+            var assemblyLocation = Path.GetDirectoryName(new Uri(codeBase).LocalPath) 
+                                   ?? throw new InvalidOperationException("Can't evaluate assembly code base: " + codeBase);
+
+            return new DirectoryInfo(assemblyLocation);
+        }
+
         /// <summary>
         /// Generates the pack URI according to <see href="https://msdn.microsoft.com/library/aa970069.aspx"/> for the specified assembly.
         /// </summary>

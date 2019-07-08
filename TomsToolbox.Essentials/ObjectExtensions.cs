@@ -16,8 +16,7 @@
         [CanBeNull]
         public static T SafeCast<T>([CanBeNull] this object value)
         {
-            // ReSharper disable once MergeConditionalExpression : R# is wrong, remove the null value check will cause error for value types!
-            return (value == null) ? default(T) : (T)value;
+            return (value == null) ? default : (T)value;
         }
     }
 }

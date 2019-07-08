@@ -117,15 +117,12 @@
             var visualTransform = image.TransformToVisual(viewport);
             var extent = visualTransform.TransformBounds(clientRect).Size;
 
-            // ReSharper disable once PossibleNullReferenceException
             var imageSources = sources.OrderBy(source => source.Height).ToArray();
             if (!imageSources.Any())
                 return;
 
             var thresholds = Enumerable.Range(0, imageSources.Length - 1)
-                // ReSharper disable PossibleNullReferenceException
                 .Select(index => imageSources[index].Height + Math.Sqrt(imageSources[index + 1].Height - imageSources[index].Height));
-            // ReSharper restore PossibleNullReferenceException
 
             var imageIndex = thresholds.Count(threshold => threshold <= extent.Height);
 

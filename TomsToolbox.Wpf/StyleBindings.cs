@@ -124,7 +124,6 @@
             var existingInputBindings = target.InputBindings;
             var newInputBindings = newValue.InputBindings;
 
-            // ReSharper disable once PossibleNullReferenceException
             existingInputBindings.AddRange(newInputBindings.OfType<InputBinding>().Select(item => item.Clone()).ToArray());
         }
 
@@ -289,7 +288,6 @@
 
         private static void GroupDescriptions_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            // ReSharper disable once PossibleNullReferenceException
             var groupDescriptions = (d as ItemsControl)?.Items.GroupDescriptions;
 
             if (groupDescriptions == null)

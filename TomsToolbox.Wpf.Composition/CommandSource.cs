@@ -49,9 +49,7 @@
         /// <summary>
         /// Identifies the <see cref="Command"/> dependency property
         /// </summary>
-        // ReSharper disable once AssignNullToNotNullAttribute
         [NotNull]
-        // ReSharper disable once AssignNullToNotNullAttribute
         public static readonly DependencyProperty CommandProperty = _commandPropertyKey.DependencyProperty;
 
 
@@ -142,7 +140,6 @@
         /// Identifies the <see cref="IsAnyTargetAttached"/> dependency property
         /// </summary>
         [NotNull]
-        // ReSharper disable once AssignNullToNotNullAttribute
         public static readonly DependencyProperty IsAnyTargetAttachedProperty = _isAnyTargetAttachedPropertyKey.DependencyProperty;
 
         /// <summary>

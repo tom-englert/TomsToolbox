@@ -160,8 +160,8 @@
         /// <param name="propertyName">Name of the property; <c>.Net 4.5 only:</c> omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
         /// <returns>True if value has changed and the PropertyChange event was raised. </returns>
         [NotifyPropertyChangedInvocator]
-        // ReSharper disable once NotNullOnImplicitCanBeNull
         // ReSharper disable once AssignNullToNotNullAttribute
+        // ReSharper disable once NotNullOnImplicitCanBeNull
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [CallerMemberName][NotNull] string propertyName = null)
         {
             if (Equals(backingField, value))
@@ -245,14 +245,12 @@
         [NotNull]
         private IDictionary<string, IEnumerable<string>> DependencyMapping => _dependencyMapping ?? (_dependencyMapping = _dependencyMappingCache[GetType()]);
 
-        // ReSharper disable once AnnotateNotNullParameter
         private void RelaySource_PropertyChanged([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
         {
             if (e.PropertyName == null)
                 return;
 
             var sourceType = sender.GetType();
-            // ReSharper disable once PossibleNullReferenceException
             foreach (var mapping in RelayMapping.Where(item => item.Key.IsAssignableFrom(sourceType)).Select(item => item.Value))
             {
                 if (mapping.TryGetValue(e.PropertyName, out var targetPropertyName) && !string.IsNullOrEmpty(targetPropertyName))
@@ -306,7 +304,9 @@
         /// <param name="propertyName">Name of the property, or <c>null</c> if the errors .</param>
         /// <param name="dataErrors">The data errors for the property.</param>
         // ReSharper disable once VirtualMemberNeverOverridden.Global
+        // ReSharper disable UnusedParameter.Global
         protected virtual void OnDataErrorsEvaluated([CanBeNull] string propertyName, [CanBeNull, ItemNotNull] IEnumerable<string> dataErrors)
+        // ReSharper restore UnusedParameter.Global
         {
         }
 
@@ -373,13 +373,7 @@
         /// Gets the dispatcher of the thread where this object was created.
         /// </summary>
         [NotNull]
-        public Dispatcher Dispatcher
-        {
-            get
-            {
-                return _dispatcher;
-            }
-        }
+        public Dispatcher Dispatcher => _dispatcher;
     }
 }
 

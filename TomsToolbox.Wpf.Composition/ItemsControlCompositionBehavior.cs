@@ -67,7 +67,6 @@
 
             VisualComposition.OnTrace(this, $"Update {GetType()}, Found {exportedItems.Length} items");
 
-            // ReSharper disable once AssignNullToNotNullAttribute
             var currentItems = itemsControl.Items.Cast<object>().ToArray();
 
             if (exportedItems.SequenceEqual(currentItems))
@@ -93,7 +92,6 @@
                 AttachSelectables(exportedItems);
                 selector.SelectionChanged += Selector_SelectionChanged;
 
-                // ReSharper disable once PossibleNullReferenceException
                 if (_forceSelection && (selector.SelectedIndex == -1) && !selector.Items.IsEmpty)
                 {
                     selector.SelectedIndex = 0;
@@ -105,7 +103,6 @@
         {
             foreach (var item in composables.OfType<IComposablePartWithContext>())
             {
-                // ReSharper disable once PossibleNullReferenceException
                 item.CompositionContext = context;
             }
         }
@@ -139,7 +136,6 @@
 
             foreach (var selectable in selectables)
             {
-                // ReSharper disable once PossibleNullReferenceException
                 selectable.PropertyChanged += Selectable_PropertyChanged;
             }
         }
@@ -153,7 +149,6 @@
 
             foreach (var selectable in selectables)
             {
-                // ReSharper disable once PossibleNullReferenceException
                 selectable.PropertyChanged -= Selectable_PropertyChanged;
             }
         }
@@ -167,8 +162,7 @@
             if (selectable == null)
                 return;
 
-            // ReSharper disable once PossibleNullReferenceException
-            if (string.Equals(e.PropertyName, "IsSelected", StringComparison.Ordinal) && selectable.IsSelected)
+            if (string.Equals(e?.PropertyName, "IsSelected", StringComparison.Ordinal) && selectable.IsSelected)
             {
                 selector.SelectedItem = selectable;
             }
@@ -180,7 +174,6 @@
             {
                 foreach (var selectable in e.RemovedItems.OfType<ISelectableComposablePart>())
                 {
-                    // ReSharper disable once PossibleNullReferenceException
                     selectable.IsSelected = false;
                 }
             }
@@ -189,7 +182,6 @@
             {
                 foreach (var selectable in e.AddedItems.OfType<ISelectableComposablePart>())
                 {
-                    // ReSharper disable once PossibleNullReferenceException
                     selectable.IsSelected = true;
                 }
             }

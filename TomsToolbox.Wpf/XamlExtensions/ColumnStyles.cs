@@ -63,10 +63,8 @@
             if (args.Action != NotifyCollectionChangedAction.Add)
                 return;
 
-            // ReSharper disable once PossibleNullReferenceException
             var column = (DataGridColumn)args.NewItems[0];
 
-            // ReSharper disable once AssignNullToNotNullAttribute
             ApplyStyle(styles, column);
         }
 

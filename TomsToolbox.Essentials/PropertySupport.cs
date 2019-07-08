@@ -110,7 +110,6 @@
             return memberName;
         }
 
-        // ReSharper disable once UnusedParameter.Local
         [CanBeNull]
         // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
         private static string HandleError(bool failOnErrors, [NotNull] string errorMessage)
