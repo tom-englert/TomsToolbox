@@ -5,6 +5,7 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Essentials;
     using TomsToolbox.Wpf;
 
     /// <summary>

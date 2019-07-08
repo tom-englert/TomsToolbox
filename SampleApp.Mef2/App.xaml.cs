@@ -13,6 +13,7 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Essentials;
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;
     using TomsToolbox.Wpf.Composition.Mef2;
@@ -84,11 +85,25 @@
         {
             public event EventHandler<EventArgs> ExportsChanged;
 
+            [NotNull]
+            T IExportProvider.GetExportedValue<T>([CanBeNull] string contractName)
+            {
+                return ExportProvider.GetExportedValue<T>(contractName);
+            }
+
+            [CanBeNull]
+            T IExportProvider.GetExportedValueOrDefault<T>([CanBeNull] string contractName)
+            {
+                return ExportProvider.GetExportedValueOrDefault<T>(contractName);
+            }
+
+            [NotNull, ItemNotNull]
             IEnumerable<T> IExportProvider.GetExportedValues<T>([CanBeNull] string contractName)
             {
                 return ExportProvider.GetExportedValues<T>(contractName);
             }
 
+            [NotNull, ItemNotNull]
             IEnumerable<ILazy<object>> IExportProvider.GetExports(Type type, [CanBeNull] string contractName)
             {
                 return ExportProvider.GetExports(type, contractName);

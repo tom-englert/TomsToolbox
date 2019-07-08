@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Wpf
+﻿namespace TomsToolbox.Essentials
 {
     using System.Collections.Generic;
 

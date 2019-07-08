@@ -6,6 +6,8 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Essentials;
+
     /// <summary>
     /// Provides location service for the export provider to the WPF UI tree.
     /// </summary>

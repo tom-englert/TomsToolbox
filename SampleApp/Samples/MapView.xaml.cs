@@ -4,6 +4,7 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Essentials;
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition.Mef;
 

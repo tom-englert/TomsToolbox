@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Wpf
+﻿namespace TomsToolbox.Essentials
 {
     using System;
     using System.Collections.Generic;
@@ -15,6 +15,22 @@
         /// Occurs when the exports in the IExportProvider change.
         /// </summary>
         event EventHandler<EventArgs> ExportsChanged;
+
+        /// <summary>
+        /// Gets the exported object with the specified contract name.
+        /// </summary>
+        /// <typeparam name="T">The type of the object.</typeparam>
+        /// <returns>The object</returns>
+        [NotNull]
+        T GetExportedValue<T>([CanBeNull] string contractName = null);
+
+        /// <summary>
+        /// Gets the exported object with the specified contract name.
+        /// </summary>
+        /// <typeparam name="T">The type of the object.</typeparam>
+        /// <returns>The object, or null if no such export exists.</returns>
+        [CanBeNull]
+        T GetExportedValueOrDefault<T>([CanBeNull] string contractName = null);
 
         /// <summary>
         /// Gets all the exported objects with the specified contract name.
@@ -39,6 +55,35 @@
     /// </summary>
     public static class ExportProviderExtensions
     {
+        /// <summary>
+        /// Tries to the get exported value.
+        /// </summary>
+        /// <typeparam name="T">The type of the object.</typeparam>
+        /// <param name="exportProvider">The export provider.</param>
+        /// <param name="value">The value.</param>
+        /// <returns>true if the value exists.</returns>
+        [ContractAnnotation("=> false,value:null;=>true,value:notnull")]
+        public static bool TryGetExportedValue<T>([NotNull] this IExportProvider exportProvider, [CanBeNull] out T value)
+        {
+            return (value = exportProvider.GetExportedValueOrDefault<T>()) != null;
+        }
+
+        /// <summary>
+        /// Tries to the get exported value.
+        /// </summary>
+        /// <typeparam name="T">The type of the object.</typeparam>
+        /// <param name="exportProvider">The export provider.</param>
+        /// <param name="contractName">Name of the contract.</param>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// true if the value exists.
+        /// </returns>
+        [ContractAnnotation("=> false,value:null;=>true,value:notnull")]
+        public static bool TryGetExportedValue<T>([NotNull] this IExportProvider exportProvider, [CanBeNull] string contractName, [CanBeNull] out T value)
+        {
+            return (value = exportProvider.GetExportedValueOrDefault<T>(contractName)) != null;
+        }
+
         /// <summary>
         /// Gets the exports.
         /// </summary>

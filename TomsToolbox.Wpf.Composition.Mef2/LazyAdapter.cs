@@ -5,6 +5,8 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Essentials;
+
     internal class LazyAdapter<T> : ILazy<T>
     {
         private readonly Lazy<T> _lazy;

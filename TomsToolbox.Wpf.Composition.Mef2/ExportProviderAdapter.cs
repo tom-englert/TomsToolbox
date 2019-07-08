@@ -7,10 +7,12 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Essentials;
+
     /// <summary>
     /// An <see cref="IExportProvider"/> adapter for the MEF 2 <see cref="CompositionContext"/>
     /// </summary>
-    /// <seealso cref="TomsToolbox.Wpf.IExportProvider" />
+    /// <seealso cref="IExportProvider" />
     public class ExportProviderAdapter : IExportProvider
     {
         [NotNull]
@@ -27,6 +29,17 @@
 
         /// <inheritdoc />
         public event EventHandler<EventArgs> ExportsChanged;
+
+        T IExportProvider.GetExportedValue<T>([CanBeNull] string contractName)
+        {
+            return _context.GetExport<T>(contractName);
+        }
+
+        [CanBeNull]
+        T IExportProvider.GetExportedValueOrDefault<T>([CanBeNull] string contractName)
+        {
+            return _context.TryGetExport<T>(contractName, out var value) ? value : default;
+        }
 
         IEnumerable<T> IExportProvider.GetExportedValues<T>([CanBeNull] string contractName)
         {
