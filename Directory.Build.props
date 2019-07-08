@@ -46,7 +46,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="..\ResharperCodeContractNullability.config" />
     <None Include="..\LICENSE" Link="LICENSE" Pack="true" PackagePath="" />
     <None Include="..\TomsToolbox.snk">
       <Link>TomsToolbox.snk</Link>

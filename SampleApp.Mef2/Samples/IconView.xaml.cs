@@ -1,6 +1,6 @@
-﻿namespace SampleApp.Samples
+﻿namespace SampleApp.Mef2.Samples
 {
-    using TomsToolbox.Wpf.Composition.Mef;
+    using TomsToolbox.Wpf.Composition.Mef2;
 
     /// <summary>
     /// Interaction logic for IconView.xaml

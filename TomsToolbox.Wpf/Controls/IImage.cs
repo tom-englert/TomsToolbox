@@ -13,7 +13,7 @@
         /// <summary>
         /// Gets the source of the image.
         /// </summary>
-        [NotNull]
+        [CanBeNull]
         ImageSource Source
         {
             get;

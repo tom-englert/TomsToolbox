@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="SampleApp.Mef2.Samples.SharedWidthSampleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:toms="urn:TomsToolbox"
+             xmlns:styles="urn:TomsToolbox.Wpf.Styles"
+             xmlns:samples="clr-namespace:SampleApp.Mef2.Samples"
+             d:DataContext="{d:DesignInstance samples:SharedWidthSampleViewModel}">
+  <DockPanel>
+    <Grid DockPanel.Dock="Bottom" Background="LightGray">
+      <StackPanel Margin="10" HorizontalAlignment="Right" Orientation="Horizontal" Grid.IsSharedSizeScope="True">
+        <StackPanel.Resources>
+          <Style TargetType="Button" BasedOn="{StaticResource {x:Static styles:ResourceKeys.ButtonStyle}}">
+            <Setter Property="Padding" Value="12,3" />
+          </Style>
+          <Style TargetType="ContentControl" BasedOn="{StaticResource {x:Static toms:ResourceKeys.SharedWidthContainerStyle}}">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+          </Style>
+        </StackPanel.Resources>
+        <Button>
+          <ContentControl Content="OK" />
+        </Button>
+        <Decorator Width="10" />
+        <Button>
+          <ContentControl Content="{Binding LongText}" />
+        </Button>
+        <Decorator Width="10" />
+        <Button>
+          <ContentControl Content="Cancel" />
+        </Button>
+      </StackPanel>
+    </Grid>
+    <StackPanel Margin="10" Grid.IsSharedSizeScope="True">
+      <TextBlock Text="Demonstration of the SharedWidthHeaderedContentControl and the SharedWidthContainerStyle" TextWrapping="Wrap" />
+      <Decorator Height="10" />
+      <TextBlock Text="Edit the text to see the effect" />
+      <Decorator Height="10" />
+      <toms:SharedWidthHeaderedContentControl Header="Edit here:">
+        <TextBox Text="{Binding LongText, UpdateSourceTrigger=PropertyChanged}" />
+      </toms:SharedWidthHeaderedContentControl>
+      <Decorator Height="10" />
+      <toms:SharedWidthHeaderedContentControl Header="{Binding LongText}">
+        <TextBox Text="Any other text" />
+      </toms:SharedWidthHeaderedContentControl>
+    </StackPanel>
+  </DockPanel>
+</UserControl>

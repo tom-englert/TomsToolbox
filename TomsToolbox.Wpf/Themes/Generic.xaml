@@ -4,9 +4,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
   xmlns:local="clr-namespace:TomsToolbox.Wpf"
-  xmlns:controls="clr-namespace:TomsToolbox.Wpf.Controls"
-  xmlns:composition="clr-namespace:TomsToolbox.Wpf.Composition"
-  xmlns:converters="clr-namespace:TomsToolbox.Wpf.Converters">
+  xmlns:controls="clr-namespace:TomsToolbox.Wpf.Controls">
 
   <Style TargetType="TextBlock" x:Key="{x:Static local:ResourceKeys.AutoToolTipTextBoxStyle}">
     <Style.Triggers>
