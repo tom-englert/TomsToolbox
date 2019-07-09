@@ -49,7 +49,8 @@
             conventions.ForTypesDerivedFrom<IValueConverter>().Export();
 
             var configuration = new ContainerConfiguration()
-                .WithAssemblies(new[] { GetType().Assembly, typeof(CoordinatesToPointConverter).Assembly }, conventions);
+                .WithAssembly(GetType().Assembly, conventions)
+                .WithAssembly(typeof(CoordinatesToPointConverter).Assembly, conventions);
 
             var container = _container = configuration.CreateContainer();
 
