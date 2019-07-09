@@ -6,7 +6,6 @@
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using JetBrains.Annotations;
@@ -38,8 +37,8 @@
         /// <param name="sourceCollection">The source collection. This instance will not hold a reference to the source collection.</param>
         /// <param name="filter">The filter.</param>
         /// <param name="liveTrackingProperties">The live tracking properties. Whenever one of these properties in any item changes, the filter is reevaluated for the item.</param>
-        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public ObservableFilteredCollection([NotNull, ItemCanBeNull] IEnumerable sourceCollection, [NotNull] Func<T, bool> filter, [NotNull, ItemNotNull] params string[] liveTrackingProperties)
+            // ReSharper disable PossibleMultipleEnumeration
             : base(new ObservableCollection<T>(sourceCollection.Cast<T>().Where(filter)))
         {
             _filter = filter;
@@ -51,6 +50,7 @@
             }
 
             AttachCollectionEvents(sourceCollection as INotifyCollectionChanged);
+            // ReSharper restore PossibleMultipleEnumeration
         }
 
         private void AttachCollectionEvents([CanBeNull] INotifyCollectionChanged sender)

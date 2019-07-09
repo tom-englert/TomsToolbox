@@ -21,10 +21,7 @@
     /// </code>
     /// </example>
     /// <remarks>When using the net45 package, INotifyDataErrorInfo is supported as well.</remarks>
-    public class ValidationTemplate : IDataErrorInfo
-#if NET45
-        , INotifyDataErrorInfo
-#endif
+    public class ValidationTemplate : IDataErrorInfo, INotifyDataErrorInfo
     {
         [NotNull]
         private readonly INotifyPropertyChanged _target;
@@ -55,13 +52,10 @@
 
             Validator.TryValidateObject(_target, _validationContext, _validationResults, true);
 
-#if NET45
-
             _validationResults
                 .SelectMany(x => x.MemberNames)
                 .Distinct()
                 .ForEach(RaiseErrorsChanged);
-#endif
         }
 
         /// <inheritdoc />
@@ -91,8 +85,6 @@
             }
         }
 
-#if NET45
-
         /// <summary>
         /// Raised when the errors for a property has changed.
         /// </summary>
@@ -111,7 +103,5 @@
         }
 
         bool INotifyDataErrorInfo.HasErrors => _validationResults.Count > 0;
-
-#endif
     }
 }

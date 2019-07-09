@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
@@ -21,8 +20,6 @@
         /// <param name="value">The value.</param>
         /// <param name="flag">The flag.</param>
         /// <returns>True if any of the specified flags is set.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag", Justification="Dealing with flags")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flag", Justification="Dealing with flags")]
         public static bool IsAnyFlagSet<T>(this T value, T flag) where T : struct
         {
             VerifyIsFlagsEnum<T>();
@@ -40,8 +37,6 @@
         /// <param name="value">The value.</param>
         /// <param name="flag">The flag.</param>
         /// <returns>True if all of the specified flags are set.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification="Dealing with flags")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flag", Justification="Dealing with flags")]
         public static bool AreAllFlagsSet<T>(this T value, T flag) where T : struct
         {
             VerifyIsFlagsEnum<T>();
@@ -58,7 +53,6 @@
         /// <typeparam name="T">The <see cref="Enum"/> type.</typeparam>
         /// <param name="value">The value.</param>
         /// <returns>The individual flags set on the specified value.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification="Dealing with flags")]
         [NotNull]
         public static IEnumerable<T> GetFlags<T>(this T value) where T : struct
         {
@@ -75,8 +69,6 @@
         /// <param name="flags">The flags.</param>
         /// <param name="on">If set to <c>true</c>, the flags are set, otherwise the flags are cleared.</param>
         /// <returns>The value with the specified flags set or cleared.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification="Dealing with flags")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification="Dealing with flags")]
         public static T SetFlags<T>(this T value, T flags, bool on) where T : struct
         {
             VerifyIsFlagsEnum<T>();
@@ -102,8 +94,6 @@
         /// <param name="value">The value.</param>
         /// <param name="flags">The flags.</param>
         /// <returns>The value with the specified flags set.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification="Dealing with flags")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification="Dealing with flags")]
         public static T SetFlags<T>(this T value, T flags) where T : struct
         {
             return value.SetFlags(flags, true);
@@ -116,8 +106,6 @@
         /// <param name="value">The value.</param>
         /// <param name="flags">The flags.</param>
         /// <returns>The value with the specified flags cleared.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification="Dealing with flags")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification="Dealing with flags")]
         public static T ClearFlags<T>(this T value, T flags) where T : struct
         {
             return value.SetFlags(flags, false);
@@ -129,8 +117,6 @@
         /// <typeparam name="T">The <see cref="Enum"/> type.</typeparam>
         /// <param name="flags">The flags.</param>
         /// <returns>The combined flags.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification="Dealing with flags")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "flags", Justification="Dealing with flags")]
         public static T CombineFlags<T>([NotNull] this IEnumerable<T> flags) where T : struct
         {
             VerifyIsFlagsEnum<T>();
@@ -289,7 +275,7 @@
             }
             catch (ArgumentException)
             {
-                return default(T);
+                return default;
             }
         }
 

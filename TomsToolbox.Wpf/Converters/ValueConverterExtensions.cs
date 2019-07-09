@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using System.Windows.Data;
 
     using JetBrains.Annotations;
@@ -14,7 +13,6 @@
         /// <summary>
         /// The error number shown in the output.
         /// </summary>
-        [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
         public static int ConverterErrorNumber = 9000;
 
         /// <summary>

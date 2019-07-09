@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
     using System.Windows.Data;
@@ -44,7 +43,6 @@
     /// </TextBlock>
     /// ]]></code>
     /// </example>
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi")]
     [ContentProperty("Converters")]
     public class AggregatingMultiValueConverter : MultiValueConverter
     {
@@ -79,8 +77,7 @@
 
             for (; nextValueIndex < numberOfValues; nextValueIndex++)
             {
-                var valueConverter = converter as IValueConverter;
-                if (valueConverter != null)
+                if (converter is IValueConverter valueConverter)
                 {
                     aggregated = valueConverter.Convert(aggregated, targetType, values[nextValueIndex], culture);
 
@@ -92,8 +89,7 @@
                 }
                 else if (nextConverterIndex >= _converters.Count)
                 {
-                    var multiValueConverter = converter as IMultiValueConverter;
-                    if (multiValueConverter != null)
+                    if (converter is IMultiValueConverter multiValueConverter)
                     {
                         return multiValueConverter.Convert(new[] { aggregated }.Concat(values.Skip(nextValueIndex)).ToArray(), targetType, parameter, culture);
                     }

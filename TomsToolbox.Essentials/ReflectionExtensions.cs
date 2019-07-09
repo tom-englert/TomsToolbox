@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
     using System.Reflection;
@@ -73,7 +72,6 @@
         /// <param name="assemblyFile">The assembly file.</param>
         /// <returns>The assembly if the assembly could be loaded; otherwise <c>null</c>.</returns>
         [CanBeNull]
-        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFile")]
         public static Assembly TryLoadAssembly([CanBeNull] this FileSystemInfo assemblyFile)
         {
             if (assemblyFile == null)
@@ -98,7 +96,6 @@
         /// <param name="assemblyFile">The assembly file.</param>
         /// <returns>The assembly if the assembly could be loaded; otherwise <c>null</c>.</returns>
         [CanBeNull]
-        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFile")]
         public static Assembly TryLoadAssemblyForReflectionOnly([CanBeNull] this FileSystemInfo assemblyFile)
         {
             if (assemblyFile == null)

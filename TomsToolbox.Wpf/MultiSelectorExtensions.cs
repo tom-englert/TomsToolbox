@@ -4,7 +4,6 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
@@ -26,7 +25,6 @@
     /// Since there is no common interface for ListBox and DataGrid, the SelectionBinding is implemented via reflection/dynamics, so it will
     /// work on any FrameworkElement that has the SelectedItems, SelectedItem and SelectedItemIndex properties and the SelectionChanged event.
     /// </remarks>
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Use the same term as in System.Windows.Controls.Primitives.MultiSelector")]
     public static class MultiSelectorExtensions
     {
         [NotNull, ItemNotNull] private static readonly IList _emptyObjectArray = new object[0];
@@ -117,8 +115,7 @@
         {
             selector.BeginInvoke(() =>
             {
-                var container = selector.ItemContainerGenerator.ContainerFromItem(selectedItem) as FrameworkElement;
-                if (container == null)
+                if (!(selector.ItemContainerGenerator.ContainerFromItem(selectedItem) is FrameworkElement container))
                     return;
 
                 var child = container.VisualDescendantsAndSelf().OfType<UIElement>().FirstOrDefault(item => item.Focusable);

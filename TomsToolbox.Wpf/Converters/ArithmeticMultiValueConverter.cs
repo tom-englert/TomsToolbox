@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
     using System.Windows.Data;
@@ -42,7 +41,6 @@
     /// <remarks>
     /// All items must be convertible to double.
     /// </remarks>
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Use the same term as in IMultiValueConverter")]
     [ValueConversion(typeof(object[]), typeof(double))]
     public class ArithmeticMultiValueConverter : MultiValueConverter
     {

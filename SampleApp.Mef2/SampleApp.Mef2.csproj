@@ -5,7 +5,7 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net462'">
     <Reference Include="System.Reflection.Context" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml" />

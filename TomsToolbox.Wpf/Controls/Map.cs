@@ -386,6 +386,7 @@
                 _isUpdating = false;
             }
 
+            // ReSharper disable once SuspiciousTypeConversion.Global
             foreach (var item in this.VisualDescendants().OfType<ILayer>())
             {
                 item.Invalidate();

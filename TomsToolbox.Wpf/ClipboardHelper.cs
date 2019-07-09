@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Wpf
 {
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Windows;
 
     using JetBrains.Annotations;
@@ -17,7 +16,6 @@
         /// <returns>The parsed clipboard data as a table, or <c>null</c> if the clipboard is empty or does not contain normalized table data.</returns>
         /// <remarks>If no TEXT is present in the clipboard, CSV data is used.</remarks>
         [CanBeNull, ItemNotNull]
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public static IList<IList<string>> GetClipboardDataAsTable()
         {
             var text = Clipboard.GetText();

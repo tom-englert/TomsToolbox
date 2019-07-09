@@ -1,13 +1,12 @@
-﻿namespace TomsToolbox.Wpf.Tests
+﻿// ReSharper disable UnusedMember.Local
+namespace TomsToolbox.Wpf.Tests
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Serialization;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    [SuppressMessage("ReSharper", "UnusedMember.Local")]
     public class DispatcherExtensionsTests
     {
         [TestMethod]

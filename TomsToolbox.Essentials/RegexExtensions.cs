@@ -28,6 +28,7 @@
         [NotNull, ItemCanBeNull]
         public static IEnumerable<T> Split<T>([NotNull] this Regex regex, [NotNull] string input, [NotNull] Func<string, bool, T> itemGenerator)
         {
+            // ReSharper disable once RedundantEnumerableCastCall (only works in netcoreapp3.0)
             var textParts = regex.Matches(input).Cast<Match>().ToArray();
 
             Match previousTextPart = null;

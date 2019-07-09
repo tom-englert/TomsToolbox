@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Wpf
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Controls;
@@ -20,7 +19,6 @@
     /// </remarks>
     public static class TextBlockHelper
     {
-        [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static TextBlockHelper()
         {
             EventManager.RegisterClassHandler(typeof(TextBlock), FrameworkElement.SizeChangedEvent, new SizeChangedEventHandler(TextBlock_SizeChanged), true);
@@ -146,9 +144,9 @@
                 return false;
 
             var typeface = new Typeface(fontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch);
-
             var numberSubstitution = new NumberSubstitution(NumberSubstitution.GetCultureSource(textBlock), NumberSubstitution.GetCultureOverride(textBlock), NumberSubstitution.GetSubstitution(textBlock));
-            var formattedText = new FormattedText(text, CultureInfo.CurrentCulture, textBlock.FlowDirection, typeface, textBlock.FontSize, textBlock.Foreground, numberSubstitution, TextOptions.GetTextFormattingMode(textBlock));
+            var pixelsPerDip = textBlock.GetPhysicalPixelSize().Height;
+            var formattedText = new FormattedText(text, CultureInfo.CurrentCulture, textBlock.FlowDirection, typeface, textBlock.FontSize, textBlock.Foreground, numberSubstitution, TextOptions.GetTextFormattingMode(textBlock), pixelsPerDip);
 
             var padding = textBlock.Padding;
             var actualWidth = textBlock.ActualWidth - padding.Left - padding.Right;

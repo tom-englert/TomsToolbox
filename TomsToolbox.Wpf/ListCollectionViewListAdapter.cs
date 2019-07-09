@@ -5,7 +5,6 @@
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Windows.Data;
 
@@ -17,8 +16,6 @@
     /// Adapter for a <see cref="ListCollectionView" /> that exposes the content as a read-only collection with an IList interface.
     /// </summary>
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
-    [SuppressMessage("Microsoft.Design", "CA1035:ICollectionImplementationsHaveStronglyTypedMembers", Justification = "ListCollectionView is not strongly typed.")]
-    [SuppressMessage("Microsoft.Design", "CA1039:ListsAreStronglyTyped", Justification = "ListCollectionView is not strongly typed.")]
     public sealed class ListCollectionViewListAdapter<T> : IObservableCollection<T>, IList
     {
         [NotNull, ItemCanBeNull]
@@ -106,7 +103,7 @@
             set => ReadOnlyNotSupported();
         }
 
-        void ICollection.CopyTo(Array array, int index)
+        void ICollection.CopyTo([NotNull] Array array, int index)
         {
             if (array == null)
                 throw new ArgumentNullException(nameof(array));
@@ -154,7 +151,7 @@
             ReadOnlyNotSupported();
         }
 
-        void ICollection<T>.CopyTo(T[] array, int index)
+        void ICollection<T>.CopyTo([NotNull] T[] array, int index)
         {
             if (array == null)
                 throw new ArgumentNullException(nameof(array));

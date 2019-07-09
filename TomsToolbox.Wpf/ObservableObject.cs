@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
@@ -23,10 +22,7 @@
     /// Also implements <see cref="IDataErrorInfo"/> (and INotifyDataErrorInfo in .Net4.5++) to support validation. The default implementation examines <see cref="ValidationAttribute"/> on the affected properties to retrieve error information.
     /// </remarks>
     [Serializable]
-    public abstract class ObservableObjectBase : INotifyPropertyChanged, IDataErrorInfo
-#if NET45
-        , INotifyDataErrorInfo
-#endif
+    public abstract class ObservableObjectBase : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
     {
         [NotNull]
         private static readonly AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>> _dependencyMappingCache = new AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>>(PropertyDependencyAttribute.CreateDependencyMapping);
@@ -129,7 +125,6 @@
         /// <param name="value">The value.</param>
         /// <param name="propertyExpression">The expression identifying the property.</param>
         /// <returns>True if value has changed and the PropertyChange event was raised.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Expression<Func<T>> propertyExpression)
         {
@@ -183,7 +178,6 @@
         /// <param name="propertyName">Name of the property.</param>
         /// <param name="changeCallback">The callback that is invoked if the value has changed. Parameters are (oldValue, newValue).</param>
         /// <returns> True if value has changed and the PropertyChange event was raised. </returns>
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] string propertyName, [NotNull] Action<T, T> changeCallback)
         {
@@ -205,8 +199,6 @@
         /// <param name="changeCallback">The callback that is invoked if the value has changed. Parameters are (oldValue, newValue).</param>
         /// <param name="propertyName">Name of the property; omit this parameter to use the callers name provided by the CallerMemberNameAttribute (.Net4.5 only)</param>
         /// <returns> True if value has changed and the PropertyChange event was raised. </returns>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This pattern is required by the CallerMemberName attribute.")]
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#")]
         [NotifyPropertyChangedInvocator]
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Action<T, T> changeCallback, [NotNull] string propertyName)
         {
@@ -217,9 +209,7 @@
         /// Raises the <see cref="PropertyChanged"/> event for the property with the specified name.
         /// </summary>
         /// <param name="propertyName">Name of the property; <c>.Net 4.5 only:</c> omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This pattern is required by the CallerMemberName attribute.")]
         [NotifyPropertyChangedInvocator]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         // ReSharper disable once NotNullOnImplicitCanBeNull
         // ReSharper disable once AssignNullToNotNullAttribute
         protected void OnPropertyChanged([CallerMemberName][NotNull] string propertyName = null)
@@ -332,8 +322,7 @@
             DetachEventSources();
         }
 
-#if NET45
-        private event EventHandler<DataErrorsChangedEventArgs> _errorsChanged;
+        private event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
         /// <summary>
         /// Raises the <see cref="INotifyDataErrorInfo.ErrorsChanged"/> event.
@@ -341,7 +330,7 @@
         /// <param name="propertyName">The name of the property where validation errors have changed; or null or <see cref="F:System.String.Empty"/>, when entity-level errors have changed.</param>
         protected void OnErrorsChanged(string propertyName)
         {
-            _errorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
         System.Collections.IEnumerable INotifyDataErrorInfo.GetErrors([CanBeNull] string propertyName)
@@ -353,10 +342,9 @@
 
         event EventHandler<DataErrorsChangedEventArgs> INotifyDataErrorInfo.ErrorsChanged
         {
-            add => _errorsChanged += value;
-            remove => _errorsChanged -= value;
+            add => ErrorsChanged += value;
+            remove => ErrorsChanged -= value;
         }
-#endif
     }
 
     /// <summary>

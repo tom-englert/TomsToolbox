@@ -2,7 +2,6 @@
 {
     using System;
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
@@ -115,7 +114,6 @@
     /// <para/>
     /// Creates a thread and starts a dispatcher in this thread. The dispatcher is only accessible after it's fully started.
     /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     public abstract class ThreadWithDispatcher
     {
         [NotNull]

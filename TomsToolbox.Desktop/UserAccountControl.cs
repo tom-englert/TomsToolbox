@@ -3,7 +3,6 @@
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using System.Net;
     using System.Runtime.InteropServices;
     using System.Security.Principal;
@@ -48,7 +47,6 @@
         /// <returns>
         /// 0 if the function succeeds, a HRESULT of the last error if the function fails.
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         public static int LogOnInteractiveUser([NotNull] this NetworkCredential credential, [CanBeNull] out SafeTokenHandle userToken)
         {
             return LogOnInteractiveUser(credential.UserName, credential.Domain, credential.Password, out userToken);
@@ -64,7 +62,6 @@
         /// <returns>
         /// 0 if the function succeeds, a HRESULT of the last error if the function fails.
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "3#")]
         public static int LogOnInteractiveUser([CanBeNull] string userName, [CanBeNull] string domain, [CanBeNull] string password, [CanBeNull] out SafeTokenHandle userToken)
         {
             ParseUserDomain(ref userName, ref domain);
@@ -231,7 +228,6 @@
         /// <returns>
         /// <c>true</c> if the user blongs to the specified group; otherwise <c>false</c>
         /// </returns>
-        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         public static bool IsUserInGroup([NotNull] SafeTokenHandle userToken, [CanBeNull] string groupName)
         {
             var token = userToken.DangerousGetHandle();
@@ -269,7 +265,6 @@
         /// Level == High). In other words, it is not safe to say if the process is 
         /// elevated based on elevation type. Instead, we should use TokenElevation. 
         /// </remarks>
-        [SuppressMessage("Microsoft.Interoperability", "CA1404:CallGetLastErrorImmediatelyAfterPInvoke")]
         public static bool IsProcessElevated()
         {
             // Open the access token of the current process with TOKEN_QUERY.
@@ -344,7 +339,6 @@
         /// When any native Windows API call fails, the function throws a Win32Exception 
         /// with the last error code.
         /// </exception>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public static int GetProcessIntegrityLevel()
         {
             // Open the access token of the current process with TOKEN_QUERY.
@@ -403,7 +397,6 @@
         /// <returns>
         /// The handle of the UAC (user account control) shield icon.
         /// </returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Uac", Justification = "UAC is a common windows term.")]
         public static IntPtr UacShieldIcon
         {
             get
@@ -421,7 +414,6 @@
         }
 
         [NotNull]
-        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         private static SafeNativeMemory PackAuthenticationBuffer([CanBeNull] NetworkCredential credential)
         {
             var userName = credential?.UserName;
@@ -437,7 +429,6 @@
         }
 
         [CanBeNull]
-        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         private static NetworkCredential PromptForCredential(IntPtr parentHandle, [CanBeNull] string caption, [CanBeNull] string message, int authenticationError, [NotNull] SafeNativeMemory inCredBuffer)
         {
             var save = true;
@@ -459,8 +450,6 @@
                 return UnpackAuthenticationBuffer(outCredBuffer);
             }
         }
-
-        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         private static bool IsAdministrator([NotNull] SafeHandle hTokenToCheck)
         {
             var token = hTokenToCheck.DangerousGetHandle();
@@ -475,7 +464,6 @@
         }
 
         [CanBeNull]
-        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
         private static NetworkCredential UnpackAuthenticationBuffer([NotNull] SafeNativeMemory outCredBuffer)
         {
             const int maxLen = 100;
@@ -644,8 +632,6 @@
             [DllImport("advapi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static extern bool GetTokenInformation([NotNull] SafeTokenHandle hToken, TOKEN_INFORMATION_CLASS tokenInfoClass, IntPtr pTokenInfo, int tokenInfoLength, out int returnLength);
-
-            [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle")]
             public static bool GetTokenInformation([NotNull] SafeTokenHandle hToken, TOKEN_INFORMATION_CLASS tokenInfoClass, [NotNull] SafeNativeMemory pTokenInfo)
             {
                 return GetTokenInformation(hToken, tokenInfoClass, pTokenInfo.DangerousGetHandle(), pTokenInfo.Size, out _);

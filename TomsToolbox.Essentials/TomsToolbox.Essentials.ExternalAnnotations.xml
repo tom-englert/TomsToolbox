@@ -792,8 +792,18 @@
   <member name="M:TomsToolbox.Essentials.ThreadBoundTaskScheduler.GetScheduledTasks">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="M:TomsToolbox.Essentials.ThreadBoundTaskScheduler.QueueTask(System.Threading.Tasks.Task)">
+    <parameter name="task">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="P:TomsToolbox.Essentials.ThreadBoundTaskScheduler.TaskFactory">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Essentials.ThreadBoundTaskScheduler.TryExecuteTaskInline(System.Threading.Tasks.Task,System.Boolean)">
+    <parameter name="task">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
   </member>
   <member name="M:TomsToolbox.Essentials.TypeExtensions.GetSelfAndBaseTypes(System.Type)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />

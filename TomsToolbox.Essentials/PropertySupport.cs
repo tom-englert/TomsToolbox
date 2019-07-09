@@ -2,7 +2,6 @@
 {
     using System;
     using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq.Expressions;
     using System.Reflection;
 
@@ -23,7 +22,6 @@
         ///     Not a <see cref="MemberExpression"/><br/>
         ///     The <see cref="MemberExpression"/> does not represent a property.<br/>
         /// </exception>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Works only with exactly this kind of expression, so we don't want to allow to pass something else!")]
         [NotNull]
         public static string ExtractPropertyName<TProperty>([NotNull] Expression<Func<TProperty>> propertyExpression)
         {
@@ -37,7 +35,6 @@
         /// <param name="propertyExpression">The property expression (e.g. () => p.PropertyName) to extract the property name from.</param>
         /// <returns>The name of the property, or null if the extraction fails.</returns>
         [CanBeNull]
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Works only with exactly this kind of expression, so we don't want to allow to pass something else!")]
         public static string TryExtractPropertyName<TProperty>([NotNull] Expression<Func<TProperty>> propertyExpression)
         {
             return ExtractPropertyName(propertyExpression, false);
@@ -53,7 +50,6 @@
         /// <exception cref="ArgumentException">Thrown when the expression is:<br />
         /// Not a <see cref="MemberExpression" /><br />
         /// The <see cref="MemberExpression" /> does not represent a property.<br /></exception>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Works only with exactly this kind of expression, so we don't want to allow to pass something else!")]
         [NotNull]
         public static string ExtractPropertyName<T, TProperty>([NotNull] Expression<Func<T, TProperty>> propertyExpression)
         {
@@ -68,7 +64,6 @@
         /// <param name="propertyExpression">The property expression (e.g. p => p.PropertyName) to extract the property name from.</param>
         /// <returns>The name of the property, or null if the extraction fails.</returns>
         [CanBeNull]
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Works only with exactly this kind of expression, so we don't want to allow to pass something else!")]
         public static string TryExtractPropertyName<T, TProperty>([NotNull] Expression<Func<T, TProperty>> propertyExpression)
         {
             return ExtractPropertyName(propertyExpression, false);

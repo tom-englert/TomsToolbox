@@ -2,7 +2,6 @@
 {
     using System;
     using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Windows.Data;
     using System.Windows.Threading;
 
@@ -75,7 +74,6 @@
         /// <returns>
         /// A <see cref="T:System.DateTime"/> whose value is the current local date and time.
         /// </returns>
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Should only be accessible via the Default singleton.")]
         public DateTime Now => DateTime.Now;
 
         /// <summary>
@@ -84,7 +82,6 @@
         /// <returns>
         /// A <see cref="T:System.DateTime"/> set to today's date, with the time component set to 00:00:00.
         /// </returns>
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Should only be accessible via the Default singleton.")]
         public DateTime Today => DateTime.Today;
 
         /// <summary>
@@ -93,7 +90,6 @@
         /// <returns>
         /// A <see cref="T:System.DateTime"/> whose value is the current UTC date and time.
         /// </returns>
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Should only be accessible via the Default singleton.")]
         public DateTime UtcNow => DateTime.UtcNow;
     }
 }

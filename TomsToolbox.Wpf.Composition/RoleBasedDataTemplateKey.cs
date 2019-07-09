@@ -5,7 +5,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Essentials;
+    using HashCode = Essentials.HashCode;
 
     /// <summary>
     /// A resource key for data templates, like the <see cref="DataTemplateKey"/>, but adding a <see cref="Role"/> property to distinguish

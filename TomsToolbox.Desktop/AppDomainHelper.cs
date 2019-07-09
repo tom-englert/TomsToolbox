@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Desktop
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
 
     using JetBrains.Annotations;
@@ -117,7 +116,7 @@
                 var result = helper.Invoke(func.Method, func.Target, args);
 
                 if (result == null) // avoid unboxing null values.
-                    return default(T);
+                    return default;
 
                 return (T)result;
             }
@@ -127,11 +126,9 @@
             }
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Created in another AppDomain.")]
         private class DomainHelper : MarshalByRefObject
         {
             [CanBeNull]
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
             public object Invoke([NotNull] MethodInfo method, [CanBeNull] object target, [CanBeNull, ItemCanBeNull] object[] args)
             {
                 return method.Invoke(target, args);

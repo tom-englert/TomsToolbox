@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Reflection;
 
@@ -61,7 +60,6 @@
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see paramref="TEventArgs"/> instance containing the event data.</param>
-        [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
         public void Raise(object sender, TEventArgs e)
         {
             lock (_handlers)

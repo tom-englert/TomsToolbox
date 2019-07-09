@@ -2,7 +2,6 @@
 {
     using System;
     using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
 
     using JetBrains.Annotations;
 
@@ -10,7 +9,6 @@
     /// Specifies a general usable attribute to associate text with an object, 
     /// similar to  <see cref="DisplayNameAttribute"/> or <see cref="DescriptionAttribute"/>, but without a predefined usage scope.
     /// </summary>
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "May need to derive a 'LocalizedTextAttribute'")]
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     public class TextAttribute : Attribute
     {

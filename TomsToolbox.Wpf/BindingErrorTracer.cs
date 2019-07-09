@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Text.RegularExpressions;
 
@@ -18,7 +17,6 @@
         /// <summary>
         /// The errors to be ignored during error handling.
         /// </summary>
-        [SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
         [NotNull, ItemNotNull]
         public static readonly IList<Regex> IgnoredErrors = new List<Regex>
         {

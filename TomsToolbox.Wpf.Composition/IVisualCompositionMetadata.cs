@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Wpf.Composition
 {
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
 
     using JetBrains.Annotations;
 
@@ -30,7 +29,6 @@
         /// <summary>
         /// Gets the target regions for visual composition.
         /// </summary>
-        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "Export metadata requires array.")]
         [CanBeNull, ItemCanBeNull]
         string[] TargetRegions
         {

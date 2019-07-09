@@ -1,14 +1,12 @@
 ﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     using JetBrains.Annotations;
 
     /// <summary>
     /// Interface to be implemented by all objects supporting visual composition.
     /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1040:AvoidEmptyInterfaces", Justification = "MEF requires an interface for export.")]
     [Obsolete("This marker interface is no longer required")]
     public interface IComposablePart
     {

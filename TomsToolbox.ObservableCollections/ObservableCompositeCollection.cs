@@ -6,8 +6,6 @@
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
     using System.Linq;
 
     using JetBrains.Annotations;
@@ -17,7 +15,6 @@
     /// <summary>
     /// Factory methods for the <see cref="ObservableCompositeCollection{T}"/>
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
     public static class ObservableCompositeCollection
     {
         /// <summary>
@@ -164,7 +161,6 @@
                 _owner.ContentCollectionChanged(args);
             }
 
-            [ContractVerification(false)] // Just forwarding...
             public void RemoveAt(int index)
             {
                 var part = _parts[index];
@@ -216,13 +212,10 @@
 
             public bool Contains([CanBeNull] IList<T> item)
             {
-                if (item == null)
-                    throw new ArgumentNullException(nameof(item));
-
                 return IndexOf(item) != -1;
             }
 
-            public void CopyTo(IList<T>[] array, int arrayIndex)
+            public void CopyTo([NotNull] IList<T>[] array, int arrayIndex)
             {
                 throw new NotImplementedException();
             }

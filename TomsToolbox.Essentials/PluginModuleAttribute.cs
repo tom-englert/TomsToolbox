@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Essentials
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     using JetBrains.Annotations;
 
@@ -26,7 +25,6 @@
         /// <summary>
         /// Gets the categories for this module.
         /// </summary>
-        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "Can't use anything else in attributes. Property must match constructor parameter.")]
         [NotNull, ItemNotNull]
         public string[] Categories
         {

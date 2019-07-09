@@ -1,6 +1,5 @@
 ﻿namespace TomsToolbox.Wpf.Controls
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -31,7 +30,6 @@
     /// Description: [............]
     /// </code>
     /// </example>
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Headered", Justification = "Same as the base class!")]
     public class SharedWidthHeaderedContentControl : HeaderedContentControl
     {
         static SharedWidthHeaderedContentControl()

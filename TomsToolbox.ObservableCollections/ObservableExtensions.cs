@@ -5,7 +5,6 @@
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Linq.Expressions;
 
@@ -123,9 +122,9 @@
                 sourceCollection.ForEach(item => AttachItemEvents(item as INotifyPropertyChanged));
             }
 
-            [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
             protected override void OnSourceCollectionChanged(IEnumerable sourceCollection, NotifyCollectionChangedEventArgs e)
             {
+                // ReSharper disable PossibleMultipleEnumeration
                 base.OnSourceCollectionChanged(sourceCollection, e);
 
                 switch (e.Action)
@@ -151,7 +150,7 @@
                         sourceCollection.OfType<INotifyPropertyChanged>().ForEach(AttachItemEvents);
                         break;
                 }
-
+                // ReSharper restore PossibleMultipleEnumeration
             }
 
             [MakeWeak]

@@ -241,7 +241,7 @@
                 }
             }
 
-            private static void DrawAdorners([NotNull] DrawingContext drawingContext, [NotNull] TextBox textBox, [NotNull] [ItemNotNull] IList<WhiteSpace> adorners, int firstIndex, int lastIndex, Size desiredSize, [NotNull] Typeface typeface, double fontSize, [NotNull] Brush brush)
+            private static void DrawAdorners([NotNull] DrawingContext drawingContext, [NotNull] TextBox textBox, [NotNull] [ItemNotNull] IList<WhiteSpace> adorners, int firstIndex, int lastIndex, Size desiredSize, [NotNull] Typeface typeface, double fontSize, [NotNull] Brush brush, NumberSubstitution numberSubstitution, TextFormattingMode textFormattingMode, double pixelsPerDip)
             {
                 while (true)
                 {
@@ -269,10 +269,10 @@
 
                     if ((rect.Right >= 0) && (rect.Left <= desiredSize.Width))
                     {
-                        drawingContext.DrawText(new FormattedText(adorner.Text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, fontSize, brush), rect.TopLeft);
+                        drawingContext.DrawText(new FormattedText(adorner.Text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, fontSize, brush, numberSubstitution, textFormattingMode, pixelsPerDip), rect.TopLeft);
                     }
 
-                    DrawAdorners(drawingContext, textBox, adorners, index + 1, lastIndex, desiredSize, typeface, fontSize, brush);
+                    DrawAdorners(drawingContext, textBox, adorners, index + 1, lastIndex, desiredSize, typeface, fontSize, brush, numberSubstitution, textFormattingMode, pixelsPerDip);
 
                     lastIndex = index;
                 }
@@ -287,8 +287,11 @@
                 drawingContext.PushOpacity(_owner.WhiteSpaceOpacity);
 
                 var typefaceName = _textBox.FontFamily?.Source ?? "Segoe UI";
-                var brush = _owner.WhiteSpaceColor ?? Brushes.Gray; 
-                DrawAdorners(drawingContext, _textBox, _whiteSpaces, 0, _whiteSpaces.Count, RenderSize, new Typeface(typefaceName), _textBox.FontSize, brush);
+                var brush = _owner.WhiteSpaceColor ?? Brushes.Gray;
+                var numberSubstitution = new NumberSubstitution(NumberSubstitution.GetCultureSource(_textBox), NumberSubstitution.GetCultureOverride(_textBox), NumberSubstitution.GetSubstitution(_textBox));
+                var pixelsPerDip = _textBox.GetPhysicalPixelSize().Height;
+
+                DrawAdorners(drawingContext, _textBox, _whiteSpaces, 0, _whiteSpaces.Count, RenderSize, new Typeface(typefaceName), _textBox.FontSize, brush, numberSubstitution, TextOptions.GetTextFormattingMode(_textBox), pixelsPerDip);
 
                 drawingContext.Pop();
             }

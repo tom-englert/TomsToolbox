@@ -3,7 +3,6 @@
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
     using System.Windows;
     using System.Windows.Interactivity;
@@ -668,7 +667,6 @@
         }
 
         [Flags]
-        [SuppressMessage("ReSharper", "UnusedMember.Local")]
         private enum RedrawWindowFlags : uint
         {
             /// <summary>
@@ -721,9 +719,9 @@
         private sealed class DeferSizeToContent : IDisposable
         {
             [NotNull]
-            private Window _window;
+            private readonly Window _window;
 
-            private SizeToContent _sizeToContent;
+            private readonly SizeToContent _sizeToContent;
 
             public DeferSizeToContent([NotNull] Window window)
             {

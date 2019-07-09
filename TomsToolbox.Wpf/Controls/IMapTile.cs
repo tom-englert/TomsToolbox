@@ -1,6 +1,5 @@
 namespace TomsToolbox.Wpf.Controls
 {
-    using System.Diagnostics.CodeAnalysis;
 
     using JetBrains.Annotations;
 
@@ -12,7 +11,6 @@ namespace TomsToolbox.Wpf.Controls
         /// <summary>
         /// Gets the horizontal index of this tile.
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "X", Justification = "Any better idea how to express coordinates?")]
         int X
         {
             get;
@@ -21,7 +19,6 @@ namespace TomsToolbox.Wpf.Controls
         /// <summary>
         /// Gets the vertical index of this tile.
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Y", Justification = "Any better idea how to express coordinates?")]
         int Y
         {
             get;

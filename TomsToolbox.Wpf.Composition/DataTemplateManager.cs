@@ -11,6 +11,8 @@
 
     using TomsToolbox.Essentials;
 
+    using HashCode = Essentials.HashCode;
+
     /// <summary>
     /// Access methods for composite data template exports.
     /// </summary>

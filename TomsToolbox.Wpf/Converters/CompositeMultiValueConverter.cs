@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Windows.Data;
     using System.Windows.Markup;
@@ -13,7 +12,6 @@
     /// A <see cref="IMultiValueConverter"/> that chains one <see cref="IMultiValueConverter"/> with a list of <see cref="IValueConverter"/>.
     /// The <see cref="CompositeMultiValueConverter.MultiValueConverter"/> is invoked first, and the result is converted by the <see cref="CompositeMultiValueConverter.Converters"/> in the specified order.
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Use the same term as in IMultiValueConverter")]
     [ContentProperty("Converters")]
     [ValueConversion(typeof(object[]), typeof(object))]
     public class CompositeMultiValueConverter : IMultiValueConverter
@@ -24,7 +22,6 @@
         /// <summary>
         /// Gets or sets the multi value converter.
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Use the same term as in IMultiValueConverter")]
         [CanBeNull]
         public IMultiValueConverter MultiValueConverter
         {
@@ -36,13 +33,7 @@
         /// Gets the list of converters.
         /// </summary>
         [NotNull, ItemNotNull]
-        public Collection<IValueConverter> Converters
-        {
-            get
-            {
-                return _compositeConverter.Converters;
-            }
-        }
+        public Collection<IValueConverter> Converters => _compositeConverter.Converters;
 
         /// <summary>
         /// Converts source values to a value for the binding target. The data binding engine calls this method when it propagates the values from source bindings to the binding target.

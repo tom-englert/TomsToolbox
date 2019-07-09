@@ -64,7 +64,7 @@
         /// Queues a <see cref="T:System.Threading.Tasks.Task" /> to the scheduler.
         /// </summary>
         /// <param name="task">The <see cref="T:System.Threading.Tasks.Task" /> to be queued.</param>
-        protected override void QueueTask(Task task)
+        protected override void QueueTask([NotNull] Task task)
         {
             _tasksCollection.Add(task);
         }
@@ -77,7 +77,7 @@
         /// <returns>
         /// A Boolean value indicating whether the task was executed inline.
         /// </returns>
-        protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
+        protected override bool TryExecuteTaskInline([CanBeNull] Task task, bool taskWasPreviouslyQueued)
         {
             return false;
         }
