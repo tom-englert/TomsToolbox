@@ -8,7 +8,7 @@
     using TomsToolbox.Wpf.Composition;
     using TomsToolbox.Wpf.Composition.Mef2;
 
-    [Export]
+    [Export, Shared]
     [VisualCompositionExport(RegionId.Menu)]
     [LocalizedDisplayName(StringResourceKey.File)]
     [Text(SubRegionIdKey, RegionId.FileSubMenu)]
@@ -17,7 +17,7 @@
     {
     }
 
-    [Export]
+    [Export, Shared]
     [VisualCompositionExport(RegionId.FileSubMenu, RegionId.ToolBar, Sequence = 1)]
     [LocalizedDisplayName(StringResourceKey.Open)]
     [Text(IconUriKey, "pack://application:,,,/SampleApp.Mef2;component/Assets/open.png")]
@@ -26,7 +26,7 @@
     {
     }
 
-    [Export]
+    [Export, Shared]
     [VisualCompositionExport(RegionId.FileSubMenu, RegionId.ToolBar, Sequence = 2)]
     [LocalizedDisplayName(StringResourceKey.Close)]
     [Text(IconUriKey, "pack://application:,,,/SampleApp.Mef2;component/Assets/close.png")]
@@ -35,7 +35,7 @@
     {
     }
 
-    [Export]
+    [Export, Shared]
     [VisualCompositionExport(RegionId.Menu, Sequence = 2)]
     [LocalizedDisplayName(StringResourceKey.Edit)]
     [Text(SubRegionIdKey, RegionId.EditSubMenu)]
@@ -44,7 +44,7 @@
     }
 
 
-    [Export]
+    [Export, Shared]
     [VisualCompositionExport(RegionId.ContextMenu, RegionId.EditSubMenu, RegionId.ToolBar, Sequence = 14)]
     [LocalizedDisplayName(StringResourceKey.Delete)]
     [Text(IconUriKey, "pack://application:,,,/SampleApp.Mef2;component/Assets/delete.png")]
@@ -53,7 +53,7 @@
     {
     }
 
-    [Export]
+    [Export, Shared]
     [VisualCompositionExport(RegionId.ContextMenu, RegionId.EditSubMenu, RegionId.ToolBar, Sequence = 11)]
     [LocalizedDisplayName(StringResourceKey.Cut)]
     [Text(IconUriKey, "pack://application:,,,/SampleApp.Mef2;component/Assets/cut.png")]
@@ -62,7 +62,7 @@
     {
     }
 
-    [Export]
+    [Export, Shared]
     [VisualCompositionExport(RegionId.ContextMenu, RegionId.EditSubMenu, RegionId.ToolBar, Sequence = 12)]
     [LocalizedDisplayName(StringResourceKey.Copy)]
     [Text(IconUriKey, "pack://application:,,,/SampleApp.Mef2;component/Assets/copy.png")]
@@ -71,7 +71,7 @@
     {
     }
 
-    [Export]
+    [Export, Shared]
     [VisualCompositionExport(RegionId.ContextMenu, RegionId.EditSubMenu, RegionId.ToolBar, Sequence = 13)]
     [LocalizedDisplayName(StringResourceKey.Paste)]
     [Text(IconUriKey, "pack://application:,,,/SampleApp.Mef2;component/Assets/paste.png")]
@@ -80,7 +80,7 @@
     {
     }
 
-    [Export]
+    [Export, Shared]
     [VisualCompositionExport(RegionId.ContextMenu, RegionId.Menu, Sequence = 20)]
     [LocalizedDisplayName(StringResourceKey.FindGroup)]
     [Text(GroupNameKey, "Find")]
@@ -89,7 +89,7 @@
     {
     }
 
-    [Export]
+    [Export, Shared]
     [VisualCompositionExport(RegionId.FindSubMenu, Sequence = 30)]
     [LocalizedDisplayName(StringResourceKey.Find)]
     [Text(GroupNameKey, "Find")]
@@ -97,7 +97,7 @@
     {
     }
 
-    [Export]
+    [Export, Shared]
     [VisualCompositionExport(RegionId.FindSubMenu, Sequence = 31)]
     [LocalizedDisplayName(StringResourceKey.Replace)]
     [Text(GroupNameKey, "Find")]
@@ -105,7 +105,7 @@
     {
     }
 
-    [Export]
+    [Export, Shared]
     [VisualCompositionExport(RegionId.FindSubMenu, Sequence = 99)]
     [LocalizedDisplayName(StringResourceKey.Recursive)]
     [LocalizedDescription(StringResourceKey.RecursiveToolTip)]

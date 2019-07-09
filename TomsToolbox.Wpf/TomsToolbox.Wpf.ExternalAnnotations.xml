@@ -690,7 +690,7 @@
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.Converters.ObjectToAttributeConverter`1.InternalConvert(System.Object,System.Type,System.Func{`0,System.String})">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="value">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
@@ -702,7 +702,7 @@
     </parameter>
   </member>
   <member name="M:TomsToolbox.Wpf.Converters.ObjectToAttributeConverter`1.InternalConvert(System.Object,System.Type,System.Func{`0,System.String},System.Func{`0,System.Boolean})">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="value">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
