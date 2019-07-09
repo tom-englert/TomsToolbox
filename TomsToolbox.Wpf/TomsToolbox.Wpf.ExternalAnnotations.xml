@@ -1324,29 +1324,6 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="M:TomsToolbox.Wpf.ExportProviderExtensions.GetExports``1(TomsToolbox.Wpf.IExportProvider,System.Type,System.Func{System.Collections.Generic.IDictionary{System.String,System.Object},``0})">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
-    <parameter name="type">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="metadataFactory">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.ExportProviderExtensions.GetExports``1(TomsToolbox.Wpf.IExportProvider,System.Type,System.String,System.Func{System.Collections.Generic.IDictionary{System.String,System.Object},``0})">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
-    <parameter name="type">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="contractName">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="metadataFactory">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
   <member name="F:TomsToolbox.Wpf.ExportProviderLocator.ExportProviderProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
@@ -1362,12 +1339,12 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="M:TomsToolbox.Wpf.ExportProviderLocator.Register(TomsToolbox.Wpf.IExportProvider)">
+  <member name="M:TomsToolbox.Wpf.ExportProviderLocator.Register(TomsToolbox.Essentials.IExportProvider)">
     <parameter name="exportProvider">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="M:TomsToolbox.Wpf.ExportProviderLocator.SetExportProvider(System.Windows.DependencyObject,TomsToolbox.Wpf.IExportProvider)">
+  <member name="M:TomsToolbox.Wpf.ExportProviderLocator.SetExportProvider(System.Windows.DependencyObject,TomsToolbox.Essentials.IExportProvider)">
     <parameter name="obj">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -1390,29 +1367,6 @@
     <parameter name="name">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.IExportProvider.GetExportedValues``1(System.String)">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
-    <parameter name="contractName">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.IExportProvider.GetExports(System.Type,System.String)">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
-    <parameter name="type">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="contractName">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="P:TomsToolbox.Wpf.ILazy`2.Metadata">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Wpf.ILazy`2.Value">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.ImageExtensions.GetResourceKey(System.Windows.Controls.Image)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />

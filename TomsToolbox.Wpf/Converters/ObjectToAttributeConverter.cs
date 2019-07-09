@@ -22,7 +22,7 @@
         /// <param name="enumType">An optional type of an enum to support converting <see cref="Enum"/> where the value is given as a number or string.</param>
         /// <param name="selector">The selector to get the desired value from the attribute.</param>
         /// <returns>The converted value.</returns>
-        [CanBeNull]
+        [NotNull]
         protected static string InternalConvert([CanBeNull] object value, [CanBeNull] Type enumType, [NotNull] Func<T, string> selector)
         {
             return InternalConvert(value, enumType, selector, _ => true);
@@ -38,12 +38,11 @@
         /// <returns>
         /// The converted value.
         /// </returns>
-        [CanBeNull]
+        [NotNull]
         protected static string InternalConvert([CanBeNull] object value, [CanBeNull] Type enumType, [NotNull] Func<T, string> selector, [NotNull] Func<T, bool> predicate)
         {
             if (value == null)
-                // ReSharper disable once AssignNullToNotNullAttribute
-                return null;
+                return string.Empty;
 
             var valueType = value.GetType();
             var valueString = value.ToString();

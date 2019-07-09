@@ -174,7 +174,7 @@
   <member name="F:TomsToolbox.Wpf.Composition.ContentControlCompositionBehavior.RoleProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
-  <member name="M:TomsToolbox.Wpf.Composition.DataTemplateManager.CreateDynamicDataTemplates(TomsToolbox.Wpf.IExportProvider)">
+  <member name="M:TomsToolbox.Wpf.Composition.DataTemplateManager.CreateDynamicDataTemplates(TomsToolbox.Essentials.IExportProvider)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     <parameter name="exportProvider">

@@ -10,7 +10,7 @@
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="M:SampleApp.MainWindow.#ctor(TomsToolbox.Wpf.IExportProvider)">
+  <member name="M:SampleApp.MainWindow.#ctor(TomsToolbox.Essentials.IExportProvider)">
     <parameter name="exportProvider">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -68,7 +68,7 @@
   <member name="P:SampleApp.Properties.Resources.Replace">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
-  <member name="M:SampleApp.Samples.CompositeCommandsView.#ctor(TomsToolbox.Wpf.IExportProvider)">
+  <member name="M:SampleApp.Samples.CompositeCommandsView.#ctor(TomsToolbox.Essentials.IExportProvider)">
     <parameter name="exportProvider">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
@@ -91,7 +91,7 @@
   <member name="P:SampleApp.Samples.CompositeCommandsViewModel.PasteCommand">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
-  <member name="M:SampleApp.Samples.MapView.#ctor(TomsToolbox.Wpf.IExportProvider)">
+  <member name="M:SampleApp.Samples.MapView.#ctor(TomsToolbox.Essentials.IExportProvider)">
     <parameter name="exportProvider">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
