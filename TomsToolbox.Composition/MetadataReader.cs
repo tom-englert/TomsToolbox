@@ -139,7 +139,11 @@
 
         private static void GetNamedArguments(CustomAttributeData exportAttribute, IDictionary<string, object> metadata)
         {
-            foreach (var namedArgument in exportAttribute.NamedArguments)
+            var namedArguments = exportAttribute.NamedArguments;
+            if (namedArguments == null)
+                return;
+
+            foreach (var namedArgument in namedArguments)
             {
                 metadata[namedArgument.MemberName] = ConvertValue(namedArgument.TypedValue);
             }
@@ -165,10 +169,13 @@
             if (argumentType.IsArray)
             {
                 var elementType = argumentType.GetElementType();
-                var values= (IEnumerable<CustomAttributeTypedArgument>)value;
-                var arrayList = ArrayList.Adapter(values.Select(ConvertValue).ToList());
+                if (elementType != null)
+                {
+                    var values = (IEnumerable<CustomAttributeTypedArgument>) value;
+                    var arrayList = ArrayList.Adapter(values.Select(ConvertValue).ToList());
 
-                return arrayList.ToArray(elementType);
+                    return arrayList.ToArray(elementType);
+                }
             }
 
             throw new InvalidOperationException($"Argument type conversion from {valueType} to {argumentType} is not supported.");
