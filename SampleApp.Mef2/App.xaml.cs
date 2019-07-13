@@ -80,7 +80,7 @@
             _container?.Dispose();
         }
 
-        [Export(typeof(IExportProvider))]
+        [Export(typeof(IExportProvider)), Shared]
         [UsedImplicitly]
         private class ExportProviderInstanceAdapter : IExportProvider
         {

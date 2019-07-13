@@ -70,7 +70,7 @@
 
             foreach (var item in exportMetaData)
             {
-                var viewModel = item.ViewModel;
+                var viewModel = item.DataType;
                 var role = item.Role;
 
                 if (viewModel == null)
@@ -159,19 +159,19 @@
 
         private static bool Equals([NotNull] IDataTemplateMetadata left, [NotNull] IDataTemplateMetadata right)
         {
-            return (left.ViewModel == right.ViewModel) && RoleEquals(left.Role, right.Role);
+            return (left.DataType == right.DataType) && RoleEquals(left.Role, right.Role);
         }
 
         private static int GetHashCode([NotNull] IDataTemplateMetadata metadata)
         {
-            return HashCode.Aggregate(metadata.ViewModel?.GetHashCode() ?? 0, (metadata.Role ?? 0).GetHashCode());
+            return HashCode.Aggregate(metadata.DataType?.GetHashCode() ?? 0, (metadata.Role ?? 0).GetHashCode());
         }
 
         private static bool IsViewModelForType([CanBeNull] this ILazy<object> item, [CanBeNull] Type viewModel, [CanBeNull] object role)
         {
             var metadata = new DataTemplateMetadata(item?.Metadata);
 
-            return (metadata.ViewModel == viewModel) && RoleEquals(metadata.Role, role);
+            return (metadata.DataType == viewModel) && RoleEquals(metadata.Role, role);
         }
 
         /// <summary>

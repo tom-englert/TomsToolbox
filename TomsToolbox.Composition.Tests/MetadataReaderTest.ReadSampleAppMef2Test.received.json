@@ -1,0 +1,592 @@
+﻿[
+    {
+        "Type": "SampleApp.Mef2.App+ExportProviderInstanceAdapter, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "ContractName": null,
+                "ContractType": "TomsToolbox.Essentials.IExportProvider, TomsToolbox.Essentials, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            }
+        ],
+        "IsShared": true,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.App+ExportProviderInstanceAdapter, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "ContractName": null,
+                "ContractType": "TomsToolbox.Essentials.IExportProvider, TomsToolbox.Essentials, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            }
+        ],
+        "IsShared": true,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.MainWindow, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "ContractName": null,
+                "ContractType": null,
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.ChessView, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "DataType": "SampleApp.Mef2.Samples.ChessViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "Role": null,
+                "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
+                "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.DataTemplateAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.ChessViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "Role": null,
+                "Sequence": 2.0,
+                "TargetRegions": [
+                    "Main"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.CompositeCommandChild1View, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "DataType": "SampleApp.Mef2.Samples.CompositeCommandChild1ViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "Role": null,
+                "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
+                "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.DataTemplateAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.CompositeCommandChild1ViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "Role": null,
+                "Sequence": 0.0,
+                "TargetRegions": [
+                    "CommandViewContainer"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.CompositeCommandChild2View, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "DataType": "SampleApp.Mef2.Samples.CompositeCommandChild2ViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "Role": null,
+                "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
+                "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.DataTemplateAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.CompositeCommandChild2ViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "Role": null,
+                "Sequence": 0.0,
+                "TargetRegions": [
+                    "CommandViewContainer"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.FileCommand, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "ContractName": null,
+                "ContractType": null,
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            },
+            {
+                "Role": null,
+                "Sequence": 0.0,
+                "TargetRegions": [
+                    "Menu"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": true,
+        "SharingBoundary": "test1"
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.OpenCommand, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "ContractName": null,
+                "ContractType": null,
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            },
+            {
+                "Role": null,
+                "Sequence": 1.0,
+                "TargetRegions": [
+                    "FileSubMenu",
+                    "ToolBar"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": true,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.CloseCommand, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "ContractName": null,
+                "ContractType": null,
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            },
+            {
+                "Role": null,
+                "Sequence": 2.0,
+                "TargetRegions": [
+                    "FileSubMenu",
+                    "ToolBar"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": true,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.EditCommand, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "ContractName": null,
+                "ContractType": null,
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            },
+            {
+                "Role": null,
+                "Sequence": 2.0,
+                "TargetRegions": [
+                    "Menu"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": true,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.DeleteCommand, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "ContractName": null,
+                "ContractType": null,
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            },
+            {
+                "Role": null,
+                "Sequence": 14.0,
+                "TargetRegions": [
+                    "ContextMenu",
+                    "EditSubMenu",
+                    "ToolBar"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": true,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.CutCommand, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "ContractName": null,
+                "ContractType": null,
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            },
+            {
+                "Role": null,
+                "Sequence": 11.0,
+                "TargetRegions": [
+                    "ContextMenu",
+                    "EditSubMenu",
+                    "ToolBar"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": true,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.CopyCommand, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "ContractName": null,
+                "ContractType": null,
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            },
+            {
+                "Role": null,
+                "Sequence": 12.0,
+                "TargetRegions": [
+                    "ContextMenu",
+                    "EditSubMenu",
+                    "ToolBar"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": true,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.PasteCommand, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "ContractName": null,
+                "ContractType": null,
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            },
+            {
+                "Role": null,
+                "Sequence": 13.0,
+                "TargetRegions": [
+                    "ContextMenu",
+                    "EditSubMenu",
+                    "ToolBar"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": true,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.FindCommandGroup, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "ContractName": null,
+                "ContractType": null,
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            },
+            {
+                "Role": null,
+                "Sequence": 20.0,
+                "TargetRegions": [
+                    "ContextMenu",
+                    "Menu"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": true,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.FindCommand, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "ContractName": null,
+                "ContractType": null,
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            },
+            {
+                "Role": null,
+                "Sequence": 30.0,
+                "TargetRegions": [
+                    "FindSubMenu"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": true,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.ReplaceCommand, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "ContractName": null,
+                "ContractType": null,
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            },
+            {
+                "Role": null,
+                "Sequence": 31.0,
+                "TargetRegions": [
+                    "FindSubMenu"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": true,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.RecursionCommand, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "ContractName": null,
+                "ContractType": null,
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            },
+            {
+                "Role": null,
+                "Sequence": 99.0,
+                "TargetRegions": [
+                    "FindSubMenu"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": true,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.CompositeCommandsView, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "DataType": "SampleApp.Mef2.Samples.CompositeCommandsViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "Role": null,
+                "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
+                "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.DataTemplateAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.CompositeCommandsViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "Role": null,
+                "Sequence": 4.0,
+                "TargetRegions": [
+                    "Main"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.IconView, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "DataType": "SampleApp.Mef2.Samples.IconViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "Role": null,
+                "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
+                "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.DataTemplateAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.IconViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "Role": null,
+                "Sequence": 5.0,
+                "TargetRegions": [
+                    "Main"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.MapView, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "DataType": "SampleApp.Mef2.Samples.MapViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "Role": null,
+                "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
+                "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.DataTemplateAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.MapViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "Role": null,
+                "Sequence": 1.0,
+                "TargetRegions": [
+                    "Main"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.MiscView, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "DataType": "SampleApp.Mef2.Samples.MiscViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "Role": null,
+                "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
+                "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.DataTemplateAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.MiscViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "Role": null,
+                "Sequence": 99.0,
+                "TargetRegions": [
+                    "Main"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.SharedWidthSampleView, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "DataType": "SampleApp.Mef2.Samples.SharedWidthSampleViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "Role": null,
+                "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
+                "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.DataTemplateAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.SharedWidthSampleViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "Role": null,
+                "Sequence": 4.0,
+                "TargetRegions": [
+                    "Main"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.TextBoxView, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "DataType": "SampleApp.Mef2.Samples.TextBoxViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "Role": null,
+                "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
+                "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.DataTemplateAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    },
+    {
+        "Type": "SampleApp.Mef2.Samples.TextBoxViewModel, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Metadata": [
+            {
+                "Role": null,
+                "Sequence": 3.0,
+                "TargetRegions": [
+                    "Main"
+                ],
+                "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+                "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "TypeId": "TomsToolbox.Wpf.Composition.Mef2.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+            }
+        ],
+        "IsShared": false,
+        "SharingBoundary": null
+    }
+]

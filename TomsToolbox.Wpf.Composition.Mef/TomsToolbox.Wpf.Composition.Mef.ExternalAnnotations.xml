@@ -5,7 +5,7 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="P:TomsToolbox.Wpf.Composition.Mef.DataTemplateAttribute.ViewModel">
+  <member name="P:TomsToolbox.Wpf.Composition.Mef.DataTemplateAttribute.DataType">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.Composition.Mef.ExportProviderAdapter.#ctor(System.ComponentModel.Composition.Hosting.ExportProvider)">

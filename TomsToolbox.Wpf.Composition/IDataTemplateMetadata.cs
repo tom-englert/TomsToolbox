@@ -12,10 +12,10 @@
     public interface IDataTemplateMetadata
     {
         /// <summary>
-        /// Gets the type of the view model that this visual has a representation for.
+        /// Gets the type for which this DataTemplate is intended.
         /// </summary>
         [CanBeNull]
-        Type ViewModel
+        Type DataType
         {
             get;
         }
@@ -38,9 +38,9 @@
             if (metadata == null)
                 return;
 
-            if (metadata.TryGetValue(nameof(ViewModel), out var viewModel))
+            if (metadata.TryGetValue(nameof(DataType), out var viewModel))
             {
-                ViewModel = viewModel as Type;
+                DataType = viewModel as Type;
             }
 
             if (metadata.TryGetValue(nameof(Role), out var role))
@@ -50,7 +50,7 @@
         }
 
         [CanBeNull]
-        public Type ViewModel { get; }
+        public Type DataType { get; }
         
         [CanBeNull]
         public object Role { get; }

@@ -242,10 +242,10 @@
   <member name="P:TomsToolbox.Wpf.Composition.IComposablePartWithContext.CompositionContext">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
-  <member name="P:TomsToolbox.Wpf.Composition.IDataTemplateMetadata.Role">
+  <member name="P:TomsToolbox.Wpf.Composition.IDataTemplateMetadata.DataType">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
-  <member name="P:TomsToolbox.Wpf.Composition.IDataTemplateMetadata.ViewModel">
+  <member name="P:TomsToolbox.Wpf.Composition.IDataTemplateMetadata.Role">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="F:TomsToolbox.Wpf.Composition.Import.DataContextProperty">

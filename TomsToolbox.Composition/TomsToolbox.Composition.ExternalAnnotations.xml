@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assembly name="TomsToolbox.Composition">
+  <member name="P:TomsToolbox.Composition.ExportInfo.Metadata">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Composition.ExportInfo.SharingBoundary">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Composition.ExportInfo.Type">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Composition.MetadataReader.Read(System.Reflection.Assembly)">
+    <parameter name="assembly">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+</assembly>

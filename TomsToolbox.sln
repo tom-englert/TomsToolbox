@@ -46,6 +46,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Composition
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Mef2", "SampleApp.Mef2\SampleApp.Mef2.csproj", "{F5144190-2871-46EF-8363-61F511AAE850}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition", "TomsToolbox.Composition\TomsToolbox.Composition.csproj", "{D3B9CE35-0E1C-43D8-8365-46C97E9534E4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Tests", "TomsToolbox.Composition.Tests\TomsToolbox.Composition.Tests.csproj", "{0D80DBAB-1C55-46B7-A78A-4746D42EE022}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +119,14 @@ Global
 		{F5144190-2871-46EF-8363-61F511AAE850}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5144190-2871-46EF-8363-61F511AAE850}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5144190-2871-46EF-8363-61F511AAE850}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3B9CE35-0E1C-43D8-8365-46C97E9534E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3B9CE35-0E1C-43D8-8365-46C97E9534E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3B9CE35-0E1C-43D8-8365-46C97E9534E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3B9CE35-0E1C-43D8-8365-46C97E9534E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D80DBAB-1C55-46B7-A78A-4746D42EE022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D80DBAB-1C55-46B7-A78A-4746D42EE022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D80DBAB-1C55-46B7-A78A-4746D42EE022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D80DBAB-1C55-46B7-A78A-4746D42EE022}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

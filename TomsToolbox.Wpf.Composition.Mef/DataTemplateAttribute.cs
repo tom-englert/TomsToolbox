@@ -22,14 +22,14 @@
         public DataTemplateAttribute([NotNull] Type viewModel)
             : base(DataTemplate.ContractName, typeof(DependencyObject))
         {
-            ViewModel = viewModel;
+            DataType = viewModel;
         }
 
         /// <summary>
         /// Gets the type of the view model that this visual has a representation for.
         /// </summary>
         [CanBeNull]
-        public Type ViewModel
+        public Type DataType
         {
             get;
         }
