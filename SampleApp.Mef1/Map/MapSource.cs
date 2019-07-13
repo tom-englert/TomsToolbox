@@ -1,4 +1,4 @@
-﻿namespace SampleApp.Mef2.Map
+﻿namespace SampleApp.Mef1.Map
 {
     using System;
     using System.Globalization;
@@ -128,9 +128,9 @@
             [NotNull]
             private readonly object _sync = new object();
             [NotNull] 
-			private readonly MapSource _owner;
+            private readonly MapSource _owner;
             [NotNull] 
-			private readonly IMapTile _mapTile;
+            private readonly IMapTile _mapTile;
 
             private BitmapImage _source;
 

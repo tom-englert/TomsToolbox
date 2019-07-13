@@ -14,7 +14,7 @@
         [TestMethod]
         public void ReadSampleAppTest()
         {
-            var assembly = typeof(SampleApp.App).Assembly;
+            var assembly = typeof(SampleApp.Mef1.App).Assembly;
             var result = MetadataReader.Read(assembly);
 
             var data = JsonConvert.SerializeObject(result);

@@ -30,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Essentials.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.ObservableCollections.Tests", "TomsToolbox.ObservableCollections.Tests\TomsToolbox.ObservableCollections.Tests.csproj", "{D061A57E-38E3-4F2A-B392-FB344C71F7F6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp", "SampleApp\SampleApp.csproj", "{31D12A42-C0C6-4B45-82D3-E896BB2E00E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Mef1", "SampleApp.Mef1\SampleApp.Mef1.csproj", "{31D12A42-C0C6-4B45-82D3-E896BB2E00E0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Tests", "TomsToolbox.Wpf.Tests\TomsToolbox.Wpf.Tests.csproj", "{726D085F-C3E1-444B-96AB-0B40C3DC0311}"
 EndProject

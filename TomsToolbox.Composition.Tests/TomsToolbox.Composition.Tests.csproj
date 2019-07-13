@@ -15,7 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SampleApp.Mef2\SampleApp.Mef2.csproj" />
-    <ProjectReference Include="..\SampleApp\SampleApp.csproj" />
+    <ProjectReference Include="..\SampleApp.Mef1\SampleApp.Mef1.csproj" />
     <ProjectReference Include="..\TomsToolbox.Composition\TomsToolbox.Composition.csproj">
       <Project>{AE305312-7637-43BF-9156-7EC513C55135}</Project>
       <Name>TomsToolbox.Composition</Name>
