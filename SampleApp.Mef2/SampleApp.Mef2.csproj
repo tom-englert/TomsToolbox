@@ -18,6 +18,8 @@
     <PackageReference Include="Fody" Version="5.1.1" PrivateAssets="all" />
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="all" />
     <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.13.0" PrivateAssets="all" />
+    <PackageReference Include="Ninject" Version="3.3.4" />
+    <PackageReference Include="Ninject.Extensions.Conventions" Version="3.3.0" />
     <PackageReference Include="System.Composition" Version="1.2.0" />
     <PackageReference Include="Throttle.Fody" Version="1.4.0" PrivateAssets="all" />
     <PackageReference Include="PropertyChanged2.Fody" Version="2.6.0" PrivateAssets="all" />
@@ -25,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TomsToolbox.Composition\TomsToolbox.Composition.csproj" />
     <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj" />
     <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj" />
     <ProjectReference Include="..\TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj" />

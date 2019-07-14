@@ -58,10 +58,10 @@
             return _exportProvider.GetExportedValues<T>(contractName ?? string.Empty);
         }
 
-        IEnumerable<ILazy<object>> IExportProvider.GetExports([NotNull] Type type, [CanBeNull] string contractName)
+        IEnumerable<ILazy<object>> IExportProvider.GetExports([NotNull] Type contractType, [CanBeNull] string contractName)
         {
             return _exportProvider
-                .GetExports(type, null, contractName ?? string.Empty)
+                .GetExports(contractType, null, contractName ?? string.Empty)
                 .Select(item => new LazyAdapter<object>(item, item.Metadata as IDictionary<string, object>));
         }
     }

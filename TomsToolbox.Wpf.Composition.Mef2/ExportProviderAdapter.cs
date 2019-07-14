@@ -46,9 +46,9 @@
             return _context.GetExports<T>(contractName);
         }
 
-        IEnumerable<ILazy<object>> IExportProvider.GetExports([NotNull] Type type, [CanBeNull] string contractName)
+        IEnumerable<ILazy<object>> IExportProvider.GetExports([NotNull] Type contractType, [CanBeNull] string contractName)
         {
-            var exportMethod = GetType().GetMethod(nameof(GetExports))?.MakeGenericMethod(type);
+            var exportMethod = GetType().GetMethod(nameof(GetExports))?.MakeGenericMethod(contractType);
             if (exportMethod == null)
                 throw new InvalidOperationException("Method not found: " + nameof(GetExports));
             return (IEnumerable<ILazy<object>>)exportMethod.Invoke(this, new object[] {contractName});

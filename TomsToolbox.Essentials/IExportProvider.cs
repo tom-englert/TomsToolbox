@@ -43,11 +43,11 @@
         /// <summary>
         /// Gets the exports.
         /// </summary>
-        /// <param name="type">The type of the requested object.</param>
+        /// <param name="contractType">The type of the requested object.</param>
         /// <param name="contractName">Name of the contract.</param>
         /// <returns></returns>
         [NotNull, ItemNotNull]
-        IEnumerable<ILazy<object>> GetExports([NotNull] Type type, [CanBeNull] string contractName = null);
+        IEnumerable<ILazy<object>> GetExports([NotNull] Type contractType, [CanBeNull] string contractName = null);
     }
 
     /// <summary>
