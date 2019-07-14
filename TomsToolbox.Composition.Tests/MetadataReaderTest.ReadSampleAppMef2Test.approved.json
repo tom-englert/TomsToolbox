@@ -1,29 +1,5 @@
 ﻿[
     {
-        "Type": "SampleApp.Mef2.App+ExportProviderInstanceAdapter, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
-        "Metadata": [
-            {
-                "ContractName": null,
-                "ContractType": "TomsToolbox.Essentials.IExportProvider, TomsToolbox.Essentials, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
-                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
-            }
-        ],
-        "IsShared": true,
-        "SharingBoundary": null
-    },
-    {
-        "Type": "SampleApp.Mef2.App+ExportProviderInstanceAdapter, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
-        "Metadata": [
-            {
-                "ContractName": null,
-                "ContractType": "TomsToolbox.Essentials.IExportProvider, TomsToolbox.Essentials, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
-                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
-            }
-        ],
-        "IsShared": true,
-        "SharingBoundary": null
-    },
-    {
         "Type": "SampleApp.Mef2.MainWindow, SampleApp.Mef2, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {

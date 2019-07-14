@@ -10,7 +10,7 @@
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="P:SampleApp.Mef2.IocAdapters.Mef2.ExportProvider">
+  <member name="P:SampleApp.Mef2.IocAdapters.Mef2Adapter.ExportProvider">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:SampleApp.Mef2.MainWindow.#ctor(TomsToolbox.Essentials.IExportProvider)">

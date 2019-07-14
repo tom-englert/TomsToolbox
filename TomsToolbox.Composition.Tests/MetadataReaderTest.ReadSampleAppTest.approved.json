@@ -1,6 +1,6 @@
 ﻿[
     {
-        "Type": "SampleApp.MainWindow, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.MainWindow, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "ContractName": null,
@@ -12,10 +12,10 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.ChessView, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.ChessView, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
-                "DataType": "SampleApp.Samples.ChessViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "DataType": "SampleApp.Mef1.Samples.ChessViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
                 "Role": null,
                 "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
                 "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
@@ -26,7 +26,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.ChessViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.ChessViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "Role": null,
@@ -43,10 +43,10 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.CompositeCommandChild1View, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.CompositeCommandChild1View, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
-                "DataType": "SampleApp.Samples.CompositeCommandChild1ViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "DataType": "SampleApp.Mef1.Samples.CompositeCommandChild1ViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
                 "Role": null,
                 "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
                 "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
@@ -57,7 +57,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.CompositeCommandChild1ViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.CompositeCommandChild1ViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "Role": null,
@@ -74,10 +74,10 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.CompositeCommandChild2View, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.CompositeCommandChild2View, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
-                "DataType": "SampleApp.Samples.CompositeCommandChild2ViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "DataType": "SampleApp.Mef1.Samples.CompositeCommandChild2ViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
                 "Role": null,
                 "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
                 "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
@@ -88,7 +88,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.CompositeCommandChild2ViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.CompositeCommandChild2ViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "Role": null,
@@ -105,7 +105,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.FileCommand, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.FileCommand, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "ContractName": null,
@@ -127,7 +127,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.OpenCommand, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.OpenCommand, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "ContractName": null,
@@ -150,7 +150,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.CloseCommand, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.CloseCommand, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "ContractName": null,
@@ -173,7 +173,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.EditCommand, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.EditCommand, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "ContractName": null,
@@ -195,7 +195,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.DeleteCommand, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.DeleteCommand, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "ContractName": null,
@@ -219,7 +219,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.CutCommand, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.CutCommand, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "ContractName": null,
@@ -243,7 +243,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.CopyCommand, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.CopyCommand, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "ContractName": null,
@@ -267,7 +267,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.PasteCommand, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.PasteCommand, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "ContractName": null,
@@ -291,7 +291,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.FindCommandGroup, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.FindCommandGroup, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "ContractName": null,
@@ -314,7 +314,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.FindCommand, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.FindCommand, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "ContractName": null,
@@ -336,7 +336,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.ReplaceCommand, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.ReplaceCommand, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "ContractName": null,
@@ -358,7 +358,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.RecursionCommand, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.RecursionCommand, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "ContractName": null,
@@ -380,10 +380,10 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.CompositeCommandsView, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.CompositeCommandsView, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
-                "DataType": "SampleApp.Samples.CompositeCommandsViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "DataType": "SampleApp.Mef1.Samples.CompositeCommandsViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
                 "Role": null,
                 "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
                 "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
@@ -394,7 +394,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.CompositeCommandsViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.CompositeCommandsViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "Role": null,
@@ -411,10 +411,10 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.IconView, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.IconView, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
-                "DataType": "SampleApp.Samples.IconViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "DataType": "SampleApp.Mef1.Samples.IconViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
                 "Role": null,
                 "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
                 "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
@@ -425,7 +425,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.IconViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.IconViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "Role": null,
@@ -442,10 +442,10 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.MapView, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.MapView, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
-                "DataType": "SampleApp.Samples.MapViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "DataType": "SampleApp.Mef1.Samples.MapViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
                 "Role": null,
                 "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
                 "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
@@ -456,7 +456,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.MapViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.MapViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "Role": null,
@@ -473,10 +473,10 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.MiscView, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.MiscView, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
-                "DataType": "SampleApp.Samples.MiscViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "DataType": "SampleApp.Mef1.Samples.MiscViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
                 "Role": null,
                 "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
                 "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
@@ -487,7 +487,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.MiscViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.MiscViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "Role": null,
@@ -504,10 +504,10 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.SharedWidthSampleView, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.SharedWidthSampleView, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
-                "DataType": "SampleApp.Samples.SharedWidthSampleViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "DataType": "SampleApp.Mef1.Samples.SharedWidthSampleViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
                 "Role": null,
                 "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
                 "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
@@ -518,7 +518,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.SharedWidthSampleViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.SharedWidthSampleViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "Role": null,
@@ -535,10 +535,10 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.TextBoxView, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.TextBoxView, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
-                "DataType": "SampleApp.Samples.TextBoxViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+                "DataType": "SampleApp.Mef1.Samples.TextBoxViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
                 "Role": null,
                 "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
                 "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
@@ -549,7 +549,7 @@
         "SharingBoundary": null
     },
     {
-        "Type": "SampleApp.Samples.TextBoxViewModel, SampleApp, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Type": "SampleApp.Mef1.Samples.TextBoxViewModel, SampleApp.Mef1, Version=1.0.75.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
                 "Role": null,
