@@ -10,6 +10,7 @@
     using Ninject;
     using Ninject.Extensions.Conventions;
     using Ninject.Planning.Bindings;
+    using Ninject.Syntax;
 
     using TomsToolbox.Composition;
     using TomsToolbox.Essentials;
@@ -34,15 +35,26 @@
                 if (exportMetadata == null)
                     continue;
 
+                var selfBinding = kernel.Bind(type).ToSelf();
+
                 foreach (var metadata in exportMetadata)
                 {
-                    var contractType = metadata.GetValueOrDefault("ContractType") as Type ?? type;
+                    var explicitContractType = metadata.GetValueOrDefault("ContractType") as Type;
+                    var contractName = metadata.GetValueOrDefault("ContractName") as string;
+                    IBindingWhenInNamedWithOrOnSyntax<object> binding;
 
-                    var binding = kernel.Bind(contractType).To(type);
-
-                    if (metadata.GetValueOrDefault("ContractName") is string contractName)
+                    if ((explicitContractType == null) && (contractName == null))
                     {
-                        binding.Named(contractName);
+                        binding = selfBinding;
+                    }
+                    else
+                    {
+                        binding = kernel.Bind(explicitContractType).ToMethod(_ => kernel.Get(type));
+
+                        if (contractName != null)
+                        {
+                            binding.Named(contractName);
+                        }
                     }
 
                     binding.WithMetadata("ExportMetadata", metadata);
