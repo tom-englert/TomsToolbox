@@ -7,7 +7,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Essentials;
+    using TomsToolbox.Composition;
 
     /// <summary>
     /// An <see cref="IExportProvider"/> adapter for the MEF 1 <see cref="ExportProvider"/>
@@ -58,11 +58,11 @@
             return _exportProvider.GetExportedValues<T>(contractName ?? string.Empty);
         }
 
-        IEnumerable<ILazy<object>> IExportProvider.GetExports([NotNull] Type contractType, [CanBeNull] string contractName)
+        IEnumerable<IExport<object>> IExportProvider.GetExports([NotNull] Type contractType, [CanBeNull] string contractName)
         {
             return _exportProvider
                 .GetExports(contractType, null, contractName ?? string.Empty)
-                .Select(item => new LazyAdapter<object>(item, item.Metadata as IDictionary<string, object>));
+                .Select(item => new ExportAdapter<object>(item, item.Metadata as IDictionary<string, object>));
         }
     }
 }

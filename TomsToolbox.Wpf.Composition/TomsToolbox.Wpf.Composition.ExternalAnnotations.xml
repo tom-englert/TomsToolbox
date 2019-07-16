@@ -174,7 +174,7 @@
   <member name="F:TomsToolbox.Wpf.Composition.ContentControlCompositionBehavior.RoleProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
-  <member name="M:TomsToolbox.Wpf.Composition.DataTemplateManager.CreateDynamicDataTemplates(TomsToolbox.Essentials.IExportProvider)">
+  <member name="M:TomsToolbox.Wpf.Composition.DataTemplateManager.CreateDynamicDataTemplates(TomsToolbox.Composition.IExportProvider)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     <parameter name="exportProvider">
@@ -213,6 +213,40 @@
     </parameter>
     <parameter name="value">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="F:TomsToolbox.Wpf.Composition.ExportProviderLocator.ExportProviderProperty">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Wpf.Composition.ExportProviderLocator.GetExportProvider(System.Windows.DependencyObject)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="obj">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.Composition.ExportProviderLocator.GetMissingExportProviderMessage(System.Windows.DependencyObject)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="obj">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.Composition.ExportProviderLocator.Register(TomsToolbox.Composition.IExportProvider)">
+    <parameter name="exportProvider">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.Composition.ExportProviderLocator.SetExportProvider(System.Windows.DependencyObject,TomsToolbox.Composition.IExportProvider)">
+    <parameter name="obj">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="value">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.Composition.ExportProviderLocator.TryGetExportProvider(System.Windows.DependencyObject)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="obj">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="P:TomsToolbox.Wpf.Composition.ICommandSourceFactory.Description">

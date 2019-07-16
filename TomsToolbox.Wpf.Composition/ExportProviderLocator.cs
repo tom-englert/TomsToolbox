@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Wpf
+﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
     using System.Linq;
@@ -6,7 +6,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Essentials;
+    using TomsToolbox.Composition;
 
     /// <summary>
     /// Provides location service for the export provider to the WPF UI tree.

@@ -1324,40 +1324,6 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="F:TomsToolbox.Wpf.ExportProviderLocator.ExportProviderProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
-  <member name="M:TomsToolbox.Wpf.ExportProviderLocator.GetExportProvider(System.Windows.DependencyObject)">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    <parameter name="obj">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.ExportProviderLocator.GetMissingExportProviderMessage(System.Windows.DependencyObject)">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    <parameter name="obj">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.ExportProviderLocator.Register(TomsToolbox.Essentials.IExportProvider)">
-    <parameter name="exportProvider">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.ExportProviderLocator.SetExportProvider(System.Windows.DependencyObject,TomsToolbox.Essentials.IExportProvider)">
-    <parameter name="obj">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="value">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Wpf.ExportProviderLocator.TryGetExportProvider(System.Windows.DependencyObject)">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    <parameter name="obj">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
   <member name="M:TomsToolbox.Wpf.ForegroundThreadWithDispatcher.#ctor(System.String,System.Threading.ApartmentState)">
     <parameter name="name">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />

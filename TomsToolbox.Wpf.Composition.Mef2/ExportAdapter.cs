@@ -5,24 +5,24 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Essentials;
+    using TomsToolbox.Composition;
 
-    internal class LazyAdapter<T> : ILazy<T>
+    internal class ExportAdapter<T> : IExport<T>
     {
         private readonly Lazy<T> _lazy;
         [CanBeNull]
         private readonly IDictionary<string, object> _metadata;
 
-        public LazyAdapter([NotNull] Func<T> valueFactory, [CanBeNull] IDictionary<string, object> metadata)
+        public ExportAdapter([NotNull] Func<T> valueFactory, [CanBeNull] IDictionary<string, object> metadata)
         {
             _lazy = new Lazy<T>(valueFactory); 
             _metadata = metadata;
         }
 
         [CanBeNull]
-        T ILazy<T, IDictionary<string, object>>.Value => _lazy.Value;
+        T IExport<T, IDictionary<string, object>>.Value => _lazy.Value;
 
         [CanBeNull]
-        IDictionary<string, object> ILazy<T, IDictionary<string, object>>.Metadata => _metadata;
+        IDictionary<string, object> IExport<T, IDictionary<string, object>>.Metadata => _metadata;
     }
 }

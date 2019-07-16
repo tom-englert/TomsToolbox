@@ -11,6 +11,7 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Composition;
     using TomsToolbox.Essentials;
     using TomsToolbox.Wpf.Composition.XamlExtensions;
     using TomsToolbox.Wpf.Interactivity;
@@ -219,7 +220,7 @@
         /// <param name="regionId">The region identifier.</param>
         /// <returns>The exports for the region, or <c>null</c> if the export provider is not set yet.</returns>
         [CanBeNull, ItemNotNull]
-        protected IEnumerable<ILazy<object, IVisualCompositionMetadata>> GetExports([CanBeNull] string regionId)
+        protected IEnumerable<IExport<object, IVisualCompositionMetadata>> GetExports([CanBeNull] string regionId)
         {
             return ExportProvider?
                 .GetExports<IVisualCompositionMetadata>(typeof(object), VisualComposition.ExportContractName, item => new VisualCompositionMetadata(item))

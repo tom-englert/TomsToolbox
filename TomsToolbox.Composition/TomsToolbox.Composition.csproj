@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj" />
-    <ProjectReference Include="..\TomsToolbox.Wpf.Composition\TomsToolbox.Wpf.Composition.csproj" />
   </ItemGroup>
 
 </Project>

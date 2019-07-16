@@ -110,12 +110,12 @@
                 return (contractName != null ? _kernel.GetAll<T>(contractName) : _kernel.GetAll<T>());
             }
 
-            public IEnumerable<ILazy<object>> GetExports(Type contractType, string contractName = null)
+            public IEnumerable<IExport<object>> GetExports(Type contractType, string contractName = null)
             {
                 var bindings = _kernel.GetBindings(contractType)
                     .Where(binding => binding.Metadata.Name == contractName);
 
-                var result = bindings.Select(binding => new LazyAdapter<object>(() => GetExportedValue(binding), binding.Metadata.Get<IDictionary<string, object>>("ExportMetadata")));
+                var result = bindings.Select(binding => new ExportAdapter<object>(() => GetExportedValue(binding), binding.Metadata.Get<IDictionary<string, object>>("ExportMetadata")));
 
                 return result.ToList();
             }
@@ -135,24 +135,24 @@
             }
         }
 
-        internal class LazyAdapter<T> : ILazy<T>
+        internal class ExportAdapter<T> : IExport<T>
         {
             [NotNull]
             private readonly Func<T> _valueFactoryCallback;
             [CanBeNull]
             private readonly IDictionary<string, object> _metadata;
 
-            public LazyAdapter([NotNull] Func<T> valueFactoryCallback, [CanBeNull] IDictionary<string, object> metadata)
+            public ExportAdapter([NotNull] Func<T> valueFactoryCallback, [CanBeNull] IDictionary<string, object> metadata)
             {
                 _valueFactoryCallback = valueFactoryCallback;
                 _metadata = metadata;
             }
 
             [CanBeNull]
-            T ILazy<T, IDictionary<string, object>>.Value => _valueFactoryCallback();
+            T IExport<T, IDictionary<string, object>>.Value => _valueFactoryCallback();
 
             [CanBeNull]
-            IDictionary<string, object> ILazy<T, IDictionary<string, object>>.Metadata => _metadata;
+            IDictionary<string, object> IExport<T, IDictionary<string, object>>.Metadata => _metadata;
         }
     }
 }

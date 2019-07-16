@@ -1,15 +1,15 @@
-﻿namespace TomsToolbox.Essentials
+﻿namespace TomsToolbox.Composition
 {
     using System.Collections.Generic;
 
     using JetBrains.Annotations;
 
     /// <summary>
-    /// Encapsulation of a lazy object with metadata.
+    /// Encapsulation of an IOC exported object with metadata.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <typeparam name="TMetadata">The type of the metadata.</typeparam>
-    public interface ILazy<out T, out TMetadata>
+    public interface IExport<out T, out TMetadata>
     {
         /// <summary>
         /// Gets the value.
@@ -25,10 +25,10 @@
     }
 
     /// <summary>
-    /// Encapsulation of a lazy object with generic metadata.
+    /// Encapsulation of an IOC exported object with generic metadata.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
-    public interface ILazy<out T> : ILazy<T, IDictionary<string, object>>
+    public interface IExport<out T> : IExport<T, IDictionary<string, object>>
     {
     }
 }

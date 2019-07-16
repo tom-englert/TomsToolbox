@@ -7,7 +7,7 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Essentials;
+    using TomsToolbox.Composition;
 
     /// <summary>
     /// An <see cref="IExportProvider"/> adapter for the MEF 2 <see cref="CompositionContext"/>
@@ -46,12 +46,12 @@
             return _context.GetExports<T>(contractName);
         }
 
-        IEnumerable<ILazy<object>> IExportProvider.GetExports([NotNull] Type contractType, [CanBeNull] string contractName)
+        IEnumerable<IExport<object>> IExportProvider.GetExports([NotNull] Type contractType, [CanBeNull] string contractName)
         {
             var exportMethod = GetType().GetMethod(nameof(GetExports))?.MakeGenericMethod(contractType);
             if (exportMethod == null)
                 throw new InvalidOperationException("Method not found: " + nameof(GetExports));
-            return (IEnumerable<ILazy<object>>)exportMethod.Invoke(this, new object[] {contractName});
+            return (IEnumerable<IExport<object>>)exportMethod.Invoke(this, new object[] {contractName});
         }
 
         /// <summary>
@@ -60,11 +60,11 @@
         /// <typeparam name="T">The type of the object</typeparam>
         /// <param name="contractName">Name of the contract.</param>
         /// <returns>The exported object.</returns>
-        public IEnumerable<ILazy<object>> GetExports<T>([CanBeNull] string contractName)
+        public IEnumerable<IExport<object>> GetExports<T>([CanBeNull] string contractName)
         {
             return _context
                 .GetExports<ExportFactory<T, IDictionary<string, object>>>(contractName)
-                .Select(item => new LazyAdapter<object>(() => item.CreateExport().Value, item.Metadata));
+                .Select(item => new ExportAdapter<object>(() => item.CreateExport().Value, item.Metadata));
         }
     }
 }

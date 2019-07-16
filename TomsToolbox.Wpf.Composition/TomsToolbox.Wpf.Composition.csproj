@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TomsToolbox.Composition\TomsToolbox.Composition.csproj" />
     <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj" />
     <ProjectReference Include="..\TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj" />
     <ProjectReference Include="..\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj" />

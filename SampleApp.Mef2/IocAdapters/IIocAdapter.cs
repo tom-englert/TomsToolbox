@@ -2,7 +2,7 @@
 {
     using System;
 
-    using TomsToolbox.Essentials;
+    using TomsToolbox.Composition;
 
     internal interface IIocAdapter : IDisposable
     {

@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Essentials
+﻿namespace TomsToolbox.Composition
 {
     using System;
     using System.Collections.Generic;
@@ -47,7 +47,7 @@
         /// <param name="contractName">Name of the contract.</param>
         /// <returns></returns>
         [NotNull, ItemNotNull]
-        IEnumerable<ILazy<object>> GetExports([NotNull] Type contractType, [CanBeNull] string contractName = null);
+        IEnumerable<IExport<object>> GetExports([NotNull] Type contractType, [CanBeNull] string contractName = null);
     }
 
     /// <summary>
@@ -93,7 +93,7 @@
         /// <param name="metadataFactory">The factory method to create the metadata object from the metadata dictionary.</param>
         /// <returns></returns>
         [NotNull, ItemNotNull]
-        public static IEnumerable<ILazy<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, [NotNull] Type type, [NotNull] Func<IDictionary<string, object>, TMetadata> metadataFactory)
+        public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, [NotNull] Type type, [NotNull] Func<IDictionary<string, object>, TMetadata> metadataFactory)
         {
             return GetExports(exportProvider, type, null, metadataFactory);
         }
@@ -108,19 +108,19 @@
         /// <param name="metadataFactory">The factory method to create the metadata object from the metadata dictionary.</param>
         /// <returns></returns>
         [NotNull, ItemNotNull]
-        public static IEnumerable<ILazy<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, [NotNull] Type type, [CanBeNull] string contractName, [NotNull] Func<IDictionary<string, object>, TMetadata> metadataFactory)
+        public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, [NotNull] Type type, [CanBeNull] string contractName, [NotNull] Func<IDictionary<string, object>, TMetadata> metadataFactory)
         {
             return exportProvider
                 .GetExports(type, contractName)
-                .Select(item => new LazyAdapter<object, TMetadata>(item, metadataFactory));
+                .Select(item => new ExportAdapter<object, TMetadata>(item, metadataFactory));
 
         }
 
-        private class LazyAdapter<TObject, TMetadata> : ILazy<TObject, TMetadata>
+        private class ExportAdapter<TObject, TMetadata> : IExport<TObject, TMetadata>
         {
-            private readonly ILazy<TObject> _source;
+            private readonly IExport<TObject> _source;
 
-            public LazyAdapter(ILazy<TObject> source, Func<IDictionary<string, object>, TMetadata> metadataFactory)
+            public ExportAdapter(IExport<TObject> source, Func<IDictionary<string, object>, TMetadata> metadataFactory)
             {
                 _source = source;
                 Metadata = metadataFactory(source.Metadata);

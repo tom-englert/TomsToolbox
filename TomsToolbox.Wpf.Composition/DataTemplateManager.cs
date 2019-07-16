@@ -9,6 +9,7 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Composition;
     using TomsToolbox.Essentials;
 
     using HashCode = Essentials.HashCode;
@@ -167,7 +168,7 @@
             return HashCode.Aggregate(metadata.DataType?.GetHashCode() ?? 0, (metadata.Role ?? 0).GetHashCode());
         }
 
-        private static bool IsViewModelForType([CanBeNull] this ILazy<object> item, [CanBeNull] Type viewModel, [CanBeNull] object role)
+        private static bool IsViewModelForType([CanBeNull] this IExport<object> item, [CanBeNull] Type viewModel, [CanBeNull] object role)
         {
             var metadata = new DataTemplateMetadata(item?.Metadata);
 

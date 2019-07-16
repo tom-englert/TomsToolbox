@@ -5,8 +5,8 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Essentials;
-    using TomsToolbox.Wpf;
+    using TomsToolbox.Composition;
+    using TomsToolbox.Wpf.Composition;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml

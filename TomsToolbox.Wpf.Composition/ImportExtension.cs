@@ -12,6 +12,7 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Composition;
     using TomsToolbox.Essentials;
 
     /// <summary>
