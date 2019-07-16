@@ -6,7 +6,7 @@
 
     using TomsToolbox.Essentials;
     using TomsToolbox.Wpf.Composition;
-    using TomsToolbox.Wpf.Composition.Mef2;
+    using TomsToolbox.Wpf.Composition.AttributedModel;
 
     [Export, Shared]
     [VisualCompositionExport(RegionId.Menu)]

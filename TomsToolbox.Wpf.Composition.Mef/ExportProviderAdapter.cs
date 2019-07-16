@@ -62,7 +62,7 @@
         {
             return _exportProvider
                 .GetExports(contractType, null, contractName ?? string.Empty)
-                .Select(item => new ExportAdapter<object>(item, item.Metadata as IDictionary<string, object>));
+                .Select(item => new ExportAdapter<object>(() => item.Value, item.Metadata as IDictionary<string, object>));
         }
     }
 }

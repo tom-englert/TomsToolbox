@@ -134,25 +134,5 @@
                 return result;
             }
         }
-
-        internal class ExportAdapter<T> : IExport<T>
-        {
-            [NotNull]
-            private readonly Func<T> _valueFactoryCallback;
-            [CanBeNull]
-            private readonly IDictionary<string, object> _metadata;
-
-            public ExportAdapter([NotNull] Func<T> valueFactoryCallback, [CanBeNull] IDictionary<string, object> metadata)
-            {
-                _valueFactoryCallback = valueFactoryCallback;
-                _metadata = metadata;
-            }
-
-            [CanBeNull]
-            T IExport<T, IDictionary<string, object>>.Value => _valueFactoryCallback();
-
-            [CanBeNull]
-            IDictionary<string, object> IExport<T, IDictionary<string, object>>.Metadata => _metadata;
-        }
     }
 }

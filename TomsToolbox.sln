@@ -42,13 +42,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Composition
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Composition.Styles", "TomsToolbox.Wpf.Compostition.Styles\TomsToolbox.Wpf.Composition.Styles.csproj", "{8A996B96-7062-49D1-BACD-6DD8B33AA599}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Composition.Mef2", "TomsToolbox.Wpf.Composition.Mef2\TomsToolbox.Wpf.Composition.Mef2.csproj", "{169441BC-1695-44A7-8514-DFCD8C31030E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Mef2", "TomsToolbox.Composition.Mef2\TomsToolbox.Composition.Mef2.csproj", "{169441BC-1695-44A7-8514-DFCD8C31030E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Mef2", "SampleApp.Mef2\SampleApp.Mef2.csproj", "{F5144190-2871-46EF-8363-61F511AAE850}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition", "TomsToolbox.Composition\TomsToolbox.Composition.csproj", "{D3B9CE35-0E1C-43D8-8365-46C97E9534E4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Tests", "TomsToolbox.Composition.Tests\TomsToolbox.Composition.Tests.csproj", "{0D80DBAB-1C55-46B7-A78A-4746D42EE022}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Composition.AttributedModel", "TomsToolbox.Wpf.Composition.AttributedModel\TomsToolbox.Wpf.Composition.AttributedModel.csproj", "{2829A34C-8D89-43E4-8F6C-A5D74B68B0A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +129,10 @@ Global
 		{0D80DBAB-1C55-46B7-A78A-4746D42EE022}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D80DBAB-1C55-46B7-A78A-4746D42EE022}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D80DBAB-1C55-46B7-A78A-4746D42EE022}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2829A34C-8D89-43E4-8F6C-A5D74B68B0A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2829A34C-8D89-43E4-8F6C-A5D74B68B0A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2829A34C-8D89-43E4-8F6C-A5D74B68B0A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2829A34C-8D89-43E4-8F6C-A5D74B68B0A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

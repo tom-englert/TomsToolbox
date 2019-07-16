@@ -28,11 +28,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Composition\TomsToolbox.Composition.csproj" />
+    <ProjectReference Include="..\TomsToolbox.Composition.Mef2\TomsToolbox.Composition.Mef2.csproj" />
     <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj" />
     <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj" />
-    <ProjectReference Include="..\TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj" />
+    <ProjectReference Include="..\TomsToolbox.Wpf.Composition.AttributedModel\TomsToolbox.Wpf.Composition.AttributedModel.csproj" />
     <ProjectReference Include="..\TomsToolbox.Wpf.Composition\TomsToolbox.Wpf.Composition.csproj" />
-    <ProjectReference Include="..\TomsToolbox.Wpf.Composition.Mef2\TomsToolbox.Wpf.Composition.Mef2.csproj" />
     <ProjectReference Include="..\TomsToolbox.Wpf.Compostition.Styles\TomsToolbox.Wpf.Composition.Styles.csproj" />
     <ProjectReference Include="..\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj" />
     <ProjectReference Include="..\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj" />

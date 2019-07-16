@@ -9,7 +9,7 @@
     using PropertyChanged;
 
     using TomsToolbox.Wpf;
-    using TomsToolbox.Wpf.Composition.Mef2;
+    using TomsToolbox.Wpf.Composition.AttributedModel;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 99)]
     [ImplementPropertyChanged]

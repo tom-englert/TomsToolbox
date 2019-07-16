@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Wpf.Composition.Mef2
+﻿namespace TomsToolbox.Wpf.Composition.AttributedModel
 {
     using System;
     using System.Composition;

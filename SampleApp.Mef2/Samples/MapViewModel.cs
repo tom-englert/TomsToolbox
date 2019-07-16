@@ -18,7 +18,7 @@ namespace SampleApp.Mef2.Samples
     using SampleApp.Mef2.Map;
 
     using TomsToolbox.Wpf;
-    using TomsToolbox.Wpf.Composition.Mef2;
+    using TomsToolbox.Wpf.Composition.AttributedModel;
     using TomsToolbox.Wpf.Controls;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 1)]

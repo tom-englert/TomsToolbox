@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <assembly name="TomsToolbox.Composition">
+  <member name="M:TomsToolbox.Composition.ExportAdapter`1.#ctor(System.Func{`0},System.Collections.Generic.IDictionary{System.String,System.Object})">
+    <parameter name="valueFactory">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="metadata">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="P:TomsToolbox.Composition.ExportInfo.Metadata">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
@@ -57,6 +65,12 @@
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="P:TomsToolbox.Composition.IExport`2.Metadata">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="P:TomsToolbox.Composition.IExport`2.Value">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Composition.IExportProvider.GetExportedValue``1(System.String)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="contractName">
@@ -85,12 +99,6 @@
     <parameter name="contractName">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
-  </member>
-  <member name="P:TomsToolbox.Composition.ILazy`2.Metadata">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-  <member name="P:TomsToolbox.Composition.ILazy`2.Value">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Composition.MetadataReader.Read(System.Reflection.Assembly)">
     <parameter name="assembly">

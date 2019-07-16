@@ -5,9 +5,8 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Composition;
-    using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;
-    using TomsToolbox.Wpf.Composition.Mef2;
+    using TomsToolbox.Wpf.Composition.AttributedModel;
 
     /// <summary>
     /// Interaction logic for MapView.xaml

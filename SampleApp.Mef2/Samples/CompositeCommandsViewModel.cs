@@ -6,7 +6,7 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Wpf;
-    using TomsToolbox.Wpf.Composition.Mef2;
+    using TomsToolbox.Wpf.Composition.AttributedModel;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 4)]
     public class CompositeCommandsViewModel

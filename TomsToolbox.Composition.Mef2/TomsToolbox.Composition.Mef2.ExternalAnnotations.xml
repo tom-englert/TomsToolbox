@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assembly name="TomsToolbox.Composition.Mef2">
+  <member name="M:TomsToolbox.Wpf.Composition.Mef2.ExportProviderAdapter.#ctor(System.Composition.CompositionContext)">
+    <parameter name="context">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.Composition.Mef2.ExportProviderAdapter.GetExports``1(System.String)">
+    <parameter name="contractName">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+</assembly>
