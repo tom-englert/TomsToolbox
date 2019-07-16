@@ -18,6 +18,8 @@
 
     internal class NinjectAdapter : IIocAdapter
     {
+        private const string ExportMetadataKey = "ExportMetadata";
+
         [CanBeNull]
         private IKernel _kernel;
 
@@ -35,33 +37,83 @@
                 if (exportMetadata == null)
                     continue;
 
-                var selfBinding = kernel.Bind(type).ToSelf();
-
-                foreach (var metadata in exportMetadata)
+                if (exportMetadata.Length == 1)
                 {
+                    var metadata = exportMetadata.Single();
+
                     var explicitContractType = metadata.GetValueOrDefault("ContractType") as Type;
                     var contractName = metadata.GetValueOrDefault("ContractName") as string;
-                    IBindingWhenInNamedWithOrOnSyntax<object> binding;
 
-                    if ((explicitContractType == null) && (contractName == null))
+                    IBindingWhenInNamedWithOrOnSyntax<object> binding;
+                    if (explicitContractType == null)
                     {
-                        binding = selfBinding;
+                        binding = kernel.Bind(type).ToSelf();
                     }
                     else
                     {
-                        binding = kernel.Bind(explicitContractType).ToMethod(_ => kernel.Get(type));
+                        binding = kernel.Bind(explicitContractType).To(type);
+                    }
+
+                    if (contractName != null)
+                    {
+                        binding.Named(contractName);
+                    }
+
+                    binding.WithMetadata(ExportMetadataKey, metadata);
+
+                    if (export.IsShared)
+                    {
+                        binding.InSingletonScope();
+                    }
+                }
+                else if (!export.IsShared)
+                {
+                    foreach (var metadata in exportMetadata)
+                    {
+                        var explicitContractType = metadata.GetValueOrDefault("ContractType") as Type;
+                        var contractName = metadata.GetValueOrDefault("ContractName") as string;
+                        IBindingWhenInNamedWithOrOnSyntax<object> binding;
+
+                        if (explicitContractType == null)
+                        {
+                            binding = kernel.Bind(type).ToSelf();
+                        }
+                        else
+                        {
+                            binding = kernel.Bind(explicitContractType).To(type);
+                        }
 
                         if (contractName != null)
                         {
                             binding.Named(contractName);
                         }
+
+                        binding.WithMetadata(ExportMetadataKey, metadata);
+
+                        if (export.IsShared)
+                        {
+                            binding.InSingletonScope();
+                        }
                     }
+                }
+                else
+                {
+                    var masterBindingName = "71751FFE-46C5-465A-9F50-6AEFD1C14232";
+                    
+                    kernel.Bind(type).ToSelf().InSingletonScope().Named(masterBindingName);
 
-                    binding.WithMetadata("ExportMetadata", metadata);
-
-                    if (export.IsShared)
+                    foreach (var metadata in exportMetadata)
                     {
-                        binding.InSingletonScope();
+                        var explicitContractType = metadata.GetValueOrDefault("ContractType") as Type;
+                        var contractName = metadata.GetValueOrDefault("ContractName") as string;
+                        var binding = kernel.Bind(explicitContractType ?? type).ToMethod(_ => kernel.Get(type, masterBindingName));
+
+                        if (contractName != null)
+                        {
+                            binding.Named(contractName);
+                        }
+
+                        binding.WithMetadata(ExportMetadataKey, metadata);
                     }
                 }
             }
@@ -115,7 +167,7 @@
                 var bindings = _kernel.GetBindings(contractType)
                     .Where(binding => binding.Metadata.Name == contractName);
 
-                var result = bindings.Select(binding => new ExportAdapter<object>(() => GetExportedValue(binding), binding.Metadata.Get<IDictionary<string, object>>("ExportMetadata")));
+                var result = bindings.Select(binding => new ExportAdapter<object>(() => GetExportedValue(binding), binding.Metadata.Get<IDictionary<string, object>>(ExportMetadataKey)));
 
                 return result.ToList();
             }
