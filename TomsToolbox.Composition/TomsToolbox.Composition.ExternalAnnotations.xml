@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <assembly name="TomsToolbox.Composition">
-  <member name="M:TomsToolbox.Composition.ExportAdapter`1.#ctor(System.Func{`0},System.Collections.Generic.IDictionary{System.String,System.Object})">
+  <member name="M:TomsToolbox.Composition.ExportAdapter`1.#ctor(System.Func{`0},TomsToolbox.Composition.IMetadata)">
     <parameter name="valueFactory">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
@@ -17,7 +17,7 @@
   <member name="P:TomsToolbox.Composition.ExportInfo.Type">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
-  <member name="M:TomsToolbox.Composition.ExportProviderExtensions.GetExports``1(TomsToolbox.Composition.IExportProvider,System.Type,System.Func{System.Collections.Generic.IDictionary{System.String,System.Object},``0})">
+  <member name="M:TomsToolbox.Composition.ExtensionMethods.GetExports``1(TomsToolbox.Composition.IExportProvider,System.Type,System.Func{TomsToolbox.Composition.IMetadata,``0})">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="type">
@@ -27,7 +27,7 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="M:TomsToolbox.Composition.ExportProviderExtensions.GetExports``1(TomsToolbox.Composition.IExportProvider,System.Type,System.String,System.Func{System.Collections.Generic.IDictionary{System.String,System.Object},``0})">
+  <member name="M:TomsToolbox.Composition.ExtensionMethods.GetExports``1(TomsToolbox.Composition.IExportProvider,System.Type,System.String,System.Func{TomsToolbox.Composition.IMetadata,``0})">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
     <parameter name="type">
@@ -40,7 +40,19 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="M:TomsToolbox.Composition.ExportProviderExtensions.TryGetExportedValue``1(TomsToolbox.Composition.IExportProvider,``0@)">
+  <member name="M:TomsToolbox.Composition.ExtensionMethods.GetValueOrDefault(TomsToolbox.Composition.IMetadata,System.String)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="metadata">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Composition.ExtensionMethods.GetValueOrDefault``1(TomsToolbox.Composition.IMetadata,System.String)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="metadata">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Composition.ExtensionMethods.TryGetExportedValue``1(TomsToolbox.Composition.IExportProvider,``0@)">
     <attribute ctor="M:JetBrains.Annotations.ContractAnnotationAttribute.#ctor(System.String)">
       <argument>=&gt; false,value:null;=&gt;true,value:notnull</argument>
     </attribute>
@@ -51,15 +63,9 @@
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
-  <member name="M:TomsToolbox.Composition.ExportProviderExtensions.TryGetExportedValue``1(TomsToolbox.Composition.IExportProvider,System.String,``0@)">
-    <attribute ctor="M:JetBrains.Annotations.ContractAnnotationAttribute.#ctor(System.String)">
-      <argument>=&gt; false,value:null;=&gt;true,value:notnull</argument>
-    </attribute>
-    <parameter name="exportProvider">
+  <member name="M:TomsToolbox.Composition.ExtensionMethods.TryGetValue``1(TomsToolbox.Composition.IMetadata,System.String,``0@)">
+    <parameter name="metadata">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="contractName">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="value">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
@@ -97,6 +103,30 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
     <parameter name="contractName">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Composition.IExportProvider.TryGetExportedValue``1(System.String,``0@)">
+    <attribute ctor="M:JetBrains.Annotations.ContractAnnotationAttribute.#ctor(System.String)">
+      <argument>=&gt; false,value:null;=&gt;true,value:notnull</argument>
+    </attribute>
+    <parameter name="contractName">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="value">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Composition.IMetadata.GetValue(System.String)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Composition.IMetadata.TryGetValue(System.String,System.Object@)">
+    <parameter name="value">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Composition.MetadataAdapter.TryGetValue(System.String,System.Object@)">
+    <parameter name="value">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>

@@ -1,8 +1,8 @@
 ﻿namespace TomsToolbox.Wpf.Composition
 {
-    using System.Collections.Generic;
-
     using JetBrains.Annotations;
+
+    using TomsToolbox.Composition;
 
     /// <summary>
     /// Export metadata for composable objects.
@@ -38,7 +38,7 @@
 
     internal class VisualCompositionMetadata : IVisualCompositionMetadata
     {
-        public VisualCompositionMetadata([CanBeNull] IDictionary<string, object> metadata)
+        public VisualCompositionMetadata([CanBeNull] IMetadata metadata)
         {
             if (metadata == null)
                 return;

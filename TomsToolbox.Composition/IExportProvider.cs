@@ -33,6 +33,18 @@
         T GetExportedValueOrDefault<T>([CanBeNull] string contractName = null);
 
         /// <summary>
+        /// Tries to the get exported value.
+        /// </summary>
+        /// <typeparam name="T">The type of the object.</typeparam>
+        /// <param name="contractName">Name of the contract.</param>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// true if the value exists.
+        /// </returns>
+        [ContractAnnotation("=> false,value:null;=>true,value:notnull")]
+        bool TryGetExportedValue<T>([CanBeNull] string contractName, [CanBeNull] out T value);
+
+        /// <summary>
         /// Gets all the exported objects with the specified contract name.
         /// </summary>
         /// <typeparam name="T">The type of the object.</typeparam>
@@ -53,7 +65,7 @@
     /// <summary>
     /// Extension methods for the <see cref="IExportProvider"/> interface.
     /// </summary>
-    public static class ExportProviderExtensions
+    public static partial class ExtensionMethods
     {
         /// <summary>
         /// Tries to the get exported value.
@@ -65,23 +77,7 @@
         [ContractAnnotation("=> false,value:null;=>true,value:notnull")]
         public static bool TryGetExportedValue<T>([NotNull] this IExportProvider exportProvider, [CanBeNull] out T value)
         {
-            return (value = exportProvider.GetExportedValueOrDefault<T>()) != null;
-        }
-
-        /// <summary>
-        /// Tries to the get exported value.
-        /// </summary>
-        /// <typeparam name="T">The type of the object.</typeparam>
-        /// <param name="exportProvider">The export provider.</param>
-        /// <param name="contractName">Name of the contract.</param>
-        /// <param name="value">The value.</param>
-        /// <returns>
-        /// true if the value exists.
-        /// </returns>
-        [ContractAnnotation("=> false,value:null;=>true,value:notnull")]
-        public static bool TryGetExportedValue<T>([NotNull] this IExportProvider exportProvider, [CanBeNull] string contractName, [CanBeNull] out T value)
-        {
-            return (value = exportProvider.GetExportedValueOrDefault<T>(contractName)) != null;
+            return exportProvider.TryGetExportedValue(null, out value);
         }
 
         /// <summary>
@@ -93,7 +89,7 @@
         /// <param name="metadataFactory">The factory method to create the metadata object from the metadata dictionary.</param>
         /// <returns></returns>
         [NotNull, ItemNotNull]
-        public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, [NotNull] Type type, [NotNull] Func<IDictionary<string, object>, TMetadata> metadataFactory)
+        public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, [NotNull] Type type, [NotNull] Func<IMetadata, TMetadata> metadataFactory)
         {
             return GetExports(exportProvider, type, null, metadataFactory);
         }
@@ -108,7 +104,7 @@
         /// <param name="metadataFactory">The factory method to create the metadata object from the metadata dictionary.</param>
         /// <returns></returns>
         [NotNull, ItemNotNull]
-        public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, [NotNull] Type type, [CanBeNull] string contractName, [NotNull] Func<IDictionary<string, object>, TMetadata> metadataFactory)
+        public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, [NotNull] Type type, [CanBeNull] string contractName, [NotNull] Func<IMetadata, TMetadata> metadataFactory)
         {
             return exportProvider
                 .GetExports(type, contractName)
@@ -120,7 +116,7 @@
         {
             private readonly IExport<TObject> _source;
 
-            public ExportAdapter(IExport<TObject> source, Func<IDictionary<string, object>, TMetadata> metadataFactory)
+            public ExportAdapter(IExport<TObject> source, Func<IMetadata, TMetadata> metadataFactory)
             {
                 _source = source;
                 Metadata = metadataFactory(source.Metadata);

@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Composition
 {
     using System;
-    using System.Collections.Generic;
 
     using JetBrains.Annotations;
 
@@ -15,21 +14,21 @@
         private readonly Func<T> _valueFactory;
 
         [CanBeNull]
-        private readonly IDictionary<string, object> _metadata;
+        private readonly IMetadata _metadata;
 
         /// <summary>Initializes a new instance of the <see cref="ExportAdapter{T}"/> class.</summary>
         /// <param name="valueFactory">The value factory.</param>
         /// <param name="metadata">The metadata.</param>
-        public ExportAdapter([NotNull] Func<T> valueFactory, [CanBeNull] IDictionary<string, object> metadata)
+        public ExportAdapter([NotNull] Func<T> valueFactory, [CanBeNull] IMetadata metadata)
         {
             _valueFactory = valueFactory;
             _metadata = metadata;
         }
 
         [CanBeNull]
-        T IExport<T, IDictionary<string, object>>.Value => _valueFactory();
+        T IExport<T, IMetadata>.Value => _valueFactory();
 
         [CanBeNull]
-        IDictionary<string, object> IExport<T, IDictionary<string, object>>.Metadata => _metadata;
+        IMetadata IExport<T, IMetadata>.Metadata => _metadata;
     }
 }

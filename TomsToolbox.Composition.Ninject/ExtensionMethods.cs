@@ -7,8 +7,6 @@
 
     using global::Ninject;
 
-    using TomsToolbox.Essentials;
-
     /// <summary>
     /// Extension methods for Ninject DI
     /// </summary>

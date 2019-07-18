@@ -53,6 +53,13 @@
             return _exportProvider.GetExportedValueOrDefault<T>(contractName ?? string.Empty);
         }
 
+        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string contractName, [CanBeNull] out T value)
+        {
+            value = _exportProvider.GetExportedValueOrDefault<T>();
+
+            return !Equals(value, default(T));
+        }
+
         IEnumerable<T> IExportProvider.GetExportedValues<T>([CanBeNull] string contractName)
         {
             return _exportProvider.GetExportedValues<T>(contractName ?? string.Empty);
@@ -62,7 +69,7 @@
         {
             return _exportProvider
                 .GetExports(contractType, null, contractName ?? string.Empty)
-                .Select(item => new ExportAdapter<object>(() => item.Value, item.Metadata as IDictionary<string, object>));
+                .Select(item => new ExportAdapter<object>(() => item.Value, new MetadataAdapter((IDictionary<string, object>)item.Metadata)));
         }
     }
 }

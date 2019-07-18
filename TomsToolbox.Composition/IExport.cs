@@ -1,7 +1,5 @@
 ﻿namespace TomsToolbox.Composition
 {
-    using System.Collections.Generic;
-
     using JetBrains.Annotations;
 
     /// <summary>
@@ -28,7 +26,7 @@
     /// Encapsulation of an IOC exported object with generic metadata.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
-    public interface IExport<out T> : IExport<T, IDictionary<string, object>>
+    public interface IExport<out T> : IExport<T, IMetadata>
     {
     }
 }

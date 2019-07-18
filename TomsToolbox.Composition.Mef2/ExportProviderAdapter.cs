@@ -41,6 +41,11 @@
             return _context.TryGetExport<T>(contractName, out var value) ? value : default;
         }
 
+        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string contractName, [CanBeNull] out T value)
+        {
+            return _context.TryGetExport(contractName, out value);
+        }
+
         IEnumerable<T> IExportProvider.GetExportedValues<T>([CanBeNull] string contractName)
         {
             return _context.GetExports<T>(contractName);
@@ -64,7 +69,7 @@
         {
             return _context
                 .GetExports<ExportFactory<T, IDictionary<string, object>>>(contractName)
-                .Select(item => new ExportAdapter<object>(() => item.CreateExport().Value, item.Metadata));
+                .Select(item => new ExportAdapter<object>(() => item.CreateExport().Value, new MetadataAdapter(item.Metadata)));
         }
     }
 }

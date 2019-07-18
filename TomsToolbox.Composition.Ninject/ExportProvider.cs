@@ -34,34 +34,49 @@
         /// <inheritdoc />
         public event EventHandler<EventArgs> ExportsChanged;
 
-        /// <inheritdoc />
-        public T GetExportedValue<T>(string contractName = null)
+        T IExportProvider.GetExportedValue<T>([CanBeNull] string contractName)
         {
             return (contractName != null ? _kernel.Get<T>(contractName) : _kernel.Get<T>());
         }
 
-        /// <inheritdoc />
         [CanBeNull]
-        public T GetExportedValueOrDefault<T>(string contractName = null)
+        T IExportProvider.GetExportedValueOrDefault<T>([CanBeNull] string contractName)
         {
-            return GetExportedValues<T>().SingleOrDefault();
+            return GetExportedValues<T>(contractName).SingleOrDefault();
         }
 
-        /// <inheritdoc />
-        public IEnumerable<T> GetExportedValues<T>(string contractName = null)
+        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string contractName, [CanBeNull] out T value)
         {
-            return (contractName != null ? _kernel.GetAll<T>(contractName) : _kernel.GetAll<T>());
+            var values = GetExportedValues<T>(contractName).ToList();
+
+            if (values.Count != 1)
+            {
+                value = default;
+                return false;
+            }
+
+            value = values[0];
+            return true;
         }
 
-        /// <inheritdoc />
-        public IEnumerable<IExport<object>> GetExports(Type contractType, string contractName = null)
+        IEnumerable<T> IExportProvider.GetExportedValues<T>([CanBeNull] string contractName)
+        {
+            return GetExportedValues<T>(contractName);
+        }
+
+        IEnumerable<IExport<object>> IExportProvider.GetExports(Type contractType, [CanBeNull] string contractName)
         {
             var bindings = _kernel.GetBindings(contractType)
                 .Where(binding => binding.Metadata.Name == contractName);
 
-            var result = bindings.Select(binding => new ExportAdapter<object>(() => GetExportedValue(binding), binding.Metadata.Get<IDictionary<string, object>>(ExportMetadataKey)));
+            var result = bindings.Select(binding => new ExportAdapter<object>(() => GetExportedValue(binding), binding.Metadata.Get<IMetadata>(ExportMetadataKey)));
 
             return result.ToList();
+        }
+
+        private IEnumerable<T> GetExportedValues<T>([CanBeNull] string contractName)
+        {
+            return (contractName != null ? _kernel.GetAll<T>(contractName) : _kernel.GetAll<T>());
         }
 
         private object GetExportedValue(IBinding binding)

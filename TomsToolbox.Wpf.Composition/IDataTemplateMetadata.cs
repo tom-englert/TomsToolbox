@@ -1,10 +1,11 @@
 ﻿namespace TomsToolbox.Wpf.Composition
 {
     using System;
-    using System.Collections.Generic;
     using System.Windows;
 
     using JetBrains.Annotations;
+
+    using TomsToolbox.Composition;
 
     /// <summary>
     /// Meta data for exported visuals.
@@ -33,7 +34,7 @@
 
     internal class DataTemplateMetadata : IDataTemplateMetadata
     {
-        public DataTemplateMetadata([CanBeNull] IDictionary<string, object>  metadata)
+        public DataTemplateMetadata([CanBeNull] IMetadata  metadata)
         {
             if (metadata == null)
                 return;

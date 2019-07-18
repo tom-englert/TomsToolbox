@@ -35,8 +35,11 @@
             VisualComposition.Trace += (sender, args) => Trace.WriteLine(args.Text);
             BindingErrorTracer.Start(BindingErrorCallback);
 
-            // _iocAdapter = new Mef2Adapter();
+            //*
+              _iocAdapter = new Mef2Adapter();
+            /*/
             _iocAdapter = new NinjectAdapter();
+            //*/
 
             var exportProvider = _iocAdapter.Initialize();
 

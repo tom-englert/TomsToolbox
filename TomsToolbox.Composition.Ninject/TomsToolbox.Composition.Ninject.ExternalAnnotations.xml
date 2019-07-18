@@ -1,6 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<assembly name="TomsToolbox.Composition.Ninject">
-  <member name="M:TomsToolbox.Composition.Ninject.ExportProvider.GetExportedValueOrDefault``1(System.String)">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-  </member>
-</assembly>
+<assembly name="TomsToolbox.Composition.Ninject" />
