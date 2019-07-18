@@ -1,8 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>Net462</TargetFramework>
-  </PropertyGroup>
+  <Tags>Sample</Tags></PropertyGroup>
 
   <ItemGroup>
     <Reference Include="System.ComponentModel.Composition" />

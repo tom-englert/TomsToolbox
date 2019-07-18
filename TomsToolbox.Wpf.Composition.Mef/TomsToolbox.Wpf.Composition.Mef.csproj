@@ -1,7 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>net45;netcoreapp3.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
@@ -26,7 +27,7 @@
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="All" />
     <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.13.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19270-01" PrivateAssets="All" />
-    <PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" Condition="'$(TargetFramework)'=='netcoreapp3.0'"/>
+    <PackageReference Include="System.ComponentModel.Composition" Version="4.5.0" Condition="'$(TargetFramework)'=='netcoreapp3.0'" />
   </ItemGroup>
 
   <ItemGroup>

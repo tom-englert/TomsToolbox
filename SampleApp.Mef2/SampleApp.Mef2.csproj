@@ -1,9 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net462;netcoreapp30</TargetFrameworks>
+    <TargetFrameworks>net45;netcoreapp3.0</TargetFrameworks>
     <UseWPF>true</UseWPF>
-  </PropertyGroup>
+  <Tags>Sample</Tags></PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net462'">
     <Reference Include="System.Reflection.Context" />

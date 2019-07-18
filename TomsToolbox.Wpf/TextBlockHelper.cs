@@ -38,7 +38,7 @@
         {
             obj.SetValue(IsTextTrimmedPropertyKey, value);
         }
-        [NotNull] 
+        [NotNull]
         private static readonly DependencyPropertyKey IsTextTrimmedPropertyKey
             = DependencyProperty.RegisterAttachedReadOnly("IsTextTrimmed", typeof(bool), typeof(TextBlockHelper), new FrameworkPropertyMetadata());
         /// <summary>
@@ -50,7 +50,7 @@
         /// reflects if the text inside the text block is trimmed, i.e. not fully visible.
         /// </summary>
         /// </AttachedPropertyComments>
-        [NotNull] 
+        [NotNull]
         public static readonly DependencyProperty IsTextTrimmedProperty = IsTextTrimmedPropertyKey.DependencyProperty;
 
         /// <summary>
@@ -82,7 +82,8 @@
         /// This property is used by the style identified with the <see cref="ResourceKeys.AutoToolTipTextBoxStyle"/> to display of a tool tip only if the text of the text block is trimmed.
         /// </summary>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty IsAutomaticToolTipEnabledProperty
+        [NotNull]
+        public static readonly DependencyProperty IsAutomaticToolTipEnabledProperty
             = DependencyProperty.RegisterAttached("IsAutomaticToolTipEnabled", typeof(bool), typeof(TextBlockHelper), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>
@@ -145,8 +146,12 @@
 
             var typeface = new Typeface(fontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch);
             var numberSubstitution = new NumberSubstitution(NumberSubstitution.GetCultureSource(textBlock), NumberSubstitution.GetCultureOverride(textBlock), NumberSubstitution.GetSubstitution(textBlock));
+#if NET45
+            var formattedText = new FormattedText(text, CultureInfo.CurrentCulture, textBlock.FlowDirection, typeface, textBlock.FontSize, textBlock.Foreground, numberSubstitution, TextOptions.GetTextFormattingMode(textBlock));
+#else
             var pixelsPerDip = textBlock.GetPhysicalPixelSize().Height;
             var formattedText = new FormattedText(text, CultureInfo.CurrentCulture, textBlock.FlowDirection, typeface, textBlock.FontSize, textBlock.Foreground, numberSubstitution, TextOptions.GetTextFormattingMode(textBlock), pixelsPerDip);
+#endif
 
             var padding = textBlock.Padding;
             var actualWidth = textBlock.ActualWidth - padding.Left - padding.Right;

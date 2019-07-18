@@ -104,7 +104,7 @@ In code the class names would be ambiguous, while in XAML a namespace prefixes i
     <VisibleItems>Attributes, InheritedMembers, Protected, ProtectedInternalAsProtected, EditorBrowsableNever, NonBrowsable</VisibleItems>
     <HelpFileVersion>1.0.0.0</HelpFileVersion>
     <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
-  </PropertyGroup>
+  <Tags>Docu</Tags></PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
