@@ -1,14 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using JetBrains.Annotations;
-
 namespace TomsToolbox.Wpf
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
+    using JetBrains.Annotations;
+
     /// <summary>
     /// Helper methods to parse or create text representations of a table.
     /// </summary>

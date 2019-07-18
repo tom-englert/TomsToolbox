@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Wpf.Composition.Mef2
+﻿namespace TomsToolbox.Composition.Mef2
 {
     using System;
     using System.Collections.Generic;

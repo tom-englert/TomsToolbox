@@ -8,8 +8,7 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Composition;
-    using TomsToolbox.Essentials;
-    using TomsToolbox.Wpf.Composition.Mef2;
+    using TomsToolbox.Composition.Mef2;
     using TomsToolbox.Wpf.Converters;
 
     public sealed class Mef2Adapter : IIocAdapter

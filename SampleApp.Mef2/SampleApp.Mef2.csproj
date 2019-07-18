@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TomsToolbox.Composition.Ninject\TomsToolbox.Composition.Ninject.csproj" />
     <ProjectReference Include="..\TomsToolbox.Composition\TomsToolbox.Composition.csproj" />
     <ProjectReference Include="..\TomsToolbox.Composition.Mef2\TomsToolbox.Composition.Mef2.csproj" />
     <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj" />
@@ -37,7 +38,7 @@
     <ProjectReference Include="..\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj" />
     <ProjectReference Include="..\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <None Update="Properties\Resources.Designer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

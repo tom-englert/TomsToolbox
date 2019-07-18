@@ -1,6 +1,5 @@
 namespace TomsToolbox.Wpf.Controls
 {
-
     using JetBrains.Annotations;
 
     /// <summary>

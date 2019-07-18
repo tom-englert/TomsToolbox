@@ -8,8 +8,6 @@ namespace TomsToolbox.Wpf.Tests
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using TomsToolbox.Wpf;
-
     [TestClass]
     public class PropertyDependencyAttributeTests
     {
