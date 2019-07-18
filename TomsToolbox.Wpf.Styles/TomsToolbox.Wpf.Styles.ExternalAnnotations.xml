@@ -1,11 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <assembly name="TomsToolbox.Wpf.Styles">
-  <member name="M:TomsToolbox.Wpf.Styles.IThemeResourceProvider.LoadThemeResources(System.Windows.ResourceDictionary)">
-    <parameter name="resource">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.AccentDarkBrush">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>

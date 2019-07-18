@@ -326,6 +326,12 @@
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
   </member>
+  <member name="M:TomsToolbox.Wpf.Composition.IThemeResourceProvider.LoadThemeResources(System.Windows.ResourceDictionary)">
+    <parameter name="resource">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="P:TomsToolbox.Wpf.Composition.IVisualCompositionBehavior.CompositionContext">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
