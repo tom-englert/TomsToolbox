@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Title>Tom's Toolbox WPF Module</Title>
+    <Title>Tom's Toolbox Composition - Mef2 Module</Title>
   </PropertyGroup>
 
   <ItemGroup>
