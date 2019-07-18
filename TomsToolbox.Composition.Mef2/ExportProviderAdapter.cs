@@ -7,8 +7,6 @@
 
     using JetBrains.Annotations;
 
-    using TomsToolbox.Composition;
-
     /// <summary>
     /// An <see cref="IExportProvider"/> adapter for the MEF 2 <see cref="CompositionContext"/>
     /// </summary>
