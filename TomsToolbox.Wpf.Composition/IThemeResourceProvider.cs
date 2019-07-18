@@ -1,6 +1,5 @@
-﻿namespace TomsToolbox.Wpf.Styles
+﻿namespace TomsToolbox.Wpf.Composition
 {
-    using System.Diagnostics.Contracts;
     using System.Windows;
 
     using JetBrains.Annotations;
@@ -9,7 +8,6 @@
     /// The interface to be implemented and exported by application specific theme resource providers. 
     /// Theme resource providers can load additional theme specific resources into the resource dictionary.
     /// </summary>
-    [ContractClass(typeof(ThemeResourceProviderContract))]
     public interface IThemeResourceProvider
     {
         /// <summary>
@@ -17,15 +15,5 @@
         /// </summary>
         /// <param name="resource">The resource where the provider can add the theme specific resource.</param>
         void LoadThemeResources([NotNull, ItemCanBeNull] ResourceDictionary resource);
-    }
-
-    [ContractClassFor(typeof(IThemeResourceProvider))]
-    internal abstract class ThemeResourceProviderContract : IThemeResourceProvider
-    {
-        public void LoadThemeResources(ResourceDictionary resource)
-        {
-            Contract.Requires(resource != null);
-            throw new System.NotImplementedException();
-        }
     }
 }

@@ -9,8 +9,10 @@
     /// <summary>
     /// Attaches default handling for the <see cref="WindowCommands"/>
     /// </summary>
-    public class WindowButtonsHandlingBehavior : Behavior<Window>
+    public class WindowButtonsHandlingBehavior : Behavior<DependencyObject>
     {
+        [CanBeNull]
+        private Window _window;
         /// <summary>
         /// Called after the behavior is attached to an AssociatedObject.
         /// </summary>
@@ -21,7 +23,9 @@
         {
             base.OnAttached();
 
-            var window = AssociatedObject;
+            var window = _window = Window.GetWindow(AssociatedObject);
+            if (window == null)
+                return;
 
             window.CommandBindings.Add(new CommandBinding(WindowCommands.Close, Close));
 
@@ -38,42 +42,50 @@
 
         private void Minimize([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
         {
-            var window = AssociatedObject;
+            var window = _window;
+            if (window == null)
+                return;
 
             window.WindowState = WindowState.Minimized;
         }
 
         private void Close([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
         {
-            var window = AssociatedObject;
-
-            window.Close();
+            _window?.Close();
         }
 
         private void CanRestore([CanBeNull] object sender, [NotNull] CanExecuteRoutedEventArgs e)
         {
-            var window = AssociatedObject;
+            var window = _window;
+            if (window == null)
+                return;
 
             e.CanExecute = window.WindowState != WindowState.Normal;
         }
 
         private void Restore([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
         {
-            var window = AssociatedObject;
+            var window = _window;
+            if (window == null)
+                return;
 
             window.WindowState = WindowState.Normal;
         }
 
         private void CanMaximize([CanBeNull] object sender, [NotNull] CanExecuteRoutedEventArgs e)
         {
-            var window = AssociatedObject;
+            var window = _window;
+            if (window == null)
+                return;
 
             e.CanExecute = (window.WindowState == WindowState.Normal) && ((window.ResizeMode == ResizeMode.CanResize) || (window.ResizeMode == ResizeMode.CanResizeWithGrip));
         }
 
         private void Maximize([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
         {
-            var window = AssociatedObject;
+            var window = _window;
+            if (window == null)
+                return;
 
             window.WindowState = WindowState.Maximized;
         }

@@ -11,14 +11,6 @@
     <Setter Property="UseLayoutRounding" Value="True" />
     <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
     <Setter Property="SnapsToDevicePixels" Value="True" />
-    <Setter Property="toms:StyleBindings.Behaviors">
-      <Setter.Value>
-        <toms:BehaviorCollection>
-          <toms:WindowButtonsHandlingBehavior />
-          <styles:ThemeResourceLoaderBehavior />
-        </toms:BehaviorCollection>
-      </Setter.Value>
-    </Setter>
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="Window">
@@ -26,6 +18,7 @@
             <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
               <i:Interaction.Behaviors>
                 <toms:CustomNonClientAreaBehavior BorderSize="4,4" CornerSize="8,8" />
+                <toms:WindowButtonsHandlingBehavior />
               </i:Interaction.Behaviors>
               <Grid x:Name="ClientAndCaption">
                 <DockPanel>
