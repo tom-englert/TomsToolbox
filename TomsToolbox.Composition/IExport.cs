@@ -23,7 +23,7 @@
     }
 
     /// <summary>
-    /// Encapsulation of an IOC exported object with generic metadata.
+    /// Encapsulation of an DI exported object with generic metadata.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
     public interface IExport<out T> : IExport<T, IMetadata>
