@@ -21,7 +21,7 @@
         /// Reads the export info and metadata from the specified assembly.
         /// </summary>
         /// <param name="assembly">The assembly.</param>
-        /// <returns></returns>
+        /// <returns>The export info for each type with an export attribute in the assembly.</returns>
         public static IList<ExportInfo> Read([NotNull] Assembly assembly)
         {
             var result = new List<ExportInfo>();

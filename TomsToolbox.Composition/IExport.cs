@@ -3,7 +3,7 @@
     using JetBrains.Annotations;
 
     /// <summary>
-    /// Encapsulation of an IOC exported object with metadata.
+    /// Encapsulation of an DI exported object with metadata.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <typeparam name="TMetadata">The type of the metadata.</typeparam>

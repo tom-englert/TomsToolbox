@@ -123,7 +123,7 @@
             DependencyProperty.Register("InternalCompositionContextBinding", typeof(BindingBase), typeof(VisualCompositionBehavior<T>));
 
         /// <summary>
-        /// Gets or sets the export provider (IOC). The export provider must be registered with the <see cref="ExportProviderLocator"/>.
+        /// Gets or sets the export provider (DI container). The export provider must be registered with the <see cref="ExportProviderLocator"/>.
         /// </summary>
         [CanBeNull]
         protected IExportProvider ExportProvider

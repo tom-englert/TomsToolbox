@@ -9,7 +9,7 @@
     using TomsToolbox.Wpf.Composition.XamlExtensions;
 
     /// <summary>
-    /// A control used to create dynamic content from an IOC container.
+    /// A control used to create dynamic content from an DI container.
     /// </summary>
     public class ComposableContentControl : ContentControl
     {

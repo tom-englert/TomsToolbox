@@ -128,5 +128,14 @@
             add => base.PropertyChanged += value;
             remove => base.PropertyChanged -= value;
         }
+
+/*
+        // ReSharper disable once EmptyDestructor
+        /// <inheritdoc />
+        ~ObservableWrappedCollection()
+        {
+
+        }
+*/
     }
 }

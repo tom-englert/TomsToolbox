@@ -86,11 +86,8 @@
             return ((IEnumerable)_collectionView).GetEnumerator();
         }
 
-        /// <summary>
-        /// Gets or sets the element at the specified index.
-        /// </summary>
-        /// <param name="index">The index.</param>
-        /// <returns></returns>
+
+        /// <inheritdoc />
         [CanBeNull]
         public T this[int index]
         {

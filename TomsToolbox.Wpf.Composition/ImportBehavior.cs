@@ -11,7 +11,7 @@
     using TomsToolbox.Wpf.Interactivity;
 
     /// <summary>
-    /// A behavior to set a dependency property of the associated object to a value retrieved from the IOC. The default target property is the <see cref="FrameworkElement.DataContextProperty"/>.
+    /// A behavior to set a dependency property of the associated object to a value retrieved from the DI container. The default target property is the <see cref="FrameworkElement.DataContextProperty"/>.
     /// </summary>
     /// <seealso cref="FrameworkElementBehavior{T}" />
     public class ImportBehavior : FrameworkElementBehavior<FrameworkElement>

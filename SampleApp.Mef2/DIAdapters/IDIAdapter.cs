@@ -1,10 +1,10 @@
-﻿namespace SampleApp.Mef2.IocAdapters
+﻿namespace SampleApp.Mef2.DIAdapters
 {
     using System;
 
     using TomsToolbox.Composition;
 
-    internal interface IIocAdapter : IDisposable
+    internal interface IDIAdapter : IDisposable
     {
         IExportProvider Initialize();
     }

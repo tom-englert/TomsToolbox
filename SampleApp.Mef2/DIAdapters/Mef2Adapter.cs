@@ -1,4 +1,4 @@
-﻿namespace SampleApp.Mef2.IocAdapters
+﻿namespace SampleApp.Mef2.DIAdapters
 {
     using System.Composition;
     using System.Composition.Convention;
@@ -11,7 +11,7 @@
     using TomsToolbox.Composition.Mef2;
     using TomsToolbox.Wpf.Converters;
 
-    public sealed class Mef2Adapter : IIocAdapter
+    public sealed class Mef2Adapter : IDIAdapter
     {
         [CanBeNull]
         private CompositionHost _container;

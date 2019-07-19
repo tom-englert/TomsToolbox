@@ -43,6 +43,7 @@
         /// <summary>
         /// Gets the metadata with the specified name.
         /// </summary>
+        /// <typeparam name="T">The type of the metadata object.</typeparam>
         /// <param name="metadata"></param>
         /// <param name="name">The name.</param>
         /// <param name="value">The value.</param>

@@ -1,4 +1,4 @@
-﻿namespace SampleApp.Mef2.IocAdapters
+﻿namespace SampleApp.Mef2.DIAdapters
 {
     using System.Windows.Data;
 
@@ -11,7 +11,7 @@
     using TomsToolbox.Composition.Ninject;
     using TomsToolbox.Wpf.Converters;
 
-    internal class NinjectAdapter : IIocAdapter
+    internal class NinjectAdapter : IDIAdapter
     {
         [CanBeNull]
         private IKernel _kernel;

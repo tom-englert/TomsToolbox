@@ -156,5 +156,14 @@
                 Items.Remove(item);
             }
         }
+
+/*
+        // ReSharper disable once EmptyDestructor
+        /// <inheritdoc />
+        ~ObservableFilteredCollection()
+        {
+
+        }
+*/
     }
 }

@@ -8,7 +8,7 @@
 
     using JetBrains.Annotations;
 
-    using SampleApp.Mef2.IocAdapters;
+    using SampleApp.Mef2.DIAdapters;
 
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;
@@ -20,7 +20,7 @@
     /// </summary>
     public sealed partial class App : IDisposable
     {
-        private IIocAdapter _iocAdapter;
+        private IDIAdapter _diAdapter;
 
         public App()
         {
@@ -36,12 +36,12 @@
             BindingErrorTracer.Start(BindingErrorCallback);
 
             //*
-              _iocAdapter = new Mef2Adapter();
+            _diAdapter = new Mef2Adapter();
             /*/
-            _iocAdapter = new NinjectAdapter();
+            _diAdapter = new NinjectAdapter();
             //*/
 
-            var exportProvider = _iocAdapter.Initialize();
+            var exportProvider = _diAdapter.Initialize();
 
             Resources.MergedDictionaries.Insert(0, WpfStyles.GetDefaultStyles().RegisterDefaultWindowStyle());
             Resources.MergedDictionaries.Add(DataTemplateManager.CreateDynamicDataTemplates(exportProvider));
@@ -49,7 +49,7 @@
             var mainWindow = exportProvider.GetExportedValue<MainWindow>();
 
             MainWindow = mainWindow;
-            
+
             mainWindow.Show();
         }
 
@@ -67,7 +67,7 @@
 
         public void Dispose()
         {
-            _iocAdapter?.Dispose();
+            _diAdapter?.Dispose();
         }
     }
 }

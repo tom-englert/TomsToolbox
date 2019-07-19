@@ -3,24 +3,24 @@
   <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
 
     <introduction>
-      <para>A rich set of core functions and classes to ease every days .Net development tasks.</para>
+      <para>A rich set of functions and classes to ease every days .Net development tasks.</para>
       <para/>
-      <para>The Core module is available as portable (net40+sl50+win+wpa81+wp80) and .Net 4.0 client version</para>
-      <para>All other modules are based on .Net 4.0, so it will work great with any version of .Net 4.0 and higher.</para>
-      <para>Some extensions are also available as .Net 4.5 to make use of it's new features.</para>
+      <para>The modules are targeting .Net 4.5 or NetStandard 2.0/3.0, depending on the functionality they provide</para>
       <para>
+        All code is annotated with
         <externalLink>
-          <linkText>CodeContracts</linkText>
-          <linkUri>http://research.microsoft.com/en-us/projects/contracts/</linkUri>
+          <linkText>R# Nullability</linkText>
+          <linkUri>https://www.jetbrains.com/help/resharper/Code_Analysis__Value_Analysis.html</linkUri>
         </externalLink>
-        reference assemblies are part of all packages, so you can build robust code.
+        attributes, so you can easily build robust code. The use of the 
+        <externalLink>
+          <linkText>ImplicitNullability</linkText>
+          <linkUri>https://github.com/ulrichb/ImplicitNullability</linkUri>
+        </externalLink>
+        is highly recommended.
       </para>
       <para>
-        Symbol files for debugging are available at
-        <externalLink>
-          <linkText>SymbolSource.org</linkText>
-          <linkUri>http://www.symbolsource.org</linkUri>
-        </externalLink>. Use http://srv.symbolsource.org/pdb/Public as symbol server url.
+        Symbol files with direct references to the GitHub sources are included, so you can easily debug the libraries.
       </para>
     </introduction>
 
@@ -35,7 +35,7 @@
             <para>
               Use <externalLink>
                 <linkText>NuGet</linkText>
-                <linkUri>http://www.nuget.org/packages/TomsToolbox.Wpf/</linkUri>
+                <linkUri>https://www.nuget.org/packages?q=TomsToolbox</linkUri>
               </externalLink> to integrate the library into your projects.
             </para>
           </listItem>
@@ -43,7 +43,7 @@
             <para>
               Download the source code from <externalLink>
                 <linkText>GitHub</linkText>
-                <linkUri>http://tom-englert.github.io/TomsToolbox/</linkUri>
+                <linkUri>https://github.com/tom-englert/TomsToolbox</linkUri>
               </externalLink> to learn about the internals or integrate the parts of interest with your own tool set.
             </para>
           </listItem>
