@@ -2,7 +2,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net462</TargetFrameworks>
-  <Tags>Test</Tags></PropertyGroup>
+    <DebugType>full</DebugType>
+    <Tags>Test</Tags>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="WindowsBase" />
   </ItemGroup>
