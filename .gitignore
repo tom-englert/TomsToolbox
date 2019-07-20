@@ -25,3 +25,4 @@
 .vs/
 
 _ReSharper.Caches/
+*.received.*
