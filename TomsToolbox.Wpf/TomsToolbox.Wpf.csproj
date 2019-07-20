@@ -5,6 +5,7 @@
     <TargetFrameworks>net45;netcoreapp3.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <UseWpf>true</UseWpf>
   </PropertyGroup>
 
   <PropertyGroup>
