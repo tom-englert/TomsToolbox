@@ -61,26 +61,27 @@
     <ProjectSummary>A set of simple but useful classes and functions to ease our daily .Net development tasks.</ProjectSummary>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
-<NamespaceSummaryItem name="TomsToolbox.Essentials" isDocumented="True">Core classes and functions that only depend on System functions. Available for any project targeting .Net4.5 or .NetStandard 2.0</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Desktop" isDocumented="True">Classes and functions that use functionality avaiable only in desktop environments targeting .Net 4.5 or .Net Core 3.0 Desktop. This assembly has e.g. a reference to WindwosBase.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.ObservableCollections" isDocumented="True">Classes and functions around observable collections.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf" isDocumented="True">Classes and functions for WPF applications.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Controls" isDocumented="True">Some common reusable WPF controls</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Converters" isDocumented="True">WPF converters</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Interactivity" isDocumented="True">System.Windows.Interactivity extensions</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Composition" isDocumented="True">WPF visual composition framework implementation</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.XamlExtensions" isDocumented="True">Special namespace that contains classes that are usually used only in XAML and not by code. 
+      <NamespaceSummaryItem name="TomsToolbox.Essentials" isDocumented="True">Core classes and functions that only depend on System functions. Available for any project targeting .Net4.5 or .NetStandard 2.0</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Desktop" isDocumented="True">Classes and functions that use functionality avaiable only in desktop environments targeting .Net 4.5 or .Net Core 3.0 Desktop. This assembly has e.g. a reference to WindwosBase.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.ObservableCollections" isDocumented="True">Classes and functions around observable collections.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf" isDocumented="True">Classes and functions for WPF applications.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Controls" isDocumented="True">Some common reusable WPF controls</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Converters" isDocumented="True">WPF converters</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Interactivity" isDocumented="True">System.Windows.Interactivity extensions</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Composition" isDocumented="True">WPF visual composition framework implementation</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.XamlExtensions" isDocumented="True">Special namespace that contains classes that are usually used only in XAML and not by code. 
 In code the class names would be ambiguous, while in XAML a namespace prefixes is needed anyhow, so the useage is clear.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Styles" isDocumented="True">Custom window and control styles</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Styles.Effects" isDocumented="True">Effects that can be used in styles</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Composition" isDocumented="True">The basic infrastrcuture to adapt various DI frameworks</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Composition.Mef2" isDocumented="True">Adapters for MEF2 (System.Composition)</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Composition.Ninject" isDocumented="True">Adapters for the Ninject DI framework</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.AttributedModel" isDocumented="True">WPF visual composition framework adapters for use with System.Composition.AttributedModel</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.Mef" isDocumented="True">WPF visual composition framework adapters for use with Mef1 (System.ComponentModel.Composition)</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.Styles" isDocumented="True">WPF styles for composite controls</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.XamlExtensions" isDocumented="True">Special namespace that contains classes that are usually used only in XAML and not by code. 
-In code the class names would be ambiguous, while in XAML a namespace prefixes is needed anyhow, so the useage is clear.</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Styles" isDocumented="True">Custom window and control styles</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Styles.Effects" isDocumented="True">Effects that can be used in styles</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Composition" isDocumented="True">The basic infrastrcuture to adapt various DI frameworks</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Composition.Mef2" isDocumented="True">Adapters for MEF2 (System.Composition)</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Composition.Ninject" isDocumented="True">Adapters for the Ninject DI framework</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.AttributedModel" isDocumented="True">WPF visual composition framework adapters for use with System.Composition.AttributedModel</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.Mef" isDocumented="True">WPF visual composition framework adapters for use with Mef1 (System.ComponentModel.Composition)</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.Styles" isDocumented="True">WPF styles for composite controls</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.XamlExtensions" isDocumented="True">Special namespace that contains classes that are usually used only in XAML and not by code. 
+In code the class names would be ambiguous, while in XAML a namespace prefixes is needed anyhow, so the useage is clear.</NamespaceSummaryItem>
+    </NamespaceSummaries>
     <FeedbackEMailLinkText>https://github.com/tom-englert/TomsToolbox/issues</FeedbackEMailLinkText>
     <CopyrightText>&amp;#169%3b tom-englert.de 2012-2019</CopyrightText>
     <CopyrightHref>https://github.com/tom-englert/TomsToolbox/blob/master/LICENSE</CopyrightHref>
@@ -136,6 +137,21 @@ In code the class names would be ambiguous, while in XAML a namespace prefixes i
     <Content Include="icons\Help.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TomsToolbox.Composition.Mef2\TomsToolbox.Composition.Mef2.csproj">
+      <Name>TomsToolbox.Composition.Mef2</Name>
+      <Project>{169441bc-1695-44a7-8514-dfcd8c31030e}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Composition.Ninject\TomsToolbox.Composition.Ninject.csproj">
+      <Name>TomsToolbox.Composition.Ninject</Name>
+      <Project>{81f4a721-04e9-4e1c-8502-4b2a9462d537}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Composition\TomsToolbox.Composition.csproj">
+      <Name>TomsToolbox.Composition</Name>
+      <Project>{d3b9ce35-0e1c-43d8-8365-46c97e9534e4}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj">
       <Name>TomsToolbox.Essentials</Name>
       <Project>{ae305312-7637-43bf-9156-7ec513c55135}</Project>
@@ -151,7 +167,32 @@ In code the class names would be ambiguous, while in XAML a namespace prefixes i
       <Project>{e3ee79ea-50ec-4d54-b59f-799d50e8b221}</Project>
       <Private>True</Private>
     </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Wpf.Composition.AttributedModel\TomsToolbox.Wpf.Composition.AttributedModel.csproj">
+      <Name>TomsToolbox.Wpf.Composition.AttributedModel</Name>
+      <Project>{2829a34c-8d89-43e4-8f6c-a5d74b68b0a2}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Wpf.Composition.Mef\TomsToolbox.Wpf.Composition.Mef.csproj">
+      <Name>TomsToolbox.Wpf.Composition.Mef</Name>
+      <Project>{1680ac6f-65f1-4f6b-8835-2e109c0bd4f8}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Wpf.Composition\TomsToolbox.Wpf.Composition.csproj">
+      <Name>TomsToolbox.Wpf.Composition</Name>
+      <Project>{250eb66a-eecd-449e-90c7-15dc8683a5c4}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Wpf.Compostition.Styles\TomsToolbox.Wpf.Composition.Styles.csproj">
+      <Name>TomsToolbox.Wpf.Composition.Styles</Name>
+      <Project>{8a996b96-7062-49d1-bacd-6dd8b33aa599}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj" Condition="$(TargetFramework)=='dummy'">
+      <Name>TomsToolbox.Wpf.Styles</Name>
+      <Project>{e5d732d2-0294-48fd-8314-63dc1a9155fe}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj">
       <Name>TomsToolbox.Wpf.Styles</Name>
       <Project>{e5d732d2-0294-48fd-8314-63dc1a9155fe}</Project>
       <Private>True</Private>
