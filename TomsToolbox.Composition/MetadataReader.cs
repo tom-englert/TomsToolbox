@@ -89,7 +89,7 @@
         /// Gets or sets the metadata of each export.
         /// </summary>
         [CanBeNull]
-        public IMetadata[] Metadata { get; set; }
+        public IDictionary<string, object>[] Metadata { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is marked as being constrained to sharing within the specified boundary.
@@ -114,14 +114,14 @@
             }
         }
 
-        private IMetadata ReadMetadata(CustomAttributeData exportAttribute)
+        private IDictionary<string, object> ReadMetadata(CustomAttributeData exportAttribute)
         {
             var metadata = new Dictionary<string, object>();
 
             GetConstructorParameters(exportAttribute, metadata);
             GetNamedArguments(exportAttribute, metadata);
 
-            return new MetadataAdapter(metadata);
+            return metadata;
         }
 
         private static void GetConstructorParameters(CustomAttributeData exportAttribute, IDictionary<string, object> metadata)

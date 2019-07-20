@@ -7,6 +7,8 @@
 
     using global::Ninject;
 
+    using TomsToolbox.Essentials;
+
     /// <summary>
     /// Extension methods for Ninject DI
     /// </summary>
@@ -64,7 +66,7 @@
                             binding.Named(contractName);
                         }
 
-                        binding.WithMetadata(ExportProvider.ExportMetadataKey, metadata);
+                        binding.WithMetadata(ExportProvider.ExportMetadataKey, new MetadataAdapter(metadata));
 
                         if (export.IsShared)
                         {

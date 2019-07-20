@@ -241,6 +241,7 @@
                 }
             }
 
+            // ReSharper disable once UnusedParameter.Local
             private static void DrawAdorners([NotNull] DrawingContext drawingContext, [NotNull] TextBox textBox, [NotNull] [ItemNotNull] IList<WhiteSpace> adorners, int firstIndex, int lastIndex, Size desiredSize, [NotNull] Typeface typeface, double fontSize, [NotNull] Brush brush, NumberSubstitution numberSubstitution, TextFormattingMode textFormattingMode, double pixelsPerDip)
             {
                 while (true)

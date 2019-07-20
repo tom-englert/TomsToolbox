@@ -35,7 +35,7 @@
             VisualComposition.Trace += (sender, args) => Trace.WriteLine(args.Text);
             BindingErrorTracer.Start(BindingErrorCallback);
 
-            //*
+            /*
             _diAdapter = new Mef2Adapter();
             /*/
             _diAdapter = new NinjectAdapter();
