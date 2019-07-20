@@ -1,11 +1,19 @@
 # Tom's Toolbox ![Badge](https://tom-englert.visualstudio.com/_apis/public/build/definitions/75bf84d2-d359-404a-a712-07c9f693f635/8/badge) [![NuGet Status](http://img.shields.io/nuget/v/TomsToolbox.Wpf.svg?style=flat)](https://www.nuget.org/packages?q=tomstoolbox)
 A set of core functions and classes to ease every days .Net development tasks.
 
+----
+
+Version 2.x has been refactored to support netstandard2.0/netcoreapp3.0, which required some breaking changes with versoin 1.x, and droping support for .Net frameworks < 4.5
+
+Sources of version 1.x can be found [here](https://github.com/tom-englert/TomsToolbox1)
+
+----
+
 Contains many extension methods, a WPF Composite MVVM framework, Controls etc...
 
 - Browse the documentation to find out how this library can support you: [Tom's Toolbox](http://tomstoolbox.azurewebsites.net)
 - Use [NuGet](https://www.nuget.org/packages?q=tomstoolbox) to integrate the library into your projects
-- Look at the [sample app](https://clickonce-tom-englert.azurewebsites.net/TomsToolbox/SampleApp.application) to try some of the use cases that this library can help you with
+- Look at the sample apps to discover some of the use cases that this library can help you with
 - Download the source code to integrate the parts of interest with your own tool set
 
 Powerd by&nbsp;&nbsp;&nbsp;<a href="http://www.jetbrains.com/resharper/"><img src="http://www.tom-englert.de/Images/icon_ReSharper.png" alt="ReSharper" width="64" height="64" /></a> &nbsp;&nbsp;&nbsp; <a href="http://research.microsoft.com/en-us/projects/contracts/"></a>&nbsp;</p>

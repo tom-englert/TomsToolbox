@@ -11,7 +11,7 @@
     <Title>Tom's Toolbox WPF Styles Module</Title>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />

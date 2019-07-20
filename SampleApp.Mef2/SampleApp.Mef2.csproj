@@ -6,15 +6,6 @@
     <UseWPF>true</UseWPF>
   <Tags>Sample</Tags></PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='net462'">
-    <Reference Include="System.Reflection.Context" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Fody" Version="5.1.1" PrivateAssets="all" />
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="all" />
