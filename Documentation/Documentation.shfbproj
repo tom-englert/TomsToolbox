@@ -187,11 +187,6 @@ In code the class names would be ambiguous, while in XAML a namespace prefixes i
       <Project>{8a996b96-7062-49d1-bacd-6dd8b33aa599}</Project>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj" Condition="$(TargetFramework)=='dummy'">
-      <Name>TomsToolbox.Wpf.Styles</Name>
-      <Project>{e5d732d2-0294-48fd-8314-63dc1a9155fe}</Project>
-      <Private>True</Private>
-    </ProjectReference>
     <ProjectReference Include="..\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj">
       <Name>TomsToolbox.Wpf.Styles</Name>
       <Project>{e5d732d2-0294-48fd-8314-63dc1a9155fe}</Project>

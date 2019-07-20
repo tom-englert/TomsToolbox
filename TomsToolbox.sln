@@ -34,8 +34,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Mef1", "SampleApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Tests", "TomsToolbox.Wpf.Tests\TomsToolbox.Wpf.Tests.csproj", "{726D085F-C3E1-444B-96AB-0B40C3DC0311}"
 EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation\Documentation.shfbproj", "{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Composition", "TomsToolbox.Wpf.Composition\TomsToolbox.Wpf.Composition.csproj", "{250EB66A-EECD-449E-90C7-15DC8683A5C4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Composition.Mef", "TomsToolbox.Wpf.Composition.Mef\TomsToolbox.Wpf.Composition.Mef.csproj", "{1680AC6F-65F1-4F6B-8835-2E109C0BD4F8}"
@@ -53,6 +51,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Composition.AttributedModel", "TomsToolbox.Wpf.Composition.AttributedModel\TomsToolbox.Wpf.Composition.AttributedModel.csproj", "{2829A34C-8D89-43E4-8F6C-A5D74B68B0A2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Ninject", "TomsToolbox.Composition.Ninject\TomsToolbox.Composition.Ninject.csproj", "{81F4A721-04E9-4E1C-8502-4B2A9462D537}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation\Documentation.shfbproj", "{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
