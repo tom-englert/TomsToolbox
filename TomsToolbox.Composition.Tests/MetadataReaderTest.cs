@@ -1,5 +1,7 @@
 ﻿namespace TomsToolbox.Composition.Tests
 {
+    using System.Runtime.CompilerServices;
+
     using ApprovalTests;
     using ApprovalTests.Reporters;
 
@@ -11,7 +13,7 @@
     [UseReporter(typeof(DiffReporter))]
     public class MetadataReaderTest
     {
-        [TestMethod]
+        [TestMethod, MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         public void ReadSampleAppTest()
         {
             var assembly = typeof(SampleApp.Mef1.App).Assembly;
@@ -22,7 +24,7 @@
             Approvals.VerifyJson(data);
         }
 
-        [TestMethod]
+        [TestMethod, MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         public void ReadSampleAppMef2Test()
         {
             var assembly = typeof(SampleApp.Mef2.App).Assembly;
