@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assembly name="TomsToolbox.Core">
+  <member name="M:TomsToolbox.Core.Deprecated.Dummy">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+</assembly>
