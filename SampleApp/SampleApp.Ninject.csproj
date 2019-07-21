@@ -9,4 +9,8 @@
   <ItemGroup>
     <Compile Remove="DIAdapters\Mef2Adapter.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <!-- ensure sequential build of both projects -->
+    <ProjectReference Include="SampleApp.Mef2.csproj" />
+  </ItemGroup>
 </Project>
