@@ -1,4 +1,4 @@
-﻿namespace SampleApp.Mef2
+﻿namespace SampleApp
 {
     public static class TemplateRoles
     {

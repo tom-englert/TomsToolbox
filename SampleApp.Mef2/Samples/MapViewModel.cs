@@ -1,6 +1,6 @@
 ﻿#pragma warning disable CCRSI_CreateContractInvariantMethod // Missing Contract Invariant Method.
 
-namespace SampleApp.Mef2.Samples
+namespace SampleApp.Samples
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace SampleApp.Mef2.Samples
 
     using PropertyChanged;
 
-    using SampleApp.Mef2.Map;
+    using SampleApp.Map;
 
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition.AttributedModel;

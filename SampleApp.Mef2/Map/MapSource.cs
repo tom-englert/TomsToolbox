@@ -1,4 +1,4 @@
-﻿namespace SampleApp.Mef2.Map
+﻿namespace SampleApp.Map
 {
     using System;
     using System.Globalization;

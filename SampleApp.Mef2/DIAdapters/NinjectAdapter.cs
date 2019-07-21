@@ -1,5 +1,6 @@
-﻿namespace SampleApp.Mef2.DIAdapters
+﻿namespace SampleApp.DIAdapters
 {
+    using System;
     using System.Windows.Data;
 
     using JetBrains.Annotations;
@@ -11,7 +12,7 @@
     using TomsToolbox.Composition.Ninject;
     using TomsToolbox.Wpf.Converters;
 
-    internal class NinjectAdapter : IDIAdapter
+    internal sealed class DIAdapter : IDisposable
     {
         [CanBeNull]
         private IKernel _kernel;

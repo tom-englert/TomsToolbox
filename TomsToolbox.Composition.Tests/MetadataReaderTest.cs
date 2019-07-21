@@ -27,7 +27,7 @@
         [TestMethod, MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         public void ReadSampleAppMef2Test()
         {
-            var assembly = typeof(SampleApp.Mef2.App).Assembly;
+            var assembly = typeof(SampleApp.App).Assembly;
             var result = MetadataReader.Read(assembly);
 
             var data = JsonConvert.SerializeObject(result);

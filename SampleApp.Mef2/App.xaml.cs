@@ -1,4 +1,4 @@
-﻿namespace SampleApp.Mef2
+﻿namespace SampleApp
 {
     using System;
     using System.Diagnostics;
@@ -8,7 +8,7 @@
 
     using JetBrains.Annotations;
 
-    using SampleApp.Mef2.DIAdapters;
+    using SampleApp.DIAdapters;
 
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;
@@ -20,7 +20,7 @@
     /// </summary>
     public sealed partial class App : IDisposable
     {
-        private IDIAdapter _diAdapter;
+        private DIAdapter _diAdapter;
 
         public App()
         {
@@ -35,11 +35,7 @@
             VisualComposition.Trace += (sender, args) => Trace.WriteLine(args.Text);
             BindingErrorTracer.Start(BindingErrorCallback);
 
-            /*
-            _diAdapter = new Mef2Adapter();
-            /*/
-            _diAdapter = new NinjectAdapter();
-            //*/
+            _diAdapter = new DIAdapter();
 
             var exportProvider = _diAdapter.Initialize();
 

@@ -1,4 +1,4 @@
-﻿namespace SampleApp.Mef2.Samples
+﻿namespace SampleApp.Samples
 {
     using System.Windows;
     using System.Windows.Input;

@@ -7,6 +7,6 @@
   </PropertyGroup>
   <Import Project="SampleApp.csproj" />
   <ItemGroup>
-    <Compile Remove="DIAdapters\NinjectAdapter.cs" />
+    <Compile Remove="DIAdapters\Mef2Adapter.cs" />
   </ItemGroup>
 </Project>

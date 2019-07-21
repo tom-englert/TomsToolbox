@@ -1,8 +1,8 @@
-﻿namespace SampleApp.Mef2.Samples
+﻿namespace SampleApp.Samples
 {
     using System.Composition;
 
-    using SampleApp.Mef2.Properties;
+    using SampleApp.Properties;
 
     using TomsToolbox.Essentials;
     using TomsToolbox.Wpf.Composition;
@@ -20,7 +20,7 @@
     [Export, Shared]
     [VisualCompositionExport(RegionId.FileSubMenu, RegionId.ToolBar, Sequence = 1)]
     [LocalizedDisplayName(StringResourceKey.Open)]
-    [Text(IconUriKey, "pack://application:,,,/SampleApp.Mef2;component/Assets/open.png")]
+    [Text(IconUriKey, "pack://application:,,,/SampleApp;component/Assets/open.png")]
     [Text(GroupNameKey, "File")]
     public class OpenCommand : CommandSourceFactory
     {
@@ -29,7 +29,7 @@
     [Export, Shared]
     [VisualCompositionExport(RegionId.FileSubMenu, RegionId.ToolBar, Sequence = 2)]
     [LocalizedDisplayName(StringResourceKey.Close)]
-    [Text(IconUriKey, "pack://application:,,,/SampleApp.Mef2;component/Assets/close.png")]
+    [Text(IconUriKey, "pack://application:,,,/SampleApp;component/Assets/close.png")]
     [Text(GroupNameKey, "File")]
     public class CloseCommand : CommandSourceFactory
     {
@@ -47,7 +47,7 @@
     [Export, Shared]
     [VisualCompositionExport(RegionId.ContextMenu, RegionId.EditSubMenu, RegionId.ToolBar, Sequence = 14)]
     [LocalizedDisplayName(StringResourceKey.Delete)]
-    [Text(IconUriKey, "pack://application:,,,/SampleApp.Mef2;component/Assets/delete.png")]
+    [Text(IconUriKey, "pack://application:,,,/SampleApp;component/Assets/delete.png")]
     [Text(GroupNameKey, "Edit")]
     public class DeleteCommand : CommandSourceFactory
     {
@@ -56,7 +56,7 @@
     [Export, Shared]
     [VisualCompositionExport(RegionId.ContextMenu, RegionId.EditSubMenu, RegionId.ToolBar, Sequence = 11)]
     [LocalizedDisplayName(StringResourceKey.Cut)]
-    [Text(IconUriKey, "pack://application:,,,/SampleApp.Mef2;component/Assets/cut.png")]
+    [Text(IconUriKey, "pack://application:,,,/SampleApp;component/Assets/cut.png")]
     [Text(GroupNameKey, "Edit")]
     public class CutCommand : CommandSourceFactory
     {
@@ -65,7 +65,7 @@
     [Export, Shared]
     [VisualCompositionExport(RegionId.ContextMenu, RegionId.EditSubMenu, RegionId.ToolBar, Sequence = 12)]
     [LocalizedDisplayName(StringResourceKey.Copy)]
-    [Text(IconUriKey, "pack://application:,,,/SampleApp.Mef2;component/Assets/copy.png")]
+    [Text(IconUriKey, "pack://application:,,,/SampleApp;component/Assets/copy.png")]
     [Text(GroupNameKey, "Edit")]
     public class CopyCommand : CommandSourceFactory
     {
@@ -74,7 +74,7 @@
     [Export, Shared]
     [VisualCompositionExport(RegionId.ContextMenu, RegionId.EditSubMenu, RegionId.ToolBar, Sequence = 13)]
     [LocalizedDisplayName(StringResourceKey.Paste)]
-    [Text(IconUriKey, "pack://application:,,,/SampleApp.Mef2;component/Assets/paste.png")]
+    [Text(IconUriKey, "pack://application:,,,/SampleApp;component/Assets/paste.png")]
     [Text(GroupNameKey, "Edit")]
     public class PasteCommand : CommandSourceFactory
     {

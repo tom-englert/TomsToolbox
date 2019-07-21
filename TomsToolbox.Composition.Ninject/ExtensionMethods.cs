@@ -92,7 +92,7 @@
                             binding.Named(contractName);
                         }
 
-                        binding.WithMetadata(ExportProvider.ExportMetadataKey, metadata);
+                        binding.WithMetadata(ExportProvider.ExportMetadataKey, new MetadataAdapter(metadata));
                     }
                 }
             }

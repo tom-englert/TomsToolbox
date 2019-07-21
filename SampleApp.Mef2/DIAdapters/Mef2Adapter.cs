@@ -1,5 +1,6 @@
-﻿namespace SampleApp.Mef2.DIAdapters
+﻿namespace SampleApp.DIAdapters
 {
+    using System;
     using System.Composition;
     using System.Composition.Convention;
     using System.Composition.Hosting;
@@ -11,7 +12,7 @@
     using TomsToolbox.Composition.Mef2;
     using TomsToolbox.Wpf.Converters;
 
-    public sealed class Mef2Adapter : IDIAdapter
+    internal sealed class DIAdapter : IDisposable
     {
         [CanBeNull]
         private CompositionHost _container;
