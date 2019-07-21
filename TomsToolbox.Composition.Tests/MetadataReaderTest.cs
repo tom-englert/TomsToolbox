@@ -1,6 +1,8 @@
 ﻿namespace TomsToolbox.Composition.Tests
 {
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Text.RegularExpressions;
 
     using ApprovalTests;
     using ApprovalTests.Reporters;
@@ -13,26 +15,33 @@
     [UseReporter(typeof(DiffReporter))]
     public class MetadataReaderTest
     {
-        [TestMethod, MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static readonly Regex _versionRegex = new Regex(@"Version=2\.\d+\.\d+\.\d+");
+
+        [TestMethod]
         public void ReadSampleAppTest()
         {
             var assembly = typeof(SampleApp.Mef1.App).Assembly;
             var result = MetadataReader.Read(assembly);
 
-            var data = JsonConvert.SerializeObject(result);
+            var data = Serialize(result);
 
             Approvals.VerifyJson(data);
         }
 
-        [TestMethod, MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        [TestMethod]
         public void ReadSampleAppMef2Test()
         {
             var assembly = typeof(SampleApp.App).Assembly;
             var result = MetadataReader.Read(assembly);
 
-            var data = JsonConvert.SerializeObject(result);
+            var data = Serialize(result);
 
             Approvals.VerifyJson(data);
+        }
+
+        private static string Serialize(IList<ExportInfo> result)
+        {
+            return _versionRegex.Replace(JsonConvert.SerializeObject(result), "Version=2.0.0.0");
         }
     }
 }
