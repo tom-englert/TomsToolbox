@@ -42,7 +42,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Composition
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Mef2", "TomsToolbox.Composition.Mef2\TomsToolbox.Composition.Mef2.csproj", "{169441BC-1695-44A7-8514-DFCD8C31030E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Mef2", "SampleApp.Mef2\SampleApp.Mef2.csproj", "{F5144190-2871-46EF-8363-61F511AAE850}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Mef2", "SampleApp\SampleApp.Mef2.csproj", "{F5144190-2871-46EF-8363-61F511AAE850}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition", "TomsToolbox.Composition\TomsToolbox.Composition.csproj", "{D3B9CE35-0E1C-43D8-8365-46C97E9534E4}"
 EndProject
@@ -54,7 +54,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Nin
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation\Documentation.shfbproj", "{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Ninject", "SampleApp.Mef2\SampleApp.Ninject.csproj", "{335EFE69-FB35-4E73-8D52-A067A410AFC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Ninject", "SampleApp\SampleApp.Ninject.csproj", "{335EFE69-FB35-4E73-8D52-A067A410AFC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
