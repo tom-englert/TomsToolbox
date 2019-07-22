@@ -19,7 +19,8 @@
     /// relaying events of other objects using the <see cref="RelayedEventAttribute"/>.
     /// </summary>
     /// <remarks>
-    /// Also implements <see cref="IDataErrorInfo"/> (and INotifyDataErrorInfo in .Net4.5++) to support validation. The default implementation examines <see cref="ValidationAttribute"/> on the affected properties to retrieve error information.
+    /// Also implements <see cref="IDataErrorInfo"/> and <see cref="INotifyDataErrorInfo"/> to support validation.
+    /// The default implementation examines <see cref="ValidationAttribute"/> on the affected properties to retrieve error information.
     /// </remarks>
     [Serializable]
     public abstract class ObservableObjectBase : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
@@ -152,7 +153,7 @@
         /// <typeparam name="T">The type of the property.</typeparam>
         /// <param name="backingField">The backing field for the property.</param>
         /// <param name="value">The value.</param>
-        /// <param name="propertyName">Name of the property; <c>.Net 4.5 only:</c> omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
+        /// <param name="propertyName">Name of the property; omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
         /// <returns>True if value has changed and the PropertyChange event was raised. </returns>
         [NotifyPropertyChangedInvocator]
         // ReSharper disable once AssignNullToNotNullAttribute
@@ -197,7 +198,7 @@
         /// <param name="backingField">The backing field for the property.</param>
         /// <param name="value">The value.</param>
         /// <param name="changeCallback">The callback that is invoked if the value has changed. Parameters are (oldValue, newValue).</param>
-        /// <param name="propertyName">Name of the property; omit this parameter to use the callers name provided by the CallerMemberNameAttribute (.Net4.5 only)</param>
+        /// <param name="propertyName">Name of the property; omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
         /// <returns> True if value has changed and the PropertyChange event was raised. </returns>
         [NotifyPropertyChangedInvocator]
         protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Action<T, T> changeCallback, [NotNull] string propertyName)
@@ -208,7 +209,7 @@
         /// <summary>
         /// Raises the <see cref="PropertyChanged"/> event for the property with the specified name.
         /// </summary>
-        /// <param name="propertyName">Name of the property; <c>.Net 4.5 only:</c> omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
+        /// <param name="propertyName">Name of the property; omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
         [NotifyPropertyChangedInvocator]
         // ReSharper disable once NotNullOnImplicitCanBeNull
         // ReSharper disable once AssignNullToNotNullAttribute

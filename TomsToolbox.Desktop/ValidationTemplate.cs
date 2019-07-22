@@ -20,7 +20,6 @@
     /// [assembly: ValidationTemplateAttribute(typeof(TomsToolbox.Desktop.ValidationTemplate))]
     /// </code>
     /// </example>
-    /// <remarks>When using the net45 package, INotifyDataErrorInfo is supported as well.</remarks>
     public class ValidationTemplate : IDataErrorInfo, INotifyDataErrorInfo
     {
         [NotNull]
