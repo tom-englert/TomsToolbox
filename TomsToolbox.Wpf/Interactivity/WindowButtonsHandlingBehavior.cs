@@ -23,7 +23,7 @@
         {
             base.OnAttached();
 
-            var window = _window = Window.GetWindow(AssociatedObject);
+            var window = _window = AssociatedObject as Window ?? Window.GetWindow(AssociatedObject);
             if (window == null)
                 return;
 

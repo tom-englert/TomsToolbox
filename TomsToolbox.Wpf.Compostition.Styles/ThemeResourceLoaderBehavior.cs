@@ -21,7 +21,7 @@
         {
             base.OnAttached();
 
-            var window = Window.GetWindow(AssociatedObject);
+            var window = AssociatedObject as Window ?? Window.GetWindow(AssociatedObject);
 
             Dispatcher?.BeginInvoke(() =>
             {
