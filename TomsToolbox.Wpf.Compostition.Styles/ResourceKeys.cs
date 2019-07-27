@@ -19,5 +19,10 @@
         /// A style to build composite menus.
         /// </summary>
         [NotNull] public static readonly ResourceKey CompositeMenuStyle = new ComponentResourceKey(typeof(ResourceKeys), "CompositeMenuStyle");
+
+        /// <summary>
+        /// The resource key for the <see cref="Window"/> style.
+        /// </summary>
+        [NotNull] public static readonly ResourceKey WindowStyle = new ComponentResourceKey(typeof(ResourceKeys), "WindowStyle");
     }
 }

@@ -8,6 +8,16 @@
   xmlns:toms="urn:TomsToolbox"
   xmlns:composition="urn:TomsToolbox.Composition">
 
+  <Style x:Key="{x:Static local:ResourceKeys.WindowStyle}" TargetType="Window" BasedOn="{StaticResource {x:Static styles:ResourceKeys.WindowStyle}}">
+    <Setter Property="toms:StyleBindings.Behaviors">
+      <Setter.Value>
+        <toms:BehaviorCollection>
+          <local:ThemeResourceLoaderBehavior />
+        </toms:BehaviorCollection>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
   <ControlTemplate x:Key="MenuGroupItemTemplate" TargetType="{x:Type GroupItem}">
     <StackPanel>
       <Separator Style="{DynamicResource {x:Static styles:ResourceKeys.MenuItemSeparatorStyle}}" />

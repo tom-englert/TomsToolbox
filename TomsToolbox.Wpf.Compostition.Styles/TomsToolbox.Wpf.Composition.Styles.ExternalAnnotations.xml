@@ -1,9 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <assembly name="TomsToolbox.Wpf.Composition.Styles">
+  <member name="M:TomsToolbox.Wpf.Composition.Styles.IThemeResourceProvider.LoadThemeResources(System.Windows.ResourceDictionary)">
+    <parameter name="resource">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="F:TomsToolbox.Wpf.Composition.Styles.ResourceKeys.CompositeContextMenuStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
   <member name="F:TomsToolbox.Wpf.Composition.Styles.ResourceKeys.CompositeMenuStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Composition.Styles.ResourceKeys.WindowStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
 </assembly>
