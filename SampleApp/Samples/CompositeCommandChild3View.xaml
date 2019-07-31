@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SampleApp.Samples.CompositeCommandChild2View"
+﻿<UserControl x:Class="SampleApp.Samples.CompositeCommandChild3View"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,14 +6,12 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:composition="urn:TomsToolbox.Composition"
              xmlns:local="clr-namespace:SampleApp.Samples"
-             d:DataContext="{d:DesignInstance local:CompositeCommandChild2ViewModel}">
+             d:DataContext="{d:DesignInstance local:CompositeCommandChild3ViewModel}">
   <Grid>
     <TextBox Margin="10" Text="{Binding Text}" />
   </Grid>
   <i:Interaction.Behaviors>
-    <composition:CommandRoutingBehavior CommandSource="{x:Type local:CutCommand}" CommandTarget="{Binding CutCommand}" IsFocusRequired="True" />
     <composition:CommandRoutingBehavior CommandSource="{x:Type local:CopyCommand}" CommandTarget="{Binding CopyCommand}" x:Name="CopyCommand" IsFocusRequired="True" />
-    <composition:CommandRoutingBehavior CommandSource="{x:Type local:PasteCommand}" CommandTarget="{Binding PasteCommand}" IsFocusRequired="True" />
   </i:Interaction.Behaviors>
   <UserControl.Style>
     <Style TargetType="UserControl">

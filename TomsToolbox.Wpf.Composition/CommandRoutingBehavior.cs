@@ -30,7 +30,8 @@
         /// <summary>
         /// Identifies the <see cref="CommandSource"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty CommandSourceProperty =
+        [NotNull]
+        public static readonly DependencyProperty CommandSourceProperty =
             DependencyProperty.Register("CommandSource", typeof(Type), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata((sender, e) => ((CommandRoutingBehavior)sender)?.CommandSource_Changed((Type)e.OldValue, (Type)e.NewValue)));
 
 
@@ -52,7 +53,8 @@
         /// <summary>
         /// Identifies the <see cref="CommandTarget"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty CommandTargetProperty =
+        [NotNull]
+        public static readonly DependencyProperty CommandTargetProperty =
             DependencyProperty.Register("CommandTarget", typeof(ICommand), typeof(CommandRoutingBehavior));
 
 
@@ -68,7 +70,8 @@
         /// <summary>
         /// Identifies the <see cref="CommandParameter"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty CommandParameterProperty =
+        [NotNull]
+        public static readonly DependencyProperty CommandParameterProperty =
             DependencyProperty.Register("CommandParameter", typeof(object), typeof(CommandRoutingBehavior));
 
 
@@ -84,7 +87,8 @@
         /// <summary>
         /// Identifies the <see cref="CompositionContext"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty CompositionContextProperty =
+        [NotNull]
+        public static readonly DependencyProperty CompositionContextProperty =
             DependencyProperty.Register("CompositionContext", typeof(object), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata((sender, e) => ((CommandRoutingBehavior)sender)?.CompositionContext_Changed(e.OldValue, e.NewValue)));
 
 
@@ -100,7 +104,8 @@
         /// <summary>
         /// Identifies the <see cref="IsEnabled"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty IsEnabledProperty =
+        [NotNull]
+        public static readonly DependencyProperty IsEnabledProperty =
             DependencyProperty.Register("IsEnabled", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, e) => ((CommandRoutingBehavior)sender)?.StateChanged()));
 
 
@@ -137,6 +142,22 @@
         /// </summary>
         [NotNull]
         public static readonly DependencyProperty IsActiveProperty = _isActivePropertyKey.DependencyProperty;
+
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance only enables command routing if the owning element has the focus.
+        /// </summary>
+        public bool IsFocusRequired
+        {
+            get => this.GetValue<bool>(IsFocusRequiredProperty);
+            set => SetValue(IsFocusRequiredProperty, value);
+        }
+        /// <summary>
+        /// Identifies the <see cref="IsFocusRequired"/> dependency property
+        /// </summary>
+        [NotNull]
+        public static readonly DependencyProperty IsFocusRequiredProperty =
+            DependencyProperty.Register("IsFocusRequired", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(false, (sender, e) => ((CommandRoutingBehavior)sender)?.StateChanged()));
 
 
         private void CommandSource_Changed([CanBeNull] Type oldValue, [CanBeNull] Type newValue)
@@ -283,7 +304,10 @@
             {
                 var associatedObject = AssociatedObject;
 
-                return (associatedObject != null) && IsEnabled && associatedObject.IsLoaded && associatedObject.IsVisible;
+                return (associatedObject != null)
+                    && IsEnabled
+                    && associatedObject.IsLoaded
+                    && associatedObject.IsVisible;
             }
         }
 
@@ -297,7 +321,10 @@
 
         bool ICommand.CanExecute([CanBeNull] object parameter)
         {
-            return CommandTarget.CanExecute(CommandParameter);
+            var associatedObject = AssociatedObject;
+            return (associatedObject != null)
+                   && (!IsFocusRequired || associatedObject.IsKeyboardFocusWithin) 
+                   && CommandTarget.CanExecute(CommandParameter);
         }
 
         event EventHandler ICommand.CanExecuteChanged

@@ -32,7 +32,7 @@
     <None Include="..\TomsToolbox.snk">
       <Link>TomsToolbox.snk</Link>
     </None>
-    <None Include="$(ProjectName).ExternalAnnotations.xml" Condition="Exists('$(ProjectName).ExternalAnnotations.xml')">
+    <None Update="$(ProjectName).ExternalAnnotations.xml" Condition="Exists('$(ProjectName).ExternalAnnotations.xml')">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

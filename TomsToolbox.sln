@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		CodeContracts.ruleset = CodeContracts.ruleset
 		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
 		LICENSE = LICENSE
 		README.md = README.md
 		Resources.Designer.t4 = Resources.Designer.t4
@@ -54,7 +55,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Nin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Ninject", "SampleApp\SampleApp.Ninject.csproj", "{335EFE69-FB35-4E73-8D52-A067A410AFC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Core", "TomsToolbox.Core\TomsToolbox.Core.csproj", "{2DFD98E0-44F6-499A-9E8E-C24482D4B676}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Core", "TomsToolbox.Core\TomsToolbox.Core.csproj", "{2DFD98E0-44F6-499A-9E8E-C24482D4B676}"
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation\Documentation.shfbproj", "{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}"
 EndProject
