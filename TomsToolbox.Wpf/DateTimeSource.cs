@@ -7,6 +7,8 @@
 
     using JetBrains.Annotations;
 
+    using WeakEventHandler;
+
     /// <summary>
     /// Provides values for date and time suitable for bindings.
     /// </summary>
@@ -20,10 +22,14 @@
     /// and MyDayOfWeek will be updated with the actual value:
     /// <para/>
     /// MyDayOfWeek="{Binding Path=Today.DayOfWeek, Source={x:Static toms:DateTimeSource.Default}}"
+    /// <para />
+    /// Another usage is a local instance timer triggered 
     /// </remarks>
-    public class DateTimeSource : ObservableObject
+    public class DateTimeSource : INotifyPropertyChanged
     {
-        [NotNull]
+        private static readonly PropertyChangedEventArgs _nowArgs = new PropertyChangedEventArgs(nameof(Now));
+        private static readonly PropertyChangedEventArgs _todayArgs = new PropertyChangedEventArgs(nameof(Today));
+        private static readonly PropertyChangedEventArgs _utcNowArgs = new PropertyChangedEventArgs(nameof(UtcNow));
         private readonly DispatcherTimer _updateTimer = new DispatcherTimer();
 
         /// <summary>
@@ -40,11 +46,24 @@
             _updateTimer.Tick += UpdateTimer_Tick;
         }
 
+        /// <summary>
+        /// Finalizes an instance of the <see cref="DateTimeSource"/> class.
+        /// </summary>
+        ~DateTimeSource()
+        {
+            _updateTimer.Stop();
+        }
+
+        [MakeWeak]
         private void UpdateTimer_Tick([CanBeNull] object sender, [CanBeNull] EventArgs eventArgs)
         {
-            OnPropertyChanged(nameof(Now));
-            OnPropertyChanged(nameof(Today));
-            OnPropertyChanged(nameof(UtcNow));
+            var eventHandler = PropertyChanged;
+            if (eventHandler == null)
+                return;
+
+            eventHandler(this, _nowArgs);
+            eventHandler(this, _todayArgs);
+            eventHandler(this, _utcNowArgs);
         }
 
         /// <summary>
@@ -91,5 +110,8 @@
         /// A <see cref="T:System.DateTime"/> whose value is the current UTC date and time.
         /// </returns>
         public DateTime UtcNow => DateTime.UtcNow;
+
+        /// <inheritdoc />
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
