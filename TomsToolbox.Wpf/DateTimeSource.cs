@@ -23,7 +23,16 @@
     /// <para/>
     /// MyDayOfWeek="{Binding Path=Today.DayOfWeek, Source={x:Static toms:DateTimeSource.Default}}"
     /// <para />
-    /// Another usage is a local instance timer triggered 
+    /// Another usage is to use a local instance with timer triggered property change events:
+    /// <code language="xaml">
+    /// <![CDATA[
+    /// <FrameworkElement.Resources>
+    ///   <toms:DateTimeSource x:Key="TimeSource" UpdateInterval="00:00:01" />
+    /// </FrameworkElement.Resources>
+    /// ...
+    /// <TextBox Text={Binding Path=Now, Source={StaticResource TimeSource}}" />
+    /// ]]>
+    /// </code>
     /// </remarks>
     public class DateTimeSource : INotifyPropertyChanged
     {
@@ -44,26 +53,6 @@
         public DateTimeSource()
         {
             _updateTimer.Tick += UpdateTimer_Tick;
-        }
-
-        /// <summary>
-        /// Finalizes an instance of the <see cref="DateTimeSource"/> class.
-        /// </summary>
-        ~DateTimeSource()
-        {
-            _updateTimer.Stop();
-        }
-
-        [MakeWeak]
-        private void UpdateTimer_Tick([CanBeNull] object sender, [CanBeNull] EventArgs eventArgs)
-        {
-            var eventHandler = PropertyChanged;
-            if (eventHandler == null)
-                return;
-
-            eventHandler(this, _nowArgs);
-            eventHandler(this, _todayArgs);
-            eventHandler(this, _utcNowArgs);
         }
 
         /// <summary>
@@ -113,5 +102,25 @@
 
         /// <inheritdoc />
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Finalizes an instance of the <see cref="DateTimeSource"/> class.
+        /// </summary>
+        ~DateTimeSource()
+        {
+            _updateTimer.Stop();
+        }
+
+        [MakeWeak]
+        private void UpdateTimer_Tick([CanBeNull] object sender, [CanBeNull] EventArgs eventArgs)
+        {
+            var eventHandler = PropertyChanged;
+            if (eventHandler == null)
+                return;
+
+            eventHandler(this, _nowArgs);
+            eventHandler(this, _todayArgs);
+            eventHandler(this, _utcNowArgs);
+        }
     }
 }
