@@ -3,7 +3,9 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>Net462</TargetFramework>
-  <Tags>Sample</Tags></PropertyGroup>
+    <Tags>Sample</Tags>
+    <ApplicationIcon>16x16.ico</ApplicationIcon>
+  </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="System.ComponentModel.Composition" />
@@ -50,7 +52,7 @@
       <Name>TomsToolbox.Wpf</Name>
     </ProjectReference>
   </ItemGroup>
-  
+
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>

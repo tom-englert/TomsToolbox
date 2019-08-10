@@ -30,7 +30,7 @@
         [TestMethod]
         public void ReadSampleAppMef2Test()
         {
-            var assembly = typeof(SampleApp.App).Assembly;
+            var assembly = typeof(SampleApp.MainWindow).Assembly;
             var result = MetadataReader.Read(assembly);
 
             var data = Serialize(result);

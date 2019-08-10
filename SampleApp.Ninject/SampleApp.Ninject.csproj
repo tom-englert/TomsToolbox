@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project>
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
+    <OutputType>WinExe</OutputType>
     <TargetFrameworks>net45;netcoreapp3.0</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <Tags>Sample</Tags>
+    <ApplicationIcon>..\SampleApp\16x16.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Fody" Version="5.1.1" PrivateAssets="all" />
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="all" />
-    <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.13.0" PrivateAssets="all" />
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="Ninject.Extensions.Conventions" Version="3.3.0" />
     <PackageReference Include="System.Composition" Version="1.2.0" />
-    <PackageReference Include="Throttle.Fody" Version="1.4.0" PrivateAssets="all" />
-    <PackageReference Include="PropertyChanged2.Fody" Version="2.6.0" PrivateAssets="all" />
     <PackageReference Include="Expression.Blend.Sdk" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SampleApp\SampleApp.csproj" />
     <ProjectReference Include="..\TomsToolbox.Composition.Ninject\TomsToolbox.Composition.Ninject.csproj" />
     <ProjectReference Include="..\TomsToolbox.Composition\TomsToolbox.Composition.csproj" />
     <ProjectReference Include="..\TomsToolbox.Composition.Mef2\TomsToolbox.Composition.Mef2.csproj" />
@@ -32,38 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Properties\Resources.Designer.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </None>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.Designer.tt</DependentUpon>
-    </Compile>
-    <None Update="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Update="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Resource Include="**/*.png" />
-    <Resource Include="**/*.ico" />
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
-    <Content Include="Map\MapSources.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    <Resource Include="..\SampleApp\16x16.ico" Link="16x16.ico" />
   </ItemGroup>
 
 </Project>

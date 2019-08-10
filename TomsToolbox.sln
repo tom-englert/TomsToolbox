@@ -43,8 +43,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Composition
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Mef2", "TomsToolbox.Composition.Mef2\TomsToolbox.Composition.Mef2.csproj", "{169441BC-1695-44A7-8514-DFCD8C31030E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Mef2", "SampleApp\SampleApp.Mef2.csproj", "{F5144190-2871-46EF-8363-61F511AAE850}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition", "TomsToolbox.Composition\TomsToolbox.Composition.csproj", "{D3B9CE35-0E1C-43D8-8365-46C97E9534E4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Tests", "TomsToolbox.Composition.Tests\TomsToolbox.Composition.Tests.csproj", "{0D80DBAB-1C55-46B7-A78A-4746D42EE022}"
@@ -53,11 +51,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Composition
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Ninject", "TomsToolbox.Composition.Ninject\TomsToolbox.Composition.Ninject.csproj", "{81F4A721-04E9-4E1C-8502-4B2A9462D537}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Ninject", "SampleApp\SampleApp.Ninject.csproj", "{335EFE69-FB35-4E73-8D52-A067A410AFC2}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Core", "TomsToolbox.Core\TomsToolbox.Core.csproj", "{2DFD98E0-44F6-499A-9E8E-C24482D4B676}"
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation\Documentation.shfbproj", "{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp", "SampleApp\SampleApp.csproj", "{C3B367A0-BA02-46C0-A505-099B4BB14114}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Mef2", "SampleApp.Mef2\SampleApp.Mef2.csproj", "{F5144190-2871-46EF-8363-61F511AAE850}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Ninject", "SampleApp.Ninject\SampleApp.Ninject.csproj", "{335EFE69-FB35-4E73-8D52-A067A410AFC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -152,6 +154,10 @@ Global
 		{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3B367A0-BA02-46C0-A505-099B4BB14114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3B367A0-BA02-46C0-A505-099B4BB14114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3B367A0-BA02-46C0-A505-099B4BB14114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3B367A0-BA02-46C0-A505-099B4BB14114}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

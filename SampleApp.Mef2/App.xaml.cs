@@ -1,4 +1,4 @@
-﻿namespace SampleApp
+﻿namespace SampleApp.Mef2
 {
     using System;
     using System.Diagnostics;
@@ -8,7 +8,7 @@
 
     using JetBrains.Annotations;
 
-    using SampleApp.DIAdapters;
+    using SampleApp.Mef2.DIAdapters;
 
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;

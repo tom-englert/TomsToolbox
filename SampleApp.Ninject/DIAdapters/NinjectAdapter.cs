@@ -1,12 +1,12 @@
-﻿namespace SampleApp.DIAdapters
+﻿namespace SampleApp.Ninject.DIAdapters
 {
     using System;
     using System.Windows.Data;
 
-    using JetBrains.Annotations;
+    using global::Ninject;
+    using global::Ninject.Extensions.Conventions;
 
-    using Ninject;
-    using Ninject.Extensions.Conventions;
+    using JetBrains.Annotations;
 
     using TomsToolbox.Composition;
     using TomsToolbox.Composition.Ninject;
@@ -21,7 +21,7 @@
         {
             var kernel = new StandardKernel();
 
-            kernel.BindExports(GetType().Assembly);
+            kernel.BindExports(typeof(MainWindow).Assembly);
 
             var exportProvider = new ExportProvider(kernel);
 

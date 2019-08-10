@@ -1,4 +1,4 @@
-﻿namespace SampleApp.DIAdapters
+﻿namespace SampleApp.Mef2.DIAdapters
 {
     using System;
     using System.Composition;
@@ -30,7 +30,8 @@
             conventions.ForTypesDerivedFrom<IValueConverter>().Export();
 
             var configuration = new ContainerConfiguration()
-                .WithAssembly(GetType().Assembly, conventions)
+                .WithAssembly(typeof(MainWindow).Assembly, conventions)
+                .WithAssembly(GetType().Assembly)
                 .WithAssembly(typeof(CoordinatesToPointConverter).Assembly, conventions);
 
             var container = configuration.CreateContainer();
