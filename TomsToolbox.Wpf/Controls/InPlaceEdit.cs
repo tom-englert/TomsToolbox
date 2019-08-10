@@ -224,7 +224,7 @@
         {
             if (!_mouseDoubleClicked)
             {
-                Dispatcher.Invoke(() => IsEditing = true);
+                Dispatcher?.Invoke(() => IsEditing = true);
             }
             _processingMouseLeftButtonDown = false;
         }
