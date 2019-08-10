@@ -143,23 +143,6 @@
         [NotNull]
         public static readonly DependencyProperty IsActiveProperty = _isActivePropertyKey.DependencyProperty;
 
-
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance only enables command routing if the owning element has the focus.
-        /// </summary>
-        public bool IsFocusRequired
-        {
-            get => this.GetValue<bool>(IsFocusRequiredProperty);
-            set => SetValue(IsFocusRequiredProperty, value);
-        }
-        /// <summary>
-        /// Identifies the <see cref="IsFocusRequired"/> dependency property
-        /// </summary>
-        [NotNull]
-        public static readonly DependencyProperty IsFocusRequiredProperty =
-            DependencyProperty.Register("IsFocusRequired", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(false, (sender, e) => ((CommandRoutingBehavior)sender)?.StateChanged()));
-
-
         private void CommandSource_Changed([CanBeNull] Type oldValue, [CanBeNull] Type newValue)
         {
             // Type.IsAssignableFrom does not work in design mode!
@@ -323,7 +306,6 @@
         {
             var associatedObject = AssociatedObject;
             return (associatedObject != null)
-                   && (!IsFocusRequired || associatedObject.IsKeyboardFocusWithin) 
                    && CommandTarget.CanExecute(CommandParameter);
         }
 

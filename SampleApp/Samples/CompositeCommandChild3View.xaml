@@ -6,12 +6,15 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:composition="urn:TomsToolbox.Composition"
              xmlns:local="clr-namespace:SampleApp.Samples"
+             xmlns:toms="urn:TomsToolbox"
              d:DataContext="{d:DesignInstance local:CompositeCommandChild3ViewModel}">
   <Grid>
     <TextBox Margin="10" Text="{Binding Text}" />
   </Grid>
   <i:Interaction.Behaviors>
-    <composition:CommandRoutingBehavior CommandSource="{x:Type local:CopyCommand}" CommandTarget="{Binding CopyCommand}" x:Name="CopyCommand" IsFocusRequired="True" />
+    <composition:CommandRoutingBehavior CommandSource="{x:Type local:CutCommand}" CommandTarget="{x:Static toms:NullCommand.Default}" />
+    <composition:CommandRoutingBehavior CommandSource="{x:Type local:CopyCommand}" CommandTarget="{Binding CopyCommand}" x:Name="CopyCommand" />
+    <composition:CommandRoutingBehavior CommandSource="{x:Type local:PasteCommand}" CommandTarget="{x:Static toms:NullCommand.Default}" />
   </i:Interaction.Behaviors>
   <UserControl.Style>
     <Style TargetType="UserControl">

@@ -33,9 +33,6 @@
   <member name="F:TomsToolbox.Wpf.Composition.CommandRoutingBehavior.IsEnabledProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
-  <member name="F:TomsToolbox.Wpf.Composition.CommandRoutingBehavior.IsFocusRequiredProperty">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-  </member>
   <member name="M:TomsToolbox.Wpf.Composition.CommandSource.#ctor(TomsToolbox.Wpf.Composition.ICommandSourceFactory)">
     <parameter name="owner">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
