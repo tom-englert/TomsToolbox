@@ -34,7 +34,7 @@
     <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.13.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01" PrivateAssets="All" />
     <PackageReference Include="Throttle.Fody" Version="1.4.0" PrivateAssets="All" />
-    <PackageReference Include="WeakEventHandler.Fody" Version="1.4.0" />
+    <PackageReference Include="WeakEventHandler.Fody" Version="1.4.0" PrivateAssets="All"/>
   </ItemGroup>
 
 </Project>
