@@ -14,6 +14,7 @@
               <listItem><para>Refactored for target frameworks Net 4.5, NetStandard 2.0/Net Core 3.0</para></listItem>
               <listItem><para>Renamed TomsToolbox.Core to TomsToolbox.Essentials to avoid naming confusion with .NetCore</para></listItem>
               <listItem><para>Visual Composition: Decoupled DI container from usage. Now you can use the DI container of your choice.</para></listItem>
+              <listItem><para>Migrate System.Windows.Interactivity to Microsoft.Xaml.Behaviors</para></listItem>
             </list>
           </listItem>
           <listItem>
