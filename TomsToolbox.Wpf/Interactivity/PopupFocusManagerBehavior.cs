@@ -5,9 +5,10 @@
     using System.Windows;
     using System.Windows.Controls.Primitives;
     using System.Windows.Input;
-    using System.Windows.Interactivity;
 
     using JetBrains.Annotations;
+
+    using Microsoft.Xaml.Behaviors;
 
     /// <summary>
     /// Handle focus for popups opened by toggle buttons. 

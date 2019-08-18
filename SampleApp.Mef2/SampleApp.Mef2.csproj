@@ -14,7 +14,7 @@
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="Ninject.Extensions.Conventions" Version="3.3.0" />
     <PackageReference Include="System.Composition" Version="1.2.0" />
-    <PackageReference Include="Expression.Blend.Sdk" Version="1.0.2" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

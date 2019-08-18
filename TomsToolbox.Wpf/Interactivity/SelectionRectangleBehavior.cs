@@ -3,9 +3,10 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
-    using System.Windows.Interactivity;
 
     using JetBrains.Annotations;
+
+    using Microsoft.Xaml.Behaviors;
 
     using TomsToolbox.Wpf.Controls;
 

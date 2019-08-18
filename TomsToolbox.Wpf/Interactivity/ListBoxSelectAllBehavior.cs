@@ -6,9 +6,10 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
-    using System.Windows.Interactivity;
 
     using JetBrains.Annotations;
+
+    using Microsoft.Xaml.Behaviors;
 
     /// <summary>
     /// A behavior for a list box to handle the interaction betwen the list box and a "select all" checkbox.

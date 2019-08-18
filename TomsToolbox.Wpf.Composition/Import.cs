@@ -3,9 +3,10 @@
     using System;
     using System.Linq;
     using System.Windows;
-    using System.Windows.Interactivity;
 
     using JetBrains.Annotations;
+
+    using Microsoft.Xaml.Behaviors;
 
     /// <summary>
     /// A helper class to host attached properties for import.

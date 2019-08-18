@@ -7,14 +7,15 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
-    using System.Windows.Interactivity;
     using System.Windows.Markup;
 
     using JetBrains.Annotations;
 
+    using Microsoft.Xaml.Behaviors;
+
     using TomsToolbox.Essentials;
 
-    using TriggerBase = System.Windows.Interactivity.TriggerBase;
+    using TriggerBase = Microsoft.Xaml.Behaviors.TriggerBase;
 
     /// <summary>
     /// A container to host the source <see cref="InputBindingCollection"/>. Must be a <see cref="FrameworkElement"/> to minimize binding errors.
@@ -25,14 +26,14 @@
     }
 
     /// <summary>
-    /// A collection of <see cref="System.Windows.Interactivity.Behavior"/> objects.
+    /// A collection of <see cref="Microsoft.Xaml.Behaviors.Behavior"/> objects.
     /// </summary>
     public class BehaviorCollection : Collection<Behavior>
     {
     }
 
     /// <summary>
-    /// A collection of Trigger (<see cref="System.Windows.Interactivity.TriggerBase"/>) objects.
+    /// A collection of Trigger (<see cref="Microsoft.Xaml.Behaviors.TriggerBase"/>) objects.
     /// </summary>
     public class TriggerCollection : Collection<TriggerBase>
     {

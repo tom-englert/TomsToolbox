@@ -2,9 +2,10 @@
 {
     using System.Windows;
     using System.Windows.Input;
-    using System.Windows.Interactivity;
 
     using JetBrains.Annotations;
+
+    using Microsoft.Xaml.Behaviors;
 
     /// <summary>
     /// Attaches default handling for the <see cref="WindowCommands"/>

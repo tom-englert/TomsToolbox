@@ -9,7 +9,7 @@
     /// <summary>
     /// A trigger that continuously fires while the associated object is loaded.
     /// </summary>
-    public sealed class TimerTrigger : System.Windows.Interactivity.TriggerBase<FrameworkElement>
+    public sealed class TimerTrigger : Microsoft.Xaml.Behaviors.TriggerBase<FrameworkElement>
     {
         [CanBeNull]
         private DispatcherTimer _timer;

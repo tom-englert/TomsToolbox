@@ -4,9 +4,10 @@
     using System.Windows.Controls.Primitives;
     using System.Windows.Data;
     using System.Windows.Input;
-    using System.Windows.Interactivity;
 
     using JetBrains.Annotations;
+
+    using Microsoft.Xaml.Behaviors;
 
     /// <summary>
     /// If attached to the root visual in the group header template of a selector control, 

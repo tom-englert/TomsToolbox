@@ -4,9 +4,10 @@
     using System.Windows;
     using System.Windows.Documents;
     using System.Windows.Input;
-    using System.Windows.Interactivity;
 
     using JetBrains.Annotations;
+
+    using Microsoft.Xaml.Behaviors;
 
     /// <summary>
     /// When attached to a framework element, the <see cref="P:System.Windows.Documents.TextElement.FontSize"/> property 

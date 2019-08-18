@@ -1,10 +1,10 @@
 ﻿namespace TomsToolbox.Wpf.Composition.Styles
 {
     using System.Windows;
-    using System.Windows.Interactivity;
+
+    using Microsoft.Xaml.Behaviors;
 
     using TomsToolbox.Essentials;
-    using TomsToolbox.Wpf.Composition;
 
     /// <summary>
     /// A behavior to call all external theme resource providers. Theme resource providers must implement and export <see cref="IThemeResourceProvider"/>.

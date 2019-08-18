@@ -5,9 +5,10 @@
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Interactivity;
 
     using JetBrains.Annotations;
+
+    using Microsoft.Xaml.Behaviors;
 
     using TomsToolbox.Essentials;
 

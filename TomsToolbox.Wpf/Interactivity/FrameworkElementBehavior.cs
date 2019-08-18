@@ -1,9 +1,10 @@
 ﻿namespace TomsToolbox.Wpf.Interactivity
 {
     using System.Windows;
-    using System.Windows.Interactivity;
 
     using JetBrains.Annotations;
+
+    using Microsoft.Xaml.Behaviors;
 
     /// <summary>
     /// A <see cref="Behavior{T}"/> with build in support for the <see cref="FrameworkElement.Loaded"/> and <see cref="FrameworkElement.Unloaded"/> events.

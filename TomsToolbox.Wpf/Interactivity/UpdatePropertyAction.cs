@@ -2,9 +2,10 @@
 {
     using System.Windows;
     using System.Windows.Data;
-    using System.Windows.Interactivity;
 
     using JetBrains.Annotations;
+
+    using Microsoft.Xaml.Behaviors;
 
     using TomsToolbox.Essentials;
 

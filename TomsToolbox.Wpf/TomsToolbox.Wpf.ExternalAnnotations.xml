@@ -2223,4 +2223,17 @@
   <member name="F:TomsToolbox.Wpf.XamlExtensions.KeyboardNavigation.IsFocusVisualVisibleProperty">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="M:TomsToolbox.Wpf.XamlExtensions.Validation.GetShowErrorInTooltip(System.Windows.DependencyObject)">
+    <parameter name="obj">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.XamlExtensions.Validation.SetShowErrorInTooltip(System.Windows.DependencyObject,System.Boolean)">
+    <parameter name="obj">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="F:TomsToolbox.Wpf.XamlExtensions.Validation.ShowErrorInTooltipProperty">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
 </assembly>

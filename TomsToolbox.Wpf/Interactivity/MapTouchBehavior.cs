@@ -1,8 +1,8 @@
 ﻿namespace TomsToolbox.Wpf.Interactivity
 {
-    using System.Windows.Interactivity;
-
     using JetBrains.Annotations;
+
+    using Microsoft.Xaml.Behaviors;
 
     using TomsToolbox.Wpf.Controls;
 
