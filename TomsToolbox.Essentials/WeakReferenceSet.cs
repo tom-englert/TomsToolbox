@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Essentials
 {
     using System;
     using System.Collections.Generic;

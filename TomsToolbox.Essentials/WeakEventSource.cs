@@ -1,4 +1,4 @@
-﻿namespace TomsToolbox.Desktop
+﻿namespace TomsToolbox.Essentials
 {
     using System;
     using System.Collections.Generic;
@@ -6,8 +6,6 @@
     using System.Reflection;
 
     using JetBrains.Annotations;
-
-    using TomsToolbox.Essentials;
 
     /// <summary>
     /// A simple weak event source implementation; useful for static events where you don't want to keep a reference to the event sink.
