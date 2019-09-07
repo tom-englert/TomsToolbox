@@ -13,7 +13,7 @@
     var resxItem = GetResxProjectItem();
     var resxPath = resxItem.FileNames[0];
     var localNamespace = GetLocalNamespace(resxItem);
-    var className = Path.GetFileNameWithoutExtension(resxPath);
+    var className = Path.GetFileNameWithoutExtension(resxPath).Replace(".", "_");
 
     using (var reader = new ResXResourceReader(resxPath) {UseResXDataNodes = true, BasePath=Path.GetDirectoryName(resxPath)})
     {
@@ -25,6 +25,18 @@
 //     Changes to this file may cause incorrect behavior and will be lost if
 //     the code is regenerated.
 // </auto-generated>
+// 
+// This template generates PublicResXFileCodeGenerator compatible code plus some
+// useful extensions. 
+// 
+// The original version provided by ResXResourceManager is restricted to resource key names
+// that are valid c# identifiers to keep this template simple (KISS!).
+// 
+// Us it as it is or as a scaffold to generate the code you need.
+//
+// As long as you have ResXResourceManager running in the background, the generated code 
+// will be kept up to date.
+//  
 //------------------------------------------------------------------------------
 
 namespace <#= localNamespace #> {
@@ -87,7 +99,7 @@ namespace <#= localNamespace #> {
         /// <summary>
         ///   Looks up a localized string similar to <#= XmlEscape(node.Value, 50) #>.
         /// </summary>
-<# InsertRemarks(insertRemarks, node.Comment); #>
+<# InsertRemarks(node.Comment); #>
         [NotNull]
         public static string <#= node.Key #> {
             get {
@@ -103,7 +115,7 @@ namespace <#= localNamespace #> {
         /// <summary>
         ///   Looks up a localized resource of type <#= node.Type.FullName #>.
         /// </summary>
-<# InsertRemarks(insertRemarks, node.Comment); #>
+<# InsertRemarks(node.Comment); #>
         public static <#= node.Type.FullName #> <#= node.Key #> {
             get {
                 object obj = ResourceManager.GetObject("<#= node.Key #>", resourceCulture);
@@ -130,7 +142,7 @@ namespace <#= localNamespace #> {
         /// <summary>
         ///   Looks up a localized string similar to <#= XmlEscape(node.Value, 50) #>.
         /// </summary>
-<# InsertRemarks(insertRemarks, node.Comment); #>
+<# InsertRemarks(node.Comment); #>
         <#= node.Key #>,
 <#
     }
@@ -148,7 +160,7 @@ namespace <#= localNamespace #> {
     [AttributeUsage(AttributeTargets.All, AllowMultiple=false)]
     public sealed class LocalizedDescriptionAttribute : System.ComponentModel.DescriptionAttribute
     {
-        private readonly StringResourceKey _resourceKey;
+        private readonly string _resourceKey;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LocalizedDescriptionAttribute"/> class.
@@ -156,7 +168,7 @@ namespace <#= localNamespace #> {
         /// <param name="resourceKey">The resource key of the associated resource.</param>
         public LocalizedDescriptionAttribute(StringResourceKey resourceKey)
         {
-            _resourceKey = resourceKey;
+            _resourceKey = resourceKey.ToString();
         }
 
         /// <summary>
@@ -166,7 +178,7 @@ namespace <#= localNamespace #> {
         {
             get
             {
-                return <#= className #>.ResourceManager.GetString(_resourceKey.ToString());
+                return <#= className #>.ResourceManager.GetString(_resourceKey);
             }
         }
     }
@@ -179,7 +191,7 @@ namespace <#= localNamespace #> {
     [AttributeUsage(AttributeTargets.All, AllowMultiple=false)]
     public sealed class LocalizedDisplayNameAttribute : System.ComponentModel.DisplayNameAttribute
     {
-        private readonly StringResourceKey _resourceKey;
+        private readonly string _resourceKey;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LocalizedDisplayNameAttribute"/> class.
@@ -187,7 +199,7 @@ namespace <#= localNamespace #> {
         /// <param name="resourceKey">The resource key of the associated resource.</param>
         public LocalizedDisplayNameAttribute(StringResourceKey resourceKey)
         {
-            _resourceKey = resourceKey;
+            _resourceKey = resourceKey.ToString();
         }
 
         /// <summary>
@@ -197,13 +209,42 @@ namespace <#= localNamespace #> {
         {
             get
             {
-                return <#= className #>.ResourceManager.GetString(_resourceKey.ToString());
+                return <#= className #>.ResourceManager.GetString(_resourceKey);
             }
         }
     }
 
+    /// <summary>
+    /// Specifies a localized category for an object.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("ResXResourceManager", "1.0.0.0")]
+    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [AttributeUsage(AttributeTargets.All, AllowMultiple=false)]
+    public sealed class LocalizedCategoryAttribute : System.ComponentModel.CategoryAttribute
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LocalizedCategoryAttribute"/> class.
+        /// </summary>
+        /// <param name="resourceKey">The resource key of the associated resource.</param>
+        public LocalizedCategoryAttribute(StringResourceKey resourceKey)
+            : base(resourceKey.ToString())
+        {
+        }
+
+        /// <summary>
+        /// Gets the localized category name from the resource id stored in this attribute.
+        /// </summary>
+        protected override string GetLocalizedString(string value)
+        {
+            return <#= className #>.ResourceManager.GetString(value);
+        }
+    }
 <#
-    if (generateTextAttribute)
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    /* <-- Add a second slash at the begining of this line to enable the LocalizedTextAttribute. 
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // The LocalizedTextAttribute requires the the TomsToolbox.Desktop NuGet package.
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
 #>
 
@@ -213,9 +254,14 @@ namespace <#= localNamespace #> {
     [global::System.CodeDom.Compiler.GeneratedCode("ResXResourceManager", "1.0.0.0")]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
-    public sealed class LocalizedTextAttribute : global::TomsToolbox.Essentials.TextAttribute
+    public sealed class LocalizedTextAttribute : global::TomsToolbox.Desktop.TextAttribute
     {
-        private readonly StringResourceKey _resourceKey;
+        // This code is generated by Resources.Designer.t4
+        // If you get compile errors because you don't use the TomsToolbox.Desktop NuGet package, 
+        // either remove this part in the Resources.Designer.t4 file, or use the TomsToolbox.Desktop NuGet package.
+        // Just search for this text and follow the instructions above.
+
+        private readonly string _resourceKey;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LocalizedTextAttribute"/> class.
@@ -225,7 +271,7 @@ namespace <#= localNamespace #> {
         public LocalizedTextAttribute(object key, StringResourceKey resourceKey)
             : base(key)
         {
-            _resourceKey = resourceKey;
+            _resourceKey = resourceKey.ToString();
         }
 
         /// <summary>
@@ -235,17 +281,16 @@ namespace <#= localNamespace #> {
         {
             get
             {
-                return <#= className #>.ResourceManager.GetString(_resourceKey.ToString());
+                return <#= className #>.ResourceManager.GetString(_resourceKey);
             }
         }
     }
 <#
     }
+    //*/
 #>
 
-
 <#
-    if (generateDataAnnotationAttributes)
     {
         var validatorNameSpacePrefix = "System.ComponentModel.DataAnnotations.";
 
@@ -331,13 +376,13 @@ namespace <#= localNamespace #> {
 #>
 
 }
-
 <#+
     ProjectItem GetResxProjectItem()
     {
         var serviceProvider = (IServiceProvider)Host;
         var dte = (DTE)serviceProvider.GetService(typeof(DTE));
-        var ttItem = dte.Solution.FindProjectItem(Host.TemplateFile);
+        var templateFile = Host.TemplateFile;
+        var ttItem = dte.Solution.FindProjectItem(templateFile);
         return (ProjectItem)ttItem.Collection.Parent;        
     }
 
@@ -358,9 +403,9 @@ namespace <#= localNamespace #> {
         return localNamespace;
     }
 
-    void InsertRemarks(bool insertRemarks, string comment)
+    void InsertRemarks(string comment)
     {
-        if (!insertRemarks || string.IsNullOrEmpty(comment)) 
+        if (string.IsNullOrEmpty(comment)) 
             return;
 
         WriteLine("        /// <remarks>");
