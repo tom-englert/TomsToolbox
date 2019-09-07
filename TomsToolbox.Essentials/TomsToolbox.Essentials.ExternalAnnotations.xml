@@ -1,72 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <assembly name="TomsToolbox.Essentials">
-  <member name="M:TomsToolbox.Desktop.HighResolutionTimer.#ctor(System.Action{System.TimeSpan})">
-    <parameter name="timerCallback">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Desktop.HighResolutionTimer.#ctor(System.Action{System.TimeSpan},System.TimeSpan)">
-    <parameter name="timerCallback">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Desktop.WeakEventListener`3.#ctor(`0,`1,System.Action{`0,System.Object,`2},System.Action{TomsToolbox.Desktop.WeakEventListener{`0,`1,`2},`1},System.Action{TomsToolbox.Desktop.WeakEventListener{`0,`1,`2},`1})">
-    <parameter name="target">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="source">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="onEventAction">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="onAttachAction">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="onDetachAction">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Desktop.WeakEventListener`3.#ctor(`0,System.WeakReference{`1},System.Action{`0,System.Object,`2},System.Action{TomsToolbox.Desktop.WeakEventListener{`0,`1,`2},`1},System.Action{TomsToolbox.Desktop.WeakEventListener{`0,`1,`2},`1})">
-    <parameter name="target">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="source">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="onEventAction">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="onAttachAction">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="onDetachAction">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Desktop.WeakEventListener`3.OnEvent(System.Object,`2)">
-    <parameter name="source">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="eventArgs">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Desktop.WeakEventSource`1.Subscribe(System.EventHandler{`0})">
-    <parameter name="handler">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Desktop.WeakEventSource`1.Unsubscribe(System.EventHandler{`0})">
-    <parameter name="handler">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Desktop.WeakReferenceSet`1.Add(`0)">
-    <parameter name="item">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    </parameter>
-  </member>
   <member name="M:TomsToolbox.Essentials.AssemblyExtensions.GeneratePackUri(System.Reflection.Assembly)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="assembly">
@@ -640,6 +573,16 @@
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:TomsToolbox.Essentials.HighResolutionTimer.#ctor(System.Action{System.TimeSpan})">
+    <parameter name="timerCallback">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.HighResolutionTimer.#ctor(System.Action{System.TimeSpan},System.TimeSpan)">
+    <parameter name="timerCallback">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="M:TomsToolbox.Essentials.ObjectExtensions.SafeCast``1(System.Object)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="value">
@@ -796,9 +739,66 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:TomsToolbox.Essentials.WeakEventListener`3.#ctor(`0,`1,System.Action{`0,System.Object,`2},System.Action{TomsToolbox.Essentials.WeakEventListener{`0,`1,`2},`1},System.Action{TomsToolbox.Essentials.WeakEventListener{`0,`1,`2},`1})">
+    <parameter name="target">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="source">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="onEventAction">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="onAttachAction">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="onDetachAction">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.WeakEventListener`3.#ctor(`0,System.WeakReference{`1},System.Action{`0,System.Object,`2},System.Action{TomsToolbox.Essentials.WeakEventListener{`0,`1,`2},`1},System.Action{TomsToolbox.Essentials.WeakEventListener{`0,`1,`2},`1})">
+    <parameter name="target">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="source">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="onEventAction">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="onAttachAction">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="onDetachAction">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.WeakEventListener`3.OnEvent(System.Object,`2)">
+    <parameter name="source">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="eventArgs">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.WeakEventSource`1.Subscribe(System.EventHandler{`0})">
+    <parameter name="handler">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.WeakEventSource`1.Unsubscribe(System.EventHandler{`0})">
+    <parameter name="handler">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="M:TomsToolbox.Essentials.WeakReferenceExtensions.GetTargetOrDefault``1(System.WeakReference{``0})">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="weakReference">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.WeakReferenceSet`1.Add(`0)">
+    <parameter name="item">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     </parameter>
   </member>
