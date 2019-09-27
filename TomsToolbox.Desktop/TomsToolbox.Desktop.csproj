@@ -3,6 +3,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net45;netcoreapp3.0</TargetFrameworks>
+    <UseWPF>true</UseWPF>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
@@ -13,7 +14,6 @@
 
   <ItemGroup Condition="'$(TargetFramework)'=='net45'">
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
 
   <ItemGroup>
