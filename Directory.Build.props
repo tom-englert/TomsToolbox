@@ -10,7 +10,7 @@
     <PackageTags>.Net Tools Extensions</PackageTags>
     <Description>A set of classes and functions to ease our daily .Net development tasks.</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageIconUrl>https://raw.githubusercontent.com/tom-englert/TomsToolbox/master/Icon.png</PackageIconUrl>
+    <PackageIcon>Icon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/tom-englert/TomsToolbox</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tom-englert/TomsToolbox.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -27,7 +27,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\LICENSE" Link="LICENSE" Pack="true" PackagePath="" />
+    <None Include="..\Icon.png" Link="Icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\LICENSE" Link="LICENSE" Pack="true" PackagePath="\" />
     <None Include="..\TomsToolbox.snk">
       <Link>TomsToolbox.snk</Link>
     </None>
