@@ -1,0 +1,62 @@
+pool:
+  name: Default
+  demands:
+  - msbuild
+  - vstest
+
+variables:
+  BuildPlatform: 'any cpu'
+  BuildConfiguration: 'release'
+
+steps:
+- task: DeleteFiles@1
+  displayName: 'Delete files from Deploy'
+  inputs:
+    Contents: 'Deploy/**'
+
+- task: MSBuild@1
+  displayName: 'Build Solution'
+  inputs:
+    solution: TomsToolbox.sln
+    platform: '$(BuildPlatform)'
+    configuration: '$(BuildConfiguration)'
+    msbuildArguments: '-restore'
+    clean: true
+
+- task: VSTest@2
+  displayName: 'Test Assemblies **\$(BuildConfiguration)\*test*.dll;-:**\obj\**'
+  inputs:
+    testAssemblyVer2: |
+     **\*test*.dll
+     !**\obj\**
+    runInParallel: false
+    codeCoverageEnabled: false
+    platform: '$(BuildPlatform)'
+    configuration: '$(BuildConfiguration)'
+    diagnosticsEnabled: True
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)/Packages'
+  inputs:
+    SourceFolder: Deploy
+    Contents: '*.*'
+    TargetFolder: '$(build.artifactstagingdirectory)/Packages'
+
+- task: ArchiveFiles@2
+  displayName: 'Archive Documentation\Help'
+  inputs:
+    rootFolderOrFile: 'Documentation\Help'
+    includeRootFolder: false
+    archiveFile: '$(Build.ArtifactStagingDirectory)/Help.zip'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Packages'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)/Packages'
+    ArtifactName: Packages
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Help'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)/Help.zip'
+    ArtifactName: Help
