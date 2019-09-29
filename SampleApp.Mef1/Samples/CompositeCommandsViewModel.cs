@@ -5,6 +5,8 @@
 
     using JetBrains.Annotations;
 
+    using PropertyChanged;
+
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition.Mef;
 

@@ -1,5 +1,7 @@
 ﻿namespace SampleApp.Mef1.Samples
 {
+    using PropertyChanged;
+
     using TomsToolbox.Wpf.Composition.Mef;
 
     /// <summary>
