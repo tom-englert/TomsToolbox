@@ -1,9 +1,9 @@
-# Tom's Toolbox ![Badge](https://tom-englert.visualstudio.com/_apis/public/build/definitions/75bf84d2-d359-404a-a712-07c9f693f635/8/badge) [![NuGet Status](http://img.shields.io/nuget/v/TomsToolbox.Wpf.svg?style=flat)](https://www.nuget.org/packages?q=tomstoolbox)
+# Tom's Toolbox [![Build Status](https://dev.azure.com/tom-englert/Open%20Source/_apis/build/status/TomsToolbox?branchName=master)](https://dev.azure.com/tom-englert/Open%20Source/_build/latest?definitionId=30&branchName=master) ![Nuget](https://img.shields.io/nuget/v/tomstoolbox.wpf) ![Nuget](https://img.shields.io/nuget/vpre/tomstoolbox.wpf)
 A set of core functions and classes to ease every days .Net development tasks.
 
 ----
 
-Version 2.x has been refactored to support netstandard2.0/netcoreapp3.0, which required some breaking changes with versoin 1.x, and droping support for .Net frameworks < 4.5
+Version 2.x has been refactored to support netstandard2.0/netcoreapp3.0, which required some breaking changes with version 1.x, and dropping support for .Net frameworks < 4.5
 
 Sources of version 1.x can be found [here](https://github.com/tom-englert/TomsToolbox1)
 
