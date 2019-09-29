@@ -1,3 +1,5 @@
+name: $(Build.DefinitionName) $(date:yyyyMMdd)$(rev:.r)
+
 pool:
   name: Default
   demands:
