@@ -3,7 +3,8 @@
                     xmlns:styles="clr-namespace:TomsToolbox.Wpf.Styles">
 
   <Style x:Key="{x:Static styles:ResourceKeys.GridSplitterStyle}" TargetType="{x:Type GridSplitter}">
-    <Setter Property="SnapsToDevicePixels" Value="True" />
+    <Setter Property="SnapsToDevicePixels" Value="False" />
+    <Setter Property="UseLayoutRounding" Value="False" />
     <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
     <Setter Property="Background" Value="Transparent" />
@@ -12,8 +13,8 @@
     <Setter Property="VerticalAlignment" Value="Stretch" />
     <Setter Property="ShowsPreview" Value="False" />
     <Setter Property="Focusable" Value="True" />
-    <Setter Property="MinHeight" Value="5" />
-    <Setter Property="MinWidth" Value="5" />
+    <Setter Property="MinHeight" Value="4" />
+    <Setter Property="MinWidth" Value="4" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type GridSplitter}">
@@ -32,7 +33,7 @@
               </Style>
             </Border.Resources>
             <Grid>
-              <StackPanel x:Name="Grip" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" SnapsToDevicePixels="True">
+              <StackPanel x:Name="Grip" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                 <Ellipse />
                 <Decorator />
                 <Ellipse />
@@ -59,7 +60,7 @@
                 <Condition Property="IsMouseOver" Value="True" />
                 <Condition Property="IsEnabled" Value="True" />
               </MultiTrigger.Conditions>
-              <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
+              <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
             </MultiTrigger>
             <Trigger Property="IsFocused" Value="True">
               <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
