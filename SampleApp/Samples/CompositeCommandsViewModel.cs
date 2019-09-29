@@ -5,10 +5,13 @@
 
     using JetBrains.Annotations;
 
+    using PropertyChanged;
+
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition.AttributedModel;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 4)]
+    [ImplementPropertyChanged]
     public class CompositeCommandsViewModel
     {
         [NotNull]

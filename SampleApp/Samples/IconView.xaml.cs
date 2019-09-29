@@ -1,5 +1,7 @@
 ﻿namespace SampleApp.Samples
 {
+    using PropertyChanged;
+
     using TomsToolbox.Wpf.Composition.AttributedModel;
 
     /// <summary>
@@ -15,6 +17,7 @@
     }
 
     [VisualCompositionExport(RegionId.Main, Sequence = 5)]
+    [ImplementPropertyChanged]
     public class IconViewModel
     {
         public override string ToString()

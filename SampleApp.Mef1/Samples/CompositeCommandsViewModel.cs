@@ -9,6 +9,7 @@
     using TomsToolbox.Wpf.Composition.Mef;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 4)]
+    [ImplementPropertyChanged]
     public class CompositeCommandsViewModel
     {
         [NotNull]
