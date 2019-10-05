@@ -1,5 +1,7 @@
 ﻿namespace TomsToolbox.Essentials
 {
+    using System;
+
     using JetBrains.Annotations;
 
     /// <summary>
@@ -17,6 +19,21 @@
         public static T SafeCast<T>([CanBeNull] this object value)
         {
             return (value == null) ? default : (T)value;
+        }
+
+        /// <summary>
+        /// Intercepts the specified value. Can be used to e.g. log LINQ expressions.
+        /// </summary>
+        /// <typeparam name="T">The target type</typeparam>
+        /// <param name="value">The value.</param>
+        /// <param name="interceptor">The interceptor.</param>
+        /// <returns>The <paramref name="value"/></returns>
+        [CanBeNull, ContractAnnotation("value:notnull=>notnull")]
+        public static T Intercept<T>([CanBeNull] this T value, [NotNull] Action<T> interceptor)
+        {
+            interceptor(value);
+
+            return value;
         }
     }
 }

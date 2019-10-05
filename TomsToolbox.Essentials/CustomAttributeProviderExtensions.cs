@@ -5,6 +5,7 @@
     using System.ComponentModel;
     using System.Linq;
     using System.Reflection;
+    using System.Text;
 
     using JetBrains.Annotations;
 
@@ -81,12 +82,37 @@
         [CanBeNull]
         public static TypeConverter GetCustomTypeConverter([NotNull] this ICustomAttributeProvider item)
         {
-            return item
+            return item.GetCustomTypeConverter(out _);
+        }
+
+        /// <summary>
+        /// Gets the custom <see cref="TypeConverter" /> declared with the <see cref="TypeConverterAttribute"/> on the specified item.
+        /// </summary>
+        /// <param name="item">The item to look up.</param>
+        /// <returns>
+        /// The custom type converter, or null if the item has no custom type converter attribute.
+        /// </returns>
+        [CanBeNull]
+        public static TypeConverter GetCustomTypeConverter([NotNull] this ICustomAttributeProvider item, out string log)
+        {
+            var logBuilder = new StringBuilder();
+
+            var result = item
                 .GetCustomAttributes<TypeConverterAttribute>(false)
-                .Select(attr => Type.GetType(attr.ConverterTypeName))
-                .Where(type => (type != null) && typeof(TypeConverter).IsAssignableFrom(type))
+                .ToList().Intercept(i => logBuilder.AppendLine($"# of TypeConverterAttributes: {i?.Count}"))
+                .Select(attr => attr.ConverterTypeName)
+                .ToList().Intercept(i => logBuilder.AppendLine($"Type names: {string.Join("; ", i)}"))
+                .Select(Type.GetType)
+                .Where(type => (type != null))
+                .ToList().Intercept(i => logBuilder.AppendLine($"Types: {string.Join("; ", i)}"))
+                .Where(type => typeof(TypeConverter).IsAssignableFrom(type))
+                .ToList().Intercept(i => logBuilder.AppendLine($"Type converters: {string.Join("; ", i)}"))
                 .Select(type => (TypeConverter)Activator.CreateInstance(type))
                 .FirstOrDefault();
+
+            log = logBuilder.ToString();
+
+            return result;
         }
     }
 }
