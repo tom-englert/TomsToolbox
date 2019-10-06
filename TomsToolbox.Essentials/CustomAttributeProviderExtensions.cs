@@ -86,9 +86,10 @@
         }
 
         /// <summary>
-        /// Gets the custom <see cref="TypeConverter" /> declared with the <see cref="TypeConverterAttribute"/> on the specified item.
+        /// Gets the custom <see cref="TypeConverter" /> declared with the <see cref="TypeConverterAttribute" /> on the specified item.
         /// </summary>
         /// <param name="item">The item to look up.</param>
+        /// <param name="log">The log how the converter was located.</param>
         /// <returns>
         /// The custom type converter, or null if the item has no custom type converter attribute.
         /// </returns>

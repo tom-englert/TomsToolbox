@@ -14,6 +14,8 @@
     <PackageProjectUrl>https://github.com/tom-englert/TomsToolbox</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tom-englert/TomsToolbox.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -22,7 +24,6 @@
     <AssemblyOriginatorKeyFile>..\TomsToolbox.snk</AssemblyOriginatorKeyFile>
     <TargetsForTfmSpecificContentInPackage>TfmSpecificContent</TargetsForTfmSpecificContentInPackage>
     <PackageOutputPath>$(SolutionDir)Deploy</PackageOutputPath>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <NoWarn>NU5118;NU1701</NoWarn>
   </PropertyGroup>
 

@@ -394,6 +394,12 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="M:TomsToolbox.Essentials.CustomAttributeProviderExtensions.GetCustomTypeConverter(System.Reflection.ICustomAttributeProvider,System.String@)">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <parameter name="item">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="M:TomsToolbox.Essentials.CustomAttributeProviderExtensions.TryGetDescription(System.Reflection.ICustomAttributeProvider)">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="item">
@@ -580,6 +586,18 @@
   </member>
   <member name="M:TomsToolbox.Essentials.HighResolutionTimer.#ctor(System.Action{System.TimeSpan},System.TimeSpan)">
     <parameter name="timerCallback">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Essentials.ObjectExtensions.Intercept``1(``0,System.Action{``0})">
+    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ContractAnnotationAttribute.#ctor(System.String)">
+      <argument>value:notnull=&gt;notnull</argument>
+    </attribute>
+    <parameter name="value">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="interceptor">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
