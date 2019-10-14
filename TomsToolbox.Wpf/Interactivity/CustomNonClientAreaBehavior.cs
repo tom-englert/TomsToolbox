@@ -187,7 +187,14 @@
             if (window == null)
                 return;
 
-            window.SourceInitialized += Window_SourceInitialized;
+            if (window.IsInitialized)
+            {
+                Window_SourceInitialized(window, EventArgs.Empty);
+            }
+            else
+            {
+                window.SourceInitialized += Window_SourceInitialized;
+            }
         }
 
         /// <summary>
@@ -248,7 +255,7 @@
         {
             if (compositionTarget == null)
                 return;
-            
+
             if (HasGlassFrame)
             {
                 try
