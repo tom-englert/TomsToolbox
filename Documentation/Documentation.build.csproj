@@ -12,5 +12,5 @@
     <PackageReference Include="EWSoftware.SHFB" Version="2019.9.15" />
     <PackageReference Include="EWSoftware.SHFB.NETFramework" Version="4.8.0" />
   </ItemGroup>
-  <Import Project="Documentation.shfbproj" />
+  <Import Project="Documentation.shfbproj" Condition="'$(MSBuildRestoreSessionId)' == ''" />
 </Project>
