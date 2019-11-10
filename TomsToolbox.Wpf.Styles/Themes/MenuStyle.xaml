@@ -84,12 +84,21 @@
 
   <Style x:Key="{x:Static styles:ResourceKeys.MenuItemSeparatorStyle}" TargetType="{x:Type Separator}">
     <Setter Property="Height" Value="1" />
-    <Setter Property="Margin" Value="25,2,0,2" />
+    <Setter Property="Margin" Value="0,2" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type Separator}">
-          <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
-                  BorderThickness="1" />
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" SharedSizeGroup="Icon" />
+              <ColumnDefinition Width="3" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="2"
+                    BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                    BorderThickness="1" />
+          </Grid>
+
         </ControlTemplate>
       </Setter.Value>
     </Setter>
@@ -139,7 +148,7 @@
     <Border x:Name="Border" BorderThickness="1" Background="Transparent">
       <Grid>
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto" SharedSizeGroup="Icon" />
+          <ColumnDefinition Width="Auto" SharedSizeGroup="Icon" MinWidth="24" />
           <ColumnDefinition Width="3" />
           <ColumnDefinition Width="*" />
           <ColumnDefinition Width="13" />
@@ -184,7 +193,7 @@
     <Border x:Name="Border" BorderThickness="1" Background="Transparent">
       <Grid>
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto" SharedSizeGroup="Icon" />
+          <ColumnDefinition Width="Auto" SharedSizeGroup="Icon" MinWidth="24" />
           <ColumnDefinition Width="3" />
           <ColumnDefinition Width="*" />
           <ColumnDefinition Width="13" />

@@ -42,7 +42,7 @@
     </GroupStyle.ContainerStyle>
   </GroupStyle>
 
-  <Style x:Key="CompositeMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+  <Style x:Key="CompositeMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Static styles:ResourceKeys.MenuItemStyle}}">
     <Setter Property="Header" Value="{Binding Header}" />
     <Setter Property="Icon" Value="{Binding Icon, Converter={x:Static toms:ImageSourceToImageConverter.Default}}" />
     <Setter Property="ToolTip" Value="{Binding Description}" />
@@ -75,7 +75,7 @@
     </Style.Triggers>
   </Style>
 
-  <Style TargetType="{x:Type composition:CompositeContextMenu}" BasedOn="{StaticResource {x:Type ContextMenu}}">
+  <Style TargetType="{x:Type composition:CompositeContextMenu}" BasedOn="{StaticResource {x:Static styles:ResourceKeys.ContextMenuStyle}}">
     <Setter Property="toms:StyleBindings.GroupStyle" Value="{StaticResource MenuGroupStyle}" />
     <Setter Property="toms:StyleBindings.GroupDescriptions">
       <Setter.Value>
@@ -87,7 +87,7 @@
     <Setter Property="ItemContainerStyle" Value="{StaticResource CompositeMenuItemStyle}" />
   </Style>
 
-  <Style x:Key="{x:Static local:ResourceKeys.CompositeContextMenuStyle}" TargetType="{x:Type ContextMenu}" BasedOn="{StaticResource {x:Type ContextMenu}}">
+  <Style x:Key="{x:Static local:ResourceKeys.CompositeContextMenuStyle}" TargetType="{x:Type ContextMenu}" BasedOn="{StaticResource {x:Static styles:ResourceKeys.ContextMenuStyle}}">
     <Setter Property="toms:StyleBindings.GroupStyle" Value="{StaticResource MenuGroupStyle}" />
     <Setter Property="toms:StyleBindings.GroupDescriptions">
       <Setter.Value>
