@@ -348,6 +348,23 @@
         /// The value from the dictionary, or the default value if no item with the specified key exists.
         /// </returns>
         [CanBeNull]
+        public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this Dictionary<TKey, TValue> dictionary, [NotNull] TKey key, [CanBeNull] TValue defaultValue)
+        {
+            return dictionary.TryGetValue(key, out var value) ? value : defaultValue;
+        }
+
+        /// <summary>
+        /// Gets the value from the dictionary, or the default value if no item with the specified key exists.
+        /// </summary>
+        /// <typeparam name="TKey">The type of the key.</typeparam>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="dictionary">The dictionary.</param>
+        /// <param name="key">The key to lookup.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <returns>
+        /// The value from the dictionary, or the default value if no item with the specified key exists.
+        /// </returns>
+        [CanBeNull]
         public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IReadOnlyDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [CanBeNull] TValue defaultValue)
         {
             return dictionary.TryGetValue(key, out var value) ? value : defaultValue;
@@ -365,6 +382,21 @@
         /// </returns>
         [CanBeNull]
         public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key)
+        {
+            return dictionary.GetValueOrDefault(key, default(TValue));
+        }
+        /// <summary>
+        /// Gets the value from the dictionary, or the default value of <typeparamref name="TValue"/> if no item with the specified key exists.
+        /// </summary>
+        /// <typeparam name="TKey">The type of the key.</typeparam>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <param name="dictionary">The dictionary.</param>
+        /// <param name="key">The key to lookup.</param>
+        /// <returns>
+        /// The value from the dictionary, or the default value of <typeparamref name="TValue"/> if no item with the specified key exists.
+        /// </returns>
+        [CanBeNull]
+        public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this Dictionary<TKey, TValue> dictionary, [NotNull] TKey key)
         {
             return dictionary.GetValueOrDefault(key, default(TValue));
         }
