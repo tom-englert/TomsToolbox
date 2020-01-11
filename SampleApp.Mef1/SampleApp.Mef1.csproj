@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>Net462</TargetFramework>
+    <LangVersion>latest</LangVersion>
     <UseWPF>true</UseWPF>
     <Tags>Sample</Tags>
     <ApplicationIcon>16x16.ico</ApplicationIcon>

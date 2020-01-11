@@ -3,6 +3,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net45;netcoreapp3.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
     <UseWPF>true</UseWPF>
     <Tags>Sample</Tags>
   </PropertyGroup>

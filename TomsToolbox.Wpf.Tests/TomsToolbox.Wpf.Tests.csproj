@@ -2,7 +2,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net462</TargetFramework>
-  <Tags>Test</Tags></PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Tags>Test</Tags>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

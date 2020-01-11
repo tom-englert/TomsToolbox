@@ -4,6 +4,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFrameworks>net45;netcoreapp3.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
     <UseWPF>true</UseWPF>
     <Tags>Sample</Tags>
     <ApplicationIcon>..\SampleApp\16x16.ico</ApplicationIcon>
