@@ -145,7 +145,7 @@
 
             public bool IsLoaded => _source != null;
 
-            public event EventHandler Loaded;
+            public event EventHandler? Loaded;
 
             private void OnLoaded()
             {
@@ -153,7 +153,7 @@
             }
 
             [CanBeNull]
-            private BitmapImage DownloadBitmap()
+            private BitmapImage? DownloadBitmap()
             {
                 try
                 {

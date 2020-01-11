@@ -30,7 +30,7 @@
         /// <param name="obj">The image.</param>
         /// <param name="value">The resource key.</param>
         [AttachedPropertyBrowsableForType(typeof(Image))]
-        public static void SetResourceKey([NotNull] this Image obj, [CanBeNull] object value)
+        public static void SetResourceKey([NotNull] this Image obj, [CanBeNull] object? value)
         {
             obj.SetValue(ResourceKeyProperty, value);
         }
@@ -43,16 +43,18 @@
         [NotNull] public static readonly DependencyProperty ResourceKeyProperty =
             DependencyProperty.RegisterAttached("ResourceKey", typeof(object), typeof(ImageExtensions), new FrameworkPropertyMetadata((sender, e) => ResourceKey_Changed((Image)sender, e.NewValue)));
 
-        private static void ResourceKey_Changed([NotNull] Image image, [CanBeNull] object resourceKey)
+        private static void ResourceKey_Changed([NotNull] Image image, [CanBeNull] object? resourceKey)
         {
             image.Source = (resourceKey != null) ? image.TryFindResource(resourceKey) as ImageSource : null;
             image.ImageFailed -= Image_ImageFailed;
             image.ImageFailed += Image_ImageFailed;
         }
 
-        static void Image_ImageFailed([NotNull] object sender, [NotNull] ExceptionRoutedEventArgs e)
+        static void Image_ImageFailed([CanBeNull] object? sender, [NotNull] ExceptionRoutedEventArgs e)
         {
-            var resourceKey = GetResourceKey((Image)sender);
+            if (!(sender is Image image))
+                return;
+            var resourceKey = GetResourceKey(image);
             var message = e.ErrorException?.Message ?? @"No exception";
             Trace.TraceError(string.Format(CultureInfo.InvariantCulture, "Load image with resource key '{0}' failed: {1}", resourceKey, message));
         }

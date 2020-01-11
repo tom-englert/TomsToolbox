@@ -121,9 +121,9 @@
         [NotNull]
         private readonly EventWaitHandle _threadStarted = new EventWaitHandle(false, EventResetMode.ManualReset);
         [CanBeNull]
-        private Dispatcher _dispatcher;
+        private Dispatcher? _dispatcher;
         [CanBeNull]
-        private TaskScheduler _taskScheduler;
+        private TaskScheduler? _taskScheduler;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ThreadWithDispatcher" /> class.
@@ -166,7 +166,7 @@
                 }
 
                 Debug.Assert(_dispatcher != null, nameof(_dispatcher) + " != null");
-                return _dispatcher;
+                return _dispatcher!;
             }
         }
 
@@ -180,7 +180,7 @@
         /// <summary>
         /// Occurs when the dispatcher is terminated.
         /// </summary>
-        public event EventHandler<EventArgs> Terminated;
+        public event EventHandler<EventArgs>? Terminated;
 
         /// <summary>
         /// Invokes the specified method in the dispatcher thread.

@@ -17,7 +17,7 @@
         /// Use this event to do some custom error handling, e.g. logging or throwing an exception.
         /// The <see cref="TextEventArgs.Text"/> will contain the name of the class of the object that was not disposed.
         /// </summary>
-        public static event EventHandler<TextEventArgs> NotDisposedObject;
+        public static event EventHandler<TextEventArgs>? NotDisposedObject;
 
         /// <summary>
         /// Handle reporting of a not disposed object.<para/>
@@ -62,7 +62,7 @@
         /// </summary>
         /// <param name="item">The object to dispose.</param>
         /// <returns><c>true</c> if the object has been disposed.</returns>
-        public static bool Dispose([CanBeNull] object item)
+        public static bool Dispose([CanBeNull] object? item)
         {
             if (!(item is IDisposable disposable))
             {

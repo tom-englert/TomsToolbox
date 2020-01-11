@@ -70,7 +70,7 @@
             }
         }
 
-        void Storyboard_Completed([CanBeNull] object sender, [CanBeNull] EventArgs e)
+        void Storyboard_Completed([CanBeNull] object? sender, [CanBeNull] EventArgs? e)
         {
             var map = AssociatedObject;
             if (map == null)
@@ -84,7 +84,7 @@
             Zoom(Math.Sign(e.Delta), e);
         }
 
-        private void Zoom(int delta, [CanBeNull] MouseEventArgs e = null)
+        private void Zoom(int delta, [CanBeNull] MouseEventArgs? e = null)
         {
             var map = AssociatedObject;
 
@@ -92,7 +92,7 @@
             if (layer == null)
                 return;
 
-            map.ZoomingPoint = e?.GetPosition(layer) ?? map.Center;
+            map!.ZoomingPoint = e?.GetPosition(layer) ?? map.Center;
 
             var from = _animation.To ?? map.ZoomLevel;
             _animation.To = (Math.Round(from / MouseWheelIncrement) + delta) * MouseWheelIncrement;

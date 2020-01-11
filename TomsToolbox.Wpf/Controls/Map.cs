@@ -76,7 +76,7 @@
         /// Gets or sets the image provider.
         /// </summary>
         [CanBeNull]
-        public IImageProvider ImageProvider
+        public IImageProvider? ImageProvider
         {
             get => (IImageProvider)GetValue(ImageProviderProperty);
             set => SetValue(ImageProviderProperty, value);
@@ -187,7 +187,7 @@
         /// Gets the element representing the map layer.
         /// </summary>
         [CanBeNull]
-        public FrameworkElement World
+        public FrameworkElement? World
         {
             get => (FrameworkElement)GetValue(WorldProperty);
             private set => SetValue(WorldPropertyKey, value);
@@ -204,7 +204,7 @@
         /// Gets the element representing the viewport.
         /// </summary>
         [CanBeNull]
-        public FrameworkElement Viewport
+        public FrameworkElement? Viewport
         {
             get => (FrameworkElement)GetValue(ViewportProperty);
             private set => SetValue(ViewportPropertyKey, value);
@@ -239,7 +239,7 @@
         /// The command parameter is a <see cref="Point"/> containing the logical coordinates.
         /// </summary>
         [CanBeNull]
-        public ICommand MouseDoubleClickCommand
+        public ICommand? MouseDoubleClickCommand
         {
             get => (ICommand)GetValue(MouseDoubleClickCommandProperty);
             set => SetValue(MouseDoubleClickCommandProperty, value);

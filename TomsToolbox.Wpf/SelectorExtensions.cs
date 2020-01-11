@@ -57,7 +57,7 @@
         public static readonly DependencyProperty TrackSelectionProperty =
             DependencyProperty.RegisterAttached("TrackSelection", typeof(bool), typeof(SelectorExtensions), new FrameworkPropertyMetadata(TrackSelection_Changed));
 
-        private static void TrackSelection_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void TrackSelection_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
             if (!(d is Selector selector))
                 return;
@@ -72,23 +72,23 @@
             selector.Loaded += Selector_Loaded;
         }
 
-        static void Selector_Loaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
+        static void Selector_Loaded([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
         {
             InternalTrackSelection(sender as Selector, true);
         }
 
-        static void Selector_SelectionChanged([CanBeNull] object sender, [CanBeNull] SelectionChangedEventArgs e)
+        static void Selector_SelectionChanged([CanBeNull] object? sender, [CanBeNull] SelectionChangedEventArgs? e)
         {
             InternalTrackSelection(sender as Selector, false);
         }
 
-        private static void InternalTrackSelection([CanBeNull] Selector selector, bool forceSelection)
+        private static void InternalTrackSelection([CanBeNull] Selector? selector, bool forceSelection)
         {
             var dataContext = selector?.DataContext;
             if (dataContext == null)
                 return;
 
-            if (!selector.IsLoaded)
+            if (!selector!.IsLoaded)
                 return;
 
             if ((selector.SelectedIndex < 0) || forceSelection)

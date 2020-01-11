@@ -16,15 +16,15 @@
         /// <returns>The parsed clipboard data as a table, or <c>null</c> if the clipboard is empty or does not contain normalized table data.</returns>
         /// <remarks>If no TEXT is present in the clipboard, CSV data is used.</remarks>
         [CanBeNull, ItemNotNull]
-        public static IList<IList<string>> GetClipboardDataAsTable()
+        public static IList<IList<string>>? GetClipboardDataAsTable()
         {
             var text = Clipboard.GetText();
             if (!string.IsNullOrEmpty(text))
-                return TableHelper.ParseTable(text, TableHelper.TextColumnSeparator);
+                return text.ParseTable(TableHelper.TextColumnSeparator);
 
             var csv = Clipboard.GetData(DataFormats.CommaSeparatedValue) as string;
             if (!string.IsNullOrEmpty(csv))
-                return TableHelper.ParseTable(csv, TableHelper.CsvColumnSeparator);
+                return csv!.ParseTable(TableHelper.CsvColumnSeparator);
 
             return null;
         }
@@ -36,7 +36,7 @@
         /// <remarks>
         /// This method sets the TEXT (tab delimited) and CSV data. Like in Excel the CSV delimiter is either comma or semicolon, depending on the current culture.
         /// </remarks>
-        public static void SetClipboardData([CanBeNull, ItemNotNull] this IList<IList<string>> table)
+        public static void SetClipboardData([CanBeNull, ItemNotNull] this IList<IList<string>>? table)
         {
             if (table == null)
             {

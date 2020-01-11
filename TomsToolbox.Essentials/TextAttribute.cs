@@ -13,13 +13,13 @@
     public class TextAttribute : Attribute
     {
         [CanBeNull]
-        private readonly object _key;
+        private readonly object? _key;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TextAttribute"/> class.
         /// </summary>
         /// <param name="key">A user defined key to classify the usage of this text.</param>
-        public TextAttribute([CanBeNull] object key)
+        public TextAttribute([CanBeNull] object? key)
         {
             _key = key;
         }
@@ -29,7 +29,7 @@
         /// </summary>
         /// <param name="key">A user defined key to classify the usage of this text.</param>
         /// <param name="text">The text.</param>
-        public TextAttribute([CanBeNull] object key, [CanBeNull] string text)
+        public TextAttribute([CanBeNull] object? key, [CanBeNull] string text)
             : this(key)
         {
             TextValue = text;
@@ -39,19 +39,19 @@
         /// Gets the key that classifies the usage of this text.
         /// </summary>
         [CanBeNull]
-        public object Key => _key;
+        public object? Key => _key;
 
         /// <summary>
         /// Gets the text associated with this attribute.
         /// </summary>
         [CanBeNull]
-        public virtual string Text => TextValue;
+        public virtual string? Text => TextValue;
 
         /// <summary>
         /// Gets or sets the text to be returned by the Text property.
         /// </summary>
         [CanBeNull]
-        protected string TextValue
+        protected string? TextValue
         {
             get;
             set;

@@ -73,14 +73,14 @@ namespace TomsToolbox.Wpf
         /// <param name="separator">The separator.</param>
         /// <returns>A quoted string if the string requires quoting; otherwise the original string.</returns>
         [NotNull]
-        public static string Quoted([CanBeNull] this string value, char separator)
+        public static string Quoted([CanBeNull] this string? value, char separator)
         {
             if (string.IsNullOrEmpty(value))
                 return string.Empty;
 
-            if (value.Any(IsLineFeed) || value.Contains(separator) || value.StartsWith(Quote, StringComparison.Ordinal))
+            if (value.Any(IsLineFeed) || value.Contains(separator) || value!.StartsWith(Quote, StringComparison.Ordinal))
             {
-                return Quote + value.Replace(Quote, Quote + Quote) + Quote;
+                return Quote + value!.Replace(Quote, Quote + Quote) + Quote;
             }
 
             return value;
@@ -93,7 +93,7 @@ namespace TomsToolbox.Wpf
         /// <param name="separator">The column separator.</param>
         /// <returns>The table.</returns>
         [CanBeNull, ItemNotNull]
-        public static IList<IList<string>> ParseTable([NotNull] this string text, char separator)
+        public static IList<IList<string>>? ParseTable([NotNull] this string text, char separator)
         {
             var table = new List<IList<string>>();
 

@@ -26,29 +26,30 @@
         /// A converted value.
         /// </returns>
         [CanBeNull]
-        protected override object Convert([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
-            var command = (ICommand)value;
+            if (!(value is ICommand command))
+                return null;
 
-            return command == null ? null : new CommandProxy(this, command);
+            return new CommandProxy(this, command);
         }
 
         /// <summary>
         /// Occurs when the command is being executed. The view can connect to this event to e.g. show a message box or modify the command parameter.
         /// </summary>
-        public event EventHandler<ConfirmedCommandEventArgs> Executing;
+        public event EventHandler<ConfirmedCommandEventArgs>? Executing;
 
         /// <summary>
         /// Occurs when an exception is raised during command execution.
         /// </summary>
-        public event EventHandler<ErrorEventArgs> Error;
+        public event EventHandler<ErrorEventArgs>? Error;
 
         private void QueryCancelExecution([NotNull] ConfirmedCommandEventArgs e)
         {
             Executing?.Invoke(this, e);
         }
 
-        private void OnError([CanBeNull] ErrorEventArgs e)
+        private void OnError(ErrorEventArgs e)
         {
             Error?.Invoke(this, e);
         }
@@ -66,7 +67,7 @@
                 _command = command;
             }
 
-            public void Execute([CanBeNull] object parameter)
+            public void Execute([CanBeNull] object? parameter)
             {
                 var args = new ConfirmedCommandEventArgs { Parameter = parameter };
 
@@ -85,7 +86,7 @@
                 }
             }
 
-            public bool CanExecute([CanBeNull] object parameter)
+            public bool CanExecute([CanBeNull] object? parameter)
             {
                 return _command.CanExecute(parameter);
             }

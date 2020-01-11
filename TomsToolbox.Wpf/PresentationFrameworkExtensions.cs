@@ -268,7 +268,7 @@
                 remove => Unsubscribe(value);
             }
 
-            private void Subscribe([CanBeNull] EventHandler value)
+            private void Subscribe([CanBeNull] EventHandler? value)
             {
                 if (value == null)
                     return;
@@ -284,7 +284,7 @@
                 _dependencyPropertyDescriptor.AddValueChanged(_frameworkElement, value);
             }
 
-            private void Unsubscribe([CanBeNull] EventHandler value)
+            private void Unsubscribe([CanBeNull] EventHandler? value)
             {
                 if (value == null)
                     return;

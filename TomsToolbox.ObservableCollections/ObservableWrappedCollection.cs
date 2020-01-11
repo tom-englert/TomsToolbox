@@ -47,7 +47,7 @@
         [NotNull]
         protected Func<TSource, TTarget> ItemGenerator => _itemGenerator;
 
-        private void AttachCollectionEvents([CanBeNull] INotifyCollectionChanged sender)
+        private void AttachCollectionEvents([CanBeNull] INotifyCollectionChanged? sender)
         {
             if (sender == null)
                 return;

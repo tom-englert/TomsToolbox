@@ -12,7 +12,7 @@
     public sealed class TimerTrigger : Microsoft.Xaml.Behaviors.TriggerBase<FrameworkElement>
     {
         [CanBeNull]
-        private DispatcherTimer _timer;
+        private DispatcherTimer? _timer;
 
         /// <summary>
         /// Gets or sets the interval of the timer.
@@ -68,7 +68,7 @@
             _timer = null;
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object? sender, EventArgs e)
         {
             InvokeActions(EventArgs.Empty);
         }

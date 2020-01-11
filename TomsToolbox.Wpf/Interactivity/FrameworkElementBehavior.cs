@@ -64,12 +64,12 @@
             associatedObject.Unloaded -= AssociatedObject_Unloaded;
         }
 
-        private void AssociatedObject_Loaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
+        private void AssociatedObject_Loaded([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
         {
             OnAssociatedObjectLoaded();
         }
 
-        private void AssociatedObject_Unloaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
+        private void AssociatedObject_Unloaded([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
         {
             OnAssociatedObjectUnloaded();
         }

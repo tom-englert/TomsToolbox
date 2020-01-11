@@ -23,7 +23,7 @@
         /// Gets or sets the multi value converter.
         /// </summary>
         [CanBeNull]
-        public IMultiValueConverter MultiValueConverter
+        public IMultiValueConverter? MultiValueConverter
         {
             get; 
             set;
@@ -46,7 +46,7 @@
         /// A converted value.
         /// </returns>
         [CanBeNull]
-        public object Convert([CanBeNull] object[] values, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        public object? Convert([CanBeNull] object[]? values, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             if (MultiValueConverter == null)
                 throw new InvalidOperationException("A MultiValueConverter must be set.");
@@ -66,7 +66,7 @@
         /// </returns>
         /// <exception cref="System.InvalidOperationException"></exception>
         [CanBeNull]
-        public object[] ConvertBack([CanBeNull] object value, [CanBeNull] Type[] targetTypes, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        public object[]? ConvertBack([CanBeNull] object? value, [CanBeNull] Type[]? targetTypes, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             throw new InvalidOperationException();
         }

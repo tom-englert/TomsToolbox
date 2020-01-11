@@ -24,7 +24,7 @@
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
         [CanBeNull]
-        protected abstract object Convert([NotNull, ItemCanBeNull] object[] values, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture);
+        protected abstract object? Convert([NotNull, ItemCanBeNull] object?[] values, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture);
 
         /// <summary>
         /// Converts a value.
@@ -38,13 +38,13 @@
         /// </returns>
         /// <exception cref="InvalidOperationException">ConvertBack is not supported by this converter.</exception>
         [CanBeNull, ItemCanBeNull]
-        protected virtual object[] ConvertBack([NotNull] object value, [CanBeNull, ItemCanBeNull] Type[] targetTypes, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        protected virtual object?[]? ConvertBack([NotNull] object value, [CanBeNull, ItemCanBeNull] Type?[]? targetTypes, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             throw new InvalidOperationException("ConvertBack is not supported by this converter.");
         }
 
         [CanBeNull]
-        object IMultiValueConverter.Convert([CanBeNull] object[] values, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        object? IMultiValueConverter.Convert([CanBeNull] object?[]? values, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             if (values == null)
                 return null;
@@ -65,7 +65,7 @@
         }
 
         [CanBeNull]
-        object[] IMultiValueConverter.ConvertBack([CanBeNull] object value, [CanBeNull] Type[] targetTypes, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        object?[]? IMultiValueConverter.ConvertBack([CanBeNull] object? value, [CanBeNull] Type[]? targetTypes, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             if (value == null)
                 return null;

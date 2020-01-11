@@ -253,7 +253,7 @@
             return InternalToNullableEnum<T>(value);
         }
 
-        private static T? InternalToNullableEnum<T>([CanBeNull] object value)
+        private static T? InternalToNullableEnum<T>([CanBeNull] object? value)
             where T : struct
         {
             if (value == null)
@@ -279,7 +279,7 @@
             }
         }
 
-        private static long ToInt64([CanBeNull] object value)
+        private static long ToInt64([CanBeNull] object? value)
         {
             return Convert.ToInt64(value, CultureInfo.InvariantCulture);
         }

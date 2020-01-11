@@ -35,7 +35,7 @@ namespace TomsToolbox.Wpf.Controls
         /// Gets the parent tile, or <c>null</c> if this is the root tile.
         /// </summary>
         [CanBeNull]
-        IMapTile Parent
+        IMapTile? Parent
         {
             get;
         }

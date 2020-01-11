@@ -31,7 +31,7 @@
         /// The credentials entered by the user, or <c>null</c> if the user has canceled the operation.
         /// </returns>
         [CanBeNull]
-        public static NetworkCredential PromptForCredential(IntPtr parentHandle, [CanBeNull] string caption, [CanBeNull] string message, int authenticationError, [CanBeNull] NetworkCredential template)
+        public static NetworkCredential? PromptForCredential(IntPtr parentHandle, [CanBeNull] string? caption, [CanBeNull] string? message, int authenticationError, [CanBeNull] NetworkCredential? template)
         {
             using (var inCredBuffer = PackAuthenticationBuffer(template))
             {
@@ -47,7 +47,7 @@
         /// <returns>
         /// 0 if the function succeeds, a HRESULT of the last error if the function fails.
         /// </returns>
-        public static int LogOnInteractiveUser([NotNull] this NetworkCredential credential, [CanBeNull] out SafeTokenHandle userToken)
+        public static int LogOnInteractiveUser([NotNull] this NetworkCredential credential, [CanBeNull] out SafeTokenHandle? userToken)
         {
             return LogOnInteractiveUser(credential.UserName, credential.Domain, credential.Password, out userToken);
         }
@@ -62,7 +62,7 @@
         /// <returns>
         /// 0 if the function succeeds, a HRESULT of the last error if the function fails.
         /// </returns>
-        public static int LogOnInteractiveUser([CanBeNull] string userName, [CanBeNull] string domain, [CanBeNull] string password, [CanBeNull] out SafeTokenHandle userToken)
+        public static int LogOnInteractiveUser([CanBeNull] string? userName, [CanBeNull] string? domain, [CanBeNull] string? password, [CanBeNull] out SafeTokenHandle? userToken)
         {
             ParseUserDomain(ref userName, ref domain);
 
@@ -210,7 +210,7 @@
         /// <returns>
         /// <c>true</c> if the user blongs to the specified group; otherwise <c>false</c>
         /// </returns>
-        public static bool IsCurrentUserInGroup([CanBeNull] string groupName)
+        public static bool IsCurrentUserInGroup([CanBeNull] string? groupName)
         {
             using (var id = WindowsIdentity.GetCurrent())
             {
@@ -228,7 +228,7 @@
         /// <returns>
         /// <c>true</c> if the user blongs to the specified group; otherwise <c>false</c>
         /// </returns>
-        public static bool IsUserInGroup([NotNull] SafeTokenHandle userToken, [CanBeNull] string groupName)
+        public static bool IsUserInGroup([NotNull] SafeTokenHandle userToken, [CanBeNull] string? groupName)
         {
             var token = userToken.DangerousGetHandle();
             if (token == IntPtr.Zero)
@@ -414,7 +414,7 @@
         }
 
         [NotNull]
-        private static SafeNativeMemory PackAuthenticationBuffer([CanBeNull] NetworkCredential credential)
+        private static SafeNativeMemory PackAuthenticationBuffer([CanBeNull] NetworkCredential? credential)
         {
             var userName = credential?.UserName;
 
@@ -429,7 +429,7 @@
         }
 
         [CanBeNull]
-        private static NetworkCredential PromptForCredential(IntPtr parentHandle, [CanBeNull] string caption, [CanBeNull] string message, int authenticationError, [NotNull] SafeNativeMemory inCredBuffer)
+        private static NetworkCredential? PromptForCredential(IntPtr parentHandle, [CanBeNull] string? caption, [CanBeNull] string? message, int authenticationError, [NotNull] SafeNativeMemory inCredBuffer)
         {
             var save = true;
             uint authPackage = 0;
@@ -464,7 +464,7 @@
         }
 
         [CanBeNull]
-        private static NetworkCredential UnpackAuthenticationBuffer([NotNull] SafeNativeMemory outCredBuffer)
+        private static NetworkCredential? UnpackAuthenticationBuffer([NotNull] SafeNativeMemory outCredBuffer)
         {
             const int maxLen = 100;
 
@@ -487,7 +487,7 @@
             };
         }
 
-        private static void ParseUserDomain([CanBeNull] ref string userName, [CanBeNull] ref string domain)
+        private static void ParseUserDomain([CanBeNull] ref string? userName, [CanBeNull] ref string? domain)
         {
             if (string.IsNullOrEmpty(userName))
                 return;
@@ -495,7 +495,7 @@
             if (!string.IsNullOrEmpty(domain))
                 return;
 
-            var parts = userName.Split('\\');
+            var parts = userName!.Split('\\');
             if (parts.Length != 2)
                 return;
 
@@ -588,9 +588,9 @@
             public int cbSize;
             public IntPtr hwndParent;
             [MarshalAs(UnmanagedType.LPWStr), CanBeNull]
-            public string pszMessageText;
+            public string? pszMessageText;
             [MarshalAs(UnmanagedType.LPWStr), CanBeNull]
-            public string pszCaptionText;
+            public string? pszCaptionText;
             public readonly IntPtr hbmBanner;
         }
 
@@ -642,7 +642,7 @@
 
             [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool LogonUser([CanBeNull] string lpszUsername, [CanBeNull] string lpszDomain, [CanBeNull] string lpszPassword, int dwLogonType, int dwLogonProvider, out IntPtr phToken);
+            public static extern bool LogonUser([CanBeNull] string? lpszUsername, [CanBeNull] string? lpszDomain, [CanBeNull] string? lpszPassword, int dwLogonType, int dwLogonProvider, out IntPtr phToken);
 
             [DllImport("credui.dll", CharSet = CharSet.Unicode)]
             [return: MarshalAs(UnmanagedType.U4)]
@@ -651,11 +651,11 @@
 
             [DllImport("credui.dll", CharSet = CharSet.Unicode)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool CredUnPackAuthenticationBuffer(int dwFlags, IntPtr pAuthBuffer, int cbAuthBuffer, [CanBeNull] StringBuilder pszUserName, ref int pcchMaxUserName, [CanBeNull] StringBuilder pszDomainName, ref int pcchMaxDomainame, [CanBeNull] StringBuilder pszPassword, ref int pcchMaxPassword);
+            public static extern bool CredUnPackAuthenticationBuffer(int dwFlags, IntPtr pAuthBuffer, int cbAuthBuffer, [CanBeNull] StringBuilder? pszUserName, ref int pcchMaxUserName, [CanBeNull] StringBuilder? pszDomainName, ref int pcchMaxDomainame, [CanBeNull] StringBuilder? pszPassword, ref int pcchMaxPassword);
 
             [DllImport("credui.dll", CharSet = CharSet.Unicode)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool CredPackAuthenticationBuffer(int dwFlags, [CanBeNull] string pszUserName, [CanBeNull] string pszPassword, IntPtr pPackedCredentials, ref int pcbPackedCredentials);
+            public static extern bool CredPackAuthenticationBuffer(int dwFlags, [CanBeNull] string? pszUserName, [CanBeNull] string? pszPassword, IntPtr pPackedCredentials, ref int pcbPackedCredentials);
 
             [DllImport("Shell32.dll", SetLastError = false)]
             public static extern int SHGetStockIconInfo(SHSTOCKICONID siid, SHGSI uFlags, ref SHSTOCKICONINFO psii);

@@ -47,7 +47,7 @@
             _timer.Start();
         }
 
-        private void Timer_Tick([NotNull] object sender, [NotNull] EventArgs e)
+        private void Timer_Tick(object? sender, [NotNull] EventArgs e)
         {
             _timer.Stop();
             _target();

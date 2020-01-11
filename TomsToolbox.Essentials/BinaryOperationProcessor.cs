@@ -118,8 +118,8 @@
         /// <returns>
         /// The result of the operation.
         /// </returns>
-        [CanBeNull]
-        public object Execute([CanBeNull] object value1, [CanBeNull] object value2)
+        [CanBeNull] 
+        public object? Execute([CanBeNull] object? value1, [CanBeNull] object? value2)
         {
             if ((value1 == null) || (value2 == null))
                 return value1;
@@ -131,14 +131,13 @@
                 ?? ApplyOperation(value1, value2);
         }
 
-        [CanBeNull]
-        private object ApplyOperation([CanBeNull] object value1, [CanBeNull] object value2)
+        private object ApplyOperation(object value1, object value2)
         {
             return _operationMethod(value1, value2);
         }
 
         [CanBeNull]
-        private object ApplyOperation([NotNull] Type valueType, [CanBeNull] object value1, [CanBeNull] object value2)
+        private object? ApplyOperation([NotNull] Type valueType, [CanBeNull] object? value1, [CanBeNull] object? value2)
         {
             var methods = valueType.GetMethods(BindingFlags.Static | BindingFlags.Public);
 
@@ -152,7 +151,7 @@
         }
 
         [CanBeNull]
-        private object ApplyOperationOnCastedObject([NotNull] Type targetType, [CanBeNull] object value1, [CanBeNull] object value2)
+        private object? ApplyOperationOnCastedObject([NotNull] Type targetType, [CanBeNull] object? value1, [CanBeNull] object? value2)
         {
             var result = targetType
                 .GetMethods(BindingFlags.Static | BindingFlags.Public)
@@ -167,7 +166,7 @@
         }
 
         [CanBeNull]
-        private static object ApplyOperation([NotNull] MethodInfo method, [NotNull] Type targetType, [CanBeNull] object value1, [CanBeNull] object value2)
+        private static object? ApplyOperation([NotNull] MethodInfo method, [NotNull] Type targetType, [CanBeNull] object? value1, [CanBeNull] object? value2)
         {
             try
             {
@@ -197,13 +196,13 @@
             return null;
         }
 
-        private static double ToDouble([CanBeNull] object value)
+        private static double ToDouble([CanBeNull] object? value)
         {
             return Convert.ToDouble(value, CultureInfo.InvariantCulture);
         }
 
         [CanBeNull]
-        private static object TryChangeType([CanBeNull] object value, [NotNull] Type targetType)
+        private static object? TryChangeType([CanBeNull] object? value, [NotNull] Type targetType)
         {
             try
             {
@@ -217,14 +216,14 @@
             return null;
         }
 
-        private static int Compare([NotNull] object a, [CanBeNull] object b)
+        private static int Compare([NotNull] object a, [CanBeNull] object? b)
         {
             return Comparer.DefaultInvariant.Compare(a, Convert.ChangeType(b, a.GetType(), CultureInfo.InvariantCulture));
         }
 
-        private new static bool Equals([NotNull] object a, [CanBeNull] object b)
+        private new static bool Equals([NotNull] object a, [CanBeNull] object? b)
         {
-            object c;
+            object? c;
 
             if ((c = TryChangeType(b, a.GetType())) != null)
                 return a.Equals(c);

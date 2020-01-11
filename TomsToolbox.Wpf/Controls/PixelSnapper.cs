@@ -28,7 +28,7 @@
         /// Gets or sets the view port displaying this control.
         /// </summary>
         [CanBeNull]
-        public FrameworkElement Viewport
+        public FrameworkElement? Viewport
         {
             get => (FrameworkElement)GetValue(ViewportProperty);
             set => SetValue(ViewportProperty, value);

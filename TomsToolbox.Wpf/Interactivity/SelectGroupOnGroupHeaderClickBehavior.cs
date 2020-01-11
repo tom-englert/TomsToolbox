@@ -42,7 +42,8 @@
 
             AssociatedObject.MouseLeftButtonDown -= GroupHeader_OnMouseLeftButtonDown;
         }
-        private static void GroupHeader_OnMouseLeftButtonDown([NotNull] object sender, [CanBeNull] MouseButtonEventArgs e)
+
+        private static void GroupHeader_OnMouseLeftButtonDown([NotNull] object sender, [CanBeNull] MouseButtonEventArgs? e)
         {
             var visual = sender as FrameworkElement;
 
@@ -50,7 +51,7 @@
             if (items == null)
                 return;
 
-            var selector = visual.TryFindAncestor<Selector>();
+            var selector = visual!.TryFindAncestor<Selector>();
 
             if (selector == null)
                 return;

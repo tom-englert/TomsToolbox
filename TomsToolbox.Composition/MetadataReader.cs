@@ -83,13 +83,13 @@
         /// Gets or sets the type this export information relates to.
         /// </summary>
         [CanBeNull]
-        public Type Type { get; set; }
+        public Type? Type { get; set; }
 
         /// <summary>
         /// Gets or sets the metadata of each export.
         /// </summary>
         [CanBeNull]
-        public IDictionary<string, object>[] Metadata { get; set; }
+        public IDictionary<string, object>[]? Metadata { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is marked as being constrained to sharing within the specified boundary.
@@ -100,7 +100,7 @@
         /// Gets or sets the boundary outside which the part marked by this attribute is inaccessible.
         /// </summary>
         [CanBeNull]
-        public string SharingBoundary { get; set; }
+        public string? SharingBoundary { get; set; }
 
         private void EvaluateSharedAttribute(Type type)
         {
@@ -145,18 +145,18 @@
 
             foreach (var namedArgument in namedArguments)
             {
-                metadata[namedArgument.MemberName] = ConvertValue(namedArgument.TypedValue);
+                metadata[namedArgument.MemberName] = ConvertValue(namedArgument.TypedValue)!;
             }
         }
 
         [CanBeNull]
-        private static object ConvertValue(CustomAttributeTypedArgument argument)
+        private static object? ConvertValue(CustomAttributeTypedArgument argument)
         {
             return ConvertValue(argument.ArgumentType, argument.Value);
         }
 
         [CanBeNull]
-        private static object ConvertValue(Type argumentType, [CanBeNull] object value)
+        private static object? ConvertValue(Type argumentType, [CanBeNull] object? value)
         {
             if (value == null)
                 return null;

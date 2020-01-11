@@ -13,7 +13,7 @@
     public class WindowButtonsHandlingBehavior : Behavior<DependencyObject>
     {
         [CanBeNull]
-        private Window _window;
+        private Window? _window;
         /// <summary>
         /// Called after the behavior is attached to an AssociatedObject.
         /// </summary>
@@ -41,7 +41,7 @@
             window.CommandBindings.Add(new CommandBinding(WindowCommands.Restore, Restore, CanRestore));
         }
 
-        private void Minimize([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
+        private void Minimize([CanBeNull] object? sender, [CanBeNull] ExecutedRoutedEventArgs? e)
         {
             var window = _window;
             if (window == null)
@@ -50,12 +50,12 @@
             window.WindowState = WindowState.Minimized;
         }
 
-        private void Close([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
+        private void Close([CanBeNull] object? sender, [CanBeNull] ExecutedRoutedEventArgs? e)
         {
             _window?.Close();
         }
 
-        private void CanRestore([CanBeNull] object sender, [NotNull] CanExecuteRoutedEventArgs e)
+        private void CanRestore([CanBeNull] object? sender, [NotNull] CanExecuteRoutedEventArgs e)
         {
             var window = _window;
             if (window == null)
@@ -64,7 +64,7 @@
             e.CanExecute = window.WindowState != WindowState.Normal;
         }
 
-        private void Restore([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
+        private void Restore([CanBeNull] object? sender, [CanBeNull] ExecutedRoutedEventArgs? e)
         {
             var window = _window;
             if (window == null)
@@ -73,7 +73,7 @@
             window.WindowState = WindowState.Normal;
         }
 
-        private void CanMaximize([CanBeNull] object sender, [NotNull] CanExecuteRoutedEventArgs e)
+        private void CanMaximize([CanBeNull] object? sender, [NotNull] CanExecuteRoutedEventArgs e)
         {
             var window = _window;
             if (window == null)
@@ -82,7 +82,7 @@
             e.CanExecute = (window.WindowState == WindowState.Normal) && ((window.ResizeMode == ResizeMode.CanResize) || (window.ResizeMode == ResizeMode.CanResizeWithGrip));
         }
 
-        private void Maximize([CanBeNull] object sender, [CanBeNull] ExecutedRoutedEventArgs e)
+        private void Maximize([CanBeNull] object? sender, [CanBeNull] ExecutedRoutedEventArgs? e)
         {
             var window = _window;
             if (window == null)

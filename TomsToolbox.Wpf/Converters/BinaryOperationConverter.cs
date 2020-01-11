@@ -32,7 +32,7 @@
     public class BinaryOperationConverter : ValueConverter, IMultiValueConverter
     {
         [CanBeNull]
-        private BinaryOperationProcessor _processor;
+        private BinaryOperationProcessor? _processor;
 
         /// <summary>
         /// The default addition converter.
@@ -85,13 +85,7 @@
         }
 
         [NotNull]
-        private BinaryOperationProcessor Processor
-        {
-            get
-            {
-                return _processor ?? (_processor = new BinaryOperationProcessor(BinaryOperation.Addition));
-            }
-        }
+        private BinaryOperationProcessor Processor => _processor ??= new BinaryOperationProcessor(BinaryOperation.Addition);
 
         /// <summary>
         /// Converts a value.
@@ -104,7 +98,7 @@
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
         [CanBeNull]
-        protected override object Convert(object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        protected override object? Convert(object value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             if (parameter == null)
                 return value;
@@ -124,7 +118,7 @@
         /// </returns>
         /// <exception cref="System.ArgumentException">MultiValueConverter requires two values.;values</exception>
         [CanBeNull]
-        public object Convert([CanBeNull] object[] values, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        public object? Convert([CanBeNull] object[]? values, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             if (values == null)
                 return null;
@@ -150,7 +144,7 @@
         /// </returns>
         /// <exception cref="System.InvalidOperationException">This operation is not supported.</exception>
         [CanBeNull]
-        public object[] ConvertBack([CanBeNull] object value, [CanBeNull] Type[] targetTypes, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        public object[] ConvertBack([CanBeNull] object? value, [CanBeNull] Type[]? targetTypes, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             throw new InvalidOperationException();
         }

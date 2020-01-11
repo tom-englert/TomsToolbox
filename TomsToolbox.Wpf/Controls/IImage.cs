@@ -14,7 +14,7 @@
         /// Gets the source of the image.
         /// </summary>
         [CanBeNull]
-        ImageSource Source
+        ImageSource? Source
         {
             get;
         }

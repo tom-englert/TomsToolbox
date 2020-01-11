@@ -50,7 +50,7 @@
         /// </returns>
         /// <param name="value">The value produced by the binding source.</param><param name="targetType">The type of the binding target property.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
         [NotNull]
-        protected override object Convert([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             return Convert(value, parameter);
         }
@@ -62,7 +62,7 @@
         /// <param name="parameter">The parameter.</param>
         /// <returns>The multiplied thickness.</returns>
         [NotNull]
-        public static object Convert([CanBeNull] object value, [CanBeNull] object parameter)
+        public static object Convert([CanBeNull] object? value, [CanBeNull] object? parameter)
         {
             var target = value.SafeCast<Thickness>();
             var factor = GetThicknessFromParameter(parameter);
@@ -70,7 +70,7 @@
             return Multiply(target, factor);
         }
 
-        private static Thickness GetThicknessFromParameter([CanBeNull] object parameter)
+        private static Thickness GetThicknessFromParameter([CanBeNull] object? parameter)
         {
             if (parameter == null)
                 return new Thickness(1.0);

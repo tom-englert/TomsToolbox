@@ -18,7 +18,7 @@
         [NotNull]
         private readonly ExportProvider _exportProvider;
 
-        private event EventHandler<EventArgs> ExportsChanged;
+        private event EventHandler<EventArgs>? ExportsChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExportProviderAdapter"/> class.
@@ -30,42 +30,42 @@
             exportProvider.ExportsChanged += ExportProvider_ExportsChanged;
         }
 
-        private void ExportProvider_ExportsChanged(object sender, ExportsChangeEventArgs e)
+        private void ExportProvider_ExportsChanged(object? sender, ExportsChangeEventArgs e)
         {
             ExportsChanged?.Invoke(sender, e);
         }
 
-        event EventHandler<EventArgs> IExportProvider.ExportsChanged
+        event EventHandler<EventArgs>? IExportProvider.ExportsChanged
         {
             add => ExportsChanged += value;
             remove => ExportsChanged -= value;
         }
 
         [NotNull]
-        T IExportProvider.GetExportedValue<T>([CanBeNull] string contractName)
+        T IExportProvider.GetExportedValue<T>([CanBeNull] string? contractName) where T : class
         {
             return _exportProvider.GetExportedValue<T>(contractName ?? string.Empty);
         }
 
         [CanBeNull]
-        T IExportProvider.GetExportedValueOrDefault<T>([CanBeNull] string contractName)
+        T? IExportProvider.GetExportedValueOrDefault<T>([CanBeNull] string? contractName) where T : class
         {
             return _exportProvider.GetExportedValueOrDefault<T>(contractName ?? string.Empty);
         }
 
-        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string contractName, [CanBeNull] out T value)
+        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string? contractName, [CanBeNull] out T? value) where T : class
         {
             value = _exportProvider.GetExportedValueOrDefault<T>();
 
             return !Equals(value, default(T));
         }
 
-        IEnumerable<T> IExportProvider.GetExportedValues<T>([CanBeNull] string contractName)
+        IEnumerable<T> IExportProvider.GetExportedValues<T>([CanBeNull] string? contractName) where T : class
         {
             return _exportProvider.GetExportedValues<T>(contractName ?? string.Empty);
         }
 
-        IEnumerable<IExport<object>> IExportProvider.GetExports([NotNull] Type contractType, [CanBeNull] string contractName)
+        IEnumerable<IExport<object>> IExportProvider.GetExports([NotNull] Type contractType, [CanBeNull] string? contractName)
         {
             return _exportProvider
                 .GetExports(contractType, null, contractName ?? string.Empty)

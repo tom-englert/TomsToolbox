@@ -20,7 +20,7 @@
         /// Gets or sets the physical layer. The children's coordinates are assumed to be relative to the physical layer.
         /// </summary>
         [CanBeNull]
-        public FrameworkElement World
+        public FrameworkElement? World
         {
             get => (FrameworkElement)GetValue(WorldProperty);
             set => SetValue(WorldProperty, value);
@@ -46,7 +46,7 @@
             if (worldLayer == null)
                 return new Size();
 
-            foreach (UIElement child in InternalChildren)
+            foreach (UIElement? child in InternalChildren)
             {
                 if (child == null)
                     continue;
@@ -85,7 +85,7 @@
             if (worldLayer == null)
                 return finalSize;
 
-            foreach (UIElement child in Children)
+            foreach (UIElement? child in Children)
             {
                 if (child == null)
                     continue;

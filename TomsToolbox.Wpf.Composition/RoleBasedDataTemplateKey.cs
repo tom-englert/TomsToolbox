@@ -32,7 +32,7 @@
         /// </summary>
         /// <param name="dataType">Type of the data.</param>
         /// <param name="role">The role.</param>
-        public RoleBasedDataTemplateKey([CanBeNull] object dataType, [CanBeNull] object role)
+        public RoleBasedDataTemplateKey([CanBeNull] object? dataType, [CanBeNull] object? role)
             : base(TemplateType.DataTemplate, dataType)
         {
             _role = role;
@@ -62,7 +62,7 @@
         /// true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
         /// </returns>
         /// <param name="other">An object to compare with this object.</param>
-        public bool Equals([CanBeNull] RoleBasedDataTemplateKey other)
+        public bool Equals([CanBeNull] RoleBasedDataTemplateKey? other)
         {
             return (other != null) && base.Equals(other) && Equals(_role, other._role);
         }
@@ -74,7 +74,7 @@
         /// <returns>
         ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals([CanBeNull] object o)
+        public override bool Equals([CanBeNull] object? o)
         {
             return Equals(o as RoleBasedDataTemplateKey);
         }

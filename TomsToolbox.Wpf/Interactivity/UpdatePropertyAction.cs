@@ -28,7 +28,7 @@
         /// Gets the property that should be refreshed.
         /// </summary>
         [CanBeNull]
-        public DependencyProperty Property
+        public DependencyProperty? Property
         {
             get => (DependencyProperty)GetValue(PropertyProperty);
             set => SetValue(PropertyProperty, value);
@@ -46,7 +46,7 @@
         /// The parameter to the action. If the action does not require a parameter, the parameter may be
         /// set to a null reference.
         /// </param>
-        protected override void Invoke([CanBeNull] object parameter)
+        protected override void Invoke([CanBeNull] object? parameter)
         {
             var target = Target;
             if ((target == null) || !target.IsLoaded)

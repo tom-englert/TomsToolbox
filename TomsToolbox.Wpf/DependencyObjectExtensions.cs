@@ -50,7 +50,7 @@
             [NotNull]
             private readonly T _dependencyObject;
             [CanBeNull]
-            private readonly DependencyPropertyDescriptor _dependencyPropertyDescriptor;
+            private readonly DependencyPropertyDescriptor? _dependencyPropertyDescriptor;
 
             public DependencyPropertyEventWrapper([NotNull] T dependencyObject, [NotNull] DependencyProperty property)
             {
@@ -121,12 +121,12 @@
         /// is <c>not</c> a <see cref="System.Windows.Window"/>.
         /// </remarks>
         [CanBeNull]
-        public static FrameworkElement TryGetRootVisual([NotNull] this DependencyObject item)
+        public static FrameworkElement? TryGetRootVisual([NotNull] this DependencyObject item)
         {
             var hwndSource = (HwndSource)PresentationSource.FromDependencyObject(item);
             var compositionTarget = hwndSource?.CompositionTarget;
 
-            var rootVisual = (FrameworkElement)compositionTarget?.RootVisual;
+            var rootVisual = (FrameworkElement?)compositionTarget?.RootVisual;
 
             return rootVisual;
         }
@@ -192,7 +192,7 @@
         /// <param name="self">The starting element.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
         [CanBeNull]
-        public static T TryFindAncestorOrSelf<T>([NotNull] this DependencyObject self)
+        public static T? TryFindAncestorOrSelf<T>([NotNull] this DependencyObject self) where T: DependencyObject
         {
             return self.AncestorsAndSelf().OfType<T>().FirstOrDefault();
         }
@@ -205,7 +205,7 @@
         /// <param name="match">The predicate to match.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
         [CanBeNull]
-        public static T TryFindAncestorOrSelf<T>([NotNull] this DependencyObject self, [NotNull] Func<T, bool> match)
+        public static T? TryFindAncestorOrSelf<T>([NotNull] this DependencyObject self, [NotNull] Func<T, bool> match) where T: DependencyObject
         {
             return self.AncestorsAndSelf().OfType<T>().FirstOrDefault(match);
         }
@@ -217,7 +217,7 @@
         /// <param name="self">The starting element.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
         [CanBeNull]
-        public static T TryFindAncestor<T>([NotNull] this DependencyObject self)
+        public static T? TryFindAncestor<T>([NotNull] this DependencyObject self) where T: DependencyObject
         {
             return self.Ancestors().OfType<T>().FirstOrDefault();
         }
@@ -230,7 +230,7 @@
         /// <param name="match">The predicate to match.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
         [CanBeNull]
-        public static T TryFindAncestor<T>([NotNull] this DependencyObject self, [NotNull] Func<T, bool> match)
+        public static T? TryFindAncestor<T>([NotNull] this DependencyObject self, [NotNull] Func<T, bool> match) where T: DependencyObject
         {
             return self.Ancestors().OfType<T>().FirstOrDefault(match);
         }

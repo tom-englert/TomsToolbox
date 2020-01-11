@@ -70,7 +70,7 @@
 
 
         [CanBeNull]
-        private static object Command_CoerceValue([CanBeNull] DependencyObject d, [CanBeNull] object basevalue)
+        private static object Command_CoerceValue([CanBeNull] DependencyObject? d, [CanBeNull] object? basevalue)
         {
             return basevalue ?? NullCommand.Default;
         }
@@ -184,7 +184,7 @@
             SetCommand(_attachedCommands.FirstOrDefault());
         }
 
-        private void SetCommand([CanBeNull] ICommand command)
+        private void SetCommand([CanBeNull] ICommand? command)
         {
             Command = command;
 

@@ -110,7 +110,7 @@
         private class WeakDelegate
         {
             [CanBeNull]
-            private readonly WeakReference _weakTarget;
+            private readonly WeakReference? _weakTarget;
             [NotNull]
             private readonly MethodInfo _method;
 
@@ -122,7 +122,7 @@
 
             public bool Invoke(object sender, TEventArgs e)
             {
-                object target = null;
+                object? target = null;
 
                 if (_weakTarget != null)
                 {

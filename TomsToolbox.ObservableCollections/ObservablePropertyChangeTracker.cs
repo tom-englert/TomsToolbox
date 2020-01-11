@@ -67,7 +67,7 @@
         /// <summary>
         /// Occurs when the property of any item has changed. The sender in the event is the item that has changed, not this instance.
         /// </summary>
-        public event EventHandler<PropertyChangedEventArgs> ItemPropertyChanged;
+        public event EventHandler<PropertyChangedEventArgs>? ItemPropertyChanged;
 
         internal ObservablePropertyChangeTracker([NotNull, ItemNotNull] IList<T> items, [NotNull] INotifyCollectionChanged eventSource)
         {

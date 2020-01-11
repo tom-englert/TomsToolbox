@@ -19,7 +19,7 @@
         /// <param name="assemblies">The assemblies.</param>
         /// <returns>The types in all assemblies.</returns>
         [NotNull, ItemNotNull]
-        public static IEnumerable<Type> EnumerateAllTypes([NotNull, ItemCanBeNull] this IEnumerable<Assembly> assemblies)
+        public static IEnumerable<Type> EnumerateAllTypes([NotNull, ItemCanBeNull] this IEnumerable<Assembly?> assemblies)
         {
             return assemblies.SelectMany(EnumerateAllTypes);
         }
@@ -30,13 +30,13 @@
         /// <param name="assembly">The assembly. If assembly is null, an empty list is returned.</param>
         /// <returns>The types in the assembly.</returns>
         [NotNull, ItemNotNull]
-        public static IEnumerable<Type> EnumerateAllTypes([CanBeNull] this Assembly assembly)
+        public static IEnumerable<Type> EnumerateAllTypes([CanBeNull] this Assembly? assembly)
         {
             return assembly?.GetTypes().SelectMany(GetSelfAndNestedTypes) ?? Enumerable.Empty<Type>();
         }
 
         [NotNull, ItemNotNull]
-        private static IEnumerable<Type> GetSelfAndNestedTypes([CanBeNull] Type type)
+        private static IEnumerable<Type> GetSelfAndNestedTypes([CanBeNull] Type? type)
         {
             return type == null ? Enumerable.Empty<Type>() : new[] { type }.Concat(type.GetNestedTypes().SelectMany(GetSelfAndNestedTypes));
         }
@@ -72,7 +72,7 @@
         /// <param name="assemblyFile">The assembly file.</param>
         /// <returns>The assembly if the assembly could be loaded; otherwise <c>null</c>.</returns>
         [CanBeNull]
-        public static Assembly TryLoadAssembly([CanBeNull] this FileSystemInfo assemblyFile)
+        public static Assembly? TryLoadAssembly([CanBeNull] this FileSystemInfo? assemblyFile)
         {
             if (assemblyFile == null)
                 return null;
@@ -96,7 +96,7 @@
         /// <param name="assemblyFile">The assembly file.</param>
         /// <returns>The assembly if the assembly could be loaded; otherwise <c>null</c>.</returns>
         [CanBeNull]
-        public static Assembly TryLoadAssemblyForReflectionOnly([CanBeNull] this FileSystemInfo assemblyFile)
+        public static Assembly? TryLoadAssemblyForReflectionOnly([CanBeNull] this FileSystemInfo? assemblyFile)
         {
             if (assemblyFile == null)
                 return null;

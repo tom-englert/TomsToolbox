@@ -20,7 +20,7 @@
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="path">The path.</param>
-        public PropertyBinding([CanBeNull] object source, [CanBeNull] string path)
+        public PropertyBinding([CanBeNull] object? source, [CanBeNull] string? path)
             : this(source, BindingMode.OneWay, path)
         {
         }
@@ -30,7 +30,7 @@
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="propertyPath">The property path.</param>
-        public PropertyBinding([CanBeNull] object source, [CanBeNull] PropertyPath propertyPath)
+        public PropertyBinding([CanBeNull] object? source, [CanBeNull] PropertyPath? propertyPath)
             : this(source, BindingMode.OneWay, propertyPath)
         {
         }
@@ -41,7 +41,7 @@
         /// <param name="source">The source.</param>
         /// <param name="mode">The mode.</param>
         /// <param name="path">The path.</param>
-        public PropertyBinding([CanBeNull] object source, BindingMode mode, [CanBeNull] string path)
+        public PropertyBinding([CanBeNull] object? source, BindingMode mode, [CanBeNull] string? path)
             : this(source, mode, new PropertyPath(path))
         {
         }
@@ -52,7 +52,7 @@
         /// <param name="source">The source.</param>
         /// <param name="mode">The mode.</param>
         /// <param name="propertyPath">The property path.</param>
-        public PropertyBinding([CanBeNull] object source, BindingMode mode, [CanBeNull] PropertyPath propertyPath)
+        public PropertyBinding([CanBeNull] object? source, BindingMode mode, [CanBeNull] PropertyPath? propertyPath)
         {
             _bindingHelper = new BindingHelper(this);
             BindingOperations.SetBinding(_bindingHelper, BindingHelper.ValueProperty, new Binding { Path = propertyPath, Source = source, Mode = mode });
@@ -71,7 +71,7 @@
         /// <summary>
         /// Occurs when the value has changed.
         /// </summary>
-        public event EventHandler<PropertyBindingValueChangedEventArgs<T>> ValueChanged;
+        public event EventHandler<PropertyBindingValueChangedEventArgs<T>>? ValueChanged;
 
         private void Value_Changed([CanBeNull] T oldValue, [CanBeNull] T newValue)
         {

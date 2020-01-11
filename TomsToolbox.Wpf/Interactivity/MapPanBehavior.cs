@@ -134,7 +134,7 @@
             _storyboard.Begin();
         }
 
-        private void Storyboard_Completed([NotNull] object sender, [NotNull] EventArgs e)
+        private void Storyboard_Completed([CanBeNull] object? sender, [NotNull] EventArgs e)
         {
             _isStoryboardRunning = false;
         }
@@ -152,7 +152,7 @@
 
             var mousePosition = e.GetPosition(layer);
 
-            map.Center += _panPosition.GetValueOrDefault() - mousePosition;
+            map!.Center += _panPosition.GetValueOrDefault() - mousePosition;
         }
 
         private void Map_MouseLeftButtonDown([NotNull] object sender, [NotNull] MouseButtonEventArgs e)
@@ -165,7 +165,7 @@
 
             _panPosition = e.GetPosition(layer);
 
-            map.CaptureMouse();
+            map!.CaptureMouse();
         }
 
         private void Map_MouseLeftButtonUp([NotNull] object sender, [NotNull] MouseButtonEventArgs e)

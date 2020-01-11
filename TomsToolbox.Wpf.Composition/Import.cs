@@ -29,7 +29,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetDataContext([NotNull] FrameworkElement obj, [CanBeNull] Type value)
+        public static void SetDataContext([NotNull] FrameworkElement obj, [CanBeNull] Type? value)
         {
             obj.SetValue(DataContextProperty, value);
         }

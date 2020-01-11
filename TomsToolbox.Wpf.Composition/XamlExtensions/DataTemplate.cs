@@ -33,7 +33,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetRole([NotNull] FrameworkElement obj, [CanBeNull] object value)
+        public static void SetRole([NotNull] FrameworkElement obj, [CanBeNull] object? value)
         {
             obj.SetValue(RoleProperty, value);
         }
@@ -47,7 +47,7 @@
         public static readonly DependencyProperty RoleProperty =
             DependencyProperty.RegisterAttached("Role", typeof(object), typeof(DataTemplate), new FrameworkPropertyMetadata(Role_Changed));
 
-        private static void Role_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void Role_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
             var newValue = e.NewValue;
 

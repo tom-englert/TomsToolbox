@@ -17,13 +17,13 @@
         /// Gets or sets the regular expression to find.
         /// </summary>
         [CanBeNull]
-        public string Pattern { get; set; }
+        public string? Pattern { get; set; }
 
         /// <summary>
         /// Gets or sets the text to replace.
         /// </summary>
         [CanBeNull]
-        public string Replacement { get; set; }
+        public string? Replacement { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="RegexOptions"/> used to find the string.
@@ -36,7 +36,7 @@
         public bool ReplaceAll { get; set; }
 
         [CanBeNull]
-        private object Convert([CanBeNull] string value)
+        private object? Convert([CanBeNull] string? value)
         {
             return Convert(value, Pattern, Replacement, Options, ReplaceAll);
         }
@@ -51,7 +51,7 @@
         /// <param name="replaceAll">if set to <c>true</c> all occurrences will be replaces; otherwise only the first.</param>
         /// <returns>The converted value.</returns>
         [CanBeNull]
-        public static object Convert([CanBeNull] string value, [CanBeNull] string pattern, [CanBeNull] string replacement, RegexOptions options, bool replaceAll)
+        public static object? Convert([CanBeNull] string? value, [CanBeNull] string? pattern, [CanBeNull] string? replacement, RegexOptions options, bool replaceAll)
         {
             if (value == null)
                 return null;
@@ -59,7 +59,7 @@
             if (string.IsNullOrEmpty(pattern))
                 return value;
 
-            replacement = replacement ?? string.Empty;
+            replacement ??= string.Empty;
 
             var regex = new Regex(pattern, options);
             regex.Replace(value, replacement, replaceAll ? -1 : 1);
@@ -79,9 +79,9 @@
         /// A converted value.
         /// </returns>
         [CanBeNull]
-        protected override object Convert([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
-            return Convert((string)value);
+            return Convert(value as string);
         }
     }
 }

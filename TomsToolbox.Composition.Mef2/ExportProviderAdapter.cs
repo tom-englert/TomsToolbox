@@ -26,35 +26,35 @@
         }
 
         /// <inheritdoc />
-        public event EventHandler<EventArgs> ExportsChanged;
+        public event EventHandler<EventArgs>? ExportsChanged;
 
-        T IExportProvider.GetExportedValue<T>([CanBeNull] string contractName)
+        T IExportProvider.GetExportedValue<T>([CanBeNull] string? contractName) where T : class
         {
             return _context.GetExport<T>(contractName);
         }
 
         [CanBeNull]
-        T IExportProvider.GetExportedValueOrDefault<T>([CanBeNull] string contractName)
+        T? IExportProvider.GetExportedValueOrDefault<T>([CanBeNull] string? contractName) where T : class
         {
             return _context.TryGetExport<T>(contractName, out var value) ? value : default;
         }
 
-        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string contractName, [CanBeNull] out T value)
+        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string? contractName, [CanBeNull] out T value)
         {
             return _context.TryGetExport(contractName, out value);
         }
 
-        IEnumerable<T> IExportProvider.GetExportedValues<T>([CanBeNull] string contractName)
+        IEnumerable<T> IExportProvider.GetExportedValues<T>([CanBeNull] string? contractName) where T : class
         {
             return _context.GetExports<T>(contractName);
         }
 
-        IEnumerable<IExport<object>> IExportProvider.GetExports([NotNull] Type contractType, [CanBeNull] string contractName)
+        IEnumerable<IExport<object>> IExportProvider.GetExports([NotNull] Type contractType, [CanBeNull] string? contractName)
         {
             var exportMethod = GetType().GetMethod(nameof(GetExports))?.MakeGenericMethod(contractType);
             if (exportMethod == null)
                 throw new InvalidOperationException("Method not found: " + nameof(GetExports));
-            return (IEnumerable<IExport<object>>)exportMethod.Invoke(this, new object[] {contractName});
+            return (IEnumerable<IExport<object>>)exportMethod.Invoke(this, new object?[] { contractName });
         }
 
         /// <summary>

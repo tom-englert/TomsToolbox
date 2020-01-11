@@ -74,7 +74,7 @@
             UpdateContent(contentControl, exportedItem);
         }
 
-        private void UpdateContent([NotNull] ContentControl contentControl, [CanBeNull] object targetItem)
+        private void UpdateContent([NotNull] ContentControl contentControl, [CanBeNull] object? targetItem)
         {
             var currentItem = contentControl.Content;
 
@@ -87,7 +87,7 @@
             ApplyContext(targetItem as IComposablePartWithContext, CompositionContext);
         }
 
-        private static void ApplyContext([CanBeNull] IComposablePartWithContext item, [CanBeNull] object context)
+        private static void ApplyContext([CanBeNull] IComposablePartWithContext? item, [CanBeNull] object? context)
         {
             if (item == null)
                 return;

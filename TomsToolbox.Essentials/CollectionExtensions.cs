@@ -30,7 +30,7 @@
         /// <param name="target">The list to synchronize.</param>
         /// <param name="source">The items that should be in the target list.</param>
         /// <param name="comparer">The comparer used to compare the items. If comparer is <c>null</c>, the default equality comparer is used to compare values.</param>
-        public static void SynchronizeWith<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull, ItemCanBeNull] ICollection<T> source, [CanBeNull] IEqualityComparer<T> comparer)
+        public static void SynchronizeWith<T>([NotNull, ItemCanBeNull] this ICollection<T> target, [NotNull, ItemCanBeNull] ICollection<T> source, [CanBeNull] IEqualityComparer<T>? comparer)
         {
             var removedItems = target.Except(source, comparer).ToArray();
             var addedItems = source.Except(target, comparer).ToArray();
@@ -191,7 +191,7 @@
         /// <param name="items">The items to test for.</param>
         /// <param name="comparer">The comparer to compare the individual items.</param>
         /// <returns><c>true</c> if any of the items is contained in the specified object; otherwise <c>false</c>.</returns>
-        public static bool ContainsAny<T>([NotNull, ItemNotNull] this IEnumerable<T> self, [CanBeNull] IEqualityComparer<T> comparer, [NotNull, ItemCanBeNull] params T[] items)
+        public static bool ContainsAny<T>([NotNull, ItemNotNull] this IEnumerable<T> self, [CanBeNull] IEqualityComparer<T>? comparer, [NotNull, ItemCanBeNull] params T[] items)
         {
             return items.Any(item => self.Contains(item, comparer));
         }
@@ -230,15 +230,15 @@
         /// <returns>
         /// The zero-based index of the first occurrence of <paramref name="item" />, if found; otherwise, –1.
         /// </returns>
-        public static int IndexOf<T>([NotNull, ItemCanBeNull] this IEnumerable<T> collection, [CanBeNull] T item, [CanBeNull] IEqualityComparer<T> comparer)
+        public static int IndexOf<T>([NotNull, ItemCanBeNull] this IEnumerable<T> collection, [CanBeNull] T item, [CanBeNull] IEqualityComparer<T>? comparer)
         {
-            comparer = comparer ?? EqualityComparer<T>.Default;
+            var comp = comparer ?? EqualityComparer<T>.Default;
 
             var index = 0;
 
             foreach (var element in collection)
             {
-                if (comparer.Equals(element, item))
+                if (comp.Equals(element, item))
                     return index;
 
                 index += 1;
@@ -314,7 +314,7 @@
         /// <exception cref="ArgumentNullException">Any of the keys is null.</exception>
         /// <exception cref="ArgumentException">Any of the keys is duplicate.</exception>
         [NotNull]
-        public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>([NotNull] this IEnumerable<KeyValuePair<TKey, TValue>> items, [CanBeNull] IEqualityComparer<TKey> comparer)
+        public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>([NotNull] this IEnumerable<KeyValuePair<TKey, TValue>> items, [CanBeNull] IEqualityComparer<TKey>? comparer)
         {
             return items.ToDictionary(item => item.Key, item => item.Value, comparer);
         }
@@ -383,7 +383,7 @@
         [CanBeNull]
         public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key)
         {
-            return dictionary.GetValueOrDefault(key, default(TValue));
+            return dictionary.GetValueOrDefault(key, default!);
         }
         /// <summary>
         /// Gets the value from the dictionary, or the default value of <typeparamref name="TValue"/> if no item with the specified key exists.
@@ -398,7 +398,7 @@
         [CanBeNull]
         public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this Dictionary<TKey, TValue> dictionary, [NotNull] TKey key)
         {
-            return dictionary.GetValueOrDefault(key, default(TValue));
+            return dictionary.GetValueOrDefault(key, default!);
         }
 
         /// <summary>
@@ -414,7 +414,7 @@
         [CanBeNull]
         public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IReadOnlyDictionary<TKey, TValue> dictionary, [NotNull] TKey key)
         {
-            return dictionary.GetValueOrDefault(key, default(TValue));
+            return dictionary.GetValueOrDefault(key, default!);
         }
 
         /// <summary>

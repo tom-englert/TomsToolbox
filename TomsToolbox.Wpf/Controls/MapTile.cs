@@ -25,7 +25,7 @@
         private Size _subLevelThreshold = (Size)(1.5 * TileSize * new Vector(1, 1));
 
         [CanBeNull]
-        private readonly IMapTile _parent;
+        private readonly IMapTile? _parent;
 
         private readonly Panel _world = new Grid { Width = TileSize, Height = TileSize };
         private readonly Panel _subLevel = new UniformGrid { Rows = 2, Columns = 2 };
@@ -44,7 +44,7 @@
         /// <param name="parent">The parent.</param>
         /// <param name="x">The x.</param>
         /// <param name="y">The y.</param>
-        private MapTile([CanBeNull] IMapTile parent, int x, int y)
+        private MapTile([CanBeNull] IMapTile? parent, int x, int y)
         {
             _parent = parent;
 
@@ -84,7 +84,7 @@
         /// Gets the logical parent  element of this element.
         /// </summary>
         [CanBeNull]
-        IMapTile IMapTile.Parent => _parent;
+        IMapTile? IMapTile.Parent => _parent;
 
         /// <summary>
         /// Unloads this instance when the tile is no longer visible.
@@ -101,7 +101,7 @@
         /// Gets or sets the viewport where the map will be displayed.
         /// </summary>
         [CanBeNull]
-        public FrameworkElement Viewport
+        public FrameworkElement? Viewport
         {
             get => (FrameworkElement)GetValue(ViewportProperty);
             set => SetValue(ViewportProperty, value);
@@ -117,7 +117,7 @@
         /// Gets or sets the image provider that can load the images.
         /// </summary>
         [CanBeNull]
-        public IImageProvider ImageProvider
+        public IImageProvider? ImageProvider
         {
             get => (IImageProvider)GetValue(ImageProviderProperty);
             set => SetValue(ImageProviderProperty, value);
@@ -133,7 +133,7 @@
         /// Gets or sets the image for this tile.
         /// </summary>
         [CanBeNull]
-        public IImage Image
+        public IImage? Image
         {
             get => (IImage)GetValue(ImageProperty);
             set => SetValue(ImageProperty, value);
@@ -214,7 +214,7 @@
             Invalidate();
         }
 
-        private static void ForceSubLevel([NotNull] IMapTile tile, [CanBeNull] Panel subLevel)
+        private static void ForceSubLevel([NotNull] IMapTile tile, [CanBeNull] Panel? subLevel)
         {
             if (subLevel == null)
                 return;

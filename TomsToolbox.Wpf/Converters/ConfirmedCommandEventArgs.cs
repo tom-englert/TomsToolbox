@@ -13,7 +13,7 @@
         /// Gets or sets the parameter that will be passed to the command when it's executed.
         /// </summary>
         [CanBeNull]
-        public object Parameter
+        public object? Parameter
         {
             get;
             set;

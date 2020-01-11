@@ -30,7 +30,7 @@
         /// ]]></code>
         /// </example>
         [NotNull]
-        public static TryCastWorker<TValue> TryCast<TValue>([CanBeNull] this TValue value)
+        public static TryCastWorker<TValue> TryCast<TValue>([CanBeNull] this TValue? value) where TValue : class
         {
             return new TryCastWorker<TValue>(value);
         }
@@ -43,8 +43,9 @@
     /// </summary>
     /// <typeparam name="TValue">The type of the value.</typeparam>
     public class TryCastWorker<TValue> : TryCastWorkerBase<TValue, object>
+        where TValue : class
     {
-        internal TryCastWorker([CanBeNull] TValue value)
+        internal TryCastWorker([CanBeNull] TValue? value)
             : base(value)
         {
         }
@@ -59,10 +60,10 @@
         /// If any previous method in the fluent chain has already succeeded, this method does nothing.
         /// </remarks>
         [NotNull]
-        public TryCastWorker<TValue> When<TTarget>([NotNull] Action<TTarget> action)
-            where TTarget : TValue
+        public TryCastWorker<TValue> When<TTarget>([NotNull] Action<TTarget?> action)
+            where TTarget : class, TValue
         {
-            TryExecute<TTarget>(target => WrapAction(action, target));
+            TryExecute<TTarget>(target => WrapAction(action, target)!);
 
             return this;
         }
@@ -71,9 +72,9 @@
         /// Executes the action if no previous cast has succeeded.
         /// </summary>
         /// <param name="action">The action.</param>
-        public void Else([NotNull] Action<TValue> action)
+        public void Else([NotNull] Action<TValue?> action)
         {
-            TryExecute<TValue>(target => WrapAction(action, target));
+            TryExecute<TValue>(target => WrapAction(action, target)!);
         }
 
         /// <summary>
@@ -105,7 +106,8 @@
         /// Wraps the action so it can be used where a function is expected.
         /// </summary>
         [CanBeNull]
-        private static object WrapAction<TTarget>([NotNull] Action<TTarget> action, [CanBeNull] TTarget target)
+        private static object? WrapAction<TTarget>([NotNull] Action<TTarget?> action, [CanBeNull] TTarget? target)
+            where TTarget: class
         {
             action(target);
             return null;
@@ -121,13 +123,14 @@
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public class TryCastWorker<TValue, TResult>
         : TryCastWorkerBase<TValue, TResult>
+        where TValue: class
     {
-        internal TryCastWorker([CanBeNull] TValue value)
+        internal TryCastWorker([CanBeNull] TValue? value)
             : base(value)
         {
         }
 
-        internal TryCastWorker([CanBeNull] TValue value, [CanBeNull] TResult defaultValue)
+        internal TryCastWorker([CanBeNull] TValue? value, [CanBeNull] TResult defaultValue)
             : base(value, defaultValue)
         {
         }
@@ -148,8 +151,8 @@
         /// If any previous method in the fluent chain has already succeeded, this method does nothing.
         /// </remarks>
         [NotNull]
-        public TryCastWorker<TValue, TResult> When<TTarget>([NotNull] Func<TTarget, TResult> action)
-            where TTarget : TValue
+        public TryCastWorker<TValue, TResult> When<TTarget>([NotNull] Func<TTarget?, TResult> action)
+            where TTarget : class, TValue
         {
             TryExecute(action);
 
@@ -162,7 +165,7 @@
         /// <param name="action">The action.</param>
         /// <returns>The result.</returns>
         [CanBeNull]
-        public TResult Else([NotNull] Func<TValue, TResult> action)
+        public TResult Else([NotNull] Func<TValue?, TResult> action)
         {
             TryExecute(action);
 
@@ -176,17 +179,19 @@
     /// <typeparam name="TValue">The type of the value.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public abstract class TryCastWorkerBase<TValue, TResult>
+        where TValue : class
     {
         [CanBeNull]
-        private readonly TValue _value;
+        private readonly TValue? _value;
         private bool _isResolved;
 
-        internal TryCastWorkerBase([CanBeNull] TValue value)
+        internal TryCastWorkerBase([CanBeNull] TValue? value)
         {
             _value = value;
+            InternalResult = default!;
         }
 
-        internal TryCastWorkerBase([CanBeNull] TValue value, [CanBeNull] TResult defaultValue)
+        internal TryCastWorkerBase([CanBeNull] TValue? value, [CanBeNull] TResult defaultValue)
             : this(value)
         {
             InternalResult = defaultValue;
@@ -196,7 +201,7 @@
         /// Gets the value to cast.
         /// </summary>
         [CanBeNull]
-        protected TValue Value => _value;
+        protected TValue? Value => _value;
 
         /// <summary>
         /// Gets the result of the action of the first succeeded cast.
@@ -216,7 +221,7 @@
         [CanBeNull]
         public TResult ElseThrow()
         {
-            return ElseThrow("Encountered an unexpected type: " + (ReferenceEquals(_value, null) ? "(null)" : _value.GetType().FullName));
+            return ElseThrow("Encountered an unexpected type: " + (_value is null ? "(null)" : _value.GetType().FullName));
         }
 
         /// <summary>
@@ -239,8 +244,8 @@
         /// </summary>
         /// <typeparam name="TTarget">The type of the target.</typeparam>
         /// <param name="action">The action.</param>
-        protected void TryExecute<TTarget>([NotNull] Func<TTarget, TResult> action)
-            where TTarget : TValue
+        protected void TryExecute<TTarget>([NotNull] Func<TTarget?, TResult> action)
+            where TTarget : class, TValue
         {
             if (_isResolved)
                 return;

@@ -221,7 +221,7 @@
             UpdateTarget();
         }
 
-        private void SetExportProvider([CanBeNull] IExportProvider exportProvider)
+        private void SetExportProvider([CanBeNull] IExportProvider? exportProvider)
         {
             if (_exportProvider != null)
             {
@@ -236,7 +236,7 @@
             }
         }
 
-        private void ExportProvider_ExportsChanged([CanBeNull] object sender, [CanBeNull] EventArgs e)
+        private void ExportProvider_ExportsChanged([CanBeNull] object? sender, [CanBeNull] EventArgs? e)
         {
             UpdateTarget();
         }

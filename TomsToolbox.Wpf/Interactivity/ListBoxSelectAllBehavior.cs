@@ -63,7 +63,7 @@
             ((INotifyCollectionChanged)listBox.Items).CollectionChanged += (_, __) => _collectionChangedThrottle.Tick();
         }
 
-        private void ListBox_SelectionChanged([CanBeNull] object sender, [CanBeNull] EventArgs e)
+        private void ListBox_SelectionChanged([CanBeNull] object? sender, [CanBeNull] EventArgs? e)
         {
             var listBox = AssociatedObject;
             if (listBox == null)

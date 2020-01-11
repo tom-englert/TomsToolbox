@@ -31,7 +31,7 @@
         /// </summary>
         /// <param name="generator">The generator.</param>
         /// <param name="comparer">The comparer.</param>
-        public AutoWeakIndexer([NotNull] Func<TKey, TValue> generator, [CanBeNull] IEqualityComparer<TKey> comparer = null)
+        public AutoWeakIndexer([NotNull] Func<TKey, TValue> generator, [CanBeNull] IEqualityComparer<TKey>?  comparer = null)
         {
             _generator = generator;
             _items = new Dictionary<TKey, WeakReference<TValue>>(comparer);
@@ -85,20 +85,20 @@
         /// A <see cref="ICollection{TValue}"/> containing the values in the <see cref="AutoWeakIndexer{TKey, TValue}"/>.
         /// </returns>
         [ItemNotNull]
-        [NotNull]
-        public ICollection<TValue> Values
+        [CanBeNull]
+        public ICollection<TValue>? Values
         {
             get
             {
-                TValue GetTargetOrDefault(WeakReference<TValue> item)
+                static TValue? GetTargetOrDefault(WeakReference<TValue> item)
                 {
                     if (item == null)
-                        return null;
+                        return default;
 
                     return item.TryGetTarget(out var value) ? value : null;
                 }
 
-                return _items.Values.Select(GetTargetOrDefault).Where(item => item != null).ToArray();
+                return _items.Values.Select(GetTargetOrDefault).Where(item => item != null).ToArray()!;
             }
         }
 
@@ -139,7 +139,7 @@
         /// </returns>
         /// <param name="key">The key of the value to get.</param>
         /// <param name="value">When this method returns, contains the value associated with the specified key, if the key is found; otherwise, the default value for the type of the <paramref name="value"/> parameter. This parameter is passed uninitialized.</param>
-        public bool TryGetValue([NotNull] TKey key, [CanBeNull] out TValue value)
+        public bool TryGetValue([NotNull] TKey key, [CanBeNull] out TValue? value)
         {
             value = default;
 
@@ -162,7 +162,7 @@
 
                 if (item.Value?.TryGetTarget(out value) == true)
                 {
-                    yield return new KeyValuePair<TKey, TValue>(item.Key, value);
+                    yield return new KeyValuePair<TKey, TValue>(item.Key, value!);
                 }
             }
         }

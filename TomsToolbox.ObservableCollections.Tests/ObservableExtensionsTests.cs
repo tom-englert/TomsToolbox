@@ -1,5 +1,6 @@
 ﻿// ReSharper disable PossibleNullReferenceException
 // ReSharper disable AssignNullToNotNullAttribute
+#nullable disable
 namespace TomsToolbox.ObservableCollections.Tests
 {
     using System.Collections.Generic;

@@ -101,7 +101,7 @@
         public DateTime UtcNow => DateTime.UtcNow;
 
         /// <inheritdoc />
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// Finalizes an instance of the <see cref="DateTimeSource"/> class.
@@ -112,7 +112,7 @@
         }
 
         [MakeWeak]
-        private void UpdateTimer_Tick([CanBeNull] object sender, [CanBeNull] EventArgs eventArgs)
+        private void UpdateTimer_Tick([CanBeNull] object? sender, [CanBeNull] EventArgs? eventArgs)
         {
             var eventHandler = PropertyChanged;
             if (eventHandler == null)

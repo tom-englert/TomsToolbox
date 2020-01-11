@@ -21,7 +21,7 @@
 
         private TimeSpan _startTimeStamp;
         [CanBeNull]
-        private Thread _timerThread;
+        private Thread? _timerThread;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HighResolutionTimer"/> class.

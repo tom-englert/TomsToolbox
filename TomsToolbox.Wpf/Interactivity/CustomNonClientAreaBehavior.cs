@@ -104,7 +104,7 @@
     public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
     {
         [CanBeNull]
-        private Window _window;
+        private Window? _window;
         private POINT _windowOffset;
         private Matrix _transformFromDevice = Matrix.Identity;
         private Matrix _transformToDevice = Matrix.Identity;
@@ -213,7 +213,7 @@
             Unregister(window);
         }
 
-        private void Window_SourceInitialized([CanBeNull] object sender, [CanBeNull] EventArgs e)
+        private void Window_SourceInitialized([CanBeNull] object? sender, [CanBeNull] EventArgs? e)
         {
             var window = _window;
 
@@ -232,7 +232,7 @@
 
             var handle = messageSource.Handle;
 
-            using (new DeferSizeToContent(window))
+            using (new DeferSizeToContent(window!))
             {
                 ShowGlassFrame(compositionTarget, handle);
                 NativeMethods.SetWindowRgn(handle, IntPtr.Zero, true);
@@ -251,7 +251,7 @@
             ShowGlassFrame(messageSource.CompositionTarget, handle);
         }
 
-        private void ShowGlassFrame([CanBeNull] HwndTarget compositionTarget, IntPtr handle)
+        private void ShowGlassFrame([CanBeNull] HwndTarget? compositionTarget, IntPtr handle)
         {
             if (compositionTarget == null)
                 return;
@@ -370,7 +370,7 @@
             var cornerSize = (SIZE)_transformToDevice.Transform((Point)CornerSize);
             var borderSize = (SIZE)_transformToDevice.Transform((Point)BorderSize);
 
-            if ((window.ResizeMode == ResizeMode.CanResize) || window.ResizeMode == ResizeMode.CanResizeWithGrip)
+            if ((window!.ResizeMode == ResizeMode.CanResize) || window.ResizeMode == ResizeMode.CanResizeWithGrip)
             {
                 if (WindowState.Maximized != window.WindowState)
                 {
@@ -671,7 +671,7 @@
 
         private static T PtrToStructure<T>(IntPtr ptr)
         {
-            return (T)Marshal.PtrToStructure(ptr, typeof(T));
+            return (T)Marshal.PtrToStructure(ptr, typeof(T))!;
         }
 
         [Flags]

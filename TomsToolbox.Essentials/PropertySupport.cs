@@ -25,7 +25,7 @@
         [NotNull]
         public static string ExtractPropertyName<TProperty>([NotNull] Expression<Func<TProperty>> propertyExpression)
         {
-            return ExtractPropertyName(propertyExpression, true);
+            return ExtractPropertyName(propertyExpression, true)!;
         }
 
         /// <summary>
@@ -35,7 +35,7 @@
         /// <param name="propertyExpression">The property expression (e.g. () => p.PropertyName) to extract the property name from.</param>
         /// <returns>The name of the property, or null if the extraction fails.</returns>
         [CanBeNull]
-        public static string TryExtractPropertyName<TProperty>([NotNull] Expression<Func<TProperty>> propertyExpression)
+        public static string? TryExtractPropertyName<TProperty>([NotNull] Expression<Func<TProperty>> propertyExpression)
         {
             return ExtractPropertyName(propertyExpression, false);
         }
@@ -53,7 +53,7 @@
         [NotNull]
         public static string ExtractPropertyName<T, TProperty>([NotNull] Expression<Func<T, TProperty>> propertyExpression)
         {
-            return ExtractPropertyName(propertyExpression, true);
+            return ExtractPropertyName(propertyExpression, true)!;
         }
 
         /// <summary>
@@ -64,14 +64,14 @@
         /// <param name="propertyExpression">The property expression (e.g. p => p.PropertyName) to extract the property name from.</param>
         /// <returns>The name of the property, or null if the extraction fails.</returns>
         [CanBeNull]
-        public static string TryExtractPropertyName<T, TProperty>([NotNull] Expression<Func<T, TProperty>> propertyExpression)
+        public static string? TryExtractPropertyName<T, TProperty>([NotNull] Expression<Func<T, TProperty>> propertyExpression)
         {
             return ExtractPropertyName(propertyExpression, false);
         }
 
         [ContractAnnotation("failOnErrors:true => notnull")]
         [CanBeNull]
-        private static string ExtractPropertyName<T>([NotNull] Expression<Func<T>> propertyExpression, bool failOnErrors)
+        private static string? ExtractPropertyName<T>([NotNull] Expression<Func<T>> propertyExpression, bool failOnErrors)
         {
             if (!(propertyExpression.Body is MemberExpression memberExpression))
                 return HandleError(failOnErrors, @"Expression is not a member access expression");
@@ -89,7 +89,7 @@
 
         [CanBeNull]
         [ContractAnnotation("failOnErrors:true => notnull")]
-        private static string ExtractPropertyName<T, TR>([NotNull] Expression<Func<T, TR>> propertyExpression, bool failOnErrors)
+        private static string? ExtractPropertyName<T, TR>([NotNull] Expression<Func<T, TR>> propertyExpression, bool failOnErrors)
         {
             if (!(propertyExpression.Body is MemberExpression memberExpression))
                 return HandleError(failOnErrors, @"Expression is not a member access expression");
@@ -107,7 +107,7 @@
 
         [CanBeNull]
         // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
-        private static string HandleError(bool failOnErrors, [NotNull] string errorMessage)
+        private static string? HandleError(bool failOnErrors, [NotNull] string errorMessage)
         {
             if (failOnErrors)
                 throw new ArgumentException(errorMessage);

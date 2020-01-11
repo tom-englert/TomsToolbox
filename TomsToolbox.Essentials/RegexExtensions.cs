@@ -31,7 +31,7 @@
             // ReSharper disable once RedundantEnumerableCastCall (only works in netcoreapp3.0)
             var textParts = regex.Matches(input).Cast<Match>().ToArray();
 
-            Match previousTextPart = null;
+            Match? previousTextPart = null;
 
             foreach (var textPart in textParts)
             {

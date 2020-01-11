@@ -26,24 +26,24 @@
     public abstract class ObservableObjectBase : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
     {
         [NotNull]
-        private static readonly AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>> _dependencyMappingCache = new AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>>(PropertyDependencyAttribute.CreateDependencyMapping);
+        private static readonly AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>> _dependencyMappingCache = new AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>>(PropertyDependencyAttribute.CreateDependencyMapping!);
         [NonSerialized, CanBeNull]
-        private IDictionary<string, IEnumerable<string>> _dependencyMapping;
+        private IDictionary<string, IEnumerable<string>>? _dependencyMapping;
 
         [NotNull]
-        private static readonly AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>> _relayMappingCache = new AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>>(RelayedEventAttribute.CreateRelayMapping);
+        private static readonly AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>> _relayMappingCache = new AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>>(RelayedEventAttribute.CreateRelayMapping!);
         [NonSerialized, CanBeNull]
-        private IDictionary<Type, IDictionary<string, string>> _relayMapping;
+        private IDictionary<Type, IDictionary<string, string>>? _relayMapping;
 
         [NonSerialized, CanBeNull]
-        private Dictionary<Type, WeakReference<INotifyPropertyChanged>> _eventSources;
+        private Dictionary<Type, WeakReference<INotifyPropertyChanged>>? _eventSources;
 
         /// <summary>
         /// Relays the property changed events of the source object (if not null) and detaches the old source (if not null).
         /// </summary>
         /// <param name="oldSource"></param>
         /// <param name="newSource"></param>
-        protected void RelayEventsOf([CanBeNull] INotifyPropertyChanged oldSource, [CanBeNull] INotifyPropertyChanged newSource)
+        protected void RelayEventsOf([CanBeNull] INotifyPropertyChanged? oldSource, [CanBeNull] INotifyPropertyChanged? newSource)
         {
             if (ReferenceEquals(oldSource, newSource))
                 return;
@@ -54,7 +54,7 @@
             }
             else
             {
-                DetachEventSource(oldSource);
+                DetachEventSource(oldSource!);
             }
         }
 
@@ -86,7 +86,7 @@
         {
             foreach (var item in EventSources.Values.Select(item => item.GetTargetOrDefault()).Where(item => item != null))
             {
-                item.PropertyChanged -= RelaySource_PropertyChanged;
+                item!.PropertyChanged -= RelaySource_PropertyChanged;
             }
 
             EventSources.Clear();
@@ -158,7 +158,7 @@
         [NotifyPropertyChangedInvocator]
         // ReSharper disable once AssignNullToNotNullAttribute
         // ReSharper disable once NotNullOnImplicitCanBeNull
-        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [CallerMemberName][NotNull] string propertyName = null)
+        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [CallerMemberName][NotNull] string propertyName = null!)
         {
             if (Equals(backingField, value))
                 return false;
@@ -213,7 +213,7 @@
         [NotifyPropertyChangedInvocator]
         // ReSharper disable once NotNullOnImplicitCanBeNull
         // ReSharper disable once AssignNullToNotNullAttribute
-        protected void OnPropertyChanged([CallerMemberName][NotNull] string propertyName = null)
+        protected void OnPropertyChanged([CallerMemberName][NotNull] string propertyName = null!)
         {
             // ReSharper disable once AssignNullToNotNullAttribute
             InternalOnPropertyChanged(propertyName);
@@ -259,7 +259,7 @@
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// Gets the validation errors for a specified property or for the entire entity.
@@ -273,7 +273,7 @@
         /// </remarks>
         [NotNull, ItemNotNull]
         // ReSharper disable once VirtualMemberNeverOverridden.Global
-        protected virtual IEnumerable<string> GetDataErrors([CanBeNull] string propertyName)
+        protected virtual IEnumerable<string> GetDataErrors([CanBeNull] string? propertyName)
         {
             if (string.IsNullOrEmpty(propertyName))
                 return Enumerable.Empty<string>();
@@ -296,13 +296,13 @@
         /// <param name="dataErrors">The data errors for the property.</param>
         // ReSharper disable once VirtualMemberNeverOverridden.Global
         // ReSharper disable UnusedParameter.Global
-        protected virtual void OnDataErrorsEvaluated([CanBeNull] string propertyName, [CanBeNull, ItemNotNull] IEnumerable<string> dataErrors)
+        protected virtual void OnDataErrorsEvaluated([CanBeNull] string? propertyName, [CanBeNull, ItemNotNull] IEnumerable<string> dataErrors)
         // ReSharper restore UnusedParameter.Global
         {
         }
 
         [NotNull, ItemNotNull]
-        private IEnumerable<string> InternalGetDataErrors([CanBeNull] string propertyName)
+        private IEnumerable<string> InternalGetDataErrors([CanBeNull] string? propertyName)
         {
             var dataErrors = GetDataErrors(propertyName).ToArray();
 
@@ -312,10 +312,10 @@
         }
 
         [CanBeNull]
-        string IDataErrorInfo.Error => InternalGetDataErrors(null).FirstOrDefault();
+        string? IDataErrorInfo.Error => InternalGetDataErrors(null).FirstOrDefault();
 
         [CanBeNull]
-        string IDataErrorInfo.this[[CanBeNull] string columnName] => InternalGetDataErrors(columnName).FirstOrDefault();
+        string? IDataErrorInfo.this[[CanBeNull] string? columnName] => InternalGetDataErrors(columnName).FirstOrDefault();
 
         /// <inheritdoc />
         ~ObservableObjectBase()
@@ -323,7 +323,7 @@
             DetachEventSources();
         }
 
-        private event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+        private event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
         /// <summary>
         /// Raises the <see cref="INotifyDataErrorInfo.ErrorsChanged"/> event.
@@ -334,7 +334,7 @@
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        System.Collections.IEnumerable INotifyDataErrorInfo.GetErrors([CanBeNull] string propertyName)
+        System.Collections.IEnumerable INotifyDataErrorInfo.GetErrors([CanBeNull] string? propertyName)
         {
             return InternalGetDataErrors(propertyName);
         }

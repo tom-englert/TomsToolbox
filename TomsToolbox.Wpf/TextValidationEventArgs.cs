@@ -16,7 +16,7 @@
         /// Initializes a new instance of the <see cref="TextValidationEventArgs"/> class.
         /// </summary>
         /// <param name="text">The text to validate.</param>
-        public TextValidationEventArgs([CanBeNull] string text)
+        public TextValidationEventArgs([CanBeNull] string? text)
         {
             _text = text ?? string.Empty;
         }

@@ -35,6 +35,6 @@
         /// <param name="compositionContext">The composition context.</param>
         /// <returns>The part to be used in composition.</returns>
         [CanBeNull]
-        object GetPart([CanBeNull] object compositionContext);
+        object GetPart([CanBeNull] object? compositionContext);
     }
 }

@@ -60,7 +60,7 @@
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
         [CanBeNull]
-        protected override object Convert([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             if (value == null) 
                 return null;
@@ -108,7 +108,7 @@
         }
 
         [CanBeNull]
-        private static object ApplyOperation([CanBeNull] object value, [NotNull] Type valueType)
+        private static object? ApplyOperation([CanBeNull] object? value, [NotNull] Type valueType)
         {
             var methods = valueType.GetMethods(BindingFlags.Static | BindingFlags.Public);
 
@@ -122,7 +122,7 @@
         }
 
         [CanBeNull]
-        private static object ChangeType([CanBeNull] string value, [NotNull] Type targetType)
+        private static object? ChangeType([CanBeNull] string? value, [NotNull] Type targetType)
         {
             var typeConverter = TypeDescriptor.GetConverter(targetType);
             return typeConverter.ConvertFromInvariantString(value);
@@ -140,7 +140,7 @@
         /// </returns>
         /// <exception cref="System.InvalidOperationException">ConvertBack is not supported by this converter.</exception>
         [CanBeNull]
-        protected override object ConvertBack([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        protected override object? ConvertBack([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             return Convert(value, targetType, parameter, culture);
         }

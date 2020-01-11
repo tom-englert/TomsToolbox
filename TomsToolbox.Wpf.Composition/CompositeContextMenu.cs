@@ -29,7 +29,7 @@
         /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Composition.CompositeContextMenuExtension" /> class.
         /// </summary>
         /// <param name="regionId">The region identifier.</param>
-        public CompositeContextMenuExtension([CanBeNull] string regionId)
+        public CompositeContextMenuExtension([CanBeNull] string? regionId)
         {
             RegionId = regionId;
         }

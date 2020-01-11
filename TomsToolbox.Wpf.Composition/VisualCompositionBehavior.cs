@@ -31,9 +31,9 @@
         private readonly DispatcherThrottle _deferredUpdateThrottle;
 
         [CanBeNull]
-        private INotifyChanged _exportProviderChangeTracker;
+        private INotifyChanged? _exportProviderChangeTracker;
         [CanBeNull]
-        private IExportProvider _exportProvider;
+        private IExportProvider? _exportProvider;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VisualCompositionBehavior{T}"/> class.
@@ -83,7 +83,7 @@
         /// Use this property instead of setting a direct binding to the <see cref="RegionId"/> property if the direct binding will generate binding error message, e.g. in style setters.
         /// </remarks>
         [CanBeNull]
-        public BindingBase RegionIdBinding
+        public BindingBase? RegionIdBinding
         {
             get => (BindingBase)GetValue(_regionIdBindingProperty);
             set => SetValue(_regionIdBindingProperty, value);
@@ -107,7 +107,7 @@
         /// Use this property instead of setting a direct binding to the <see cref="RegionId"/> property if the direct binding will generate binding error message, e.g. in style setters.
         /// </remarks>
         [CanBeNull]
-        public BindingBase CompositionContextBinding
+        public BindingBase? CompositionContextBinding
         {
             get => (BindingBase)GetValue(_compositionContextBindingProperty);
             set => SetValue(_compositionContextBindingProperty, value);
@@ -126,14 +126,14 @@
         /// Gets or sets the export provider (DI container). The export provider must be registered with the <see cref="ExportProviderLocator"/>.
         /// </summary>
         [CanBeNull]
-        protected IExportProvider ExportProvider
+        protected IExportProvider? ExportProvider
         {
             get => InternalExportProvider ?? (InternalExportProvider = GetExportProvider());
             private set => InternalExportProvider = value;
         }
 
         [CanBeNull]
-        private IExportProvider InternalExportProvider
+        private IExportProvider? InternalExportProvider
         {
             get => _exportProvider;
             set
@@ -220,7 +220,7 @@
         /// <param name="regionId">The region identifier.</param>
         /// <returns>The exports for the region, or <c>null</c> if the export provider is not set yet.</returns>
         [CanBeNull, ItemNotNull]
-        protected IEnumerable<IExport<object, IVisualCompositionMetadata>> GetExports([CanBeNull] string regionId)
+        protected IEnumerable<IExport<object, IVisualCompositionMetadata>>? GetExports([CanBeNull] string? regionId)
         {
             return ExportProvider?
                 .GetExports<IVisualCompositionMetadata>(typeof(object), VisualComposition.ExportContractName, item => new VisualCompositionMetadata(item))
@@ -235,7 +235,7 @@
         /// <param name="item">The item.</param>
         /// <returns>The item or the factory generated item.</returns>
         [CanBeNull]
-        protected object GetTarget([CanBeNull] object item)
+        protected object? GetTarget([CanBeNull] object? item)
         {
             return (item is IComposablePartFactory partFactory) ? partFactory.GetPart(CompositionContext) : item;
         }
@@ -264,7 +264,7 @@
         protected abstract void OnUpdate();
 
         [CanBeNull]
-        private IExportProvider GetExportProvider()
+        private IExportProvider? GetExportProvider()
         {
             var associatedObject = AssociatedObject;
             if (associatedObject == null)
@@ -289,7 +289,7 @@
             Update();
         }
 
-        private void ExportProvider_ExportsChanged([CanBeNull] object sender, [CanBeNull] EventArgs e)
+        private void ExportProvider_ExportsChanged([CanBeNull] object? sender, [CanBeNull] EventArgs? e)
         {
             // Defer update using a throttle:
             // - Export events may come from any thread, must dispatch to UI thread anyhow.
@@ -297,7 +297,7 @@
             _deferredUpdateThrottle.Tick();
         }
 
-        private void ExportProvider_Changed([CanBeNull] object sender, [CanBeNull] EventArgs e)
+        private void ExportProvider_Changed([CanBeNull] object? sender, [CanBeNull] EventArgs? e)
         {
             ExportProvider = AssociatedObject?.TryGetExportProvider();
 

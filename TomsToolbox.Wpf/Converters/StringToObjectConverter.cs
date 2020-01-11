@@ -15,19 +15,20 @@
     public class StringToObjectConverter : ValueConverter
     {
         [CanBeNull]
-        private TypeConverter _typeConverter;
+        private TypeConverter? _typeConverter;
 
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Default = new StringToObjectConverter();
+        [NotNull] 
+        public static readonly IValueConverter Default = new StringToObjectConverter();
 
         /// <summary>
         /// Gets or sets the type of the type converter to use.
         /// If no type is specified, the type converter will be deduced form the target type.
         /// </summary>
         [CanBeNull]
-        public Type TypeConverterType
+        public Type? TypeConverterType
         {
             get => _typeConverter?.GetType();
             set
@@ -36,7 +37,7 @@
                 {
                     if (typeof(TypeConverter).IsAssignableFrom(value) && (value.GetConstructor(Type.EmptyTypes) != null))
                     {
-                        _typeConverter = (TypeConverter)Activator.CreateInstance(value);
+                        _typeConverter = Activator.CreateInstance(value) as TypeConverter;
                         return;
                     }
 
@@ -58,7 +59,7 @@
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         [CanBeNull]
-        protected override object Convert([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             var typeConverter = GetTypeConverter(targetType);
             if (typeConverter == null)
@@ -82,7 +83,7 @@
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
         [CanBeNull]
-        protected override object ConvertBack([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        protected override object? ConvertBack([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             var typeConverter = GetTypeConverter(targetType);
 
@@ -90,7 +91,7 @@
         }
 
         [CanBeNull]
-        private TypeConverter GetTypeConverter([CanBeNull] Type targetType)
+        private TypeConverter? GetTypeConverter([CanBeNull] Type? targetType)
         {
             var typeConverter = _typeConverter;
             if (typeConverter != null)

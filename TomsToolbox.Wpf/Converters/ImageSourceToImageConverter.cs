@@ -32,9 +32,9 @@
         /// A converted value.
         /// </returns>
         [NotNull]
-        protected override object Convert([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
-            return new Image { Source = (ImageSource)value };
+            return new Image { Source = value as ImageSource };
         }
     }
 }

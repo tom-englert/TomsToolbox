@@ -38,13 +38,13 @@
         /// can guarantee that the handler gets unregistered when listener is released but does not reference the source.
         /// </summary>
         [CanBeNull]
-        private readonly WeakReference<TSource> _weakSource;
+        private readonly WeakReference<TSource>? _weakSource;
         /// <summary>
         /// To hold a reference to source object. With this instance the WeakEventListener
         /// can guarantee that the handler gets unregistered when listener is released.
         /// </summary>
         [CanBeNull]
-        private readonly TSource _source;
+        private readonly TSource? _source;
 
         /// <summary>
         /// Delegate to the method to call when the event fires.
@@ -116,9 +116,7 @@
         /// <param name="eventArgs">Event arguments.</param>
         public void OnEvent([NotNull] object source, [NotNull] TEventArgs eventArgs)
         {
-            TTarget target;
-
-            if (_weakTarget.TryGetTarget(out target))
+            if (_weakTarget.TryGetTarget(out var target))
             {
                 // Call registered action
                 _onEventAction(target, source, eventArgs);

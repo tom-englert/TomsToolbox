@@ -15,7 +15,7 @@
         /// </summary>
         /// <returns>null</returns>
         [CanBeNull]
-        public object Dummy()
+        public object? Dummy()
         {
             return null;
         }

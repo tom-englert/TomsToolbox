@@ -36,19 +36,19 @@
         /// </summary>
         public static event EventHandler<TextEventArgs> Trace;
 
-        internal static void OnError([CanBeNull] object sender, [NotNull] Exception ex)
+        internal static void OnError([CanBeNull] object? sender, [NotNull] Exception ex)
         {
             OnError(sender, ex.ToString());
         }
 
-        internal static void OnError([CanBeNull] object sender, [NotNull] string message)
+        internal static void OnError([CanBeNull] object? sender, [NotNull] string message)
         {
             PresentationTraceSources.DataBindingSource?.TraceEvent(TraceEventType.Error, ErrorNumber, message);
 
             Error?.Invoke(sender, new TextEventArgs(message));
         }
 
-        internal static void OnTrace([CanBeNull] object sender, [NotNull] string message)
+        internal static void OnTrace([CanBeNull] object? sender, [NotNull] string message)
         {
             Trace?.Invoke(sender, new TextEventArgs(message));
         }
@@ -70,7 +70,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetRegionId([NotNull] Control obj, [CanBeNull] string value)
+        public static void SetRegionId([NotNull] Control obj, [CanBeNull] string? value)
         {
             obj.SetValue(RegionIdProperty, value);
         }
@@ -86,7 +86,7 @@
         public static readonly DependencyProperty RegionIdProperty =
             DependencyProperty.RegisterAttached("RegionId", typeof(string), typeof(VisualComposition), new FrameworkPropertyMetadata(RegionId_Changed));
 
-        private static void RegionId_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void RegionId_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
             if (!(e.NewValue is string id))
                 return;
@@ -104,7 +104,7 @@
             }
         }
 
-        private static void SetRegionIdInternal<T>([NotNull] DependencyObject d, [CanBeNull] string id)
+        private static void SetRegionIdInternal<T>([NotNull] DependencyObject d, [CanBeNull] string? id)
             where T : Behavior, IVisualCompositionBehavior, new()
         {
             try

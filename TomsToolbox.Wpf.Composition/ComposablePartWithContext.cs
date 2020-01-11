@@ -50,7 +50,7 @@ namespace TomsToolbox.Wpf.Composition
         /// </summary>
         /// <param name="oldValue">The old value.</param>
         /// <param name="newValue">The new value.</param>
-        protected virtual void OnCompositionContextChanged([CanBeNull] T oldValue, [CanBeNull] T newValue)
+        protected virtual void OnCompositionContextChanged([CanBeNull] T? oldValue, [CanBeNull] T? newValue)
         {
             OnPropertyChanged(() => CompositionContext);
         }

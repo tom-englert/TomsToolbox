@@ -286,13 +286,13 @@ namespace TomsToolbox.Essentials.Tests
         class TestClassTypeConverter : TypeConverter
         {
             [CanBeNull]
-            public override object ConvertFrom([CanBeNull] ITypeDescriptorContext context, CultureInfo culture, [CanBeNull] object value)
+            public override object? ConvertFrom([CanBeNull] ITypeDescriptorContext context, CultureInfo culture, [CanBeNull] object value)
             {
                 return new TestClass(Convert.ToInt32(value, culture));
             }
 
             [CanBeNull]
-            public override object ConvertTo([CanBeNull] ITypeDescriptorContext context, [CanBeNull] CultureInfo culture, [CanBeNull] object value, Type destinationType)
+            public override object? ConvertTo([CanBeNull] ITypeDescriptorContext context, [CanBeNull] CultureInfo culture, [CanBeNull] object value, Type destinationType)
             {
                 return value?.ToString();
             }

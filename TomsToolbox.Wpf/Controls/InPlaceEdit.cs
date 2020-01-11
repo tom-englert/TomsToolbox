@@ -41,10 +41,10 @@
         [NotNull]
         private readonly Throttle _mouseDoubleClickThrottle;
         [CanBeNull]
-        private TextBox _textBox;
+        private TextBox? _textBox;
         // The first focusable ancestor to test for focus and to provide F2 key.
         [CanBeNull]
-        private FrameworkElement _focusableParent;
+        private FrameworkElement? _focusableParent;
 
         // The time when the parent item got the focus.
         private DateTime _parentGotFocusTime = DateTime.MinValue;
@@ -72,13 +72,13 @@
         /// <summary>
         /// Occurs when the edited text needs to be validated.
         /// </summary>
-        public event EventHandler<TextValidationEventArgs> Validate;
+        public event EventHandler<TextValidationEventArgs>? Validate;
 
         /// <summary>
         /// Gets or sets the text to be edited.
         /// </summary>
         [CanBeNull]
-        public string Text
+        public string? Text
         {
             get => (string)GetValue(TextProperty);
             set => SetValue(TextProperty, value);
@@ -236,7 +236,7 @@
             base.OnMouseDoubleClick(e);
         }
 
-        private void Self_Loaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
+        private void Self_Loaded([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
         {
             var focusableParent = _focusableParent = this.TryFindAncestorOrSelf<FrameworkElement>(item => item?.Focusable == true);
             if (focusableParent == null)
@@ -247,12 +247,12 @@
             focusableParent.GotFocus += FocusableParent_GotFocus;
         }
 
-        private void FocusableParent_GotFocus([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
+        private void FocusableParent_GotFocus([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
         {
             _parentGotFocusTime = DateTime.Now;
         }
 
-        private void Self_Unloaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
+        private void Self_Unloaded([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
         {
             var focusableParent = _focusableParent;
             if (focusableParent == null)
@@ -283,12 +283,12 @@
             }
         }
 
-        private void TextBox_LostFocus([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
+        private void TextBox_LostFocus([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
         {
             IsEditing = false;
         }
 
-        private void TextBox_TextChanged([CanBeNull] object sender, [CanBeNull] TextChangedEventArgs e)
+        private void TextBox_TextChanged([CanBeNull] object? sender, [CanBeNull] TextChangedEventArgs? e)
         {
             OnValidate();
         }
@@ -315,7 +315,7 @@
             }
         }
 
-        private void Parent_KeyDown([CanBeNull] object sender, [NotNull] KeyEventArgs e)
+        private void Parent_KeyDown([CanBeNull] object? sender, [NotNull] KeyEventArgs e)
         {
             switch (e.Key)
             {
@@ -400,7 +400,7 @@
             }
         }
 
-        private void Self_PreviewMouseDoubleClick([CanBeNull] object sender, [NotNull] MouseButtonEventArgs e)
+        private void Self_PreviewMouseDoubleClick([CanBeNull] object? sender, [NotNull] MouseButtonEventArgs e)
         {
             if (_textBox == null)
                 return;
@@ -413,7 +413,7 @@
             e.Handled = true;
         }
 
-        private void Window_IsKeyboardFocusWithinChanged([CanBeNull] object sender, DependencyPropertyChangedEventArgs e)
+        private void Window_IsKeyboardFocusWithinChanged([CanBeNull] object? sender, DependencyPropertyChangedEventArgs e)
         {
             if (Equals(e.NewValue, false))
             {
@@ -421,7 +421,7 @@
             }
         }
 
-        private void Window_PreviewMouseDown([CanBeNull] object sender, [CanBeNull] MouseButtonEventArgs e)
+        private void Window_PreviewMouseDown([CanBeNull] object? sender, [CanBeNull] MouseButtonEventArgs? e)
         {
             if (_textBox == null)
                 return;
@@ -433,7 +433,7 @@
             }
         }
 
-        private void Window_PreviewMouseWheel([CanBeNull] object sender, [CanBeNull] MouseWheelEventArgs e)
+        private void Window_PreviewMouseWheel([CanBeNull] object? sender, [CanBeNull] MouseWheelEventArgs? e)
         {
             IsEditing = false;
         }

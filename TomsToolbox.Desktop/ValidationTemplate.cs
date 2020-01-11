@@ -35,7 +35,6 @@
         /// <param name="target">The target.</param>
         public ValidationTemplate([NotNull] INotifyPropertyChanged target)
         {
-
             _target = target;
             _validationContext = new ValidationContext(target, null, null);
             _validationResults = new List<ValidationResult>();
@@ -87,14 +86,14 @@
         /// <summary>
         /// Raised when the errors for a property has changed.
         /// </summary>
-        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
-        private void RaiseErrorsChanged([CanBeNull] string propertyName)
+        private void RaiseErrorsChanged([CanBeNull] string? propertyName)
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        IEnumerable INotifyDataErrorInfo.GetErrors([CanBeNull] string propertyName)
+        IEnumerable INotifyDataErrorInfo.GetErrors([CanBeNull] string? propertyName)
         {
             return _validationResults
                 .Where(x => x.MemberNames.Contains(propertyName))

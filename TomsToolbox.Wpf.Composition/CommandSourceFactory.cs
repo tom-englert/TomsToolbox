@@ -132,7 +132,7 @@
         /// <param name="compositionContext">The composition context.</param>
         /// <returns>The part to be used in composition.</returns>
         [NotNull]
-        public object GetPart([CanBeNull] object compositionContext)
+        public object GetPart([CanBeNull] object? compositionContext)
         {
             return GetCommandSource(compositionContext);
         }
@@ -143,7 +143,7 @@
         /// <param name="compositionContext">The composition context.</param>
         /// <returns>The command source.</returns>
         [NotNull]
-        private T GetCommandSource([CanBeNull] object compositionContext)
+        private T GetCommandSource([CanBeNull] object? compositionContext)
         {
             var commandSource = _commandSourcePerContext.ForceValue(compositionContext ?? typeof(NullKey), context => CreateCommandSource());
             Debug.Assert(commandSource != null, nameof(commandSource) + " != null");
@@ -224,7 +224,7 @@
         /// <param name="command">The command.</param>
         /// <returns>The <see cref="CommandSource"/> associated with the <paramref name="context"/></returns>
         [NotNull]
-        public T Attach([CanBeNull] object context, [NotNull] ICommand command)
+        public T Attach([CanBeNull] object? context, [NotNull] ICommand command)
         {
             var commandSource = GetCommandSource(context);
 
@@ -241,7 +241,7 @@
         /// <returns>The <see cref="CommandSource"/> associated with the <paramref name="context"/></returns>
         /// <exception cref="System.ArgumentException">Can't detach a command that has not been attached before;command</exception>
         [NotNull]
-        public T Detach([CanBeNull] object context, [NotNull] ICommand command)
+        public T Detach([CanBeNull] object? context, [NotNull] ICommand command)
         {
             var commandSource = GetCommandSource(context);
 
@@ -259,7 +259,7 @@
         /// <returns>The <see cref="CommandSource"/> associated with the <paramref name="context"/></returns>
         /// <exception cref="System.ArgumentException">Can't replace a command that has not been attached before;oldCommand</exception>
         [NotNull]
-        public T Replace([CanBeNull] object context, [NotNull] ICommand oldCommand, [NotNull] ICommand newCommand)
+        public T Replace([CanBeNull] object? context, [NotNull] ICommand oldCommand, [NotNull] ICommand newCommand)
         {
             var commandSource = GetCommandSource(context);
 

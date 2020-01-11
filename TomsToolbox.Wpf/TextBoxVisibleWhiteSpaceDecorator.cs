@@ -59,7 +59,7 @@
         [NotNull]
         private readonly AdornerDecorator _adornerDecorator = new AdornerDecorator { ClipToBounds = true };
         [CanBeNull]
-        private WhiteSpaceDecoratorAdorner _adorner;
+        private WhiteSpaceDecoratorAdorner? _adorner;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TextBoxVisibleWhiteSpaceDecorator"/> class.
@@ -95,7 +95,7 @@
         /// Gets or sets the color of the white space visualization.
         /// </summary>
         [CanBeNull]
-        public Brush WhiteSpaceColor
+        public Brush? WhiteSpaceColor
         {
             get => (Brush)GetValue(WhiteSpaceColorProperty);
             set => SetValue(WhiteSpaceColorProperty, value);
@@ -127,7 +127,7 @@
         /// Gets or sets the inner text box.
         /// </summary>
         [CanBeNull]
-        public TextBox Child
+        public TextBox? Child
         {
             get => _adornerDecorator.Child as TextBox;
             set => _adornerDecorator.Child = value;
@@ -135,7 +135,7 @@
 
         /// <inheritdoc />
         [CanBeNull]
-        protected override IEnumerator LogicalChildren
+        protected override IEnumerator? LogicalChildren
         {
             get
             {
@@ -145,7 +145,7 @@
 
         /// <inheritdoc />
         [CanBeNull]
-        protected override Visual GetVisualChild(int index)
+        protected override Visual? GetVisualChild(int index)
         {
             return (index == 0) ? _adornerDecorator : null;
         }
@@ -167,7 +167,7 @@
             return finalSize;
         }
 
-        private void Self_Loaded([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
+        private void Self_Loaded([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
         {
             var textBox = Child;
             if (textBox == null)
@@ -199,12 +199,12 @@
                 UpdateWhiteSpaces();
             }
 
-            private void ScrollViewer_ScrollChanged([CanBeNull] object sender, [CanBeNull] ScrollChangedEventArgs e)
+            private void ScrollViewer_ScrollChanged([CanBeNull] object? sender, [CanBeNull] ScrollChangedEventArgs? e)
             {
                 InvalidateVisual();
             }
 
-            private void TextBox_TextChanged([CanBeNull] object sender, [CanBeNull] TextChangedEventArgs e)
+            private void TextBox_TextChanged([CanBeNull] object? sender, [CanBeNull] TextChangedEventArgs? e)
             {
                 UpdateWhiteSpaces();
             }
@@ -217,13 +217,13 @@
                 _whiteSpaces = textBox.Text
                     .Select((character, index) => GetWhiteSpace(character, index, whiteSpaces))
                     .Where(item => item != null)
-                    .ToArray();
+                    .ToArray()!;
 
                 this.BeginInvoke(DispatcherPriority.Background, InvalidateVisual);
             }
 
             [CanBeNull]
-            private static WhiteSpace GetWhiteSpace(char character, int index, WhiteSpaces whiteSpaces)
+            private static WhiteSpace? GetWhiteSpace(char character, int index, WhiteSpaces whiteSpaces)
             {
                 switch (character)
                 {

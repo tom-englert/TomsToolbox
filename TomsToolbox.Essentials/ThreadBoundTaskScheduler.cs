@@ -77,7 +77,7 @@
         /// <returns>
         /// A Boolean value indicating whether the task was executed inline.
         /// </returns>
-        protected override bool TryExecuteTaskInline([CanBeNull] Task task, bool taskWasPreviouslyQueued)
+        protected override bool TryExecuteTaskInline([CanBeNull] Task? task, bool taskWasPreviouslyQueued)
         {
             return false;
         }

@@ -28,7 +28,7 @@
         /// <param name="colorName">The color name.</param>
         /// <returns>The corresponding brush if the conversion was successful; otherwise <c>null</c>.</returns>
         [CanBeNull]
-        public static Brush Convert([CanBeNull] string colorName)
+        public static Brush? Convert([CanBeNull] string? colorName)
         {
             // let it fail fast so we are not left wondering what went wrong
             return colorName != null ? _typeConverter.ConvertFromInvariantString(colorName) as Brush : null;
@@ -45,9 +45,9 @@
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
         [CanBeNull]
-        protected override object Convert([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
-            return Convert((string)value);
+            return Convert(value as string);
         }
     }
 }

@@ -27,7 +27,7 @@
         }
 
         /// <inheritdoc />
-        public bool TryGetValue(string name, [CanBeNull] out object value)
+        public bool TryGetValue(string name, [CanBeNull] out object? value)
         {
             return _metadata.TryGetValue(name, out value);
         }

@@ -26,7 +26,7 @@
         /// <returns>The command.</returns>
         [CanBeNull]
         [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
-        public static ICommand GetDefaultItemCommand([NotNull] this ItemsControl obj)
+        public static ICommand? GetDefaultItemCommand([NotNull] this ItemsControl obj)
         {
             return (ICommand)obj.GetValue(DefaultItemCommandProperty);
         }
@@ -36,7 +36,7 @@
         /// <param name="obj">The object.</param>
         /// <param name="value">The command.</param>
         [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
-        public static void SetDefaultItemCommand([NotNull] this ItemsControl obj, [CanBeNull] ICommand value)
+        public static void SetDefaultItemCommand([NotNull] this ItemsControl obj, [CanBeNull] ICommand? value)
         {
             obj.SetValue(DefaultItemCommandProperty, value);
         }
@@ -56,7 +56,7 @@
         public static readonly DependencyProperty DefaultItemCommandProperty =
             DependencyProperty.RegisterAttached("DefaultItemCommand", typeof(ICommand), typeof(ItemsControlExtensions), new FrameworkPropertyMetadata(DefaultItemCommand_Changed));
 
-        private static void DefaultItemCommand_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void DefaultItemCommand_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
             var itemsControl = d as ItemsControl;
             if (itemsControl == null)
@@ -136,7 +136,7 @@
         /// <param name="obj">The <see cref="ItemsControl"/> to refresh.</param>
         /// <returns>The object to observe.</returns>
         [CanBeNull]
-        public static object GetRefreshOnSourceChanges([NotNull] ItemsControl obj)
+        public static object? GetRefreshOnSourceChanges([NotNull] ItemsControl obj)
         {
             return obj.GetValue(RefreshOnSourceChangesProperty);
         }
@@ -146,7 +146,7 @@
         /// </summary>
         /// <param name="obj">The <see cref="ItemsControl"/> to refresh.</param>
         /// <param name="value">The object to observe.</param>
-        public static void SetRefreshOnSourceChanges([NotNull] ItemsControl obj, [CanBeNull] object value)
+        public static void SetRefreshOnSourceChanges([NotNull] ItemsControl obj, [CanBeNull] object? value)
         {
             obj.SetValue(RefreshOnSourceChangesProperty, value);
         }
@@ -162,14 +162,14 @@
         public static readonly DependencyProperty RefreshOnSourceChangesProperty =
             DependencyProperty.RegisterAttached("RefreshOnSourceChanges", typeof(object), typeof(ItemsControlExtensions), new FrameworkPropertyMetadata(Source_Changed));
 
-        private static void Source_Changed([CanBeNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void Source_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
             var itemsControl = d as ItemsControl;
             if (itemsControl == null)
                 return;
 
             // Collection views are maybe nested! Must recurse through all views, the top one might not own the filter!
-            ICollectionView itemCollection = itemsControl.Items;
+            ICollectionView? itemCollection = itemsControl.Items;
             while (itemCollection != null)
             {
                 itemCollection.Refresh();
@@ -190,7 +190,7 @@
         /// <param name="itemsControl">The items control.</param>
         /// <returns>The list of containers; contains <c>null</c> entries for unrealized containers (see <see cref="ItemContainerGenerator.ContainerFromIndex"/>).</returns>
         [NotNull, ItemCanBeNull]
-        public static IEnumerable<T> GetItemContainers<T>([NotNull] this ItemsControl itemsControl)
+        public static IEnumerable<T?> GetItemContainers<T>([NotNull] this ItemsControl itemsControl)
             where T : DependencyObject
         {
             var generator = itemsControl.ItemContainerGenerator;

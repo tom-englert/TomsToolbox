@@ -38,7 +38,7 @@
 
     internal class VisualCompositionMetadata : IVisualCompositionMetadata
     {
-        public VisualCompositionMetadata([CanBeNull] IMetadata metadata)
+        public VisualCompositionMetadata([CanBeNull] IMetadata? metadata)
         {
             if (metadata == null)
                 return;

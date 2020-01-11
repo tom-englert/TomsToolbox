@@ -46,7 +46,7 @@
         /// Gets or sets the header that is displayed centered above the graphics.
         /// </summary>
         [CanBeNull]
-        public object Header
+        public object? Header
         {
             get => GetValue(HeaderProperty);
             set => SetValue(HeaderProperty, value);
@@ -77,7 +77,7 @@
         /// Gets or sets the layout transform applied to the animation.
         /// </summary>
         [CanBeNull]
-        public Transform AnimationLayoutTransform
+        public Transform? AnimationLayoutTransform
         {
             get => (Transform)GetValue(AnimationLayoutTransformProperty);
             set => SetValue(AnimationLayoutTransformProperty, value);

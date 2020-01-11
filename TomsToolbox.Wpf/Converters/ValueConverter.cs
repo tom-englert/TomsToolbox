@@ -16,37 +16,37 @@
         /// Gets or sets the <c>null</c> value, which is returned whenever the value to convert is <c>null</c>; the default is <c>null</c>.
         /// </summary>
         [CanBeNull]
-        public object ConvertNullValue { get; set; }
+        public object? ConvertNullValue { get; set; }
 
         /// <summary>
         /// Gets or sets the <c>unset</c> value, which is returned whenever the value to convert is <see cref="DependencyProperty.UnsetValue"/>; the default is <see cref="DependencyProperty.UnsetValue"/>.
         /// </summary>
         [CanBeNull]
-        public object ConvertUnsetValue { get; set; } = DependencyProperty.UnsetValue;
+        public object? ConvertUnsetValue { get; set; } = DependencyProperty.UnsetValue;
 
         /// <summary>
         /// Gets or sets the <c>error</c> value, which is returned whenever the value to convert produces an error; the default is <see cref="DependencyProperty.UnsetValue"/>.
         /// </summary>
         [CanBeNull]
-        public object ConvertErrorValue { get; set; } = DependencyProperty.UnsetValue;
+        public object? ConvertErrorValue { get; set; } = DependencyProperty.UnsetValue;
 
         /// <summary>
         /// Gets or sets the <c>null</c> value, which is returned whenever the value to convert back is <c>null</c>; the default is <c>null</c>.
         /// </summary>
         [CanBeNull]
-        public object ConvertBackNullValue { get; set; }
+        public object? ConvertBackNullValue { get; set; }
 
         /// <summary>
         /// Gets or sets the <c>unset</c> value, which is returned whenever the value to convert back is <see cref="DependencyProperty.UnsetValue"/>; the default is <see cref="DependencyProperty.UnsetValue"/>.
         /// </summary>
         [CanBeNull]
-        public object ConvertBackUnsetValue { get; set; } = DependencyProperty.UnsetValue;
+        public object? ConvertBackUnsetValue { get; set; } = DependencyProperty.UnsetValue;
 
         /// <summary>
         /// Gets or sets the <c>error</c> value, which is returned whenever the value to convert back produces an error; the default is <see cref="DependencyProperty.UnsetValue"/>.
         /// </summary>
         [CanBeNull]
-        public object ConvertBackErrorValue { get; set; } = DependencyProperty.UnsetValue;
+        public object? ConvertBackErrorValue { get; set; } = DependencyProperty.UnsetValue;
 
         /// <summary>
         /// Converts a value.
@@ -59,7 +59,7 @@
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
         [CanBeNull]
-        protected abstract object Convert([NotNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture);
+        protected abstract object? Convert([NotNull] object value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture);
 
         /// <summary>
         /// Converts a value.
@@ -73,13 +73,13 @@
         /// </returns>
         /// <exception cref="InvalidOperationException">ConvertBack is not supported by this converter.</exception>
         [CanBeNull]
-        protected virtual object ConvertBack([NotNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        protected virtual object? ConvertBack([NotNull] object value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             throw new InvalidOperationException("ConvertBack is not supported by this converter.");
         }
 
         [CanBeNull]
-        object IValueConverter.Convert([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        object? IValueConverter.Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             if (value == null)
                 return ConvertNullValue;
@@ -99,7 +99,7 @@
         }
 
         [CanBeNull]
-        object IValueConverter.ConvertBack([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        object? IValueConverter.ConvertBack([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             if (value == null)
                 return ConvertBackNullValue;

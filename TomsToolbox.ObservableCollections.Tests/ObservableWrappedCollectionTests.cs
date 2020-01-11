@@ -1,5 +1,6 @@
 ﻿// ReSharper disable AssignNullToNotNullAttribute
 // ReSharper disable UnusedVariable
+#nullable disable
 namespace TomsToolbox.ObservableCollections.Tests
 {
     using System;

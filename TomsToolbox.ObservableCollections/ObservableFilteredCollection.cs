@@ -53,7 +53,7 @@
             // ReSharper restore PossibleMultipleEnumeration
         }
 
-        private void AttachCollectionEvents([CanBeNull] INotifyCollectionChanged sender)
+        private void AttachCollectionEvents([CanBeNull] INotifyCollectionChanged? sender)
         {
             if (sender == null)
                 return;
@@ -93,7 +93,7 @@
             }
         }
 
-        private void AddItems([CanBeNull, ItemCanBeNull] IEnumerable<T> newItems)
+        private void AddItems([CanBeNull, ItemCanBeNull] IEnumerable<T>? newItems)
         {
             if (newItems == null)
                 return;
@@ -116,7 +116,7 @@
             }
         }
 
-        private void RemoveItems([CanBeNull, ItemCanBeNull] IEnumerable<T> oldItems)
+        private void RemoveItems([CanBeNull, ItemCanBeNull] IEnumerable<T>? oldItems)
         {
             if (oldItems == null)
                 return;

@@ -16,7 +16,7 @@
         /// <param name="weakReference">The weak reference.</param>
         /// <returns>The target of the weak reference, if the target is still alive; otherwise null.</returns>
         [CanBeNull]
-        public static T GetTargetOrDefault<T>([CanBeNull] this WeakReference<T> weakReference)
+        public static T? GetTargetOrDefault<T>([CanBeNull] this WeakReference<T>? weakReference)
         where T : class
         {
             if (weakReference == null)

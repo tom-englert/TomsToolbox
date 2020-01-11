@@ -16,7 +16,7 @@
         /// <param name="value">The value.</param>
         /// <returns>The value casted to <typeparamref name="T"/>, or <c>default(T)</c> if value is <c>null</c>.</returns>
         [CanBeNull]
-        public static T SafeCast<T>([CanBeNull] this object value)
+        public static T SafeCast<T>([CanBeNull] this object? value)
         {
             return (value == null) ? default : (T)value;
         }

@@ -32,20 +32,20 @@
         }
 
         /// <inheritdoc />
-        public event EventHandler<EventArgs> ExportsChanged;
+        public event EventHandler<EventArgs>? ExportsChanged;
 
-        T IExportProvider.GetExportedValue<T>([CanBeNull] string contractName)
+        T IExportProvider.GetExportedValue<T>([CanBeNull] string? contractName) where T : class
         {
             return (contractName != null ? _kernel.Get<T>(contractName) : _kernel.Get<T>());
         }
 
         [CanBeNull]
-        T IExportProvider.GetExportedValueOrDefault<T>([CanBeNull] string contractName)
+        T? IExportProvider.GetExportedValueOrDefault<T>([CanBeNull] string? contractName) where T : class
         {
             return GetExportedValues<T>(contractName).SingleOrDefault();
         }
 
-        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string contractName, [CanBeNull] out T value)
+        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string? contractName, [CanBeNull] out T? value) where T : class
         {
             var values = GetExportedValues<T>(contractName).ToList();
 
@@ -59,12 +59,12 @@
             return true;
         }
 
-        IEnumerable<T> IExportProvider.GetExportedValues<T>([CanBeNull] string contractName)
+        IEnumerable<T> IExportProvider.GetExportedValues<T>([CanBeNull] string? contractName) where T : class
         {
             return GetExportedValues<T>(contractName);
         }
 
-        IEnumerable<IExport<object>> IExportProvider.GetExports(Type contractType, [CanBeNull] string contractName)
+        IEnumerable<IExport<object>> IExportProvider.GetExports(Type contractType, [CanBeNull] string? contractName)
         {
             var bindings = _kernel.GetBindings(contractType)
                 .Where(binding => binding.Metadata.Name == contractName);
@@ -74,7 +74,7 @@
             return result.ToList();
         }
 
-        private IEnumerable<T> GetExportedValues<T>([CanBeNull] string contractName)
+        private IEnumerable<T> GetExportedValues<T>([CanBeNull] string? contractName)
         {
             return (contractName != null ? _kernel.GetAll<T>(contractName) : _kernel.GetAll<T>());
         }

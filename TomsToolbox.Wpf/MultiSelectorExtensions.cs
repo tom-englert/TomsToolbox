@@ -36,7 +36,7 @@
         /// <returns>The current selection.</returns>
         [CanBeNull, ItemCanBeNull]
         [AttachedPropertyBrowsableForType(typeof(Selector))]
-        public static IList GetSelectionBinding([NotNull] this Selector obj)
+        public static IList? GetSelectionBinding([NotNull] this Selector obj)
         {
             return (IList)obj.GetValue(SelectionBindingProperty);
         }
@@ -46,7 +46,7 @@
         /// <param name="obj">The object to attach to.</param>
         /// <param name="value">The new selection.</param>
         [AttachedPropertyBrowsableForType(typeof(Selector))]
-        public static void SetSelectionBinding([NotNull] this Selector obj, [CanBeNull, ItemCanBeNull] IList value)
+        public static void SetSelectionBinding([NotNull] this Selector obj, [CanBeNull, ItemCanBeNull] IList? value)
         {
             obj.SetValue(SelectionBindingProperty, value);
         }
@@ -92,7 +92,7 @@
             d.SetValue(SelectionSynchronizerProperty, new SelectionSynchronizer((Selector)d, sourceSelection));
         }
 
-        private static void CommitEdit([CanBeNull] this Selector selector)
+        private static void CommitEdit([CanBeNull] this Selector? selector)
         {
             if (selector is DataGrid dataGrid)
             {
@@ -106,12 +106,12 @@
             var selectedItems = (IList)((dynamic)selector).SelectedItems;
             return selectedItems;
         }
-        private static void ScrollIntoView([NotNull] this Selector selector, [CanBeNull] object selectedItem)
+        private static void ScrollIntoView([NotNull] this Selector selector, [CanBeNull] object? selectedItem)
         {
             ((dynamic)selector).ScrollIntoView(selectedItem);
         }
 
-        private static void BeginSetFocus([NotNull] this ItemsControl selector, [CanBeNull] object selectedItem)
+        private static void BeginSetFocus([NotNull] this ItemsControl selector, [CanBeNull] object? selectedItem)
         {
             selector.BeginInvoke(() =>
             {
@@ -172,7 +172,7 @@
         {
             var isSourceInvalid = false;
             var selectedItems = selector.GetSelectedItems();
-            var itemsToRemove = new List<object>();
+            var itemsToRemove = new List<object?>();
 
             foreach (var item in itemsToSelect)
             {
@@ -239,7 +239,7 @@
             [NotNull]
             private readonly Selector _selector;
             [CanBeNull]
-            private readonly INotifyCollectionChanged _observableSourceSelection;
+            private readonly INotifyCollectionChanged? _observableSourceSelection;
 
             private readonly bool _selectorHasItemsSourceBinding;
 

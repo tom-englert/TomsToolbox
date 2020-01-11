@@ -59,12 +59,12 @@
         public static ICollection<CultureInfo> GetChildren([NotNull] this CultureInfo item)
         {
             var children = _childCache.ForceValue(item, CreateChildList);
-            Debug.Assert(children != null, nameof(children) + " != null");
+            // ReSharper disable once AssignNullToNotNullAttribute
             return children;
         }
 
         [NotNull, ItemNotNull]
-        private static CultureInfo[] CreateChildList([CanBeNull] CultureInfo parent)
+        private static CultureInfo[] CreateChildList([CanBeNull] CultureInfo? parent)
         {
             return CultureInfo.GetCultures(CultureTypes.AllCultures).Where(child => child?.Parent.Equals(parent) == true).ToArray();
         }

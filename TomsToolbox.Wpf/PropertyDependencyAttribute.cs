@@ -61,7 +61,7 @@
         /// <exception cref="System.InvalidOperationException">Invalid dependency definitions, i.e. dependency to non-existing property.</exception>
         [CanBeNull]
         [ContractAnnotation("notnull => notnull")]
-        public static Dictionary<string, IEnumerable<string>> CreateDependencyMapping([CanBeNull] Type type)
+        public static Dictionary<string, IEnumerable<string>>? CreateDependencyMapping([CanBeNull] Type? type)
         {
             if (type == null)
                 return null;
@@ -147,7 +147,7 @@
         {
             var entryAssembly = entryType.Assembly;
 
-            var programFolder = Path.GetDirectoryName(entryAssembly.GetAssemblyDirectory().FullName);
+            var programFolder = Path.GetDirectoryName(entryAssembly.GetAssemblyDirectory().FullName)!;
 
             var referencedAssemblyNames = entryAssembly.GetReferencedAssemblies();
 
@@ -155,9 +155,9 @@
                 .Select(SafeLoad)
                 .Where(assembly => assembly != null)
                 // ReSharper disable once AssignNullToNotNullAttribute
-                .Where(assembly => IsAssemblyInSubfolderOf(assembly.GetName(), programFolder));
+                .Where(assembly => IsAssemblyInSubfolderOf(assembly!.GetName(), programFolder));
 
-            return new[] { entryAssembly }.Concat(referencedAssemblies);
+            return new[] { entryAssembly }.Concat(referencedAssemblies)!;
         }
 
         /// <summary>
@@ -176,11 +176,11 @@
             var assemblyDirectory = Path.GetDirectoryName(assemblyName.GetAssemblyDirectory().FullName);
 
             // ReSharper disable once PossibleNullReferenceException
-            return assemblyDirectory.StartsWith(programFolder, StringComparison.OrdinalIgnoreCase);
+            return assemblyDirectory!.StartsWith(programFolder, StringComparison.OrdinalIgnoreCase);
         }
 
         [CanBeNull]
-        private static Assembly SafeLoad([NotNull] AssemblyName name)
+        private static Assembly? SafeLoad([NotNull] AssemblyName name)
         {
             try
             {

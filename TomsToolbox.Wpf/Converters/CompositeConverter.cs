@@ -45,7 +45,7 @@
         /// A converted value.
         /// </returns>
         [CanBeNull]
-        public object Convert([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        public object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             if (Converters.Count <= 0)
             {
@@ -66,7 +66,7 @@
         /// A converted value.
         /// </returns>
         [CanBeNull]
-        public object ConvertBack([CanBeNull] object value, [CanBeNull] Type targetType, [CanBeNull] object parameter, [CanBeNull] CultureInfo culture)
+        public object? ConvertBack([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
         {
             if (Converters.Count <= 0) 
             {

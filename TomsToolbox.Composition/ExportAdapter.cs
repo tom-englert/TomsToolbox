@@ -9,26 +9,27 @@
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class ExportAdapter<T> : IExport<T>
+        where T : class
     {
         [NotNull] 
-        private readonly Func<T> _valueFactory;
+        private readonly Func<T?> _valueFactory;
 
         [CanBeNull]
-        private readonly IMetadata _metadata;
+        private readonly IMetadata? _metadata;
 
         /// <summary>Initializes a new instance of the <see cref="ExportAdapter{T}"/> class.</summary>
         /// <param name="valueFactory">The value factory.</param>
         /// <param name="metadata">The metadata.</param>
-        public ExportAdapter([NotNull] Func<T> valueFactory, [CanBeNull] IMetadata metadata)
+        public ExportAdapter([NotNull] Func<T?> valueFactory, [CanBeNull] IMetadata? metadata)
         {
             _valueFactory = valueFactory;
             _metadata = metadata;
         }
 
         [CanBeNull]
-        T IExport<T, IMetadata>.Value => _valueFactory();
+        T? IExport<T, IMetadata>.Value => _valueFactory();
 
         [CanBeNull]
-        IMetadata IExport<T, IMetadata>.Metadata => _metadata;
+        IMetadata? IExport<T, IMetadata>.Metadata => _metadata;
     }
 }

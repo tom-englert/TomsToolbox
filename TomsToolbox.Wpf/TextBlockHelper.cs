@@ -111,7 +111,7 @@
         /// </summary>
         /// <param name="sender">Object where the event handler is attached</param>
         /// <param name="e">Event data</param>
-        private static void Binding_TargetUpdated([NotNull] object sender, [NotNull] DataTransferEventArgs e)
+        private static void Binding_TargetUpdated([CanBeNull] object? sender, [NotNull] DataTransferEventArgs e)
         {
             if (!(sender is TextBlock textBlock))
                 return;

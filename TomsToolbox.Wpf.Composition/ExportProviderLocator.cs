@@ -56,7 +56,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetExportProvider([NotNull] this DependencyObject obj, [CanBeNull] IExportProvider value)
+        public static void SetExportProvider([NotNull] this DependencyObject obj, [CanBeNull] IExportProvider? value)
         {
             obj.SetValue(ExportProviderProperty, value);
         }

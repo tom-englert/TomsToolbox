@@ -8,18 +8,20 @@
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <typeparam name="TMetadata">The type of the metadata.</typeparam>
     public interface IExport<out T, out TMetadata>
+        where T : class
+        where TMetadata: class
     {
         /// <summary>
         /// Gets the value.
         /// </summary>
         [CanBeNull]
-        T Value { get; }
+        T? Value { get; }
 
         /// <summary>
         /// Gets the metadata.
         /// </summary>
         [CanBeNull]
-        TMetadata Metadata { get; }
+        TMetadata? Metadata { get; }
     }
 
     /// <summary>
@@ -27,6 +29,7 @@
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
     public interface IExport<out T> : IExport<T, IMetadata>
+        where T : class
     {
     }
 }

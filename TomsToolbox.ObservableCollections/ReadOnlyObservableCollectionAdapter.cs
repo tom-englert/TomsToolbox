@@ -36,18 +36,18 @@
         /// <summary>
         /// Occurs when the collection changes.
         /// </summary>
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// Raises the <see cref="INotifyPropertyChanged.PropertyChanged" /> event.
         /// </summary>
         /// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnPropertyChanged([CanBeNull] PropertyChangedEventArgs e)
+        protected virtual void OnPropertyChanged([CanBeNull] PropertyChangedEventArgs? e)
         {
             PropertyChanged?.Invoke(this, e);
         }
@@ -56,17 +56,17 @@
         /// Raises the <see cref="INotifyCollectionChanged.CollectionChanged" /> event.
         /// </summary>
         /// <param name="e">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnCollectionChanged([CanBeNull] NotifyCollectionChangedEventArgs e)
+        protected virtual void OnCollectionChanged([CanBeNull] NotifyCollectionChangedEventArgs? e)
         {
             CollectionChanged?.Invoke(this, e);
         }
 
-        private void Items_PropertyChanged([CanBeNull] object sender, [CanBeNull] PropertyChangedEventArgs e)
+        private void Items_PropertyChanged([CanBeNull] object? sender, [CanBeNull] PropertyChangedEventArgs? e)
         {
             OnPropertyChanged(e);
         }
 
-        private void Items_CollectionChanged([CanBeNull] object sender, [CanBeNull] NotifyCollectionChangedEventArgs e)
+        private void Items_CollectionChanged([CanBeNull] object? sender, [CanBeNull] NotifyCollectionChangedEventArgs? e)
         {
             OnCollectionChanged(e);
         }

@@ -1,4 +1,5 @@
 ﻿// ReSharper disable PossibleNullReferenceException
+#nullable disable
 namespace TomsToolbox.ObservableCollections.Tests
 {
     using System;

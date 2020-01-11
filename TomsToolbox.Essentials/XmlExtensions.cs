@@ -19,7 +19,7 @@
         /// The value of the attribute, or the <paramref name="defaultValue" /> if no such attribute exists
         /// </returns>
         [CanBeNull]
-        public static string GetAttribute([NotNull] this XElement element, [NotNull] string name, [CanBeNull] string defaultValue = null)
+        public static string? GetAttribute([NotNull] this XElement element, [NotNull] string name, [CanBeNull] string? defaultValue = null)
         {
             return GetAttribute(element, XName.Get(name), defaultValue);
         }
@@ -34,7 +34,7 @@
         /// The value of the attribute, or the <paramref name="defaultValue"/> if no such attribute exists
         /// </returns>
         [CanBeNull]
-        public static string GetAttribute([NotNull] this XElement element, [NotNull] XName name, [CanBeNull] string defaultValue = null)
+        public static string? GetAttribute([NotNull] this XElement element, [NotNull] XName name, [CanBeNull] string? defaultValue = null)
         {
             var attribute = element.Attribute(name);
 

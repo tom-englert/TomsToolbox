@@ -23,7 +23,7 @@
         /// <returns>
         /// <c>true</c> if the metadata value exists.
         /// </returns>
-        bool TryGetValue(string name, [CanBeNull] out object value);
+        bool TryGetValue(string name, [CanBeNull] out object? value);
     }
 
     public static partial class ExtensionMethods
@@ -50,7 +50,8 @@
         /// <returns>
         /// <c>true</c> if the metadata value exists.
         /// </returns>
-        public static bool TryGetValue<T>([NotNull] this IMetadata metadata, string name, [CanBeNull] out T value)
+        public static bool TryGetValue<T>([NotNull] this IMetadata metadata, string name, [CanBeNull] out T? value)
+            where T : class
         {
             if (metadata.TryGetValue(name, out var v) && (v is T t))
             {
@@ -69,7 +70,7 @@
         /// <param name="name">The name.</param>
         /// <returns>The value, or default if no item with this name exists.</returns>
         [CanBeNull]
-        public static object GetValueOrDefault([NotNull] this IMetadata metadata, string name)
+        public static object? GetValueOrDefault([NotNull] this IMetadata metadata, string name)
         {
             return metadata.TryGetValue(name, out var value) ? value : default;
         }
@@ -84,7 +85,8 @@
         /// The value, or default if no item with this name exists.
         /// </returns>
         [CanBeNull]
-        public static T GetValueOrDefault<T>([NotNull] this IMetadata metadata, string name)
+        public static T? GetValueOrDefault<T>([NotNull] this IMetadata metadata, string name)
+            where T: class
         {
             return metadata.TryGetValue<T>(name, out var value) ? value : default;
         }

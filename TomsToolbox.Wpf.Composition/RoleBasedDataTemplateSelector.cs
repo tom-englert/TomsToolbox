@@ -41,7 +41,7 @@
         /// Returns a <see cref="T:System.Windows.DataTemplate" /> or null. The default value is null.
         /// </returns>
         [CanBeNull]
-        public override DataTemplate SelectTemplate([CanBeNull] object item, [CanBeNull] DependencyObject container)
+        public override DataTemplate SelectTemplate([CanBeNull] object? item, [CanBeNull] DependencyObject? container)
         {
             if ((item == null) || (container == null))
                 return null;

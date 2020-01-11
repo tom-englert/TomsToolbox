@@ -99,7 +99,7 @@
             }
         }
 
-        private static void ApplyContext([NotNull, ItemCanBeNull] IEnumerable composables, [CanBeNull] object context)
+        private static void ApplyContext([NotNull, ItemCanBeNull] IEnumerable composables, [CanBeNull] object? context)
         {
             foreach (var item in composables.OfType<IComposablePartWithContext>())
             {
@@ -153,7 +153,7 @@
             }
         }
 
-        private void Selectable_PropertyChanged([CanBeNull] object sender, [CanBeNull] PropertyChangedEventArgs e)
+        private void Selectable_PropertyChanged([CanBeNull] object? sender, [CanBeNull] PropertyChangedEventArgs? e)
         {
             if (!(AssociatedObject is Selector selector))
                 return;
@@ -168,7 +168,7 @@
             }
         }
 
-        private static void Selector_SelectionChanged([CanBeNull] object sender, [NotNull] SelectionChangedEventArgs e)
+        private static void Selector_SelectionChanged([CanBeNull] object? sender, [NotNull] SelectionChangedEventArgs e)
         {
             if (e.RemovedItems != null)
             {

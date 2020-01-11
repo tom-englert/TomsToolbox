@@ -61,7 +61,7 @@
             }
         }
 
-        private static void ValidationHasErrors_Changed(object sender, EventArgs e)
+        private static void ValidationHasErrors_Changed(object? sender, EventArgs e)
         {
             var target = sender as FrameworkElement;
             if (target == null)

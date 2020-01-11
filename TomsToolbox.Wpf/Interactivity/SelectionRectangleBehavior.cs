@@ -21,7 +21,7 @@
         /// Gets or sets the target element that displays the selection.
         /// </summary>
         [CanBeNull]
-        public FrameworkElement TargetElement
+        public FrameworkElement? TargetElement
         {
             get => (FrameworkElement)GetValue(TargetElementProperty);
             set => SetValue(TargetElementProperty, value);
@@ -37,7 +37,7 @@
         /// Gets or sets the view port in which the target element is displayed.
         /// </summary>
         [CanBeNull]
-        public FrameworkElement Viewport
+        public FrameworkElement? Viewport
         {
             get => (FrameworkElement)GetValue(ViewportProperty);
             set => SetValue(ViewportProperty, value);
@@ -88,7 +88,7 @@
         }
 
 
-        private void Viewport_Changed([CanBeNull] FrameworkElement oldValue, [CanBeNull] FrameworkElement newValue)
+        private void Viewport_Changed([CanBeNull] FrameworkElement? oldValue, [CanBeNull] FrameworkElement? newValue)
         {
             if (oldValue != null)
             {
@@ -106,7 +106,7 @@
         }
 
 
-        private void Viewport_MouseMove([CanBeNull] object sender, [NotNull] MouseEventArgs e)
+        private void Viewport_MouseMove([CanBeNull] object? sender, [NotNull] MouseEventArgs e)
         {
             if (_startPosition == null)
                 return;
@@ -122,7 +122,7 @@
         }
 
 
-        private void Viewport_MouseRightButtonDown([CanBeNull] object sender, [NotNull] MouseButtonEventArgs e)
+        private void Viewport_MouseRightButtonDown([CanBeNull] object? sender, [NotNull] MouseButtonEventArgs e)
         {
             var viewport = Viewport;
             if (viewport == null)
@@ -138,7 +138,7 @@
             viewport.CaptureMouse();
         }
 
-        private void Viewport_MouseRightButtonUp([CanBeNull] object sender, [CanBeNull] MouseButtonEventArgs e)
+        private void Viewport_MouseRightButtonUp([CanBeNull] object? sender, [CanBeNull] MouseButtonEventArgs? e)
         {
             _startPosition = null;
 

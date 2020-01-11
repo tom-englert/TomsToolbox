@@ -103,7 +103,7 @@
             [NotNull]
             private readonly WeakReference<IList<TSource>> _sourceReference;
             [CanBeNull]
-            private readonly string _propertyName;
+            private readonly string? _propertyName;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.ObservableExtensions.ObservableSelectImpl`2" /> class.
@@ -170,7 +170,7 @@
                 Items[index] = ItemGenerator((TSource)sender);
             }
 
-            private void AttachItemEvents([CanBeNull] INotifyPropertyChanged sender)
+            private void AttachItemEvents([CanBeNull] INotifyPropertyChanged? sender)
             {
                 if (sender == null)
                     return;
@@ -178,7 +178,7 @@
                 sender.PropertyChanged += SourceItem_PropertyChanged;
             }
 
-            private void DetachItemEvents([CanBeNull] INotifyPropertyChanged sender)
+            private void DetachItemEvents([CanBeNull] INotifyPropertyChanged? sender)
             {
                 if (sender == null)
                     return;
@@ -200,7 +200,7 @@
 
                 Items.Content.AddRange(_source);
             }
-            private void Source_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+            private void Source_CollectionChanged([CanBeNull] object? sender, [NotNull] NotifyCollectionChangedEventArgs e)
             {
                 var newStartingIndex = e.NewStartingIndex;
                 var oldStartingIndex = e.OldStartingIndex;

@@ -37,7 +37,7 @@
         /// <param name="item">The item to lookup. This can be a MemberInfo like FieldInfo, PropertyInfo...</param>
         /// <returns>The associated display name, or null if the item does not have a DisplayName attribute.</returns>
         [CanBeNull]
-        public static string TryGetDisplayName([NotNull] this ICustomAttributeProvider item)
+        public static string? TryGetDisplayName([NotNull] this ICustomAttributeProvider item)
         {
             return item.GetCustomAttributes<DisplayNameAttribute>(false)
                 .Select(attr => attr.DisplayName)
@@ -50,7 +50,7 @@
         /// <param name="item">The item to lookup. This can be a MemberInfo like FieldInfo, PropertyInfo...</param>
         /// <returns>The associated description, or null if the item does not have a Description attribute.</returns>
         [CanBeNull]
-        public static string TryGetDescription([NotNull] this ICustomAttributeProvider item)
+        public static string? TryGetDescription([NotNull] this ICustomAttributeProvider item)
         {
             return item.GetCustomAttributes<DescriptionAttribute>(false)
                 .Select(attr => attr.Description)
@@ -64,7 +64,7 @@
         /// <param name="key">The key.</param>
         /// <returns>The associated text, or null if the item does not have a text attribute with this key.</returns>
         [CanBeNull]
-        public static string TryGetText([NotNull] this ICustomAttributeProvider item, [NotNull] object key)
+        public static string? TryGetText([NotNull] this ICustomAttributeProvider item, [NotNull] object key)
         {
             return item.GetCustomAttributes<TextAttribute>(false)
                 .Where(attr => Equals(attr.Key, key))
@@ -80,7 +80,7 @@
         /// The custom type converter, or null if the item has no custom type converter attribute.
         /// </returns>
         [CanBeNull]
-        public static TypeConverter GetCustomTypeConverter([NotNull] this ICustomAttributeProvider item)
+        public static TypeConverter? GetCustomTypeConverter([NotNull] this ICustomAttributeProvider item)
         {
             return item.GetCustomTypeConverter(out _);
         }
@@ -94,7 +94,7 @@
         /// The custom type converter, or null if the item has no custom type converter attribute.
         /// </returns>
         [CanBeNull]
-        public static TypeConverter GetCustomTypeConverter([NotNull] this ICustomAttributeProvider item, out string log)
+        public static TypeConverter? GetCustomTypeConverter([NotNull] this ICustomAttributeProvider item, out string log)
         {
             var logBuilder = new StringBuilder();
 

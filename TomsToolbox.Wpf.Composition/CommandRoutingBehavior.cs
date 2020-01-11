@@ -143,7 +143,7 @@
         [NotNull]
         public static readonly DependencyProperty IsActiveProperty = _isActivePropertyKey.DependencyProperty;
 
-        private void CommandSource_Changed([CanBeNull] Type oldValue, [CanBeNull] Type newValue)
+        private void CommandSource_Changed([CanBeNull] Type? oldValue, [CanBeNull] Type? newValue)
         {
             // Type.IsAssignableFrom does not work in design mode!
             if (newValue != null && newValue.GetSelfAndBaseTypes().All(t => t.FullName != typeof(CommandSourceFactory).FullName))
@@ -177,7 +177,7 @@
             }
         }
 
-        private void CompositionContext_Changed([CanBeNull] object oldValue, [CanBeNull] object newValue)
+        private void CompositionContext_Changed([CanBeNull] object? oldValue, [CanBeNull] object? newValue)
         {
             if (AssociatedObject == null)
                 return;
@@ -264,7 +264,7 @@
         }
 
         [CanBeNull]
-        private CommandSourceFactory GetCommandSourceFactory([CanBeNull] Type commandSourceType)
+        private CommandSourceFactory GetCommandSourceFactory([CanBeNull] Type? commandSourceType)
         {
             if (commandSourceType == null)
                 return null;
@@ -302,7 +302,7 @@
             }
         }
 
-        bool ICommand.CanExecute([CanBeNull] object parameter)
+        bool ICommand.CanExecute([CanBeNull] object? parameter)
         {
             var associatedObject = AssociatedObject;
             return (associatedObject != null)
@@ -315,12 +315,12 @@
             remove => CommandTarget.CanExecuteChanged -= value;
         }
 
-        void ICommand.Execute([CanBeNull] object parameter)
+        void ICommand.Execute([CanBeNull] object? parameter)
         {
             CommandTarget.Execute(CommandParameter);
         }
 
-        void ICommandChangedNotificationSink.ActiveCommandChanged([CanBeNull] ICommand command)
+        void ICommandChangedNotificationSink.ActiveCommandChanged([CanBeNull] ICommand? command)
         {
             var oldValue = IsActive;
 
@@ -337,6 +337,6 @@
 
     internal interface ICommandChangedNotificationSink
     {
-        void ActiveCommandChanged([CanBeNull] ICommand command);
+        void ActiveCommandChanged([CanBeNull] ICommand? command);
     }
 }

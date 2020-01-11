@@ -14,7 +14,7 @@
         /// <summary>
         /// Occurs when the exports in the IExportProvider change.
         /// </summary>
-        event EventHandler<EventArgs> ExportsChanged;
+        event EventHandler<EventArgs>? ExportsChanged;
 
         /// <summary>
         /// Gets the exported object with the specified contract name.
@@ -25,7 +25,7 @@
         /// The object
         /// </returns>
         [NotNull]
-        T GetExportedValue<T>([CanBeNull] string contractName = null);
+        T GetExportedValue<T>([CanBeNull] string? contractName = null) where T : class;
 
         /// <summary>
         /// Gets the exported object with the specified contract name.
@@ -36,8 +36,7 @@
         /// The object, or null if no such export exists.
         /// </returns>
         [CanBeNull]
-        T GetExportedValueOrDefault<T>([CanBeNull] string contractName = null);
-
+        T? GetExportedValueOrDefault<T>([CanBeNull] string? contractName = null) where T : class;
         /// <summary>
         /// Tries to the get exported value.
         /// </summary>
@@ -48,7 +47,7 @@
         /// true if the value exists.
         /// </returns>
         [ContractAnnotation("=> false,value:null;=>true,value:notnull")]
-        bool TryGetExportedValue<T>([CanBeNull] string contractName, [CanBeNull] out T value);
+        bool TryGetExportedValue<T>([CanBeNull] string? contractName, [CanBeNull] out T? value) where T : class;
 
         /// <summary>
         /// Gets all the exported objects with the specified contract name.
@@ -59,7 +58,7 @@
         /// The object
         /// </returns>
         [NotNull, ItemNotNull]
-        IEnumerable<T> GetExportedValues<T>([CanBeNull] string contractName = null);
+        IEnumerable<T> GetExportedValues<T>([CanBeNull] string? contractName = null) where T : class;
 
         /// <summary>
         /// Gets the exports for the specified parameters.
@@ -70,7 +69,7 @@
         /// The exports.
         /// </returns>
         [NotNull, ItemNotNull]
-        IEnumerable<IExport<object>> GetExports([NotNull] Type contractType, [CanBeNull] string contractName = null);
+        IEnumerable<IExport<object>> GetExports([NotNull] Type contractType, [CanBeNull] string? contractName = null);
     }
 
     /// <summary>
@@ -88,7 +87,8 @@
         /// true if the value exists.
         /// </returns>
         [ContractAnnotation("=> false,value:null;=>true,value:notnull")]
-        public static bool TryGetExportedValue<T>([NotNull] this IExportProvider exportProvider, [CanBeNull] out T value)
+        public static bool TryGetExportedValue<T>([NotNull] this IExportProvider exportProvider, [CanBeNull] out T? value) 
+            where T : class
         {
             return exportProvider.TryGetExportedValue(null, out value);
         }
@@ -104,7 +104,8 @@
         /// The exports.
         /// </returns>
         [NotNull, ItemNotNull]
-        public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, [NotNull] Type type, [NotNull] Func<IMetadata, TMetadata> metadataFactory)
+        public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, [NotNull] Type type, [NotNull] Func<IMetadata?, TMetadata?> metadataFactory)
+            where TMetadata: class
         {
             return GetExports(exportProvider, type, null, metadataFactory);
         }
@@ -121,7 +122,8 @@
         /// The exports.
         /// </returns>
         [NotNull, ItemNotNull]
-        public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, [NotNull] Type type, [CanBeNull] string contractName, [NotNull] Func<IMetadata, TMetadata> metadataFactory)
+        public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, [NotNull] Type type, [CanBeNull] string? contractName, [NotNull] Func<IMetadata?, TMetadata?> metadataFactory)
+            where TMetadata: class
         {
             return exportProvider
                 .GetExports(type, contractName)
@@ -130,20 +132,22 @@
         }
 
         private class ExportAdapter<TObject, TMetadata> : IExport<TObject, TMetadata>
+            where TObject : class
+            where TMetadata : class
         {
             private readonly IExport<TObject> _source;
 
-            public ExportAdapter(IExport<TObject> source, Func<IMetadata, TMetadata> metadataFactory)
+            public ExportAdapter(IExport<TObject> source, Func<IMetadata?, TMetadata?> metadataFactory)
             {
                 _source = source;
                 Metadata = metadataFactory(source.Metadata);
             }
 
             [CanBeNull]
-            public TObject Value => _source.Value;
+            public TObject? Value => _source.Value;
 
             [CanBeNull]
-            public TMetadata Metadata { get; }
+            public TMetadata? Metadata { get; }
         }
     }
 }

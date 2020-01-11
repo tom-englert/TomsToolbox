@@ -16,7 +16,7 @@
         /// <param name="ex">The exception to start with.</param>
         /// <returns>The exception and all inner exceptions.</returns>
         [NotNull, ItemNotNull]
-        public static IEnumerable<Exception> ExceptionChain([CanBeNull] this Exception ex)
+        public static IEnumerable<Exception> ExceptionChain([CanBeNull] this Exception? ex)
         {
             while (ex != null)
             {

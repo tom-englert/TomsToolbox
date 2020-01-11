@@ -23,7 +23,7 @@
         /// <returns>The styles.</returns>
         [CanBeNull, ItemNotNull]
         [AttachedPropertyBrowsableForType(typeof(DataGrid))]
-        public static DataGridColumnStyleCollection GetDefaultColumnStyles([NotNull] DataGrid dataGrid)
+        public static DataGridColumnStyleCollection? GetDefaultColumnStyles([NotNull] DataGrid dataGrid)
         {
             return (DataGridColumnStyleCollection)dataGrid.GetValue(DefaultColumnStylesProperty);
         }
@@ -32,7 +32,7 @@
         /// </summary>
         /// <param name="dataGrid">The data grid.</param>
         /// <param name="value">The styles.</param>
-        public static void SetDefaultColumnStyles([NotNull] DataGrid dataGrid, [CanBeNull, ItemNotNull] DataGridColumnStyleCollection value)
+        public static void SetDefaultColumnStyles([NotNull] DataGrid dataGrid, [CanBeNull, ItemNotNull] DataGridColumnStyleCollection? value)
         {
             dataGrid.SetValue(DefaultColumnStylesProperty, value);
         }
@@ -63,7 +63,7 @@
             if (args.Action != NotifyCollectionChangedAction.Add)
                 return;
 
-            var column = (DataGridColumn)args.NewItems[0];
+            var column = (DataGridColumn)args.NewItems[0]!;
 
             ApplyStyle(styles, column);
         }
@@ -116,13 +116,13 @@
         /// Gets or sets the type of the column for which to set the styles.
         /// </summary>
         [CanBeNull]
-        public Type ColumnType { get; set; }
+        public Type? ColumnType { get; set; }
 
         /// <summary>
         /// Gets or sets the element style for the column.
         /// </summary>
         [CanBeNull]
-        public Style ElementStyle
+        public Style? ElementStyle
         {
             get => (Style)GetValue(ElementStyleProperty);
             set => SetValue(ElementStyleProperty, value);
@@ -138,7 +138,7 @@
         /// Gets or sets the editing element style for the column.
         /// </summary>
         [CanBeNull]
-        public Style EditingElementStyle
+        public Style? EditingElementStyle
         {
             get => (Style)GetValue(EditingElementStyleProperty);
             set => SetValue(EditingElementStyleProperty, value);

@@ -19,7 +19,7 @@
     public class Icon : Control
     {
         private const string ImagePartName = "PART_Image";
-        private Image _image;
+        private Image? _image;
 
         static Icon()
         {
@@ -30,7 +30,7 @@
         /// Gets or sets the optional viewport where the image will be displayed. If the viewport property is not set, the window is used.
         /// </summary>
         [CanBeNull]
-        public FrameworkElement Viewport
+        public FrameworkElement? Viewport
         {
             get => (FrameworkElement)GetValue(ViewportProperty);
             set => SetValue(ViewportProperty, value);
@@ -46,7 +46,7 @@
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "Required, is used via XAML")]
         [CanBeNull]
-        public IList<ImageSource> Sources
+        public IList<ImageSource>? Sources
         {
             get => (IList<ImageSource>)GetValue(SourcesProperty);
             set => SetValue(SourcesProperty, value);

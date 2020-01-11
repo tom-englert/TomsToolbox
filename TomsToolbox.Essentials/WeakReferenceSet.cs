@@ -24,7 +24,7 @@
         /// <returns>
         /// <c>true</c> if the element is added to the WeakReferenceSet{T} object; <c>false</c> if the element is already present.
         /// </returns>
-        public bool Add([CanBeNull] T item)
+        public bool Add(T item)
         {
             if (this.Contains(item))
                 return false;
