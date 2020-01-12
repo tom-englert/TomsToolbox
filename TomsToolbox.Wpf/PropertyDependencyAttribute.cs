@@ -61,6 +61,7 @@
         /// <exception cref="System.InvalidOperationException">Invalid dependency definitions, i.e. dependency to non-existing property.</exception>
         [CanBeNull]
         [ContractAnnotation("notnull => notnull")]
+        [return:System.Diagnostics.CodeAnalysis.NotNullIfNotNull("type")]
         public static Dictionary<string, IEnumerable<string>>? CreateDependencyMapping([CanBeNull] Type? type)
         {
             if (type == null)

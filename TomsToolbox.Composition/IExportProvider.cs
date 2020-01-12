@@ -47,7 +47,7 @@
         /// true if the value exists.
         /// </returns>
         [ContractAnnotation("=> false,value:null;=>true,value:notnull")]
-        bool TryGetExportedValue<T>([CanBeNull] string? contractName, [CanBeNull] out T? value) where T : class;
+        bool TryGetExportedValue<T>([CanBeNull] string? contractName, [CanBeNull, System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out T? value) where T : class;
 
         /// <summary>
         /// Gets all the exported objects with the specified contract name.
@@ -87,7 +87,7 @@
         /// true if the value exists.
         /// </returns>
         [ContractAnnotation("=> false,value:null;=>true,value:notnull")]
-        public static bool TryGetExportedValue<T>([NotNull] this IExportProvider exportProvider, [CanBeNull] out T? value) 
+        public static bool TryGetExportedValue<T>([NotNull] this IExportProvider exportProvider, [CanBeNull, System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out T? value) 
             where T : class
         {
             return exportProvider.TryGetExportedValue(null, out value);

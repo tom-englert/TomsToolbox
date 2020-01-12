@@ -29,6 +29,7 @@
         /// <param name="interceptor">The interceptor.</param>
         /// <returns>The <paramref name="value"/></returns>
         [CanBeNull, ContractAnnotation("value:notnull=>notnull")]
+        [return:System.Diagnostics.CodeAnalysis.NotNullIfNotNull("value")]
         public static T Intercept<T>([CanBeNull] this T value, [NotNull] Action<T> interceptor)
         {
             interceptor(value);
