@@ -140,7 +140,7 @@
             }
         }
 
-        private void DetachSelectables([CanBeNull, ItemCanBeNull] IEnumerable viewModels)
+        private void DetachSelectables([CanBeNull, ItemCanBeNull] IEnumerable? viewModels)
         {
             if (viewModels == null)
                 return;
@@ -158,7 +158,7 @@
             if (!(AssociatedObject is Selector selector))
                 return;
 
-            var selectable = (ISelectableComposablePart)sender;
+            var selectable = sender as ISelectableComposablePart;
             if (selectable == null)
                 return;
 

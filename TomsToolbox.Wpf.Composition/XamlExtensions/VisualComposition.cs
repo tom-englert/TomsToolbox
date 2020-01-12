@@ -30,11 +30,11 @@
         /// <summary>
         /// Occurs when the visual composition framework has detected an error.
         /// </summary>
-        public static event EventHandler<TextEventArgs> Error;
+        public static event EventHandler<TextEventArgs>? Error;
         /// <summary>
         /// Occurs when the visual composition framework logs some action.
         /// </summary>
-        public static event EventHandler<TextEventArgs> Trace;
+        public static event EventHandler<TextEventArgs>? Trace;
 
         internal static void OnError([CanBeNull] object? sender, [NotNull] Exception ex)
         {
@@ -61,7 +61,7 @@
         [CanBeNull]
         [AttachedPropertyBrowsableForType(typeof(ContentControl))]
         [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
-        public static string GetRegionId([NotNull] Control obj)
+        public static string? GetRegionId([NotNull] Control obj)
         {
             return (string)obj.GetValue(RegionIdProperty);
         }

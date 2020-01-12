@@ -24,7 +24,7 @@
         [AttachedPropertyBrowsableForType(typeof(ContentControl))]
         [AttachedPropertyBrowsableForType(typeof(TabControl))]
         [AttachedPropertyBrowsableForType(typeof(ContentPresenter))]
-        public static object GetRole([NotNull] FrameworkElement obj)
+        public static object? GetRole([NotNull] FrameworkElement obj)
         {
             return obj.GetValue(RoleProperty);
         }

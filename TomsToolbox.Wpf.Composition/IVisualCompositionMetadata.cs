@@ -13,7 +13,7 @@
         /// Gets the id of the item for visual composition.
         /// </summary>
         [CanBeNull]
-        object Role
+        object? Role
         {
             get;
         }
@@ -30,7 +30,7 @@
         /// Gets the target regions for visual composition.
         /// </summary>
         [CanBeNull, ItemCanBeNull]
-        string[] TargetRegions
+        string?[]? TargetRegions
         {
             get;
         }
@@ -60,11 +60,11 @@
         }
 
         [CanBeNull]
-        public object Role { get; }
+        public object? Role { get; }
 
         public double Sequence { get; }
 
-        [CanBeNull]
-        public string[] TargetRegions { get; }
+        [CanBeNull, ItemCanBeNull]
+        public string?[]? TargetRegions { get; }
     }
 }

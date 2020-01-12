@@ -231,7 +231,7 @@
         /// <returns>This method never returns, but throws the exception.</returns>
         /// <exception cref="InvalidOperationException"><paramref name="message"/></exception>
         [CanBeNull]
-        public TResult ElseThrow([CanBeNull][Localizable(false)][LocalizationRequired(false)] string message)
+        public TResult ElseThrow([CanBeNull][Localizable(false)][LocalizationRequired(false)] string? message)
         {
             if (!_isResolved)
                 throw new InvalidOperationException(message);

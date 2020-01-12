@@ -22,7 +22,7 @@
         /// Gets the header to be shown in the UI. Usually this is a localized text naming the command.
         /// </summary>
         [CanBeNull]
-        object Header
+        object? Header
         {
             get;
         }
@@ -31,7 +31,7 @@
         /// Gets the tool tip to be shown in the UI. Usually this is a localized text describing the command.
         /// </summary>
         [CanBeNull]
-        object Description
+        object? Description
         {
             get;
         }
@@ -40,7 +40,7 @@
         /// Gets the icon to be shown in the UI, or null to show no icon.
         /// </summary>
         [CanBeNull]
-        object Icon
+        object? Icon
         {
             get;
         }
@@ -61,7 +61,7 @@
         /// This is used to build up menus with sub menu entries.
         /// </remarks>
         [CanBeNull]
-        string SubRegionId
+        string? SubRegionId
         {
             get;
         }
@@ -80,7 +80,7 @@
         /// If different group names are specified for a target region, the commands can be grouped and the groups separated by a <see cref="Separator"/>.
         /// </summary>
         [CanBeNull]
-        object GroupName
+        object? GroupName
         {
             get;
         }
@@ -89,7 +89,7 @@
         /// Gets a tag that can be bound to the target objects tag.
         /// </summary>
         [CanBeNull]
-        object Tag
+        object? Tag
         {
             get;
         }
@@ -147,7 +147,7 @@
         {
             var commandSource = _commandSourcePerContext.ForceValue(compositionContext ?? typeof(NullKey), context => CreateCommandSource());
             Debug.Assert(commandSource != null, nameof(commandSource) + " != null");
-            return commandSource;
+            return commandSource!;
         }
 
         /// <summary>
@@ -161,19 +161,19 @@
         /// Gets the header to be shown in the UI. Usually this is a localized text naming the command.
         /// </summary>
         [CanBeNull]
-        public virtual object Header => GetType().TryGetDisplayName();
+        public virtual object? Header => GetType().TryGetDisplayName();
 
         /// <summary>
         /// Gets the tool tip to be shown in the UI. Usually this is a localized text describing the command.
         /// </summary>
         [CanBeNull]
-        public virtual object Description => GetType().TryGetDescription();
+        public virtual object? Description => GetType().TryGetDescription();
 
         /// <summary>
         /// Gets the icon to be shown in the UI, or null to show no icon.
         /// </summary>
         [CanBeNull]
-        public virtual object Icon
+        public virtual object? Icon
         {
             get
             {
@@ -196,7 +196,7 @@
         /// This is used to build up menus with sub menu entries.
         /// </remarks>
         [CanBeNull]
-        public virtual string SubRegionId => GetType().TryGetText(SubRegionIdKey);
+        public virtual string? SubRegionId => GetType().TryGetText(SubRegionIdKey);
 
         /// <summary>
         /// Gets a value indicating whether the control associated with this instance should be checkable, 
@@ -209,13 +209,13 @@
         /// If different group names are specified for a target region, the commands can be grouped and the groups separated by a <see cref="Separator" />.
         /// </summary>
         [CanBeNull]
-        public virtual object GroupName => GetType().TryGetText(GroupNameKey);
+        public virtual object? GroupName => GetType().TryGetText(GroupNameKey);
 
         /// <summary>
         /// Gets a tag that can be bound to the target objects tag.
         /// </summary>
         [CanBeNull]
-        public virtual object Tag => null;
+        public virtual object? Tag => null;
 
         /// <summary>
         /// Attaches the specified command. The last command attached will become the active command, while the previous command will be pushed on a stack.

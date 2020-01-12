@@ -11,7 +11,7 @@ namespace TomsToolbox.Wpf.Composition
         /// Gets or sets the id of the region. The region id is used to select candidates for composition.
         /// </summary>
         [CanBeNull]
-        string RegionId
+        string? RegionId
         {
             get;
             set;
@@ -21,7 +21,7 @@ namespace TomsToolbox.Wpf.Composition
         /// Gets or sets the composition context.
         /// </summary>
         [CanBeNull]
-        object CompositionContext
+        object? CompositionContext
         {
             get;
             set;

@@ -29,7 +29,7 @@
         /// Gets the type of the view model that this visual has a representation for.
         /// </summary>
         [CanBeNull]
-        public Type DataType
+        public Type? DataType
         {
             get;
         }
@@ -38,7 +38,8 @@
         /// Gets the role of this visual. 
         /// If a role is set, a <see cref="RoleBasedDataTemplateKey"/> will be created for this view; else a simple <see cref="DataTemplateKey"/> is used.
         /// </summary>
-        public object Role
+        [CanBeNull]
+        public object? Role
         {
             get;
             set;

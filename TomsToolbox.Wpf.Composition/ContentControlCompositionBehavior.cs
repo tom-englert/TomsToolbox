@@ -21,7 +21,7 @@
         /// The first exported item matching RegionId and Role will be set as the content of the content control.
         /// </remarks>
         [CanBeNull]
-        public object Role
+        public object? Role
         {
             get => GetValue(RoleProperty);
             set => SetValue(RoleProperty, value);
@@ -52,7 +52,7 @@
             if (contentControl == null)
                 return;
 
-            object exportedItem = null;
+            object? exportedItem = null;
 
             if (!string.IsNullOrEmpty(regionId))
             {

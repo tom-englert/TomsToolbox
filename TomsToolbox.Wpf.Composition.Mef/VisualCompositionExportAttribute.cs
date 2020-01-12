@@ -30,7 +30,7 @@
         /// <summary>
         /// Gets the role of the view model for visual composition.
         /// </summary>
-        public object Role
+        public object? Role
         {
             get;
             set;
@@ -49,12 +49,6 @@
         /// Gets the target regions for visual composition.
         /// </summary>
         [NotNull]
-        public string[] TargetRegions
-        {
-            get
-            {
-                return _targetRegions;
-            }
-        }
+        public string[] TargetRegions => _targetRegions;
     }
 }

@@ -109,6 +109,7 @@
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class SafeNativeMemory<T> : SafeNativeMemory
+        where T: struct
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SafeNativeMemory{T}"/> class.
@@ -134,7 +135,6 @@
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        [CanBeNull]
         public static explicit operator T([NotNull] SafeNativeMemory<T> wrapper)
         {
             return wrapper.ToStructure();
@@ -144,7 +144,6 @@
         /// Marshal the memory from native to .NET.
         /// </summary>
         /// <returns>The .NET structure.</returns>
-        [CanBeNull]
         public T ToStructure()
         {
             return Marshal.PtrToStructure(handle, typeof(T)).SafeCast<T>();

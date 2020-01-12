@@ -45,7 +45,7 @@
 
             foreach (var style in baseStyles)
             {
-                mergedDictionary.Add(style.TargetType, style);
+                mergedDictionary.Add(style!.TargetType, style);
             }
 
             mergedDictionary.Add(MenuItem.SeparatorStyleKey, helperWindow.FindResource(ResourceKeys.MenuItemSeparatorStyle));
@@ -149,7 +149,7 @@
         /// Gets the applications title from the <see cref="AssemblyTitleAttribute"/>.
         /// </summary>
         [CanBeNull]
-        public static string ApplicationTitle
+        public static string? ApplicationTitle
         {
             get
             {
@@ -169,19 +169,19 @@
         /// Gets the small application icon (16x16) from the running executable.
         /// </summary>
         [CanBeNull]
-        public static ImageSource SmallApplicationIcon => NativeMethods.GetApplicationIcon(16);
+        public static ImageSource? SmallApplicationIcon => NativeMethods.GetApplicationIcon(16);
 
         /// <summary>
         /// Gets the medium application icon (32x32) from the running executable.
         /// </summary>
         [CanBeNull]
-        public static ImageSource MediumApplicationIcon => NativeMethods.GetApplicationIcon(32);
+        public static ImageSource? MediumApplicationIcon => NativeMethods.GetApplicationIcon(32);
 
         /// <summary>
         /// Gets the large application icon (48x48) from the running executable.
         /// </summary>
         [CanBeNull]
-        public static ImageSource LargeApplicationIcon => NativeMethods.GetApplicationIcon(48);
+        public static ImageSource? LargeApplicationIcon => NativeMethods.GetApplicationIcon(48);
 
         private static class NativeMethods
         {
@@ -189,13 +189,13 @@
             private static extern IntPtr LoadImage(IntPtr hinst, IntPtr lpszName, uint uType, int cxDesired, int cyDesired, uint fuLoad);
 
             [DllImport("kernel32.dll", CharSet = CharSet.Unicode, ThrowOnUnmappableChar = false)]
-            private static extern IntPtr GetModuleHandle([CanBeNull] string lpModuleName);
+            private static extern IntPtr GetModuleHandle([CanBeNull] string? lpModuleName);
 
             // ReSharper disable once InconsistentNaming
             private static readonly IntPtr IDI_APPLICATION = new IntPtr(0x7F00);
 
             [CanBeNull]
-            public static ImageSource GetApplicationIcon(int size)
+            public static ImageSource? GetApplicationIcon(int size)
             {
                 try
                 {

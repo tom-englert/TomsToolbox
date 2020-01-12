@@ -48,7 +48,7 @@
         /// <returns>
         /// The pointer to the allocated memory block.
         /// </returns>
-        public static implicit operator IntPtr([CanBeNull] HGlobal item)
+        public static implicit operator IntPtr([CanBeNull] HGlobal? item)
         {
             return ToIntPtr(item);
         }
@@ -60,7 +60,7 @@
         /// <returns>
         /// The pointer to the allocated memory block.
         /// </returns>
-        public static IntPtr ToIntPtr([CanBeNull] HGlobal item)
+        public static IntPtr ToIntPtr([CanBeNull] HGlobal? item)
         {
             return item?.Ptr ?? IntPtr.Zero;
         }

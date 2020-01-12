@@ -71,7 +71,7 @@
 
         /// <inheritdoc />
         [NotNull]
-        public string this[[CanBeNull] string columnName]
+        public string this[[CanBeNull] string? columnName]
         {
             get
             {

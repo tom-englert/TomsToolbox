@@ -30,7 +30,7 @@
         /// <param name="obj">The object.</param>
         /// <returns>The role</returns>
         [CanBeNull]
-        public static object GetRole([NotNull] DependencyObject obj)
+        public static object? GetRole([NotNull] DependencyObject obj)
         {
             return obj.GetValue(RoleProperty);
         }
@@ -86,7 +86,7 @@
         }
 
         [CanBeNull]
-        private static DataTemplate CreateTemplate([NotNull] Type viewModelType, [CanBeNull] object? role)
+        private static DataTemplate? CreateTemplate([NotNull] Type viewModelType, [CanBeNull] object? role)
         {
             const string xamlTemplate = "<DataTemplate DataType=\"{{x:Type viewModel:{0}}}\"><toms:ComposableContentControl {1}/></DataTemplate>";
             var roleParameter = role == null ? string.Empty : string.Format(CultureInfo.InvariantCulture, "Role=\"{0}\"", role);
@@ -132,7 +132,7 @@
         /// <param name="role">The role.</param>
         /// <returns>The view</returns>
         [CanBeNull]
-        internal static DependencyObject GetDataTemplateView([NotNull] this IExportProvider exportProvider, [NotNull] Type viewModel, [CanBeNull] object? role)
+        internal static DependencyObject? GetDataTemplateView([NotNull] this IExportProvider exportProvider, [NotNull] Type viewModel, [CanBeNull] object? role)
         {
             return exportProvider.GetExports(typeof(DependencyObject), XamlExtensions.DataTemplate.ContractName)
                 .Where(item => item.IsViewModelForType(viewModel, role))
@@ -154,8 +154,9 @@
             return exportProvider
                 .GetExports<IDataTemplateMetadata>(typeof(DependencyObject), XamlExtensions.DataTemplate.ContractName, item => new DataTemplateMetadata(item))
                 .Select(item => item.Metadata)
+                .Where(metadata => metadata != null)
                 // .Select(AssertCorrectCreationPolicy)
-                .Distinct(ExportsComparer);
+                .Distinct(ExportsComparer!)!;
         }
 
         private static bool Equals([NotNull] IDataTemplateMetadata left, [NotNull] IDataTemplateMetadata right)
@@ -168,11 +169,15 @@
             return HashCode.Aggregate(metadata.DataType?.GetHashCode() ?? 0, (metadata.Role ?? 0).GetHashCode());
         }
 
-        private static bool IsViewModelForType([CanBeNull] this IExport<object> item, [CanBeNull] Type? viewModel, [CanBeNull] object? role)
+        private static bool IsViewModelForType([NotNull] this IExport<object> item, [NotNull] Type viewModel, [CanBeNull] object? role)
         {
-            var metadata = new DataTemplateMetadata(item?.Metadata);
+            var itemMetadata = item.Metadata;
+            if (itemMetadata == null)
+                return false;
 
-            return (metadata.DataType == viewModel) && RoleEquals(metadata.Role, role);
+            var templateMetadata = new DataTemplateMetadata(itemMetadata);
+
+            return (templateMetadata.DataType == viewModel) && RoleEquals(templateMetadata.Role, role);
         }
 
         /// <summary>

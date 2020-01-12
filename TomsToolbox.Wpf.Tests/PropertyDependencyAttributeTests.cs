@@ -13,44 +13,44 @@ namespace TomsToolbox.Wpf.Tests
     {
         class TestType
         {
-            public string Property1 { get; private set; }
+            public string? Property1 { get; private set; }
 
             [PropertyDependency("Property1")]
-            public string Property2 { get; private set; }
+            public string? Property2 { get; private set; }
 
             [PropertyDependency("Property1", "Property2")]
-            public string Property3 { get; private set; }
+            public string? Property3 { get; private set; }
 
             [PropertyDependency("Property3")]
-            public string Property4 { get; private set; }
+            public string? Property4 { get; private set; }
 
             [PropertyDependency("Property1")]
-            public string Property5 { get; private set; }
+            public string? Property5 { get; private set; }
 
-            public string Property6 { get; private set; }
+            public string? Property6 { get; private set; }
         }
 
         class TestTypeWithRecursion
         {
             [PropertyDependency("Property3")]
-            public string Property1 { get; private set; }
+            public string? Property1 { get; private set; }
 
             [PropertyDependency("Property1", "Property2")]
-            public string Property2 { get; private set; }
+            public string? Property2 { get; private set; }
 
             [PropertyDependency("Property2")]
-            public string Property3 { get; private set; }
+            public string? Property3 { get; private set; }
         }
 
         class TestTypeWithErrors
         {
-            public string Property1 { get; private set; }
+            public string? Property1 { get; private set; }
 
             [PropertyDependency("Property1")]
-            public string Property2 { get; private set; }
+            public string? Property2 { get; private set; }
 
             [PropertyDependency("Property4")] // Should raise an error: Property4 does not exist!
-            public string Property3 { get; private set; }
+            public string? Property3 { get; private set; }
         }
 
         /// <summary>
@@ -66,6 +66,7 @@ namespace TomsToolbox.Wpf.Tests
         ///A test for CreateDependencyMapping
         ///</summary>
         [TestMethod]
+#nullable disable
         public void PropertyDependencyAttribute_CreateDependencyMappingTest()
         {
             var actual = PropertyDependencyAttribute.CreateDependencyMapping(typeof(TestType));

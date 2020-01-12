@@ -17,19 +17,19 @@
     public class ImportBehavior : FrameworkElementBehavior<FrameworkElement>
     {
         [CanBeNull]
-        private INotifyChanged _tracker;
+        private INotifyChanged? _tracker;
         [CanBeNull]
-        private Type _memberType;
+        private Type? _memberType;
         [CanBeNull]
-        private string _contractName;
+        private string? _contractName;
         [CanBeNull]
-        private DependencyProperty _targetProperty = FrameworkElement.DataContextProperty;
+        private DependencyProperty? _targetProperty = FrameworkElement.DataContextProperty;
 
         /// <summary>
         /// Gets or sets the exported type of the object to provide.
         /// </summary>
         [CanBeNull]
-        public Type MemberType
+        public Type? MemberType
         {
             get => _memberType;
             set
@@ -43,7 +43,7 @@
         /// Gets or sets the optional contract name of the exported object.
         /// </summary>
         [CanBeNull]
-        public string ContractName
+        public string? ContractName
         {
             get => _contractName;
             set
@@ -57,7 +57,7 @@
         /// Gets or sets the target property to set. The default is <see cref="FrameworkElement.DataContextProperty"/>.
         /// </summary>
         [CanBeNull]
-        public DependencyProperty TargetProperty
+        public DependencyProperty? TargetProperty
         {
             get => _targetProperty;
             set
@@ -108,7 +108,7 @@
             }
         }
 
-        private void ExportProvider_Changed([NotNull] object sender, [NotNull] EventArgs e)
+        private void ExportProvider_Changed([CanBeNull] object? sender, [NotNull] EventArgs e)
         {
             Update();
         }
@@ -131,7 +131,7 @@
                 .Select(item => item.Value)
                 .FirstOrDefault();
 
-            frameworkElement.SetValue(dependencyProperty, value);
+            frameworkElement!.SetValue(dependencyProperty, value);
         }
     }
 }

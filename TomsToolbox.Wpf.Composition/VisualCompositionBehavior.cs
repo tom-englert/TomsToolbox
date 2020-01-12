@@ -46,7 +46,7 @@
         /// <summary>
         /// Gets or sets the id of the region. The region id is used to select candidates for composition.
         /// </summary>
-        public string RegionId
+        public string? RegionId
         {
             get => (string)GetValue(RegionIdProperty);
             set => SetValue(RegionIdProperty, value);
@@ -62,7 +62,7 @@
         /// <summary>
         /// Gets or sets the composition context.
         /// </summary>
-        public object CompositionContext
+        public object? CompositionContext
         {
             get => GetValue(CompositionContextProperty);
             set => SetValue(CompositionContextProperty, value);
@@ -170,9 +170,7 @@
                 BindingOperations.SetBinding(this, CompositionContextProperty, CompositionContextBinding);
 
             var associatedObject = AssociatedObject;
-
-            Debug.Assert(associatedObject != null, nameof(associatedObject) + " != null");
-            if (DesignerProperties.GetIsInDesignMode(associatedObject))
+            if ((associatedObject == null) || DesignerProperties.GetIsInDesignMode(associatedObject))
                 return;
 
             _exportProviderChangeTracker = associatedObject.Track(ExportProviderLocator.ExportProviderProperty);

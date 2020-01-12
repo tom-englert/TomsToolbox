@@ -616,7 +616,7 @@
 
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
             [CanBeNull]
-            public readonly string szPath;
+            public readonly string? szPath;
         }
 
         private static class NativeMethods

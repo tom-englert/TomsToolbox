@@ -25,9 +25,10 @@ namespace SampleApp.Samples
     [ImplementPropertyChanged]
     public class MapViewModel
     {
-        [NotNull] private static readonly string _configurationFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Map", "MapSources.xml");
-
-        [NotNull] private readonly MapSourceFile _mapSourceFile;
+        [NotNull] 
+        private static readonly string _configurationFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory!, "Map", "MapSources.xml");
+        [NotNull] 
+        private readonly MapSourceFile _mapSourceFile;
 
         public MapViewModel()
         {
@@ -44,17 +45,17 @@ namespace SampleApp.Samples
         }
 
         [CanBeNull]
-        public IList<MapSource> MapSources => _mapSourceFile.MapSources;
+        public IList<MapSource>? MapSources => _mapSourceFile.MapSources;
 
         [CanBeNull]
-        public IImageProvider ImageProvider { get; set; }
+        public IImageProvider? ImageProvider { get; set; }
 
         public Coordinates Center { get; set; } = new Coordinates(52.5075419, 13.4251364);
 
         public Coordinates MousePosition { get; set; }
 
         [CanBeNull]
-        public Poi SelectedPoi { get; set; }
+        public Poi? SelectedPoi { get; set; }
 
         [UsedImplicitly]
 #pragma warning disable IDE0051 // Remove unused private members

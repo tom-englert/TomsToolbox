@@ -15,7 +15,7 @@
     internal sealed class DIAdapter : IDisposable
     {
         [CanBeNull]
-        private IKernel _kernel;
+        private IKernel? _kernel;
 
         public IExportProvider Initialize()
         {

@@ -68,7 +68,7 @@ namespace TomsToolbox.Wpf.Tests
         {
             private readonly GoverningClass1 _governingClass1;
             [CanBeNull]
-            private readonly GoverningClass2 _governingClass2;
+            private readonly GoverningClass2? _governingClass2;
 
             public RelayingClass(GoverningClass1 governingClass)
             {

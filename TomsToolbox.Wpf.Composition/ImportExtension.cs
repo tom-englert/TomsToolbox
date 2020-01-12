@@ -28,15 +28,15 @@
         private readonly List<Setter> _setters = new List<Setter>();
 
         [CanBeNull]
-        private object _targetObject;
+        private object? _targetObject;
         [CanBeNull]
-        private object _targetProperty;
+        private object? _targetProperty;
         [CanBeNull]
-        private IExportProvider _exportProvider;
+        private IExportProvider? _exportProvider;
         [CanBeNull]
-        private FrameworkElement _rootObject;
+        private FrameworkElement? _rootObject;
         [CanBeNull]
-        private INotifyChanged _tracker;
+        private INotifyChanged? _tracker;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Composition.ImportExtension" /> class.
@@ -62,7 +62,7 @@
         /// Gets or sets the optional contract name of the exported object.
         /// </summary>
         [CanBeNull]
-        public string ContractName
+        public string? ContractName
         {
             get;
             // ReSharper disable once UnusedAutoPropertyAccessor.Global
@@ -103,7 +103,7 @@
         /// The object value to set on the property where the extension is applied.
         /// </returns>
         [CanBeNull]
-        public override object ProvideValue(IServiceProvider serviceProvider)
+        public override object? ProvideValue(IServiceProvider serviceProvider)
         {
             var rootObjectProvider = (IRootObjectProvider)serviceProvider.GetService(typeof(IRootObjectProvider));
             if (rootObjectProvider == null)
@@ -160,7 +160,7 @@
         }
 
         [CanBeNull]
-        private object Value
+        private object? Value
         {
             get
             {
@@ -215,7 +215,7 @@
             }
         }
 
-        private void ExportProvider_Changed(object sender, EventArgs e)
+        private void ExportProvider_Changed(object? sender, EventArgs e)
         {
             SetExportProvider(_rootObject?.TryGetExportProvider());
             UpdateTarget();

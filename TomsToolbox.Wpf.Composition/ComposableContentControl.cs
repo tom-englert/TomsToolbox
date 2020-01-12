@@ -26,7 +26,7 @@
         /// Gets or sets the role of the template.
         /// </summary>
         [CanBeNull]
-        public object Role
+        public object? Role
         {
             get => GetValue(RoleProperty);
             set => SetValue(RoleProperty, value);

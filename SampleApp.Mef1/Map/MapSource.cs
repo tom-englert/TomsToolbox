@@ -21,7 +21,7 @@
         [NotNull] private static readonly XmlSerializer _serializer = new XmlSerializer(typeof(MapSourceFile));
 
         [XmlArray("MapSourceList")]
-        public MapSource[] MapSources
+        public MapSource[]? MapSources
         {
             get;
             set;
@@ -59,14 +59,14 @@
         }
 
         [XmlAttribute("ID")]
-        public string Id
+        public string? Id
         {
             get;
             set;
         }
 
         [XmlElement]
-        public string Copyright
+        public string? Copyright
         {
             get;
             set;
@@ -88,7 +88,7 @@
 
         [CanBeNull]
         [XmlElement]
-        public string[] TileUrl
+        public string[]? TileUrl
         {
             get;
             set;
@@ -132,7 +132,7 @@
             [NotNull] 
             private readonly IMapTile _mapTile;
 
-            private BitmapImage _source;
+            private BitmapImage? _source;
 
             public Image([NotNull] MapSource owner, [NotNull] IMapTile mapTile)
             {
@@ -141,7 +141,7 @@
             }
 
             [CanBeNull]
-            public ImageSource Source => _source ?? DownloadBitmap();
+            public ImageSource? Source => _source ?? DownloadBitmap();
 
             public bool IsLoaded => _source != null;
 

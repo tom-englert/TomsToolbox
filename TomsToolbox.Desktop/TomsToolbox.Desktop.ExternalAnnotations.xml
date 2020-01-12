@@ -29,13 +29,9 @@
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.SafeNativeMemory`1.op_Explicit(TomsToolbox.Desktop.SafeNativeMemory{`0})~`0">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
     <parameter name="wrapper">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
-  </member>
-  <member name="M:TomsToolbox.Desktop.SafeNativeMemory`1.ToStructure">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Desktop.TryCastExtension.TryCast``1(``0)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />

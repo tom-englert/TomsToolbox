@@ -15,13 +15,13 @@
     internal sealed class DIAdapter : IDisposable
     {
         [CanBeNull]
-        private CompositionHost _container;
+        private CompositionHost? _container;
         [CanBeNull]
-        private static IExportProvider _exportProvider;
+        private static IExportProvider? _exportProvider;
 
         [Export(typeof(IExportProvider))]
         [CanBeNull]
-        public IExportProvider ExportProvider => _exportProvider;
+        public IExportProvider? ExportProvider => _exportProvider;
         
         public IExportProvider Initialize()
         {

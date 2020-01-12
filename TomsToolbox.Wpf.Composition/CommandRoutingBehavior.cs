@@ -22,7 +22,7 @@
         /// Gets or sets the type of the command source factory defining the command.
         /// </summary>
         [CanBeNull]
-        public Type CommandSource
+        public Type? CommandSource
         {
             get => (Type)GetValue(CommandSourceProperty);
             set => SetValue(CommandSourceProperty, value);
@@ -62,7 +62,7 @@
         /// Gets or sets the command parameter.
         /// </summary>
         [CanBeNull]
-        public object CommandParameter
+        public object? CommandParameter
         {
             get => GetValue(CommandParameterProperty);
             set => SetValue(CommandParameterProperty, value);
@@ -79,7 +79,7 @@
         /// Gets or sets the composition context.
         /// </summary>
         [CanBeNull]
-        public object CompositionContext
+        public object? CompositionContext
         {
             get => GetValue(CompositionContextProperty);
             set => SetValue(CompositionContextProperty, value);
@@ -258,13 +258,13 @@
         }
 
         [CanBeNull]
-        private CommandSourceFactory GetCommandSourceFactory()
+        private CommandSourceFactory? GetCommandSourceFactory()
         {
             return GetCommandSourceFactory(CommandSource);
         }
 
         [CanBeNull]
-        private CommandSourceFactory GetCommandSourceFactory([CanBeNull] Type? commandSourceType)
+        private CommandSourceFactory? GetCommandSourceFactory([CanBeNull] Type? commandSourceType)
         {
             if (commandSourceType == null)
                 return null;

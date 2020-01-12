@@ -1,4 +1,5 @@
 ﻿// ReSharper disable PossibleNullReferenceException
+#nullable disable
 namespace TomsToolbox.Wpf.Tests
 {
     using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace TomsToolbox.Wpf.Tests
             const string targetText = "\"$(SolutionDir).nuget\\nuget.exe\" pack \"$(ProjectPath)\" -OutputDirectory \"$(SolutionDir)..\\Bin\\Deploy\\.\" -IncludeReferencedProjects -Prop Configuration=$(ConfigurationName)";
             var table = sourceText.ParseTable('\t');
 
+            Assert.IsNotNull(table);
             Assert.AreEqual(1, table.Count);
             Assert.AreEqual(1, table[0].Count);
             Assert.AreEqual(targetText, table[0][0]);

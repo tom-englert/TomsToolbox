@@ -20,7 +20,7 @@
         /// <returns>The data context type.</returns>
         [CanBeNull]
         [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
-        public static Type GetDataContext([NotNull] FrameworkElement obj)
+        public static Type? GetDataContext([NotNull] FrameworkElement obj)
         {
             return (Type)obj.GetValue(DataContextProperty);
         }

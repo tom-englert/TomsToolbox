@@ -18,7 +18,7 @@ namespace TomsToolbox.Wpf.Composition
         /// <summary>
         /// Gets or sets the composition context.
         /// </summary>
-        object IComposablePartWithContext.CompositionContext
+        object? IComposablePartWithContext.CompositionContext
         {
             get => CompositionContext;
             set
@@ -38,7 +38,7 @@ namespace TomsToolbox.Wpf.Composition
         /// Gets the composition context.
         /// </summary>
         [CanBeNull]
-        public T CompositionContext
+        public T? CompositionContext
         {
             get;
             private set;

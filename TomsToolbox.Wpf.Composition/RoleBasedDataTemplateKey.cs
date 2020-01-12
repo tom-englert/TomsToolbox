@@ -17,7 +17,7 @@
     public class RoleBasedDataTemplateKey : TemplateKey, IEquatable<RoleBasedDataTemplateKey>
     {
         [CanBeNull]
-        private object _role;
+        private object? _role;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RoleBasedDataTemplateKey"/> class.
@@ -43,7 +43,7 @@
         /// </summary>
         /// <exception cref="System.InvalidOperationException">Object is immutable.</exception>
         [CanBeNull]
-        public object Role
+        public object? Role
         {
             get => _role;
             set

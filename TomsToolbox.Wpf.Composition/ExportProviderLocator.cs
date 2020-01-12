@@ -47,7 +47,7 @@
         /// The exports provider.
         /// </returns>
         [CanBeNull]
-        public static IExportProvider TryGetExportProvider([NotNull] this DependencyObject obj)
+        public static IExportProvider? TryGetExportProvider([NotNull] this DependencyObject obj)
         {
             return (IExportProvider)obj.GetValue(ExportProviderProperty);
         }

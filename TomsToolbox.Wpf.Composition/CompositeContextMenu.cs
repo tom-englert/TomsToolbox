@@ -38,7 +38,7 @@
         /// Gets or sets the region identifier.
         /// </summary>
         [CanBeNull]
-        public string RegionId
+        public string? RegionId
         {
             get;
             set;
@@ -48,7 +48,7 @@
         /// Gets or sets a binding to seed the <see cref="IVisualCompositionBehavior.CompositionContext"/>.
         /// </summary>
         [CanBeNull]
-        public Binding CompositionContextBinding
+        public Binding? CompositionContextBinding
         {
             get;
             set;
@@ -108,7 +108,7 @@
         /// Gets or sets the region identifier for which to collect all exported <see cref="CommandSourceFactory"/> objects.
         /// </summary>
         [CanBeNull]
-        public string RegionId
+        public string? RegionId
         {
             get => (string)GetValue(RegionIdProperty);
             set => SetValue(RegionIdProperty, value);
@@ -124,7 +124,7 @@
         /// Gets or sets the composition context.
         /// </summary>
         [CanBeNull]
-        public object CompositionContext
+        public object? CompositionContext
         {
             get => GetValue(CompositionContextProperty);
             set => SetValue(CompositionContextProperty, value);

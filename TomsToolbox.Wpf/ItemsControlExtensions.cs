@@ -58,8 +58,7 @@
 
         private static void DefaultItemCommand_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
-            var itemsControl = d as ItemsControl;
-            if (itemsControl == null)
+            if (!(d is ItemsControl itemsControl))
                 return;
 
             itemsControl.MouseDoubleClick -= ItemsControl_MouseDoubleClick;
@@ -93,12 +92,10 @@
             if (DateTime.Now < (_lastClickHandled + _doubleClickTime))
                 return; // avoid duplicate actions on nested controls, EVERY items control will receive the double click event.
 
-            var itemsControl = sender as ItemsControl;
-            if (itemsControl == null)
+            if (!(sender is ItemsControl itemsControl))
                 return;
 
-            var originalSource = e.OriginalSource as DependencyObject;
-            if (originalSource == null)
+            if (!(e.OriginalSource is DependencyObject originalSource))
                 return;
 
             var command = GetDefaultItemCommand(itemsControl);
@@ -164,8 +161,7 @@
 
         private static void Source_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
-            var itemsControl = d as ItemsControl;
-            if (itemsControl == null)
+            if (!(d is ItemsControl itemsControl))
                 return;
 
             // Collection views are maybe nested! Must recurse through all views, the top one might not own the filter!

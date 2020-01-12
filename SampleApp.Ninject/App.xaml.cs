@@ -20,7 +20,7 @@
     /// </summary>
     public sealed partial class App : IDisposable
     {
-        private DIAdapter _diAdapter;
+        private DIAdapter? _diAdapter;
 
         public App()
         {

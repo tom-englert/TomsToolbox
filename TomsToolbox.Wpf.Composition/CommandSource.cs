@@ -38,7 +38,7 @@
         /// Gets the command represented by this <see cref="CommandSourceFactory" />. This can be bound to a menu's or button's Command property.
         /// </summary>
         [CanBeNull]
-        public ICommand Command
+        public ICommand? Command
         {
             get => (ICommand)GetValue(CommandProperty);
             private set => SetValue(_commandPropertyKey, value);
@@ -70,7 +70,7 @@
 
 
         [CanBeNull]
-        private static object Command_CoerceValue([CanBeNull] DependencyObject? d, [CanBeNull] object? basevalue)
+        private static object? Command_CoerceValue([CanBeNull] DependencyObject? d, [CanBeNull] object? basevalue)
         {
             return basevalue ?? NullCommand.Default;
         }
@@ -79,19 +79,19 @@
         /// Gets the header to be shown in the UI. Usually this is a localized text naming the command.
         /// </summary>
         [CanBeNull]
-        public object Header => _owner.Header;
+        public object? Header => _owner.Header;
 
         /// <summary>
         /// Gets the tool tip to be shown in the UI. Usually this is a localized text describing the command.
         /// </summary>
         [CanBeNull]
-        public object Description => _owner.Description;
+        public object? Description => _owner.Description;
 
         /// <summary>
         /// Gets the icon to be shown in the UI, or null to show no icon.
         /// </summary>
         [CanBeNull]
-        public object Icon => _owner.Icon;
+        public object? Icon => _owner.Icon;
 
         /// <summary>
         /// Gets a value indicating whether to show the header text when this command is bound to a button. 
@@ -103,7 +103,7 @@
         /// Gets the id of the region sub-items can register for.
         /// </summary>
         [CanBeNull]
-        public string SubRegionId => _owner.SubRegionId;
+        public string? SubRegionId => _owner.SubRegionId;
 
         /// <summary>
         /// Gets a value indicating whether the control associated with this instance should be checkable, 
@@ -116,13 +116,13 @@
         /// If different group names are specified for a target region, the commands can be grouped and the groups separated by a <see cref="Separator" />.
         /// </summary>
         [CanBeNull]
-        public virtual object GroupName => _owner.GroupName;
+        public virtual object? GroupName => _owner.GroupName;
 
         /// <summary>
         /// Gets a tag that can be bound to the target objects tag.
         /// </summary>
         [CanBeNull]
-        public object Tag => _owner.Tag;
+        public object? Tag => _owner.Tag;
 
         /// <summary>
         /// Gets a value indicating whether any target is attached to this source.

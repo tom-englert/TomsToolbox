@@ -16,7 +16,7 @@
         /// Gets the type for which this DataTemplate is intended.
         /// </summary>
         [CanBeNull]
-        Type DataType
+        Type? DataType
         {
             get;
         }
@@ -26,7 +26,7 @@
         /// If a role is set, a <see cref="RoleBasedDataTemplateKey"/> will be created for this view; else a simple <see cref="DataTemplateKey"/> is used.
         /// </summary>
         [CanBeNull]
-        object Role
+        object? Role
         {
             get;
         }
@@ -34,7 +34,7 @@
 
     internal class DataTemplateMetadata : IDataTemplateMetadata
     {
-        public DataTemplateMetadata([CanBeNull] IMetadata  metadata)
+        public DataTemplateMetadata([CanBeNull] IMetadata?  metadata)
         {
             if (metadata == null)
                 return;
@@ -51,9 +51,9 @@
         }
 
         [CanBeNull]
-        public Type DataType { get; }
+        public Type? DataType { get; }
         
         [CanBeNull]
-        public object Role { get; }
+        public object? Role { get; }
     }
 }
