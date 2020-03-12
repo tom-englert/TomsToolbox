@@ -12,6 +12,8 @@
     /// </summary>
     public static class CanvasAnchor
     {
+        private static readonly Point _noPoint = new Point(double.NaN, double.NaN);
+
         /// <summary>
         /// Gets the elements <see cref="P:TomsToolbox.Wpf.CanvasAnchor.TopLeft"/> point in the canvas.
         /// </summary>
@@ -46,7 +48,7 @@
         /// </remarks>
         /// </AttachedPropertyComments>
         [NotNull] public static readonly DependencyProperty TopLeftProperty =
-            DependencyProperty.RegisterAttached("TopLeft", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(TopLeft_Changed));
+            DependencyProperty.RegisterAttached("TopLeft", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(_noPoint, TopLeft_Changed));
 
         private static void TopLeft_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -96,7 +98,7 @@
         /// </remarks>
         /// </AttachedPropertyComments>
         [NotNull] public static readonly DependencyProperty TopRightProperty =
-            DependencyProperty.RegisterAttached("TopRight", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(TopRight_Changed));
+            DependencyProperty.RegisterAttached("TopRight", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(_noPoint, TopRight_Changed));
 
         private static void TopRight_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -145,7 +147,7 @@
         /// </remarks>
         /// </AttachedPropertyComments>
         [NotNull] public static readonly DependencyProperty BottomLeftProperty =
-            DependencyProperty.RegisterAttached("BottomLeft", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(BottomLeft_Changed));
+            DependencyProperty.RegisterAttached("BottomLeft", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(_noPoint, BottomLeft_Changed));
 
         private static void BottomLeft_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -195,7 +197,7 @@
         /// </remarks>
         /// </AttachedPropertyComments>
         [NotNull] public static readonly DependencyProperty BottomRightProperty =
-            DependencyProperty.RegisterAttached("BottomRight", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(BottomRight_Changed));
+            DependencyProperty.RegisterAttached("BottomRight", typeof(Point), typeof(CanvasAnchor), new FrameworkPropertyMetadata(_noPoint, BottomRight_Changed));
 
         private static void BottomRight_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
