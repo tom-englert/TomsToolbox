@@ -49,6 +49,7 @@
           </ItemsControl>
           <toms:ViewportCanvas World="{Binding Path=World, ElementName=MapControl}">
             <Border x:Name="SelectionBorder" BorderBrush="Red" BorderThickness="2" />
+            <Polyline toms:Polyline.DataPoints="{Binding Track, Converter={composition:Import toms:CoordinatesToPointConverter}}" Stroke="DarkBlue" StrokeThickness="3" StrokeDashArray="1,1" />
             <i:Interaction.Behaviors>
               <toms:SelectionRectangleBehavior Viewport="{Binding ElementName=MapControl}"
                                                TargetElement="{Binding ElementName=SelectionBorder}"

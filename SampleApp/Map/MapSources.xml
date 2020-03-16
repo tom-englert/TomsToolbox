@@ -2,13 +2,13 @@
 <root>
   <MapSourceList>
 
-    <MapSource ID="OSM">
-      <Copyright>http://www.openstreetmap.org</Copyright>
+    <MapSource ID="HikeBikeMap">
+      <Copyright>http://hikebikemap.org</Copyright>
       <MinZoom>1</MinZoom>
-      <MaxZoom>18</MaxZoom>
-      <TileUrl>http://a.tile.openstreetmap.org/%z/%x/%y.png</TileUrl>
-      <TileUrl>http://b.tile.openstreetmap.org/%z/%x/%y.png</TileUrl>
-      <TileUrl>http://c.tile.openstreetmap.org/%z/%x/%y.png</TileUrl>
+      <MaxZoom>17</MaxZoom>
+      <TileUrl>http://a.tiles.wmflabs.org/hikebike/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://b.tiles.wmflabs.org/hikebike/%z/%x/%y.png</TileUrl>
+      <TileUrl>http://c.tiles.wmflabs.org/hikebike/%z/%x/%y.png</TileUrl>
     </MapSource>
 
     <MapSource ID="4UMaps">
@@ -23,15 +23,6 @@
       <MinZoom>1</MinZoom>
       <MaxZoom>17</MaxZoom>
       <TileUrl>http://maps.benzinpreis.de/osm/%z/%x/%y.png</TileUrl>
-    </MapSource>
-
-    <MapSource ID="HikeBikeMap">
-      <Copyright>http://hikebikemap.org</Copyright>
-      <MinZoom>1</MinZoom>
-      <MaxZoom>17</MaxZoom>
-      <TileUrl>http://a.tiles.wmflabs.org/hikebike/%z/%x/%y.png</TileUrl>
-      <TileUrl>http://b.tiles.wmflabs.org/hikebike/%z/%x/%y.png</TileUrl>
-      <TileUrl>http://c.tiles.wmflabs.org/hikebike/%z/%x/%y.png</TileUrl>
     </MapSource>
 
     <MapSource ID="Thunderforest lanscape">
@@ -59,6 +50,15 @@
       <TileUrl>http://a.tile.thunderforest.com/neighbourhood/%z/%x/%y.png</TileUrl>
       <TileUrl>http://b.tile.thunderforest.com/neighbourhood/%z/%x/%y.png</TileUrl>
       <TileUrl>http://c.tile.thunderforest.com/neighbourhood/%z/%x/%y.png</TileUrl>
+    </MapSource>
+
+    <MapSource ID="OSM">
+      <Copyright>http://www.openstreetmap.org</Copyright>
+      <MinZoom>1</MinZoom>
+      <MaxZoom>18</MaxZoom>
+      <TileUrl>https://a.tile.openstreetmap.org/%z/%x/%y.png</TileUrl>
+      <TileUrl>https://b.tile.openstreetmap.org/%z/%x/%y.png</TileUrl>
+      <TileUrl>https://c.tile.openstreetmap.org/%z/%x/%y.png</TileUrl>
     </MapSource>
 
   </MapSourceList>

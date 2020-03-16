@@ -1,7 +1,9 @@
 ﻿namespace TomsToolbox.Wpf.Converters
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Data;
 
@@ -68,6 +70,16 @@
             if (value is Coordinates coordinates)
             {
                 return (Point)coordinates;
+            }
+
+            if (value is IEnumerable<Point> pointCollection)
+            {
+                return pointCollection.Select(p => (Coordinates)p).ToList();
+            }
+
+            if (value is IEnumerable<Coordinates> coordinatesCollection)
+            {
+                return coordinatesCollection.Select(p => (Point)p).ToList();
             }
 
             throw new InvalidOperationException("Value is neither a Point nor a Coordinates structure");
