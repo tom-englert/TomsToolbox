@@ -76,7 +76,7 @@
         public static Rect GetBoundingRect(this ICollection<Point> points)
         {
             if (!points.Any())
-                return Rect.Empty;
+                return new Rect();
 
             var xMin = points.Min(p => p.X);
             var xMax = points.Max(p => p.X);
