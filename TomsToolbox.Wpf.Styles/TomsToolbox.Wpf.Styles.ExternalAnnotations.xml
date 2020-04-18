@@ -72,6 +72,9 @@
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.MenuStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.PasswordBoxStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.RadioButtonStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>

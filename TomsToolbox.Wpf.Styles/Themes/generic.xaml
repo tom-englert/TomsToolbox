@@ -10,9 +10,10 @@
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/GridSplitterStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/GroupBoxStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/ListBoxStyle.xaml" />
+    <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/PasswordBoxStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/RadioButtonStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/TabControlStyle.xaml" />
-    <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/TextBoxStyles.xaml" />
+    <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/TextBoxStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/ToggleButtonStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/ToolTipStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/DataGridStyle.xaml" />

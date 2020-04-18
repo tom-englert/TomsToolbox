@@ -7,7 +7,8 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:samples="clr-namespace:SampleApp.Samples"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             d:DataContext="{d:DesignInstance samples:MiscViewModel}">
+             d:DataContext="{d:DesignInstance samples:MiscViewModel}"
+             UseLayoutRounding="True">
   <UserControl.Resources>
     <toms:DateTimeSource UpdateInterval="00:00:01" x:Key="LiveDateTime" />
   </UserControl.Resources>
@@ -183,6 +184,17 @@
       </HeaderedContentControl>
       <HeaderedContentControl Header="Memory testing">
         <Button Content="GC Collect" Margin="10" Command="{Binding GCCollectCommand}" />
+      </HeaderedContentControl>
+      <HeaderedContentControl Header="TextBox/PasswordBox">
+        <StackPanel>
+          <TextBox x:Name="TextBox" />
+          <Decorator Height="5" />
+          <PasswordBox>
+            <i:Interaction.Behaviors>
+              <toms:PasswordBoxBindingBehavior Text="{Binding Text, ElementName=TextBox}" />
+            </i:Interaction.Behaviors>
+          </PasswordBox>
+        </StackPanel>
       </HeaderedContentControl>
     </StackPanel>
   </ScrollViewer>

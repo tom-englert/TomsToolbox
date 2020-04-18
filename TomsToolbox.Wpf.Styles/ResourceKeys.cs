@@ -142,6 +142,12 @@
         [NotNull] public static readonly ResourceKey TextBoxStyle = new ComponentResourceKey(typeof(ResourceKeys), "TextBoxStyle");
 
         /// <summary>
+        /// The resource key for the <see cref="PasswordBox"/> style.
+        /// </summary>
+        [DefaultStyle]
+        [NotNull] public static readonly ResourceKey PasswordBoxStyle = new ComponentResourceKey(typeof(ResourceKeys), "PasswordBoxStyle");
+
+        /// <summary>
         /// The resource key for the <see cref="ToggleButton"/> style.
         /// </summary>
         [DefaultStyle]
