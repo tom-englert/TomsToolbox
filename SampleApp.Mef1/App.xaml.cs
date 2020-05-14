@@ -15,9 +15,9 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Composition;
+    using TomsToolbox.Composition.Mef;
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;
-    using TomsToolbox.Wpf.Composition.Mef;
     using TomsToolbox.Wpf.Composition.XamlExtensions;
     using TomsToolbox.Wpf.Styles;
 

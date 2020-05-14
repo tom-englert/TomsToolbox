@@ -1,23 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <assembly name="TomsToolbox.Desktop">
-  <member name="M:TomsToolbox.Desktop.DependencyObjectExtensions.GetValue``1(System.Windows.DependencyObject,System.Windows.DependencyProperty)">
-    <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
-    <parameter name="self">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="property">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
-  <member name="M:TomsToolbox.Desktop.DependencyObjectExtensions.Track``1(``0,System.Windows.DependencyProperty)">
-    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    <parameter name="dependencyObject">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-    <parameter name="property">
-      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-    </parameter>
-  </member>
   <member name="M:TomsToolbox.Desktop.HGlobal.op_Implicit(TomsToolbox.Desktop.HGlobal)~System.IntPtr">
     <parameter name="item">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />

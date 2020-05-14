@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assembly name="TomsToolbox.Composition.Mef">
+  <member name="M:TomsToolbox.Composition.Mef.ExportProviderAdapter.#ctor(System.ComponentModel.Composition.Hosting.ExportProvider)">
+    <parameter name="exportProvider">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+</assembly>
