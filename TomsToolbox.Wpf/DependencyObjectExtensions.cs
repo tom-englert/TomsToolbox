@@ -192,7 +192,7 @@
         /// <param name="self">The starting element.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
         [CanBeNull]
-        public static T? TryFindAncestorOrSelf<T>([NotNull] this DependencyObject self) where T: DependencyObject
+        public static T? TryFindAncestorOrSelf<T>([NotNull] this DependencyObject self) where T : class
         {
             return self.AncestorsAndSelf().OfType<T>().FirstOrDefault();
         }
@@ -205,7 +205,7 @@
         /// <param name="match">The predicate to match.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
         [CanBeNull]
-        public static T? TryFindAncestorOrSelf<T>([NotNull] this DependencyObject self, [NotNull] Func<T, bool> match) where T: DependencyObject
+        public static T? TryFindAncestorOrSelf<T>([NotNull] this DependencyObject self, [NotNull] Func<T, bool> match) where T : class
         {
             return self.AncestorsAndSelf().OfType<T>().FirstOrDefault(match);
         }
@@ -217,7 +217,7 @@
         /// <param name="self">The starting element.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
         [CanBeNull]
-        public static T? TryFindAncestor<T>([NotNull] this DependencyObject self) where T: DependencyObject
+        public static T? TryFindAncestor<T>([NotNull] this DependencyObject self) where T : class
         {
             return self.Ancestors().OfType<T>().FirstOrDefault();
         }
@@ -230,7 +230,7 @@
         /// <param name="match">The predicate to match.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
         [CanBeNull]
-        public static T? TryFindAncestor<T>([NotNull] this DependencyObject self, [NotNull] Func<T, bool> match) where T: DependencyObject
+        public static T? TryFindAncestor<T>([NotNull] this DependencyObject self, [NotNull] Func<T, bool> match) where T : class
         {
             return self.Ancestors().OfType<T>().FirstOrDefault(match);
         }
