@@ -10,6 +10,7 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Essentials;
     using TomsToolbox.ObservableCollections;
 
     /// <summary>
@@ -91,11 +92,7 @@
         [CanBeNull]
         public T this[int index]
         {
-            get
-            {
-                var value = _collectionView.GetItemAt(index);
-                return value == null ? default : (T)value;
-            }
+            get => _collectionView.GetItemAt(index).SafeCast<T>();
             // ReSharper disable once ValueParameterNotUsed
             set => ReadOnlyNotSupported();
         }

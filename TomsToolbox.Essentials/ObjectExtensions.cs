@@ -18,7 +18,7 @@
         [CanBeNull]
         public static T SafeCast<T>([CanBeNull] this object? value)
         {
-            return (value == null) ? default : (T)value;
+            return (value == null) ? default! : (T)value;
         }
 
         /// <summary>

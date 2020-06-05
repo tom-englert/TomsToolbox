@@ -39,7 +39,7 @@
             return _context.TryGetExport<T>(contractName, out var value) ? value : default;
         }
 
-        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string? contractName, [CanBeNull] out T value)
+        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string? contractName, [CanBeNull] out T? value) where T : class
         {
             return _context.TryGetExport(contractName, out value);
         }

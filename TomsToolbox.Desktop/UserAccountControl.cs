@@ -505,6 +505,7 @@
 
         // ReSharper disable MemberCanBePrivate.Local
         // ReSharper disable UnusedMember.Local
+        // ReSharper disable InconsistentNaming
 
         private const int ERROR_INVALID_PARAMETER = 0x57;
         // Token Specific Access Rights

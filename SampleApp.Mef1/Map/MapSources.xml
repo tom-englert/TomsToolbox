@@ -34,7 +34,7 @@
       <TileUrl>http://c.tiles.wmflabs.org/hikebike/%z/%x/%y.png</TileUrl>
     </MapSource>
 
-    <MapSource ID="Thunderforest lanscape">
+    <MapSource ID="Thunderforest landscape">
       <Copyright>http://www.thunderforest.com</Copyright>
       <MinZoom>1</MinZoom>
       <MaxZoom>16</MaxZoom>
