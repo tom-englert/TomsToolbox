@@ -23,7 +23,7 @@
 
     /// <summary>
     /// Applies the <see cref="Operation"/> on the value.<para/>
-    /// Either a boolean or an arithetic operation for built in types, or the negation defined by the objects negation operator overload.<para/>
+    /// Either a boolean or an arithmetic operation for built in types, or the negation defined by the objects negation operator overload.<para/>
     /// </summary>
     /// <returns>
     /// If the conversions succeed, the result of the operation is returned. If any error occurs, the result is <see cref="DependencyProperty.UnsetValue"/>.
