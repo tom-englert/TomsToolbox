@@ -8,7 +8,7 @@
                 "TypeId": "System.ComponentModel.Composition.ExportAttribute, System.ComponentModel.Composition, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -39,7 +39,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -53,7 +53,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.DataTemplateAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -70,7 +70,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -84,7 +84,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.DataTemplateAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -101,7 +101,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -123,7 +123,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -146,7 +146,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -169,7 +169,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -191,7 +191,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -215,7 +215,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -239,7 +239,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -263,7 +263,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -287,7 +287,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -310,7 +310,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -332,7 +332,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -354,7 +354,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -376,7 +376,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -390,7 +390,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.DataTemplateAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -407,7 +407,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -421,7 +421,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.DataTemplateAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -438,7 +438,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -469,7 +469,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -500,7 +500,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -531,7 +531,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
@@ -562,7 +562,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     }
 ]

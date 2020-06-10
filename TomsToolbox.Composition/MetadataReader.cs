@@ -45,13 +45,18 @@
             var type = typeInfo.AsType();
 
             var exportAttributes = type.GetCustomAttributesData()
-                .Where(attr => attr.AttributeType.GetSelfAndBaseTypes().Any(t => t.Name == ExportAttributeName))
+                .Select(attr => new { Attribute = attr, ExportAttributeType = attr.AttributeType.GetSelfAndBaseTypes().FirstOrDefault(t => t.Name == ExportAttributeName) })
+                .Where(item => item.ExportAttributeType != null)
                 .ToList();
 
             if (!exportAttributes.Any())
                 return;
 
-            result.Add(new ExportInfo(type, exportAttributes));
+            var anyExportAttributeType = exportAttributes.First();
+
+            var isMef1 = anyExportAttributeType.ExportAttributeType.Namespace == "System.ComponentModel.Composition";
+
+            result.Add(new ExportInfo(type, isMef1, exportAttributes.Select(item => item.Attribute)));
         }
     }
 
@@ -61,6 +66,7 @@
     public class ExportInfo
     {
         private const string SharedAttributeName = "SharedAttribute";
+        private const string PartCreationPolicyAttributeName = "PartCreationPolicyAttribute";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExportInfo"/> class.
@@ -69,14 +75,18 @@
         {
         }
 
-        internal ExportInfo(Type type, IList<CustomAttributeData> exportAttributes)
+        internal ExportInfo(Type type, bool isMef1, IEnumerable<CustomAttributeData> exportAttributes)
         {
             Type = type;
+            IsShared = isMef1;
             Metadata = exportAttributes
                 .Select(ReadMetadata)
                 .ToArray();
-            
-            EvaluateSharedAttribute(type);
+
+            if (isMef1)
+                EvaluatePartCreationPolicy(type);
+            else
+                EvaluateSharedAttribute(type);
         }
 
         /// <summary>
@@ -111,6 +121,18 @@
             {
                 IsShared = true;
                 SharingBoundary = sharedAttribute.ConstructorArguments.Select(arg => arg.Value as string).FirstOrDefault();
+            }
+        }
+
+        private void EvaluatePartCreationPolicy(Type type)
+        {
+            var partCreationPolicyAttribute = type.GetCustomAttributesData()
+                .FirstOrDefault(attr => attr.AttributeType.Name == PartCreationPolicyAttributeName);
+
+            if (partCreationPolicyAttribute != null)
+            {
+                var value = partCreationPolicyAttribute.ConstructorArguments.Select(arg => (int)arg.Value).FirstOrDefault();
+                IsShared = value != 2;
             }
         }
 
@@ -171,7 +193,7 @@
                 var elementType = argumentType.GetElementType();
                 if (elementType != null)
                 {
-                    var values = (IEnumerable<CustomAttributeTypedArgument>) value;
+                    var values = (IEnumerable<CustomAttributeTypedArgument>)value;
                     var arrayList = ArrayList.Adapter(values.Select(ConvertValue).ToList());
 
                     return arrayList.ToArray(elementType);
