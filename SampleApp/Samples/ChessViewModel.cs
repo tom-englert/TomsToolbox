@@ -1,12 +1,16 @@
 ﻿namespace SampleApp.Samples
 {
+    using System.Composition;
+
     using PropertyChanged;
 
     using TomsToolbox.Wpf.Composition.AttributedModel;
 
+    [Export]
     [VisualCompositionExport(RegionId.Main, Sequence=2)]
     [ImplementPropertyChanged]
-    class ChessViewModel
+    [Shared]
+    public class ChessViewModel
     {
         public override string ToString()
         {

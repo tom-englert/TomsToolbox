@@ -57,8 +57,8 @@
                         var explicitContractType = metadata.GetValueOrDefault("ContractType") as Type;
                         var contractName = metadata.GetValueOrDefault("ContractName") as string;
 
-                        var binding = explicitContractType == null 
-                            ? kernel.Bind(type).ToSelf() 
+                        var binding = explicitContractType == null
+                            ? kernel.Bind(type).ToSelf()
                             : kernel.Bind(explicitContractType).To(type);
 
                         if (contractName != null)
@@ -76,16 +76,29 @@
                 }
                 else
                 {
-                    var masterBindingName = "71751FFE-46C5-465A-9F50-6AEFD1C14232";
+                    const string masterBindingName = "71751FFE-46C5-465A-9F50-6AEFD1C14232";
 
-                    kernel.Bind(type).ToSelf().InSingletonScope().Named(masterBindingName);
+                    var masterBinding = kernel.Bind(type).ToSelf().InSingletonScope();
+
+                    var hasNativeExport = exportMetadata.Any(metadata => metadata.GetContractType() == null && metadata.GetContractName() == null);
+
+                    if (!hasNativeExport)
+                    {
+                        // make binding to self hidden, object has only specific exports.
+                        masterBinding.Named(masterBindingName);
+                    }
 
                     foreach (var metadata in exportMetadata)
                     {
-                        var explicitContractType = metadata.GetValueOrDefault("ContractType") as Type;
-                        var contractName = metadata.GetValueOrDefault("ContractName") as string;
+                        var explicitContractType = metadata.GetContractType();
+                        var contractName = metadata.GetContractName();
 
-                        var binding = kernel.Bind(explicitContractType ?? type).ToMethod(_ => kernel.Get(type, masterBindingName));
+                        if (explicitContractType == null && contractName == null)
+                            continue;
+
+                        var binding = hasNativeExport 
+                            ? kernel.Bind(explicitContractType ?? type).ToMethod(_ => kernel.Get(type))
+                            : kernel.Bind(explicitContractType ?? type).ToMethod(_ => kernel.Get(type, masterBindingName));
 
                         if (contractName != null)
                         {
@@ -96,6 +109,16 @@
                     }
                 }
             }
+        }
+
+        private static Type? GetContractType(this IDictionary<string, object> metadata)
+        {
+            return metadata.GetValueOrDefault("ContractType") as Type;
+        }
+
+        private static string? GetContractName(this IDictionary<string, object> metadata)
+        {
+            return metadata.GetValueOrDefault("ContractName") as string;
         }
     }
 }

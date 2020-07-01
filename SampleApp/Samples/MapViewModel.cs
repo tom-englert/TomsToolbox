@@ -30,7 +30,7 @@ namespace SampleApp.Samples
         [NotNull]
         private readonly MapSourceFile _mapSourceFile;
 
-        public MapViewModel()
+        public MapViewModel(ChessViewModel dummyToTestInjection)
         {
             try
             {
