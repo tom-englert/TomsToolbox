@@ -29,6 +29,11 @@
         "Type": "SampleApp.Samples.ChessViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Metadata": [
             {
+                "ContractName": null,
+                "ContractType": null,
+                "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            },
+            {
                 "Role": null,
                 "Sequence": 2.0,
                 "TargetRegions": [
@@ -39,7 +44,7 @@
                 "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
             }
         ],
-        "IsShared": false,
+        "IsShared": true,
         "SharingBoundary": null
     },
     {
