@@ -53,7 +53,7 @@
             return _exportProvider.GetExportedValueOrDefault<T>(contractName ?? string.Empty);
         }
 
-        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string? contractName, [CanBeNull] out T? value) where T : class
+        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string? contractName, [CanBeNull, System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out T? value) where T : class
         {
             value = _exportProvider.GetExportedValueOrDefault<T>();
 
