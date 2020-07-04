@@ -38,24 +38,24 @@
         /// Binds the specified exports to the kernel.
         /// </summary>
         /// <param name="kernel">The kernel.</param>
-        /// <param name="exports">The exports.</param>
-        public static void BindExports(this IKernel kernel, IEnumerable<ExportInfo> exports)
+        /// <param name="exportInfos">The exports.</param>
+        public static void BindExports(this IKernel kernel, IEnumerable<ExportInfo> exportInfos)
         {
-            foreach (var export in exports)
+            foreach (var exportInfo in exportInfos)
             {
-                var type = export.Type;
+                var type = exportInfo.Type;
                 if (type == null)
                     continue;
-                var exportMetadata = export.Metadata;
+                var exportMetadata = exportInfo.Metadata;
                 if (exportMetadata == null)
                     continue;
 
-                if ((exportMetadata.Length == 1) || !export.IsShared)
+                if ((exportMetadata.Length == 1) || !exportInfo.IsShared)
                 {
                     foreach (var metadata in exportMetadata)
                     {
-                        var explicitContractType = metadata.GetValueOrDefault("ContractType") as Type;
-                        var contractName = metadata.GetValueOrDefault("ContractName") as string;
+                        var explicitContractType = metadata.GetContractTypeFor(type);
+                        var contractName = metadata.GetContractName();
 
                         var binding = explicitContractType == null
                             ? kernel.Bind(type).ToSelf()
@@ -68,7 +68,7 @@
 
                         binding.WithMetadata(ExportProvider.ExportMetadataKey, new MetadataAdapter(metadata));
 
-                        if (export.IsShared)
+                        if (exportInfo.IsShared)
                         {
                             binding.InSingletonScope();
                         }
@@ -76,44 +76,51 @@
                 }
                 else
                 {
-                    const string masterBindingName = "71751FFE-46C5-465A-9F50-6AEFD1C14232";
+                    const string defaultMasterBindingName = "71751FFE-46C5-465A-9F50-6AEFD1C14232";
 
-                    var masterBinding = kernel.Bind(type).ToSelf().InSingletonScope();
+                    var masterBindingName = defaultMasterBindingName;
 
-                    var hasNativeExport = exportMetadata.Any(metadata => metadata.GetContractType() == null && metadata.GetContractName() == null);
+                    var exports = exportMetadata
+                        .Select(item => (Type: type, ContractType: item.GetContractTypeFor(type), ContractName: item.GetContractName(), Metadata: item))
+                        .Distinct()
+                        .ToList();
 
-                    if (!hasNativeExport)
+                    var nativeNamedExports = exports
+                        .Where(export => export.ContractType == null && export.ContractName != null)
+                        .ToList();
+
+                    if (nativeNamedExports.Any())
                     {
-                        // make binding to self hidden, object has only specific exports.
-                        masterBinding.Named(masterBindingName);
-                    }
+                        masterBindingName = nativeNamedExports[0].ContractName;
+                    } 
 
-                    foreach (var metadata in exportMetadata)
+                    kernel.Bind(type).ToSelf().InSingletonScope().Named(masterBindingName);
+
+                    foreach (var export in exports)
                     {
-                        var explicitContractType = metadata.GetContractType();
-                        var contractName = metadata.GetContractName();
+                        var explicitContractType = export.ContractType;
+                        var contractName = export.ContractName;
 
-                        if (explicitContractType == null && contractName == null)
+                        if (explicitContractType == null && (contractName == null || contractName == masterBindingName))
                             continue;
 
-                        var binding = hasNativeExport 
-                            ? kernel.Bind(explicitContractType ?? type).ToMethod(_ => kernel.Get(type))
-                            : kernel.Bind(explicitContractType ?? type).ToMethod(_ => kernel.Get(type, masterBindingName));
+                        var binding = kernel.Bind(explicitContractType ?? type).ToMethod(context => context.Kernel.Get(type, masterBindingName));
 
                         if (contractName != null)
                         {
                             binding.Named(contractName);
                         }
 
-                        binding.WithMetadata(ExportProvider.ExportMetadataKey, new MetadataAdapter(metadata));
+                        binding.WithMetadata(ExportProvider.ExportMetadataKey, new MetadataAdapter(export.Metadata));
                     }
                 }
             }
         }
 
-        private static Type? GetContractType(this IDictionary<string, object> metadata)
+        private static Type? GetContractTypeFor(this IDictionary<string, object> metadata, Type elementType)
         {
-            return metadata.GetValueOrDefault("ContractType") as Type;
+            var type = metadata.GetValueOrDefault("ContractType") as Type;
+            return type == elementType ? null : type;
         }
 
         private static string? GetContractName(this IDictionary<string, object> metadata)
