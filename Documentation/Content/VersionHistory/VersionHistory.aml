@@ -13,6 +13,7 @@
             <list class="bullet">
               <listItem><para>Introduce SemanticVersion class</para></listItem>
               <listItem><para>Wpf window style: allow to have some additional content in the title bar.</para></listItem>
+              <listItem><para>Add GitHubClient to check for new releases.</para></listItem>
             </list>
           </listItem>
           <listItem>
