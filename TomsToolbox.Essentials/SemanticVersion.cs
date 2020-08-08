@@ -76,7 +76,7 @@
                 return false;
             if (ReferenceEquals(this, other))
                 return true;
-            return Equals(Version, other.Version) && string.Equals(Suffix, other.Suffix, StringComparison.InvariantCultureIgnoreCase);
+            return Equals(Version, other.Version) && string.Equals(Suffix, other.Suffix, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <inheritdoc />
@@ -96,7 +96,7 @@
         {
             unchecked
             {
-                return ((Version != null ? Version.GetHashCode() : 0) * 397) ^ (Suffix != null ? StringComparer.InvariantCultureIgnoreCase.GetHashCode(Suffix) : 0);
+                return ((Version != null ? Version.GetHashCode() : 0) * 397) ^ (Suffix != null ? StringComparer.OrdinalIgnoreCase.GetHashCode(Suffix) : 0);
             }
         }
 

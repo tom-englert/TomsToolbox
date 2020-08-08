@@ -10,7 +10,10 @@
     <ControlTemplate>
       <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0">
         <TextBlock Foreground="Gray">V&#xA0;<Run Text="{Binding FileVersion, Mode=OneWay}"/></TextBlock>
-        <TextBlock x:Name="Update">&#xA0;<Hyperlink Command="{Binding HyperlinkClickCommand}">Update Available</Hyperlink></TextBlock>
+        <TextBlock x:Name="Update" ToolTip="{Binding UpdateLink}">
+          &#xA0;
+          <Hyperlink Command="{Binding HyperlinkClickCommand}">Update Available</Hyperlink>
+        </TextBlock>
       </StackPanel>
       <ControlTemplate.Triggers>
         <DataTrigger Binding="{Binding UpdateLink}" Value="{x:Null}">

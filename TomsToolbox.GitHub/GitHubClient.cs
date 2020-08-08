@@ -31,7 +31,7 @@
                 return null;
 
             return latestRelease.Assets
-                .Where(asset => string.Equals(asset.Name, Path.ChangeExtension(entryAssembly.Location, ".exe"), StringComparison.OrdinalIgnoreCase))
+                .Where(asset => string.Equals(asset.Name, Path.ChangeExtension(Path.GetFileName(entryAssembly.Location), ".exe"), StringComparison.OrdinalIgnoreCase))
                 .Select(asset => asset.BrowserDownloadUrl)
                 .FirstOrDefault();
         }

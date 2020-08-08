@@ -24,7 +24,7 @@
 
         private void HyperlinkClick()
         {
-            Process.Start(UpdateLink);
+            Process.Start(new ProcessStartInfo(UpdateLink) { UseShellExecute = true });
         }
 
         private async void CheckForUpdate()
