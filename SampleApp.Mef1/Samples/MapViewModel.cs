@@ -22,7 +22,7 @@ namespace SampleApp.Mef1.Samples
     using TomsToolbox.Wpf.Controls;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 1)]
-    [ImplementPropertyChanged]
+    [AddINotifyPropertyChangedInterface]
     public class MapViewModel
     {
         [NotNull] private static readonly string _configurationFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Map", "MapSources.xml");

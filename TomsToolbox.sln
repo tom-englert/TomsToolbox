@@ -65,6 +65,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Ninject", "Sample
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Mef", "TomsToolbox.Composition.Mef\TomsToolbox.Composition.Mef.csproj", "{FC040BDB-D6E3-4001-A86B-F8F858835605}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.GitHub", "TomsToolbox.GitHub\TomsToolbox.GitHub.csproj", "{6E2268F1-F1AD-48C3-BF16-B5EBD7FC9387}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -166,6 +168,10 @@ Global
 		{FC040BDB-D6E3-4001-A86B-F8F858835605}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC040BDB-D6E3-4001-A86B-F8F858835605}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC040BDB-D6E3-4001-A86B-F8F858835605}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E2268F1-F1AD-48C3-BF16-B5EBD7FC9387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E2268F1-F1AD-48C3-BF16-B5EBD7FC9387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E2268F1-F1AD-48C3-BF16-B5EBD7FC9387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E2268F1-F1AD-48C3-BF16-B5EBD7FC9387}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

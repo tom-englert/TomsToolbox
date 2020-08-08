@@ -5,7 +5,7 @@
     using TomsToolbox.Wpf.Composition.Mef;
 
     [VisualCompositionExport(RegionId.Main, Sequence=2)]
-    [ImplementPropertyChanged]
+    [AddINotifyPropertyChangedInterface]
     class ChessViewModel
     {
         public override string ToString()

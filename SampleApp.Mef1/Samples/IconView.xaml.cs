@@ -17,7 +17,7 @@
     }
 
     [VisualCompositionExport(RegionId.Main, Sequence = 5)]
-    [ImplementPropertyChanged]
+    [AddINotifyPropertyChangedInterface]
     public class IconViewModel
     {
         public override string ToString()

@@ -5,7 +5,7 @@
     using TomsToolbox.Wpf.Composition.AttributedModel;
 
     [VisualCompositionExport(RegionId.Main, Sequence=9)]
-    [ImplementPropertyChanged]
+    [AddINotifyPropertyChangedInterface]
     class StyxViewModel
     {
         public override string ToString()

@@ -5,7 +5,7 @@
     using TomsToolbox.Wpf.Composition.AttributedModel;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 3)]
-    [ImplementPropertyChanged]
+    [AddINotifyPropertyChangedInterface]
     class TextBoxViewModel
     {
         public override string ToString()

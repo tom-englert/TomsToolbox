@@ -8,7 +8,7 @@
 
     [Export]
     [VisualCompositionExport(RegionId.Main, Sequence=2)]
-    [ImplementPropertyChanged]
+    [AddINotifyPropertyChangedInterface]
     [Shared]
     public class ChessViewModel
     {

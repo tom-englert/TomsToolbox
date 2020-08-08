@@ -22,7 +22,7 @@ namespace SampleApp.Samples
     using TomsToolbox.Wpf.Controls;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 1)]
-    [ImplementPropertyChanged]
+    [AddINotifyPropertyChangedInterface]
     public class MapViewModel
     {
         [NotNull]

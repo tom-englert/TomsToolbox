@@ -4,10 +4,8 @@
         xmlns:sampleApp="clr-namespace:SampleApp"
         xmlns:composition="urn:TomsToolbox.Composition"
         xmlns:styles="urn:TomsToolbox.Wpf.Styles"
-        Height="600" Width="800">
-  <styles:WpfStyles.WindowTitleDecorator>
-    <TextBlock Text="Something in the title bar" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,0"/>
-  </styles:WpfStyles.WindowTitleDecorator>
+        Height="600" Width="800"
+        styles:WpfStyles.WindowTitleDecorator="{composition:Import {x:Type sampleApp:WindowTitleDecoratorViewModel}}">
   <Window.ContextMenu>
     <ContextMenu>
       <MenuItem Header="Show Popup" Click="ShowPopup_Click" />
