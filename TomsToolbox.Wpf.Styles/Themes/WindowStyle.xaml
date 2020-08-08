@@ -98,8 +98,9 @@
                           <Path Width="12" Height="12" Data="M2,2 L10,10 M10,2 L2,10" />
                         </Button>
                       </StackPanel>
-                      <TextBlock x:Name="Title" Text="{TemplateBinding Title}" VerticalAlignment="Center"
+                      <TextBlock DockPanel.Dock="Left" x:Name="Title" Text="{TemplateBinding Title}" VerticalAlignment="Center"
                                  FontSize="12" IsHitTestVisible="False" />
+                      <ContentPresenter VerticalAlignment="Stretch" Content="{Binding Path=(styles:WpfStyles.WindowTitleDecorator), RelativeSource={RelativeSource Self}}" />
                     </DockPanel>
                   </Border>
                   <Border x:Name="ClientArea" ClipToBounds="True"

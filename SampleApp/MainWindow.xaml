@@ -3,7 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:sampleApp="clr-namespace:SampleApp"
         xmlns:composition="urn:TomsToolbox.Composition"
+        xmlns:styles="urn:TomsToolbox.Wpf.Styles"
         Height="600" Width="800">
+  <styles:WpfStyles.WindowTitleDecorator>
+    <TextBlock Text="Something in the title bar" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,0"/>
+  </styles:WpfStyles.WindowTitleDecorator>
   <Window.ContextMenu>
     <ContextMenu>
       <MenuItem Header="Show Popup" Click="ShowPopup_Click" />

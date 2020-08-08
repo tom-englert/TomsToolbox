@@ -166,6 +166,31 @@
         }
 
         /// <summary>
+        /// Identifies the <see cref="P:TomsToolbox.Wpf.Styles.WpfStyles.WindowTitleDecorator"/> attached property
+        /// </summary>
+        /// <AttachedPropertyComments>
+        /// <summary>
+        /// Allows to add content to the title bar of the window.
+        /// </summary>
+        /// </AttachedPropertyComments>
+        public static readonly DependencyProperty WindowTitleDecoratorProperty = DependencyProperty.RegisterAttached(
+                    "WindowTitleDecorator", typeof(object), typeof(WpfStyles), new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.Inherits));
+        /// <summary>
+        /// Sets the <see cref="P:TomsToolbox.Wpf.Styles.WpfStyles.WindowTitleDecorator"/>
+        /// </summary>
+        public static void SetWindowTitleDecorator(DependencyObject element, object value)
+        {
+            element.SetValue(WindowTitleDecoratorProperty, value);
+        }
+        /// <summary>
+        /// Gets the <see cref="P:TomsToolbox.Wpf.Styles.WpfStyles.WindowTitleDecorator"/>
+        /// </summary>
+        public static object GetWindowTitleDecorator(DependencyObject element)
+        {
+            return element.GetValue(WindowTitleDecoratorProperty);
+        }
+
+        /// <summary>
         /// Gets the small application icon (16x16) from the running executable.
         /// </summary>
         [CanBeNull]
