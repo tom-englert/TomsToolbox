@@ -1,7 +1,7 @@
 name: $(Build.DefinitionName) $(date:yyyyMMdd)$(rev:.r)
 
 pool:
-  name: Default
+  vmImage: 'windows-latest'
   demands:
   - msbuild
   - vstest
@@ -25,6 +25,17 @@ steps:
     msbuildArguments: '-restore'
     clean: true
 
+- task: MSBuild@1
+  displayName: 'Publish Sample App'
+  inputs:
+    solution: 'SampleApp.Ninject\SampleApp.Ninject.csproj'
+    platform: AnyCPU
+    configuration: release
+    msbuildArguments: '/target:publish'
+    logProjectEvents: true
+    createLogFile: true
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+
 - task: VSTest@2
   displayName: 'Test Assemblies **\$(BuildConfiguration)\*test*.dll;-:**\obj\**'
   inputs:
@@ -44,6 +55,13 @@ steps:
     Contents: '*.*'
     TargetFolder: '$(build.artifactstagingdirectory)/Packages'
 
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)/Sample'
+  inputs:
+    SourceFolder: Publish
+    Contents: '*.*'
+    TargetFolder: '$(build.artifactstagingdirectory)/Sample'
+
 - task: ArchiveFiles@2
   displayName: 'Archive Documentation\Help'
   inputs:
@@ -62,3 +80,9 @@ steps:
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)/Help.zip'
     ArtifactName: Help
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Sample'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)/Sample'
+    ArtifactName: Sample

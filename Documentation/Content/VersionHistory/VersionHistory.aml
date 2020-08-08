@@ -9,12 +9,27 @@
       <content>
         <list class="bullet">
           <listItem>
+            <para>2.1</para>
+            <list class="bullet">
+              <listItem><para>Introduce SemanticVersion class</para></listItem>
+              <listItem><para>Wpf window style: allow to have some additional content in the title bar.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
+            <para>2.0.2</para>
+            <list class="bullet">
+              <listItem><para>MetadataReader properly reads MEF1 creation policy.</para></listItem>
+              <listItem><para>Fine-tune nullability annotations.</para></listItem>
+              <listItem><para>Fix Ninject bindings for singletons with multiple exports.</para></listItem>
+            </list>
+          </listItem>
+          <listItem>
             <para>2.0.1</para>
             <list class="bullet">
               <listItem><para>Refactored for target frameworks Net 4.5, NetStandard 2.0/Net Core 3.0</para></listItem>
               <listItem><para>Renamed TomsToolbox.Core to TomsToolbox.Essentials to avoid naming confusion with .NetCore</para></listItem>
               <listItem><para>Visual Composition: Decoupled DI container from usage. Now you can use the DI container of your choice.</para></listItem>
-              <listItem><para>Migrate System.Windows.Interactivity to Microsoft.Xaml.Behaviors</para></listItem>
+              <listItem><para>Migrated System.Windows.Interactivity to Microsoft.Xaml.Behaviors</para></listItem>
             </list>
           </listItem>
           <listItem>

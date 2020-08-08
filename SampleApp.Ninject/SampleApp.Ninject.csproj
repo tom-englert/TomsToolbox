@@ -3,11 +3,20 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net45;netcoreapp3.0</TargetFrameworks>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>latest</LangVersion>
     <UseWPF>true</UseWPF>
     <Tags>Sample</Tags>
     <ApplicationIcon>..\SampleApp\16x16.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PublishDir>..\Publish</PublishDir>
+    <PublishProtocol>FileSystem</PublishProtocol>
+    <SelfContained>false</SelfContained>
+    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
+    <PublishSingleFile>True</PublishSingleFile>
+    <PublishReadyToRun>False</PublishReadyToRun>
   </PropertyGroup>
 
   <ItemGroup>
