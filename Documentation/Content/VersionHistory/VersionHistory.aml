@@ -12,8 +12,9 @@
             <para>2.1</para>
             <list class="bullet">
               <listItem><para>Introduce SemanticVersion class</para></listItem>
-              <listItem><para>Wpf window style: allow to have some additional content in the title bar.</para></listItem>
-              <listItem><para>Add GitHubClient to check for new releases.</para></listItem>
+              <listItem><para>WPF window style: allow to have some additional content in the title bar.</para></listItem>
+              <listItem><para>Add GitHubTasks to check for new releases.</para></listItem>
+              <listItem><para>Improve performance of TextBoxVisibleWhiteSpaceDecorator.</para></listItem>
             </list>
           </listItem>
           <listItem>
