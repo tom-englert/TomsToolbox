@@ -29,7 +29,7 @@
 
         private async void CheckForUpdate()
         {
-            UpdateLink = await TomsToolbox.GitHub.GitHubClient.IsUpdateAvailable("tom-englert", "TomsToolbox");
+            UpdateLink = await TomsToolbox.GitHub.GitHubTasks.FindUpdate("tom-englert", "TomsToolbox");
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

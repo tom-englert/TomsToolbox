@@ -61,18 +61,10 @@
             return new SemanticVersion();
         }
 
-        private static int? ParseNumber(Group group)
-        {
-            if (int.TryParse(group.Value.TrimStart('.'), NumberStyles.Integer, CultureInfo.InvariantCulture, out var number))
-                return number;
-
-            return 0;
-        }
-
         /// <inheritdoc />
         public bool Equals(SemanticVersion other)
         {
-            if (ReferenceEquals(null, other))
+            if (other is null)
                 return false;
             if (ReferenceEquals(this, other))
                 return true;
@@ -82,7 +74,7 @@
         /// <inheritdoc />
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
+            if (obj is null)
                 return false;
             if (ReferenceEquals(this, obj))
                 return true;
@@ -111,7 +103,7 @@
         {
             if (ReferenceEquals(this, other))
                 return 0;
-            if (ReferenceEquals(null, other))
+            if (other is null)
                 return 1;
 
             return Compare(this, other);

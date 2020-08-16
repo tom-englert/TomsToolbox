@@ -10,9 +10,9 @@
 
     using TomsToolbox.Essentials;
 
-    public static class GitHubClient
+    public static class GitHubTasks
     {
-        public static async Task<string?> IsUpdateAvailable(string owner, string name)
+        public static async Task<string?> FindUpdate(string owner, string name)
         {
             var entryAssembly = Assembly.GetEntryAssembly();
             if (entryAssembly == null)
@@ -22,8 +22,13 @@
             if (appVersion.Version == new Version())
                 return null;
 
-            var client = new Octokit.GitHubClient(new ProductHeaderValue(entryAssembly.GetCustomAttribute<AssemblyTitleAttribute>()?.Title ?? "UpdateCheck"));
-            var latestRelease = (await client.Repository.Release.GetAll(owner, name))
+            var productHeaderValue = new ProductHeaderValue(entryAssembly.GetCustomAttribute<AssemblyTitleAttribute>()?.Title ?? "UpdateCheck");
+
+            var connection = new Connection(productHeaderValue);
+            var apiConnection = new ApiConnection(connection);
+            var client = new ReleasesClient(apiConnection);
+
+            var latestRelease = (await client.GetAll(owner, name))
                 .OrderByDescending(r => SemanticVersion.Parse(r.TagName))
                 .FirstOrDefault();
 
