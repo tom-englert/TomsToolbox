@@ -88,7 +88,7 @@
         /// </summary>
         [NotNull]
         public static readonly DependencyProperty WhiteSpacesProperty =
-            DependencyProperty.Register("WhiteSpaces", typeof(WhiteSpaces), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(WhiteSpaces.Paragraph, (sender, e) => ((TextBoxVisibleWhiteSpaceDecorator)sender)?._adorner?.UpdateWhiteSpaces()));
+            DependencyProperty.Register("WhiteSpaces", typeof(WhiteSpaces), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(WhiteSpaces.Paragraph, (sender, e) => ((TextBoxVisibleWhiteSpaceDecorator)sender)?._adorner?.RecalculateWhiteSpaces()));
 
 
         /// <summary>
@@ -178,12 +178,17 @@
 
         private class WhiteSpaceDecoratorAdorner : Adorner
         {
+            private static readonly Vector NullVector = new Vector();
+
             [NotNull]
             private readonly TextBoxVisibleWhiteSpaceDecorator _owner;
             [NotNull]
             private readonly TextBox _textBox;
             [NotNull, ItemNotNull]
             private IList<WhiteSpace> _whiteSpaces = new WhiteSpace[0];
+
+            private Vector _scrollOffset;
+            private Vector _scrollExtent;
 
             public WhiteSpaceDecoratorAdorner([NotNull] TextBoxVisibleWhiteSpaceDecorator owner, [NotNull] TextBox textBox)
                 : base(textBox)
@@ -194,32 +199,127 @@
                 textBox.TextChanged += TextBox_TextChanged;
 
                 if (textBox.Template?.FindName("PART_ContentHost", textBox) is ScrollViewer scrollViewer)
+                {
                     scrollViewer.ScrollChanged += ScrollViewer_ScrollChanged;
+                    _scrollOffset = new Vector(scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset);
+                    _scrollExtent = new Vector(scrollViewer.ExtentWidth, scrollViewer.ExtentHeight);
+                }
 
-                UpdateWhiteSpaces();
+                _whiteSpaces = CalculateWhiteSpaces();
             }
 
-            private void ScrollViewer_ScrollChanged([CanBeNull] object? sender, [CanBeNull] ScrollChangedEventArgs? e)
+            private void ScrollViewer_ScrollChanged([CanBeNull] object? sender, ScrollChangedEventArgs e)
             {
-                InvalidateVisual();
+                _scrollOffset = new Vector(e.HorizontalOffset, e.VerticalOffset);
+
+                var scrollExtent = new Vector(e.ExtentWidth, e.ExtentHeight);
+                if (_scrollExtent != scrollExtent)
+                {
+                    _whiteSpaces = CalculateWhiteSpaces();
+                    _scrollExtent = scrollExtent;
+                }
+
+                Invalidate();
             }
 
-            private void TextBox_TextChanged([CanBeNull] object? sender, [CanBeNull] TextChangedEventArgs? e)
+            private void TextBox_TextChanged([CanBeNull] object? sender, TextChangedEventArgs e)
             {
-                UpdateWhiteSpaces();
+                if (e.Changes.Count != 1)
+                {
+                    RecalculateWhiteSpaces();
+                    return;
+                }
+
+                try
+                {
+                    var textChange = e.Changes.First();
+                    var offset = textChange.Offset;
+                    var addedLength = textChange.AddedLength;
+                    var removedLength = textChange.RemovedLength;
+                    var removedOffset = offset + removedLength;
+                    var indexDelta = addedLength - removedLength;
+
+                    var changeIndex = 0;
+
+                    while (changeIndex < _whiteSpaces.Count && _whiteSpaces[changeIndex].CharIndex < offset)
+                    {
+                        changeIndex++;
+                    }
+
+                    while (changeIndex < _whiteSpaces.Count && _whiteSpaces[changeIndex].CharIndex < removedOffset)
+                    {
+                        _whiteSpaces.RemoveAt(changeIndex);
+                    }
+
+                    for (var i = changeIndex; i < _whiteSpaces.Count; i++)
+                    {
+                        _whiteSpaces[i].CharIndex += indexDelta;
+                    }
+
+                    for (var i = changeIndex; i < _whiteSpaces.Count; i++)
+                    {
+                        var whiteSpace = _whiteSpaces[i];
+                        var desiredRect = whiteSpace.DesiredRect;
+                        if (desiredRect == null)
+                            continue;
+
+                        var oldRect = desiredRect.Value;
+                        var newRect = whiteSpace.CalculateDesiredRect(_textBox, _scrollOffset);
+                        var itemOffset = newRect.TopLeft - oldRect.TopLeft;
+
+                        if (itemOffset == NullVector)
+                            break;
+
+                        whiteSpace.OffsetBy(itemOffset);
+
+                        if (Math.Abs(itemOffset.X) <= double.Epsilon)
+                        {
+                            for (var k = i + 1; k < _whiteSpaces.Count; k++)
+                            {
+                                _whiteSpaces[k].OffsetBy(itemOffset);
+                            }
+
+                            break;
+                        }
+                    }
+
+                    if (addedLength > 0)
+                    {
+                        var newSpaces = CalculateWhiteSpaces(offset, addedLength);
+                        var addedInsertionIndex = changeIndex;
+
+                        foreach (var whiteSpace in newSpaces)
+                        {
+                            _whiteSpaces.Insert(addedInsertionIndex++, whiteSpace);
+                        }
+                    }
+                }
+                catch
+                {
+                    _whiteSpaces = CalculateWhiteSpaces();
+                }
+
+                Invalidate();
             }
 
-            internal void UpdateWhiteSpaces()
+            internal void RecalculateWhiteSpaces()
+            {
+                _whiteSpaces = CalculateWhiteSpaces();
+
+                Invalidate();
+            }
+
+            private IList<WhiteSpace> CalculateWhiteSpaces(int start = 0, int length = int.MaxValue)
             {
                 var textBox = _textBox;
                 var whiteSpaces = _owner.WhiteSpaces;
 
-                _whiteSpaces = textBox.Text
-                    .Select((character, index) => GetWhiteSpace(character, index, whiteSpaces))
+                return textBox.Text
+                    .Select((character, index) => new { character, index })
+                    .Skip(start).Take(length)
+                    .Select(item => GetWhiteSpace(item.character, item.index, whiteSpaces))
                     .Where(item => item != null)
-                    .ToArray()!;
-
-                this.BeginInvoke(DispatcherPriority.Background, InvalidateVisual);
+                    .ToList()!;
             }
 
             [CanBeNull]
@@ -242,7 +342,7 @@
             }
 
             // ReSharper disable once UnusedParameter.Local
-            private static void DrawAdorners([NotNull] DrawingContext drawingContext, [NotNull] TextBox textBox, [NotNull] [ItemNotNull] IList<WhiteSpace> adorners, int firstIndex, int lastIndex, Size desiredSize, [NotNull] Typeface typeface, double fontSize, [NotNull] Brush brush, NumberSubstitution numberSubstitution, TextFormattingMode textFormattingMode, double pixelsPerDip)
+            private void DrawAdorners([NotNull] DrawingContext drawingContext, [NotNull] TextBox textBox, [NotNull][ItemNotNull] IList<WhiteSpace> whiteSpaces, int firstIndex, int lastIndex, Size desiredSize, [NotNull] Typeface typeface, double fontSize, [NotNull] Brush brush, NumberSubstitution numberSubstitution, TextFormattingMode textFormattingMode, double pixelsPerDip)
             {
                 while (true)
                 {
@@ -251,10 +351,12 @@
 
                     var index = (lastIndex + firstIndex) / 2;
 
-                    var adorner = adorners[index];
-                    var rect = adorner.GetDesiredRect(textBox);
+                    var whiteSpace = whiteSpaces[index];
+                    var rect = whiteSpace.GetDrawingRect(textBox, _scrollOffset);
                     if (rect.IsEmpty)
                         return;
+
+                    rect = Rect.Offset(rect, -_scrollOffset);
 
                     if (rect.Top < 0)
                     {
@@ -271,13 +373,13 @@
                     if ((rect.Right >= 0) && (rect.Left <= desiredSize.Width))
                     {
 #if NET45
-                        drawingContext.DrawText(new FormattedText(adorner.Text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, fontSize, brush, numberSubstitution, textFormattingMode), rect.TopLeft);
+                        drawingContext.DrawText(new FormattedText(whiteSpace.Text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, fontSize, brush, numberSubstitution, textFormattingMode), rect.TopLeft);
 #else
-                        drawingContext.DrawText(new FormattedText(adorner.Text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, fontSize, brush, numberSubstitution, textFormattingMode, pixelsPerDip), rect.TopLeft);
+                        drawingContext.DrawText(new FormattedText(whiteSpace.Text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, fontSize, brush, numberSubstitution, textFormattingMode, pixelsPerDip), rect.TopLeft);
 #endif
                     }
 
-                    DrawAdorners(drawingContext, textBox, adorners, index + 1, lastIndex, desiredSize, typeface, fontSize, brush, numberSubstitution, textFormattingMode, pixelsPerDip);
+                    DrawAdorners(drawingContext, textBox, whiteSpaces, index + 1, lastIndex, desiredSize, typeface, fontSize, brush, numberSubstitution, textFormattingMode, pixelsPerDip);
 
                     lastIndex = index;
                 }
@@ -301,22 +403,53 @@
                 drawingContext.Pop();
             }
 
+            private void Invalidate()
+            {
+                this.BeginInvoke(DispatcherPriority.Background, InvalidateVisual);
+            }
+
             private class WhiteSpace
             {
-                private readonly int _charIndex;
+                private Rect? _desiredRect;
 
                 public WhiteSpace(int charIndex, [NotNull] string text)
                 {
-                    _charIndex = charIndex;
+                    CharIndex = charIndex;
                     Text = text;
                 }
+
+                public int CharIndex { get; set; }
 
                 [NotNull]
                 public string Text { get; }
 
-                public Rect GetDesiredRect([NotNull] TextBox textBox)
+                public bool HasDesiredRect => _desiredRect.HasValue;
+
+                public Rect? DesiredRect => _desiredRect;
+
+                public Rect GetDrawingRect([NotNull] TextBox textBox, Vector scrollOffset)
                 {
-                    return textBox.Text.Length <= _charIndex ? Rect.Empty : textBox.GetRectFromCharacterIndex(_charIndex);
+                    return _desiredRect ??= CalculateDesiredRect(textBox, scrollOffset);
+                }
+
+                public Rect CalculateDesiredRect(TextBox textBox, Vector scrollOffset)
+                {
+                    if (textBox.Text.Length <= CharIndex)
+                        return Rect.Empty;
+
+                    var rect = textBox.GetRectFromCharacterIndex(CharIndex);
+                    if (rect.IsEmpty)
+                        return rect;
+
+                    return Rect.Offset(rect, scrollOffset);
+                }
+
+                public void OffsetBy(Vector value)
+                {
+                    if (_desiredRect.HasValue)
+                    {
+                        _desiredRect = Rect.Offset(_desiredRect.Value, value);
+                    }
                 }
             }
         }
