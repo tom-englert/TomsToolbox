@@ -6,6 +6,7 @@ namespace SampleApp.Samples
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Composition;
     using System.IO;
     using System.Linq;
     using System.Windows;
@@ -30,6 +31,7 @@ namespace SampleApp.Samples
         [NotNull]
         private readonly MapSourceFile _mapSourceFile;
 
+        [ImportingConstructor]
         public MapViewModel(ChessViewModel dummyToTestInjection)
         {
             try
