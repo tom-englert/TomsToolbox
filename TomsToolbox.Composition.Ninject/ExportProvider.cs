@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using global::Ninject;
@@ -15,6 +16,11 @@
     /// <seealso cref="IExportProvider" />
     public class ExportProvider : IExportProvider
     {
+        /// <summary>
+        /// The default master binding name
+        /// </summary>
+        internal const string DefaultMasterBindingName = "71751FFE-46C5-465A-9F50-6AEFD1C14232";
+
         /// <summary>
         /// The key under which the export metadata is stored.
         /// </summary>
@@ -45,7 +51,7 @@
             return GetExportedValues<T>(contractName).SingleOrDefault();
         }
 
-        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string? contractName, [CanBeNull, System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out T? value) where T : class
+        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string? contractName, [CanBeNull, NotNullWhen(true)] out T? value) where T : class
         {
             var values = GetExportedValues<T>(contractName).ToList();
 
@@ -66,12 +72,21 @@
 
         IEnumerable<IExport<object>> IExportProvider.GetExports(Type contractType, [CanBeNull] string? contractName)
         {
+            if (contractName == string.Empty)
+                contractName = null;
+
             var bindings = _kernel.GetBindings(contractType)
-                .Where(binding => binding.Metadata.Name == contractName);
+                .Where(binding => GetEffectiveContractName(binding.Metadata.Name) == contractName);
 
             var result = bindings.Select(binding => new ExportAdapter<object>(() => GetExportedValue(binding), binding.Metadata.Get<IMetadata>(ExportMetadataKey)));
 
             return result.ToList();
+        }
+
+        [CanBeNull]
+        private static string? GetEffectiveContractName([CanBeNull] string? name)
+        {
+            return name == DefaultMasterBindingName ? null : name;
         }
 
         private IEnumerable<T> GetExportedValues<T>([CanBeNull] string? contractName)

@@ -76,9 +76,7 @@
                 }
                 else
                 {
-                    const string defaultMasterBindingName = "71751FFE-46C5-465A-9F50-6AEFD1C14232";
-
-                    var masterBindingName = defaultMasterBindingName;
+                    var masterBindingName = ExportProvider.DefaultMasterBindingName;
 
                     var exports = exportMetadata
                         .Select(item => (Type: type, ContractType: item.GetContractTypeFor(type), ContractName: item.GetContractName(), Metadata: item))
@@ -92,7 +90,7 @@
                     if (nativeNamedExports.Any())
                     {
                         masterBindingName = nativeNamedExports[0].ContractName;
-                    } 
+                    }
 
                     kernel.Bind(type).ToSelf().InSingletonScope().Named(masterBindingName);
 
