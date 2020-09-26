@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shfbBuild product="Sandcastle Help File Builder and Tools" version="2020.3.6.0" projectFile="D:\Develop\My Open Source\GitHub\TomsToolbox2\src\Documentation\Documentation.shfbproj" started="26.09.2020 15:22:31">
+<buildStep step="Initializing">
+Finding tools...
+The Sandcastle tools are located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\&#39;
+Locating components in the following folder(s):
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\Documentation
+    C:\ProgramData\EWSoftware\Sandcastle Help File Builder\Components and Plug-Ins\
+    C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\
+Using framework reflection data for &#39;.NET Framework 4.7.2&#39; located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\Data\.NETFramework&#39;
+Using presentation style &#39;VS2013&#39; located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013&#39;
+Loading and initializing plug-ins...
+Lightweight Website Style Version 2020.3.6.0
+Copyright &#169; 2006-2020, Eric Woodruff, All Rights Reserved
+Portions Copyright &#169; 2014, Sam Harwell, All Rights Reserved
+-------------------------------
+Clearing any prior web/markdown output...
+</buildStep>
+<buildStep step="ValidatingDocumentationSources">
+Validating and copying documentation source information
+Source: D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj
+    Found project &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj&#39;
+Source: D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj
+    Found project &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj&#39;
+Source: D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj
+    Found project &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj&#39;
+Source: D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj
+    Found project &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj&#39;
+Source: D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj
+    Found project &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj&#39;
+Source: D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Composition\TomsToolbox.Wpf.Composition.csproj
+    Found project &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Composition\TomsToolbox.Wpf.Composition.csproj&#39;
+Source: D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Compostition.Styles\TomsToolbox.Wpf.Composition.Styles.csproj
+    Found project &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Compostition.Styles\TomsToolbox.Wpf.Composition.Styles.csproj&#39;
+Source: D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Composition.Mef\TomsToolbox.Wpf.Composition.Mef.csproj
+    Found project &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Composition.Mef\TomsToolbox.Wpf.Composition.Mef.csproj&#39;
+Source: D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Composition.AttributedModel\TomsToolbox.Wpf.Composition.AttributedModel.csproj
+    Found project &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Composition.AttributedModel\TomsToolbox.Wpf.Composition.AttributedModel.csproj&#39;
+Source: D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Composition\TomsToolbox.Composition.csproj
+    Found project &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Composition\TomsToolbox.Composition.csproj&#39;
+Source: D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Composition.Ninject\TomsToolbox.Composition.Ninject.csproj
+    Found project &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Composition.Ninject\TomsToolbox.Composition.Ninject.csproj&#39;
+Source: D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Composition.Mef2\TomsToolbox.Composition.Mef2.csproj
+    Found project &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Composition.Mef2\TomsToolbox.Composition.Mef2.csproj&#39;
+Source: D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Core\TomsToolbox.Core.csproj
+    Found project &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Core\TomsToolbox.Core.csproj&#39;
+
+Parsing project files
+    Found assembly &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Essentials\bin\Debug\net45\TomsToolbox.Essentials.dll&#39;
+    Found assembly &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Desktop\bin\Debug\net45\TomsToolbox.Desktop.dll&#39;
+    Found assembly &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.ObservableCollections\bin\Debug\net45\TomsToolbox.ObservableCollections.dll&#39;
+    Found assembly &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf\bin\Debug\net45\TomsToolbox.Wpf.dll&#39;
+    Found assembly &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Styles\bin\Debug\net45\TomsToolbox.Wpf.Styles.dll&#39;
+    Found assembly &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Composition\bin\Debug\net45\TomsToolbox.Wpf.Composition.dll&#39;
+    Found assembly &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Compostition.Styles\bin\Debug\net45\TomsToolbox.Wpf.Composition.Styles.dll&#39;
+    Found assembly &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Composition.Mef\bin\Debug\net45\TomsToolbox.Wpf.Composition.Mef.dll&#39;
+    Found assembly &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Composition.AttributedModel\bin\Debug\net45\TomsToolbox.Wpf.Composition.AttributedModel.dll&#39;
+    Found assembly &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Composition\bin\Debug\net45\TomsToolbox.Composition.dll&#39;
+    Found assembly &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Composition.Ninject\bin\Debug\net45\TomsToolbox.Composition.Ninject.dll&#39;
+    Found assembly &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Composition.Mef2\bin\Debug\net45\TomsToolbox.Composition.Mef2.dll&#39;
+    Found assembly &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Core\bin\Debug\net45\TomsToolbox.Core.dll&#39;
+
+References to include:
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Composition.Mef2\bin\Debug\net45\TomsToolbox.Composition.Mef2.dll
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Composition.Ninject\bin\Debug\net45\TomsToolbox.Composition.Ninject.dll
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Composition\bin\Debug\net45\TomsToolbox.Composition.dll
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Desktop\bin\Debug\net45\TomsToolbox.Desktop.dll
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Essentials\bin\Debug\net45\TomsToolbox.Essentials.dll
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.ObservableCollections\bin\Debug\net45\TomsToolbox.ObservableCollections.dll
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Composition.AttributedModel\bin\Debug\net45\TomsToolbox.Wpf.Composition.AttributedModel.dll
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Composition.Mef\bin\Debug\net45\TomsToolbox.Wpf.Composition.Mef.dll
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Composition\bin\Debug\net45\TomsToolbox.Wpf.Composition.dll
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Compostition.Styles\bin\Debug\net45\TomsToolbox.Wpf.Composition.Styles.dll
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Styles\bin\Debug\net45\TomsToolbox.Wpf.Styles.dll
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf\bin\Debug\net45\TomsToolbox.Wpf.dll
+    JetBrains.Annotations
+    JetBrainsAnnotations
+    Microsoft.Xaml.Behaviors
+    Ninject
+    System.Composition.AttributedModel
+    System.ValueTuple
+    Throttle
+    WeakEventHandler
+
+Copying XML comments files
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Essentials\bin\Debug\net45\TomsToolbox.Essentials.xml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Essentials.xml
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Desktop\bin\Debug\net45\TomsToolbox.Desktop.xml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Desktop.xml
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.ObservableCollections\bin\Debug\net45\TomsToolbox.ObservableCollections.xml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.ObservableCollections.xml
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf\bin\Debug\net45\TomsToolbox.Wpf.xml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Wpf.xml
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Styles\bin\Debug\net45\TomsToolbox.Wpf.Styles.xml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Wpf.Styles.xml
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Composition\bin\Debug\net45\TomsToolbox.Wpf.Composition.xml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Wpf.Composition.xml
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Compostition.Styles\bin\Debug\net45\TomsToolbox.Wpf.Composition.Styles.xml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Wpf.Composition.Styles.xml
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Composition.Mef\bin\Debug\net45\TomsToolbox.Wpf.Composition.Mef.xml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Wpf.Composition.Mef.xml
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Wpf.Composition.AttributedModel\bin\Debug\net45\TomsToolbox.Wpf.Composition.AttributedModel.xml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Wpf.Composition.AttributedModel.xml
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Composition\bin\Debug\net45\TomsToolbox.Composition.xml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Composition.xml
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Composition.Ninject\bin\Debug\net45\TomsToolbox.Composition.Ninject.xml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Composition.Ninject.xml
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Composition.Mef2\bin\Debug\net45\TomsToolbox.Composition.Mef2.xml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Composition.Mef2.xml
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\TomsToolbox.Core\bin\Debug\net45\TomsToolbox.Core.xml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Core.xml
+</buildStep>
+<buildStep step="GenerateSharedContent">
+Generating shared content files (en-US, English (United States))...
+<plugIn name="Lightweight Website Style" behavior="After" priority="1000">
+</plugIn>    Last step completed in 00:00:00,0030
+</buildStep>
+<buildStep step="GenerateApiFilter">
+Generating API filter for MRefBuilder...
+    Last step completed in 00:00:00,0160
+</buildStep>
+<buildStep step="GenerateReflectionInfo">
+Generating reflection information...
+[C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe - GenerateRefInfo.proj]
+Build started 26.09.2020 15:22:35.
+Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\GenerateRefInfo.proj&quot; on node 1 (default targets).
+PrepareForBuild:
+  Creating directory &quot;obj\Debug\&quot;.
+GenerateBindingRedirects:
+  No suggested binding redirects from ResolveAssemblyReferences.
+GenerateRefInfo:
+  MRefBuilder (v2020.3.6.0)
+  Copyright &#184; 2006-2020, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright &#184; 2006-2020, Eric Woodruff, All Rights Reserved.
+  No source code context base path specified.  Source context information is unavailable.
+  Loaded 13 assemblies for reflection and 123 dependency assemblies.
+  Wrote information on 19 namespaces, 226 types, and 1265 members
+  Copying file from &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\reflection.org&quot; to &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\reflection.all&quot;.
+  XslTransform (v2020.3.6.0)
+  Copyright &#184; 2006-2020, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright &#184; 2006-2020, Eric Woodruff, All Rights Reserved.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\MergeDuplicates.xsl&#39;.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\AddXamlSyntaxData.xsl&#39;.
+Done Building Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\GenerateRefInfo.proj&quot; (default targets).
+    Last step completed in 00:00:01,8863
+</buildStep>
+<buildStep step="TransformReflectionInfo">
+Transforming reflection output...
+[C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe - TransformManifest.proj]
+Build started 26.09.2020 15:22:37.
+Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TransformManifest.proj&quot; on node 1 (default targets).
+TransformManifest:
+  XslTransform (v2020.3.6.0)
+  Copyright &#184; 2006-2020, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright &#184; 2006-2020, Eric Woodruff, All Rights Reserved.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\\ProductionTransforms\ApplyVSDocModel.xsl&#39;.
+  Copying file from &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\reflection.xml&quot; to &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\reflection.nofilenames&quot;.
+  XslTransform (v2020.3.6.0)
+  Copyright &#184; 2006-2020, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright &#184; 2006-2020, Eric Woodruff, All Rights Reserved.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\AddFilenames.xsl&#39;.
+    Unique name 4AF54226 generated for M:TomsToolbox.Composition.ExtensionMethods.GetExports``1(TomsToolbox.Composition.IExportProvider,System.Type,System.String,System.Func{TomsToolbox.Composition.IMetadata,``0})
+    Unique name 9BEC7D29 generated for M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Collections.Generic.IEnumerable{TomsToolbox.Composition.ExportInfo})
+    Unique name 10877D29 generated for M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Reflection.Assembly[])
+    Unique name C1A7FC28 generated for M:TomsToolbox.Desktop.SafeNativeMemory.#ctor(System.Int32)
+    Unique name C1A6FC28 generated for M:TomsToolbox.Desktop.SafeNativeMemory.#ctor(System.IntPtr,System.Int32)
+    Unique name 6D355840 generated for M:TomsToolbox.Desktop.SafeNativeMemory`1.#ctor(System.Int32)
+    Unique name AFEF9DA3 generated for M:TomsToolbox.Desktop.TryCastWorker`1.Returning``1(``0)
+    Unique name B416096E generated for M:TomsToolbox.Desktop.TryCastWorkerBase`2.ElseThrow(System.String)
+    Unique name 5BC4311D generated for M:TomsToolbox.Desktop.UserAccountControl.LogOnInteractiveUser(System.String,System.String,System.String,TomsToolbox.Desktop.SafeTokenHandle@)
+    Unique name C641B45 generated for M:TomsToolbox.Essentials.AssemblyExtensions.GeneratePackUri(System.Reflection.Assembly,System.String)
+    Unique name C641B48 generated for M:TomsToolbox.Essentials.AssemblyExtensions.GeneratePackUri(System.Reflection.Assembly,System.Uri)
+    Unique name D4FB3B7C generated for M:TomsToolbox.Essentials.AssemblyExtensions.GetAssemblyDirectory(System.Reflection.AssemblyName)
+    Unique name 231FC5C8 generated for M:TomsToolbox.Essentials.CollectionExtensions.AddRange``1(System.Collections.Generic.ICollection{``0},``0,``0,``0[])
+    Unique name 1A01B936 generated for M:TomsToolbox.Essentials.CollectionExtensions.ContainsAny``1(System.Collections.Generic.IEnumerable{``0},``0[])
+    Unique name E7F77681 generated for M:TomsToolbox.Essentials.CollectionExtensions.ForceValue``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)
+    Unique name 5428E3EC generated for M:TomsToolbox.Essentials.CollectionExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0,System.Int32})
+    Unique name D94C66A1 generated for M:TomsToolbox.Essentials.CollectionExtensions.GetValueOrDefault``2(System.Collections.Generic.Dictionary{``0,``1},``0,``1)
+    Unique name 7B7B66A1 generated for M:TomsToolbox.Essentials.CollectionExtensions.GetValueOrDefault``2(System.Collections.Generic.IDictionary{``0,``1},``0)
+    Unique name F01666A1 generated for M:TomsToolbox.Essentials.CollectionExtensions.GetValueOrDefault``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)
+    Unique name 371D66A1 generated for M:TomsToolbox.Essentials.CollectionExtensions.GetValueOrDefault``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},``0)
+    Unique name ABB866A1 generated for M:TomsToolbox.Essentials.CollectionExtensions.GetValueOrDefault``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},``0,``1)
+    Unique name 46E1B86A generated for M:TomsToolbox.Essentials.CollectionExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},``0,System.Collections.Generic.IEqualityComparer{``0})
+    Unique name B8342C6D generated for M:TomsToolbox.Essentials.CollectionExtensions.SynchronizeWith``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEqualityComparer{``0})
+    Unique name 960FCC5D generated for M:TomsToolbox.Essentials.CollectionExtensions.ToDictionary``2(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}},System.Collections.Generic.IEqualityComparer{``0})
+    Unique name F0C08780 generated for M:TomsToolbox.Essentials.CustomAttributeProviderExtensions.GetCustomTypeConverter(System.Reflection.ICustomAttributeProvider,System.String@)
+    Unique name 44D4B989 generated for M:TomsToolbox.Essentials.DateTimeOperations.Max(System.TimeSpan,System.TimeSpan)
+    Unique name 4040BEDB generated for M:TomsToolbox.Essentials.DateTimeOperations.Min(System.TimeSpan,System.TimeSpan)
+    Unique name C4C072BC generated for M:TomsToolbox.Essentials.DateTimeOperations.RoundToDays(System.DateTime,System.Func{System.Double,System.Double})
+    Unique name C3D3FF79 generated for M:TomsToolbox.Essentials.DateTimeOperations.RoundToHours(System.DateTime,System.Func{System.Double,System.Double})
+    Unique name C3D2FF79 generated for M:TomsToolbox.Essentials.DateTimeOperations.RoundToHours(System.TimeSpan)
+    Unique name C3D1FF79 generated for M:TomsToolbox.Essentials.DateTimeOperations.RoundToHours(System.TimeSpan,System.Func{System.Double,System.Double})
+    Unique name 38D64258 generated for M:TomsToolbox.Essentials.DateTimeOperations.RoundToMinutes(System.DateTime,System.Func{System.Double,System.Double})
+    Unique name 96A74258 generated for M:TomsToolbox.Essentials.DateTimeOperations.RoundToMinutes(System.TimeSpan)
+    Unique name 220C4258 generated for M:TomsToolbox.Essentials.DateTimeOperations.RoundToMinutes(System.TimeSpan,System.Func{System.Double,System.Double})
+    Unique name 9FD7C0AB generated for M:TomsToolbox.Essentials.DateTimeOperations.RoundToSeconds(System.DateTime,System.Func{System.Double,System.Double})
+    Unique name FDA8C0AB generated for M:TomsToolbox.Essentials.DateTimeOperations.RoundToSeconds(System.TimeSpan)
+    Unique name 890DC0AB generated for M:TomsToolbox.Essentials.DateTimeOperations.RoundToSeconds(System.TimeSpan,System.Func{System.Double,System.Double})
+    Unique name 1BDBB4A6 generated for M:TomsToolbox.Essentials.DelegateEqualityComparer`1.#ctor(System.Func{`0,System.Object})
+    Unique name BE832941 generated for M:TomsToolbox.Essentials.DelegateEqualityComparer`1.#ctor(System.Func{`0,System.Object},System.Func{System.Object,System.Object,System.Boolean},System.Func{System.Object,System.Int32})
+    Unique name 612A9DDC generated for M:TomsToolbox.Essentials.DelegateEqualityComparer`1.#ctor(System.Func{`0,`0,System.Boolean},System.Func{`0,System.Int32})
+    Unique name 1A44E572 generated for M:TomsToolbox.Essentials.EnumExtensions.SetFlags``1(``0,``0,System.Boolean)
+    Unique name 6F4686DB generated for M:TomsToolbox.Essentials.EnumExtensions.ToEnum``1(System.Int32)
+    Unique name 11EDFB76 generated for M:TomsToolbox.Essentials.EnumExtensions.ToEnum``1(System.Int64)
+    Unique name B4957011 generated for M:TomsToolbox.Essentials.EnumExtensions.ToEnum``1(System.Nullable{System.Int16})
+    Unique name 42013FD4 generated for M:TomsToolbox.Essentials.EnumExtensions.ToEnum``1(System.Nullable{System.Int32})
+    Unique name E4A8B46F generated for M:TomsToolbox.Essentials.EnumExtensions.ToEnum``1(System.Nullable{System.UInt16})
+    Unique name 8750290A generated for M:TomsToolbox.Essentials.EnumExtensions.ToEnum``1(System.Nullable{System.UInt32})
+    Unique name 29F79DA5 generated for M:TomsToolbox.Essentials.EnumExtensions.ToEnum``1(System.UInt16)
+    Unique name B7636D68 generated for M:TomsToolbox.Essentials.EnumExtensions.ToEnum``1(System.UInt32)
+    Unique name 5A0AE203 generated for M:TomsToolbox.Essentials.EnumExtensions.ToEnum``1(System.UInt64)
+    Unique name D26C9733 generated for M:TomsToolbox.Essentials.HighResolutionTimer.#ctor(System.Action{System.TimeSpan},System.TimeSpan)
+    Unique name 9D564F53 generated for M:TomsToolbox.Essentials.MathExtensions.Clip(System.Int32,System.Int32,System.Int32)
+    Unique name 9D534F53 generated for M:TomsToolbox.Essentials.MathExtensions.Clip(System.Int64,System.Int64,System.Int64)
+    Unique name 9D544F53 generated for M:TomsToolbox.Essentials.MathExtensions.Clip(System.Single,System.Single,System.Single)
+    Unique name 3FB0FF83 generated for M:TomsToolbox.Essentials.ReflectionExtensions.EnumerateAllTypes(System.IO.DirectoryInfo)
+    Unique name 3FB0FF82 generated for M:TomsToolbox.Essentials.ReflectionExtensions.EnumerateAllTypes(System.IO.DirectoryInfo,System.String)
+    Unique name 3FB0FF81 generated for M:TomsToolbox.Essentials.ReflectionExtensions.EnumerateAllTypes(System.Reflection.Assembly)
+    Unique name F0F7D537 generated for M:TomsToolbox.Essentials.SemanticVersion.#ctor(System.Version,System.String)
+    Unique name B6879592 generated for M:TomsToolbox.Essentials.SemanticVersion.Equals(TomsToolbox.Essentials.SemanticVersion)
+    Unique name C3B8570C generated for M:TomsToolbox.Essentials.TextAttribute.#ctor(System.Object,System.String)
+    Unique name C56B41FC generated for M:TomsToolbox.Essentials.WeakEventListener`3.#ctor(`0,`1,System.Action{`0,System.Object,`2},System.Action{TomsToolbox.Essentials.WeakEventListener{`0,`1,`2},`1},System.Action{TomsToolbox.Essentials.WeakEventListener{`0,`1,`2},`1})
+    Unique name F5F985D4 generated for M:TomsToolbox.Essentials.XmlExtensions.GetAttribute(System.Xml.Linq.XElement,System.Xml.Linq.XName,System.String)
+    Unique name D35EE0D3 generated for M:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.#ctor(System.Collections.Generic.IList{`0}[])
+    Unique name 768F76E4 generated for M:TomsToolbox.ObservableCollections.ObservableIndexer`2.#ctor(System.Func{`0,`1},System.Collections.Generic.IEqualityComparer{`0})
+    Unique name 5F0E2BB6 generated for M:TomsToolbox.ObservableCollections.ObservablePropertyChangeTracker`1.#ctor(System.Collections.ObjectModel.ReadOnlyObservableCollection{`0})
+    Unique name 5F0E2BB5 generated for M:TomsToolbox.ObservableCollections.ObservablePropertyChangeTracker`1.#ctor(TomsToolbox.ObservableCollections.IObservableCollection{`0})
+    Unique name 1BACCC2 generated for M:TomsToolbox.Wpf.BackgroundThreadWithDispatcher.#ctor(System.String,System.Threading.ApartmentState,System.Threading.ThreadPriority)
+    Unique name 454F282C generated for M:TomsToolbox.Wpf.BindingErrorTracer.Start(System.Action{System.String},System.Diagnostics.SourceLevels)
+    Unique name F01B778 generated for M:TomsToolbox.Wpf.Coordinates.Equals(TomsToolbox.Wpf.Coordinates)
+    Unique name EF6C49C8 generated for M:TomsToolbox.Wpf.Coordinates.op_Implicit(TomsToolbox.Wpf.Coordinates)~System.Windows.Point
+    Unique name 40BD5763 generated for M:TomsToolbox.Wpf.DelegateCommand.#ctor(System.Action)
+    Unique name 40BD5762 generated for M:TomsToolbox.Wpf.DelegateCommand.#ctor(System.Func{System.Boolean},System.Action)
+    Unique name 919FC166 generated for M:TomsToolbox.Wpf.DelegateCommand`1.#ctor(System.Action{`0})
+    Unique name 79961F37 generated for M:TomsToolbox.Wpf.DelegateCommand`1.#ctor(System.Predicate{`0},System.Action{`0})
+    Unique name 2B386846 generated for M:TomsToolbox.Wpf.DependencyObjectExtensions.TryFindAncestor``1(System.Windows.DependencyObject,System.Func{``0,System.Boolean})
+    Unique name 892DA486 generated for M:TomsToolbox.Wpf.DependencyObjectExtensions.TryFindAncestorOrSelf``1(System.Windows.DependencyObject,System.Func{``0,System.Boolean})
+    Unique name 896DF809 generated for M:TomsToolbox.Wpf.DispatcherExtensions.BeginInvoke(System.Windows.Threading.Dispatcher,System.Windows.Threading.DispatcherPriority,System.Action)
+    Unique name 8F65046A generated for M:TomsToolbox.Wpf.DispatcherThrottle.#ctor(System.Windows.Threading.DispatcherPriority,System.Action)
+    Unique name F7447644 generated for M:TomsToolbox.Wpf.ForegroundThreadWithDispatcher.#ctor(System.String,System.Threading.ApartmentState,System.Threading.ThreadPriority)
+    Unique name 4733FA89 generated for M:TomsToolbox.Wpf.ObservableObjectBase.RelayEventsOf(System.ComponentModel.INotifyPropertyChanged,System.ComponentModel.INotifyPropertyChanged)
+    Unique name BC159716 generated for M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.Linq.Expressions.Expression{System.Func{``0}})
+    Unique name 5EBD0BB1 generated for M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.Linq.Expressions.Expression{System.Func{``0}},System.Action{``0,``0})
+    Unique name 164804C generated for M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.String)
+    Unique name 8ED0500F generated for M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.String,System.Action{``0,``0})
+    Unique name F8BB801D generated for M:TomsToolbox.Wpf.PresentationFrameworkExtensions.GetClientRect(System.Windows.FrameworkElement,System.Windows.Media.Visual)
+    Unique name 11738805 generated for M:TomsToolbox.Wpf.PresentationFrameworkExtensions.GetExtent(System.Windows.FrameworkElement,System.Windows.FrameworkElement)
+    Unique name F446C72E generated for M:TomsToolbox.Wpf.PresentationFrameworkExtensions.ProcessMessages(System.Windows.Media.Visual,System.Windows.Threading.DispatcherPriority)
+    Unique name DC3D24FF generated for M:TomsToolbox.Wpf.PresentationFrameworkExtensions.ProcessMessages(System.Windows.Threading.Dispatcher)
+    Unique name 3995B064 generated for M:TomsToolbox.Wpf.PresentationFrameworkExtensions.ProcessMessages(System.Windows.Threading.Dispatcher,System.Windows.Threading.DispatcherPriority)
+    Unique name E5574789 generated for M:TomsToolbox.Wpf.PresentationFrameworkExtensions.Translate(System.Windows.Rect,System.Windows.Media.Visual,System.Windows.Media.Visual)
+    Unique name 3F729033 generated for M:TomsToolbox.Wpf.PropertyBinding`1.#ctor(System.Object,System.Windows.Data.BindingMode,System.String)
+    Unique name 2768EE04 generated for M:TomsToolbox.Wpf.PropertyBinding`1.#ctor(System.Object,System.Windows.Data.BindingMode,System.Windows.PropertyPath)
+    Unique name 84C17969 generated for M:TomsToolbox.Wpf.PropertyBinding`1.#ctor(System.Object,System.Windows.PropertyPath)
+    Unique name FEC90DB3 generated for M:TomsToolbox.Wpf.RelayedEventAttribute.#ctor(System.Type,System.String)
+    Unique name 7BDF007E generated for M:TomsToolbox.Wpf.ThreadWithDispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority,System.Action)
+    Unique name 4D00D9EF generated for M:TomsToolbox.Wpf.ThreadWithDispatcher.Join(System.TimeSpan)
+    Unique name 48CD7538 generated for M:TomsToolbox.Wpf.Throttle.#ctor(System.TimeSpan,System.Action)
+    Unique name 3F2C7BA generated for M:TomsToolbox.Wpf.VisualExtensions.BeginInvoke(System.Windows.Media.Visual,System.Windows.Threading.DispatcherPriority,System.Action)
+    Unique name 4484C6EB generated for M:TomsToolbox.Wpf.WaitCursor.Start(System.Windows.FrameworkElement,System.Windows.Threading.DispatcherPriority)
+    Unique name 570B24F generated for M:TomsToolbox.Wpf.WaitCursor.StartLocal(System.Windows.FrameworkElement,System.Windows.Threading.DispatcherPriority)
+    Unique name 723425AA generated for M:TomsToolbox.Wpf.Composition.CompositeContextMenuExtension.#ctor(System.String)
+    Unique name 2D01BF45 generated for M:TomsToolbox.Wpf.Composition.RoleBasedDataTemplateKey.#ctor(System.Object,System.Object)
+    Unique name 6FE314C2 generated for M:TomsToolbox.Wpf.Composition.RoleBasedDataTemplateKey.Equals(TomsToolbox.Wpf.Composition.RoleBasedDataTemplateKey)
+    Unique name 9CD66BB6 generated for M:TomsToolbox.Wpf.Converters.BinaryOperationConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)
+    Unique name EB0A7A24 generated for M:TomsToolbox.Wpf.Converters.ColorNameToBrushConverter.Convert(System.String)
+    Unique name 46D89EB5 generated for M:TomsToolbox.Wpf.Converters.CoordinatesToPointConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+    Unique name 2945BC0 generated for M:TomsToolbox.Wpf.Converters.EnumToBooleanConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+    Unique name 86334A6A generated for M:TomsToolbox.Wpf.Converters.EnumToValuesConverter.Convert(System.Type,System.String)
+    Unique name C78B3171 generated for M:TomsToolbox.Wpf.Converters.ObjectToAttributeConverter`1.InternalConvert(System.Object,System.Type,System.Func{`0,System.String},System.Func{`0,System.Boolean})
+    Unique name 9A730EDE generated for M:TomsToolbox.Wpf.Converters.ObjectToDescriptionConverter.Convert(System.Object,System.Type)
+    Unique name B27CB10D generated for M:TomsToolbox.Wpf.Converters.ObjectToDescriptionConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+    Unique name 46D71137 generated for M:TomsToolbox.Wpf.Converters.ObjectToDisplayNameConverter.Convert(System.Object,System.Type)
+    Unique name E97E85D2 generated for M:TomsToolbox.Wpf.Converters.ObjectToDisplayNameConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+    Unique name D8A50705 generated for M:TomsToolbox.Wpf.Converters.ObjectToTextConverter.Convert(System.Object,System.Object,System.Type)
+    Unique name 36760705 generated for M:TomsToolbox.Wpf.Converters.ObjectToTextConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+    Unique name 79E6F25B generated for M:TomsToolbox.Wpf.Converters.ReplaceTextConverter.Convert(System.String,System.String,System.String,System.Text.RegularExpressions.RegexOptions,System.Boolean)
+    Unique name 4F420DEA generated for M:TomsToolbox.Wpf.Converters.ThicknessMultiplyConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+    Unique name DB5A80DB generated for M:TomsToolbox.Wpf.Converters.ValueConverterExtensions.TraceError(System.Windows.Data.IValueConverter,System.String,System.String)
+    Unique name C73FFCA9 generated for M:TomsToolbox.Wpf.Styles.WpfStyles.Defaults(System.Windows.Window)
+  XslTransform (v2020.3.6.0)
+  Copyright &#184; 2006-2020, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright &#184; 2006-2020, Eric Woodruff, All Rights Reserved.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\ReflectionToManifest.xsl&#39;.
+Done Building Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TransformManifest.proj&quot; (default targets).
+    Last step completed in 00:00:01,3078
+</buildStep>
+<buildStep step="GenerateNamespaceSummaries">
+Generating namespace summary information...
+    Last step completed in 00:00:00,1193
+</buildStep>
+<buildStep step="GenerateInheritedDocumentation">
+Generating inherited documentation...
+[C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe - GenerateInheritedDocs.proj]
+Sandcastle Help File Builder and Tools, version 2020.3.6.0
+Copyright &#184; 2006-2020, Eric Woodruff, All Rights Reserved
+E-Mail: Eric@EWoodruff.us
+
+Reflection information will be retrieved from &#39;reflection.xml&#39;
+Inherited documentation will be written to &#39;_InheritedDocs_.xml&#39;
+Indexing C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\*.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Ninject.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Throttle.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Microsoft.Xaml.Behaviors.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\WeakEventHandler.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\JetBrainsAnnotations.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\JetBrains.Annotations.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Essentials.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Desktop.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.ObservableCollections.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Wpf.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Wpf.Styles.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Wpf.Composition.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Wpf.Composition.Styles.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Wpf.Composition.Mef.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Wpf.Composition.AttributedModel.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Composition.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Composition.Ninject.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Composition.Mef2.xml
+Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Core.xml
+Indexed 161560 members in 146 file(s).  19 file(s) to scan for &lt;inheritdoc /&gt; tags.
+Merging inherited documentation...
+
+
+Documentation merged successfully
+    Last step completed in 00:00:01,8814
+</buildStep>
+<buildStep step="CopyConceptualContent">
+Copying conceptual content...
+Copying standard token shared content file...
+Checking for other token files...
+Checking for code snippets files...
+Copying images and creating the media map file...
+Generating conceptual topic files
+    Parsing topic file &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\Documentation\Content\Welcome.aml&#39;
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\Documentation\Content\Welcome.aml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\ddueXml\70e0e697-583b-46c1-94a3-a992d398d79a.xml
+    Parsing topic file &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\Documentation\Content\VersionHistory\VersionHistory.aml&#39;
+    D:\Develop\My Open Source\GitHub\TomsToolbox2\src\Documentation\Content\VersionHistory\VersionHistory.aml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\ddueXml\30a05c61-ca5f-4fe9-8190-f1bd787fe2c7.xml
+    Last step completed in 00:00:00,0160
+</buildStep>
+<buildStep step="CreateConceptualTopicConfigs">
+Creating conceptual topic configuration files...
+    Companion files
+    _ContentMetadata_.xml
+    Merging topic IDs into manifest.xml
+    Last step completed in 00:00:00,0130
+</buildStep>
+<buildStep step="CopyAdditionalContent">
+Copying additional content files...
+D:\Develop\My Open Source\GitHub\TomsToolbox2\src\Documentation\icons\Help.png -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\Help.png
+    Last step completed in 00:00:00,0030
+</buildStep>
+<buildStep step="MergeTablesOfContents">
+Merging conceptual and additional tables of contents...
+    Last step completed in 00:00:00,0010
+</buildStep>
+<buildStep step="GenerateIntermediateTableOfContents">
+Generating intermediate table of contents file...
+[C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe - GenerateIntermediateTOC.proj]
+Build started 26.09.2020 15:22:40.
+Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\GenerateIntermediateTOC.proj&quot; on node 1 (default targets).
+GenerateIntermediateTOC:
+  XslTransform (v2020.3.6.0)
+  Copyright &#184; 2006-2020, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright &#184; 2006-2020, Eric Woodruff, All Rights Reserved.
+  Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\\ProductionTransforms\CreateVSToc.xsl&#39;.
+Done Building Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\GenerateIntermediateTOC.proj&quot; (default targets).
+Generating conceptual content intermediate TOC file...
+    Last step completed in 00:00:00,3521
+</buildStep>
+<buildStep step="CreateBuildAssemblerConfigs">
+Creating Sandcastle configuration files...
+    sandcastle.config
+    Last step completed in 00:00:00,2032
+</buildStep>
+<buildStep step="MergeCustomConfigs">
+Merging custom build component configurations
+D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\sandcastle.config
+  Updating reference topic configurations.
+    Added configuration for &#39;API Token Resolution&#39; before &#39;Show Missing Documentation Component&#39; (instance 1)
+    Replacing default configuration for &#39;Code Block Component&#39; with the custom configuration
+    The configuration for &#39;Syntax Component&#39; is disabled and will not be used.
+  Updating conceptual topic configurations.
+    Skipping component &#39;API Token Resolution&#39;, not used in conceptual build
+    Replacing default configuration for &#39;Code Block Component&#39; with the custom configuration
+    The configuration for &#39;Syntax Component&#39; is disabled and will not be used.
+    Removing unused ExampleComponent.
+    Last step completed in 00:00:00,0070
+</buildStep>
+<buildStep step="BuildTopics">
+Building help topics...
+[C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe - BuildTopics.proj]
+Build started 26.09.2020 15:22:41.
+Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj&quot; on node 1 (default targets).
+BuildTopics:
+  BuildAssembler (v2020.3.6.0)
+  Copyright &#184; 2006-2020, Microsoft Corporation, All Rights Reserved.
+  Portions Copyright &#184; 2006-2020, Eric Woodruff, All Rights Reserved.
+  Loading configuration...
+  Processing topics...
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExportProvider.#ctor(Ninject.IKernel)] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Collections.Generic.IEnumerable{System.Reflection.Assembly})] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Collections.Generic.IEnumerable{System.Reflection.Assembly})] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Collections.Generic.IEnumerable{TomsToolbox.Composition.ExportInfo})] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Collections.Generic.IEnumerable{TomsToolbox.Composition.ExportInfo})] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Reflection.Assembly[])] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Reflection.Assembly[])] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.ObservableCollections.ObservableFilteredCollection`1.Finalize] Missing &lt;summary&gt; documentation [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2.Finalize] Missing &lt;summary&gt; documentation [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [N:TomsToolbox.Wpf] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [N:TomsToolbox.Wpf] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerBase&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.BehaviorCollection] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.BehaviorCollection] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.TriggerCollection] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerBase&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.TriggerCollection] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerBase&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [N:TomsToolbox.Wpf.Composition] Member ID URL not found for target &#39;T:System.ComponentModel.Composition.Hosting.IExportProvider&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [N:TomsToolbox.Wpf.Composition] Unknown reference link target &#39;T:TomsToolbox.Wpf.Composition.VisualCompositionExportAttribute&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.CommandRoutingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.CommandRoutingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ContentControlCompositionBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ContentControlCompositionBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ImportBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ImportBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ImportExtension] Member ID URL not found for target &#39;T:System.ComponentModel.Composition.Hosting.IExportProvider&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ItemsControlCompositionBehavior] Unknown reference link target &#39;T:TomsToolbox.Wpf.Composition.VisualCompositionExportAttribute&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ItemsControlCompositionBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ItemsControlCompositionBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.Styles.ThemeResourceLoaderBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.Styles.ThemeResourceLoaderBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.Styles.ThemeResourceLoaderBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Composition.Styles.ThemeResourceLoaderBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.XamlExtensions.DataTemplate] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.DataTemplate.Role&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Fields.T:TomsToolbox.Wpf.Composition.XamlExtensions.DataTemplate] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.DataTemplate.Role&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [F:TomsToolbox.Wpf.Composition.XamlExtensions.DataTemplate.RoleProperty] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.DataTemplate.Role&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.XamlExtensions.VisualComposition] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.VisualComposition.RegionId&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Fields.T:TomsToolbox.Wpf.Composition.XamlExtensions.VisualComposition] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.VisualComposition.RegionId&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [F:TomsToolbox.Wpf.Composition.XamlExtensions.VisualComposition.RegionIdProperty] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.VisualComposition.RegionId&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [N:TomsToolbox.Wpf.Interactivity] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapPanBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapPanBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapPanBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.CreateInstanceCore&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.MapPanBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.CreateInstanceCore&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapTouchBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapTouchBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapTouchBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.MapTouchBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapZoomBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapZoomBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectionRectangleBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectionRectangleBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.TimerTrigger] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerBase&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.TimerTrigger] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerBase`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerAction&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TargetedTriggerAction&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TargetedTriggerAction`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.TriggerAction.Invoke(System.Object)&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.TriggerAction.Invoke(System.Object)&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.WindowButtonsHandlingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.WindowButtonsHandlingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.WindowButtonsHandlingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.WindowButtonsHandlingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Styles.WpfStyles.GetWindowTitleDecorator(System.Windows.DependencyObject)] Missing &lt;returns&gt; documentation [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Styles.WpfStyles.GetWindowTitleDecorator(System.Windows.DependencyObject)] Missing &lt;param name=&quot;element&quot;/&gt; documentation [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Styles.WpfStyles.SetWindowTitleDecorator(System.Windows.DependencyObject,System.Object)] Missing &lt;param name=&quot;element&quot;/&gt; documentation [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Styles.WpfStyles.SetWindowTitleDecorator(System.Windows.DependencyObject,System.Object)] Missing &lt;param name=&quot;value&quot;/&gt; documentation [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.XamlExtensions.Validation] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.ShowErrorInTooltip&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [Fields.T:TomsToolbox.Wpf.XamlExtensions.Validation] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.ShowErrorInTooltip&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [F:TomsToolbox.Wpf.XamlExtensions.Validation.ShowErrorInTooltipProperty] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.ShowErrorInTooltip&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+  Processed 1993 topic(s)
+  112 warning(s)
+  CopyFromIndexComponent: &quot;metadata&quot; in-memory cache entries used: 1 of 15.
+  ResolveArtLinksComponent: Copying media files...
+  CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 15 of 15.
+  CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 14 of 30.
+Done Building Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj&quot; (default targets).
+    Last step completed in 00:00:22,5896
+</buildStep>
+<buildStep step="CombiningIntermediateTocFiles">
+Combining conceptual and API intermediate TOC files...
+    Last step completed in 00:00:00,0110
+</buildStep>
+<buildStep step="ExtractingHtmlInfo">
+Extracting HTML info for HTML Help 1 and/or website...
+[C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe - ExtractHtmlInfo.proj]
+Sandcastle Help File Builder and Tools, version 2020.3.6.0
+Copyright &#184; 2006-2020, Eric Woodruff, All Rights Reserved
+E-Mail: Eric@EWoodruff.us
+
+Using LCID &#39;1033&#39;, code page &#39;65001&#39;, encoding charset &#39;UTF-8&#39;.
+
+Processing website files in D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website
+Processed 1993 HTML files
+Sorting keywords and generating See Also indices
+Saving website keyword index to D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\WebKI.xml
+Saving website table of contents to D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\WebTOC.xml
+    Last step completed in 00:00:01,0900
+</buildStep>
+<buildStep step="CopyStandardHelpContent">
+Copying standard help content...
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertCaution.png -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\AlertCaution.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertNote.png -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\AlertNote.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\AlertSecurity.png -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\AlertSecurity.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\CFW.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\CFW.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\CodeExample.png -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\CodeExample.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\favicon.ico -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\favicon.ico
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privclass.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\privclass.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privdelegate.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\privdelegate.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privenumeration.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\privenumeration.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privevent.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\privevent.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privextension.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\privextension.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privfield.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\privfield.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privinterface.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\privinterface.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privmethod.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\privmethod.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privproperty.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\privproperty.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\privstructure.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\privstructure.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protclass.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\protclass.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protdelegate.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\protdelegate.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protenumeration.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\protenumeration.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protevent.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\protevent.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protextension.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\protextension.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protfield.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\protfield.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protinterface.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\protinterface.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protmethod.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\protmethod.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protoperator.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\protoperator.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protproperty.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\protproperty.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\protstructure.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\protstructure.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubclass.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\pubclass.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubdelegate.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\pubdelegate.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubenumeration.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\pubenumeration.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubevent.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\pubevent.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubextension.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\pubextension.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubfield.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\pubfield.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubinterface.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\pubinterface.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubmethod.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\pubmethod.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\puboperator.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\puboperator.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubproperty.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\pubproperty.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\pubstructure.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\pubstructure.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\SectionCollapsed.png -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\SectionCollapsed.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\SectionExpanded.png -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\SectionExpanded.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\slMobile.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\slMobile.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\static.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\static.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\icons\xna.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\xna.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\scripts\branding.js -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\scripts\branding.js
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-cs-CZ.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-cs-CZ.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-de-DE.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-de-DE.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-en-US.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-en-US.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-es-ES.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-es-ES.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-fr-FR.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-fr-FR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Help1.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-Help1.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-HelpViewer.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-HelpViewer.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-it-IT.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-it-IT.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ja-JP.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-ja-JP.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ko-KR.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-ko-KR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-pl-PL.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-pl-PL.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-pt-BR.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-pt-BR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-ru-RU.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-ru-RU.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-tr-TR.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-tr-TR.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-Website.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-Website.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-CN.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-zh-CN.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-TW.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding-zh-TW.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding.css -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\styles\branding.css
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\index.html -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\index.html
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\search.html -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\search.html
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\SearchHelp.aspx -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\SearchHelp.aspx
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\SearchHelp.inc.php -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\SearchHelp.inc.php
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\SearchHelp.php -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\SearchHelp.php
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\Web.Config -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\Web.Config
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\html\GeneralError.htm -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\html\GeneralError.htm
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\html\PageNotFound.htm -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\html\PageNotFound.htm
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\Search.png -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\Search.png
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocClose.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\TocClose.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocCollapsed.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\TocCollapsed.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocExpanded.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\TocExpanded.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\icons\TocOpen.gif -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\TocOpen.gif
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\branding-Website.js -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\scripts\branding-Website.js
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\clipboard.min.js -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\scripts\clipboard.min.js
+C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\jquery-3.3.1.min.js -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\scripts\jquery-3.3.1.min.js
+    Last step completed in 00:00:00,3413
+</buildStep>
+<buildStep step="GenerateHelpFormatTableOfContents">
+Generating website table of contents file...
+    Last step completed in 00:00:00,0000
+</buildStep>
+<buildStep step="GenerateFullTextIndex">
+Generating full-text index for the website...
+
+<plugIn name="Lightweight Website Style" behavior="After" priority="1000">
+Adding lightweight search and TOC elements to each topic...
+</plugIn>    Last step completed in 00:00:02,9515
+</buildStep>
+<buildStep step="CopyingWebsiteFiles">
+Copying website files to output folder...
+
+Copied 500 files
+Copied 1000 files
+Copied 1500 files
+Copied 2000 files
+Copied 2500 files
+Copied 2806 files for the website content
+    Last step completed in 00:00:02,4091
+</buildStep>
+<buildStep step="CleanIntermediates">
+Removing intermediate files...
+    Last step completed in 00:00:01,5296
+</buildStep>
+<buildStep step="Completed">
+
+Build completed successfully at 26.09.2020 15:23:12.  Total time: 00:00:41,0698
+
+</buildStep>
+</shfbBuild>
