@@ -30,7 +30,7 @@
     <Border BorderThickness="1" BorderBrush="LightGray">
       <Menu Style="{DynamicResource {x:Static composition:ResourceKeys.CompositeMenuStyle}}" composition:VisualComposition.RegionId="{x:Static local:RegionId.Menu}" />
     </Border>
-    <ToolBar composition:VisualComposition.RegionId="{x:Static local:RegionId.ToolBar}">
+    <ToolBar composition:VisualComposition.RegionId="{x:Static local:RegionId.ToolBar}" UseLayoutRounding="True">
       <ToolBar.Resources>
         <ControlTemplate x:Key="ToolBarGroupItemTemplate" TargetType="{x:Type GroupItem}">
           <StackPanel Orientation="Horizontal">
