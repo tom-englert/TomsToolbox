@@ -13,7 +13,7 @@
 
     /// <inheritdoc />
     /// <summary>
-    /// Retrieves all exported items with the  <see cref="T:TomsToolbox.Wpf.Composition.VisualCompositionExportAttribute" /> that match the RegionId from the composition container and assigns them as the items source of the associated <see cref="T:System.Windows.Controls.ItemsControl" />
+    /// Retrieves all exported items with the  <see cref="T:TomsToolbox.Wpf.Composition.AttributedModel.VisualCompositionExportAttribute" /> that match the RegionId from the composition container and assigns them as the items source of the associated <see cref="T:System.Windows.Controls.ItemsControl" />
     /// <para />
     /// If the items control is a <see cref="T:System.Windows.Controls.Primitives.Selector" />, and the composable object implement <see cref="T:TomsToolbox.Wpf.Composition.ISelectableComposablePart" />, the selection of the selector is synchronized with the <see cref="P:TomsToolbox.Wpf.Composition.ISelectableComposablePart.IsSelected" /> property.
     /// </summary>

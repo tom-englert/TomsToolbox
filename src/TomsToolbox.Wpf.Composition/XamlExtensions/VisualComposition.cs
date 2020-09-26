@@ -75,7 +75,7 @@
             obj.SetValue(RegionIdProperty, value);
         }
         /// <summary>
-        /// Identifies the <see cref="P:TomsToolbox.Wpf.XamlExtensions.VisualComposition.RegionId"/> attached property
+        /// Identifies the <see cref="P:TomsToolbox.Wpf.Composition.XamlExtensions.VisualComposition.RegionId"/> attached property
         /// </summary>
         /// <AttachedPropertyComments>
         /// <summary>

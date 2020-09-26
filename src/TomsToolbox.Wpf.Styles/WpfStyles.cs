@@ -176,15 +176,17 @@
         public static readonly DependencyProperty WindowTitleDecoratorProperty = DependencyProperty.RegisterAttached(
                     "WindowTitleDecorator", typeof(object), typeof(WpfStyles), new FrameworkPropertyMetadata(default, FrameworkPropertyMetadataOptions.Inherits));
         /// <summary>
-        /// Sets the <see cref="P:TomsToolbox.Wpf.Styles.WpfStyles.WindowTitleDecorator"/>
-        /// </summary>
+        /// Sets the <see cref="P:TomsToolbox.Wpf.Styles.WpfStyles.WindowTitleDecorator" /></summary>
+        /// <param name="element">The target element.</param>
+        /// <param name="value">The value.</param>
         public static void SetWindowTitleDecorator(DependencyObject element, object value)
         {
             element.SetValue(WindowTitleDecoratorProperty, value);
         }
         /// <summary>
-        /// Gets the <see cref="P:TomsToolbox.Wpf.Styles.WpfStyles.WindowTitleDecorator"/>
-        /// </summary>
+        /// Gets the <see cref="P:TomsToolbox.Wpf.Styles.WpfStyles.WindowTitleDecorator" /></summary>
+        /// <param name="element">The element.</param>
+        /// <returns>The title decorator</returns>
         public static object GetWindowTitleDecorator(DependencyObject element)
         {
             return element.GetValue(WindowTitleDecoratorProperty);

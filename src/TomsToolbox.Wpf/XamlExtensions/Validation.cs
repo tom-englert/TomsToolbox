@@ -17,25 +17,25 @@
         private static readonly DependencyPropertyDescriptor _propertyDescriptor = DependencyPropertyDescriptor.FromProperty(System.Windows.Controls.Validation.HasErrorProperty, typeof(FrameworkElement));
 
         /// <summary>
-        /// Gets whether validation errors are shown in the tooltip of the associated control or not.
+        /// Gets whether validation errors are shown in the tool tip of the associated control or not.
         /// </summary>
         /// <param name="obj">The target control.</param>
-        /// <returns><c>true</c>if validation errors are shown in the tooltip of the associated control; otherwise <c>false</c>.</returns>
+        /// <returns><c>true</c>if validation errors are shown in the tool tip of the associated control; otherwise <c>false</c>.</returns>
         public static bool GetShowErrorInTooltip([NotNull] DependencyObject obj)
         {
             return ((bool?)obj.GetValue(ShowErrorInTooltipProperty)).GetValueOrDefault();
         }
         /// <summary>
-        /// Sets whether validation errors are shown in the tooltip of the associated control or not.
+        /// Sets whether validation errors are shown in the tool tip of the associated control or not.
         /// </summary>
         /// <param name="obj">The target control.</param>
-        /// <param name="value">if set to <c>true</c> validation errors are shown in the tooltip of the associated control.</param>
+        /// <param name="value">if set to <c>true</c> validation errors are shown in the tool tip of the associated control.</param>
         public static void SetShowErrorInTooltip([NotNull] DependencyObject obj, bool value)
         {
             obj.SetValue(ShowErrorInTooltipProperty, value);
         }
         /// <summary>
-        /// Identifies the <see cref="P:TomsToolbox.Wpf.XamlExtensions.ShowErrorInTooltip"/> attached property
+        /// Identifies the <see cref="P:TomsToolbox.Wpf.XamlExtensions.Validation.ShowErrorInTooltip"/> attached property
         /// </summary>
         /// <AttachedPropertyComments>
         /// <summary>

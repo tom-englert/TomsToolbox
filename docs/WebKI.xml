@@ -747,8 +747,8 @@
     <HelpKINode Title="Import.DataContextProperty Field" Url="html/778C9F2D.htm" />
   </HelpKINode>
   <HelpKINode Title="DataGridCellStyle field">
-    <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/B7A4BBF6.htm" />
     <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/3B3054D2.htm" />
+    <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/B7A4BBF6.htm" />
   </HelpKINode>
   <HelpKINode Title="DataGridCheckBoxEditingElementStyle field" Url="html/57EBF12C.htm" />
   <HelpKINode Title="DataGridCheckBoxElementStyle field" Url="html/2173DFDD.htm" />
@@ -798,20 +798,20 @@
     <HelpKINode Title="constructor" Url="html/B8CBCDB2.htm" />
     <HelpKINode Title="methods" Url="html/135542AA.htm" />
     <HelpKINode Title="methods" Url="html/A2C845AC.htm" />
-    <HelpKINode Title="properties" Url="html/F59E154B.htm" />
     <HelpKINode Title="properties" Url="html/FF53E2AE.htm" />
+    <HelpKINode Title="properties" Url="html/F59E154B.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateAttribute.DataTemplateAttribute constructor">
     <HelpKINode Title="DataTemplateAttribute Constructor " Url="html/2BFCF92B.htm" />
     <HelpKINode Title="DataTemplateAttribute Constructor " Url="html/B8CBCDB2.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateAttribute.DataType property">
-    <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/5032ADFA.htm" />
     <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/D1E2AC38.htm" />
+    <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/5032ADFA.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateAttribute.Role property">
-    <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/FB533439.htm" />
     <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/AB47D607.htm" />
+    <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/FB533439.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateManager class">
     <HelpKINode Title="DataTemplateManager Class" Url="html/F883E1B6.htm" />
@@ -827,8 +827,8 @@
   <HelpKINode Title="DataTemplateManager.RoleProperty field" Url="html/A120E2C1.htm" />
   <HelpKINode Title="DataTemplateManager.SetRole method" Url="html/1C9515FF.htm" />
   <HelpKINode Title="DataType property">
-    <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/D1E2AC38.htm" />
     <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/5032ADFA.htm" />
+    <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/D1E2AC38.htm" />
     <HelpKINode Title="IDataTemplateMetadata.DataType Property " Url="html/E944940D.htm" />
   </HelpKINode>
   <HelpKINode Title="DateTimeOperations class">
@@ -1235,8 +1235,8 @@
     <HelpKINode Title="IExportProvider.ExportsChanged Event" Url="html/D16EDD33.htm" />
   </HelpKINode>
   <HelpKINode Title="ExtensionMethods class">
-    <HelpKINode Title="ExtensionMethods Class" Url="html/2392FCED.htm" />
     <HelpKINode Title="ExtensionMethods Class" Url="html/9DCC5175.htm" />
+    <HelpKINode Title="ExtensionMethods Class" Url="html/2392FCED.htm" />
     <HelpKINode Title="methods" Url="html/C33F5656.htm" />
     <HelpKINode Title="methods" Url="html/283E1F3C.htm" />
   </HelpKINode>
@@ -1305,6 +1305,12 @@
   <HelpKINode Title="FromSingleItem&lt;T&gt; method" Url="html/B450E71D.htm" />
   <HelpKINode Title="FromSingleItemAndList(Of T, TItem) method" Url="html/69971F97.htm" />
   <HelpKINode Title="FromSingleItemAndList&lt;T, TItem&gt; method" Url="html/69971F97.htm" />
+  <HelpKINode Title="GeneratedInternalTypeHelper class">
+    <HelpKINode Title="GeneratedInternalTypeHelper Class" Url="html/570DC53F.htm" />
+    <HelpKINode Title="constructor" Url="html/5E1CF73.htm" />
+    <HelpKINode Title="methods" Url="html/A93E5235.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GeneratedInternalTypeHelper.GeneratedInternalTypeHelper constructor" Url="html/5E1CF73.htm" />
   <HelpKINode Title="GeneratePackUri method" Url="html/D8E2E4C3.htm" />
   <HelpKINode Title="GetAncestors method" Url="html/E15EAC1F.htm" />
   <HelpKINode Title="GetAncestorsAndSelf method" Url="html/6640D0E1.htm" />
@@ -2873,12 +2879,12 @@
   <HelpKINode Title="ResourceKey attached property" Url="html/A4769F90.htm" />
   <HelpKINode Title="ResourceKeyProperty field" Url="html/F5E6759A.htm" />
   <HelpKINode Title="ResourceKeys class">
-    <HelpKINode Title="ResourceKeys Class" Url="html/70E16745.htm" />
     <HelpKINode Title="ResourceKeys Class" Url="html/C959EDED.htm" />
     <HelpKINode Title="ResourceKeys Class" Url="html/D534761E.htm" />
-    <HelpKINode Title="fields" Url="html/2AAA6258.htm" />
+    <HelpKINode Title="ResourceKeys Class" Url="html/70E16745.htm" />
     <HelpKINode Title="fields" Url="html/CD6D30E1.htm" />
     <HelpKINode Title="fields" Url="html/2A12A93F.htm" />
+    <HelpKINode Title="fields" Url="html/2AAA6258.htm" />
   </HelpKINode>
   <HelpKINode Title="ResourceKeys.AccentDarkBrush field" Url="html/5DE74413.htm" />
   <HelpKINode Title="ResourceKeys.AutoToolTipTextBoxStyle field" Url="html/D332F46B.htm" />
@@ -2891,8 +2897,8 @@
   <HelpKINode Title="ResourceKeys.ContextMenuStyle field" Url="html/E7F28551.htm" />
   <HelpKINode Title="ResourceKeys.ControlWithValidationErrorToolTipStyle field" Url="html/EBE046D9.htm" />
   <HelpKINode Title="ResourceKeys.DataGridCellStyle field">
-    <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/B7A4BBF6.htm" />
     <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/3B3054D2.htm" />
+    <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/B7A4BBF6.htm" />
   </HelpKINode>
   <HelpKINode Title="ResourceKeys.DataGridCheckBoxEditingElementStyle field" Url="html/57EBF12C.htm" />
   <HelpKINode Title="ResourceKeys.DataGridCheckBoxElementStyle field" Url="html/2173DFDD.htm" />
@@ -2922,8 +2928,8 @@
   <HelpKINode Title="ResourceKeys.ToggleButtonStyle field" Url="html/A01161DE.htm" />
   <HelpKINode Title="ResourceKeys.ToolTipStyle field" Url="html/FF14EDC0.htm" />
   <HelpKINode Title="ResourceKeys.WindowStyle field">
-    <HelpKINode Title="ResourceKeys.WindowStyle Field" Url="html/DEC31CEE.htm" />
     <HelpKINode Title="ResourceKeys.WindowStyle Field" Url="html/D12C2CA2.htm" />
+    <HelpKINode Title="ResourceKeys.WindowStyle Field" Url="html/DEC31CEE.htm" />
   </HelpKINode>
   <HelpKINode Title="Restart method" Url="html/4ACCC89C.htm" />
   <HelpKINode Title="Restore property" Url="html/EE43B8E3.htm" />
@@ -2938,14 +2944,14 @@
   <HelpKINode Title="Role property">
     <HelpKINode Title="ComposableContentControl.Role Property " Url="html/1959897.htm" />
     <HelpKINode Title="ContentControlCompositionBehavior.Role Property " Url="html/B3DF3EF8.htm" />
-    <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/AB47D607.htm" />
     <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/FB533439.htm" />
+    <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/AB47D607.htm" />
     <HelpKINode Title="IDataTemplateMetadata.Role Property " Url="html/6373CFC4.htm" />
     <HelpKINode Title="IVisualCompositionMetadata.Role Property " Url="html/33FFCA4E.htm" />
     <HelpKINode Title="RoleBasedDataTemplateKey.Role Property " Url="html/3831FFD.htm" />
     <HelpKINode Title="RoleBasedDataTemplateSelector.Role Property " Url="html/75C8DD6D.htm" />
-    <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/D4495849.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/3215271D.htm" />
+    <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/D4495849.htm" />
   </HelpKINode>
   <HelpKINode Title="RoleBasedDataTemplateKey class">
     <HelpKINode Title="RoleBasedDataTemplateKey Class" Url="html/F71D1B96.htm" />
@@ -3268,8 +3274,8 @@
   <HelpKINode Title="TargetProperty property" Url="html/5FA82A08.htm" />
   <HelpKINode Title="TargetRegions property">
     <HelpKINode Title="IVisualCompositionMetadata.TargetRegions Property " Url="html/9D7D2BC5.htm" />
-    <HelpKINode Title="VisualCompositionExportAttribute.TargetRegions Property " Url="html/828590FC.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute.TargetRegions Property " Url="html/D7D76DDE.htm" />
+    <HelpKINode Title="VisualCompositionExportAttribute.TargetRegions Property " Url="html/828590FC.htm" />
   </HelpKINode>
   <HelpKINode Title="TaskFactory property" Url="html/FB60A7C.htm" />
   <HelpKINode Title="TaskScheduler property" Url="html/B9357733.htm" />
@@ -4076,16 +4082,16 @@
   <HelpKINode Title="VisualCompositionExportAttribute class">
     <HelpKINode Title="VisualCompositionExportAttribute Class" Url="html/A3ADB2E6.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute Class" Url="html/FB38E407.htm" />
-    <HelpKINode Title="constructor" Url="html/2FFCFE4E.htm" />
     <HelpKINode Title="constructor" Url="html/EBFBBE4.htm" />
-    <HelpKINode Title="methods" Url="html/D9F4C1F8.htm" />
+    <HelpKINode Title="constructor" Url="html/2FFCFE4E.htm" />
     <HelpKINode Title="methods" Url="html/E5318483.htm" />
-    <HelpKINode Title="properties" Url="html/E381767F.htm" />
+    <HelpKINode Title="methods" Url="html/D9F4C1F8.htm" />
     <HelpKINode Title="properties" Url="html/94C4E8D1.htm" />
+    <HelpKINode Title="properties" Url="html/E381767F.htm" />
   </HelpKINode>
   <HelpKINode Title="VisualCompositionExportAttribute.Role property">
-    <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/3215271D.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/D4495849.htm" />
+    <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/3215271D.htm" />
   </HelpKINode>
   <HelpKINode Title="VisualCompositionExportAttribute.Sequence property">
     <HelpKINode Title="VisualCompositionExportAttribute.Sequence Property " Url="html/5AF7B7AA.htm" />
@@ -4207,8 +4213,8 @@
   <HelpKINode Title="WindowCommands.Minimize property" Url="html/F16DD780.htm" />
   <HelpKINode Title="WindowCommands.Restore property" Url="html/EE43B8E3.htm" />
   <HelpKINode Title="WindowStyle field">
-    <HelpKINode Title="ResourceKeys.WindowStyle Field" Url="html/D12C2CA2.htm" />
     <HelpKINode Title="ResourceKeys.WindowStyle Field" Url="html/DEC31CEE.htm" />
+    <HelpKINode Title="ResourceKeys.WindowStyle Field" Url="html/D12C2CA2.htm" />
   </HelpKINode>
   <HelpKINode Title="WindowTitleDecorator attached property" Url="html/13A05917.htm" />
   <HelpKINode Title="WindowTitleDecoratorProperty field" Url="html/218BFA0B.htm" />
@@ -4242,6 +4248,8 @@
     <HelpKINode Title="IMapTile.X Property " Url="html/F54224A0.htm" />
     <HelpKINode Title="MapTile.X Property " Url="html/374B00E5.htm" />
   </HelpKINode>
+  <HelpKINode Title="XamlGeneratedNamespace namespace" Url="html/CC5EE448.htm" />
+  <HelpKINode Title="XamlGeneratedNamespace.GeneratedInternalTypeHelper class" Url="html/570DC53F.htm" />
   <HelpKINode Title="XmlExtensions class">
     <HelpKINode Title="XmlExtensions Class" Url="html/D110CF63.htm" />
     <HelpKINode Title="methods" Url="html/D71FE18D.htm" />

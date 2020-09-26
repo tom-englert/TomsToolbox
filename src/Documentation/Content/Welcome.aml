@@ -9,15 +9,15 @@
       <para>
         All code is annotated with
         <externalLink>
+          <linkText>Nullable reference types</linkText>
+          <linkUri>https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references</linkUri>
+        </externalLink>
+        and
+        <externalLink>
           <linkText>R# Nullability</linkText>
           <linkUri>https://www.jetbrains.com/help/resharper/Code_Analysis__Value_Analysis.html</linkUri>
         </externalLink>
-        attributes, so you can easily build robust code. The use of the 
-        <externalLink>
-          <linkText>ImplicitNullability</linkText>
-          <linkUri>https://github.com/ulrichb/ImplicitNullability</linkUri>
-        </externalLink>
-        is highly recommended.
+        , so you can easily build robust code.
       </para>
       <para>
         Symbol files with direct references to the GitHub sources are included, so you can easily debug the libraries.
@@ -41,8 +41,8 @@
           </listItem>
           <listItem>
             <para>
-              Download the source code from <externalLink>
-                <linkText>GitHub</linkText>
+              Browse or download the <externalLink>
+                <linkText>source code</linkText>
                 <linkUri>https://github.com/tom-englert/TomsToolbox</linkUri>
               </externalLink> to learn about the internals or integrate the parts of interest with your own tool set.
             </para>

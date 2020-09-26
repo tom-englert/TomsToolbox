@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shfbBuild product="Sandcastle Help File Builder and Tools" version="2020.3.6.0" projectFile="D:\Develop\My Open Source\GitHub\TomsToolbox2\src\Documentation\Documentation.shfbproj" started="26.09.2020 15:22:31">
+<shfbBuild product="Sandcastle Help File Builder and Tools" version="2020.3.6.0" projectFile="D:\Develop\My Open Source\GitHub\TomsToolbox2\src\Documentation\Documentation.shfbproj" started="26.09.2020 17:17:32">
 <buildStep step="Initializing">
 Finding tools...
 The Sandcastle tools are located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\&#39;
@@ -104,12 +104,12 @@ Generating shared content files (en-US, English (United States))...
 </buildStep>
 <buildStep step="GenerateApiFilter">
 Generating API filter for MRefBuilder...
-    Last step completed in 00:00:00,0160
+    Last step completed in 00:00:00,0190
 </buildStep>
 <buildStep step="GenerateReflectionInfo">
 Generating reflection information...
 [C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe - GenerateRefInfo.proj]
-Build started 26.09.2020 15:22:35.
+Build started 26.09.2020 17:17:36.
 Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\GenerateRefInfo.proj&quot; on node 1 (default targets).
 PrepareForBuild:
   Creating directory &quot;obj\Debug\&quot;.
@@ -121,7 +121,7 @@ GenerateRefInfo:
   Portions Copyright &#184; 2006-2020, Eric Woodruff, All Rights Reserved.
   No source code context base path specified.  Source context information is unavailable.
   Loaded 13 assemblies for reflection and 123 dependency assemblies.
-  Wrote information on 19 namespaces, 226 types, and 1265 members
+  Wrote information on 20 namespaces, 227 types, and 1266 members
   Copying file from &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\reflection.org&quot; to &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\reflection.all&quot;.
   XslTransform (v2020.3.6.0)
   Copyright &#184; 2006-2020, Microsoft Corporation, All Rights Reserved.
@@ -129,12 +129,12 @@ GenerateRefInfo:
   Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\MergeDuplicates.xsl&#39;.
   Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\AddXamlSyntaxData.xsl&#39;.
 Done Building Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\GenerateRefInfo.proj&quot; (default targets).
-    Last step completed in 00:00:01,8863
+    Last step completed in 00:00:01,9018
 </buildStep>
 <buildStep step="TransformReflectionInfo">
 Transforming reflection output...
 [C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe - TransformManifest.proj]
-Build started 26.09.2020 15:22:37.
+Build started 26.09.2020 17:17:38.
 Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TransformManifest.proj&quot; on node 1 (default targets).
 TransformManifest:
   XslTransform (v2020.3.6.0)
@@ -270,11 +270,11 @@ TransformManifest:
   Portions Copyright &#184; 2006-2020, Eric Woodruff, All Rights Reserved.
   Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\ReflectionToManifest.xsl&#39;.
 Done Building Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TransformManifest.proj&quot; (default targets).
-    Last step completed in 00:00:01,3078
+    Last step completed in 00:00:01,2982
 </buildStep>
 <buildStep step="GenerateNamespaceSummaries">
 Generating namespace summary information...
-    Last step completed in 00:00:00,1193
+    Last step completed in 00:00:00,1441
 </buildStep>
 <buildStep step="GenerateInheritedDocumentation">
 Generating inherited documentation...
@@ -305,12 +305,12 @@ Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.
 Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Composition.Ninject.xml
 Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Composition.Mef2.xml
 Indexing D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\TomsToolbox.Core.xml
-Indexed 161560 members in 146 file(s).  19 file(s) to scan for &lt;inheritdoc /&gt; tags.
+Indexed 161565 members in 146 file(s).  19 file(s) to scan for &lt;inheritdoc /&gt; tags.
 Merging inherited documentation...
 
 
 Documentation merged successfully
-    Last step completed in 00:00:01,8814
+    Last step completed in 00:00:01,9529
 </buildStep>
 <buildStep step="CopyConceptualContent">
 Copying conceptual content...
@@ -323,28 +323,28 @@ Generating conceptual topic files
     D:\Develop\My Open Source\GitHub\TomsToolbox2\src\Documentation\Content\Welcome.aml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\ddueXml\70e0e697-583b-46c1-94a3-a992d398d79a.xml
     Parsing topic file &#39;D:\Develop\My Open Source\GitHub\TomsToolbox2\src\Documentation\Content\VersionHistory\VersionHistory.aml&#39;
     D:\Develop\My Open Source\GitHub\TomsToolbox2\src\Documentation\Content\VersionHistory\VersionHistory.aml -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\ddueXml\30a05c61-ca5f-4fe9-8190-f1bd787fe2c7.xml
-    Last step completed in 00:00:00,0160
+    Last step completed in 00:00:00,0270
 </buildStep>
 <buildStep step="CreateConceptualTopicConfigs">
 Creating conceptual topic configuration files...
     Companion files
     _ContentMetadata_.xml
     Merging topic IDs into manifest.xml
-    Last step completed in 00:00:00,0130
+    Last step completed in 00:00:00,0060
 </buildStep>
 <buildStep step="CopyAdditionalContent">
 Copying additional content files...
 D:\Develop\My Open Source\GitHub\TomsToolbox2\src\Documentation\icons\Help.png -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\icons\Help.png
-    Last step completed in 00:00:00,0030
+    Last step completed in 00:00:00,0040
 </buildStep>
 <buildStep step="MergeTablesOfContents">
 Merging conceptual and additional tables of contents...
-    Last step completed in 00:00:00,0010
+    Last step completed in 00:00:00,0000
 </buildStep>
 <buildStep step="GenerateIntermediateTableOfContents">
 Generating intermediate table of contents file...
 [C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe - GenerateIntermediateTOC.proj]
-Build started 26.09.2020 15:22:40.
+Build started 26.09.2020 17:17:41.
 Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\GenerateIntermediateTOC.proj&quot; on node 1 (default targets).
 GenerateIntermediateTOC:
   XslTransform (v2020.3.6.0)
@@ -353,12 +353,12 @@ GenerateIntermediateTOC:
   Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\\ProductionTransforms\CreateVSToc.xsl&#39;.
 Done Building Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\GenerateIntermediateTOC.proj&quot; (default targets).
 Generating conceptual content intermediate TOC file...
-    Last step completed in 00:00:00,3521
+    Last step completed in 00:00:00,3564
 </buildStep>
 <buildStep step="CreateBuildAssemblerConfigs">
 Creating Sandcastle configuration files...
     sandcastle.config
-    Last step completed in 00:00:00,2032
+    Last step completed in 00:00:00,1992
 </buildStep>
 <buildStep step="MergeCustomConfigs">
 Merging custom build component configurations
@@ -367,17 +367,27 @@ D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\sandcastle.config
     Added configuration for &#39;API Token Resolution&#39; before &#39;Show Missing Documentation Component&#39; (instance 1)
     Replacing default configuration for &#39;Code Block Component&#39; with the custom configuration
     The configuration for &#39;Syntax Component&#39; is disabled and will not be used.
+    Replaced configuration for &#39;Copy From Index Component&#39; (instance 3) with configuration for &#39;Comments Index Data (ESENT Cache)&#39;
+    Replaced configuration for &#39;Copy From Index Component&#39; (instance 1) with configuration for &#39;Reflection Index Data (ESENT Cache)&#39;
+    Replaced configuration for &#39;Resolve Reference Links Component&#39; (instance 1) with configuration for &#39;Resolve Reference Links (ESENT Cache)&#39;
+    Replaced configuration for &#39;Resolve Reference Links Component&#39; (instance 1) with configuration for &#39;Resolve Reference Links (ESENT Cache)&#39;
+    Replaced configuration for &#39;Resolve Reference Links Component&#39; (instance 1) with configuration for &#39;Resolve Reference Links (ESENT Cache)&#39;
   Updating conceptual topic configurations.
     Skipping component &#39;API Token Resolution&#39;, not used in conceptual build
     Replacing default configuration for &#39;Code Block Component&#39; with the custom configuration
     The configuration for &#39;Syntax Component&#39; is disabled and will not be used.
+    Skipping component &#39;Comments Index Data (ESENT Cache)&#39;, not used in conceptual build
+    Skipping component &#39;Reflection Index Data (ESENT Cache)&#39;, not used in conceptual build
+    Replaced configuration for &#39;Resolve Reference Links Component&#39; (instance 1) with configuration for &#39;Resolve Reference Links (ESENT Cache)&#39;
+    Replaced configuration for &#39;Resolve Reference Links Component&#39; (instance 1) with configuration for &#39;Resolve Reference Links (ESENT Cache)&#39;
+    Replaced configuration for &#39;Resolve Reference Links Component&#39; (instance 1) with configuration for &#39;Resolve Reference Links (ESENT Cache)&#39;
     Removing unused ExampleComponent.
-    Last step completed in 00:00:00,0070
+    Last step completed in 00:00:00,0310
 </buildStep>
 <buildStep step="BuildTopics">
 Building help topics...
 [C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe - BuildTopics.proj]
-Build started 26.09.2020 15:22:41.
+Build started 26.09.2020 17:17:42.
 Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj&quot; on node 1 (default targets).
 BuildTopics:
   BuildAssembler (v2020.3.6.0)
@@ -385,130 +395,120 @@ BuildTopics:
   Portions Copyright &#184; 2006-2020, Eric Woodruff, All Rights Reserved.
   Loading configuration...
   Processing topics...
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExportProvider.#ctor(Ninject.IKernel)] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Collections.Generic.IEnumerable{System.Reflection.Assembly})] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Collections.Generic.IEnumerable{System.Reflection.Assembly})] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Collections.Generic.IEnumerable{TomsToolbox.Composition.ExportInfo})] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Collections.Generic.IEnumerable{TomsToolbox.Composition.ExportInfo})] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Reflection.Assembly[])] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Reflection.Assembly[])] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExportProvider.#ctor(Ninject.IKernel)] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Collections.Generic.IEnumerable{System.Reflection.Assembly})] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Collections.Generic.IEnumerable{System.Reflection.Assembly})] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Collections.Generic.IEnumerable{TomsToolbox.Composition.ExportInfo})] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Collections.Generic.IEnumerable{TomsToolbox.Composition.ExportInfo})] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Reflection.Assembly[])] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Reflection.Assembly[])] Unknown reference link target &#39;T:Ninject.IKernel&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.ObservableCollections.ObservableFilteredCollection`1.Finalize] Missing &lt;summary&gt; documentation [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2.Finalize] Missing &lt;summary&gt; documentation [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [N:TomsToolbox.Wpf] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [N:TomsToolbox.Wpf] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerBase&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.BehaviorCollection] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.BehaviorCollection] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.TriggerCollection] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerBase&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.TriggerCollection] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerBase&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [N:TomsToolbox.Wpf.Composition] Member ID URL not found for target &#39;T:System.ComponentModel.Composition.Hosting.IExportProvider&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [N:TomsToolbox.Wpf.Composition] Unknown reference link target &#39;T:TomsToolbox.Wpf.Composition.VisualCompositionExportAttribute&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.CommandRoutingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.CommandRoutingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ContentControlCompositionBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ContentControlCompositionBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ImportBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ImportBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ImportExtension] Member ID URL not found for target &#39;T:System.ComponentModel.Composition.Hosting.IExportProvider&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ItemsControlCompositionBehavior] Unknown reference link target &#39;T:TomsToolbox.Wpf.Composition.VisualCompositionExportAttribute&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ItemsControlCompositionBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ItemsControlCompositionBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.Styles.ThemeResourceLoaderBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.Styles.ThemeResourceLoaderBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.Styles.ThemeResourceLoaderBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Composition.Styles.ThemeResourceLoaderBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.XamlExtensions.DataTemplate] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.DataTemplate.Role&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Fields.T:TomsToolbox.Wpf.Composition.XamlExtensions.DataTemplate] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.DataTemplate.Role&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [F:TomsToolbox.Wpf.Composition.XamlExtensions.DataTemplate.RoleProperty] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.DataTemplate.Role&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.XamlExtensions.VisualComposition] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.VisualComposition.RegionId&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Fields.T:TomsToolbox.Wpf.Composition.XamlExtensions.VisualComposition] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.VisualComposition.RegionId&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [F:TomsToolbox.Wpf.Composition.XamlExtensions.VisualComposition.RegionIdProperty] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.VisualComposition.RegionId&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [N:TomsToolbox.Wpf.Interactivity] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapPanBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapPanBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapPanBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.CreateInstanceCore&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.MapPanBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.CreateInstanceCore&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapTouchBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapTouchBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapTouchBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.MapTouchBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapZoomBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapZoomBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectionRectangleBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectionRectangleBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.TimerTrigger] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerBase&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.TimerTrigger] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerBase`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerAction&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TargetedTriggerAction&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TargetedTriggerAction`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.TriggerAction.Invoke(System.Object)&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.TriggerAction.Invoke(System.Object)&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.WindowButtonsHandlingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.WindowButtonsHandlingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.WindowButtonsHandlingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.WindowButtonsHandlingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Styles.WpfStyles.GetWindowTitleDecorator(System.Windows.DependencyObject)] Missing &lt;returns&gt; documentation [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Styles.WpfStyles.GetWindowTitleDecorator(System.Windows.DependencyObject)] Missing &lt;param name=&quot;element&quot;/&gt; documentation [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Styles.WpfStyles.SetWindowTitleDecorator(System.Windows.DependencyObject,System.Object)] Missing &lt;param name=&quot;element&quot;/&gt; documentation [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Styles.WpfStyles.SetWindowTitleDecorator(System.Windows.DependencyObject,System.Object)] Missing &lt;param name=&quot;value&quot;/&gt; documentation [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.XamlExtensions.Validation] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.ShowErrorInTooltip&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [Fields.T:TomsToolbox.Wpf.XamlExtensions.Validation] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.ShowErrorInTooltip&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [F:TomsToolbox.Wpf.XamlExtensions.Validation.ShowErrorInTooltipProperty] Unknown reference link target &#39;P:TomsToolbox.Wpf.XamlExtensions.ShowErrorInTooltip&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
-  Processed 1993 topic(s)
-  112 warning(s)
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [N:TomsToolbox.Wpf] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [N:TomsToolbox.Wpf] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerBase&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.BehaviorCollection] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.BehaviorCollection] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.TriggerCollection] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerBase&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.TriggerCollection] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerBase&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [N:TomsToolbox.Wpf.Composition] Member ID URL not found for target &#39;T:System.ComponentModel.Composition.Hosting.IExportProvider&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.CommandRoutingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.CommandRoutingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ContentControlCompositionBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ContentControlCompositionBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ImportBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ImportBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ImportExtension] Member ID URL not found for target &#39;T:System.ComponentModel.Composition.Hosting.IExportProvider&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ItemsControlCompositionBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.ItemsControlCompositionBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.VisualCompositionBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.Styles.ThemeResourceLoaderBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.Styles.ThemeResourceLoaderBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Composition.Styles.ThemeResourceLoaderBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Composition.Styles.ThemeResourceLoaderBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [N:TomsToolbox.Wpf.Interactivity] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.ListBoxSelectAllBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapPanBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapPanBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapPanBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.CreateInstanceCore&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.MapPanBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.CreateInstanceCore&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapTouchBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapTouchBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapTouchBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.MapTouchBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapZoomBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.MapZoomBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.PasswordBoxBindingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.PopupFocusManagerBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.SelectGroupOnGroupHeaderClickBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectionRectangleBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.SelectionRectangleBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.TimerTrigger] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerBase&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.TimerTrigger] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerBase`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TriggerAction&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TargetedTriggerAction&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.TargetedTriggerAction`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.TriggerAction.Invoke(System.Object)&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.UpdatePropertyAction] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.TriggerAction.Invoke(System.Object)&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.WindowButtonsHandlingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.WindowButtonsHandlingBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.WindowButtonsHandlingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.WindowButtonsHandlingBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ESentResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [N:XamlGeneratedNamespace] Missing &lt;summary&gt; documentation [D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj]
+  Processed 1997 topic(s)
+  98 warning(s)
   CopyFromIndexComponent: &quot;metadata&quot; in-memory cache entries used: 1 of 15.
   ResolveArtLinksComponent: Copying media files...
-  CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 15 of 15.
-  CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 14 of 30.
+  ESentResolveReferenceLinksComponent: Member ID URL ESENT local cache flushed 0 time(s).  Current ESENT local cache usage: 352 of 2500.
+  ESentResolveReferenceLinksComponent: &quot;FrameworkTargets&quot; ESENT local cache flushed 0 time(s).  Current ESENT local cache usage: 392 of 2500.
+  ESentCopyFromIndexComponent: &quot;reflection&quot; highest ESENT local cache flush count: 0.  Highest ESENT current local cache usage: 179 of 2500.
+  ESentCopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 1 of 15.
+  ESentCopyFromIndexComponent: &quot;comments&quot; highest ESENT local cache flush count: 0.  Highest ESENT current local cache usage: 1 of 2500.
+  ESentCopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 14 of 30.
 Done Building Project &quot;D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\BuildTopics.proj&quot; (default targets).
-    Last step completed in 00:00:22,5896
+    Last step completed in 00:00:16,3008
 </buildStep>
 <buildStep step="CombiningIntermediateTocFiles">
 Combining conceptual and API intermediate TOC files...
-    Last step completed in 00:00:00,0110
+    Last step completed in 00:00:00,0210
 </buildStep>
 <buildStep step="ExtractingHtmlInfo">
 Extracting HTML info for HTML Help 1 and/or website...
@@ -520,11 +520,11 @@ E-Mail: Eric@EWoodruff.us
 Using LCID &#39;1033&#39;, code page &#39;65001&#39;, encoding charset &#39;UTF-8&#39;.
 
 Processing website files in D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website
-Processed 1993 HTML files
+Processed 1997 HTML files
 Sorting keywords and generating See Also indices
 Saving website keyword index to D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\WebKI.xml
 Saving website table of contents to D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\WebTOC.xml
-    Last step completed in 00:00:01,0900
+    Last step completed in 00:00:01,1001
 </buildStep>
 <buildStep step="CopyStandardHelpContent">
 Copying standard help content...
@@ -606,7 +606,7 @@ C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyle
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\branding-Website.js -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\scripts\branding-Website.js
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\clipboard.min.js -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\scripts\clipboard.min.js
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\jquery-3.3.1.min.js -&gt; D:\Develop\My Open Source\GitHub\TomsToolbox2\docs\Working\Output\Website\scripts\jquery-3.3.1.min.js
-    Last step completed in 00:00:00,3413
+    Last step completed in 00:00:01,7120
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating website table of contents file...
@@ -617,7 +617,7 @@ Generating full-text index for the website...
 
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
 Adding lightweight search and TOC elements to each topic...
-</plugIn>    Last step completed in 00:00:02,9515
+</plugIn>    Last step completed in 00:00:02,8530
 </buildStep>
 <buildStep step="CopyingWebsiteFiles">
 Copying website files to output folder...
@@ -627,16 +627,16 @@ Copied 1000 files
 Copied 1500 files
 Copied 2000 files
 Copied 2500 files
-Copied 2806 files for the website content
-    Last step completed in 00:00:02,4091
+Copied 2812 files for the website content
+    Last step completed in 00:00:06,5576
 </buildStep>
 <buildStep step="CleanIntermediates">
 Removing intermediate files...
-    Last step completed in 00:00:01,5296
+    Last step completed in 00:00:11,9027
 </buildStep>
 <buildStep step="Completed">
 
-Build completed successfully at 26.09.2020 15:23:12.  Total time: 00:00:41,0698
+Build completed successfully at 26.09.2020 17:18:22.  Total time: 00:00:50,6533
 
 </buildStep>
 </shfbBuild>

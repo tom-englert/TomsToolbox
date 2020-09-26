@@ -38,7 +38,7 @@
             obj.SetValue(RoleProperty, value);
         }
         /// <summary>
-        /// Identifies the <see cref="P:TomsToolbox.Wpf.XamlExtensions.DataTemplate.Role"/> dependency property.
+        /// Identifies the <see cref="P:TomsToolbox.Wpf.Composition.XamlExtensions.DataTemplate.Role"/> dependency property.
         /// </summary>
         /// <AttachedPropertyComments>
         /// <summary>Shortcut to set a <see cref="RoleBasedDataTemplateSelector"/> with the specified role as the targets <see cref="ContentControl.ContentTemplateSelector"/>.</summary>
