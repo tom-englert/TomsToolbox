@@ -7,8 +7,8 @@ pool:
   - vstest
 
 variables:
-  BuildPlatform: 'any cpu'
-  BuildConfiguration: 'release'
+  BuildPlatform: 'Any CPU'
+  BuildConfiguration: 'Release'
 
 steps:
 - task: DeleteFiles@1
@@ -19,7 +19,7 @@ steps:
 - task: MSBuild@1
   displayName: 'Build Solution'
   inputs:
-    solution: TomsToolbox.sln
+    solution: src\TomsToolbox.sln
     platform: '$(BuildPlatform)'
     configuration: '$(BuildConfiguration)'
     msbuildArguments: '-restore'
@@ -28,7 +28,7 @@ steps:
 - task: MSBuild@1
   displayName: 'Publish Sample App'
   inputs:
-    solution: 'SampleApp.Ninject\SampleApp.Ninject.csproj'
+    solution: 'src\SampleApp.Ninject\SampleApp.Ninject.csproj'
     platform: AnyCPU
     configuration: release
     msbuildArguments: '/target:publish'
@@ -58,28 +58,15 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)/Sample'
   inputs:
-    SourceFolder: Publish
+    SourceFolder: src\Publish
     Contents: '*.*'
     TargetFolder: '$(build.artifactstagingdirectory)/Sample'
-
-- task: ArchiveFiles@2
-  displayName: 'Archive Documentation\Help'
-  inputs:
-    rootFolderOrFile: 'Documentation\Help'
-    includeRootFolder: false
-    archiveFile: '$(Build.ArtifactStagingDirectory)/Help.zip'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: Packages'
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)/Packages'
     ArtifactName: Packages
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: Help'
-  inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)/Help.zip'
-    ArtifactName: Help
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: Sample'

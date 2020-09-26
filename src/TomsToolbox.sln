@@ -6,8 +6,8 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B35F4812-32F1-469C-8AFC-A58B3D3A62C0}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		azure-pipelines.yml = azure-pipelines.yml
-		CodeContracts.ruleset = CodeContracts.ruleset
+		..\appveyor.yml = ..\appveyor.yml
+		..\azure-pipelines.yml = ..\azure-pipelines.yml
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
 		LICENSE = LICENSE
@@ -65,7 +65,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Ninject", "Sample
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Mef", "TomsToolbox.Composition.Mef\TomsToolbox.Composition.Mef.csproj", "{FC040BDB-D6E3-4001-A86B-F8F858835605}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.GitHub", "TomsToolbox.GitHub\TomsToolbox.GitHub.csproj", "{6E2268F1-F1AD-48C3-BF16-B5EBD7FC9387}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.GitHub", "TomsToolbox.GitHub\TomsToolbox.GitHub.csproj", "{6E2268F1-F1AD-48C3-BF16-B5EBD7FC9387}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -151,7 +151,6 @@ Global
 		{2DFD98E0-44F6-499A-9E8E-C24482D4B676}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4D7FB3D6-9A0D-4B5E-A286-AA2F009A0EF8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C3B367A0-BA02-46C0-A505-099B4BB14114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C3B367A0-BA02-46C0-A505-099B4BB14114}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3B367A0-BA02-46C0-A505-099B4BB14114}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -31,7 +31,7 @@
 
   <ItemGroup>
     <None Include="..\Icon.png" Link="Icon.png" Pack="true" PackagePath="\" />
-    <None Include="..\LICENSE" Link="LICENSE" Pack="true" PackagePath="\" />
+    <None Include="..\..\LICENSE" Link="LICENSE" Pack="true" PackagePath="\" />
     <None Include="..\TomsToolbox.snk">
       <Link>TomsToolbox.snk</Link>
     </None>
