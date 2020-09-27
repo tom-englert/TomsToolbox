@@ -4,13 +4,14 @@
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
+    using System.Windows.Markup;
 
     using JetBrains.Annotations;
 
     /// <summary>
     /// A base class for value converters performing pre-check of value and error handling.
     /// </summary>
-    public abstract class ValueConverter : IValueConverter
+    public abstract class ValueConverter : MarkupExtension, IValueConverter
     {
         /// <summary>
         /// Gets or sets the <c>null</c> value, which is returned whenever the value to convert is <c>null</c>; the default is <c>null</c>.
@@ -115,6 +116,18 @@
                 this.TraceError(ex.Message, "ConvertBack");
                 return ConvertBackErrorValue;
             }
+        }
+
+        /// <summary>
+        /// When implemented in a derived class, returns an object that is provided as the value of the target property for this markup extension.
+        /// </summary>
+        /// <param name="serviceProvider">A service provider helper that can provide services for the markup extension.</param>
+        /// <returns>
+        /// The object value to set on the property where the extension is applied.
+        /// </returns>
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
         }
     }
 }

@@ -5,13 +5,14 @@
     using System.Linq;
     using System.Windows;
     using System.Windows.Data;
+    using System.Windows.Markup;
 
     using JetBrains.Annotations;
 
     /// <summary>
-    /// A base class for mutli value converters performing pre-check of value and error handling.
+    /// A base class for multi-value converters performing pre-check of value and error handling.
     /// </summary>
-    public abstract class MultiValueConverter : IMultiValueConverter
+    public abstract class MultiValueConverter : MarkupExtension, IMultiValueConverter
     {
         /// <summary>
         /// Converts a value.
@@ -79,6 +80,18 @@
                 this.TraceError(ex.Message, "ConvertBack");
                 return null;
             }
+        }
+
+        /// <summary>
+        /// When implemented in a derived class, returns an object that is provided as the value of the target property for this markup extension.
+        /// </summary>
+        /// <param name="serviceProvider">A service provider helper that can provide services for the markup extension.</param>
+        /// <returns>
+        /// The object value to set on the property where the extension is applied.
+        /// </returns>
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
         }
     }
 }
