@@ -8,12 +8,13 @@
              xmlns:local="clr-namespace:SampleApp"
              xmlns:samples="clr-namespace:SampleApp.Samples"
              xmlns:composition="urn:TomsToolbox.Composition"
+             xmlns:themes="clr-namespace:SampleApp.Themes"
              d:DataContext="{d:DesignInstance samples:CompositeCommandsViewModel}">
   <StackPanel Margin="10">
     <StackPanel.Resources>
       <DataTemplate DataType="{x:Type composition:CommandSource}">
         <Button Command="{Binding Command}" BorderThickness="0" Margin="1" Padding="2">
-          <Image Source="{Binding Icon}" />
+          <Image Source="{Binding Icon}" Style="{StaticResource {x:Static themes:ResourceKeys.ThemedImageStyle}}" />
         </Button>
       </DataTemplate>
     </StackPanel.Resources>

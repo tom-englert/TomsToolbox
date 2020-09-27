@@ -10,7 +10,11 @@
   <StackPanel Margin="10">
     <TextBlock>Select Theme:</TextBlock>
     <Decorator Height="5" />
-    <ListBox ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme}" SelectedIndex="0" Background="Transparent" BorderThickness="0">
+    <ListBox ItemsSource="{Binding Source={x:Type samples:Theme}, Converter={x:Static toms:EnumToValuesConverter.Default}}" 
+             SelectedItem="{Binding SelectedTheme}" 
+             SelectedIndex="0" 
+             Background="Transparent" 
+             BorderThickness="0">
       <ListBox.ItemContainerStyle>
         <Style TargetType="ListBoxItem">
           <Setter Property="Template">

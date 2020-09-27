@@ -41,9 +41,8 @@
         public ThemingViewModel()
         {
             var themeDictionary = new ResourceDictionary();
-            var mergedDictionaries = Application.Current.Resources.MergedDictionaries;
-            mergedDictionaries.Insert(0, themeDictionary);
-            mergedDictionaries.Insert(0, new ResourceDictionary { Source = new Uri(@"pack://application:,,,/SampleApp;component/Themes/ImageStyle.xaml")});
+            var applicationDictionaries = Application.Current.Resources.MergedDictionaries;
+            applicationDictionaries.Insert(0, themeDictionary);
             _themeContainer = themeDictionary.MergedDictionaries;
         }
 
@@ -51,8 +50,6 @@
         {
             return "Theming";
         }
-
-        public Array Themes => Enum.GetValues(typeof(Theme));
 
         [OnChangedMethod(nameof(OnSelectedThemeChanged))]
         public Theme SelectedTheme { get; set; } 

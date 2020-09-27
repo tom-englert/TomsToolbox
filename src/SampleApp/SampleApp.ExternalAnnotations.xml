@@ -104,4 +104,7 @@
   <member name="P:SampleApp.Samples.MapViewModel.SelectedPoi">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
+  <member name="F:SampleApp.Themes.ResourceKeys.ThemedImageStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
 </assembly>
