@@ -2,8 +2,11 @@
 {
     using System.Composition;
     using System.Windows;
+    using System.Windows.Media;
 
     using JetBrains.Annotations;
+
+    using SampleApp.Themes;
 
     using TomsToolbox.Composition;
     using TomsToolbox.Wpf.Composition;
@@ -11,8 +14,8 @@
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    [Export]
-    public partial class MainWindow
+    [Export, Export(typeof(IThemeManager)), Shared]
+    public partial class MainWindow : IThemeManager
     {
         [ImportingConstructor]
         public MainWindow([NotNull] IExportProvider exportProvider)
@@ -25,6 +28,32 @@
         private void ShowPopup_Click(object sender, RoutedEventArgs e)
         {
             new PopupWindow { Owner = this }.ShowDialog();
+        }
+
+        public bool IsDarkTheme
+        {
+            get => (bool) GetValue(IsDarkThemeProperty);
+            set => SetValue(IsDarkThemeProperty, value);
+        }
+        public static readonly DependencyProperty IsDarkThemeProperty = DependencyProperty.Register(
+            "IsDarkTheme", typeof(bool), typeof(MainWindow), new PropertyMetadata(default(bool)));
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+
+            if ((e.Property != ForegroundProperty) && (e.Property != BackgroundProperty))
+                return;
+
+            var foreground = ToGray((Foreground as SolidColorBrush)?.Color);
+            var background = ToGray((Background as SolidColorBrush)?.Color);
+
+            IsDarkTheme = background < foreground;
+        }
+
+        private static double ToGray(Color? color)
+        {
+            return color?.R * 0.21 + color?.G * 0.72 + color?.B * 0.07 ?? 0.0;
         }
     }
 }

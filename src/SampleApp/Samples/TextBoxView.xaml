@@ -8,7 +8,7 @@
   <DockPanel>
     <toms:TextBoxVisibleWhiteSpaceDecorator Width="300" DockPanel.Dock="Left" WhiteSpaces="All" WhiteSpaceColor="{Binding Foreground, ElementName=TextBox}" WhiteSpaceOpacity=".3">
       <TextBox x:Name="TextBox" Text="Demo of white space&#10;visualization with the TextBoxVisibleWhiteSpaceDecorator adorner decorator&#10;&#9;- Spaces&#10;&#9;- Tabs&#10;&#9;- Paragraphs&#10;&#10;Type here to try..."
-               TextWrapping="Wrap" AcceptsTab="True" AcceptsReturn="True" FontSize="20" Foreground="DarkBlue">
+               TextWrapping="Wrap" AcceptsTab="True" AcceptsReturn="True" FontSize="20">
         <i:Interaction.Behaviors>
           <toms:ZoomFontSizeOnMouseWheelBehavior />
         </i:Interaction.Behaviors>

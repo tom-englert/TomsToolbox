@@ -58,7 +58,7 @@
           </toms:ViewportCanvas>
         </Grid>
       </toms:Map>
-      <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Background="#AAFFFFFF">
+      <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Background="#AAFFFFFF" TextElement.Foreground="Black">
         <StackPanel Width="200" Margin="10">
           <ComboBox ItemsSource="{Binding MapSources}" SelectedItem="{Binding ImageProvider}" DisplayMemberPath="Id" />
           <Decorator Height="10" />

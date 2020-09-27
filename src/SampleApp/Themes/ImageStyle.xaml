@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:styles="urn:TomsToolbox.Wpf.Styles"
+                    xmlns:composition="urn:TomsToolbox.Composition"
+                    xmlns:themes="clr-namespace:SampleApp.Themes">
+
+  <styles:InvertGrayEffect x:Key="InvertGrayEffect" />
+
+  <Style TargetType="Image">
+    <Setter Property="Stretch" Value="None" />
+    <Style.Triggers>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Opacity" Value=".5" />
+      </Trigger>
+      <DataTrigger Binding="{Binding IsDarkTheme, Source={composition:Import {x:Type themes:IThemeManager}}}" Value="True">
+        <Setter Property="Effect" Value="{StaticResource InvertGrayEffect}" />
+      </DataTrigger>
+    </Style.Triggers>
+  </Style>
+
+</ResourceDictionary>

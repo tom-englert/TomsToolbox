@@ -50,7 +50,7 @@
         </GroupStyle>
       </ToolBar.Resources>
       <ToolBar.Style>
-        <Style TargetType="ToolBar">
+        <Style TargetType="ToolBar" BasedOn="{StaticResource {x:Type ToolBar}}">
           <Setter Property="toms:StyleBindings.GroupStyle" Value="{StaticResource ToolBarGroupStyle}" />
           <Setter Property="toms:StyleBindings.GroupDescriptions">
             <Setter.Value>

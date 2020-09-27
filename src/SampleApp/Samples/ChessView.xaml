@@ -32,7 +32,7 @@
       </EventTrigger>
     </Grid.Triggers>
     <Grid>
-      <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+      <Border BorderBrush="Black" Background="White" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Viewbox>
           <UniformGrid Rows="8" Columns="8" Width="64" Height="64">
             <Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle /><Rectangle Fill="{StaticResource DarkFieldBrush}" /><Rectangle />

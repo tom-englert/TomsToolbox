@@ -14,6 +14,7 @@
 
     using TomsToolbox.Composition;
     using TomsToolbox.Essentials;
+    using TomsToolbox.Wpf.Composition.XamlExtensions;
 
     /// <summary>
     /// The XAML equivalent of the <see cref="T:System.ComponentModel.Composition.ImportAttribute" />. Use like the <see cref="T:System.Windows.Markup.StaticExtension" />;
@@ -33,8 +34,6 @@
         private object? _targetProperty;
         [CanBeNull]
         private IExportProvider? _exportProvider;
-        [CanBeNull]
-        private FrameworkElement? _rootObject;
         [CanBeNull]
         private INotifyChanged? _tracker;
 
@@ -107,13 +106,16 @@
         {
             var rootObjectProvider = (IRootObjectProvider)serviceProvider.GetService(typeof(IRootObjectProvider));
             if (rootObjectProvider == null)
+            {
+                VisualComposition.OnError(this, $"Import: Service {nameof(IRootObjectProvider)} unavailable.");
+                return null;
+            }
+
+            var rootObject = rootObjectProvider.RootObject as FrameworkElement ?? Application.Current.MainWindow;
+            if (rootObject == null)
                 return null;
 
-            _rootObject = rootObjectProvider.RootObject as FrameworkElement;
-            if (_rootObject == null)
-                return null;
-
-            if (DesignerProperties.GetIsInDesignMode(_rootObject))
+            if (DesignerProperties.GetIsInDesignMode(rootObject))
                 return null;
 
             if (AllowRecomposition)
@@ -125,14 +127,14 @@
                     _targetProperty = provideValueTarget.TargetProperty;
                 }
 
-                _tracker = _rootObject.Track(ExportProviderLocator.ExportProviderProperty);
+                _tracker = rootObject.Track(ExportProviderLocator.ExportProviderProperty);
 
-                _rootObject.Loaded += RootObject_Loaded;
-                _rootObject.Unloaded += RootObject_Unloaded;
+                rootObject.Loaded += RootObject_Loaded;
+                rootObject.Unloaded += RootObject_Unloaded;
             }
             else
             {
-                _exportProvider = _rootObject.GetExportProvider();
+                _exportProvider = rootObject.GetExportProvider();
             }
 
             return Value;
@@ -146,7 +148,7 @@
                 _tracker.Changed += ExportProvider_Changed;
             }
 
-            SetExportProvider(_rootObject?.TryGetExportProvider());
+            SetExportProvider((sender as FrameworkElement)?.TryGetExportProvider());
         }
 
         private void RootObject_Unloaded(object sender, RoutedEventArgs e)
@@ -217,7 +219,7 @@
 
         private void ExportProvider_Changed(object? sender, EventArgs e)
         {
-            SetExportProvider(_rootObject?.TryGetExportProvider());
+            SetExportProvider((sender as FrameworkElement)?.TryGetExportProvider());
             UpdateTarget();
         }
 

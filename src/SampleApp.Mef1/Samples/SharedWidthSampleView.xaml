@@ -11,7 +11,7 @@
     <Grid DockPanel.Dock="Bottom" Background="LightGray">
       <StackPanel Margin="10" HorizontalAlignment="Right" Orientation="Horizontal" Grid.IsSharedSizeScope="True">
         <StackPanel.Resources>
-          <Style TargetType="Button" BasedOn="{StaticResource {x:Static styles:ResourceKeys.ButtonStyle}}">
+          <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Padding" Value="12,3" />
           </Style>
           <Style TargetType="ContentControl" BasedOn="{StaticResource {x:Static toms:ResourceKeys.SharedWidthContainerStyle}}">

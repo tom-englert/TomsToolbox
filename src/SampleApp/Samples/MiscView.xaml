@@ -16,7 +16,7 @@
     <StackPanel Margin="10">
       <HeaderedContentControl Header="Custom focus visual that aligns with the content (use keyboard navigation to see it)" Focusable="False">
         <HeaderedContentControl.Resources>
-          <Style TargetType="Button">
+          <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="MinWidth" Value="70" />
             <Setter Property="Margin" Value="5" />
@@ -25,7 +25,7 @@
             <Setter Property="Template">
               <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                  <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Background="White">
+                  <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
                     <Grid Margin="{TemplateBinding Padding}"
                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
@@ -37,7 +37,7 @@
                   </Border>
                   <ControlTemplate.Triggers>
                     <Trigger Property="IsPressed" Value="True">
-                      <Setter Property="BorderBrush" Value="Black" />
+                      <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
                     </Trigger>
                     <MultiDataTrigger>
                       <MultiDataTrigger.Conditions>
@@ -90,7 +90,7 @@
           </StackPanel.Resources>
           <StackPanel Orientation="Horizontal" Margin="5">
             <TextBlock Text="Start time: " />
-            <TextBox Text="{Binding OperationStarted, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Text="{Binding OperationStarted, UpdateSourceTrigger=PropertyChanged}" MouseDoubleClick="OperationStarted_MouseDoubleClick" />
             <Decorator Width="20" />
             <TextBlock Text="Min. Duration: " />
             <TextBox Text="{Binding MinimumDuration, UpdateSourceTrigger=PropertyChanged}" />
@@ -155,9 +155,9 @@
           </Border>
         </StackPanel>
       </HeaderedContentControl>
-      <HeaderedContentControl Header="Nested items control with default command" Focusable="False">
+      <HeaderedContentControl Header="Nested items control with default command (double click item to test)" Focusable="False">
         <StackPanel Margin="5">
-          <ListBox Height="100" toms:ItemsControlExtensions.DefaultItemCommand="{Binding ItemsControlDefaultCommand}" Background="BlanchedAlmond">
+          <ListBox Height="110" toms:ItemsControlExtensions.DefaultItemCommand="{Binding ItemsControlDefaultCommand}">
             <ListBox.ItemTemplate>
               <DataTemplate>
                 <ListBox Margin="2" toms:ItemsControlExtensions.DefaultItemCommand="{Binding DataContext.ItemsControlDefaultCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" BorderThickness="0" Background="{x:Null}">
@@ -167,7 +167,7 @@
                     </ItemsPanelTemplate>
                   </ListBox.ItemsPanel>
                   <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
+                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                       <Setter Property="Margin" Value="10" />
                     </Style>
                   </ListBox.ItemContainerStyle>

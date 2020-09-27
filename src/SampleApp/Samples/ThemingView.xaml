@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="SampleApp.Samples.ThemingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:samples="clr-namespace:SampleApp.Samples"
+             xmlns:toms="urn:TomsToolbox"
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance samples:ThemingViewModel}">
+  <StackPanel Margin="10">
+    <TextBlock>Select Theme:</TextBlock>
+    <Decorator Height="5" />
+    <ListBox ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme}" SelectedIndex="0" Background="Transparent" BorderThickness="0">
+      <ListBox.ItemContainerStyle>
+        <Style TargetType="ListBoxItem">
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="ListBoxItem">
+                <RadioButton Content="{Binding Converter={x:Static toms:ObjectToDisplayNameConverter.Default}}"
+                             IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}}"
+                             Margin="0,3" />
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+      </ListBox.ItemContainerStyle>
+    </ListBox>
+  </StackPanel>
+</UserControl>

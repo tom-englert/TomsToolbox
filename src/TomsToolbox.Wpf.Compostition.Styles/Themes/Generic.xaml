@@ -99,7 +99,7 @@
     <Setter Property="ItemContainerStyle" Value="{StaticResource CompositeMenuItemStyle}" />
   </Style>
 
-  <Style x:Key="{x:Static local:ResourceKeys.CompositeMenuStyle}" TargetType="{x:Type Menu}">
+  <Style x:Key="{x:Static local:ResourceKeys.CompositeMenuStyle}" TargetType="{x:Type Menu}" BasedOn="{StaticResource {x:Static styles:ResourceKeys.MenuStyle}}">
     <Setter Property="ItemContainerStyle" Value="{StaticResource CompositeMenuItemStyle}" />
   </Style>
 

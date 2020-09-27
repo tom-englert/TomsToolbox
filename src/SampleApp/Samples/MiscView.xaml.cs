@@ -1,5 +1,10 @@
 ﻿namespace SampleApp.Samples
 {
+    using System;
+    using System.Globalization;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+
     using TomsToolbox.Wpf.Composition.AttributedModel;
 
     /// <summary>
@@ -11,6 +16,11 @@
         public MiscView()
         {
             InitializeComponent();
+        }
+
+        private void OperationStarted_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ((TextBox) sender).Text = DateTime.Now.ToString(CultureInfo.CurrentCulture);
         }
     }
 }

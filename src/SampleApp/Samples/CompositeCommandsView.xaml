@@ -13,17 +13,7 @@
     <StackPanel.Resources>
       <DataTemplate DataType="{x:Type composition:CommandSource}">
         <Button Command="{Binding Command}" BorderThickness="0" Margin="1" Padding="2">
-          <Image Source="{Binding Icon}">
-            <Image.Style>
-              <Style TargetType="Image">
-                <Style.Triggers>
-                  <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Opacity" Value=".5" />
-                  </Trigger>
-                </Style.Triggers>
-              </Style>
-            </Image.Style>
-          </Image>
+          <Image Source="{Binding Icon}" />
         </Button>
       </DataTemplate>
     </StackPanel.Resources>
@@ -60,7 +50,7 @@
         </GroupStyle>
       </ToolBar.Resources>
       <ToolBar.Style>
-        <Style TargetType="ToolBar">
+        <Style TargetType="ToolBar" BasedOn="{StaticResource {x:Type ToolBar}}">
           <Setter Property="toms:StyleBindings.GroupStyle" Value="{StaticResource ToolBarGroupStyle}" />
           <Setter Property="toms:StyleBindings.GroupDescriptions">
             <Setter.Value>
