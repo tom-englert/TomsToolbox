@@ -5,22 +5,21 @@
 
   <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
     <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+    <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType=TabControl}}" />
     <Setter Property="Padding" Value="14,2,14,1" />
-    <Setter Property="BorderBrush" Value="{DynamicResource {x:Static styles:ResourceKeys.BorderBrush}}" />
-    <Setter Property="Background" Value="{DynamicResource {x:Static  SystemColors.ControlBrushKey}}" />
-    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType=TabControl}}" />
+    <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource FindAncestor, AncestorType=TabControl}}" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type TabItem}">
           <Grid SnapsToDevicePixels="True">
-            <Border x:Name="TabItemBorder" BorderBrush="{TemplateBinding BorderBrush}"
+            <Border x:Name="TabItemBorder" 
+                    BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="0"
                     Background="{TemplateBinding Background}"
                     Padding="{TemplateBinding Padding}">
-              <Grid HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"
-                    VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}">
+              <Grid HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
                 <ContentPresenter x:Name="Content" ContentTemplate="{TemplateBinding HeaderTemplate}"
                                   Content="{TemplateBinding Header}"
                                   ContentStringFormat="{TemplateBinding HeaderStringFormat}"
@@ -106,8 +105,6 @@
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="BorderBrush" Value="{DynamicResource {x:Static styles:ResourceKeys.BorderBrush}}" />
     <Setter Property="Background" Value="{DynamicResource {x:Static  SystemColors.ControlBrushKey}}" />
-    <Setter Property="HorizontalContentAlignment" Value="Center" />
-    <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="ItemContainerStyle" Value="{StaticResource TabItemStyle}" />
     <Setter Property="Template">
       <Setter.Value>
