@@ -8,7 +8,7 @@
              xmlns:samples="clr-namespace:SampleApp.Samples"
              d:DataContext="{d:DesignInstance samples:SharedWidthSampleViewModel}">
   <DockPanel>
-    <Grid DockPanel.Dock="Bottom" Background="LightGray">
+    <Grid DockPanel.Dock="Bottom" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
       <StackPanel Margin="10" HorizontalAlignment="Right" Orientation="Horizontal" Grid.IsSharedSizeScope="True">
         <StackPanel.Resources>
           <Style TargetType="Button" BasedOn="{StaticResource {x:Static styles:ResourceKeys.ButtonStyle}}">

@@ -4,93 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:toms="urn:TomsToolbox"
              xmlns:local="clr-namespace:SampleApp"
              xmlns:samples="clr-namespace:SampleApp.Samples"
              xmlns:composition="urn:TomsToolbox.Composition"
-             xmlns:themes="clr-namespace:SampleApp.Themes"
              d:DataContext="{d:DesignInstance samples:CompositeCommandsViewModel}">
   <StackPanel Margin="10">
-    <StackPanel.Resources>
-      <DataTemplate DataType="{x:Type composition:CommandSource}">
-        <Button Command="{Binding Command}" BorderThickness="0" Margin="1" Padding="2">
-          <Image Source="{Binding Icon}" Style="{StaticResource {x:Static themes:ResourceKeys.ThemedImageStyle}}" />
-        </Button>
-      </DataTemplate>
-    </StackPanel.Resources>
-    <Border BorderThickness="1" BorderBrush="LightGray">
-      <Menu Style="{DynamicResource {x:Static composition:ResourceKeys.CompositeMenuStyle}}" composition:VisualComposition.RegionId="{x:Static local:RegionId.Menu}" />
-    </Border>
-    <ToolBar composition:VisualComposition.RegionId="{x:Static local:RegionId.ToolBar}" UseLayoutRounding="True">
-      <ToolBar.Resources>
-        <ControlTemplate x:Key="ToolBarGroupItemTemplate" TargetType="{x:Type GroupItem}">
-          <StackPanel Orientation="Horizontal">
-            <Separator Style="{DynamicResource {x:Static ToolBar.SeparatorStyleKey}}" />
-            <ItemsPresenter />
-          </StackPanel>
-        </ControlTemplate>
-        <ControlTemplate x:Key="FirstToolBarGroupItemTemplate" TargetType="{x:Type GroupItem}">
-          <ItemsPresenter />
-        </ControlTemplate>
-        <GroupStyle x:Key="ToolBarGroupStyle">
-          <GroupStyle.ContainerStyle>
-            <Style TargetType="GroupItem">
-              <Setter Property="Template" Value="{StaticResource ToolBarGroupItemTemplate}" />
-              <Style.Triggers>
-                <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
-                  <Setter Property="Template" Value="{StaticResource FirstToolBarGroupItemTemplate}" />
-                </DataTrigger>
-              </Style.Triggers>
-            </Style>
-          </GroupStyle.ContainerStyle>
-          <GroupStyle.Panel>
-            <ItemsPanelTemplate>
-              <StackPanel Orientation="Horizontal" />
-            </ItemsPanelTemplate>
-          </GroupStyle.Panel>
-        </GroupStyle>
-      </ToolBar.Resources>
-      <ToolBar.Style>
-        <Style TargetType="ToolBar" BasedOn="{StaticResource {x:Type ToolBar}}">
-          <Setter Property="toms:StyleBindings.GroupStyle" Value="{StaticResource ToolBarGroupStyle}" />
-          <Setter Property="toms:StyleBindings.GroupDescriptions">
-            <Setter.Value>
-              <toms:GroupDescriptionCollection>
-                <PropertyGroupDescription PropertyName="GroupName" />
-              </toms:GroupDescriptionCollection>
-            </Setter.Value>
-          </Setter>
-          <Setter Property="Template">
-            <Setter.Value>
-              <ControlTemplate>
-                <Border Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Padding="2">
-                  <ItemsPresenter />
-                </Border>
-              </ControlTemplate>
-            </Setter.Value>
-          </Setter>
-          <Setter Property="ItemsPanel">
-            <Setter.Value>
-              <ItemsPanelTemplate>
-                <StackPanel Orientation="Horizontal" />
-              </ItemsPanelTemplate>
-            </Setter.Value>
-          </Setter>
-        </Style>
-      </ToolBar.Style>
-    </ToolBar>
-    <StackPanel>
-      <Border Background="Orange" ContextMenu="{composition:CompositeContextMenu RegionId={x:Static local:RegionId.ContextMenu}}">
-        <StackPanel Margin="10">
-          <TextBlock>
+    <Border Background="Orange" ContextMenu="{composition:CompositeContextMenu RegionId={x:Static local:RegionId.ContextMenu}}">
+      <StackPanel Margin="10">
+        <TextBlock>
             Sample of composite commands with menu, tool bar and context menu.<LineBreak />
             <LineBreak />
             Right-Click to open the context menu.
-          </TextBlock>
-        </StackPanel>
-      </Border>
-      <ItemsControl composition:VisualComposition.RegionId="{x:Static local:RegionId.CommandViewContainer}" />
-    </StackPanel>
+        </TextBlock>
+      </StackPanel>
+    </Border>
+    <ItemsControl composition:VisualComposition.RegionId="{x:Static local:RegionId.CommandViewContainer}" />
   </StackPanel>
   <i:Interaction.Behaviors>
     <composition:CommandRoutingBehavior CommandSource="{x:Type samples:OpenCommand}" CommandTarget="{Binding OpenCommand}" />

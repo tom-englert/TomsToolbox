@@ -4,20 +4,95 @@
         xmlns:sampleApp="clr-namespace:SampleApp"
         xmlns:composition="urn:TomsToolbox.Composition"
         xmlns:styles="urn:TomsToolbox.Wpf.Styles"
+        xmlns:themes="clr-namespace:SampleApp.Themes"
+        xmlns:toms="urn:TomsToolbox"
         Height="600" Width="800"
         styles:WpfStyles.WindowTitleDecorator="{composition:Import {x:Type sampleApp:WindowTitleDecoratorViewModel}}">
+  <Window.Resources>
+    <DataTemplate DataType="{x:Type composition:CommandSource}">
+      <Button Command="{Binding Command}" BorderThickness="0" Margin="1" Padding="2">
+        <Image Source="{Binding Icon}" Style="{StaticResource {x:Static themes:ResourceKeys.ThemedImageStyle}}" />
+      </Button>
+    </DataTemplate>
+  </Window.Resources>
   <Window.ContextMenu>
     <ContextMenu>
       <MenuItem Header="Show Popup" Click="ShowPopup_Click" />
     </ContextMenu>
   </Window.ContextMenu>
-
-  <TabControl composition:VisualComposition.RegionId="{x:Static sampleApp:RegionId.Main}" Margin="-1">
-    <TabControl.ItemTemplate>
-      <DataTemplate>
-        <TextBlock Text="{Binding}" />
-      </DataTemplate>
-    </TabControl.ItemTemplate>
-  </TabControl>
-
+  <DockPanel>
+    <StackPanel DockPanel.Dock="Top">
+      <Border BorderThickness="0,0,0,1" BorderBrush="LightGray">
+        <Menu Style="{DynamicResource {x:Static composition:ResourceKeys.CompositeMenuStyle}}" composition:VisualComposition.RegionId="{x:Static sampleApp:RegionId.Menu}" />
+      </Border>
+      <ToolBar composition:VisualComposition.RegionId="{x:Static sampleApp:RegionId.ToolBar}" UseLayoutRounding="True">
+        <ToolBar.Resources>
+          <ControlTemplate x:Key="ToolBarGroupItemTemplate" TargetType="{x:Type GroupItem}">
+            <StackPanel Orientation="Horizontal">
+              <Separator Style="{DynamicResource {x:Static ToolBar.SeparatorStyleKey}}" />
+              <ItemsPresenter />
+            </StackPanel>
+          </ControlTemplate>
+          <ControlTemplate x:Key="FirstToolBarGroupItemTemplate" TargetType="{x:Type GroupItem}">
+            <ItemsPresenter />
+          </ControlTemplate>
+          <GroupStyle x:Key="ToolBarGroupStyle">
+            <GroupStyle.ContainerStyle>
+              <Style TargetType="GroupItem">
+                <Setter Property="Template" Value="{StaticResource ToolBarGroupItemTemplate}" />
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                    <Setter Property="Template" Value="{StaticResource FirstToolBarGroupItemTemplate}" />
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </GroupStyle.ContainerStyle>
+            <GroupStyle.Panel>
+              <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" />
+              </ItemsPanelTemplate>
+            </GroupStyle.Panel>
+          </GroupStyle>
+        </ToolBar.Resources>
+        <ToolBar.Style>
+          <Style TargetType="ToolBar" BasedOn="{StaticResource {x:Type ToolBar}}">
+            <Setter Property="toms:StyleBindings.GroupStyle" Value="{StaticResource ToolBarGroupStyle}" />
+            <Setter Property="toms:StyleBindings.GroupDescriptions">
+              <Setter.Value>
+                <toms:GroupDescriptionCollection>
+                  <PropertyGroupDescription PropertyName="GroupName" />
+                </toms:GroupDescriptionCollection>
+              </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+              <Setter.Value>
+                <ControlTemplate>
+                  <Border Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Padding="2">
+                    <ItemsPresenter />
+                  </Border>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsPanel">
+              <Setter.Value>
+                <ItemsPanelTemplate>
+                  <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+              </Setter.Value>
+            </Setter>
+          </Style>
+        </ToolBar.Style>
+      </ToolBar>
+    </StackPanel>
+    <TabControl composition:VisualComposition.RegionId="{x:Static sampleApp:RegionId.Main}" 
+                Margin="-1,1,-1,-1" 
+                Padding="0"
+                Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+      <TabControl.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding}" />
+        </DataTemplate>
+      </TabControl.ItemTemplate>
+    </TabControl>
+  </DockPanel>
 </Window>

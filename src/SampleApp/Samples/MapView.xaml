@@ -10,7 +10,8 @@
              xmlns:composition="urn:TomsToolbox.Composition"
              d:DataContext="{d:DesignInstance samples:MapViewModel}">
   <DockPanel>
-    <ListBox DockPanel.Dock="Right" Width="200" ItemsSource="{Binding Pois}"
+    <ListBox DockPanel.Dock="Right" Width="200" ItemsSource="{Binding Pois}" 
+             BorderThickness="0"
              SelectedItem="{Binding SelectedPoi}" SelectedIndex="1">
       <ListBox.ItemTemplate>
         <DataTemplate DataType="{x:Type map:Poi}">
