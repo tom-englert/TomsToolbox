@@ -196,6 +196,15 @@
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
         <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
       </Trigger>
+      <MultiTrigger>
+        <MultiTrigger.Conditions>
+          <Condition Property="IsSelected" Value="True"/>
+          <Condition Property="Selector.IsSelectionActive" Value="False"/>
+        </MultiTrigger.Conditions>
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+      </MultiTrigger>
       <Trigger Property="IsKeyboardFocusWithin" Value="True">
         <Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}" />
       </Trigger>
@@ -207,6 +216,13 @@
       <Trigger Property="IsSelected" Value="True">
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
       </Trigger>
+      <MultiTrigger>
+        <MultiTrigger.Conditions>
+          <Condition Property="IsSelected" Value="True"/>
+          <Condition Property="Selector.IsSelectionActive" Value="False"/>
+        </MultiTrigger.Conditions>
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
+      </MultiTrigger>
       <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}, Path=SelectionUnit}" Value="Cell">
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
       </DataTrigger>
