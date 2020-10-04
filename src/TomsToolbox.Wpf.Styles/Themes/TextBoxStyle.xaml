@@ -8,7 +8,7 @@
     <Setter Property="BorderBrush" Value="{DynamicResource {x:Static styles:ResourceKeys.BorderBrush}}" />
     <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
     <Setter Property="BorderThickness" Value="1" />
-    <Setter Property="Padding" Value="2,1" />
+    <Setter Property="Padding" Value="2,1.5" />
     <Setter Property="AllowDrop" Value="true"/>
     <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
     <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
