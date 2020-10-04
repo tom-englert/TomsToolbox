@@ -12,6 +12,7 @@
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/ListBoxStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/PasswordBoxStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/RadioButtonStyle.xaml" />
+    <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/ScrollViewerStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/TabControlStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/TextBoxStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/ToggleButtonStyle.xaml" />

@@ -78,6 +78,12 @@
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.RadioButtonStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ScrollBarStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ScrollViewerStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.TabControlStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>

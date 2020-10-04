@@ -124,6 +124,18 @@
         [NotNull] public static readonly ResourceKey RadioButtonStyle = new ComponentResourceKey(typeof(ResourceKeys), "RadioButtonStyle");
 
         /// <summary>
+        /// The resource key for the <see cref="ScrollBar"/> style.
+        /// </summary>
+        [DefaultStyle]
+        [NotNull] public static readonly ResourceKey ScrollBarStyle = new ComponentResourceKey(typeof(ResourceKeys), "ScrollBarStyle");
+
+        /// <summary>
+        /// The resource key for the <see cref="ScrollViewer"/> style.
+        /// </summary>
+        [DefaultStyle]
+        [NotNull] public static readonly ResourceKey ScrollViewerStyle = new ComponentResourceKey(typeof(ResourceKeys), "ScrollViewerStyle");
+
+        /// <summary>
         /// The resource key for the <see cref="TabControl"/> style.
         /// </summary>
         [DefaultStyle]
