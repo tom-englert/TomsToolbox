@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Locations>
+  <Location>
+    <Id>1</Id>
+    <Name>Berlin</Name>
+  </Location>
+  <Location>
+    <Id>2</Id>
+    <Name>Rome</Name>
+  </Location>
+  <Location>
+    <Id>3</Id>
+    <Name>New York</Name>
+  </Location>
+  <Location>
+    <Id>4</Id>
+    <Name>Amsterdam</Name>
+  </Location>
+</Locations>

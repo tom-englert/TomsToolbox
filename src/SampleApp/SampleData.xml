@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Teams>
+  <Team>
+    <Id>1</Id>
+    <Name>Team Yellow</Name>
+    <Location>Berlin</Location>
+    <IsActive>True</IsActive>
+  </Team>
+  <Team>
+    <Id>2</Id>
+    <Name>Team Red</Name>
+    <Location>Paris</Location>
+    <IsActive>True</IsActive>
+  </Team>
+  <Team>
+    <Id>3</Id>
+    <Name>Team Green</Name>
+    <Location>New York</Location>
+    <IsActive>True</IsActive>
+  </Team>
+  <Team>
+    <Id>4</Id>
+    <Name>Team Blue</Name>
+    <Location>Rome</Location>
+    <IsActive>False</IsActive>
+  </Team>
+  <Team>
+    <Id>5</Id>
+    <Name>Team Maroon</Name>
+    <Location>Amsterdam</Location>
+    <IsActive>False</IsActive>
+  </Team>
+</Teams>

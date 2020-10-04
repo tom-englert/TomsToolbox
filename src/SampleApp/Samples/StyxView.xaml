@@ -2,27 +2,292 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="*" />
-      <ColumnDefinition Width="4" />
-      <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="*" />
-      <RowDefinition Height="4" />
-      <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:styx="clr-namespace:AVL.Styx"
+             xmlns:samples="clr-namespace:SampleApp.Samples"
+             xmlns:sampleApp="clr-namespace:SampleApp"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance samples:StyxViewModel}">
+  <FrameworkElement.Resources>
+    <DataTemplate x:Key="ItemTemplate" DataType="styx:ResourceItem">
+      <StackPanel>
+        <Grid Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
+          <TextBlock Text="{Binding Key.ResourceId}" FontWeight="Bold" Margin="2" />
+        </Grid>
+        <ContentControl Content="{Binding Value}" 
+                            Focusable="False" 
+                            Margin="10" 
+                            IsEnabled="{Binding DataContext.IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}" />
+      </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type Style}">
+      <ContentControl Content="{Binding}" MaxHeight="180" MinHeight="16" Focusable="False">
+        <ContentControl.ContentTemplateSelector>
+          <sampleApp:StyleTemplateSelector />
+        </ContentControl.ContentTemplateSelector>
+      </ContentControl>
+    </DataTemplate>
+    <DataTemplate x:Key="Hyperlink">
+      <TextBlock>
+        <Hyperlink>
+          <Run>Style Explorer</Run>
+        </Hyperlink>
+      </TextBlock>
+    </DataTemplate>
 
-    <GridSplitter Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" VerticalAlignment="Stretch" HorizontalAlignment="Center" />
-    <GridSplitter Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+    <DataTemplate x:Key="MenuItem">
+      <TextBlock Text="See Menu or ContextMenu" />
+    </DataTemplate>
 
-    <Border Grid.Row="0" Grid.Column="0" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" />
-    <Border Grid.Row="0" Grid.Column="2" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" />
-    <Border Grid.Row="2" Grid.Column="0" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" />
-    <Border Grid.Row="2" Grid.Column="2" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" />
+    <DataTemplate x:Key="ToolTip">
+      <Border Background="Transparent">
+        <Border.ToolTip>
+          <ToolTip Content="Style Explorer" />
+        </Border.ToolTip>
+        <TextBlock Text="Hover to show tool tip" />
+      </Border>
+    </DataTemplate>
 
-  </Grid>
+    <DataTemplate x:Key="ContextMenu">
+      <Border Background="Transparent">
+        <Border.ContextMenu>
+          <ContextMenu>
+            <MenuItem Header="Item _1" />
+            <MenuItem Header="Item _2" />
+            <Separator />
+            <MenuItem Header="Item _2a" />
+            <MenuItem Header="Item _3">
+              <MenuItem Header="Style _Explorer" />
+              <MenuItem Header="Item _2" />
+            </MenuItem>
+          </ContextMenu>
+        </Border.ContextMenu>
+        <TextBlock Text="Right click to show context menu" />
+      </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="GridSplitter">
+      <Grid Height="80">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="2*" />
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Background="Red" Grid.Row="0" Grid.Column="0" Opacity="0.2" />
+        <Border Background="Green" Grid.Row="0" Grid.Column="2" Opacity="0.2" />
+        <Border Background="Blue" Grid.Row="2" Grid.Column="0" Opacity="0.2" />
+        <Border Background="Orange" Grid.Row="2" Grid.Column="2" Opacity="0.2" />
+        <GridSplitter x:Name="H" Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" HorizontalAlignment="Center" />
+        <GridSplitter x:Name="V" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" VerticalAlignment="Center" />
+      </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ListView">
+      <ListView>
+        <ListView.View>
+          <GridView>
+            <GridView.Columns>
+              <GridViewColumn Header="Colum1" />
+              <GridViewColumn Header="Colum2" />
+            </GridView.Columns>
+          </GridView>
+        </ListView.View>
+        <system:String>Item 1</system:String>
+        <system:String>Item 2</system:String>
+        <system:String>Item 3</system:String>
+      </ListView>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Menu">
+      <Menu>
+        <MenuItem Header="Style _Explorer">
+          <MenuItem Header="Style _Explorer">
+            <MenuItem.Icon>
+              <Ellipse Width="16" Height="16" Fill="Green" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem Header="Item _2" />
+          <Separator />
+          <MenuItem Header="Item _2a" IsCheckable="True" IsChecked="True" />
+          <MenuItem Header="Style E_xplorer">
+            <MenuItem Header="Style _Explorer" />
+            <MenuItem Header="Item _2" />
+          </MenuItem>
+        </MenuItem>
+        <MenuItem Header="Item _2">
+          <MenuItem Header="Style _Explorer" />
+          <MenuItem Header="Item _2" />
+          <MenuItem Header="Item _3">
+            <MenuItem Header="Style _Explorer" />
+            <MenuItem Header="Item _2" />
+          </MenuItem>
+        </MenuItem>
+        <MenuItem Header="Item _3">
+          <MenuItem Header="Style _Explorer" />
+          <MenuItem Header="Item _2" />
+        </MenuItem>
+      </Menu>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Separator">
+      <Separator Style="{Binding}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="Window">
+      <TextBlock Text="Can't show window style inline." />
+    </DataTemplate>
+
+    <DataTemplate x:Key="ComboBox">
+      <StackPanel>
+        <ComboBox SelectedIndex="0">
+          <system:String>Item 1</system:String>
+          <system:String>Item 2</system:String>
+          <system:String>Item 3</system:String>
+        </ComboBox>
+        <Decorator Height="10" />
+        <ComboBox IsEditable="True" Text="Another item">
+          <system:String>Item 1</system:String>
+          <system:String>Item 2</system:String>
+          <system:String>Item 3</system:String>
+        </ComboBox>
+      </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ContentControl">
+      <ContentControl Height="32" Foreground="Green" Background="DeepSkyBlue">
+        <TextBlock Text="Styx" Foreground="White" />
+      </ContentControl>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CheckBox">
+      <CheckBox Content="StyleExplorer" IsThreeState="True" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="Button">
+      <StackPanel Orientation="Horizontal">
+        <Button IsDefault="True" Content="OK" Style="{Binding}" />
+        <Decorator Width="10" />
+        <Button Content="Abbrechen" Style="{Binding}" />
+      </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ProgressBar">
+      <StackPanel>
+        <ProgressBar Value="50" />
+        <Decorator Height="10" />
+        <ProgressBar IsIndeterminate="True" />
+      </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RadioButton">
+      <StackPanel>
+        <Grid Height="50">
+          <RadioButton Content="StyleExplorer" GroupName="G1" />
+        </Grid>
+        <RadioButton Content="StyleExplorer" GroupName="G1" />
+      </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ScrollBar">
+      <ScrollBar Orientation="Horizontal" />
+    </DataTemplate>
+
+    <XmlDataProvider x:Key="SampleData" Source="../SampleData.xml" XPath="Teams/Team" />
+    <XmlDataProvider x:Key="DgComboData" Source="../SampleLocations.xml" XPath="Locations/Location/Name" />
+
+    <DataTemplate x:Key="DataGrid">
+      <ScrollViewer>
+        <StackPanel>
+          <DataGrid ItemsSource="{Binding Source={StaticResource SampleData}}" AutoGenerateColumns="False" Height="100">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Name" Binding="{Binding XPath=Name}" />
+              <DataGridComboBoxColumn Header="Location" ItemsSource="{Binding Source={StaticResource DgComboData}}" SelectedItemBinding="{Binding XPath=Location}" />
+              <DataGridCheckBoxColumn Header="Active" Binding="{Binding XPath=IsActive}" />
+            </DataGrid.Columns>
+          </DataGrid>
+          <Decorator Height="10" />
+          <DataGrid ItemsSource="{Binding Source={StaticResource SampleData}}" AutoGenerateColumns="False" SelectionUnit="CellOrRowHeader" Height="150">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Name" Binding="{Binding XPath=Name}" />
+              <DataGridComboBoxColumn Header="Location" ItemsSource="{Binding Source={StaticResource DgComboData}}" SelectedItemBinding="{Binding XPath=Location}" />
+              <DataGridCheckBoxColumn Header="Active" Binding="{Binding XPath=IsActive}" />
+            </DataGrid.Columns>
+          </DataGrid>
+        </StackPanel>
+      </ScrollViewer>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Expander">
+      <Expander ExpandDirection="Down" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                Header="ExpandDirection down" Content="Content" BorderThickness="1" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="ToolBar">
+      <ToolBar VerticalAlignment="Top">
+        <Button Content="Button" />
+        <ToggleButton Content="ToggleButton" />
+        <Separator />
+        <ComboBox Width="50" />
+        <TextBox Width="50" />
+        <Button>
+          <Image Source="../Assets/close.png" Width="16" Height="16" />
+        </Button>
+        <Separator />
+        <Button>
+          <Image Source="../Assets/delete.png" Width="16" Height="16" HorizontalAlignment="Center" />
+        </Button>
+
+      </ToolBar>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TextBox">
+      <StackPanel>
+        <StackPanel Orientation="Horizontal">
+          <TextBox Width="100" VerticalAlignment="Center" Text="Test1" />
+          <ComboBox Width="100" VerticalAlignment="Center" SelectedIndex="0">
+            <system:String>Test1</system:String>
+            <system:String>Test2</system:String>
+            <system:String>Test3</system:String>
+          </ComboBox>
+          <ComboBox Width="100" IsEditable="True" SelectedIndex="0">
+            <system:String>Test1</system:String>
+            <system:String>Test2</system:String>
+            <system:String>Test3</system:String>
+          </ComboBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+          <TextBox Width="100" VerticalAlignment="Top" Text="Test1" />
+          <ComboBox Width="100" VerticalAlignment="Top" SelectedIndex="0">
+            <system:String>Test1</system:String>
+            <system:String>Test2</system:String>
+            <system:String>Test3</system:String>
+          </ComboBox>
+          <ComboBox Width="100" IsEditable="True" VerticalAlignment="Top" SelectedIndex="0">
+            <system:String>Test1</system:String>
+            <system:String>Test2</system:String>
+            <system:String>Test3</system:String>
+          </ComboBox>
+        </StackPanel>
+      </StackPanel>
+    </DataTemplate>
+
+  </FrameworkElement.Resources>
+  <DockPanel>
+    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+      <CheckBox Content="Enabled" Margin="4" IsChecked="{Binding IsEnabled}" />
+      <CheckBox Content="LargeFont" Margin="4" Checked="LargeFont_Checked" Unchecked="LargeFont_Unchecked" />
+    </StackPanel>
+    <ScrollViewer>
+      <ItemsControl ItemsSource="{Binding Styles}" 
+                    ItemTemplate="{StaticResource ItemTemplate}" 
+                    Focusable="False" />
+    </ScrollViewer>
+  </DockPanel>
 </UserControl>

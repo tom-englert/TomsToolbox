@@ -38,6 +38,7 @@
             _diAdapter = new DIAdapter();
 
             var exportProvider = _diAdapter.Initialize();
+            ExportProviderLocator.Register(exportProvider);
 
             Resources.MergedDictionaries.Insert(0, WpfStyles.GetDefaultStyles().RegisterDefaultWindowStyle());
             Resources.MergedDictionaries.Add(DataTemplateManager.CreateDynamicDataTemplates(exportProvider));
@@ -49,8 +50,10 @@
             mainWindow.Show();
         }
 
-        private void BindingErrorCallback([CanBeNull] string msg)
+        private void BindingErrorCallback(string msg)
         {
+            if (msg.StartsWith("System.Windows.Data Error: 4 : Cannot find source for binding with reference 'RelativeSource FindAncestor, AncestorType='System.Windows.Controls.DataGrid"))
+                return;
             Dispatcher?.BeginInvoke((Action)(() => MessageBox.Show(msg)));
         }
 

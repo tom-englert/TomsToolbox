@@ -67,6 +67,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <None Remove="SampleData.xml" />
+    <None Remove="SampleLocations.xml" />
+    <Resource Include="SampleData.xml" />
+    <Resource Include="SampleLocations.xml" />
   </ItemGroup>
 
   <ItemGroup>

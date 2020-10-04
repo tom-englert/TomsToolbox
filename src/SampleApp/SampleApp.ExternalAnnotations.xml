@@ -1,5 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <assembly name="SampleApp">
+  <member name="P:AVL.Styx.ResourceItem.Description">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="M:AVL.Styx.ResourceItem.GetAll(System.Type,System.String)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <parameter name="type">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+    <parameter name="suffix">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="P:AVL.Styx.ResourceItem.Key">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="P:AVL.Styx.ResourceItem.Value">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="M:SampleApp.MainWindow.#ctor(TomsToolbox.Composition.IExportProvider)">
     <parameter name="exportProvider">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
@@ -103,6 +121,11 @@
   </member>
   <member name="P:SampleApp.Samples.MapViewModel.SelectedPoi">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+  </member>
+  <member name="M:SampleApp.StyleTemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
+    <parameter name="container">
+      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+    </parameter>
   </member>
   <member name="F:SampleApp.Themes.ResourceKeys.ThemedImageStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />

@@ -5,29 +5,36 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:samples="clr-namespace:SampleApp.Samples"
              xmlns:toms="urn:TomsToolbox"
+             xmlns:composition="urn:TomsToolbox.Composition"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance samples:ThemingViewModel}">
-  <StackPanel Margin="10">
-    <TextBlock>Select Theme:</TextBlock>
-    <Decorator Height="5" />
-    <ListBox ItemsSource="{Binding Source={x:Type samples:Theme}, Converter={x:Static toms:EnumToValuesConverter.Default}}" 
+  <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Margin="10">
+      <TextBlock>Select Theme:</TextBlock>
+      <Decorator Height="5" />
+      <ListBox ItemsSource="{Binding Source={x:Type samples:Theme}, Converter={x:Static toms:EnumToValuesConverter.Default}}" 
              SelectedItem="{Binding SelectedTheme}" 
              SelectedIndex="0" 
              Background="Transparent" 
              BorderThickness="0">
-      <ListBox.ItemContainerStyle>
-        <Style TargetType="ListBoxItem">
-          <Setter Property="Template">
-            <Setter.Value>
-              <ControlTemplate TargetType="ListBoxItem">
-                <RadioButton Content="{Binding Converter={x:Static toms:ObjectToDisplayNameConverter.Default}}"
+        <ListBox.ItemContainerStyle>
+          <Style TargetType="ListBoxItem">
+            <Setter Property="Template">
+              <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                  <RadioButton Content="{Binding Converter={x:Static toms:ObjectToDisplayNameConverter.Default}}"
                              IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}}"
                              Margin="0,3" />
-              </ControlTemplate>
-            </Setter.Value>
-          </Setter>
-        </Style>
-      </ListBox.ItemContainerStyle>
-    </ListBox>
-  </StackPanel>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </Style>
+        </ListBox.ItemContainerStyle>
+      </ListBox>
+      <Decorator Height="10" />
+      <Expander IsExpanded="True" Header="Colors">
+        <ContentControl Content="{composition:Import {x:Type samples:ColorViewModel}}" />
+      </Expander>
+    </StackPanel>
+  </ScrollViewer>
 </UserControl>
