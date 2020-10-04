@@ -6,6 +6,7 @@
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/ButtonStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/CheckBoxStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/ComboBoxStyle.xaml" />
+    <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/ExpanderStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/MenuStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/GridSplitterStyle.xaml" />
     <ResourceDictionary Source="/TomsToolbox.Wpf.Styles;component/Themes/GroupBoxStyle.xaml" />

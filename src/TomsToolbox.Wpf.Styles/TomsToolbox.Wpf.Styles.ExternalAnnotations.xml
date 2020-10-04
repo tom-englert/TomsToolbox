@@ -48,6 +48,9 @@
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.DisabledBrush">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ExpanderStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.GridSplitterStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>

@@ -71,6 +71,12 @@
         [NotNull] public static readonly ResourceKey DataGridComboBoxElementStyle = new ComponentResourceKey(typeof(ResourceKeys), "DataGridComboBoxElementStyle");
 
         /// <summary>
+        /// The resource key for the <see cref="Expander"/> style.
+        /// </summary>
+        [DefaultStyle]
+        [NotNull] public static readonly ResourceKey ExpanderStyle = new ComponentResourceKey(typeof(ResourceKeys), "ExpanderStyle");
+
+        /// <summary>
         /// The resource key for the <see cref="ContextMenu"/> style.
         /// </summary>
         [DefaultStyle]
