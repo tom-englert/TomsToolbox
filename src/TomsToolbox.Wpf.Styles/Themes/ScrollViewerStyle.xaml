@@ -76,7 +76,7 @@
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
               <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
-              <Setter Property="Opacity" Value=".75"/>
+              <Setter Property="Opacity" Value=".5"/>
             </Trigger>
           </ControlTemplate.Triggers>
         </ControlTemplate>
@@ -108,7 +108,7 @@
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
               <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
-              <Setter Property="Opacity" Value=".75"/>
+              <Setter Property="Opacity" Value=".5"/>
             </Trigger>
           </ControlTemplate.Triggers>
         </ControlTemplate>
