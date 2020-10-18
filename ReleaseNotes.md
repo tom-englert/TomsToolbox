@@ -1,3 +1,10 @@
+##### 2.2
+- Add ScrollBar, ScrollViewer and Expander style
+- Fix some color usages to fully support theming of styles
+
+##### 2.1.1
+- Fix Ninject ExportProvider for singletons with multiple exports.
+
 ##### 2.1
 - Introduce SemanticVersion class
 - WPF window style: allow to have some additional content in the title bar.
