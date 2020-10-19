@@ -2,10 +2,10 @@
 {
     using TomsToolbox.Wpf.Composition.AttributedModel;
 
-    [DataTemplate(typeof(ThemingViewModel))]
-    public partial class ThemingView
+    [DataTemplate(typeof(ColorThemeViewModel))]
+    public partial class ColorThemeView
     {
-        public ThemingView()
+        public ColorThemeView()
         {
             InitializeComponent();
         }

@@ -7,7 +7,9 @@
 
     using PropertyChanged;
 
+    using TomsToolbox.Essentials;
     using TomsToolbox.Wpf.Composition.AttributedModel;
+    using TomsToolbox.Wpf.Converters;
 
     [AttributeUsage(AttributeTargets.All)]
     public class DisplayNameAttribute : System.ComponentModel.DisplayNameAttribute
@@ -21,24 +23,31 @@
         }
     }
 
-    enum Theme
+
+
+    enum ColorTheme
     {
-        [DisplayName("System Theme")]
+        [DisplayName("System")]
+        [Text(ColorThemeViewModel.DictionaryUriKey, "")]
         System,
-        [DisplayName("VisualStudio Light Theme")]
+        [DisplayName("VisualStudio Light")]
+        [Text(ColorThemeViewModel.DictionaryUriKey, @"Themes/LightTheme.xaml")]
         Light,
-        [DisplayName("VisualStudio Dark Theme")]
+        [DisplayName("VisualStudio Dark")]
+        [Text(ColorThemeViewModel.DictionaryUriKey, @"Themes/DarkTheme.xaml")]
         Dark
     }
 
     [VisualCompositionExport(RegionId.Main, Sequence = 10)]
     [AddINotifyPropertyChangedInterface]
     [Shared]
-    class ThemingViewModel
+    class ColorThemeViewModel
     {
+        public const string DictionaryUriKey = nameof(ColorTheme);
+
         private readonly Collection<ResourceDictionary> _themeContainer;
 
-        public ThemingViewModel()
+        public ColorThemeViewModel()
         {
             var themeDictionary = new ResourceDictionary();
             var applicationDictionaries = Application.Current.Resources.MergedDictionaries;
@@ -52,25 +61,18 @@
         }
 
         [OnChangedMethod(nameof(OnSelectedThemeChanged))]
-        public Theme SelectedTheme { get; set; } 
+        public ColorTheme SelectedColorTheme { get; set; } 
 
         private void OnSelectedThemeChanged()
         {
             _themeContainer.Clear();
 
-            switch (SelectedTheme)
-            {
-                case Theme.System:
-                    break;
+            var relativeUri = ObjectToTextConverter.Convert(DictionaryUriKey, SelectedColorTheme);
 
-                case Theme.Light:
-                    _themeContainer.Add(new ResourceDictionary{ Source = new Uri(@"pack://application:,,,/SampleApp;component/Themes/LightTheme.xaml")});
-                    break;
+            if (string.IsNullOrEmpty(relativeUri))
+                return;
 
-                case Theme.Dark:
-                    _themeContainer.Add(new ResourceDictionary{ Source = new Uri(@"pack://application:,,,/SampleApp;component/Themes/DarkTheme.xaml")});
-                    break;
-            }
+            _themeContainer.Add(new ResourceDictionary{ Source = GetType().Assembly.GeneratePackUri(relativeUri)});
         }
     }
 }
