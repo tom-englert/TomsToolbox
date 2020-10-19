@@ -7,33 +7,22 @@
 
     using PropertyChanged;
 
+    using SampleApp.Properties;
+
     using TomsToolbox.Essentials;
+    using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition.AttributedModel;
     using TomsToolbox.Wpf.Converters;
 
-    [AttributeUsage(AttributeTargets.All)]
-    public class DisplayNameAttribute : System.ComponentModel.DisplayNameAttribute
-    {
-        public DisplayNameAttribute() : this(string.Empty)
-        {
-        }
-
-        public DisplayNameAttribute(string displayName) : base(displayName)
-        {
-        }
-    }
-
-
-
     enum ColorTheme
     {
-        [DisplayName("System")]
+        [LocalizedDisplayName(StringResourceKey.ColorTheme_System)]
         [Text(ColorThemeViewModel.DictionaryUriKey, "")]
         System,
-        [DisplayName("VisualStudio Light")]
+        [LocalizedDisplayName(StringResourceKey.ColorTheme_Light)]
         [Text(ColorThemeViewModel.DictionaryUriKey, @"Themes/LightTheme.xaml")]
         Light,
-        [DisplayName("VisualStudio Dark")]
+        [LocalizedDisplayName(StringResourceKey.ColorTheme_VisualStudioDark)]
         [Text(ColorThemeViewModel.DictionaryUriKey, @"Themes/DarkTheme.xaml")]
         Dark
     }
@@ -41,7 +30,7 @@
     [VisualCompositionExport(RegionId.Main, Sequence = 10)]
     [AddINotifyPropertyChangedInterface]
     [Shared]
-    class ColorThemeViewModel
+    class ColorThemeViewModel : ObservableObject
     {
         public const string DictionaryUriKey = nameof(ColorTheme);
 
@@ -60,10 +49,10 @@
             return "Theming";
         }
 
-        [OnChangedMethod(nameof(OnSelectedThemeChanged))]
+        [OnChangedMethod(nameof(OnSelectedColorThemeChanged))]
         public ColorTheme SelectedColorTheme { get; set; } 
 
-        private void OnSelectedThemeChanged()
+        private void OnSelectedColorThemeChanged()
         {
             _themeContainer.Clear();
 

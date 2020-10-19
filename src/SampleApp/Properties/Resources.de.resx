@@ -156,4 +156,13 @@
   <data name="Close" xml:space="preserve">
     <value>Schließen</value>
   </data>
+  <data name="ColorTheme_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="ColorTheme_Light" xml:space="preserve">
+    <value>Hell</value>
+  </data>
+  <data name="ColorTheme_VisualStudioDark" xml:space="preserve">
+    <value>Dunkel</value>
+  </data>
 </root>

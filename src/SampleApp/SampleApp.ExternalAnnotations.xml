@@ -40,6 +40,15 @@
   <member name="P:SampleApp.Properties.Resources.Close">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="P:SampleApp.Properties.Resources.ColorTheme_Light">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="P:SampleApp.Properties.Resources.ColorTheme_System">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="P:SampleApp.Properties.Resources.ColorTheme_VisualStudioDark">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="P:SampleApp.Properties.Resources.Copy">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>

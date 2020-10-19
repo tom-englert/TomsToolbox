@@ -153,4 +153,13 @@
   <data name="Close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="ColorTheme_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="ColorTheme_Light" xml:space="preserve">
+    <value>VisualStudio Light</value>
+  </data>
+  <data name="ColorTheme_VisualStudioDark" xml:space="preserve">
+    <value>VisualStudio Dark</value>
+  </data>
 </root>

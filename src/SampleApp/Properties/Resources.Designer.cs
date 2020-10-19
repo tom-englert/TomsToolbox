@@ -81,6 +81,36 @@ namespace SampleApp.Properties {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to VisualStudio Light.
+        /// </summary>
+        [NotNull]
+        public static string ColorTheme_Light {
+            get {
+                return ResourceManager.GetString("ColorTheme_Light", resourceCulture) ?? string.Empty;
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to System.
+        /// </summary>
+        [NotNull]
+        public static string ColorTheme_System {
+            get {
+                return ResourceManager.GetString("ColorTheme_System", resourceCulture) ?? string.Empty;
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to VisualStudio Dark.
+        /// </summary>
+        [NotNull]
+        public static string ColorTheme_VisualStudioDark {
+            get {
+                return ResourceManager.GetString("ColorTheme_VisualStudioDark", resourceCulture) ?? string.Empty;
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Copy (Ctrl+C).
         /// </summary>
         [NotNull]
@@ -212,6 +242,18 @@ namespace SampleApp.Properties {
         ///   Looks up a localized string similar to Close.
         /// </summary>
         Close,
+        /// <summary>
+        ///   Looks up a localized string similar to VisualStudio Light.
+        /// </summary>
+        ColorTheme_Light,
+        /// <summary>
+        ///   Looks up a localized string similar to System.
+        /// </summary>
+        ColorTheme_System,
+        /// <summary>
+        ///   Looks up a localized string similar to VisualStudio Dark.
+        /// </summary>
+        ColorTheme_VisualStudioDark,
         /// <summary>
         ///   Looks up a localized string similar to Copy (Ctrl+C).
         /// </summary>
