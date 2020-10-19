@@ -7,11 +7,13 @@ function Replace-Version
         [string]$text
     )
 
-    return $text -replace ' Version: \d\.\d\.\d\+[a-z0-9]+', ''
+    return $text -replace ' Version: \d\.\d(\.\d)?\+[a-z0-9]+', ''
 
 }
 
 Get-ChildItem '..\..\docs\html\*.htm' | ForEach {
 (Get-Content $_ -Raw | Replace-Version) | Set-Content -Path $_ -Encoding UTF8
 }
+
+copy Readme.md ..\..\docs
 

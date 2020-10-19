@@ -172,6 +172,7 @@ In code the class names would be ambiguous, while in XAML a namespace prefixes i
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons\Help.png" />
+    <Content Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Composition.Mef2\TomsToolbox.Composition.Mef2.csproj">

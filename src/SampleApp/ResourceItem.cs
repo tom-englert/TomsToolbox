@@ -70,7 +70,7 @@
                 .Where(field => field.Name.EndsWith(suffix))
                 .Select(field => field.GetValue(null) as ComponentResourceKey)
                 .Where(key => key != null)
-                .Select(key => new ResourceItem(key, Application.Current.FindResource(key), suffix))
+                .Select(key => new ResourceItem(key!, Application.Current.FindResource(key), suffix))
                 .ToArray();
         }
     }
