@@ -38,6 +38,17 @@
             Approvals.VerifyJson(data);
         }
 
+        [TestMethod]
+        public void ReadThisAssemblyTest()
+        {
+            var assembly = GetType().Assembly;
+            var result = MetadataReader.Read(assembly);
+
+            var data = Serialize(result);
+
+            Approvals.VerifyJson(data);
+        }
+
         private static string Serialize(IList<ExportInfo> result)
         {
             return _versionRegex.Replace(JsonConvert.SerializeObject(result), "Version=2.0.0.0");

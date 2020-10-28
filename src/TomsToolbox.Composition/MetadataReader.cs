@@ -151,7 +151,7 @@
             var instance = exportAttribute.Constructor.Invoke(exportAttribute.ConstructorArguments.Select(ConvertValue).ToArray());
             var properties = exportAttribute.AttributeType.GetProperties();
 
-            foreach (var propertyInfo in properties)
+            foreach (var propertyInfo in properties.OrderBy(item => item.Name))
             {
                 var value = propertyInfo.GetValue(instance, null);
 
@@ -165,7 +165,7 @@
             if (namedArguments == null)
                 return;
 
-            foreach (var namedArgument in namedArguments)
+            foreach (var namedArgument in namedArguments.OrderBy(item => item.MemberName))
             {
                 metadata[namedArgument.MemberName] = ConvertValue(namedArgument.TypedValue)!;
             }
@@ -198,6 +198,11 @@
 
                     return arrayList.ToArray(elementType);
                 }
+            }
+
+            if (argumentType.IsEnum)
+            {
+                return Enum.Parse(argumentType, value.ToString());
             }
 
             throw new InvalidOperationException($"Argument type conversion from {valueType} to {argumentType} is not supported.");
