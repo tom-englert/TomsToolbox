@@ -1,3 +1,6 @@
+##### 2.2.1
+- MetaDataReader: Support Enums as attribute arguments
+
 ##### 2.2
 - Add ScrollBar, ScrollViewer and Expander style
 - Fix some color usages to fully support theming of styles

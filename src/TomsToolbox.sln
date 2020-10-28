@@ -15,7 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 		..\ReleaseNotes.md = ..\ReleaseNotes.md
 		Resources.Designer.t4 = Resources.Designer.t4
-		Documentation\Content\VersionHistory\VersionHistory.aml = Documentation\Content\VersionHistory\VersionHistory.aml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Essentials", "TomsToolbox.Essentials\TomsToolbox.Essentials.csproj", "{AE305312-7637-43BF-9156-7EC513C55135}"
