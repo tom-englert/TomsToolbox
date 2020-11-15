@@ -21,7 +21,6 @@
     <PackageReference Include="JetBrains.Annotations" Version="2020.1.0" PrivateAssets="All" />
     <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.16.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="System.Composition.AttributedModel" Version="1.4.1" />
   </ItemGroup>
 
   <ItemGroup>
