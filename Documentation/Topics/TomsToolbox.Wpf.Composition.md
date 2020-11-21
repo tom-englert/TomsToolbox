@@ -35,8 +35,7 @@ and somewhere else:
 ```
 
 ## Declaring and injecting models
-To modularize our application we need to have loose coupling between containers and content. To achieve this the VCF provides the concept of regions. This concept was inspired by the [Prism](https://docs.microsoft.
-com/en-us/previous-versions/msp-n-p/gg406140) framework, but has been designed to support the model-first approach and declarative DI like MEF.
+To modularize our application we need to have loose coupling between containers and content. To achieve this the VCF provides the concept of regions. This concept was inspired by the [Prism](https://docs.microsoft.com/en-us/previous-versions/msp-n-p/gg406140) framework, but has been designed to support the model-first approach and declarative DI like MEF.
 
 The container simply declares a region, and the framework injects the model(s) that have registered with this region:
 
