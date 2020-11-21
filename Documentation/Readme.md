@@ -35,7 +35,7 @@ Controls, converters, extensions, behaviors, triggers, styles, MVVM and other he
 Check out the [Sample Application](https://github.com/tom-englert/TomsToolbox/releases/latest) to get a glimpse of what you can do.
 
 ### [TomsToolbox.Wpf.Composition](Topics/TomsToolbox.Wpf.Composition.md)
-A lightweight but powerful Visual Composition framework to leverage the power of your favorite DI container in your MVVM models and controls.
+A lightweight but powerful Visual Composition framework to decouple components and leverage the power of your favorite DI container in your MVVM models and controls.
 
 ### [TomsToolbox.Wpf.Styles](Topics/TomsToolbox.Wpf.Styles.md) 
-Provides themeable modern styles for most standard WPF components by adding just one line of code to your project.
+Themeable modern styles for most standard WPF components by adding just one line of code to your project.

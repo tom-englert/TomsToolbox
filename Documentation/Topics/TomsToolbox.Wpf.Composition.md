@@ -48,6 +48,8 @@ The container simply declares a region, and the framework injects the model(s) t
 [VisualCompositionExport(RegionId.Main)]
 public class MainViewModel 
 {
+    public MainViewModel(SomeService injectedViaDI)
+    {
     ...
 }
 ```
@@ -79,8 +81,12 @@ To achieve this the VCF provides an attribute to decorate any `(User)Control`, t
 [DataTemplate(typeof(MyViewModel))]
 public partial class MyView : UserControl
 {
+    public MyView(SomeService injectedViaDI)
+    {
     ...
 ```
+Both view-model and view are instantiated by the DI container, so they have full access to all registered services.
+
 Finally to collect all controls and make them available as data templates you have to add one line to your `App.xaml.cs` after you have populated your DI-container:
 ```c#
 public sealed partial class App : Application
