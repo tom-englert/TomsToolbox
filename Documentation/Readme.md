@@ -8,7 +8,7 @@ A detailed documentation of the full API is available [here](https://tom-englert
 
 ## TomsToolbox.Essentials 
 
-This library contains methods to enhance code based on `netstandard2.0` objects. It has extension methods for essential objects like attributes, collections, date-time operations, etc.
+This library contains methods to enhance code in the `netstandard2.0` scope. It has extension methods for essential objects like attributes, collections, date-time operations, etc.
 
 ## TomsToolbox.Desktop
 
@@ -30,9 +30,12 @@ Extensions, adapters and helpers for the `ObservableCollection` class, like obse
 
 ## TomsToolbox.Wpf.*
 
-Controls, converters, extensions, behaviors, triggers, styles and helpers for WPF applications.
+Controls, converters, extensions, behaviors, triggers, styles, MVVM and other helpers for WPF applications.
 
-Check out the [Sample Application](https://github.com/tom-englert/TomsToolbox/releases/latest) to get a glimpse of what you can do. 
+Check out the [Sample Application](https://github.com/tom-englert/TomsToolbox/releases/latest) to get a glimpse of what you can do.
+
+### [TomsToolbox.Wpf.Composition](Topics/TomsToolbox.Wpf.Composition.md)
+A lightweight but powerful Visual Composition framework to leverage the power of your favorite DI container in your MVVM models and controls.
 
 ### [TomsToolbox.Wpf.Styles](Topics/TomsToolbox.Wpf.Styles.md) 
 Provides themeable modern styles for most standard WPF components by adding just one line of code to your project.
