@@ -747,8 +747,8 @@
     <HelpKINode Title="Import.DataContextProperty Field" Url="html/778C9F2D.htm" />
   </HelpKINode>
   <HelpKINode Title="DataGridCellStyle field">
-    <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/B7A4BBF6.htm" />
     <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/3B3054D2.htm" />
+    <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/B7A4BBF6.htm" />
   </HelpKINode>
   <HelpKINode Title="DataGridCheckBoxEditingElementStyle field" Url="html/57EBF12C.htm" />
   <HelpKINode Title="DataGridCheckBoxElementStyle field" Url="html/2173DFDD.htm" />
@@ -792,26 +792,26 @@
   <HelpKINode Title="DataTemplate.RoleProperty field" Url="html/21F663B4.htm" />
   <HelpKINode Title="DataTemplate.SetRole method" Url="html/A0C2F45D.htm" />
   <HelpKINode Title="DataTemplateAttribute class">
-    <HelpKINode Title="DataTemplateAttribute Class" Url="html/70B84780.htm" />
     <HelpKINode Title="DataTemplateAttribute Class" Url="html/81714F2A.htm" />
-    <HelpKINode Title="constructor" Url="html/B8CBCDB2.htm" />
+    <HelpKINode Title="DataTemplateAttribute Class" Url="html/70B84780.htm" />
     <HelpKINode Title="constructor" Url="html/2BFCF92B.htm" />
+    <HelpKINode Title="constructor" Url="html/B8CBCDB2.htm" />
     <HelpKINode Title="methods" Url="html/135542AA.htm" />
     <HelpKINode Title="methods" Url="html/A2C845AC.htm" />
     <HelpKINode Title="properties" Url="html/F59E154B.htm" />
     <HelpKINode Title="properties" Url="html/FF53E2AE.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateAttribute.DataTemplateAttribute constructor">
-    <HelpKINode Title="DataTemplateAttribute Constructor " Url="html/2BFCF92B.htm" />
     <HelpKINode Title="DataTemplateAttribute Constructor " Url="html/B8CBCDB2.htm" />
+    <HelpKINode Title="DataTemplateAttribute Constructor " Url="html/2BFCF92B.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateAttribute.DataType property">
-    <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/5032ADFA.htm" />
     <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/D1E2AC38.htm" />
+    <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/5032ADFA.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateAttribute.Role property">
-    <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/FB533439.htm" />
     <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/AB47D607.htm" />
+    <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/FB533439.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateManager class">
     <HelpKINode Title="DataTemplateManager Class" Url="html/F883E1B6.htm" />
@@ -1208,11 +1208,17 @@
   <HelpKINode Title="ExportProvider.ExportsChanged event" Url="html/8B71E19A.htm" />
   <HelpKINode Title="ExportProviderAdapter class">
     <HelpKINode Title="ExportProviderAdapter Class" Url="html/53109BE0.htm" />
+    <HelpKINode Title="ExportProviderAdapter Class" Url="html/43E18152.htm" />
     <HelpKINode Title="constructor" Url="html/EEAA2CFE.htm" />
+    <HelpKINode Title="constructor" Url="html/36565B87.htm" />
     <HelpKINode Title="events" Url="html/AFA40130.htm" />
     <HelpKINode Title="methods" Url="html/7211FBD0.htm" />
+    <HelpKINode Title="methods" Url="html/7071141D.htm" />
   </HelpKINode>
-  <HelpKINode Title="ExportProviderAdapter.ExportProviderAdapter constructor" Url="html/EEAA2CFE.htm" />
+  <HelpKINode Title="ExportProviderAdapter.ExportProviderAdapter constructor">
+    <HelpKINode Title="ExportProviderAdapter Constructor " Url="html/EEAA2CFE.htm" />
+    <HelpKINode Title="ExportProviderAdapter Constructor " Url="html/36565B87.htm" />
+  </HelpKINode>
   <HelpKINode Title="ExportProviderAdapter.ExportsChanged event" Url="html/8E18065.htm" />
   <HelpKINode Title="ExportProviderAdapter.GetExports(Of T) method" Url="html/89A344E1.htm" />
   <HelpKINode Title="ExportProviderAdapter.GetExports&lt;T&gt; method" Url="html/89A344E1.htm" />
@@ -1236,10 +1242,10 @@
     <HelpKINode Title="IExportProvider.ExportsChanged Event" Url="html/D16EDD33.htm" />
   </HelpKINode>
   <HelpKINode Title="ExtensionMethods class">
-    <HelpKINode Title="ExtensionMethods Class" Url="html/9DCC5175.htm" />
     <HelpKINode Title="ExtensionMethods Class" Url="html/2392FCED.htm" />
-    <HelpKINode Title="methods" Url="html/283E1F3C.htm" />
+    <HelpKINode Title="ExtensionMethods Class" Url="html/9DCC5175.htm" />
     <HelpKINode Title="methods" Url="html/C33F5656.htm" />
+    <HelpKINode Title="methods" Url="html/283E1F3C.htm" />
   </HelpKINode>
   <HelpKINode Title="ExtensionMethods.BindExports method" Url="html/6BF16E87.htm" />
   <HelpKINode Title="ExtensionMethods.GetExports method" Url="html/47DD0A5.htm" />
@@ -2877,12 +2883,12 @@
   <HelpKINode Title="ResourceKey attached property" Url="html/A4769F90.htm" />
   <HelpKINode Title="ResourceKeyProperty field" Url="html/F5E6759A.htm" />
   <HelpKINode Title="ResourceKeys class">
-    <HelpKINode Title="ResourceKeys Class" Url="html/C959EDED.htm" />
     <HelpKINode Title="ResourceKeys Class" Url="html/70E16745.htm" />
+    <HelpKINode Title="ResourceKeys Class" Url="html/C959EDED.htm" />
     <HelpKINode Title="ResourceKeys Class" Url="html/D534761E.htm" />
-    <HelpKINode Title="fields" Url="html/2A12A93F.htm" />
     <HelpKINode Title="fields" Url="html/CD6D30E1.htm" />
     <HelpKINode Title="fields" Url="html/2AAA6258.htm" />
+    <HelpKINode Title="fields" Url="html/2A12A93F.htm" />
   </HelpKINode>
   <HelpKINode Title="ResourceKeys.AccentDarkBrush field" Url="html/5DE74413.htm" />
   <HelpKINode Title="ResourceKeys.AutoToolTipTextBoxStyle field" Url="html/D332F46B.htm" />
@@ -2945,8 +2951,8 @@
   <HelpKINode Title="Role property">
     <HelpKINode Title="ComposableContentControl.Role Property " Url="html/1959897.htm" />
     <HelpKINode Title="ContentControlCompositionBehavior.Role Property " Url="html/B3DF3EF8.htm" />
-    <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/AB47D607.htm" />
     <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/FB533439.htm" />
+    <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/AB47D607.htm" />
     <HelpKINode Title="IDataTemplateMetadata.Role Property " Url="html/6373CFC4.htm" />
     <HelpKINode Title="IVisualCompositionMetadata.Role Property " Url="html/33FFCA4E.htm" />
     <HelpKINode Title="RoleBasedDataTemplateKey.Role Property " Url="html/3831FFD.htm" />
@@ -3097,8 +3103,8 @@
   <HelpKINode Title="SemanticVersion.Version property" Url="html/DF79F5F8.htm" />
   <HelpKINode Title="Sequence property">
     <HelpKINode Title="IVisualCompositionMetadata.Sequence Property " Url="html/2029359D.htm" />
-    <HelpKINode Title="VisualCompositionExportAttribute.Sequence Property " Url="html/B22091C7.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute.Sequence Property " Url="html/5AF7B7AA.htm" />
+    <HelpKINode Title="VisualCompositionExportAttribute.Sequence Property " Url="html/B22091C7.htm" />
   </HelpKINode>
   <HelpKINode Title="SequenceAttribute class">
     <HelpKINode Title="SequenceAttribute Class" Url="html/3BB5BB3D.htm" />
@@ -3458,6 +3464,8 @@
   <HelpKINode Title="TomsToolbox.Composition.IExport&lt;T&gt; interface" Url="html/964FF57A.htm" />
   <HelpKINode Title="TomsToolbox.Composition.IExportProvider interface" Url="html/7C866D16.htm" />
   <HelpKINode Title="TomsToolbox.Composition.IMetadata interface" Url="html/2994B7F7.htm" />
+  <HelpKINode Title="TomsToolbox.Composition.Mef namespace" Url="html/A3C0CC6D.htm" />
+  <HelpKINode Title="TomsToolbox.Composition.Mef.ExportProviderAdapter class" Url="html/43E18152.htm" />
   <HelpKINode Title="TomsToolbox.Composition.Mef2 namespace" Url="html/A3F2CC6D.htm" />
   <HelpKINode Title="TomsToolbox.Composition.Mef2.ExportProviderAdapter class" Url="html/53109BE0.htm" />
   <HelpKINode Title="TomsToolbox.Composition.MetadataAdapter class" Url="html/4C2F8264.htm" />
@@ -4083,16 +4091,16 @@
   <HelpKINode Title="VisualCompositionExportAttribute class">
     <HelpKINode Title="VisualCompositionExportAttribute Class" Url="html/A3ADB2E6.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute Class" Url="html/FB38E407.htm" />
-    <HelpKINode Title="constructor" Url="html/2FFCFE4E.htm" />
     <HelpKINode Title="constructor" Url="html/EBFBBE4.htm" />
+    <HelpKINode Title="constructor" Url="html/2FFCFE4E.htm" />
     <HelpKINode Title="methods" Url="html/D9F4C1F8.htm" />
     <HelpKINode Title="methods" Url="html/E5318483.htm" />
-    <HelpKINode Title="properties" Url="html/E381767F.htm" />
     <HelpKINode Title="properties" Url="html/94C4E8D1.htm" />
+    <HelpKINode Title="properties" Url="html/E381767F.htm" />
   </HelpKINode>
   <HelpKINode Title="VisualCompositionExportAttribute.Role property">
-    <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/3215271D.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/D4495849.htm" />
+    <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/3215271D.htm" />
   </HelpKINode>
   <HelpKINode Title="VisualCompositionExportAttribute.Sequence property">
     <HelpKINode Title="VisualCompositionExportAttribute.Sequence Property " Url="html/5AF7B7AA.htm" />
