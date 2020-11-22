@@ -18,7 +18,7 @@ This library contains extensions to objects only available when targeting Window
 
 This is a set of libraries providing an abstraction layer to DI-containers, so you can use dependency injection and leverage the annotations of `System.Composition.AttributedModel` without having to commit to a specific DI-container.
 
-Reusable implementations for MEF1, MEF2, and Ninject are provided.
+Reusable adapters for MEF1, MEF2, and Ninject are available.
 
 ## TomsToolbox.ObservableCollections
 
