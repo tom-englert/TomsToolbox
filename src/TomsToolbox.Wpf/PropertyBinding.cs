@@ -68,6 +68,7 @@
         {
             [return: MaybeNull]
             get => _bindingHelper.GetValue<T>(BindingHelper.ValueProperty);
+            [param: AllowNull]
             set => _bindingHelper.SetValue(BindingHelper.ValueProperty, value);
         }
 

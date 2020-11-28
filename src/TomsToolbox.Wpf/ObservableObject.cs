@@ -147,7 +147,7 @@
         [NotifyPropertyChangedInvocator]
         protected bool SetProperty<T>([CanBeNull, AllowNull, MaybeNull] ref T backingField, [CanBeNull, AllowNull] T value, [NotNull] Expression<Func<T>> propertyExpression, [NotNull] Action<T, T> changeCallback)
         {
-            return SetProperty(ref backingField, value, PropertySupport.ExtractPropertyName(propertyExpression), changeCallback);
+            return SetProperty(ref backingField, value, PropertySupport.ExtractPropertyName(propertyExpression), changeCallback!);
         }
 
         /// <summary>
@@ -203,7 +203,7 @@
         [NotifyPropertyChangedInvocator]
         protected bool SetProperty<T>([CanBeNull, AllowNull, MaybeNull] ref T backingField, [CanBeNull, AllowNull] T value, [NotNull] Action<T, T> changeCallback, [NotNull] string propertyName)
         {
-            return SetProperty(ref backingField, value, propertyName, changeCallback);
+            return SetProperty(ref backingField, value, propertyName, changeCallback!);
         }
 
         /// <summary>

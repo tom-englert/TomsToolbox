@@ -60,7 +60,7 @@
         /// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
         /// </returns>
         /// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
-        public bool Contains([CanBeNull, AllowNull] T item)
+        public bool Contains([CanBeNull] T item)
         {
             return _collectionView.Contains(item!);
         }
@@ -72,7 +72,7 @@
         /// <returns>
         /// The index of <paramref name="item" /> if found in the list; otherwise, -1.
         /// </returns>
-        public int IndexOf([CanBeNull, AllowNull] T item)
+        public int IndexOf([CanBeNull] T item)
         {
             return _collectionView.IndexOf(item!);
         }
@@ -88,13 +88,10 @@
         }
 
         /// <inheritdoc />
-        [CanBeNull, MaybeNull, AllowNull]
+        [CanBeNull]
         public T this[int index]
         {
-            [return: MaybeNull]
-#pragma warning disable 8766
-            get => _collectionView.GetItemAt(index).SafeCast<T>();
-#pragma warning restore 8766
+            get => _collectionView.GetItemAt(index).SafeCast<T>()!;
             // ReSharper disable once ValueParameterNotUsed
             set => ReadOnlyNotSupported();
         }

@@ -16,10 +16,11 @@
         /// <typeparam name="T">The target type</typeparam>
         /// <param name="value">The value.</param>
         /// <returns>The value casted to <typeparamref name="T"/>, or <c>default(T)</c> if value is <c>null</c>.</returns>
-        [CanBeNull][return: MaybeNull]
+        [CanBeNull]
+        [return: NotNullIfNotNull("value")]
         public static T SafeCast<T>([CanBeNull] this object? value)
         {
-            return (value == null) ? default : (T)value;
+            return ((value == null) ? default : (T)value)!;
         }
 
         /// <summary>
