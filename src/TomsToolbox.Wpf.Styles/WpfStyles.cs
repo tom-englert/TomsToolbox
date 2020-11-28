@@ -16,6 +16,8 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Essentials;
+
     /// <summary>
     /// Helper methods to ease dealing with the styles.
     /// </summary>
@@ -36,16 +38,16 @@
                 .GetFields()
                 .Where(field => field.GetCustomAttributes<DefaultStyleAttribute>(false).Any())
                 .Select(field => field.GetValue(null) as ComponentResourceKey)
-                .Where(key => key != null)
+                .ExceptNullItems()
                 .Select(key => helperWindow.FindResource(key) as Style)
-                .Where(style => style != null)
+                .ExceptNullItems()
                 .ToArray();
 
             var mergedDictionary = new ResourceDictionary();
 
             foreach (var style in baseStyles)
             {
-                mergedDictionary.Add(style!.TargetType, style);
+                mergedDictionary.Add(style.TargetType, style);
             }
 
             mergedDictionary.Add(MenuItem.SeparatorStyleKey, helperWindow.FindResource(ResourceKeys.MenuItemSeparatorStyle));

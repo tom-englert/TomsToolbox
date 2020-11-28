@@ -6,6 +6,7 @@
     using System.Windows.Data;
 
     using JetBrains.Annotations;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// A converter that converts the specified value by replacing text using a regular expression.
@@ -56,7 +57,7 @@
             if (value == null)
                 return null;
 
-            if (string.IsNullOrEmpty(pattern))
+            if (pattern.IsNullOrEmpty())
                 return value;
 
             replacement ??= string.Empty;

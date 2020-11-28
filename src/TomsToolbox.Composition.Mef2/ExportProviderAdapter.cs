@@ -41,7 +41,7 @@
 
         bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string? contractName, [CanBeNull, System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out T? value) where T : class
         {
-            return _context.TryGetExport(contractName, out value!);
+            return _context.TryGetExport(contractName, out value) && value != null;
         }
 
         IEnumerable<T> IExportProvider.GetExportedValues<T>([CanBeNull] string? contractName) where T : class

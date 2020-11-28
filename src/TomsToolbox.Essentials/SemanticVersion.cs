@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
     using System.Text.RegularExpressions;
 
@@ -62,7 +61,7 @@
         }
 
         /// <inheritdoc />
-        public bool Equals(SemanticVersion other)
+        public bool Equals(SemanticVersion? other)
         {
             if (other is null)
                 return false;
@@ -72,7 +71,7 @@
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is null)
                 return false;
@@ -99,7 +98,7 @@
         }
 
         /// <inheritdoc />
-        public int CompareTo(SemanticVersion other)
+        public int CompareTo(SemanticVersion? other)
         {
             if (ReferenceEquals(this, other))
                 return 0;

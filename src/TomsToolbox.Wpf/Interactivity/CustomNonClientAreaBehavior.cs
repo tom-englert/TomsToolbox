@@ -215,13 +215,8 @@
 
         private void Window_SourceInitialized([CanBeNull] object? sender, [CanBeNull] EventArgs? e)
         {
-            var window = _window;
-
-            Debug.Assert(window != null, nameof(window) + " != null");
-            var messageSource = (HwndSource)PresentationSource.FromDependencyObject(window);
-
-            if (messageSource == null)
-                throw new InvalidOperationException("Window needs to be initialized");
+            var window = _window ?? throw new InvalidOperationException("Window needs to be initialized");
+            var messageSource = (HwndSource?)PresentationSource.FromDependencyObject(window) ?? throw new InvalidOperationException("Window needs to be initialized");
 
             var compositionTarget = messageSource.CompositionTarget;
 
@@ -241,12 +236,8 @@
 
         private void ShowGlassFrame(IntPtr handle)
         {
-            var window = _window;
-
-            Debug.Assert(window != null, nameof(window) + " != null");
-            var messageSource = (HwndSource)PresentationSource.FromDependencyObject(window);
-            if (messageSource == null)
-                throw new InvalidOperationException("Window needs to be initialized");
+            var window = _window ?? throw new InvalidOperationException("Window needs to be initialized");
+            var messageSource = (HwndSource?)PresentationSource.FromDependencyObject(window) ?? throw new InvalidOperationException("Window needs to be initialized");
 
             ShowGlassFrame(messageSource.CompositionTarget, handle);
         }
@@ -299,9 +290,9 @@
                         NativeMethods.DefWindowProc(windowHandle, WM_NCCALCSIZE, wParam, lParam);
                         var after = PtrToStructure<RECT>(lParam);
 
-                        // Fix for taskbar: taskbar location = bottom, auto hide taskbar, show taskbar on all displays, 3 displays active => on main monitor the task bar does not restore when hovering with the mouse.
-                        var monitorinfo = MonitorInfoFromWindow(windowHandle);
-                        if (monitorinfo.rcMonitor.Height == monitorinfo.rcWork.Height && monitorinfo.rcMonitor.Width == monitorinfo.rcWork.Width)
+                        // Fix for task-bar: task-bar location = bottom, auto hide task-bar, show task-bar on all displays, 3 displays active => on main monitor the task bar does not restore when hovering with the mouse.
+                        var monitorInfo = MonitorInfoFromWindow(windowHandle);
+                        if (monitorInfo.rcMonitor.Height == monitorInfo.rcWork.Height && monitorInfo.rcMonitor.Width == monitorInfo.rcWork.Width)
                         {
                             --after.Bottom;
                         }
@@ -357,8 +348,7 @@
 
         private HitTest NcHitTest(IntPtr windowHandle, IntPtr lParam)
         {
-            var window = _window;
-            Debug.Assert(window != null, nameof(window) + " != null");
+            var window = _window ?? throw new InvalidOperationException("Window needs to be initialized");
 
             // Arguments are absolute native coordinates
             var hitPoint = new POINT((short)lParam, (short)((uint)lParam >> 16));
@@ -370,7 +360,7 @@
             var cornerSize = (SIZE)_transformToDevice.Transform((Point)CornerSize);
             var borderSize = (SIZE)_transformToDevice.Transform((Point)BorderSize);
 
-            if ((window!.ResizeMode == ResizeMode.CanResize) || window.ResizeMode == ResizeMode.CanResizeWithGrip)
+            if ((window.ResizeMode == ResizeMode.CanResize) || window.ResizeMode == ResizeMode.CanResizeWithGrip)
             {
                 if (WindowState.Maximized != window.WindowState)
                 {

@@ -10,7 +10,7 @@
 // useful extensions. 
 // 
 // The original version provided by ResXResourceManager is restricted to resource key names
-// that are valid c# identifiers to keep this template simple (KISS!).
+// that are valid c# identifiers to keep this template simple (KISS).
 // 
 // Us it as it is or as a scaffold to generate the code you need.
 //

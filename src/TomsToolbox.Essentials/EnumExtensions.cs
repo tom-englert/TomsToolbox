@@ -286,7 +286,6 @@
 
         private static void VerifyIsEnum<T>()
         {
-            // ReSharper disable once PossibleNullReferenceException
             if (!typeof(T).GetTypeInfo().IsEnum)
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Type '{0}' is not an System.Enum", typeof(T).FullName));
         }

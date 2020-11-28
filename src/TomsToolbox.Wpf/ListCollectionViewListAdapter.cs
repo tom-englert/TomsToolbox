@@ -5,10 +5,12 @@
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Windows.Data;
 
     using JetBrains.Annotations;
+    using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
 
     using TomsToolbox.Essentials;
     using TomsToolbox.ObservableCollections;
@@ -58,10 +60,9 @@
         /// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
         /// </returns>
         /// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
-        public bool Contains([CanBeNull] T item)
+        public bool Contains([CanBeNull, AllowNull] T item)
         {
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return _collectionView.Contains(item);
+            return _collectionView.Contains(item!);
         }
 
         /// <summary>
@@ -71,10 +72,9 @@
         /// <returns>
         /// The index of <paramref name="item" /> if found in the list; otherwise, -1.
         /// </returns>
-        public int IndexOf([CanBeNull] T item)
+        public int IndexOf([CanBeNull, AllowNull] T item)
         {
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return _collectionView.IndexOf(item);
+            return _collectionView.IndexOf(item!);
         }
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
@@ -87,12 +87,14 @@
             return ((IEnumerable)_collectionView).GetEnumerator();
         }
 
-
         /// <inheritdoc />
-        [CanBeNull]
+        [CanBeNull, MaybeNull, AllowNull]
         public T this[int index]
         {
+            [return: MaybeNull]
+#pragma warning disable 8766
             get => _collectionView.GetItemAt(index).SafeCast<T>();
+#pragma warning restore 8766
             // ReSharper disable once ValueParameterNotUsed
             set => ReadOnlyNotSupported();
         }

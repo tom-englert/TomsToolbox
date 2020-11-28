@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
@@ -12,6 +13,8 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Essentials;
+
+    using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
 
     /// <summary>
     /// Base class implementing <see cref="INotifyPropertyChanged"/>.<para/>
@@ -84,9 +87,9 @@
         /// </summary>
         protected void DetachEventSources()
         {
-            foreach (var item in EventSources.Values.Select(item => item.GetTargetOrDefault()).Where(item => item != null))
+            foreach (var item in EventSources.Values.Select(item => item.GetTargetOrDefault()).ExceptNullItems())
             {
-                item!.PropertyChanged -= RelaySource_PropertyChanged;
+                item.PropertyChanged -= RelaySource_PropertyChanged;
             }
 
             EventSources.Clear();
@@ -127,7 +130,7 @@
         /// <param name="propertyExpression">The expression identifying the property.</param>
         /// <returns>True if value has changed and the PropertyChange event was raised.</returns>
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Expression<Func<T>> propertyExpression)
+        protected bool SetProperty<T>([CanBeNull, AllowNull, MaybeNull] ref T backingField, [CanBeNull, AllowNull] T value, [NotNull] Expression<Func<T>> propertyExpression)
         {
             return SetProperty(ref backingField, value, PropertySupport.ExtractPropertyName(propertyExpression));
         }
@@ -142,7 +145,7 @@
         /// <param name="changeCallback">The callback that is invoked if the value has changed. Parameters are (oldValue, newValue).</param>
         /// <returns>True if value has changed and the PropertyChange event was raised.</returns>
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Expression<Func<T>> propertyExpression, [NotNull] Action<T, T> changeCallback)
+        protected bool SetProperty<T>([CanBeNull, AllowNull, MaybeNull] ref T backingField, [CanBeNull, AllowNull] T value, [NotNull] Expression<Func<T>> propertyExpression, [NotNull] Action<T, T> changeCallback)
         {
             return SetProperty(ref backingField, value, PropertySupport.ExtractPropertyName(propertyExpression), changeCallback);
         }
@@ -156,16 +159,13 @@
         /// <param name="propertyName">Name of the property; omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
         /// <returns>True if value has changed and the PropertyChange event was raised. </returns>
         [NotifyPropertyChangedInvocator]
-        // ReSharper disable once AssignNullToNotNullAttribute
-        // ReSharper disable once NotNullOnImplicitCanBeNull
-        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [CallerMemberName][NotNull] string propertyName = null!)
+        protected bool SetProperty<T>([CanBeNull, AllowNull, MaybeNull] ref T backingField, [CanBeNull, AllowNull] T value, [CallerMemberName][NotNull] string propertyName = null!)
         {
             if (Equals(backingField, value))
                 return false;
 
             backingField = value;
 
-            // ReSharper disable once AssignNullToNotNullAttribute
             OnPropertyChanged(propertyName);
             return true;
         }
@@ -180,14 +180,14 @@
         /// <param name="changeCallback">The callback that is invoked if the value has changed. Parameters are (oldValue, newValue).</param>
         /// <returns> True if value has changed and the PropertyChange event was raised. </returns>
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] string propertyName, [NotNull] Action<T, T> changeCallback)
+        protected bool SetProperty<T>([CanBeNull, AllowNull, MaybeNull] ref T backingField, [CanBeNull, AllowNull] T value, [NotNull] string propertyName, [NotNull] Action<T, T> changeCallback)
         {
             var oldValue = backingField;
 
             if (!SetProperty(ref backingField, value, propertyName))
                 return false;
 
-            changeCallback(oldValue, value);
+            changeCallback(oldValue!, value!);
             return true;
         }
 
@@ -201,7 +201,7 @@
         /// <param name="propertyName">Name of the property; omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
         /// <returns> True if value has changed and the PropertyChange event was raised. </returns>
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>([CanBeNull] ref T backingField, [CanBeNull] T value, [NotNull] Action<T, T> changeCallback, [NotNull] string propertyName)
+        protected bool SetProperty<T>([CanBeNull, AllowNull, MaybeNull] ref T backingField, [CanBeNull, AllowNull] T value, [NotNull] Action<T, T> changeCallback, [NotNull] string propertyName)
         {
             return SetProperty(ref backingField, value, propertyName, changeCallback);
         }
@@ -211,11 +211,8 @@
         /// </summary>
         /// <param name="propertyName">Name of the property; omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
         [NotifyPropertyChangedInvocator]
-        // ReSharper disable once NotNullOnImplicitCanBeNull
-        // ReSharper disable once AssignNullToNotNullAttribute
         protected void OnPropertyChanged([CallerMemberName][NotNull] string propertyName = null!)
         {
-            // ReSharper disable once AssignNullToNotNullAttribute
             InternalOnPropertyChanged(propertyName);
 
             if (!DependencyMapping.TryGetValue(propertyName, out var dependentProperties))
@@ -228,13 +225,13 @@
         }
 
         [NotNull]
-        private Dictionary<Type, WeakReference<INotifyPropertyChanged>> EventSources => _eventSources ?? (_eventSources = new Dictionary<Type, WeakReference<INotifyPropertyChanged>>());
+        private Dictionary<Type, WeakReference<INotifyPropertyChanged>> EventSources => _eventSources ??= new Dictionary<Type, WeakReference<INotifyPropertyChanged>>();
 
         [NotNull]
-        private IDictionary<Type, IDictionary<string, string>> RelayMapping => _relayMapping ?? (_relayMapping = _relayMappingCache[GetType()]);
+        private IDictionary<Type, IDictionary<string, string>> RelayMapping => _relayMapping ??= _relayMappingCache[GetType()];
 
         [NotNull]
-        private IDictionary<string, IEnumerable<string>> DependencyMapping => _dependencyMapping ?? (_dependencyMapping = _dependencyMappingCache[GetType()]);
+        private IDictionary<string, IEnumerable<string>> DependencyMapping => _dependencyMapping ??= _dependencyMappingCache[GetType()];
 
         private void RelaySource_PropertyChanged([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
         {
@@ -272,10 +269,9 @@
         /// The default implementation returns the <see cref="ValidationAttribute"/> errors of the property.
         /// </remarks>
         [NotNull, ItemNotNull]
-        // ReSharper disable once VirtualMemberNeverOverridden.Global
         protected virtual IEnumerable<string> GetDataErrors([CanBeNull] string? propertyName)
         {
-            if (string.IsNullOrEmpty(propertyName))
+            if (propertyName.IsNullOrEmpty())
                 return Enumerable.Empty<string>();
 
             var property = GetType().GetProperty(propertyName);
@@ -294,7 +290,6 @@
         /// </summary>
         /// <param name="propertyName">Name of the property, or <c>null</c> if the errors .</param>
         /// <param name="dataErrors">The data errors for the property.</param>
-        // ReSharper disable once VirtualMemberNeverOverridden.Global
         // ReSharper disable UnusedParameter.Global
         protected virtual void OnDataErrorsEvaluated([CanBeNull] string? propertyName, [CanBeNull, ItemNotNull] IEnumerable<string> dataErrors)
         // ReSharper restore UnusedParameter.Global
@@ -355,14 +350,11 @@
     /// <seealso cref="ObservableObjectBase" />
     public abstract class ObservableObject : ObservableObjectBase
     {
-        [NotNull]
-        private readonly Dispatcher _dispatcher = Dispatcher.CurrentDispatcher;
-
         /// <summary>
         /// Gets the dispatcher of the thread where this object was created.
         /// </summary>
         [NotNull]
-        public Dispatcher Dispatcher => _dispatcher;
+        public Dispatcher Dispatcher { get; } = Dispatcher.CurrentDispatcher;
     }
 }
 

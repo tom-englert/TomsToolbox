@@ -67,7 +67,7 @@
         /// <param name="value">The value.</param>
         /// <returns>The text of the value.</returns>
         [CanBeNull]
-        public static string Convert([CanBeNull] object? key, [CanBeNull] object? value)
+        public static string? Convert([CanBeNull] object? key, [CanBeNull] object? value)
         {
             return InternalConvert(value, null, attr => attr?.Text, attr => Equals(attr?.Key, key));
         }
@@ -80,7 +80,7 @@
         /// <param name="enumType">An optional type of an enum to support converting <see cref="Enum"/> where the value is given as a number or string.</param>
         /// <returns>The text of the value.</returns>
         [CanBeNull]
-        public static string Convert([CanBeNull] object? key, [CanBeNull] object? value, [CanBeNull] Type? enumType)
+        public static string? Convert([CanBeNull] object? key, [CanBeNull] object? value, [CanBeNull] Type? enumType)
         {
             return InternalConvert(value, enumType, attr => attr?.Text, attr => Equals(attr?.Key, key));
         }

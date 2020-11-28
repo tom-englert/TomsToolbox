@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq.Expressions;
     using System.Reflection;
 
@@ -22,8 +23,8 @@
         ///     Not a <see cref="MemberExpression"/><br/>
         ///     The <see cref="MemberExpression"/> does not represent a property.<br/>
         /// </exception>
-        [NotNull]
-        public static string ExtractPropertyName<TProperty>([NotNull] Expression<Func<TProperty>> propertyExpression)
+        [JetBrains.Annotations.NotNull]
+        public static string ExtractPropertyName<TProperty>([JetBrains.Annotations.NotNull] Expression<Func<TProperty>> propertyExpression)
         {
             return ExtractPropertyName(propertyExpression, true)!;
         }
@@ -35,7 +36,7 @@
         /// <param name="propertyExpression">The property expression (e.g. () => p.PropertyName) to extract the property name from.</param>
         /// <returns>The name of the property, or null if the extraction fails.</returns>
         [CanBeNull]
-        public static string? TryExtractPropertyName<TProperty>([NotNull] Expression<Func<TProperty>> propertyExpression)
+        public static string? TryExtractPropertyName<TProperty>([JetBrains.Annotations.NotNull] Expression<Func<TProperty>> propertyExpression)
         {
             return ExtractPropertyName(propertyExpression, false);
         }
@@ -50,8 +51,8 @@
         /// <exception cref="ArgumentException">Thrown when the expression is:<br />
         /// Not a <see cref="MemberExpression" /><br />
         /// The <see cref="MemberExpression" /> does not represent a property.<br /></exception>
-        [NotNull]
-        public static string ExtractPropertyName<T, TProperty>([NotNull] Expression<Func<T, TProperty>> propertyExpression)
+        [JetBrains.Annotations.NotNull]
+        public static string ExtractPropertyName<T, TProperty>([JetBrains.Annotations.NotNull] Expression<Func<T, TProperty>> propertyExpression)
         {
             return ExtractPropertyName(propertyExpression, true)!;
         }
@@ -64,14 +65,14 @@
         /// <param name="propertyExpression">The property expression (e.g. p => p.PropertyName) to extract the property name from.</param>
         /// <returns>The name of the property, or null if the extraction fails.</returns>
         [CanBeNull]
-        public static string? TryExtractPropertyName<T, TProperty>([NotNull] Expression<Func<T, TProperty>> propertyExpression)
+        public static string? TryExtractPropertyName<T, TProperty>([JetBrains.Annotations.NotNull] Expression<Func<T, TProperty>> propertyExpression)
         {
             return ExtractPropertyName(propertyExpression, false);
         }
 
         [ContractAnnotation("failOnErrors:true => notnull")]
         [CanBeNull]
-        private static string? ExtractPropertyName<T>([NotNull] Expression<Func<T>> propertyExpression, bool failOnErrors)
+        private static string? ExtractPropertyName<T>([JetBrains.Annotations.NotNull] Expression<Func<T>> propertyExpression, bool failOnErrors)
         {
             if (!(propertyExpression.Body is MemberExpression memberExpression))
                 return HandleError(failOnErrors, @"Expression is not a member access expression");
@@ -89,7 +90,7 @@
 
         [CanBeNull]
         [ContractAnnotation("failOnErrors:true => notnull")]
-        private static string? ExtractPropertyName<T, TR>([NotNull] Expression<Func<T, TR>> propertyExpression, bool failOnErrors)
+        private static string? ExtractPropertyName<T, TR>([JetBrains.Annotations.NotNull] Expression<Func<T, TR>> propertyExpression, bool failOnErrors)
         {
             if (!(propertyExpression.Body is MemberExpression memberExpression))
                 return HandleError(failOnErrors, @"Expression is not a member access expression");
@@ -107,7 +108,7 @@
 
         [CanBeNull]
         // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
-        private static string? HandleError(bool failOnErrors, [NotNull] string errorMessage)
+        private static string? HandleError(bool failOnErrors, [JetBrains.Annotations.NotNull] string errorMessage)
         {
             if (failOnErrors)
                 throw new ArgumentException(errorMessage);
@@ -125,8 +126,8 @@
         ///     Not a <see cref="MemberExpression"/><br/>
         ///     The <see cref="MemberExpression"/> does not represent a property.<br/>
         /// </exception>
-        [NotNull]
-        public static PropertyChangedEventArgs GetEventArgs<T>([NotNull] Expression<Func<T>> propertyExpression)
+        [JetBrains.Annotations.NotNull]
+        public static PropertyChangedEventArgs GetEventArgs<T>([JetBrains.Annotations.NotNull] Expression<Func<T>> propertyExpression)
         {
             return new PropertyChangedEventArgs(ExtractPropertyName(propertyExpression));
         }

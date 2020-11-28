@@ -1,5 +1,4 @@
-﻿// ReSharper disable AssignNullToNotNullAttribute
-// ReSharper disable UnusedVariable
+﻿// ReSharper disable UnusedVariable
 #nullable disable
 namespace TomsToolbox.ObservableCollections.Tests
 {
@@ -59,7 +58,7 @@ namespace TomsToolbox.ObservableCollections.Tests
         [ExpectedException(typeof(Exception), AllowDerivedTypes = true)]
         public void ObservableWrappedCollection_ConstructorFailTest()
         {
-            var collection = new ObservableWrappedCollection<int, int>(null, null);
+            var collection = new ObservableWrappedCollection<int, int>(null!, null!);
         }
 
         [TestMethod]

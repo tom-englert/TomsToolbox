@@ -2,8 +2,10 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
 
     using JetBrains.Annotations;
+    using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
 
     /// <summary>
     /// Entry point to create the <see cref="TryCastWorker{TValue}"/>.
@@ -209,7 +211,9 @@
         [CanBeNull]
         protected TResult InternalResult
         {
+            [return: MaybeNull]
             get;
+            [param: AllowNull]
             private set;
         }
 

@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Essentials
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     using JetBrains.Annotations;
 
@@ -15,10 +16,10 @@
         /// <typeparam name="T">The target type</typeparam>
         /// <param name="value">The value.</param>
         /// <returns>The value casted to <typeparamref name="T"/>, or <c>default(T)</c> if value is <c>null</c>.</returns>
-        [CanBeNull]
+        [CanBeNull][return: MaybeNull]
         public static T SafeCast<T>([CanBeNull] this object? value)
         {
-            return (value == null) ? default! : (T)value;
+            return (value == null) ? default : (T)value;
         }
 
         /// <summary>
@@ -29,8 +30,8 @@
         /// <param name="interceptor">The interceptor.</param>
         /// <returns>The <paramref name="value"/></returns>
         [CanBeNull, ContractAnnotation("value:notnull=>notnull")]
-        [return:System.Diagnostics.CodeAnalysis.NotNullIfNotNull("value")]
-        public static T Intercept<T>([CanBeNull] this T value, [NotNull] Action<T> interceptor)
+        [return:NotNullIfNotNull("value")]
+        public static T Intercept<T>([CanBeNull] this T value, [JetBrains.Annotations.NotNull] Action<T> interceptor)
         {
             interceptor(value);
 

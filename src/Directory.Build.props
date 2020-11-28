@@ -18,6 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
+    <WarningsAsErrors>nullable</WarningsAsErrors>
   </PropertyGroup>
 
   <PropertyGroup>

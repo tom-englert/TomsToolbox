@@ -7,6 +7,7 @@
     using System.Windows.Data;
 
     using JetBrains.Annotations;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// A <see cref="IValueConverter" /> wrapping a <see cref="TypeConverter" />
@@ -66,7 +67,7 @@
                 return null;
 
             var text = value?.ToString();
-            if (string.IsNullOrEmpty(text))
+            if (text.IsNullOrEmpty())
                 return null;
 
             return typeConverter.ConvertFromInvariantString(text);

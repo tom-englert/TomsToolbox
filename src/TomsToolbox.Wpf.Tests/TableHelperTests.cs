@@ -1,5 +1,4 @@
-﻿// ReSharper disable PossibleNullReferenceException
-#nullable disable
+﻿#nullable disable
 namespace TomsToolbox.Wpf.Tests
 {
     using System.Collections.Generic;

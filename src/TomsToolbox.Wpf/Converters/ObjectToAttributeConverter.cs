@@ -47,10 +47,13 @@
             var valueType = value.GetType();
             var valueString = value.ToString();
 
-            ICustomAttributeProvider fieldInfo;
+            if (valueString == null)
+                return string.Empty;
+
+            ICustomAttributeProvider? fieldInfo;
             if (valueType.IsEnum)
             {
-                fieldInfo = valueType.GetField(valueString!)!;
+                fieldInfo = valueType.GetField(valueString);
             }
             else if (enumType != null)
             {
@@ -58,7 +61,10 @@
                     throw new ArgumentException(@"Parameter must be an enum type or null.", nameof(enumType));
 
                 var enumName = valueType == typeof(string) ? (string)value : Enum.ToObject(enumType, value).ToString();
-                fieldInfo = enumType.GetField(enumName!)!;
+                if (enumName == null)
+                    return string.Empty;
+
+                fieldInfo = enumType.GetField(enumName);
             }
             else
             {
@@ -70,10 +76,10 @@
                 return fieldInfo.GetCustomAttributes<T>(false)
                     .Where(predicate)
                     .Select(selector)
-                    .FirstOrDefault() ?? valueString!;
+                    .FirstOrDefault() ?? valueString;
             }
 
-            return valueString!;
+            return valueString;
         }
 
         /// <summary>

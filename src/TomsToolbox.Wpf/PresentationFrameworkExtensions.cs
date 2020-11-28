@@ -34,7 +34,6 @@
         {
             var dispatcher = visual.Dispatcher;
 
-            // ReSharper disable once AssignNullToNotNullAttribute : Visual.Dispatcher is always NotNull! 
             ProcessMessages(dispatcher, priority);
         }
 

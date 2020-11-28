@@ -52,7 +52,6 @@
             get
             {
                 var items1 = _items;
-                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                 if (items1.TryGetValue(key, out var value) && value.TryGetTarget(out var target) && (target != null))
                     return target;
 
@@ -160,9 +159,9 @@
             {
                 var value = default(TValue);
 
-                if (item.Value?.TryGetTarget(out value) == true)
+                if (item.Value?.TryGetTarget(out value) == true && value != null)
                 {
-                    yield return new KeyValuePair<TKey, TValue>(item.Key, value!);
+                    yield return new KeyValuePair<TKey, TValue>(item.Key, value);
                 }
             }
         }

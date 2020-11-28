@@ -1,10 +1,12 @@
 ﻿namespace TomsToolbox.Wpf
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Windows;
     using System.Windows.Data;
 
     using JetBrains.Annotations;
+    using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
 
     /// <summary>
     /// Support binding to a property of an element when the target is not a <see cref="DependencyObject"/>
@@ -61,9 +63,10 @@
         /// <summary>
         /// Gets or sets the value.
         /// </summary>
-        [CanBeNull]
+        [CanBeNull, MaybeNull, AllowNull]
         public T Value
         {
+            [return: MaybeNull]
             get => _bindingHelper.GetValue<T>(BindingHelper.ValueProperty);
             set => _bindingHelper.SetValue(BindingHelper.ValueProperty, value);
         }
@@ -96,7 +99,8 @@
                 _owner = owner;
             }
 
-            [NotNull] public static readonly DependencyProperty ValueProperty =
+            [NotNull]
+            public static readonly DependencyProperty ValueProperty =
                 DependencyProperty.Register("Value", typeof(T), typeof(BindingHelper), new FrameworkPropertyMetadata((sender, e) => ((BindingHelper)sender)?._owner.Value_Changed((T)e.OldValue, (T)e.NewValue)));
         }
     }

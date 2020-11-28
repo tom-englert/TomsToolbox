@@ -165,7 +165,6 @@
                 {
                 }
 
-                Debug.Assert(_dispatcher != null, nameof(_dispatcher) + " != null");
                 return _dispatcher!;
             }
         }
@@ -174,8 +173,7 @@
         /// Gets the task scheduler associated with the <see cref="Dispatcher"/>
         /// </summary>
         [NotNull]
-        // ReSharper disable once AssignNullToNotNullAttribute
-        public TaskScheduler TaskScheduler => _taskScheduler ?? (_taskScheduler = Invoke(TaskScheduler.FromCurrentSynchronizationContext));
+        public TaskScheduler TaskScheduler => _taskScheduler ??= Invoke(TaskScheduler.FromCurrentSynchronizationContext)!;
 
         /// <summary>
         /// Occurs when the dispatcher is terminated.

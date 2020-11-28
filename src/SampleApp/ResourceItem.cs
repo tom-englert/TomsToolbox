@@ -11,6 +11,8 @@
 
     using PropertyChanged;
 
+    using TomsToolbox.Essentials;
+
     [AddINotifyPropertyChangedInterface]
     public class ResourceItem
     {
@@ -69,8 +71,8 @@
                 .GetFields()
                 .Where(field => field.Name.EndsWith(suffix))
                 .Select(field => field.GetValue(null) as ComponentResourceKey)
-                .Where(key => key != null)
-                .Select(key => new ResourceItem(key!, Application.Current.FindResource(key), suffix))
+                .ExceptNullItems()
+                .Select(key => new ResourceItem(key, Application.Current.FindResource(key)!, suffix))
                 .ToArray();
         }
     }

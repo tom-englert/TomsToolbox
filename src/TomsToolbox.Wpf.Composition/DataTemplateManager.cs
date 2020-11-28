@@ -96,10 +96,8 @@
             var contentType = typeof(ComposableContentControl);
 
             context.XamlTypeMapper = new XamlTypeMapper(new string[0]);
-            // ReSharper disable once AssignNullToNotNullAttribute
-            context.XamlTypeMapper.AddMappingProcessingInstruction("viewModel", viewModelType.Namespace, viewModelType.Assembly.FullName);
-            // ReSharper disable once AssignNullToNotNullAttribute
-            context.XamlTypeMapper.AddMappingProcessingInstruction("toms", contentType.Namespace, contentType.Assembly.FullName);
+            context.XamlTypeMapper.AddMappingProcessingInstruction("viewModel", viewModelType.Namespace!, viewModelType.Assembly.FullName);
+            context.XamlTypeMapper.AddMappingProcessingInstruction("toms", contentType.Namespace!, contentType.Assembly.FullName);
 
             context.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
             context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
@@ -154,9 +152,8 @@
             return exportProvider
                 .GetExports<IDataTemplateMetadata>(typeof(DependencyObject), XamlExtensions.DataTemplate.ContractName, item => new DataTemplateMetadata(item))
                 .Select(item => item.Metadata)
-                .Where(metadata => metadata != null)
-                // .Select(AssertCorrectCreationPolicy)
-                .Distinct(ExportsComparer!)!;
+                .ExceptNullItems()
+                .Distinct(ExportsComparer);
         }
 
         private static bool Equals([NotNull] IDataTemplateMetadata left, [NotNull] IDataTemplateMetadata right)

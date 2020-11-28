@@ -3,9 +3,11 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using JetBrains.Annotations;
+    using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
 
     /// <summary>
     /// Extensions methods to ease dealing with collections.
@@ -191,7 +193,7 @@
         /// <param name="items">The items to test for.</param>
         /// <param name="comparer">The comparer to compare the individual items.</param>
         /// <returns><c>true</c> if any of the items is contained in the specified object; otherwise <c>false</c>.</returns>
-        public static bool ContainsAny<T>([NotNull, ItemNotNull] this IEnumerable<T> self, [CanBeNull] IEqualityComparer<T>? comparer, [NotNull, ItemCanBeNull] params T[] items)
+        public static bool ContainsAny<T>([NotNull, ItemCanBeNull] this IEnumerable<T> self, [CanBeNull] IEqualityComparer<T>? comparer, [NotNull, ItemCanBeNull] params T[] items)
         {
             return items.Any(item => self.Contains(item, comparer));
         }
@@ -330,8 +332,8 @@
         /// <returns>
         /// The value from the dictionary, or the default value if no item with the specified key exists.
         /// </returns>
-        [CanBeNull]
-        public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [CanBeNull] TValue defaultValue)
+        [CanBeNull][return:MaybeNull]
+        public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [CanBeNull, AllowNull] TValue defaultValue)
         {
             return dictionary.TryGetValue(key, out var value) ? value : defaultValue;
         }
@@ -347,8 +349,8 @@
         /// <returns>
         /// The value from the dictionary, or the default value if no item with the specified key exists.
         /// </returns>
-        [CanBeNull]
-        public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this Dictionary<TKey, TValue> dictionary, [NotNull] TKey key, [CanBeNull] TValue defaultValue)
+        [CanBeNull][return:MaybeNull]
+        public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this Dictionary<TKey, TValue> dictionary, [NotNull] TKey key, [CanBeNull, AllowNull] TValue defaultValue)
         {
             return dictionary.TryGetValue(key, out var value) ? value : defaultValue;
         }
@@ -364,8 +366,8 @@
         /// <returns>
         /// The value from the dictionary, or the default value if no item with the specified key exists.
         /// </returns>
-        [CanBeNull]
-        public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IReadOnlyDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [CanBeNull] TValue defaultValue)
+        [CanBeNull][return:MaybeNull]
+        public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IReadOnlyDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [CanBeNull, AllowNull] TValue defaultValue)
         {
             return dictionary.TryGetValue(key, out var value) ? value : defaultValue;
         }
@@ -380,10 +382,10 @@
         /// <returns>
         /// The value from the dictionary, or the default value of <typeparamref name="TValue"/> if no item with the specified key exists.
         /// </returns>
-        [CanBeNull]
+        [CanBeNull][return:MaybeNull]
         public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key)
         {
-            return dictionary.GetValueOrDefault(key, default!);
+            return dictionary.GetValueOrDefault(key, default);
         }
         /// <summary>
         /// Gets the value from the dictionary, or the default value of <typeparamref name="TValue"/> if no item with the specified key exists.
@@ -395,10 +397,10 @@
         /// <returns>
         /// The value from the dictionary, or the default value of <typeparamref name="TValue"/> if no item with the specified key exists.
         /// </returns>
-        [CanBeNull]
+        [CanBeNull][return:MaybeNull]
         public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this Dictionary<TKey, TValue> dictionary, [NotNull] TKey key)
         {
-            return dictionary.GetValueOrDefault(key, default!);
+            return dictionary.GetValueOrDefault(key, default);
         }
 
         /// <summary>
@@ -411,10 +413,10 @@
         /// <returns>
         /// The value from the dictionary, or the default value of <typeparamref name="TValue"/> if no item with the specified key exists.
         /// </returns>
-        [CanBeNull]
+        [CanBeNull][return:MaybeNull]
         public static TValue GetValueOrDefault<TKey, TValue>([NotNull] this IReadOnlyDictionary<TKey, TValue> dictionary, [NotNull] TKey key)
         {
-            return dictionary.GetValueOrDefault(key, default!);
+            return dictionary.GetValueOrDefault(key, default);
         }
 
         /// <summary>
@@ -426,7 +428,7 @@
         /// <param name="key">The key.</param>
         /// <param name="generator">The generator function called when a new value needs to be created.</param>
         /// <returns>The element with the specified key.</returns>
-        [CanBeNull]
+        [CanBeNull][return:MaybeNull]
         public static TValue ForceValue<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [NotNull] Func<TKey, TValue> generator)
         {
             if (dictionary.TryGetValue(key, out var result))
@@ -448,10 +450,10 @@
         /// <param name="key">The key.</param>
         /// <param name="defaultValue">The value that will be added to the dictionary if the dictionary does not contain a value associated with the key.</param>
         /// <returns>The element with the specified key.</returns>
-        [CanBeNull]
-        public static TValue ForceValue<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [CanBeNull] TValue defaultValue)
+        [CanBeNull][return:MaybeNull]
+        public static TValue ForceValue<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, [CanBeNull, AllowNull] TValue defaultValue)
         {
-            return ForceValue(dictionary, key, _ => defaultValue);
+            return ForceValue(dictionary, key, _ => defaultValue!);
         }
 
         /// <summary>

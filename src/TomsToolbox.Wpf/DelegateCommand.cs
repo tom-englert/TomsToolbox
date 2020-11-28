@@ -143,7 +143,7 @@
                 return true;
             }
 
-            return CanExecuteCallback(parameter.SafeCast<T>());
+            return CanExecuteCallback(parameter.SafeCast<T>()!);
         }
 
         /// <summary>
@@ -152,7 +152,7 @@
         /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
         public void Execute([CanBeNull] object? parameter)
         {
-            ExecuteCallback?.Invoke(parameter.SafeCast<T>());
+            ExecuteCallback?.Invoke(parameter.SafeCast<T>()!);
         }
     }
 

@@ -7,13 +7,14 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Essentials;
+
     /// <summary>
     /// Validation XAML extensions.
     /// </summary>
     public static class Validation
     {
         [NotNull]
-        // ReSharper disable once AssignNullToNotNullAttribute
         private static readonly DependencyPropertyDescriptor _propertyDescriptor = DependencyPropertyDescriptor.FromProperty(System.Windows.Controls.Validation.HasErrorProperty, typeof(FrameworkElement));
 
         /// <summary>
@@ -74,7 +75,10 @@
                 return;
             }
 
-            var errors = System.Windows.Controls.Validation.GetErrors(target)?.Select(err => err?.ErrorContent?.ToString()).Where(err => err != null);
+            var errors = System.Windows.Controls.Validation
+                .GetErrors(target)
+                ?.Select(err => err?.ErrorContent?.ToString())
+                .ExceptNullItems();
             var toolTip = string.Join("\r\n", errors ?? Enumerable.Empty<string>());
             target.ToolTip = toolTip;
         }

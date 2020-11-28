@@ -57,9 +57,7 @@
         [NotNull, ItemNotNull]
         public static ICollection<CultureInfo> GetChildren([NotNull] this CultureInfo item)
         {
-            var children = _childCache.ForceValue(item, CreateChildList);
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return children;
+            return _childCache.ForceValue(item, CreateChildList)!;
         }
 
         [NotNull, ItemNotNull]

@@ -489,13 +489,13 @@
 
         private static void ParseUserDomain([CanBeNull] ref string? userName, [CanBeNull] ref string? domain)
         {
-            if (string.IsNullOrEmpty(userName))
+            if (userName.IsNullOrEmpty())
                 return;
 
-            if (!string.IsNullOrEmpty(domain))
+            if (!domain.IsNullOrEmpty())
                 return;
 
-            var parts = userName!.Split('\\');
+            var parts = userName.Split('\\');
             if (parts.Length != 2)
                 return;
 

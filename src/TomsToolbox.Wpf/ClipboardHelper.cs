@@ -5,6 +5,8 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Essentials;
+
     /// <summary>
     /// Helper methods to interchange data via clipboard.
     /// </summary>
@@ -19,12 +21,12 @@
         public static IList<IList<string>>? GetClipboardDataAsTable()
         {
             var text = Clipboard.GetText();
-            if (!string.IsNullOrEmpty(text))
+            if (!text.IsNullOrEmpty())
                 return text.ParseTable(TableHelper.TextColumnSeparator);
 
             var csv = Clipboard.GetData(DataFormats.CommaSeparatedValue) as string;
-            if (!string.IsNullOrEmpty(csv))
-                return csv!.ParseTable(TableHelper.CsvColumnSeparator);
+            if (!csv.IsNullOrEmpty())
+                return csv.ParseTable(TableHelper.CsvColumnSeparator);
 
             return null;
         }

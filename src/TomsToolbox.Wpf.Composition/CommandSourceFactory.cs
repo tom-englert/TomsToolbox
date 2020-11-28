@@ -145,9 +145,7 @@
         [NotNull]
         private T GetCommandSource([CanBeNull] object? compositionContext)
         {
-            var commandSource = _commandSourcePerContext.ForceValue(compositionContext ?? typeof(NullKey), context => CreateCommandSource());
-            Debug.Assert(commandSource != null, nameof(commandSource) + " != null");
-            return commandSource!;
+            return _commandSourcePerContext.ForceValue(compositionContext ?? typeof(NullKey), context => CreateCommandSource())!;
         }
 
         /// <summary>

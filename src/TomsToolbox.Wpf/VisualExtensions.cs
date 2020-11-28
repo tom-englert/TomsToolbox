@@ -29,7 +29,6 @@
         {
             var dispatcher = visual.Dispatcher;
 
-            // ReSharper disable once PossibleNullReferenceException : Visual.Dispatcher is always NotNull! 
             return dispatcher.BeginInvoke(DispatcherPriority.Normal, method);
         }
 
@@ -51,7 +50,6 @@
         {
             var dispatcher = visual.Dispatcher;
 
-            // ReSharper disable once PossibleNullReferenceException : Visual.Dispatcher is always NotNull! 
             return dispatcher.BeginInvoke(method, priority, null);
         }
 

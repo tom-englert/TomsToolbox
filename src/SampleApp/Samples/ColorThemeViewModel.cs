@@ -58,7 +58,7 @@
 
             var relativeUri = ObjectToTextConverter.Convert(DictionaryUriKey, SelectedColorTheme);
 
-            if (string.IsNullOrEmpty(relativeUri))
+            if (relativeUri.IsNullOrEmpty())
                 return;
 
             _themeContainer.Add(new ResourceDictionary{ Source = GetType().Assembly.GeneratePackUri(relativeUri)});

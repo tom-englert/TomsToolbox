@@ -128,7 +128,7 @@
         [NotNull, ItemNotNull]
         public static IEnumerable<string> GetInvalidDependencies([NotNull] Type entryType)
         {
-            return from type in GetCustomAssemblies(entryType).SelectMany(SafeGetTypes).Where(item => item != null)
+            return from type in GetCustomAssemblies(entryType).SelectMany(SafeGetTypes).ExceptNullItems()
                    let allProperties = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
                    from property in allProperties
                    let attribute = property.GetCustomAttributes<PropertyDependencyAttribute>(false).FirstOrDefault()
@@ -154,9 +154,8 @@
 
             var referencedAssemblies = referencedAssemblyNames
                 .Select(SafeLoad)
-                .Where(assembly => assembly != null)
-                // ReSharper disable once AssignNullToNotNullAttribute
-                .Where(assembly => IsAssemblyInSubfolderOf(assembly!.GetName(), programFolder));
+                .ExceptNullItems()
+                .Where(assembly => IsAssemblyInSubfolderOf(assembly.GetName(), programFolder));
 
             return new[] { entryAssembly }.Concat(referencedAssemblies)!;
         }
@@ -174,10 +173,9 @@
             if (assemblyName.CodeBase == null)
                 return false;
 
-            var assemblyDirectory = Path.GetDirectoryName(assemblyName.GetAssemblyDirectory().FullName);
+            var assemblyDirectory = Path.GetDirectoryName(assemblyName.GetAssemblyDirectory().FullName)!;
 
-            // ReSharper disable once PossibleNullReferenceException
-            return assemblyDirectory!.StartsWith(programFolder, StringComparison.OrdinalIgnoreCase);
+            return assemblyDirectory.StartsWith(programFolder, StringComparison.OrdinalIgnoreCase);
         }
 
         [CanBeNull]

@@ -142,7 +142,7 @@
   <member name="M:TomsToolbox.Essentials.CollectionExtensions.ContainsAny``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0},``0[])">
     <parameter name="self">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
-      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     </parameter>
     <parameter name="comparer">
       <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />

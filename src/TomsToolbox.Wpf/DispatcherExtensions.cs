@@ -1,10 +1,12 @@
 ﻿namespace TomsToolbox.Wpf
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
     using System.Windows.Threading;
 
     using JetBrains.Annotations;
+    using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
 
     /// <summary>
     /// Extension methods to ease usage of dispatcher calls.
@@ -19,7 +21,7 @@
         /// <param name="method">The method.</param>
         /// <returns>The result of the method.</returns>
         /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
-        [CanBeNull]
+        [CanBeNull][return:MaybeNull]
         public static T Invoke<T>([CanBeNull] this Dispatcher? dispatcher, [NotNull] Func<T> method)
         {
             return InternalInvoke(dispatcher, method);
@@ -36,12 +38,12 @@
             InternalInvoke(dispatcher, method);
         }
 
-        [CanBeNull]
+        [CanBeNull][return:MaybeNull]
         private static T InternalInvoke<T>([CanBeNull] Dispatcher? dispatcher, [NotNull] Func<T> method)
         {
             var result = InternalInvoke(dispatcher, (Delegate)method);
             if (result == null)
-                return default!;
+                return default;
 
             return (T)result;
         }

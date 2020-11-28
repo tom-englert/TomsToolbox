@@ -14,6 +14,8 @@
 
     using JetBrains.Annotations;
 
+    using TomsToolbox.Essentials;
+
     /// <summary>
     /// Classifies white spaces in plain text.
     /// </summary>
@@ -318,8 +320,8 @@
                     .Select((character, index) => new { character, index })
                     .Skip(start).Take(length)
                     .Select(item => GetWhiteSpace(item.character, item.index, whiteSpaces))
-                    .Where(item => item != null)
-                    .ToList()!;
+                    .ExceptNullItems()
+                    .ToList();
             }
 
             [CanBeNull]

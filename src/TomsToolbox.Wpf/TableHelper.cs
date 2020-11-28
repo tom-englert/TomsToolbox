@@ -8,6 +8,7 @@ namespace TomsToolbox.Wpf
     using System.Text;
 
     using JetBrains.Annotations;
+    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Helper methods to parse or create text representations of a table.
@@ -75,12 +76,12 @@ namespace TomsToolbox.Wpf
         [NotNull]
         public static string Quoted([CanBeNull] this string? value, char separator)
         {
-            if (string.IsNullOrEmpty(value))
+            if (value.IsNullOrEmpty())
                 return string.Empty;
 
-            if (value.Any(IsLineFeed) || value.Contains(separator) || value!.StartsWith(Quote, StringComparison.Ordinal))
+            if (value.Any(IsLineFeed) || value.Contains(separator) || value.StartsWith(Quote, StringComparison.Ordinal))
             {
-                return Quote + value!.Replace(Quote, Quote + Quote) + Quote;
+                return Quote + value.Replace(Quote, Quote + Quote) + Quote;
             }
 
             return value;
