@@ -227,7 +227,7 @@
 
             var handle = messageSource.Handle;
 
-            using (new DeferSizeToContent(window!))
+            using (new DeferSizeToContent(window))
             {
                 ShowGlassFrame(compositionTarget, handle);
                 NativeMethods.SetWindowRgn(handle, IntPtr.Zero, true);

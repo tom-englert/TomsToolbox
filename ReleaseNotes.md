@@ -1,3 +1,6 @@
+##### 2.3
+- Add nullable helpers
+
 ##### 2.2.1
 - MetaDataReader: Support Enums as attribute arguments
 
