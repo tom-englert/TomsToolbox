@@ -33,5 +33,10 @@
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            PropertyChanged?.Invoke(this, e);
+        }
     }
 }
