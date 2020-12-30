@@ -24,7 +24,7 @@
         /// <returns>
         /// <see langword="true" /> if the <paramref name="value" /> parameter is <see langword="null" /> or <see cref="F:System.String.Empty" />, or if <paramref name="value" /> consists exclusively of white-space characters.
         /// </returns>
-        public static bool IsNullOrWhiteSpace([NotNullWhen(false)] this string value)
+        public static bool IsNullOrWhiteSpace([NotNullWhen(false)] this string? value)
         {
             return string.IsNullOrWhiteSpace(value);
         }
