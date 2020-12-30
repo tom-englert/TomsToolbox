@@ -1,4 +1,6 @@
-# Tom's Toolbox [![Build Status](https://dev.azure.com/tom-englert/Open%20Source/_apis/build/status/TomsToolbox?branchName=master)](https://dev.azure.com/tom-englert/Open%20Source/_build/latest?definitionId=30&branchName=master) ![Nuget](https://img.shields.io/nuget/v/tomstoolbox.wpf)
+# Tom's Toolbox 
+[![Build Status](https://dev.azure.com/tom-englert/Open%20Source/_apis/build/status/TomsToolbox?branchName=master)](https://dev.azure.com/tom-englert/Open%20Source/_build/latest?definitionId=30&branchName=master) 
+[![Nuget](https://img.shields.io/nuget/v/tomstoolbox.wpf)](https://www.nuget.org/packages/TomsToolbox.Wpf)
 
 A set of core functions and classes to ease every days .Net development tasks.
 
