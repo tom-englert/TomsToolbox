@@ -1,3 +1,9 @@
+##### 2.3.2
+- Fix nullable annotations
+
+##### 2.3.1
+- Fix nullable annotations
+
 ##### 2.3
 - Add nullable helpers
 
