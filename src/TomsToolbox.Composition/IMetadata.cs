@@ -26,7 +26,7 @@
         /// <returns>
         /// <c>true</c> if the metadata value exists.
         /// </returns>
-        bool TryGetValue(string name, [CanBeNull, MaybeNull, NotNullWhen(true)] out object? value);
+        bool TryGetValue(string name, [CanBeNull, NotNullWhen(true)] out object? value);
     }
 
     public static partial class ExtensionMethods

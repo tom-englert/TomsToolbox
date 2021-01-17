@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Composition
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
     using JetBrains.Annotations;
 
@@ -27,7 +28,7 @@
         }
 
         /// <inheritdoc />
-        public bool TryGetValue(string name, [CanBeNull] out object? value)
+        public bool TryGetValue(string name, [CanBeNull, NotNullWhen(true)] out object? value)
         {
             return _metadata.TryGetValue(name, out value);
         }
