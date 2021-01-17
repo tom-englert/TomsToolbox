@@ -1,6 +1,9 @@
 ﻿namespace TomsToolbox.Composition
 {
+    using System.Diagnostics.CodeAnalysis;
+
     using JetBrains.Annotations;
+    using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
 
     /// <summary>
     /// A collection of named metadata objects.
@@ -23,7 +26,7 @@
         /// <returns>
         /// <c>true</c> if the metadata value exists.
         /// </returns>
-        bool TryGetValue(string name, [CanBeNull] out object? value);
+        bool TryGetValue(string name, [CanBeNull, MaybeNull, NotNullWhen(true)] out object? value);
     }
 
     public static partial class ExtensionMethods
@@ -50,8 +53,7 @@
         /// <returns>
         /// <c>true</c> if the metadata value exists.
         /// </returns>
-        public static bool TryGetValue<T>([NotNull] this IMetadata metadata, string name, [CanBeNull] out T? value)
-            where T : class
+        public static bool TryGetValue<T>([NotNull] this IMetadata metadata, string name, [CanBeNull, MaybeNull, NotNullWhen(true)] out T value)
         {
             if (metadata.TryGetValue(name, out var v) && (v is T t))
             {
@@ -85,8 +87,8 @@
         /// The value, or default if no item with this name exists.
         /// </returns>
         [CanBeNull]
-        public static T? GetValueOrDefault<T>([NotNull] this IMetadata metadata, string name)
-            where T: class
+        [return:MaybeNull]
+        public static T GetValueOrDefault<T>([NotNull] this IMetadata metadata, string name)
         {
             return metadata.TryGetValue<T>(name, out var value) ? value : default;
         }
