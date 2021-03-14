@@ -233,8 +233,11 @@
         <Button Content="Button" />
         <ToggleButton Content="ToggleButton" />
         <Separator />
-        <ComboBox Width="50" />
-        <TextBox Width="50" />
+        <ComboBox Width="100" SelectedIndex="0">
+          <system:String>ÄÖÜgyp</system:String>
+          <system:String>Typing</system:String>
+        </ComboBox>
+        <TextBox Width="80" Text="ÄÖÜgyp"/>
         <Button>
           <Image Source="../Assets/close.png" Width="16" Height="16" />
         </Button>

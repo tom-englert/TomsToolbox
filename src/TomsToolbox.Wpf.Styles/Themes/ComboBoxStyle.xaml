@@ -257,7 +257,6 @@
   </Style>
 
   <Style x:Key="{x:Static styles:ResourceKeys.ToolBarComboBoxStyle}" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Static styles:ResourceKeys.ComboBoxStyle}}">
-    <Setter Property="Height" Value="22" />
     <Setter Property="Margin" Value="2,0" />
   </Style>
 

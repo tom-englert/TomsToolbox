@@ -70,7 +70,7 @@
                         </Style>
                       </DockPanel.Resources>
                       <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" MinWidth="6">
-                        <Border x:Name="Icon" Width="16" Height="16" Tag="{x:Static toms:HitTest.SysMenu}" Background="Transparent">
+                        <Border x:Name="Icon" Width="16" Height="16" Tag="{x:Static toms:HitTest.SysMenu}" Background="Transparent" Margin="6,0">
                           <Control Style="{DynamicResource {x:Static styles:ResourceKeys.IconControlStyle}}" IsHitTestVisible="False" Focusable="False" />
                         </Border>
                       </StackPanel>
