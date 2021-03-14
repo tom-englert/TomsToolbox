@@ -1,3 +1,6 @@
+##### 2.4.0
+- WpfStyles: add ListView and ToolBar
+
 ##### 2.3.2
 - Fix nullable annotations
 
