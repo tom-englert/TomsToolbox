@@ -80,7 +80,7 @@
 
             var result = bindings.Select(binding => new ExportAdapter<object>(() => GetExportedValue(binding), binding.Metadata.Get<IMetadata>(ExportMetadataKey)));
 
-            return result.ToList();
+            return result.ToList().AsReadOnly();
         }
 
         [CanBeNull]
@@ -91,7 +91,7 @@
 
         private IEnumerable<T> GetExportedValues<T>([CanBeNull] string? contractName)
         {
-            return (contractName != null ? _kernel.GetAll<T>(contractName) : _kernel.GetAll<T>());
+            return (contractName != null ? _kernel.GetAll<T>(contractName) : _kernel.GetAll<T>()).ToList().AsReadOnly();
         }
 
         private object GetExportedValue(IBinding binding)
