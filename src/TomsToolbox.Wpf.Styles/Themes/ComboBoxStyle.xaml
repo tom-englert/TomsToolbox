@@ -19,9 +19,9 @@
         <ControlTemplate TargetType="ToggleButton">
           <Grid Background="Transparent">
             <Border Width="18" HorizontalAlignment="Right" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-              <Path Width="10" Height="6" VerticalAlignment="Center"
+              <Path Width="7" Height="5" VerticalAlignment="Center"
                     StrokeThickness="2" SnapsToDevicePixels="True"
-                    Data="M 0 0 L 3.5 4 L 7 0 Z"
+                    Data="M 0 1 L 1.5 3 L 3 1 Z"
                     Stroke="{TemplateBinding Foreground}" Fill="{TemplateBinding Foreground}" />
             </Border>
           </Grid>
@@ -241,7 +241,7 @@
           <Condition Property="IsMouseOver" Value="True" />
           <Condition Property="IsEnabled" Value="True" />
         </MultiTrigger.Conditions>
-        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
       </MultiTrigger>
     </Style.Triggers>
   </Style>
@@ -258,6 +258,7 @@
 
   <Style x:Key="{x:Static styles:ResourceKeys.ToolBarComboBoxStyle}" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Static styles:ResourceKeys.ComboBoxStyle}}">
     <Setter Property="Margin" Value="2,0" />
+    <Setter Property="Height" Value="24" />
   </Style>
 
 </ResourceDictionary>

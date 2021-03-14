@@ -294,6 +294,13 @@
         public static readonly ResourceKey ToolBarToggleButtonStyle = new ComponentResourceKey(typeof(ResourceKeys), "ToolBarToggleButtonStyle");
 
         /// <summary>
+        /// The resource key for the <see cref="ToggleButton"/> style inside a tool bar.
+        /// </summary>
+        [DefaultStyle(typeof(CheckBox), typeof(ToolBar), nameof(ToolBar.CheckBoxStyleKey))]
+        [NotNull]
+        public static readonly ResourceKey ToolBarCheckBoxStyle = new ComponentResourceKey(typeof(ResourceKeys), "ToolBarCheckBoxStyle");
+
+        /// <summary>
         /// The resource key for the <see cref="TextBox"/> style inside a tool bar.
         /// </summary>
         [DefaultStyle(typeof(TextBox), typeof(ToolBar), nameof(ToolBar.TextBoxStyleKey))]

@@ -232,6 +232,7 @@
       <ToolBar VerticalAlignment="Top">
         <Button Content="Button" />
         <ToggleButton Content="ToggleButton" />
+        <CheckBox Content="CheckBox" />
         <Separator />
         <ComboBox Width="100" SelectedIndex="0">
           <system:String>ÄÖÜgyp</system:String>

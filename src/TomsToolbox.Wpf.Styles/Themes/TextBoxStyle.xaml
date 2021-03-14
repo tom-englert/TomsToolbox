@@ -59,6 +59,7 @@
 
   <Style x:Key="{x:Static styles:ResourceKeys.ToolBarTextBoxStyle}" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Static styles:ResourceKeys.TextBoxStyle}}">
     <Setter Property="Margin" Value="2,0" />
+    <Setter Property="Height" Value="24" />
   </Style>
 
 </ResourceDictionary>

@@ -158,7 +158,6 @@
   </Style>
 
   <Style x:Key="{x:Static styles:ResourceKeys.ListViewItemStyle}"  TargetType="{x:Type ListViewItem}">
-    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderBrush" Value="Transparent" />
     <Setter Property="BorderThickness" Value="0" />
@@ -176,9 +175,6 @@
                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     Focusable="False" />
             </Border>
-            <Rectangle x:Name="FocusedVisualElement" IsHitTestVisible="False"
-                       Stroke="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"
-                       StrokeThickness="2" Visibility="Collapsed" />
           </Grid>
           <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -186,9 +182,6 @@
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
               <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
-            </Trigger>
-            <Trigger Property="IsFocused" Value="True">
-              <Setter TargetName="FocusedVisualElement" Property="Visibility" Value="Visible" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
               <Setter Property="Background" Value="{DynamicResource {x:Static styles:ResourceKeys.DisabledBrush}}" />
@@ -200,7 +193,6 @@
                 <Condition Property="IsKeyboardFocused" Value="False" />
               </MultiTrigger.Conditions>
               <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" />
-              <Setter TargetName="FocusedVisualElement" Property="Visibility" Value="Hidden" />
             </MultiTrigger>
           </ControlTemplate.Triggers>
         </ControlTemplate>
@@ -209,7 +201,6 @@
   </Style>
 
   <Style x:Key="{x:Static styles:ResourceKeys.ListViewStyle}" TargetType="{x:Type ListView}">
-    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     <Setter Property="Padding" Value="0" />
     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
@@ -229,19 +220,6 @@
               <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
             </ScrollViewer>
           </Border>
-          <ControlTemplate.Triggers>
-            <!-- Trigger Property="UIElement.IsEnabled" Value="false">
-              <Setter TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
-                      Property="theme:ListBoxChrome.Background"/>
-            </Trigger -->
-            <!--<MultiTrigger>
-              <MultiTrigger.Conditions>
-                <Condition Property="ItemsControl.IsGrouping" Value="true"/>
-                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
-              </MultiTrigger.Conditions>
-              <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
-            </MultiTrigger>-->
-          </ControlTemplate.Triggers>
         </ControlTemplate>
       </Setter.Value>
     </Setter>

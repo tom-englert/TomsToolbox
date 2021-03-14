@@ -114,6 +114,9 @@
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ToolBarButtonStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ToolBarCheckBoxStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ToolBarComboBoxStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
