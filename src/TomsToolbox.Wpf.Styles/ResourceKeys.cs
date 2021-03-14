@@ -146,8 +146,8 @@
         [DefaultStyle(typeof(ListView))]
         [NotNull]
         public static readonly ResourceKey ListViewStyle = new ComponentResourceKey(typeof(ResourceKeys), "ListViewStyle");
-        /// <summary>
 
+        /// <summary>
         /// The resource key for the <see cref="ListViewItem"/> style.
         /// </summary>
         [DefaultStyle(typeof(ListViewItem))]
@@ -167,6 +167,7 @@
         [NotNull]
         public static readonly ResourceKey GridViewColumnHeaderStyle = new ComponentResourceKey(typeof(ResourceKeys), "GridViewColumnHeaderStyle");
 
+        /// <summary>
         /// The resource key for the <see cref="RadioButton"/> style.
         /// </summary>
         [DefaultStyle(typeof(RadioButton))]
@@ -277,6 +278,7 @@
         [DefaultStyle(typeof(ToolBar))]
         [NotNull]
         public static readonly ResourceKey ToolBarStyle = new ComponentResourceKey(typeof(ResourceKeys), "ToolBarStyle");
+
         /// <summary>
         /// The resource key for the <see cref="Button"/> style inside a tool bar.
         /// </summary>
