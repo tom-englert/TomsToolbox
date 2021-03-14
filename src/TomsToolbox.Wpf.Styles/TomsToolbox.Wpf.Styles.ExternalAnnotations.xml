@@ -54,6 +54,12 @@
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.GridSplitterStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.GridViewColumnHeaderStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.GridViewScrollViewerStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.GroupBoxStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
@@ -64,6 +70,12 @@
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ListBoxStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ListViewItemStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ListViewStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.MenuItemSeparatorStyle">
@@ -99,6 +111,24 @@
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ToggleButtonStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ToolBarButtonStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ToolBarComboBoxStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ToolBarSeparatorStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ToolBarStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ToolBarTextBoxStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ToolBarToggleButtonStyle">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="F:TomsToolbox.Wpf.Styles.ResourceKeys.ToolTipStyle">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
@@ -119,9 +149,25 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
+  <member name="F:TomsToolbox.Wpf.Styles.WpfStyles.EnsureDefaultStylesProperty">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+  </member>
   <member name="M:TomsToolbox.Wpf.Styles.WpfStyles.GetDefaultStyles">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Wpf.Styles.WpfStyles.GetEnsureDefaultStyles(System.Windows.Window)">
+    <parameter name="obj">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.Styles.WpfStyles.GetIsCaptionVisible(System.Windows.Window)">
+    <parameter name="window">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="F:TomsToolbox.Wpf.Styles.WpfStyles.IsCaptionVisibleProperty">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
   </member>
   <member name="P:TomsToolbox.Wpf.Styles.WpfStyles.LargeApplicationIcon">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
@@ -129,10 +175,34 @@
   <member name="P:TomsToolbox.Wpf.Styles.WpfStyles.MediumApplicationIcon">
     <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
   </member>
+  <member name="M:TomsToolbox.Wpf.Styles.WpfStyles.RegisterDefault(System.Windows.ResourceDictionary)">
+    <parameter name="resources">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.Styles.WpfStyles.RegisterDefaultStyles(System.Windows.ResourceDictionary)">
+    <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    <parameter name="resources">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.ItemNotNullAttribute.#ctor" />
+    </parameter>
+  </member>
   <member name="M:TomsToolbox.Wpf.Styles.WpfStyles.RegisterDefaultWindowStyle(System.Windows.ResourceDictionary)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <attribute ctor="M:JetBrains.Annotations.ItemCanBeNullAttribute.#ctor" />
     <parameter name="resourceDictionary">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.Styles.WpfStyles.SetEnsureDefaultStyles(System.Windows.Window,System.Boolean)">
+    <parameter name="obj">
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
+    </parameter>
+  </member>
+  <member name="M:TomsToolbox.Wpf.Styles.WpfStyles.SetIsCaptionVisible(System.Windows.Window,System.Boolean)">
+    <parameter name="window">
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>

@@ -56,4 +56,10 @@
       </MultiTrigger>
     </Style.Triggers>
   </Style>
+
+  <Style x:Key="{x:Static styles:ResourceKeys.ToolBarTextBoxStyle}" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Static styles:ResourceKeys.TextBoxStyle}}">
+    <Setter Property="Height" Value="22" />
+    <Setter Property="Margin" Value="2,0" />
+  </Style>
+
 </ResourceDictionary>

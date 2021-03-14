@@ -4,6 +4,8 @@
                     xmlns:styles="clr-namespace:TomsToolbox.Wpf.Styles">
 
   <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Stretch" />
     <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType=TabControl}}" />
     <Setter Property="Padding" Value="14,2,14,1" />
@@ -18,8 +20,8 @@
                     BorderThickness="0"
                     Background="{TemplateBinding Background}"
                     Padding="{TemplateBinding Padding}">
-              <Grid HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+              <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                 <ContentPresenter x:Name="Content" ContentTemplate="{TemplateBinding HeaderTemplate}"
                                   Content="{TemplateBinding Header}"
                                   ContentStringFormat="{TemplateBinding HeaderStringFormat}"

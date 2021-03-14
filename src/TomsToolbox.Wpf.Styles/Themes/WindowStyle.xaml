@@ -9,6 +9,7 @@
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" />
     <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+    <Setter Property="styles:WpfStyles.EnsureDefaultStyles" Value="True" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="Window">
@@ -26,6 +27,8 @@
                           Tag="{x:Static toms:HitTest.Caption}" MinHeight="24">
                     <DockPanel>
                       <DockPanel.Resources>
+                        <!-- Ensure any global TextBlock style does not interfere with the caption -->
+                        <Style TargetType="TextBlock"/>
                         <Style TargetType="Button">
                           <Setter Property="Background" Value="Transparent" />
                           <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" />
@@ -67,7 +70,7 @@
                         </Style>
                       </DockPanel.Resources>
                       <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" MinWidth="6">
-                        <Border x:Name="Icon" Width="16" Height="16" Tag="{x:Static toms:HitTest.SysMenu}" Background="Transparent" Margin="6,0">
+                        <Border x:Name="Icon" Width="16" Height="16" Tag="{x:Static toms:HitTest.SysMenu}" Background="Transparent">
                           <Control Style="{DynamicResource {x:Static styles:ResourceKeys.IconControlStyle}}" IsHitTestVisible="False" Focusable="False" />
                         </Border>
                       </StackPanel>
@@ -116,6 +119,10 @@
             </Border>
           </AdornerDecorator>
           <ControlTemplate.Triggers>
+            <Trigger Property="styles:WpfStyles.IsCaptionVisible" Value="False">
+              <Setter TargetName="Caption" Property="Visibility" Value="Collapsed" />
+              <Setter TargetName="ClientArea" Property="Background" Value="Transparent" />
+            </Trigger>
             <Trigger Property="WindowState" Value="Maximized">
               <Setter Property="BorderThickness" Value="0" />
             </Trigger>
