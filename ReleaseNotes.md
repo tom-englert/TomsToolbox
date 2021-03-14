@@ -1,3 +1,6 @@
+##### 2.4.1
+- WpfStyles: Fix text-clipping in tool-bar; icon margin in Window.
+
 ##### 2.4.0
 - WpfStyles: add ListView and ToolBar
 
