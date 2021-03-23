@@ -1,6 +1,9 @@
+##### 2.4.3
+- Fix #10: missing RecognizesAccessKey in some buttons.
+
 ##### 2.4.2
 - WpfStyles: Support CheckBoxStyle in ToolBar, fine-tune styles.
-- 
+ 
 ##### 2.4.1
 - WpfStyles: Fix text-clipping in tool-bar; icon margin in Window.
 
