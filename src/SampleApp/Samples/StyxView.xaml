@@ -31,13 +31,13 @@
     <DataTemplate x:Key="Hyperlink">
       <TextBlock>
         <Hyperlink>
-          <Run>Style Explorer</Run>
+          <Run>Style _Explorer</Run>
         </Hyperlink>
       </TextBlock>
     </DataTemplate>
 
     <DataTemplate x:Key="MenuItem">
-      <TextBlock Text="See Menu or ContextMenu" />
+      <TextBlock Text="See _Menu or ContextMenu" />
     </DataTemplate>
 
     <DataTemplate x:Key="ToolTip">
@@ -166,14 +166,14 @@
     </DataTemplate>
 
     <DataTemplate x:Key="CheckBox">
-      <CheckBox Content="StyleExplorer" IsThreeState="True" />
+      <CheckBox Content="S_tyleExplorer" IsThreeState="True" />
     </DataTemplate>
 
     <DataTemplate x:Key="Button">
       <StackPanel Orientation="Horizontal">
-        <Button IsDefault="True" Content="OK" Style="{Binding}" />
+        <Button IsDefault="True" Content="_OK" Style="{Binding}" />
         <Decorator Width="10" />
-        <Button Content="Abbrechen" Style="{Binding}" />
+        <Button Content="_Abbrechen" Style="{Binding}" />
       </StackPanel>
     </DataTemplate>
 
@@ -188,9 +188,9 @@
     <DataTemplate x:Key="RadioButton">
       <StackPanel>
         <Grid Height="50">
-          <RadioButton Content="StyleExplorer" GroupName="G1" />
+          <RadioButton Content="_StyleExplorer" GroupName="G1" />
         </Grid>
-        <RadioButton Content="StyleExplorer" GroupName="G1" />
+        <RadioButton Content="Style_Explorer" GroupName="G1" />
       </StackPanel>
     </DataTemplate>
 
@@ -230,9 +230,9 @@
 
     <DataTemplate x:Key="ToolBar">
       <ToolBar VerticalAlignment="Top">
-        <Button Content="Button" />
-        <ToggleButton Content="ToggleButton" />
-        <CheckBox Content="CheckBox" />
+        <Button Content="B_utton" />
+        <ToggleButton Content="_ToggleButton" />
+        <CheckBox Content="Check_Box" />
         <Separator />
         <ComboBox Width="100" SelectedIndex="0">
           <system:String>ÄÖÜgyp</system:String>

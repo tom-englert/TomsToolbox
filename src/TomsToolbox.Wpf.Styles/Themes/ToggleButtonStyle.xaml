@@ -23,7 +23,7 @@
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Focusable="False" Foreground="{TemplateBinding Foreground}">
-              <ContentPresenter />
+              <ContentPresenter RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
             </ContentControl>
           </Border>
         </ControlTemplate>
