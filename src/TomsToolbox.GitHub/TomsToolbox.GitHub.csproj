@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
+    <NoWarn>NU5118;NU1701;8002</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

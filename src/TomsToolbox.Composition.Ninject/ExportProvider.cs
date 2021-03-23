@@ -37,6 +37,7 @@
             _kernel = kernel;
         }
 
+#pragma warning disable CS0067
         /// <inheritdoc />
         public event EventHandler<EventArgs>? ExportsChanged;
 

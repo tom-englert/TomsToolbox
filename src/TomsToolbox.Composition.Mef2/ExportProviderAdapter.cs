@@ -25,6 +25,7 @@
             _context = context;
         }
 
+#pragma warning disable CS0067
         /// <inheritdoc />
         public event EventHandler<EventArgs>? ExportsChanged;
 
