@@ -56,7 +56,6 @@
   <Style x:Key="HScrollBarThumbStyle" TargetType="{x:Type Thumb}">
     <Setter Property="SnapsToDevicePixels" Value="True" />
     <Setter Property="Focusable" Value="False" />
-    <Setter Property="Cursor" Value="SizeWE" />
     <Setter Property="OverridesDefaultStyle" Value="True" />
     <Setter Property="IsTabStop" Value="False" />
     <Setter Property="Stylus.IsPressAndHoldEnabled" Value="False" />
@@ -88,7 +87,6 @@
   <Style x:Key="VScrollBarThumbStyle" TargetType="{x:Type Thumb}">
     <Setter Property="SnapsToDevicePixels" Value="True" />
     <Setter Property="Focusable" Value="False" />
-    <Setter Property="Cursor" Value="SizeNS" />
     <Setter Property="OverridesDefaultStyle" Value="True" />
     <Setter Property="IsTabStop" Value="False" />
     <Setter Property="Stylus.IsPressAndHoldEnabled" Value="False" />
