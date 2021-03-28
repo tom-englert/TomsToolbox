@@ -1,3 +1,7 @@
+##### 2.4.4
+- Fix unexpected cursor in scroll bar thumb
+- Align ListView and ListBox border styles
+
 ##### 2.4.3
 - Fix #10: missing RecognizesAccessKey in some buttons.
 
