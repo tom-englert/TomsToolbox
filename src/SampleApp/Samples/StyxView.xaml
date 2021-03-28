@@ -101,6 +101,12 @@
         <system:String>Item 1</system:String>
         <system:String>Item 2</system:String>
         <system:String>Item 3</system:String>
+        <system:String>Item 4</system:String>
+        <system:String>Item 5</system:String>
+        <system:String>Item 6</system:String>
+        <system:String>Item 7</system:String>
+        <system:String>Item 8</system:String>
+        <system:String>Item 9</system:String>
       </ListView>
     </DataTemplate>
 

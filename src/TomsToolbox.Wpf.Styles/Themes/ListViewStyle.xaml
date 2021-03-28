@@ -22,7 +22,7 @@
   <Style TargetType="{x:Type GridViewColumnHeader}" x:Key="{x:Static styles:ResourceKeys.GridViewColumnHeaderStyle}">
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource {x:Static styles:ResourceKeys.BorderBrush}}" />
     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
     <Setter Property="BorderThickness" Value="0"/>
     <Setter Property="Padding" Value="2,0"/>
@@ -144,13 +144,6 @@
                        ViewportSize="{TemplateBinding ScrollViewer.ViewportHeight}"
                        Visibility="{TemplateBinding ScrollViewer.ComputedVerticalScrollBarVisibility}" Cursor="Arrow"
                        Value="{Binding Path=VerticalOffset, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"/>
-            <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="false"
-                       Background="{Binding Path=Background, ElementName=PART_VerticalScrollBar}">
-              <Rectangle DockPanel.Dock="Left" Width="1" Fill="White"
-                         Visibility="{TemplateBinding ScrollViewer.ComputedVerticalScrollBarVisibility}"/>
-              <Rectangle DockPanel.Dock="Top" Height="1" Fill="White"
-                         Visibility="{TemplateBinding ScrollViewer.ComputedHorizontalScrollBarVisibility}"/>
-            </DockPanel>
           </Grid>
         </ControlTemplate>
       </Setter.Value>
@@ -182,6 +175,7 @@
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
               <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+              <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
               <Setter Property="Background" Value="{DynamicResource {x:Static styles:ResourceKeys.DisabledBrush}}" />
@@ -204,7 +198,7 @@
     <Setter Property="Padding" Value="0" />
     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
-    <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource {x:Static styles:ResourceKeys.BorderBrush}}" />
     <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
     <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
     <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
