@@ -54,12 +54,12 @@
         <Border.ContextMenu>
           <ContextMenu>
             <MenuItem Header="Item _1" />
-            <MenuItem Header="Item _2" />
+            <MenuItem Header="Item _2" InputGestureText="Ctrl+2"/>
             <Separator />
             <MenuItem Header="Item _2a" />
             <MenuItem Header="Item _3">
               <MenuItem Header="Style _Explorer" />
-              <MenuItem Header="Item _2" />
+              <MenuItem Header="Item _2" InputGestureText="Shift+Ctrl+2"/>
             </MenuItem>
           </ContextMenu>
         </Border.ContextMenu>
@@ -118,12 +118,12 @@
               <Ellipse Width="16" Height="16" Fill="Green" />
             </MenuItem.Icon>
           </MenuItem>
-          <MenuItem Header="Item _2" />
+          <MenuItem Header="Item _2" InputGestureText="Ctrl+1"/>
           <Separator />
           <MenuItem Header="Item _2a" IsCheckable="True" IsChecked="True" />
           <MenuItem Header="Style E_xplorer">
             <MenuItem Header="Style _Explorer" />
-            <MenuItem Header="Item _2" />
+            <MenuItem Header="Item _2"  InputGestureText="Shift+Ctrl+2"/>
           </MenuItem>
         </MenuItem>
         <MenuItem Header="Item _2">

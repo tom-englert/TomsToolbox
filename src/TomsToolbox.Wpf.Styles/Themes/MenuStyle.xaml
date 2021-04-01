@@ -8,6 +8,12 @@
   <Geometry x:Key="UpArrow">M 0,4 L 3.5,0 L 7,4 Z</Geometry>
   <Geometry x:Key="RightArrow">M 0,0 L 4,3.5 L 0,7 Z</Geometry>
 
+  <VisualBrush x:Key="HighlightBackgroundBrush" Opacity=".25" Stretch="Fill">
+    <VisualBrush.Visual>
+      <Border Width="1" Height="1" Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+    </VisualBrush.Visual>
+  </VisualBrush>
+
   <Style x:Key="MenuScrollButton" BasedOn="{x:Null}" TargetType="{x:Type RepeatButton}">
     <Setter Property="ClickMode" Value="Hover" />
     <Setter Property="MinWidth" Value="0" />
@@ -84,14 +90,14 @@
 
   <Style x:Key="{x:Static styles:ResourceKeys.MenuItemSeparatorStyle}" TargetType="{x:Type Separator}">
     <Setter Property="Height" Value="1" />
-    <Setter Property="Margin" Value="0,2" />
+    <Setter Property="Margin" Value="0,2, 4, 2" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type Separator}">
           <Grid>
             <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="Auto" SharedSizeGroup="Icon" />
-              <ColumnDefinition Width="3" />
+              <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup" MinWidth="24" />
+              <ColumnDefinition Width="4" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Border Grid.Column="2"
@@ -105,26 +111,28 @@
   </Style>
 
   <ControlTemplate x:Key="MenuItemTopLevelHeaderTemplate" TargetType="{x:Type MenuItem}">
-    <Grid>
-      <ContentPresenter Margin="{TemplateBinding Padding}" ContentSource="Header" RecognizesAccessKey="True" />
-      <Popup x:Name="Popup" AllowsTransparency="True" Focusable="False" IsOpen="{TemplateBinding IsSubmenuOpen}"
+    <Border x:Name="Border" Background="{TemplateBinding Background}">
+      <Grid>
+        <ContentPresenter Margin="{TemplateBinding Padding}" ContentSource="Header" RecognizesAccessKey="True" />
+        <Popup x:Name="Popup" AllowsTransparency="True" Focusable="False" IsOpen="{TemplateBinding IsSubmenuOpen}"
              Placement="Bottom" PopupAnimation="Fade">
-        <Border x:Name="SubmenuBorder"
+          <Border x:Name="SubmenuBorder"
                 Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}"
                 BorderBrush="{DynamicResource {x:Static styles:ResourceKeys.BorderBrush}}"
                 BorderThickness="1" SnapsToDevicePixels="True">
-          <ScrollViewer CanContentScroll="True" Style="{StaticResource MenuScrollViewer}">
-            <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle" Grid.IsSharedSizeScope="True" />
-          </ScrollViewer>
-        </Border>
-      </Popup>
-    </Grid>
+            <ScrollViewer CanContentScroll="True" Style="{StaticResource MenuScrollViewer}">
+              <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle" Grid.IsSharedSizeScope="True" />
+            </ScrollViewer>
+          </Border>
+        </Popup>
+      </Grid>
+    </Border>
     <ControlTemplate.Triggers>
       <Trigger Property="IsSuspendingPopupAnimation" Value="True">
         <Setter TargetName="Popup" Property="PopupAnimation" Value="None" />
       </Trigger>
       <Trigger Property="IsHighlighted" Value="True">
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
+        <Setter Property="Background" TargetName="Border" Value="{StaticResource HighlightBackgroundBrush}" />
       </Trigger>
       <Trigger Property="IsEnabled" Value="False">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
@@ -133,10 +141,12 @@
   </ControlTemplate>
 
   <ControlTemplate x:Key="MenuItemTopLevelItemTemplate" TargetType="{x:Type MenuItem}">
-    <ContentPresenter Margin="{TemplateBinding Padding}" ContentSource="Header" RecognizesAccessKey="True" />
+    <Border x:Name="Border">
+      <ContentPresenter Margin="{TemplateBinding Padding}" ContentSource="Header" RecognizesAccessKey="True" />
+    </Border>
     <ControlTemplate.Triggers>
       <Trigger Property="IsHighlighted" Value="True">
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
+        <Setter Property="Background" TargetName="Border" Value="{StaticResource HighlightBackgroundBrush}" />
       </Trigger>
       <Trigger Property="IsEnabled" Value="False">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
@@ -148,10 +158,12 @@
     <Border x:Name="Border" BorderThickness="1" Background="Transparent">
       <Grid>
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto" SharedSizeGroup="Icon" MinWidth="24" />
-          <ColumnDefinition Width="3" />
+          <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup" MinWidth="24" />
+          <ColumnDefinition Width="4" />
           <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="13" />
+          <ColumnDefinition Width="16" />
+          <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGTColumnGroup" />
+          <ColumnDefinition Width="12" />
         </Grid.ColumnDefinitions>
         <ContentPresenter Name="Icon" ContentSource="Icon" Margin="{TemplateBinding Padding}" />
         <Border x:Name="Check" Grid.Column="0" Width="13" Height="13" Margin="6,0"
@@ -164,6 +176,7 @@
                 Visibility="Hidden" UseLayoutRounding="False" />
         </Border>
         <ContentPresenter Grid.Column="2" Margin="{TemplateBinding Padding}" ContentSource="Header" RecognizesAccessKey="True" />
+        <TextBlock Grid.Column="4" Text="{TemplateBinding InputGestureText}" Margin="{TemplateBinding Padding}" />
       </Grid>
     </Border>
     <ControlTemplate.Triggers>
@@ -179,7 +192,7 @@
         <Setter TargetName="Icon" Property="Visibility" Value="Hidden" />
       </Trigger>
       <Trigger Property="IsHighlighted" Value="True">
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
+        <Setter Property="Background" TargetName="Border" Value="{StaticResource HighlightBackgroundBrush}" />
       </Trigger>
       <Trigger Property="IsEnabled" Value="False">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
@@ -193,10 +206,10 @@
     <Border x:Name="Border" BorderThickness="1" Background="Transparent">
       <Grid>
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto" SharedSizeGroup="Icon" MinWidth="24" />
-          <ColumnDefinition Width="3" />
+          <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup" MinWidth="24" />
+          <ColumnDefinition Width="4" />
           <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="13" />
+          <ColumnDefinition Width="12" />
         </Grid.ColumnDefinitions>
         <ContentPresenter x:Name="Icon" Margin="3,0" VerticalAlignment="Center" ContentSource="Icon" />
         <ContentPresenter Grid.Column="2" Margin="{TemplateBinding Padding}" ContentSource="Header" RecognizesAccessKey="True" />
@@ -221,7 +234,7 @@
         <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
       </Trigger>
       <Trigger Property="IsHighlighted" Value="True">
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
+        <Setter Property="Background" TargetName="Border"  Value="{StaticResource HighlightBackgroundBrush}" />
       </Trigger>
       <Trigger Property="IsEnabled" Value="False">
         <Setter Property="Foreground"
@@ -269,7 +282,7 @@
         <ControlTemplate TargetType="{x:Type ContextMenu}">
           <Border x:Name="Border" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}"
                   BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-            <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle" />
+            <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Cycle" Grid.IsSharedSizeScope="True"/>
           </Border>
         </ControlTemplate>
       </Setter.Value>
