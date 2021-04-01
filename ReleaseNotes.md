@@ -1,3 +1,7 @@
+##### 2.5.1
+- Fix TabControlStyle: design is more VS-like
+- Fix MenuStyle: Add missing InputGestureText + design more VS-like
+
 ##### 2.5.0
 - Add attached property to CustomNonClientAreaBehavior to control DWM composition.
 
