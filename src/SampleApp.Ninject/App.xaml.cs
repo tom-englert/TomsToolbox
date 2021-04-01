@@ -13,6 +13,7 @@
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;
     using TomsToolbox.Wpf.Composition.XamlExtensions;
+    using TomsToolbox.Wpf.Interactivity;
     using TomsToolbox.Wpf.Styles;
 
     /// <summary>
@@ -26,6 +27,7 @@
         {
             // Thread.CurrentThread.CurrentUICulture = new CultureInfo("de-DE");
             FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+            // CustomNonClientAreaBehavior.DisableGlassFrameProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata(true));
         }
 
         protected override void OnStartup([CanBeNull] StartupEventArgs e)

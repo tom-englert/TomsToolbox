@@ -167,6 +167,35 @@
 
 
         /// <summary>
+        /// Gets the value indicating if the glass frame using DWM composition for this window should be disabled.
+        /// </summary>
+        /// <param name="window">The window.</param>
+        /// <returns><c>true</c> if the glass frame is disabled; otherwise <c>false</c></returns>
+        public static bool GetDisableGlassFrame(Window? window)
+        {
+            return (bool)(window?.GetValue(DisableGlassFrameProperty) ?? false);
+        }
+        /// <summary>
+        /// Sets the value indicating if the glass frame using DWM composition for this window should be disabled.
+        /// </summary>
+        /// <param name="window">The window.</param>
+        /// <param name="value">if set to <c>true</c> the glass frame is disabled.</param>
+        public static void SetDisableGlassFrame(Window window, bool value)
+        {
+            window.SetValue(DisableGlassFrameProperty, value);
+        }
+        /// <summary>
+        /// Identifies the <see cref="P:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.DisableGlassFrame"/> attached property
+        /// </summary>
+        /// <AttachedPropertyComments>
+        /// <summary>
+        /// Control DWM composition via the hosting Window.
+        /// </summary>
+        /// </AttachedPropertyComments>
+        public static readonly DependencyProperty DisableGlassFrameProperty = DependencyProperty.RegisterAttached(
+            "DisableGlassFrame", typeof(bool), typeof(CustomNonClientAreaBehavior));
+
+        /// <summary>
         /// The WM_NCHITTEST test event equivalent.
         /// </summary>
         [NotNull] public static readonly RoutedEvent NcHitTestEvent = EventManager.RegisterRoutedEvent("NcHitTest", RoutingStrategy.Bubble, typeof(EventHandler<NcHitTestEventArgs>), typeof(CustomNonClientAreaBehavior));
@@ -242,12 +271,12 @@
             ShowGlassFrame(messageSource.CompositionTarget, handle);
         }
 
-        private void ShowGlassFrame([CanBeNull] HwndTarget? compositionTarget, IntPtr handle)
+        private void ShowGlassFrame(HwndTarget? compositionTarget, IntPtr handle)
         {
             if (compositionTarget == null)
                 return;
 
-            if (HasGlassFrame)
+            if (HasGlassFrame && !GetDisableGlassFrame(_window))
             {
                 try
                 {
@@ -271,7 +300,7 @@
 
         private void Unregister([NotNull] Window window)
         {
-            var messageSource = (HwndSource)PresentationSource.FromDependencyObject(window);
+            var messageSource = (HwndSource?)PresentationSource.FromDependencyObject(window);
 
             messageSource?.RemoveHook(WindowProc);
         }
