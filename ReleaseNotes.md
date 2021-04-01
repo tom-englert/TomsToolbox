@@ -1,3 +1,6 @@
+##### 2.5.0
+- Add attached property to CustomNonClientAreaBehavior to control DWM composition.
+
 ##### 2.4.4
 - Fix unexpected cursor in scroll bar thumb
 - Align ListView and ListBox border styles
