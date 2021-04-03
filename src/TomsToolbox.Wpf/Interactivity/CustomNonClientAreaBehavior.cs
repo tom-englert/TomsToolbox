@@ -284,7 +284,7 @@
                     {
                         compositionTarget.BackgroundColor = Colors.Transparent;
 
-                        var m = new MARGINS(-1);
+                        var m = new MARGINS(1);
                         NativeMethods.DwmExtendFrameIntoClientArea(handle, ref m);
                         return;
                     }
