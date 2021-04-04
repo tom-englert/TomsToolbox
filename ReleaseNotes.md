@@ -1,3 +1,6 @@
+##### 2.5.2
+- CustomNonClientAreaBehavior: DwmExtendFrameIntoClientArea uses margin of 1 to not interfere with child windows (e.g. via WinForms interop)
+
 ##### 2.5.1
 - Fix TabControlStyle: design is more VS-like
 - Fix MenuStyle: Add missing InputGestureText + design more VS-like
