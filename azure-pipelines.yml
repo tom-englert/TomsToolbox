@@ -18,6 +18,7 @@ steps:
     Contents: 'Deploy/**'
 
 - task: NuGetCommand@2
+  displayName: 'NuGet restore'
   inputs:
     command: 'restore'
     restoreSolution: '$(Solution)'
