@@ -9,6 +9,7 @@ pool:
 variables:
   BuildPlatform: 'Any CPU'
   BuildConfiguration: 'Release'
+  Solution: 'src\TomsToolbox.sln'
 
 steps:
 - task: DeleteFiles@1
@@ -16,13 +17,17 @@ steps:
   inputs:
     Contents: 'Deploy/**'
 
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '$(Solution)'
+
 - task: MSBuild@1
   displayName: 'Build Solution'
   inputs:
-    solution: src\TomsToolbox.sln
+    solution: '$(Solution)'
     platform: '$(BuildPlatform)'
     configuration: '$(BuildConfiguration)'
-    msbuildArguments: '-restore'
     clean: true
 
 - task: MSBuild@1
