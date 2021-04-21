@@ -1,3 +1,6 @@
+##### 2.5.3
+- Adjust checkable style of MenuItem
+
 ##### 2.5.2
 - CustomNonClientAreaBehavior: DwmExtendFrameIntoClientArea uses margin of 1 to not interfere with child windows (e.g. via WinForms interop)
 
