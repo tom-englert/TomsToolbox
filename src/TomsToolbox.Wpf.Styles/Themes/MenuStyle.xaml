@@ -166,10 +166,10 @@
           <ColumnDefinition Width="12" />
         </Grid.ColumnDefinitions>
         <ContentPresenter Name="Icon" ContentSource="Icon" Margin="{TemplateBinding Padding}" />
-        <Border x:Name="Check" Grid.Column="0" Width="13" Height="13" Margin="6,0"
-                Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}"
-                BorderBrush="{DynamicResource {x:Static styles:ResourceKeys.BorderBrush}}"
-                BorderThickness="1" Visibility="Collapsed">
+        <Border x:Name="Check" Grid.Column="0" Width="14" Height="14"
+                HorizontalAlignment="Center"
+                Background="Transparent"
+                Visibility="Collapsed">
           <Path x:Name="CheckMark" Stretch="Fill" Margin="1"
                 Data="M7,0 3,5 1,3 0,4 3,7 9,0 z"
                 Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
