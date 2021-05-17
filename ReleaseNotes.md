@@ -1,3 +1,6 @@
+##### 2.5.4
+- Modernize WindowStyle
+
 ##### 2.5.3
 - Adjust checkable style of MenuItem
 
