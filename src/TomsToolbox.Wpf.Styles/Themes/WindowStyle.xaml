@@ -87,7 +87,7 @@
                           </Button>
                           <Button Command="{x:Static toms:WindowCommands.Restore}">
                             <Grid>
-                              <Path Width="12" Height="12" Data="M3.5,1.5 L3.5,8.5 L10.5,8.5 L10.5,1.5 Z" />
+                              <Path Width="12" Height="12" Data="M3.5,3.5 L3.5,1.5 L10.5,1.5 L10.5,8.5 L8.5,8.5" />
                               <Path Width="12" Height="12" Data="M1.5,3.5 L1.5,10.5 L8.5,10.5 L8.5,3.5 Z" />
                             </Grid>
                           </Button>
