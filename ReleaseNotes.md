@@ -1,3 +1,6 @@
+##### 2.5.5
+- Fix restore button image
+
 ##### 2.5.4
 - Modernize WindowStyle
 
