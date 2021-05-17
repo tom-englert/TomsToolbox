@@ -31,7 +31,6 @@
                         <Style TargetType="TextBlock"/>
                         <Style TargetType="Button">
                           <Setter Property="Background" Value="Transparent" />
-                          <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" />
                           <Setter Property="Focusable" Value="False" />
                           <Setter Property="VerticalAlignment" Value="Stretch" />
                           <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
@@ -39,8 +38,8 @@
                           <Setter Property="Template">
                             <Setter.Value>
                               <ControlTemplate TargetType="Button">
-                                <Border x:Name="background" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Background="{TemplateBinding Background}">
-                                  <ContentPresenter />
+                                <Border x:Name="background" Width="36" Background="{TemplateBinding Background}">
+                                  <ContentPresenter HorizontalAlignment="Center" />
                                 </Border>
                                 <ControlTemplate.Triggers>
                                   <Trigger Property="IsMouseOver" Value="True">
@@ -63,10 +62,10 @@
                           </Style.Triggers>
                         </Style>
                         <Style TargetType="Path">
-                          <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType=Button}}" />
+                          <Setter Property="Stroke" Value="{Binding (TextElement.Foreground), ElementName=Caption}" />
                           <Setter Property="StrokeStartLineCap" Value="Square" />
                           <Setter Property="StrokeEndLineCap" Value="Square" />
-                          <Setter Property="StrokeThickness" Value="3" />
+                          <Setter Property="StrokeThickness" Value="1" />
                         </Style>
                       </DockPanel.Resources>
                       <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" MinWidth="6">
@@ -83,22 +82,18 @@
                         <StackPanel x:Name="MaximizeRestoreButton" Orientation="Horizontal">
                           <Button Command="{x:Static toms:WindowCommands.Maximize}">
                             <Grid>
-                              <Path Width="12" Height="12" Data="M1.5,1.5 L10.5,1.5" />
-                              <Path Width="12" Height="12" Data="M0.5,0.5 L0.5,11.5 L11.5,11.5 L11.5,0.5" StrokeThickness="1" />
+                              <Path Width="12" Height="12" Data="M1.5,1.5 L1.5,10.5 L10.5,10.5 L10.5,1.5 Z" />
                             </Grid>
                           </Button>
                           <Button Command="{x:Static toms:WindowCommands.Restore}">
                             <Grid>
-                              <Path Width="12" Height="12" Data="M5.5,1.5 L10.5,1.5" />
-                              <Path Width="12" Height="12" Data="M4.5,0.5 L4.5,7.5 L11.5,7.5 L11.5,0.5" StrokeThickness="1" />
-                              <Path Width="12" Height="12" Data="M0,4 L8,4 L8,12 L0,12 Z" Fill="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" StrokeThickness="0" />
-                              <Path Width="12" Height="12" Data="M1.5,5.5 L6.5,5.5" />
-                              <Path Width="12" Height="12" Data="M0.5,4.5 L0.5,11.5 L7.5,11.5 L7.5,4.5" StrokeThickness="1" />
+                              <Path Width="12" Height="12" Data="M3.5,1.5 L3.5,8.5 L10.5,8.5 L10.5,1.5 Z" />
+                              <Path Width="12" Height="12" Data="M1.5,3.5 L1.5,10.5 L8.5,10.5 L8.5,3.5 Z" />
                             </Grid>
                           </Button>
                         </StackPanel>
                         <Button Command="{x:Static toms:WindowCommands.Close}" Tag="{x:Static toms:HitTest.Close}">
-                          <Path Width="12" Height="12" Data="M2,2 L10,10 M10,2 L2,10" />
+                          <Path Width="12" Height="12" Data="M1.5,1.5 L10.5,10.5 M10.5,1.5 L1.5,10.5" />
                         </Button>
                       </StackPanel>
                       <TextBlock DockPanel.Dock="Left" x:Name="Title" Text="{TemplateBinding Title}" VerticalAlignment="Center"

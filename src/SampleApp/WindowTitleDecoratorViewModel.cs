@@ -29,7 +29,14 @@
 
         private async void CheckForUpdate()
         {
-            UpdateLink = await TomsToolbox.GitHub.GitHubTasks.FindUpdate("tom-englert", "TomsToolbox");
+            try
+            {
+                UpdateLink = await TomsToolbox.GitHub.GitHubTasks.FindUpdate("tom-englert", "TomsToolbox");
+            }
+            catch
+            {
+                // API limit exceeded.
+            }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
