@@ -1,3 +1,6 @@
+##### 2.6.1
+- support net5.0-windows and netcoreapp3.1 targets
+
 ##### 2.5.5
 - Fix restore button image
 
