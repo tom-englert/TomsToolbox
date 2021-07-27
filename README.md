@@ -6,7 +6,7 @@ A set of core functions and classes to ease every days .Net development tasks.
 
 ----
 
-Version 2.x has been refactored to support netstandard2.0/netcoreapp3.1, which required some breaking changes with version 1.x, and dropping support for .Net frameworks < 4.5
+Version 2.x has been refactored to support netstandard2.0/netcoreapp3.1//net5.0-windows, which required some breaking changes with version 1.x, and dropping support for .Net frameworks < 4.5
 
 Sources of version 1.x can be found [here](https://github.com/tom-englert/TomsToolbox1)
 
@@ -20,5 +20,5 @@ Contains many extension methods, a WPF Composite MVVM framework, Controls etc...
 - Look at the sample apps to discover some of the use cases that this library can help you with.
 - Or download the source code to integrate the parts of interest with your own tool set.
 
-Powerd by&nbsp;&nbsp;&nbsp;<a href="http://www.jetbrains.com/resharper/"><img src="http://www.tom-englert.de/Images/icon_ReSharper.png" alt="ReSharper" width="64" height="64" /></a></p>
+Powered by&nbsp;&nbsp;&nbsp;<a href="http://www.jetbrains.com/resharper/"><img src="http://www.tom-englert.de/Images/icon_ReSharper.png" alt="ReSharper" width="64" height="64" /></a></p>
 <p>Support this Project: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TQQR8AKGNHELQ&source=url"> <img style="border: none; margin-bottom: -6px;" title="Donate" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" alt="Donate" /></a></p>
