@@ -3,7 +3,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net462;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net462;netcoreapp3.1;net5.0-windows</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <UseWPF>true</UseWPF>
     <Tags>Sample</Tags>
