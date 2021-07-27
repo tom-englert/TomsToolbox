@@ -6,7 +6,7 @@ A set of core functions and classes to ease every days .Net development tasks.
 
 ----
 
-Version 2.x has been refactored to support netstandard2.0/netcoreapp3.0, which required some breaking changes with version 1.x, and dropping support for .Net frameworks < 4.5
+Version 2.x has been refactored to support netstandard2.0/netcoreapp3.1, which required some breaking changes with version 1.x, and dropping support for .Net frameworks < 4.5
 
 Sources of version 1.x can be found [here](https://github.com/tom-englert/TomsToolbox1)
 
