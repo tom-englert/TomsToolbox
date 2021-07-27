@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ILMerge.Fody" Version="1.13.0" PrivateAssets="All" />
-    <PackageReference Include="Octokit" Version="0.48.0" />
+    <PackageReference Include="ILMerge.Fody" Version="1.16.0" PrivateAssets="All" />
+    <PackageReference Include="Octokit" Version="0.50.0" />
   </ItemGroup>
 
   <ItemGroup>
