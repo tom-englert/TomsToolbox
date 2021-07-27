@@ -295,6 +295,7 @@
         /// <summary>
         /// Aborts this instance.
         /// </summary>
+        [Obsolete("'Thread.Abort()' is obsolete: 'Thread.Abort is not supported and throws PlatformNotSupportedException.'")]
         public void Abort()
         {
             _thread.Abort();

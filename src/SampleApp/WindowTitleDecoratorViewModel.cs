@@ -6,6 +6,7 @@
     using System.Reflection;
     using System.Windows.Input;
 
+    using TomsToolbox.Essentials;
     using TomsToolbox.Wpf;
 
     [Export]
@@ -24,6 +25,9 @@
 
         private void HyperlinkClick()
         {
+            if (UpdateLink.IsNullOrEmpty())
+                return;
+
             Process.Start(new ProcessStartInfo(UpdateLink) { UseShellExecute = true });
         }
 

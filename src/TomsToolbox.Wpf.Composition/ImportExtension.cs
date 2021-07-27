@@ -104,7 +104,7 @@
         [CanBeNull]
         public override object? ProvideValue(IServiceProvider serviceProvider)
         {
-            var rootObjectProvider = (IRootObjectProvider)serviceProvider.GetService(typeof(IRootObjectProvider));
+            var rootObjectProvider = (IRootObjectProvider?)serviceProvider.GetService(typeof(IRootObjectProvider));
             if (rootObjectProvider == null)
             {
                 VisualComposition.OnError(this, $"Import: Service {nameof(IRootObjectProvider)} unavailable.");
@@ -120,7 +120,7 @@
 
             if (AllowRecomposition)
             {
-                var provideValueTarget = (IProvideValueTarget)serviceProvider.GetService(typeof(IProvideValueTarget));
+                var provideValueTarget = (IProvideValueTarget?)serviceProvider.GetService(typeof(IProvideValueTarget));
                 if (provideValueTarget != null)
                 {
                     _targetObject = provideValueTarget.TargetObject;

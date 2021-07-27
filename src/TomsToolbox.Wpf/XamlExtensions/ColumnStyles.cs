@@ -63,7 +63,9 @@
             if (args.Action != NotifyCollectionChangedAction.Add)
                 return;
 
-            var column = (DataGridColumn)args.NewItems[0]!;
+            var column = args.NewItems?.OfType<DataGridColumn>().FirstOrDefault();
+            if (column == null)
+                return;
 
             ApplyStyle(styles, column);
         }

@@ -81,7 +81,7 @@
   </member>
   <member name="M:TomsToolbox.Desktop.UserAccountControl.IsCurrentUserInGroup(System.String)">
     <parameter name="groupName">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.UserAccountControl.IsUserInAdminGroup(TomsToolbox.Desktop.SafeTokenHandle)">
@@ -94,7 +94,7 @@
       <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
     <parameter name="groupName">
-      <attribute ctor="M:JetBrains.Annotations.CanBeNullAttribute.#ctor" />
+      <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     </parameter>
   </member>
   <member name="M:TomsToolbox.Desktop.UserAccountControl.LogOnInteractiveUser(System.Net.NetworkCredential,TomsToolbox.Desktop.SafeTokenHandle@)">

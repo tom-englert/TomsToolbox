@@ -91,7 +91,7 @@
                 return _command.CanExecute(parameter);
             }
 
-            public event EventHandler CanExecuteChanged
+            public event EventHandler? CanExecuteChanged
             {
                 add => _command.CanExecuteChanged += value;
                 remove => _command.CanExecuteChanged -= value;

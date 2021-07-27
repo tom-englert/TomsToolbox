@@ -208,9 +208,9 @@
         /// </summary>
         /// <param name="groupName">Name of the group.</param>
         /// <returns>
-        /// <c>true</c> if the user blongs to the specified group; otherwise <c>false</c>
+        /// <c>true</c> if the user belongs to the specified group; otherwise <c>false</c>
         /// </returns>
-        public static bool IsCurrentUserInGroup([CanBeNull] string? groupName)
+        public static bool IsCurrentUserInGroup([NotNull] string groupName)
         {
             using (var id = WindowsIdentity.GetCurrent())
             {
@@ -228,7 +228,7 @@
         /// <returns>
         /// <c>true</c> if the user blongs to the specified group; otherwise <c>false</c>
         /// </returns>
-        public static bool IsUserInGroup([NotNull] SafeTokenHandle userToken, [CanBeNull] string? groupName)
+        public static bool IsUserInGroup([NotNull] SafeTokenHandle userToken, [NotNull] string groupName)
         {
             var token = userToken.DangerousGetHandle();
             if (token == IntPtr.Zero)

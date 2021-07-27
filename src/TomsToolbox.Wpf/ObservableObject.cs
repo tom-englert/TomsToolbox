@@ -233,9 +233,9 @@
         [NotNull]
         private IDictionary<string, IEnumerable<string>> DependencyMapping => _dependencyMapping ??= _dependencyMappingCache[GetType()];
 
-        private void RelaySource_PropertyChanged([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
+        private void RelaySource_PropertyChanged(object? sender, [NotNull] PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == null)
+            if (sender == null || e.PropertyName == null)
                 return;
 
             var sourceType = sender.GetType();
@@ -336,7 +336,7 @@
 
         bool INotifyDataErrorInfo.HasErrors => InternalGetDataErrors(null).Any();
 
-        event EventHandler<DataErrorsChangedEventArgs> INotifyDataErrorInfo.ErrorsChanged
+        event EventHandler<DataErrorsChangedEventArgs>? INotifyDataErrorInfo.ErrorsChanged
         {
             add => ErrorsChanged += value;
             remove => ErrorsChanged -= value;

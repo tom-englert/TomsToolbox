@@ -118,7 +118,7 @@
         /// The event is forwarded to the <see cref="CommandManager"/>, so visuals bound to the delegate command will be updated
         /// in sync with the system. To explicitly refresh all visuals call CommandManager.InvalidateRequerySuggested();
         /// </remarks>
-        public event EventHandler CanExecuteChanged
+        public event EventHandler? CanExecuteChanged
         {
             add => CommandManager.RequerySuggested += value;
             remove => CommandManager.RequerySuggested -= value;

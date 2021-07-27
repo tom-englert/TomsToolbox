@@ -229,7 +229,7 @@
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void OnPropertyChanged([CanBeNull] PropertyChangedEventArgs? e)
+        private void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(this, e);
         }
@@ -239,17 +239,17 @@
         /// </summary>
         public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
-        private void OnCollectionChanged([CanBeNull] NotifyCollectionChangedEventArgs? e)
+        private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
             CollectionChanged?.Invoke(this, e);
         }
 
-        private void CollectionView_PropertyChanged([CanBeNull] object? sender, [CanBeNull] PropertyChangedEventArgs? e)
+        private void CollectionView_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e);
         }
 
-        private void CollectionView_CollectionChanged([CanBeNull] object? sender, [CanBeNull] NotifyCollectionChangedEventArgs? e)
+        private void CollectionView_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             OnCollectionChanged(e);
         }

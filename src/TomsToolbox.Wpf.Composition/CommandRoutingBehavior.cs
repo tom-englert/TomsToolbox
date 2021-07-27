@@ -309,7 +309,7 @@
                    && CommandTarget.CanExecute(CommandParameter);
         }
 
-        event EventHandler ICommand.CanExecuteChanged
+        event EventHandler? ICommand.CanExecuteChanged
         {
             add => CommandTarget.CanExecuteChanged += value;
             remove => CommandTarget.CanExecuteChanged -= value;

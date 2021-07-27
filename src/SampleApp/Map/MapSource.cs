@@ -33,7 +33,7 @@
         {
             using (var stream = File.OpenRead(fileName))
             {
-                return (MapSourceFile)_serializer.Deserialize(stream) ?? new MapSourceFile();
+                return (MapSourceFile?)_serializer.Deserialize(stream) ?? new MapSourceFile();
             }
         }
 

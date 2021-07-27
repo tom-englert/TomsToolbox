@@ -269,9 +269,9 @@
                 private set;
             }
 
-            private void SourceSelection_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+            private void SourceSelection_CollectionChanged([NotNull] object? sender, [NotNull] NotifyCollectionChangedEventArgs e)
             {
-                if (IsUpdating)
+                if (IsUpdating || sender == null)
                     return;
 
                 IsUpdating = true;
@@ -282,8 +282,8 @@
 
                     var selectedItems = _selector.GetSelectedItems();
 
-                    var itemsToSelect = e.NewItems;
-                    var itemsToDeselect = e.OldItems;
+                    var itemsToSelect = e.NewItems!;
+                    var itemsToDeselect = e.OldItems!;
 
                     switch (e.Action)
                     {

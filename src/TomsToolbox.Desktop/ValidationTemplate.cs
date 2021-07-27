@@ -44,7 +44,7 @@
             target.PropertyChanged += Validate;
         }
 
-        private void Validate([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
+        private void Validate(object? sender, [NotNull] PropertyChangedEventArgs e)
         {
             _validationResults = new List<ValidationResult>();
 
