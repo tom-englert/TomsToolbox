@@ -1,3 +1,6 @@
+##### 2.7.0
+- Use C#9, migrate Nullable annotations, drop JetBrains.Annotations for nullability
+
 ##### 2.6.1
 - support net5.0-windows and netcoreapp3.1 targets
 
