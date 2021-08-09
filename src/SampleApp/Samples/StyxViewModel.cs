@@ -3,8 +3,6 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using AVL.Styx;
-
     using PropertyChanged;
 
     using TomsToolbox.Wpf.Composition.AttributedModel;

@@ -9,8 +9,6 @@
     using System.Windows.Input;
     using System.Windows.Markup;
 
-    using JetBrains.Annotations;
-
     using Microsoft.Xaml.Behaviors;
 
     using TomsToolbox.Essentials;
@@ -77,17 +75,16 @@
         /// </summary>
         /// <param name="obj">The object the inputBindings are attached to.</param>
         /// <returns>The inputBindings.</returns>
-        [CanBeNull]
-        public static InputBindingTemplate? GetInputBindings([NotNull] DependencyObject obj)
+        public static InputBindingTemplate? GetInputBindings(DependencyObject obj)
         {
-            return (InputBindingTemplate)obj.GetValue(InputBindingsProperty);
+            return (InputBindingTemplate?)obj.GetValue(InputBindingsProperty);
         }
         /// <summary>
         /// Sets the inputBindings attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.InputBindings"/> attached property.
         /// </summary>
         /// <param name="obj">The object the inputBindings are attached to.</param>
         /// <param name="value">The inputBindings to attach.</param>
-        public static void SetInputBindings([NotNull] DependencyObject obj, [CanBeNull] InputBindingTemplate? value)
+        public static void SetInputBindings(DependencyObject obj, InputBindingTemplate? value)
         {
             obj.SetValue(InputBindingsProperty, value);
         }
@@ -111,10 +108,10 @@
         /// ]]>
         /// </code></example>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty InputBindingsProperty =
+        public static readonly DependencyProperty InputBindingsProperty =
             DependencyProperty.RegisterAttached("InputBindings", typeof(InputBindingTemplate), typeof(StyleBindings), new FrameworkPropertyMetadata((d, e) => InputBindings_Changed(d, (InputBindingTemplate)e.NewValue)));
 
-        private static void InputBindings_Changed([CanBeNull] DependencyObject? d, [CanBeNull] UIElement? newValue)
+        private static void InputBindings_Changed(DependencyObject? d, UIElement? newValue)
         {
             if (newValue == null)
                 return;
@@ -134,17 +131,16 @@
         /// </summary>
         /// <param name="obj">The object the group style is attached to.</param>
         /// <returns>The group styles.</returns>
-        [CanBeNull, ItemNotNull]
-        public static GroupStyleCollection? GetGroupStyles([NotNull] DependencyObject obj)
+        public static GroupStyleCollection? GetGroupStyles(DependencyObject obj)
         {
-            return (GroupStyleCollection)obj.GetValue(GroupStylesProperty);
+            return (GroupStyleCollection?)obj.GetValue(GroupStylesProperty);
         }
         /// <summary>
         /// Sets the group style attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.GroupStyles"/> attached property.
         /// </summary>
         /// <param name="obj">The object the group style is attached to.</param>
         /// <param name="value">The group styles.</param>
-        public static void SetGroupStyles([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] GroupStyleCollection? value)
+        public static void SetGroupStyles(DependencyObject obj, GroupStyleCollection? value)
         {
             obj.SetValue(GroupStylesProperty, value);
         }
@@ -169,10 +165,10 @@
         /// ]]>
         /// </code></example>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty GroupStylesProperty =
+        public static readonly DependencyProperty GroupStylesProperty =
             DependencyProperty.RegisterAttached("GroupStyles", typeof(GroupStyleCollection), typeof(StyleBindings), new FrameworkPropertyMetadata(GroupStyles_Changed));
 
-        private static void GroupStyles_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
+        private static void GroupStyles_Changed(DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
             var groupStyle = (d as ItemsControl)?.GroupStyle;
 
@@ -193,17 +189,16 @@
         /// </summary>
         /// <param name="obj">The object the group style is attached to.</param>
         /// <returns>The group style.</returns>
-        [CanBeNull]
-        public static GroupStyle? GetGroupStyle([NotNull] DependencyObject obj)
+        public static GroupStyle? GetGroupStyle(DependencyObject obj)
         {
-            return (GroupStyle)obj.GetValue(GroupStyleProperty);
+            return (GroupStyle?)obj.GetValue(GroupStyleProperty);
         }
         /// <summary>
         /// Sets the group style attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.GroupStyle"/> attached property.
         /// </summary>
         /// <param name="obj">The object the group style is attached to.</param>
         /// <param name="value">The group style.</param>
-        public static void SetGroupStyle([NotNull] DependencyObject obj, [CanBeNull] GroupStyle? value)
+        public static void SetGroupStyle(DependencyObject obj, GroupStyle? value)
         {
             obj.SetValue(GroupStyleProperty, value);
         }
@@ -227,11 +222,10 @@
         /// ]]>
         /// </code></example>
         /// </AttachedPropertyComments>
-        [NotNull]
         public static readonly DependencyProperty GroupStyleProperty =
             DependencyProperty.RegisterAttached("GroupStyle", typeof(GroupStyle), typeof(StyleBindings), new FrameworkPropertyMetadata(GroupStyle_Changed));
 
-        private static void GroupStyle_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
+        private static void GroupStyle_Changed(DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
             var groupStyle = (d as ItemsControl)?.GroupStyle;
 
@@ -251,17 +245,16 @@
         /// </summary>
         /// <param name="obj">The object the group descriptions are attached to.</param>
         /// <returns>The group descriptions.</returns>
-        [CanBeNull, ItemNotNull]
-        public static GroupDescriptionCollection? GetGroupDescriptions([NotNull] DependencyObject obj)
+        public static GroupDescriptionCollection? GetGroupDescriptions(DependencyObject obj)
         {
-            return (GroupDescriptionCollection)obj.GetValue(GroupDescriptionsProperty);
+            return (GroupDescriptionCollection?)obj.GetValue(GroupDescriptionsProperty);
         }
         /// <summary>
         /// Sets the group descriptions attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.GroupDescriptions"/> attached property.
         /// </summary>
         /// <param name="obj">The object the group descriptions are attached to.</param>
         /// <param name="value">The group descriptions.</param>
-        public static void SetGroupDescriptions([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] ICollection<GroupDescription>? value)
+        public static void SetGroupDescriptions(DependencyObject obj, ICollection<GroupDescription>? value)
         {
             obj.SetValue(GroupDescriptionsProperty, value);
         }
@@ -284,10 +277,10 @@
         /// ]]>
         /// </code></example>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty GroupDescriptionsProperty =
+        public static readonly DependencyProperty GroupDescriptionsProperty =
             DependencyProperty.RegisterAttached("GroupDescriptions", typeof(GroupDescriptionCollection), typeof(StyleBindings), new FrameworkPropertyMetadata(GroupDescriptions_Changed));
 
-        private static void GroupDescriptions_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
+        private static void GroupDescriptions_Changed(DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
             var groupDescriptions = (d as ItemsControl)?.Items.GroupDescriptions;
 
@@ -308,17 +301,16 @@
         /// </summary>
         /// <param name="obj">The object the behaviors are attached to.</param>
         /// <returns>The behaviors.</returns>
-        [CanBeNull, ItemNotNull]
-        public static BehaviorCollection? GetBehaviors([NotNull] DependencyObject obj)
+        public static BehaviorCollection? GetBehaviors(DependencyObject obj)
         {
-            return (BehaviorCollection)obj.GetValue(BehaviorsProperty);
+            return (BehaviorCollection?)obj.GetValue(BehaviorsProperty);
         }
         /// <summary>
         /// Sets the behaviors attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.Behaviors"/> attached property.
         /// </summary>
         /// <param name="obj">The object the behaviors are attached to.</param>
         /// <param name="value">The behaviors to attach.</param>
-        public static void SetBehaviors([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] BehaviorCollection? value)
+        public static void SetBehaviors(DependencyObject obj, BehaviorCollection? value)
         {
             obj.SetValue(BehaviorsProperty, value);
         }
@@ -341,10 +333,10 @@
         /// ]]>
         /// </code></example>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty BehaviorsProperty =
+        public static readonly DependencyProperty BehaviorsProperty =
             DependencyProperty.RegisterAttached("Behaviors", typeof(BehaviorCollection), typeof(StyleBindings), new UIPropertyMetadata((d, e) => Behaviors_Changed(d, (BehaviorCollection)e.NewValue)));
 
-        private static void Behaviors_Changed([CanBeNull] DependencyObject? d, [CanBeNull, ItemNotNull] IEnumerable<Behavior>? newValue)
+        private static void Behaviors_Changed(DependencyObject? d, IEnumerable<Behavior>? newValue)
         {
             if (newValue != null)
             {
@@ -359,17 +351,16 @@
         /// </summary>
         /// <param name="obj">The object the triggers are attached to.</param>
         /// <returns>The triggers.</returns>
-        [CanBeNull, ItemNotNull]
-        public static TriggerCollection? GetTriggers([NotNull] DependencyObject obj)
+        public static TriggerCollection? GetTriggers(DependencyObject obj)
         {
-            return (TriggerCollection)obj.GetValue(TriggersProperty);
+            return (TriggerCollection?)obj.GetValue(TriggersProperty);
         }
         /// <summary>
         /// Sets the triggers attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.Triggers"/> attached property.
         /// </summary>
         /// <param name="obj">The obj.</param>
         /// <param name="value">The value.</param>
-        public static void SetTriggers([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] TriggerCollection? value)
+        public static void SetTriggers(DependencyObject obj, TriggerCollection? value)
         {
             obj.SetValue(TriggersProperty, value);
         }
@@ -396,10 +387,10 @@
         /// ]]>
         /// </code></example>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty TriggersProperty =
+        public static readonly DependencyProperty TriggersProperty =
             DependencyProperty.RegisterAttached("Triggers", typeof(TriggerCollection), typeof(StyleBindings), new UIPropertyMetadata((d, e) => Triggers_Changed(d, (TriggerCollection)e.NewValue)));
 
-        private static void Triggers_Changed([CanBeNull] DependencyObject? d, [CanBeNull, ItemNotNull] IEnumerable<TriggerBase>? newValue)
+        private static void Triggers_Changed(DependencyObject? d, IEnumerable<TriggerBase>? newValue)
         {
             if (newValue != null)
             {
@@ -415,17 +406,16 @@
         /// </summary>
         /// <param name="obj">The object the column definitions are attached to.</param>
         /// <returns>The column definitions.</returns>
-        [CanBeNull, ItemNotNull]
-        public static ColumnDefinitionCollection? GetColumnDefinitions([NotNull] DependencyObject obj)
+        public static ColumnDefinitionCollection? GetColumnDefinitions(DependencyObject obj)
         {
-            return (ColumnDefinitionCollection)obj.GetValue(ColumnDefinitionsProperty);
+            return (ColumnDefinitionCollection?)obj.GetValue(ColumnDefinitionsProperty);
         }
         /// <summary>
         /// Sets the columnDefinitions attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.ColumnDefinitions"/> attached property.
         /// </summary>
         /// <param name="obj">The obj.</param>
         /// <param name="value">The value.</param>
-        public static void SetColumnDefinitions([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] ColumnDefinitionCollection? value)
+        public static void SetColumnDefinitions(DependencyObject obj, ColumnDefinitionCollection? value)
         {
             obj.SetValue(ColumnDefinitionsProperty, value);
         }
@@ -450,11 +440,10 @@
         /// ]]>
         /// </code></example>
         /// </AttachedPropertyComments>
-        [NotNull]
         public static readonly DependencyProperty ColumnDefinitionsProperty =
             DependencyProperty.RegisterAttached("ColumnDefinitionCollection", typeof(ColumnDefinitionCollection), typeof(StyleBindings), new FrameworkPropertyMetadata(ColumnDefinitions_Changed));
 
-        private static void ColumnDefinitions_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
+        private static void ColumnDefinitions_Changed(DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
             var columnDefinitions = (d as Grid)?.ColumnDefinitions;
 
@@ -485,17 +474,16 @@
         /// </summary>
         /// <param name="obj">The object the row definitions are attached to.</param>
         /// <returns>The row definitions.</returns>
-        [CanBeNull, ItemNotNull]
-        public static RowDefinitionCollection? GetRowDefinitions([NotNull] DependencyObject obj)
+        public static RowDefinitionCollection? GetRowDefinitions(DependencyObject obj)
         {
-            return (RowDefinitionCollection)obj.GetValue(RowDefinitionsProperty);
+            return (RowDefinitionCollection?)obj.GetValue(RowDefinitionsProperty);
         }
         /// <summary>
         /// Sets the row definitions attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.RowDefinitions"/> attached property.
         /// </summary>
         /// <param name="obj">The obj.</param>
         /// <param name="value">The value.</param>
-        public static void SetRowDefinitions([NotNull] DependencyObject obj, [CanBeNull, ItemNotNull] RowDefinitionCollection? value)
+        public static void SetRowDefinitions(DependencyObject obj, RowDefinitionCollection? value)
         {
             obj.SetValue(RowDefinitionsProperty, value);
         }
@@ -520,11 +508,10 @@
         /// ]]>
         /// </code></example>
         /// </AttachedPropertyComments>
-        [NotNull]
         public static readonly DependencyProperty RowDefinitionsProperty =
             DependencyProperty.RegisterAttached("RowDefinitionCollection", typeof(RowDefinitionCollection), typeof(StyleBindings), new FrameworkPropertyMetadata(RowDefinitions_Changed));
 
-        private static void RowDefinitions_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
+        private static void RowDefinitions_Changed(DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
             var rowDefinitions = (d as Grid)?.RowDefinitions;
 

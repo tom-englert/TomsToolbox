@@ -7,8 +7,6 @@
     using System.Windows.Media;
     using System.Windows.Threading;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -20,7 +18,7 @@
         /// Waits until all pending messages up to the <see cref="DispatcherPriority.Background"/> priority are processed.
         /// </summary>
         /// <param name="visual">The dispatcher object to wait on.</param>
-        public static void ProcessMessages([NotNull] this Visual visual)
+        public static void ProcessMessages(this Visual visual)
         {
             ProcessMessages(visual, DispatcherPriority.Background);
         }
@@ -30,7 +28,7 @@
         /// </summary>
         /// <param name="visual">The dispatcher object to wait on.</param>
         /// <param name="priority">The priority up to which all messages should be processed.</param>
-        public static void ProcessMessages([NotNull] this Visual visual, DispatcherPriority priority)
+        public static void ProcessMessages(this Visual visual, DispatcherPriority priority)
         {
             var dispatcher = visual.Dispatcher;
 
@@ -41,7 +39,7 @@
         /// Waits until all pending messages up to the <see cref="DispatcherPriority.Background"/> priority are processed.
         /// </summary>
         /// <param name="dispatcher">The dispatcher to wait on.</param>
-        public static void ProcessMessages([NotNull] this Dispatcher dispatcher)
+        public static void ProcessMessages(this Dispatcher dispatcher)
         {
             ProcessMessages(dispatcher, DispatcherPriority.Background);
         }
@@ -51,7 +49,7 @@
         /// </summary>
         /// <param name="dispatcher">The dispatcher to wait on.</param>
         /// <param name="priority">The priority up to which all messages should be processed.</param>
-        public static void ProcessMessages([NotNull] this Dispatcher dispatcher, DispatcherPriority priority)
+        public static void ProcessMessages(this Dispatcher dispatcher, DispatcherPriority priority)
         {
             var frame = new DispatcherFrame();
             dispatcher.BeginInvoke(priority, () => frame.Continue = false);
@@ -75,7 +73,7 @@
         /// <param name="from">The visual for which the rectangle coordinates are specified.</param>
         /// <param name="to">The visual to which the rectangle coordinates are translated.</param>
         /// <returns>The translated rectangle</returns>
-        public static Rect Translate(this Rect rect, [NotNull] Visual from, [NotNull] Visual to)
+        public static Rect Translate(this Rect rect, Visual from, Visual to)
         {
             var transform = from.TransformToVisual(to);
 
@@ -90,7 +88,7 @@
         /// <param name="from">The visual for which the point coordinates are specified.</param>
         /// <param name="to">The visual to which the point coordinates are translated.</param>
         /// <returns>The translated point</returns>
-        public static Point Translate(this Point point, [NotNull] UIElement from, [NotNull] UIElement to)
+        public static Point Translate(this Point point, UIElement from, UIElement to)
         {
             return from.TranslatePoint(point, to);
         }
@@ -100,7 +98,7 @@
         /// </summary>
         /// <param name="self">The framework element for which to retrieve the client rectangle.</param>
         /// <returns>The client rectangle</returns>
-        public static Rect GetClientRect([NotNull] this FrameworkElement self)
+        public static Rect GetClientRect(this FrameworkElement self)
         {
             return new Rect(0, 0, self.ActualWidth, self.ActualHeight);
         }
@@ -113,7 +111,7 @@
         /// <returns>
         /// The client rectangle relative to the visual.
         /// </returns>
-        public static Rect GetClientRect([NotNull] this FrameworkElement self, [NotNull] Visual relativeTo)
+        public static Rect GetClientRect(this FrameworkElement self, Visual relativeTo)
         {
             return self.GetClientRect().Translate(self, relativeTo);
         }
@@ -123,7 +121,7 @@
         /// </summary>
         /// <param name="self">The framework element for which to retrieve the extent.</param>
         /// <returns>The extent.</returns>
-        public static Size GetExtent([NotNull] this FrameworkElement self)
+        public static Size GetExtent(this FrameworkElement self)
         {
             return new Size(self.ActualWidth, self.ActualHeight);
         }
@@ -136,7 +134,7 @@
         /// <returns>
         /// The extent relative to the visual.
         /// </returns>
-        public static Size GetExtent([NotNull] this FrameworkElement self, [NotNull] FrameworkElement relativeTo)
+        public static Size GetExtent(this FrameworkElement self, FrameworkElement relativeTo)
         {
             return (Size)self.TranslatePoint(new Point(self.ActualWidth, self.ActualHeight), relativeTo);
         }
@@ -147,7 +145,7 @@
         /// <param name="self">The framework element used to get the presentation source.</param>
         /// <returns>The physical size of one pixel in design units.</returns>
         /// <exception cref="System.ArgumentException">The framework element is not loaded in the visual tree.</exception>
-        public static Size GetPhysicalPixelSize([NotNull] this FrameworkElement self)
+        public static Size GetPhysicalPixelSize(this FrameworkElement self)
         {
             var source = PresentationSource.FromVisual(self);
 
@@ -172,7 +170,7 @@
         /// <param name="self">The framework element used to get the presentation source.</param>
         /// <returns>The physical size of one design unit in pixels.</returns>
         /// <exception cref="System.ArgumentException">The framework element is not loaded in the visual tree.</exception>
-        public static Size GetDesignUnitSize([NotNull] this FrameworkElement self)
+        public static Size GetDesignUnitSize(this FrameworkElement self)
         {
             var source = PresentationSource.FromVisual(self);
 
@@ -197,8 +195,7 @@
         /// <param name="first">The base transformation.</param>
         /// <param name="others">The transformations to merge.</param>
         /// <returns>The merged transformation.</returns>
-        [NotNull]
-        public static GeneralTransform MergeWith([NotNull] this GeneralTransform first, [NotNull, ItemNotNull] params GeneralTransform[] others)
+        public static GeneralTransform MergeWith(this GeneralTransform first, params GeneralTransform[] others)
         {
             var transformGroup = new GeneralTransformGroup();
             var children = transformGroup.Children;
@@ -218,8 +215,7 @@
         /// <param name="frameworkElement">The framework element.</param>
         /// <param name="property">The property to track.</param>
         /// <returns>The object providing the changed event.</returns>
-        [NotNull]
-        public static INotifyChanged ChangeTracker<T>([NotNull] this T frameworkElement, [NotNull] DependencyProperty property)
+        public static INotifyChanged ChangeTracker<T>(this T frameworkElement, DependencyProperty property)
             where T : FrameworkElement
         {
             return new DependencyPropertyEventWrapper<T>(frameworkElement, property);
@@ -228,14 +224,11 @@
         private class DependencyPropertyEventWrapper<T> : INotifyChanged
             where T : FrameworkElement
         {
-            [NotNull]
             private readonly T _frameworkElement;
-            [NotNull]
             private readonly DependencyPropertyDescriptor _dependencyPropertyDescriptor;
-            [NotNull, ItemNotNull]
-            private readonly HashSet<EventHandler> _eventHandlers = new HashSet<EventHandler>();
+            private readonly HashSet<EventHandler> _eventHandlers = new();
 
-            public DependencyPropertyEventWrapper([NotNull] T frameworkElement, [NotNull] DependencyProperty property)
+            public DependencyPropertyEventWrapper(T frameworkElement, DependencyProperty property)
             {
                 _frameworkElement = frameworkElement;
                 _dependencyPropertyDescriptor = DependencyPropertyDescriptor.FromProperty(property, typeof(T));
@@ -267,7 +260,7 @@
                 remove => Unsubscribe(value);
             }
 
-            private void Subscribe([CanBeNull] EventHandler? value)
+            private void Subscribe(EventHandler? value)
             {
                 if (value == null)
                     return;
@@ -283,7 +276,7 @@
                 _dependencyPropertyDescriptor.AddValueChanged(_frameworkElement, value);
             }
 
-            private void Unsubscribe([CanBeNull] EventHandler? value)
+            private void Unsubscribe(EventHandler? value)
             {
                 if (value == null)
                     return;

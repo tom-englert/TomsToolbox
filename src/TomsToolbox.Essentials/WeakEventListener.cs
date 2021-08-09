@@ -3,8 +3,6 @@
     using System;
     using System.Reflection;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Common interface for weak event listener.
     /// </summary>
@@ -30,32 +28,27 @@
         /// <summary>
         /// WeakReference to the object listening for the event.
         /// </summary>
-        [NotNull]
         private readonly WeakReference<TTarget> _weakTarget;
 
         /// <summary>
         /// To hold only a reference to source object. With this instance the WeakEventListener
         /// can guarantee that the handler gets unregistered when listener is released but does not reference the source.
         /// </summary>
-        [CanBeNull]
         private readonly WeakReference<TSource>? _weakSource;
         /// <summary>
         /// To hold a reference to source object. With this instance the WeakEventListener
         /// can guarantee that the handler gets unregistered when listener is released.
         /// </summary>
-        [CanBeNull]
         private readonly TSource? _source;
 
         /// <summary>
         /// Delegate to the method to call when the event fires.
         /// </summary>
-        [NotNull]
         private readonly Action<TTarget, object, TEventArgs> _onEventAction;
 
         /// <summary>
         /// Delegate to the method to call when detaching from the event.
         /// </summary>
-        [NotNull]
         private readonly Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> _onDetachAction;
 
         /// <summary>
@@ -66,10 +59,10 @@
         /// <param name="onEventAction">The static method to call when a event is received.</param>
         /// <param name="onAttachAction">The static action to attach to the event(s).</param>
         /// <param name="onDetachAction">The static action to detach from the event(s).</param>
-        public WeakEventListener([NotNull] TTarget target, [NotNull] TSource source,
-            [NotNull] Action<TTarget, object, TEventArgs> onEventAction,
-            [NotNull] Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onAttachAction,
-            [NotNull] Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onDetachAction)
+        public WeakEventListener(TTarget target, TSource source,
+            Action<TTarget, object, TEventArgs> onEventAction,
+            Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onAttachAction,
+            Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onDetachAction)
         {
             if (!onEventAction.GetMethodInfo().IsStatic || !onAttachAction.GetMethodInfo().IsStatic || !onDetachAction.GetMethodInfo().IsStatic)
                 throw new ArgumentException("Methods must be static, otherwise the event WeakEventListener class does not prevent memory leaks.");
@@ -90,10 +83,10 @@
         /// <param name="onEventAction">The static method to call when a event is received.</param>
         /// <param name="onAttachAction">The static action to attach to the event(s).</param>
         /// <param name="onDetachAction">The static action to detach from the event(s).</param>
-        public WeakEventListener([NotNull] TTarget target, [NotNull] WeakReference<TSource> source,
-            [NotNull] Action<TTarget, object, TEventArgs> onEventAction,
-            [NotNull] Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onAttachAction,
-            [NotNull] Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onDetachAction)
+        public WeakEventListener(TTarget target, WeakReference<TSource> source,
+            Action<TTarget, object, TEventArgs> onEventAction,
+            Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onAttachAction,
+            Action<WeakEventListener<TTarget, TSource, TEventArgs>, TSource> onDetachAction)
         {
             if (!onEventAction.GetMethodInfo().IsStatic || !onAttachAction.GetMethodInfo().IsStatic || !onDetachAction.GetMethodInfo().IsStatic)
                 throw new ArgumentException("Methods must be static, otherwise the event WeakEventListener class does not prevent memory leaks.");
@@ -114,7 +107,7 @@
         /// </summary>
         /// <param name="source">Event source.</param>
         /// <param name="eventArgs">Event arguments.</param>
-        public void OnEvent([NotNull] object source, [NotNull] TEventArgs eventArgs)
+        public void OnEvent(object source, TEventArgs eventArgs)
         {
             if (_weakTarget.TryGetTarget(out var target))
             {

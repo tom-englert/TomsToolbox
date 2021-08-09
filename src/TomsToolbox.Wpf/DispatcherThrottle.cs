@@ -4,8 +4,6 @@
     using System.Threading;
     using System.Windows.Threading;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Implements a simple throttle that uses the dispatcher to delay the target action.<para/>
     /// Calling <see cref="Tick()"/> multiple times will result in on single call to the action as soon as
@@ -13,9 +11,7 @@
     /// </summary>
     public class DispatcherThrottle
     {
-        [NotNull]
         private readonly Dispatcher _dispatcher = Dispatcher.CurrentDispatcher;
-        [NotNull]
         private readonly Action _target;
         private readonly DispatcherPriority _priority;
 
@@ -25,7 +21,7 @@
         /// Initializes a new instance of the <see cref="DispatcherThrottle"/> class.
         /// </summary>
         /// <param name="target">The target action to invoke when the throttle condition is hit.</param>
-        public DispatcherThrottle([NotNull] Action target)
+        public DispatcherThrottle(Action target)
             : this(DispatcherPriority.Normal, target)
         {
         }
@@ -35,7 +31,7 @@
         /// </summary>
         /// <param name="priority">The priority of the dispatcher.</param>
         /// <param name="target">The target action to invoke when the throttle condition is hit.</param>
-        public DispatcherThrottle(DispatcherPriority priority, [NotNull] Action target)
+        public DispatcherThrottle(DispatcherPriority priority, Action target)
         {
             _target = target;
             _priority = priority;

@@ -160,7 +160,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             {
                 var target = new ObservableFilteredCollection<TestObject>(source, s => (s.Value & 1) != 0, "Value");
 
-                target.CollectionChanged += (sender, args) => changeCount += 1;
+                target.CollectionChanged += (_, _) => changeCount += 1;
 
                 source.RemoveAt(4);
                 source.RemoveAt(4);

@@ -5,8 +5,6 @@
     using System.Collections.ObjectModel;
     using System.Linq;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A Dictionary like implementation that populates it's content on demand, i.e. calling indexer[key] will never return null.
     /// </summary>
@@ -14,16 +12,14 @@
     /// <typeparam name="TValue">The type of the value.</typeparam>
     public sealed class ObservableIndexer<TKey, TValue> : ReadOnlyObservableCollectionAdapter<KeyValuePair<TKey, TValue>, ObservableCollection<KeyValuePair<TKey, TValue>>>
     {
-        [NotNull]
         private readonly Func<TKey, TValue> _generator;
-        [NotNull]
         private Dictionary<TKey, int> _index;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObservableIndexer{TKey, TValue}"/> class.
         /// </summary>
         /// <param name="generator">The generator.</param>
-        public ObservableIndexer([NotNull] Func<TKey, TValue> generator)
+        public ObservableIndexer(Func<TKey, TValue> generator)
             : this(generator, null)
         {
         }
@@ -33,7 +29,7 @@
         /// </summary>
         /// <param name="generator">The generator.</param>
         /// <param name="comparer">The comparer.</param>
-        public ObservableIndexer([NotNull] Func<TKey, TValue> generator, [CanBeNull] IEqualityComparer<TKey>? comparer)
+        public ObservableIndexer(Func<TKey, TValue> generator, IEqualityComparer<TKey>? comparer)
             : base(new ObservableCollection<KeyValuePair<TKey, TValue>>())
         {
             _generator = generator;
@@ -50,8 +46,7 @@
         /// </returns>
         /// <exception cref="System.InvalidOperationException">The generator did not generate a valid item.</exception>
         /// <exception cref="System.ArgumentNullException"><paramref name="key" /> is null.</exception>
-        [NotNull]
-        public TValue this[[NotNull] TKey key]
+        public TValue this[TKey key]
         {
             get
             {
@@ -95,7 +90,6 @@
         /// <returns>
         /// The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> generic interface implementation that is used to determine equality of keys for the current <see cref="T:System.Collections.Generic.Dictionary`2"/> and to provide hash values for the keys.
         /// </returns>
-        [NotNull]
         public IEqualityComparer<TKey> Comparer => _index.Comparer;
 
         /// <summary>
@@ -105,7 +99,7 @@
         /// true if the element is successfully found and removed; otherwise, false.  This method returns false if <paramref name="key"/> is not found in the <see cref="T:System.Collections.Generic.Dictionary`2"/>.
         /// </returns>
         /// <param name="key">The key of the element to remove.</param><exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null.</exception>
-        public bool Remove([NotNull] TKey key)
+        public bool Remove(TKey key)
         {
             if (!_index.TryGetValue(key, out var index))
                 return false;

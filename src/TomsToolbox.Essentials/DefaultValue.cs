@@ -3,8 +3,6 @@
     using System;
     using System.Reflection;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Helper methods to get the default value for a type when the type is only available at runtime.
     /// </summary>
@@ -15,8 +13,7 @@
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The default value.</returns>
-        [CanBeNull]
-        public static object? CreateDefault([NotNull] Type type)
+        public static object? CreateDefault(Type type)
         {
             // every value type has a default constructor, default for reference types is always null
             return type.GetTypeInfo().IsValueType ? Activator.CreateInstance(type) : null;
@@ -35,8 +32,7 @@
         /// </remarks>
         /// <param name="type">The type.</param>
         /// <returns>The empty value.</returns>
-        [CanBeNull]
-        public static object? CreateEmpty([NotNull] Type type)
+        public static object? CreateEmpty(Type type)
         {
             return type == typeof(string) ? string.Empty : CreateDefault(type);
         }

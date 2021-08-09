@@ -11,8 +11,6 @@ namespace SampleApp.Mef1.Samples
     using System.Windows;
     using System.Windows.Input;
 
-    using JetBrains.Annotations;
-
     using PropertyChanged;
 
     using SampleApp.Mef1.Map;
@@ -25,9 +23,9 @@ namespace SampleApp.Mef1.Samples
     [AddINotifyPropertyChangedInterface]
     public class MapViewModel
     {
-        [NotNull] private static readonly string _configurationFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Map", "MapSources.xml");
+        private static readonly string _configurationFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Map", "MapSources.xml");
 
-        [NotNull] private readonly MapSourceFile _mapSourceFile;
+        private readonly MapSourceFile _mapSourceFile;
 
         public MapViewModel()
         {
@@ -43,20 +41,16 @@ namespace SampleApp.Mef1.Samples
             }
         }
 
-        [CanBeNull]
         public IList<MapSource>? MapSources => _mapSourceFile.MapSources;
 
-        [CanBeNull]
         public IImageProvider? ImageProvider { get; set; }
 
-        public Coordinates Center { get; set; } = new Coordinates(52.5075419, 13.4251364);
+        public Coordinates Center { get; set; } = new(52.5075419, 13.4251364);
 
         public Coordinates MousePosition { get; set; }
 
-        [CanBeNull]
         public Poi? SelectedPoi { get; set; }
 
-        [UsedImplicitly]
 #pragma warning disable IDE0051 // Remove unused private members
         private void OnSelectedPoiChanged()
 #pragma warning restore IDE0051 // Remove unused private members
@@ -68,14 +62,13 @@ namespace SampleApp.Mef1.Samples
             }
         }
 
-        [NotNull]
         public IList<Poi> Pois { get; } =  new ObservableCollection<Poi>
         {
-            new Poi {Coordinates = new Coordinates(52.3747158, 4.8986142), Description = "Amsterdam"},
-            new Poi {Coordinates = new Coordinates(52.5075419, 13.4251364), Description = "Berlin"},
-            new Poi {Coordinates = new Coordinates(55.749792, 37.632495), Description = "Moscow"},
-            new Poi {Coordinates = new Coordinates(40.7033127, -73.979681), Description = "New York"},
-            new Poi {Coordinates = new Coordinates(41.9100711, 12.5359979), Description = "Rome"},
+            new() {Coordinates = new Coordinates(52.3747158, 4.8986142), Description = "Amsterdam"},
+            new() {Coordinates = new Coordinates(52.5075419, 13.4251364), Description = "Berlin"},
+            new() {Coordinates = new Coordinates(55.749792, 37.632495), Description = "Moscow"},
+            new() {Coordinates = new Coordinates(40.7033127, -73.979681), Description = "New York"},
+            new() {Coordinates = new Coordinates(41.9100711, 12.5359979), Description = "Rome"},
         };
 
         public Rect Bounds { get; set; }
@@ -98,10 +91,8 @@ namespace SampleApp.Mef1.Samples
             // ReSharper restore UnusedVariable
         }
 
-        [NotNull]
         public ICommand ClearSelectionCommand => new DelegateCommand(() => !Selection.IsEmpty, () => Selection = Rect.Empty);
 
-        [NotNull]
         public ICommand MouseDoubleClickCommand => new DelegateCommand<Point>(p => Pois.Add(new Poi {Coordinates = p, Description = "New Poi"}));
 
         public override string ToString()

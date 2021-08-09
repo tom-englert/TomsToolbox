@@ -4,8 +4,6 @@
     using System.Windows.Input;
     using System.Windows.Threading;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Helper class to ease automatic display of the wait cursor.
     /// </summary>
@@ -16,7 +14,7 @@
         /// automatically resets the cursor to the default cursor when the dispatcher becomes idle again.
         /// </summary>
         /// <param name="frameworkElement">The element on which to set the cursor.</param>
-        public static void StartLocal([NotNull] FrameworkElement frameworkElement)
+        public static void StartLocal(FrameworkElement frameworkElement)
         {
             StartLocal(frameworkElement, DispatcherPriority.Background);
         }
@@ -27,7 +25,7 @@
         /// </summary>
         /// <param name="frameworkElement">The element on which to set the cursor.</param>
         /// <param name="priority">The dispatcher priority used for waiting.</param>
-        public static void StartLocal([NotNull] FrameworkElement frameworkElement, DispatcherPriority priority)
+        public static void StartLocal(FrameworkElement frameworkElement, DispatcherPriority priority)
         {
             if (frameworkElement.Cursor == Cursors.Wait)
                 return;
@@ -46,7 +44,7 @@
         /// <remarks>
         /// The root visual usually is the whole window, except for controls embedded in native or WindowsForms windows.
         /// </remarks>
-        public static void Start([NotNull] FrameworkElement frameworkElement)
+        public static void Start(FrameworkElement frameworkElement)
         {
             Start(frameworkElement, DispatcherPriority.Background);
         }
@@ -60,7 +58,7 @@
         /// <remarks>
         /// The root visual usually is the whole window, except for controls embedded in native or WindowsForms windows.
         /// </remarks>
-        public static void Start([NotNull] FrameworkElement frameworkElement, DispatcherPriority priority)
+        public static void Start(FrameworkElement frameworkElement, DispatcherPriority priority)
         {
             StartLocal(frameworkElement.GetRootVisual(), priority);
         }

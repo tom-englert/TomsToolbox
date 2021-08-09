@@ -4,8 +4,6 @@
     using System.Windows;
     using System.Windows.Controls;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A canvas that transforms the coordinates of it's children to the own visual before arranging them. 
     /// It is used to have an overlay of non-scaled object on top of a scaled object, where the coordinates of the overlay objects are expressed in the coordinate system 
@@ -19,16 +17,15 @@
         /// <summary>
         /// Gets or sets the physical layer. The children's coordinates are assumed to be relative to the physical layer.
         /// </summary>
-        [CanBeNull]
         public FrameworkElement? World
         {
-            get => (FrameworkElement)GetValue(WorldProperty);
+            get => (FrameworkElement?)GetValue(WorldProperty);
             set => SetValue(WorldProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="World"/> dependency property.
         /// </summary>
-        [NotNull] public static readonly DependencyProperty WorldProperty =
+        public static readonly DependencyProperty WorldProperty =
             DependencyProperty.Register("World", typeof(FrameworkElement), typeof(ViewportCanvas));
 
         /// <summary>

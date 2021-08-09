@@ -5,12 +5,8 @@
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Windows.Data;
-
-    using JetBrains.Annotations;
-    using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
 
     using TomsToolbox.Essentials;
     using TomsToolbox.ObservableCollections;
@@ -21,16 +17,13 @@
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
     public sealed class ListCollectionViewListAdapter<T> : IObservableCollection<T>, IList
     {
-        [NotNull, ItemCanBeNull]
-        private readonly ListCollectionView _collectionView;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ListCollectionViewListAdapter{T}"/> class.
         /// </summary>
         /// <param name="collectionView">The collection view.</param>
-        public ListCollectionViewListAdapter([NotNull, ItemCanBeNull] ListCollectionView collectionView)
+        public ListCollectionViewListAdapter(ListCollectionView collectionView)
         {
-            _collectionView = collectionView;
+            CollectionView = collectionView;
             ((INotifyCollectionChanged)collectionView).CollectionChanged += CollectionView_CollectionChanged;
             ((INotifyPropertyChanged)collectionView).PropertyChanged += CollectionView_PropertyChanged;
         }
@@ -38,8 +31,7 @@
         /// <summary>
         /// Gets the underlying collection view.
         /// </summary>
-        [NotNull, ItemCanBeNull]
-        public ListCollectionView CollectionView => _collectionView;
+        public ListCollectionView CollectionView { get; }
 
         /// <summary>
         /// Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1" />.
@@ -48,7 +40,7 @@
         {
             get
             {
-                var count = _collectionView.Count;
+                var count = CollectionView.Count;
                 return count;
             }
         }
@@ -60,9 +52,9 @@
         /// true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
         /// </returns>
         /// <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
-        public bool Contains([CanBeNull] T item)
+        public bool Contains(T item)
         {
-            return _collectionView.Contains(item!);
+            return CollectionView.Contains(item);
         }
 
         /// <summary>
@@ -72,31 +64,30 @@
         /// <returns>
         /// The index of <paramref name="item" /> if found in the list; otherwise, -1.
         /// </returns>
-        public int IndexOf([CanBeNull] T item)
+        public int IndexOf(T item)
         {
-            return _collectionView.IndexOf(item!);
+            return CollectionView.IndexOf(item);
         }
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            return _collectionView.Cast<T>().GetEnumerator();
+            return CollectionView.Cast<T>().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable)_collectionView).GetEnumerator();
+            return ((IEnumerable)CollectionView).GetEnumerator();
         }
 
         /// <inheritdoc />
-        [CanBeNull]
         public T this[int index]
         {
-            get => _collectionView.GetItemAt(index).SafeCast<T>()!;
+            get => CollectionView.GetItemAt(index).SafeCast<T>();
             // ReSharper disable once ValueParameterNotUsed
             set => ReadOnlyNotSupported();
         }
 
-        void ICollection.CopyTo([NotNull] Array array, int index)
+        void ICollection.CopyTo(Array array, int index)
         {
             if (array == null)
                 throw new ArgumentNullException(nameof(array));
@@ -107,34 +98,34 @@
             if (array.Rank != 1)
                 throw new ArgumentException("array is not one-dimensional");
 
-            foreach (var item in _collectionView)
+            foreach (var item in CollectionView)
             {
                 array.SetValue(item, index++);
             }
         }
 
-        bool ICollection<T>.Remove([CanBeNull] T item)
+        bool ICollection<T>.Remove(T item)
         {
             ReadOnlyNotSupported();
             return false;
         }
 
-        object ICollection.SyncRoot => _collectionView;
+        object ICollection.SyncRoot => CollectionView;
 
         bool ICollection.IsSynchronized => false;
 
-        int IList.Add([CanBeNull] object? value)
+        int IList.Add(object? value)
         {
             ReadOnlyNotSupported();
             return 0;
         }
 
-        bool IList.Contains([CanBeNull] object? value)
+        bool IList.Contains(object? value)
         {
-            return value != null && _collectionView.Contains(value);
+            return value != null && CollectionView.Contains(value);
         }
 
-        void ICollection<T>.Add([CanBeNull] T item)
+        void ICollection<T>.Add(T item)
         {
             ReadOnlyNotSupported();
         }
@@ -144,7 +135,7 @@
             ReadOnlyNotSupported();
         }
 
-        void ICollection<T>.CopyTo([NotNull] T[] array, int index)
+        void ICollection<T>.CopyTo(T[] array, int index)
         {
             if (array == null)
                 throw new ArgumentNullException(nameof(array));
@@ -155,7 +146,7 @@
             if (array.Rank != 1)
                 throw new ArgumentException("array is not one-dimensional");
 
-            foreach (var item in _collectionView)
+            foreach (var item in CollectionView)
             {
                 array.SetValue(item, index++);
             }
@@ -166,22 +157,22 @@
             ReadOnlyNotSupported();
         }
 
-        int IList.IndexOf([CanBeNull] object? value)
+        int IList.IndexOf(object? value)
         {
-            return value == null ? -1 : _collectionView.IndexOf(value);
+            return value == null ? -1 : CollectionView.IndexOf(value);
         }
 
-        void IList.Insert(int index, [CanBeNull] object? value)
-        {
-            ReadOnlyNotSupported();
-        }
-
-        void IList.Remove([CanBeNull] object? value)
+        void IList.Insert(int index, object? value)
         {
             ReadOnlyNotSupported();
         }
 
-        void IList<T>.Insert(int index, [CanBeNull] T item)
+        void IList.Remove(object? value)
+        {
+            ReadOnlyNotSupported();
+        }
+
+        void IList<T>.Insert(int index, T item)
         {
             ReadOnlyNotSupported();
         }
@@ -196,10 +187,9 @@
             ReadOnlyNotSupported();
         }
 
-        [CanBeNull]
         object? IList.this[int index]
         {
-            get => _collectionView.GetItemAt(index);
+            get => CollectionView.GetItemAt(index);
             set
             {
                 if (value == null)

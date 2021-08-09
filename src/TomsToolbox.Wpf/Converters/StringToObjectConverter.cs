@@ -6,7 +6,6 @@
     using System.Globalization;
     using System.Windows.Data;
 
-    using JetBrains.Annotations;
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -15,20 +14,17 @@
     [ValueConversion(typeof(string), typeof(object))]
     public class StringToObjectConverter : ValueConverter
     {
-        [CanBeNull]
         private TypeConverter? _typeConverter;
 
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        [NotNull] 
         public static readonly IValueConverter Default = new StringToObjectConverter();
 
         /// <summary>
         /// Gets or sets the type of the type converter to use.
         /// If no type is specified, the type converter will be deduced form the target type.
         /// </summary>
-        [CanBeNull]
         public Type? TypeConverterType
         {
             get => _typeConverter?.GetType();
@@ -59,8 +55,7 @@
         /// <param name="targetType">The type of the binding target property.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
-        [CanBeNull]
-        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             var typeConverter = GetTypeConverter(targetType);
             if (typeConverter == null)
@@ -83,16 +78,14 @@
         /// <param name="targetType">The type to convert to.</param>
         /// <param name="parameter">The converter parameter to use.</param>
         /// <param name="culture">The culture to use in the converter.</param>
-        [CanBeNull]
-        protected override object? ConvertBack([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             var typeConverter = GetTypeConverter(targetType);
 
             return typeConverter?.ConvertToInvariantString(value ?? string.Empty);
         }
 
-        [CanBeNull]
-        private TypeConverter? GetTypeConverter([CanBeNull] Type? targetType)
+        private TypeConverter? GetTypeConverter(Type? targetType)
         {
             var typeConverter = _typeConverter;
             if (typeConverter != null)

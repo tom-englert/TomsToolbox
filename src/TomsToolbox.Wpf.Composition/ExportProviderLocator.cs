@@ -4,8 +4,6 @@
     using System.Linq;
     using System.Windows;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Composition;
 
     /// <summary>
@@ -17,7 +15,7 @@
         /// Registers the specified export provider.
         /// </summary>
         /// <param name="exportProvider">The export provider.</param>
-        public static void Register([NotNull] IExportProvider exportProvider)
+        public static void Register(IExportProvider exportProvider)
         {
             ExportProviderProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(exportProvider, FrameworkPropertyMetadataOptions.Inherits));
         }
@@ -30,10 +28,9 @@
         /// The exports provider.
         /// </returns>
         /// <exception cref="System.InvalidOperationException">Export provider must be registered in the visual tree</exception>
-        [NotNull]
-        public static IExportProvider GetExportProvider([NotNull] this DependencyObject obj)
+        public static IExportProvider GetExportProvider(this DependencyObject obj)
         {
-            var exportProvider = (IExportProvider)obj.GetValue(ExportProviderProperty);
+            var exportProvider = (IExportProvider?)obj.GetValue(ExportProviderProperty);
             if (exportProvider == null)
                 throw new InvalidOperationException(GetMissingExportProviderMessage(obj));
 
@@ -46,17 +43,16 @@
         /// <returns>
         /// The exports provider.
         /// </returns>
-        [CanBeNull]
-        public static IExportProvider? TryGetExportProvider([NotNull] this DependencyObject obj)
+        public static IExportProvider? TryGetExportProvider(this DependencyObject obj)
         {
-            return (IExportProvider)obj.GetValue(ExportProviderProperty);
+            return (IExportProvider?)obj.GetValue(ExportProviderProperty);
         }
         /// <summary>
         /// Sets the export provider.
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetExportProvider([NotNull] this DependencyObject obj, [CanBeNull] IExportProvider? value)
+        public static void SetExportProvider(this DependencyObject obj, IExportProvider? value)
         {
             obj.SetValue(ExportProviderProperty, value);
         }
@@ -68,7 +64,7 @@
         /// Makes the export provider available in the WPF visual tree.
         /// </summary>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty ExportProviderProperty =
+        public static readonly DependencyProperty ExportProviderProperty =
             DependencyProperty.RegisterAttached("ExportProvider", typeof(IExportProvider), typeof(ExportProviderLocator), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>
@@ -76,8 +72,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns>The message.</returns>
-        [NotNull]
-        public static string GetMissingExportProviderMessage([NotNull] this DependencyObject obj)
+        public static string GetMissingExportProviderMessage(this DependencyObject obj)
         {
             return "Export provider must be registered in the visual tree " + string.Join("/", obj.AncestorsAndSelf().Reverse().Select(o => o?.GetType().Name));
         }

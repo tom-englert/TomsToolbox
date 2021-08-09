@@ -134,12 +134,12 @@
                                       CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                                       SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"/>
             </DockPanel>
-            <ScrollBar Name="PART_HorizontalScrollBar" Orientation="Horizontal" Grid.Row="1" Minimum="0.0"
+            <ScrollBar Name="PART_HorizontalScrollBar" Orientation="Horizontal" Grid.Column="0" Grid.Row="1" Minimum="0.0"
                        Maximum="{TemplateBinding ScrollViewer.ScrollableWidth}"
                        ViewportSize="{TemplateBinding ScrollViewer.ViewportWidth}"
                        Visibility="{TemplateBinding ScrollViewer.ComputedHorizontalScrollBarVisibility}" Cursor="Arrow"
                        Value="{Binding Path=HorizontalOffset, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"/>
-            <ScrollBar Name="PART_VerticalScrollBar" Orientation="Vertical" Grid.Column="1" Minimum="0.0"
+            <ScrollBar Name="PART_VerticalScrollBar" Orientation="Vertical" Grid.Column="1" Grid.Row="0" Minimum="0.0"
                        Maximum="{TemplateBinding ScrollViewer.ScrollableHeight}"
                        ViewportSize="{TemplateBinding ScrollViewer.ViewportHeight}"
                        Visibility="{TemplateBinding ScrollViewer.ComputedVerticalScrollBarVisibility}" Cursor="Arrow"

@@ -8,8 +8,6 @@
     using global::Ninject;
     using global::Ninject.Planning.Bindings;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Implements the <see cref="IExportProvider"/> interface for the Ninject DI container
     /// </summary>
@@ -41,18 +39,17 @@
         /// <inheritdoc />
         public event EventHandler<EventArgs>? ExportsChanged;
 
-        T IExportProvider.GetExportedValue<T>([CanBeNull] string? contractName) where T : class
+        T IExportProvider.GetExportedValue<T>(string? contractName) where T : class
         {
             return (contractName != null ? _kernel.Get<T>(contractName) : _kernel.Get<T>());
         }
 
-        [CanBeNull]
-        T? IExportProvider.GetExportedValueOrDefault<T>([CanBeNull] string? contractName) where T : class
+        T? IExportProvider.GetExportedValueOrDefault<T>(string? contractName) where T : class
         {
             return GetExportedValues<T>(contractName).SingleOrDefault();
         }
 
-        bool IExportProvider.TryGetExportedValue<T>([CanBeNull] string? contractName, [CanBeNull, NotNullWhen(true)] out T? value) where T : class
+        bool IExportProvider.TryGetExportedValue<T>(string? contractName, [NotNullWhen(true)] out T? value) where T : class
         {
             var values = GetExportedValues<T>(contractName).ToList();
 
@@ -66,12 +63,12 @@
             return true;
         }
 
-        IEnumerable<T> IExportProvider.GetExportedValues<T>([CanBeNull] string? contractName) where T : class
+        IEnumerable<T> IExportProvider.GetExportedValues<T>(string? contractName) where T : class
         {
             return GetExportedValues<T>(contractName);
         }
 
-        IEnumerable<IExport<object>> IExportProvider.GetExports(Type contractType, [CanBeNull] string? contractName)
+        IEnumerable<IExport<object>> IExportProvider.GetExports(Type contractType, string? contractName)
         {
             if (contractName == string.Empty)
                 contractName = null;
@@ -84,13 +81,12 @@
             return result.ToList().AsReadOnly();
         }
 
-        [CanBeNull]
-        private static string? GetEffectiveContractName([CanBeNull] string? name)
+        private static string? GetEffectiveContractName(string? name)
         {
             return name == DefaultMasterBindingName ? null : name;
         }
 
-        private IEnumerable<T> GetExportedValues<T>([CanBeNull] string? contractName)
+        private IEnumerable<T> GetExportedValues<T>(string? contractName)
         {
             return (contractName != null ? _kernel.GetAll<T>(contractName) : _kernel.GetAll<T>()).ToList().AsReadOnly();
         }

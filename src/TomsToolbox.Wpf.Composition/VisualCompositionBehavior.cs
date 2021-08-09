@@ -8,8 +8,6 @@
     using System.Windows.Data;
     using System.Windows.Threading;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Composition;
     using TomsToolbox.Essentials;
     using TomsToolbox.Wpf.Composition.XamlExtensions;
@@ -26,12 +24,9 @@
     public abstract class VisualCompositionBehavior<T> : FrameworkElementBehavior<T>, IVisualCompositionBehavior
         where T : FrameworkElement
     {
-        [NotNull]
         private readonly DispatcherThrottle _deferredUpdateThrottle;
 
-        [CanBeNull]
         private INotifyChanged? _exportProviderChangeTracker;
-        [CanBeNull]
         private IExportProvider? _exportProvider;
 
         /// <summary>
@@ -47,15 +42,14 @@
         /// </summary>
         public string? RegionId
         {
-            get => (string)GetValue(RegionIdProperty);
+            get => (string?)GetValue(RegionIdProperty);
             set => SetValue(RegionIdProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="RegionId"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty RegionIdProperty =
-            DependencyProperty.Register("RegionId", typeof(string), typeof(VisualCompositionBehavior<T>), new FrameworkPropertyMetadata((sender, e) => ((VisualCompositionBehavior<T>)sender)?.RegionId_Changed()));
+            DependencyProperty.Register("RegionId", typeof(string), typeof(VisualCompositionBehavior<T>), new FrameworkPropertyMetadata((sender, _) => ((VisualCompositionBehavior<T>)sender)?.RegionId_Changed()));
 
 
         /// <summary>
@@ -69,9 +63,8 @@
         /// <summary>
         /// Identifies the <see cref="CompositionContext"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty CompositionContextProperty =
-            DependencyProperty.Register("CompositionContext", typeof(object), typeof(VisualCompositionBehavior<T>), new FrameworkPropertyMetadata(null, (sender, e) => ((VisualCompositionBehavior<T>)sender)?.Update()));
+            DependencyProperty.Register("CompositionContext", typeof(object), typeof(VisualCompositionBehavior<T>), new FrameworkPropertyMetadata(null, (sender, _) => ((VisualCompositionBehavior<T>)sender)?.Update()));
 
 
         /// <summary>
@@ -81,10 +74,9 @@
         /// <remarks>
         /// Use this property instead of setting a direct binding to the <see cref="RegionId"/> property if the direct binding will generate binding error message, e.g. in style setters.
         /// </remarks>
-        [CanBeNull]
         public BindingBase? RegionIdBinding
         {
-            get => (BindingBase)GetValue(_regionIdBindingProperty);
+            get => (BindingBase?)GetValue(_regionIdBindingProperty);
             set => SetValue(_regionIdBindingProperty, value);
         }
 
@@ -93,7 +85,6 @@
         /// Internally it must be a <see cref="DependencyProperty"/>, else <see cref="Freezable.Clone"/> would not clone it,
         /// but for the framework the <see cref="RegionIdBinding"/> property must look like a regular property, else it would try to apply the binding instead of simply assigning it.
         /// </summary>
-        [NotNull]
         private static readonly DependencyProperty _regionIdBindingProperty =
             DependencyProperty.Register("InternalRegionIdBinding", typeof(BindingBase), typeof(VisualCompositionBehavior<T>));
 
@@ -105,10 +96,9 @@
         /// <remarks>
         /// Use this property instead of setting a direct binding to the <see cref="RegionId"/> property if the direct binding will generate binding error message, e.g. in style setters.
         /// </remarks>
-        [CanBeNull]
         public BindingBase? CompositionContextBinding
         {
-            get => (BindingBase)GetValue(_compositionContextBindingProperty);
+            get => (BindingBase?)GetValue(_compositionContextBindingProperty);
             set => SetValue(_compositionContextBindingProperty, value);
         }
 
@@ -117,21 +107,18 @@
         /// Internally it must be a <see cref="DependencyProperty"/>, else <see cref="Freezable.Clone"/> would not clone it,
         /// but for the framework the <see cref="CompositionContextBinding"/> property must look like a regular property, else it would try to apply the binding instead of simply assigning it.
         /// </summary>
-        [NotNull]
         private static readonly DependencyProperty _compositionContextBindingProperty =
             DependencyProperty.Register("InternalCompositionContextBinding", typeof(BindingBase), typeof(VisualCompositionBehavior<T>));
 
         /// <summary>
         /// Gets or sets the export provider (DI container). The export provider must be registered with the <see cref="ExportProviderLocator"/>.
         /// </summary>
-        [CanBeNull]
         protected IExportProvider? ExportProvider
         {
-            get => InternalExportProvider ?? (InternalExportProvider = GetExportProvider());
+            get => InternalExportProvider ??= GetExportProvider();
             private set => InternalExportProvider = value;
         }
 
-        [CanBeNull]
         private IExportProvider? InternalExportProvider
         {
             get => _exportProvider;
@@ -216,8 +203,7 @@
         /// </summary>
         /// <param name="regionId">The region identifier.</param>
         /// <returns>The exports for the region, or <c>null</c> if the export provider is not set yet.</returns>
-        [CanBeNull, ItemNotNull]
-        protected IEnumerable<IExport<object, IVisualCompositionMetadata>>? GetExports([CanBeNull] string? regionId)
+        protected IEnumerable<IExport<object, IVisualCompositionMetadata>>? GetExports(string? regionId)
         {
             return ExportProvider?
                 .GetExports<IVisualCompositionMetadata>(typeof(object), VisualComposition.ExportContractName, item => new VisualCompositionMetadata(item))
@@ -231,8 +217,7 @@
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns>The item or the factory generated item.</returns>
-        [CanBeNull]
-        protected object? GetTarget([CanBeNull] object? item)
+        protected object? GetTarget(object? item)
         {
             return (item is IComposablePartFactory partFactory) ? partFactory.GetPart(CompositionContext) : item;
         }
@@ -260,7 +245,6 @@
         /// </remarks>
         protected abstract void OnUpdate();
 
-        [CanBeNull]
         private IExportProvider? GetExportProvider()
         {
             var associatedObject = AssociatedObject;
@@ -286,7 +270,7 @@
             Update();
         }
 
-        private void ExportProvider_ExportsChanged([CanBeNull] object? sender, [CanBeNull] EventArgs? e)
+        private void ExportProvider_ExportsChanged(object? sender, EventArgs? e)
         {
             // Defer update using a throttle:
             // - Export events may come from any thread, must dispatch to UI thread anyhow.
@@ -294,7 +278,7 @@
             _deferredUpdateThrottle.Tick();
         }
 
-        private void ExportProvider_Changed([CanBeNull] object? sender, [CanBeNull] EventArgs? e)
+        private void ExportProvider_Changed(object? sender, EventArgs? e)
         {
             ExportProvider = AssociatedObject?.TryGetExportProvider();
 

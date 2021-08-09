@@ -4,8 +4,6 @@
     using System.Windows;
     using System.Windows.Input;
 
-    using JetBrains.Annotations;
-
     using PropertyChanged;
 
     using TomsToolbox.Wpf;
@@ -24,10 +22,8 @@
 
         public TimeSpan MinimumDuration { get; set; } = TimeSpan.FromMinutes(0.2);
 
-        [NotNull]
         public ICommand ItemsControlDefaultCommand => new DelegateCommand<string>(item => MessageBox.Show(item + " clicked."));
 
-        [NotNull]
         public ICommand GCCollectCommand => new DelegateCommand(GC.Collect);
     }
 }

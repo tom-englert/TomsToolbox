@@ -7,8 +7,6 @@
     using System.Reflection;
     using System.Text;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Various extension methods.
     /// </summary>
@@ -23,9 +21,7 @@
         /// <returns>An array of custom attributes applied to this member, or an array with zero (0) elements if no attributes have been applied.</returns>
         /// <exception cref="System.TypeLoadException">A custom attribute type cannot be loaded</exception>
         /// <exception cref="System.InvalidOperationException">This member belongs to a type that is loaded into the reflection-only context. See How to: Load Assemblies into the Reflection-Only Context.</exception>
-        [ItemNotNull]
-        [NotNull]
-        public static IEnumerable<T> GetCustomAttributes<T>([NotNull] this ICustomAttributeProvider self, bool inherit)
+        public static IEnumerable<T> GetCustomAttributes<T>(this ICustomAttributeProvider self, bool inherit)
         {
             return self.GetCustomAttributes(typeof(T), inherit).Cast<T>();
         }
@@ -36,8 +32,7 @@
         /// </summary>
         /// <param name="item">The item to lookup. This can be a MemberInfo like FieldInfo, PropertyInfo...</param>
         /// <returns>The associated display name, or null if the item does not have a DisplayName attribute.</returns>
-        [CanBeNull]
-        public static string? TryGetDisplayName([NotNull] this ICustomAttributeProvider item)
+        public static string? TryGetDisplayName(this ICustomAttributeProvider item)
         {
             return item.GetCustomAttributes<DisplayNameAttribute>(false)
                 .Select(attr => attr.DisplayName)
@@ -49,8 +44,7 @@
         /// </summary>
         /// <param name="item">The item to lookup. This can be a MemberInfo like FieldInfo, PropertyInfo...</param>
         /// <returns>The associated description, or null if the item does not have a Description attribute.</returns>
-        [CanBeNull]
-        public static string? TryGetDescription([NotNull] this ICustomAttributeProvider item)
+        public static string? TryGetDescription(this ICustomAttributeProvider item)
         {
             return item.GetCustomAttributes<DescriptionAttribute>(false)
                 .Select(attr => attr.Description)
@@ -63,8 +57,7 @@
         /// <param name="item">The item to lookup. This can be a MemberInfo like FieldInfo, PropertyInfo...</param>
         /// <param name="key">The key.</param>
         /// <returns>The associated text, or null if the item does not have a text attribute with this key.</returns>
-        [CanBeNull]
-        public static string? TryGetText([NotNull] this ICustomAttributeProvider item, [NotNull] object key)
+        public static string? TryGetText(this ICustomAttributeProvider item, object key)
         {
             return item.GetCustomAttributes<TextAttribute>(false)
                 .Where(attr => Equals(attr.Key, key))
@@ -79,8 +72,7 @@
         /// <returns>
         /// The custom type converter, or null if the item has no custom type converter attribute.
         /// </returns>
-        [CanBeNull]
-        public static TypeConverter? GetCustomTypeConverter([NotNull] this ICustomAttributeProvider item)
+        public static TypeConverter? GetCustomTypeConverter(this ICustomAttributeProvider item)
         {
             return item.GetCustomTypeConverter(out _);
         }
@@ -93,8 +85,7 @@
         /// <returns>
         /// The custom type converter, or null if the item has no custom type converter attribute.
         /// </returns>
-        [CanBeNull]
-        public static TypeConverter? GetCustomTypeConverter([NotNull] this ICustomAttributeProvider item, out string log)
+        public static TypeConverter? GetCustomTypeConverter(this ICustomAttributeProvider item, out string log)
         {
             var logBuilder = new StringBuilder();
 

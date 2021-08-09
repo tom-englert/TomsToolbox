@@ -8,8 +8,6 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A converter composed of a chain of converters. The converters are invoked in the oder specified.
     /// </summary>
@@ -17,20 +15,10 @@
     [ValueConversion(typeof(object), typeof(object))]
     public class CompositeConverter : IValueConverter
     {
-        [NotNull, ItemNotNull]
-        private readonly Collection<IValueConverter> _converters = new Collection<IValueConverter>(new List<IValueConverter>());
-
         /// <summary>
         /// Gets the chain of converters.
         /// </summary>
-        [NotNull, ItemNotNull]
-        public Collection<IValueConverter> Converters
-        {
-            get
-            {
-                return _converters;
-            }
-        }
+        public Collection<IValueConverter> Converters { get; } = new(new List<IValueConverter>());
 
         #region IValueConverter Members
 
@@ -44,8 +32,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        [CanBeNull]
-        public object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             if (Converters.Count <= 0)
             {
@@ -65,8 +52,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        [CanBeNull]
-        public object? ConvertBack([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             if (Converters.Count <= 0) 
             {

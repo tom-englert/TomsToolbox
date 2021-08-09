@@ -27,7 +27,7 @@
             {
                 window?.TryGetExportProvider()?
                     .GetExportedValues<IThemeResourceProvider>()
-                    .ForEach(resourceProvider => resourceProvider?.LoadThemeResources(window.Resources));
+                    .ForEach(resourceProvider => resourceProvider.LoadThemeResources(window.Resources));
             });
         }
     }

@@ -5,8 +5,6 @@
     using System.Windows.Documents;
     using System.Windows.Input;
 
-    using JetBrains.Annotations;
-
     using Microsoft.Xaml.Behaviors;
 
     /// <summary>
@@ -44,7 +42,7 @@
             AssociatedObject.PreviewMouseWheel -= AssociatedObject_PreviewMouseWheel;
         }
 
-        private void AssociatedObject_PreviewMouseWheel([NotNull] object sender, [NotNull] MouseWheelEventArgs e)
+        private void AssociatedObject_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             if ((!Keyboard.IsKeyDown(Key.LeftCtrl) && !Keyboard.IsKeyDown(Key.RightCtrl)) || (e.Delta == 0))
                 return;
@@ -57,10 +55,7 @@
             if (frameworkElement == null)
                 return;
 
-            if (!_initialFontSize.HasValue)
-            {
-                _initialFontSize = TextElement.GetFontSize(frameworkElement);
-            }
+            _initialFontSize ??= TextElement.GetFontSize(frameworkElement);
 
             var newFontSize = _initialFontSize.Value + newZoomOffset;
 

@@ -2,8 +2,6 @@
 {
     using System;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Interface to be implemented by all objects supporting visual composition.
     /// </summary>
@@ -20,7 +18,6 @@
         /// <summary>
         /// Gets or sets the composition context.
         /// </summary>
-        [CanBeNull]
         object? CompositionContext { get; set; }
     }
 
@@ -34,7 +31,6 @@
         /// </summary>
         /// <param name="compositionContext">The composition context.</param>
         /// <returns>The part to be used in composition.</returns>
-        [CanBeNull]
-        object? GetPart([CanBeNull] object? compositionContext);
+        object? GetPart(object? compositionContext);
     }
 }

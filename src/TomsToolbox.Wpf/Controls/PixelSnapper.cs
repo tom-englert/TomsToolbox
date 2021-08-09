@@ -4,16 +4,14 @@
     using System.Windows.Controls;
     using System.Windows.Media;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Moves the view port by fractional pixels, so the control's top left point is always aligned on a pixel boundary.
     /// See e.g. <see href="https://msdn.microsoft.com/de-de/library/aa970908.aspx"/>.
     /// </summary>
     public class PixelSnapper : ContentControl, ILayer
     {
-        private static readonly Point ZeroPoint = new Point(0.0, 0.0);
-        private Size _physicalPixelSize = new Size(1.0, 1.0);
+        private static readonly Point ZeroPoint = new(0.0, 0.0);
+        private Size _physicalPixelSize = new(1.0, 1.0);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PixelSnapper"/> class.
@@ -21,22 +19,21 @@
         public PixelSnapper()
         {
             Focusable = false;
-            Loaded += (_, __) => _physicalPixelSize = this.GetPhysicalPixelSize();
+            Loaded += (_, _) => _physicalPixelSize = this.GetPhysicalPixelSize();
         }
 
         /// <summary>
         /// Gets or sets the view port displaying this control.
         /// </summary>
-        [CanBeNull]
         public FrameworkElement? Viewport
         {
-            get => (FrameworkElement)GetValue(ViewportProperty);
+            get => (FrameworkElement?)GetValue(ViewportProperty);
             set => SetValue(ViewportProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Viewport"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty ViewportProperty =
+        public static readonly DependencyProperty ViewportProperty =
             DependencyProperty.Register("Viewport", typeof(FrameworkElement), typeof(PixelSnapper));
 
         /// <summary>

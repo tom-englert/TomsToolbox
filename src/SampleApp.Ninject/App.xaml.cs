@@ -6,14 +6,11 @@
     using System.Windows;
     using System.Windows.Markup;
 
-    using JetBrains.Annotations;
-
     using SampleApp.Ninject.DIAdapters;
 
     using TomsToolbox.Wpf;
     using TomsToolbox.Wpf.Composition;
     using TomsToolbox.Wpf.Composition.XamlExtensions;
-    using TomsToolbox.Wpf.Interactivity;
     using TomsToolbox.Wpf.Styles;
 
     /// <summary>
@@ -30,11 +27,11 @@
             // CustomNonClientAreaBehavior.DisableGlassFrameProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata(true));
         }
 
-        protected override void OnStartup([CanBeNull] StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            VisualComposition.Trace += (sender, args) => Trace.WriteLine(args.Text);
+            VisualComposition.Trace += (_, args) => Trace.WriteLine(args.Text);
             BindingErrorTracer.Start(BindingErrorCallback);
 
             _diAdapter = new DIAdapter();
@@ -60,7 +57,7 @@
             Dispatcher?.BeginInvoke((Action)(() => MessageBox.Show(msg)));
         }
 
-        protected override void OnExit([CanBeNull] ExitEventArgs e)
+        protected override void OnExit(ExitEventArgs e)
         {
             Dispose();
 

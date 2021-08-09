@@ -6,8 +6,6 @@
     using System.Windows.Controls;
     using System.Windows.Media;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Extension for the <see cref="Image"/> class:
     /// </summary>
@@ -18,9 +16,8 @@
         /// </summary>
         /// <param name="obj">The image.</param>
         /// <returns>The resource key.</returns>
-        [CanBeNull]
         [AttachedPropertyBrowsableForType(typeof(Image))]
-        public static object GetResourceKey([NotNull] this Image obj)
+        public static object? GetResourceKey(this Image obj)
         {
             return obj.GetValue(ResourceKeyProperty);
         }
@@ -30,7 +27,7 @@
         /// <param name="obj">The image.</param>
         /// <param name="value">The resource key.</param>
         [AttachedPropertyBrowsableForType(typeof(Image))]
-        public static void SetResourceKey([NotNull] this Image obj, [CanBeNull] object? value)
+        public static void SetResourceKey(this Image obj, object? value)
         {
             obj.SetValue(ResourceKeyProperty, value);
         }
@@ -40,17 +37,17 @@
         /// <AttachedPropertyComments>
         /// <summary>Allows to specify a resource key instead of an Uri as the source from which the image will be loaded.</summary>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty ResourceKeyProperty =
+        public static readonly DependencyProperty ResourceKeyProperty =
             DependencyProperty.RegisterAttached("ResourceKey", typeof(object), typeof(ImageExtensions), new FrameworkPropertyMetadata((sender, e) => ResourceKey_Changed((Image)sender, e.NewValue)));
 
-        private static void ResourceKey_Changed([NotNull] Image image, [CanBeNull] object? resourceKey)
+        private static void ResourceKey_Changed(Image image, object? resourceKey)
         {
             image.Source = (resourceKey != null) ? image.TryFindResource(resourceKey) as ImageSource : null;
             image.ImageFailed -= Image_ImageFailed;
             image.ImageFailed += Image_ImageFailed;
         }
 
-        static void Image_ImageFailed([CanBeNull] object? sender, [NotNull] ExceptionRoutedEventArgs e)
+        static void Image_ImageFailed(object? sender, ExceptionRoutedEventArgs e)
         {
             if (!(sender is Image image))
                 return;

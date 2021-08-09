@@ -7,8 +7,6 @@
     using System.ComponentModel;
     using System.Linq;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     using WeakEventHandler;
@@ -25,18 +23,15 @@
     /// <inheritdoc />
     public class ObservableWrappedCollection<TSource, TTarget> : ReadOnlyObservableCollectionAdapter<TTarget, ObservableCollection<TTarget>>
     {
-        [NotNull]
-        private readonly Func<TSource, TTarget> _itemGenerator;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2" /> class.
         /// </summary>
         /// <param name="sourceCollection">The source collection to wrap. This instance will not hold a reference to the source collection.</param>
         /// <param name="itemGenerator">The item generator to generate the wrapper for each item.</param>
-        public ObservableWrappedCollection([NotNull, ItemNotNull] IEnumerable sourceCollection, [NotNull] Func<TSource, TTarget> itemGenerator)
+        public ObservableWrappedCollection(IEnumerable sourceCollection, Func<TSource, TTarget> itemGenerator)
             : base(new ObservableCollection<TTarget>(sourceCollection.Cast<TSource>().Select(itemGenerator)))
         {
-            _itemGenerator = itemGenerator;
+            ItemGenerator = itemGenerator;
 
             AttachCollectionEvents(sourceCollection as INotifyCollectionChanged);
         }
@@ -44,10 +39,9 @@
         /// <summary>
         /// Gets the item generator used to generate the wrapper for each item.
         /// </summary>
-        [NotNull]
-        protected Func<TSource, TTarget> ItemGenerator => _itemGenerator;
+        protected Func<TSource, TTarget> ItemGenerator { get; }
 
-        private void AttachCollectionEvents([CanBeNull] INotifyCollectionChanged? sender)
+        private void AttachCollectionEvents(INotifyCollectionChanged? sender)
         {
             if (sender == null)
                 return;
@@ -56,7 +50,7 @@
         }
 
         [MakeWeak]
-        private void SourceCollection_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+        private void SourceCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnSourceCollectionChanged((IEnumerable)sender, e);
         }
@@ -68,7 +62,7 @@
         /// <param name="e">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
         /// <exception cref="System.ArgumentException">Event source must provide index!</exception>
         /// <exception cref="System.NotImplementedException">Moving more than one item is not supported</exception>
-        protected virtual void OnSourceCollectionChanged([NotNull, ItemCanBeNull] IEnumerable sourceCollection, [NotNull] NotifyCollectionChangedEventArgs e)
+        protected virtual void OnSourceCollectionChanged(IEnumerable sourceCollection, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
             {

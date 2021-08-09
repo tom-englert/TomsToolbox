@@ -2,8 +2,6 @@
 {
     using System.Windows;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// XAML extensions for the <see cref="System.Windows.Controls.Button"/>
     /// </summary>
@@ -15,7 +13,7 @@
         /// <param name="button">The button.</param>
         /// <returns>The associated dialog result.</returns>
         [AttachedPropertyBrowsableForType(typeof(System.Windows.Controls.Button))]
-        public static bool? GetDialogResult([NotNull] System.Windows.Controls.Button button)
+        public static bool? GetDialogResult(System.Windows.Controls.Button button)
         {
             return (bool?)button.GetValue(DialogResultProperty);
         }
@@ -24,7 +22,7 @@
         /// </summary>
         /// <param name="button">The button.</param>
         /// <param name="value">The associated dialog result.</param>
-        public static void SetDialogResult([NotNull] System.Windows.Controls.Button button, bool? value)
+        public static void SetDialogResult(System.Windows.Controls.Button button, bool? value)
         {
             button.SetValue(DialogResultProperty, value);
         }
@@ -40,11 +38,10 @@
         /// This only has an effect if the window was created using the <see cref="Window.ShowDialog"/> method.
         /// </remarks>
         /// </AttachedPropertyComments>
-        [NotNull]
         public static readonly DependencyProperty DialogResultProperty = DependencyProperty.RegisterAttached(
             "DialogResult", typeof(bool?), typeof(Button), new FrameworkPropertyMetadata(default(bool?), DialogResult_Changed));
 
-        private static void DialogResult_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void DialogResult_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (!(d is System.Windows.Controls.Button button))
                 return;
@@ -52,7 +49,7 @@
             button.Click += Button_Click;
         }
 
-        private static void Button_Click([NotNull] object sender, [NotNull] RoutedEventArgs e)
+        private static void Button_Click(object sender, RoutedEventArgs e)
         {
             if (!(sender is System.Windows.Controls.Button button))
                 return;

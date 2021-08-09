@@ -6,16 +6,13 @@
     using System.Windows.Controls;
     using System.Windows.Data;
 
-    using JetBrains.Annotations;
-
     public class StyleTemplateSelector : DataTemplateSelector
     {
         private const string StyleExplorer = "Style Explorer";
 
-        [NotNull]
         private static readonly string[] _itemsSource = Enumerable.Range(1, 10).Select(i => StyleExplorer + " Item " + i).ToArray();
 
-        public override DataTemplate? SelectTemplate(object item, [CanBeNull] DependencyObject container)
+        public override DataTemplate? SelectTemplate(object item, DependencyObject? container)
         {
             if (!(item is Style style))
                 return null;
@@ -30,8 +27,7 @@
             return dt ?? DynamicTemplate(targetType);
         }
 
-        [NotNull]
-        private static DataTemplate DynamicTemplate([CanBeNull] Type targetType)
+        private static DataTemplate DynamicTemplate(Type? targetType)
         {
             var visualTree = new FrameworkElementFactory(targetType);
 

@@ -3,8 +3,6 @@
     using System.Collections.Generic;
     using System.Windows;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -17,7 +15,6 @@
         /// </summary>
         /// <returns>The parsed clipboard data as a table, or <c>null</c> if the clipboard is empty or does not contain normalized table data.</returns>
         /// <remarks>If no TEXT is present in the clipboard, CSV data is used.</remarks>
-        [CanBeNull, ItemNotNull]
         public static IList<IList<string>>? GetClipboardDataAsTable()
         {
             var text = Clipboard.GetText();
@@ -38,7 +35,7 @@
         /// <remarks>
         /// This method sets the TEXT (tab delimited) and CSV data. Like in Excel the CSV delimiter is either comma or semicolon, depending on the current culture.
         /// </remarks>
-        public static void SetClipboardData([CanBeNull, ItemNotNull] this IList<IList<string>>? table)
+        public static void SetClipboardData(this IList<IList<string>>? table)
         {
             if (table == null)
             {

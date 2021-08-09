@@ -8,8 +8,6 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <inheritdoc />
@@ -38,12 +36,9 @@
         private const string TextboxPartName = "PART_TextBox";
         private static readonly TimeSpan _doubleClickTime = TimeSpan.FromMilliseconds(NativeMethods.GetDoubleClickTime());
 
-        [NotNull]
         private readonly Throttle _mouseDoubleClickThrottle;
-        [CanBeNull]
         private TextBox? _textBox;
         // The first focusable ancestor to test for focus and to provide F2 key.
-        [CanBeNull]
         private FrameworkElement? _focusableParent;
 
         // The time when the parent item got the focus.
@@ -77,16 +72,14 @@
         /// <summary>
         /// Gets or sets the text to be edited.
         /// </summary>
-        [CanBeNull]
         public string? Text
         {
-            get => (string)GetValue(TextProperty);
+            get => (string?)GetValue(TextProperty);
             set => SetValue(TextProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Text"/> dependency property.
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register("Text", typeof(string), typeof(InPlaceEdit), new FrameworkPropertyMetadata() { BindsTwoWayByDefault = true, DefaultUpdateSourceTrigger = UpdateSourceTrigger.LostFocus });
 
@@ -102,7 +95,6 @@
         /// <summary>
         /// Identifies the <see cref="IsEditing"/> dependency property.
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty IsEditingProperty =
             DependencyProperty.Register("IsEditing", typeof(bool), typeof(InPlaceEdit), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((InPlaceEdit)sender)?.IsEditing_Changed((bool)e.NewValue), (sender, baseValue) => ((InPlaceEdit)sender)?.IsEditing_CoerceValue(baseValue.SafeCast<bool>())));
 
@@ -118,7 +110,6 @@
         /// <summary>
         /// Identifies the <see cref="IsEditingDisabled"/> dependency property.
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty IsEditingDisabledProperty =
             DependencyProperty.Register("IsEditingDisabled", typeof(bool), typeof(InPlaceEdit), new FrameworkPropertyMetadata(false));
 
@@ -134,7 +125,6 @@
         /// <summary>
         /// Identifies the <see cref="HasErrors"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty HasErrorsProperty =
             DependencyProperty.Register("HasErrors", typeof(bool), typeof(InPlaceEdit));
 
@@ -153,7 +143,6 @@
         /// <summary>
         /// Identifies the <see cref="TextTrimming"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty TextTrimmingProperty =
             DependencyProperty.Register("TextTrimming", typeof(TextTrimming), typeof(InPlaceEdit), new FrameworkPropertyMetadata(TextTrimming.CharacterEllipsis));
 
@@ -169,7 +158,6 @@
         /// <summary>
         /// Identifies the <see cref="TextAlignment"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty TextAlignmentProperty =
             DependencyProperty.Register("TextAlignment", typeof(TextAlignment), typeof(InPlaceEdit), new FrameworkPropertyMetadata(TextAlignment.Left));
 
@@ -204,8 +192,7 @@
             {
                 // Edit on deferred double click => Only handle mouse clicks if parent is already focused.
                 // Since the parent gets the focus before we receive this event do not handle if within double click time.
-                if ((_focusableParent != null) && _focusableParent.IsFocused
-                    && ((_parentGotFocusTime + _doubleClickTime) < DateTime.Now))
+                if (_focusableParent is { IsFocused: true } && ((_parentGotFocusTime + _doubleClickTime) < DateTime.Now))
                 {
                     // Defer processing so we don't start editing on double clicks.
                     if (!_processingMouseLeftButtonDown)
@@ -236,7 +223,7 @@
             base.OnMouseDoubleClick(e);
         }
 
-        private void Self_Loaded([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
+        private void Self_Loaded(object? sender, RoutedEventArgs? e)
         {
             var focusableParent = _focusableParent = this.TryFindAncestorOrSelf<FrameworkElement>(item => item?.Focusable == true);
             if (focusableParent == null)
@@ -247,12 +234,12 @@
             focusableParent.GotFocus += FocusableParent_GotFocus;
         }
 
-        private void FocusableParent_GotFocus([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
+        private void FocusableParent_GotFocus(object? sender, RoutedEventArgs? e)
         {
             _parentGotFocusTime = DateTime.Now;
         }
 
-        private void Self_Unloaded([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
+        private void Self_Unloaded(object? sender, RoutedEventArgs? e)
         {
             var focusableParent = _focusableParent;
             if (focusableParent == null)
@@ -263,7 +250,7 @@
             _focusableParent = null;
         }
 
-        private void TextBox_KeyDown([NotNull] object sender, [NotNull] KeyEventArgs e)
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (_textBox == null)
                 return;
@@ -283,12 +270,12 @@
             }
         }
 
-        private void TextBox_LostFocus([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
+        private void TextBox_LostFocus(object? sender, RoutedEventArgs? e)
         {
             IsEditing = false;
         }
 
-        private void TextBox_TextChanged([CanBeNull] object? sender, [CanBeNull] TextChangedEventArgs? e)
+        private void TextBox_TextChanged(object? sender, TextChangedEventArgs? e)
         {
             OnValidate();
         }
@@ -315,7 +302,7 @@
             }
         }
 
-        private void Parent_KeyDown([CanBeNull] object? sender, [NotNull] KeyEventArgs e)
+        private void Parent_KeyDown(object? sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
@@ -400,7 +387,7 @@
             }
         }
 
-        private void Self_PreviewMouseDoubleClick([CanBeNull] object? sender, [NotNull] MouseButtonEventArgs e)
+        private void Self_PreviewMouseDoubleClick(object? sender, MouseButtonEventArgs e)
         {
             if (_textBox == null)
                 return;
@@ -413,7 +400,7 @@
             e.Handled = true;
         }
 
-        private void Window_IsKeyboardFocusWithinChanged([CanBeNull] object? sender, DependencyPropertyChangedEventArgs e)
+        private void Window_IsKeyboardFocusWithinChanged(object? sender, DependencyPropertyChangedEventArgs e)
         {
             if (Equals(e.NewValue, false))
             {
@@ -421,7 +408,7 @@
             }
         }
 
-        private void Window_PreviewMouseDown([CanBeNull] object? sender, [CanBeNull] MouseButtonEventArgs? e)
+        private void Window_PreviewMouseDown(object? sender, MouseButtonEventArgs? e)
         {
             if (_textBox == null)
                 return;
@@ -433,7 +420,7 @@
             }
         }
 
-        private void Window_PreviewMouseWheel([CanBeNull] object? sender, [CanBeNull] MouseWheelEventArgs? e)
+        private void Window_PreviewMouseWheel(object? sender, MouseWheelEventArgs? e)
         {
             IsEditing = false;
         }

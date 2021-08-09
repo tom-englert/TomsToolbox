@@ -4,8 +4,6 @@
     using System.Windows;
     using System.Windows.Controls;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A template selector that finds the <see cref="DataTemplate"/> by the <see cref="RoleBasedDataTemplateKey"/>.
     /// </summary>
@@ -14,7 +12,6 @@
         /// <summary>
         /// Gets or sets the role to use in the lookup.
         /// </summary>
-        [CanBeNull]
         public object? Role
         {
             get;
@@ -25,7 +22,6 @@
         /// <summary>
         /// Gets or sets the template used as fallback if no template for the specified role is found.
         /// </summary>
-        [CanBeNull]
         public DataTemplate? FallbackValue
         {
             get;
@@ -40,8 +36,7 @@
         /// <returns>
         /// Returns a <see cref="T:System.Windows.DataTemplate" /> or null. The default value is null.
         /// </returns>
-        [CanBeNull]
-        public override DataTemplate? SelectTemplate([CanBeNull] object? item, [CanBeNull] DependencyObject? container)
+        public override DataTemplate? SelectTemplate(object? item, DependencyObject? container)
         {
             if ((item == null) || (container == null))
                 return null;

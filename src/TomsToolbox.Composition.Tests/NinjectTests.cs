@@ -30,7 +30,7 @@
 
             try
             {
-                var self = kernel.Get(typeof(NinjectTests));
+                kernel.Get(typeof(NinjectTests));
                 Assert.Inconclusive("Should have thrown...");
             }
             catch (ActivationException)
@@ -60,7 +60,7 @@
                 {
                     IsShared = true,
                     Type = typeof(NinjectTests),
-                    Metadata = new[]
+                    Metadata = new IDictionary<string, object>[]
                     {
                         new Dictionary<string, object>
                         {
@@ -103,11 +103,9 @@
                 {
                     IsShared = true,
                     Type = typeof(NinjectTests),
-                    Metadata = new[]
+                    Metadata = new IDictionary<string, object>[]
                     {
-                        new Dictionary<string, object>
-                        {
-                        },
+                        new Dictionary<string, object>(),
                         new Dictionary<string, object>
                         {
                             {"ContractName", "A"},
@@ -135,11 +133,9 @@
                 {
                     IsShared = true,
                     Type = typeof(NinjectTests),
-                    Metadata = new[]
+                    Metadata = new IDictionary<string, object>[]
                     {
-                        new Dictionary<string, object>
-                        {
-                        },
+                        new Dictionary<string, object>(),
                         new Dictionary<string, object>
                         {
                             {"ContractName", "A"},
@@ -163,7 +159,7 @@
 
             try
             {
-                var self = kernel.Get<NinjectTests>();
+                kernel.Get<NinjectTests>();
                 Assert.Inconclusive("Should have thrown...");
             }
             catch (ActivationException)

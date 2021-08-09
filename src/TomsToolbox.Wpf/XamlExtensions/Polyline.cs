@@ -18,9 +18,9 @@
         /// <param name="element">The element.</param>
         /// <returns>The data points</returns>
         [AttachedPropertyBrowsableForType(typeof(System.Windows.Shapes.Polyline))]
-        public static ICollection<Point> GetDataPoints(DependencyObject element)
+        public static ICollection<Point>? GetDataPoints(DependencyObject element)
         {
-            return (ICollection<Point>)element.GetValue(DataPointsProperty);
+            return (ICollection<Point>?)element.GetValue(DataPointsProperty);
         }
         /// <summary>
         /// Sets the data points in the canvas coordinates.

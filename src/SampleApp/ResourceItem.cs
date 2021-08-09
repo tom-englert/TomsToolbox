@@ -1,4 +1,4 @@
-﻿namespace AVL.Styx
+﻿namespace SampleApp
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,6 @@
     using System.Windows;
     using System.Windows.Media;
 
-    using JetBrains.Annotations;
-
     using PropertyChanged;
 
     using TomsToolbox.Essentials;
@@ -16,22 +14,19 @@
     [AddINotifyPropertyChangedInterface]
     public class ResourceItem
     {
-        [NotNull] private readonly string _suffix;
+        private readonly string _suffix;
 
-        private ResourceItem([NotNull] ComponentResourceKey key, [NotNull] object value, [NotNull] string suffix)
+        private ResourceItem(ComponentResourceKey key, object value, string suffix)
         {
             _suffix = suffix;
             Key = key;
             Value = value;
         }
 
-        [NotNull]
         public ComponentResourceKey Key { get; }
 
-        [NotNull]
         public object Value { get; }
 
-        [NotNull]
         public string Description
         {
             get
@@ -53,7 +48,6 @@
             }
         }
 
-        [NotNull]
         private string GetDescription(Color color)
         {
             return string.Format(CultureInfo.InvariantCulture, "#{0:X2}{1:X2}{2:X2}   ({0}/{1}/{2})", color.R, color.G, color.B);
@@ -64,15 +58,14 @@
             return ((string)Key.ResourceId).Replace(_suffix, string.Empty);
         }
 
-        [NotNull]
-        public static IList<ResourceItem> GetAll([NotNull] Type type, [NotNull] string suffix)
+        public static IList<ResourceItem> GetAll(Type type, string suffix)
         {
             return type
                 .GetFields()
                 .Where(field => field.Name.EndsWith(suffix))
                 .Select(field => field.GetValue(null) as ComponentResourceKey)
                 .ExceptNullItems()
-                .Select(key => new ResourceItem(key, Application.Current.FindResource(key)!, suffix))
+                .Select(key => new ResourceItem(key, Application.Current.FindResource(key), suffix))
                 .ToArray();
         }
     }

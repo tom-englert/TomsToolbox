@@ -3,8 +3,6 @@
     using System.Windows;
     using System.Windows.Media.Effects;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -13,8 +11,8 @@
     /// <seealso cref="System.Windows.Media.Effects.ShaderEffect" />
     public class InvertGrayEffect : ShaderEffect
     {
-        [NotNull] private static readonly PixelShader _pixelShader = new PixelShader() { UriSource = typeof(InvertGrayEffect).Assembly.GeneratePackUri("effects/invertGray.ps") };
-        [NotNull] private static readonly DependencyProperty _inputProperty = RegisterPixelShaderSamplerProperty("Input", typeof(InvertGrayEffect), 0);
+        private static readonly PixelShader _pixelShader = new() { UriSource = typeof(InvertGrayEffect).Assembly.GeneratePackUri("effects/invertGray.ps") };
+        private static readonly DependencyProperty _inputProperty = RegisterPixelShaderSamplerProperty("Input", typeof(InvertGrayEffect), 0);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InvertGrayEffect"/> class.

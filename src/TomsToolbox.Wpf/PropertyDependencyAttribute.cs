@@ -3,11 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
     using System.Reflection;
-
-    using JetBrains.Annotations;
 
     using TomsToolbox.Essentials;
 
@@ -35,23 +34,19 @@
     [CLSCompliant(false)]
     public sealed class PropertyDependencyAttribute : Attribute
     {
-        [NotNull, ItemNotNull]
-        private readonly IEnumerable<string> _propertyNames;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyDependencyAttribute"/> class.
         /// </summary>
         /// <param name="propertyNames">The property names of the properties that this property depends on.</param>
-        public PropertyDependencyAttribute([Localizable(false)][NotNull, ItemNotNull] params string[] propertyNames)
+        public PropertyDependencyAttribute([Localizable(false)] params string[] propertyNames)
         {
-            _propertyNames = propertyNames;
+            PropertyNames = propertyNames;
         }
 
         /// <summary>
         /// Gets the names of the properties that the attributed property depends on.
         /// </summary>
-        [NotNull, ItemNotNull]
-        public IEnumerable<string> PropertyNames => _propertyNames;
+        public IEnumerable<string> PropertyNames { get; }
 
         /// <summary>
         /// Creates the dependency mapping from the attributes of the properties of the specified type.
@@ -59,10 +54,8 @@
         /// <param name="type">The type.</param>
         /// <returns>A dictionary that maps the property names to all direct and indirect dependent property names.</returns>
         /// <exception cref="System.InvalidOperationException">Invalid dependency definitions, i.e. dependency to non-existing property.</exception>
-        [CanBeNull]
-        [ContractAnnotation("notnull => notnull")]
-        [return:System.Diagnostics.CodeAnalysis.NotNullIfNotNull("type")]
-        public static Dictionary<string, IEnumerable<string>>? CreateDependencyMapping([CanBeNull] Type? type)
+        [return: NotNullIfNotNull("type")]
+        public static Dictionary<string, IEnumerable<string>>? CreateDependencyMapping(Type? type)
         {
             if (type == null)
                 return null;
@@ -100,8 +93,7 @@
             return directDependencies.Keys.ToDictionary(item => item, item => GetAllDependencies(item, directDependencies));
         }
 
-        [NotNull, ItemNotNull]
-        private static IEnumerable<string> GetAllDependencies([NotNull] string item, [NotNull] IDictionary<string, string[]> directDependencies)
+        private static IEnumerable<string> GetAllDependencies(string item, IDictionary<string, string[]> directDependencies)
         {
             var allDependenciesAndSelf = new List<string> { item };
 
@@ -125,8 +117,7 @@
         /// <param name="entryType">Type of the entry.</param>
         /// <returns>A list of strings, each describing an invalid dependency definition. If no invalid definitions exist, the list is empty.</returns>
         /// <remarks>This method is mainly for writing unit test to detect invalid dependencies during compile time.</remarks>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<string> GetInvalidDependencies([NotNull] Type entryType)
+        public static IEnumerable<string> GetInvalidDependencies(Type entryType)
         {
             return from type in GetCustomAssemblies(entryType).SelectMany(SafeGetTypes).ExceptNullItems()
                    let allProperties = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
@@ -143,8 +134,7 @@
         /// </summary>
         /// <param name="entryType">A type contained in the entry assembly.</param>
         /// <returns>The assembly that contains the entryType plus all custom assemblies that this assembly references.</returns>
-        [NotNull, ItemNotNull]
-        private static IEnumerable<Assembly> GetCustomAssemblies([NotNull] Type entryType)
+        private static IEnumerable<Assembly> GetCustomAssemblies(Type entryType)
         {
             var entryAssembly = entryType.Assembly;
 
@@ -157,7 +147,7 @@
                 .ExceptNullItems()
                 .Where(assembly => IsAssemblyInSubfolderOf(assembly.GetName(), programFolder));
 
-            return new[] { entryAssembly }.Concat(referencedAssemblies)!;
+            return new[] { entryAssembly }.Concat(referencedAssemblies);
         }
 
         /// <summary>
@@ -168,7 +158,7 @@
         /// <returns>
         ///   <c>true</c> if the assembly is located in the same folder or a sub folder of the specified program folder; otherwise, <c>false</c>.
         /// </returns>
-        private static bool IsAssemblyInSubfolderOf([NotNull] AssemblyName assemblyName, [NotNull] string programFolder)
+        private static bool IsAssemblyInSubfolderOf(AssemblyName assemblyName, string programFolder)
         {
             if (assemblyName.CodeBase == null)
                 return false;
@@ -178,8 +168,7 @@
             return assemblyDirectory.StartsWith(programFolder, StringComparison.OrdinalIgnoreCase);
         }
 
-        [CanBeNull]
-        private static Assembly? SafeLoad([NotNull] AssemblyName name)
+        private static Assembly? SafeLoad(AssemblyName name)
         {
             try
             {
@@ -193,8 +182,7 @@
         }
 
 
-        [NotNull, ItemNotNull]
-        private static IEnumerable<Type> SafeGetTypes([NotNull] Assembly a)
+        private static IEnumerable<Type> SafeGetTypes(Assembly a)
         {
             try
             {
@@ -204,7 +192,7 @@
             {
             }
 
-            return new Type[0];
+            return Type.EmptyTypes;
         }
     }
 }

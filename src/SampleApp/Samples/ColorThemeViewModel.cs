@@ -1,6 +1,5 @@
 ﻿namespace SampleApp.Samples
 {
-    using System;
     using System.Collections.ObjectModel;
     using System.Composition;
     using System.Windows;

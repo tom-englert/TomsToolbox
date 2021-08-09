@@ -6,8 +6,6 @@
     using System.Collections.Specialized;
     using System.ComponentModel;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Adapter to return an <see cref="IList"/> from an <see cref="IList{T}"/>.<para/>
     /// Most objects that implement <see cref="IList{T}"/> also implement <see cref="IList"/>, 
@@ -19,14 +17,13 @@
     /// <typeparam name="T">The type of elements in the list.</typeparam>
     public class ObservableListAdapter<T> : IList, INotifyCollectionChanged, INotifyPropertyChanged
     {
-        [NotNull, ItemCanBeNull]
         private readonly IList<T> _source;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObservableListAdapter{T}"/> class.
         /// </summary>
         /// <param name="source">The source.</param>
-        public ObservableListAdapter([NotNull, ItemCanBeNull] IList<T> source)
+        public ObservableListAdapter(IList<T> source)
         {
             _source = source;
 
@@ -52,7 +49,7 @@
         /// Copies the elements of the <see cref="T:System.Collections.ICollection"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
         /// </summary>
         /// <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.ICollection"/>. The <see cref="T:System.Array"/> must have zero-based indexing. </param><param name="index">The zero-based index in <paramref name="array"/> at which copying begins. </param><exception cref="T:System.ArgumentNullException"><paramref name="array"/> is null. </exception><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than zero. </exception><exception cref="T:System.ArgumentException"><paramref name="array"/> is multidimensional.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>.-or-The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>.</exception>
-        public void CopyTo([NotNull] Array array, int index)
+        public void CopyTo(Array array, int index)
         {
             for (var i = 0; i < Count; i++)
             {
@@ -91,9 +88,9 @@
         /// The position into which the new element was inserted, or -1 to indicate that the item was not inserted into the collection,
         /// </returns>
         /// <param name="value">The object to add to the <see cref="T:System.Collections.IList"/>. </param><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
-        public int Add([CanBeNull] object value)
+        public int Add(object? value)
         {
-            _source.Add((T)value);
+            _source.Add((T)value!);
             return _source.Count - 1;
         }
 
@@ -104,9 +101,9 @@
         /// true if the <see cref="T:System.Object"/> is found in the <see cref="T:System.Collections.IList"/>; otherwise, false.
         /// </returns>
         /// <param name="value">The object to locate in the <see cref="T:System.Collections.IList"/>. </param>
-        public bool Contains([CanBeNull] object value)
+        public bool Contains(object? value)
         {
-            return _source.Contains((T)value);
+            return _source.Contains((T)value!);
         }
 
         /// <summary>
@@ -125,27 +122,27 @@
         /// The index of <paramref name="value"/> if found in the list; otherwise, -1.
         /// </returns>
         /// <param name="value">The object to locate in the <see cref="T:System.Collections.IList"/>. </param>
-        public int IndexOf([CanBeNull] object value)
+        public int IndexOf(object? value)
         {
-            return _source.IndexOf((T)value);
+            return _source.IndexOf((T)value!);
         }
 
         /// <summary>
         /// Inserts an item to the <see cref="T:System.Collections.IList"/> at the specified index.
         /// </summary>
         /// <param name="index">The zero-based index at which <paramref name="value"/> should be inserted. </param><param name="value">The object to insert into the <see cref="T:System.Collections.IList"/>. </param><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.IList"/>. </exception><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception><exception cref="T:System.NullReferenceException"><paramref name="value"/> is null reference in the <see cref="T:System.Collections.IList"/>.</exception>
-        public void Insert(int index, [CanBeNull] object value)
+        public void Insert(int index, object? value)
         {
-            _source.Insert(index, (T)value);
+            _source.Insert(index, (T)value!);
         }
 
         /// <summary>
         /// Removes the first occurrence of a specific object from the <see cref="T:System.Collections.IList"/>.
         /// </summary>
         /// <param name="value">The object to remove from the <see cref="T:System.Collections.IList"/>. </param><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
-        public void Remove([CanBeNull] object value)
+        public void Remove(object? value)
         {
-            _source.Remove((T)value);
+            _source.Remove((T)value!);
         }
 
         /// <summary>
@@ -166,7 +163,6 @@
         /// <param name="index">The zero-based index of the element to get or set. </param>
         /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.IList"/>.</exception>
         /// <exception cref="T:System.NotSupportedException">The property is set and the <see cref="T:System.Collections.IList"/> is read-only. </exception>
-        [CanBeNull]
         public object? this[int index]
         {
             get => _source[index];
@@ -199,22 +195,22 @@
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void Source_PropertyChanged([CanBeNull] object sender, [CanBeNull] PropertyChangedEventArgs e)
+        private void Source_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e);
         }
 
-        private void Source_CollectionChanged([CanBeNull] object sender, [CanBeNull] NotifyCollectionChangedEventArgs e)
+        private void Source_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             OnCollectionChanged(e);
         }
 
-        private void OnCollectionChanged([CanBeNull] NotifyCollectionChangedEventArgs e)
+        private void OnCollectionChanged(NotifyCollectionChangedEventArgs? e)
         {
             CollectionChanged?.Invoke(this, e);
         }
 
-        private void OnPropertyChanged([CanBeNull] PropertyChangedEventArgs e)
+        private void OnPropertyChanged(PropertyChangedEventArgs? e)
         {
             PropertyChanged?.Invoke(this, e);
         }

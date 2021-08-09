@@ -4,8 +4,6 @@
     using System.Windows;
     using System.Windows.Media;
 
-    using JetBrains.Annotations;
-
     using SampleApp.Themes;
 
     using TomsToolbox.Composition;
@@ -18,7 +16,7 @@
     public partial class MainWindow : IThemeManager
     {
         [ImportingConstructor]
-        public MainWindow([NotNull] IExportProvider exportProvider)
+        public MainWindow(IExportProvider exportProvider)
         {
             this.SetExportProvider(exportProvider);
 

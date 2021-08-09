@@ -1,7 +1,5 @@
 ﻿namespace SampleApp.Samples
 {
-    using JetBrains.Annotations;
-
     using PropertyChanged;
 
     using TomsToolbox.Wpf.Composition.AttributedModel;
@@ -10,8 +8,7 @@
     [AddINotifyPropertyChangedInterface]
     class SharedWidthSampleViewModel
     {
-        [CanBeNull]
-        public string LongText { get; set; } = "This is a long text";
+        public string? LongText { get; set; } = "This is a long text";
 
         public override string ToString()
         {

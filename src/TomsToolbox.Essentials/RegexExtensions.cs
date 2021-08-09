@@ -5,8 +5,6 @@
     using System.Linq;
     using System.Text.RegularExpressions;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Extension methods for <see cref="Regex"/>.
     /// </summary>
@@ -25,8 +23,7 @@
         /// It's up to the item generator how matched and non-matched items are handled.
         /// Concatenating all unmodified fragment values will always return the original string.
         /// </remarks>
-        [NotNull, ItemCanBeNull]
-        public static IEnumerable<T> Split<T>([NotNull] this Regex regex, [NotNull] string input, [NotNull] Func<string, bool, T> itemGenerator)
+        public static IEnumerable<T> Split<T>(this Regex regex, string input, Func<string, bool, T> itemGenerator)
         {
             // ReSharper disable once RedundantEnumerableCastCall (only works in netcoreapp3.1)
             var textParts = regex.Matches(input).Cast<Match>().ToArray();

@@ -15,7 +15,7 @@
             const string expected = source;
 
             var regex = new Regex(@"\s+");
-            var fragments = regex.Split(source, (value, isMatch) => value).ToArray();
+            var fragments = regex.Split(source, (value, _) => value).ToArray();
 
             Assert.AreEqual(15, fragments.Length);
 

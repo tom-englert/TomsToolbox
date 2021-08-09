@@ -6,8 +6,6 @@ namespace TomsToolbox.Essentials.Tests
     using System.Globalization;
     using System.Windows;
 
-    using JetBrains.Annotations;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -285,14 +283,12 @@ namespace TomsToolbox.Essentials.Tests
 
         class TestClassTypeConverter : TypeConverter
         {
-            [CanBeNull]
-            public override object? ConvertFrom([CanBeNull] ITypeDescriptorContext context, CultureInfo culture, [CanBeNull] object value)
+            public override object ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object? value)
             {
                 return new TestClass(Convert.ToInt32(value, culture));
             }
 
-            [CanBeNull]
-            public override object? ConvertTo([CanBeNull] ITypeDescriptorContext context, [CanBeNull] CultureInfo culture, [CanBeNull] object value, Type destinationType)
+            public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
             {
                 return value?.ToString();
             }
@@ -345,12 +341,9 @@ namespace TomsToolbox.Essentials.Tests
             /// </summary>
             /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
             /// <returns><c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.</returns>
-            public override bool Equals([CanBeNull] object obj)
+            public override bool Equals(object? obj)
             {
-                if (!(obj is TestClass))
-                    return false;
-
-                return Equals((TestClass)obj);
+                return obj is TestClass testClass && Equals(testClass);
             }
 
             /// <summary>

@@ -2,9 +2,6 @@
 {
     using System.Diagnostics.CodeAnalysis;
 
-    using JetBrains.Annotations;
-    using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
-
     /// <summary>
     /// A collection of named metadata objects.
     /// </summary>
@@ -15,7 +12,6 @@
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>The metadata value.</returns>
-        [NotNull]
         object GetValue(string name);
 
         /// <summary>
@@ -26,7 +22,7 @@
         /// <returns>
         /// <c>true</c> if the metadata value exists.
         /// </returns>
-        bool TryGetValue(string name, [CanBeNull, NotNullWhen(true)] out object? value);
+        bool TryGetValue(string name, [NotNullWhen(true)] out object? value);
     }
 
     public static partial class ExtensionMethods
@@ -53,7 +49,7 @@
         /// <returns>
         /// <c>true</c> if the metadata value exists.
         /// </returns>
-        public static bool TryGetValue<T>([NotNull] this IMetadata metadata, string name, [CanBeNull, MaybeNull, NotNullWhen(true)] out T value)
+        public static bool TryGetValue<T>(this IMetadata metadata, string name, [NotNullWhen(true)] out T? value)
         {
             if (metadata.TryGetValue(name, out var v) && (v is T t))
             {
@@ -71,8 +67,7 @@
         /// <param name="metadata">The metadata.</param>
         /// <param name="name">The name.</param>
         /// <returns>The value, or default if no item with this name exists.</returns>
-        [CanBeNull]
-        public static object? GetValueOrDefault([NotNull] this IMetadata metadata, string name)
+        public static object? GetValueOrDefault(this IMetadata metadata, string name)
         {
             return metadata.TryGetValue(name, out var value) ? value : default;
         }
@@ -86,9 +81,7 @@
         /// <returns>
         /// The value, or default if no item with this name exists.
         /// </returns>
-        [CanBeNull]
-        [return:MaybeNull]
-        public static T GetValueOrDefault<T>([NotNull] this IMetadata metadata, string name)
+        public static T? GetValueOrDefault<T>(this IMetadata metadata, string name)
         {
             return metadata.TryGetValue<T>(name, out var value) ? value : default;
         }

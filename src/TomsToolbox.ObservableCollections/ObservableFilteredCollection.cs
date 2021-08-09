@@ -8,8 +8,6 @@
     using System.ComponentModel;
     using System.Linq;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     using WeakEventHandler;
@@ -26,9 +24,7 @@
     /// </remarks>
     public class ObservableFilteredCollection<T> : ReadOnlyObservableCollectionAdapter<T, ObservableCollection<T>>
     {
-        [NotNull]
         private readonly Func<T, bool> _filter;
-        [NotNull, ItemNotNull]
         private readonly string[] _liveTrackingProperties;
 
         /// <summary>
@@ -37,7 +33,7 @@
         /// <param name="sourceCollection">The source collection. This instance will not hold a reference to the source collection.</param>
         /// <param name="filter">The filter.</param>
         /// <param name="liveTrackingProperties">The live tracking properties. Whenever one of these properties in any item changes, the filter is reevaluated for the item.</param>
-        public ObservableFilteredCollection([NotNull, ItemCanBeNull] IEnumerable sourceCollection, [NotNull] Func<T, bool> filter, [NotNull, ItemNotNull] params string[] liveTrackingProperties)
+        public ObservableFilteredCollection(IEnumerable sourceCollection, Func<T, bool> filter, params string[] liveTrackingProperties)
             // ReSharper disable PossibleMultipleEnumeration
             : base(new ObservableCollection<T>(sourceCollection.Cast<T>().Where(filter)))
         {
@@ -53,7 +49,7 @@
             // ReSharper restore PossibleMultipleEnumeration
         }
 
-        private void AttachCollectionEvents([CanBeNull] INotifyCollectionChanged? sender)
+        private void AttachCollectionEvents(INotifyCollectionChanged? sender)
         {
             if (sender == null)
                 return;
@@ -62,7 +58,7 @@
         }
 
         [MakeWeak]
-        private void SourceCollection_CollectionChanged([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+        private void SourceCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
             {
@@ -93,7 +89,7 @@
             }
         }
 
-        private void AddItems([CanBeNull, ItemCanBeNull] IEnumerable<T>? newItems)
+        private void AddItems(IEnumerable<T>? newItems)
         {
             if (newItems == null)
                 return;
@@ -108,7 +104,7 @@
             }
         }
 
-        private void AttachItemEvents([CanBeNull] T newItem)
+        private void AttachItemEvents(T newItem)
         {
             if (newItem is INotifyPropertyChanged eventSource)
             {
@@ -116,7 +112,7 @@
             }
         }
 
-        private void RemoveItems([CanBeNull, ItemCanBeNull] IEnumerable<T>? oldItems)
+        private void RemoveItems(IEnumerable<T>? oldItems)
         {
             if (oldItems == null)
                 return;
@@ -130,7 +126,7 @@
             }
         }
 
-        private void DetachItemEvents([CanBeNull] T oldItem)
+        private void DetachItemEvents(T oldItem)
         {
             if (oldItem is INotifyPropertyChanged eventSource)
             {
@@ -139,7 +135,7 @@
         }
 
         [MakeWeak]
-        private void Item_PropertyChanged([NotNull] object sender, [NotNull] PropertyChangedEventArgs e)
+        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             var item = (T)sender;
 

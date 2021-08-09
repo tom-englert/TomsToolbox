@@ -9,8 +9,6 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -20,16 +18,14 @@
     /// <inheritdoc />
     public class CommandSource : DependencyObject
     {
-        [NotNull]
         private readonly ICommandSourceFactory _owner;
-        [NotNull, ItemNotNull]
-        private readonly List<ICommand> _attachedCommands = new List<ICommand>();
+        private readonly List<ICommand> _attachedCommands = new();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Composition.CommandSource" /> class.
         /// </summary>
         /// <param name="owner">The command source factory.</param>
-        public CommandSource([NotNull] ICommandSourceFactory owner)
+        public CommandSource(ICommandSourceFactory owner)
         {
             _owner = owner;
         }
@@ -37,19 +33,16 @@
         /// <summary>
         /// Gets the command represented by this <see cref="CommandSourceFactory" />. This can be bound to a menu's or button's Command property.
         /// </summary>
-        [CanBeNull]
         public ICommand? Command
         {
-            get => (ICommand)GetValue(CommandProperty);
+            get => (ICommand?)GetValue(CommandProperty);
             private set => SetValue(_commandPropertyKey, value);
         }
-        [NotNull]
         private static readonly DependencyPropertyKey _commandPropertyKey =
             DependencyProperty.RegisterReadOnly("Command", typeof(ICommand), typeof(CommandSource), new FrameworkPropertyMetadata(NullCommand.Default, null, Command_CoerceValue));
         /// <summary>
         /// Identifies the <see cref="Command"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty CommandProperty = _commandPropertyKey.DependencyProperty;
 
 
@@ -64,13 +57,11 @@
         /// <summary>
         /// Identifies the <see cref="IsChecked"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty IsCheckedProperty =
             DependencyProperty.Register("IsChecked", typeof(bool), typeof(CommandSource));
 
 
-        [CanBeNull]
-        private static object? Command_CoerceValue([CanBeNull] DependencyObject? d, [CanBeNull] object? basevalue)
+        private static object Command_CoerceValue(DependencyObject? d, object? basevalue)
         {
             return basevalue ?? NullCommand.Default;
         }
@@ -78,19 +69,16 @@
         /// <summary>
         /// Gets the header to be shown in the UI. Usually this is a localized text naming the command.
         /// </summary>
-        [CanBeNull]
         public object? Header => _owner.Header;
 
         /// <summary>
         /// Gets the tool tip to be shown in the UI. Usually this is a localized text describing the command.
         /// </summary>
-        [CanBeNull]
         public object? Description => _owner.Description;
 
         /// <summary>
         /// Gets the icon to be shown in the UI, or null to show no icon.
         /// </summary>
-        [CanBeNull]
         public object? Icon => _owner.Icon;
 
         /// <summary>
@@ -102,7 +90,6 @@
         /// <summary>
         /// Gets the id of the region sub-items can register for.
         /// </summary>
-        [CanBeNull]
         public string? SubRegionId => _owner.SubRegionId;
 
         /// <summary>
@@ -115,13 +102,11 @@
         /// Gets the name of the group that this command belongs to.
         /// If different group names are specified for a target region, the commands can be grouped and the groups separated by a <see cref="Separator" />.
         /// </summary>
-        [CanBeNull]
         public virtual object? GroupName => _owner.GroupName;
 
         /// <summary>
         /// Gets a tag that can be bound to the target objects tag.
         /// </summary>
-        [CanBeNull]
         public object? Tag => _owner.Tag;
 
         /// <summary>
@@ -133,20 +118,18 @@
             get => this.GetValue<bool>(IsAnyTargetAttachedProperty);
             private set => SetValue(_isAnyTargetAttachedPropertyKey, value);
         }
-        [NotNull]
         private static readonly DependencyPropertyKey _isAnyTargetAttachedPropertyKey =
             DependencyProperty.RegisterReadOnly("IsAnyTargetAttached", typeof(bool), typeof(CommandSource), new FrameworkPropertyMetadata(false));
         /// <summary>
         /// Identifies the <see cref="IsAnyTargetAttached"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty IsAnyTargetAttachedProperty = _isAnyTargetAttachedPropertyKey.DependencyProperty;
 
         /// <summary>
         /// Attaches the specified command. The last command attached will become the active command, while the previous command will be pushed on a stack.
         /// </summary>
         /// <param name="command">The command.</param>
-        internal void Attach([NotNull] ICommand command)
+        internal void Attach(ICommand command)
         {
             _attachedCommands.Insert(0, command);
 
@@ -158,7 +141,7 @@
         /// </summary>
         /// <param name="command">The command.</param>
         /// <exception cref="System.ArgumentException">Can't detach a command that has not been attached before;command</exception>
-        internal void Detach([NotNull] ICommand command)
+        internal void Detach(ICommand command)
         {
             if (!_attachedCommands.Remove(command))
                 return;
@@ -172,7 +155,7 @@
         /// <param name="oldCommand">The old command.</param>
         /// <param name="newCommand">The new command.</param>
         /// <exception cref="System.ArgumentException">Can't replace a command that has not been attached before;oldCommand</exception>
-        internal void Replace([NotNull] ICommand oldCommand, [NotNull] ICommand newCommand)
+        internal void Replace(ICommand oldCommand, ICommand newCommand)
         {
             var index = _attachedCommands.IndexOf(oldCommand);
 
@@ -184,7 +167,7 @@
             SetCommand(_attachedCommands.FirstOrDefault());
         }
 
-        private void SetCommand([CanBeNull] ICommand? command)
+        private void SetCommand(ICommand? command)
         {
             Command = command;
 

@@ -4,8 +4,6 @@
     using System.Windows.Input;
     using System.Windows.Media;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A virtualizing panel that raises MouseDoubleClick events like the <see cref="Control"/>.
     /// </summary>
@@ -24,7 +22,7 @@
         /// Raises the <see cref="Control.MouseDoubleClickEvent" /> event.
         /// </summary>
         /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnMouseDoubleClick([NotNull] MouseButtonEventArgs e)
+        protected virtual void OnMouseDoubleClick(MouseButtonEventArgs e)
         {
             RaiseEvent(e);
         }
@@ -33,7 +31,7 @@
         /// Raises the <see cref="Control.PreviewMouseDoubleClickEvent" /> event.
         /// </summary>
         /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnPreviewMouseDoubleClick([NotNull] MouseButtonEventArgs e)
+        protected virtual void OnPreviewMouseDoubleClick(MouseButtonEventArgs e)
         {
             RaiseEvent(e);
         }
@@ -86,7 +84,7 @@
             base.OnPreviewMouseRightButtonDown(e);
         }
 
-        private bool HandleDoubleClick([NotNull] MouseButtonEventArgs e)
+        private bool HandleDoubleClick(MouseButtonEventArgs e)
         {
 
             if (e.ClickCount != 2)

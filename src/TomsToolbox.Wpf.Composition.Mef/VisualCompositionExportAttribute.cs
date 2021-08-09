@@ -3,8 +3,6 @@
     using System;
     using System.ComponentModel.Composition;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Wpf.Composition.XamlExtensions;
 
     /// <summary>
@@ -14,17 +12,14 @@
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class VisualCompositionExportAttribute : ExportAttribute, IVisualCompositionMetadata
     {
-        [NotNull, ItemNotNull]
-        private readonly string[] _targetRegions;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="VisualCompositionExportAttribute" /> class.
         /// </summary>
         /// <param name="targetRegions">The names of the region(s) where this view should appear.</param>
-        public VisualCompositionExportAttribute([NotNull, ItemNotNull] params string[] targetRegions)
+        public VisualCompositionExportAttribute(params string[] targetRegions)
             : base(VisualComposition.ExportContractName, typeof(object))
         {
-            _targetRegions = targetRegions;
+            TargetRegions = targetRegions;
         }
 
         /// <summary>
@@ -48,7 +43,6 @@
         /// <summary>
         /// Gets the target regions for visual composition.
         /// </summary>
-        [NotNull]
-        public string[] TargetRegions => _targetRegions;
+        public string[] TargetRegions { get; }
     }
 }

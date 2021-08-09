@@ -4,23 +4,19 @@
     using System.Globalization;
     using System.Linq;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Extension methods for the <see cref="CultureInfo"/> class.
     /// </summary>
     public static class CultureInfoExtensions
     {
-        [NotNull] private static readonly Dictionary<CultureInfo, CultureInfo[]> _childCache = new Dictionary<CultureInfo, CultureInfo[]>();
+        private static readonly Dictionary<CultureInfo, CultureInfo[]> _childCache = new();
 
         /// <summary>
         /// Returns an enumeration of the ancestor elements of this element.
         /// </summary>
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
-        [ItemNotNull]
-        [NotNull]
-        public static IEnumerable<CultureInfo> GetAncestors([NotNull] this CultureInfo self)
+        public static IEnumerable<CultureInfo> GetAncestors(this CultureInfo self)
         {
             var item = self.Parent;
 
@@ -36,9 +32,7 @@
         /// </summary>
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
-        [ItemNotNull]
-        [NotNull]
-        public static IEnumerable<CultureInfo> GetAncestorsAndSelf([NotNull] this CultureInfo self)
+        public static IEnumerable<CultureInfo> GetAncestorsAndSelf(this CultureInfo self)
         {
             var item = self;
 
@@ -54,14 +48,12 @@
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns>The immediate children of the specified item.</returns>
-        [NotNull, ItemNotNull]
-        public static ICollection<CultureInfo> GetChildren([NotNull] this CultureInfo item)
+        public static ICollection<CultureInfo> GetChildren(this CultureInfo item)
         {
-            return _childCache.ForceValue(item, CreateChildList)!;
+            return _childCache.ForceValue(item, CreateChildList);
         }
 
-        [NotNull, ItemNotNull]
-        private static CultureInfo[] CreateChildList([CanBeNull] CultureInfo? parent)
+        private static CultureInfo[] CreateChildList(CultureInfo? parent)
         {
             return CultureInfo.GetCultures(CultureTypes.AllCultures).Where(child => child?.Parent.Equals(parent) == true).ToArray();
         }
@@ -71,8 +63,7 @@
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns>The descendants of the item.</returns>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<CultureInfo> GetDescendants([NotNull] this CultureInfo item)
+        public static IEnumerable<CultureInfo> GetDescendants(this CultureInfo item)
         {
             foreach (var child in item.GetChildren())
             {

@@ -8,8 +8,6 @@
     using System.Windows.Input;
     using System.Windows.Threading;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -29,9 +27,8 @@
         /// </summary>
         public const string TemplatePartViewport = @"PART_Viewport";
 
-        private static readonly Point LogicalCenter = new Point(0.5, 0.5);
+        private static readonly Point LogicalCenter = new(0.5, 0.5);
 
-        [NotNull]
         private readonly DispatcherThrottle _updateThrottle;
 
         private bool _isUpdating;
@@ -50,7 +47,7 @@
             ClipToBounds = true;
             _updateThrottle = new DispatcherThrottle(DispatcherPriority.Background, Update);
 
-            Loaded += (_, __) => ViewportSize = (Vector)this.GetPhysicalPixelSize() * 512.0;
+            Loaded += (_, _) => ViewportSize = (Vector)this.GetPhysicalPixelSize() * 512.0;
         }
 
         #region Dependency Properties
@@ -63,28 +60,25 @@
             get => this.GetValue<Vector>(ViewportSizeProperty);
             private set => SetValue(ViewportSizePropertyKey, value);
         }
-        [NotNull]
         private static readonly DependencyPropertyKey ViewportSizePropertyKey =
             DependencyProperty.RegisterReadOnly("ViewportSize", typeof(Vector), typeof(Map), new FrameworkPropertyMetadata(new Vector(512, 512)));
         /// <summary>
         /// Identifies the <see cref="ViewportSize"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty ViewportSizeProperty = ViewportSizePropertyKey.DependencyProperty;
+        public static readonly DependencyProperty ViewportSizeProperty = ViewportSizePropertyKey.DependencyProperty;
 
 
         /// <summary>
         /// Gets or sets the image provider.
         /// </summary>
-        [CanBeNull]
         public IImageProvider? ImageProvider
         {
-            get => (IImageProvider)GetValue(ImageProviderProperty);
+            get => (IImageProvider?)GetValue(ImageProviderProperty);
             set => SetValue(ImageProviderProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="ImageProvider"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty ImageProviderProperty =
             DependencyProperty.Register("ImageProvider", typeof(IImageProvider), typeof(Map));
 
@@ -96,13 +90,12 @@
             get => this.GetValue<double>(ZoomFactorProperty);
             private set => SetValue(ZoomFactorPropertyKey, value);
         }
-        [NotNull]
         private static readonly DependencyPropertyKey ZoomFactorPropertyKey =
-            DependencyProperty.RegisterReadOnly("ZoomFactor", typeof(double), typeof(Map), new FrameworkPropertyMetadata(1.0, (sender, e) => ((Map)sender)?.ZoomFactor_Changed()));
+            DependencyProperty.RegisterReadOnly("ZoomFactor", typeof(double), typeof(Map), new FrameworkPropertyMetadata(1.0, (sender, _) => ((Map)sender)?.ZoomFactor_Changed()));
         /// <summary>
         /// Identifies the <see cref="ZoomFactor"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty ZoomFactorProperty = ZoomFactorPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty ZoomFactorProperty = ZoomFactorPropertyKey.DependencyProperty;
 
         /// <summary>
         /// Gets or sets the zoom level. Set to integer values to get non-blurred images.
@@ -115,7 +108,6 @@
         /// <summary>
         /// Identifies the <see cref="ZoomLevel"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty ZoomLevelProperty =
             DependencyProperty.Register("ZoomLevel", typeof(double), typeof(Map), new FrameworkPropertyMetadata(0.0, (sender, e) => ((Map)sender)?.ZoomLevel_Changed((double)e.NewValue), (d, baseValue) => ((Map)d)?.ZoomLevel_CoerceValue(baseValue.SafeCast<double>())));
 
@@ -130,9 +122,8 @@
         /// <summary>
         /// Identifies the <see cref="Center"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty CenterProperty =
-            DependencyProperty.Register("Center", typeof(Point), typeof(Map), new FrameworkPropertyMetadata(LogicalCenter, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((Map)sender)?.Center_Changed((Point)e.NewValue), (d, baseValue) => Center_CoerceValue(baseValue.SafeCast<Point>())));
+            DependencyProperty.Register("Center", typeof(Point), typeof(Map), new FrameworkPropertyMetadata(LogicalCenter, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((Map)sender)?.Center_Changed((Point)e.NewValue), (_, baseValue) => Center_CoerceValue(baseValue.SafeCast<Point>())));
 
         /// <summary>
         /// Gets the logical offset that the map image is moved relative to it's origin.
@@ -142,13 +133,12 @@
             get => this.GetValue<Vector>(OffsetProperty);
             private set => SetValue(OffsetPropertyKey, value);
         }
-        [NotNull]
         private static readonly DependencyPropertyKey OffsetPropertyKey =
-            DependencyProperty.RegisterReadOnly("Offset", typeof(Vector), typeof(Map), new FrameworkPropertyMetadata((sender, e) => ((Map)sender)?.Offset_Changed()));
+            DependencyProperty.RegisterReadOnly("Offset", typeof(Vector), typeof(Map), new FrameworkPropertyMetadata((sender, _) => ((Map)sender)?.Offset_Changed()));
         /// <summary>
         /// Identifies the <see cref="Offset"/> read only dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty OffsetProperty = OffsetPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty OffsetProperty = OffsetPropertyKey.DependencyProperty;
 
         /// <summary>
         /// Gets or sets the logical coordinates of the zooming point that will stay fixed when zooming.
@@ -161,7 +151,6 @@
         /// <summary>
         /// Identifies the <see cref="ZoomingPoint"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty ZoomingPointProperty =
             DependencyProperty.Register("ZoomingPoint", typeof(Point), typeof(Map), new FrameworkPropertyMetadata(LogicalCenter, (sender, e) => ((Map)sender)?.ZoomingPoint_Changed((Point)e.OldValue, (Point)e.NewValue)));
 
@@ -179,43 +168,38 @@
         /// <summary>
         /// Identifies the <see cref="Bounds"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty BoundsProperty =
             DependencyProperty.Register("Bounds", typeof(Rect), typeof(Map), new FrameworkPropertyMetadata(Rect.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         /// <summary>
         /// Gets the element representing the map layer.
         /// </summary>
-        [CanBeNull]
         public FrameworkElement? World
         {
-            get => (FrameworkElement)GetValue(WorldProperty);
+            get => (FrameworkElement?)GetValue(WorldProperty);
             private set => SetValue(WorldPropertyKey, value);
         }
-        [NotNull]
         private static readonly DependencyPropertyKey WorldPropertyKey =
             DependencyProperty.RegisterReadOnly("World", typeof(FrameworkElement), typeof(Map), new FrameworkPropertyMetadata());
         /// <summary>
         /// Identifies the <see cref="World"/> dependency property.
         /// </summary>
-        [NotNull] public static readonly DependencyProperty WorldProperty = WorldPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty WorldProperty = WorldPropertyKey.DependencyProperty;
 
         /// <summary>
         /// Gets the element representing the viewport.
         /// </summary>
-        [CanBeNull]
         public FrameworkElement? Viewport
         {
-            get => (FrameworkElement)GetValue(ViewportProperty);
+            get => (FrameworkElement?)GetValue(ViewportProperty);
             private set => SetValue(ViewportPropertyKey, value);
         }
-        [NotNull]
         private static readonly DependencyPropertyKey ViewportPropertyKey =
             DependencyProperty.RegisterReadOnly("Viewport", typeof(FrameworkElement), typeof(Map), new FrameworkPropertyMetadata());
         /// <summary>
         /// Identifies the <see cref="Viewport"/> dependency property.
         /// </summary>
-        [NotNull] public static readonly DependencyProperty ViewportProperty = ViewportPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty ViewportProperty = ViewportPropertyKey.DependencyProperty;
 
         /// <summary>
         /// Gets the last mouse position when the mouse was over the map in logical coordinates.
@@ -231,23 +215,21 @@
         /// <summary>
         /// Identifies the <see cref="MousePosition"/> dependency property.
         /// </summary>
-        [NotNull] public static readonly DependencyProperty MousePositionProperty = DependencyProperty.Register("MousePosition", typeof(Point), typeof(Map), new FrameworkPropertyMetadata(LogicalCenter, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static readonly DependencyProperty MousePositionProperty = DependencyProperty.Register("MousePosition", typeof(Point), typeof(Map), new FrameworkPropertyMetadata(LogicalCenter, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
         /// <summary>
         /// Gets or sets the double click command. The command will be executed when the user double clicks on the map.
         /// The command parameter is a <see cref="Point"/> containing the logical coordinates.
         /// </summary>
-        [CanBeNull]
         public ICommand? MouseDoubleClickCommand
         {
-            get => (ICommand)GetValue(MouseDoubleClickCommandProperty);
+            get => (ICommand?)GetValue(MouseDoubleClickCommandProperty);
             set => SetValue(MouseDoubleClickCommandProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="MouseDoubleClickCommand"/> dependency property.
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty MouseDoubleClickCommandProperty =
             DependencyProperty.Register("MouseDoubleClickCommand", typeof(ICommand), typeof(Map));
 

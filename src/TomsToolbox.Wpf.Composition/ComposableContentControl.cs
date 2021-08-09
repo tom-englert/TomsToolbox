@@ -4,8 +4,6 @@
     using System.Windows;
     using System.Windows.Controls;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Wpf.Composition.XamlExtensions;
 
     /// <summary>
@@ -25,7 +23,6 @@
         /// <summary>
         /// Gets or sets the role of the template.
         /// </summary>
-        [CanBeNull]
         public object? Role
         {
             get => GetValue(RoleProperty);
@@ -34,7 +31,7 @@
         /// <summary>
         /// Identifies the <see cref="Role"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty RoleProperty =
+        public static readonly DependencyProperty RoleProperty =
             DependencyProperty.Register("Role", typeof(object), typeof(ComposableContentControl));
 
 

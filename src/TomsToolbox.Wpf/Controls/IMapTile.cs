@@ -1,7 +1,5 @@
 namespace TomsToolbox.Wpf.Controls
 {
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Implemented by representations of a map tile.
     /// </summary>
@@ -34,7 +32,6 @@ namespace TomsToolbox.Wpf.Controls
         /// <summary>
         /// Gets the parent tile, or <c>null</c> if this is the root tile.
         /// </summary>
-        [CanBeNull]
         IMapTile? Parent
         {
             get;

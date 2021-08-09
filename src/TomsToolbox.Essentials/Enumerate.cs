@@ -4,8 +4,6 @@
     using System.Collections;
     using System.Collections.Generic;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Some enumerators for various scenarios.
     /// </summary>
@@ -20,19 +18,13 @@
         /// <param name="second">The second collection.</param>
         /// <returns>Tuples of the elements.</returns>
         /// <remarks>If the number of elements in each collection is different, the smaller collection determines the number of enumerated items.</remarks>
-        [ItemNotNull]
-        [NotNull]
-        public static IEnumerable<Tuple<T1, T2>> AsTuples<T1, T2>([NotNull, ItemCanBeNull] IEnumerable<T1> first, [NotNull, ItemCanBeNull] IEnumerable<T2> second)
+        public static IEnumerable<Tuple<T1, T2>> AsTuples<T1, T2>(IEnumerable<T1> first, IEnumerable<T2> second)
         {
-            using (var e1 = first.GetEnumerator())
+            using var e1 = first.GetEnumerator();
+            using var e2 = second.GetEnumerator();
+            while (e1.MoveNext() && e2.MoveNext())
             {
-                using (var e2 = second.GetEnumerator())
-                {
-                    while (e1.MoveNext() && e2.MoveNext())
-                    {
-                        yield return new Tuple<T1, T2>(e1.Current, e2.Current);
-                    }
-                }
+                yield return new Tuple<T1, T2>(e1.Current, e2.Current);
             }
         }
 
@@ -43,9 +35,7 @@
         /// <param name="second">The second collection.</param>
         /// <returns>Tuples of the elements.</returns>
         /// <remarks>If the number of elements in each collection is different, the smaller collection determines the number of enumerated items.</remarks>
-        [ItemNotNull]
-        [NotNull]
-        public static IEnumerable<Tuple<object, object>> AsTuples([NotNull, ItemCanBeNull] IEnumerable first, [NotNull, ItemCanBeNull] IEnumerable second)
+        public static IEnumerable<Tuple<object, object>> AsTuples(IEnumerable first, IEnumerable second)
         {
             var e1 = first.GetEnumerator();
             var e2 = second.GetEnumerator();

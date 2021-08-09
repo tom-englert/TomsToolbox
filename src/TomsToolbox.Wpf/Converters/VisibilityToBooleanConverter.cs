@@ -5,8 +5,6 @@
     using System.Windows;
     using System.Windows.Data;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// The counterpart of BooleanToVisibilityConverter.
     /// </summary>
@@ -16,7 +14,7 @@
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Default = new VisibilityToBooleanConverter();
+        public static readonly IValueConverter Default = new VisibilityToBooleanConverter();
 
         /// <summary>
         /// The visibility value to be used when converting back from a false boolean value. Defaults to Collapsed.
@@ -33,8 +31,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        [NotNull]
-        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             return Visibility.Visible.Equals(value);
         }
@@ -49,8 +46,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        [NotNull]
-        protected override object? ConvertBack([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             return true.Equals(value) ? Visibility.Visible : VisibilityWhenBooleanIsFalse;
         }

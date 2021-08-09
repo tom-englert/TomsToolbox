@@ -7,8 +7,6 @@
     using System.Windows.Data;
     using System.Windows.Media;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -31,49 +29,48 @@
     [ValueConversion(typeof(object), typeof(object))]
     public class BinaryOperationConverter : ValueConverter, IMultiValueConverter
     {
-        [CanBeNull]
         private BinaryOperationProcessor? _processor;
 
         /// <summary>
         /// The default addition converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Addition = new BinaryOperationConverter { Operation = BinaryOperation.Addition };
+        public static readonly IValueConverter Addition = new BinaryOperationConverter { Operation = BinaryOperation.Addition };
         /// <summary>
         /// The default subtraction converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Subtraction = new BinaryOperationConverter { Operation = BinaryOperation.Subtraction };
+        public static readonly IValueConverter Subtraction = new BinaryOperationConverter { Operation = BinaryOperation.Subtraction };
         /// <summary>
         /// The default multiplication converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Multiply = new BinaryOperationConverter { Operation = BinaryOperation.Multiply };
+        public static readonly IValueConverter Multiply = new BinaryOperationConverter { Operation = BinaryOperation.Multiply };
         /// <summary>
         /// The default division converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Division = new BinaryOperationConverter { Operation = BinaryOperation.Division };
+        public static readonly IValueConverter Division = new BinaryOperationConverter { Operation = BinaryOperation.Division };
         /// <summary>
         /// The default equality converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Equality = new BinaryOperationConverter { Operation = BinaryOperation.Equality };
+        public static readonly IValueConverter Equality = new BinaryOperationConverter { Operation = BinaryOperation.Equality };
         /// <summary>
         /// The default inequality converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Inequality = new BinaryOperationConverter { Operation = BinaryOperation.Inequality };
+        public static readonly IValueConverter Inequality = new BinaryOperationConverter { Operation = BinaryOperation.Inequality };
         /// <summary>
         /// The default greater than converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter GreaterThan = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThan };
+        public static readonly IValueConverter GreaterThan = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThan };
         /// <summary>
         /// The default less than converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter LessThan = new BinaryOperationConverter { Operation = BinaryOperation.LessThan };
+        public static readonly IValueConverter LessThan = new BinaryOperationConverter { Operation = BinaryOperation.LessThan };
         /// <summary>
         /// The default greater than or equals converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter GreaterThanOrEqual = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThanOrEqual };
+        public static readonly IValueConverter GreaterThanOrEqual = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThanOrEqual };
         /// <summary>
         /// The default less than or equals converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter LessThanOrEqual = new BinaryOperationConverter { Operation = BinaryOperation.LessThanOrEqual };
+        public static readonly IValueConverter LessThanOrEqual = new BinaryOperationConverter { Operation = BinaryOperation.LessThanOrEqual };
 
         /// <summary>
         /// Gets or sets the operation the converter is performing.
@@ -84,7 +81,6 @@
             set => _processor = new BinaryOperationProcessor(value);
         }
 
-        [NotNull]
         private BinaryOperationProcessor Processor => _processor ??= new BinaryOperationProcessor(BinaryOperation.Addition);
 
         /// <summary>
@@ -97,8 +93,7 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        [CanBeNull]
-        protected override object? Convert(object value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object? Convert(object value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             if (parameter == null)
                 return value;
@@ -117,8 +112,7 @@
         /// A converted value.If the method returns null, the valid null value is used.A return value of <see cref="T:System.Windows.DependencyProperty" />.<see cref="F:System.Windows.DependencyProperty.UnsetValue" /> indicates that the converter did not produce a value, and that the binding will use the <see cref="P:System.Windows.Data.BindingBase.FallbackValue" /> if it is available, or else will use the default value.A return value of <see cref="T:System.Windows.Data.Binding" />.<see cref="F:System.Windows.Data.Binding.DoNothing" /> indicates that the binding does not transfer the value or use the <see cref="P:System.Windows.Data.BindingBase.FallbackValue" /> or the default value.
         /// </returns>
         /// <exception cref="System.ArgumentException">MultiValueConverter requires two values.;values</exception>
-        [CanBeNull]
-        public object? Convert([CanBeNull] object[]? values, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        public object? Convert(object[]? values, Type? targetType, object? parameter, CultureInfo? culture)
         {
             if (values == null)
                 return null;
@@ -143,8 +137,7 @@
         /// An array of values that have been converted from the target value back to the source values.
         /// </returns>
         /// <exception cref="System.InvalidOperationException">This operation is not supported.</exception>
-        [CanBeNull]
-        public object[] ConvertBack([CanBeNull] object? value, [CanBeNull] Type[]? targetTypes, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        public object[] ConvertBack(object? value, Type[]? targetTypes, object? parameter, CultureInfo? culture)
         {
             throw new InvalidOperationException();
         }

@@ -4,8 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A simple set of weak references.
     /// </summary>
@@ -14,8 +12,7 @@
     {
         private int _cleanupCycleCounter;
 
-        [NotNull, ItemNotNull]
-        private List<WeakReference<T>> _items = new List<WeakReference<T>>();
+        private List<WeakReference<T>> _items = new();
 
         /// <summary>
         /// Adds the specified element to the set.

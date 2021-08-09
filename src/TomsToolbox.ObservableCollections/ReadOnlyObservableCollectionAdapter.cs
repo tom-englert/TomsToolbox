@@ -5,8 +5,6 @@
     using System.Collections.Specialized;
     using System.ComponentModel;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Similar to the <see cref="ReadOnlyObservableCollection{T}" />, except it does not require the items
     /// collection to be an <see cref="ObservableCollection{T}" /> but only an <see cref="IList{T}" /> that implements also INotifyCollectionChanged.
@@ -20,7 +18,7 @@
         /// Initializes a new instance of the <see cref="ReadOnlyObservableCollectionAdapter{T, TList}"/> class.
         /// </summary>
         /// <param name="items">The items.</param>
-        protected ReadOnlyObservableCollectionAdapter([NotNull] TList items)
+        protected ReadOnlyObservableCollectionAdapter(TList items)
             : base(items)
         {
             items.CollectionChanged += Items_CollectionChanged;
@@ -30,7 +28,6 @@
         /// <summary>
         /// Returns the collection that the <see cref="ReadOnlyObservableCollectionAdapter{T, TList}"/> wraps.
         /// </summary>
-        [NotNull]
         protected new TList Items => (TList)base.Items;
 
         /// <summary>
@@ -47,7 +44,7 @@
         /// Raises the <see cref="INotifyPropertyChanged.PropertyChanged" /> event.
         /// </summary>
         /// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnPropertyChanged([CanBeNull] PropertyChangedEventArgs? e)
+        protected virtual void OnPropertyChanged(PropertyChangedEventArgs? e)
         {
             PropertyChanged?.Invoke(this, e);
         }
@@ -56,17 +53,17 @@
         /// Raises the <see cref="INotifyCollectionChanged.CollectionChanged" /> event.
         /// </summary>
         /// <param name="e">The <see cref="NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
-        protected virtual void OnCollectionChanged([CanBeNull] NotifyCollectionChangedEventArgs? e)
+        protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs? e)
         {
             CollectionChanged?.Invoke(this, e);
         }
 
-        private void Items_PropertyChanged([CanBeNull] object? sender, [CanBeNull] PropertyChangedEventArgs? e)
+        private void Items_PropertyChanged(object? sender, PropertyChangedEventArgs? e)
         {
             OnPropertyChanged(e);
         }
 
-        private void Items_CollectionChanged([CanBeNull] object? sender, [CanBeNull] NotifyCollectionChangedEventArgs? e)
+        private void Items_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs? e)
         {
             OnCollectionChanged(e);
         }

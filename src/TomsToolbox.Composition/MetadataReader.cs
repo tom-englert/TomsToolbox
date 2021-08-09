@@ -6,8 +6,6 @@
     using System.Linq;
     using System.Reflection;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -22,7 +20,7 @@
         /// </summary>
         /// <param name="assembly">The assembly.</param>
         /// <returns>The export info for each type with an export attribute in the assembly.</returns>
-        public static IList<ExportInfo> Read([NotNull] Assembly assembly)
+        public static IList<ExportInfo> Read(Assembly assembly)
         {
             var result = new List<ExportInfo>();
 
@@ -92,13 +90,11 @@
         /// <summary>
         /// Gets or sets the type this export information relates to.
         /// </summary>
-        [CanBeNull]
         public Type? Type { get; set; }
 
         /// <summary>
         /// Gets or sets the metadata of each export.
         /// </summary>
-        [CanBeNull]
         public IDictionary<string, object>[]? Metadata { get; set; }
 
         /// <summary>
@@ -109,7 +105,6 @@
         /// <summary>
         /// Gets or sets the boundary outside which the part marked by this attribute is inaccessible.
         /// </summary>
-        [CanBeNull]
         public string? SharingBoundary { get; set; }
 
         private void EvaluateSharedAttribute(Type type)
@@ -171,14 +166,12 @@
             }
         }
 
-        [CanBeNull]
         private static object? ConvertValue(CustomAttributeTypedArgument argument)
         {
             return ConvertValue(argument.ArgumentType, argument.Value);
         }
 
-        [CanBeNull]
-        private static object? ConvertValue(Type argumentType, [CanBeNull] object? value)
+        private static object? ConvertValue(Type argumentType, object? value)
         {
             if (value == null)
                 return null;

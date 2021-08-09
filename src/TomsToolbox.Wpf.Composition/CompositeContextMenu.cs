@@ -6,8 +6,6 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
-    using JetBrains.Annotations;
-
     using Microsoft.Xaml.Behaviors;
 
     /// <summary>
@@ -29,7 +27,7 @@
         /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Composition.CompositeContextMenuExtension" /> class.
         /// </summary>
         /// <param name="regionId">The region identifier.</param>
-        public CompositeContextMenuExtension([CanBeNull] string? regionId)
+        public CompositeContextMenuExtension(string? regionId)
         {
             RegionId = regionId;
         }
@@ -37,7 +35,6 @@
         /// <summary>
         /// Gets or sets the region identifier.
         /// </summary>
-        [CanBeNull]
         public string? RegionId
         {
             get;
@@ -47,7 +44,6 @@
         /// <summary>
         /// Gets or sets a binding to seed the <see cref="IVisualCompositionBehavior.CompositionContext"/>.
         /// </summary>
-        [CanBeNull]
         public Binding? CompositionContextBinding
         {
             get;
@@ -62,7 +58,6 @@
         /// <returns>
         /// The object value to set on the property where the extension is applied.
         /// </returns>
-        [NotNull]
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             var compositeContextMenu = new CompositeContextMenu()
@@ -107,23 +102,21 @@
         /// <summary>
         /// Gets or sets the region identifier for which to collect all exported <see cref="CommandSourceFactory"/> objects.
         /// </summary>
-        [CanBeNull]
         public string? RegionId
         {
-            get => (string)GetValue(RegionIdProperty);
+            get => (string?)GetValue(RegionIdProperty);
             set => SetValue(RegionIdProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="RegionId"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty RegionIdProperty =
+        public static readonly DependencyProperty RegionIdProperty =
             DependencyProperty.Register("RegionId", typeof(string), typeof(CompositeContextMenu));
 
 
         /// <summary>
         /// Gets or sets the composition context.
         /// </summary>
-        [CanBeNull]
         public object? CompositionContext
         {
             get => GetValue(CompositionContextProperty);
@@ -132,7 +125,7 @@
         /// <summary>
         /// Identifies the <see cref="CompositionContext"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty CompositionContextProperty =
+        public static readonly DependencyProperty CompositionContextProperty =
             DependencyProperty.Register("CompositionContext", typeof (object), typeof (CompositeContextMenu));
     }
 }

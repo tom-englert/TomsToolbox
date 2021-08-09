@@ -5,8 +5,6 @@
     using System.IO;
     using System.Reflection;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Extension methods for assemblies.
     /// </summary>
@@ -18,8 +16,7 @@
         /// </summary>
         /// <param name="assembly">The assembly.</param>
         /// <returns>The directory in which the given assembly is stored.</returns>
-        [NotNull]
-        public static DirectoryInfo GetAssemblyDirectory([NotNull] this Assembly assembly)
+        public static DirectoryInfo GetAssemblyDirectory(this Assembly assembly)
         {
             var codeBase = assembly.CodeBase;
 
@@ -34,8 +31,7 @@
         /// </summary>
         /// <param name="assemblyName">The assembly.</param>
         /// <returns>The directory in which the given assembly is stored.</returns>
-        [NotNull]
-        public static DirectoryInfo GetAssemblyDirectory([NotNull] this AssemblyName assemblyName)
+        public static DirectoryInfo GetAssemblyDirectory(this AssemblyName assemblyName)
         {
             var codeBase = assemblyName.CodeBase;
 
@@ -53,8 +49,7 @@
         /// <remarks>
         /// The URI is in the format "pack://application:,,,/ReferencedAssembly;component/"
         /// </remarks>
-        [NotNull]
-        public static Uri GeneratePackUri([NotNull] this Assembly assembly)
+        public static Uri GeneratePackUri(this Assembly assembly)
         {
             var name = new AssemblyName(assembly.FullName).Name;
 
@@ -72,8 +67,7 @@
         /// <remarks>
         /// The URI is in the format "pack://application:,,,/ReferencedAssembly;component/RelativeUri"
         /// </remarks>
-        [NotNull]
-        public static Uri GeneratePackUri([NotNull] this Assembly assembly, [NotNull] string relativeUri)
+        public static Uri GeneratePackUri(this Assembly assembly, string relativeUri)
         {
             return assembly.GeneratePackUri(new Uri(relativeUri, UriKind.Relative));
         }
@@ -89,8 +83,7 @@
         /// <remarks>
         /// The URI is in the format "pack://application:,,,/ReferencedAssembly;component/RelativeUri"
         /// </remarks>
-        [NotNull]
-        public static Uri GeneratePackUri([NotNull] this Assembly assembly, [NotNull] Uri relativeUri)
+        public static Uri GeneratePackUri(this Assembly assembly, Uri relativeUri)
         {
             return new Uri(assembly.GeneratePackUri(), relativeUri);
         }

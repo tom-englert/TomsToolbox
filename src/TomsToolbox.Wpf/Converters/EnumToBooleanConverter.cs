@@ -6,8 +6,6 @@
     using System.Linq;
     using System.Windows.Data;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Tests if an enum value matches one of the given values provides as the converter parameter. 
     /// If the enum has a <see cref="FlagsAttribute"/>, the match is done with the logic "is any flag set".
@@ -18,7 +16,7 @@
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Default = new EnumToBooleanConverter();
+        public static readonly IValueConverter Default = new EnumToBooleanConverter();
 
         /// <summary>
         /// Converts a value. 
@@ -28,8 +26,7 @@
         /// A converted value.
         /// </returns>
         /// <param name="value">The value produced by the binding source.</param><param name="targetType">The type of the binding target property.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
-        [NotNull]
-        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             return Convert(value, parameter as string ?? string.Empty);
         }
@@ -40,7 +37,7 @@
         /// <param name="value">The enum value.</param>
         /// <param name="matches">A comma separated list of enum names to match.</param>
         /// <returns>True if the value matches one of the enum names.</returns>
-        public static bool Convert([CanBeNull] object? value, [NotNull] string matches)
+        public static bool Convert(object? value, string matches)
         {
             var valueType = value?.GetType();
             if (valueType?.IsEnum != true)

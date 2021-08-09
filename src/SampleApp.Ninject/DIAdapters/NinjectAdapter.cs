@@ -6,15 +6,12 @@
     using global::Ninject;
     using global::Ninject.Extensions.Conventions;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Composition;
     using TomsToolbox.Composition.Ninject;
     using TomsToolbox.Wpf.Converters;
 
     internal sealed class DIAdapter : IDisposable
     {
-        [CanBeNull]
         private IKernel? _kernel;
 
         public IExportProvider Initialize()

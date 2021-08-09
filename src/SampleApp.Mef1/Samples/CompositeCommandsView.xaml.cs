@@ -2,8 +2,6 @@
 {
     using System.ComponentModel.Composition;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Composition;
     using TomsToolbox.Wpf.Composition;
     using TomsToolbox.Wpf.Composition.Mef;
@@ -15,7 +13,7 @@
     public partial class CompositeCommandsView
     {
         [ImportingConstructor]
-        public CompositeCommandsView([CanBeNull] IExportProvider exportProvider)
+        public CompositeCommandsView(IExportProvider? exportProvider)
         {
             this.SetExportProvider(exportProvider);
 

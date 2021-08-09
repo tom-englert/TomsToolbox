@@ -6,8 +6,6 @@
     using System.Windows;
     using System.Windows.Controls;
 
-    using JetBrains.Annotations;
-
     using Microsoft.Xaml.Behaviors;
 
     using TomsToolbox.Essentials;
@@ -36,19 +34,19 @@
         /// </summary>
         public static event EventHandler<TextEventArgs>? Trace;
 
-        internal static void OnError([CanBeNull] object? sender, [NotNull] Exception ex)
+        internal static void OnError(object? sender, Exception ex)
         {
             OnError(sender, ex.ToString());
         }
 
-        internal static void OnError([CanBeNull] object? sender, [NotNull] string message)
+        internal static void OnError(object? sender, string message)
         {
             PresentationTraceSources.DataBindingSource?.TraceEvent(TraceEventType.Error, ErrorNumber, message);
 
             Error?.Invoke(sender, new TextEventArgs(message));
         }
 
-        internal static void OnTrace([CanBeNull] object? sender, [NotNull] string message)
+        internal static void OnTrace(object? sender, string message)
         {
             Trace?.Invoke(sender, new TextEventArgs(message));
         }
@@ -58,19 +56,18 @@
         /// </summary>
         /// <param name="obj">The target object.</param>
         /// <returns>The region identifier</returns>
-        [CanBeNull]
         [AttachedPropertyBrowsableForType(typeof(ContentControl))]
         [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
-        public static string? GetRegionId([NotNull] Control obj)
+        public static string? GetRegionId(Control obj)
         {
-            return (string)obj.GetValue(RegionIdProperty);
+            return (string?)obj.GetValue(RegionIdProperty);
         }
         /// <summary>
         /// Sets the region identifier.
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetRegionId([NotNull] Control obj, [CanBeNull] string? value)
+        public static void SetRegionId(Control obj, string? value)
         {
             obj.SetValue(RegionIdProperty, value);
         }
@@ -82,11 +79,10 @@
         /// Attach this property to inject a visual composition behavior with this region id into the attached object.
         /// </summary>
         /// </AttachedPropertyComments>
-        [NotNull]
         public static readonly DependencyProperty RegionIdProperty =
             DependencyProperty.RegisterAttached("RegionId", typeof(string), typeof(VisualComposition), new FrameworkPropertyMetadata(RegionId_Changed));
 
-        private static void RegionId_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
+        private static void RegionId_Changed(DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
             if (!(e.NewValue is string id))
                 return;
@@ -104,7 +100,7 @@
             }
         }
 
-        private static void SetRegionIdInternal<T>([NotNull] DependencyObject d, [CanBeNull] string? id)
+        private static void SetRegionIdInternal<T>(DependencyObject d, string? id)
             where T : Behavior, IVisualCompositionBehavior, new()
         {
             try

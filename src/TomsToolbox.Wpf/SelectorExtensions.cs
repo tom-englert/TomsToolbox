@@ -8,14 +8,12 @@
     using System.Windows.Controls.Primitives;
     using System.Windows.Threading;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Extensions for the <see cref="Selector"/>
     /// </summary>
     public static class SelectorExtensions
     {
-        [NotNull] private static readonly WeakKeyIndexer<int> _cache = new WeakKeyIndexer<int>();
+        private static readonly WeakKeyIndexer<int> _cache = new();
 
         /// <summary>
         /// Gets the value of the <see cref="P:TomsToolbox.Wpf.SelectorExtensions.TrackSelection"/> attached property.
@@ -23,7 +21,7 @@
         /// <param name="obj">The selector.</param>
         /// <returns><c>true</c> if the selection should be tracked; otherwise <c>false</c>.</returns>
         [AttachedPropertyBrowsableForType(typeof(Selector))]
-        public static bool GetTrackSelection([NotNull] DependencyObject obj)
+        public static bool GetTrackSelection(DependencyObject obj)
         {
             return obj.GetValue<bool>(TrackSelectionProperty);
         }
@@ -33,7 +31,7 @@
         /// <param name="obj">The object.</param>
         /// <param name="value">if set to <c>true</c> if the selection should be tracked; otherwise <c>false</c>.</param>
         [AttachedPropertyBrowsableForType(typeof(Selector))]
-        public static void SetTrackSelection([NotNull] DependencyObject obj, bool value)
+        public static void SetTrackSelection(DependencyObject obj, bool value)
         {
             obj.SetValue(TrackSelectionProperty, value);
         }
@@ -53,11 +51,10 @@
         /// If no index is cached, the first item will be selected.
         /// </remarks>
         /// </AttachedPropertyComments>
-        [NotNull]
         public static readonly DependencyProperty TrackSelectionProperty =
             DependencyProperty.RegisterAttached("TrackSelection", typeof(bool), typeof(SelectorExtensions), new FrameworkPropertyMetadata(TrackSelection_Changed));
 
-        private static void TrackSelection_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
+        private static void TrackSelection_Changed(DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
             if (!(d is Selector selector))
                 return;
@@ -72,17 +69,17 @@
             selector.Loaded += Selector_Loaded;
         }
 
-        static void Selector_Loaded([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
+        static void Selector_Loaded(object? sender, RoutedEventArgs? e)
         {
             InternalTrackSelection(sender as Selector, true);
         }
 
-        static void Selector_SelectionChanged([CanBeNull] object? sender, [CanBeNull] SelectionChangedEventArgs? e)
+        static void Selector_SelectionChanged(object? sender, SelectionChangedEventArgs? e)
         {
             InternalTrackSelection(sender as Selector, false);
         }
 
-        private static void InternalTrackSelection([CanBeNull] Selector? selector, bool forceSelection)
+        private static void InternalTrackSelection(Selector? selector, bool forceSelection)
         {
             var dataContext = selector?.DataContext;
             if (dataContext == null)
@@ -103,13 +100,11 @@
 
         private class WeakKeyIndexer<T>
         {
-            [NotNull]
-            private Dictionary<WeakReference, T> _items = new Dictionary<WeakReference, T>();
+            private Dictionary<WeakReference, T> _items = new();
 
             private int _cleanupCycleCounter;
 
-            [CanBeNull]
-            public T this[[NotNull] object key]
+            public T this[object key]
             {
                 get
                 {

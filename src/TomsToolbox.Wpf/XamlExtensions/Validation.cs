@@ -5,8 +5,6 @@
     using System.Linq;
     using System.Windows;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -14,7 +12,6 @@
     /// </summary>
     public static class Validation
     {
-        [NotNull]
         private static readonly DependencyPropertyDescriptor _propertyDescriptor = DependencyPropertyDescriptor.FromProperty(System.Windows.Controls.Validation.HasErrorProperty, typeof(FrameworkElement));
 
         /// <summary>
@@ -22,7 +19,7 @@
         /// </summary>
         /// <param name="obj">The target control.</param>
         /// <returns><c>true</c>if validation errors are shown in the tool tip of the associated control; otherwise <c>false</c>.</returns>
-        public static bool GetShowErrorInTooltip([NotNull] DependencyObject obj)
+        public static bool GetShowErrorInTooltip(DependencyObject obj)
         {
             return ((bool?)obj.GetValue(ShowErrorInTooltipProperty)).GetValueOrDefault();
         }
@@ -31,7 +28,7 @@
         /// </summary>
         /// <param name="obj">The target control.</param>
         /// <param name="value">if set to <c>true</c> validation errors are shown in the tool tip of the associated control.</param>
-        public static void SetShowErrorInTooltip([NotNull] DependencyObject obj, bool value)
+        public static void SetShowErrorInTooltip(DependencyObject obj, bool value)
         {
             obj.SetValue(ShowErrorInTooltipProperty, value);
         }
@@ -46,11 +43,10 @@
         /// Use this as a replacement for <see cref="ResourceKeys.ControlWithValidationErrorToolTipStyle"/> where a neutral base style is not applicable.
         /// </remarks>
         /// </AttachedPropertyComments>
-        [NotNull]
         public static readonly DependencyProperty ShowErrorInTooltipProperty =
             DependencyProperty.RegisterAttached("ShowErrorInTooltip", typeof(bool), typeof(Validation), new FrameworkPropertyMetadata(false, ShowErrorInTooltip_Changed));
 
-        private static void ShowErrorInTooltip_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void ShowErrorInTooltip_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (true.Equals(e.NewValue))
             {
@@ -64,8 +60,7 @@
 
         private static void ValidationHasErrors_Changed(object? sender, EventArgs e)
         {
-            var target = sender as FrameworkElement;
-            if (target == null)
+            if (sender is not FrameworkElement target)
                 return;
 
             var hasError = System.Windows.Controls.Validation.GetHasError(target);

@@ -4,7 +4,7 @@
     <None Remove="FAML.Designer.settings" />
   </ItemGroup>
 
-  <Target Name="TfmSpecificContent">
+  <Target Name="TfmSpecificContent" Condition="Exists('$(TargetDir)$(PackageId).ExternalAnnotations.xml')">
     <ItemGroup>
       <ExternalAnnotations Include="$(TargetDir)$(PackageId).ExternalAnnotations.xml" />
     </ItemGroup>

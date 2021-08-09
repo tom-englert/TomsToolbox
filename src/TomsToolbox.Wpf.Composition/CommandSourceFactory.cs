@@ -2,14 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
     using System.Windows.Input;
     using System.Windows.Media.Imaging;
-
-    using JetBrains.Annotations;
 
     using TomsToolbox.Essentials;
 
@@ -21,7 +18,6 @@
         /// <summary>
         /// Gets the header to be shown in the UI. Usually this is a localized text naming the command.
         /// </summary>
-        [CanBeNull]
         object? Header
         {
             get;
@@ -30,7 +26,6 @@
         /// <summary>
         /// Gets the tool tip to be shown in the UI. Usually this is a localized text describing the command.
         /// </summary>
-        [CanBeNull]
         object? Description
         {
             get;
@@ -39,7 +34,6 @@
         /// <summary>
         /// Gets the icon to be shown in the UI, or null to show no icon.
         /// </summary>
-        [CanBeNull]
         object? Icon
         {
             get;
@@ -60,7 +54,6 @@
         /// <remarks>
         /// This is used to build up menus with sub menu entries.
         /// </remarks>
-        [CanBeNull]
         string? SubRegionId
         {
             get;
@@ -79,7 +72,6 @@
         /// Gets the name of the group that this command belongs to. 
         /// If different group names are specified for a target region, the commands can be grouped and the groups separated by a <see cref="Separator"/>.
         /// </summary>
-        [CanBeNull]
         object? GroupName
         {
             get;
@@ -88,7 +80,6 @@
         /// <summary>
         /// Gets a tag that can be bound to the target objects tag.
         /// </summary>
-        [CanBeNull]
         object? Tag
         {
             get;
@@ -123,16 +114,14 @@
         public const string GroupNameKey = "GroupName";
 
 
-        [NotNull]
-        private readonly Dictionary<object, T> _commandSourcePerContext = new Dictionary<object, T>();
+        private readonly Dictionary<object, T> _commandSourcePerContext = new();
 
         /// <summary>
         /// Gets the part for the specified context.
         /// </summary>
         /// <param name="compositionContext">The composition context.</param>
         /// <returns>The part to be used in composition.</returns>
-        [NotNull]
-        public object GetPart([CanBeNull] object? compositionContext)
+        public object GetPart(object? compositionContext)
         {
             return GetCommandSource(compositionContext);
         }
@@ -142,35 +131,30 @@
         /// </summary>
         /// <param name="compositionContext">The composition context.</param>
         /// <returns>The command source.</returns>
-        [NotNull]
-        private T GetCommandSource([CanBeNull] object? compositionContext)
+        private T GetCommandSource(object? compositionContext)
         {
-            return _commandSourcePerContext.ForceValue(compositionContext ?? typeof(NullKey), context => CreateCommandSource())!;
+            return _commandSourcePerContext.ForceValue(compositionContext ?? typeof(NullKey), _ => CreateCommandSource());
         }
 
         /// <summary>
         /// Creates a new <see cref="CommandSource"/> or derived object.
         /// </summary>
         /// <returns>The command source.</returns>
-        [NotNull]
         protected abstract T CreateCommandSource();
 
         /// <summary>
         /// Gets the header to be shown in the UI. Usually this is a localized text naming the command.
         /// </summary>
-        [CanBeNull]
         public virtual object? Header => GetType().TryGetDisplayName();
 
         /// <summary>
         /// Gets the tool tip to be shown in the UI. Usually this is a localized text describing the command.
         /// </summary>
-        [CanBeNull]
         public virtual object? Description => GetType().TryGetDescription();
 
         /// <summary>
         /// Gets the icon to be shown in the UI, or null to show no icon.
         /// </summary>
-        [CanBeNull]
         public virtual object? Icon
         {
             get
@@ -193,7 +177,6 @@
         /// <remarks>
         /// This is used to build up menus with sub menu entries.
         /// </remarks>
-        [CanBeNull]
         public virtual string? SubRegionId => GetType().TryGetText(SubRegionIdKey);
 
         /// <summary>
@@ -206,13 +189,11 @@
         /// Gets the name of the group that this command belongs to.
         /// If different group names are specified for a target region, the commands can be grouped and the groups separated by a <see cref="Separator" />.
         /// </summary>
-        [CanBeNull]
         public virtual object? GroupName => GetType().TryGetText(GroupNameKey);
 
         /// <summary>
         /// Gets a tag that can be bound to the target objects tag.
         /// </summary>
-        [CanBeNull]
         public virtual object? Tag => null;
 
         /// <summary>
@@ -221,8 +202,7 @@
         /// <param name="context">The context.</param>
         /// <param name="command">The command.</param>
         /// <returns>The <see cref="CommandSource"/> associated with the <paramref name="context"/></returns>
-        [NotNull]
-        public T Attach([CanBeNull] object? context, [NotNull] ICommand command)
+        public T Attach(object? context, ICommand command)
         {
             var commandSource = GetCommandSource(context);
 
@@ -238,8 +218,7 @@
         /// <param name="command">The command.</param>
         /// <returns>The <see cref="CommandSource"/> associated with the <paramref name="context"/></returns>
         /// <exception cref="System.ArgumentException">Can't detach a command that has not been attached before;command</exception>
-        [NotNull]
-        public T Detach([CanBeNull] object? context, [NotNull] ICommand command)
+        public T Detach(object? context, ICommand command)
         {
             var commandSource = GetCommandSource(context);
 
@@ -256,8 +235,7 @@
         /// <param name="newCommand">The new command.</param>
         /// <returns>The <see cref="CommandSource"/> associated with the <paramref name="context"/></returns>
         /// <exception cref="System.ArgumentException">Can't replace a command that has not been attached before;oldCommand</exception>
-        [NotNull]
-        public T Replace([CanBeNull] object? context, [NotNull] ICommand oldCommand, [NotNull] ICommand newCommand)
+        public T Replace(object? context, ICommand oldCommand, ICommand newCommand)
         {
             var commandSource = GetCommandSource(context);
 

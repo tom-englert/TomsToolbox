@@ -5,8 +5,6 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A thread safe, <see cref="Dictionary{TKey,TValue}"/> like implementation that populates it's content on demand, i.e. calling indexer[key] will never return null.
     /// The cache has only weak references to the values, so the values may come and go.
@@ -19,11 +17,8 @@
     public sealed class AutoWeakIndexer<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
         where TValue : class
     {
-        [NotNull]
-        private readonly object _sync = new object();
-        [NotNull]
+        private readonly object _sync = new();
         private readonly Func<TKey, TValue> _generator;
-        [NotNull]
         private Dictionary<TKey, WeakReference<TValue>> _items;
 
         /// <summary>
@@ -31,7 +26,7 @@
         /// </summary>
         /// <param name="generator">The generator.</param>
         /// <param name="comparer">The comparer.</param>
-        public AutoWeakIndexer([NotNull] Func<TKey, TValue> generator, [CanBeNull] IEqualityComparer<TKey>?  comparer = null)
+        public AutoWeakIndexer(Func<TKey, TValue> generator, IEqualityComparer<TKey>?  comparer = null)
         {
             _generator = generator;
             _items = new Dictionary<TKey, WeakReference<TValue>>(comparer);
@@ -46,8 +41,7 @@
         /// the item generator is called to create a new element with the specified key.
         /// </returns>
         /// <exception cref="System.InvalidOperationException">The generator did not generate a valid item.</exception>
-        [NotNull]
-        public TValue this[[NotNull] TKey key]
+        public TValue this[TKey key]
         {
             get
             {
@@ -83,13 +77,11 @@
         /// <returns>
         /// A <see cref="ICollection{TValue}"/> containing the values in the <see cref="AutoWeakIndexer{TKey, TValue}"/>.
         /// </returns>
-        [ItemNotNull]
-        [CanBeNull]
-        public ICollection<TValue>? Values
+        public ICollection<TValue> Values
         {
             get
             {
-                static TValue? GetTargetOrDefault(WeakReference<TValue> item)
+                static TValue? GetTargetOrDefault(WeakReference<TValue>? item)
                 {
                     if (item == null)
                         return default;
@@ -97,7 +89,7 @@
                     return item.TryGetTarget(out var value) ? value : null;
                 }
 
-                return _items.Values.Select(GetTargetOrDefault).Where(item => item != null).ToArray()!;
+                return _items.Values.Select(GetTargetOrDefault).ExceptNullItems().ToArray();
             }
         }
 
@@ -107,8 +99,6 @@
         /// <returns>
         /// A <see cref="ICollection{TKey}"/> containing the keys in the <see cref="AutoWeakIndexer{TKey, TValue}"/>.
         /// </returns>
-        [ItemNotNull]
-        [NotNull]
         public ICollection<TKey> Keys
         {
             get
@@ -127,7 +117,6 @@
         /// <returns>
         /// The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> generic interface implementation that is used to determine equality of keys for the current <see cref="AutoWeakIndexer{TKey, TValue}"/> and to provide hash values for the keys.
         /// </returns>
-        [NotNull]
         public IEqualityComparer<TKey> Comparer => _items.Comparer;
 
         /// <summary>
@@ -138,7 +127,7 @@
         /// </returns>
         /// <param name="key">The key of the value to get.</param>
         /// <param name="value">When this method returns, contains the value associated with the specified key, if the key is found; otherwise, the default value for the type of the <paramref name="value"/> parameter. This parameter is passed uninitialized.</param>
-        public bool TryGetValue([NotNull] TKey key, [CanBeNull] out TValue? value)
+        public bool TryGetValue(TKey key, out TValue? value)
         {
             value = default;
 
@@ -178,7 +167,7 @@
         /// true if the <see cref="AutoWeakIndexer{TKey, TValue}"/> contains an element with the specified key; otherwise, false.
         /// </returns>
         /// <param name="key">The key to locate in the <see cref="AutoWeakIndexer{TKey, TValue}"/>.</param>
-        public bool ContainsKey([NotNull] TKey key)
+        public bool ContainsKey(TKey key)
         {
             return _items.TryGetValue(key, out var reference) && (reference != null) && reference.TryGetTarget(out _);
         }

@@ -2,8 +2,6 @@
 {
     using System.Windows;
 
-    using JetBrains.Annotations;
-
     using Microsoft.Xaml.Behaviors;
 
     /// <summary>
@@ -64,12 +62,12 @@
             associatedObject.Unloaded -= AssociatedObject_Unloaded;
         }
 
-        private void AssociatedObject_Loaded([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
+        private void AssociatedObject_Loaded(object? sender, RoutedEventArgs? e)
         {
             OnAssociatedObjectLoaded();
         }
 
-        private void AssociatedObject_Unloaded([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
+        private void AssociatedObject_Unloaded(object? sender, RoutedEventArgs? e)
         {
             OnAssociatedObjectUnloaded();
         }

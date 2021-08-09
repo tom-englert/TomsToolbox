@@ -2,103 +2,44 @@
 {
     using System.Windows.Input;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Routed commands for dialog management.
     /// </summary>
     public static class DialogCommands
     {
-        [NotNull] private static readonly RoutedUICommand _ok = new RoutedUICommand("OK", "OK", typeof(DialogCommands));
-        [NotNull] private static readonly RoutedUICommand _cancel = new RoutedUICommand("Cancel", "Cancel", typeof(DialogCommands));
-        [NotNull] private static readonly RoutedUICommand _yes = new RoutedUICommand("Yes", "Yes", typeof(DialogCommands));
-        [NotNull] private static readonly RoutedUICommand _no = new RoutedUICommand("No", "No", typeof(DialogCommands));
-        [NotNull] private static readonly RoutedUICommand _ignore = new RoutedUICommand("Ignore", "Ignore", typeof(DialogCommands));
-        [NotNull] private static readonly RoutedUICommand _retry = new RoutedUICommand("Retry", "Retry", typeof(DialogCommands));
-        [NotNull] private static readonly RoutedUICommand _abort = new RoutedUICommand("Abort", "Abort", typeof(DialogCommands));
-
         /// <summary>
         /// Gets the OK Dialog command.
         /// </summary>
-        [NotNull]
-        public static RoutedUICommand Ok
-        {
-            get
-            {
-                return _ok;
-            }
-        }
+        public static RoutedUICommand Ok { get; } = new("OK", "OK", typeof(DialogCommands));
 
         /// <summary>
         /// Gets the Cancel Dialog command.
         /// </summary>
-        [NotNull]
-        public static RoutedUICommand Cancel
-        {
-            get
-            {
-                return _cancel;
-            }
-        }
+        public static RoutedUICommand Cancel { get; } = new("Cancel", "Cancel", typeof(DialogCommands));
 
         /// <summary>
         /// Gets the Yes Dialog command.
         /// </summary>
-        [NotNull]
-        public static RoutedUICommand Yes
-        {
-            get
-            {
-                return _yes;
-            }
-        }
+        public static RoutedUICommand Yes { get; } = new("Yes", "Yes", typeof(DialogCommands));
 
         /// <summary>
         /// Gets the No Dialog command.
         /// </summary>
-        [NotNull]
-        public static RoutedUICommand No
-        {
-            get
-            {
-                return _no;
-            }
-        }
+        public static RoutedUICommand No { get; } = new("No", "No", typeof(DialogCommands));
 
         /// <summary>
         /// Gets the Ignore Dialog command.
         /// </summary>
-        [NotNull]
-        public static RoutedUICommand Ignore
-        {
-            get
-            {
-                return _ignore;
-            }
-        }
+        public static RoutedUICommand Ignore { get; } = new("Ignore", "Ignore", typeof(DialogCommands));
 
         /// <summary>
         /// Gets the Retry Dialog command.
         /// </summary>
-        [NotNull]
-        public static RoutedUICommand Retry
-        {
-            get
-            {
-                return _retry;
-            }
-        }
+        public static RoutedUICommand Retry { get; } = new("Retry", "Retry", typeof(DialogCommands));
 
         /// <summary>
         /// Gets the Abort Dialog command.
         /// </summary>
-        [NotNull]
-        public static RoutedUICommand Abort
-        {
-            get
-            {
-                return _abort;
-            }
-        }
+        public static RoutedUICommand Abort { get; } = new("Abort", "Abort", typeof(DialogCommands));
     }
 }

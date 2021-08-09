@@ -7,8 +7,6 @@ namespace TomsToolbox.ObservableCollections.Tests
     using System.Diagnostics;
     using System.Linq;
 
-    using JetBrains.Annotations;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using TomsToolbox.Essentials;
@@ -37,8 +35,8 @@ namespace TomsToolbox.ObservableCollections.Tests
             var collectionEvents = 0;
             var compositeEvents = 0;
 
-            collection.CollectionChanged += (_, __) => collectionEvents += 1;
-            compositeCollection.CollectionChanged += (_, __) => compositeEvents += 1;
+            collection.CollectionChanged += (_, _) => collectionEvents += 1;
+            compositeCollection.CollectionChanged += (_, _) => compositeEvents += 1;
 
             collection.CollectionChanged += Collection_CollectionChanged;
             compositeCollection.CollectionChanged += Collection_CollectionChanged;
@@ -86,7 +84,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             var item = ((IList)sender)[e.NewStartingIndex];
         }
 
-        private static void CommpareAdd([NotNull] ObservableCollection<Item> collection, [NotNull] ObservableCompositeCollection<Item> compositeCollection)
+        private static void CommpareAdd(ObservableCollection<Item> collection, ObservableCompositeCollection<Item> compositeCollection)
         {
             var data = CreateData();
 
@@ -114,7 +112,6 @@ namespace TomsToolbox.ObservableCollections.Tests
             Assert.IsTrue(collection.SequenceEqual(compositeCollection));
         }
 
-        [NotNull]
         private static IList<ObservableCollection<Item>> CreateData()
         {
             return Enumerable.Range(0, 1000).Select(i1 => new ObservableCollection<Item>(Enumerable.Range(0, 1000).Select(i2 => new Item { Index = 1000 * i1 + i2 }))).ToList();

@@ -3,8 +3,6 @@
     using System;
     using System.Runtime.InteropServices;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -135,7 +133,7 @@
         /// <returns>
         /// The result of the conversion.
         /// </returns>
-        public static explicit operator T([NotNull] SafeNativeMemory<T> wrapper)
+        public static explicit operator T(SafeNativeMemory<T> wrapper)
         {
             return wrapper.ToStructure();
         }

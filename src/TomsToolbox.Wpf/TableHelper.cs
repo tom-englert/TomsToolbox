@@ -7,7 +7,6 @@ namespace TomsToolbox.Wpf
     using System.Linq;
     using System.Text;
 
-    using JetBrains.Annotations;
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -32,8 +31,7 @@ namespace TomsToolbox.Wpf
         /// </summary>
         /// <param name="table">The table.</param>
         /// <returns>The string representation of the table.</returns>
-        [NotNull]
-        public static string ToTextString([NotNull, ItemNotNull] this IList<IList<string>> table)
+        public static string ToTextString(this IList<IList<string>> table)
         {
             return ToString(table, TextColumnSeparator);
         }
@@ -44,8 +42,7 @@ namespace TomsToolbox.Wpf
         /// <param name="table">The table.</param>
         /// <returns>The string representation of the table.</returns>
         /// <remarks>The separator is culture specific, i.e. if the NumberDecimalSeparator is a comma, a semicolon is used</remarks>
-        [NotNull]
-        public static string ToCsvString([NotNull, ItemNotNull] this IList<IList<string>> table)
+        public static string ToCsvString(this IList<IList<string>> table)
         {
             return ToString(table, CsvColumnSeparator);
         }
@@ -58,8 +55,7 @@ namespace TomsToolbox.Wpf
         /// <returns>
         /// The string representation of the table.
         /// </returns>
-        [NotNull]
-        public static string ToString([NotNull, ItemNotNull] this IList<IList<string>> table, char separator)
+        public static string ToString(this IList<IList<string>> table, char separator)
         {
             if ((table.Count == 1) && (table[0] != null) && (table[0].Count == 1) && string.IsNullOrWhiteSpace(table[0][0]))
                 return Quote + (table[0][0] ?? string.Empty) + Quote;
@@ -73,8 +69,7 @@ namespace TomsToolbox.Wpf
         /// <param name="value">The value.</param>
         /// <param name="separator">The separator.</param>
         /// <returns>A quoted string if the string requires quoting; otherwise the original string.</returns>
-        [NotNull]
-        public static string Quoted([CanBeNull] this string? value, char separator)
+        public static string Quoted(this string? value, char separator)
         {
             if (value.IsNullOrEmpty())
                 return string.Empty;
@@ -93,8 +88,7 @@ namespace TomsToolbox.Wpf
         /// <param name="text">The text.</param>
         /// <param name="separator">The column separator.</param>
         /// <returns>The table.</returns>
-        [CanBeNull, ItemNotNull]
-        public static IList<IList<string>>? ParseTable([NotNull] this string text, char separator)
+        public static IList<IList<string>>? ParseTable(this string text, char separator)
         {
             var table = new List<IList<string>>();
 
@@ -114,8 +108,7 @@ namespace TomsToolbox.Wpf
             return table.Any(columns => columns?.Count != headerColumns?.Count) ? null : table;
         }
 
-        [NotNull, ItemNotNull]
-        private static IList<string> ReadTableLine([NotNull] TextReader reader, char separator)
+        private static IList<string> ReadTableLine(TextReader reader, char separator)
         {
             var columns = new List<string>();
 
@@ -139,8 +132,7 @@ namespace TomsToolbox.Wpf
             return columns;
         }
 
-        [NotNull]
-        private static string ReadTableColumn([NotNull] TextReader reader, char separator)
+        private static string ReadTableColumn(TextReader reader, char separator)
         {
             var stringBuilder = new StringBuilder();
             int nextChar;

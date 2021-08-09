@@ -2,8 +2,6 @@
 {
     using System.Windows;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Wpf.Composition.AttributedModel;
 
     /// <summary>
@@ -17,12 +15,12 @@
             InitializeComponent();
         }
 
-        private void LargeFont_Checked([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
+        private void LargeFont_Checked(object? sender, RoutedEventArgs e)
         {
             FontSize = 24;
         }
 
-        private void LargeFont_Unchecked([CanBeNull] object sender, [CanBeNull] RoutedEventArgs e)
+        private void LargeFont_Unchecked(object? sender, RoutedEventArgs e)
         {
             SetValue(FontSizeProperty, DependencyProperty.UnsetValue);
         }

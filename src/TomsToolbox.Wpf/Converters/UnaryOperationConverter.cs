@@ -8,8 +8,6 @@
     using System.Windows;
     using System.Windows.Data;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Unary operations supported by the <see cref="UnaryOperationConverter"/>
     /// </summary>
@@ -30,13 +28,11 @@
     /// </returns>
     public class UnaryOperationConverter : ValueConverter
     {
-        [NotNull, ItemNotNull]
         private static readonly string[] _operationMethodNames = { "op_UnaryNegation" };
 
         /// <summary>
         /// The default negation converter.
         /// </summary>
-        [NotNull]
         public static readonly IValueConverter Negation = new UnaryOperationConverter();
 
         /// <summary>
@@ -59,8 +55,7 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        [CanBeNull]
-        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             if (value == null) 
                 return null;
@@ -107,8 +102,7 @@
             }
         }
 
-        [CanBeNull]
-        private static object? ApplyOperation([CanBeNull] object? value, [NotNull] Type valueType)
+        private static object? ApplyOperation(object? value, Type valueType)
         {
             var methods = valueType.GetMethods(BindingFlags.Static | BindingFlags.Public);
 
@@ -121,8 +115,7 @@
                 .FirstOrDefault(v => v != null);
         }
 
-        [CanBeNull]
-        private static object? ChangeType([CanBeNull] string? value, [NotNull] Type targetType)
+        private static object? ChangeType(string? value, Type targetType)
         {
             var typeConverter = TypeDescriptor.GetConverter(targetType);
             return typeConverter.ConvertFromInvariantString(value);
@@ -139,8 +132,7 @@
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
         /// <exception cref="System.InvalidOperationException">ConvertBack is not supported by this converter.</exception>
-        [CanBeNull]
-        protected override object? ConvertBack([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             return Convert(value, targetType, parameter, culture);
         }

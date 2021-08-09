@@ -5,8 +5,6 @@
     using System.Linq;
     using System.Reflection;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A simple weak event source implementation; useful for static events where you don't want to keep a reference to the event sink.
     /// </summary>
@@ -50,8 +48,7 @@
     public class WeakEventSource<TEventArgs>
         where TEventArgs : EventArgs
     {
-        [NotNull, ItemNotNull]
-        private readonly List<WeakDelegate> _handlers = new List<WeakDelegate>();
+        private readonly List<WeakDelegate> _handlers = new();
 
         /// <summary>
         /// Raises the event with the specified sender and argument.
@@ -74,7 +71,7 @@
         /// Subscribes the specified handler for the event.
         /// </summary>
         /// <param name="handler">The handler.</param>
-        public void Subscribe([NotNull] EventHandler<TEventArgs> handler)
+        public void Subscribe(EventHandler<TEventArgs> handler)
         {
             var weakHandlers = handler
                 .GetInvocationList()
@@ -91,7 +88,7 @@
         /// Unsubscribes the specified handler from the event.
         /// </summary>
         /// <param name="handler">The handler.</param>
-        public void Unsubscribe([NotNull] EventHandler<TEventArgs> handler)
+        public void Unsubscribe(EventHandler<TEventArgs> handler)
         {
             lock (_handlers)
             {
@@ -109,12 +106,10 @@
 
         private class WeakDelegate
         {
-            [CanBeNull]
             private readonly WeakReference? _weakTarget;
-            [NotNull]
             private readonly MethodInfo _method;
 
-            public WeakDelegate([NotNull] Delegate handler)
+            public WeakDelegate(Delegate handler)
             {
                 _weakTarget = handler.Target != null ? new WeakReference(handler.Target) : null;
                 _method = handler.GetMethodInfo();
@@ -136,7 +131,7 @@
                 return true;
             }
 
-            public bool Matches([NotNull] EventHandler<TEventArgs> handler)
+            public bool Matches(EventHandler<TEventArgs> handler)
             {
                 return ReferenceEquals(handler.Target, _weakTarget?.Target)
                        && Equals(handler.GetMethodInfo(), _method);

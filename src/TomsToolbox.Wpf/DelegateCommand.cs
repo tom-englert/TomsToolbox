@@ -3,8 +3,6 @@
     using System;
     using System.Windows.Input;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -60,7 +58,7 @@
         ///     }
         /// }
         /// ]]></code></example>
-        public DelegateCommand([CanBeNull] Action<T>? executeCallback)
+        public DelegateCommand(Action<T>? executeCallback)
             : this(null, executeCallback)
         {
         }
@@ -83,7 +81,7 @@
         /// {
         ///     .....
         /// ]]></code></example>
-        public DelegateCommand([CanBeNull] Predicate<T>? canExecuteCallback, [CanBeNull] Action<T>? executeCallback)
+        public DelegateCommand(Predicate<T>? canExecuteCallback, Action<T>? executeCallback)
         {
             ExecuteCallback = executeCallback;
             CanExecuteCallback = canExecuteCallback;
@@ -93,7 +91,6 @@
         /// Gets or sets the predicate to handle the ICommand.CanExecute method.
         /// If unset, ICommand.CanExecute will always return true if ExecuteCallback is set.
         /// </summary>
-        [CanBeNull]
         public Predicate<T>? CanExecuteCallback
         {
             get;
@@ -104,7 +101,6 @@
         /// Gets or sets the action to handle the ICommand.Execute method.
         /// If unset, ICommand.CanExecute will always return false.
         /// </summary>
-        [CanBeNull]
         public Action<T>? ExecuteCallback
         {
             get;
@@ -131,7 +127,7 @@
         /// <returns>
         /// true if this command can be executed; otherwise, false.
         /// </returns>
-        public bool CanExecute([CanBeNull] object? parameter)
+        public bool CanExecute(object? parameter)
         {
             if (ExecuteCallback == null)
             {
@@ -150,7 +146,7 @@
         /// Defines the method to be called when the command is invoked.
         /// </summary>
         /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
-        public void Execute([CanBeNull] object? parameter)
+        public void Execute(object? parameter)
         {
             ExecuteCallback?.Invoke(parameter.SafeCast<T>()!);
         }
@@ -209,7 +205,7 @@
         ///     }
         /// }
         /// ]]></code></example>
-        public DelegateCommand([NotNull] Action executeCallback)
+        public DelegateCommand(Action executeCallback)
             : this(null, executeCallback)
         {
         }
@@ -232,7 +228,7 @@
         /// {
         ///     .....
         /// ]]></code></example>
-        public DelegateCommand([CanBeNull] Func<bool>? canExecuteCallback, [CanBeNull] Action? executeCallback)
+        public DelegateCommand(Func<bool>? canExecuteCallback, Action? executeCallback)
         {
             CanExecuteCallback = canExecuteCallback;
             ExecuteCallback = executeCallback;
@@ -242,7 +238,6 @@
         /// Gets or sets the predicate to handle the ICommand.CanExecute method.
         /// If unset, ICommand.CanExecute will always return true if ExecuteCallback is set.
         /// </summary>
-        [CanBeNull]
         public Func<bool>? CanExecuteCallback
         {
             get;
@@ -253,7 +248,6 @@
         /// Gets or sets the action to handle the ICommand.Execute method.
         /// If unset, ICommand.CanExecute will always return false.
         /// </summary>
-        [CanBeNull]
         public Action? ExecuteCallback
         {
             get;
@@ -280,7 +274,7 @@
         /// <returns>
         /// true if this command can be executed; otherwise, false.
         /// </returns>
-        public bool CanExecute([CanBeNull] object? parameter)
+        public bool CanExecute(object? parameter)
         {
             if (ExecuteCallback == null)
             {
@@ -299,7 +293,7 @@
         /// Defines the method to be called when the command is invoked.
         /// </summary>
         /// <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
-        public void Execute([CanBeNull] object? parameter)
+        public void Execute(object? parameter)
         {
             ExecuteCallback?.Invoke();
         }

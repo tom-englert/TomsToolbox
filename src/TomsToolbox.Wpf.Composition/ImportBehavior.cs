@@ -5,8 +5,6 @@
     using System.Linq;
     using System.Windows;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
     using TomsToolbox.Wpf.Interactivity;
 
@@ -16,19 +14,14 @@
     /// <seealso cref="FrameworkElementBehavior{T}" />
     public class ImportBehavior : FrameworkElementBehavior<FrameworkElement>
     {
-        [CanBeNull]
         private INotifyChanged? _tracker;
-        [CanBeNull]
         private Type? _memberType;
-        [CanBeNull]
         private string? _contractName;
-        [CanBeNull]
         private DependencyProperty? _targetProperty = FrameworkElement.DataContextProperty;
 
         /// <summary>
         /// Gets or sets the exported type of the object to provide.
         /// </summary>
-        [CanBeNull]
         public Type? MemberType
         {
             get => _memberType;
@@ -42,7 +35,6 @@
         /// <summary>
         /// Gets or sets the optional contract name of the exported object.
         /// </summary>
-        [CanBeNull]
         public string? ContractName
         {
             get => _contractName;
@@ -56,7 +48,6 @@
         /// <summary>
         /// Gets or sets the target property to set. The default is <see cref="FrameworkElement.DataContextProperty"/>.
         /// </summary>
-        [CanBeNull]
         public DependencyProperty? TargetProperty
         {
             get => _targetProperty;
@@ -108,7 +99,7 @@
             }
         }
 
-        private void ExportProvider_Changed([CanBeNull] object? sender, [NotNull] EventArgs e)
+        private void ExportProvider_Changed(object? sender, EventArgs e)
         {
             Update();
         }

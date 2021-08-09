@@ -7,8 +7,6 @@
     using System.Windows.Controls;
     using System.Windows.Input;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
     using TomsToolbox.Wpf.Interactivity;
 
@@ -21,16 +19,14 @@
         /// <summary>
         /// Gets or sets the type of the command source factory defining the command.
         /// </summary>
-        [CanBeNull]
         public Type? CommandSource
         {
-            get => (Type)GetValue(CommandSourceProperty);
+            get => (Type?)GetValue(CommandSourceProperty);
             set => SetValue(CommandSourceProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="CommandSource"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty CommandSourceProperty =
             DependencyProperty.Register("CommandSource", typeof(Type), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata((sender, e) => ((CommandRoutingBehavior)sender)?.CommandSource_Changed((Type)e.OldValue, (Type)e.NewValue)));
 
@@ -41,19 +37,14 @@
         /// <remarks>
         /// The command target is usually by a binding to the corresponding command property of the view model.
         /// </remarks>
-        [NotNull]
         public ICommand CommandTarget
         {
-            get
-            {
-                return (ICommand)GetValue(CommandTargetProperty) ?? NullCommand.Default;
-            }
+            get => (ICommand?)GetValue(CommandTargetProperty) ?? NullCommand.Default;
             set => SetValue(CommandTargetProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="CommandTarget"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty CommandTargetProperty =
             DependencyProperty.Register("CommandTarget", typeof(ICommand), typeof(CommandRoutingBehavior));
 
@@ -61,7 +52,6 @@
         /// <summary>
         /// Gets or sets the command parameter.
         /// </summary>
-        [CanBeNull]
         public object? CommandParameter
         {
             get => GetValue(CommandParameterProperty);
@@ -70,7 +60,6 @@
         /// <summary>
         /// Identifies the <see cref="CommandParameter"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty CommandParameterProperty =
             DependencyProperty.Register("CommandParameter", typeof(object), typeof(CommandRoutingBehavior));
 
@@ -78,7 +67,6 @@
         /// <summary>
         /// Gets or sets the composition context.
         /// </summary>
-        [CanBeNull]
         public object? CompositionContext
         {
             get => GetValue(CompositionContextProperty);
@@ -87,7 +75,6 @@
         /// <summary>
         /// Identifies the <see cref="CompositionContext"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty CompositionContextProperty =
             DependencyProperty.Register("CompositionContext", typeof(object), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata((sender, e) => ((CommandRoutingBehavior)sender)?.CompositionContext_Changed(e.OldValue, e.NewValue)));
 
@@ -104,9 +91,8 @@
         /// <summary>
         /// Identifies the <see cref="IsEnabled"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty IsEnabledProperty =
-            DependencyProperty.Register("IsEnabled", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, e) => ((CommandRoutingBehavior)sender)?.StateChanged()));
+            DependencyProperty.Register("IsEnabled", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, _) => ((CommandRoutingBehavior)sender)?.StateChanged()));
 
 
         /// <summary>
@@ -120,9 +106,8 @@
         /// <summary>
         /// Identifies the <see cref="IsChecked"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty IsCheckedProperty =
-            DependencyProperty.Register("IsChecked", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, e) => ((CommandRoutingBehavior)sender)?.StateChanged()));
+            DependencyProperty.Register("IsChecked", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, _) => ((CommandRoutingBehavior)sender)?.StateChanged()));
 
 
         /// <summary>
@@ -134,16 +119,14 @@
             get => this.GetValue<bool>(IsActiveProperty);
             private set => SetValue(_isActivePropertyKey, value);
         }
-        [NotNull]
         private static readonly DependencyPropertyKey _isActivePropertyKey =
             DependencyProperty.RegisterReadOnly("IsActive", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(false));
         /// <summary>
         /// Identifies the <see cref="IsActive"/> read only dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty IsActiveProperty = _isActivePropertyKey.DependencyProperty;
 
-        private void CommandSource_Changed([CanBeNull] Type? oldValue, [CanBeNull] Type? newValue)
+        private void CommandSource_Changed(Type? oldValue, Type? newValue)
         {
             // Type.IsAssignableFrom does not work in design mode!
             if (newValue != null && newValue.GetSelfAndBaseTypes().All(t => t.FullName != typeof(CommandSourceFactory).FullName))
@@ -177,7 +160,7 @@
             }
         }
 
-        private void CompositionContext_Changed([CanBeNull] object? oldValue, [CanBeNull] object? newValue)
+        private void CompositionContext_Changed(object? oldValue, object? newValue)
         {
             if (AssociatedObject == null)
                 return;
@@ -257,14 +240,12 @@
             commandSource?.Detach(CompositionContext, this);
         }
 
-        [CanBeNull]
         private CommandSourceFactory? GetCommandSourceFactory()
         {
             return GetCommandSourceFactory(CommandSource);
         }
 
-        [CanBeNull]
-        private CommandSourceFactory? GetCommandSourceFactory([CanBeNull] Type? commandSourceType)
+        private CommandSourceFactory? GetCommandSourceFactory(Type? commandSourceType)
         {
             if (commandSourceType == null)
                 return null;
@@ -294,7 +275,7 @@
             }
         }
 
-        private void AssociatedObject_IsKeyboardFocusWithinChanged([NotNull] object sender, DependencyPropertyChangedEventArgs e)
+        private void AssociatedObject_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (AssociatedObject?.IsKeyboardFocusWithin == true)
             {
@@ -302,7 +283,7 @@
             }
         }
 
-        bool ICommand.CanExecute([CanBeNull] object? parameter)
+        bool ICommand.CanExecute(object? parameter)
         {
             var associatedObject = AssociatedObject;
             return (associatedObject != null)
@@ -315,12 +296,12 @@
             remove => CommandTarget.CanExecuteChanged -= value;
         }
 
-        void ICommand.Execute([CanBeNull] object? parameter)
+        void ICommand.Execute(object? parameter)
         {
             CommandTarget.Execute(CommandParameter);
         }
 
-        void ICommandChangedNotificationSink.ActiveCommandChanged([CanBeNull] ICommand? command)
+        void ICommandChangedNotificationSink.ActiveCommandChanged(ICommand? command)
         {
             var oldValue = IsActive;
 
@@ -337,6 +318,6 @@
 
     internal interface ICommandChangedNotificationSink
     {
-        void ActiveCommandChanged([CanBeNull] ICommand? command);
+        void ActiveCommandChanged(ICommand? command);
     }
 }

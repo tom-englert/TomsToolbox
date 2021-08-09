@@ -10,7 +10,7 @@
     /// </summary>
     public class SemanticVersion : IEquatable<SemanticVersion>, IComparable<SemanticVersion>
     {
-        private static readonly Regex versionRegex = new Regex(@"(\d+)(.\d+)(.\d+)?(.\d+)?([-+]\S+)?");
+        private static readonly Regex _versionRegex = new(@"(\d+)(.\d+)(.\d+)?(.\d+)?([-+]\S+)?");
 
         /// <summary>
         /// Initializes a new default instance of the <see cref="SemanticVersion"/> class.
@@ -47,7 +47,7 @@
         /// <returns>The first version found in the string, or the default if no version could be detected.</returns>
         public static SemanticVersion Parse(string input)
         {
-            var match = versionRegex.Match(input);
+            var match = _versionRegex.Match(input);
             if (match.Success)
             {
                 var captures = match.Groups;
@@ -87,7 +87,7 @@
         {
             unchecked
             {
-                return ((Version != null ? Version.GetHashCode() : 0) * 397) ^ (Suffix != null ? StringComparer.OrdinalIgnoreCase.GetHashCode(Suffix) : 0);
+                return (Version.GetHashCode() * 397) ^ StringComparer.OrdinalIgnoreCase.GetHashCode(Suffix);
             }
         }
 

@@ -7,8 +7,6 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -22,18 +20,15 @@
     /// </example>
     public class ValidationTemplate : IDataErrorInfo, INotifyDataErrorInfo
     {
-        [NotNull]
         private readonly INotifyPropertyChanged _target;
-        [NotNull]
         private readonly ValidationContext _validationContext;
-        [NotNull, ItemNotNull]
         private List<ValidationResult> _validationResults;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidationTemplate"/> class.
         /// </summary>
         /// <param name="target">The target.</param>
-        public ValidationTemplate([NotNull] INotifyPropertyChanged target)
+        public ValidationTemplate(INotifyPropertyChanged target)
         {
             _target = target;
             _validationContext = new ValidationContext(target, null, null);
@@ -44,7 +39,7 @@
             target.PropertyChanged += Validate;
         }
 
-        private void Validate(object? sender, [NotNull] PropertyChangedEventArgs e)
+        private void Validate(object? sender, PropertyChangedEventArgs e)
         {
             _validationResults = new List<ValidationResult>();
 
@@ -57,7 +52,6 @@
         }
 
         /// <inheritdoc />
-        [NotNull]
         public string Error
         {
             get
@@ -70,8 +64,7 @@
         }
 
         /// <inheritdoc />
-        [NotNull]
-        public string this[[CanBeNull] string? columnName]
+        public string this[string? columnName]
         {
             get
             {
@@ -88,12 +81,12 @@
         /// </summary>
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
-        private void RaiseErrorsChanged([CanBeNull] string? propertyName)
+        private void RaiseErrorsChanged(string? propertyName)
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        IEnumerable INotifyDataErrorInfo.GetErrors([CanBeNull] string? propertyName)
+        IEnumerable INotifyDataErrorInfo.GetErrors(string? propertyName)
         {
             return _validationResults
                 .Where(x => x.MemberNames.Contains(propertyName))

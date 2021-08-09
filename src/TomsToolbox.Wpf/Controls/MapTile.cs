@@ -8,8 +8,6 @@
     using System.Windows.Data;
     using System.Windows.Media;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -21,10 +19,9 @@
         /// The size of one tile in pixels.
         /// </summary>
         public const double TileSize = 256;
-        private static readonly Rect TileRect = new Rect(0, 0, TileSize, TileSize);
+        private static readonly Rect TileRect = new(0, 0, TileSize, TileSize);
         private Size _subLevelThreshold = (Size)(1.5 * TileSize * new Vector(1, 1));
 
-        [CanBeNull]
         private readonly IMapTile? _parent;
 
         private readonly Panel _world = new Grid { Width = TileSize, Height = TileSize };
@@ -44,7 +41,7 @@
         /// <param name="parent">The parent.</param>
         /// <param name="x">The x.</param>
         /// <param name="y">The y.</param>
-        private MapTile([CanBeNull] IMapTile? parent, int x, int y)
+        private MapTile(IMapTile? parent, int x, int y)
         {
             _parent = parent;
 
@@ -57,7 +54,7 @@
 
             Initialize();
 
-            Loaded += (_, __) =>
+            Loaded += (_, _) =>
             {
                 var designUnitSize = this.GetDesignUnitSize();
                 _subLevelThreshold = (Size)(1.5 * TileSize * (Vector)designUnitSize);
@@ -83,7 +80,6 @@
         /// <summary>
         /// Gets the logical parent  element of this element.
         /// </summary>
-        [CanBeNull]
         IMapTile? IMapTile.Parent => _parent;
 
         /// <summary>
@@ -100,50 +96,44 @@
         /// <summary>
         /// Gets or sets the viewport where the map will be displayed.
         /// </summary>
-        [CanBeNull]
         public FrameworkElement? Viewport
         {
-            get => (FrameworkElement)GetValue(ViewportProperty);
+            get => (FrameworkElement?)GetValue(ViewportProperty);
             set => SetValue(ViewportProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Viewport"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty ViewportProperty =
             DependencyProperty.Register("Viewport", typeof(FrameworkElement), typeof(MapTile));
 
         /// <summary>
         /// Gets or sets the image provider that can load the images.
         /// </summary>
-        [CanBeNull]
         public IImageProvider? ImageProvider
         {
-            get => (IImageProvider)GetValue(ImageProviderProperty);
+            get => (IImageProvider?)GetValue(ImageProviderProperty);
             set => SetValue(ImageProviderProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="ImageProvider"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty ImageProviderProperty =
-            DependencyProperty.Register("ImageProvider", typeof(IImageProvider), typeof(MapTile), new FrameworkPropertyMetadata((sender, e) => ((MapTile)sender)?.ImageProvider_Changed()));
+            DependencyProperty.Register("ImageProvider", typeof(IImageProvider), typeof(MapTile), new FrameworkPropertyMetadata((sender, _) => ((MapTile)sender)?.ImageProvider_Changed()));
 
         /// <summary>
         /// Gets or sets the image for this tile.
         /// </summary>
-        [CanBeNull]
         public IImage? Image
         {
-            get => (IImage)GetValue(ImageProperty);
+            get => (IImage?)GetValue(ImageProperty);
             set => SetValue(ImageProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Image"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty ImageProperty =
-            DependencyProperty.Register("Image", typeof(IImage), typeof(MapTile), new FrameworkPropertyMetadata((sender, e) => Disposable.Dispose(e.OldValue)));
+            DependencyProperty.Register("Image", typeof(IImage), typeof(MapTile), new FrameworkPropertyMetadata((_, e) => Disposable.Dispose(e.OldValue)));
 
         /// <summary>
         /// Invalidates the layout of this instance.
@@ -178,7 +168,7 @@
                 if (image == null)
                 {
                     Image = image = imageProvider.GetImage(this);
-                    image.Loaded += (_, __) => this.BeginInvoke(Invalidate);
+                    image.Loaded += (_, _) => this.BeginInvoke(Invalidate);
                 }
 
                 if (!image.IsLoaded)
@@ -192,7 +182,6 @@
             ForceSubLevel(this, _subLevel);
         }
 
-        [NotNull, ItemNotNull]
         private IEnumerable<IMapTile> SubTiles => _subLevel.Children.Cast<IMapTile>();
 
         private void Initialize()
@@ -214,7 +203,7 @@
             Invalidate();
         }
 
-        private static void ForceSubLevel([NotNull] IMapTile tile, [CanBeNull] Panel? subLevel)
+        private static void ForceSubLevel(IMapTile tile, Panel? subLevel)
         {
             if (subLevel == null)
                 return;
@@ -243,7 +232,7 @@
             return (ZoomLevel < maxZoom) && (extent.Width > _subLevelThreshold.Width) && (extent.Height > _subLevelThreshold.Height);
         }
 
-        private static bool IsThisTileVisible([NotNull] Visual visual, [NotNull] FrameworkElement viewPort, out Size extent)
+        private static bool IsThisTileVisible(Visual visual, FrameworkElement viewPort, out Size extent)
         {
             var tileRect = TileRect.Translate(visual, viewPort);
             var viewPortRect = viewPort.GetClientRect();

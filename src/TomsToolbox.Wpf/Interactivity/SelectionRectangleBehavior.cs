@@ -4,8 +4,6 @@
     using System.Windows.Controls;
     using System.Windows.Input;
 
-    using JetBrains.Annotations;
-
     using Microsoft.Xaml.Behaviors;
 
     using TomsToolbox.Wpf.Controls;
@@ -20,32 +18,30 @@
         /// <summary>
         /// Gets or sets the target element that displays the selection.
         /// </summary>
-        [CanBeNull]
         public FrameworkElement? TargetElement
         {
-            get => (FrameworkElement)GetValue(TargetElementProperty);
+            get => (FrameworkElement?)GetValue(TargetElementProperty);
             set => SetValue(TargetElementProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="TargetElement"/> dependency property.
         /// </summary>
-        [NotNull] public static readonly DependencyProperty TargetElementProperty =
+        public static readonly DependencyProperty TargetElementProperty =
             DependencyProperty.Register("TargetElement", typeof(FrameworkElement), typeof(SelectionRectangleBehavior));
 
 
         /// <summary>
         /// Gets or sets the view port in which the target element is displayed.
         /// </summary>
-        [CanBeNull]
         public FrameworkElement? Viewport
         {
-            get => (FrameworkElement)GetValue(ViewportProperty);
+            get => (FrameworkElement?)GetValue(ViewportProperty);
             set => SetValue(ViewportProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Viewport"/> dependency property.
         /// </summary>
-        [NotNull] public static readonly DependencyProperty ViewportProperty =
+        public static readonly DependencyProperty ViewportProperty =
             DependencyProperty.Register("Viewport", typeof(FrameworkElement), typeof(SelectionRectangleBehavior), new FrameworkPropertyMetadata((sender, e) => ((SelectionRectangleBehavior)sender)?.Viewport_Changed((FrameworkElement)e.OldValue, (FrameworkElement)e.NewValue)));
 
 
@@ -60,7 +56,7 @@
         /// <summary>
         /// Identifies the <see cref="Selection"/> dependency property.
         /// </summary>
-        [NotNull] public static readonly DependencyProperty SelectionProperty =
+        public static readonly DependencyProperty SelectionProperty =
             DependencyProperty.Register("Selection", typeof(Rect), typeof(SelectionRectangleBehavior), new FrameworkPropertyMetadata(Rect.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((SelectionRectangleBehavior)sender)?.Selection_Changed((Rect)e.NewValue)));
 
 
@@ -88,7 +84,7 @@
         }
 
 
-        private void Viewport_Changed([CanBeNull] FrameworkElement? oldValue, [CanBeNull] FrameworkElement? newValue)
+        private void Viewport_Changed(FrameworkElement? oldValue, FrameworkElement? newValue)
         {
             if (oldValue != null)
             {
@@ -106,7 +102,7 @@
         }
 
 
-        private void Viewport_MouseMove([CanBeNull] object? sender, [NotNull] MouseEventArgs e)
+        private void Viewport_MouseMove(object? sender, MouseEventArgs e)
         {
             if (_startPosition == null)
                 return;
@@ -122,7 +118,7 @@
         }
 
 
-        private void Viewport_MouseRightButtonDown([CanBeNull] object? sender, [NotNull] MouseButtonEventArgs e)
+        private void Viewport_MouseRightButtonDown(object? sender, MouseButtonEventArgs e)
         {
             var viewport = Viewport;
             if (viewport == null)
@@ -138,7 +134,7 @@
             viewport.CaptureMouse();
         }
 
-        private void Viewport_MouseRightButtonUp([CanBeNull] object? sender, [CanBeNull] MouseButtonEventArgs? e)
+        private void Viewport_MouseRightButtonUp(object? sender, MouseButtonEventArgs? e)
         {
             _startPosition = null;
 

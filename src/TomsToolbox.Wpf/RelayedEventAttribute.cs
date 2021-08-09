@@ -5,8 +5,6 @@
     using System.Globalization;
     using System.Linq;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -40,18 +38,13 @@
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class RelayedEventAttribute : Attribute
     {
-        [NotNull]
-        private readonly Type _sourceType;
-        [CanBeNull]
-        private readonly string? _sourceName;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="RelayedEventAttribute"/> class.
         /// </summary>
         /// <param name="sourceType">Type of the source for the events.</param>
-        public RelayedEventAttribute([NotNull] Type sourceType)
+        public RelayedEventAttribute(Type sourceType)
         {
-            _sourceType = sourceType;
+            SourceType = sourceType;
         }
 
         /// <summary>
@@ -59,32 +52,23 @@
         /// </summary>
         /// <param name="sourceType">Type of the source for the events.</param>
         /// <param name="sourceName">Name of the source property. You need to specify this only if the source property name is different.</param>
-        public RelayedEventAttribute([NotNull] Type sourceType, [CanBeNull] string? sourceName)
+        public RelayedEventAttribute(Type sourceType, string? sourceName)
             : this(sourceType)
         {
-            _sourceName = sourceName;
+            SourceName = sourceName;
         }
 
         /// <summary>
         /// Gets the type of the source for the events.
         /// </summary>
-        [NotNull]
-        public Type SourceType
-        {
-            get
-            {
-                return _sourceType;
-            }
-        }
+        public Type SourceType { get; }
 
         /// <summary>
         /// Gets the name of the source property, or null if the name is the same as the target property.
         /// </summary>
-        [CanBeNull]
-        public string? SourceName => _sourceName;
+        public string? SourceName { get; }
 
-        [CanBeNull]
-        internal static IDictionary<Type, IDictionary<string, string>>? CreateRelayMapping([CanBeNull] Type? type)
+        internal static IDictionary<Type, IDictionary<string, string>>? CreateRelayMapping(Type? type)
         {
             if (type == null)
                 return null;
@@ -102,7 +86,7 @@
             return relayMapping;
         }
 
-        private static bool AreAllPropertiesValid([NotNull] Type sourceType, [NotNull, ItemNotNull] IEnumerable<string> propertyNames)
+        private static bool AreAllPropertiesValid(Type sourceType, IEnumerable<string> propertyNames)
         {
             var existingPropertyNames = sourceType.GetProperties()
                 .Select(p => p.Name)

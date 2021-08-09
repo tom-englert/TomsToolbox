@@ -7,8 +7,6 @@
     using System.Linq;
     using System.Windows.Data;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Converts the specified enum-type into an array of the individual enum values.
     /// The converter parameter can be used to specify a comma separated exclude list.
@@ -19,7 +17,7 @@
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Default = new EnumToValuesConverter();
+        public static readonly IValueConverter Default = new EnumToValuesConverter();
 
         /// <summary>
         /// Converts a value. 
@@ -29,8 +27,7 @@
         /// A converted value.
         /// </returns>
         /// <param name="value">The value produced by the binding source.</param><param name="targetType">The type of the binding target property.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
-        [NotNull]
-        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             return Convert((Type?)value, (string?)parameter);
         }
@@ -41,8 +38,7 @@
         /// <param name="type">The enum type.</param>
         /// <param name="excluded">A comma separated list of values to exclude.</param>
         /// <returns>An array of the enum's values.</returns>
-        [NotNull, ItemNotNull]
-        public static Array Convert([CanBeNull] Type? type, [CanBeNull] string? excluded = null)
+        public static Array Convert(Type? type, string? excluded = null)
         {
             if (type == null)
                 return new object[0];

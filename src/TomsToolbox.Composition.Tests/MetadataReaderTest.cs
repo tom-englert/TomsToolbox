@@ -14,7 +14,7 @@
     [UseReporter(typeof(DiffReporter))]
     public class MetadataReaderTest
     {
-        private static readonly Regex _versionRegex = new Regex(@"Version=2\.\d+\.\d+\.\d+");
+        private static readonly Regex _versionRegex = new(@"Version=2\.\d+\.\d+\.\d+");
 
         [TestMethod]
         public void ReadSampleAppTest()

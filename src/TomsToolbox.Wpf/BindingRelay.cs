@@ -2,8 +2,6 @@
 {
     using System.Windows;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A simple helper to relay the data context to objects that don't live in the visual tree.
     /// </summary>
@@ -43,7 +41,6 @@
         /// <summary>
         /// Identifies th <see cref="DataContext"/> dependency property.
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty DataContextProperty = DependencyProperty.Register("DataContext", typeof(object), typeof(BindingRelay));
     }
 }

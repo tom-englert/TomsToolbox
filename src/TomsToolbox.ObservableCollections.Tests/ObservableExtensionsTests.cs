@@ -9,8 +9,6 @@ namespace TomsToolbox.ObservableCollections.Tests
     using System.ComponentModel;
     using System.Linq;
 
-    using JetBrains.Annotations;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using TomsToolbox.Essentials;
@@ -23,7 +21,6 @@ namespace TomsToolbox.ObservableCollections.Tests
             private IList<int> _inner;
             private int _value;
 
-            [CanBeNull]
             public IList<int> Inner
             {
                 get => _inner;
@@ -67,7 +64,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             var testObject2 = new TestObject { Value = 2 };
             var testObject3 = new TestObject { Value = 3 };
 
-            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (sender, e) =>
+            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (_, e) =>
             {
                 receivedEvents[e.Action] += 1;
             };
@@ -93,7 +90,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             var testObject2 = new TestObject { Value = 2 };
             var testObject3 = new TestObject { Value = 3 };
 
-            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (sender, e) =>
+            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (_, e) =>
             {
                 receivedEvents[e.Action] += 1;
             };
@@ -126,7 +123,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             var testObject2 = new TestObject { Value = 2 };
             var testObject3 = new TestObject { Value = 3 };
 
-            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (sender, e) =>
+            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (_, e) =>
             {
                 receivedEvents[e.Action] += 1;
             };
@@ -156,7 +153,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             var testObject2 = new TestObject { Inner = new ObservableCollection<int>() };
             var testObject3 = new TestObject { Inner = new ObservableCollection<int>() };
 
-            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (sender, e) =>
+            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (_, e) =>
             {
                 receivedEvents[e.Action] += 1;
             };
@@ -191,7 +188,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             var testObject2 = new TestObject { Inner = new ObservableCollection<int>(new[] { 1, 2, 3 }) };
             var testObject3 = new TestObject { Inner = new ObservableCollection<int>(new[] { 1, 2, 3 }) };
 
-            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (sender, e) =>
+            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (_, e) =>
             {
                 receivedEvents[e.Action] += 1;
             };
@@ -233,7 +230,7 @@ namespace TomsToolbox.ObservableCollections.Tests
 
             var newInnerCollection = new ObservableCollection<int>(new[] { 10, 20, 30 });
 
-            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (sender, e) =>
+            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (_, e) =>
             {
                 receivedEvents[e.Action] += 1;
             };
@@ -264,7 +261,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             var testObject2 = new TestObject { Inner = new ObservableCollection<int>(new[] { 4, 5, 6 }) };
             var testObject3 = new TestObject { Inner = new ObservableCollection<int>(new[] { 7, 8, 9 }) };
 
-            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (sender, e) =>
+            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (_, e) =>
             {
                 receivedEvents[e.Action] += 1;
             };
@@ -295,7 +292,7 @@ namespace TomsToolbox.ObservableCollections.Tests
             var testObject2 = new TestObject { Inner = new ObservableCollection<int>(new[] { 4, 5, 6 }) };
             var testObject3 = new TestObject { Inner = new ObservableCollection<int>(new[] { 7, 8, 9 }) };
 
-            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (sender, e) =>
+            NotifyCollectionChangedEventHandler collectionChangedEventHandler = (_, e) =>
             {
                 receivedEvents[e.Action] += 1;
             };

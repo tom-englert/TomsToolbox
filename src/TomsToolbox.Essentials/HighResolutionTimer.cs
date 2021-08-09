@@ -4,30 +4,24 @@
     using System.Diagnostics;
     using System.Threading;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A high resolution timer that runs in a single thread. 
     /// Timer events are triggered with high resolution, but new events will not be triggered unless the previous event is processed.
     /// </summary>
     public sealed class HighResolutionTimer : IDisposable
     {
-        [NotNull]
-        private readonly Stopwatch _stopwatch = new Stopwatch();
-        [NotNull]
-        private readonly ManualResetEvent _stopEvent = new ManualResetEvent(false);
-        [NotNull]
+        private readonly Stopwatch _stopwatch = new();
+        private readonly ManualResetEvent _stopEvent = new(false);
         private readonly Action<TimeSpan> _timerCallback;
 
         private TimeSpan _startTimeStamp;
-        [CanBeNull]
         private Thread? _timerThread;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HighResolutionTimer"/> class.
         /// </summary>
         /// <param name="timerCallback">The timer callback.</param>
-        public HighResolutionTimer([NotNull] Action<TimeSpan> timerCallback)
+        public HighResolutionTimer(Action<TimeSpan> timerCallback)
             : this(timerCallback, TimeSpan.FromSeconds(1))
         {
         }
@@ -37,7 +31,7 @@
         /// </summary>
         /// <param name="timerCallback">The timer callback.</param>
         /// <param name="interval">The interval.</param>
-        public HighResolutionTimer([NotNull] Action<TimeSpan> timerCallback, TimeSpan interval)
+        public HighResolutionTimer(Action<TimeSpan> timerCallback, TimeSpan interval)
         {
             _timerCallback = timerCallback;
             

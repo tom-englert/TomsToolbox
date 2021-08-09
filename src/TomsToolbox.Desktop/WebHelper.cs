@@ -4,8 +4,6 @@
     using System.IO;
     using System.Net;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Helper for web methods.
     /// </summary>
@@ -16,8 +14,7 @@
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <returns>The request.</returns>
-        [NotNull]
-        public static WebRequest CreateHttpWebRequest([NotNull] Uri uri)
+        public static WebRequest CreateHttpWebRequest(Uri uri)
         {
             var webRequest = WebRequest.Create(uri);
             var webProxy = WebRequest.DefaultWebProxy ?? new WebProxy();
@@ -32,8 +29,7 @@
         /// </summary>
         /// <param name="uri">The URI.</param>
         /// <returns>A stream containing the downloaded data.</returns>
-        [NotNull]
-        public static MemoryStream Download([NotNull] Uri uri)
+        public static MemoryStream Download(Uri uri)
         {
             var webRequest = CreateHttpWebRequest(uri);
             var localStream = new MemoryStream();

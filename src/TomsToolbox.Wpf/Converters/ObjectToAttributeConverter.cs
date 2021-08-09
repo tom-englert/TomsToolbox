@@ -5,8 +5,6 @@
     using System.Linq;
     using System.Reflection;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -22,8 +20,7 @@
         /// <param name="enumType">An optional type of an enum to support converting <see cref="Enum"/> where the value is given as a number or string.</param>
         /// <param name="selector">The selector to get the desired value from the attribute.</param>
         /// <returns>The converted value.</returns>
-        [NotNull]
-        protected static string InternalConvert([CanBeNull] object? value, [CanBeNull] Type? enumType, [NotNull] Func<T, string?> selector)
+        protected static string InternalConvert(object? value, Type? enumType, Func<T, string?> selector)
         {
             return InternalConvert(value, enumType, selector, _ => true);
         }
@@ -38,17 +35,13 @@
         /// <returns>
         /// The converted value.
         /// </returns>
-        [NotNull]
-        protected static string InternalConvert([CanBeNull] object? value, [CanBeNull] Type? enumType, [NotNull] Func<T, string?> selector, [NotNull] Func<T, bool> predicate)
+        protected static string InternalConvert(object? value, Type? enumType, Func<T, string?> selector, Func<T, bool> predicate)
         {
             if (value == null)
                 return string.Empty;
 
             var valueType = value.GetType();
-            var valueString = value.ToString();
-
-            if (valueString == null)
-                return string.Empty;
+            var valueString = value.ToString()!;
 
             ICustomAttributeProvider? fieldInfo;
             if (valueType.IsEnum)
@@ -60,9 +53,7 @@
                 if (!enumType.IsEnum)
                     throw new ArgumentException(@"Parameter must be an enum type or null.", nameof(enumType));
 
-                var enumName = valueType == typeof(string) ? (string)value : Enum.ToObject(enumType, value).ToString();
-                if (enumName == null)
-                    return string.Empty;
+                var enumName = valueType == typeof(string) ? (string)value : Enum.ToObject(enumType, value).ToString()!;
 
                 fieldInfo = enumType.GetField(enumName);
             }
@@ -89,7 +80,6 @@
         /// A converted value.
         /// </returns>
         /// <param name="value">The value produced by the binding source.</param><param name="targetType">The type of the binding target property.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
-        [CanBeNull]
-        protected abstract override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture);
+        protected abstract override object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture);
     }
 }

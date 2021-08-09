@@ -5,8 +5,6 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using JetBrains.Annotations;
-
     using Microsoft.Xaml.Behaviors;
 
     /// <summary>
@@ -43,7 +41,7 @@
             AssociatedObject.MouseLeftButtonDown -= GroupHeader_OnMouseLeftButtonDown;
         }
 
-        private static void GroupHeader_OnMouseLeftButtonDown([NotNull] object sender, [CanBeNull] MouseButtonEventArgs? e)
+        private static void GroupHeader_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs? e)
         {
             var visual = sender as FrameworkElement;
 

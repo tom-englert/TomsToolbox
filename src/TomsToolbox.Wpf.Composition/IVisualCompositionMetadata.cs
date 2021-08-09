@@ -1,7 +1,5 @@
 ﻿namespace TomsToolbox.Wpf.Composition
 {
-    using JetBrains.Annotations;
-
     using TomsToolbox.Composition;
 
     /// <summary>
@@ -12,7 +10,6 @@
         /// <summary>
         /// Gets the id of the item for visual composition.
         /// </summary>
-        [CanBeNull]
         object? Role
         {
             get;
@@ -29,7 +26,6 @@
         /// <summary>
         /// Gets the target regions for visual composition.
         /// </summary>
-        [CanBeNull, ItemCanBeNull]
         string?[]? TargetRegions
         {
             get;
@@ -38,7 +34,7 @@
 
     internal class VisualCompositionMetadata : IVisualCompositionMetadata
     {
-        public VisualCompositionMetadata([CanBeNull] IMetadata? metadata)
+        public VisualCompositionMetadata(IMetadata? metadata)
         {
             if (metadata == null)
                 return;
@@ -59,12 +55,10 @@
             }
         }
 
-        [CanBeNull]
         public object? Role { get; }
 
         public double Sequence { get; }
 
-        [CanBeNull, ItemCanBeNull]
         public string?[]? TargetRegions { get; }
     }
 }

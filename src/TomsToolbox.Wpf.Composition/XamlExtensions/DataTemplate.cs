@@ -3,8 +3,6 @@
     using System.Windows;
     using System.Windows.Controls;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Attached properties to simplify data template handling.
     /// </summary>
@@ -20,11 +18,10 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns>The role.</returns>
-        [CanBeNull]
         [AttachedPropertyBrowsableForType(typeof(ContentControl))]
         [AttachedPropertyBrowsableForType(typeof(TabControl))]
         [AttachedPropertyBrowsableForType(typeof(ContentPresenter))]
-        public static object? GetRole([NotNull] FrameworkElement obj)
+        public static object? GetRole(FrameworkElement obj)
         {
             return obj.GetValue(RoleProperty);
         }
@@ -33,7 +30,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetRole([NotNull] FrameworkElement obj, [CanBeNull] object? value)
+        public static void SetRole(FrameworkElement obj, object? value)
         {
             obj.SetValue(RoleProperty, value);
         }
@@ -43,11 +40,10 @@
         /// <AttachedPropertyComments>
         /// <summary>Shortcut to set a <see cref="RoleBasedDataTemplateSelector"/> with the specified role as the targets <see cref="ContentControl.ContentTemplateSelector"/>.</summary>
         /// </AttachedPropertyComments>
-        [NotNull]
         public static readonly DependencyProperty RoleProperty =
             DependencyProperty.RegisterAttached("Role", typeof(object), typeof(DataTemplate), new FrameworkPropertyMetadata(Role_Changed));
 
-        private static void Role_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
+        private static void Role_Changed(DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
             var newValue = e.NewValue;
 

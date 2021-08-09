@@ -6,8 +6,6 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A <see cref="IMultiValueConverter"/> that chains one <see cref="IMultiValueConverter"/> with a list of <see cref="IValueConverter"/>.
     /// The <see cref="CompositeMultiValueConverter.MultiValueConverter"/> is invoked first, and the result is converted by the <see cref="CompositeMultiValueConverter.Converters"/> in the specified order.
@@ -16,13 +14,11 @@
     [ValueConversion(typeof(object[]), typeof(object))]
     public class CompositeMultiValueConverter : IMultiValueConverter
     {
-        [NotNull]
-        private readonly CompositeConverter _compositeConverter = new CompositeConverter();
+        private readonly CompositeConverter _compositeConverter = new();
 
         /// <summary>
         /// Gets or sets the multi value converter.
         /// </summary>
-        [CanBeNull]
         public IMultiValueConverter? MultiValueConverter
         {
             get; 
@@ -32,7 +28,6 @@
         /// <summary>
         /// Gets the list of converters.
         /// </summary>
-        [NotNull, ItemNotNull]
         public Collection<IValueConverter> Converters => _compositeConverter.Converters;
 
         /// <summary>
@@ -45,8 +40,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        [CanBeNull]
-        public object? Convert([CanBeNull] object[]? values, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        public object? Convert(object[]? values, Type? targetType, object? parameter, CultureInfo? culture)
         {
             if (MultiValueConverter == null)
                 throw new InvalidOperationException("A MultiValueConverter must be set.");
@@ -65,8 +59,7 @@
         /// An array of values that have been converted from the target value back to the source values.
         /// </returns>
         /// <exception cref="System.InvalidOperationException"></exception>
-        [CanBeNull]
-        public object[]? ConvertBack([CanBeNull] object? value, [CanBeNull] Type[]? targetTypes, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        public object[] ConvertBack(object? value, Type[]? targetTypes, object? parameter, CultureInfo? culture)
         {
             throw new InvalidOperationException();
         }

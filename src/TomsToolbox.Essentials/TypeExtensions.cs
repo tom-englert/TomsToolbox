@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Extension methods for <see cref="Type"/>
     /// </summary>
@@ -15,8 +13,7 @@
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The type and all it's base types.</returns>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<Type> GetSelfAndBaseTypes([NotNull] this Type type)
+        public static IEnumerable<Type> GetSelfAndBaseTypes(this Type type)
         {
             while (type != null)
             {

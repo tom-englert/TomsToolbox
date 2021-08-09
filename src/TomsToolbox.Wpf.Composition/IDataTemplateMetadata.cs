@@ -3,8 +3,6 @@
     using System;
     using System.Windows;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Composition;
 
     /// <summary>
@@ -15,7 +13,6 @@
         /// <summary>
         /// Gets the type for which this DataTemplate is intended.
         /// </summary>
-        [CanBeNull]
         Type? DataType
         {
             get;
@@ -25,7 +22,6 @@
         /// Gets the role of this visual.
         /// If a role is set, a <see cref="RoleBasedDataTemplateKey"/> will be created for this view; else a simple <see cref="DataTemplateKey"/> is used.
         /// </summary>
-        [CanBeNull]
         object? Role
         {
             get;
@@ -34,7 +30,7 @@
 
     internal class DataTemplateMetadata : IDataTemplateMetadata
     {
-        public DataTemplateMetadata([CanBeNull] IMetadata?  metadata)
+        public DataTemplateMetadata(IMetadata?  metadata)
         {
             if (metadata == null)
                 return;
@@ -50,10 +46,8 @@
             }
         }
 
-        [CanBeNull]
         public Type? DataType { get; }
         
-        [CanBeNull]
         public object? Role { get; }
     }
 }

@@ -6,8 +6,6 @@
     using System.Windows.Data;
     using System.Windows.Input;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A converter to use in <see cref="ICommand"/> bindings to intercept or filter command executions in the view layer in MVVM applications.
     /// </summary>
@@ -25,8 +23,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        [CanBeNull]
-        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             if (!(value is ICommand command))
                 return null;
@@ -44,7 +41,7 @@
         /// </summary>
         public event EventHandler<ErrorEventArgs>? Error;
 
-        private void QueryCancelExecution([NotNull] ConfirmedCommandEventArgs e)
+        private void QueryCancelExecution(ConfirmedCommandEventArgs e)
         {
             Executing?.Invoke(this, e);
         }
@@ -56,18 +53,16 @@
 
         private class CommandProxy : ICommand
         {
-            [NotNull]
             private readonly ConfirmedCommandConverter _owner;
-            [NotNull]
             private readonly ICommand _command;
 
-            public CommandProxy([NotNull] ConfirmedCommandConverter owner, [NotNull] ICommand command)
+            public CommandProxy(ConfirmedCommandConverter owner, ICommand command)
             {
                 _owner = owner;
                 _command = command;
             }
 
-            public void Execute([CanBeNull] object? parameter)
+            public void Execute(object? parameter)
             {
                 var args = new ConfirmedCommandEventArgs { Parameter = parameter };
 
@@ -86,7 +81,7 @@
                 }
             }
 
-            public bool CanExecute([CanBeNull] object? parameter)
+            public bool CanExecute(object? parameter)
             {
                 return _command.CanExecute(parameter);
             }

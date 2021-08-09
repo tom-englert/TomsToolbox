@@ -1,12 +1,8 @@
 ﻿namespace TomsToolbox.Wpf
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
     using System.Windows.Threading;
-
-    using JetBrains.Annotations;
-    using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
 
     /// <summary>
     /// Extension methods to ease usage of dispatcher calls.
@@ -21,8 +17,7 @@
         /// <param name="method">The method.</param>
         /// <returns>The result of the method.</returns>
         /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
-        [CanBeNull][return:MaybeNull]
-        public static T Invoke<T>([CanBeNull] this Dispatcher? dispatcher, [NotNull] Func<T> method)
+        public static T? Invoke<T>(this Dispatcher? dispatcher, Func<T> method)
         {
             return InternalInvoke(dispatcher, method);
         }
@@ -33,13 +28,12 @@
         /// <param name="dispatcher">The dispatcher.</param>
         /// <param name="method">The method.</param>
         /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
-        public static void Invoke([CanBeNull] this Dispatcher? dispatcher, [NotNull] Action method)
+        public static void Invoke(this Dispatcher? dispatcher, Action method)
         {
             InternalInvoke(dispatcher, method);
         }
 
-        [CanBeNull][return:MaybeNull]
-        private static T InternalInvoke<T>([CanBeNull] Dispatcher? dispatcher, [NotNull] Func<T> method)
+        private static T? InternalInvoke<T>(Dispatcher? dispatcher, Func<T> method)
         {
             var result = InternalInvoke(dispatcher, (Delegate)method);
             if (result == null)
@@ -48,8 +42,7 @@
             return (T)result;
         }
 
-        [CanBeNull]
-        private static object? InternalInvoke([CanBeNull] Dispatcher? dispatcher, [NotNull] Delegate method)
+        private static object? InternalInvoke(Dispatcher? dispatcher, Delegate method)
         {
             if ((dispatcher == null) || dispatcher.CheckAccess())
             {
@@ -87,8 +80,7 @@
             return result;
         }
 
-        [NotNull]
-        private static Exception UnwrapTargetInvocation([NotNull] Exception ex)
+        private static Exception UnwrapTargetInvocation(Exception ex)
         {
             if (ex is TargetInvocationException)
             {
@@ -105,8 +97,7 @@
         /// <param name="method">The method.</param>
         /// <returns>The dispatcher operation to track the outcome of the call.</returns>
         /// <exception cref="System.InvalidOperationException">The dispatcher has already shut down.</exception>
-        [NotNull]
-        public static DispatcherOperation BeginInvoke([NotNull] this Dispatcher dispatcher, [NotNull] Action method)
+        public static DispatcherOperation BeginInvoke(this Dispatcher dispatcher, Action method)
         {
             return BeginInvoke(dispatcher, DispatcherPriority.Normal, method);
         }
@@ -119,8 +110,7 @@
         /// <param name="method">The method.</param>
         /// <returns>The dispatcher operation to track the outcome of the call.</returns>
         /// <exception cref="System.InvalidOperationException">The dispatcher has already shut down.</exception>
-        [NotNull]
-        public static DispatcherOperation BeginInvoke([NotNull] this Dispatcher dispatcher, DispatcherPriority priority, [NotNull] Action method)
+        public static DispatcherOperation BeginInvoke(this Dispatcher dispatcher, DispatcherPriority priority, Action method)
         {
             return dispatcher.BeginInvoke(method, priority, null);
         }
@@ -129,7 +119,7 @@
         /// Restarts the specified timer.
         /// </summary>
         /// <param name="timer">The timer.</param>
-        public static void Restart([NotNull] this DispatcherTimer timer)
+        public static void Restart(this DispatcherTimer timer)
         {
             timer.Stop();
             timer.Start();

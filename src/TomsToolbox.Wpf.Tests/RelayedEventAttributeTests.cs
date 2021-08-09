@@ -5,8 +5,6 @@ namespace TomsToolbox.Wpf.Tests
 {
     using System;
 
-    using JetBrains.Annotations;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using TomsToolbox.ObservableCollections;
@@ -67,7 +65,6 @@ namespace TomsToolbox.Wpf.Tests
         class RelayingClass : ObservableObject
         {
             private readonly GoverningClass1 _governingClass1;
-            [CanBeNull]
             private readonly GoverningClass2? _governingClass2;
 
             public RelayingClass(GoverningClass1 governingClass)
@@ -126,7 +123,7 @@ namespace TomsToolbox.Wpf.Tests
             var governing = new GoverningClass1();
             var relaying = new RelayingClass(governing);
 
-            relaying.PropertyChanged += (sender, e) => receivedEvents[e.PropertyName] += 1;
+            relaying.PropertyChanged += (_, e) => receivedEvents[e.PropertyName] += 1;
 
             governing.Value = 5;
 
@@ -149,7 +146,7 @@ namespace TomsToolbox.Wpf.Tests
             var governing2 = new GoverningClass2();
             var relaying = new RelayingClass(governing1, governing2);
 
-            relaying.PropertyChanged += (sender, e) => receivedEvents[e.PropertyName] += 1;
+            relaying.PropertyChanged += (_, e) => receivedEvents[e.PropertyName] += 1;
 
             governing1.Value = 5;
 
@@ -189,7 +186,7 @@ namespace TomsToolbox.Wpf.Tests
             var governing2 = new GoverningClass2();
             var relaying = new RelayingClass(governing1, governing2);
 
-            relaying.PropertyChanged += (sender, e) => receivedEvents[e.PropertyName] += 1;
+            relaying.PropertyChanged += (_, e) => receivedEvents[e.PropertyName] += 1;
 
             governing1.Value = 5;
 

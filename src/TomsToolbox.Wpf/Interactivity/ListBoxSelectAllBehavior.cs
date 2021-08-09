@@ -7,8 +7,6 @@
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
 
-    using JetBrains.Annotations;
-
     using Microsoft.Xaml.Behaviors;
 
     /// <summary>
@@ -17,7 +15,6 @@
     /// <seealso cref="Behavior{T}" />
     public class ListBoxSelectAllBehavior : Behavior<ListBox>
     {
-        [NotNull]
         private readonly DispatcherThrottle _collectionChangedThrottle;
         private bool _isListBoxUpdating;
 
@@ -40,7 +37,7 @@
         /// <summary>
         /// Identifies the <see cref="AreAllFilesSelected"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty AreAllFilesSelectedProperty =
+        public static readonly DependencyProperty AreAllFilesSelectedProperty =
             DependencyProperty.Register("AreAllFilesSelected", typeof(bool?), typeof(ListBoxSelectAllBehavior), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, (sender, e) => ((ListBoxSelectAllBehavior)sender)?.AreAllFilesSelected_Changed((bool?)e.NewValue)));
 
         /// <summary>
@@ -60,10 +57,10 @@
             listBox.SelectAll();
 
             listBox.SelectionChanged += ListBox_SelectionChanged;
-            ((INotifyCollectionChanged)listBox.Items).CollectionChanged += (_, __) => _collectionChangedThrottle.Tick();
+            ((INotifyCollectionChanged)listBox.Items).CollectionChanged += (_, _) => _collectionChangedThrottle.Tick();
         }
 
-        private void ListBox_SelectionChanged([CanBeNull] object? sender, [CanBeNull] EventArgs? e)
+        private void ListBox_SelectionChanged(object? sender, EventArgs? e)
         {
             var listBox = AssociatedObject;
             if (listBox == null)

@@ -8,8 +8,6 @@
     using System.Security.Principal;
     using System.Text;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -30,13 +28,10 @@
         /// <returns>
         /// The credentials entered by the user, or <c>null</c> if the user has canceled the operation.
         /// </returns>
-        [CanBeNull]
-        public static NetworkCredential? PromptForCredential(IntPtr parentHandle, [CanBeNull] string? caption, [CanBeNull] string? message, int authenticationError, [CanBeNull] NetworkCredential? template)
+        public static NetworkCredential? PromptForCredential(IntPtr parentHandle, string? caption, string? message, int authenticationError, NetworkCredential? template)
         {
-            using (var inCredBuffer = PackAuthenticationBuffer(template))
-            {
-                return PromptForCredential(parentHandle, caption, message, authenticationError, inCredBuffer);
-            }
+            using var inCredBuffer = PackAuthenticationBuffer(template);
+            return PromptForCredential(parentHandle, caption, message, authenticationError, inCredBuffer);
         }
 
         /// <summary>
@@ -47,7 +42,7 @@
         /// <returns>
         /// 0 if the function succeeds, a HRESULT of the last error if the function fails.
         /// </returns>
-        public static int LogOnInteractiveUser([NotNull] this NetworkCredential credential, [CanBeNull] out SafeTokenHandle? userToken)
+        public static int LogOnInteractiveUser(this NetworkCredential credential, out SafeTokenHandle? userToken)
         {
             return LogOnInteractiveUser(credential.UserName, credential.Domain, credential.Password, out userToken);
         }
@@ -62,7 +57,7 @@
         /// <returns>
         /// 0 if the function succeeds, a HRESULT of the last error if the function fails.
         /// </returns>
-        public static int LogOnInteractiveUser([CanBeNull] string? userName, [CanBeNull] string? domain, [CanBeNull] string? password, [CanBeNull] out SafeTokenHandle? userToken)
+        public static int LogOnInteractiveUser(string? userName, string? domain, string? password, out SafeTokenHandle? userToken)
         {
             ParseUserDomain(ref userName, ref domain);
 
@@ -98,10 +93,8 @@
                 throw new Win32Exception();
             }
 
-            using (var hToken = new SafeTokenHandle(phToken))
-            {
-                return IsUserInAdminGroup(hToken);
-            }
+            using var hToken = new SafeTokenHandle(phToken);
+            return IsUserInAdminGroup(hToken);
         }
 
         /// <summary>
@@ -118,7 +111,7 @@
         /// <exception cref="Win32Exception">
         /// </exception>
         /// <exception cref="System.ComponentModel.Win32Exception">When any native Windows API call fails, the function throws a Win32Exception with the last error code.</exception>
-        public static bool IsUserInAdminGroup([NotNull] SafeTokenHandle userToken)
+        public static bool IsUserInAdminGroup(SafeTokenHandle userToken)
         {
             // Determine whether system is running Windows Vista or later operating 
             // systems (major version >= 6) because they support linked tokens, but 
@@ -131,37 +124,31 @@
                 // Determine token type: limited, elevated, or default. 
 
                 // Allocate a buffer for the elevation type information.
-                using (var pElevationType = new SafeNativeMemory(sizeof(TOKEN_ELEVATION_TYPE)))
+                using var pElevationType = new SafeNativeMemory(sizeof(TOKEN_ELEVATION_TYPE));
+                // Retrieve token elevation type information.
+                if (!NativeMethods.GetTokenInformation(userToken, TOKEN_INFORMATION_CLASS.TokenElevationType, pElevationType))
                 {
-                    // Retrieve token elevation type information.
-                    if (!NativeMethods.GetTokenInformation(userToken, TOKEN_INFORMATION_CLASS.TokenElevationType, pElevationType))
+                    throw new Win32Exception();
+                }
+
+                // Marshal the TOKEN_ELEVATION_TYPE enum from native to .NET.
+                var elevType = pElevationType.ReadInt32().ToEnum<TOKEN_ELEVATION_TYPE>();
+
+                // If limited, get the linked elevated token for further check.
+                if (elevType == TOKEN_ELEVATION_TYPE.TokenElevationTypeLimited)
+                {
+                    // Allocate a buffer for the linked token.
+                    using var pLinkedToken = new SafeNativeMemory(IntPtr.Size);
+                    // Get the linked token.
+                    if (!NativeMethods.GetTokenInformation(userToken, TOKEN_INFORMATION_CLASS.TokenLinkedToken, pLinkedToken))
                     {
                         throw new Win32Exception();
                     }
 
-                    // Marshal the TOKEN_ELEVATION_TYPE enum from native to .NET.
-                    var elevType = pElevationType.ReadInt32().ToEnum<TOKEN_ELEVATION_TYPE>();
-
-                    // If limited, get the linked elevated token for further check.
-                    if (elevType == TOKEN_ELEVATION_TYPE.TokenElevationTypeLimited)
-                    {
-                        // Allocate a buffer for the linked token.
-                        using (var pLinkedToken = new SafeNativeMemory(IntPtr.Size))
-                        {
-                            // Get the linked token.
-                            if (!NativeMethods.GetTokenInformation(userToken, TOKEN_INFORMATION_CLASS.TokenLinkedToken, pLinkedToken))
-                            {
-                                throw new Win32Exception();
-                            }
-
-                            // Marshal the linked token value from native to .NET.
-                            var hLinkedToken = pLinkedToken.ReadIntPtr();
-                            using (var linkedToken = new SafeTokenHandle(hLinkedToken))
-                            {
-                                return IsAdministrator(linkedToken);
-                            }
-                        }
-                    }
+                    // Marshal the linked token value from native to .NET.
+                    var hLinkedToken = pLinkedToken.ReadIntPtr();
+                    using var linkedToken = new SafeTokenHandle(hLinkedToken);
+                    return IsAdministrator(linkedToken);
                 }
             }
 
@@ -175,11 +162,9 @@
                 throw new Win32Exception();
             }
 
-            using (var hTokenToCheck = new SafeTokenHandle(phTokenToCheck))
-            {
-                // Check if the token to be checked contains admin SID.
-                return IsAdministrator(hTokenToCheck);
-            }
+            using var hTokenToCheck = new SafeTokenHandle(phTokenToCheck);
+            // Check if the token to be checked contains admin SID.
+            return IsAdministrator(hTokenToCheck);
         }
 
         /// <summary>
@@ -195,12 +180,10 @@
         /// </returns>
         public static bool IsRunAsAdmin()
         {
-            using (var id = WindowsIdentity.GetCurrent())
-            {
-                var principal = new WindowsPrincipal(id);
+            using var id = WindowsIdentity.GetCurrent();
+            var principal = new WindowsPrincipal(id);
 
-                return principal.IsInRole(WindowsBuiltInRole.Administrator);
-            }
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
 
         /// <summary>
@@ -210,14 +193,12 @@
         /// <returns>
         /// <c>true</c> if the user belongs to the specified group; otherwise <c>false</c>
         /// </returns>
-        public static bool IsCurrentUserInGroup([NotNull] string groupName)
+        public static bool IsCurrentUserInGroup(string groupName)
         {
-            using (var id = WindowsIdentity.GetCurrent())
-            {
-                var principal = new WindowsPrincipal(id);
+            using var id = WindowsIdentity.GetCurrent();
+            var principal = new WindowsPrincipal(id);
 
-                return principal.IsInRole(groupName);
-            }
+            return principal.IsInRole(groupName);
         }
 
         /// <summary>
@@ -228,17 +209,15 @@
         /// <returns>
         /// <c>true</c> if the user blongs to the specified group; otherwise <c>false</c>
         /// </returns>
-        public static bool IsUserInGroup([NotNull] SafeTokenHandle userToken, [NotNull] string groupName)
+        public static bool IsUserInGroup(SafeTokenHandle userToken, string groupName)
         {
             var token = userToken.DangerousGetHandle();
             if (token == IntPtr.Zero)
                 return false;
 
-            using (var id = new WindowsIdentity(token))
-            {
-                var principal = new WindowsPrincipal(id);
-                return principal.IsInRole(groupName);
-            }
+            using var id = new WindowsIdentity(token);
+            var principal = new WindowsPrincipal(id);
+            return principal.IsInRole(groupName);
         }
 
         /// <summary>
@@ -273,35 +252,31 @@
                 throw new Win32Exception();
             }
 
-            using (var hToken = new SafeTokenHandle(phToken))
+            using var hToken = new SafeTokenHandle(phToken);
+            // Allocate a buffer for the elevation information.
+            using var pTokenElevation = new SafeNativeMemory<TOKEN_ELEVATION>();
+            // Retrieve token elevation information.
+            if (!NativeMethods.GetTokenInformation(hToken, TOKEN_INFORMATION_CLASS.TokenElevation, pTokenElevation))
             {
-                // Allocate a buffer for the elevation information.
-                using (var pTokenElevation = new SafeNativeMemory<TOKEN_ELEVATION>())
+                // When the process is run on operating systems prior to Windows 
+                // Vista, GetTokenInformation returns false with the error code 
+                // ERROR_INVALID_PARAMETER because TokenElevation is not supported 
+                // on those operating systems.
+                if ((Marshal.GetLastWin32Error() & 0xFFFF) == ERROR_INVALID_PARAMETER)
                 {
-                    // Retrieve token elevation information.
-                    if (!NativeMethods.GetTokenInformation(hToken, TOKEN_INFORMATION_CLASS.TokenElevation, pTokenElevation))
-                    {
-                        // When the process is run on operating systems prior to Windows 
-                        // Vista, GetTokenInformation returns false with the error code 
-                        // ERROR_INVALID_PARAMETER because TokenElevation is not supported 
-                        // on those operating systems.
-                        if ((Marshal.GetLastWin32Error() & 0xFFFF) == ERROR_INVALID_PARAMETER)
-                        {
-                            // => so on XP we are always "Elevated"!
-                            return true;
-                        }
-
-                        throw new Win32Exception();
-                    }
-
-                    // Marshal the TOKEN_ELEVATION struct from native to .NET object.
-                    var elevation = (TOKEN_ELEVATION)pTokenElevation;
-
-                    // TOKEN_ELEVATION.TokenIsElevated is a non-zero value if the token 
-                    // has elevated privileges; otherwise, a zero value.
-                    return (elevation.TokenIsElevated != 0);
+                    // => so on XP we are always "Elevated"!
+                    return true;
                 }
+
+                throw new Win32Exception();
             }
+
+            // Marshal the TOKEN_ELEVATION struct from native to .NET object.
+            var elevation = (TOKEN_ELEVATION)pTokenElevation;
+
+            // TOKEN_ELEVATION.TokenIsElevated is a non-zero value if the token 
+            // has elevated privileges; otherwise, a zero value.
+            return (elevation.TokenIsElevated != 0);
         }
 
         /// <summary>
@@ -347,47 +322,43 @@
                 throw new Win32Exception();
             }
 
-            using (var hToken = new SafeTokenHandle(phToken))
+            using var hToken = new SafeTokenHandle(phToken);
+            // Then we must query the size of the integrity level information 
+            // associated with the token. Note that we expect GetTokenInformation 
+            // to return false with the ERROR_INSUFFICIENT_BUFFER error code 
+            // because we've given it a null buffer. On exit cbTokenIntegrityLevel will tell 
+            // the size of the group information.
+            if (!NativeMethods.GetTokenInformation(hToken, TOKEN_INFORMATION_CLASS.TokenIntegrityLevel, IntPtr.Zero, 0, out var cbTokenIntegrityLevel))
             {
-                // Then we must query the size of the integrity level information 
-                // associated with the token. Note that we expect GetTokenInformation 
-                // to return false with the ERROR_INSUFFICIENT_BUFFER error code 
-                // because we've given it a null buffer. On exit cbTokenIntegrityLevel will tell 
-                // the size of the group information.
-                if (!NativeMethods.GetTokenInformation(hToken, TOKEN_INFORMATION_CLASS.TokenIntegrityLevel, IntPtr.Zero, 0, out var cbTokenIntegrityLevel))
+                var error = Marshal.GetLastWin32Error();
+                if (error != ERROR_INSUFFICIENT_BUFFER)
                 {
-                    var error = Marshal.GetLastWin32Error();
-                    if (error != ERROR_INSUFFICIENT_BUFFER)
-                    {
-                        // When the process is run on operating systems prior to 
-                        // Windows Vista, GetTokenInformation returns false with the 
-                        // ERROR_INVALID_PARAMETER error code because 
-                        // TokenIntegrityLevel is not supported on those OS's.
-                        throw new Win32Exception(error);
-                    }
-                }
-
-                // Now we allocate a buffer for the integrity level information.
-                using (var pTokenIntegrityLevel = new SafeNativeMemory<TOKEN_MANDATORY_LABEL>(cbTokenIntegrityLevel))
-                {
-                    // Now we ask for the integrity level information again. This may fail 
-                    // if an administrator has added this account to an additional group 
-                    // between our first call to GetTokenInformation and this one.
-                    if (!NativeMethods.GetTokenInformation(hToken, TOKEN_INFORMATION_CLASS.TokenIntegrityLevel, pTokenIntegrityLevel))
-                    {
-                        throw new Win32Exception();
-                    }
-
-                    // Marshal the TOKEN_MANDATORY_LABEL struct from native to .NET object.
-                    var tokenIntegrityLevel = (TOKEN_MANDATORY_LABEL)pTokenIntegrityLevel;
-
-                    // Integrity Level SIDs are in the form of S-1-16-0xXXXX. (e.g. 
-                    // S-1-16-0x1000 stands for low integrity level SID). There is one 
-                    // and only one sub-authority.
-                    var pIntegrityLevel = NativeMethods.GetSidSubAuthority(tokenIntegrityLevel.Label.Sid, 0);
-                    return Marshal.ReadInt32(pIntegrityLevel);
+                    // When the process is run on operating systems prior to 
+                    // Windows Vista, GetTokenInformation returns false with the 
+                    // ERROR_INVALID_PARAMETER error code because 
+                    // TokenIntegrityLevel is not supported on those OS's.
+                    throw new Win32Exception(error);
                 }
             }
+
+            // Now we allocate a buffer for the integrity level information.
+            using var pTokenIntegrityLevel = new SafeNativeMemory<TOKEN_MANDATORY_LABEL>(cbTokenIntegrityLevel);
+            // Now we ask for the integrity level information again. This may fail 
+            // if an administrator has added this account to an additional group 
+            // between our first call to GetTokenInformation and this one.
+            if (!NativeMethods.GetTokenInformation(hToken, TOKEN_INFORMATION_CLASS.TokenIntegrityLevel, pTokenIntegrityLevel))
+            {
+                throw new Win32Exception();
+            }
+
+            // Marshal the TOKEN_MANDATORY_LABEL struct from native to .NET object.
+            var tokenIntegrityLevel = (TOKEN_MANDATORY_LABEL)pTokenIntegrityLevel;
+
+            // Integrity Level SIDs are in the form of S-1-16-0xXXXX. (e.g. 
+            // S-1-16-0x1000 stands for low integrity level SID). There is one 
+            // and only one sub-authority.
+            var pIntegrityLevel = NativeMethods.GetSidSubAuthority(tokenIntegrityLevel.Label.Sid, 0);
+            return Marshal.ReadInt32(pIntegrityLevel);
         }
 
         /// <summary>
@@ -413,8 +384,7 @@
             }
         }
 
-        [NotNull]
-        private static SafeNativeMemory PackAuthenticationBuffer([CanBeNull] NetworkCredential? credential)
+        private static SafeNativeMemory PackAuthenticationBuffer(NetworkCredential? credential)
         {
             var userName = credential?.UserName;
 
@@ -428,8 +398,7 @@
             return buffer;
         }
 
-        [CanBeNull]
-        private static NetworkCredential? PromptForCredential(IntPtr parentHandle, [CanBeNull] string? caption, [CanBeNull] string? message, int authenticationError, [NotNull] SafeNativeMemory inCredBuffer)
+        private static NetworkCredential? PromptForCredential(IntPtr parentHandle, string? caption, string? message, int authenticationError, SafeNativeMemory inCredBuffer)
         {
             var save = true;
             uint authPackage = 0;
@@ -445,26 +414,21 @@
             if (0 != NativeMethods.CredUIPromptForWindowsCredentials(ref credui, authenticationError, ref authPackage, inCredBuffer.DangerousGetHandle(), inCredBuffer.Size, out var outCredBufferPtr, out int outCredSize, ref save, 0))
                 return null;
 
-            using (var outCredBuffer = new SafeNativeMemory(outCredBufferPtr, outCredSize))
-            {
-                return UnpackAuthenticationBuffer(outCredBuffer);
-            }
+            using var outCredBuffer = new SafeNativeMemory(outCredBufferPtr, outCredSize);
+            return UnpackAuthenticationBuffer(outCredBuffer);
         }
-        private static bool IsAdministrator([NotNull] SafeHandle hTokenToCheck)
+        private static bool IsAdministrator(SafeHandle hTokenToCheck)
         {
             var token = hTokenToCheck.DangerousGetHandle();
             if (token == IntPtr.Zero)
                 return false;
 
-            using (var id = new WindowsIdentity(token))
-            {
-                var principal = new WindowsPrincipal(id);
-                return principal.IsInRole(WindowsBuiltInRole.Administrator);
-            }
+            using var id = new WindowsIdentity(token);
+            var principal = new WindowsPrincipal(id);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
 
-        [CanBeNull]
-        private static NetworkCredential? UnpackAuthenticationBuffer([NotNull] SafeNativeMemory outCredBuffer)
+        private static NetworkCredential? UnpackAuthenticationBuffer(SafeNativeMemory outCredBuffer)
         {
             const int maxLen = 100;
 
@@ -487,7 +451,7 @@
             };
         }
 
-        private static void ParseUserDomain([CanBeNull] ref string? userName, [CanBeNull] ref string? domain)
+        private static void ParseUserDomain(ref string? userName, ref string? domain)
         {
             if (userName.IsNullOrEmpty())
                 return;
@@ -588,9 +552,9 @@
         {
             public int cbSize;
             public IntPtr hwndParent;
-            [MarshalAs(UnmanagedType.LPWStr), CanBeNull]
+            [MarshalAs(UnmanagedType.LPWStr)]
             public string? pszMessageText;
-            [MarshalAs(UnmanagedType.LPWStr), CanBeNull]
+            [MarshalAs(UnmanagedType.LPWStr)]
             public string? pszCaptionText;
             public readonly IntPtr hbmBanner;
         }
@@ -616,7 +580,6 @@
             public readonly int iIcon;
 
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
-            [CanBeNull]
             public readonly string? szPath;
         }
 
@@ -628,12 +591,12 @@
 
             [DllImport("advapi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool DuplicateToken([NotNull] SafeTokenHandle existingTokenHandle, SECURITY_IMPERSONATION_LEVEL impersonationLevel, out IntPtr duplicateTokenHandle);
+            public static extern bool DuplicateToken(SafeTokenHandle existingTokenHandle, SECURITY_IMPERSONATION_LEVEL impersonationLevel, out IntPtr duplicateTokenHandle);
 
             [DllImport("advapi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool GetTokenInformation([NotNull] SafeTokenHandle hToken, TOKEN_INFORMATION_CLASS tokenInfoClass, IntPtr pTokenInfo, int tokenInfoLength, out int returnLength);
-            public static bool GetTokenInformation([NotNull] SafeTokenHandle hToken, TOKEN_INFORMATION_CLASS tokenInfoClass, [NotNull] SafeNativeMemory pTokenInfo)
+            public static extern bool GetTokenInformation(SafeTokenHandle hToken, TOKEN_INFORMATION_CLASS tokenInfoClass, IntPtr pTokenInfo, int tokenInfoLength, out int returnLength);
+            public static bool GetTokenInformation(SafeTokenHandle hToken, TOKEN_INFORMATION_CLASS tokenInfoClass, SafeNativeMemory pTokenInfo)
             {
                 return GetTokenInformation(hToken, tokenInfoClass, pTokenInfo.DangerousGetHandle(), pTokenInfo.Size, out _);
             }
@@ -643,7 +606,7 @@
 
             [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool LogonUser([CanBeNull] string? lpszUsername, [CanBeNull] string? lpszDomain, [CanBeNull] string? lpszPassword, int dwLogonType, int dwLogonProvider, out IntPtr phToken);
+            public static extern bool LogonUser(string? lpszUsername, string? lpszDomain, string? lpszPassword, int dwLogonType, int dwLogonProvider, out IntPtr phToken);
 
             [DllImport("credui.dll", CharSet = CharSet.Unicode)]
             [return: MarshalAs(UnmanagedType.U4)]
@@ -652,11 +615,11 @@
 
             [DllImport("credui.dll", CharSet = CharSet.Unicode)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool CredUnPackAuthenticationBuffer(int dwFlags, IntPtr pAuthBuffer, int cbAuthBuffer, [CanBeNull] StringBuilder? pszUserName, ref int pcchMaxUserName, [CanBeNull] StringBuilder? pszDomainName, ref int pcchMaxDomainame, [CanBeNull] StringBuilder? pszPassword, ref int pcchMaxPassword);
+            public static extern bool CredUnPackAuthenticationBuffer(int dwFlags, IntPtr pAuthBuffer, int cbAuthBuffer, StringBuilder? pszUserName, ref int pcchMaxUserName, StringBuilder? pszDomainName, ref int pcchMaxDomainame, StringBuilder? pszPassword, ref int pcchMaxPassword);
 
             [DllImport("credui.dll", CharSet = CharSet.Unicode)]
             [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool CredPackAuthenticationBuffer(int dwFlags, [CanBeNull] string? pszUserName, [CanBeNull] string? pszPassword, IntPtr pPackedCredentials, ref int pcbPackedCredentials);
+            public static extern bool CredPackAuthenticationBuffer(int dwFlags, string? pszUserName, string? pszPassword, IntPtr pPackedCredentials, ref int pcbPackedCredentials);
 
             [DllImport("Shell32.dll", SetLastError = false)]
             public static extern int SHGetStockIconInfo(SHSTOCKICONID siid, SHGSI uFlags, ref SHSTOCKICONINFO psii);

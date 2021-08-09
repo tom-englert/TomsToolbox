@@ -6,8 +6,6 @@
     using System.Linq;
     using System.Reflection;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Methods to ease reflection
     /// </summary>
@@ -18,8 +16,7 @@
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
         /// <returns>The types in all assemblies.</returns>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<Type> EnumerateAllTypes([NotNull, ItemCanBeNull] this IEnumerable<Assembly?> assemblies)
+        public static IEnumerable<Type> EnumerateAllTypes(this IEnumerable<Assembly?> assemblies)
         {
             return assemblies.SelectMany(EnumerateAllTypes);
         }
@@ -29,14 +26,12 @@
         /// </summary>
         /// <param name="assembly">The assembly. If assembly is null, an empty list is returned.</param>
         /// <returns>The types in the assembly.</returns>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<Type> EnumerateAllTypes([CanBeNull] this Assembly? assembly)
+        public static IEnumerable<Type> EnumerateAllTypes(this Assembly? assembly)
         {
             return assembly?.GetTypes().SelectMany(GetSelfAndNestedTypes) ?? Enumerable.Empty<Type>();
         }
 
-        [NotNull, ItemNotNull]
-        private static IEnumerable<Type> GetSelfAndNestedTypes([CanBeNull] Type? type)
+        private static IEnumerable<Type> GetSelfAndNestedTypes(Type? type)
         {
             return type == null ? Enumerable.Empty<Type>() : new[] { type }.Concat(type.GetNestedTypes().SelectMany(GetSelfAndNestedTypes));
         }
@@ -46,8 +41,7 @@
         /// </summary>
         /// <param name="directory">The directory.</param>
         /// <returns>All types in all assemblies in the specified directory</returns>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<Type> EnumerateAllTypes([NotNull] this DirectoryInfo directory)
+        public static IEnumerable<Type> EnumerateAllTypes(this DirectoryInfo directory)
         {
             return EnumerateAllTypes(directory, "*.dll");
         }
@@ -58,8 +52,7 @@
         /// <param name="directory">The directory.</param>
         /// <param name="searchPattern">The search string. The default pattern is "*", which returns all files.</param>
         /// <returns>All types in all assemblies in the specified directory</returns>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<Type> EnumerateAllTypes([NotNull] this DirectoryInfo directory, [NotNull] string searchPattern)
+        public static IEnumerable<Type> EnumerateAllTypes(this DirectoryInfo directory, string searchPattern)
         {
             var assemblyFiles = directory.EnumerateFiles(searchPattern);
 
@@ -71,8 +64,7 @@
         /// </summary>
         /// <param name="assemblyFile">The assembly file.</param>
         /// <returns>The assembly if the assembly could be loaded; otherwise <c>null</c>.</returns>
-        [CanBeNull]
-        public static Assembly? TryLoadAssembly([CanBeNull] this FileSystemInfo? assemblyFile)
+        public static Assembly? TryLoadAssembly(this FileSystemInfo? assemblyFile)
         {
             if (assemblyFile == null)
                 return null;
@@ -95,8 +87,7 @@
         /// </summary>
         /// <param name="assemblyFile">The assembly file.</param>
         /// <returns>The assembly if the assembly could be loaded; otherwise <c>null</c>.</returns>
-        [CanBeNull]
-        public static Assembly? TryLoadAssemblyForReflectionOnly([CanBeNull] this FileSystemInfo? assemblyFile)
+        public static Assembly? TryLoadAssemblyForReflectionOnly(this FileSystemInfo? assemblyFile)
         {
             if (assemblyFile == null)
                 return null;

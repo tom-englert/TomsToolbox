@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
@@ -13,8 +12,6 @@
     using JetBrains.Annotations;
 
     using TomsToolbox.Essentials;
-
-    using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
 
     /// <summary>
     /// Base class implementing <see cref="INotifyPropertyChanged"/>.<para/>
@@ -28,17 +25,15 @@
     [Serializable]
     public abstract class ObservableObjectBase : INotifyPropertyChanged, IDataErrorInfo, INotifyDataErrorInfo
     {
-        [NotNull]
-        private static readonly AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>> _dependencyMappingCache = new AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>>(PropertyDependencyAttribute.CreateDependencyMapping!);
-        [NonSerialized, CanBeNull]
+        private static readonly AutoWeakIndexer<Type, IDictionary<string, IEnumerable<string>>> _dependencyMappingCache = new(PropertyDependencyAttribute.CreateDependencyMapping);
+        [NonSerialized]
         private IDictionary<string, IEnumerable<string>>? _dependencyMapping;
 
-        [NotNull]
-        private static readonly AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>> _relayMappingCache = new AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>>(RelayedEventAttribute.CreateRelayMapping!);
-        [NonSerialized, CanBeNull]
+        private static readonly AutoWeakIndexer<Type, IDictionary<Type, IDictionary<string, string>>> _relayMappingCache = new(RelayedEventAttribute.CreateRelayMapping!);
+        [NonSerialized]
         private IDictionary<Type, IDictionary<string, string>>? _relayMapping;
 
-        [NonSerialized, CanBeNull]
+        [NonSerialized]
         private Dictionary<Type, WeakReference<INotifyPropertyChanged>>? _eventSources;
 
         /// <summary>
@@ -46,7 +41,7 @@
         /// </summary>
         /// <param name="oldSource"></param>
         /// <param name="newSource"></param>
-        protected void RelayEventsOf([CanBeNull] INotifyPropertyChanged? oldSource, [CanBeNull] INotifyPropertyChanged? newSource)
+        protected void RelayEventsOf(INotifyPropertyChanged? oldSource, INotifyPropertyChanged? newSource)
         {
             if (ReferenceEquals(oldSource, newSource))
                 return;
@@ -66,7 +61,7 @@
         /// The properties to relay must be declared with the <see cref="RelayedEventAttribute"/>.
         /// </summary>
         /// <param name="source">The source.</param>
-        protected void RelayEventsOf([NotNull] INotifyPropertyChanged source)
+        protected void RelayEventsOf(INotifyPropertyChanged source)
         {
             var sourceType = source.GetType();
             if (RelayMapping.Keys.All(key => key?.IsAssignableFrom(sourceType) != true))
@@ -99,7 +94,7 @@
         /// Detaches the event source.
         /// </summary>
         /// <param name="item">The item to detach.</param>
-        protected void DetachEventSource([NotNull] INotifyPropertyChanged item)
+        protected void DetachEventSource(INotifyPropertyChanged item)
         {
             var sourceType = item.GetType();
 
@@ -116,7 +111,7 @@
         /// <typeparam name="T">The type of the property.</typeparam>
         /// <param name="propertyExpression">The expression identifying the property.</param>
         [NotifyPropertyChangedInvocator]
-        protected void OnPropertyChanged<T>([NotNull] Expression<Func<T>> propertyExpression)
+        protected void OnPropertyChanged<T>(Expression<Func<T>> propertyExpression)
         {
             OnPropertyChanged(PropertySupport.ExtractPropertyName(propertyExpression));
         }
@@ -130,7 +125,7 @@
         /// <param name="propertyExpression">The expression identifying the property.</param>
         /// <returns>True if value has changed and the PropertyChange event was raised.</returns>
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>([CanBeNull, AllowNull, MaybeNull] ref T backingField, [CanBeNull, AllowNull] T value, [NotNull] Expression<Func<T>> propertyExpression)
+        protected bool SetProperty<T>(ref T? backingField, T? value, Expression<Func<T>> propertyExpression)
         {
             return SetProperty(ref backingField, value, PropertySupport.ExtractPropertyName(propertyExpression));
         }
@@ -145,9 +140,9 @@
         /// <param name="changeCallback">The callback that is invoked if the value has changed. Parameters are (oldValue, newValue).</param>
         /// <returns>True if value has changed and the PropertyChange event was raised.</returns>
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>([CanBeNull, AllowNull, MaybeNull] ref T backingField, [CanBeNull, AllowNull] T value, [NotNull] Expression<Func<T>> propertyExpression, [NotNull] Action<T, T> changeCallback)
+        protected bool SetProperty<T>(ref T? backingField, T? value, Expression<Func<T>> propertyExpression, Action<T, T> changeCallback)
         {
-            return SetProperty(ref backingField, value, PropertySupport.ExtractPropertyName(propertyExpression), changeCallback!);
+            return SetProperty(ref backingField, value, PropertySupport.ExtractPropertyName(propertyExpression), changeCallback);
         }
 
         /// <summary>
@@ -159,7 +154,7 @@
         /// <param name="propertyName">Name of the property; omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
         /// <returns>True if value has changed and the PropertyChange event was raised. </returns>
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>([CanBeNull, AllowNull, MaybeNull] ref T backingField, [CanBeNull, AllowNull] T value, [CallerMemberName][NotNull] string propertyName = null!)
+        protected bool SetProperty<T>(ref T? backingField, T? value, [CallerMemberName] string propertyName = null!)
         {
             if (Equals(backingField, value))
                 return false;
@@ -180,7 +175,7 @@
         /// <param name="changeCallback">The callback that is invoked if the value has changed. Parameters are (oldValue, newValue).</param>
         /// <returns> True if value has changed and the PropertyChange event was raised. </returns>
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>([CanBeNull, AllowNull, MaybeNull] ref T backingField, [CanBeNull, AllowNull] T value, [NotNull] string propertyName, [NotNull] Action<T, T> changeCallback)
+        protected bool SetProperty<T>(ref T? backingField, T? value, string propertyName, Action<T, T> changeCallback)
         {
             var oldValue = backingField;
 
@@ -201,9 +196,9 @@
         /// <param name="propertyName">Name of the property; omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
         /// <returns> True if value has changed and the PropertyChange event was raised. </returns>
         [NotifyPropertyChangedInvocator]
-        protected bool SetProperty<T>([CanBeNull, AllowNull, MaybeNull] ref T backingField, [CanBeNull, AllowNull] T value, [NotNull] Action<T, T> changeCallback, [NotNull] string propertyName)
+        protected bool SetProperty<T>(ref T? backingField, T? value, Action<T, T> changeCallback, string propertyName)
         {
-            return SetProperty(ref backingField, value, propertyName, changeCallback!);
+            return SetProperty(ref backingField, value, propertyName, changeCallback);
         }
 
         /// <summary>
@@ -211,7 +206,7 @@
         /// </summary>
         /// <param name="propertyName">Name of the property; omit this parameter to use the callers name provided by the CallerMemberNameAttribute</param>
         [NotifyPropertyChangedInvocator]
-        protected void OnPropertyChanged([CallerMemberName][NotNull] string propertyName = null!)
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null!)
         {
             InternalOnPropertyChanged(propertyName);
 
@@ -224,16 +219,13 @@
             }
         }
 
-        [NotNull]
         private Dictionary<Type, WeakReference<INotifyPropertyChanged>> EventSources => _eventSources ??= new Dictionary<Type, WeakReference<INotifyPropertyChanged>>();
 
-        [NotNull]
         private IDictionary<Type, IDictionary<string, string>> RelayMapping => _relayMapping ??= _relayMappingCache[GetType()];
 
-        [NotNull]
         private IDictionary<string, IEnumerable<string>> DependencyMapping => _dependencyMapping ??= _dependencyMappingCache[GetType()];
 
-        private void RelaySource_PropertyChanged(object? sender, [NotNull] PropertyChangedEventArgs e)
+        private void RelaySource_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (sender == null || e.PropertyName == null)
                 return;
@@ -248,7 +240,7 @@
             }
         }
 
-        private void InternalOnPropertyChanged([NotNull] string propertyName)
+        private void InternalOnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -268,8 +260,7 @@
         /// <remarks>
         /// The default implementation returns the <see cref="ValidationAttribute"/> errors of the property.
         /// </remarks>
-        [NotNull, ItemNotNull]
-        protected virtual IEnumerable<string> GetDataErrors([CanBeNull] string? propertyName)
+        protected virtual IEnumerable<string> GetDataErrors(string? propertyName)
         {
             if (propertyName.IsNullOrEmpty())
                 return Enumerable.Empty<string>();
@@ -291,13 +282,12 @@
         /// <param name="propertyName">Name of the property, or <c>null</c> if the errors .</param>
         /// <param name="dataErrors">The data errors for the property.</param>
         // ReSharper disable UnusedParameter.Global
-        protected virtual void OnDataErrorsEvaluated([CanBeNull] string? propertyName, [CanBeNull, ItemNotNull] IEnumerable<string> dataErrors)
+        protected virtual void OnDataErrorsEvaluated(string? propertyName, IEnumerable<string>? dataErrors)
         // ReSharper restore UnusedParameter.Global
         {
         }
 
-        [NotNull, ItemNotNull]
-        private IEnumerable<string> InternalGetDataErrors([CanBeNull] string? propertyName)
+        private IEnumerable<string> InternalGetDataErrors(string? propertyName)
         {
             var dataErrors = GetDataErrors(propertyName).ToArray();
 
@@ -306,11 +296,9 @@
             return dataErrors;
         }
 
-        [CanBeNull]
         string? IDataErrorInfo.Error => InternalGetDataErrors(null).FirstOrDefault();
 
-        [CanBeNull]
-        string? IDataErrorInfo.this[[CanBeNull] string? columnName] => InternalGetDataErrors(columnName).FirstOrDefault();
+        string? IDataErrorInfo.this[string? columnName] => InternalGetDataErrors(columnName).FirstOrDefault();
 
         /// <inheritdoc />
         ~ObservableObjectBase()
@@ -329,7 +317,7 @@
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        System.Collections.IEnumerable INotifyDataErrorInfo.GetErrors([CanBeNull] string? propertyName)
+        System.Collections.IEnumerable INotifyDataErrorInfo.GetErrors(string? propertyName)
         {
             return InternalGetDataErrors(propertyName);
         }
@@ -353,7 +341,6 @@
         /// <summary>
         /// Gets the dispatcher of the thread where this object was created.
         /// </summary>
-        [NotNull]
         public Dispatcher Dispatcher { get; } = Dispatcher.CurrentDispatcher;
     }
 }

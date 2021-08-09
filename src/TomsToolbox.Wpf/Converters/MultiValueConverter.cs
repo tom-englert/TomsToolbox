@@ -7,8 +7,6 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A base class for multi-value converters performing pre-check of value and error handling.
     /// </summary>
@@ -24,8 +22,7 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        [CanBeNull]
-        protected abstract object? Convert([NotNull, ItemCanBeNull] object?[] values, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture);
+        protected abstract object? Convert(object?[] values, Type? targetType, object? parameter, CultureInfo? culture);
 
         /// <summary>
         /// Converts a value.
@@ -38,14 +35,12 @@
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
         /// <exception cref="InvalidOperationException">ConvertBack is not supported by this converter.</exception>
-        [CanBeNull, ItemCanBeNull]
-        protected virtual object?[]? ConvertBack([NotNull] object value, [CanBeNull, ItemCanBeNull] Type?[]? targetTypes, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected virtual object?[] ConvertBack(object value, Type?[]? targetTypes, object? parameter, CultureInfo? culture)
         {
             throw new InvalidOperationException("ConvertBack is not supported by this converter.");
         }
 
-        [CanBeNull]
-        object? IMultiValueConverter.Convert([CanBeNull] object?[]? values, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        object? IMultiValueConverter.Convert(object?[]? values, Type? targetType, object? parameter, CultureInfo? culture)
         {
             if (values == null)
                 return null;
@@ -65,8 +60,7 @@
             }
         }
 
-        [CanBeNull]
-        object?[]? IMultiValueConverter.ConvertBack([CanBeNull] object? value, [CanBeNull] Type[]? targetTypes, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        object?[]? IMultiValueConverter.ConvertBack(object? value, Type[]? targetTypes, object? parameter, CultureInfo? culture)
         {
             if (value == null)
                 return null;

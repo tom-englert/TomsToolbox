@@ -9,8 +9,6 @@
     using System.Windows.Controls;
     using System.Windows.Input;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Extensions and helpers for the <see cref="ItemsControl"/> or derived classes.
     /// </summary>
@@ -24,11 +22,10 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns>The command.</returns>
-        [CanBeNull]
         [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
-        public static ICommand? GetDefaultItemCommand([NotNull] this ItemsControl obj)
+        public static ICommand? GetDefaultItemCommand(this ItemsControl obj)
         {
-            return (ICommand)obj.GetValue(DefaultItemCommandProperty);
+            return (ICommand?)obj.GetValue(DefaultItemCommandProperty);
         }
         /// <summary>
         /// Sets the default item command. See <see cref="P:TomsToolbox.Wpf.ItemsControlExtensions.DefaultItemCommand"/> attached property for details.
@@ -36,7 +33,7 @@
         /// <param name="obj">The object.</param>
         /// <param name="value">The command.</param>
         [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
-        public static void SetDefaultItemCommand([NotNull] this ItemsControl obj, [CanBeNull] ICommand? value)
+        public static void SetDefaultItemCommand(this ItemsControl obj, ICommand? value)
         {
             obj.SetValue(DefaultItemCommandProperty, value);
         }
@@ -52,11 +49,10 @@
         /// The command parameter for the command is the item that has been clicked.
         /// </summary>
         /// </AttachedPropertyComments>
-        [NotNull]
         public static readonly DependencyProperty DefaultItemCommandProperty =
             DependencyProperty.RegisterAttached("DefaultItemCommand", typeof(ICommand), typeof(ItemsControlExtensions), new FrameworkPropertyMetadata(DefaultItemCommand_Changed));
 
-        private static void DefaultItemCommand_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
+        private static void DefaultItemCommand_Changed(DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
             if (!(d is ItemsControl itemsControl))
                 return;
@@ -71,7 +67,7 @@
             itemsControl.KeyDown += ItemsControl_KeyDown;
         }
 
-        static void ItemsControl_KeyDown([NotNull] object sender, [NotNull] KeyEventArgs e)
+        static void ItemsControl_KeyDown(object sender, KeyEventArgs e)
         {
             if ((e.Key != Key.Enter) || e.Handled)
                 return;
@@ -79,7 +75,7 @@
             ExecuteCommand(sender, e);
         }
 
-        static void ItemsControl_MouseDoubleClick([NotNull] object sender, [NotNull] MouseButtonEventArgs e)
+        static void ItemsControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.Handled)
                 return;
@@ -87,7 +83,7 @@
             ExecuteCommand(sender, e);
         }
 
-        private static void ExecuteCommand([NotNull] object sender, [NotNull] RoutedEventArgs e)
+        private static void ExecuteCommand(object sender, RoutedEventArgs e)
         {
             if (DateTime.Now < (_lastClickHandled + _doubleClickTime))
                 return; // avoid duplicate actions on nested controls, EVERY items control will receive the double click event.
@@ -132,8 +128,7 @@
         /// </summary>
         /// <param name="obj">The <see cref="ItemsControl"/> to refresh.</param>
         /// <returns>The object to observe.</returns>
-        [CanBeNull]
-        public static object? GetRefreshOnSourceChanges([NotNull] ItemsControl obj)
+        public static object? GetRefreshOnSourceChanges(ItemsControl obj)
         {
             return obj.GetValue(RefreshOnSourceChangesProperty);
         }
@@ -143,7 +138,7 @@
         /// </summary>
         /// <param name="obj">The <see cref="ItemsControl"/> to refresh.</param>
         /// <param name="value">The object to observe.</param>
-        public static void SetRefreshOnSourceChanges([NotNull] ItemsControl obj, [CanBeNull] object? value)
+        public static void SetRefreshOnSourceChanges(ItemsControl obj, object? value)
         {
             obj.SetValue(RefreshOnSourceChangesProperty, value);
         }
@@ -155,11 +150,10 @@
         /// The object that will be observed for changes. A change of the object will trigger a refresh on the collection view of the attached items control.
         /// </summary>
         /// </AttachedPropertyComments>
-        [NotNull]
         public static readonly DependencyProperty RefreshOnSourceChangesProperty =
             DependencyProperty.RegisterAttached("RefreshOnSourceChanges", typeof(object), typeof(ItemsControlExtensions), new FrameworkPropertyMetadata(Source_Changed));
 
-        private static void Source_Changed([CanBeNull] DependencyObject? d, DependencyPropertyChangedEventArgs e)
+        private static void Source_Changed(DependencyObject? d, DependencyPropertyChangedEventArgs e)
         {
             if (!(d is ItemsControl itemsControl))
                 return;
@@ -185,8 +179,7 @@
         /// <typeparam name="T">The type of the containers.</typeparam>
         /// <param name="itemsControl">The items control.</param>
         /// <returns>The list of containers; contains <c>null</c> entries for unrealized containers (see <see cref="ItemContainerGenerator.ContainerFromIndex"/>).</returns>
-        [NotNull, ItemCanBeNull]
-        public static IEnumerable<T?> GetItemContainers<T>([NotNull] this ItemsControl itemsControl)
+        public static IEnumerable<T?> GetItemContainers<T>(this ItemsControl itemsControl)
             where T : DependencyObject
         {
             var generator = itemsControl.ItemContainerGenerator;

@@ -2,13 +2,10 @@
 {
     using System;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Windows;
     using System.Windows.Interop;
     using System.Windows.Media;
-
-    using JetBrains.Annotations;
 
     using Microsoft.Xaml.Behaviors;
 
@@ -103,7 +100,6 @@
     /// </summary>
     public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
     {
-        [CanBeNull]
         private Window? _window;
         private POINT _windowOffset;
         private Matrix _transformFromDevice = Matrix.Identity;
@@ -123,7 +119,6 @@
         /// <summary>
         /// Identifies the <see cref="BorderSize"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty BorderSizeProperty =
             DependencyProperty.Register("BorderSize", typeof(Size), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(new Size(4, 4)));
 
@@ -142,7 +137,6 @@
         /// <summary>
         /// Identifies the <see cref="CornerSize"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty CornerSizeProperty =
             DependencyProperty.Register("CornerSize", typeof(Size), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(new Size(8, 8)));
 
@@ -161,7 +155,6 @@
         /// <summary>
         /// Identifies the <see cref="HasGlassFrame"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty HasGlassFrameProperty =
             DependencyProperty.Register("HasGlassFrame", typeof(bool), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(true));
 
@@ -198,7 +191,7 @@
         /// <summary>
         /// The WM_NCHITTEST test event equivalent.
         /// </summary>
-        [NotNull] public static readonly RoutedEvent NcHitTestEvent = EventManager.RegisterRoutedEvent("NcHitTest", RoutingStrategy.Bubble, typeof(EventHandler<NcHitTestEventArgs>), typeof(CustomNonClientAreaBehavior));
+        public static readonly RoutedEvent NcHitTestEvent = EventManager.RegisterRoutedEvent("NcHitTest", RoutingStrategy.Bubble, typeof(EventHandler<NcHitTestEventArgs>), typeof(CustomNonClientAreaBehavior));
 
         /// <summary>
         /// Called when the element is attached.
@@ -242,7 +235,7 @@
             Unregister(window);
         }
 
-        private void Window_SourceInitialized([CanBeNull] object? sender, [CanBeNull] EventArgs? e)
+        private void Window_SourceInitialized(object? sender, EventArgs? e)
         {
             var window = _window ?? throw new InvalidOperationException("Window needs to be initialized");
             var messageSource = (HwndSource?)PresentationSource.FromDependencyObject(window) ?? throw new InvalidOperationException("Window needs to be initialized");
@@ -298,7 +291,7 @@
             compositionTarget.BackgroundColor = SystemColors.WindowColor;
         }
 
-        private void Unregister([NotNull] Window window)
+        private void Unregister(Window window)
         {
             var messageSource = (HwndSource?)PresentationSource.FromDependencyObject(window);
 
@@ -518,9 +511,9 @@
             public int Right;
             public int Bottom;
 
-            public POINT TopLeft => new POINT { X = Left, Y = Top };
+            public POINT TopLeft => new() { X = Left, Y = Top };
 
-            public POINT BottomRight => new POINT { X = Right, Y = Bottom };
+            public POINT BottomRight => new() { X = Right, Y = Bottom };
 
             public int Width => Right - Left;
 
@@ -621,16 +614,6 @@
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        private struct MINMAXINFO
-        {
-            public readonly POINT ptReserved;
-            public readonly POINT ptMaxSize;
-            public readonly POINT ptMaxPosition;
-            public readonly POINT ptMinTrackSize;
-            public readonly POINT ptMaxTrackSize;
-        };
-
-        [StructLayout(LayoutKind.Sequential)]
         private class WINDOWPLACEMENT
         {
             public int length = Marshal.SizeOf(typeof(WINDOWPLACEMENT));
@@ -665,7 +648,6 @@
             public ushort wCreatorVersion;
         }
 
-        [NotNull]
         private static WINDOWPLACEMENT GetWindowPlacement(IntPtr hwnd)
         {
             var lpwndpl = new WINDOWPLACEMENT();
@@ -745,12 +727,11 @@
 
         private sealed class DeferSizeToContent : IDisposable
         {
-            [NotNull]
             private readonly Window _window;
 
             private readonly SizeToContent _sizeToContent;
 
-            public DeferSizeToContent([NotNull] Window window)
+            public DeferSizeToContent(Window window)
             {
                 _window = window;
                 _sizeToContent = window.SizeToContent;

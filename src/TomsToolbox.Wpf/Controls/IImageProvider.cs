@@ -1,7 +1,5 @@
 ﻿namespace TomsToolbox.Wpf.Controls
 {
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Implemented by image providers for the <see cref="Map"/> control.
     /// </summary>
@@ -28,7 +26,6 @@
         /// </summary>
         /// <param name="tile">The tile for which to provide the image.</param>
         /// <returns>The image.</returns>
-        [NotNull]
-        IImage GetImage([NotNull] IMapTile tile);
+        IImage GetImage(IMapTile tile);
     }
 }

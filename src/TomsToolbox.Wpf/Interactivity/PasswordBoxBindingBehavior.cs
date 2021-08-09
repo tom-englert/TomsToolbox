@@ -16,9 +16,9 @@
         /// <summary>
         /// Gets or sets the password as plain text.
         /// </summary>
-        public string Text
+        public string? Text
         {
-            get => (string)GetValue(TextProperty);
+            get => (string?)GetValue(TextProperty);
             set => SetValue(TextProperty, value);
         }
         /// <summary>

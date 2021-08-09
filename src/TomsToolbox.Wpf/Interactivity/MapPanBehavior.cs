@@ -6,8 +6,6 @@
     using System.Windows.Input;
     using System.Windows.Media.Animation;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Wpf.Controls;
 
     /// <summary>
@@ -15,15 +13,12 @@
     /// </summary>
     public class MapPanBehavior : FrameworkElementBehavior<Map>
     {
-        [NotNull]
-        private readonly PointAnimation _panAnimation = new PointAnimation { Duration = new Duration(TimeSpan.FromSeconds(0.25)) };
-        [NotNull]
-        private readonly Storyboard _storyboard = new Storyboard();
+        private readonly PointAnimation _panAnimation = new() { Duration = new Duration(TimeSpan.FromSeconds(0.25)) };
+        private readonly Storyboard _storyboard = new();
 
         private Point? _panPosition;
         private bool _isStoryboardRunning;
 
-        [NotNull]
         private static readonly DependencyProperty AnimatedPanPositionProperty =
             DependencyProperty.Register("AnimatedPanPosition", typeof(Point), typeof(MapPanBehavior), new FrameworkPropertyMetadata((sender, e) => ((MapPanBehavior)sender)?.AnimatedPanPosition_Changed((Point)e.NewValue)));
 
@@ -81,7 +76,7 @@
             }
         }
 
-        private void FocusableParent_KeyDown([NotNull] object sender, [NotNull] KeyEventArgs e)
+        private void FocusableParent_KeyDown(object sender, KeyEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                 return;
@@ -134,12 +129,12 @@
             _storyboard.Begin();
         }
 
-        private void Storyboard_Completed([CanBeNull] object? sender, [NotNull] EventArgs e)
+        private void Storyboard_Completed(object? sender, EventArgs e)
         {
             _isStoryboardRunning = false;
         }
 
-        private void Map_MouseMove([NotNull] object sender, [NotNull] MouseEventArgs e)
+        private void Map_MouseMove(object sender, MouseEventArgs e)
         {
             if (_panPosition == null)
                 return;
@@ -155,7 +150,7 @@
             map!.Center += _panPosition.GetValueOrDefault() - mousePosition;
         }
 
-        private void Map_MouseLeftButtonDown([NotNull] object sender, [NotNull] MouseButtonEventArgs e)
+        private void Map_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var map = AssociatedObject;
 
@@ -168,7 +163,7 @@
             map!.CaptureMouse();
         }
 
-        private void Map_MouseLeftButtonUp([NotNull] object sender, [NotNull] MouseButtonEventArgs e)
+        private void Map_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             _panPosition = null;
 

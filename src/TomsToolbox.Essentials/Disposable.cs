@@ -5,8 +5,6 @@
     using System.Diagnostics;
     using System.Linq;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Helper methods to ease robust implementation of the IDisposable pattern.
     /// </summary>
@@ -41,7 +39,7 @@
         ///     this.ReportNotDisposedObject();
         /// }
         /// ]]></code></example>
-        public static void ReportNotDisposedObject([NotNull] this IDisposable obj)
+        public static void ReportNotDisposedObject(this IDisposable obj)
         {
             var objectType = obj.GetType();
             var message = "Object not disposed: " + objectType.Name;
@@ -62,7 +60,7 @@
         /// </summary>
         /// <param name="item">The object to dispose.</param>
         /// <returns><c>true</c> if the object has been disposed.</returns>
-        public static bool Dispose([CanBeNull] object? item)
+        public static bool Dispose(object? item)
         {
             if (!(item is IDisposable disposable))
             {
@@ -83,7 +81,7 @@
         /// </summary>
         /// <param name="items">The objects to dispose.</param>
         /// <returns><c>true</c> if any object has been disposed.</returns>
-        public static bool DisposeAll([NotNull, ItemCanBeNull] IEnumerable items)
+        public static bool DisposeAll(IEnumerable items)
         {
             return items.Cast<object>().Count(Dispose) > 0;
         }

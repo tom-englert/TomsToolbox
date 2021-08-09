@@ -7,8 +7,6 @@
     using System.Windows;
     using System.Windows.Data;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Converts WGS-84 coordinates (<see cref="Coordinates"/> ) into normalized logical XY coordinates (<see cref="Point"/>) in the range 0..1 and back.
     /// </summary>
@@ -18,7 +16,7 @@
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Default = new CoordinatesToPointConverter();
+        public static readonly IValueConverter Default = new CoordinatesToPointConverter();
 
         /// <summary>
         /// Converts a value.
@@ -31,8 +29,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        [NotNull]
-        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             return Convert(value);
         }
@@ -47,8 +44,7 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        [NotNull]
-        protected override object? ConvertBack([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             return Convert(value);
         }
@@ -59,8 +55,7 @@
         /// <param name="value">The <see cref="Coordinates" /> or <see cref="Point" /> value.</param>
         /// <returns>The <see cref="Coordinates" /> or <see cref="Point" /> value.</returns>
         /// <exception cref="System.InvalidOperationException">Value is neither a Point nor a Coordinates structure.</exception>
-        [NotNull]
-        public static object Convert([CanBeNull] object? value)
+        public static object Convert(object? value)
         {
             if (value is Point point)
             {

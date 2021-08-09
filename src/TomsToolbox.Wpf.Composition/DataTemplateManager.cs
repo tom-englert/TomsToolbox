@@ -7,8 +7,6 @@
     using System.Windows;
     using System.Windows.Markup;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Composition;
     using TomsToolbox.Essentials;
 
@@ -22,15 +20,14 @@
         /// <summary>
         /// A comparer to compare exports for dynamic data templates.
         /// </summary>
-        [NotNull] private static readonly IEqualityComparer<IDataTemplateMetadata> ExportsComparer = new DelegateEqualityComparer<IDataTemplateMetadata>(Equals, GetHashCode);
+        private static readonly IEqualityComparer<IDataTemplateMetadata> ExportsComparer = new DelegateEqualityComparer<IDataTemplateMetadata>(Equals, GetHashCode);
 
         /// <summary>
         /// Gets the role of the view.
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <returns>The role</returns>
-        [CanBeNull]
-        public static object? GetRole([NotNull] DependencyObject obj)
+        public static object? GetRole(DependencyObject obj)
         {
             return obj.GetValue(RoleProperty);
         }
@@ -39,7 +36,7 @@
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="value">The value.</param>
-        public static void SetRole([NotNull] DependencyObject obj, [CanBeNull] object? value)
+        public static void SetRole(DependencyObject obj, object? value)
         {
             obj.SetValue(RoleProperty, value);
         }
@@ -51,7 +48,7 @@
         /// Gets or sets the role associated with the view.
         /// </summary>
         /// </AttachedPropertyComments>
-        [NotNull] public static readonly DependencyProperty RoleProperty =
+        public static readonly DependencyProperty RoleProperty =
             DependencyProperty.RegisterAttached("Role", typeof(object), typeof(DataTemplateManager), new FrameworkPropertyMetadata(FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>
@@ -62,8 +59,7 @@
         /// <returns>
         /// The resource dictionary containing the dynamic data templates. This is usually added to the merged dictionaries of your application's resources.
         /// </returns>
-        [NotNull, ItemCanBeNull]
-        public static ResourceDictionary CreateDynamicDataTemplates([NotNull] IExportProvider exportProvider)
+        public static ResourceDictionary CreateDynamicDataTemplates(IExportProvider exportProvider)
         {
             var dataTemplateResources = new ResourceDictionary();
 
@@ -85,8 +81,7 @@
             return dataTemplateResources;
         }
 
-        [CanBeNull]
-        private static DataTemplate? CreateTemplate([NotNull] Type viewModelType, [CanBeNull] object? role)
+        private static DataTemplate CreateTemplate(Type viewModelType, object? role)
         {
             const string xamlTemplate = "<DataTemplate DataType=\"{{x:Type viewModel:{0}}}\"><toms:ComposableContentControl {1}/></DataTemplate>";
             var roleParameter = role == null ? string.Empty : string.Format(CultureInfo.InvariantCulture, "Role=\"{0}\"", role);
@@ -96,8 +91,8 @@
             var contentType = typeof(ComposableContentControl);
 
             context.XamlTypeMapper = new XamlTypeMapper(new string[0]);
-            context.XamlTypeMapper.AddMappingProcessingInstruction("viewModel", viewModelType.Namespace!, viewModelType.Assembly.FullName);
-            context.XamlTypeMapper.AddMappingProcessingInstruction("toms", contentType.Namespace!, contentType.Assembly.FullName);
+            context.XamlTypeMapper.AddMappingProcessingInstruction("viewModel", viewModelType.Namespace, viewModelType.Assembly.FullName);
+            context.XamlTypeMapper.AddMappingProcessingInstruction("toms", contentType.Namespace, contentType.Assembly.FullName);
 
             context.XmlnsDictionary.Add("", "http://schemas.microsoft.com/winfx/2006/xaml/presentation");
             context.XmlnsDictionary.Add("x", "http://schemas.microsoft.com/winfx/2006/xaml");
@@ -113,8 +108,7 @@
         /// <param name="dataType">The type for which the template is used to display items.</param>
         /// <param name="role">The optional role.</param>
         /// <returns>The key for the specified parameters.</returns>
-        [NotNull]
-        public static TemplateKey CreateKey([NotNull] Type dataType, [CanBeNull] object? role)
+        public static TemplateKey CreateKey(Type dataType, object? role)
         {
             if (role != null)
                 return new RoleBasedDataTemplateKey(dataType, role);
@@ -129,13 +123,12 @@
         /// <param name="viewModel">The view model.</param>
         /// <param name="role">The role.</param>
         /// <returns>The view</returns>
-        [CanBeNull]
-        internal static DependencyObject? GetDataTemplateView([NotNull] this IExportProvider exportProvider, [NotNull] Type viewModel, [CanBeNull] object? role)
+        internal static DependencyObject? GetDataTemplateView(this IExportProvider exportProvider, Type viewModel, object? role)
         {
             return exportProvider.GetExports(typeof(DependencyObject), XamlExtensions.DataTemplate.ContractName)
                 .Where(item => item.IsViewModelForType(viewModel, role))
                 .Reverse()  // if multiple exports exist, use the top one, e.g. s.o. wants to override in a special layout module.
-                // .Select(AssertCorrectCreationPolicy)
+                            // .Select(AssertCorrectCreationPolicy)
                 .Select(item => item.Value)
                 .OfType<DependencyObject>()
                 .FirstOrDefault();
@@ -146,8 +139,7 @@
         /// </summary>
         /// <param name="exportProvider">The export provider.</param>
         /// <returns>The meta data of all exports.</returns>
-        [NotNull, ItemNotNull]
-        private static IEnumerable<IDataTemplateMetadata> GetDataTemplateExportsMetadata([NotNull] this IExportProvider exportProvider)
+        private static IEnumerable<IDataTemplateMetadata> GetDataTemplateExportsMetadata(this IExportProvider exportProvider)
         {
             return exportProvider
                 .GetExports<IDataTemplateMetadata>(typeof(DependencyObject), XamlExtensions.DataTemplate.ContractName, item => new DataTemplateMetadata(item))
@@ -156,17 +148,24 @@
                 .Distinct(ExportsComparer);
         }
 
-        private static bool Equals([NotNull] IDataTemplateMetadata left, [NotNull] IDataTemplateMetadata right)
+        private static bool Equals(IDataTemplateMetadata? left, IDataTemplateMetadata? right)
         {
+            if (left is null)
+                return right is null;
+            if (right is null)
+                return false;
             return (left.DataType == right.DataType) && RoleEquals(left.Role, right.Role);
         }
 
-        private static int GetHashCode([NotNull] IDataTemplateMetadata metadata)
+        private static int GetHashCode(IDataTemplateMetadata? metadata)
         {
+            if (metadata is null)
+                return 0;
+
             return HashCode.Aggregate(metadata.DataType?.GetHashCode() ?? 0, (metadata.Role ?? 0).GetHashCode());
         }
 
-        private static bool IsViewModelForType([NotNull] this IExport<object> item, [NotNull] Type viewModel, [CanBeNull] object? role)
+        private static bool IsViewModelForType(this IExport<object> item, Type viewModel, object? role)
         {
             var itemMetadata = item.Metadata;
             if (itemMetadata == null)
@@ -183,7 +182,7 @@
         /// <param name="left">The left role.</param>
         /// <param name="right">The right role.</param>
         /// <returns>True it both objects are equal.</returns>
-        public static bool RoleEquals([CanBeNull] object? left, [CanBeNull] object? right)
+        public static bool RoleEquals(object? left, object? right)
         {
             if (left == null)
                 return right == null;

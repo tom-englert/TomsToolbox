@@ -7,8 +7,6 @@
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Wpf.Composition.XamlExtensions;
 
     /// <inheritdoc />
@@ -19,18 +17,12 @@
     /// </summary>
     public class ItemsControlCompositionBehavior : VisualCompositionBehavior<ItemsControl>
     {
-        private bool _forceSelection = true;
-
         /// <summary>
         /// Gets or sets a value indicating whether the behavior will force the selection of the first element after applying the content.<para/>
         /// This will ensure that e.g. a tab-control will show the first tab instead of empty content.<para/>
         /// The default value is <c>true</c>.
         /// </summary>
-        public bool ForceSelection
-        {
-            get => _forceSelection;
-            set => _forceSelection = value;
-        }
+        public bool ForceSelection { get; set; } = true;
 
         /// <inheritdoc />
         /// <summary>
@@ -92,14 +84,14 @@
                 AttachSelectables(exportedItems);
                 selector.SelectionChanged += Selector_SelectionChanged;
 
-                if (_forceSelection && (selector.SelectedIndex == -1) && !selector.Items.IsEmpty)
+                if (ForceSelection && (selector.SelectedIndex == -1) && !selector.Items.IsEmpty)
                 {
                     selector.SelectedIndex = 0;
                 }
             }
         }
 
-        private static void ApplyContext([NotNull, ItemCanBeNull] IEnumerable composables, [CanBeNull] object? context)
+        private static void ApplyContext(IEnumerable composables, object? context)
         {
             foreach (var item in composables.OfType<IComposablePartWithContext>())
             {
@@ -130,7 +122,7 @@
             base.OnDetaching();
         }
 
-        private void AttachSelectables([NotNull, ItemCanBeNull] IEnumerable viewModels)
+        private void AttachSelectables(IEnumerable viewModels)
         {
             var selectables = viewModels.OfType<ISelectableComposablePart>();
 
@@ -140,7 +132,7 @@
             }
         }
 
-        private void DetachSelectables([CanBeNull, ItemCanBeNull] IEnumerable? viewModels)
+        private void DetachSelectables(IEnumerable? viewModels)
         {
             if (viewModels == null)
                 return;
@@ -153,13 +145,12 @@
             }
         }
 
-        private void Selectable_PropertyChanged([CanBeNull] object? sender, [CanBeNull] PropertyChangedEventArgs? e)
+        private void Selectable_PropertyChanged(object? sender, PropertyChangedEventArgs? e)
         {
             if (!(AssociatedObject is Selector selector))
                 return;
 
-            var selectable = sender as ISelectableComposablePart;
-            if (selectable == null)
+            if (sender is not ISelectableComposablePart selectable)
                 return;
 
             if (string.Equals(e?.PropertyName, "IsSelected", StringComparison.Ordinal) && selectable.IsSelected)
@@ -168,7 +159,7 @@
             }
         }
 
-        private static void Selector_SelectionChanged([CanBeNull] object? sender, [NotNull] SelectionChangedEventArgs e)
+        private static void Selector_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
             if (e.RemovedItems != null)
             {

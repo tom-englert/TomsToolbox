@@ -1,7 +1,5 @@
 ﻿namespace SampleApp
 {
-    using System.Windows;
-
     using TomsToolbox.Wpf.Composition.AttributedModel;
 
     /// <summary>
@@ -13,11 +11,6 @@
         public WindowTitleDecoratorView()
         {
             InitializeComponent();
-        }
-
-        private void Hyperlink_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

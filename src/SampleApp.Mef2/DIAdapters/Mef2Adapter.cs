@@ -6,21 +6,16 @@
     using System.Composition.Hosting;
     using System.Windows.Data;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Composition;
     using TomsToolbox.Composition.Mef2;
     using TomsToolbox.Wpf.Converters;
 
     internal sealed class DIAdapter : IDisposable
     {
-        [CanBeNull]
         private CompositionHost? _container;
-        [CanBeNull]
         private static IExportProvider? _exportProvider;
 
         [Export(typeof(IExportProvider))]
-        [CanBeNull]
         public IExportProvider? ExportProvider => _exportProvider;
         
         public IExportProvider Initialize()

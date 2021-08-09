@@ -6,8 +6,6 @@
     using System.Windows.Input;
     using System.Windows.Media.Animation;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Wpf.Controls;
 
     /// <summary>
@@ -15,10 +13,8 @@
     /// </summary>
     public class MapZoomBehavior : FrameworkElementBehavior<Map>
     {
-        [NotNull]
-        private readonly DoubleAnimation _animation = new DoubleAnimation { Duration = new Duration(TimeSpan.FromSeconds(0.5)) };
-        [NotNull]
-        private readonly Storyboard _storyboard = new Storyboard();
+        private readonly DoubleAnimation _animation = new() { Duration = new Duration(TimeSpan.FromSeconds(0.5)) };
+        private readonly Storyboard _storyboard = new();
 
         /// <summary>
         /// Gets or sets the number of zoom steps performed on one mouse wheel event.
@@ -31,7 +27,7 @@
         /// <summary>
         /// Identifies the <see cref="MouseWheelIncrement"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty MouseWheelIncrementProperty =
+        public static readonly DependencyProperty MouseWheelIncrementProperty =
             DependencyProperty.Register("MouseWheelIncrement", typeof(double), typeof(MapZoomBehavior), new FrameworkPropertyMetadata(1.0));
 
 
@@ -70,7 +66,7 @@
             }
         }
 
-        void Storyboard_Completed([CanBeNull] object? sender, [CanBeNull] EventArgs? e)
+        void Storyboard_Completed(object? sender, EventArgs? e)
         {
             var map = AssociatedObject;
             if (map == null)
@@ -79,12 +75,12 @@
             _animation.To = map.ZoomLevel;
         }
 
-        private void AssociatedObject_PreviewMouseWheel([NotNull] object sender, [NotNull] MouseWheelEventArgs e)
+        private void AssociatedObject_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             Zoom(Math.Sign(e.Delta), e);
         }
 
-        private void Zoom(int delta, [CanBeNull] MouseEventArgs? e = null)
+        private void Zoom(int delta, MouseEventArgs? e = null)
         {
             var map = AssociatedObject;
 
@@ -99,7 +95,7 @@
             _storyboard.Begin();
         }
 
-        private void FocusableParent_KeyDown([NotNull] object sender, [NotNull] KeyEventArgs e)
+        private void FocusableParent_KeyDown(object sender, KeyEventArgs e)
         {
             var map = AssociatedObject;
             if (map == null)

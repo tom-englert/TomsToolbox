@@ -3,8 +3,6 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// An adapter to provide a dictionary with metadata as <see cref="IMetadata"/>
     /// </summary>
@@ -28,7 +26,7 @@
         }
 
         /// <inheritdoc />
-        public bool TryGetValue(string name, [CanBeNull, NotNullWhen(true)] out object? value)
+        public bool TryGetValue(string name, [NotNullWhen(true)] out object? value)
         {
             return _metadata.TryGetValue(name, out value);
         }

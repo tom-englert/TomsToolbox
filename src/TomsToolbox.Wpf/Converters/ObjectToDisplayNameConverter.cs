@@ -5,8 +5,6 @@
     using System.Globalization;
     using System.Windows.Data;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Takes an object and returns the display name taken from it's <see cref="DisplayNameAttribute"/>
     /// </summary>
@@ -28,7 +26,7 @@
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Default = new ObjectToDisplayNameConverter();
+        public static readonly IValueConverter Default = new ObjectToDisplayNameConverter();
 
         /// <summary>
         /// Converts a value.
@@ -41,8 +39,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        [NotNull]
-        protected override object Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             return Convert(value, parameter as Type);
         }
@@ -52,8 +49,7 @@
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The display name of the value.</returns>
-        [NotNull]
-        public static string Convert([CanBeNull] object? value)
+        public static string Convert(object? value)
         {
             return InternalConvert(value, null, attr => attr?.DisplayName);
         }
@@ -64,8 +60,7 @@
         /// <param name="value">The value.</param>
         /// <param name="enumType">An optional type of an enum to support converting <see cref="Enum"/> where the value is given as a number or string.</param>
         /// <returns>The display name of the value.</returns>
-        [NotNull]
-        public static string Convert([CanBeNull] object? value, [CanBeNull] Type? enumType)
+        public static string Convert(object? value, Type? enumType)
         {
             return InternalConvert(value, enumType, attr => attr?.DisplayName);
         }

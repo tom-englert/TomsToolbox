@@ -6,8 +6,6 @@
     using System.Windows;
     using System.Windows.Data;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -17,12 +15,12 @@
     [ValueConversion(typeof(Thickness), typeof(Thickness))]
     public class ThicknessMultiplyConverter : ValueConverter
     {
-        [NotNull] private static readonly TypeConverter _typeConverter = new ThicknessConverter();
+        private static readonly TypeConverter _typeConverter = new ThicknessConverter();
 
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Default = new ThicknessMultiplyConverter();
+        public static readonly IValueConverter Default = new ThicknessMultiplyConverter();
 
 
         /// <summary>
@@ -49,8 +47,7 @@
         /// A converted value.
         /// </returns>
         /// <param name="value">The value produced by the binding source.</param><param name="targetType">The type of the binding target property.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
-        [NotNull]
-        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             return Convert(value, parameter);
         }
@@ -61,8 +58,7 @@
         /// <param name="value">The value.</param>
         /// <param name="parameter">The parameter.</param>
         /// <returns>The multiplied thickness.</returns>
-        [NotNull]
-        public static object Convert([CanBeNull] object? value, [CanBeNull] object? parameter)
+        public static object Convert(object? value, object? parameter)
         {
             var target = value.SafeCast<Thickness>();
             var factor = GetThicknessFromParameter(parameter);
@@ -70,16 +66,15 @@
             return Multiply(target, factor);
         }
 
-        private static Thickness GetThicknessFromParameter([CanBeNull] object? parameter)
+        private static Thickness GetThicknessFromParameter(object? parameter)
         {
             if (parameter == null)
                 return new Thickness(1.0);
 
-            if (parameter is Thickness)
-                return (Thickness)parameter;
+            if (parameter is Thickness thickness)
+                return thickness;
 
-            var parameterString = parameter as string;
-            if (parameterString != null)
+            if (parameter is string parameterString)
                 return _typeConverter.ConvertFromInvariantString(parameterString).SafeCast<Thickness>();
 
             throw new ArgumentException("Invalid thickness parameter.", nameof(parameter));

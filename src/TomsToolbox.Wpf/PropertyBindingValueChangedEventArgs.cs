@@ -2,8 +2,6 @@
 {
     using System;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Event arguments for the <see cref="PropertyBinding{T}.ValueChanged"/> event.
     /// </summary>
@@ -15,7 +13,7 @@
         /// </summary>
         /// <param name="oldValue">The old value.</param>
         /// <param name="newValue">The new value.</param>
-        public PropertyBindingValueChangedEventArgs([CanBeNull] T oldValue, [CanBeNull] T newValue)
+        public PropertyBindingValueChangedEventArgs(T? oldValue, T? newValue)
         {
             NewValue = newValue;
             OldValue = oldValue;
@@ -24,13 +22,11 @@
         /// <summary>
         /// Gets the old value.
         /// </summary>
-        [CanBeNull]
-        public T OldValue { get; }
+        public T? OldValue { get; }
 
         /// <summary>
         /// Gets the new value.
         /// </summary>
-        [CanBeNull]
-        public T NewValue { get; }
+        public T? NewValue { get; }
     }
 }

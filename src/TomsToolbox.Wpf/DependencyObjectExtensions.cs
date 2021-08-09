@@ -3,14 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Windows;
     using System.Windows.Interop;
     using System.Windows.Media;
-
-    using JetBrains.Annotations;
-    using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
 
     using TomsToolbox.Essentials;
 
@@ -26,9 +22,7 @@
         /// <param name="self">The dependency object from which to get the value.</param>
         /// <param name="property">The property to get.</param>
         /// <returns>The value safely casted to <typeparamref name="T"/></returns>
-        [CanBeNull]
-        [return: MaybeNull]
-        public static T GetValue<T>([NotNull] this DependencyObject self, [NotNull] DependencyProperty property)
+        public static T GetValue<T>(this DependencyObject self, DependencyProperty property)
         {
             return self.GetValue(property).SafeCast<T>();
         }
@@ -40,8 +34,7 @@
         /// <param name="dependencyObject">The dependency object.</param>
         /// <param name="property">The property to track.</param>
         /// <returns>The object providing the changed event.</returns>
-        [NotNull]
-        public static INotifyChanged Track<T>([NotNull] this T dependencyObject, [NotNull] DependencyProperty property)
+        public static INotifyChanged Track<T>(this T dependencyObject, DependencyProperty property)
             where T : DependencyObject
         {
             return new DependencyPropertyEventWrapper<T>(dependencyObject, property);
@@ -50,12 +43,10 @@
         private class DependencyPropertyEventWrapper<T> : INotifyChanged
             where T : DependencyObject
         {
-            [NotNull]
             private readonly T _dependencyObject;
-            [CanBeNull]
             private readonly DependencyPropertyDescriptor? _dependencyPropertyDescriptor;
 
-            public DependencyPropertyEventWrapper([NotNull] T dependencyObject, [NotNull] DependencyProperty property)
+            public DependencyPropertyEventWrapper(T dependencyObject, DependencyProperty property)
             {
                 _dependencyObject = dependencyObject;
                 _dependencyPropertyDescriptor = DependencyPropertyDescriptor.FromProperty(property, typeof(T));
@@ -73,7 +64,7 @@
         /// </summary>
         /// <param name="self">The item.</param>
         /// <returns>The window handle, if the item is part of a valid visual tree, otherwise IntPtr.Zero.</returns>
-        public static IntPtr GetWindowHandle([NotNull] this DependencyObject self)
+        public static IntPtr GetWindowHandle(this DependencyObject self)
         {
             var hwndSource = PresentationSource.FromDependencyObject(self) as HwndSource;
 
@@ -90,8 +81,7 @@
         /// If the item is inside a control that's embedded in a native or WindowsForms window, the root visual
         /// is <c>not</c> a <see cref="System.Windows.Window"/>.
         /// </remarks>
-        [NotNull]
-        public static FrameworkElement GetRootVisual([NotNull] this DependencyObject item)
+        public static FrameworkElement GetRootVisual(this DependencyObject item)
         {
             var hwndSource = (HwndSource)PresentationSource.FromDependencyObject(item);
             if (hwndSource == null)
@@ -123,10 +113,9 @@
         /// If the item is inside a control that's embedded in a native or WindowsForms window, the root visual
         /// is <c>not</c> a <see cref="System.Windows.Window"/>.
         /// </remarks>
-        [CanBeNull]
-        public static FrameworkElement? TryGetRootVisual([NotNull] this DependencyObject item)
+        public static FrameworkElement? TryGetRootVisual(this DependencyObject item)
         {
-            var hwndSource = (HwndSource)PresentationSource.FromDependencyObject(item);
+            var hwndSource = (HwndSource?)PresentationSource.FromDependencyObject(item);
             var compositionTarget = hwndSource?.CompositionTarget;
 
             var rootVisual = (FrameworkElement?)compositionTarget?.RootVisual;
@@ -139,8 +128,7 @@
         /// </summary>
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<DependencyObject> VisualAncestorsAndSelf([NotNull] this DependencyObject self)
+        public static IEnumerable<DependencyObject> VisualAncestorsAndSelf(this DependencyObject self)
         {
             while (self != null)
             {
@@ -154,8 +142,7 @@
         /// </summary>
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<DependencyObject> VisualAncestors([NotNull] this DependencyObject self)
+        public static IEnumerable<DependencyObject> VisualAncestors(this DependencyObject self)
         {
             return self.VisualAncestorsAndSelf().Skip(1);
         }
@@ -166,8 +153,7 @@
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
         /// <remarks>If the start element is not in the logical tree, this method return elements from the visual tree until the first element from the logical tree is found.</remarks>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<DependencyObject> AncestorsAndSelf([NotNull] this DependencyObject self)
+        public static IEnumerable<DependencyObject> AncestorsAndSelf(this DependencyObject self)
         {
             while (self != null)
             {
@@ -182,8 +168,7 @@
         /// <param name="self">The starting element.</param>
         /// <returns>The ancestor list.</returns>
         /// <remarks>If the start element is not in the logical tree, this method return elements from the visual tree until the first element from the logical tree is found.</remarks>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<DependencyObject> Ancestors([NotNull] this DependencyObject self)
+        public static IEnumerable<DependencyObject> Ancestors(this DependencyObject self)
         {
             return self.AncestorsAndSelf().Skip(1);
         }
@@ -194,8 +179,7 @@
         /// <typeparam name="T">The type of element to return.</typeparam>
         /// <param name="self">The starting element.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
-        [CanBeNull]
-        public static T? TryFindAncestorOrSelf<T>([NotNull] this DependencyObject self) where T : class
+        public static T? TryFindAncestorOrSelf<T>(this DependencyObject self) where T : class
         {
             return self.AncestorsAndSelf().OfType<T>().FirstOrDefault();
         }
@@ -207,8 +191,7 @@
         /// <param name="self">The starting element.</param>
         /// <param name="match">The predicate to match.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
-        [CanBeNull]
-        public static T? TryFindAncestorOrSelf<T>([NotNull] this DependencyObject self, [NotNull] Func<T, bool> match) where T : class
+        public static T? TryFindAncestorOrSelf<T>(this DependencyObject self, Func<T, bool> match) where T : class
         {
             return self.AncestorsAndSelf().OfType<T>().FirstOrDefault(match);
         }
@@ -219,8 +202,7 @@
         /// <typeparam name="T">The type of element to return.</typeparam>
         /// <param name="self">The starting element.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
-        [CanBeNull]
-        public static T? TryFindAncestor<T>([NotNull] this DependencyObject self) where T : class
+        public static T? TryFindAncestor<T>(this DependencyObject self) where T : class
         {
             return self.Ancestors().OfType<T>().FirstOrDefault();
         }
@@ -232,8 +214,7 @@
         /// <param name="self">The starting element.</param>
         /// <param name="match">The predicate to match.</param>
         /// <returns>The first element matching the criteria, or null if no element was found.</returns>
-        [CanBeNull]
-        public static T? TryFindAncestor<T>([NotNull] this DependencyObject self, [NotNull] Func<T, bool> match) where T : class
+        public static T? TryFindAncestor<T>(this DependencyObject self, Func<T, bool> match) where T : class
         {
             return self.Ancestors().OfType<T>().FirstOrDefault(match);
         }
@@ -246,8 +227,7 @@
         /// <remarks>
         /// Uses <see cref="VisualTreeHelper.GetChildrenCount"/> and <see cref="VisualTreeHelper.GetChild"/>.
         /// </remarks>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<DependencyObject> VisualChildren([NotNull] this DependencyObject item)
+        public static IEnumerable<DependencyObject> VisualChildren(this DependencyObject item)
         {
             var numberOfChildren = VisualTreeHelper.GetChildrenCount(item);
             for (var i = 0; i < numberOfChildren; i++)
@@ -265,8 +245,7 @@
         /// <remarks>
         /// Uses <see cref="VisualTreeHelper.GetChildrenCount"/> and <see cref="VisualTreeHelper.GetChild"/>.
         /// </remarks>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<DependencyObject> VisualChildrenAndSelf([NotNull] this DependencyObject item)
+        public static IEnumerable<DependencyObject> VisualChildrenAndSelf(this DependencyObject item)
         {
             yield return item;
 
@@ -284,8 +263,7 @@
         /// <remarks>
         /// Uses <see cref="VisualTreeHelper.GetChildrenCount"/> and <see cref="VisualTreeHelper.GetChild"/>.
         /// </remarks>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<DependencyObject> VisualDescendants([NotNull] this DependencyObject item)
+        public static IEnumerable<DependencyObject> VisualDescendants(this DependencyObject item)
         {
             foreach (var child in item.VisualChildren())
             {
@@ -306,8 +284,7 @@
         /// <remarks>
         /// Uses <see cref="VisualTreeHelper.GetChildrenCount"/> and <see cref="VisualTreeHelper.GetChild"/>.
         /// </remarks>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<DependencyObject> VisualDescendantsAndSelf([NotNull] this DependencyObject item)
+        public static IEnumerable<DependencyObject> VisualDescendantsAndSelf(this DependencyObject item)
         {
             yield return item;
 

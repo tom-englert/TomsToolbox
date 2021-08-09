@@ -10,8 +10,6 @@
     using System.Windows.Markup;
     using System.Xaml;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Composition;
     using TomsToolbox.Essentials;
     using TomsToolbox.Wpf.Composition.XamlExtensions;
@@ -25,23 +23,18 @@
     [MarkupExtensionReturnType(typeof(object))]
     public class ImportExtension : MarkupExtension
     {
-        [NotNull, ItemNotNull]
-        private readonly List<Setter> _setters = new List<Setter>();
+        private readonly List<Setter> _setters = new();
 
-        [CanBeNull]
         private object? _targetObject;
-        [CanBeNull]
         private object? _targetProperty;
-        [CanBeNull]
         private IExportProvider? _exportProvider;
-        [CanBeNull]
         private INotifyChanged? _tracker;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:TomsToolbox.Wpf.Composition.ImportExtension" /> class.
         /// </summary>
         /// <param name="memberType">Type of the member to provide.</param>
-        public ImportExtension([NotNull] Type memberType)
+        public ImportExtension(Type memberType)
         {
             MemberType = memberType;
         }
@@ -49,7 +42,6 @@
         /// <summary>
         /// Gets or sets the exported type of the object to provide.
         /// </summary>
-        [NotNull]
         public Type MemberType
         {
             get;
@@ -60,7 +52,6 @@
         /// <summary>
         /// Gets or sets the optional contract name of the exported object.
         /// </summary>
-        [CanBeNull]
         public string? ContractName
         {
             get;
@@ -84,14 +75,7 @@
         /// <summary>
         /// Gets a list of setters that allow initializing dependency properties of the composed object.
         /// </summary>
-        [NotNull, ItemNotNull]
-        public ICollection<Setter> Setters
-        {
-            get
-            {
-                return _setters;
-            }
-        }
+        public ICollection<Setter> Setters => _setters;
 
         /// <inheritdoc />
         /// <summary>
@@ -101,7 +85,6 @@
         /// <returns>
         /// The object value to set on the property where the extension is applied.
         /// </returns>
-        [CanBeNull]
         public override object? ProvideValue(IServiceProvider serviceProvider)
         {
             var rootObjectProvider = (IRootObjectProvider?)serviceProvider.GetService(typeof(IRootObjectProvider));
@@ -161,7 +144,6 @@
             SetExportProvider(null);
         }
 
-        [CanBeNull]
         private object? Value
         {
             get
@@ -223,7 +205,7 @@
             UpdateTarget();
         }
 
-        private void SetExportProvider([CanBeNull] IExportProvider? exportProvider)
+        private void SetExportProvider(IExportProvider? exportProvider)
         {
             if (_exportProvider != null)
             {
@@ -238,7 +220,7 @@
             }
         }
 
-        private void ExportProvider_ExportsChanged([CanBeNull] object? sender, [CanBeNull] EventArgs? e)
+        private void ExportProvider_ExportsChanged(object? sender, EventArgs? e)
         {
             UpdateTarget();
         }

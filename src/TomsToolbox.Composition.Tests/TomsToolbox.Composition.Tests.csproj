@@ -2,7 +2,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net462</TargetFrameworks>
-    <LangVersion>latest</LangVersion>
     <DebugType>full</DebugType>
     <Tags>Test</Tags>
   </PropertyGroup>
@@ -11,7 +10,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ApprovalTests" Version="5.5.0" />
-    <PackageReference Include="JetBrains.Annotations" Version="2021.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.5" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.5" />

@@ -3,8 +3,6 @@
     using System.Windows;
     using System.Windows.Data;
 
-    using JetBrains.Annotations;
-
     using Microsoft.Xaml.Behaviors;
 
     using TomsToolbox.Essentials;
@@ -27,16 +25,15 @@
         /// <summary>
         /// Gets the property that should be refreshed.
         /// </summary>
-        [CanBeNull]
         public DependencyProperty? Property
         {
-            get => (DependencyProperty)GetValue(PropertyProperty);
+            get => (DependencyProperty?)GetValue(PropertyProperty);
             set => SetValue(PropertyProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Property"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty PropertyProperty =
+        public static readonly DependencyProperty PropertyProperty =
             DependencyProperty.Register("Property", typeof (DependencyProperty), typeof (UpdatePropertyAction));
 
         /// <summary>
@@ -46,7 +43,7 @@
         /// The parameter to the action. If the action does not require a parameter, the parameter may be
         /// set to a null reference.
         /// </param>
-        protected override void Invoke([CanBeNull] object? parameter)
+        protected override void Invoke(object? parameter)
         {
             var target = Target;
             if ((target == null) || !target.IsLoaded)

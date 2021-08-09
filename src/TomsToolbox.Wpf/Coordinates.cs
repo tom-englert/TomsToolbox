@@ -3,8 +3,6 @@
     using System;
     using System.Windows;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -113,9 +111,9 @@
         /// </summary>
         /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
         /// <returns><c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.</returns>
-        public override bool Equals([CanBeNull] object? obj)
+        public override bool Equals(object? obj)
         {
-            return (obj != null) && (obj is Coordinates coordinates) && Equals(coordinates);
+            return obj is Coordinates coordinates && Equals(coordinates);
         }
 
         /// <summary>

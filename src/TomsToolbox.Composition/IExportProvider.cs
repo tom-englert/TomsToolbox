@@ -5,9 +5,6 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using JetBrains.Annotations;
-    using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
-
     /// <summary>
     /// Retrieves exports which match a specified ImportDefinition object.
     /// </summary>
@@ -26,8 +23,7 @@
         /// <returns>
         /// The object
         /// </returns>
-        [NotNull]
-        T GetExportedValue<T>([CanBeNull] string? contractName = null) where T : class;
+        T GetExportedValue<T>(string? contractName = null) where T : class;
 
         /// <summary>
         /// Gets the exported object with the specified contract name.
@@ -37,8 +33,7 @@
         /// <returns>
         /// The object, or null if no such export exists.
         /// </returns>
-        [CanBeNull]
-        T? GetExportedValueOrDefault<T>([CanBeNull] string? contractName = null) where T : class;
+        T? GetExportedValueOrDefault<T>(string? contractName = null) where T : class;
         /// <summary>
         /// Tries to the get exported value.
         /// </summary>
@@ -48,8 +43,7 @@
         /// <returns>
         /// true if the value exists.
         /// </returns>
-        [ContractAnnotation("=> false,value:null;=>true,value:notnull")]
-        bool TryGetExportedValue<T>([CanBeNull] string? contractName, [CanBeNull, NotNullWhen(true)] out T? value) where T : class;
+        bool TryGetExportedValue<T>(string? contractName, [NotNullWhen(true)] out T? value) where T : class;
 
         /// <summary>
         /// Gets all the exported objects with the specified contract name.
@@ -59,8 +53,7 @@
         /// <returns>
         /// The object
         /// </returns>
-        [NotNull, ItemNotNull]
-        IEnumerable<T> GetExportedValues<T>([CanBeNull] string? contractName = null) where T : class;
+        IEnumerable<T> GetExportedValues<T>(string? contractName = null) where T : class;
 
         /// <summary>
         /// Gets the exports for the specified parameters.
@@ -70,8 +63,7 @@
         /// <returns>
         /// The exports.
         /// </returns>
-        [NotNull, ItemNotNull]
-        IEnumerable<IExport<object>> GetExports([NotNull] Type contractType, [CanBeNull] string? contractName = null);
+        IEnumerable<IExport<object>> GetExports(Type contractType, string? contractName = null);
     }
 
     /// <summary>
@@ -88,8 +80,7 @@
         /// <returns>
         /// true if the value exists.
         /// </returns>
-        [ContractAnnotation("=> false,value:null;=>true,value:notnull")]
-        public static bool TryGetExportedValue<T>([NotNull] this IExportProvider exportProvider, [CanBeNull, NotNullWhen(true)] out T? value)
+        public static bool TryGetExportedValue<T>(this IExportProvider exportProvider, [NotNullWhen(true)] out T? value)
             where T : class
         {
             return exportProvider.TryGetExportedValue(null, out value);
@@ -105,8 +96,7 @@
         /// <returns>
         /// The exports.
         /// </returns>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, [NotNull] Type type, [NotNull] Func<IMetadata?, TMetadata?> metadataFactory)
+        public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, Type type, Func<IMetadata?, TMetadata?> metadataFactory)
             where TMetadata : class
         {
             return GetExports(exportProvider, type, null, metadataFactory);
@@ -123,8 +113,7 @@
         /// <returns>
         /// The exports.
         /// </returns>
-        [NotNull, ItemNotNull]
-        public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, [NotNull] Type type, [CanBeNull] string? contractName, [NotNull] Func<IMetadata?, TMetadata?> metadataFactory)
+        public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, Type type, string? contractName, Func<IMetadata?, TMetadata?> metadataFactory)
             where TMetadata : class
         {
             return exportProvider
@@ -145,10 +134,8 @@
                 Metadata = metadataFactory(source.Metadata);
             }
 
-            [CanBeNull]
             public TObject? Value => _source.Value;
 
-            [CanBeNull]
             public TMetadata? Metadata { get; }
         }
     }

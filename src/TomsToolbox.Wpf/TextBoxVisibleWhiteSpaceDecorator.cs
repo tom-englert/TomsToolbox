@@ -12,8 +12,6 @@
     using System.Windows.Media;
     using System.Windows.Threading;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -58,9 +56,7 @@
     [ContentProperty("Child")]
     public class TextBoxVisibleWhiteSpaceDecorator : FrameworkElement
     {
-        [NotNull]
-        private readonly AdornerDecorator _adornerDecorator = new AdornerDecorator { ClipToBounds = true };
-        [CanBeNull]
+        private readonly AdornerDecorator _adornerDecorator = new() { ClipToBounds = true };
         private WhiteSpaceDecoratorAdorner? _adorner;
 
         /// <summary>
@@ -74,7 +70,6 @@
             AddVisualChild(_adornerDecorator);
         }
 
-        [NotNull]
         private AdornerLayer AdornerLayer => _adornerDecorator.AdornerLayer;
 
         /// <summary>
@@ -88,26 +83,23 @@
         /// <summary>
         /// Identifies the <see cref="WhiteSpaces"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty WhiteSpacesProperty =
-            DependencyProperty.Register("WhiteSpaces", typeof(WhiteSpaces), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(WhiteSpaces.Paragraph, (sender, e) => ((TextBoxVisibleWhiteSpaceDecorator)sender)?._adorner?.RecalculateWhiteSpaces()));
+            DependencyProperty.Register("WhiteSpaces", typeof(WhiteSpaces), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(WhiteSpaces.Paragraph, (sender, _) => ((TextBoxVisibleWhiteSpaceDecorator)sender)?._adorner?.RecalculateWhiteSpaces()));
 
 
         /// <summary>
         /// Gets or sets the color of the white space visualization.
         /// </summary>
-        [CanBeNull]
         public Brush? WhiteSpaceColor
         {
-            get => (Brush)GetValue(WhiteSpaceColorProperty);
+            get => (Brush?)GetValue(WhiteSpaceColorProperty);
             set => SetValue(WhiteSpaceColorProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="WhiteSpaceColor"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty WhiteSpaceColorProperty =
-            DependencyProperty.Register("WhiteSpaceColor", typeof(Brush), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(Brushes.Gray, (sender, e) => ((TextBoxVisibleWhiteSpaceDecorator)sender)?._adorner?.InvalidateVisual()));
+            DependencyProperty.Register("WhiteSpaceColor", typeof(Brush), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(Brushes.Gray, (sender, _) => ((TextBoxVisibleWhiteSpaceDecorator)sender)?._adorner?.InvalidateVisual()));
 
 
         /// <summary>
@@ -121,14 +113,12 @@
         /// <summary>
         /// Identifies the <see cref="WhiteSpaceOpacity"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty WhiteSpaceOpacityProperty =
-            DependencyProperty.Register("WhiteSpaceOpacity", typeof(double), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(1.0, (sender, e) => ((TextBoxVisibleWhiteSpaceDecorator)sender)?._adorner?.InvalidateVisual()));
+            DependencyProperty.Register("WhiteSpaceOpacity", typeof(double), typeof(TextBoxVisibleWhiteSpaceDecorator), new FrameworkPropertyMetadata(1.0, (sender, _) => ((TextBoxVisibleWhiteSpaceDecorator)sender)?._adorner?.InvalidateVisual()));
 
         /// <summary>
         /// Gets or sets the inner text box.
         /// </summary>
-        [CanBeNull]
         public TextBox? Child
         {
             get => _adornerDecorator.Child as TextBox;
@@ -136,7 +126,6 @@
         }
 
         /// <inheritdoc />
-        [CanBeNull]
         protected override IEnumerator? LogicalChildren
         {
             get
@@ -146,7 +135,6 @@
         }
 
         /// <inheritdoc />
-        [CanBeNull]
         protected override Visual? GetVisualChild(int index)
         {
             return (index == 0) ? _adornerDecorator : null;
@@ -169,7 +157,7 @@
             return finalSize;
         }
 
-        private void Self_Loaded([CanBeNull] object? sender, [CanBeNull] RoutedEventArgs? e)
+        private void Self_Loaded(object? sender, RoutedEventArgs? e)
         {
             var textBox = Child;
             if (textBox == null)
@@ -180,19 +168,16 @@
 
         private class WhiteSpaceDecoratorAdorner : Adorner
         {
-            private static readonly Vector NullVector = new Vector();
+            private static readonly Vector NullVector = new();
 
-            [NotNull]
             private readonly TextBoxVisibleWhiteSpaceDecorator _owner;
-            [NotNull]
             private readonly TextBox _textBox;
-            [NotNull, ItemNotNull]
-            private IList<WhiteSpace> _whiteSpaces = new WhiteSpace[0];
+            private IList<WhiteSpace> _whiteSpaces;
 
             private Vector _scrollOffset;
             private Vector _scrollExtent;
 
-            public WhiteSpaceDecoratorAdorner([NotNull] TextBoxVisibleWhiteSpaceDecorator owner, [NotNull] TextBox textBox)
+            public WhiteSpaceDecoratorAdorner(TextBoxVisibleWhiteSpaceDecorator owner, TextBox textBox)
                 : base(textBox)
             {
                 _owner = owner;
@@ -210,7 +195,7 @@
                 _whiteSpaces = CalculateWhiteSpaces();
             }
 
-            private void ScrollViewer_ScrollChanged([CanBeNull] object? sender, ScrollChangedEventArgs e)
+            private void ScrollViewer_ScrollChanged(object? sender, ScrollChangedEventArgs e)
             {
                 _scrollOffset = new Vector(e.HorizontalOffset, e.VerticalOffset);
 
@@ -224,7 +209,7 @@
                 Invalidate();
             }
 
-            private void TextBox_TextChanged([CanBeNull] object? sender, TextChangedEventArgs e)
+            private void TextBox_TextChanged(object? sender, TextChangedEventArgs e)
             {
                 if (e.Changes.Count != 1)
                 {
@@ -324,7 +309,6 @@
                     .ToList();
             }
 
-            [CanBeNull]
             private static WhiteSpace? GetWhiteSpace(char character, int index, WhiteSpaces whiteSpaces)
             {
                 switch (character)
@@ -344,7 +328,7 @@
             }
 
             // ReSharper disable once UnusedParameter.Local
-            private void DrawAdorners([NotNull] DrawingContext drawingContext, [NotNull] TextBox textBox, [NotNull][ItemNotNull] IList<WhiteSpace> whiteSpaces, int firstIndex, int lastIndex, Size desiredSize, [NotNull] Typeface typeface, double fontSize, [NotNull] Brush brush, NumberSubstitution numberSubstitution, TextFormattingMode textFormattingMode, double pixelsPerDip)
+            private void DrawAdorners(DrawingContext drawingContext, TextBox textBox, IList<WhiteSpace> whiteSpaces, int firstIndex, int lastIndex, Size desiredSize, Typeface typeface, double fontSize, Brush brush, NumberSubstitution numberSubstitution, TextFormattingMode textFormattingMode, double pixelsPerDip)
             {
                 while (true)
                 {
@@ -414,7 +398,7 @@
             {
                 private Rect? _desiredRect;
 
-                public WhiteSpace(int charIndex, [NotNull] string text)
+                public WhiteSpace(int charIndex, string text)
                 {
                     CharIndex = charIndex;
                     Text = text;
@@ -422,14 +406,11 @@
 
                 public int CharIndex { get; set; }
 
-                [NotNull]
                 public string Text { get; }
-
-                public bool HasDesiredRect => _desiredRect.HasValue;
 
                 public Rect? DesiredRect => _desiredRect;
 
-                public Rect GetDrawingRect([NotNull] TextBox textBox, Vector scrollOffset)
+                public Rect GetDrawingRect(TextBox textBox, Vector scrollOffset)
                 {
                     return _desiredRect ??= CalculateDesiredRect(textBox, scrollOffset);
                 }

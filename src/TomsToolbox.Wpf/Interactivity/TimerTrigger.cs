@@ -4,14 +4,11 @@
     using System.Windows;
     using System.Windows.Threading;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A trigger that continuously fires while the associated object is loaded.
     /// </summary>
     public sealed class TimerTrigger : Microsoft.Xaml.Behaviors.TriggerBase<FrameworkElement>
     {
-        [CanBeNull]
         private DispatcherTimer? _timer;
 
         /// <summary>
@@ -25,7 +22,6 @@
         /// <summary>
         /// Identifies the <see cref="Interval"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty IntervalProperty = DependencyProperty.Register(
           "Interval", typeof(TimeSpan), typeof(TimerTrigger), new FrameworkPropertyMetadata(default(TimeSpan)));
 

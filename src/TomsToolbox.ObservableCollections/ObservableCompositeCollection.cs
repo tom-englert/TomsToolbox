@@ -8,8 +8,6 @@
     using System.ComponentModel;
     using System.Linq;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -23,8 +21,7 @@
         /// <typeparam name="T">The type of elements in the list.</typeparam>
         /// <param name="singleItem">The first single item in the collection</param>
         /// <returns>A new <see cref="ObservableCompositeCollection{T}"/> containing one fixed list with one single item.</returns>
-        [NotNull, ItemCanBeNull]
-        public static ObservableCompositeCollection<T> FromSingleItem<T>([CanBeNull] T singleItem)
+        public static ObservableCompositeCollection<T> FromSingleItem<T>(T singleItem)
         {
             return new ObservableCompositeCollection<T>(new[] { singleItem });
         }
@@ -37,8 +34,7 @@
         /// <param name="singleItem">The first single item in the collection</param>
         /// <param name="list">The list to add after the single item.</param>
         /// <returns>A new <see cref="ObservableCompositeCollection{T}"/> containing one fixed list with the single item plus all items from the list.</returns>
-        [NotNull, ItemCanBeNull]
-        public static ObservableCompositeCollection<T> FromSingleItemAndList<T, TItem>([CanBeNull] T singleItem, [NotNull, ItemCanBeNull] IList<TItem> list)
+        public static ObservableCompositeCollection<T> FromSingleItemAndList<T, TItem>(T singleItem, IList<TItem> list)
             where TItem : T
         {
             return typeof(T) == typeof(TItem)
@@ -54,8 +50,7 @@
         /// <param name="list">The list to add before the single item.</param>
         /// <param name="singleItem">The last single item in the collection</param>
         /// <returns>A new <see cref="ObservableCompositeCollection{T}"/> containing all items from the list plus one fixed list with the single item at the end.</returns>
-        [NotNull, ItemCanBeNull]
-        public static ObservableCompositeCollection<T> FromListAndSingleItem<TItem, T>([NotNull, ItemCanBeNull] IList<TItem> list, [CanBeNull] T singleItem)
+        public static ObservableCompositeCollection<T> FromListAndSingleItem<TItem, T>(IList<TItem> list, T singleItem)
             where TItem : T
         {
             return typeof(T) == typeof(TItem)
@@ -73,7 +68,6 @@
     /// <inheritdoc cref="ReadOnlyObservableCollection{T}" />
     public sealed class ObservableCompositeCollection<T> : ReadOnlyObservableCollection<T>, IObservableCollection<T>
     {
-        [NotNull, ItemNotNull]
         private readonly ContentManager _content;
 
         /// <summary>
@@ -82,17 +76,15 @@
         private class ContentManager : IList<IList<T>>
         {
             // The parts that make up the composite collection
-            [NotNull, ItemNotNull]
-            private readonly List<IList<T>> _parts = new List<IList<T>>();
+            private readonly List<IList<T>> _parts = new();
             // The composite collection that we manage
-            [NotNull, ItemCanBeNull]
             private readonly ObservableCompositeCollection<T> _owner;
 
-            public ContentManager([NotNull, ItemCanBeNull] ObservableCompositeCollection<T> owner)
+            public ContentManager(ObservableCompositeCollection<T> owner)
             {
                 _owner = owner;
             }
-            private void Parts_CollectionChanged([CanBeNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+            private void Parts_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
             {
                 // Monitor changes of parts and forward events properly
                 // Offset to apply is the sum of all counts of all parts preceding this part
@@ -101,8 +93,7 @@
                 _owner.ContentCollectionChanged(TranslateEventArgs(e, offset));
             }
 
-            [NotNull]
-            private static NotifyCollectionChangedEventArgs TranslateEventArgs([NotNull] NotifyCollectionChangedEventArgs e, int offset)
+            private static NotifyCollectionChangedEventArgs TranslateEventArgs(NotifyCollectionChangedEventArgs e, int offset)
             {
                 // Translate given event args by adding the given offset to the starting index
 
@@ -132,12 +123,12 @@
             }
             #region IList<IList<T>> Members
 
-            public int IndexOf([CanBeNull] IList<T> item)
+            public int IndexOf(IList<T> item)
             {
                 return _parts.IndexOf(item);
             }
 
-            public void Insert(int index, [CanBeNull] IList<T> item)
+            public void Insert(int index, IList<T> item)
             {
                 if (item == null)
                     throw new ArgumentNullException(nameof(item));
@@ -179,7 +170,6 @@
                 _owner.ContentCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, (IList)part, offset));
             }
 
-            [CanBeNull]
             public IList<T> this[int index]
             {
                 get => _parts[index];
@@ -194,7 +184,7 @@
 
             #region ICollection<IList<T>> Members
 
-            public void Add([CanBeNull] IList<T> item)
+            public void Add(IList<T> item)
             {
                 if (item == null)
                     throw new ArgumentException(@"None of the parts may be null!");
@@ -210,12 +200,12 @@
                 }
             }
 
-            public bool Contains([CanBeNull] IList<T> item)
+            public bool Contains(IList<T> item)
             {
                 return IndexOf(item) != -1;
             }
 
-            public void CopyTo([NotNull] IList<T>[] array, int arrayIndex)
+            public void CopyTo(IList<T>[] array, int arrayIndex)
             {
                 throw new NotImplementedException();
             }
@@ -224,7 +214,7 @@
 
             public bool IsReadOnly => false;
 
-            public bool Remove([CanBeNull] IList<T> item)
+            public bool Remove(IList<T> item)
             {
                 if (item == null)
                     throw new ArgumentNullException(nameof(item));
@@ -272,7 +262,7 @@
         /// <param name="parts">The lists to wrap</param>
         /// <exception cref="System.ArgumentException">None of the parts may be null!</exception>
         /// <exception cref="T:System.ArgumentException">None of the parts may be null!</exception>
-        public ObservableCompositeCollection([NotNull, ItemNotNull] params IList<T>[] parts)
+        public ObservableCompositeCollection(params IList<T>[] parts)
             : this()
         {
             foreach (var part in parts)
@@ -284,16 +274,9 @@
         /// <summary>
         /// Access to the physical layer of the content
         /// </summary>
-        [NotNull, ItemNotNull]
-        public IList<IList<T>> Content
-        {
-            get
-            {
-                return _content;
-            }
-        }
+        public IList<IList<T>> Content => _content;
 
-        private void ContentCollectionChanged([NotNull] NotifyCollectionChangedEventArgs e)
+        private void ContentCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
             {

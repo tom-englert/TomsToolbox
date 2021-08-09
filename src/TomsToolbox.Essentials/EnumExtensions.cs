@@ -6,8 +6,6 @@
     using System.Linq;
     using System.Reflection;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Extension methods to ease dealing with <see cref="Enum"/> types.
     /// </summary>
@@ -53,7 +51,6 @@
         /// <typeparam name="T">The <see cref="Enum"/> type.</typeparam>
         /// <param name="value">The value.</param>
         /// <returns>The individual flags set on the specified value.</returns>
-        [NotNull]
         public static IEnumerable<T> GetFlags<T>(this T value) where T : struct
         {
             VerifyIsFlagsEnum<T>();
@@ -117,7 +114,7 @@
         /// <typeparam name="T">The <see cref="Enum"/> type.</typeparam>
         /// <param name="flags">The flags.</param>
         /// <returns>The combined flags.</returns>
-        public static T CombineFlags<T>([NotNull] this IEnumerable<T> flags) where T : struct
+        public static T CombineFlags<T>(this IEnumerable<T> flags) where T : struct
         {
             VerifyIsFlagsEnum<T>();
 
@@ -253,7 +250,7 @@
             return InternalToNullableEnum<T>(value);
         }
 
-        private static T? InternalToNullableEnum<T>([CanBeNull] object? value)
+        private static T? InternalToNullableEnum<T>(object? value)
             where T : struct
         {
             if (value == null)
@@ -262,7 +259,7 @@
             return InternalToEnum<T>(value);
         }
 
-        private static T InternalToEnum<T>([NotNull] object value)
+        private static T InternalToEnum<T>(object value)
             where T : struct
         {
             var enumType = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
@@ -279,7 +276,7 @@
             }
         }
 
-        private static long ToInt64([CanBeNull] object? value)
+        private static long ToInt64(object? value)
         {
             return Convert.ToInt64(value, CultureInfo.InvariantCulture);
         }

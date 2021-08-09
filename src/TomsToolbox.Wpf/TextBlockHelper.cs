@@ -7,8 +7,6 @@
     using System.Windows.Data;
     using System.Windows.Media;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Attached property provider which adds the read-only attached property <see cref="IsTextTrimmedProperty"/> to
     /// the framework's <see cref="TextBlock"/> control.
@@ -30,15 +28,14 @@
         /// </summary>
         /// <param name="obj">The text block.</param>
         /// <returns><c>true</c> if text trimmed inside the text block; otherwise <c>false</c></returns>
-        public static bool GetIsTextTrimmed([NotNull] DependencyObject obj)
+        public static bool GetIsTextTrimmed(DependencyObject obj)
         {
             return obj.GetValue<bool>(IsTextTrimmedProperty);
         }
-        private static void SetIsTextTrimmed([NotNull] DependencyObject obj, bool value)
+        private static void SetIsTextTrimmed(DependencyObject obj, bool value)
         {
             obj.SetValue(IsTextTrimmedPropertyKey, value);
         }
-        [NotNull]
         private static readonly DependencyPropertyKey IsTextTrimmedPropertyKey
             = DependencyProperty.RegisterAttachedReadOnly("IsTextTrimmed", typeof(bool), typeof(TextBlockHelper), new FrameworkPropertyMetadata());
         /// <summary>
@@ -50,7 +47,6 @@
         /// reflects if the text inside the text block is trimmed, i.e. not fully visible.
         /// </summary>
         /// </AttachedPropertyComments>
-        [NotNull]
         public static readonly DependencyProperty IsTextTrimmedProperty = IsTextTrimmedPropertyKey.DependencyProperty;
 
         /// <summary>
@@ -59,7 +55,7 @@
         /// <param name="obj">The <see cref="TextBlock"/> to evaluate.</param>
         /// <returns><c>true</c> if the automatic tool tip is enabled; otherwise <c>false</c></returns>
         [AttachedPropertyBrowsableForType(typeof(TextBlock))]
-        public static bool GetIsAutomaticToolTipEnabled([NotNull] DependencyObject obj)
+        public static bool GetIsAutomaticToolTipEnabled(DependencyObject obj)
         {
             return obj.GetValue<bool>(IsAutomaticToolTipEnabledProperty);
         }
@@ -69,7 +65,7 @@
         /// <param name="obj">The <see cref="TextBlock"/> to evaluate.</param>
         /// <param name="value"><c>true</c> to enable the automatic tool tip; otherwise <c>false</c></param>
         [AttachedPropertyBrowsableForType(typeof(TextBlock))]
-        public static void SetIsAutomaticToolTipEnabled([NotNull] DependencyObject obj, bool value)
+        public static void SetIsAutomaticToolTipEnabled(DependencyObject obj, bool value)
         {
             obj.SetValue(IsAutomaticToolTipEnabledProperty, value);
         }
@@ -82,7 +78,6 @@
         /// This property is used by the style identified with the <see cref="ResourceKeys.AutoToolTipTextBoxStyle"/> to display of a tool tip only if the text of the text block is trimmed.
         /// </summary>
         /// </AttachedPropertyComments>
-        [NotNull]
         public static readonly DependencyProperty IsAutomaticToolTipEnabledProperty
             = DependencyProperty.RegisterAttached("IsAutomaticToolTipEnabled", typeof(bool), typeof(TextBlockHelper), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.Inherits));
 
@@ -91,7 +86,7 @@
         /// </summary>
         /// <param name="sender">Object where the event handler is attached</param>
         /// <param name="e">Event data</param>
-        private static void TextBlock_SizeChanged([NotNull] object sender, [NotNull] SizeChangedEventArgs e)
+        private static void TextBlock_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (!(sender is TextBlock textBlock))
                 return;
@@ -111,7 +106,7 @@
         /// </summary>
         /// <param name="sender">Object where the event handler is attached</param>
         /// <param name="e">Event data</param>
-        private static void Binding_TargetUpdated([CanBeNull] object? sender, [NotNull] DataTransferEventArgs e)
+        private static void Binding_TargetUpdated(object? sender, DataTransferEventArgs e)
         {
             if (!(sender is TextBlock textBlock))
                 return;
@@ -126,7 +121,7 @@
         /// Update the value of IsTextTrimmed.
         /// </summary>
         /// <param name="textBlock">The text block</param>
-        private static void UpdateIsTextTrimmed([NotNull] TextBlock textBlock)
+        private static void UpdateIsTextTrimmed(TextBlock textBlock)
         {
             SetIsTextTrimmed(textBlock, (textBlock.TextTrimming != TextTrimming.None) && EvaluateIsTextTrimmed(textBlock));
         }
@@ -136,7 +131,7 @@
         /// </summary>
         /// <param name="textBlock">The <see cref="TextBlock"/> to evaluate.</param>
         /// <returns><c>true</c> if the text is currently being trimmed; otherwise <c>false</c></returns>
-        private static bool EvaluateIsTextTrimmed([NotNull] TextBlock textBlock)
+        private static bool EvaluateIsTextTrimmed(TextBlock textBlock)
         {
             var fontFamily = textBlock.FontFamily;
             var text = textBlock.Text;

@@ -6,20 +6,18 @@
     using System.Windows.Data;
     using System.Windows.Media;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Converts a color name to the corresponding solid color brush. See <see cref="BrushConverter"/> for supported values.
     /// </summary>
     [ValueConversion(typeof(string), typeof(Brush))]
     public class ColorNameToBrushConverter : ValueConverter
     {
-        [NotNull] private static readonly TypeConverter _typeConverter = new BrushConverter();
+        private static readonly TypeConverter _typeConverter = new BrushConverter();
 
         /// <summary>
         /// The singleton instance of the converter.
         /// </summary>
-        [NotNull] public static readonly IValueConverter Default = new ColorNameToBrushConverter();
+        public static readonly IValueConverter Default = new ColorNameToBrushConverter();
 
         /// <summary>
         /// Converts the specified color name.
@@ -27,8 +25,7 @@
         /// </summary>
         /// <param name="colorName">The color name.</param>
         /// <returns>The corresponding brush if the conversion was successful; otherwise <c>null</c>.</returns>
-        [CanBeNull]
-        public static Brush? Convert([CanBeNull] string? colorName)
+        public static Brush? Convert(string? colorName)
         {
             // let it fail fast so we are not left wondering what went wrong
             return colorName != null ? _typeConverter.ConvertFromInvariantString(colorName) as Brush : null;
@@ -44,8 +41,7 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        [CanBeNull]
-        protected override object? Convert([CanBeNull] object? value, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             return Convert(value as string);
         }

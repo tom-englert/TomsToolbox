@@ -7,8 +7,6 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A converter that aggregates the inner converters for all values, overcoming the restriction of .Net that <see cref="IMultiValueConverter"/> can't be nested.
     /// </summary>
@@ -46,9 +44,6 @@
     [ContentProperty("Converters")]
     public class AggregatingMultiValueConverter : MultiValueConverter
     {
-        [NotNull, ItemNotNull]
-        private readonly Collection<object> _converters = new Collection<object>();
-
         /// <summary>
         /// Converts a value.
         /// </summary>
@@ -59,10 +54,9 @@
         /// <returns>
         /// A converted value. If the method returns null, the valid null value is used.
         /// </returns>
-        [CanBeNull]
-        protected override object? Convert(object?[] values, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object? Convert(object?[] values, Type? targetType, object? parameter, CultureInfo? culture)
         {
-            if (!_converters.Any())
+            if (!Converters.Any())
                 throw new InvalidOperationException("Need at least one converter");
 
             var numberOfValues = values.Length;
@@ -70,7 +64,7 @@
                 return null;
 
             var aggregated = values[0];
-            var converter = _converters[0];
+            var converter = Converters[0];
 
             var nextConverterIndex = 1;
             var nextValueIndex = 1;
@@ -81,13 +75,13 @@
                 {
                     aggregated = valueConverter.Convert(aggregated, targetType, values[nextValueIndex], culture);
 
-                    if (nextConverterIndex < _converters.Count())
+                    if (nextConverterIndex < Converters.Count)
                     {
-                        converter = _converters[nextConverterIndex];
+                        converter = Converters[nextConverterIndex];
                         nextConverterIndex += 1;
                     }
                 }
-                else if (nextConverterIndex >= _converters.Count)
+                else if (nextConverterIndex >= Converters.Count)
                 {
                     if (converter is IMultiValueConverter multiValueConverter)
                     {
@@ -104,13 +98,6 @@
         /// <summary>
         /// Gets the aggregating converters. Must be all <see cref="IValueConverter"/>, only the last might be a <see cref="IMultiValueConverter"/>.
         /// </summary>
-        [NotNull, ItemNotNull]
-        public Collection<object> Converters
-        {
-            get
-            {
-                return _converters;
-            }
-        }
+        public Collection<object> Converters { get; } = new();
     }
 }

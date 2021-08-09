@@ -12,8 +12,6 @@
     using System.Windows.Data;
     using System.Windows.Markup;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Composition;
     using TomsToolbox.Composition.Mef;
     using TomsToolbox.Wpf;
@@ -26,8 +24,7 @@
     /// </summary>
     public sealed partial class App : IDisposable
     {
-        [NotNull]
-        private readonly AggregateCatalog _compositionCatalog = new AggregateCatalog();
+        private readonly AggregateCatalog _compositionCatalog = new();
         private readonly CompositionContainer _compositionContainer;
         private readonly IExportProvider _exportProvider;
 
@@ -42,11 +39,11 @@
             _compositionContainer.ComposeExportedValue(_exportProvider);
         }
 
-        protected override void OnStartup([CanBeNull] StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            VisualComposition.Trace += (sender, args) => Trace.WriteLine(args.Text);
+            VisualComposition.Trace += (_, args) => Trace.WriteLine(args.Text);
             BindingErrorTracer.Start(BindingErrorCallback);
 
             var context = new RegistrationBuilder();
@@ -72,12 +69,12 @@
             MainWindow.Show();
         }
 
-        private void BindingErrorCallback([CanBeNull] string msg)
+        private void BindingErrorCallback(string? msg)
         {
             Dispatcher?.BeginInvoke((Action)(() => MessageBox.Show(msg)));
         }
 
-        protected override void OnExit([CanBeNull] ExitEventArgs e)
+        protected override void OnExit(ExitEventArgs e)
         {
             Dispose();
 

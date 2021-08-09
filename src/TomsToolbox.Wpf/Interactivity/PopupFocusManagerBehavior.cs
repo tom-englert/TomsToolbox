@@ -6,8 +6,6 @@
     using System.Windows.Controls.Primitives;
     using System.Windows.Input;
 
-    using JetBrains.Annotations;
-
     using Microsoft.Xaml.Behaviors;
 
     /// <summary>
@@ -20,16 +18,15 @@
         /// <summary>
         /// Gets or sets the toggle button that controls the popup.
         /// </summary>
-        [CanBeNull]
         public ToggleButton? ToggleButton
         {
-            get => (ToggleButton)GetValue(ToggleButtonProperty);
+            get => (ToggleButton?)GetValue(ToggleButtonProperty);
             set => SetValue(ToggleButtonProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="ToggleButton"/> dependency property.
         /// </summary>
-        [NotNull] public static readonly DependencyProperty ToggleButtonProperty =
+        public static readonly DependencyProperty ToggleButtonProperty =
             DependencyProperty.Register("ToggleButton", typeof(ToggleButton), typeof(PopupFocusManagerBehavior));
 
         /// <summary>
@@ -66,7 +63,7 @@
             popup.KeyDown -= Popup_KeyDown;
         }
 
-        private void Popup_KeyDown([CanBeNull] object? sender, [CanBeNull] KeyEventArgs? e)
+        private void Popup_KeyDown(object? sender, KeyEventArgs? e)
         {
             if (ToggleButton == null)
                 return;
@@ -81,7 +78,7 @@
             }
         }
 
-        private void Popup_Opened([CanBeNull] object? sender, [CanBeNull] EventArgs? e)
+        private void Popup_Opened(object? sender, EventArgs? e)
         {
             if (!(sender is Popup popup))
                 return;
@@ -94,7 +91,7 @@
             }
         }
 
-        private void Popup_IsKeyboardFocusWithinChanged([CanBeNull] object? sender, DependencyPropertyChangedEventArgs e)
+        private void Popup_IsKeyboardFocusWithinChanged(object? sender, DependencyPropertyChangedEventArgs e)
         {
             if (Equals(e.NewValue, false) && (ToggleButton != null))
             {

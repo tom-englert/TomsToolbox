@@ -8,8 +8,6 @@
     using System.Windows.Markup;
     using System.Windows.Media;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// An image control that accepts a list of image sources and displays the image that best fits the size of the control.
     /// </summary>
@@ -29,34 +27,31 @@
         /// <summary>
         /// Gets or sets the optional viewport where the image will be displayed. If the viewport property is not set, the window is used.
         /// </summary>
-        [CanBeNull]
         public FrameworkElement? Viewport
         {
-            get => (FrameworkElement)GetValue(ViewportProperty);
+            get => (FrameworkElement?)GetValue(ViewportProperty);
             set => SetValue(ViewportProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Viewport"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty ViewportProperty =
-            DependencyProperty.Register("Viewport", typeof(FrameworkElement), typeof(Icon), new FrameworkPropertyMetadata((sender, e) => ((Icon)sender).Update()));
+        public static readonly DependencyProperty ViewportProperty =
+            DependencyProperty.Register("Viewport", typeof(FrameworkElement), typeof(Icon), new FrameworkPropertyMetadata((sender, _) => ((Icon)sender).Update()));
 
         /// <summary>
         /// Gets or sets the image sources that are candidates for the target image.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "Required, is used via XAML")]
-        [CanBeNull]
         public IList<ImageSource>? Sources
         {
-            get => (IList<ImageSource>)GetValue(SourcesProperty);
+            get => (IList<ImageSource>?)GetValue(SourcesProperty);
             set => SetValue(SourcesProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="Sources"/> dependency property
         /// </summary>
-        [NotNull]
         public static readonly DependencyProperty SourcesProperty =
-            DependencyProperty.Register("Sources", typeof(IList<ImageSource>), typeof(Icon), new FrameworkPropertyMetadata((sender, e) => ((Icon)sender).Update()));
+            DependencyProperty.Register("Sources", typeof(IList<ImageSource>), typeof(Icon), new FrameworkPropertyMetadata((sender, _) => ((Icon)sender).Update()));
 
         /// <inheritdoc />
         public override void OnApplyTemplate()

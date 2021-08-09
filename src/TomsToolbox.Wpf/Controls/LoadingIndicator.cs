@@ -4,8 +4,6 @@
     using System.Windows.Controls;
     using System.Windows.Media;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A loading indicator showing a rotating animation when active.
     /// </summary>
@@ -38,14 +36,13 @@
         /// <summary>
         /// Identifies the <see cref="IsActive"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty IsActiveProperty =
+        public static readonly DependencyProperty IsActiveProperty =
             DependencyProperty.Register("IsActive", typeof(bool), typeof(LoadingIndicator));
 
 
         /// <summary>
         /// Gets or sets the header that is displayed centered above the graphics.
         /// </summary>
-        [CanBeNull]
         public object? Header
         {
             get => GetValue(HeaderProperty);
@@ -54,7 +51,7 @@
         /// <summary>
         /// Identifies the <see cref="Header"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty HeaderProperty =
+        public static readonly DependencyProperty HeaderProperty =
             DependencyProperty.Register("Header", typeof(object), typeof(LoadingIndicator));
 
 
@@ -69,23 +66,22 @@
         /// <summary>
         /// Identifies the <see cref="ActiveBackgroundColor"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty ActiveBackgroundColorProperty =
+        public static readonly DependencyProperty ActiveBackgroundColorProperty =
             DependencyProperty.Register("ActiveBackgroundColor", typeof(Color), typeof(LoadingIndicator), new FrameworkPropertyMetadata(Colors.Transparent));
 
 
         /// <summary>
         /// Gets or sets the layout transform applied to the animation.
         /// </summary>
-        [CanBeNull]
         public Transform? AnimationLayoutTransform
         {
-            get => (Transform)GetValue(AnimationLayoutTransformProperty);
+            get => (Transform?)GetValue(AnimationLayoutTransformProperty);
             set => SetValue(AnimationLayoutTransformProperty, value);
         }
         /// <summary>
         /// Identifies the <see cref="AnimationLayoutTransform"/> dependency property
         /// </summary>
-        [NotNull] public static readonly DependencyProperty AnimationLayoutTransformProperty =
+        public static readonly DependencyProperty AnimationLayoutTransformProperty =
             DependencyProperty.Register("AnimationLayoutTransform", typeof(Transform), typeof(LoadingIndicator));
     }
 }

@@ -3,7 +3,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
-    <LangVersion>latest</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
@@ -21,8 +20,6 @@
 
   <ItemGroup>
     <PackageReference Include="Fody" Version="6.5.2" PrivateAssets="All" />
-    <PackageReference Include="JetBrains.Annotations" Version="2021.2.0" PrivateAssets="All" />
-    <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.17.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="WeakEventHandler.Fody" Version="1.7.0" PrivateAssets="All" />
   </ItemGroup>

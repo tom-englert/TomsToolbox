@@ -1,7 +1,5 @@
 ﻿namespace TomsToolbox.Composition
 {
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Encapsulation of an DI exported object with metadata.
     /// </summary>
@@ -14,13 +12,11 @@
         /// <summary>
         /// Gets the value.
         /// </summary>
-        [CanBeNull]
         T? Value { get; }
 
         /// <summary>
         /// Gets the metadata.
         /// </summary>
-        [CanBeNull]
         TMetadata? Metadata { get; }
     }
 

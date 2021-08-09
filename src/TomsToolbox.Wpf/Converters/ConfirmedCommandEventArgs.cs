@@ -2,8 +2,6 @@
 {
     using System.ComponentModel;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Event arguments for the <see cref="ConfirmedCommandConverter.Executing"/> event.
     /// </summary>
@@ -12,7 +10,6 @@
         /// <summary>
         /// Gets or sets the parameter that will be passed to the command when it's executed.
         /// </summary>
-        [CanBeNull]
         public object? Parameter
         {
             get;

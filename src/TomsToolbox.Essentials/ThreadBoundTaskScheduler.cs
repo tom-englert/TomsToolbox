@@ -6,16 +6,12 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// A <see cref="System.Threading.Tasks.TaskScheduler" /> that queues the tasks an runs them in one dedicated thread.
     /// </summary>
     public sealed class ThreadBoundTaskScheduler : TaskScheduler, IDisposable
     {
-        [NotNull]
-        private readonly BlockingCollection<Task> _tasksCollection = new BlockingCollection<Task>();
-        [NotNull]
+        private readonly BlockingCollection<Task> _tasksCollection = new();
         private readonly Thread _thread;
 
         /// <summary>
@@ -37,7 +33,6 @@
         /// <summary>
         /// Gets the task factory that can be used to enqueue a new task.
         /// </summary>
-        [NotNull]
         public TaskFactory TaskFactory { get; }
 
         private void Execute()
@@ -54,7 +49,6 @@
         /// <returns>
         /// An enumerable that allows a debugger to traverse the tasks currently queued to this scheduler.
         /// </returns>
-        [NotNull]
         protected override IEnumerable<Task> GetScheduledTasks()
         {
             return _tasksCollection.ToArray();
@@ -64,7 +58,7 @@
         /// Queues a <see cref="T:System.Threading.Tasks.Task" /> to the scheduler.
         /// </summary>
         /// <param name="task">The <see cref="T:System.Threading.Tasks.Task" /> to be queued.</param>
-        protected override void QueueTask([NotNull] Task task)
+        protected override void QueueTask(Task task)
         {
             _tasksCollection.Add(task);
         }
@@ -77,7 +71,7 @@
         /// <returns>
         /// A Boolean value indicating whether the task was executed inline.
         /// </returns>
-        protected override bool TryExecuteTaskInline([CanBeNull] Task? task, bool taskWasPreviouslyQueued)
+        protected override bool TryExecuteTaskInline(Task? task, bool taskWasPreviouslyQueued)
         {
             return false;
         }

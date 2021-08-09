@@ -1,7 +1,5 @@
 ﻿namespace TomsToolbox.Wpf.Interactivity
 {
-    using JetBrains.Annotations;
-
     using Microsoft.Xaml.Behaviors;
 
     using TomsToolbox.Wpf.Controls;
@@ -26,7 +24,7 @@
             map.ManipulationDelta += Map_ManipulationDelta;
         }
 
-        private void Map_ManipulationDelta([CanBeNull] object? sender, [NotNull] System.Windows.Input.ManipulationDeltaEventArgs e)
+        private void Map_ManipulationDelta(object? sender, System.Windows.Input.ManipulationDeltaEventArgs e)
         {
             var map = AssociatedObject;
 

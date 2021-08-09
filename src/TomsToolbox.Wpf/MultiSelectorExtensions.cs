@@ -9,8 +9,6 @@
     using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Essentials;
 
     /// <summary>
@@ -27,18 +25,18 @@
     /// </remarks>
     public static class MultiSelectorExtensions
     {
-        [NotNull, ItemNotNull] private static readonly IList _emptyObjectArray = new object[0];
+#pragma warning disable CA1825 // Avoid zero-length array allocations (=> Net45)
+        private static readonly IList _emptyObjectArray = new object[0];
 
         /// <summary>
         /// Gets the value of the <see cref="P:TomsToolbox.Wpf.MultiSelectorExtensions.SelectionBinding"/> attached property.
         /// </summary>
         /// <param name="obj">The object to attach to.</param>
         /// <returns>The current selection.</returns>
-        [CanBeNull, ItemCanBeNull]
         [AttachedPropertyBrowsableForType(typeof(Selector))]
-        public static IList? GetSelectionBinding([NotNull] this Selector obj)
+        public static IList? GetSelectionBinding(this Selector obj)
         {
-            return (IList)obj.GetValue(SelectionBindingProperty);
+            return (IList?)obj.GetValue(SelectionBindingProperty);
         }
         /// <summary>
         /// Sets the value of the <see cref="P:TomsToolbox.Wpf.MultiSelectorExtensions.SelectionBinding"/> attached property.
@@ -46,7 +44,7 @@
         /// <param name="obj">The object to attach to.</param>
         /// <param name="value">The new selection.</param>
         [AttachedPropertyBrowsableForType(typeof(Selector))]
-        public static void SetSelectionBinding([NotNull] this Selector obj, [CanBeNull, ItemCanBeNull] IList? value)
+        public static void SetSelectionBinding(this Selector obj, IList? value)
         {
             obj.SetValue(SelectionBindingProperty, value);
         }
@@ -65,17 +63,15 @@
         /// ]]></code>
         /// </example>
         /// </AttachedPropertyComments>
-        [NotNull]
         public static readonly DependencyProperty SelectionBindingProperty =
             DependencyProperty.RegisterAttached("SelectionBinding", typeof(IList), typeof(MultiSelectorExtensions), new FrameworkPropertyMetadata(null, SelectionBinding_Changed));
-        [NotNull]
         private static readonly DependencyProperty SelectionSynchronizerProperty =
             DependencyProperty.RegisterAttached("SelectionSynchronizer", typeof(SelectionSynchronizer), typeof(MultiSelectorExtensions));
 
-        private static void SelectionBinding_Changed([NotNull] DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void SelectionBinding_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             // The selector is the target of the binding, and the ViewModel property is the source.
-            var synchronizer = (SelectionSynchronizer)d.GetValue(SelectionSynchronizerProperty);
+            var synchronizer = (SelectionSynchronizer?)d.GetValue(SelectionSynchronizerProperty);
 
             if (synchronizer != null)
             {
@@ -85,14 +81,13 @@
                 synchronizer.Dispose();
             }
 
-            var sourceSelection = (IList)e.NewValue;
-            if (sourceSelection == null)
+            if (e.NewValue is not IList sourceSelection)
                 return;
 
             d.SetValue(SelectionSynchronizerProperty, new SelectionSynchronizer((Selector)d, sourceSelection));
         }
 
-        private static void CommitEdit([CanBeNull] this Selector? selector)
+        private static void CommitEdit(this Selector? selector)
         {
             if (selector is DataGrid dataGrid)
             {
@@ -100,22 +95,21 @@
                 dataGrid.CommitEdit(); // row
             }
         }
-        [NotNull, ItemCanBeNull]
-        private static IList GetSelectedItems([NotNull] this Selector selector)
+        private static IList GetSelectedItems(this Selector selector)
         {
             var selectedItems = (IList)((dynamic)selector).SelectedItems;
             return selectedItems;
         }
-        private static void ScrollIntoView([NotNull] this Selector selector, [CanBeNull] object? selectedItem)
+        private static void ScrollIntoView(this Selector selector, object? selectedItem)
         {
             ((dynamic)selector).ScrollIntoView(selectedItem);
         }
 
-        private static void BeginSetFocus([NotNull] this ItemsControl selector, [CanBeNull] object? selectedItem)
+        private static void BeginSetFocus(this ItemsControl selector, object? selectedItem)
         {
             selector.BeginInvoke(() =>
             {
-                if (!(selector.ItemContainerGenerator.ContainerFromItem(selectedItem) is FrameworkElement container))
+                if (selector.ItemContainerGenerator.ContainerFromItem(selectedItem) is not FrameworkElement container)
                     return;
 
                 var child = container.VisualDescendantsAndSelf().OfType<UIElement>().FirstOrDefault(item => item.Focusable);
@@ -124,7 +118,7 @@
             });
         }
 
-        private static void ClearSourceSelection([NotNull] this Selector selector)
+        private static void ClearSourceSelection(this Selector selector)
         {
             var sourceSelection = selector.GetSelectionBinding();
 
@@ -141,12 +135,12 @@
             }
         }
 
-        private static bool All([NotNull, ItemCanBeNull] this IEnumerable items, [NotNull] Func<object, bool> condition)
+        private static bool All(this IEnumerable items, Func<object, bool> condition)
         {
-            return Enumerable.All(items.Cast<object>(), condition);
+            return items.Cast<object>().All(condition);
         }
 
-        private static void SynchronizeWithSource([NotNull] this Selector selector, [NotNull, ItemCanBeNull] IList sourceSelection)
+        private static void SynchronizeWithSource(this Selector selector, IList sourceSelection)
         {
             var selectedItems = selector.GetSelectedItems();
 
@@ -168,7 +162,7 @@
             }
         }
 
-        private static void AddItemsToSelection([NotNull] this Selector selector, [NotNull, ItemNotNull] IList itemsToSelect)
+        private static void AddItemsToSelection(this Selector selector, IList itemsToSelect)
         {
             var isSourceInvalid = false;
             var selectedItems = selector.GetSelectedItems();
@@ -204,7 +198,7 @@
             }
         }
 
-        private static void SelectSingleItem([NotNull] this Selector selector, [NotNull, ItemCanBeNull] IList sourceSelection)
+        private static void SelectSingleItem(this Selector selector, IList sourceSelection)
         {
             // Special handling, maybe list box is in single selection mode where we can't call selectedItems.Add().
             var selectedItem = sourceSelection[0];
@@ -226,8 +220,7 @@
             }
         }
 
-        [NotNull, ItemCanBeNull]
-        private static IList ArrayCopy([NotNull, ItemCanBeNull] ICollection source)
+        private static IList ArrayCopy(ICollection source)
         {
             var target = new object[source.Count];
             source.CopyTo(target, 0);
@@ -236,14 +229,12 @@
 
         private sealed class SelectionSynchronizer : IDisposable
         {
-            [NotNull]
             private readonly Selector _selector;
-            [CanBeNull]
             private readonly INotifyCollectionChanged? _observableSourceSelection;
 
             private readonly bool _selectorHasItemsSourceBinding;
 
-            public SelectionSynchronizer([NotNull] Selector selector, [NotNull, ItemCanBeNull] IList sourceSelection)
+            public SelectionSynchronizer(Selector selector, IList sourceSelection)
             {
                 _selector = selector;
                 _selectorHasItemsSourceBinding = selector.ItemsSource != null;
@@ -269,7 +260,7 @@
                 private set;
             }
 
-            private void SourceSelection_CollectionChanged([NotNull] object? sender, [NotNull] NotifyCollectionChangedEventArgs e)
+            private void SourceSelection_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
             {
                 if (IsUpdating || sender == null)
                     return;
@@ -322,7 +313,7 @@
                 }
             }
 
-            private void Selector_SelectionChanged([NotNull] object sender, [NotNull] SelectionChangedEventArgs e)
+            private void Selector_SelectionChanged(object sender, SelectionChangedEventArgs e)
             {
                 if (IsUpdating)
                     return;

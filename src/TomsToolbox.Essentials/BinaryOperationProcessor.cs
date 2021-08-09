@@ -7,8 +7,6 @@
     using System.Linq;
     using System.Reflection;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Applies the <see cref="Operation"/> on the values.<para/>
     /// </summary>
@@ -28,21 +26,18 @@
     /// </remarks>
     public sealed class BinaryOperationProcessor
     {
-        [NotNull] private static readonly Func<object, object, object> _additionMethod = (a, b) => ToDouble(a) + ToDouble(b);
-        [NotNull] private static readonly Func<object, object, object> _subtractionMethod = (a, b) => ToDouble(a) - ToDouble(b);
-        [NotNull] private static readonly Func<object, object, object> _multiplyMethod = (a, b) => ToDouble(a) * ToDouble(b);
-        [NotNull] private static readonly Func<object, object, object> _divisionMethod = (a, b) => ToDouble(a) / ToDouble(b);
-        [NotNull] private static readonly Func<object, object, object> _equalityMethod = (a, b) => Equals(a, b);
-        [NotNull] private static readonly Func<object, object, object> _inequalityMethod = (a, b) => !Equals(a, b);
-        [NotNull] private static readonly Func<object, object, object> _greaterThanMethod = (a, b) => Compare(a, b) > 0;
-        [NotNull] private static readonly Func<object, object, object> _lessThanMethod = (a, b) => Compare(a, b) < 0;
-        [NotNull] private static readonly Func<object, object, object> _greaterThanOrEqualMethod = (a, b) => Compare(a, b) >= 0;
-        [NotNull] private static readonly Func<object, object, object> _lessThanOrEqualMethod = (a, b) => Compare(a, b) <= 0;
+        private static readonly Func<object, object, object> _additionMethod = (a, b) => ToDouble(a) + ToDouble(b);
+        private static readonly Func<object, object, object> _subtractionMethod = (a, b) => ToDouble(a) - ToDouble(b);
+        private static readonly Func<object, object, object> _multiplyMethod = (a, b) => ToDouble(a) * ToDouble(b);
+        private static readonly Func<object, object, object> _divisionMethod = (a, b) => ToDouble(a) / ToDouble(b);
+        private static readonly Func<object, object, object> _equalityMethod = (a, b) => Equals(a, b);
+        private static readonly Func<object, object, object> _inequalityMethod = (a, b) => !Equals(a, b);
+        private static readonly Func<object, object, object> _greaterThanMethod = (a, b) => Compare(a, b) > 0;
+        private static readonly Func<object, object, object> _lessThanMethod = (a, b) => Compare(a, b) < 0;
+        private static readonly Func<object, object, object> _greaterThanOrEqualMethod = (a, b) => Compare(a, b) >= 0;
+        private static readonly Func<object, object, object> _lessThanOrEqualMethod = (a, b) => Compare(a, b) <= 0;
 
-        private readonly BinaryOperation _operation;
-        [NotNull, ItemNotNull]
         private readonly string[] _operationMethodNames;
-        [NotNull]
         private readonly Func<object, object, object> _operationMethod;
 
         /// <summary>
@@ -52,7 +47,7 @@
         /// <exception cref="System.ArgumentOutOfRangeException">operation</exception>
         public BinaryOperationProcessor(BinaryOperation operation)
         {
-            _operation = operation;
+            Operation = operation;
             _operationMethodNames = new[] { "op_" + operation };
 
             switch (operation)
@@ -108,7 +103,7 @@
         /// <summary>
         /// Gets the operation the converter is performing.
         /// </summary>
-        public BinaryOperation Operation => _operation;
+        public BinaryOperation Operation { get; }
 
         /// <summary>
         /// Executes the operation.
@@ -118,8 +113,7 @@
         /// <returns>
         /// The result of the operation.
         /// </returns>
-        [CanBeNull] 
-        public object? Execute([CanBeNull] object? value1, [CanBeNull] object? value2)
+        public object? Execute(object? value1, object? value2)
         {
             if ((value1 == null) || (value2 == null))
                 return value1;
@@ -136,22 +130,20 @@
             return _operationMethod(value1, value2);
         }
 
-        [CanBeNull]
-        private object? ApplyOperation([NotNull] Type valueType, [CanBeNull] object? value1, [CanBeNull] object? value2)
+        private object? ApplyOperation(Type valueType, object? value1, object? value2)
         {
             var methods = valueType.GetMethods(BindingFlags.Static | BindingFlags.Public);
 
             return methods
                 .Where(m => _operationMethodNames.Contains(m.Name))
                 .Select(m => new { Method = m, Parameters = m.GetParameters() })
-                .Where(m => m.Parameters?.Length == 2)
+                .Where(m => m.Parameters.Length == 2)
                 .Where(m => m.Parameters[0].ParameterType == valueType)
                 .Select(m => ApplyOperation(m.Method, m.Parameters[1].ParameterType, value1, value2))
                 .FirstOrDefault(v => v != null);
         }
 
-        [CanBeNull]
-        private object? ApplyOperationOnCastedObject([NotNull] Type targetType, [CanBeNull] object? value1, [CanBeNull] object? value2)
+        private object? ApplyOperationOnCastedObject(Type targetType, object? value1, object? value2)
         {
             var result = targetType
                 .GetMethods(BindingFlags.Static | BindingFlags.Public)
@@ -165,8 +157,7 @@
             return result;
         }
 
-        [CanBeNull]
-        private static object? ApplyOperation([NotNull] MethodInfo method, [NotNull] Type targetType, [CanBeNull] object? value1, [CanBeNull] object? value2)
+        private static object? ApplyOperation(MethodInfo method, Type targetType, object? value1, object? value2)
         {
             try
             {
@@ -196,13 +187,12 @@
             return null;
         }
 
-        private static double ToDouble([CanBeNull] object? value)
+        private static double ToDouble(object? value)
         {
             return Convert.ToDouble(value, CultureInfo.InvariantCulture);
         }
 
-        [CanBeNull]
-        private static object? TryChangeType([CanBeNull] object? value, [NotNull] Type targetType)
+        private static object? TryChangeType(object? value, Type targetType)
         {
             try
             {
@@ -216,12 +206,12 @@
             return null;
         }
 
-        private static int Compare([NotNull] object a, [CanBeNull] object? b)
+        private static int Compare(object a, object? b)
         {
             return Comparer.DefaultInvariant.Compare(a, Convert.ChangeType(b, a.GetType(), CultureInfo.InvariantCulture));
         }
 
-        private new static bool Equals([NotNull] object a, [CanBeNull] object? b)
+        private new static bool Equals(object a, object? b)
         {
             object? c;
 

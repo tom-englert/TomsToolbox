@@ -6,8 +6,6 @@
     using System.Linq;
     using System.Windows.Data;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// The logical operation performed by the <see cref="LogicalMultiValueConverter" />
     /// </summary>
@@ -32,21 +30,20 @@
     [ValueConversion(typeof(object[]), typeof(bool))]
     public class LogicalMultiValueConverter : MultiValueConverter
     {
-        [NotNull] private static readonly Func<IEnumerable<bool>, bool> _andOperationMethod = items => items.All(item => item);
-        [NotNull] private static readonly Func<IEnumerable<bool>, bool> _orOperationMethod = items => items.Any(item => item);
+        private static readonly Func<IEnumerable<bool>, bool> _andOperationMethod = items => items.All(item => item);
+        private static readonly Func<IEnumerable<bool>, bool> _orOperationMethod = items => items.Any(item => item);
 
         private LogicalOperation _operation;
-        [NotNull]
         private Func<IEnumerable<bool>, bool> _operationMethod = _andOperationMethod;
 
         /// <summary>
         /// The default logical AND converter. 
         /// </summary>
-        [NotNull] public static readonly IMultiValueConverter And = new LogicalMultiValueConverter { Operation = LogicalOperation.And };
+        public static readonly IMultiValueConverter And = new LogicalMultiValueConverter { Operation = LogicalOperation.And };
         /// <summary>
         /// The default logical OR converter. 
         /// </summary>
-        [NotNull] public static readonly IMultiValueConverter Or = new LogicalMultiValueConverter { Operation = LogicalOperation.Or };
+        public static readonly IMultiValueConverter Or = new LogicalMultiValueConverter { Operation = LogicalOperation.Or };
 
         /// <summary>
         /// Gets or sets the operation to be performed on all items.
@@ -85,8 +82,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        [NotNull]
-        protected override object? Convert(object?[] values, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object Convert(object?[] values, Type? targetType, object? parameter, CultureInfo? culture)
         {
             return _operationMethod(values.Select(v => System.Convert.ToBoolean(v, CultureInfo.InvariantCulture)));
         }

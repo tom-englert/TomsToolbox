@@ -6,8 +6,6 @@ namespace TomsToolbox.Wpf.Composition
 {
     using System.ComponentModel;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// Base class for a view model with a typed composition context.
     /// </summary>
@@ -37,7 +35,6 @@ namespace TomsToolbox.Wpf.Composition
         /// <summary>
         /// Gets the composition context.
         /// </summary>
-        [CanBeNull]
         public T? CompositionContext
         {
             get;
@@ -50,7 +47,7 @@ namespace TomsToolbox.Wpf.Composition
         /// </summary>
         /// <param name="oldValue">The old value.</param>
         /// <param name="newValue">The new value.</param>
-        protected virtual void OnCompositionContextChanged([CanBeNull] T? oldValue, [CanBeNull] T? newValue)
+        protected virtual void OnCompositionContextChanged(T? oldValue, T? newValue)
         {
             OnPropertyChanged(() => CompositionContext);
         }

@@ -4,8 +4,6 @@
     using System.Windows;
     using System.Windows.Controls;
 
-    using JetBrains.Annotations;
-
     using TomsToolbox.Wpf.Composition.XamlExtensions;
 
     /// <summary>
@@ -20,7 +18,6 @@
         /// <remarks>
         /// The first exported item matching RegionId and Role will be set as the content of the content control.
         /// </remarks>
-        [CanBeNull]
         public object? Role
         {
             get => GetValue(RoleProperty);
@@ -29,8 +26,8 @@
         /// <summary>
         /// Identifies the <see cref="Role"/> dependency property.
         /// </summary>
-        [NotNull] public static readonly DependencyProperty RoleProperty =
-            DependencyProperty.Register("Role", typeof(object), typeof(ContentControlCompositionBehavior), new FrameworkPropertyMetadata((sender, e) => ((ContentControlCompositionBehavior)sender)?.Role_Changed()));
+        public static readonly DependencyProperty RoleProperty =
+            DependencyProperty.Register("Role", typeof(object), typeof(ContentControlCompositionBehavior), new FrameworkPropertyMetadata((sender, _) => ((ContentControlCompositionBehavior)sender)?.Role_Changed()));
 
         private void Role_Changed()
         {
@@ -74,7 +71,7 @@
             UpdateContent(contentControl, exportedItem);
         }
 
-        private void UpdateContent([NotNull] ContentControl contentControl, [CanBeNull] object? targetItem)
+        private void UpdateContent(ContentControl contentControl, object? targetItem)
         {
             var currentItem = contentControl.Content;
 
@@ -87,7 +84,7 @@
             ApplyContext(targetItem as IComposablePartWithContext, CompositionContext);
         }
 
-        private static void ApplyContext([CanBeNull] IComposablePartWithContext? item, [CanBeNull] object? context)
+        private static void ApplyContext(IComposablePartWithContext? item, object? context)
         {
             if (item == null)
                 return;

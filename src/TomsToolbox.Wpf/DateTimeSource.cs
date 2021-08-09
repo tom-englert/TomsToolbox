@@ -5,8 +5,6 @@
     using System.Windows.Data;
     using System.Windows.Threading;
 
-    using JetBrains.Annotations;
-
     using WeakEventHandler;
 
     /// <summary>
@@ -36,16 +34,15 @@
     /// </remarks>
     public class DateTimeSource : INotifyPropertyChanged
     {
-        private static readonly PropertyChangedEventArgs _nowArgs = new PropertyChangedEventArgs(nameof(Now));
-        private static readonly PropertyChangedEventArgs _todayArgs = new PropertyChangedEventArgs(nameof(Today));
-        private static readonly PropertyChangedEventArgs _utcNowArgs = new PropertyChangedEventArgs(nameof(UtcNow));
-        private readonly DispatcherTimer _updateTimer = new DispatcherTimer();
+        private static readonly PropertyChangedEventArgs _nowArgs = new(nameof(Now));
+        private static readonly PropertyChangedEventArgs _todayArgs = new(nameof(Today));
+        private static readonly PropertyChangedEventArgs _utcNowArgs = new(nameof(UtcNow));
+        private readonly DispatcherTimer _updateTimer = new();
 
         /// <summary>
         /// The default singleton object. Use this as a source for binding that supports manual updating.
         /// </summary>
-        [NotNull]
-        public static readonly DateTimeSource Default = new DateTimeSource();
+        public static readonly DateTimeSource Default = new();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DateTimeSource"/> class.
@@ -112,7 +109,7 @@
         }
 
         [MakeWeak]
-        private void UpdateTimer_Tick([CanBeNull] object? sender, [CanBeNull] EventArgs? eventArgs)
+        private void UpdateTimer_Tick(object? sender, EventArgs? eventArgs)
         {
             var eventHandler = PropertyChanged;
             if (eventHandler == null)

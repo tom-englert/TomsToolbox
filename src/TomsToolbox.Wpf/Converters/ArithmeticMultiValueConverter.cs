@@ -6,8 +6,6 @@
     using System.Linq;
     using System.Windows.Data;
 
-    using JetBrains.Annotations;
-
     /// <summary>
     /// The arithmetic operation performed by the <see cref="ArithmeticMultiValueConverter" />
     /// </summary>
@@ -45,39 +43,38 @@
     public class ArithmeticMultiValueConverter : MultiValueConverter
     {
         // removed DefaultIfEmpty() so we are not left wondering what went wrong if one of the items cannot be resolved
-        [NotNull] private static readonly Func<IEnumerable<double>, double> _minOperationMethod = items => items.Min();
-        [NotNull] private static readonly Func<IEnumerable<double>, double> _maxOperationMethod = items => items.Max();
-        [NotNull] private static readonly Func<IEnumerable<double>, double> _sumOperationMethod = items => items.Sum();
-        [NotNull] private static readonly Func<IEnumerable<double>, double> _averageOperationMethod = items => items.Average();
-        [NotNull] private static readonly Func<IEnumerable<double>, double> _productOperationMethod = items =>
+        private static readonly Func<IEnumerable<double>, double> _minOperationMethod = items => items.Min();
+        private static readonly Func<IEnumerable<double>, double> _maxOperationMethod = items => items.Max();
+        private static readonly Func<IEnumerable<double>, double> _sumOperationMethod = items => items.Sum();
+        private static readonly Func<IEnumerable<double>, double> _averageOperationMethod = items => items.Average();
+        private static readonly Func<IEnumerable<double>, double> _productOperationMethod = items =>
         {
             return items.Aggregate(1.0, (current, item) => current * item);
         };
 
         private ArithmeticOperation _operation;
-        [NotNull]
         private Func<IEnumerable<double>, double> _operationMethod = _minOperationMethod;
 
         /// <summary>
         /// The default arithmetic MIN converter. 
         /// </summary>
-        [NotNull] public static readonly IMultiValueConverter Min = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Min };
+        public static readonly IMultiValueConverter Min = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Min };
         /// <summary>
         /// The default arithmetic MAX converter. 
         /// </summary>
-        [NotNull] public static readonly IMultiValueConverter Max = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Max };
+        public static readonly IMultiValueConverter Max = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Max };
         /// <summary>
         /// The default arithmetic SUM converter. 
         /// </summary>
-        [NotNull] public static readonly IMultiValueConverter Sum = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Sum };
+        public static readonly IMultiValueConverter Sum = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Sum };
         /// <summary>
         /// The default arithmetic AVERAGE converter. 
         /// </summary>
-        [NotNull] public static readonly IMultiValueConverter Average = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Average };
+        public static readonly IMultiValueConverter Average = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Average };
         /// <summary>
         /// The default arithmetic PRODUCT converter. 
         /// </summary>
-        [NotNull] public static readonly IMultiValueConverter Product = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Product };
+        public static readonly IMultiValueConverter Product = new ArithmeticMultiValueConverter { Operation = ArithmeticOperation.Product };
 
         /// <summary>
         /// Gets or sets the operation to be performed on all items.
@@ -128,8 +125,7 @@
         /// <returns>
         /// A converted value.
         /// </returns>
-        [NotNull]
-        protected override object? Convert(object?[] values, [CanBeNull] Type? targetType, [CanBeNull] object? parameter, [CanBeNull] CultureInfo? culture)
+        protected override object Convert(object?[] values, Type? targetType, object? parameter, CultureInfo? culture)
         {
             return _operationMethod(values.Select(v => System.Convert.ToDouble(v, CultureInfo.InvariantCulture)));
         }

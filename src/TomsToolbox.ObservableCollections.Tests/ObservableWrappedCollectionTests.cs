@@ -6,8 +6,6 @@ namespace TomsToolbox.ObservableCollections.Tests
     using System.Collections.ObjectModel;
     using System.Linq;
 
-    using JetBrains.Annotations;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -34,7 +32,7 @@ namespace TomsToolbox.ObservableCollections.Tests
 
         private class StringWrapper
         {
-            public StringWrapper([CanBeNull] string wrapped)
+            public StringWrapper(string wrapped)
             {
                 Wrapped = wrapped;
             }
@@ -51,14 +49,13 @@ namespace TomsToolbox.ObservableCollections.Tests
             }
         }
 
-        [NotNull] [ItemNotNull]
         private readonly string[] _sourceStrings = Enumerable.Range(0, 10).Select(i => i.ToString()).ToArray();
 
         [TestMethod]
         [ExpectedException(typeof(Exception), AllowDerivedTypes = true)]
         public void ObservableWrappedCollection_ConstructorFailTest()
         {
-            var collection = new ObservableWrappedCollection<int, int>(null!, null!);
+            var collection = new ObservableWrappedCollection<int, int>(null, null);
         }
 
         [TestMethod]
