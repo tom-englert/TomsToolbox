@@ -135,16 +135,11 @@
             }
         }
 
-        private static bool All(this IEnumerable items, Func<object, bool> condition)
-        {
-            return items.Cast<object>().All(condition);
-        }
-
         private static void SynchronizeWithSource(this Selector selector, IList sourceSelection)
         {
             var selectedItems = selector.GetSelectedItems();
 
-            if ((selectedItems.Count == sourceSelection.Count) && sourceSelection.All(selectedItems.Contains))
+            if ((selectedItems.Count == sourceSelection.Count) && sourceSelection.Cast<object>().All(selectedItems.Contains))
                 return;
 
             selector.CommitEdit();
