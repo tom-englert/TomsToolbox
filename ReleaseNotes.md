@@ -1,3 +1,6 @@
+##### 2.7.1
+- Fix possible stack overflow due to https://developercommunity.visualstudio.com/t/Changed-evaluation-of-extension-methods/1513545
+
 ##### 2.7.0
 - Use C#9, migrate Nullable annotations, drop JetBrains.Annotations for nullability
 
