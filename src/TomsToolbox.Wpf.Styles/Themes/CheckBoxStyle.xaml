@@ -27,20 +27,24 @@
                 <Rectangle x:Name="IndeterminateCheckMark" Width="7" Height="7"
                            Visibility="Hidden"
                            Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+                <Rectangle x:Name="FocusVisual1" StrokeThickness="1" Visibility="Hidden"
+                           Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                           StrokeDashArray="1 2" Margin="-3" SnapsToDevicePixels="True" />
               </Grid>
             </Border>
+            <Decorator Width="4" x:Name="ContentSpacer" />
             <Grid Margin="{TemplateBinding Padding}"
                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
               <ContentPresenter RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-              <Rectangle x:Name="FocusVisual" StrokeThickness="1" Visibility="Hidden"
+              <Rectangle x:Name="FocusVisual2" StrokeThickness="1" Visibility="Hidden"
                          Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
                          StrokeDashArray="1 2" Margin="-2,-1" SnapsToDevicePixels="True" />
             </Grid>
           </DockPanel>
           <ControlTemplate.Triggers>
-            <Trigger Property="ContentControl.HasContent" Value="true">
-              <Setter Property="Control.Padding" Value="4,1,0,0" />
+            <Trigger Property="ContentControl.HasContent" Value="False">
+              <Setter TargetName="ContentSpacer" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <MultiTrigger>
               <MultiTrigger.Conditions>
@@ -52,9 +56,20 @@
             <MultiDataTrigger>
               <MultiDataTrigger.Conditions>
                 <Condition Binding="{Binding IsKeyboardFocused, RelativeSource={RelativeSource Self}}" Value="True" />
-                <Condition Binding="{Binding IsFocusVisualVisible, Source={x:Static toms:KeyboardNavigation.Current}}" Value="True" />
+                <Condition Binding="{Binding IsFocusVisualVisible, Source={x:Static toms:KeyboardNavigation.Current}}"
+                           Value="True" />
+                <Condition Binding="{Binding HasContent, RelativeSource={RelativeSource Self}}" Value="false" />
               </MultiDataTrigger.Conditions>
-              <Setter Property="Visibility" TargetName="FocusVisual" Value="Visible" />
+              <Setter Property="Visibility" TargetName="FocusVisual1" Value="Visible" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+              <MultiDataTrigger.Conditions>
+                <Condition Binding="{Binding IsKeyboardFocused, RelativeSource={RelativeSource Self}}" Value="True" />
+                <Condition Binding="{Binding IsFocusVisualVisible, Source={x:Static toms:KeyboardNavigation.Current}}"
+                           Value="True" />
+                <Condition Binding="{Binding HasContent, RelativeSource={RelativeSource Self}}" Value="true" />
+              </MultiDataTrigger.Conditions>
+              <Setter Property="Visibility" TargetName="FocusVisual2" Value="Visible" />
             </MultiDataTrigger>
             <Trigger Property="IsPressed" Value="True">
               <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
@@ -75,12 +90,14 @@
     </Setter>
   </Style>
 
-  <Style TargetType="CheckBox" x:Key="{x:Static styles:ResourceKeys.DataGridCheckBoxEditingElementStyle}" BasedOn="{StaticResource {x:Static styles:ResourceKeys.CheckBoxStyle}}">
+  <Style TargetType="CheckBox" x:Key="{x:Static styles:ResourceKeys.DataGridCheckBoxEditingElementStyle}"
+         BasedOn="{StaticResource {x:Static styles:ResourceKeys.CheckBoxStyle}}">
     <Setter Property="HorizontalAlignment" Value="Center" />
     <Setter Property="VerticalAlignment" Value="Center" />
   </Style>
 
-  <Style TargetType="CheckBox" x:Key="{x:Static styles:ResourceKeys.DataGridCheckBoxElementStyle}" BasedOn="{StaticResource {x:Static styles:ResourceKeys.CheckBoxStyle}}">
+  <Style TargetType="CheckBox" x:Key="{x:Static styles:ResourceKeys.DataGridCheckBoxElementStyle}"
+         BasedOn="{StaticResource {x:Static styles:ResourceKeys.CheckBoxStyle}}">
     <Setter Property="HorizontalAlignment" Value="Center" />
     <Setter Property="VerticalAlignment" Value="Center" />
     <Setter Property="IsHitTestVisible" Value="False" />

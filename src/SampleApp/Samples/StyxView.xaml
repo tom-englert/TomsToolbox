@@ -171,7 +171,13 @@
     </DataTemplate>
 
     <DataTemplate x:Key="CheckBox">
-      <CheckBox Content="S_tyleExplorer" IsThreeState="True" />
+      <StackPanel Orientation="Horizontal">
+        <CheckBox Content="S_tyleExplorer" IsThreeState="True" />
+        <Decorator Width="10" />
+        <TextBlock Text="w/o content: " />
+        <CheckBox />
+        <TextBlock Text=" :" />
+      </StackPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="Button">
