@@ -28,7 +28,7 @@
         /// Initializes a new instance of the <see cref="DelegateEqualityComparer{T}"/> class.
         /// </summary>
         /// <param name="selector">The selector that selects the object to compare, if e.g. two objects can be compared by a single property.</param>
-        public DelegateEqualityComparer(Func<T?, object> selector)
+        public DelegateEqualityComparer(Func<T?, object?> selector)
         {
             _comparer = (a, b) => Equals(selector(a), selector(b));
             _hashCodeGenerator = obj => selector(obj)?.GetHashCode() ?? 0;
@@ -51,7 +51,7 @@
         /// <param name="selector">The selector that selects the object to compare, if e.g. two objects can be compared by a single property.</param>
         /// <param name="comparer">The compare function.</param>
         /// <param name="hashCodeGenerator">The hash code generator.</param>
-        public DelegateEqualityComparer(Func<T?, object> selector, Func<object?, object?, bool> comparer, Func<object?, int> hashCodeGenerator)
+        public DelegateEqualityComparer(Func<T?, object?> selector, Func<object?, object?, bool> comparer, Func<object?, int> hashCodeGenerator)
         {
             _comparer = (a, b) => comparer(selector(a), selector(b));
             _hashCodeGenerator = obj => hashCodeGenerator(selector(obj));
