@@ -1,3 +1,7 @@
+##### 2.7.2
+- Fix nullable signature of DelegateEqualityComparer
+- Fix focus visual style for the CheckBox w/o content
+
 ##### 2.7.1
 - Fix possible stack overflow due to https://developercommunity.visualstudio.com/t/Changed-evaluation-of-extension-methods/1513545
 
