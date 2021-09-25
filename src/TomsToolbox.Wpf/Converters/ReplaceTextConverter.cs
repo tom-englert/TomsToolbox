@@ -58,9 +58,8 @@
             replacement ??= string.Empty;
 
             var regex = new Regex(pattern, options);
-            regex.Replace(value, replacement, replaceAll ? -1 : 1);
-
-            return value;
+            
+            return regex.Replace(value, replacement, replaceAll ? -1 : 1);
         }
 
         /// <summary>
