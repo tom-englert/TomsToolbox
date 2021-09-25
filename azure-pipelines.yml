@@ -67,6 +67,7 @@ steps:
     SourceFolder: src\Publish
     Contents: '*.*'
     TargetFolder: '$(build.artifactstagingdirectory)/Sample'
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: Packages'
@@ -79,3 +80,4 @@ steps:
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)/Sample'
     ArtifactName: Sample
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
