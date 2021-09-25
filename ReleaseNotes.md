@@ -1,3 +1,6 @@
+##### 2.7.3
+- Fix #11: ReplaceTextConverter may return wrong result
+
 ##### 2.7.2
 - Fix nullable signature of DelegateEqualityComparer
 - Fix focus visual style for the CheckBox w/o content
