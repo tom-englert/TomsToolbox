@@ -93,7 +93,7 @@
         {
             var listBox = AssociatedObject;
 
-            if (AreAllFilesSelected.GetValueOrDefault())
+            if (AreAllFilesSelected.GetValueOrDefault() && listBox.IsLoaded)
             {
                 listBox?.SelectAll();
             }
