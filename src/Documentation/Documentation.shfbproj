@@ -16,7 +16,7 @@
     <RootNamespace>Documentation</RootNamespace>
     <Name>Documentation</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>.NET Framework 4.7.2</FrameworkVersion>
+    <FrameworkVersion>.NET Framework 4.8</FrameworkVersion>
     <OutputPath>..\..\docs\</OutputPath>
     <HtmlHelpName>API Documentation</HtmlHelpName>
     <Language>en-US</Language>
@@ -65,35 +65,42 @@
     <ProjectSummary>A set of simple but useful classes and functions to ease our daily .Net development tasks.</ProjectSummary>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
-<NamespaceSummaryItem name="TomsToolbox.Essentials" isDocumented="True">Core classes and functions that only depend on System functions. Available for any project targeting .Net4.5 or .NetStandard 2.0</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Desktop" isDocumented="True">Classes and functions that use functionality avaiable only in desktop environments targeting .Net 4.5 or .Net Core 3.0 Desktop. This assembly has e.g. a reference to WindwosBase.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.ObservableCollections" isDocumented="True">Classes and functions around observable collections.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf" isDocumented="True">Classes and functions for WPF applications.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Controls" isDocumented="True">Some common reusable WPF controls</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Converters" isDocumented="True">WPF converters</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Interactivity" isDocumented="True">System.Windows.Interactivity extensions</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Composition" isDocumented="True">WPF visual composition framework implementation</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.XamlExtensions" isDocumented="True">Special namespace that contains classes that are usually used only in XAML and not by code. 
-In code the class names would be ambiguous, while in XAML a namespace prefixes is needed anyhow, so the useage is clear.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Styles" isDocumented="True">Custom window and control styles</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Styles.Effects" isDocumented="True">Effects that can be used in styles</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Composition" isDocumented="True">The basic infrastructure to adapt various DI frameworks</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Composition.Mef2" isDocumented="True">Adapters for MEF2 (System.Composition)</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Composition.Ninject" isDocumented="True">Adapters for the Ninject DI framework</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.AttributedModel" isDocumented="True">WPF visual composition framework adapters for use with System.Composition.AttributedModel</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.Mef" isDocumented="True">WPF visual composition framework adapters for use with Mef1 (System.ComponentModel.Composition)</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.Styles" isDocumented="True">WPF styles for composite controls</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.XamlExtensions" isDocumented="True">Special namespace that contains classes that are usually used only in XAML and not by code. 
-In code the class names would be ambiguous, while in XAML a namespace prefixes is needed anyhow, so the useage is clear.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Core" isDocumented="True">This module has been deprecated; all code has been moved to TomsToobox.Essentials to avoid naming confusions with .Net Core.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="TomsToolbox.Composition.Mef" isDocumented="True">Adapters for MEF1 (System.ComponentModel.Composition)</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="TomsToolbox.Essentials" isDocumented="True">Core classes and functions that only depend on System functions. Available for any project targeting .Net4.5 or .NetStandard 2.0</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Desktop" isDocumented="True">Classes and functions that use functionality avaiable only in desktop environments targeting .Net 4.5 or .Net Core 3.0 Desktop. This assembly has e.g. a reference to WindwosBase.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.ObservableCollections" isDocumented="True">Classes and functions around observable collections.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf" isDocumented="True">Classes and functions for WPF applications.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Controls" isDocumented="True">Some common reusable WPF controls</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Converters" isDocumented="True">WPF converters</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Interactivity" isDocumented="True">System.Windows.Interactivity extensions</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Composition" isDocumented="True">WPF visual composition framework implementation</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.XamlExtensions" isDocumented="True">
+        Special namespace that contains classes that are usually used only in XAML and not by code.
+        In code the class names would be ambiguous, while in XAML a namespace prefixes is needed anyhow, so the useage is clear.
+      </NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Styles" isDocumented="True">Custom window and control styles</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Styles.Effects" isDocumented="True">Effects that can be used in styles</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Composition" isDocumented="True">The basic infrastructure to adapt various DI frameworks</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Composition.Mef2" isDocumented="True">Adapters for MEF2 (System.Composition)</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Composition.Ninject" isDocumented="True">Adapters for the Ninject DI framework</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.AttributedModel" isDocumented="True">WPF visual composition framework adapters for use with System.Composition.AttributedModel</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.Mef" isDocumented="True">WPF visual composition framework adapters for use with Mef1 (System.ComponentModel.Composition)</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.Styles" isDocumented="True">WPF styles for composite controls</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Wpf.Composition.XamlExtensions" isDocumented="True">
+        Special namespace that contains classes that are usually used only in XAML and not by code.
+        In code the class names would be ambiguous, while in XAML a namespace prefixes is needed anyhow, so the useage is clear.
+      </NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Core" isDocumented="True">This module has been deprecated; all code has been moved to TomsToobox.Essentials to avoid naming confusions with .Net Core.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="TomsToolbox.Composition.Mef" isDocumented="True">Adapters for MEF1 (System.ComponentModel.Composition)</NamespaceSummaryItem>
+    </NamespaceSummaries>
     <FeedbackEMailLinkText>https://github.com/tom-englert/TomsToolbox/issues</FeedbackEMailLinkText>
     <CopyrightText>&amp;#169%3b tom-englert.de 2012-2020</CopyrightText>
     <CopyrightHref>https://github.com/tom-englert/TomsToolbox/blob/master/LICENSE</CopyrightHref>
     <ComponentConfigurations>
       <ComponentConfig id="API Token Resolution" enabled="True">
-        <component id="API Token Resolution">{@TokenFiles}
-<replace elements="/*//token" item="string(.)" /></component>
+        <component id="API Token Resolution">
+          {@TokenFiles}
+          <replace elements="/*//token" item="string(.)" />
+        </component>
       </ComponentConfig>
       <ComponentConfig id="Code Block Component" enabled="True">
         <component id="Code Block Component">
@@ -101,51 +108,40 @@ In code the class names would be ambiguous, while in XAML a namespace prefixes i
           <outputPaths>{@HelpFormatOutputPaths}</outputPaths>
           <allowMissingSource value="false" />
           <removeRegionMarkers value="false" />
-          <colorizer syntaxFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xml" styleFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.xsl" stylesheet="{@SHFBFolder}PresentationStyles\Colorizer\highlight.css" scriptFile="{@SHFBFolder}PresentationStyles\Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}" language="cs" tabSize="0" numberLines="false" outlining="false" keepSeeTags="false" defaultTitle="true" />
+          <colorizer syntaxFile="{@CoreComponentsFolder}Colorizer\highlight.xml"
+                     styleFile="{@CoreComponentsFolder}Colorizer\highlight.xsl"
+                     stylesheet="{@CoreComponentsFolder}Colorizer\highlight.css"
+                     scriptFile="{@CoreComponentsFolder}Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}"
+                     language="cs" tabSize="0" numberLines="false" outlining="false" keepSeeTags="false"
+                     defaultTitle="true" />
         </component>
       </ComponentConfig>
-      <ComponentConfig id="Syntax Component" enabled="False">
+      <ComponentConfig id="Syntax Component" enabled="True">
         <component id="Syntax Component">
           <syntax input="/document/reference" output="/document/syntax" renderReferenceLinks="false" />
           <generators>
-    {@SyntaxFilters}
-</generators>
-          <containerElement name="codeSnippetGroup" addNoExampleTabs="true" includeOnSingleSnippets="false" groupingEnabled="{@CodeSnippetGrouping}" />
+            {@SyntaxFilters}
+          </generators>
+          <containerElement name="codeSnippetGroup" addNoExampleTabs="true" includeOnSingleSnippets="false"
+                            groupingEnabled="{@CodeSnippetGrouping}" />
+          <configurations>
+            <generator id="C#" />
+            <generator id="Visual Basic">
+              <includeLineContinuation value="false" />
+            </generator>
+            <generator id="Visual Basic Usage">
+              <includeLineContinuation value="false" />
+            </generator>
+            <generator id="Managed C++" />
+            <generator id="F#" />
+            <generator id="J#" />
+            <generator id="JScript" />
+            <generator id="JavaScript" />
+            <generator id="XAML Usage" />
+            <generator id="ASP.NET" />
+            <generator id="X#" />
+          </configurations>
         </component>
-      </ComponentConfig>
-      <ComponentConfig id="Comments Index Data (ESENT Cache)" enabled="True">
-        <component id="Comments Index Data (ESENT Cache)">
-          <index name="comments" value="/doc/members/member" key="@name" cache="30" localCacheSize="2500" frameworkCachePath="{@LocalDataFolder}Cache\CommentsIndexCache" projectCachePath="">
-	{@FrameworkCommentList}
-	{@CommentFileList}
-</index>
-          <copy name="comments" source="*" target="/document/comments" />
-        </component>
-      </ComponentConfig>
-      <ComponentConfig id="Reflection Index Data (ESENT Cache)" enabled="True">
-        <component id="Reflection Index Data (ESENT Cache)">
-          <index name="reflection" value="/reflection/apis/api" key="@id" cache="15" localCacheSize="2500" frameworkCachePath="{@LocalDataFolder}Cache\ReflectionIndexCache" projectCachePath="">
-            <data base="{@FrameworkReflectionDataFolder}" recurse="true" files="*.xml" duplicateWarning="false" groupId="ReflectionIndexCache">
-		{@ReferenceLinkNamespaceFiles}
-	</data>
-            <data files="reflection.xml" groupId="Project_Ref_{@UniqueID}" />
-          </index>
-          <copy name="reflection" source="*" target="/document/reference" />
-        </component>
-      </ComponentConfig>
-      <ComponentConfig id="Resolve Reference Links (ESENT Cache)" enabled="True">
-        <component id="Resolve Reference Links (ESENT Cache)">{@HRefFormat}
-<locale value="{@Locale}" /><linkTarget value="{@SdkLinkTarget}" /><helpOutput format="HtmlHelp1"><memberIdUrlCache path="{@LocalDataFolder}Cache\MemberIdUrl.cache" cachePath="{@LocalDataFolder}Cache\ESentMemberIdUrlCache" localCacheSize="2500" /><targets base="{@FrameworkReflectionDataFolder}" recurse="true" files="*.xml" type="{@HtmlSdkLinkType}" id="FrameworkTargets" cachePath="{@LocalDataFolder}Cache\ESentFrameworkTargetCache" localCacheSize="2500">
-		{@ReferenceLinkNamespaceFiles}
-	</targets><targets files="reflection.xml" type="Local" id="ProjectTargets" cachePath="" localCacheSize="2500" noReload="true" /></helpOutput><helpOutput format="MSHelpViewer"><memberIdUrlCache path="{@LocalDataFolder}Cache\MemberIdUrl.cache" cachePath="{@LocalDataFolder}Cache\ESentMemberIdUrlCache" localCacheSize="2500" /><targets base="{@FrameworkReflectionDataFolder}" recurse="true" files="*.xml" type="{@MSHelpViewerSdkLinkType}" id="FrameworkTargets" cachePath="{@LocalDataFolder}Cache\ESentFrameworkTargetCache" localCacheSize="2500">
-		{@ReferenceLinkNamespaceFiles}
-	</targets><targets files="reflection.xml" type="Id" id="ProjectTargets" cachePath="" localCacheSize="2500" noReload="true" /></helpOutput><helpOutput format="Website"><memberIdUrlCache path="{@LocalDataFolder}Cache\MemberIdUrl.cache" cachePath="{@LocalDataFolder}Cache\ESentMemberIdUrlCache" localCacheSize="2500" /><targets base="{@FrameworkReflectionDataFolder}" recurse="true" files="*.xml" type="{@WebsiteSdkLinkType}" id="FrameworkTargets" cachePath="{@LocalDataFolder}Cache\ESentFrameworkTargetCache" localCacheSize="2500">
-		{@ReferenceLinkNamespaceFiles}
-	</targets><targets files="reflection.xml" type="Local" id="ProjectTargets" cachePath="" localCacheSize="2500" noReload="true" /></helpOutput><helpOutput format="OpenXml"><memberIdUrlCache path="{@LocalDataFolder}Cache\MemberIdUrl.cache" cachePath="{@LocalDataFolder}Cache\ESentMemberIdUrlCache" localCacheSize="2500" /><targets base="{@FrameworkReflectionDataFolder}" recurse="true" files="*.xml" type="{@WebsiteSdkLinkType}" id="FrameworkTargets" cachePath="{@LocalDataFolder}Cache\ESentFrameworkTargetCache" localCacheSize="2500">
-		{@ReferenceLinkNamespaceFiles}
-	</targets><targets files="reflection.xml" type="Local" id="ProjectTargets" cachePath="" localCacheSize="2500" noReload="true" /></helpOutput><helpOutput format="Markdown"><memberIdUrlCache path="{@LocalDataFolder}Cache\MemberIdUrl.cache" cachePath="{@LocalDataFolder}Cache\ESentMemberIdUrlCache" localCacheSize="2500" /><targets base="{@FrameworkReflectionDataFolder}" recurse="true" files="*.xml" type="{@WebsiteSdkLinkType}" id="FrameworkTargets" cachePath="{@LocalDataFolder}Cache\ESentFrameworkTargetCache" localCacheSize="2500">
-		{@ReferenceLinkNamespaceFiles}
-	</targets><targets files="reflection.xml" type="Local" id="ProjectTargets" cachePath="" localCacheSize="2500" noReload="true" /></helpOutput></component>
       </ComponentConfig>
     </ComponentConfigurations>
     <VisibleItems>Attributes, InheritedMembers, Protected, ProtectedInternalAsProtected, EditorBrowsableNever, NonBrowsable</VisibleItems>
@@ -238,8 +234,8 @@ In code the class names would be ambiguous, while in XAML a namespace prefixes i
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="EWSoftware.SHFB" Version="2019.9.15" />
-    <PackageReference Include="EWSoftware.SHFB.NETFramework" Version="4.8.0" />
+    <PackageReference Include="EWSoftware.SHFB" Version="2021.11.7" />
+    <PackageReference Include="EWSoftware.SHFB.NETFramework" Version="4.8.0.1" />
   </ItemGroup>
   <!-- Import the SHFB build targets -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists('$(SHFBROOT)\SandcastleHelpFileBuilder.targets')" />

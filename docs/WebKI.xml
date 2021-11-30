@@ -37,6 +37,7 @@
   <HelpKINode Title="And field" Url="html/DFDA321B.htm" />
   <HelpKINode Title="AnimationLayoutTransform property" Url="html/70B8C173.htm" />
   <HelpKINode Title="AnimationLayoutTransformProperty field" Url="html/4BCA9B2F.htm" />
+  <HelpKINode Title="ApplicationIconId property" Url="html/FC2F63A6.htm" />
   <HelpKINode Title="ApplicationTitle property" Url="html/BD9D7A32.htm" />
   <HelpKINode Title="AreAllFilesSelected property" Url="html/BCE28C35.htm" />
   <HelpKINode Title="AreAllFilesSelectedProperty field" Url="html/C0B3125B.htm" />
@@ -725,6 +726,7 @@
   <HelpKINode Title="CustomAttributeProviderExtensions.TryGetText method" Url="html/1CCB89A0.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior class">
     <HelpKINode Title="CustomNonClientAreaBehavior Class" Url="html/3503D86B.htm" />
+    <HelpKINode Title="attached properties" Url="html/AD808FD4.htm" />
     <HelpKINode Title="constructor" Url="html/B2FD96AF.htm" />
     <HelpKINode Title="fields" Url="html/64C5A8.htm" />
     <HelpKINode Title="methods" Url="html/C76D25A3.htm" />
@@ -735,11 +737,15 @@
   <HelpKINode Title="CustomNonClientAreaBehavior.CornerSize property" Url="html/ED43FD29.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior.CornerSizeProperty field" Url="html/7C71D902.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior.CustomNonClientAreaBehavior constructor" Url="html/B2FD96AF.htm" />
+  <HelpKINode Title="CustomNonClientAreaBehavior.DisableGlassFrame attached property" Url="html/181F01B3.htm" />
+  <HelpKINode Title="CustomNonClientAreaBehavior.DisableGlassFrameProperty field" Url="html/514474A3.htm" />
+  <HelpKINode Title="CustomNonClientAreaBehavior.GetDisableGlassFrame method" Url="html/836B7047.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior.HasGlassFrame property" Url="html/598EBA0C.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior.HasGlassFrameProperty field" Url="html/6BE649B6.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior.NcHitTestEvent field" Url="html/D214699F.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior.OnAttached method" Url="html/B1FF16E6.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior.OnDetaching method" Url="html/2B7DCAFE.htm" />
+  <HelpKINode Title="CustomNonClientAreaBehavior.SetDisableGlassFrame method" Url="html/69886E4B.htm" />
   <HelpKINode Title="DataContext attached property" Url="html/7E067DBF.htm" />
   <HelpKINode Title="DataContext property" Url="html/D402644.htm" />
   <HelpKINode Title="DataContextProperty field">
@@ -747,8 +753,8 @@
     <HelpKINode Title="Import.DataContextProperty Field" Url="html/778C9F2D.htm" />
   </HelpKINode>
   <HelpKINode Title="DataGridCellStyle field">
-    <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/3B3054D2.htm" />
     <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/B7A4BBF6.htm" />
+    <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/3B3054D2.htm" />
   </HelpKINode>
   <HelpKINode Title="DataGridCheckBoxEditingElementStyle field" Url="html/57EBF12C.htm" />
   <HelpKINode Title="DataGridCheckBoxElementStyle field" Url="html/2173DFDD.htm" />
@@ -794,24 +800,24 @@
   <HelpKINode Title="DataTemplateAttribute class">
     <HelpKINode Title="DataTemplateAttribute Class" Url="html/81714F2A.htm" />
     <HelpKINode Title="DataTemplateAttribute Class" Url="html/70B84780.htm" />
-    <HelpKINode Title="constructor" Url="html/2BFCF92B.htm" />
     <HelpKINode Title="constructor" Url="html/B8CBCDB2.htm" />
+    <HelpKINode Title="constructor" Url="html/2BFCF92B.htm" />
     <HelpKINode Title="methods" Url="html/135542AA.htm" />
     <HelpKINode Title="methods" Url="html/A2C845AC.htm" />
-    <HelpKINode Title="properties" Url="html/F59E154B.htm" />
     <HelpKINode Title="properties" Url="html/FF53E2AE.htm" />
+    <HelpKINode Title="properties" Url="html/F59E154B.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateAttribute.DataTemplateAttribute constructor">
-    <HelpKINode Title="DataTemplateAttribute Constructor " Url="html/B8CBCDB2.htm" />
     <HelpKINode Title="DataTemplateAttribute Constructor " Url="html/2BFCF92B.htm" />
+    <HelpKINode Title="DataTemplateAttribute Constructor " Url="html/B8CBCDB2.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateAttribute.DataType property">
     <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/D1E2AC38.htm" />
     <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/5032ADFA.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateAttribute.Role property">
-    <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/AB47D607.htm" />
     <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/FB533439.htm" />
+    <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/AB47D607.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateManager class">
     <HelpKINode Title="DataTemplateManager Class" Url="html/F883E1B6.htm" />
@@ -827,8 +833,8 @@
   <HelpKINode Title="DataTemplateManager.RoleProperty field" Url="html/A120E2C1.htm" />
   <HelpKINode Title="DataTemplateManager.SetRole method" Url="html/1C9515FF.htm" />
   <HelpKINode Title="DataType property">
-    <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/D1E2AC38.htm" />
     <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/5032ADFA.htm" />
+    <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/D1E2AC38.htm" />
     <HelpKINode Title="IDataTemplateMetadata.DataType Property " Url="html/E944940D.htm" />
   </HelpKINode>
   <HelpKINode Title="DateTimeOperations class">
@@ -1016,6 +1022,8 @@
   <HelpKINode Title="DialogResult attached property" Url="html/903A665E.htm" />
   <HelpKINode Title="DialogResultProperty field" Url="html/D4B30A5E.htm" />
   <HelpKINode Title="DisabledBrush field" Url="html/F029E3EE.htm" />
+  <HelpKINode Title="DisableGlassFrame attached property" Url="html/181F01B3.htm" />
+  <HelpKINode Title="DisableGlassFrameProperty field" Url="html/514474A3.htm" />
   <HelpKINode Title="Dispatcher property">
     <HelpKINode Title="ObservableObject.Dispatcher Property " Url="html/2F2FD926.htm" />
     <HelpKINode Title="ThreadWithDispatcher.Dispatcher Property " Url="html/112C40BA.htm" />
@@ -1086,6 +1094,8 @@
     <HelpKINode Title="TryCastWorker(TValue, TResult).Else Method " Url="html/5FA1D8B7.htm" />
   </HelpKINode>
   <HelpKINode Title="ElseThrow method" Url="html/D5B454CB.htm" />
+  <HelpKINode Title="EnsureDefaultStyles attached property" Url="html/736E044A.htm" />
+  <HelpKINode Title="EnsureDefaultStylesProperty field" Url="html/CFBDFBF2.htm" />
   <HelpKINode Title="Enumerate class">
     <HelpKINode Title="Enumerate Class" Url="html/1E386643.htm" />
     <HelpKINode Title="methods" Url="html/E4BEFB16.htm" />
@@ -1157,6 +1167,8 @@
     <HelpKINode Title="methods" Url="html/6C7BFA3.htm" />
   </HelpKINode>
   <HelpKINode Title="ExceptionExtensions.ExceptionChain method" Url="html/3C34F5FE.htm" />
+  <HelpKINode Title="ExceptNullItems(Of TSource) method" Url="html/AFDD9B1F.htm" />
+  <HelpKINode Title="ExceptNullItems&lt;TSource&gt; method" Url="html/AFDD9B1F.htm" />
   <HelpKINode Title="Execute method">
     <HelpKINode Title="BinaryOperationProcessor.Execute Method " Url="html/8CC61E8.htm" />
     <HelpKINode Title="DelegateCommand(T).Execute Method " Url="html/FEDDEEBE.htm" />
@@ -1339,6 +1351,8 @@
   <HelpKINode Title="GetDescendants method" Url="html/5FEC6DB6.htm" />
   <HelpKINode Title="GetDesignUnitSize method" Url="html/8E8280DC.htm" />
   <HelpKINode Title="GetDialogResult method" Url="html/757675CC.htm" />
+  <HelpKINode Title="GetDisableGlassFrame method" Url="html/836B7047.htm" />
+  <HelpKINode Title="GetEnsureDefaultStyles method" Url="html/5E6A54FB.htm" />
   <HelpKINode Title="GetEnumerator method">
     <HelpKINode Title="AutoWeakIndexer(TKey, TValue).GetEnumerator Method " Url="html/C790A642.htm" />
     <HelpKINode Title="ObservableListAdapter(T).GetEnumerator Method " Url="html/CF56810E.htm" />
@@ -1379,6 +1393,7 @@
   <HelpKINode Title="GetInputBindings method" Url="html/5DC5F902.htm" />
   <HelpKINode Title="GetInvalidDependencies method" Url="html/F8D3E90F.htm" />
   <HelpKINode Title="GetIsAutomaticToolTipEnabled method" Url="html/AA579CCF.htm" />
+  <HelpKINode Title="GetIsCaptionVisible method" Url="html/E5211483.htm" />
   <HelpKINode Title="GetIsTextTrimmed method" Url="html/20C5C912.htm" />
   <HelpKINode Title="GetItemContainers(Of T) method" Url="html/73F87CFD.htm" />
   <HelpKINode Title="GetItemContainers&lt;T&gt; method" Url="html/73F87CFD.htm" />
@@ -1434,6 +1449,8 @@
   <HelpKINode Title="GreaterThanOrEqual field" Url="html/2F43E50C.htm" />
   <HelpKINode Title="GreaterThanOrEqual operator" Url="html/88374713.htm" />
   <HelpKINode Title="GridSplitterStyle field" Url="html/514614AF.htm" />
+  <HelpKINode Title="GridViewColumnHeaderStyle field" Url="html/2F27C5C9.htm" />
+  <HelpKINode Title="GridViewScrollViewerStyle field" Url="html/6A5C75C4.htm" />
   <HelpKINode Title="GroupBoxStyle field" Url="html/2534F4FC.htm" />
   <HelpKINode Title="GroupDescriptionCollection class">
     <HelpKINode Title="GroupDescriptionCollection Class" Url="html/D2BED0C.htm" />
@@ -1786,6 +1803,8 @@
   <HelpKINode Title="IsAnyTargetAttachedProperty field" Url="html/42FA96F3.htm" />
   <HelpKINode Title="IsAutomaticToolTipEnabled attached property" Url="html/653128D5.htm" />
   <HelpKINode Title="IsAutomaticToolTipEnabledProperty field" Url="html/93FCBD01.htm" />
+  <HelpKINode Title="IsCaptionVisible attached property" Url="html/51EC9B33.htm" />
+  <HelpKINode Title="IsCaptionVisibleProperty field" Url="html/DD4871EA.htm" />
   <HelpKINode Title="IsCheckable property">
     <HelpKINode Title="CommandSource.IsCheckable Property " Url="html/C9E55EF0.htm" />
     <HelpKINode Title="CommandSourceFactory(T).IsCheckable Property " Url="html/D03F77C7.htm" />
@@ -1824,6 +1843,8 @@
     <HelpKINode Title="FrameworkElementBehavior(T).IsLoaded Property " Url="html/5B4EFA3C.htm" />
     <HelpKINode Title="IImage.IsLoaded Property " Url="html/C53670F3.htm" />
   </HelpKINode>
+  <HelpKINode Title="IsNullOrEmpty method" Url="html/B2F7EB54.htm" />
+  <HelpKINode Title="IsNullOrWhiteSpace method" Url="html/FFCEADF6.htm" />
   <HelpKINode Title="IsProcessElevated method" Url="html/A819D97B.htm" />
   <HelpKINode Title="IsReadOnly property">
     <HelpKINode Title="ListCollectionViewListAdapter(T).IsReadOnly Property " Url="html/D7679B76.htm" />
@@ -1980,6 +2001,8 @@
   <HelpKINode Title="ListCollectionViewListAdapter&lt;T&gt;.Item property" Url="html/1927FAE0.htm" />
   <HelpKINode Title="ListCollectionViewListAdapter&lt;T&gt;.ListCollectionViewListAdapter constructor" Url="html/937620AA.htm" />
   <HelpKINode Title="ListCollectionViewListAdapter&lt;T&gt;.PropertyChanged event" Url="html/2A2ADE15.htm" />
+  <HelpKINode Title="ListViewItemStyle field" Url="html/845A2A98.htm" />
+  <HelpKINode Title="ListViewStyle field" Url="html/68F83992.htm" />
   <HelpKINode Title="Loaded event" Url="html/4EBE03E5.htm" />
   <HelpKINode Title="LoadingIndicator class">
     <HelpKINode Title="LoadingIndicator Class" Url="html/CCE46DE2.htm" />
@@ -2214,6 +2237,14 @@
     <HelpKINode Title="RealTimeService.Now Property " Url="html/D5CD5913.htm" />
   </HelpKINode>
   <HelpKINode Title="Nowhere enumeration member" Url="html/B4733550.htm" />
+  <HelpKINode Title="NullableExtensions class">
+    <HelpKINode Title="NullableExtensions Class" Url="html/A02ED42.htm" />
+    <HelpKINode Title="methods" Url="html/E8B6EA40.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NullableExtensions.ExceptNullItems(Of TSource) method" Url="html/AFDD9B1F.htm" />
+  <HelpKINode Title="NullableExtensions.ExceptNullItems&lt;TSource&gt; method" Url="html/AFDD9B1F.htm" />
+  <HelpKINode Title="NullableExtensions.IsNullOrEmpty method" Url="html/B2F7EB54.htm" />
+  <HelpKINode Title="NullableExtensions.IsNullOrWhiteSpace method" Url="html/FFCEADF6.htm" />
   <HelpKINode Title="NullCommand class">
     <HelpKINode Title="NullCommand Class" Url="html/D21ED57D.htm" />
     <HelpKINode Title="constructor" Url="html/23103072.htm" />
@@ -2838,6 +2869,8 @@
     <HelpKINode Title="VisualCompositionBehavior(T).RegionIdProperty Field" Url="html/88BDEF3F.htm" />
   </HelpKINode>
   <HelpKINode Title="Register method" Url="html/3FB18B4A.htm" />
+  <HelpKINode Title="RegisterDefault method" Url="html/4665BCFB.htm" />
+  <HelpKINode Title="RegisterDefaultStyles method" Url="html/1BE536DC.htm" />
   <HelpKINode Title="RegisterDefaultWindowStyle method" Url="html/AAB625A3.htm" />
   <HelpKINode Title="RelayedEventAttribute class">
     <HelpKINode Title="RelayedEventAttribute Class" Url="html/9BD07029.htm" />
@@ -2901,8 +2934,8 @@
   <HelpKINode Title="ResourceKeys.ContextMenuStyle field" Url="html/E7F28551.htm" />
   <HelpKINode Title="ResourceKeys.ControlWithValidationErrorToolTipStyle field" Url="html/EBE046D9.htm" />
   <HelpKINode Title="ResourceKeys.DataGridCellStyle field">
-    <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/3B3054D2.htm" />
     <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/B7A4BBF6.htm" />
+    <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/3B3054D2.htm" />
   </HelpKINode>
   <HelpKINode Title="ResourceKeys.DataGridCheckBoxEditingElementStyle field" Url="html/57EBF12C.htm" />
   <HelpKINode Title="ResourceKeys.DataGridCheckBoxElementStyle field" Url="html/2173DFDD.htm" />
@@ -2916,11 +2949,15 @@
   <HelpKINode Title="ResourceKeys.DisabledBrush field" Url="html/F029E3EE.htm" />
   <HelpKINode Title="ResourceKeys.ExpanderStyle field" Url="html/DEAEF11B.htm" />
   <HelpKINode Title="ResourceKeys.GridSplitterStyle field" Url="html/514614AF.htm" />
+  <HelpKINode Title="ResourceKeys.GridViewColumnHeaderStyle field" Url="html/2F27C5C9.htm" />
+  <HelpKINode Title="ResourceKeys.GridViewScrollViewerStyle field" Url="html/6A5C75C4.htm" />
   <HelpKINode Title="ResourceKeys.GroupBoxStyle field" Url="html/2534F4FC.htm" />
   <HelpKINode Title="ResourceKeys.IconControlStyle field" Url="html/99879DDE.htm" />
   <HelpKINode Title="ResourceKeys.ListBoxItemCheckBoxStyle field" Url="html/37EF5FF.htm" />
   <HelpKINode Title="ResourceKeys.ListBoxItemStyle field" Url="html/3590B365.htm" />
   <HelpKINode Title="ResourceKeys.ListBoxStyle field" Url="html/63B54526.htm" />
+  <HelpKINode Title="ResourceKeys.ListViewItemStyle field" Url="html/845A2A98.htm" />
+  <HelpKINode Title="ResourceKeys.ListViewStyle field" Url="html/68F83992.htm" />
   <HelpKINode Title="ResourceKeys.MenuItemSeparatorStyle field" Url="html/EAE635BE.htm" />
   <HelpKINode Title="ResourceKeys.MenuItemStyle field" Url="html/9E9A878.htm" />
   <HelpKINode Title="ResourceKeys.MenuStyle field" Url="html/29F36BC9.htm" />
@@ -2933,6 +2970,13 @@
   <HelpKINode Title="ResourceKeys.TabItemStyle field" Url="html/C9597169.htm" />
   <HelpKINode Title="ResourceKeys.TextBoxStyle field" Url="html/8D5D44B7.htm" />
   <HelpKINode Title="ResourceKeys.ToggleButtonStyle field" Url="html/A01161DE.htm" />
+  <HelpKINode Title="ResourceKeys.ToolBarButtonStyle field" Url="html/8924B9AC.htm" />
+  <HelpKINode Title="ResourceKeys.ToolBarCheckBoxStyle field" Url="html/CB4FE167.htm" />
+  <HelpKINode Title="ResourceKeys.ToolBarComboBoxStyle field" Url="html/AD38CE79.htm" />
+  <HelpKINode Title="ResourceKeys.ToolBarSeparatorStyle field" Url="html/A7DA84A0.htm" />
+  <HelpKINode Title="ResourceKeys.ToolBarStyle field" Url="html/C18CD808.htm" />
+  <HelpKINode Title="ResourceKeys.ToolBarTextBoxStyle field" Url="html/C6FD4176.htm" />
+  <HelpKINode Title="ResourceKeys.ToolBarToggleButtonStyle field" Url="html/B1675EB.htm" />
   <HelpKINode Title="ResourceKeys.ToolTipStyle field" Url="html/FF14EDC0.htm" />
   <HelpKINode Title="ResourceKeys.WindowStyle field">
     <HelpKINode Title="ResourceKeys.WindowStyle Field" Url="html/D12C2CA2.htm" />
@@ -2957,8 +3001,8 @@
     <HelpKINode Title="IVisualCompositionMetadata.Role Property " Url="html/33FFCA4E.htm" />
     <HelpKINode Title="RoleBasedDataTemplateKey.Role Property " Url="html/3831FFD.htm" />
     <HelpKINode Title="RoleBasedDataTemplateSelector.Role Property " Url="html/75C8DD6D.htm" />
-    <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/3215271D.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/D4495849.htm" />
+    <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/3215271D.htm" />
   </HelpKINode>
   <HelpKINode Title="RoleBasedDataTemplateKey class">
     <HelpKINode Title="RoleBasedDataTemplateKey Class" Url="html/F71D1B96.htm" />
@@ -3103,8 +3147,8 @@
   <HelpKINode Title="SemanticVersion.Version property" Url="html/DF79F5F8.htm" />
   <HelpKINode Title="Sequence property">
     <HelpKINode Title="IVisualCompositionMetadata.Sequence Property " Url="html/2029359D.htm" />
-    <HelpKINode Title="VisualCompositionExportAttribute.Sequence Property " Url="html/5AF7B7AA.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute.Sequence Property " Url="html/B22091C7.htm" />
+    <HelpKINode Title="VisualCompositionExportAttribute.Sequence Property " Url="html/5AF7B7AA.htm" />
   </HelpKINode>
   <HelpKINode Title="SequenceAttribute class">
     <HelpKINode Title="SequenceAttribute Class" Url="html/3BB5BB3D.htm" />
@@ -3124,6 +3168,8 @@
   <HelpKINode Title="SetDefaultColumnStyles method" Url="html/C6A12E81.htm" />
   <HelpKINode Title="SetDefaultItemCommand method" Url="html/292E9CB3.htm" />
   <HelpKINode Title="SetDialogResult method" Url="html/76486730.htm" />
+  <HelpKINode Title="SetDisableGlassFrame method" Url="html/69886E4B.htm" />
+  <HelpKINode Title="SetEnsureDefaultStyles method" Url="html/2D581A81.htm" />
   <HelpKINode Title="SetExportProvider method" Url="html/83A76ABD.htm" />
   <HelpKINode Title="SetFlags method" Url="html/1D68F3EA.htm" />
   <HelpKINode Title="SetGroupDescriptions method" Url="html/2FDB8198.htm" />
@@ -3131,6 +3177,7 @@
   <HelpKINode Title="SetGroupStyles method" Url="html/CB9FA126.htm" />
   <HelpKINode Title="SetInputBindings method" Url="html/5E0226A6.htm" />
   <HelpKINode Title="SetIsAutomaticToolTipEnabled method" Url="html/E6A590A1.htm" />
+  <HelpKINode Title="SetIsCaptionVisible method" Url="html/DEB2E96C.htm" />
   <HelpKINode Title="SetProperty method" Url="html/7E10BA96.htm" />
   <HelpKINode Title="SetRefreshOnSourceChanges method" Url="html/FDB6120B.htm" />
   <HelpKINode Title="SetRegionId method" Url="html/622DE1AD.htm" />
@@ -3283,8 +3330,8 @@
   <HelpKINode Title="TargetProperty property" Url="html/5FA82A08.htm" />
   <HelpKINode Title="TargetRegions property">
     <HelpKINode Title="IVisualCompositionMetadata.TargetRegions Property " Url="html/9D7D2BC5.htm" />
-    <HelpKINode Title="VisualCompositionExportAttribute.TargetRegions Property " Url="html/D7D76DDE.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute.TargetRegions Property " Url="html/828590FC.htm" />
+    <HelpKINode Title="VisualCompositionExportAttribute.TargetRegions Property " Url="html/D7D76DDE.htm" />
   </HelpKINode>
   <HelpKINode Title="TaskFactory property" Url="html/FB60A7C.htm" />
   <HelpKINode Title="TaskScheduler property" Url="html/B9357733.htm" />
@@ -3517,6 +3564,7 @@
   <HelpKINode Title="TomsToolbox.Essentials.ITimeService interface" Url="html/A752BBCA.htm" />
   <HelpKINode Title="TomsToolbox.Essentials.IWeakEventListener interface" Url="html/42E5C225.htm" />
   <HelpKINode Title="TomsToolbox.Essentials.MathExtensions class" Url="html/DB843840.htm" />
+  <HelpKINode Title="TomsToolbox.Essentials.NullableExtensions class" Url="html/A02ED42.htm" />
   <HelpKINode Title="TomsToolbox.Essentials.ObjectExtensions class" Url="html/1084332.htm" />
   <HelpKINode Title="TomsToolbox.Essentials.PluginModuleAttribute class" Url="html/5BA6778F.htm" />
   <HelpKINode Title="TomsToolbox.Essentials.PropertySupport class" Url="html/7208518E.htm" />
@@ -3730,6 +3778,13 @@
   <HelpKINode Title="TomsToolbox.Wpf.XamlExtensions.KeyboardNavigation class" Url="html/2C34ED07.htm" />
   <HelpKINode Title="TomsToolbox.Wpf.XamlExtensions.Polyline class" Url="html/79EAA3D2.htm" />
   <HelpKINode Title="TomsToolbox.Wpf.XamlExtensions.Validation class" Url="html/F16AD38.htm" />
+  <HelpKINode Title="ToolBarButtonStyle field" Url="html/8924B9AC.htm" />
+  <HelpKINode Title="ToolBarCheckBoxStyle field" Url="html/CB4FE167.htm" />
+  <HelpKINode Title="ToolBarComboBoxStyle field" Url="html/AD38CE79.htm" />
+  <HelpKINode Title="ToolBarSeparatorStyle field" Url="html/A7DA84A0.htm" />
+  <HelpKINode Title="ToolBarStyle field" Url="html/C18CD808.htm" />
+  <HelpKINode Title="ToolBarTextBoxStyle field" Url="html/C6FD4176.htm" />
+  <HelpKINode Title="ToolBarToggleButtonStyle field" Url="html/B1675EB.htm" />
   <HelpKINode Title="ToolTipStyle field" Url="html/FF14EDC0.htm" />
   <HelpKINode Title="Top enumeration member" Url="html/B4733550.htm" />
   <HelpKINode Title="TopLeft attached property" Url="html/27BC780E.htm" />
@@ -4089,10 +4144,10 @@
   <HelpKINode Title="VisualCompositionBehavior&lt;T&gt;.Update method" Url="html/BBD96270.htm" />
   <HelpKINode Title="VisualCompositionBehavior&lt;T&gt;.VisualCompositionBehavior constructor" Url="html/FAF6B568.htm" />
   <HelpKINode Title="VisualCompositionExportAttribute class">
-    <HelpKINode Title="VisualCompositionExportAttribute Class" Url="html/A3ADB2E6.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute Class" Url="html/FB38E407.htm" />
-    <HelpKINode Title="constructor" Url="html/EBFBBE4.htm" />
+    <HelpKINode Title="VisualCompositionExportAttribute Class" Url="html/A3ADB2E6.htm" />
     <HelpKINode Title="constructor" Url="html/2FFCFE4E.htm" />
+    <HelpKINode Title="constructor" Url="html/EBFBBE4.htm" />
     <HelpKINode Title="methods" Url="html/D9F4C1F8.htm" />
     <HelpKINode Title="methods" Url="html/E5318483.htm" />
     <HelpKINode Title="properties" Url="html/94C4E8D1.htm" />
@@ -4103,12 +4158,12 @@
     <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/3215271D.htm" />
   </HelpKINode>
   <HelpKINode Title="VisualCompositionExportAttribute.Sequence property">
-    <HelpKINode Title="VisualCompositionExportAttribute.Sequence Property " Url="html/5AF7B7AA.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute.Sequence Property " Url="html/B22091C7.htm" />
+    <HelpKINode Title="VisualCompositionExportAttribute.Sequence Property " Url="html/5AF7B7AA.htm" />
   </HelpKINode>
   <HelpKINode Title="VisualCompositionExportAttribute.TargetRegions property">
-    <HelpKINode Title="VisualCompositionExportAttribute.TargetRegions Property " Url="html/828590FC.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute.TargetRegions Property " Url="html/D7D76DDE.htm" />
+    <HelpKINode Title="VisualCompositionExportAttribute.TargetRegions Property " Url="html/828590FC.htm" />
   </HelpKINode>
   <HelpKINode Title="VisualCompositionExportAttribute.VisualCompositionExportAttribute constructor">
     <HelpKINode Title="VisualCompositionExportAttribute Constructor " Url="html/2FFCFE4E.htm" />
@@ -4242,13 +4297,24 @@
     <HelpKINode Title="methods" Url="html/C990AE3F.htm" />
     <HelpKINode Title="properties" Url="html/88C583DF.htm" />
   </HelpKINode>
+  <HelpKINode Title="WpfStyles.ApplicationIconId property" Url="html/FC2F63A6.htm" />
   <HelpKINode Title="WpfStyles.ApplicationTitle property" Url="html/BD9D7A32.htm" />
   <HelpKINode Title="WpfStyles.Defaults method" Url="html/49E5ABC4.htm" />
+  <HelpKINode Title="WpfStyles.EnsureDefaultStyles attached property" Url="html/736E044A.htm" />
+  <HelpKINode Title="WpfStyles.EnsureDefaultStylesProperty field" Url="html/CFBDFBF2.htm" />
   <HelpKINode Title="WpfStyles.GetDefaultStyles method" Url="html/3C0C89AB.htm" />
+  <HelpKINode Title="WpfStyles.GetEnsureDefaultStyles method" Url="html/5E6A54FB.htm" />
+  <HelpKINode Title="WpfStyles.GetIsCaptionVisible method" Url="html/E5211483.htm" />
   <HelpKINode Title="WpfStyles.GetWindowTitleDecorator method" Url="html/3368C93E.htm" />
+  <HelpKINode Title="WpfStyles.IsCaptionVisible attached property" Url="html/51EC9B33.htm" />
+  <HelpKINode Title="WpfStyles.IsCaptionVisibleProperty field" Url="html/DD4871EA.htm" />
   <HelpKINode Title="WpfStyles.LargeApplicationIcon property" Url="html/ABDFFDB3.htm" />
   <HelpKINode Title="WpfStyles.MediumApplicationIcon property" Url="html/D3E18A5F.htm" />
+  <HelpKINode Title="WpfStyles.RegisterDefault method" Url="html/4665BCFB.htm" />
+  <HelpKINode Title="WpfStyles.RegisterDefaultStyles method" Url="html/1BE536DC.htm" />
   <HelpKINode Title="WpfStyles.RegisterDefaultWindowStyle method" Url="html/AAB625A3.htm" />
+  <HelpKINode Title="WpfStyles.SetEnsureDefaultStyles method" Url="html/2D581A81.htm" />
+  <HelpKINode Title="WpfStyles.SetIsCaptionVisible method" Url="html/DEB2E96C.htm" />
   <HelpKINode Title="WpfStyles.SetWindowTitleDecorator method" Url="html/4BD095CE.htm" />
   <HelpKINode Title="WpfStyles.SmallApplicationIcon property" Url="html/D13D891D.htm" />
   <HelpKINode Title="WpfStyles.WindowTitleDecorator attached property" Url="html/13A05917.htm" />
