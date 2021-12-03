@@ -54,7 +54,10 @@
             if ((listBox == null) || DesignerProperties.GetIsInDesignMode(listBox))
                 return;
 
-            listBox.SelectAll();
+            if (listBox.IsLoaded)
+            {
+                listBox.SelectAll();
+            }
 
             listBox.SelectionChanged += ListBox_SelectionChanged;
             ((INotifyCollectionChanged)listBox.Items).CollectionChanged += (_, _) => _collectionChangedThrottle.Tick();
@@ -93,9 +96,9 @@
         {
             var listBox = AssociatedObject;
 
-            if (AreAllFilesSelected.GetValueOrDefault() && listBox.IsLoaded)
+            if (AreAllFilesSelected.GetValueOrDefault() && listBox?.IsLoaded == true)
             {
-                listBox?.SelectAll();
+                listBox.SelectAll();
             }
         }
 
@@ -114,7 +117,7 @@
                 return;
             }
 
-            if (newValue.GetValueOrDefault())
+            if (newValue.GetValueOrDefault() && listBox.IsLoaded)
             {
                 listBox.SelectAll();
             }
