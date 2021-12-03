@@ -1,3 +1,6 @@
+##### 2.7.4
+- ListBoxSelectAllBehavior: SelectAll() must not be called when ListBox is not loaded.
+
 ##### 2.7.3
 - Fix #11: ReplaceTextConverter may return wrong result
 
