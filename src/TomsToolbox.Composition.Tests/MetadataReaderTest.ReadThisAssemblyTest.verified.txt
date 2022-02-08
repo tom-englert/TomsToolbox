@@ -1,30 +1,30 @@
-[
-    {
-        "Type": "TomsToolbox.Composition.Tests.SomeTemplateWithRoles1, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
-        "Metadata": [
-            {
-                "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-                "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
-                "DataType": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                "Role": 1,
-                "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
-            }
-        ],
-        "IsShared": false,
-        "SharingBoundary": null
-    },
-    {
-        "Type": "TomsToolbox.Composition.Tests.SomeTemplateWithRoles2, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
-        "Metadata": [
-            {
-                "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-                "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
-                "DataType": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                "Role": "Role2",
-                "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
-            }
-        ],
-        "IsShared": false,
-        "SharingBoundary": null
-    }
+﻿[
+  {
+    "Type": "TomsToolbox.Composition.Tests.SomeTemplateWithRoles1, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+    "Metadata": [
+      {
+        "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=5.0.12.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "DataType": "System.Int32, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+        "Role": 1,
+        "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+      }
+    ],
+    "IsShared": false,
+    "SharingBoundary": null
+  },
+  {
+    "Type": "TomsToolbox.Composition.Tests.SomeTemplateWithRoles2, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+    "Metadata": [
+      {
+        "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=5.0.12.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "DataType": "System.Int32, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+        "Role": "Role2",
+        "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+      }
+    ],
+    "IsShared": false,
+    "SharingBoundary": null
+  }
 ]

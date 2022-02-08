@@ -53,7 +53,7 @@
 
         private static string Serialize(IList<ExportInfo> result)
         {
-            return _versionRegex.Replace(JsonConvert.SerializeObject(result, Formatting.Indented), "Version=2.0.0.0"); // .Replace("\n", "\r\n");
+            return _versionRegex.Replace(JsonConvert.SerializeObject(result, Formatting.Indented), "Version=2.0.0.0");
         }
     }
 }
