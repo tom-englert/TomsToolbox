@@ -2,56 +2,58 @@
 {
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
-
-    using ApprovalTests;
-    using ApprovalTests.Reporters;
+    using System.Threading.Tasks;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Newtonsoft.Json;
 
+    using VerifyMSTest;
+
+    using VerifyTests;
+
     [TestClass]
-    [UseReporter(typeof(DiffReporter))]
-    public class MetadataReaderTest
+    public class MetadataReaderTest : VerifyBase
     {
         private static readonly Regex _versionRegex = new(@"Version=2\.\d+\.\d+\.\d+");
+        private static readonly VerifySettings _settings = new VerifySettings();
 
         [TestMethod]
-        public void ReadSampleAppTest()
+        public async Task ReadSampleAppTest()
         {
             var assembly = typeof(SampleApp.Mef1.App).Assembly;
             var result = MetadataReader.Read(assembly);
 
             var data = Serialize(result);
 
-            Approvals.VerifyJson(data);
+            await Verify(data);
         }
 
         [TestMethod]
-        public void ReadSampleAppMef2Test()
+        public async Task ReadSampleAppMef2Test()
         {
             var assembly = typeof(SampleApp.MainWindow).Assembly;
             var result = MetadataReader.Read(assembly);
 
             var data = Serialize(result);
 
-            Approvals.VerifyJson(data);
+            await Verify(data);
         }
 
         [TestMethod]
-        public void ReadThisAssemblyTest()
+        public async Task ReadThisAssemblyTest()
         {
             var assembly = GetType().Assembly;
             var result = MetadataReader.Read(assembly);
 
             var data = Serialize(result);
 
-            Approvals.VerifyJson(data);
+            await Verify(data);
         }
 
         private static string Serialize(IList<ExportInfo> result)
         {
-            return _versionRegex.Replace(JsonConvert.SerializeObject(result), "Version=2.0.0.0");
+            return _versionRegex.Replace(JsonConvert.SerializeObject(result, Formatting.Indented), "Version=2.0.0.0"); // .Replace("\n", "\r\n");
         }
     }
 }

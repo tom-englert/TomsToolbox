@@ -58,14 +58,14 @@
             }
             catch (ReflectionTypeLoadException ex)
             {
-                MessageBox.Show(ex.Message + "\n" + string.Join("\n", ex.LoaderExceptions.Select(le => le.Message)));
+                MessageBox.Show(ex.Message + "\n" + string.Join("\n", ex.LoaderExceptions.Select(le => le?.Message)));
             }
 
 
             Resources.MergedDictionaries.Insert(0, WpfStyles.GetDefaultStyles().RegisterDefaultWindowStyle());
             Resources.MergedDictionaries.Add(DataTemplateManager.CreateDynamicDataTemplates(_exportProvider));
 
-            MainWindow = _compositionContainer.GetExportedValue<MainWindow>();
+            MainWindow = _compositionContainer.GetExportedValue<MainWindow>()!;
             MainWindow.Show();
         }
 
