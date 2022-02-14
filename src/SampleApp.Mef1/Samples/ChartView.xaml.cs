@@ -1,14 +1,14 @@
 ﻿namespace SampleApp.Samples
 {
-    using TomsToolbox.Wpf.Composition.AttributedModel;
+    using TomsToolbox.Wpf.Composition.Mef;
 
     /// <summary>
     /// Interaction logic for CharView.xaml
     /// </summary>
     [DataTemplate(typeof(ChartViewModel))]
-    public partial class CharView
+    public partial class ChartView
     {
-        public CharView()
+        public ChartView()
         {
             InitializeComponent();
         }

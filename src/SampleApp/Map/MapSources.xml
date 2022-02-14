@@ -2,13 +2,6 @@
 <root>
   <MapSourceList>
 
-    <MapSource ID="4UMaps">
-      <Copyright>http://www.4umaps.eu</Copyright>
-      <MinZoom>1</MinZoom>
-      <MaxZoom>15</MaxZoom>
-      <TileUrl>http://www.4umaps.eu/%z/%x/%y.png</TileUrl>
-    </MapSource>
-
     <MapSource ID="Thunderforest lanscape">
       <Copyright>http://www.thunderforest.com</Copyright>
       <MinZoom>1</MinZoom>
@@ -34,6 +27,13 @@
       <TileUrl>http://a.tile.thunderforest.com/neighbourhood/%z/%x/%y.png</TileUrl>
       <TileUrl>http://b.tile.thunderforest.com/neighbourhood/%z/%x/%y.png</TileUrl>
       <TileUrl>http://c.tile.thunderforest.com/neighbourhood/%z/%x/%y.png</TileUrl>
+    </MapSource>
+
+    <MapSource ID="4UMaps">
+      <Copyright>http://www.4umaps.eu</Copyright>
+      <MinZoom>1</MinZoom>
+      <MaxZoom>15</MaxZoom>
+      <TileUrl>http://www.4umaps.eu/%z/%x/%y.png</TileUrl>
     </MapSource>
 
     <MapSource ID="OSM">
