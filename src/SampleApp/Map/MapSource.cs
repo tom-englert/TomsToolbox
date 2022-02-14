@@ -169,7 +169,7 @@
 
                     return _source;
                 }
-                catch (WebException)
+                catch
                 {
                     return null;
                 }
