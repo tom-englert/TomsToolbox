@@ -1,6 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Controls
 {
     using System;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -15,7 +16,7 @@
     public class ViewportCanvas : Canvas, ILayer
     {
         /// <summary>
-        /// Gets or sets the physical layer. The children's coordinates are assumed to be relative to the physical layer.
+        /// Gets or sets the physical layer. The children`s coordinates are assumed to be relative to the physical layer.
         /// </summary>
         public FrameworkElement? World
         {
@@ -43,11 +44,8 @@
             if (worldLayer == null)
                 return new Size();
 
-            foreach (UIElement? child in InternalChildren)
+            foreach (var child in InternalChildren.OfType<FrameworkElement>())
             {
-                if (child == null)
-                    continue;
-
                 var left = GetLeft(child);
                 var top = GetTop(child);
                 var right = GetRight(child);
@@ -58,8 +56,13 @@
 
                 if (double.IsNaN(constraint.Width))
                     constraint.Width = double.PositiveInfinity;
+                else
+                    constraint.Width = Math.Max(constraint.Width, child.MinWidth);
+
                 if (double.IsNaN(constraint.Height))
                     constraint.Height = double.PositiveInfinity;
+                else
+                    constraint.Height = Math.Max(constraint.Height, child.MinHeight);
 
                 child.Measure(constraint);
             }
@@ -94,11 +97,11 @@
 
                 var targetRect = GetTargetRect(left, right, top, bottom);
 
-                targetRect =  targetRect.Translate(worldLayer, viewportLayer);
+                targetRect = targetRect.Translate(worldLayer, viewportLayer);
 
-                if (Math.Abs(targetRect.Width) < double.Epsilon)
+                if (Math.Abs(targetRect.Width) < child.DesiredSize.Width)
                     targetRect.Width = child.DesiredSize.Width;
-                if (Math.Abs(targetRect.Height) < double.Epsilon)
+                if (Math.Abs(targetRect.Height) < child.DesiredSize.Height)
                     targetRect.Height = child.DesiredSize.Height;
 
                 if (double.IsNaN(left)) // only right specified
@@ -117,7 +120,7 @@
 
         private static Rect GetTargetRect(double left, double right, double top, double bottom)
         {
-            var targetRect = new Rect(0,0,0,0);
+            var targetRect = new Rect(0, 0, 0, 0);
 
             if (!double.IsNaN(left))
             {
