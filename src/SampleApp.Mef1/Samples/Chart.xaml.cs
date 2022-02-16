@@ -6,6 +6,9 @@
     using System.Windows;
     using System.Windows.Media;
 
+    using TomsToolbox.Essentials;
+    using TomsToolbox.Wpf;
+    using TomsToolbox.Wpf.Controls;
     using TomsToolbox.Wpf.XamlExtensions;
 
     public class DataLine
@@ -88,6 +91,26 @@
             new FrameworkPropertyMetadata(default(Rect), MetadataOptions));
         public static readonly DependencyProperty BoundingRectProperty = BoundingRectPropertyKey.DependencyProperty;
 
+        public Point Offset
+        {
+            get => (Point)GetValue(OffsetProperty);
+            private set => SetValue(OffsetPropertyKey, value);
+        }
+        private static readonly DependencyPropertyKey OffsetPropertyKey = DependencyProperty.RegisterReadOnly(
+            "Offset", typeof(Point), typeof(Chart),
+            new FrameworkPropertyMetadata(default(Point), MetadataOptions));
+        public static readonly DependencyProperty OffsetProperty = OffsetPropertyKey.DependencyProperty;
+
+        public Rect DataBounds
+        {
+            get => (Rect)GetValue(DataBoundsProperty);
+            private set => SetValue(DataBoundsPropertyKey, value);
+        }
+        private static readonly DependencyPropertyKey DataBoundsPropertyKey = DependencyProperty.RegisterReadOnly(
+            "DataBounds", typeof(Rect), typeof(Chart),
+            new FrameworkPropertyMetadata(default(Rect), MetadataOptions));
+        public static readonly DependencyProperty DataBoundsProperty = DataBoundsPropertyKey.DependencyProperty;
+
         public Size Q1
         {
             get => (Size)GetValue(Q1Property);
@@ -128,11 +151,16 @@
             var dataLines = Lines ?? Array.Empty<DataLine>();
             var dataPoints = Points ?? Array.Empty<DataPoint>();
 
-            var boundingRect = dataLines.Aggregate(Enumerable.Empty<Point>(), (points, items) => points.Concat(items.Points))
+            var dataBounds = dataLines.Aggregate(Enumerable.Empty<Point>(), (points, items) => points.Concat(items.Points))
                 .Concat(dataPoints.Select(item => item.Position))
                 .Concat(new[] { Origin })
                 .ToList()
                 .GetBoundingRect();
+
+            DataBounds = dataBounds;
+
+            var boundingRect = new[] { Origin, dataBounds.TopLeft, dataBounds.BottomRight }
+               .GetBoundingRect();
 
             BoundingRect = new Rect(
                 Math.Floor(boundingRect.Left),
@@ -140,13 +168,17 @@
                 Math.Ceiling(boundingRect.Width),
                 Math.Ceiling(boundingRect.Height));
 
+            Offset = (Point)(-(Vector)BoundingRect.TopLeft);
+
             Q1 = new Size(
                 Math.Max(0, BoundingRect.Right - Origin.X),
                 Math.Max(0, BoundingRect.Bottom - Origin.Y));
 
             Q3 = new Size(
-                Math.Max(0, BoundingRect.Width - Q1.Width),
-                Math.Max(0, BoundingRect.Height - Q1.Height));
+                - Math.Min(0, BoundingRect.Left - Origin.X),
+                - Math.Min(0, BoundingRect.Top - Origin.Y));
+
+            this.VisualDescendants().OfType<ViewportCanvas>().ForEach(item => item.InvalidateMeasure());
         }
     }
 }

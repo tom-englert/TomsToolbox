@@ -1,22 +1,22 @@
 ﻿<UserControl x:Class="SampleApp.Mef1.Samples.Chart"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SampleApp.Samples"
              xmlns:toms="urn:TomsToolbox"
              xmlns:samples="clr-namespace:SampleApp.Mef1.Samples"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
   <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
     <!-- Define the four quadrants -->
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="{Binding Q3.Width, Converter={toms:StarSizeConverter}}" MinWidth="48"/>
+      <ColumnDefinition Width="{Binding Q3.Width, Converter={toms:StarSizeConverter}}" />
       <ColumnDefinition Width="{Binding Q1.Width, Converter={toms:StarSizeConverter}}" />
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
-      <RowDefinition Height="{Binding Q1.Height, Converter={toms:StarSizeConverter}}"/>
-      <RowDefinition Height="{Binding Q3.Height, Converter={toms:StarSizeConverter}}" MinHeight="24"/>
+      <RowDefinition Height="{Binding Q1.Height, Converter={toms:StarSizeConverter}}" />
+      <RowDefinition Height="{Binding Q3.Height, Converter={toms:StarSizeConverter}}" />
     </Grid.RowDefinitions>
     <!-- Draw the two axes -->
     <Border Grid.Row="0" Grid.Column="1" BorderBrush="Gray" BorderThickness="2,0,0,2" Margin="-1,0,0,-1" />
@@ -34,7 +34,7 @@
       <TextBlock Text="{Binding BoundingRect.Top, FallbackValue=Bottom}" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
     </Grid>
     <!-- Define the chart -->
-    <Grid Grid.Row="0" Grid.Column="1">
+    <Grid Grid.RowSpan="2" Grid.ColumnSpan="2">
       <!-- Invert Y axis to get a math coordinate system -->
       <FrameworkElement.LayoutTransform>
         <ScaleTransform ScaleX="1" ScaleY="-1" />
@@ -42,12 +42,12 @@
       <!-- Define our world coordinates that scales into Q1 -->
       <Viewbox Stretch="Fill">
         <Grid x:Name="World"
-              Width="{Binding Q1.Width}"
-              Height="{Binding Q1.Height}">
+              Width="{Binding BoundingRect.Width}"
+              Height="{Binding BoundingRect.Height}">
           <Grid.RenderTransform>
             <TranslateTransform
-              X="{Binding Origin.X, Converter={x:Static toms:UnaryOperationConverter.Negation}}"
-              Y="{Binding Origin.Y, Converter={x:Static toms:UnaryOperationConverter.Negation}}" />
+              X="{Binding Offset.X}"
+              Y="{Binding Offset.Y}" />
           </Grid.RenderTransform>
         </Grid>
       </Viewbox>
@@ -60,7 +60,7 @@
                 <Polyline toms:Polyline.DataPoints="{Binding Points}"
                           Stroke="{Binding Color}"
                           StrokeThickness="2"
-                          StrokeDashArray="2 2" MinHeight="2" MinWidth="2"/>
+                          StrokeDashArray="2 2" MinHeight="2" MinWidth="2" />
               </toms:ViewportCanvas>
             </DataTemplate>
           </ItemsControl.ItemTemplate>
@@ -88,12 +88,12 @@
                 <FrameworkElement.RenderTransform>
                   <TransformGroup>
                     <!-- Center is the center of the ellipse-->
-                    <TranslateTransform X="-2" Y="-2" />
+                    <TranslateTransform X="-5" Y="-5" />
                     <!-- Reverse the Y axis inversion -->
                     <ScaleTransform ScaleY="-1" />
                   </TransformGroup>
                 </FrameworkElement.RenderTransform>
-                <Ellipse Height="4" Width="4" Fill="{Binding Color}" HorizontalAlignment="Left"/>
+                <Ellipse Height="10" Width="10" Fill="{Binding Color}" HorizontalAlignment="Left" />
                 <TextBlock Text="{Binding Label}" />
               </StackPanel>
             </DataTemplate>
