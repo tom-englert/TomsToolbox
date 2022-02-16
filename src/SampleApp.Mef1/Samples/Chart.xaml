@@ -11,30 +11,32 @@
   <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
     <!-- Define the four quadrants -->
     <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" MinWidth="24"/>
       <ColumnDefinition Width="{Binding Q3.Width, Converter={toms:StarSizeConverter}}" />
       <ColumnDefinition Width="{Binding Q1.Width, Converter={toms:StarSizeConverter}}" />
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
       <RowDefinition Height="{Binding Q1.Height, Converter={toms:StarSizeConverter}}" />
       <RowDefinition Height="{Binding Q3.Height, Converter={toms:StarSizeConverter}}" />
+      <RowDefinition Height="Auto" MinHeight="24"/>
     </Grid.RowDefinitions>
     <!-- Draw the two axes -->
-    <Border Grid.Row="0" Grid.Column="1" BorderBrush="Gray" BorderThickness="2,0,0,2" Margin="-1,0,0,-1" />
-    <Border Grid.Row="1" Grid.Column="0" BorderBrush="Gray" BorderThickness="0,2,2,0" Margin="0,-1,-1,0" />
+    <Border Grid.Row="0" Grid.Column="2" BorderBrush="Gray" BorderThickness="2,0,0,2" Margin="-1,0,0,-1" />
+    <Border Grid.Row="1" Grid.Column="1" BorderBrush="Gray" BorderThickness="0,2,2,0" Margin="0,-1,-1,0" />
     <!-- Label the axes -->
-    <Grid Grid.Row="0" Grid.Column="0" Margin="4,2">
-      <TextBlock Text="{Binding BoundingRect.Bottom, FallbackValue=Top}" HorizontalAlignment="Right" />
+    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="4,2">
+      <TextBlock Text="{Binding BoundingRect.Bottom, FallbackValue=Top, StringFormat=YMax: {0}}" HorizontalAlignment="Right" />
       <TextBlock Text="{Binding Origin.Y, FallbackValue=0, StringFormat={}{0:F2}}" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
     </Grid>
-    <Grid Grid.Row="1" Grid.Column="1" Margin="4">
+    <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" Margin="4">
       <TextBlock Text="{Binding Origin.X, FallbackValue=Left, StringFormat={}{0:F2}}" HorizontalAlignment="Left" />
-      <TextBlock Text="{Binding BoundingRect.Right, FallbackValue=Right}" HorizontalAlignment="Right" />
+      <TextBlock Text="{Binding BoundingRect.Right, FallbackValue=Right, StringFormat=XMax: {0}}" HorizontalAlignment="Right" />
     </Grid>
-    <Grid Grid.Row="1" Grid.Column="0" Margin="4,2">
-      <TextBlock Text="{Binding BoundingRect.Top, FallbackValue=Bottom}" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+    <Grid Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Margin="4,2">
+      <TextBlock Text="{Binding BoundingRect.Top, FallbackValue=Bottom, StringFormat=YMin: {0}}" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
     </Grid>
     <!-- Define the chart -->
-    <Grid Grid.RowSpan="2" Grid.ColumnSpan="2">
+    <Grid Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
       <!-- Invert Y axis to get a math coordinate system -->
       <FrameworkElement.LayoutTransform>
         <ScaleTransform ScaleX="1" ScaleY="-1" />
