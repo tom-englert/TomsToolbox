@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFrameworks>net45;netcoreapp3.1;net5.0-windows7.0</TargetFrameworks>
+    <TargetFrameworks>net45;netcoreapp3.1;net5.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -21,7 +21,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
     <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" Condition="'$(TargetFramework)'=='netcoreapp3.1'" />
-    <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" Condition="'$(TargetFramework)'=='net5.0-windows7.0'" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" Condition="'$(TargetFramework)'=='net5.0-windows'" />
   </ItemGroup>
 
   <ItemGroup>
