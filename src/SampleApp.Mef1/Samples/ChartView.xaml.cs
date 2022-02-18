@@ -1,4 +1,4 @@
-﻿namespace SampleApp.Samples
+﻿namespace SampleApp.Mef1.Samples
 {
     using TomsToolbox.Wpf.Composition.Mef;
 

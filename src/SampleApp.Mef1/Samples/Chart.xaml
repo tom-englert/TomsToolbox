@@ -3,22 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:SampleApp.Samples"
+             xmlns:local="clr-namespace:SampleApp.Mef1.Samples"
              xmlns:toms="urn:TomsToolbox"
-             xmlns:samples="clr-namespace:SampleApp.Mef1.Samples"
-             mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
   <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
     <!-- Define the four quadrants -->
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto" MinWidth="24"/>
+      <ColumnDefinition Width="Auto" MinWidth="24" />
       <ColumnDefinition Width="{Binding Q3.Width, Converter={toms:StarSizeConverter}}" />
       <ColumnDefinition Width="{Binding Q1.Width, Converter={toms:StarSizeConverter}}" />
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
       <RowDefinition Height="{Binding Q1.Height, Converter={toms:StarSizeConverter}}" />
       <RowDefinition Height="{Binding Q3.Height, Converter={toms:StarSizeConverter}}" />
-      <RowDefinition Height="Auto" MinHeight="24"/>
+      <RowDefinition Height="Auto" MinHeight="24" />
     </Grid.RowDefinitions>
     <!-- Draw the two axes -->
     <Border Grid.Row="0" Grid.Column="2" BorderBrush="Gray" BorderThickness="2,0,0,2" Margin="-1,0,0,-1" />
@@ -48,8 +46,8 @@
               Height="{Binding BoundingRect.Height}">
           <Grid.RenderTransform>
             <TranslateTransform
-              X="{Binding Offset.X}"
-              Y="{Binding Offset.Y}" />
+              X="{Binding BoundingRect.Left, Converter={x:Static toms:BinaryOperationConverter.Multiply}, ConverterParameter=-1}"
+              Y="{Binding BoundingRect.Top, Converter={x:Static toms:BinaryOperationConverter.Multiply}, ConverterParameter=-1}" />
           </Grid.RenderTransform>
         </Grid>
       </Viewbox>
@@ -59,10 +57,42 @@
           <ItemsControl.ItemTemplate>
             <DataTemplate>
               <toms:ViewportCanvas World="{Binding ElementName=World}">
-                <Polyline toms:Polyline.DataPoints="{Binding Points}"
-                          Stroke="{Binding Color}"
-                          StrokeThickness="2"
-                          StrokeDashArray="2 2" MinHeight="2" MinWidth="2" />
+                <Button MinHeight="2" MinWidth="2" Click="Line_Click">
+                  <Control.Template>
+                    <ControlTemplate TargetType="ContentControl">
+                      <ContentPresenter />
+                    </ControlTemplate>
+                  </Control.Template>
+                  <Grid>
+                    <Polyline Points="{Binding ElementName=PolyLine, Path=Points}"
+                              Width="{Binding ElementName=PolyLine, Path=ActualWidth, Converter={x:Static toms:BinaryOperationConverter.Addition}, ConverterParameter=4}"
+                              Height="{Binding ElementName=PolyLine, Path=ActualHeight, Converter={x:Static toms:BinaryOperationConverter.Addition}, ConverterParameter=4}"
+                              Stroke="Transparent"
+                              Stretch="Fill"
+                              Margin="-2"
+                              StrokeThickness="6">
+                      <FrameworkElement.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                          <BeginStoryboard Name="LineAnimation">
+                            <Storyboard RepeatBehavior="Forever">
+                              <DoubleAnimation Storyboard.TargetName="PolyLine"
+                                               Storyboard.TargetProperty="StrokeDashOffset" Duration="00:00:00.5"
+                                               To="4" />
+                            </Storyboard>
+                          </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                          <RemoveStoryboard BeginStoryboardName="LineAnimation" />
+                        </EventTrigger>
+                      </FrameworkElement.Triggers>
+                    </Polyline>
+                    <Polyline x:Name="PolyLine" IsHitTestVisible="False"
+                              toms:Polyline.DataPoints="{Binding Points}"
+                              Stroke="{Binding Color}"
+                              StrokeThickness="2"
+                              StrokeDashArray="2 2" />
+                  </Grid>
+                </Button>
               </toms:ViewportCanvas>
             </DataTemplate>
           </ItemsControl.ItemTemplate>
@@ -81,7 +111,7 @@
           </ItemsControl.ItemsPanel>
           <ItemsControl.ItemContainerStyle>
             <Style TargetType="ContentPresenter">
-              <Setter Property="toms:CanvasAnchor.TopLeft" Value="{Binding (samples:DataPoint.Position)}" />
+              <Setter Property="toms:CanvasAnchor.TopLeft" Value="{Binding (local:DataPoint.Position)}" />
             </Style>
           </ItemsControl.ItemContainerStyle>
           <ItemsControl.ItemTemplate>

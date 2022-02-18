@@ -1,4 +1,4 @@
-﻿namespace SampleApp.Samples
+﻿namespace SampleApp.Mef1.Samples
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,6 @@
     using PropertyChanged;
 
     using SampleApp.Mef1;
-    using SampleApp.Mef1.Samples;
 
     using TomsToolbox.Wpf.Composition.Mef;
 
@@ -37,6 +36,7 @@
         {
             yield return new DataLine(GetSinusPoints(1.0).ToList(), Brushes.Blue);
             yield return new DataLine(new[] { new Point(0, 1), new Point(10, 1) }, Brushes.Orange);
+            yield return new DataLine(new[] { new Point(0, -1), new Point(10, -1) }, Brushes.Orange);
             yield return new DataLine(new[] { new Point(5, 0), new Point(5, 1) }, Brushes.Orange);
         }
 

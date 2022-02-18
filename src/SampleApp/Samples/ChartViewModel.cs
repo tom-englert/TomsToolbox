@@ -23,9 +23,10 @@
             return "Chart";
         }
 
-        public ICollection<DataPoint> Points => GetSinusPoints(0.0, 0.5)
+        public ICollection<DataPoint> Points => Array.Empty<Point>()
+            .Concat(GetSinusPoints(0.0, 0.5))
             .Concat(GetDistinctPoints())
-            .Select(item => new DataPoint(item, Brushes.Green) { Label = item.Y.ToString("F2", CultureInfo.CurrentCulture) })
+            .Select(item => new DataPoint(item, Brushes.Orange) { Label = item.X.ToString("F2", CultureInfo.CurrentCulture) + ":" + item.Y.ToString("F2", CultureInfo.CurrentCulture) })
             .ToArray();
 
         public ICollection<DataLine> Lines => GetLines().ToList();
@@ -34,6 +35,7 @@
         {
             yield return new DataLine(GetSinusPoints(1.0).ToList(), Brushes.Blue);
             yield return new DataLine(new[] { new Point(0, 1), new Point(10, 1) }, Brushes.Orange);
+            yield return new DataLine(new[] { new Point(0, -1), new Point(10, -1) }, Brushes.Orange);
             yield return new DataLine(new[] { new Point(5, 0), new Point(5, 1) }, Brushes.Orange);
 
         }
@@ -45,6 +47,7 @@
                 yield return new Point(x, Math.Sin(x + phase));
             }
         }
+
         private IEnumerable<Point> GetDistinctPoints()
         {
             yield return new Point(1, 2);

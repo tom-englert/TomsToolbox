@@ -2,8 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Windows;
+    using System.Windows.Input;
     using System.Windows.Media;
 
     using TomsToolbox.Essentials;
@@ -91,16 +93,6 @@
             new FrameworkPropertyMetadata(default(Rect), MetadataOptions));
         public static readonly DependencyProperty BoundingRectProperty = BoundingRectPropertyKey.DependencyProperty;
 
-        public Point Offset
-        {
-            get => (Point)GetValue(OffsetProperty);
-            private set => SetValue(OffsetPropertyKey, value);
-        }
-        private static readonly DependencyPropertyKey OffsetPropertyKey = DependencyProperty.RegisterReadOnly(
-            "Offset", typeof(Point), typeof(Chart),
-            new FrameworkPropertyMetadata(default(Point), MetadataOptions));
-        public static readonly DependencyProperty OffsetProperty = OffsetPropertyKey.DependencyProperty;
-
         public Rect DataBounds
         {
             get => (Rect)GetValue(DataBoundsProperty);
@@ -168,8 +160,6 @@
                 Math.Ceiling(boundingRect.Width),
                 Math.Ceiling(boundingRect.Height));
 
-            Offset = (Point)(-(Vector)BoundingRect.TopLeft);
-
             Q1 = new Size(
                 Math.Max(0, BoundingRect.Right - Origin.X),
                 Math.Max(0, BoundingRect.Bottom - Origin.Y));
@@ -179,6 +169,14 @@
                 - Math.Min(0, BoundingRect.Top - Origin.Y));
 
             this.VisualDescendants().OfType<ViewportCanvas>().ForEach(item => item.InvalidateMeasure());
+        }
+
+        private void Line_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is not FrameworkElement { DataContext: DataLine line })
+                return;
+
+            MessageBox.Show($"Clicked on a {line.Color} line.");
         }
     }
 }
