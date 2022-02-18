@@ -6,11 +6,11 @@
     <Tags>Test</Tags>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Verify.MSTest" Version="16.1.1" />
+    <PackageReference Include="Verify.MSTest" Version="16.1.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SampleApp.Mef2\SampleApp.Mef2.csproj" />
