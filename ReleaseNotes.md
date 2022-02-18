@@ -1,3 +1,6 @@
+2.7.6
+- Polyline: set canvas anchors on the child of the ViewportCanvas.
+
 2.7.5
 - ViewportCanvas: Fix minimum constraints
 
