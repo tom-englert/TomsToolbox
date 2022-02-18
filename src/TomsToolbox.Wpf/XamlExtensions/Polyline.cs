@@ -3,8 +3,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows;
-    using System.Windows.Controls;
     using System.Windows.Media;
+
+    using TomsToolbox.Wpf.Controls;
+
+    using static System.Windows.Controls.Canvas;
 
     /// <summary>
     /// Extensions to properly display a <see cref="System.Windows.Shapes.Polyline"/> in the coordinates of the containing canvas.
@@ -41,31 +44,35 @@
         /// </summary>
         /// </AttachedPropertyComments>
         public static readonly DependencyProperty DataPointsProperty = DependencyProperty.RegisterAttached(
-            "DataPoints", typeof(ICollection<Point>), typeof(Polyline), 
+            "DataPoints", typeof(ICollection<Point>), typeof(Polyline),
             new FrameworkPropertyMetadata(default(ICollection<Point>), Points_Changed));
 
 
         private static void Points_Changed(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
-            if (!(sender is System.Windows.Shapes.Polyline target))
+            if (sender is not System.Windows.Shapes.Polyline polyline)
                 return;
 
-            if (!(args.NewValue is ICollection<Point> points))
+            if (args.NewValue is not ICollection<Point> points)
             {
-                target.Points = null;
+                polyline.Points = null;
                 return;
             }
 
             var bounds = points.GetBoundingRect();
             var offset = (Vector)bounds.TopLeft;
 
-            target.Points = new PointCollection(points.Select(item => item - offset));
-            target.Stretch = Stretch.Fill;
+            polyline.Points = new PointCollection(points.Select(item => item - offset));
+            polyline.Stretch = Stretch.Fill;
 
-            Canvas.SetTop(target, bounds.Top);
-            Canvas.SetLeft(target, bounds.Left);
-            Canvas.SetRight(target, bounds.Right);
-            Canvas.SetBottom(target, bounds.Bottom);
+            var target = polyline.AncestorsAndSelf()
+                .OfType<FrameworkElement>()
+                .FirstOrDefault(item => item.Parent is ViewportCanvas) ?? polyline;
+
+            SetTop(target, bounds.Top);
+            SetLeft(target, bounds.Left);
+            SetRight(target, bounds.Right);
+            SetBottom(target, bounds.Bottom);
         }
 
         /// <summary>
