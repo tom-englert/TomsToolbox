@@ -12,6 +12,42 @@
     "SharingBoundary": null
   },
   {
+    "Type": "SampleApp.Mef1.Samples.ChartView, SampleApp.Mef1, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+    "Metadata": [
+      {
+        "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=5.0.12.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "DataType": "SampleApp.Mef1.Samples.ChartViewModel, SampleApp.Mef1, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "Role": null,
+        "TypeId": "TomsToolbox.Wpf.Composition.Mef.DataTemplateAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+      }
+    ],
+    "IsShared": true,
+    "SharingBoundary": null
+  },
+  {
+    "Type": "SampleApp.Mef1.Samples.ChartViewModel, SampleApp.Mef1, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+    "Metadata": [
+      {
+        "ContractName": null,
+        "ContractType": null,
+        "TypeId": "System.ComponentModel.Composition.ExportAttribute, System.ComponentModel.Composition, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      },
+      {
+        "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
+        "Role": null,
+        "Sequence": 1.5,
+        "TargetRegions": [
+          "Main"
+        ],
+        "TypeId": "TomsToolbox.Wpf.Composition.Mef.VisualCompositionExportAttribute, TomsToolbox.Wpf.Composition.Mef, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
+      }
+    ],
+    "IsShared": true,
+    "SharingBoundary": null
+  },
+  {
     "Type": "SampleApp.Mef1.Samples.ChessView, SampleApp.Mef1, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
     "Metadata": [
       {
