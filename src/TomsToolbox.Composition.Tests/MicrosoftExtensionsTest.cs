@@ -62,6 +62,7 @@
 
         private class SomeDependency : INotifyChanged
         {
+#pragma warning disable CS0067
             public event EventHandler? Changed;
         }
 

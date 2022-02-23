@@ -1,14 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <Import Project="..\TargetFrameworks.Desktop.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>net462;netcoreapp3.1;net5.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <Tags>Sample</Tags>
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Condition="'$(TargetFramework)'=='net462'" Include="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Condition="'$(TargetFrameworkIdentifier)'=='.NETFramework'" Include="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
   </ItemGroup>
 
   <ItemGroup>

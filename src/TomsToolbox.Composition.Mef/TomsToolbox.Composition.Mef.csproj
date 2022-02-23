@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\TargetFrameworks.Portable.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
@@ -11,7 +11,7 @@
     <Title>Tom's Toolbox Composition - Mef1 Module</Title>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
-    <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" Condition="'$(TargetFramework)'=='netstandard2.0'" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" />
   </ItemGroup>
 
   <ItemGroup>

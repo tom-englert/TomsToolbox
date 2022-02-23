@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <ItemGroup>
-    <None Remove="FAML.Designer.settings" />
-  </ItemGroup>
 
   <Target Name="TfmSpecificContent" Condition="Exists('$(TargetDir)$(PackageId).ExternalAnnotations.xml')">
     <ItemGroup>

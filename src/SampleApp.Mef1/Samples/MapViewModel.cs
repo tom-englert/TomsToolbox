@@ -23,7 +23,9 @@ namespace SampleApp.Mef1.Samples
     [AddINotifyPropertyChangedInterface]
     public class MapViewModel
     {
-        private static readonly string _configurationFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Map", "MapSources.xml");
+        private static readonly string _configurationFileName = Path.Combine(BaseDirectory, "Map", "MapSources.xml");
+
+        private static string BaseDirectory => AppDomain.CurrentDomain.BaseDirectory ?? ".";
 
         private readonly MapSourceFile _mapSourceFile;
 

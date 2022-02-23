@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project>
 
   <PropertyGroup>
@@ -18,7 +17,6 @@
     <DebugSymbols>true</DebugSymbols>
     <Nullable>enable</Nullable>
     <LangVersion>9.0</LangVersion>
-    <WarningsAsErrors Condition="'$(TargetFramework)'!='net5.0-windows'">nullable</WarningsAsErrors>
   </PropertyGroup>
 
   <PropertyGroup>

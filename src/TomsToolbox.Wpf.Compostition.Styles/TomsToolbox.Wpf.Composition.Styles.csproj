@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <Import Project="..\TargetFrameworks.Desktop.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>net45;netcoreapp3.1;net5.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
