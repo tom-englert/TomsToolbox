@@ -16,8 +16,8 @@
     public class MetadataReaderTest : VerifyBase
     {
         private static readonly Regex _versionRegex = new(@"Version=2\.\d+\.\d+\.\d+");
-        private static readonly VerifySettings _settings = new VerifySettings();
 
+#if NETFRAMEWORK
         [TestMethod]
         public async Task ReadSampleAppTest()
         {
@@ -50,6 +50,7 @@
 
             await Verify(data);
         }
+#endif
 
         private static string Serialize(IList<ExportInfo> result)
         {
