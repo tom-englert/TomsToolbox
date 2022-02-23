@@ -12,7 +12,7 @@
         /// <summary>
         /// Gets the value.
         /// </summary>
-        T? Value { get; }
+        T Value { get; }
 
         /// <summary>
         /// Gets the metadata.

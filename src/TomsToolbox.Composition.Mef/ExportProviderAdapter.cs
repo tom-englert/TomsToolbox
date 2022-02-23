@@ -5,8 +5,6 @@
     using System.ComponentModel.Composition.Hosting;
     using System.Linq;
 
-    using TomsToolbox.Composition;
-
     /// <summary>
     /// An <see cref="IExportProvider"/> adapter for the MEF 1 <see cref="ExportProvider"/>
     /// </summary>
@@ -64,7 +62,7 @@
         {
             return _exportProvider
                 .GetExports(contractType, null, contractName ?? string.Empty)
-                .Select(item => new ExportAdapter<object>(() => item.Value, new MetadataAdapter((IDictionary<string, object>)item.Metadata)));
+                .Select(item => new ExportAdapter<object>(() => item.Value, new MetadataAdapter((IDictionary<string, object?>)item.Metadata)));
         }
     }
 }

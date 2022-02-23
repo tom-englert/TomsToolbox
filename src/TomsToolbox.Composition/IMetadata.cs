@@ -12,7 +12,7 @@
         /// </summary>
         /// <param name="name">The name.</param>
         /// <returns>The metadata value.</returns>
-        object GetValue(string name);
+        object? GetValue(string name);
 
         /// <summary>
         /// Gets the metadata with the specified name.
@@ -34,9 +34,9 @@
         /// <param name="metadata">The metadata.</param>
         /// <param name="name">The name.</param>
         /// <returns>The metadata value.</returns>
-        public static T GetValue<T>(this IMetadata metadata, string name)
+        public static T? GetValue<T>(this IMetadata metadata, string name)
         {
-            return (T)metadata.GetValue(name);
+            return (T?)metadata.GetValue(name);
         }
 
         /// <summary>

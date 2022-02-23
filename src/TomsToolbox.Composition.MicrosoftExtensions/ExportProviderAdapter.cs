@@ -3,9 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
-    using global::Microsoft.Extensions.DependencyInjection;
-    using global::Microsoft.Extensions.Options;
+    using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
     /// An <see cref="IExportProvider"/> adapter for the Microsoft.Extensions.DependencyInjection <see cref="ServiceCollection"/>
@@ -16,12 +16,15 @@
         private readonly ServiceProvider _context;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExportProviderAdapter"/> class.
+        /// Initializes a new instance of the <see cref="ExportProviderAdapter" /> class.
         /// </summary>
-        /// <param name="context">The context providing the exports.</param>
-        public ExportProviderAdapter(ServiceProvider context)
+        /// <param name="serviceCollection">The service collection.</param>
+        /// <param name="options">The options to build the service provider.</param>
+        public ExportProviderAdapter(IServiceCollection serviceCollection, ServiceProviderOptions? options = null)
         {
-            _context = context;
+            serviceCollection.AddSingleton<IExportProvider>(this);
+
+            _context = serviceCollection.BuildServiceProvider(options ?? new ServiceProviderOptions());
         }
 
 #pragma warning disable CS0067
@@ -35,7 +38,11 @@
                 return _context.GetRequiredService<T>();
             }
 
-            return _context.GetRequiredService<IOptionsSnapshot<T>>().Get(contractName);
+            var exports = GetServices<T>(contractName)
+                .Select(item => item.Value)
+                .Single();
+
+            return exports;
         }
 
         T? IExportProvider.GetExportedValueOrDefault<T>(string? contractName) where T : class
@@ -45,7 +52,11 @@
                 return _context.GetService<T>();
             }
 
-            return _context.GetService<IOptionsSnapshot<T>>()?.Get(contractName);
+            var exports = GetServices<T>(contractName)
+                .Select(item => item.Value)
+                .SingleOrDefault();
+
+            return exports;
         }
 
         bool IExportProvider.TryGetExportedValue<T>(string? contractName, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out T? value) where T : class
@@ -60,16 +71,17 @@
                 return _context.GetServices<T>();
             }
 
-            return _context
-                .GetServices<IOptionsSnapshot<T>>()
-                .Select(snapshot => snapshot.Get(contractName));
+            var exports = GetServices<T>(contractName)
+                .Select(item => item.Value);
+
+            return exports;
         }
 
         IEnumerable<IExport<object>> IExportProvider.GetExports(Type contractType, string? contractName)
         {
-            var exportMethod = GetType().GetMethod(nameof(GetExports))?.MakeGenericMethod(contractType);
+            var exportMethod = GetType().GetMethod(nameof(GetExportsAsObject), BindingFlags.NonPublic | BindingFlags.Instance)?.MakeGenericMethod(contractType);
             if (exportMethod == null)
-                throw new InvalidOperationException("Method not found: " + nameof(GetExports));
+                throw new InvalidOperationException("Method not found: " + nameof(GetExportsAsObject));
             return (IEnumerable<IExport<object>>)exportMethod.Invoke(this, new object?[] { contractName });
         }
 
@@ -79,13 +91,28 @@
         /// <typeparam name="T">The type of the object</typeparam>
         /// <param name="contractName">Name of the contract.</param>
         /// <returns>The exported object.</returns>
-        public IEnumerable<IExport<object>> GetExports<T>(string? contractName)
+        public IEnumerable<IExport<T>> GetExports<T>(string? contractName)
+            where T : class
         {
-            return Enumerable.Empty<IExport<object>>();
+            var exports = GetServices<T>(contractName)
+                .Select(item => new ExportAdapter<T>(() => item.Value, item.Metadata));
 
-            //return _context
-            //    .GetExports<ExportFactory<T, IDictionary<string, object>>>(contractName)
-            //    .Select(item => new ExportAdapter<object>(() => item.CreateExport().Value, new MetadataAdapter(item.Metadata)));
+            return exports;
+        }
+
+        private IEnumerable<IExport<object>> GetExportsAsObject<T>(string? contractName)
+            where T : class
+        {
+            var exports = GetServices<T>(contractName)
+                .Select(item => new ExportAdapter<object>(() => item.Value, item.Metadata));
+
+            return exports;
+        }
+
+        private IEnumerable<IExport<T>> GetServices<T>(string? contractName) where T : class
+        {
+            return _context.GetServices<IExport<T>>()
+                .Where(item => item.Metadata?.ContractNameMatches(contractName) ?? string.IsNullOrEmpty(contractName));
         }
     }
 }

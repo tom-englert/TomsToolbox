@@ -411,7 +411,7 @@
                 hwndParent = parentHandle
             };
 
-            if (0 != NativeMethods.CredUIPromptForWindowsCredentials(ref credui, authenticationError, ref authPackage, inCredBuffer.DangerousGetHandle(), inCredBuffer.Size, out var outCredBufferPtr, out int outCredSize, ref save, 0))
+            if (0 != NativeMethods.CredUIPromptForWindowsCredentials(ref credui, authenticationError, ref authPackage, inCredBuffer.DangerousGetHandle(), inCredBuffer.Size, out var outCredBufferPtr, out var outCredSize, ref save, 0))
                 return null;
 
             using var outCredBuffer = new SafeNativeMemory(outCredBufferPtr, outCredSize);

@@ -69,6 +69,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.GitHub", "TomsT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.MicrosoftExtensions", "TomsToolbox.Composition.MicrosoftExtensions\TomsToolbox.Composition.MicrosoftExtensions.csproj", "{21E7CE05-54A2-4312-B6D4-8538C3E5E107}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.MicrosoftExtensions", "SampleApp.MicrosoftExtensions\SampleApp.MicrosoftExtensions.csproj", "{A10D0467-54CC-40BD-84F7-161B7799F6B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -177,6 +179,10 @@ Global
 		{21E7CE05-54A2-4312-B6D4-8538C3E5E107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21E7CE05-54A2-4312-B6D4-8538C3E5E107}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21E7CE05-54A2-4312-B6D4-8538C3E5E107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A10D0467-54CC-40BD-84F7-161B7799F6B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A10D0467-54CC-40BD-84F7-161B7799F6B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A10D0467-54CC-40BD-84F7-161B7799F6B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A10D0467-54CC-40BD-84F7-161B7799F6B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

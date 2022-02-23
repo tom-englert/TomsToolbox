@@ -71,7 +71,7 @@
             }
             set
             {
-                if (_index.TryGetValue(key, out int index))
+                if (_index.TryGetValue(key, out var index))
                 {
                     Items[index] = new KeyValuePair<TKey, TValue>(key, value);
                 }

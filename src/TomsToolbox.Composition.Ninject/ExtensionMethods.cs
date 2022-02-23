@@ -1,13 +1,10 @@
 ﻿namespace TomsToolbox.Composition.Ninject
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
 
     using global::Ninject;
-
-    using TomsToolbox.Essentials;
 
     /// <summary>
     /// Extension methods for Ninject DI
@@ -113,17 +110,6 @@
                     }
                 }
             }
-        }
-
-        private static Type? GetContractTypeFor(this IDictionary<string, object> metadata, Type elementType)
-        {
-            var type = metadata.GetValueOrDefault("ContractType") as Type;
-            return type == elementType ? null : type;
-        }
-
-        private static string? GetContractName(this IDictionary<string, object> metadata)
-        {
-            return metadata.GetValueOrDefault("ContractName") as string;
         }
     }
 }

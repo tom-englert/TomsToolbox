@@ -63,8 +63,8 @@
         public IEnumerable<IExport<object>> GetExports<T>(string? contractName)
         {
             return _context
-                .GetExports<ExportFactory<T, IDictionary<string, object>>>(contractName)
-                .Select(item => new ExportAdapter<object>(() => item.CreateExport().Value, new MetadataAdapter(item.Metadata)));
+                .GetExports<ExportFactory<T, IDictionary<string, object?>>>(contractName)
+                .Select(item => new ExportAdapter<object>(() => item.CreateExport().Value ?? throw new InvalidOperationException("Export did not return a value."), new MetadataAdapter(item.Metadata)));
         }
     }
 }

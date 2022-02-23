@@ -2,8 +2,6 @@
 {
     using System.Composition;
 
-    using SampleApp;
-
     using TomsToolbox.Wpf.Composition.AttributedModel;
 
     [VisualCompositionExport(RegionId.Main, Sequence = 100)]

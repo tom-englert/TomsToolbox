@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace TomsToolbox.Composition.Tests
+﻿namespace TomsToolbox.Composition.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -9,6 +7,7 @@ namespace TomsToolbox.Composition.Tests
     using System.Threading;
 
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using TomsToolbox.Essentials;
 
@@ -23,10 +22,10 @@ namespace TomsToolbox.Composition.Tests
             serviceCollection
                 .AddSingleton<SomeDependency>()
                 .AddSingleton<SomeSingleton>()
-                .AddTransient(provider => new Lazy<SomeSingleton, IMetadata>(provider.GetRequiredService<SomeSingleton>, new MetadataAdapter(new Dictionary<string, object> { ["Test"] = "Value1" })))
+                .AddTransient(provider => new Lazy<SomeSingleton, IMetadata>(provider.GetRequiredService<SomeSingleton>, new MetadataAdapter(new Dictionary<string, object?> { ["Test"] = "Value1" })))
                 .AddTransient<IMetadata>(provider => provider.GetRequiredService<SomeSingleton>())
-                .AddTransient(provider => new Lazy<IMetadata, IMetadata>(provider.GetRequiredService<SomeSingleton>, new MetadataAdapter(new Dictionary<string, object> { ["Test"] = "Value1" })))
-                .AddTransient(provider => new Lazy<IMetadata, IMetadata>(provider.GetRequiredService<SomeSingleton>, new MetadataAdapter(new Dictionary<string, object> { ["Test"] = "Value2" })))
+                .AddTransient(provider => new Lazy<IMetadata, IMetadata>(provider.GetRequiredService<SomeSingleton>, new MetadataAdapter(new Dictionary<string, object?> { ["Test"] = "Value1" })))
+                .AddTransient(provider => new Lazy<IMetadata, IMetadata>(provider.GetRequiredService<SomeSingleton>, new MetadataAdapter(new Dictionary<string, object?> { ["Test"] = "Value2" })))
                 ;
 
             var serviceCollection2 = new ServiceCollection();

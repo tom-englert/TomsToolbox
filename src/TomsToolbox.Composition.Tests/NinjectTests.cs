@@ -60,18 +60,18 @@
                 {
                     IsShared = true,
                     Type = typeof(NinjectTests),
-                    Metadata = new IDictionary<string, object>[]
+                    Metadata = new IDictionary<string, object?>[]
                     {
-                        new Dictionary<string, object>
+                        new Dictionary<string, object?>
                         {
                             {"ContractName", "A"},
                         },
-                        new Dictionary<string, object>
+                        new Dictionary<string, object?>
                         {
                             {"ContractType", typeof(NinjectTests)},
                             {"ContractName", "A"},
                         },
-                        new Dictionary<string, object>
+                        new Dictionary<string, object?>
                         {
                             {"ContractType", typeof(INotifyPropertyChanged)},
                             {"ContractName", "B"},
@@ -103,10 +103,10 @@
                 {
                     IsShared = true,
                     Type = typeof(NinjectTests),
-                    Metadata = new IDictionary<string, object>[]
+                    Metadata = new IDictionary<string, object?>[]
                     {
-                        new Dictionary<string, object>(),
-                        new Dictionary<string, object>
+                        new Dictionary<string, object?>(),
+                        new Dictionary<string, object?>
                         {
                             {"ContractName", "A"},
                         },
@@ -133,14 +133,14 @@
                 {
                     IsShared = true,
                     Type = typeof(NinjectTests),
-                    Metadata = new IDictionary<string, object>[]
+                    Metadata = new IDictionary<string, object?>[]
                     {
-                        new Dictionary<string, object>(),
-                        new Dictionary<string, object>
+                        new Dictionary<string, object?>(),
+                        new Dictionary<string, object?>
                         {
                             {"ContractName", "A"},
                         },
-                        new Dictionary<string, object>
+                        new Dictionary<string, object?>
                         {
                             {"ContractName", "B"},
                         },
