@@ -148,8 +148,8 @@
         {
             get
             {
-                var value = _exportProvider?.GetExports(MemberType, ContractName)
-                    .Select(item => item.Value)
+                var value = _exportProvider?
+                    .GetExportedValues(MemberType, ContractName)
                     .FirstOrDefault();
 
                 if (value == null)

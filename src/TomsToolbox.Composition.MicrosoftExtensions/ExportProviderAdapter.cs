@@ -7,12 +7,15 @@
 
     using Microsoft.Extensions.DependencyInjection;
 
+    using TomsToolbox.Essentials;
+
     /// <summary>
     /// An <see cref="IExportProvider"/> adapter for the Microsoft.Extensions.DependencyInjection <see cref="ServiceCollection"/>
     /// </summary>
     /// <seealso cref="IExportProvider" />
     public class ExportProviderAdapter : IExportProvider
     {
+        private static readonly MethodInfo _getExportsAsObjectMethod = typeof(ExportProviderAdapter).GetMethod(nameof(GetExportsAsObject), BindingFlags.NonPublic | BindingFlags.Instance) ?? throw new InvalidOperationException("Method not found: " + nameof(GetExportsAsObject));
         private readonly ServiceProvider _context;
 
         /// <summary>
@@ -77,27 +80,38 @@
             return exports;
         }
 
-        IEnumerable<IExport<object>> IExportProvider.GetExports(Type contractType, string? contractName)
+        IEnumerable<object> IExportProvider.GetExportedValues(Type contractType, string? contractName = null)
         {
-            var exportMethod = GetType().GetMethod(nameof(GetExportsAsObject), BindingFlags.NonPublic | BindingFlags.Instance)?.MakeGenericMethod(contractType);
-            if (exportMethod == null)
-                throw new InvalidOperationException("Method not found: " + nameof(GetExportsAsObject));
-            return (IEnumerable<IExport<object>>)exportMethod.Invoke(this, new object?[] { contractName });
+            if (string.IsNullOrEmpty(contractName))
+            {
+                return _context.GetServices(contractType).ExceptNullItems();
+            }
+
+            var exports = GetExports(contractType, contractName)
+                .Select(item => item.Value);
+
+            return exports;
         }
 
-        /// <summary>
-        /// Gets the exports.
-        /// </summary>
-        /// <typeparam name="T">The type of the object</typeparam>
-        /// <param name="contractName">Name of the contract.</param>
-        /// <returns>The exported object.</returns>
-        public IEnumerable<IExport<T>> GetExports<T>(string? contractName)
+        IEnumerable<IExport<object>> IExportProvider.GetExports(Type contractType, string? contractName)
+        {
+            return GetExports(contractType, contractName);
+        }
+
+        IEnumerable<IExport<T>> IExportProvider.GetExports<T>(string? contractName)
             where T : class
         {
             var exports = GetServices<T>(contractName)
                 .Select(item => new ExportAdapter<T>(() => item.Value, item.Metadata));
 
             return exports;
+        }
+
+        private IEnumerable<IExport<object>> GetExports(Type contractType, string? contractName)
+        {
+            var exportMethod = _getExportsAsObjectMethod.MakeGenericMethod(contractType);
+
+            return (IEnumerable<IExport<object>>)exportMethod.Invoke(this, new object?[] { contractName });
         }
 
         private IEnumerable<IExport<object>> GetExportsAsObject<T>(string? contractName)

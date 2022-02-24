@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Composition;
     using System.Linq;
+    using System.Reflection;
 
     /// <summary>
     /// An <see cref="IExportProvider"/> adapter for the MEF 2 <see cref="CompositionContext"/>
@@ -11,6 +12,7 @@
     /// <seealso cref="IExportProvider" />
     public class ExportProviderAdapter : IExportProvider
     {
+        private static readonly MethodInfo _getExportsAsObjectMethod = typeof(ExportProviderAdapter).GetMethod(nameof(GetExportsAsObject), BindingFlags.NonPublic | BindingFlags.Instance) ?? throw new InvalidOperationException("Method not found: " + nameof(GetExportsAsObject));
         private readonly CompositionContext _context;
 
         /// <summary>
@@ -48,19 +50,24 @@
 
         IEnumerable<IExport<object>> IExportProvider.GetExports(Type contractType, string? contractName)
         {
-            var exportMethod = GetType().GetMethod(nameof(GetExports))?.MakeGenericMethod(contractType);
-            if (exportMethod == null)
-                throw new InvalidOperationException("Method not found: " + nameof(GetExports));
+            var exportMethod = _getExportsAsObjectMethod.MakeGenericMethod(contractType);
+
             return (IEnumerable<IExport<object>>)exportMethod.Invoke(this, new object?[] { contractName });
         }
 
-        /// <summary>
-        /// Gets the exports.
-        /// </summary>
-        /// <typeparam name="T">The type of the object</typeparam>
-        /// <param name="contractName">Name of the contract.</param>
-        /// <returns>The exported object.</returns>
-        public IEnumerable<IExport<object>> GetExports<T>(string? contractName)
+        IEnumerable<object> IExportProvider.GetExportedValues(Type contractType, string? contractName)
+        {
+            return _context.GetExports(contractType, contractName);
+        }
+
+        IEnumerable<IExport<T>> IExportProvider.GetExports<T>(string? contractName) where T : class
+        {
+            return _context
+                .GetExports<ExportFactory<T, IDictionary<string, object?>>>(contractName)
+                .Select(item => new ExportAdapter<T>(() => item.CreateExport().Value ?? throw new InvalidOperationException("Export did not return a value."), new MetadataAdapter(item.Metadata)));
+        }
+
+        private IEnumerable<IExport<object>> GetExportsAsObject<T>(string? contractName)
         {
             return _context
                 .GetExports<ExportFactory<T, IDictionary<string, object?>>>(contractName)

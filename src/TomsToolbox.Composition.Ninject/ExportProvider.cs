@@ -68,6 +68,12 @@
             return GetExportedValues<T>(contractName);
         }
 
+        IEnumerable<object> IExportProvider.GetExportedValues(Type contractType, string? contractName)
+        {
+            return (contractName != null ? _kernel.GetAll(contractType, contractName) : _kernel.GetAll(contractType))
+                .ToList().AsReadOnly();
+        }
+
         IEnumerable<IExport<object>> IExportProvider.GetExports(Type contractType, string? contractName)
         {
             if (contractName == string.Empty)
@@ -77,6 +83,19 @@
                 .Where(binding => GetEffectiveContractName(binding.Metadata.Name) == contractName);
 
             var result = bindings.Select(binding => new ExportAdapter<object>(() => GetExportedValue(binding), binding.Metadata.Get<IMetadata>(ExportMetadataKey)));
+
+            return result.ToList().AsReadOnly();
+        }
+
+        IEnumerable<IExport<T>> IExportProvider.GetExports<T>(string? contractName) where T : class
+        {
+            if (contractName == string.Empty)
+                contractName = null;
+
+            var bindings = _kernel.GetBindings(typeof(T))
+                .Where(binding => GetEffectiveContractName(binding.Metadata.Name) == contractName);
+
+            var result = bindings.Select(binding => new ExportAdapter<T>(() => (T)GetExportedValue(binding), binding.Metadata.Get<IMetadata>(ExportMetadataKey)));
 
             return result.ToList().AsReadOnly();
         }

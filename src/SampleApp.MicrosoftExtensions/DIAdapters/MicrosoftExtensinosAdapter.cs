@@ -19,9 +19,7 @@
 
             foreach (var valueConverterType in typeof(CoordinatesToPointConverter).Assembly.GetTypes().Where(type => typeof(IValueConverter).IsAssignableFrom(type) && !type.IsAbstract))
             {
-                serviceCollection
-                    .AddSingleton(valueConverterType)
-                    .BindMetadata(valueConverterType);
+                serviceCollection.AddSingleton(valueConverterType);
             }
 
             return new ExportProviderAdapter(serviceCollection);

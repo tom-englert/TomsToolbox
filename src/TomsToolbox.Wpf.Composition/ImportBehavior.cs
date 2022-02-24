@@ -118,8 +118,8 @@
             if (exportProvider == null)
                 return;
 
-            var value = exportProvider.GetExports(memberType, ContractName)
-                .Select(item => item.Value)
+            var value = exportProvider
+                .GetExportedValues(memberType, ContractName)
                 .FirstOrDefault();
 
             frameworkElement!.SetValue(dependencyProperty, value);

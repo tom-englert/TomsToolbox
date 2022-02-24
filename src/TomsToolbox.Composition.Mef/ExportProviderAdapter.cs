@@ -58,11 +58,25 @@
             return _exportProvider.GetExportedValues<T>(contractName ?? string.Empty);
         }
 
+        IEnumerable<object> IExportProvider.GetExportedValues(Type contractType, string? contractName)
+        {
+            return _exportProvider
+                .GetExports(contractType, null, contractName ?? string.Empty)
+                .Select(item => item.Value);
+        }
+
         IEnumerable<IExport<object>> IExportProvider.GetExports(Type contractType, string? contractName)
         {
             return _exportProvider
                 .GetExports(contractType, null, contractName ?? string.Empty)
                 .Select(item => new ExportAdapter<object>(() => item.Value, new MetadataAdapter((IDictionary<string, object?>)item.Metadata)));
+        }
+
+        IEnumerable<IExport<T>> IExportProvider.GetExports<T>(string? contractName) where T: class
+        {
+            return _exportProvider
+                .GetExports(typeof(T), null, contractName ?? string.Empty)
+                .Select(item => new ExportAdapter<T>(() => (T)item.Value, new MetadataAdapter((IDictionary<string, object?>)item.Metadata)));
         }
     }
 }

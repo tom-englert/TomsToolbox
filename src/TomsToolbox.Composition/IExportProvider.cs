@@ -56,6 +56,16 @@
         IEnumerable<T> GetExportedValues<T>(string? contractName = null) where T : class;
 
         /// <summary>
+        /// Gets all the exported objects with the specified contract name.
+        /// </summary>
+        /// <param name="contractType">The type of the requested object.</param>
+        /// <param name="contractName">Name of the contract.</param>
+        /// <returns>
+        /// The object
+        /// </returns>
+        IEnumerable<object> GetExportedValues(Type contractType, string? contractName = null);
+
+        /// <summary>
         /// Gets the exports for the specified parameters.
         /// </summary>
         /// <param name="contractType">The type of the requested object.</param>
@@ -64,6 +74,16 @@
         /// The exports.
         /// </returns>
         IEnumerable<IExport<object>> GetExports(Type contractType, string? contractName = null);
+
+        /// <summary>
+        /// Gets the exports for the specified parameters.
+        /// </summary>
+        /// <typeparam name="T">The type of the requested object.</typeparam>
+        /// <param name="contractName">Name of the contract.</param>
+        /// <returns>
+        /// The exports.
+        /// </returns>
+        IEnumerable<IExport<T>> GetExports<T>(string? contractName) where T : class;
     }
 
     /// <summary>
