@@ -80,7 +80,7 @@
             return exports;
         }
 
-        IEnumerable<object> IExportProvider.GetExportedValues(Type contractType, string? contractName = null)
+        IEnumerable<object> IExportProvider.GetExportedValues(Type contractType, string? contractName)
         {
             if (string.IsNullOrEmpty(contractName))
             {
