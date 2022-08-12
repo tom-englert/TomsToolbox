@@ -1,6 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
-  <Import Project="..\TargetFrameworks.Desktop.props" />
+  <PropertyGroup>
+    <TargetFrameworks>net6.0-windows7.0</TargetFrameworks>
+    <WarningsAsErrors Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">nullable</WarningsAsErrors>
+  </PropertyGroup>
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -20,9 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Fody" Version="6.6.0" PrivateAssets="all" />
+    <PackageReference Include="Fody" Version="6.6.3" PrivateAssets="all" />
     <PackageReference Include="Throttle.Fody" Version="1.7.0" PrivateAssets="all" />
-    <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" PrivateAssets="all" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.4.1" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
   </ItemGroup>
 
