@@ -1,3 +1,6 @@
+2.7.7
+- Fix UserAccountControl issues with long names/passwords
+
 2.7.6
 - Polyline: set canvas anchors on the child of the ViewportCanvas.
 
