@@ -226,7 +226,7 @@
         /// available on Windows Vista and newer operating systems, thus 
         /// IsProcessElevated throws a C++ exception if it is called on systems prior 
         /// to Windows Vista. It is not appropriate to use this function to determine 
-        /// whether a process is run as administartor.
+        /// whether a process is run as administrator.
         /// </summary>
         /// <returns>
         /// Returns true if the process is elevated. Returns false if it is not.
@@ -430,7 +430,7 @@
 
         private static NetworkCredential? UnpackAuthenticationBuffer(SafeNativeMemory outCredBuffer)
         {
-            const int maxLen = 100;
+            const int maxLen = 4096;
 
             var usernameBuf = new StringBuilder(maxLen);
             var passwordBuf = new StringBuilder(maxLen);
@@ -440,7 +440,7 @@
             var maxDomainLen = maxLen;
             var maxPasswordLen = maxLen;
 
-            if (!NativeMethods.CredUnPackAuthenticationBuffer(1, outCredBuffer.DangerousGetHandle(), outCredBuffer.Size, usernameBuf, ref maxUserLen, domainBuf, ref maxDomainLen, passwordBuf, ref maxPasswordLen))
+            if (!NativeMethods.CredUnPackAuthenticationBuffer(0, outCredBuffer.DangerousGetHandle(), outCredBuffer.Size, usernameBuf, ref maxUserLen, domainBuf, ref maxDomainLen, passwordBuf, ref maxPasswordLen))
                 return null;
 
             return new NetworkCredential()
