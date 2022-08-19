@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\TargetFrameworks.Desktop.props" />
-
   <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <DebugType>full</DebugType>
     <Tags>Test</Tags>
   </PropertyGroup>
