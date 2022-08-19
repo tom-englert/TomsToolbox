@@ -52,7 +52,7 @@ steps:
     codeCoverageEnabled: false
     platform: '$(BuildPlatform)'
     configuration: '$(BuildConfiguration)'
-    diagnosticsEnabled: True
+    diagnosticsEnabled: false
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)/Packages'
