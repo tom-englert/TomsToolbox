@@ -46,7 +46,7 @@ steps:
   displayName: 'Test Assemblies **\$(BuildConfiguration)\*tests.dll;-:**\obj\**'
   inputs:
     testAssemblyVer2: |
-     **\*test*.dll
+     **\*tests.dll
      !**\obj\**
     runInParallel: false
     codeCoverageEnabled: false
