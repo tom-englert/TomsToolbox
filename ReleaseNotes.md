@@ -1,3 +1,6 @@
+2.7.8
+- Add analyzer to support writing DI-framework independent code.
+
 2.7.7
 - Fix UserAccountControl issues with long names/passwords
 
