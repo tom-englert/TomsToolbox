@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Analyzer Include="..\TomsToolbox.Composition.Analyzer\bin\$(Configuration)\netstandard2.0\TomsToolbox.Composition.Analyzer.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Fody" Version="6.6.3" PrivateAssets="all" />
     <PackageReference Include="Throttle.Fody" Version="1.7.0" PrivateAssets="all" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.1" PrivateAssets="all" />
@@ -33,28 +37,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Composition.Mef\TomsToolbox.Composition.Mef.csproj" />
-    <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj">
-      <Project>{ae305312-7637-43bf-9156-7ec513c55135}</Project>
-      <Name>TomsToolbox.Essentials</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj">
-      <Project>{3647cd2d-2a4e-4859-9bbd-606a73c14801}</Project>
-      <Name>TomsToolbox.Desktop</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj">
-      <Project>{e3ee79ea-50ec-4d54-b59f-799d50e8b221}</Project>
-      <Name>TomsToolbox.ObservableCollections</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Composition.Analyzer\TomsToolbox.Composition.Analyzer.csproj" />
+    <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj" />
+    <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj" />
+    <ProjectReference Include="..\TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj" />
     <ProjectReference Include="..\TomsToolbox.Wpf.Composition.Mef\TomsToolbox.Wpf.Composition.Mef.csproj" />
     <ProjectReference Include="..\TomsToolbox.Wpf.Composition\TomsToolbox.Wpf.Composition.csproj" />
     <ProjectReference Include="..\TomsToolbox.Wpf.Compostition.Styles\TomsToolbox.Wpf.Composition.Styles.csproj" />
-    <ProjectReference Include="..\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj">
-      <Project>{E5D732D2-0294-48FD-8314-63DC1A9155FE}</Project>
-      <Name>TomsToolbox.Wpf.Styles</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj" />
     <ProjectReference Include="..\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj">
-      <Project>{ec9f9418-877f-49ba-af91-f456fbc5ad57}</Project>
-      <Name>TomsToolbox.Wpf</Name>
     </ProjectReference>
   </ItemGroup>
 

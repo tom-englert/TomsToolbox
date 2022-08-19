@@ -73,6 +73,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Mic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.MicrosoftExtensions", "SampleApp.MicrosoftExtensions\SampleApp.MicrosoftExtensions.csproj", "{A10D0467-54CC-40BD-84F7-161B7799F6B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Composition.Analyzer", "TomsToolbox.Composition.Analyzer\TomsToolbox.Composition.Analyzer.csproj", "{8CE7EDD9-C781-4890-82F9-98D98EE89AD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Composition.Analyzer.Tests", "TomsToolbox.Composition.Analyzer.Tests\TomsToolbox.Composition.Analyzer.Tests.csproj", "{DFBCEE05-910E-469F-9B00-B45CADD4C0FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -185,6 +189,14 @@ Global
 		{A10D0467-54CC-40BD-84F7-161B7799F6B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A10D0467-54CC-40BD-84F7-161B7799F6B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A10D0467-54CC-40BD-84F7-161B7799F6B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CE7EDD9-C781-4890-82F9-98D98EE89AD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CE7EDD9-C781-4890-82F9-98D98EE89AD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CE7EDD9-C781-4890-82F9-98D98EE89AD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CE7EDD9-C781-4890-82F9-98D98EE89AD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFBCEE05-910E-469F-9B00-B45CADD4C0FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFBCEE05-910E-469F-9B00-B45CADD4C0FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFBCEE05-910E-469F-9B00-B45CADD4C0FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFBCEE05-910E-469F-9B00-B45CADD4C0FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

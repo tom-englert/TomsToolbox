@@ -13,7 +13,7 @@
     public partial class MainWindow
     {
         [ImportingConstructor]
-        public MainWindow(IExportProvider exportProvider)
+        public MainWindow([Import] IExportProvider exportProvider)
         {
             this.SetExportProvider(exportProvider);
 

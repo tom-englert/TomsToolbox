@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Analyzer Include="..\TomsToolbox.Composition.Analyzer\bin\$(Configuration)\netstandard2.0\TomsToolbox.Composition.Analyzer.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Condition="'$(TargetFrameworkIdentifier)'=='.NETFramework'" Include="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
   </ItemGroup>
 
@@ -22,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Composition\TomsToolbox.Composition.csproj" />
+    <ProjectReference Include="..\TomsToolbox.Composition.Analyzer\TomsToolbox.Composition.Analyzer.csproj" />
     <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj" />
     <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj" />
     <ProjectReference Include="..\TomsToolbox.GitHub\TomsToolbox.GitHub.csproj" />
