@@ -5,6 +5,7 @@ VisualStudioVersion = 17.1.32120.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B35F4812-32F1-469C-8AFC-A58B3D3A62C0}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		..\.gitignore = ..\.gitignore
 		..\appveyor.yml = ..\appveyor.yml
 		..\azure-pipelines.yml = ..\azure-pipelines.yml
@@ -73,9 +74,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Mic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.MicrosoftExtensions", "SampleApp.MicrosoftExtensions\SampleApp.MicrosoftExtensions.csproj", "{A10D0467-54CC-40BD-84F7-161B7799F6B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Composition.Analyzer", "TomsToolbox.Composition.Analyzer\TomsToolbox.Composition.Analyzer.csproj", "{8CE7EDD9-C781-4890-82F9-98D98EE89AD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Analyzer", "TomsToolbox.Composition.Analyzer\TomsToolbox.Composition.Analyzer.csproj", "{8CE7EDD9-C781-4890-82F9-98D98EE89AD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Composition.Analyzer.Tests", "TomsToolbox.Composition.Analyzer.Tests\TomsToolbox.Composition.Analyzer.Tests.csproj", "{DFBCEE05-910E-469F-9B00-B45CADD4C0FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Analyzer.Tests", "TomsToolbox.Composition.Analyzer.Tests\TomsToolbox.Composition.Analyzer.Tests.csproj", "{DFBCEE05-910E-469F-9B00-B45CADD4C0FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
