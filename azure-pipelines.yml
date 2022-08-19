@@ -43,7 +43,7 @@ steps:
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
 - task: VSTest@2
-  displayName: 'Test Assemblies **\$(BuildConfiguration)\*test*.dll;-:**\obj\**'
+  displayName: 'Test Assemblies **\$(BuildConfiguration)\*tests.dll;-:**\obj\**'
   inputs:
     testAssemblyVer2: |
      **\*test*.dll
