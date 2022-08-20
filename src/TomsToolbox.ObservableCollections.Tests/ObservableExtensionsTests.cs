@@ -9,11 +9,10 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using TomsToolbox.Essentials;
 
-[TestClass]
 public class ObservableExtensionsTests
 {
     class TestObject : INotifyPropertyChanged
@@ -50,7 +49,7 @@ public class ObservableExtensionsTests
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
-    [TestMethod]
+    [Fact]
     public void ObservableSelect_AddItemsTest()
     {
         var collection = new ObservableCollection<TestObject>();
@@ -72,11 +71,11 @@ public class ObservableExtensionsTests
         values.CollectionChanged += collectionChangedEventHandler;
         collection.AddRange(testObject1, testObject2, testObject3);
 
-        Assert.IsTrue(receivedEvents.SequenceEqual(expectedEvents));
-        Assert.IsTrue(values.SequenceEqual(expectedValues));
+        Assert.True(receivedEvents.SequenceEqual(expectedEvents));
+        Assert.True(values.SequenceEqual(expectedValues));
     }
 
-    [TestMethod]
+    [Fact]
     public void ObservableSelect_ChangeItemsTest()
     {
         var collection = new ObservableCollection<TestObject>();
@@ -104,11 +103,11 @@ public class ObservableExtensionsTests
             item.Value += 1;
         }
 
-        Assert.IsTrue(receivedEvents.SequenceEqual(expectedEvents));
-        Assert.IsTrue(values.SequenceEqual(expectedValues));
+        Assert.True(receivedEvents.SequenceEqual(expectedEvents));
+        Assert.True(values.SequenceEqual(expectedValues));
     }
 
-    [TestMethod]
+    [Fact]
     public void ObservableSelect_RemoveItemsTest()
     {
         var collection = new ObservableCollection<TestObject>();
@@ -129,17 +128,17 @@ public class ObservableExtensionsTests
         };
 
         collection.AddRange(testObject1, testObject2, testObject3);
-        Assert.IsTrue(values.SequenceEqual(initialValues));
+        Assert.True(values.SequenceEqual(initialValues));
 
         values.CollectionChanged += collectionChangedEventHandler;
 
         collection.RemoveAt(1);
 
-        Assert.IsTrue(receivedEvents.SequenceEqual(expectedEvents));
-        Assert.IsTrue(values.SequenceEqual(expectedValues));
+        Assert.True(receivedEvents.SequenceEqual(expectedEvents));
+        Assert.True(values.SequenceEqual(expectedValues));
     }
 
-    [TestMethod]
+    [Fact]
     public void ObservableSelectMany_AddItemsTest()
     {
         var collection = new ObservableCollection<TestObject>();
@@ -160,7 +159,7 @@ public class ObservableExtensionsTests
 
         values.CollectionChanged += collectionChangedEventHandler;
 
-        Assert.AreEqual(0, values.Count);
+        Assert.Equal(0, values.Count);
 
         collection.AddRange(testObject1, testObject2, testObject3);
 
@@ -169,11 +168,11 @@ public class ObservableExtensionsTests
             item.Inner.AddRange(1, 2, 3);
         }
 
-        Assert.IsTrue(receivedEvents.SequenceEqual(expectedEvents));
-        Assert.IsTrue(values.SequenceEqual(expectedValues));
+        Assert.True(receivedEvents.SequenceEqual(expectedEvents));
+        Assert.True(values.SequenceEqual(expectedValues));
     }
 
-    [TestMethod]
+    [Fact]
     public void ObservableSelectMany_ChangeItemValuesTest()
     {
         var collection = new ObservableCollection<TestObject>();
@@ -194,7 +193,7 @@ public class ObservableExtensionsTests
         };
 
         collection.AddRange(testObject1, testObject2, testObject3);
-        Assert.IsTrue(values.SequenceEqual(expectedInitialValues));
+        Assert.True(values.SequenceEqual(expectedInitialValues));
 
         values.CollectionChanged += collectionChangedEventHandler;
 
@@ -209,11 +208,11 @@ public class ObservableExtensionsTests
             }
         }
 
-        Assert.IsTrue(receivedEvents.SequenceEqual(expectedEvents));
-        Assert.IsTrue(values.SequenceEqual(expectedValues));
+        Assert.True(receivedEvents.SequenceEqual(expectedEvents));
+        Assert.True(values.SequenceEqual(expectedValues));
     }
 
-    [TestMethod]
+    [Fact]
     public void ObservableSelectMany_ReplaceItemsTest()
     {
         var collection = new ObservableCollection<TestObject>();
@@ -236,17 +235,17 @@ public class ObservableExtensionsTests
         };
 
         collection.AddRange(testObject1, testObject2, testObject3);
-        Assert.IsTrue(values.SequenceEqual(expectedInitialValues));
+        Assert.True(values.SequenceEqual(expectedInitialValues));
 
         values.CollectionChanged += collectionChangedEventHandler;
 
         collection[1].Inner = newInnerCollection;
 
-        Assert.IsTrue(receivedEvents.SequenceEqual(expectedEvents));
-        Assert.IsTrue(values.SequenceEqual(expectedValues));
+        Assert.True(receivedEvents.SequenceEqual(expectedEvents));
+        Assert.True(values.SequenceEqual(expectedValues));
     }
 
-    [TestMethod]
+    [Fact]
     public void ObservableSelectMany_RemoveItemsTest()
     {
         var collection = new ObservableCollection<TestObject>();
@@ -267,17 +266,17 @@ public class ObservableExtensionsTests
         };
 
         collection.AddRange(testObject1, testObject2, testObject3);
-        Assert.IsTrue(values.SequenceEqual(expectedInitialValues));
+        Assert.True(values.SequenceEqual(expectedInitialValues));
 
         values.CollectionChanged += collectionChangedEventHandler;
 
         collection.RemoveAt(1);
 
-        Assert.IsTrue(receivedEvents.SequenceEqual(expectedEvents));
-        Assert.IsTrue(values.SequenceEqual(expectedValues));
+        Assert.True(receivedEvents.SequenceEqual(expectedEvents));
+        Assert.True(values.SequenceEqual(expectedValues));
     }
 
-    [TestMethod]
+    [Fact]
     public void ObservableSelectMany_RemoveValuesTest()
     {
         var collection = new ObservableCollection<TestObject>();
@@ -298,7 +297,7 @@ public class ObservableExtensionsTests
         };
 
         collection.AddRange(testObject1, testObject2, testObject3);
-        Assert.IsTrue(values.SequenceEqual(expectedInitialValues));
+        Assert.True(values.SequenceEqual(expectedInitialValues));
 
         values.CollectionChanged += collectionChangedEventHandler;
 
@@ -307,11 +306,11 @@ public class ObservableExtensionsTests
             item.Inner.RemoveAt(1);
         }
 
-        Assert.IsTrue(receivedEvents.SequenceEqual(expectedEvents));
-        Assert.IsTrue(values.SequenceEqual(expectedValues));
+        Assert.True(receivedEvents.SequenceEqual(expectedEvents));
+        Assert.True(values.SequenceEqual(expectedValues));
     }
 
-    [TestMethod]
+    [Fact]
     public void ObservableWhere_AddRemoveTest()
     {
         var source = new ObservableCollection<int>(Enumerable.Range(0, 10));
@@ -324,39 +323,39 @@ public class ObservableExtensionsTests
         target.CollectionChanged += callback;
 
         source.Remove(2);
-        Assert.IsTrue(target.SequenceEqual(new[] { 1, 3, 5, 7, 9 }));
-        Assert.IsNull(lastEventArgs);
+        Assert.True(target.SequenceEqual(new[] { 1, 3, 5, 7, 9 }));
+        Assert.Null(lastEventArgs);
 
         source.Remove(3);
-        Assert.IsTrue(target.SequenceEqual(new[] { 1, 5, 7, 9 }));
-        Assert.AreEqual(NotifyCollectionChangedAction.Remove, lastEventArgs.Action);
-        Assert.AreEqual(3, lastEventArgs.OldItems[0]);
+        Assert.True(target.SequenceEqual(new[] { 1, 5, 7, 9 }));
+        Assert.Equal(NotifyCollectionChangedAction.Remove, lastEventArgs.Action);
+        Assert.Equal(3, lastEventArgs.OldItems[0]);
         lastEventArgs = null;
 
         source.Remove(4);
-        Assert.IsTrue(target.SequenceEqual(new[] { 1, 5, 7, 9 }));
-        Assert.IsNull(lastEventArgs);
+        Assert.True(target.SequenceEqual(new[] { 1, 5, 7, 9 }));
+        Assert.Null(lastEventArgs);
 
         source.Remove(5);
-        Assert.IsTrue(target.SequenceEqual(new[] { 1, 7, 9 }));
-        Assert.AreEqual(NotifyCollectionChangedAction.Remove, lastEventArgs.Action);
-        Assert.AreEqual(5, lastEventArgs.OldItems[0]);
+        Assert.True(target.SequenceEqual(new[] { 1, 7, 9 }));
+        Assert.Equal(NotifyCollectionChangedAction.Remove, lastEventArgs.Action);
+        Assert.Equal(5, lastEventArgs.OldItems[0]);
         lastEventArgs = null;
 
         source.Add(4);
-        Assert.IsTrue(target.SequenceEqual(new[] { 1, 7, 9 }));
-        Assert.IsNull(lastEventArgs);
+        Assert.True(target.SequenceEqual(new[] { 1, 7, 9 }));
+        Assert.Null(lastEventArgs);
 
         source.Add(5);
-        Assert.IsTrue(target.SequenceEqual(new[] { 1, 7, 9, 5 }));
-        Assert.AreEqual(NotifyCollectionChangedAction.Add, lastEventArgs.Action);
-        Assert.AreEqual(5, lastEventArgs.NewItems[0]);
+        Assert.True(target.SequenceEqual(new[] { 1, 7, 9, 5 }));
+        Assert.Equal(NotifyCollectionChangedAction.Add, lastEventArgs.Action);
+        Assert.Equal(5, lastEventArgs.NewItems[0]);
         lastEventArgs = null;
 
         source.Insert(2, 5);
-        Assert.IsTrue(target.SequenceEqual(new[] { 1, 7, 9, 5, 5 }));
-        Assert.AreEqual(NotifyCollectionChangedAction.Add, lastEventArgs.Action);
-        Assert.AreEqual(5, lastEventArgs.NewItems[0]);
+        Assert.True(target.SequenceEqual(new[] { 1, 7, 9, 5, 5 }));
+        Assert.Equal(NotifyCollectionChangedAction.Add, lastEventArgs.Action);
+        Assert.Equal(5, lastEventArgs.NewItems[0]);
     }
 
 

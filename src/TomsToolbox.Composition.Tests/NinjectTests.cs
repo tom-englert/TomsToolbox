@@ -5,14 +5,15 @@ using System.ComponentModel;
 
 using global::Ninject;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using TomsToolbox.Composition.Ninject;
 
-[TestClass]
+using Xunit.Sdk;
+
 public class NinjectTests : INotifyPropertyChanged
 {
-    [TestMethod]
+    [Fact]
     public void NamedObjectsCanNotBeRetrievedWithoutNameIfBindingIsNotUnique()
     {
         IKernel kernel = new StandardKernel();
@@ -25,20 +26,20 @@ public class NinjectTests : INotifyPropertyChanged
         var a2 = kernel.Get(typeof(NinjectTests), "A2");
         var b = kernel.Get(typeof(NinjectTests), "B");
 
-        Assert.AreNotEqual(a1, b);
-        Assert.AreNotEqual(a1, a2);
+        Assert.NotEqual(a1, b);
+        Assert.NotEqual(a1, a2);
 
         try
         {
             kernel.Get(typeof(NinjectTests));
-            Assert.Inconclusive("Should have thrown...");
+            throw new XunitException("Should have thrown...");
         }
         catch (ActivationException)
         {
         }
     }
 
-    [TestMethod]
+    [Fact]
     public void NamedObjectsCanBeRetrievedWithoutNameIfBindingIsUnique()
     {
         IKernel kernel = new StandardKernel();
@@ -48,10 +49,10 @@ public class NinjectTests : INotifyPropertyChanged
         var a = kernel.Get(typeof(NinjectTests), "A");
         var self = kernel.Get(typeof(NinjectTests));
 
-        Assert.AreEqual(a, self);
+        Assert.Equal(a, self);
     }
 
-    [TestMethod]
+    [Fact]
     public void ExportsWithSingleNamedBindingsCanGetViaNameOrNative()
     {
         var exports = new[]
@@ -89,12 +90,12 @@ public class NinjectTests : INotifyPropertyChanged
         var b = kernel.Get<INotifyPropertyChanged>();
         var c = kernel.Get<INotifyPropertyChanged>("B");
 
-        Assert.AreEqual(self, a);
-        Assert.AreEqual(self, b);
-        Assert.AreEqual(self, c);
+        Assert.Equal(self, a);
+        Assert.Equal(self, b);
+        Assert.Equal(self, c);
     }
 
-    [TestMethod]
+    [Fact]
     public void ExportsWithNativeAndSingleNamedBindingsCanGetViaNameOrNative()
     {
         var exports = new[]
@@ -121,10 +122,10 @@ public class NinjectTests : INotifyPropertyChanged
         var a = kernel.Get<NinjectTests>("A");
         var b = kernel.Get<NinjectTests>();
 
-        Assert.AreEqual(a, b);
+        Assert.Equal(a, b);
     }
 
-    [TestMethod]
+    [Fact]
     public void ExportsWithNativeAndMultipleNamedBindingsCanGetViaNameOnly()
     {
         var exports = new[]
@@ -155,12 +156,12 @@ public class NinjectTests : INotifyPropertyChanged
         var a = kernel.Get<NinjectTests>("A");
         var b = kernel.Get<NinjectTests>("B");
 
-        Assert.AreEqual(a, b);
+        Assert.Equal(a, b);
 
         try
         {
             kernel.Get<NinjectTests>();
-            Assert.Inconclusive("Should have thrown...");
+            throw new XunitException("Should have thrown...");
         }
         catch (ActivationException)
         {

@@ -6,25 +6,22 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
-[TestClass]
-public class ObservableWrappedCollectionTests
+public class ObservableWrappedCollectionTests : IDisposable
 {
-    private Random _random;
-    private ObservableCollection<string> _source;
-    private ObservableWrappedCollection<string, StringWrapper> _target;
+    private readonly Random _random;
+    private readonly ObservableCollection<string> _source;
+    private readonly ObservableWrappedCollection<string, StringWrapper> _target;
 
-    [TestInitialize]
-    public void TestInitialize()
+    public ObservableWrappedCollectionTests()
     {
         _random = new Random(DateTime.Today.Day); // reproducible random sequence generating identical values at the same day.
         _source = new ObservableCollection<string>(_sourceStrings);
         _target = new ObservableWrappedCollection<string, StringWrapper>(_source, (s) => new StringWrapper(s));
     }
 
-    [TestCleanup]
-    public void TestCleanup()
+    public void Dispose()
     {
         // Nice for debugging...
         var result = string.Join("/", _target.Select(item => item.ToString()));
@@ -51,20 +48,22 @@ public class ObservableWrappedCollectionTests
 
     private readonly string[] _sourceStrings = Enumerable.Range(0, 10).Select(i => i.ToString()).ToArray();
 
-    [TestMethod]
-    [ExpectedException(typeof(Exception), AllowDerivedTypes = true)]
+    [Fact]
     public void ObservableWrappedCollection_ConstructorFailTest()
     {
-        var collection = new ObservableWrappedCollection<int, int>(null, null);
+        Assert.ThrowsAny<Exception>(() =>
+        {
+            var collection = new ObservableWrappedCollection<int, int>(null, null);
+        });
     }
 
-    [TestMethod]
+    [Fact]
     public void ObservableWrappedCollection_ConstructorTest()
     {
         VerifyConsistency();
     }
 
-    [TestMethod]
+    [Fact]
     public void ObservableWrappedCollection_RemoveTest()
     {
         while (_source.Count > 0)
@@ -74,7 +73,7 @@ public class ObservableWrappedCollectionTests
         }
     }
 
-    [TestMethod]
+    [Fact]
     public void ObservableWrappedCollection_InsertTest()
     {
         foreach (var newValue in Enumerable.Range(0, 9).Select(i => "new" + i.ToString()))
@@ -84,7 +83,7 @@ public class ObservableWrappedCollectionTests
         }
     }
 
-    [TestMethod]
+    [Fact]
     public void ObservableWrappedCollection_MoveTest()
     {
         for (var i = 0; i < 10; i++)
@@ -96,7 +95,7 @@ public class ObservableWrappedCollectionTests
 
     private void VerifyConsistency()
     {
-        Assert.AreEqual(_source.Count, _target.Count);
-        Assert.IsTrue(_source.SequenceEqual(_target.Select(item => item.Wrapped)));
+        Assert.Equal(_source.Count, _target.Count);
+        Assert.True(_source.SequenceEqual(_target.Select(item => item.Wrapped)));
     }
 }

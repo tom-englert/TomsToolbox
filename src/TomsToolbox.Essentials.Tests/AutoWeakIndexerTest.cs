@@ -2,14 +2,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
-[TestClass]
 public class AutoWeakIndexerTest
 {
-    [TestMethod]
-    public void AutoWeakIndexer_WithReferenceTest()
+    [Fact]
+    public async Task AutoWeakIndexer_WithReferenceTest()
     {
         var indexer = new AutoWeakIndexer<int, ICollection<int>>(_ => new List<int>());
 
@@ -17,28 +17,40 @@ public class AutoWeakIndexerTest
 
         GC.Collect();
 
-        indexer[0].Add(1);
+        await Task.Run(() =>
+        {
+            indexer[0].Add(1);
+        });
 
         GC.Collect();
 
-        indexer[0].Add(1);
+        await Task.Run(() =>
+        {
+            indexer[0].Add(1);
+        });
 
-        Assert.AreEqual(2, list.Count);
+        Assert.Equal(2, list.Count);
     }
 
-    [TestMethod]
-    public void AutoWeakIndexer_WithoutReferenceTest()
+    [Fact]
+    public async Task AutoWeakIndexer_WithoutReferenceTest()
     {
         var indexer = new AutoWeakIndexer<int, ICollection<int>>(_ => new List<int>());
 
-        indexer[0].Add(1);
+        await Task.Run(() =>
+        {
+            indexer[0].Add(1);
+        });
 
         GC.Collect();
 
-        indexer[0].Add(1);
+        await Task.Run(() =>
+        {
+            indexer[0].Add(1);
+        });
 
         var list = indexer[0];
 
-        Assert.AreEqual(1, list.Count);
+        Assert.Equal(1, list.Count);
     }
 }

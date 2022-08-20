@@ -4,12 +4,11 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
-[TestClass]
 public class TaskSchedulerTests
 {
-    [TestMethod]
+    [Fact]
     public void ThreadBoundTaskSchedulerTest()
     {
         var stack = new ConcurrentStack<string>();
@@ -27,8 +26,8 @@ public class TaskSchedulerTests
             factory.StartNew(() => { stack.Push("4: " + Thread.CurrentThread.ManagedThreadId); Thread.Sleep(100); });
         }
 
-        Assert.AreEqual(4, stack.Count);
-        Assert.AreNotEqual(thisId, schedulerId);
-        Assert.IsTrue(stack.Reverse().SequenceEqual(Enumerable.Range(1, 4).Select(i => i + ": " + schedulerId)));
+        Assert.Equal(4, stack.Count);
+        Assert.NotEqual(thisId, schedulerId);
+        Assert.True(stack.Reverse().SequenceEqual(Enumerable.Range(1, 4).Select(i => i + ": " + schedulerId)));
     }
 }

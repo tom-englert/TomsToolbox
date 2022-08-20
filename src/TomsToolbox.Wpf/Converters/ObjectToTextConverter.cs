@@ -19,7 +19,7 @@ using TomsToolbox.Essentials;
 ///     Item2
 /// }
 ///
-/// Assert.AreEqual("This is item 1", ObjectToTextConverter.Convert("key1", Items.Item1));
+/// Assert.Equal("This is item 1", ObjectToTextConverter.Convert("key1", Items.Item1));
 /// </code></example>
 /// <remarks>Works with any object; for enum types the attribute of the field is returned. When used via the <see cref="IValueConverter"/> interface, the key is specified as the converter parameter.</remarks>
 [ValueConversion(typeof(object), typeof(string))]

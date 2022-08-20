@@ -5,11 +5,10 @@ namespace TomsToolbox.Wpf.Tests;
 
 using System;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using TomsToolbox.ObservableCollections;
 
-[TestClass]
 public class RelayedEventAttributeTests
 {
     class GoverningClass1 : ObservableObject
@@ -116,7 +115,7 @@ public class RelayedEventAttributeTests
         public int MyValue => _governingClass1.Value;
     }
 
-    [TestMethod]
+    [Fact]
     public void RelayedEventAttribute_SingleGoverningClassTest()
     {
         var receivedEvents = new ObservableIndexer<string, int>(_ => 0);
@@ -127,18 +126,18 @@ public class RelayedEventAttributeTests
 
         governing.Value = 5;
 
-        Assert.AreEqual(5, relaying.Value);
-        Assert.AreEqual(1, receivedEvents.Count);
-        Assert.AreEqual(1, receivedEvents["Value"]);
+        Assert.Equal(5, relaying.Value);
+        Assert.Single(receivedEvents);
+        Assert.Equal(1, receivedEvents["Value"]);
 
         governing.Value = 7;
 
-        Assert.AreEqual(7, relaying.Value);
-        Assert.AreEqual(1, receivedEvents.Count);
-        Assert.AreEqual(2, receivedEvents["Value"]);
+        Assert.Equal(7, relaying.Value);
+        Assert.Single(receivedEvents);
+        Assert.Equal(2, receivedEvents["Value"]);
     }
 
-    [TestMethod]
+    [Fact]
     public void RelayedEventAttribute_MultipleGoverningClassTest()
     {
         var receivedEvents = new ObservableIndexer<string, int>(_ => 0);
@@ -150,35 +149,35 @@ public class RelayedEventAttributeTests
 
         governing1.Value = 5;
 
-        Assert.AreEqual(5, relaying.Value);
-        Assert.AreEqual(0, relaying.MyOtherValue);
-        Assert.AreEqual(1, receivedEvents.Count);
-        Assert.AreEqual(1, receivedEvents["Value"]);
+        Assert.Equal(5, relaying.Value);
+        Assert.Equal(0, relaying.MyOtherValue);
+        Assert.Single(receivedEvents);
+        Assert.Equal(1, receivedEvents["Value"]);
 
         governing1.Value = 7;
 
-        Assert.AreEqual(7, relaying.Value);
-        Assert.AreEqual(0, relaying.MyOtherValue);
-        Assert.AreEqual(1, receivedEvents.Count);
-        Assert.AreEqual(2, receivedEvents["Value"]);
+        Assert.Equal(7, relaying.Value);
+        Assert.Equal(0, relaying.MyOtherValue);
+        Assert.Single(receivedEvents);
+        Assert.Equal(2, receivedEvents["Value"]);
 
         // Governing2.Value is not relayed, changes should not generate relayed events
         governing2.Value = 8;
 
-        Assert.AreEqual(7, relaying.Value);
-        Assert.AreEqual(0, relaying.MyOtherValue);
-        Assert.AreEqual(1, receivedEvents.Count);
-        Assert.AreEqual(2, receivedEvents["Value"]);
+        Assert.Equal(7, relaying.Value);
+        Assert.Equal(0, relaying.MyOtherValue);
+        Assert.Single(receivedEvents);
+        Assert.Equal(2, receivedEvents["Value"]);
 
         governing2.OtherValue = 8;
 
-        Assert.AreEqual(7, relaying.Value);
-        Assert.AreEqual(8, relaying.MyOtherValue);
-        Assert.AreEqual(2, receivedEvents.Count);
-        Assert.AreEqual(2, receivedEvents["Value"]);
-        Assert.AreEqual(1, receivedEvents["MyOtherValue"]);
+        Assert.Equal(7, relaying.Value);
+        Assert.Equal(8, relaying.MyOtherValue);
+        Assert.Equal(2, receivedEvents.Count);
+        Assert.Equal(2, receivedEvents["Value"]);
+        Assert.Equal(1, receivedEvents["MyOtherValue"]);
     }
-    [TestMethod]
+    [Fact]
     public void RelayedEventAttribute_MultipleGoverningWeakReferenceGetsReleasedTest()
     {
         var receivedEvents = new ObservableIndexer<string, int>(_ => 0);
@@ -190,18 +189,18 @@ public class RelayedEventAttributeTests
 
         governing1.Value = 5;
 
-        Assert.AreEqual(5, relaying.Value);
-        Assert.AreEqual(0, relaying.MyOtherValue);
-        Assert.AreEqual(1, receivedEvents.Count);
-        Assert.AreEqual(1, receivedEvents["Value"]);
+        Assert.Equal(5, relaying.Value);
+        Assert.Equal(0, relaying.MyOtherValue);
+        Assert.Single(receivedEvents);
+        Assert.Equal(1, receivedEvents["Value"]);
 
         governing2.OtherValue = 8;
 
-        Assert.AreEqual(5, relaying.Value);
-        Assert.AreEqual(8, relaying.MyOtherValue);
-        Assert.AreEqual(2, receivedEvents.Count);
-        Assert.AreEqual(1, receivedEvents["Value"]);
-        Assert.AreEqual(1, receivedEvents["MyOtherValue"]);
+        Assert.Equal(5, relaying.Value);
+        Assert.Equal(8, relaying.MyOtherValue);
+        Assert.Equal(2, receivedEvents.Count);
+        Assert.Equal(1, receivedEvents["Value"]);
+        Assert.Equal(1, receivedEvents["MyOtherValue"]);
 
         GC.Collect();
         GC.WaitForPendingFinalizers();
@@ -209,24 +208,28 @@ public class RelayedEventAttributeTests
         governing1.Value = 5;
         governing2.OtherValue = 8;
 
-        Assert.AreEqual(2, receivedEvents.Count);
-        Assert.AreEqual(1, receivedEvents["Value"]);
-        Assert.AreEqual(1, receivedEvents["MyOtherValue"]);
+        Assert.Equal(2, receivedEvents.Count);
+        Assert.Equal(1, receivedEvents["Value"]);
+        Assert.Equal(1, receivedEvents["MyOtherValue"]);
     }
 
-    [TestMethod]
-    [ExpectedException(typeof(InvalidOperationException))]
+    [Fact]
     public void RelayedEventAttribute_CallingRelayEventsOfWithoutRelayedEventAttributeTest()
     {
-        var governing = new GoverningClass1();
-        var relaying = new BadRelayingClass1(governing);
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            var governing = new GoverningClass1();
+            var relaying = new BadRelayingClass1(governing);
+        });
     }
 
-    [TestMethod]
-    [ExpectedException(typeof(InvalidOperationException))]
+    [Fact]
     public void RelayedEventAttribute_CallingRelayEventsOfWithInvalidRelayedEventAttributeTest()
     {
-        var governing = new GoverningClass1();
-        var relaying = new BadRelayingClass2(governing);
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            var governing = new GoverningClass1();
+            var relaying = new BadRelayingClass2(governing);
+        });
     }
 }

@@ -4,25 +4,24 @@ namespace TomsToolbox.Wpf.Tests;
 using System.Collections.Generic;
 using System.Linq;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
-[TestClass]
 public class TableHelperTests
 {
-    [TestMethod]
+    [Fact]
     public void TableHelper_ParseQuotedStrings()
     {
         const string sourceText = "\"\"\"$(SolutionDir).nuget\\nuget.exe\"\" pack \"\"$(ProjectPath)\"\" -OutputDirectory \"\"$(SolutionDir)..\\Bin\\Deploy\\.\"\" -IncludeReferencedProjects -Prop Configuration=$(ConfigurationName)\"";
         const string targetText = "\"$(SolutionDir).nuget\\nuget.exe\" pack \"$(ProjectPath)\" -OutputDirectory \"$(SolutionDir)..\\Bin\\Deploy\\.\" -IncludeReferencedProjects -Prop Configuration=$(ConfigurationName)";
         var table = sourceText.ParseTable('\t');
 
-        Assert.IsNotNull(table);
-        Assert.AreEqual(1, table.Count);
-        Assert.AreEqual(1, table[0].Count);
-        Assert.AreEqual(targetText, table[0][0]);
+        Assert.NotNull(table);
+        Assert.Equal(1, table.Count);
+        Assert.Equal(1, table[0].Count);
+        Assert.Equal(targetText, table[0][0]);
     }
 
-    [TestMethod]
+    [Fact]
     public void TableHelper_QuotedStringsWithLineBreaks_RoundTrip()
     {
         IList<string> line1 = new[] { "L1\r\nC1", "L1C2\r\n" };
@@ -32,12 +31,12 @@ public class TableHelperTests
 
         var target1 = sourceTable.ToCsvString();
 
-        Assert.AreEqual(target1, expected.Replace(";", TableHelper.CsvColumnSeparator.ToString()));
+        Assert.Equal(target1, expected.Replace(";", TableHelper.CsvColumnSeparator.ToString()));
 
         var target2 = expected.ParseTable(';');
 
-        Assert.AreEqual(sourceTable.Length, target2.Count);
-        Assert.IsTrue(sourceTable[0].SequenceEqual(target2[0]));
-        Assert.IsTrue(sourceTable[1].SequenceEqual(target2[1]));
+        Assert.Equal(sourceTable.Length, target2.Count);
+        Assert.True(sourceTable[0].SequenceEqual(target2[0]));
+        Assert.True(sourceTable[1].SequenceEqual(target2[1]));
     }
 }

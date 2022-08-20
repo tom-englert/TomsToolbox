@@ -5,111 +5,110 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using TomsToolbox.Essentials;
 using TomsToolbox.Wpf.Converters;
 
-[TestClass]
 public class BinaryOperationConverterTests
 {
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Add_Double_Integer_Test()
     {
         var target = BinaryOperationConverter.Multiply;
         var result = target.Convert(1.5, null, 2, null);
-        Assert.AreEqual(1.5 * 2, result);
+        Assert.Equal(1.5 * 2, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Add_Integer_Integer_Test()
     {
         var target = BinaryOperationConverter.Multiply;
         var result = target.Convert(1, null, 2, null);
-        Assert.AreEqual(2.0, result);
+        Assert.Equal(2.0, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Multiply_Integer_Double_Test()
     {
         var target = BinaryOperationConverter.Multiply;
         var result = target.Convert(3, null, 2.5, null);
-        Assert.AreEqual(3 * 2.5, result);
+        Assert.Equal(3 * 2.5, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Multiply_Vector_Number_Test()
     {
         var target = BinaryOperationConverter.Multiply;
         var result = target.Convert(new Vector(1, 2), null, 2.5, null);
-        Assert.AreEqual(new Vector(2.5, 5), result);
+        Assert.Equal(new Vector(2.5, 5), result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Multiply_Vector_NumberString_Test()
     {
         var target = BinaryOperationConverter.Multiply;
         var result = target.Convert(new Vector(1, 2), null, "2.5", null);
-        Assert.AreEqual(new Vector(2.5, 5), result);
+        Assert.Equal(new Vector(2.5, 5), result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Multiply_Vector_VectorString_Test()
     {
         var target = BinaryOperationConverter.Multiply;
         var result = target.Convert(new Vector(1, 2), null, "2.5,1.5", null);
-        Assert.AreEqual(5.5, result);
+        Assert.Equal(5.5, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Multiply_Vector_Vector_Test()
     {
         var target = BinaryOperationConverter.Multiply;
         var result = target.Convert(new Vector(1, 2), null, new Vector(2.5, 1.5), null);
-        Assert.AreEqual(5.5, result);
+        Assert.Equal(5.5, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Multiply_Vector_Unknown_Test()
     {
         var target = BinaryOperationConverter.Multiply;
         var result = target.Convert(new Vector(1, 2), null, target, null);
-        Assert.AreEqual(DependencyProperty.UnsetValue, result);
+        Assert.Equal(DependencyProperty.UnsetValue, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Multiply_Size_Double_Test()
     {
         var target = BinaryOperationConverter.Multiply;
         var result = target.Convert(new Size(1, 2), null, 2, null);
-        Assert.AreEqual(new Vector(2, 4), result);
+        Assert.Equal(new Vector(2, 4), result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Multiply_Unknown_Number_Test()
     {
         var target = BinaryOperationConverter.Multiply;
         var result = target.Convert(target, null, 2, null);
-        Assert.AreEqual(DependencyProperty.UnsetValue, result);
+        Assert.Equal(DependencyProperty.UnsetValue, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Add_Point_VectorString_Test()
     {
         var target = BinaryOperationConverter.Addition;
         var result = target.Convert(new Point(2, 5), null, "2,3", null);
-        Assert.AreEqual(new Point(4, 8), result);
+        Assert.Equal(new Point(4, 8), result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Substract_Vector_VectorString_Test()
     {
         var target = BinaryOperationConverter.Subtraction;
         var result = target.Convert(new Vector(2, 5), null, "2,3", null);
-        Assert.AreEqual(new Vector(0, 2), result);
+        Assert.Equal(new Vector(0, 2), result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Substract_DateTime_DateTime_Test()
     {
         var target = BinaryOperationConverter.Subtraction;
@@ -117,188 +116,188 @@ public class BinaryOperationConverterTests
         var op1 = DateTime.Now;
         var op2 = op1 - diff;
         var result = target.Convert(op1, null, op2, null);
-        Assert.AreEqual(diff, result);
+        Assert.Equal(diff, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Multiply_Vector_MatrixString_Test()
     {
         var target = BinaryOperationConverter.Multiply;
         var result = target.Convert(new Vector(2, 5), null, "0,1,-1,0,0,0", null);
-        Assert.AreEqual(new Vector(-5, 2), result);
+        Assert.Equal(new Vector(-5, 2), result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Multiply_Rect_MatrixString_Test()
     {
         var target = BinaryOperationConverter.Multiply; // => Transform
         var result = target.Convert(new Rect(0, 0, 2, 5), null, "0,1,-1,0,0,0", null);
-        Assert.AreEqual(new Rect(-5, 0, 5, 2), result);
+        Assert.Equal(new Rect(-5, 0, 5, 2), result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Add_Rect_VectorString_Test()
     {
         var target = BinaryOperationConverter.Addition; // => Offset
         var result = target.Convert(new Rect(1, 2, 3, 4), null, "1,2", null);
-        Assert.AreEqual(new Rect(2, 4, 3, 4), result);
+        Assert.Equal(new Rect(2, 4, 3, 4), result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Equality_Rect_String_Test()
     {
         var target = BinaryOperationConverter.Equality;
         var result = target.Convert(new Rect(1, 2, 3, 4), null, "1,2,3,4", null);
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Equality_Double_String_Test()
     {
         var target = BinaryOperationConverter.Equality;
         var result = target.Convert(3.14, null, "3.14", null);
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Equality_Integer_String_Test()
     {
         var target = BinaryOperationConverter.Equality;
         var result = target.Convert(3, null, "3", null);
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Equality_Boolean_String_Test()
     {
         var target = BinaryOperationConverter.Equality;
         var result = target.Convert(true, null, "true", null);
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Equality_Boolean_String2_Test()
     {
         var target = BinaryOperationConverter.Equality;
         var result = target.Convert(true, null, "false", null);
-        Assert.AreEqual(false, result);
+        Assert.Equal(false, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Equality_TimeSpan_Test()
     {
         var target = BinaryOperationConverter.Equality;
         var result = target.Convert(TimeSpan.FromHours(2), null, "2:00:00", null);
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Equality_Rect_UnmatchedString_Test()
     {
         var target = BinaryOperationConverter.Equality;
         var result = target.Convert(new Rect(1, 2, 3, 4), null, "1,4,3,4", null);
-        Assert.AreEqual(false, result);
+        Assert.Equal(false, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Equality_String_String_Test()
     {
         var target = BinaryOperationConverter.Equality;
         var result = target.Convert("Test", null, "Test", null);
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
         result = target.Convert("Test1", null, "Test", null);
-        Assert.AreEqual(false, result);
+        Assert.Equal(false, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Equality_Custom_String_Test()
     {
         var target = BinaryOperationConverter.Equality;
         var result = target.Convert(new TestClass(42), null, "42", null);
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Inequality_Custom_String_Test()
     {
         var target = BinaryOperationConverter.Inequality;
         var result = target.Convert(new TestClass(42), null, "43", null);
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Multiply_Custom_String_Test()
     {
         var target = BinaryOperationConverter.Multiply;
         var result = target.Convert(new TestClass(4), null, "5", null);
-        Assert.AreEqual(new TestClass(20), result);
+        Assert.Equal(new TestClass(20), result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Division_Custom_String_Test()
     {
         var target = BinaryOperationConverter.Division;
         var result = target.Convert(new TestClass(20), null, "5", null);
-        Assert.AreEqual(new TestClass(4), result);
+        Assert.Equal(new TestClass(4), result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_LessThan_Custom_String_Test()
     {
         var target = BinaryOperationConverter.LessThan;
         var result = target.Convert(new TestClass(4), null, "5", null);
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
         result = target.Convert(new TestClass(5), null, "5", null);
-        Assert.AreEqual(false, result);
+        Assert.Equal(false, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Inequality_Rect_String_Test()
     {
         var target = BinaryOperationConverter.Inequality;
         var result = target.Convert(new Rect(1, 2, 3, 4), null, "1,2,3,4", null);
-        Assert.AreEqual(false, result);
+        Assert.Equal(false, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_Inequality_Rect_UnmatchedString_Test()
     {
         var target = BinaryOperationConverter.Inequality;
         var result = target.Convert(new Rect(1, 2, 3, 4), null, "1,4,3,4", null);
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationConverter_GreaterThan_TimeSpan_Test()
     {
         var target = BinaryOperationConverter.GreaterThan;
         var result = target.Convert(TimeSpan.FromHours(2), null, "1:59:00", null);
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationMultiConverter_GreaterThan_Test()
     {
         var target = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThan };
         var result = target.Convert(new object[] { 3, 2.0 }, null, null, null);
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationMultiConverter_NotGreaterThan_Test()
     {
         var target = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThan };
         var result = target.Convert(new object[] { 1, 2.0 }, null, null, null);
-        Assert.AreEqual(false, result);
+        Assert.Equal(false, result);
     }
 
 
-    [TestMethod]
+    [Fact]
     public void BinaryOperationMultiConverter_GreaterThanOrEqual_Test()
     {
         var target = new BinaryOperationConverter { Operation = BinaryOperation.GreaterThanOrEqual };
         var result = target.Convert(new object[] { 2, 2.0 }, null, null, null);
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
     class TestClassTypeConverter : TypeConverter

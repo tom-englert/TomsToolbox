@@ -7,14 +7,13 @@ using System.Linq;
 using System.Threading;
 
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using TomsToolbox.Essentials;
 
-[TestClass]
 public class MicrosoftExtensionsTest
 {
-    [TestMethod]
+    [Fact]
     public void RegistrationBehavior()
     {
         var serviceCollection = new ServiceCollection();
@@ -54,10 +53,10 @@ public class MicrosoftExtensionsTest
         var t2 = lazy2.Value;
         var t3 = serviceProvider.GetRequiredService<IMetadata>();
 
-        Assert.AreEqual("Test1", t1.GetValue("Test"));
-        Assert.AreEqual("Test1", t2.GetValue("Test"));
-        Assert.AreEqual("Test1", t3.GetValue("Test"));
-        Assert.AreEqual("Test1", t4.GetValue("Test"));
+        Assert.Equal("Test1", t1.GetValue("Test"));
+        Assert.Equal("Test1", t2.GetValue("Test"));
+        Assert.Equal("Test1", t3.GetValue("Test"));
+        Assert.Equal("Test1", t4.GetValue("Test"));
     }
 
     private class SomeDependency : INotifyChanged

@@ -3,12 +3,11 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
-[TestClass]
 public class RegexExtensionsTest
 {
-    [TestMethod]
+    [Fact]
     public void RegexExtensions_Split_RoundTrip_Test()
     {
         const string source = "This is  a text with    varying \twhite space";
@@ -17,15 +16,15 @@ public class RegexExtensionsTest
         var regex = new Regex(@"\s+");
         var fragments = regex.Split(source, (value, _) => value).ToArray();
 
-        Assert.AreEqual(15, fragments.Length);
+        Assert.Equal(15, fragments.Length);
 
         var result = string.Concat(fragments);
 
 
-        Assert.AreEqual(expected, result);
+        Assert.Equal(expected, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void RegexExtensions_Split_DecorateUnmatched_Test()
     {
         const string source = "This is  a text with    varying \twhite space";
@@ -34,14 +33,14 @@ public class RegexExtensionsTest
         var regex = new Regex(@"\s+");
         var fragments = regex.Split(source, (value, isMatch) => isMatch ? value : $"<{value}>").ToArray();
 
-        Assert.AreEqual(15, fragments.Length);
+        Assert.Equal(15, fragments.Length);
 
         var result = string.Concat(fragments);
 
-        Assert.AreEqual(expected, result);
+        Assert.Equal(expected, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void RegexExtensions_Split_ReplaceMatched_Test()
     {
         const string source = "This is  a text with    varying \twhite space";
@@ -50,14 +49,14 @@ public class RegexExtensionsTest
         var regex = new Regex(@"\s+");
         var fragments = regex.Split(source, (value, isMatch) => isMatch ? "-" : value).ToArray();
 
-        Assert.AreEqual(15, fragments.Length);
+        Assert.Equal(15, fragments.Length);
 
         var result = string.Concat(fragments);
 
-        Assert.AreEqual(expected, result);
+        Assert.Equal(expected, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void RegexExtensions_Split_ReplaceInStrings_Test()
     {
         // replace 'this' with 'that', but only inside quoted strings.
@@ -72,7 +71,7 @@ public class RegexExtensionsTest
 
         var result = string.Concat(fragments);
 
-        Assert.AreEqual(expected, result);
+        Assert.Equal(expected, result);
     }
 
 }

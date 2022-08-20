@@ -2,14 +2,13 @@
 
 using System.Windows;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using TomsToolbox.Wpf.Converters;
 
-[TestClass]
 public class LogicalMultiValueConverterTests
 {
-    [TestMethod]
+    [Fact]
     public void LogicalMultiValueConverter_And_1_Test()
     {
         var target = LogicalMultiValueConverter.And;
@@ -17,10 +16,10 @@ public class LogicalMultiValueConverterTests
 
         var result = target.Convert(source, null, null, null);
 
-        Assert.AreEqual(false, result);
+        Assert.Equal(false, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void LogicalMultiValueConverter_And_2_Test()
     {
         var target = LogicalMultiValueConverter.And;
@@ -28,30 +27,30 @@ public class LogicalMultiValueConverterTests
 
         var result = target.Convert(source, null, null, null);
 
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void LogicalMultiValueConverter_And_MixedInput1_Test()
     {
         var target = LogicalMultiValueConverter.And;
         var source = new object[] { true, 1, "true", 2 };
         var result = target.Convert(source, null, null, null);
 
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void LogicalMultiValueConverter_And_MixedInput2_Test()
     {
         var target = LogicalMultiValueConverter.And;
         var source = new object[] { true, 1, "true", 0 };
         var result = target.Convert(source, null, null, null);
 
-        Assert.AreEqual(false, result);
+        Assert.Equal(false, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void LogicalMultiValueConverter_Or_1_Test()
     {
         var target = LogicalMultiValueConverter.Or;
@@ -59,10 +58,10 @@ public class LogicalMultiValueConverterTests
 
         var result = target.Convert(source, null, null, null);
 
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void LogicalMultiValueConverter_Or_2_Test()
     {
         var target = LogicalMultiValueConverter.Or;
@@ -70,30 +69,30 @@ public class LogicalMultiValueConverterTests
 
         var result = target.Convert(source, null, null, null);
 
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void LogicalMultiValueConverter_Or_MixedInput1_Test()
     {
         var target = LogicalMultiValueConverter.Or;
         var source = new object[] { true, 1, "true", 0, "false" };
         var result = target.Convert(source, null, null, null);
 
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void LogicalMultiValueConverter_Or_MixedInput2_Test()
     {
         var target = LogicalMultiValueConverter.Or;
         var source = new object[] { true, 1, "true", 0 };
         var result = target.Convert(source, null, null, null);
 
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void LogicalMultiValueConverter_And_InvalidInput_Test()
     {
         var target = LogicalMultiValueConverter.And;
@@ -101,10 +100,10 @@ public class LogicalMultiValueConverterTests
 
         var result = target.Convert(source, null, null, null);
 
-        Assert.AreEqual(DependencyProperty.UnsetValue, result);
+        Assert.Equal(DependencyProperty.UnsetValue, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void LogicalMultiValueConverter_Or_InvalidInput_Test()
     {
         var target = LogicalMultiValueConverter.Or;
@@ -112,6 +111,6 @@ public class LogicalMultiValueConverterTests
 
         var result = target.Convert(source, null, null, null);
 
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 }

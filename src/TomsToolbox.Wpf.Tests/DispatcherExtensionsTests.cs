@@ -4,12 +4,12 @@ namespace TomsToolbox.Wpf.Tests;
 using System;
 using System.Runtime.Serialization;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
+using Xunit.Sdk;
 
-[TestClass]
 public class DispatcherExtensionsTests
 {
-    [TestMethod]
+    [Fact]
     public void DispatcherExtensions_InvokePassesExceptionsTest()
     {
         try
@@ -19,15 +19,15 @@ public class DispatcherExtensionsTests
                 thread1.Dispatcher.Invoke(() => throw new TestException());
             }
 
-            Assert.Fail("We should never get here");
+            throw new XunitException("We should never get here");
         }
         catch (Exception ex)
         {
-            Assert.IsInstanceOfType(ex, typeof(TestException));
+            Assert.Equal(typeof(TestException), ex.GetType());
         }
     }
 
-    [TestMethod]
+    [Fact]
     public void DispatcherExtensions_InvokePassesExceptionsOnSameThreadTest()
     {
         try
@@ -38,11 +38,11 @@ public class DispatcherExtensionsTests
                 thread1.Dispatcher.Invoke(() => t.Invoke(() => throw new TestException()));
             }
 
-            Assert.Fail("We should never get here");
+            throw new XunitException("We should never get here");
         }
         catch (Exception ex)
         {
-            Assert.IsInstanceOfType(ex, typeof(TestException));
+            Assert.Equal(typeof(TestException), ex.GetType());
         }
     }
 

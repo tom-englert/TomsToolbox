@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using Newtonsoft.Json;
 
@@ -12,13 +12,12 @@ using VerifyMSTest;
 
 using VerifyTests;
 
-[TestClass]
 public class MetadataReaderTest : VerifyBase
 {
     private static readonly Regex _versionRegex = new(@"Version=2\.\d+\.\d+\.\d+");
 
 #if NETFRAMEWORK
-        [TestMethod]
+        [Fact]
         public async Task ReadSampleAppTest()
         {
             var assembly = typeof(SampleApp.Mef1.App).Assembly;
@@ -29,7 +28,7 @@ public class MetadataReaderTest : VerifyBase
             await Verify(data);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task ReadSampleAppMef2Test()
         {
             var assembly = typeof(SampleApp.MainWindow).Assembly;
@@ -40,7 +39,7 @@ public class MetadataReaderTest : VerifyBase
             await Verify(data);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task ReadThisAssemblyTest()
         {
             var assembly = GetType().Assembly;

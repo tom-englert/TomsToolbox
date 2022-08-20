@@ -7,17 +7,16 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using TomsToolbox.Essentials;
 
 /// <summary>
 /// Summary description for ObservableCompositeCollectionTest
 /// </summary>
-[TestClass]
 public class ObservableCompositeCollectionTest
 {
-    [TestMethod]
+    [Fact]
     public void ObservableCompositeCollection_FillWithoutEventHandlersTest()
     {
         var collection = new ObservableCollection<Item>();
@@ -26,7 +25,7 @@ public class ObservableCompositeCollectionTest
         CommpareAdd(collection, compositeCollection);
     }
 
-    [TestMethod]
+    [Fact]
     public void ObservableCompositeCollection_FillWithEventHandlersTest()
     {
         var collection = new ObservableCollection<Item>();
@@ -43,11 +42,11 @@ public class ObservableCompositeCollectionTest
 
         CommpareAdd(collection, compositeCollection);
 
-        Assert.AreEqual(collectionEvents, collection.Count);
-        Assert.AreEqual(compositeEvents, compositeCollection.Count);
+        Assert.Equal(collectionEvents, collection.Count);
+        Assert.Equal(compositeEvents, compositeCollection.Count);
     }
 
-    [TestMethod]
+    [Fact]
     public void ObservableCompositeCollection_ModifyTest()
     {
         var data = CreateData();
@@ -55,27 +54,27 @@ public class ObservableCompositeCollectionTest
         var compositeCollection = new ObservableCompositeCollection<Item>();
 
         compositeCollection.Content.AddRange(data);
-        Assert.IsTrue(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
+        Assert.True(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
 
         // move
         data[99].Move(0, 999);
-        Assert.IsTrue(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
+        Assert.True(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
         // replace
         data[1][42] = new Item { Index = -1 };
-        Assert.IsTrue(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
+        Assert.True(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
         // add
         data[42].AddRange(new[] { new Item(), new Item(), new Item() });
-        Assert.IsTrue(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
+        Assert.True(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
         // remove
         data[218].RemoveWhere(item => (item.Index & 1) == 0);
-        Assert.IsTrue(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
+        Assert.True(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
         // reset
         data[698].Clear();
-        Assert.IsTrue(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
+        Assert.True(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
         // modify sources
         data.RemoveAt(777);
         compositeCollection.Content.RemoveAt(777);
-        Assert.IsTrue(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
+        Assert.True(compositeCollection.SequenceEqual(data.SelectMany(list => list)));
     }
 
     private static void Collection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -108,8 +107,8 @@ public class ObservableCompositeCollectionTest
         Debug.WriteLine("composite: {0} / plain {1} = {2}", compositeTime, plainTime, factor);
         Debug.WriteLine("{0} elements.", compositeCollection.Count);
 
-        Assert.IsTrue(factor < 2);
-        Assert.IsTrue(collection.SequenceEqual(compositeCollection));
+        Assert.True(factor < 2);
+        Assert.True(collection.SequenceEqual(compositeCollection));
     }
 
     private static IList<ObservableCollection<Item>> CreateData()

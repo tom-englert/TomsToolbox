@@ -3,14 +3,13 @@
 using System;
 using System.Windows.Data;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using TomsToolbox.Wpf.Converters;
 
-[TestClass]
 public class AggregatingMultiValueConverterTests
 {
-    [TestMethod]
+    [Fact]
     public void AggregatingMultiValueConverter_CalculateTimeThreshold_ConditionOK()
     {
         IMultiValueConverter target = new AggregatingMultiValueConverter
@@ -28,10 +27,10 @@ public class AggregatingMultiValueConverterTests
 
         var result = target.Convert(new object[] { now, eventTime, threshold }, null, null, null);
 
-        Assert.AreEqual(true, result);
+        Assert.Equal(true, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void AggregatingMultiValueConverter_CalculateTimeThreshold_ConditionFails()
     {
         IMultiValueConverter target = new AggregatingMultiValueConverter
@@ -49,10 +48,10 @@ public class AggregatingMultiValueConverterTests
 
         var result = target.Convert(new object[] { now, eventTime, threshold }, null, null, null);
 
-        Assert.AreEqual(false, result);
+        Assert.Equal(false, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void AggregatingMultiValueConverter_CascadingMultiConverters()
     {
         IMultiValueConverter target = new AggregatingMultiValueConverter
@@ -69,10 +68,10 @@ public class AggregatingMultiValueConverterTests
         var result = target.Convert(input, null, null, null);
 
         // ((9 - 3) / 2) * 3 * 2
-        Assert.AreEqual(18.0, result);
+        Assert.Equal(18.0, result);
     }
 
-    [TestMethod]
+    [Fact]
     public void AggregatingMultiValueConverter_RepeatingLastConverter()
     {
         IMultiValueConverter target = new AggregatingMultiValueConverter
@@ -88,7 +87,7 @@ public class AggregatingMultiValueConverterTests
         var result = target.Convert(input, null, null, null);
 
         // (((9 - 3) / 2) / 3) / 2
-        Assert.AreEqual(.5, result);
+        Assert.Equal(.5, result);
     }
 
 }
