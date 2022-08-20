@@ -1,3 +1,6 @@
+2.7.9
+- Fix namespace of NonSharedAttribute
+
 2.7.8
 - Add analyzer to support writing DI-framework independent code.
 
