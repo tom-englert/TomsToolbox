@@ -1,21 +1,19 @@
-﻿namespace TomsToolbox.Composition.Tests
+﻿namespace TomsToolbox.Composition.Tests;
+
+using TomsToolbox.Wpf.Composition.AttributedModel;
+
+enum SomeRoles
 {
-    using TomsToolbox.Wpf.Composition.AttributedModel;
+    Role1,
+    Role2
+}
 
-    enum SomeRoles
-    {
-        Role1,
-        Role2
-    }
+[DataTemplate(typeof(int), Role = SomeRoles.Role2)]
+class SomeTemplateWithRoles1
+{
+}
 
-    [DataTemplate(typeof(int), Role = SomeRoles.Role2)]
-    class SomeTemplateWithRoles1
-    {
-    }
-
-    [DataTemplate(typeof(int), Role = "Role2")]
-    class SomeTemplateWithRoles2
-    {
-    }
-
+[DataTemplate(typeof(int), Role = "Role2")]
+class SomeTemplateWithRoles2
+{
 }

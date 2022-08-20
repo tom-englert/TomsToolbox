@@ -1,36 +1,35 @@
-﻿namespace TomsToolbox.Wpf.Composition
+﻿namespace TomsToolbox.Wpf.Composition;
+
+using System;
+
+/// <summary>
+/// Interface to be implemented by all objects supporting visual composition.
+/// </summary>
+[Obsolete("This marker interface is no longer required")]
+public interface IComposablePart
 {
-    using System;
+}
 
+/// <summary>
+/// Interface to be implemented by all objects supporting visual composition and require a context.
+/// </summary>
+public interface IComposablePartWithContext
+{
     /// <summary>
-    /// Interface to be implemented by all objects supporting visual composition.
+    /// Gets or sets the composition context.
     /// </summary>
-    [Obsolete("This marker interface is no longer required")]
-    public interface IComposablePart
-    {
-    }
+    object? CompositionContext { get; set; }
+}
 
+/// <summary>
+/// Interface to be implemented by all objects supporting visual composition and provide individual objects per context.
+/// </summary>
+public interface IComposablePartFactory
+{
     /// <summary>
-    /// Interface to be implemented by all objects supporting visual composition and require a context.
+    /// Gets the part for the specified context.
     /// </summary>
-    public interface IComposablePartWithContext
-    {
-        /// <summary>
-        /// Gets or sets the composition context.
-        /// </summary>
-        object? CompositionContext { get; set; }
-    }
-
-    /// <summary>
-    /// Interface to be implemented by all objects supporting visual composition and provide individual objects per context.
-    /// </summary>
-    public interface IComposablePartFactory
-    {
-        /// <summary>
-        /// Gets the part for the specified context.
-        /// </summary>
-        /// <param name="compositionContext">The composition context.</param>
-        /// <returns>The part to be used in composition.</returns>
-        object? GetPart(object? compositionContext);
-    }
+    /// <param name="compositionContext">The composition context.</param>
+    /// <returns>The part to be used in composition.</returns>
+    object? GetPart(object? compositionContext);
 }

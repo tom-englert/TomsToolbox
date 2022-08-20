@@ -1,82 +1,81 @@
-﻿namespace TomsToolbox.Composition.Mef
+﻿namespace TomsToolbox.Composition.Mef;
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
+using System.Linq;
+
+/// <summary>
+/// An <see cref="IExportProvider"/> adapter for the MEF 1 <see cref="ExportProvider"/>
+/// </summary>
+/// <seealso cref="IExportProvider" />
+public class ExportProviderAdapter : IExportProvider
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.Composition.Hosting;
-    using System.Linq;
+    private readonly ExportProvider _exportProvider;
+
+    private event EventHandler<EventArgs>? ExportsChanged;
 
     /// <summary>
-    /// An <see cref="IExportProvider"/> adapter for the MEF 1 <see cref="ExportProvider"/>
+    /// Initializes a new instance of the <see cref="ExportProviderAdapter"/> class.
     /// </summary>
-    /// <seealso cref="IExportProvider" />
-    public class ExportProviderAdapter : IExportProvider
+    /// <param name="exportProvider">The export provider.</param>
+    public ExportProviderAdapter(ExportProvider exportProvider)
     {
-        private readonly ExportProvider _exportProvider;
+        _exportProvider = exportProvider;
+        exportProvider.ExportsChanged += ExportProvider_ExportsChanged;
+    }
 
-        private event EventHandler<EventArgs>? ExportsChanged;
+    private void ExportProvider_ExportsChanged(object? sender, ExportsChangeEventArgs e)
+    {
+        ExportsChanged?.Invoke(sender, e);
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ExportProviderAdapter"/> class.
-        /// </summary>
-        /// <param name="exportProvider">The export provider.</param>
-        public ExportProviderAdapter(ExportProvider exportProvider)
-        {
-            _exportProvider = exportProvider;
-            exportProvider.ExportsChanged += ExportProvider_ExportsChanged;
-        }
+    event EventHandler<EventArgs>? IExportProvider.ExportsChanged
+    {
+        add => ExportsChanged += value;
+        remove => ExportsChanged -= value;
+    }
 
-        private void ExportProvider_ExportsChanged(object? sender, ExportsChangeEventArgs e)
-        {
-            ExportsChanged?.Invoke(sender, e);
-        }
+    T IExportProvider.GetExportedValue<T>(string? contractName) where T : class
+    {
+        return _exportProvider.GetExportedValue<T>(contractName ?? string.Empty);
+    }
 
-        event EventHandler<EventArgs>? IExportProvider.ExportsChanged
-        {
-            add => ExportsChanged += value;
-            remove => ExportsChanged -= value;
-        }
+    T? IExportProvider.GetExportedValueOrDefault<T>(string? contractName) where T : class
+    {
+        return _exportProvider.GetExportedValueOrDefault<T>(contractName ?? string.Empty);
+    }
 
-        T IExportProvider.GetExportedValue<T>(string? contractName) where T : class
-        {
-            return _exportProvider.GetExportedValue<T>(contractName ?? string.Empty);
-        }
+    bool IExportProvider.TryGetExportedValue<T>(string? contractName, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out T? value) where T : class
+    {
+        value = _exportProvider.GetExportedValueOrDefault<T>();
 
-        T? IExportProvider.GetExportedValueOrDefault<T>(string? contractName) where T : class
-        {
-            return _exportProvider.GetExportedValueOrDefault<T>(contractName ?? string.Empty);
-        }
+        return !Equals(value, default(T));
+    }
 
-        bool IExportProvider.TryGetExportedValue<T>(string? contractName, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out T? value) where T : class
-        {
-            value = _exportProvider.GetExportedValueOrDefault<T>();
+    IEnumerable<T> IExportProvider.GetExportedValues<T>(string? contractName) where T : class
+    {
+        return _exportProvider.GetExportedValues<T>(contractName ?? string.Empty);
+    }
 
-            return !Equals(value, default(T));
-        }
+    IEnumerable<object> IExportProvider.GetExportedValues(Type contractType, string? contractName)
+    {
+        return _exportProvider
+            .GetExports(contractType, null, contractName ?? string.Empty)
+            .Select(item => item.Value);
+    }
 
-        IEnumerable<T> IExportProvider.GetExportedValues<T>(string? contractName) where T : class
-        {
-            return _exportProvider.GetExportedValues<T>(contractName ?? string.Empty);
-        }
+    IEnumerable<IExport<object>> IExportProvider.GetExports(Type contractType, string? contractName)
+    {
+        return _exportProvider
+            .GetExports(contractType, null, contractName ?? string.Empty)
+            .Select(item => new ExportAdapter<object>(() => item.Value, new MetadataAdapter((IDictionary<string, object?>)item.Metadata)));
+    }
 
-        IEnumerable<object> IExportProvider.GetExportedValues(Type contractType, string? contractName)
-        {
-            return _exportProvider
-                .GetExports(contractType, null, contractName ?? string.Empty)
-                .Select(item => item.Value);
-        }
-
-        IEnumerable<IExport<object>> IExportProvider.GetExports(Type contractType, string? contractName)
-        {
-            return _exportProvider
-                .GetExports(contractType, null, contractName ?? string.Empty)
-                .Select(item => new ExportAdapter<object>(() => item.Value, new MetadataAdapter((IDictionary<string, object?>)item.Metadata)));
-        }
-
-        IEnumerable<IExport<T>> IExportProvider.GetExports<T>(string? contractName) where T: class
-        {
-            return _exportProvider
-                .GetExports(typeof(T), null, contractName ?? string.Empty)
-                .Select(item => new ExportAdapter<T>(() => (T)item.Value, new MetadataAdapter((IDictionary<string, object?>)item.Metadata)));
-        }
+    IEnumerable<IExport<T>> IExportProvider.GetExports<T>(string? contractName) where T: class
+    {
+        return _exportProvider
+            .GetExports(typeof(T), null, contractName ?? string.Empty)
+            .Select(item => new ExportAdapter<T>(() => (T)item.Value, new MetadataAdapter((IDictionary<string, object?>)item.Metadata)));
     }
 }

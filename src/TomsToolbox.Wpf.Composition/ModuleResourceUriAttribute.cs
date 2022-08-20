@@ -1,29 +1,28 @@
-﻿namespace TomsToolbox.Wpf.Composition
+﻿namespace TomsToolbox.Wpf.Composition;
+
+using System;
+
+/// <summary>
+/// Attribute to associate a resource with a module; when a module is loaded dynamically, the resource can be linked into the application resource scope.
+/// </summary>
+[AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Module, AllowMultiple=true)]
+[Serializable]
+public sealed class ModuleResourceUriAttribute : Attribute
 {
-    using System;
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ModuleResourceUriAttribute"/> class.
+    /// </summary>
+    /// <param name="uri">The URI of the resource.</param>
+    public ModuleResourceUriAttribute(string uri)
+    {
+        Uri = uri;
+    }
 
     /// <summary>
-    /// Attribute to associate a resource with a module; when a module is loaded dynamically, the resource can be linked into the application resource scope.
+    /// Gets the URI of the resource.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Module, AllowMultiple=true)]
-    [Serializable]
-    public sealed class ModuleResourceUriAttribute : Attribute
+    public string Uri
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ModuleResourceUriAttribute"/> class.
-        /// </summary>
-        /// <param name="uri">The URI of the resource.</param>
-        public ModuleResourceUriAttribute(string uri)
-        {
-            Uri = uri;
-        }
-
-        /// <summary>
-        /// Gets the URI of the resource.
-        /// </summary>
-        public string Uri
-        {
-            get;
-        }
+        get;
     }
 }

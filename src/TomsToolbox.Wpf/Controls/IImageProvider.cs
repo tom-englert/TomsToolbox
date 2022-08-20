@@ -1,31 +1,30 @@
-﻿namespace TomsToolbox.Wpf.Controls
+﻿namespace TomsToolbox.Wpf.Controls;
+
+/// <summary>
+/// Implemented by image providers for the <see cref="Map"/> control.
+/// </summary>
+public interface IImageProvider
 {
     /// <summary>
-    /// Implemented by image providers for the <see cref="Map"/> control.
+    /// Gets the minimum zoom factor supported by this provider.
     /// </summary>
-    public interface IImageProvider
+    int MinZoom
     {
-        /// <summary>
-        /// Gets the minimum zoom factor supported by this provider.
-        /// </summary>
-        int MinZoom
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets the maximum zoom factor supported by this provider.
-        /// </summary>
-        int MaxZoom
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets the image for a map tile.
-        /// </summary>
-        /// <param name="tile">The tile for which to provide the image.</param>
-        /// <returns>The image.</returns>
-        IImage GetImage(IMapTile tile);
+        get;
     }
+
+    /// <summary>
+    /// Gets the maximum zoom factor supported by this provider.
+    /// </summary>
+    int MaxZoom
+    {
+        get;
+    }
+
+    /// <summary>
+    /// Gets the image for a map tile.
+    /// </summary>
+    /// <param name="tile">The tile for which to provide the image.</param>
+    /// <returns>The image.</returns>
+    IImage GetImage(IMapTile tile);
 }

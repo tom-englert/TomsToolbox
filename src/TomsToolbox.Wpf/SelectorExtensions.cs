@@ -1,135 +1,134 @@
-﻿namespace TomsToolbox.Wpf
+﻿namespace TomsToolbox.Wpf;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Threading;
+
+/// <summary>
+/// Extensions for the <see cref="Selector"/>
+/// </summary>
+public static class SelectorExtensions
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Controls.Primitives;
-    using System.Windows.Threading;
+    private static readonly WeakKeyIndexer<int> _cache = new();
 
     /// <summary>
-    /// Extensions for the <see cref="Selector"/>
+    /// Gets the value of the <see cref="P:TomsToolbox.Wpf.SelectorExtensions.TrackSelection"/> attached property.
     /// </summary>
-    public static class SelectorExtensions
+    /// <param name="obj">The selector.</param>
+    /// <returns><c>true</c> if the selection should be tracked; otherwise <c>false</c>.</returns>
+    [AttachedPropertyBrowsableForType(typeof(Selector))]
+    public static bool GetTrackSelection(DependencyObject obj)
     {
-        private static readonly WeakKeyIndexer<int> _cache = new();
+        return obj.GetValue<bool>(TrackSelectionProperty);
+    }
+    /// <summary>
+    /// Sets the value of the <see cref="P:TomsToolbox.Wpf.SelectorExtensions.TrackSelection" /> attached property.
+    /// </summary>
+    /// <param name="obj">The object.</param>
+    /// <param name="value">if set to <c>true</c> if the selection should be tracked; otherwise <c>false</c>.</param>
+    [AttachedPropertyBrowsableForType(typeof(Selector))]
+    public static void SetTrackSelection(DependencyObject obj, bool value)
+    {
+        obj.SetValue(TrackSelectionProperty, value);
+    }
+    /// <summary>
+    /// Identifies the <see cref="P:TomsToolbox.Wpf.SelectorExtensions.TrackSelection"/> attached property
+    /// </summary>
+    /// <AttachedPropertyComments>
+    /// <summary>
+    /// A value indicating whether selection should be tracked or not.
+    /// </summary>
+    /// <remarks>
+    /// When a <see cref="Selector"/> is embedded in a dynamic page, e.g. another selector,
+    /// the visual is recreated or reused with another data context whenever the page is displayed.
+    /// <para/>
+    /// TrackSelection links the selected index with the view model (DataContext) of the selector,
+    /// restoring the cached index whenever the same view model is displayed.
+    /// If no index is cached, the first item will be selected.
+    /// </remarks>
+    /// </AttachedPropertyComments>
+    public static readonly DependencyProperty TrackSelectionProperty =
+        DependencyProperty.RegisterAttached("TrackSelection", typeof(bool), typeof(SelectorExtensions), new FrameworkPropertyMetadata(TrackSelection_Changed));
 
-        /// <summary>
-        /// Gets the value of the <see cref="P:TomsToolbox.Wpf.SelectorExtensions.TrackSelection"/> attached property.
-        /// </summary>
-        /// <param name="obj">The selector.</param>
-        /// <returns><c>true</c> if the selection should be tracked; otherwise <c>false</c>.</returns>
-        [AttachedPropertyBrowsableForType(typeof(Selector))]
-        public static bool GetTrackSelection(DependencyObject obj)
+    private static void TrackSelection_Changed(DependencyObject? d, DependencyPropertyChangedEventArgs e)
+    {
+        if (!(d is Selector selector))
+            return;
+
+        selector.SelectionChanged -= Selector_SelectionChanged;
+        selector.Loaded -= Selector_Loaded;
+
+        if (false.Equals(e.NewValue))
+            return;
+
+        selector.SelectionChanged += Selector_SelectionChanged;
+        selector.Loaded += Selector_Loaded;
+    }
+
+    static void Selector_Loaded(object? sender, RoutedEventArgs? e)
+    {
+        InternalTrackSelection(sender as Selector, true);
+    }
+
+    static void Selector_SelectionChanged(object? sender, SelectionChangedEventArgs? e)
+    {
+        InternalTrackSelection(sender as Selector, false);
+    }
+
+    private static void InternalTrackSelection(Selector? selector, bool forceSelection)
+    {
+        var dataContext = selector?.DataContext;
+        if (dataContext == null)
+            return;
+
+        if (!selector!.IsLoaded)
+            return;
+
+        if ((selector.SelectedIndex < 0) || forceSelection)
         {
-            return obj.GetValue<bool>(TrackSelectionProperty);
+            selector.BeginInvoke(DispatcherPriority.Loaded, () => selector.SelectedIndex = _cache[dataContext]);
         }
-        /// <summary>
-        /// Sets the value of the <see cref="P:TomsToolbox.Wpf.SelectorExtensions.TrackSelection" /> attached property.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <param name="value">if set to <c>true</c> if the selection should be tracked; otherwise <c>false</c>.</param>
-        [AttachedPropertyBrowsableForType(typeof(Selector))]
-        public static void SetTrackSelection(DependencyObject obj, bool value)
+        else
         {
-            obj.SetValue(TrackSelectionProperty, value);
+            _cache[dataContext] = selector.SelectedIndex;
         }
-        /// <summary>
-        /// Identifies the <see cref="P:TomsToolbox.Wpf.SelectorExtensions.TrackSelection"/> attached property
-        /// </summary>
-        /// <AttachedPropertyComments>
-        /// <summary>
-        /// A value indicating whether selection should be tracked or not.
-        /// </summary>
-        /// <remarks>
-        /// When a <see cref="Selector"/> is embedded in a dynamic page, e.g. another selector,
-        /// the visual is recreated or reused with another data context whenever the page is displayed.
-        /// <para/>
-        /// TrackSelection links the selected index with the view model (DataContext) of the selector,
-        /// restoring the cached index whenever the same view model is displayed.
-        /// If no index is cached, the first item will be selected.
-        /// </remarks>
-        /// </AttachedPropertyComments>
-        public static readonly DependencyProperty TrackSelectionProperty =
-            DependencyProperty.RegisterAttached("TrackSelection", typeof(bool), typeof(SelectorExtensions), new FrameworkPropertyMetadata(TrackSelection_Changed));
+    }
 
-        private static void TrackSelection_Changed(DependencyObject? d, DependencyPropertyChangedEventArgs e)
+    private class WeakKeyIndexer<T>
+    {
+        private Dictionary<WeakReference, T> _items = new();
+
+        private int _cleanupCycleCounter;
+
+        public T this[object key]
         {
-            if (!(d is Selector selector))
-                return;
-
-            selector.SelectionChanged -= Selector_SelectionChanged;
-            selector.Loaded -= Selector_Loaded;
-
-            if (false.Equals(e.NewValue))
-                return;
-
-            selector.SelectionChanged += Selector_SelectionChanged;
-            selector.Loaded += Selector_Loaded;
-        }
-
-        static void Selector_Loaded(object? sender, RoutedEventArgs? e)
-        {
-            InternalTrackSelection(sender as Selector, true);
-        }
-
-        static void Selector_SelectionChanged(object? sender, SelectionChangedEventArgs? e)
-        {
-            InternalTrackSelection(sender as Selector, false);
-        }
-
-        private static void InternalTrackSelection(Selector? selector, bool forceSelection)
-        {
-            var dataContext = selector?.DataContext;
-            if (dataContext == null)
-                return;
-
-            if (!selector!.IsLoaded)
-                return;
-
-            if ((selector.SelectedIndex < 0) || forceSelection)
+            get
             {
-                selector.BeginInvoke(DispatcherPriority.Loaded, () => selector.SelectedIndex = _cache[dataContext]);
+                if ((++_cleanupCycleCounter & 0x7F) == 0)
+                    Cleanup();
+
+                var target = _items.FirstOrDefault(item => item.Key?.Target == key);
+
+                return target.Value;
             }
-            else
+            set
             {
-                _cache[dataContext] = selector.SelectedIndex;
+                if ((++_cleanupCycleCounter & 0x7F) == 0)
+                    Cleanup();
+
+                var innerKey = _items.Keys.FirstOrDefault(i => i?.Target == key) ?? new WeakReference(key);
+
+                _items[innerKey] = value;
             }
         }
 
-        private class WeakKeyIndexer<T>
+        private void Cleanup()
         {
-            private Dictionary<WeakReference, T> _items = new();
-
-            private int _cleanupCycleCounter;
-
-            public T this[object key]
-            {
-                get
-                {
-                    if ((++_cleanupCycleCounter & 0x7F) == 0)
-                        Cleanup();
-
-                    var target = _items.FirstOrDefault(item => item.Key?.Target == key);
-
-                    return target.Value;
-                }
-                set
-                {
-                    if ((++_cleanupCycleCounter & 0x7F) == 0)
-                        Cleanup();
-
-                    var innerKey = _items.Keys.FirstOrDefault(i => i?.Target == key) ?? new WeakReference(key);
-
-                    _items[innerKey] = value;
-                }
-            }
-
-            private void Cleanup()
-            {
-                _items = _items.Where(item => item.Key?.IsAlive == true).ToDictionary(item => item.Key, item => item.Value);
-            }
+            _items = _items.Where(item => item.Key?.IsAlive == true).ToDictionary(item => item.Key, item => item.Value);
         }
     }
 }

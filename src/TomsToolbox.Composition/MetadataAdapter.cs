@@ -1,34 +1,33 @@
-﻿namespace TomsToolbox.Composition
+﻿namespace TomsToolbox.Composition;
+
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+
+/// <summary>
+/// An adapter to provide a dictionary with metadata as <see cref="IMetadata"/>
+/// </summary>
+public class MetadataAdapter : IMetadata
 {
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
+    private readonly IDictionary<string, object?> _metadata;
 
     /// <summary>
-    /// An adapter to provide a dictionary with metadata as <see cref="IMetadata"/>
+    /// Initializes a new instance of the <see cref="MetadataAdapter"/> class.
     /// </summary>
-    public class MetadataAdapter : IMetadata
+    /// <param name="metadata">The metadata.</param>
+    public MetadataAdapter(IDictionary<string, object?> metadata)
     {
-        private readonly IDictionary<string, object?> _metadata;
+        _metadata = metadata;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MetadataAdapter"/> class.
-        /// </summary>
-        /// <param name="metadata">The metadata.</param>
-        public MetadataAdapter(IDictionary<string, object?> metadata)
-        {
-            _metadata = metadata;
-        }
+    /// <inheritdoc />
+    public object? GetValue(string name)
+    {
+        return _metadata[name];
+    }
 
-        /// <inheritdoc />
-        public object? GetValue(string name)
-        {
-            return _metadata[name];
-        }
-
-        /// <inheritdoc />
-        public bool TryGetValue(string name, [NotNullWhen(true)] out object? value)
-        {
-            return _metadata.TryGetValue(name, out value) && value != null;
-        }
+    /// <inheritdoc />
+    public bool TryGetValue(string name, [NotNullWhen(true)] out object? value)
+    {
+        return _metadata.TryGetValue(name, out value) && value != null;
     }
 }

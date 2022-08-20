@@ -1,34 +1,33 @@
-﻿namespace TomsToolbox.Wpf.Interactivity
+﻿namespace TomsToolbox.Wpf.Interactivity;
+
+using Microsoft.Xaml.Behaviors;
+
+using TomsToolbox.Wpf.Controls;
+
+/// <summary>
+/// Behavior to add support for touch manipulation to the <see cref="Map"/> object.
+/// </summary>
+public class MapTouchBehavior : Behavior<Map>
 {
-    using Microsoft.Xaml.Behaviors;
-
-    using TomsToolbox.Wpf.Controls;
-
     /// <summary>
-    /// Behavior to add support for touch manipulation to the <see cref="Map"/> object.
+    /// Called after the behavior is attached to an AssociatedObject.
     /// </summary>
-    public class MapTouchBehavior : Behavior<Map>
+    /// <remarks>
+    /// Override this to hook up functionality to the AssociatedObject.
+    /// </remarks>
+    protected override void OnAttached()
     {
-        /// <summary>
-        /// Called after the behavior is attached to an AssociatedObject.
-        /// </summary>
-        /// <remarks>
-        /// Override this to hook up functionality to the AssociatedObject.
-        /// </remarks>
-        protected override void OnAttached()
-        {
-            base.OnAttached();
+        base.OnAttached();
 
-            var map = AssociatedObject;
+        var map = AssociatedObject;
 
-            map.ManipulationDelta += Map_ManipulationDelta;
-        }
+        map.ManipulationDelta += Map_ManipulationDelta;
+    }
 
-        private void Map_ManipulationDelta(object? sender, System.Windows.Input.ManipulationDeltaEventArgs e)
-        {
-            var map = AssociatedObject;
+    private void Map_ManipulationDelta(object? sender, System.Windows.Input.ManipulationDeltaEventArgs e)
+    {
+        var map = AssociatedObject;
 
-            map.Center += e.DeltaManipulation.Translation;
-        }
+        map.Center += e.DeltaManipulation.Translation;
     }
 }

@@ -1,20 +1,19 @@
-﻿namespace SampleApp.Mef1
+﻿namespace SampleApp.Mef1;
+
+using System.Windows.Input;
+
+/// <summary>
+/// Interaction logic for PopupWindow.xaml
+/// </summary>
+public partial class PopupWindow
 {
-    using System.Windows.Input;
-
-    /// <summary>
-    /// Interaction logic for PopupWindow.xaml
-    /// </summary>
-    public partial class PopupWindow
+    public PopupWindow()
     {
-        public PopupWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Close();
-        }
+    private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        Close();
     }
 }

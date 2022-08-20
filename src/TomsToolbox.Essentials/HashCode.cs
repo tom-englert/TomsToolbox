@@ -1,22 +1,21 @@
-﻿namespace TomsToolbox.Essentials
+﻿namespace TomsToolbox.Essentials;
+
+/// <summary>
+/// Helper to generate hash codes
+/// </summary>
+public static class HashCode
 {
     /// <summary>
-    /// Helper to generate hash codes
+    /// Aggregates the specified values to a single hash code.
     /// </summary>
-    public static class HashCode
+    /// <param name="hash1">The first hash code.</param>
+    /// <param name="hash2">The second hash code.</param>
+    /// <returns>A new hash code calculated from the specified ones.</returns>
+    public static int Aggregate(int hash1, int hash2)
     {
-        /// <summary>
-        /// Aggregates the specified values to a single hash code.
-        /// </summary>
-        /// <param name="hash1">The first hash code.</param>
-        /// <param name="hash2">The second hash code.</param>
-        /// <returns>A new hash code calculated from the specified ones.</returns>
-        public static int Aggregate(int hash1, int hash2)
+        unchecked
         {
-            unchecked
-            {
-                return ((hash1 << 5) + hash1) ^ hash2;
-            }
+            return ((hash1 << 5) + hash1) ^ hash2;
         }
     }
 }

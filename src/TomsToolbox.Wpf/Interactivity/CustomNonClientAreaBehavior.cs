@@ -1,803 +1,802 @@
-﻿namespace TomsToolbox.Wpf.Interactivity
+﻿namespace TomsToolbox.Wpf.Interactivity;
+
+using System;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media;
+
+using Microsoft.Xaml.Behaviors;
+
+/// <summary>
+/// Hit test values for the <see cref="NcHitTestEventArgs"/>
+/// </summary>
+public enum HitTest
 {
-    using System;
-    using System.ComponentModel;
-    using System.Runtime.InteropServices;
-    using System.Windows;
-    using System.Windows.Interop;
-    using System.Windows.Media;
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    Nowhere = 0,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    Client = 1,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    Caption = 2,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    SysMenu = 3,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    GrowBox = 4,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    Size = GrowBox,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    Menu = 5,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    HScroll = 6,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    VScroll = 7,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    MinButton = 8,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    MaxButton = 9,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    Left = 10,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    Right = 11,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    Top = 12,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    TopLeft = 13,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    TopRight = 14,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    Bottom = 15,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    BottomLeft = 16,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    BottomRight = 17,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    Border = 18,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    Object = 19,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    Close = 20,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    Help = 21,
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    Error = (-2),
+    /// <summary>See documentation of WM_NCHITTEST</summary>
+    Transparent = (-1),
+}
 
-    using Microsoft.Xaml.Behaviors;
+/// <summary>
+/// Event args for the <see cref="CustomNonClientAreaBehavior.NcHitTestEvent"/> event.
+/// </summary>
+public class NcHitTestEventArgs : RoutedEventArgs
+{
+    private HitTest _hitTest;
 
     /// <summary>
-    /// Hit test values for the <see cref="NcHitTestEventArgs"/>
+    /// Initializes a new instance of the <see cref="NcHitTestEventArgs"/> class.
     /// </summary>
-    public enum HitTest
+    public NcHitTestEventArgs()
     {
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        Nowhere = 0,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        Client = 1,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        Caption = 2,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        SysMenu = 3,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        GrowBox = 4,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        Size = GrowBox,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        Menu = 5,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        HScroll = 6,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        VScroll = 7,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        MinButton = 8,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        MaxButton = 9,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        Left = 10,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        Right = 11,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        Top = 12,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        TopLeft = 13,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        TopRight = 14,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        Bottom = 15,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        BottomLeft = 16,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        BottomRight = 17,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        Border = 18,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        Object = 19,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        Close = 20,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        Help = 21,
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        Error = (-2),
-        /// <summary>See documentation of WM_NCHITTEST</summary>
-        Transparent = (-1),
+        RoutedEvent = CustomNonClientAreaBehavior.NcHitTestEvent;
     }
 
     /// <summary>
-    /// Event args for the <see cref="CustomNonClientAreaBehavior.NcHitTestEvent"/> event.
+    /// Gets or sets the hit test result.
     /// </summary>
-    public class NcHitTestEventArgs : RoutedEventArgs
+    public HitTest HitTest
     {
-        private HitTest _hitTest;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NcHitTestEventArgs"/> class.
-        /// </summary>
-        public NcHitTestEventArgs()
+        get => _hitTest;
+        set
         {
-            RoutedEvent = CustomNonClientAreaBehavior.NcHitTestEvent;
+            _hitTest = value;
+            Handled = true;
         }
+    }
+}
 
-        /// <summary>
-        /// Gets or sets the hit test result.
-        /// </summary>
-        public HitTest HitTest
+/// <summary>
+/// Behavior to emulate correct non client area handling for transparent windows that draw their own border and caption.
+/// </summary>
+public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
+{
+    private Window? _window;
+    private POINT _windowOffset;
+    private Matrix _transformFromDevice = Matrix.Identity;
+    private Matrix _transformToDevice = Matrix.Identity;
+
+    /// <summary>
+    /// Gets or sets the size of the border used to size the window.
+    /// </summary>
+    /// <value>
+    /// The size of the border.
+    /// </value>
+    public Size BorderSize
+    {
+        get => this.GetValue<Size>(BorderSizeProperty);
+        set => SetValue(BorderSizeProperty, value);
+    }
+    /// <summary>
+    /// Identifies the <see cref="BorderSize"/> dependency property
+    /// </summary>
+    public static readonly DependencyProperty BorderSizeProperty =
+        DependencyProperty.Register("BorderSize", typeof(Size), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(new Size(4, 4)));
+
+
+    /// <summary>
+    /// Gets or sets the size of a corner used to size the window.
+    /// </summary>
+    /// <value>
+    /// The size of the corner.
+    /// </value>
+    public Size CornerSize
+    {
+        get => this.GetValue<Size>(CornerSizeProperty);
+        set => SetValue(CornerSizeProperty, value);
+    }
+    /// <summary>
+    /// Identifies the <see cref="CornerSize"/> dependency property
+    /// </summary>
+    public static readonly DependencyProperty CornerSizeProperty =
+        DependencyProperty.Register("CornerSize", typeof(Size), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(new Size(8, 8)));
+
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this window has a glass frame.
+    /// </summary>
+    /// <value>
+    /// <c>true</c> if this window has a glass frame; otherwise, <c>false</c>.
+    /// </value>
+    public bool HasGlassFrame
+    {
+        get => this.GetValue<bool>(HasGlassFrameProperty);
+        set => SetValue(HasGlassFrameProperty, value);
+    }
+    /// <summary>
+    /// Identifies the <see cref="HasGlassFrame"/> dependency property
+    /// </summary>
+    public static readonly DependencyProperty HasGlassFrameProperty =
+        DependencyProperty.Register("HasGlassFrame", typeof(bool), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(true));
+
+
+    /// <summary>
+    /// Gets the value indicating if the glass frame using DWM composition for this window should be disabled.
+    /// </summary>
+    /// <param name="window">The window.</param>
+    /// <returns><c>true</c> if the glass frame is disabled; otherwise <c>false</c></returns>
+    public static bool GetDisableGlassFrame(Window? window)
+    {
+        return (bool)(window?.GetValue(DisableGlassFrameProperty) ?? false);
+    }
+    /// <summary>
+    /// Sets the value indicating if the glass frame using DWM composition for this window should be disabled.
+    /// </summary>
+    /// <param name="window">The window.</param>
+    /// <param name="value">if set to <c>true</c> the glass frame is disabled.</param>
+    public static void SetDisableGlassFrame(Window window, bool value)
+    {
+        window.SetValue(DisableGlassFrameProperty, value);
+    }
+    /// <summary>
+    /// Identifies the <see cref="P:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.DisableGlassFrame"/> attached property
+    /// </summary>
+    /// <AttachedPropertyComments>
+    /// <summary>
+    /// Control DWM composition via the hosting Window.
+    /// </summary>
+    /// </AttachedPropertyComments>
+    public static readonly DependencyProperty DisableGlassFrameProperty = DependencyProperty.RegisterAttached(
+        "DisableGlassFrame", typeof(bool), typeof(CustomNonClientAreaBehavior));
+
+    /// <summary>
+    /// The WM_NCHITTEST test event equivalent.
+    /// </summary>
+    public static readonly RoutedEvent NcHitTestEvent = EventManager.RegisterRoutedEvent("NcHitTest", RoutingStrategy.Bubble, typeof(EventHandler<NcHitTestEventArgs>), typeof(CustomNonClientAreaBehavior));
+
+    /// <summary>
+    /// Called when the element is attached.
+    /// </summary>
+    protected override void OnAttached()
+    {
+        base.OnAttached();
+
+        var frameworkElement = AssociatedObject;
+
+        if (DesignerProperties.GetIsInDesignMode(frameworkElement))
+            return;
+
+        var window = _window = frameworkElement.TryFindAncestorOrSelf<Window>();
+        if (window == null)
+            return;
+
+        if (window.IsInitialized)
         {
-            get => _hitTest;
-            set
-            {
-                _hitTest = value;
-                Handled = true;
-            }
+            Window_SourceInitialized(window, EventArgs.Empty);
+        }
+        else
+        {
+            window.SourceInitialized += Window_SourceInitialized;
         }
     }
 
     /// <summary>
-    /// Behavior to emulate correct non client area handling for transparent windows that draw their own border and caption.
+    /// Called when the element is detached.
     /// </summary>
-    public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
+    protected override void OnDetaching()
     {
-        private Window? _window;
-        private POINT _windowOffset;
-        private Matrix _transformFromDevice = Matrix.Identity;
-        private Matrix _transformToDevice = Matrix.Identity;
+        base.OnDetaching();
 
-        /// <summary>
-        /// Gets or sets the size of the border used to size the window.
-        /// </summary>
-        /// <value>
-        /// The size of the border.
-        /// </value>
-        public Size BorderSize
+        var window = _window;
+
+        if (window == null)
+            return;
+
+        window.SourceInitialized -= Window_SourceInitialized;
+        Unregister(window);
+    }
+
+    private void Window_SourceInitialized(object? sender, EventArgs? e)
+    {
+        var window = _window ?? throw new InvalidOperationException("Window needs to be initialized");
+        var messageSource = (HwndSource?)PresentationSource.FromDependencyObject(window) ?? throw new InvalidOperationException("Window needs to be initialized");
+
+        var compositionTarget = messageSource.CompositionTarget;
+
+        _transformFromDevice = compositionTarget?.TransformFromDevice ?? throw new InvalidOperationException("Window needs to be initialized");
+        _transformToDevice = compositionTarget.TransformToDevice;
+
+        messageSource.AddHook(WindowProc);
+
+        var handle = messageSource.Handle;
+
+        using (new DeferSizeToContent(window))
         {
-            get => this.GetValue<Size>(BorderSizeProperty);
-            set => SetValue(BorderSizeProperty, value);
+            ShowGlassFrame(compositionTarget, handle);
+            NativeMethods.SetWindowRgn(handle, IntPtr.Zero, true);
         }
-        /// <summary>
-        /// Identifies the <see cref="BorderSize"/> dependency property
-        /// </summary>
-        public static readonly DependencyProperty BorderSizeProperty =
-            DependencyProperty.Register("BorderSize", typeof(Size), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(new Size(4, 4)));
+    }
 
+    private void ShowGlassFrame(IntPtr handle)
+    {
+        var window = _window ?? throw new InvalidOperationException("Window needs to be initialized");
+        var messageSource = (HwndSource?)PresentationSource.FromDependencyObject(window) ?? throw new InvalidOperationException("Window needs to be initialized");
 
-        /// <summary>
-        /// Gets or sets the size of a corner used to size the window.
-        /// </summary>
-        /// <value>
-        /// The size of the corner.
-        /// </value>
-        public Size CornerSize
+        ShowGlassFrame(messageSource.CompositionTarget, handle);
+    }
+
+    private void ShowGlassFrame(HwndTarget? compositionTarget, IntPtr handle)
+    {
+        if (compositionTarget == null)
+            return;
+
+        if (HasGlassFrame && !GetDisableGlassFrame(_window))
         {
-            get => this.GetValue<Size>(CornerSizeProperty);
-            set => SetValue(CornerSizeProperty, value);
-        }
-        /// <summary>
-        /// Identifies the <see cref="CornerSize"/> dependency property
-        /// </summary>
-        public static readonly DependencyProperty CornerSizeProperty =
-            DependencyProperty.Register("CornerSize", typeof(Size), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(new Size(8, 8)));
-
-
-        /// <summary>
-        /// Gets or sets a value indicating whether this window has a glass frame.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if this window has a glass frame; otherwise, <c>false</c>.
-        /// </value>
-        public bool HasGlassFrame
-        {
-            get => this.GetValue<bool>(HasGlassFrameProperty);
-            set => SetValue(HasGlassFrameProperty, value);
-        }
-        /// <summary>
-        /// Identifies the <see cref="HasGlassFrame"/> dependency property
-        /// </summary>
-        public static readonly DependencyProperty HasGlassFrameProperty =
-            DependencyProperty.Register("HasGlassFrame", typeof(bool), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(true));
-
-
-        /// <summary>
-        /// Gets the value indicating if the glass frame using DWM composition for this window should be disabled.
-        /// </summary>
-        /// <param name="window">The window.</param>
-        /// <returns><c>true</c> if the glass frame is disabled; otherwise <c>false</c></returns>
-        public static bool GetDisableGlassFrame(Window? window)
-        {
-            return (bool)(window?.GetValue(DisableGlassFrameProperty) ?? false);
-        }
-        /// <summary>
-        /// Sets the value indicating if the glass frame using DWM composition for this window should be disabled.
-        /// </summary>
-        /// <param name="window">The window.</param>
-        /// <param name="value">if set to <c>true</c> the glass frame is disabled.</param>
-        public static void SetDisableGlassFrame(Window window, bool value)
-        {
-            window.SetValue(DisableGlassFrameProperty, value);
-        }
-        /// <summary>
-        /// Identifies the <see cref="P:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.DisableGlassFrame"/> attached property
-        /// </summary>
-        /// <AttachedPropertyComments>
-        /// <summary>
-        /// Control DWM composition via the hosting Window.
-        /// </summary>
-        /// </AttachedPropertyComments>
-        public static readonly DependencyProperty DisableGlassFrameProperty = DependencyProperty.RegisterAttached(
-            "DisableGlassFrame", typeof(bool), typeof(CustomNonClientAreaBehavior));
-
-        /// <summary>
-        /// The WM_NCHITTEST test event equivalent.
-        /// </summary>
-        public static readonly RoutedEvent NcHitTestEvent = EventManager.RegisterRoutedEvent("NcHitTest", RoutingStrategy.Bubble, typeof(EventHandler<NcHitTestEventArgs>), typeof(CustomNonClientAreaBehavior));
-
-        /// <summary>
-        /// Called when the element is attached.
-        /// </summary>
-        protected override void OnAttached()
-        {
-            base.OnAttached();
-
-            var frameworkElement = AssociatedObject;
-
-            if (DesignerProperties.GetIsInDesignMode(frameworkElement))
-                return;
-
-            var window = _window = frameworkElement.TryFindAncestorOrSelf<Window>();
-            if (window == null)
-                return;
-
-            if (window.IsInitialized)
+            try
             {
-                Window_SourceInitialized(window, EventArgs.Empty);
-            }
-            else
-            {
-                window.SourceInitialized += Window_SourceInitialized;
-            }
-        }
-
-        /// <summary>
-        /// Called when the element is detached.
-        /// </summary>
-        protected override void OnDetaching()
-        {
-            base.OnDetaching();
-
-            var window = _window;
-
-            if (window == null)
-                return;
-
-            window.SourceInitialized -= Window_SourceInitialized;
-            Unregister(window);
-        }
-
-        private void Window_SourceInitialized(object? sender, EventArgs? e)
-        {
-            var window = _window ?? throw new InvalidOperationException("Window needs to be initialized");
-            var messageSource = (HwndSource?)PresentationSource.FromDependencyObject(window) ?? throw new InvalidOperationException("Window needs to be initialized");
-
-            var compositionTarget = messageSource.CompositionTarget;
-
-            _transformFromDevice = compositionTarget?.TransformFromDevice ?? throw new InvalidOperationException("Window needs to be initialized");
-            _transformToDevice = compositionTarget.TransformToDevice;
-
-            messageSource.AddHook(WindowProc);
-
-            var handle = messageSource.Handle;
-
-            using (new DeferSizeToContent(window))
-            {
-                ShowGlassFrame(compositionTarget, handle);
-                NativeMethods.SetWindowRgn(handle, IntPtr.Zero, true);
-            }
-        }
-
-        private void ShowGlassFrame(IntPtr handle)
-        {
-            var window = _window ?? throw new InvalidOperationException("Window needs to be initialized");
-            var messageSource = (HwndSource?)PresentationSource.FromDependencyObject(window) ?? throw new InvalidOperationException("Window needs to be initialized");
-
-            ShowGlassFrame(messageSource.CompositionTarget, handle);
-        }
-
-        private void ShowGlassFrame(HwndTarget? compositionTarget, IntPtr handle)
-        {
-            if (compositionTarget == null)
-                return;
-
-            if (HasGlassFrame && !GetDisableGlassFrame(_window))
-            {
-                try
+                if (NativeMethods.DwmIsCompositionEnabled())
                 {
-                    if (NativeMethods.DwmIsCompositionEnabled())
-                    {
-                        compositionTarget.BackgroundColor = Colors.Transparent;
+                    compositionTarget.BackgroundColor = Colors.Transparent;
 
-                        var m = new MARGINS(1);
-                        NativeMethods.DwmExtendFrameIntoClientArea(handle, ref m);
-                        return;
-                    }
-                }
-                catch (Exception)
-                {
-                    // dwmapi.dll not found => incompatible OS
+                    var m = new MARGINS(1);
+                    NativeMethods.DwmExtendFrameIntoClientArea(handle, ref m);
+                    return;
                 }
             }
-
-            compositionTarget.BackgroundColor = SystemColors.WindowColor;
-        }
-
-        private void Unregister(Window window)
-        {
-            var messageSource = (HwndSource?)PresentationSource.FromDependencyObject(window);
-
-            messageSource?.RemoveHook(WindowProc);
-        }
-
-        private IntPtr WindowProc(IntPtr windowHandle, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
-            switch (msg)
+            catch (Exception)
             {
-                case WM_NCCALCSIZE:
-                    var windowPlacement = GetWindowPlacement(windowHandle);
-                    if (windowPlacement.showCmd == SW_MAXIMIZE)
+                // dwmapi.dll not found => incompatible OS
+            }
+        }
+
+        compositionTarget.BackgroundColor = SystemColors.WindowColor;
+    }
+
+    private void Unregister(Window window)
+    {
+        var messageSource = (HwndSource?)PresentationSource.FromDependencyObject(window);
+
+        messageSource?.RemoveHook(WindowProc);
+    }
+
+    private IntPtr WindowProc(IntPtr windowHandle, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    {
+        switch (msg)
+        {
+            case WM_NCCALCSIZE:
+                var windowPlacement = GetWindowPlacement(windowHandle);
+                if (windowPlacement.showCmd == SW_MAXIMIZE)
+                {
+                    var windowInfo = GetWindowInfo(windowHandle);
+
+                    var before = PtrToStructure<RECT>(lParam);
+                    NativeMethods.DefWindowProc(windowHandle, WM_NCCALCSIZE, wParam, lParam);
+                    var after = PtrToStructure<RECT>(lParam);
+
+                    // Fix for task-bar: task-bar location = bottom, auto hide task-bar, show task-bar on all displays, 3 displays active => on main monitor the task bar does not restore when hovering with the mouse.
+                    var monitorInfo = MonitorInfoFromWindow(windowHandle);
+                    if (monitorInfo.rcMonitor.Height == monitorInfo.rcWork.Height && monitorInfo.rcMonitor.Width == monitorInfo.rcWork.Width)
                     {
-                        var windowInfo = GetWindowInfo(windowHandle);
-
-                        var before = PtrToStructure<RECT>(lParam);
-                        NativeMethods.DefWindowProc(windowHandle, WM_NCCALCSIZE, wParam, lParam);
-                        var after = PtrToStructure<RECT>(lParam);
-
-                        // Fix for task-bar: task-bar location = bottom, auto hide task-bar, show task-bar on all displays, 3 displays active => on main monitor the task bar does not restore when hovering with the mouse.
-                        var monitorInfo = MonitorInfoFromWindow(windowHandle);
-                        if (monitorInfo.rcMonitor.Height == monitorInfo.rcWork.Height && monitorInfo.rcMonitor.Width == monitorInfo.rcWork.Width)
-                        {
-                            --after.Bottom;
-                        }
-
-                        after.Top = before.Top + (int)windowInfo.cyWindowBorders;
-
-                        if ((windowInfo.dwExStyle & WS_EX_CLIENTEDGE) != 0)
-                        {
-                            var x = NativeMethods.GetSystemMetrics(SM_CXEDGE);
-                            after.Right += 2 * x;
-                            after.Left -= x;
-                        }
-
-                        Marshal.StructureToPtr(after, lParam, true);
-
-                        _windowOffset = after.TopLeft - before.TopLeft;
-                    }
-                    else
-                    {
-                        _windowOffset = new POINT();
+                        --after.Bottom;
                     }
 
-                    // We do all drawings...
-                    handled = true;
-                    break;
+                    after.Top = before.Top + (int)windowInfo.cyWindowBorders;
 
-                case WM_NCACTIVATE:
-                    handled = true;
-                    // Schedule a redraw, if DWM composition is disabled, DefWindowProc(...WM_NCACTIVATE..) *does* some extra drawing.
-                    NativeMethods.RedrawWindow(windowHandle, IntPtr.Zero, IntPtr.Zero, RedrawWindowFlags.Invalidate | RedrawWindowFlags.NoErase);
-                    // Must call DefWindowProc with lParam set to -1, else windows might do some custom drawing in the NC area.
-                    return NativeMethods.DefWindowProc(windowHandle, WM_NCACTIVATE, wParam, new IntPtr(-1));
+                    if ((windowInfo.dwExStyle & WS_EX_CLIENTEDGE) != 0)
+                    {
+                        var x = NativeMethods.GetSystemMetrics(SM_CXEDGE);
+                        after.Right += 2 * x;
+                        after.Left -= x;
+                    }
 
-                case WM_NCHITTEST:
-                    handled = true;
-                    var result = NcHitTest(windowHandle, lParam);
-                    return (IntPtr)result;
+                    Marshal.StructureToPtr(after, lParam, true);
 
-                case WM_NCRBUTTONUP:
-                    var hitTest = wParam.ToInt32();
-                    if ((hitTest == (int)HitTest.SysMenu) || (hitTest == (int)HitTest.Caption))
-                        ShowSystemMenu(windowHandle, LOWORD(lParam), HIWORD(lParam));
-                    break;
-
-                case WM_DWMCOMPOSITIONCHANGED:
-                    handled = true;
-                    ShowGlassFrame(windowHandle);
-                    break;
-            }
-
-            return IntPtr.Zero;
-        }
-
-        private HitTest NcHitTest(IntPtr windowHandle, IntPtr lParam)
-        {
-            var window = _window ?? throw new InvalidOperationException("Window needs to be initialized");
-
-            // Arguments are absolute native coordinates
-            var hitPoint = new POINT((short)lParam, (short)((uint)lParam >> 16));
-
-            NativeMethods.GetWindowRect(windowHandle, out var windowRect);
-
-            var topLeft = windowRect.TopLeft + _windowOffset;
-
-            var cornerSize = (SIZE)_transformToDevice.Transform((Point)CornerSize);
-            var borderSize = (SIZE)_transformToDevice.Transform((Point)BorderSize);
-
-            if ((window.ResizeMode == ResizeMode.CanResize) || window.ResizeMode == ResizeMode.CanResizeWithGrip)
-            {
-                if (WindowState.Maximized != window.WindowState)
-                {
-                    var bottomRight = windowRect.BottomRight;
-                    var left = topLeft.X;
-                    var top = topLeft.Y;
-                    var right = bottomRight.X;
-                    var bottom = bottomRight.Y;
-
-                    if ((hitPoint.Y < top) || (hitPoint.Y > bottom) || (hitPoint.X < left) || (hitPoint.X > right))
-                        return HitTest.Transparent;
-
-                    if ((hitPoint.Y < (top + cornerSize.Height)) && (hitPoint.X < (left + cornerSize.Width)))
-                        return HitTest.TopLeft;
-                    if ((hitPoint.Y < (top + cornerSize.Height)) && (hitPoint.X > (right - cornerSize.Width)))
-                        return HitTest.TopRight;
-                    if ((hitPoint.Y > (bottom - cornerSize.Height)) && (hitPoint.X < (left + cornerSize.Width)))
-                        return HitTest.BottomLeft;
-                    if ((hitPoint.Y > (bottom - cornerSize.Height)) && (hitPoint.X > (right - cornerSize.Width)))
-                        return HitTest.BottomRight;
-                    if (hitPoint.Y < (top + borderSize.Height))
-                        return HitTest.Top;
-                    if (hitPoint.Y > (bottom - borderSize.Height))
-                        return HitTest.Bottom;
-                    if (hitPoint.X < (left + borderSize.Width))
-                        return HitTest.Left;
-                    if (hitPoint.X > (right - borderSize.Width))
-                        return HitTest.Right;
+                    _windowOffset = after.TopLeft - before.TopLeft;
                 }
-            }
-
-            // Now check Tag or send an internal NcHitTest event, so any element can override the behavior.
-            // The caption must e.g. return HitTest.Caption
-            var clientPoint = _transformFromDevice.Transform(hitPoint - topLeft);
-
-            if (window.InputHitTest(clientPoint) is FrameworkElement element)
-            {
-                if (element.Tag is HitTest value)
+                else
                 {
-                    if (Enum.IsDefined(typeof(HitTest), value))
-                        return value;
+                    _windowOffset = new POINT();
                 }
 
-                var args = new NcHitTestEventArgs();
+                // We do all drawings...
+                handled = true;
+                break;
 
-                element.RaiseEvent(args);
+            case WM_NCACTIVATE:
+                handled = true;
+                // Schedule a redraw, if DWM composition is disabled, DefWindowProc(...WM_NCACTIVATE..) *does* some extra drawing.
+                NativeMethods.RedrawWindow(windowHandle, IntPtr.Zero, IntPtr.Zero, RedrawWindowFlags.Invalidate | RedrawWindowFlags.NoErase);
+                // Must call DefWindowProc with lParam set to -1, else windows might do some custom drawing in the NC area.
+                return NativeMethods.DefWindowProc(windowHandle, WM_NCACTIVATE, wParam, new IntPtr(-1));
 
-                if (args.Handled)
-                    return args.HitTest;
+            case WM_NCHITTEST:
+                handled = true;
+                var result = NcHitTest(windowHandle, lParam);
+                return (IntPtr)result;
+
+            case WM_NCRBUTTONUP:
+                var hitTest = wParam.ToInt32();
+                if ((hitTest == (int)HitTest.SysMenu) || (hitTest == (int)HitTest.Caption))
+                    ShowSystemMenu(windowHandle, LOWORD(lParam), HIWORD(lParam));
+                break;
+
+            case WM_DWMCOMPOSITIONCHANGED:
+                handled = true;
+                ShowGlassFrame(windowHandle);
+                break;
+        }
+
+        return IntPtr.Zero;
+    }
+
+    private HitTest NcHitTest(IntPtr windowHandle, IntPtr lParam)
+    {
+        var window = _window ?? throw new InvalidOperationException("Window needs to be initialized");
+
+        // Arguments are absolute native coordinates
+        var hitPoint = new POINT((short)lParam, (short)((uint)lParam >> 16));
+
+        NativeMethods.GetWindowRect(windowHandle, out var windowRect);
+
+        var topLeft = windowRect.TopLeft + _windowOffset;
+
+        var cornerSize = (SIZE)_transformToDevice.Transform((Point)CornerSize);
+        var borderSize = (SIZE)_transformToDevice.Transform((Point)BorderSize);
+
+        if ((window.ResizeMode == ResizeMode.CanResize) || window.ResizeMode == ResizeMode.CanResizeWithGrip)
+        {
+            if (WindowState.Maximized != window.WindowState)
+            {
+                var bottomRight = windowRect.BottomRight;
+                var left = topLeft.X;
+                var top = topLeft.Y;
+                var right = bottomRight.X;
+                var bottom = bottomRight.Y;
+
+                if ((hitPoint.Y < top) || (hitPoint.Y > bottom) || (hitPoint.X < left) || (hitPoint.X > right))
+                    return HitTest.Transparent;
+
+                if ((hitPoint.Y < (top + cornerSize.Height)) && (hitPoint.X < (left + cornerSize.Width)))
+                    return HitTest.TopLeft;
+                if ((hitPoint.Y < (top + cornerSize.Height)) && (hitPoint.X > (right - cornerSize.Width)))
+                    return HitTest.TopRight;
+                if ((hitPoint.Y > (bottom - cornerSize.Height)) && (hitPoint.X < (left + cornerSize.Width)))
+                    return HitTest.BottomLeft;
+                if ((hitPoint.Y > (bottom - cornerSize.Height)) && (hitPoint.X > (right - cornerSize.Width)))
+                    return HitTest.BottomRight;
+                if (hitPoint.Y < (top + borderSize.Height))
+                    return HitTest.Top;
+                if (hitPoint.Y > (bottom - borderSize.Height))
+                    return HitTest.Bottom;
+                if (hitPoint.X < (left + borderSize.Width))
+                    return HitTest.Left;
+                if (hitPoint.X > (right - borderSize.Width))
+                    return HitTest.Right;
+            }
+        }
+
+        // Now check Tag or send an internal NcHitTest event, so any element can override the behavior.
+        // The caption must e.g. return HitTest.Caption
+        var clientPoint = _transformFromDevice.Transform(hitPoint - topLeft);
+
+        if (window.InputHitTest(clientPoint) is FrameworkElement element)
+        {
+            if (element.Tag is HitTest value)
+            {
+                if (Enum.IsDefined(typeof(HitTest), value))
+                    return value;
             }
 
-            return HitTest.Client;
+            var args = new NcHitTestEventArgs();
+
+            element.RaiseEvent(args);
+
+            if (args.Handled)
+                return args.HitTest;
         }
 
-        private void ShowSystemMenu(IntPtr handle, int x, int y)
-        {
-            var systemMenu = NativeMethods.GetSystemMenu(handle, false);
+        return HitTest.Client;
+    }
 
-            var windowState = _window?.WindowState;
-            var resizeMode = _window?.ResizeMode;
+    private void ShowSystemMenu(IntPtr handle, int x, int y)
+    {
+        var systemMenu = NativeMethods.GetSystemMenu(handle, false);
 
-            NativeMethods.EnableMenuItem(systemMenu, SC_RESTORE, MenuFlags(windowState != WindowState.Normal));
-            NativeMethods.EnableMenuItem(systemMenu, SC_MOVE, MenuFlags(windowState == WindowState.Normal));
-            NativeMethods.EnableMenuItem(systemMenu, SC_SIZE, MenuFlags((windowState == WindowState.Normal) && ((resizeMode == ResizeMode.CanResize) || (resizeMode == ResizeMode.CanResizeWithGrip))));
-            NativeMethods.EnableMenuItem(systemMenu, SC_MINIMIZE, MenuFlags((windowState != WindowState.Minimized) && (resizeMode != ResizeMode.NoResize)));
-            NativeMethods.EnableMenuItem(systemMenu, SC_MAXIMIZE, MenuFlags((windowState != WindowState.Maximized) && (resizeMode != ResizeMode.NoResize)));
+        var windowState = _window?.WindowState;
+        var resizeMode = _window?.ResizeMode;
 
-            var cmd = NativeMethods.TrackPopupMenuEx(systemMenu, 256U, x, y, handle, IntPtr.Zero);
-            if (cmd == 0)
-                return;
+        NativeMethods.EnableMenuItem(systemMenu, SC_RESTORE, MenuFlags(windowState != WindowState.Normal));
+        NativeMethods.EnableMenuItem(systemMenu, SC_MOVE, MenuFlags(windowState == WindowState.Normal));
+        NativeMethods.EnableMenuItem(systemMenu, SC_SIZE, MenuFlags((windowState == WindowState.Normal) && ((resizeMode == ResizeMode.CanResize) || (resizeMode == ResizeMode.CanResizeWithGrip))));
+        NativeMethods.EnableMenuItem(systemMenu, SC_MINIMIZE, MenuFlags((windowState != WindowState.Minimized) && (resizeMode != ResizeMode.NoResize)));
+        NativeMethods.EnableMenuItem(systemMenu, SC_MAXIMIZE, MenuFlags((windowState != WindowState.Maximized) && (resizeMode != ResizeMode.NoResize)));
 
-            NativeMethods.PostMessage(handle, WM_SYSCOMMAND, new IntPtr(cmd), IntPtr.Zero);
-        }
+        var cmd = NativeMethods.TrackPopupMenuEx(systemMenu, 256U, x, y, handle, IntPtr.Zero);
+        if (cmd == 0)
+            return;
 
-        // ReSharper disable InconsistentNaming
-        private const int SW_MAXIMIZE = 3;
+        NativeMethods.PostMessage(handle, WM_SYSCOMMAND, new IntPtr(cmd), IntPtr.Zero);
+    }
 
-        private const int WM_NCHITTEST = 0x0084;
-        private const int WM_NCCALCSIZE = 0x0083;
-        private const int WM_NCACTIVATE = 0x0086;
-        private const int WM_NCRBUTTONUP = 165;
-        private const int WM_DWMCOMPOSITIONCHANGED = 798;
-        private const int WM_SYSCOMMAND = 274;
+    // ReSharper disable InconsistentNaming
+    private const int SW_MAXIMIZE = 3;
 
-        private const int SC_SIZE = 61440;
-        private const int SC_MOVE = 61456;
-        private const int SC_MINIMIZE = 61472;
-        private const int SC_MAXIMIZE = 61488;
-        private const int SC_RESTORE = 61728;
+    private const int WM_NCHITTEST = 0x0084;
+    private const int WM_NCCALCSIZE = 0x0083;
+    private const int WM_NCACTIVATE = 0x0086;
+    private const int WM_NCRBUTTONUP = 165;
+    private const int WM_DWMCOMPOSITIONCHANGED = 798;
+    private const int WM_SYSCOMMAND = 274;
 
-        private const uint MF_ENABLED = 0;
-        private const uint MF_GRAYED = 1;
-        private const uint MF_DISABLED = 2;
+    private const int SC_SIZE = 61440;
+    private const int SC_MOVE = 61456;
+    private const int SC_MINIMIZE = 61472;
+    private const int SC_MAXIMIZE = 61488;
+    private const int SC_RESTORE = 61728;
 
-        private const int SM_CXEDGE = 45;
-        // private const int SM_CYEDGE = 46;
+    private const uint MF_ENABLED = 0;
+    private const uint MF_GRAYED = 1;
+    private const uint MF_DISABLED = 2;
 
-        private const int WS_EX_CLIENTEDGE = 0x00000200;
+    private const int SM_CXEDGE = 45;
+    // private const int SM_CYEDGE = 46;
 
-        private static uint MenuFlags(bool enabled)
-        {
-            return enabled ? MF_ENABLED : MF_DISABLED | MF_GRAYED;
-        }
+    private const int WS_EX_CLIENTEDGE = 0x00000200;
 
-        private static int HIWORD(IntPtr i)
-        {
-            return (short)(i.ToInt32() >> 16);
-        }
+    private static uint MenuFlags(bool enabled)
+    {
+        return enabled ? MF_ENABLED : MF_DISABLED | MF_GRAYED;
+    }
 
-        private static int LOWORD(IntPtr i)
-        {
-            return (short)(i.ToInt32() & ushort.MaxValue);
-        }
+    private static int HIWORD(IntPtr i)
+    {
+        return (short)(i.ToInt32() >> 16);
+    }
 
-        // ReSharper disable MemberCanBePrivate.Local
-        // ReSharper disable FieldCanBeMadeReadOnly.Local
-        // ReSharper disable UnusedMember.Local
+    private static int LOWORD(IntPtr i)
+    {
+        return (short)(i.ToInt32() & ushort.MaxValue);
+    }
+
+    // ReSharper disable MemberCanBePrivate.Local
+    // ReSharper disable FieldCanBeMadeReadOnly.Local
+    // ReSharper disable UnusedMember.Local
 #pragma warning disable 169 // field is never used
 #pragma warning disable 649 // field is never assigned
 
-        [StructLayout(LayoutKind.Sequential, Pack = 0)]
-        private struct RECT
+    [StructLayout(LayoutKind.Sequential, Pack = 0)]
+    private struct RECT
+    {
+        public int Left;
+        public int Top;
+        public int Right;
+        public int Bottom;
+
+        public POINT TopLeft => new() { X = Left, Y = Top };
+
+        public POINT BottomRight => new() { X = Right, Y = Bottom };
+
+        public int Width => Right - Left;
+
+        public int Height => Bottom - Top;
+
+        public static implicit operator Rect(RECT r)
         {
-            public int Left;
-            public int Top;
-            public int Right;
-            public int Bottom;
-
-            public POINT TopLeft => new() { X = Left, Y = Top };
-
-            public POINT BottomRight => new() { X = Right, Y = Bottom };
-
-            public int Width => Right - Left;
-
-            public int Height => Bottom - Top;
-
-            public static implicit operator Rect(RECT r)
-            {
-                return new Rect(r.TopLeft, r.BottomRight);
-            }
-
-            public override string ToString()
-            {
-                return ((Rect)this).ToString();
-            }
+            return new Rect(r.TopLeft, r.BottomRight);
         }
 
-        [StructLayout(LayoutKind.Sequential, Pack = 0)]
-        private struct POINT
+        public override string ToString()
         {
-            public int X;
-            public int Y;
+            return ((Rect)this).ToString();
+        }
+    }
 
-            public POINT(int x, int y)
-            {
-                X = x;
-                Y = y;
-            }
+    [StructLayout(LayoutKind.Sequential, Pack = 0)]
+    private struct POINT
+    {
+        public int X;
+        public int Y;
 
-            public static POINT operator +(POINT p1, POINT p2)
-            {
-                return new POINT { X = p1.X + p2.X, Y = p1.Y + p2.Y };
-            }
-
-            public static POINT operator -(POINT p1, POINT p2)
-            {
-                return new POINT { X = p1.X - p2.X, Y = p1.Y - p2.Y };
-            }
-
-            public static implicit operator Point(POINT p)
-            {
-                return new Point(p.X, p.Y);
-            }
-
-            public static implicit operator POINT(Point p)
-            {
-                return new POINT((int)Math.Round(p.X), (int)Math.Round(p.Y));
-            }
-
-            public override string ToString()
-            {
-                return ((Point)this).ToString();
-            }
+        public POINT(int x, int y)
+        {
+            X = x;
+            Y = y;
         }
 
-        [StructLayout(LayoutKind.Sequential, Pack = 0)]
-        private struct SIZE
+        public static POINT operator +(POINT p1, POINT p2)
         {
-            public readonly int Width;
-            public readonly int Height;
-
-            public SIZE(int width, int height)
-            {
-                Width = width;
-                Height = height;
-            }
-
-            public static implicit operator SIZE(Point p)
-            {
-                return new SIZE((int)Math.Round(p.X), (int)Math.Round(p.Y));
-            }
-
-            public static implicit operator Size(SIZE s)
-            {
-                return new Size(s.Width, s.Height);
-            }
-
-            public override string ToString()
-            {
-                return ((Size)this).ToString();
-            }
+            return new POINT { X = p1.X + p2.X, Y = p1.Y + p2.Y };
         }
 
-        [StructLayout(LayoutKind.Sequential, Pack = 0)]
-        private struct MARGINS
+        public static POINT operator -(POINT p1, POINT p2)
         {
-            public readonly int Left;
-            public readonly int Right;
-            public readonly int Top;
-            public readonly int Bottom;
-
-            public MARGINS(int value)
-            {
-                Left = value;
-                Top = value;
-                Right = value;
-                Bottom = value;
-            }
+            return new POINT { X = p1.X - p2.X, Y = p1.Y - p2.Y };
         }
 
-        [StructLayout(LayoutKind.Sequential)]
-        private class WINDOWPLACEMENT
+        public static implicit operator Point(POINT p)
         {
-            public int length = Marshal.SizeOf(typeof(WINDOWPLACEMENT));
-            public int flags;
-            public int showCmd;
-            public POINT ptMinPosition;
-            public POINT ptMaxPosition;
-            public RECT rcNormalPosition;
+            return new Point(p.X, p.Y);
         }
 
-        [StructLayout(LayoutKind.Sequential)]
-        private struct MONITORINFO
+        public static implicit operator POINT(Point p)
         {
-            public uint cbSize;
-            public RECT rcMonitor;
-            public RECT rcWork;
-            public uint dwFlags;
+            return new POINT((int)Math.Round(p.X), (int)Math.Round(p.Y));
         }
 
-        [StructLayout(LayoutKind.Sequential)]
-        private struct WINDOWINFO
+        public override string ToString()
         {
-            public int cbSize;
-            public RECT rcWindow;
-            public RECT rcClient;
-            public int dwStyle;
-            public int dwExStyle;
-            public uint dwWindowStatus;
-            public uint cxWindowBorders;
-            public uint cyWindowBorders;
-            public ushort atomWindowType;
-            public ushort wCreatorVersion;
+            return ((Point)this).ToString();
+        }
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 0)]
+    private struct SIZE
+    {
+        public readonly int Width;
+        public readonly int Height;
+
+        public SIZE(int width, int height)
+        {
+            Width = width;
+            Height = height;
         }
 
-        private static WINDOWPLACEMENT GetWindowPlacement(IntPtr hwnd)
+        public static implicit operator SIZE(Point p)
         {
-            var lpwndpl = new WINDOWPLACEMENT();
-            NativeMethods.GetWindowPlacement(hwnd, lpwndpl);
-            return lpwndpl;
+            return new SIZE((int)Math.Round(p.X), (int)Math.Round(p.Y));
         }
 
-        private static MONITORINFO MonitorInfoFromWindow(IntPtr hWnd)
+        public static implicit operator Size(SIZE s)
         {
-            var hMonitor = NativeMethods.MonitorFromWindow(hWnd, 2);
-            var monitorInfo = new MONITORINFO { cbSize = (uint)Marshal.SizeOf(typeof(MONITORINFO)) };
-            NativeMethods.GetMonitorInfo(hMonitor, ref monitorInfo);
-            return monitorInfo;
+            return new Size(s.Width, s.Height);
         }
 
-        private static WINDOWINFO GetWindowInfo(IntPtr hWnd)
+        public override string ToString()
         {
-            var pwi = new WINDOWINFO { cbSize = Marshal.SizeOf(typeof(WINDOWINFO)) };
-            NativeMethods.GetWindowInfo(hWnd, ref pwi);
-            return pwi;
+            return ((Size)this).ToString();
+        }
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 0)]
+    private struct MARGINS
+    {
+        public readonly int Left;
+        public readonly int Right;
+        public readonly int Top;
+        public readonly int Bottom;
+
+        public MARGINS(int value)
+        {
+            Left = value;
+            Top = value;
+            Right = value;
+            Bottom = value;
+        }
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    private class WINDOWPLACEMENT
+    {
+        public int length = Marshal.SizeOf(typeof(WINDOWPLACEMENT));
+        public int flags;
+        public int showCmd;
+        public POINT ptMinPosition;
+        public POINT ptMaxPosition;
+        public RECT rcNormalPosition;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct MONITORINFO
+    {
+        public uint cbSize;
+        public RECT rcMonitor;
+        public RECT rcWork;
+        public uint dwFlags;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct WINDOWINFO
+    {
+        public int cbSize;
+        public RECT rcWindow;
+        public RECT rcClient;
+        public int dwStyle;
+        public int dwExStyle;
+        public uint dwWindowStatus;
+        public uint cxWindowBorders;
+        public uint cyWindowBorders;
+        public ushort atomWindowType;
+        public ushort wCreatorVersion;
+    }
+
+    private static WINDOWPLACEMENT GetWindowPlacement(IntPtr hwnd)
+    {
+        var lpwndpl = new WINDOWPLACEMENT();
+        NativeMethods.GetWindowPlacement(hwnd, lpwndpl);
+        return lpwndpl;
+    }
+
+    private static MONITORINFO MonitorInfoFromWindow(IntPtr hWnd)
+    {
+        var hMonitor = NativeMethods.MonitorFromWindow(hWnd, 2);
+        var monitorInfo = new MONITORINFO { cbSize = (uint)Marshal.SizeOf(typeof(MONITORINFO)) };
+        NativeMethods.GetMonitorInfo(hMonitor, ref monitorInfo);
+        return monitorInfo;
+    }
+
+    private static WINDOWINFO GetWindowInfo(IntPtr hWnd)
+    {
+        var pwi = new WINDOWINFO { cbSize = Marshal.SizeOf(typeof(WINDOWINFO)) };
+        NativeMethods.GetWindowInfo(hWnd, ref pwi);
+        return pwi;
+    }
+
+    private static T PtrToStructure<T>(IntPtr ptr)
+    {
+        return (T)Marshal.PtrToStructure(ptr, typeof(T))!;
+    }
+
+    [Flags]
+    private enum RedrawWindowFlags : uint
+    {
+        /// <summary>
+        /// Invalidates the rectangle or region that you specify in lprcUpdate or hrgnUpdate.
+        /// You can set only one of these parameters to a non-NULL value. If both are NULL, RDW_INVALIDATE invalidates the entire window.
+        /// </summary>
+        Invalidate = 0x1,
+
+        /// <summary>Causes the OS to post a WM_PAINT message to the window regardless of whether a portion of the window is invalid.</summary>
+        InternalPaint = 0x2,
+
+        /// <summary>
+        /// Causes the window to receive a WM_ERASEBKGND message when the window is repainted.
+        /// Specify this value in combination with the RDW_INVALIDATE value; otherwise, RDW_ERASE has no effect.
+        /// </summary>
+        Erase = 0x4,
+
+        /// <summary>
+        /// Validates the rectangle or region that you specify in lprcUpdate or hrgnUpdate.
+        /// You can set only one of these parameters to a non-NULL value. If both are NULL, RDW_VALIDATE validates the entire window.
+        /// This value does not affect internal WM_PAINT messages.
+        /// </summary>
+        Validate = 0x8,
+
+        NoInternalPaint = 0x10,
+
+        /// <summary>Suppresses any pending WM_ERASEBKGND messages.</summary>
+        NoErase = 0x20,
+
+        /// <summary>Excludes child windows, if any, from the repainting operation.</summary>
+        NoChildren = 0x40,
+
+        /// <summary>Includes child windows, if any, in the repainting operation.</summary>
+        AllChildren = 0x80,
+
+        /// <summary>Causes the affected windows, which you specify by setting the RDW_ALLCHILDREN and RDW_NOCHILDREN values, to receive WM_ERASEBKGND and WM_PAINT messages before the RedrawWindow returns, if necessary.</summary>
+        UpdateNow = 0x100,
+
+        /// <summary>
+        /// Causes the affected windows, which you specify by setting the RDW_ALLCHILDREN and RDW_NOCHILDREN values, to receive WM_ERASEBKGND messages before RedrawWindow returns, if necessary.
+        /// The affected windows receive WM_PAINT messages at the ordinary time.
+        /// </summary>
+        EraseNow = 0x200,
+
+        Frame = 0x400,
+
+        NoFrame = 0x800
+    }
+
+    private sealed class DeferSizeToContent : IDisposable
+    {
+        private readonly Window _window;
+
+        private readonly SizeToContent _sizeToContent;
+
+        public DeferSizeToContent(Window window)
+        {
+            _window = window;
+            _sizeToContent = window.SizeToContent;
+
+            window.SizeToContent = SizeToContent.Manual;
         }
 
-        private static T PtrToStructure<T>(IntPtr ptr)
+        public void Dispose()
         {
-            return (T)Marshal.PtrToStructure(ptr, typeof(T))!;
+            _window.SizeToContent = _sizeToContent;
         }
+    }
 
-        [Flags]
-        private enum RedrawWindowFlags : uint
-        {
-            /// <summary>
-            /// Invalidates the rectangle or region that you specify in lprcUpdate or hrgnUpdate.
-            /// You can set only one of these parameters to a non-NULL value. If both are NULL, RDW_INVALIDATE invalidates the entire window.
-            /// </summary>
-            Invalidate = 0x1,
+    private static class NativeMethods
+    {
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern IntPtr DefWindowProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
 
-            /// <summary>Causes the OS to post a WM_PAINT message to the window regardless of whether a portion of the window is invalid.</summary>
-            InternalPaint = 0x2,
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
 
-            /// <summary>
-            /// Causes the window to receive a WM_ERASEBKGND message when the window is repainted.
-            /// Specify this value in combination with the RDW_INVALIDATE value; otherwise, RDW_ERASE has no effect.
-            /// </summary>
-            Erase = 0x4,
+        [DllImport("dwmapi.dll")]
+        public static extern int DwmExtendFrameIntoClientArea(IntPtr hWnd, ref MARGINS pMarInset);
 
-            /// <summary>
-            /// Validates the rectangle or region that you specify in lprcUpdate or hrgnUpdate.
-            /// You can set only one of these parameters to a non-NULL value. If both are NULL, RDW_VALIDATE validates the entire window.
-            /// This value does not affect internal WM_PAINT messages.
-            /// </summary>
-            Validate = 0x8,
+        [DllImport("dwmapi.dll", EntryPoint = "DwmIsCompositionEnabled", PreserveSig = false)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool DwmIsCompositionEnabled();
 
-            NoInternalPaint = 0x10,
+        [DllImport("user32.dll")]
+        public static extern uint TrackPopupMenuEx(IntPtr hmenu, uint fuFlags, int x, int y, IntPtr hwnd, IntPtr lptpm);
 
-            /// <summary>Suppresses any pending WM_ERASEBKGND messages.</summary>
-            NoErase = 0x20,
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetSystemMenu(IntPtr hWnd, [MarshalAs(UnmanagedType.Bool)] bool bRevert);
 
-            /// <summary>Excludes child windows, if any, from the repainting operation.</summary>
-            NoChildren = 0x40,
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool PostMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
-            /// <summary>Includes child windows, if any, in the repainting operation.</summary>
-            AllChildren = 0x80,
+        [DllImport("user32.dll")]
+        public static extern int EnableMenuItem(IntPtr hMenu, uint uIDEnableItem, uint uEnable);
 
-            /// <summary>Causes the affected windows, which you specify by setting the RDW_ALLCHILDREN and RDW_NOCHILDREN values, to receive WM_ERASEBKGND and WM_PAINT messages before the RedrawWindow returns, if necessary.</summary>
-            UpdateNow = 0x100,
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool RedrawWindow(IntPtr hWnd, IntPtr lprcUpdate, IntPtr hrgnUpdate, RedrawWindowFlags flags);
 
-            /// <summary>
-            /// Causes the affected windows, which you specify by setting the RDW_ALLCHILDREN and RDW_NOCHILDREN values, to receive WM_ERASEBKGND messages before RedrawWindow returns, if necessary.
-            /// The affected windows receive WM_PAINT messages at the ordinary time.
-            /// </summary>
-            EraseNow = 0x200,
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GetWindowPlacement(IntPtr hwnd, WINDOWPLACEMENT lpwndpl);
 
-            Frame = 0x400,
+        [DllImport("user32.dll")]
+        public static extern IntPtr MonitorFromWindow(IntPtr handle, int flags);
 
-            NoFrame = 0x800
-        }
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool GetMonitorInfo(IntPtr hMonitor, ref MONITORINFO monitorInfo);
 
-        private sealed class DeferSizeToContent : IDisposable
-        {
-            private readonly Window _window;
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GetWindowInfo(IntPtr hwnd, ref WINDOWINFO pwi);
 
-            private readonly SizeToContent _sizeToContent;
+        [DllImport("user32.dll")]
+        public static extern int GetSystemMetrics(int nIndex);
 
-            public DeferSizeToContent(Window window)
-            {
-                _window = window;
-                _sizeToContent = window.SizeToContent;
-
-                window.SizeToContent = SizeToContent.Manual;
-            }
-
-            public void Dispose()
-            {
-                _window.SizeToContent = _sizeToContent;
-            }
-        }
-
-        private static class NativeMethods
-        {
-            [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-            public static extern IntPtr DefWindowProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
-
-            [DllImport("user32.dll")]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
-
-            [DllImport("dwmapi.dll")]
-            public static extern int DwmExtendFrameIntoClientArea(IntPtr hWnd, ref MARGINS pMarInset);
-
-            [DllImport("dwmapi.dll", EntryPoint = "DwmIsCompositionEnabled", PreserveSig = false)]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool DwmIsCompositionEnabled();
-
-            [DllImport("user32.dll")]
-            public static extern uint TrackPopupMenuEx(IntPtr hmenu, uint fuFlags, int x, int y, IntPtr hwnd, IntPtr lptpm);
-
-            [DllImport("user32.dll")]
-            public static extern IntPtr GetSystemMenu(IntPtr hWnd, [MarshalAs(UnmanagedType.Bool)] bool bRevert);
-
-            [DllImport("user32.dll", SetLastError = true)]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool PostMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
-
-            [DllImport("user32.dll")]
-            public static extern int EnableMenuItem(IntPtr hMenu, uint uIDEnableItem, uint uEnable);
-
-            [DllImport("user32.dll")]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool RedrawWindow(IntPtr hWnd, IntPtr lprcUpdate, IntPtr hrgnUpdate, RedrawWindowFlags flags);
-
-            [DllImport("user32.dll", SetLastError = true)]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool GetWindowPlacement(IntPtr hwnd, WINDOWPLACEMENT lpwndpl);
-
-            [DllImport("user32.dll")]
-            public static extern IntPtr MonitorFromWindow(IntPtr handle, int flags);
-
-            [DllImport("user32.dll")]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            internal static extern bool GetMonitorInfo(IntPtr hMonitor, ref MONITORINFO monitorInfo);
-
-            [DllImport("user32.dll")]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            public static extern bool GetWindowInfo(IntPtr hwnd, ref WINDOWINFO pwi);
-
-            [DllImport("user32.dll")]
-            public static extern int GetSystemMetrics(int nIndex);
-
-            [DllImport("user32.dll", SetLastError = true)]
-            public static extern int SetWindowRgn(IntPtr hWnd, IntPtr hRgn, [MarshalAs(UnmanagedType.Bool)] bool bRedraw);
-        }
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern int SetWindowRgn(IntPtr hWnd, IntPtr hRgn, [MarshalAs(UnmanagedType.Bool)] bool bRedraw);
     }
 }

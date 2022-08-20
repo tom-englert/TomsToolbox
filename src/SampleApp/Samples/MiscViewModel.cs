@@ -1,72 +1,71 @@
-﻿namespace SampleApp.Samples
+﻿namespace SampleApp.Samples;
+
+using System;
+using System.Net;
+using System.Windows;
+using System.Windows.Input;
+
+using PropertyChanged;
+
+using TomsToolbox.Desktop;
+using TomsToolbox.Wpf;
+using TomsToolbox.Wpf.Composition.AttributedModel;
+
+[VisualCompositionExport(RegionId.Main, Sequence = 99)]
+[AddINotifyPropertyChangedInterface]
+internal class MiscViewModel
 {
-    using System;
-    using System.Net;
-    using System.Windows;
-    using System.Windows.Input;
+    private string? _userName;
 
-    using PropertyChanged;
-
-    using TomsToolbox.Desktop;
-    using TomsToolbox.Wpf;
-    using TomsToolbox.Wpf.Composition.AttributedModel;
-
-    [VisualCompositionExport(RegionId.Main, Sequence = 99)]
-    [AddINotifyPropertyChangedInterface]
-    internal class MiscViewModel
+    public override string ToString()
     {
-        private string? _userName;
+        return "Misc.";
+    }
 
-        public override string ToString()
+    public DateTime OperationStarted { get; set; } = DateTime.Now;
+
+    public TimeSpan MinimumDuration { get; set; } = TimeSpan.FromMinutes(0.2);
+
+    public ICommand ItemsControlDefaultCommand => new DelegateCommand<string>(item => MessageBox.Show(item + " clicked."));
+
+    public ICommand GCCollectCommand => new DelegateCommand(GC.Collect);
+
+    public ICommand CheckForAdminRightsCommand => new DelegateCommand(CheckForAdminRights);
+
+    private void CheckForAdminRights()
+    {
+        bool CheckRights()
         {
-            return "Misc.";
-        }
+            var credential = new NetworkCredential(_userName ?? string.Empty, string.Empty);
+            var lastError = 0;
 
-        public DateTime OperationStarted { get; set; } = DateTime.Now;
+            var parent = Application.Current?.MainWindow?.GetWindowHandle() ?? IntPtr.Zero;
 
-        public TimeSpan MinimumDuration { get; set; } = TimeSpan.FromMinutes(0.2);
-
-        public ICommand ItemsControlDefaultCommand => new DelegateCommand<string>(item => MessageBox.Show(item + " clicked."));
-
-        public ICommand GCCollectCommand => new DelegateCommand(GC.Collect);
-
-        public ICommand CheckForAdminRightsCommand => new DelegateCommand(CheckForAdminRights);
-
-        private void CheckForAdminRights()
-        {
-            bool CheckRights()
+            while ((credential = UserAccountControl.PromptForCredential(parent, "Test", "Login", lastError, credential)) != null)
             {
-                var credential = new NetworkCredential(_userName ?? string.Empty, string.Empty);
-                var lastError = 0;
+                lastError = credential.LogOnInteractiveUser(out var userToken);
 
-                var parent = Application.Current?.MainWindow?.GetWindowHandle() ?? IntPtr.Zero;
-
-                while ((credential = UserAccountControl.PromptForCredential(parent, "Test", "Login", lastError, credential)) != null)
+                using (userToken)
                 {
-                    lastError = credential.LogOnInteractiveUser(out var userToken);
-
-                    using (userToken)
+                    if (lastError != 0 || userToken == null)
                     {
-                        if (lastError != 0 || userToken == null)
-                        {
-                            continue;
-                        }
-
-                        if (UserAccountControl.IsUserInAdminGroup(userToken) ||
-                            UserAccountControl.IsUserInGroup(userToken, "LocalAdmins"))
-                        {
-                            _userName = credential.UserName;
-                            return true;
-                        }
-
-                        lastError = 740; // (0x2E4) ERROR_ELEVATION_REQUIRED, The requested operation requires elevation.
+                        continue;
                     }
-                }
 
-                return false;
+                    if (UserAccountControl.IsUserInAdminGroup(userToken) ||
+                        UserAccountControl.IsUserInGroup(userToken, "LocalAdmins"))
+                    {
+                        _userName = credential.UserName;
+                        return true;
+                    }
+
+                    lastError = 740; // (0x2E4) ERROR_ELEVATION_REQUIRED, The requested operation requires elevation.
+                }
             }
 
-            MessageBox.Show(CheckRights() ? "User is Admin" : "User is not an Admin");
+            return false;
         }
+
+        MessageBox.Show(CheckRights() ? "User is Admin" : "User is not an Admin");
     }
 }

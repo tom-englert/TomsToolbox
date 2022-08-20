@@ -1,26 +1,25 @@
-﻿namespace TomsToolbox.Wpf.Styles.Effects
-{
-    using System.Windows;
-    using System.Windows.Media.Effects;
+﻿namespace TomsToolbox.Wpf.Styles.Effects;
 
-    using TomsToolbox.Essentials;
+using System.Windows;
+using System.Windows.Media.Effects;
+
+using TomsToolbox.Essentials;
+
+/// <summary>
+/// Shader effect that inverts all gray values but leaves colors untouched.
+/// </summary>
+/// <seealso cref="System.Windows.Media.Effects.ShaderEffect" />
+public class InvertGrayEffect : ShaderEffect
+{
+    private static readonly PixelShader _pixelShader = new() { UriSource = typeof(InvertGrayEffect).Assembly.GeneratePackUri("effects/invertGray.ps") };
+    private static readonly DependencyProperty _inputProperty = RegisterPixelShaderSamplerProperty("Input", typeof(InvertGrayEffect), 0);
 
     /// <summary>
-    /// Shader effect that inverts all gray values but leaves colors untouched.
+    /// Initializes a new instance of the <see cref="InvertGrayEffect"/> class.
     /// </summary>
-    /// <seealso cref="System.Windows.Media.Effects.ShaderEffect" />
-    public class InvertGrayEffect : ShaderEffect
+    public InvertGrayEffect()
     {
-        private static readonly PixelShader _pixelShader = new() { UriSource = typeof(InvertGrayEffect).Assembly.GeneratePackUri("effects/invertGray.ps") };
-        private static readonly DependencyProperty _inputProperty = RegisterPixelShaderSamplerProperty("Input", typeof(InvertGrayEffect), 0);
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="InvertGrayEffect"/> class.
-        /// </summary>
-        public InvertGrayEffect()
-        {
-            PixelShader = _pixelShader;
-            UpdateShaderValue(_inputProperty);
-        }
+        PixelShader = _pixelShader;
+        UpdateShaderValue(_inputProperty);
     }
 }

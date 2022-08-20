@@ -1,16 +1,15 @@
-﻿namespace SampleApp.Samples
-{
-    using TomsToolbox.Wpf.Composition.AttributedModel;
+﻿namespace SampleApp.Samples;
 
-    /// <summary>
-    /// Interaction logic for ChessView.xaml
-    /// </summary>
-    [DataTemplate(typeof(ChessViewModel))]
-    public partial class ChessView
+using TomsToolbox.Wpf.Composition.AttributedModel;
+
+/// <summary>
+/// Interaction logic for ChessView.xaml
+/// </summary>
+[DataTemplate(typeof(ChessViewModel))]
+public partial class ChessView
+{
+    public ChessView()
     {
-        public ChessView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

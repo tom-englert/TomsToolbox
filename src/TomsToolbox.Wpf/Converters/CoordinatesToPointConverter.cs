@@ -1,83 +1,82 @@
-﻿namespace TomsToolbox.Wpf.Converters
+﻿namespace TomsToolbox.Wpf.Converters;
+
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Windows;
+using System.Windows.Data;
+
+/// <summary>
+/// Converts WGS-84 coordinates (<see cref="Coordinates"/> ) into normalized logical XY coordinates (<see cref="Point"/>) in the range 0..1 and back.
+/// </summary>
+[ValueConversion(typeof(object), typeof(object))]
+public class CoordinatesToPointConverter : ValueConverter
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Windows;
-    using System.Windows.Data;
+    /// <summary>
+    /// The singleton instance of the converter.
+    /// </summary>
+    public static readonly IValueConverter Default = new CoordinatesToPointConverter();
 
     /// <summary>
-    /// Converts WGS-84 coordinates (<see cref="Coordinates"/> ) into normalized logical XY coordinates (<see cref="Point"/>) in the range 0..1 and back.
+    /// Converts a value.
+    /// Null and UnSet are unchanged.
     /// </summary>
-    [ValueConversion(typeof(object), typeof(object))]
-    public class CoordinatesToPointConverter : ValueConverter
+    /// <param name="value">The value produced by the binding source.</param>
+    /// <param name="targetType">The type of the binding target property.</param>
+    /// <param name="parameter">The converter parameter to use.</param>
+    /// <param name="culture">The culture to use in the converter.</param>
+    /// <returns>
+    /// A converted value.
+    /// </returns>
+    protected override object Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
     {
-        /// <summary>
-        /// The singleton instance of the converter.
-        /// </summary>
-        public static readonly IValueConverter Default = new CoordinatesToPointConverter();
+        return Convert(value);
+    }
 
-        /// <summary>
-        /// Converts a value.
-        /// Null and UnSet are unchanged.
-        /// </summary>
-        /// <param name="value">The value produced by the binding source.</param>
-        /// <param name="targetType">The type of the binding target property.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// A converted value.
-        /// </returns>
-        protected override object Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
+    /// <summary>
+    /// Converts a value.
+    /// </summary>
+    /// <param name="value">The value that is produced by the binding target.</param>
+    /// <param name="targetType">The type to convert to.</param>
+    /// <param name="parameter">The converter parameter to use.</param>
+    /// <param name="culture">The culture to use in the converter.</param>
+    /// <returns>
+    /// A converted value. If the method returns null, the valid null value is used.
+    /// </returns>
+    protected override object ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
+    {
+        return Convert(value);
+    }
+
+    /// <summary>
+    /// Converts WGS-84 coordinates (<see cref="Coordinates" /> ) into normalized logical XY coordinates (<see cref="Point" />) in the range 0..1 and back.
+    /// </summary>
+    /// <param name="value">The <see cref="Coordinates" /> or <see cref="Point" /> value.</param>
+    /// <returns>The <see cref="Coordinates" /> or <see cref="Point" /> value.</returns>
+    /// <exception cref="System.InvalidOperationException">Value is neither a Point nor a Coordinates structure.</exception>
+    public static object Convert(object? value)
+    {
+        if (value is Point point)
         {
-            return Convert(value);
+            return (Coordinates)point;
         }
 
-        /// <summary>
-        /// Converts a value.
-        /// </summary>
-        /// <param name="value">The value that is produced by the binding target.</param>
-        /// <param name="targetType">The type to convert to.</param>
-        /// <param name="parameter">The converter parameter to use.</param>
-        /// <param name="culture">The culture to use in the converter.</param>
-        /// <returns>
-        /// A converted value. If the method returns null, the valid null value is used.
-        /// </returns>
-        protected override object ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
+        if (value is Coordinates coordinates)
         {
-            return Convert(value);
+            return (Point)coordinates;
         }
 
-        /// <summary>
-        /// Converts WGS-84 coordinates (<see cref="Coordinates" /> ) into normalized logical XY coordinates (<see cref="Point" />) in the range 0..1 and back.
-        /// </summary>
-        /// <param name="value">The <see cref="Coordinates" /> or <see cref="Point" /> value.</param>
-        /// <returns>The <see cref="Coordinates" /> or <see cref="Point" /> value.</returns>
-        /// <exception cref="System.InvalidOperationException">Value is neither a Point nor a Coordinates structure.</exception>
-        public static object Convert(object? value)
+        if (value is IEnumerable<Point> pointCollection)
         {
-            if (value is Point point)
-            {
-                return (Coordinates)point;
-            }
-
-            if (value is Coordinates coordinates)
-            {
-                return (Point)coordinates;
-            }
-
-            if (value is IEnumerable<Point> pointCollection)
-            {
-                return pointCollection.Select(p => (Coordinates)p).ToList();
-            }
-
-            if (value is IEnumerable<Coordinates> coordinatesCollection)
-            {
-                return coordinatesCollection.Select(p => (Point)p).ToList();
-            }
-
-            throw new InvalidOperationException("Value is neither a Point nor a Coordinates structure");
+            return pointCollection.Select(p => (Coordinates)p).ToList();
         }
+
+        if (value is IEnumerable<Coordinates> coordinatesCollection)
+        {
+            return coordinatesCollection.Select(p => (Point)p).ToList();
+        }
+
+        throw new InvalidOperationException("Value is neither a Point nor a Coordinates structure");
     }
 }

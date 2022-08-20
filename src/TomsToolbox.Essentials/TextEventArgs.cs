@@ -1,24 +1,23 @@
-﻿namespace TomsToolbox.Essentials
+﻿namespace TomsToolbox.Essentials;
+
+using System;
+
+/// <summary>
+/// Event arguments for events that deal with text, e.g. text changed or text received.
+/// </summary>
+public class TextEventArgs : EventArgs
 {
-    using System;
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TextEventArgs"/> class.
+    /// </summary>
+    /// <param name="text">The text associated with the event.</param>
+    public TextEventArgs(string text)
+    {
+        Text = text;
+    }
 
     /// <summary>
-    /// Event arguments for events that deal with text, e.g. text changed or text received.
+    /// Gets the text associated with the event.
     /// </summary>
-    public class TextEventArgs : EventArgs
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TextEventArgs"/> class.
-        /// </summary>
-        /// <param name="text">The text associated with the event.</param>
-        public TextEventArgs(string text)
-        {
-            Text = text;
-        }
-
-        /// <summary>
-        /// Gets the text associated with the event.
-        /// </summary>
-        public string Text { get; }
-    }
+    public string Text { get; }
 }

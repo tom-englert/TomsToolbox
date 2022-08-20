@@ -1,104 +1,103 @@
-﻿namespace TomsToolbox.Wpf
+﻿namespace TomsToolbox.Wpf;
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+/// <summary>
+/// Helper class to detect binding errors during debugging.<para/> 
+/// All functionality is only active if a debugger is attached.<para/> 
+/// </summary>
+public static class BindingErrorTracer
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Text.RegularExpressions;
+    /// <summary>
+    /// The errors to be ignored during error handling.
+    /// </summary>
+    public static readonly IList<Regex> IgnoredErrors = new List<Regex>
+    {
+        // There are no more validation errors, but Validation.HasError is still true!
+        new(@"Cannot get 'Item\[\]' value \(type 'ValidationError'\) from '\(Validation.Errors\)' \(type 'ReadOnlyObservableCollection`1'\)."),
+
+        // Validation via Exception
+        new(@"System\.Windows\.Data Error: 8 : Cannot save value from target back to source\."),
+
+        // Frequently happens when overriding the ItemContainerStyle; uncritical, but often impossible to avoid.
+        new(@"System\.Windows\.Data Error: 4 : Cannot find source for binding with reference 'RelativeSource FindAncestor, AncestorType='System.Windows.Controls.ItemsControl', AncestorLevel='1''. BindingExpression:Path=(Horizontal|Vertical)ContentAlignment; DataItem=null;"),
+
+        // Bindings on behaviors...
+        new(@"System\.Windows\.Data Error: 2 : Cannot find governing FrameworkElement or FrameworkContentElement for target element\. BindingExpression:Path=\w+; DataItem='\w+' \(HashCode=.*\); target element is '\w+Behavior'")
+    };
 
     /// <summary>
-    /// Helper class to detect binding errors during debugging.<para/> 
-    /// All functionality is only active if a debugger is attached.<para/> 
+    /// Hooks into <see cref="PresentationTraceSources" /> to listen for binding errors with <see cref="SourceLevels.Warning"/>.
     /// </summary>
-    public static class BindingErrorTracer
+    /// <param name="errorCallback">The callback that is called in case of binding errors, to show an error message or throw an exception</param>
+    public static void Start(Action<string> errorCallback)
     {
-        /// <summary>
-        /// The errors to be ignored during error handling.
-        /// </summary>
-        public static readonly IList<Regex> IgnoredErrors = new List<Regex>
+        Start(errorCallback, SourceLevels.Warning);
+    }
+
+    /// <summary>
+    /// Hooks into <see cref="PresentationTraceSources" /> to listen for binding errors.
+    /// </summary>
+    /// <param name="errorCallback">The callback that is called in case of binding errors, to show an error message or throw an exception</param>
+    /// <param name="sourceLevels">The source levels that trigger a warning.</param>
+    public static void Start(Action<string> errorCallback, SourceLevels sourceLevels)
+    {
+        if (!Debugger.IsAttached)
+            return;
+
+        PresentationTraceSources.Refresh();
+
+        var dataBindingSource = PresentationTraceSources.DataBindingSource;
+
+        var listeners = dataBindingSource?.Listeners;
+        listeners?.Add(new Listener(errorCallback));
+
+        var sourceSwitch = dataBindingSource?.Switch;
+        if (sourceSwitch != null)
+            sourceSwitch.Level = sourceLevels;
+    }
+
+    class Listener : TraceListener
+    {
+        private readonly Action<string> _errorCallback;
+        private string? _buffer;
+
+        public Listener(Action<string> errorCallback)
         {
-            // There are no more validation errors, but Validation.HasError is still true!
-            new(@"Cannot get 'Item\[\]' value \(type 'ValidationError'\) from '\(Validation.Errors\)' \(type 'ReadOnlyObservableCollection`1'\)."),
-
-            // Validation via Exception
-            new(@"System\.Windows\.Data Error: 8 : Cannot save value from target back to source\."),
-
-            // Frequently happens when overriding the ItemContainerStyle; uncritical, but often impossible to avoid.
-            new(@"System\.Windows\.Data Error: 4 : Cannot find source for binding with reference 'RelativeSource FindAncestor, AncestorType='System.Windows.Controls.ItemsControl', AncestorLevel='1''. BindingExpression:Path=(Horizontal|Vertical)ContentAlignment; DataItem=null;"),
-
-            // Bindings on behaviors...
-            new(@"System\.Windows\.Data Error: 2 : Cannot find governing FrameworkElement or FrameworkContentElement for target element\. BindingExpression:Path=\w+; DataItem='\w+' \(HashCode=.*\); target element is '\w+Behavior'")
-        };
-
-        /// <summary>
-        /// Hooks into <see cref="PresentationTraceSources" /> to listen for binding errors with <see cref="SourceLevels.Warning"/>.
-        /// </summary>
-        /// <param name="errorCallback">The callback that is called in case of binding errors, to show an error message or throw an exception</param>
-        public static void Start(Action<string> errorCallback)
-        {
-            Start(errorCallback, SourceLevels.Warning);
+            _errorCallback = errorCallback;
         }
 
         /// <summary>
-        /// Hooks into <see cref="PresentationTraceSources" /> to listen for binding errors.
+        /// When overridden in a derived class, writes the specified message to the listener you create in the derived class.
         /// </summary>
-        /// <param name="errorCallback">The callback that is called in case of binding errors, to show an error message or throw an exception</param>
-        /// <param name="sourceLevels">The source levels that trigger a warning.</param>
-        public static void Start(Action<string> errorCallback, SourceLevels sourceLevels)
+        /// <param name="message">A message to write. </param>
+        public override void Write(string? message)
         {
-            if (!Debugger.IsAttached)
-                return;
-
-            PresentationTraceSources.Refresh();
-
-            var dataBindingSource = PresentationTraceSources.DataBindingSource;
-
-            var listeners = dataBindingSource?.Listeners;
-            listeners?.Add(new Listener(errorCallback));
-
-            var sourceSwitch = dataBindingSource?.Switch;
-            if (sourceSwitch != null)
-                sourceSwitch.Level = sourceLevels;
+            _buffer += message;
         }
 
-        class Listener : TraceListener
+        /// <summary>
+        /// When overridden in a derived class, writes a message to the listener you create in the derived class, followed by a line terminator.
+        /// </summary>
+        /// <param name="message">A message to write. </param>
+        public override void WriteLine(string? message)
         {
-            private readonly Action<string> _errorCallback;
-            private string? _buffer;
+            _buffer += message;
 
-            public Listener(Action<string> errorCallback)
+            try
             {
-                _errorCallback = errorCallback;
+                if (IgnoredErrors.Any(err => err.Match(_buffer).Success))
+                    return;
+
+                _errorCallback(_buffer);
             }
-
-            /// <summary>
-            /// When overridden in a derived class, writes the specified message to the listener you create in the derived class.
-            /// </summary>
-            /// <param name="message">A message to write. </param>
-            public override void Write(string? message)
+            finally 
             {
-                _buffer += message;
-            }
-
-            /// <summary>
-            /// When overridden in a derived class, writes a message to the listener you create in the derived class, followed by a line terminator.
-            /// </summary>
-            /// <param name="message">A message to write. </param>
-            public override void WriteLine(string? message)
-            {
-                _buffer += message;
-
-                try
-                {
-                    if (IgnoredErrors.Any(err => err.Match(_buffer).Success))
-                        return;
-
-                    _errorCallback(_buffer);
-                }
-                finally 
-                {
-                    _buffer = null;
-                }
+                _buffer = null;
             }
         }
     }

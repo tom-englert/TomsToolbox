@@ -1,16 +1,15 @@
-﻿namespace TomsToolbox.Wpf.Composition
-{
-    using System.Windows.Input;
+﻿namespace TomsToolbox.Wpf.Composition;
 
-    /// <summary>
-    /// A command proxy to handle checkable menu items or toggle buttons.
-    /// </summary>
-    interface ICheckableCommand : ICommand
+using System.Windows.Input;
+
+/// <summary>
+/// A command proxy to handle checkable menu items or toggle buttons.
+/// </summary>
+interface ICheckableCommand : ICommand
+{
+    bool IsChecked
     {
-        bool IsChecked
-        {
-            get;
-            set;
-        }
+        get;
+        set;
     }
 }

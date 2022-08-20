@@ -1,15 +1,14 @@
-﻿namespace TomsToolbox.Essentials
-{
-    using System;
+﻿namespace TomsToolbox.Essentials;
 
+using System;
+
+/// <summary>
+/// Interface implemented by objects that support a generic changed event.
+/// </summary>
+public interface INotifyChanged
+{
     /// <summary>
-    /// Interface implemented by objects that support a generic changed event.
+    /// Occurs when the object has changed.
     /// </summary>
-    public interface INotifyChanged
-    {
-        /// <summary>
-        /// Occurs when the object has changed.
-        /// </summary>
-        event EventHandler Changed;
-    }
+    event EventHandler Changed;
 }

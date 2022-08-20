@@ -1,19 +1,18 @@
-﻿namespace TomsToolbox.Wpf.Composition
-{
-    using System.ComponentModel;
+﻿namespace TomsToolbox.Wpf.Composition;
 
+using System.ComponentModel;
+
+/// <summary>
+/// Base class for items that export a selectable item for a selector control. 
+/// </summary>
+public interface ISelectableComposablePart : INotifyPropertyChanged
+{
     /// <summary>
-    /// Base class for items that export a selectable item for a selector control. 
+    /// Gets or sets a value indicating whether this instance is selected.
     /// </summary>
-    public interface ISelectableComposablePart : INotifyPropertyChanged
+    bool IsSelected
     {
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance is selected.
-        /// </summary>
-        bool IsSelected
-        {
-            get;
-            set;
-        }
+        get;
+        set;
     }
 }

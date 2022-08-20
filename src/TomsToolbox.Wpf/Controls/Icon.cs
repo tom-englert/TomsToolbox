@@ -1,127 +1,126 @@
-﻿namespace TomsToolbox.Wpf.Controls
+﻿namespace TomsToolbox.Wpf.Controls;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Markup;
+using System.Windows.Media;
+
+/// <summary>
+/// An image control that accepts a list of image sources and displays the image that best fits the size of the control.
+/// </summary>
+/// <seealso cref="System.Windows.Controls.Control" />
+[TemplatePart(Name = ImagePartName, Type = typeof(Image))]
+[ContentProperty(nameof(Sources))]
+public class Icon : Control
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Markup;
-    using System.Windows.Media;
+    private const string ImagePartName = "PART_Image";
+    private Image? _image;
+
+    static Icon()
+    {
+        DefaultStyleKeyProperty.OverrideMetadata(typeof(Icon), new FrameworkPropertyMetadata(typeof(Icon)));
+    }
 
     /// <summary>
-    /// An image control that accepts a list of image sources and displays the image that best fits the size of the control.
+    /// Gets or sets the optional viewport where the image will be displayed. If the viewport property is not set, the window is used.
     /// </summary>
-    /// <seealso cref="System.Windows.Controls.Control" />
-    [TemplatePart(Name = ImagePartName, Type = typeof(Image))]
-    [ContentProperty(nameof(Sources))]
-    public class Icon : Control
+    public FrameworkElement? Viewport
     {
-        private const string ImagePartName = "PART_Image";
-        private Image? _image;
+        get => (FrameworkElement?)GetValue(ViewportProperty);
+        set => SetValue(ViewportProperty, value);
+    }
+    /// <summary>
+    /// Identifies the <see cref="Viewport"/> dependency property
+    /// </summary>
+    public static readonly DependencyProperty ViewportProperty =
+        DependencyProperty.Register("Viewport", typeof(FrameworkElement), typeof(Icon), new FrameworkPropertyMetadata((sender, _) => ((Icon)sender).Update()));
 
-        static Icon()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(Icon), new FrameworkPropertyMetadata(typeof(Icon)));
-        }
+    /// <summary>
+    /// Gets or sets the image sources that are candidates for the target image.
+    /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "Required, is used via XAML")]
+    public IList<ImageSource>? Sources
+    {
+        get => (IList<ImageSource>?)GetValue(SourcesProperty);
+        set => SetValue(SourcesProperty, value);
+    }
+    /// <summary>
+    /// Identifies the <see cref="Sources"/> dependency property
+    /// </summary>
+    public static readonly DependencyProperty SourcesProperty =
+        DependencyProperty.Register("Sources", typeof(IList<ImageSource>), typeof(Icon), new FrameworkPropertyMetadata((sender, _) => ((Icon)sender).Update()));
 
-        /// <summary>
-        /// Gets or sets the optional viewport where the image will be displayed. If the viewport property is not set, the window is used.
-        /// </summary>
-        public FrameworkElement? Viewport
-        {
-            get => (FrameworkElement?)GetValue(ViewportProperty);
-            set => SetValue(ViewportProperty, value);
-        }
-        /// <summary>
-        /// Identifies the <see cref="Viewport"/> dependency property
-        /// </summary>
-        public static readonly DependencyProperty ViewportProperty =
-            DependencyProperty.Register("Viewport", typeof(FrameworkElement), typeof(Icon), new FrameworkPropertyMetadata((sender, _) => ((Icon)sender).Update()));
+    /// <inheritdoc />
+    public override void OnApplyTemplate()
+    {
+        base.OnApplyTemplate();
 
-        /// <summary>
-        /// Gets or sets the image sources that are candidates for the target image.
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "Required, is used via XAML")]
-        public IList<ImageSource>? Sources
-        {
-            get => (IList<ImageSource>?)GetValue(SourcesProperty);
-            set => SetValue(SourcesProperty, value);
-        }
-        /// <summary>
-        /// Identifies the <see cref="Sources"/> dependency property
-        /// </summary>
-        public static readonly DependencyProperty SourcesProperty =
-            DependencyProperty.Register("Sources", typeof(IList<ImageSource>), typeof(Icon), new FrameworkPropertyMetadata((sender, _) => ((Icon)sender).Update()));
+        _image = Template?.FindName(ImagePartName, this) as Image;
 
-        /// <inheritdoc />
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
+        Update();
+    }
 
-            _image = Template?.FindName(ImagePartName, this) as Image;
+    /// <inheritdoc />
+    protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+    {
+        base.OnRenderSizeChanged(sizeInfo);
 
-            Update();
-        }
+        Update();
+    }
 
-        /// <inheritdoc />
-        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-        {
-            base.OnRenderSizeChanged(sizeInfo);
+    /// <inheritdoc />
+    protected override Size MeasureOverride(Size constraint)
+    {
+        var size = base.MeasureOverride(constraint);
 
-            Update();
-        }
+        Update();
 
-        /// <inheritdoc />
-        protected override Size MeasureOverride(Size constraint)
-        {
-            var size = base.MeasureOverride(constraint);
+        return size;
+    }
 
-            Update();
+    /// <inheritdoc />
+    protected override Size ArrangeOverride(Size arrangeBounds)
+    {
+        var size = base.ArrangeOverride(arrangeBounds);
 
-            return size;
-        }
+        Update();
 
-        /// <inheritdoc />
-        protected override Size ArrangeOverride(Size arrangeBounds)
-        {
-            var size = base.ArrangeOverride(arrangeBounds);
+        return size;
+    }
 
-            Update();
+    private void Update()
+    {
+        var image = _image;
+        if (image == null)
+            return;
 
-            return size;
-        }
+        var sources = Sources;
+        if (sources == null)
+            return;
 
-        private void Update()
-        {
-            var image = _image;
-            if (image == null)
-                return;
+        var clientRect = new Rect(0, 0, ActualWidth, ActualHeight);
+        if (clientRect.Height < double.Epsilon)
+            return;
 
-            var sources = Sources;
-            if (sources == null)
-                return;
+        var viewport = Viewport ?? Window.GetWindow(this);
+        if (viewport == null)
+            return;
 
-            var clientRect = new Rect(0, 0, ActualWidth, ActualHeight);
-            if (clientRect.Height < double.Epsilon)
-                return;
+        var visualTransform = image.TransformToVisual(viewport);
+        var extent = visualTransform.TransformBounds(clientRect).Size;
 
-            var viewport = Viewport ?? Window.GetWindow(this);
-            if (viewport == null)
-                return;
+        var imageSources = sources.OrderBy(source => source.Height).ToArray();
+        if (!imageSources.Any())
+            return;
 
-            var visualTransform = image.TransformToVisual(viewport);
-            var extent = visualTransform.TransformBounds(clientRect).Size;
+        var thresholds = Enumerable.Range(0, imageSources.Length - 1)
+            .Select(index => imageSources[index].Height + Math.Sqrt(imageSources[index + 1].Height - imageSources[index].Height));
 
-            var imageSources = sources.OrderBy(source => source.Height).ToArray();
-            if (!imageSources.Any())
-                return;
+        var imageIndex = thresholds.Count(threshold => threshold <= extent.Height);
 
-            var thresholds = Enumerable.Range(0, imageSources.Length - 1)
-                .Select(index => imageSources[index].Height + Math.Sqrt(imageSources[index + 1].Height - imageSources[index].Height));
-
-            var imageIndex = thresholds.Count(threshold => threshold <= extent.Height);
-
-            image.Source = imageSources[imageIndex];
-        }
+        image.Source = imageSources[imageIndex];
     }
 }

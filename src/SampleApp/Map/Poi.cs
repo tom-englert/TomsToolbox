@@ -1,19 +1,18 @@
-﻿namespace SampleApp.Map
+﻿namespace SampleApp.Map;
+
+using TomsToolbox.Wpf;
+
+public class Poi
 {
-    using TomsToolbox.Wpf;
-
-    public class Poi
+    public Coordinates Coordinates
     {
-        public Coordinates Coordinates
-        {
-            get;
-            set;
-        }
+        get;
+        set;
+    }
 
-        public string? Description
-        {
-            get;
-            set;
-        }
+    public string? Description
+    {
+        get;
+        set;
     }
 }

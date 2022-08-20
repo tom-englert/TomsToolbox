@@ -1,323 +1,322 @@
-﻿namespace TomsToolbox.Wpf.Composition
-{
-    using System;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Input;
+﻿namespace TomsToolbox.Wpf.Composition;
 
-    using TomsToolbox.Essentials;
-    using TomsToolbox.Wpf.Interactivity;
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+
+using TomsToolbox.Essentials;
+using TomsToolbox.Wpf.Interactivity;
+
+/// <summary>
+/// Handles routing of a command from the <see cref="CommandSource"/> to the view model.
+/// Using this behavior ensures that the command is only active if the view is loaded.
+/// </summary>
+public sealed class CommandRoutingBehavior : FrameworkElementBehavior<FrameworkElement>, ICheckableCommand, ICommandChangedNotificationSink
+{
+    /// <summary>
+    /// Gets or sets the type of the command source factory defining the command.
+    /// </summary>
+    public Type? CommandSource
+    {
+        get => (Type?)GetValue(CommandSourceProperty);
+        set => SetValue(CommandSourceProperty, value);
+    }
+    /// <summary>
+    /// Identifies the <see cref="CommandSource"/> dependency property
+    /// </summary>
+    public static readonly DependencyProperty CommandSourceProperty =
+        DependencyProperty.Register("CommandSource", typeof(Type), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata((sender, e) => ((CommandRoutingBehavior)sender)?.CommandSource_Changed((Type)e.OldValue, (Type)e.NewValue)));
+
 
     /// <summary>
-    /// Handles routing of a command from the <see cref="CommandSource"/> to the view model.
-    /// Using this behavior ensures that the command is only active if the view is loaded.
+    /// Gets or sets the command target.
     /// </summary>
-    public sealed class CommandRoutingBehavior : FrameworkElementBehavior<FrameworkElement>, ICheckableCommand, ICommandChangedNotificationSink
+    /// <remarks>
+    /// The command target is usually by a binding to the corresponding command property of the view model.
+    /// </remarks>
+    public ICommand CommandTarget
     {
-        /// <summary>
-        /// Gets or sets the type of the command source factory defining the command.
-        /// </summary>
-        public Type? CommandSource
+        get => (ICommand?)GetValue(CommandTargetProperty) ?? NullCommand.Default;
+        set => SetValue(CommandTargetProperty, value);
+    }
+    /// <summary>
+    /// Identifies the <see cref="CommandTarget"/> dependency property
+    /// </summary>
+    public static readonly DependencyProperty CommandTargetProperty =
+        DependencyProperty.Register("CommandTarget", typeof(ICommand), typeof(CommandRoutingBehavior));
+
+
+    /// <summary>
+    /// Gets or sets the command parameter.
+    /// </summary>
+    public object? CommandParameter
+    {
+        get => GetValue(CommandParameterProperty);
+        set => SetValue(CommandParameterProperty, value);
+    }
+    /// <summary>
+    /// Identifies the <see cref="CommandParameter"/> dependency property
+    /// </summary>
+    public static readonly DependencyProperty CommandParameterProperty =
+        DependencyProperty.Register("CommandParameter", typeof(object), typeof(CommandRoutingBehavior));
+
+
+    /// <summary>
+    /// Gets or sets the composition context.
+    /// </summary>
+    public object? CompositionContext
+    {
+        get => GetValue(CompositionContextProperty);
+        set => SetValue(CompositionContextProperty, value);
+    }
+    /// <summary>
+    /// Identifies the <see cref="CompositionContext"/> dependency property
+    /// </summary>
+    public static readonly DependencyProperty CompositionContextProperty =
+        DependencyProperty.Register("CompositionContext", typeof(object), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata((sender, e) => ((CommandRoutingBehavior)sender)?.CompositionContext_Changed(e.OldValue, e.NewValue)));
+
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this instance is enabled, i.e. if the routing will be active. 
+    /// This does not affect the enabled state of the visual bound to the command source.
+    /// </summary>
+    public bool IsEnabled
+    {
+        get => this.GetValue<bool>(IsEnabledProperty);
+        set => SetValue(IsEnabledProperty, value);
+    }
+    /// <summary>
+    /// Identifies the <see cref="IsEnabled"/> dependency property
+    /// </summary>
+    public static readonly DependencyProperty IsEnabledProperty =
+        DependencyProperty.Register("IsEnabled", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, _) => ((CommandRoutingBehavior)sender)?.StateChanged()));
+
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this instance is checked, e.g. when bound to a <see cref="MenuItem"/> with <see cref="MenuItem.IsCheckable"/> set to <c>true</c>.
+    /// </summary>
+    public bool IsChecked
+    {
+        get => this.GetValue<bool>(IsCheckedProperty);
+        set => SetValue(IsCheckedProperty, value);
+    }
+    /// <summary>
+    /// Identifies the <see cref="IsChecked"/> dependency property
+    /// </summary>
+    public static readonly DependencyProperty IsCheckedProperty =
+        DependencyProperty.Register("IsChecked", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, _) => ((CommandRoutingBehavior)sender)?.StateChanged()));
+
+
+    /// <summary>
+    /// Gets a value indicating whether this instance is active. 
+    /// If multiple command routings exist, the routing of the element that had the most recent keyboard focus is active.
+    /// </summary>
+    public bool IsActive
+    {
+        get => this.GetValue<bool>(IsActiveProperty);
+        private set => SetValue(_isActivePropertyKey, value);
+    }
+    private static readonly DependencyPropertyKey _isActivePropertyKey =
+        DependencyProperty.RegisterReadOnly("IsActive", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(false));
+    /// <summary>
+    /// Identifies the <see cref="IsActive"/> read only dependency property
+    /// </summary>
+    public static readonly DependencyProperty IsActiveProperty = _isActivePropertyKey.DependencyProperty;
+
+    private void CommandSource_Changed(Type? oldValue, Type? newValue)
+    {
+        // Type.IsAssignableFrom does not work in design mode!
+        if (newValue != null && newValue.GetSelfAndBaseTypes().All(t => t.FullName != typeof(CommandSourceFactory).FullName))
         {
-            get => (Type?)GetValue(CommandSourceProperty);
-            set => SetValue(CommandSourceProperty, value);
-        }
-        /// <summary>
-        /// Identifies the <see cref="CommandSource"/> dependency property
-        /// </summary>
-        public static readonly DependencyProperty CommandSourceProperty =
-            DependencyProperty.Register("CommandSource", typeof(Type), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata((sender, e) => ((CommandRoutingBehavior)sender)?.CommandSource_Changed((Type)e.OldValue, (Type)e.NewValue)));
-
-
-        /// <summary>
-        /// Gets or sets the command target.
-        /// </summary>
-        /// <remarks>
-        /// The command target is usually by a binding to the corresponding command property of the view model.
-        /// </remarks>
-        public ICommand CommandTarget
-        {
-            get => (ICommand?)GetValue(CommandTargetProperty) ?? NullCommand.Default;
-            set => SetValue(CommandTargetProperty, value);
-        }
-        /// <summary>
-        /// Identifies the <see cref="CommandTarget"/> dependency property
-        /// </summary>
-        public static readonly DependencyProperty CommandTargetProperty =
-            DependencyProperty.Register("CommandTarget", typeof(ICommand), typeof(CommandRoutingBehavior));
-
-
-        /// <summary>
-        /// Gets or sets the command parameter.
-        /// </summary>
-        public object? CommandParameter
-        {
-            get => GetValue(CommandParameterProperty);
-            set => SetValue(CommandParameterProperty, value);
-        }
-        /// <summary>
-        /// Identifies the <see cref="CommandParameter"/> dependency property
-        /// </summary>
-        public static readonly DependencyProperty CommandParameterProperty =
-            DependencyProperty.Register("CommandParameter", typeof(object), typeof(CommandRoutingBehavior));
-
-
-        /// <summary>
-        /// Gets or sets the composition context.
-        /// </summary>
-        public object? CompositionContext
-        {
-            get => GetValue(CompositionContextProperty);
-            set => SetValue(CompositionContextProperty, value);
-        }
-        /// <summary>
-        /// Identifies the <see cref="CompositionContext"/> dependency property
-        /// </summary>
-        public static readonly DependencyProperty CompositionContextProperty =
-            DependencyProperty.Register("CompositionContext", typeof(object), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata((sender, e) => ((CommandRoutingBehavior)sender)?.CompositionContext_Changed(e.OldValue, e.NewValue)));
-
-
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance is enabled, i.e. if the routing will be active. 
-        /// This does not affect the enabled state of the visual bound to the command source.
-        /// </summary>
-        public bool IsEnabled
-        {
-            get => this.GetValue<bool>(IsEnabledProperty);
-            set => SetValue(IsEnabledProperty, value);
-        }
-        /// <summary>
-        /// Identifies the <see cref="IsEnabled"/> dependency property
-        /// </summary>
-        public static readonly DependencyProperty IsEnabledProperty =
-            DependencyProperty.Register("IsEnabled", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, _) => ((CommandRoutingBehavior)sender)?.StateChanged()));
-
-
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance is checked, e.g. when bound to a <see cref="MenuItem"/> with <see cref="MenuItem.IsCheckable"/> set to <c>true</c>.
-        /// </summary>
-        public bool IsChecked
-        {
-            get => this.GetValue<bool>(IsCheckedProperty);
-            set => SetValue(IsCheckedProperty, value);
-        }
-        /// <summary>
-        /// Identifies the <see cref="IsChecked"/> dependency property
-        /// </summary>
-        public static readonly DependencyProperty IsCheckedProperty =
-            DependencyProperty.Register("IsChecked", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(true, (sender, _) => ((CommandRoutingBehavior)sender)?.StateChanged()));
-
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is active. 
-        /// If multiple command routings exist, the routing of the element that had the most recent keyboard focus is active.
-        /// </summary>
-        public bool IsActive
-        {
-            get => this.GetValue<bool>(IsActiveProperty);
-            private set => SetValue(_isActivePropertyKey, value);
-        }
-        private static readonly DependencyPropertyKey _isActivePropertyKey =
-            DependencyProperty.RegisterReadOnly("IsActive", typeof(bool), typeof(CommandRoutingBehavior), new FrameworkPropertyMetadata(false));
-        /// <summary>
-        /// Identifies the <see cref="IsActive"/> read only dependency property
-        /// </summary>
-        public static readonly DependencyProperty IsActiveProperty = _isActivePropertyKey.DependencyProperty;
-
-        private void CommandSource_Changed(Type? oldValue, Type? newValue)
-        {
-            // Type.IsAssignableFrom does not work in design mode!
-            if (newValue != null && newValue.GetSelfAndBaseTypes().All(t => t.FullName != typeof(CommandSourceFactory).FullName))
-            {
-                throw new InvalidOperationException(newValue + @": Only objects deriving from CommandSourceFactory can be assigned.");
-            }
-
-            if (AssociatedObject == null)
-                return;
-
-            if ((oldValue != null) && (newValue != null))
-            {
-                throw new InvalidOperationException(@"Cannot change the command source while associated with an object.");
-            }
-
-            var compositionContext = CompositionContext;
-
-            if (oldValue != null)
-            {
-                var oldCommandSource = GetCommandSourceFactory(oldValue);
-                oldCommandSource?.Detach(compositionContext, this);
-            }
-
-            if (!IsAlive)
-                return;
-
-            if (newValue != null)
-            {
-                var newCommandSource = GetCommandSourceFactory(newValue);
-                newCommandSource?.Attach(compositionContext, this);
-            }
+            throw new InvalidOperationException(newValue + @": Only objects deriving from CommandSourceFactory can be assigned.");
         }
 
-        private void CompositionContext_Changed(object? oldValue, object? newValue)
+        if (AssociatedObject == null)
+            return;
+
+        if ((oldValue != null) && (newValue != null))
         {
-            if (AssociatedObject == null)
-                return;
-
-            var factory = GetCommandSourceFactory();
-
-            if (factory == null)
-                return;
-
-            factory.Detach(oldValue, this);
-
-            if (!IsAlive)
-                return;
-
-            factory.Attach(newValue, this);
+            throw new InvalidOperationException(@"Cannot change the command source while associated with an object.");
         }
 
-        private void StateChanged()
-        {
-            var compositionContext = CompositionContext;
+        var compositionContext = CompositionContext;
 
-            CompositionContext_Changed(compositionContext, compositionContext);
+        if (oldValue != null)
+        {
+            var oldCommandSource = GetCommandSourceFactory(oldValue);
+            oldCommandSource?.Detach(compositionContext, this);
         }
 
-        /// <inheritdoc />
-        /// <summary>
-        /// Called after the behavior is attached to an AssociatedObject.
-        /// </summary>
-        /// <remarks>
-        /// Override this to hook up functionality to the AssociatedObject.
-        /// </remarks>
-        protected override void OnAttached()
+        if (!IsAlive)
+            return;
+
+        if (newValue != null)
         {
-            base.OnAttached();
-
-            AssociatedObject.IsKeyboardFocusWithinChanged += AssociatedObject_IsKeyboardFocusWithinChanged;
+            var newCommandSource = GetCommandSourceFactory(newValue);
+            newCommandSource?.Attach(compositionContext, this);
         }
+    }
 
-        /// <summary>
-        /// Called when the behavior is being detached from its AssociatedObject, but before it has actually occurred.
-        /// </summary>
-        /// <remarks>
-        /// Override this to unhook functionality from the AssociatedObject.
-        /// </remarks>
-        protected override void OnDetaching()
-        {
-            base.OnDetaching();
+    private void CompositionContext_Changed(object? oldValue, object? newValue)
+    {
+        if (AssociatedObject == null)
+            return;
 
-            AssociatedObject.IsKeyboardFocusWithinChanged -= AssociatedObject_IsKeyboardFocusWithinChanged;
-        }
+        var factory = GetCommandSourceFactory();
 
-        /// <summary>
-        /// Called when the associated object is loaded.
-        /// </summary>
-        protected override void OnAssociatedObjectLoaded()
-        {
-            base.OnAssociatedObjectLoaded();
+        if (factory == null)
+            return;
 
-            // Sometimes objects are preloaded, so we get two loaded events! Ignore when object is not yet visible!
-            if (!IsAlive)
-                return;
+        factory.Detach(oldValue, this);
 
-            var commandSource = GetCommandSourceFactory();
+        if (!IsAlive)
+            return;
 
-            commandSource?.Attach(CompositionContext, this);
-        }
+        factory.Attach(newValue, this);
+    }
 
-        /// <summary>
-        /// Called when the associated object is unloaded.
-        /// </summary>
-        protected override void OnAssociatedObjectUnloaded()
-        {
-            base.OnAssociatedObjectUnloaded();
+    private void StateChanged()
+    {
+        var compositionContext = CompositionContext;
 
-            var commandSource = GetCommandSourceFactory();
+        CompositionContext_Changed(compositionContext, compositionContext);
+    }
 
-            commandSource?.Detach(CompositionContext, this);
-        }
+    /// <inheritdoc />
+    /// <summary>
+    /// Called after the behavior is attached to an AssociatedObject.
+    /// </summary>
+    /// <remarks>
+    /// Override this to hook up functionality to the AssociatedObject.
+    /// </remarks>
+    protected override void OnAttached()
+    {
+        base.OnAttached();
 
-        private CommandSourceFactory? GetCommandSourceFactory()
-        {
-            return GetCommandSourceFactory(CommandSource);
-        }
+        AssociatedObject.IsKeyboardFocusWithinChanged += AssociatedObject_IsKeyboardFocusWithinChanged;
+    }
 
-        private CommandSourceFactory? GetCommandSourceFactory(Type? commandSourceType)
-        {
-            if (commandSourceType == null)
-                return null;
+    /// <summary>
+    /// Called when the behavior is being detached from its AssociatedObject, but before it has actually occurred.
+    /// </summary>
+    /// <remarks>
+    /// Override this to unhook functionality from the AssociatedObject.
+    /// </remarks>
+    protected override void OnDetaching()
+    {
+        base.OnDetaching();
 
-            var element = AssociatedObject;
-            if (element == null)
-                return null;
+        AssociatedObject.IsKeyboardFocusWithinChanged -= AssociatedObject_IsKeyboardFocusWithinChanged;
+    }
 
-            var exportProvider = IsAlive ? element.GetExportProvider() : element.TryGetExportProvider();
+    /// <summary>
+    /// Called when the associated object is loaded.
+    /// </summary>
+    protected override void OnAssociatedObjectLoaded()
+    {
+        base.OnAssociatedObjectLoaded();
 
-            return exportProvider?.GetExports(commandSourceType)
-                .Select(export => export.Value)
-                .OfType<CommandSourceFactory>()
-                .FirstOrDefault();
-        }
+        // Sometimes objects are preloaded, so we get two loaded events! Ignore when object is not yet visible!
+        if (!IsAlive)
+            return;
 
-        private bool IsAlive
-        {
-            get
-            {
-                var associatedObject = AssociatedObject;
+        var commandSource = GetCommandSourceFactory();
 
-                return (associatedObject != null)
-                    && IsEnabled
-                    && associatedObject.IsLoaded
-                    && associatedObject.IsVisible;
-            }
-        }
+        commandSource?.Attach(CompositionContext, this);
+    }
 
-        private void AssociatedObject_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (AssociatedObject?.IsKeyboardFocusWithin == true)
-            {
-                StateChanged();
-            }
-        }
+    /// <summary>
+    /// Called when the associated object is unloaded.
+    /// </summary>
+    protected override void OnAssociatedObjectUnloaded()
+    {
+        base.OnAssociatedObjectUnloaded();
 
-        bool ICommand.CanExecute(object? parameter)
+        var commandSource = GetCommandSourceFactory();
+
+        commandSource?.Detach(CompositionContext, this);
+    }
+
+    private CommandSourceFactory? GetCommandSourceFactory()
+    {
+        return GetCommandSourceFactory(CommandSource);
+    }
+
+    private CommandSourceFactory? GetCommandSourceFactory(Type? commandSourceType)
+    {
+        if (commandSourceType == null)
+            return null;
+
+        var element = AssociatedObject;
+        if (element == null)
+            return null;
+
+        var exportProvider = IsAlive ? element.GetExportProvider() : element.TryGetExportProvider();
+
+        return exportProvider?.GetExports(commandSourceType)
+            .Select(export => export.Value)
+            .OfType<CommandSourceFactory>()
+            .FirstOrDefault();
+    }
+
+    private bool IsAlive
+    {
+        get
         {
             var associatedObject = AssociatedObject;
+
             return (associatedObject != null)
-                   && CommandTarget.CanExecute(CommandParameter);
-        }
-
-        event EventHandler? ICommand.CanExecuteChanged
-        {
-            add => CommandTarget.CanExecuteChanged += value;
-            remove => CommandTarget.CanExecuteChanged -= value;
-        }
-
-        void ICommand.Execute(object? parameter)
-        {
-            CommandTarget.Execute(CommandParameter);
-        }
-
-        void ICommandChangedNotificationSink.ActiveCommandChanged(ICommand? command)
-        {
-            var oldValue = IsActive;
-
-            IsActive = ReferenceEquals(command, this);
-
-            var newValue = IsActive;
-
-            if (newValue != oldValue)
-            {
-                Debug.WriteLine("IsActive, " + CommandSource + ", " + AssociatedObject + ": " + newValue);
-            }
+                   && IsEnabled
+                   && associatedObject.IsLoaded
+                   && associatedObject.IsVisible;
         }
     }
 
-    internal interface ICommandChangedNotificationSink
+    private void AssociatedObject_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
     {
-        void ActiveCommandChanged(ICommand? command);
+        if (AssociatedObject?.IsKeyboardFocusWithin == true)
+        {
+            StateChanged();
+        }
     }
+
+    bool ICommand.CanExecute(object? parameter)
+    {
+        var associatedObject = AssociatedObject;
+        return (associatedObject != null)
+               && CommandTarget.CanExecute(CommandParameter);
+    }
+
+    event EventHandler? ICommand.CanExecuteChanged
+    {
+        add => CommandTarget.CanExecuteChanged += value;
+        remove => CommandTarget.CanExecuteChanged -= value;
+    }
+
+    void ICommand.Execute(object? parameter)
+    {
+        CommandTarget.Execute(CommandParameter);
+    }
+
+    void ICommandChangedNotificationSink.ActiveCommandChanged(ICommand? command)
+    {
+        var oldValue = IsActive;
+
+        IsActive = ReferenceEquals(command, this);
+
+        var newValue = IsActive;
+
+        if (newValue != oldValue)
+        {
+            Debug.WriteLine("IsActive, " + CommandSource + ", " + AssociatedObject + ": " + newValue);
+        }
+    }
+}
+
+internal interface ICommandChangedNotificationSink
+{
+    void ActiveCommandChanged(ICommand? command);
 }

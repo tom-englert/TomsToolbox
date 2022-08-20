@@ -1,70 +1,69 @@
-﻿namespace SampleApp.Mef2
+﻿namespace SampleApp.Mef2;
+
+using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Markup;
+
+using SampleApp.Mef2.DIAdapters;
+
+using TomsToolbox.Wpf;
+using TomsToolbox.Wpf.Composition;
+using TomsToolbox.Wpf.Composition.XamlExtensions;
+using TomsToolbox.Wpf.Styles;
+
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public sealed partial class App : IDisposable
 {
-    using System;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Windows;
-    using System.Windows.Markup;
+    private DIAdapter? _diAdapter;
 
-    using SampleApp.Mef2.DIAdapters;
-
-    using TomsToolbox.Wpf;
-    using TomsToolbox.Wpf.Composition;
-    using TomsToolbox.Wpf.Composition.XamlExtensions;
-    using TomsToolbox.Wpf.Styles;
-
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public sealed partial class App : IDisposable
+    public App()
     {
-        private DIAdapter? _diAdapter;
+        // Thread.CurrentThread.CurrentUICulture = new CultureInfo("de-DE");
+        FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+    }
 
-        public App()
-        {
-            // Thread.CurrentThread.CurrentUICulture = new CultureInfo("de-DE");
-            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
-        }
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
 
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
+        VisualComposition.Trace += (_, args) => Trace.WriteLine(args.Text);
+        BindingErrorTracer.Start(BindingErrorCallback);
 
-            VisualComposition.Trace += (_, args) => Trace.WriteLine(args.Text);
-            BindingErrorTracer.Start(BindingErrorCallback);
+        _diAdapter = new DIAdapter();
 
-            _diAdapter = new DIAdapter();
+        var exportProvider = _diAdapter.Initialize();
+        ExportProviderLocator.Register(exportProvider);
 
-            var exportProvider = _diAdapter.Initialize();
-            ExportProviderLocator.Register(exportProvider);
+        Resources.MergedDictionaries.Insert(0, WpfStyles.GetDefaultStyles().RegisterDefaultWindowStyle());
+        Resources.MergedDictionaries.Add(DataTemplateManager.CreateDynamicDataTemplates(exportProvider));
 
-            Resources.MergedDictionaries.Insert(0, WpfStyles.GetDefaultStyles().RegisterDefaultWindowStyle());
-            Resources.MergedDictionaries.Add(DataTemplateManager.CreateDynamicDataTemplates(exportProvider));
+        var mainWindow = exportProvider.GetExportedValue<MainWindow>();
 
-            var mainWindow = exportProvider.GetExportedValue<MainWindow>();
+        MainWindow = mainWindow;
 
-            MainWindow = mainWindow;
+        mainWindow.Show();
+    }
 
-            mainWindow.Show();
-        }
+    private void BindingErrorCallback(string msg)
+    {
+        if (msg.StartsWith("System.Windows.Data Error: 4 : Cannot find source for binding with reference 'RelativeSource FindAncestor, AncestorType='System.Windows.Controls.DataGrid"))
+            return;
+        Dispatcher?.BeginInvoke((Action)(() => MessageBox.Show(msg)));
+    }
 
-        private void BindingErrorCallback(string msg)
-        {
-            if (msg.StartsWith("System.Windows.Data Error: 4 : Cannot find source for binding with reference 'RelativeSource FindAncestor, AncestorType='System.Windows.Controls.DataGrid"))
-                return;
-            Dispatcher?.BeginInvoke((Action)(() => MessageBox.Show(msg)));
-        }
+    protected override void OnExit(ExitEventArgs e)
+    {
+        Dispose();
 
-        protected override void OnExit(ExitEventArgs e)
-        {
-            Dispose();
+        base.OnExit(e);
+    }
 
-            base.OnExit(e);
-        }
-
-        public void Dispose()
-        {
-            _diAdapter?.Dispose();
-        }
+    public void Dispose()
+    {
+        _diAdapter?.Dispose();
     }
 }

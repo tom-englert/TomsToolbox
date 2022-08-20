@@ -1,103 +1,102 @@
 ﻿// ReSharper disable UnusedVariable
 #nullable disable
-namespace TomsToolbox.ObservableCollections.Tests
+namespace TomsToolbox.ObservableCollections.Tests;
+
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+[TestClass]
+public class ObservableWrappedCollectionTests
 {
-    using System;
-    using System.Collections.ObjectModel;
-    using System.Linq;
+    private Random _random;
+    private ObservableCollection<string> _source;
+    private ObservableWrappedCollection<string, StringWrapper> _target;
 
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    [TestClass]
-    public class ObservableWrappedCollectionTests
+    [TestInitialize]
+    public void TestInitialize()
     {
-        private Random _random;
-        private ObservableCollection<string> _source;
-        private ObservableWrappedCollection<string, StringWrapper> _target;
+        _random = new Random(DateTime.Today.Day); // reproducible random sequence generating identical values at the same day.
+        _source = new ObservableCollection<string>(_sourceStrings);
+        _target = new ObservableWrappedCollection<string, StringWrapper>(_source, (s) => new StringWrapper(s));
+    }
 
-        [TestInitialize]
-        public void TestInitialize()
+    [TestCleanup]
+    public void TestCleanup()
+    {
+        // Nice for debugging...
+        var result = string.Join("/", _target.Select(item => item.ToString()));
+    }
+
+    private class StringWrapper
+    {
+        public StringWrapper(string wrapped)
         {
-            _random = new Random(DateTime.Today.Day); // reproducible random sequence generating identical values at the same day.
-            _source = new ObservableCollection<string>(_sourceStrings);
-            _target = new ObservableWrappedCollection<string, StringWrapper>(_source, (s) => new StringWrapper(s));
+            Wrapped = wrapped;
         }
 
-        [TestCleanup]
-        public void TestCleanup()
+        public string Wrapped
         {
-            // Nice for debugging...
-            var result = string.Join("/", _target.Select(item => item.ToString()));
+            get;
+            private set;
         }
 
-        private class StringWrapper
+        public override string ToString()
         {
-            public StringWrapper(string wrapped)
-            {
-                Wrapped = wrapped;
-            }
-
-            public string Wrapped
-            {
-                get;
-                private set;
-            }
-
-            public override string ToString()
-            {
-                return "$" + Wrapped + "$";
-            }
+            return "$" + Wrapped + "$";
         }
+    }
 
-        private readonly string[] _sourceStrings = Enumerable.Range(0, 10).Select(i => i.ToString()).ToArray();
+    private readonly string[] _sourceStrings = Enumerable.Range(0, 10).Select(i => i.ToString()).ToArray();
 
-        [TestMethod]
-        [ExpectedException(typeof(Exception), AllowDerivedTypes = true)]
-        public void ObservableWrappedCollection_ConstructorFailTest()
+    [TestMethod]
+    [ExpectedException(typeof(Exception), AllowDerivedTypes = true)]
+    public void ObservableWrappedCollection_ConstructorFailTest()
+    {
+        var collection = new ObservableWrappedCollection<int, int>(null, null);
+    }
+
+    [TestMethod]
+    public void ObservableWrappedCollection_ConstructorTest()
+    {
+        VerifyConsistency();
+    }
+
+    [TestMethod]
+    public void ObservableWrappedCollection_RemoveTest()
+    {
+        while (_source.Count > 0)
         {
-            var collection = new ObservableWrappedCollection<int, int>(null, null);
-        }
-
-        [TestMethod]
-        public void ObservableWrappedCollection_ConstructorTest()
-        {
+            _source.RemoveAt(_random.Next(_source.Count));
             VerifyConsistency();
         }
+    }
 
-        [TestMethod]
-        public void ObservableWrappedCollection_RemoveTest()
+    [TestMethod]
+    public void ObservableWrappedCollection_InsertTest()
+    {
+        foreach (var newValue in Enumerable.Range(0, 9).Select(i => "new" + i.ToString()))
         {
-            while (_source.Count > 0)
-            {
-                _source.RemoveAt(_random.Next(_source.Count));
-                VerifyConsistency();
-            }
+            _source.Insert(_random.Next(_source.Count + 1), newValue);
+            VerifyConsistency();
         }
+    }
 
-        [TestMethod]
-        public void ObservableWrappedCollection_InsertTest()
+    [TestMethod]
+    public void ObservableWrappedCollection_MoveTest()
+    {
+        for (var i = 0; i < 10; i++)
         {
-            foreach (var newValue in Enumerable.Range(0, 9).Select(i => "new" + i.ToString()))
-            {
-                _source.Insert(_random.Next(_source.Count + 1), newValue);
-                VerifyConsistency();
-            }
+            _source.Move(_random.Next(_source.Count), _random.Next(_source.Count));
+            VerifyConsistency();
         }
+    }
 
-        [TestMethod]
-        public void ObservableWrappedCollection_MoveTest()
-        {
-            for (var i = 0; i < 10; i++)
-            {
-                _source.Move(_random.Next(_source.Count), _random.Next(_source.Count));
-                VerifyConsistency();
-            }
-        }
-
-        private void VerifyConsistency()
-        {
-            Assert.AreEqual(_source.Count, _target.Count);
-            Assert.IsTrue(_source.SequenceEqual(_target.Select(item => item.Wrapped)));
-        }
+    private void VerifyConsistency()
+    {
+        Assert.AreEqual(_source.Count, _target.Count);
+        Assert.IsTrue(_source.SequenceEqual(_target.Select(item => item.Wrapped)));
     }
 }

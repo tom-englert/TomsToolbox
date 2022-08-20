@@ -1,29 +1,28 @@
-﻿namespace TomsToolbox.Essentials
+﻿namespace TomsToolbox.Essentials;
+
+using System;
+
+/// <summary>
+/// General usable sequence attribute to assign sequences to any object that may need to be e.g. sorted by some means.
+/// </summary>
+[AttributeUsage(AttributeTargets.All)]
+public sealed class SequenceAttribute : Attribute
 {
-    using System;
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SequenceAttribute"/> class.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    public SequenceAttribute(double value)
+    {
+        Value = value;
+    }
 
     /// <summary>
-    /// General usable sequence attribute to assign sequences to any object that may need to be e.g. sorted by some means.
+    /// Gets the value.
     /// </summary>
-    [AttributeUsage(AttributeTargets.All)]
-    public sealed class SequenceAttribute : Attribute
+    public double Value
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SequenceAttribute"/> class.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        public SequenceAttribute(double value)
-        {
-            Value = value;
-        }
-
-        /// <summary>
-        /// Gets the value.
-        /// </summary>
-        public double Value
-        {
-            get;
-            private set;
-        }
+        get;
+        private set;
     }
 }

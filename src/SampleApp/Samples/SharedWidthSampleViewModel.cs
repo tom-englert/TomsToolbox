@@ -1,18 +1,17 @@
-﻿namespace SampleApp.Samples
+﻿namespace SampleApp.Samples;
+
+using PropertyChanged;
+
+using TomsToolbox.Wpf.Composition.AttributedModel;
+
+[VisualCompositionExport(RegionId.Main, Sequence = 4)]
+[AddINotifyPropertyChangedInterface]
+class SharedWidthSampleViewModel
 {
-    using PropertyChanged;
+    public string? LongText { get; set; } = "This is a long text";
 
-    using TomsToolbox.Wpf.Composition.AttributedModel;
-
-    [VisualCompositionExport(RegionId.Main, Sequence = 4)]
-    [AddINotifyPropertyChangedInterface]
-    class SharedWidthSampleViewModel
+    public override string ToString()
     {
-        public string? LongText { get; set; } = "This is a long text";
-
-        public override string ToString()
-        {
-            return "Alignment";
-        }
+        return "Alignment";
     }
 }

@@ -1,52 +1,51 @@
-﻿namespace TomsToolbox.Wpf
+﻿namespace TomsToolbox.Wpf;
+
+using System;
+
+/// <summary>
+/// Event argument for text validation events.
+/// </summary>
+public class TextValidationEventArgs : EventArgs
 {
-    using System;
-
     /// <summary>
-    /// Event argument for text validation events.
+    /// Initializes a new instance of the <see cref="TextValidationEventArgs"/> class.
     /// </summary>
-    public class TextValidationEventArgs : EventArgs
+    /// <param name="text">The text to validate.</param>
+    public TextValidationEventArgs(string? text)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TextValidationEventArgs"/> class.
-        /// </summary>
-        /// <param name="text">The text to validate.</param>
-        public TextValidationEventArgs(string? text)
-        {
-            Text = text ?? string.Empty;
-        }
-
-        /// <summary>
-        /// Gets the text to validate.
-        /// </summary>
-        public string Text { get; }
-
-        /// <summary>
-        /// Gets or sets the action to take.
-        /// </summary>
-        public TextValidationAction Action
-        {
-            get;
-            set;
-        }
+        Text = text ?? string.Empty;
     }
 
     /// <summary>
-    /// The action to be taken after text validation.
+    /// Gets the text to validate.
     /// </summary>
-    public enum TextValidationAction
+    public string Text { get; }
+
+    /// <summary>
+    /// Gets or sets the action to take.
+    /// </summary>
+    public TextValidationAction Action
     {
-        /// <summary>
-        /// The text is OK, nothing to do.
-        /// </summary>
-        None,
-        /// <summary>
-        /// The text contains errors and should be highlighted.
-        /// </summary>
-        Error,
-        /// <summary>
-        /// The text contains errors, the last change should be undone.
-        /// </summary>
-        Undo
+        get;
+        set;
     }
+}
+
+/// <summary>
+/// The action to be taken after text validation.
+/// </summary>
+public enum TextValidationAction
+{
+    /// <summary>
+    /// The text is OK, nothing to do.
+    /// </summary>
+    None,
+    /// <summary>
+    /// The text contains errors and should be highlighted.
+    /// </summary>
+    Error,
+    /// <summary>
+    /// The text contains errors, the last change should be undone.
+    /// </summary>
+    Undo
 }

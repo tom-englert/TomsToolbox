@@ -1,113 +1,112 @@
-﻿namespace TomsToolbox.Composition.Ninject
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
+﻿namespace TomsToolbox.Composition.Ninject;
 
-    using global::Ninject;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+
+using global::Ninject;
+
+/// <summary>
+/// Extension methods for Ninject DI
+/// </summary>
+public static class ExtensionMethods
+{
+    /// <summary>
+    /// Binds the exports of the specified assemblies to the kernel.
+    /// </summary>
+    /// <param name="kernel">The kernel.</param>
+    /// <param name="assemblies">The assemblies.</param>
+    public static void BindExports(this IKernel kernel, params Assembly[] assemblies)
+    {
+        BindExports(kernel, (IEnumerable<Assembly>)assemblies);
+    }
 
     /// <summary>
-    /// Extension methods for Ninject DI
+    /// Binds the exports of the specified assemblies to the kernel.
     /// </summary>
-    public static class ExtensionMethods
+    /// <param name="kernel">The kernel.</param>
+    /// <param name="assemblies">The assemblies.</param>
+    public static void BindExports(this IKernel kernel, IEnumerable<Assembly> assemblies)
     {
-        /// <summary>
-        /// Binds the exports of the specified assemblies to the kernel.
-        /// </summary>
-        /// <param name="kernel">The kernel.</param>
-        /// <param name="assemblies">The assemblies.</param>
-        public static void BindExports(this IKernel kernel, params Assembly[] assemblies)
-        {
-            BindExports(kernel, (IEnumerable<Assembly>)assemblies);
-        }
+        BindExports(kernel, assemblies.SelectMany(MetadataReader.Read));
+    }
 
-        /// <summary>
-        /// Binds the exports of the specified assemblies to the kernel.
-        /// </summary>
-        /// <param name="kernel">The kernel.</param>
-        /// <param name="assemblies">The assemblies.</param>
-        public static void BindExports(this IKernel kernel, IEnumerable<Assembly> assemblies)
+    /// <summary>
+    /// Binds the specified exports to the kernel.
+    /// </summary>
+    /// <param name="kernel">The kernel.</param>
+    /// <param name="exportInfos">The exports.</param>
+    public static void BindExports(this IKernel kernel, IEnumerable<ExportInfo> exportInfos)
+    {
+        foreach (var exportInfo in exportInfos)
         {
-            BindExports(kernel, assemblies.SelectMany(MetadataReader.Read));
-        }
+            var type = exportInfo.Type;
+            if (type == null)
+                continue;
+            var exportMetadata = exportInfo.Metadata;
+            if (exportMetadata == null)
+                continue;
 
-        /// <summary>
-        /// Binds the specified exports to the kernel.
-        /// </summary>
-        /// <param name="kernel">The kernel.</param>
-        /// <param name="exportInfos">The exports.</param>
-        public static void BindExports(this IKernel kernel, IEnumerable<ExportInfo> exportInfos)
-        {
-            foreach (var exportInfo in exportInfos)
+            if ((exportMetadata.Length == 1) || !exportInfo.IsShared)
             {
-                var type = exportInfo.Type;
-                if (type == null)
-                    continue;
-                var exportMetadata = exportInfo.Metadata;
-                if (exportMetadata == null)
-                    continue;
-
-                if ((exportMetadata.Length == 1) || !exportInfo.IsShared)
+                foreach (var metadata in exportMetadata)
                 {
-                    foreach (var metadata in exportMetadata)
+                    var explicitContractType = metadata.GetContractTypeFor(type);
+                    var contractName = metadata.GetContractName();
+
+                    var binding = explicitContractType == null
+                        ? kernel.Bind(type).ToSelf()
+                        : kernel.Bind(explicitContractType).To(type);
+
+                    if (contractName != null)
                     {
-                        var explicitContractType = metadata.GetContractTypeFor(type);
-                        var contractName = metadata.GetContractName();
+                        binding.Named(contractName);
+                    }
 
-                        var binding = explicitContractType == null
-                            ? kernel.Bind(type).ToSelf()
-                            : kernel.Bind(explicitContractType).To(type);
+                    binding.WithMetadata(ExportProvider.ExportMetadataKey, new MetadataAdapter(metadata));
 
-                        if (contractName != null)
-                        {
-                            binding.Named(contractName);
-                        }
-
-                        binding.WithMetadata(ExportProvider.ExportMetadataKey, new MetadataAdapter(metadata));
-
-                        if (exportInfo.IsShared)
-                        {
-                            binding.InSingletonScope();
-                        }
+                    if (exportInfo.IsShared)
+                    {
+                        binding.InSingletonScope();
                     }
                 }
-                else
+            }
+            else
+            {
+                var masterBindingName = ExportProvider.DefaultMasterBindingName;
+
+                var exports = exportMetadata
+                    .Select(item => (Type: type, ContractType: item.GetContractTypeFor(type), ContractName: item.GetContractName(), Metadata: item))
+                    .Distinct()
+                    .ToList();
+
+                var nativeNamedExports = exports
+                    .Where(export => export.ContractType == null && export.ContractName != null)
+                    .ToList();
+
+                if (nativeNamedExports.Any())
                 {
-                    var masterBindingName = ExportProvider.DefaultMasterBindingName;
+                    masterBindingName = nativeNamedExports[0].ContractName;
+                }
 
-                    var exports = exportMetadata
-                        .Select(item => (Type: type, ContractType: item.GetContractTypeFor(type), ContractName: item.GetContractName(), Metadata: item))
-                        .Distinct()
-                        .ToList();
+                kernel.Bind(type).ToSelf().InSingletonScope().Named(masterBindingName);
 
-                    var nativeNamedExports = exports
-                        .Where(export => export.ContractType == null && export.ContractName != null)
-                        .ToList();
+                foreach (var export in exports)
+                {
+                    var explicitContractType = export.ContractType;
+                    var contractName = export.ContractName;
 
-                    if (nativeNamedExports.Any())
+                    if (explicitContractType == null && (contractName == null || contractName == masterBindingName))
+                        continue;
+
+                    var binding = kernel.Bind(explicitContractType ?? type).ToMethod(context => context.Kernel.Get(type, masterBindingName));
+
+                    if (contractName != null)
                     {
-                        masterBindingName = nativeNamedExports[0].ContractName;
+                        binding.Named(contractName);
                     }
 
-                    kernel.Bind(type).ToSelf().InSingletonScope().Named(masterBindingName);
-
-                    foreach (var export in exports)
-                    {
-                        var explicitContractType = export.ContractType;
-                        var contractName = export.ContractName;
-
-                        if (explicitContractType == null && (contractName == null || contractName == masterBindingName))
-                            continue;
-
-                        var binding = kernel.Bind(explicitContractType ?? type).ToMethod(context => context.Kernel.Get(type, masterBindingName));
-
-                        if (contractName != null)
-                        {
-                            binding.Named(contractName);
-                        }
-
-                        binding.WithMetadata(ExportProvider.ExportMetadataKey, new MetadataAdapter(export.Metadata));
-                    }
+                    binding.WithMetadata(ExportProvider.ExportMetadataKey, new MetadataAdapter(export.Metadata));
                 }
             }
         }

@@ -1,57 +1,56 @@
-﻿namespace TomsToolbox.Wpf
-{
-    using System.Collections.Generic;
-    using System.Windows;
+﻿namespace TomsToolbox.Wpf;
 
-    using TomsToolbox.Essentials;
+using System.Collections.Generic;
+using System.Windows;
+
+using TomsToolbox.Essentials;
+
+/// <summary>
+/// Helper methods to interchange data via clipboard.
+/// </summary>
+public static class ClipboardHelper
+{
+    /// <summary>
+    /// Gets the clipboard data as a table.
+    /// </summary>
+    /// <returns>The parsed clipboard data as a table, or <c>null</c> if the clipboard is empty or does not contain normalized table data.</returns>
+    /// <remarks>If no TEXT is present in the clipboard, CSV data is used.</remarks>
+    public static IList<IList<string>>? GetClipboardDataAsTable()
+    {
+        var text = Clipboard.GetText();
+        if (!text.IsNullOrEmpty())
+            return text.ParseTable(TableHelper.TextColumnSeparator);
+
+        var csv = Clipboard.GetData(DataFormats.CommaSeparatedValue) as string;
+        if (!csv.IsNullOrEmpty())
+            return csv.ParseTable(TableHelper.CsvColumnSeparator);
+
+        return null;
+    }
 
     /// <summary>
-    /// Helper methods to interchange data via clipboard.
+    /// Sets the clipboard data for the specified table.
     /// </summary>
-    public static class ClipboardHelper
+    /// <param name="table">The table.</param>
+    /// <remarks>
+    /// This method sets the TEXT (tab delimited) and CSV data. Like in Excel the CSV delimiter is either comma or semicolon, depending on the current culture.
+    /// </remarks>
+    public static void SetClipboardData(this IList<IList<string>>? table)
     {
-        /// <summary>
-        /// Gets the clipboard data as a table.
-        /// </summary>
-        /// <returns>The parsed clipboard data as a table, or <c>null</c> if the clipboard is empty or does not contain normalized table data.</returns>
-        /// <remarks>If no TEXT is present in the clipboard, CSV data is used.</remarks>
-        public static IList<IList<string>>? GetClipboardDataAsTable()
+        if (table == null)
         {
-            var text = Clipboard.GetText();
-            if (!text.IsNullOrEmpty())
-                return text.ParseTable(TableHelper.TextColumnSeparator);
-
-            var csv = Clipboard.GetData(DataFormats.CommaSeparatedValue) as string;
-            if (!csv.IsNullOrEmpty())
-                return csv.ParseTable(TableHelper.CsvColumnSeparator);
-
-            return null;
+            Clipboard.Clear();
+            return;
         }
 
-        /// <summary>
-        /// Sets the clipboard data for the specified table.
-        /// </summary>
-        /// <param name="table">The table.</param>
-        /// <remarks>
-        /// This method sets the TEXT (tab delimited) and CSV data. Like in Excel the CSV delimiter is either comma or semicolon, depending on the current culture.
-        /// </remarks>
-        public static void SetClipboardData(this IList<IList<string>>? table)
-        {
-            if (table == null)
-            {
-                Clipboard.Clear();
-                return;
-            }
+        var textString = table.ToTextString();
+        var csvString = table.ToCsvString();
 
-            var textString = table.ToTextString();
-            var csvString = table.ToCsvString();
+        var dataObject = new DataObject();
 
-            var dataObject = new DataObject();
+        dataObject.SetText(textString);
+        dataObject.SetText(csvString, TextDataFormat.CommaSeparatedValue);
 
-            dataObject.SetText(textString);
-            dataObject.SetText(csvString, TextDataFormat.CommaSeparatedValue);
-
-            Clipboard.SetDataObject(dataObject);
-        }
+        Clipboard.SetDataObject(dataObject);
     }
 }

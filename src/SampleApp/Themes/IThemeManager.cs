@@ -1,7 +1,6 @@
-﻿namespace SampleApp.Themes
+﻿namespace SampleApp.Themes;
+
+interface IThemeManager
 {
-    interface IThemeManager
-    {
-        bool IsDarkTheme { get; }
-    }
+    bool IsDarkTheme { get; }
 }

@@ -1,72 +1,71 @@
 ﻿// ReSharper disable UnusedMember.Local
-namespace TomsToolbox.Wpf.Tests
+namespace TomsToolbox.Wpf.Tests;
+
+using System;
+using System.Runtime.Serialization;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+[TestClass]
+public class DispatcherExtensionsTests
 {
-    using System;
-    using System.Runtime.Serialization;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    [TestClass]
-    public class DispatcherExtensionsTests
+    [TestMethod]
+    public void DispatcherExtensions_InvokePassesExceptionsTest()
     {
-        [TestMethod]
-        public void DispatcherExtensions_InvokePassesExceptionsTest()
+        try
         {
-            try
+            using (var thread1 = new ForegroundThreadWithDispatcher("Test1"))
             {
-                using (var thread1 = new ForegroundThreadWithDispatcher("Test1"))
-                {
-                    thread1.Dispatcher.Invoke(() => throw new TestException());
-                }
+                thread1.Dispatcher.Invoke(() => throw new TestException());
+            }
 
-                Assert.Fail("We should never get here");
-            }
-            catch (Exception ex)
+            Assert.Fail("We should never get here");
+        }
+        catch (Exception ex)
+        {
+            Assert.IsInstanceOfType(ex, typeof(TestException));
+        }
+    }
+
+    [TestMethod]
+    public void DispatcherExtensions_InvokePassesExceptionsOnSameThreadTest()
+    {
+        try
+        {
+            using (var thread1 = new ForegroundThreadWithDispatcher("Test1"))
             {
-                Assert.IsInstanceOfType(ex, typeof(TestException));
+                var t = thread1;
+                thread1.Dispatcher.Invoke(() => t.Invoke(() => throw new TestException()));
             }
+
+            Assert.Fail("We should never get here");
+        }
+        catch (Exception ex)
+        {
+            Assert.IsInstanceOfType(ex, typeof(TestException));
+        }
+    }
+
+    [Serializable]
+    class TestException : Exception
+    {
+        public TestException()
+        {
         }
 
-        [TestMethod]
-        public void DispatcherExtensions_InvokePassesExceptionsOnSameThreadTest()
+        public TestException(string message)
+            : base(message)
         {
-            try
-            {
-                using (var thread1 = new ForegroundThreadWithDispatcher("Test1"))
-                {
-                    var t = thread1;
-                    thread1.Dispatcher.Invoke(() => t.Invoke(() => throw new TestException()));
-                }
-
-                Assert.Fail("We should never get here");
-            }
-            catch (Exception ex)
-            {
-                Assert.IsInstanceOfType(ex, typeof(TestException));
-            }
         }
 
-        [Serializable]
-        class TestException : Exception
+        public TestException(string message, Exception inner)
+            : base(message, inner)
         {
-            public TestException()
-            {
-            }
+        }
 
-            public TestException(string message)
-                : base(message)
-            {
-            }
-
-            public TestException(string message, Exception inner)
-                : base(message, inner)
-            {
-            }
-
-            protected TestException(SerializationInfo info, StreamingContext context)
-                : base(info, context)
-            {
-            }
+        protected TestException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
         }
     }
 }

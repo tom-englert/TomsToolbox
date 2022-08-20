@@ -1,19 +1,18 @@
-﻿namespace SampleApp.Mef1.Samples
+﻿namespace SampleApp.Mef1.Samples;
+
+using System.ComponentModel.Composition;
+
+using TomsToolbox.Wpf.Composition.Mef;
+
+/// <summary>
+/// Interaction logic for ChessView.xaml
+/// </summary>
+[DataTemplate(typeof(ChessViewModel))]
+[PartCreationPolicy(CreationPolicy.NonShared)]
+public partial class ChessView
 {
-    using System.ComponentModel.Composition;
-
-    using TomsToolbox.Wpf.Composition.Mef;
-
-    /// <summary>
-    /// Interaction logic for ChessView.xaml
-    /// </summary>
-    [DataTemplate(typeof(ChessViewModel))]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class ChessView
+    public ChessView()
     {
-        public ChessView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

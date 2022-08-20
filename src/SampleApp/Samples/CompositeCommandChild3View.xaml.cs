@@ -1,16 +1,15 @@
-﻿namespace SampleApp.Samples
-{
-    using TomsToolbox.Wpf.Composition.AttributedModel;
+﻿namespace SampleApp.Samples;
 
-    /// <summary>
-    /// Interaction logic for CommandViewChild2.xaml
-    /// </summary>
-    [DataTemplate(typeof(CompositeCommandChild3ViewModel))]
-    public partial class CompositeCommandChild3View
+using TomsToolbox.Wpf.Composition.AttributedModel;
+
+/// <summary>
+/// Interaction logic for CommandViewChild2.xaml
+/// </summary>
+[DataTemplate(typeof(CompositeCommandChild3ViewModel))]
+public partial class CompositeCommandChild3View
+{
+    public CompositeCommandChild3View()
     {
-        public CompositeCommandChild3View()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

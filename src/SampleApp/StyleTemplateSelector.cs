@@ -1,60 +1,59 @@
-﻿namespace SampleApp
+﻿namespace SampleApp;
+
+using System;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+
+public class StyleTemplateSelector : DataTemplateSelector
 {
-    using System;
-    using System.Linq;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Data;
+    private const string StyleExplorer = "Style Explorer";
 
-    public class StyleTemplateSelector : DataTemplateSelector
+    private static readonly string[] _itemsSource = Enumerable.Range(1, 10).Select(i => StyleExplorer + " Item " + i).ToArray();
+
+    public override DataTemplate? SelectTemplate(object item, DependencyObject? container)
     {
-        private const string StyleExplorer = "Style Explorer";
+        if (!(item is Style style))
+            return null;
 
-        private static readonly string[] _itemsSource = Enumerable.Range(1, 10).Select(i => StyleExplorer + " Item " + i).ToArray();
+        if (!(container is FrameworkElement element))
+            return null;
 
-        public override DataTemplate? SelectTemplate(object item, DependencyObject? container)
+        var targetType = style.TargetType;
+
+        var dt = element.TryFindResource(targetType.Name) as DataTemplate;
+
+        return dt ?? DynamicTemplate(targetType);
+    }
+
+    private static DataTemplate DynamicTemplate(Type? targetType)
+    {
+        var visualTree = new FrameworkElementFactory(targetType);
+
+        if (typeof(HeaderedContentControl).IsAssignableFrom(targetType))
         {
-            if (!(item is Style style))
-                return null;
-
-            if (!(container is FrameworkElement element))
-                return null;
-
-            var targetType = style.TargetType;
-
-            var dt = element.TryFindResource(targetType.Name) as DataTemplate;
-
-            return dt ?? DynamicTemplate(targetType);
+            visualTree.SetValue(HeaderedContentControl.HeaderProperty, StyleExplorer);
         }
 
-        private static DataTemplate DynamicTemplate(Type? targetType)
+        if (typeof(HeaderedItemsControl).IsAssignableFrom(targetType))
         {
-            var visualTree = new FrameworkElementFactory(targetType);
-
-            if (typeof(HeaderedContentControl).IsAssignableFrom(targetType))
-            {
-                visualTree.SetValue(HeaderedContentControl.HeaderProperty, StyleExplorer);
-            }
-
-            if (typeof(HeaderedItemsControl).IsAssignableFrom(targetType))
-            {
-                visualTree.SetValue(HeaderedItemsControl.HeaderProperty, StyleExplorer);
-            }
-
-            if (typeof(ContentControl).IsAssignableFrom(targetType))
-            {
-                visualTree.SetValue(ContentControl.ContentProperty, StyleExplorer);
-            }
-
-            if (typeof(ItemsControl).IsAssignableFrom(targetType))
-            {
-                visualTree.SetValue(ItemsControl.ItemsSourceProperty, new Binding { Source = _itemsSource });
-            }
-
-            return new DataTemplate(targetType)
-            {
-                VisualTree = visualTree
-            };
+            visualTree.SetValue(HeaderedItemsControl.HeaderProperty, StyleExplorer);
         }
+
+        if (typeof(ContentControl).IsAssignableFrom(targetType))
+        {
+            visualTree.SetValue(ContentControl.ContentProperty, StyleExplorer);
+        }
+
+        if (typeof(ItemsControl).IsAssignableFrom(targetType))
+        {
+            visualTree.SetValue(ItemsControl.ItemsSourceProperty, new Binding { Source = _itemsSource });
+        }
+
+        return new DataTemplate(targetType)
+        {
+            VisualTree = visualTree
+        };
     }
 }

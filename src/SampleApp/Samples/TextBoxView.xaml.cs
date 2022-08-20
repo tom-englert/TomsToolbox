@@ -1,16 +1,15 @@
-﻿namespace SampleApp.Samples
-{
-    using TomsToolbox.Wpf.Composition.AttributedModel;
+﻿namespace SampleApp.Samples;
 
-    /// <summary>
-    /// Interaction logic for TextBoxView.xaml
-    /// </summary>
-    [DataTemplate(typeof(TextBoxViewModel))]
-    public partial class TextBoxView
+using TomsToolbox.Wpf.Composition.AttributedModel;
+
+/// <summary>
+/// Interaction logic for TextBoxView.xaml
+/// </summary>
+[DataTemplate(typeof(TextBoxViewModel))]
+public partial class TextBoxView
+{
+    public TextBoxView()
     {
-        public TextBoxView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

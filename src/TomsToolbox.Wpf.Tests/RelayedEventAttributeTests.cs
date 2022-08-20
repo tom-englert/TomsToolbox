@@ -1,233 +1,232 @@
 ﻿// ReSharper disable NotAccessedField.Local
 // ReSharper disable UnusedVariable
 // ReSharper disable UnusedMember.Local
-namespace TomsToolbox.Wpf.Tests
+namespace TomsToolbox.Wpf.Tests;
+
+using System;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using TomsToolbox.ObservableCollections;
+
+[TestClass]
+public class RelayedEventAttributeTests
 {
-    using System;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using TomsToolbox.ObservableCollections;
-
-    [TestClass]
-    public class RelayedEventAttributeTests
+    class GoverningClass1 : ObservableObject
     {
-        class GoverningClass1 : ObservableObject
+        private int _value;
+
+        public int Value
         {
-            private int _value;
-
-            public int Value
+            get => _value;
+            set
             {
-                get => _value;
-                set
-                {
-                    if (_value == value)
-                        return;
+                if (_value == value)
+                    return;
 
-                    _value = value;
-                    OnPropertyChanged(() => Value);
-                }
+                _value = value;
+                OnPropertyChanged(() => Value);
+            }
+        }
+    }
+
+    class GoverningClass2 : ObservableObject
+    {
+        private int _value;
+        private int _otherValue;
+
+        public int Value
+        {
+            get => _value;
+            set
+            {
+                if (_value == value)
+                    return;
+
+                _value = value;
+                OnPropertyChanged(() => Value);
             }
         }
 
-        class GoverningClass2 : ObservableObject
+        public int OtherValue
         {
-            private int _value;
-            private int _otherValue;
-
-            public int Value
+            get => _otherValue;
+            set
             {
-                get => _value;
-                set
-                {
-                    if (_value == value)
-                        return;
+                if (_otherValue == value)
+                    return;
 
-                    _value = value;
-                    OnPropertyChanged(() => Value);
-                }
-            }
-
-            public int OtherValue
-            {
-                get => _otherValue;
-                set
-                {
-                    if (_otherValue == value)
-                        return;
-
-                    _otherValue = value;
-                    OnPropertyChanged(() => OtherValue);
-                }
+                _otherValue = value;
+                OnPropertyChanged(() => OtherValue);
             }
         }
+    }
 
-        class RelayingClass : ObservableObject
+    class RelayingClass : ObservableObject
+    {
+        private readonly GoverningClass1 _governingClass1;
+        private readonly GoverningClass2? _governingClass2;
+
+        public RelayingClass(GoverningClass1 governingClass)
         {
-            private readonly GoverningClass1 _governingClass1;
-            private readonly GoverningClass2? _governingClass2;
-
-            public RelayingClass(GoverningClass1 governingClass)
-            {
-                _governingClass1 = governingClass;
-                RelayEventsOf(governingClass);
-            }
-
-            public RelayingClass(GoverningClass1 governingClass1, GoverningClass2 governingClass2)
-            {
-                _governingClass1 = governingClass1;
-                _governingClass2 = governingClass2;
-
-                RelayEventsOf(governingClass1);
-                RelayEventsOf(governingClass2);
-            }
-
-            [RelayedEvent(typeof(GoverningClass1))]
-            public int Value => _governingClass1.Value;
-
-            [RelayedEvent(typeof(GoverningClass2), "OtherValue")]
-            public int MyOtherValue => _governingClass2?.OtherValue ?? int.MinValue;
+            _governingClass1 = governingClass;
+            RelayEventsOf(governingClass);
         }
 
-        class BadRelayingClass1 : ObservableObject
+        public RelayingClass(GoverningClass1 governingClass1, GoverningClass2 governingClass2)
         {
-            private readonly GoverningClass1 _governingClass;
+            _governingClass1 = governingClass1;
+            _governingClass2 = governingClass2;
 
-            public BadRelayingClass1(GoverningClass1 governingClass)
-            {
-                _governingClass = governingClass;
-                // Invalid initialization, class has no property with a RelayedEventAttribute for GoverningClass1
-                RelayEventsOf(governingClass);
-            }
+            RelayEventsOf(governingClass1);
+            RelayEventsOf(governingClass2);
         }
 
-        class BadRelayingClass2 : ObservableObject
+        [RelayedEvent(typeof(GoverningClass1))]
+        public int Value => _governingClass1.Value;
+
+        [RelayedEvent(typeof(GoverningClass2), "OtherValue")]
+        public int MyOtherValue => _governingClass2?.OtherValue ?? int.MinValue;
+    }
+
+    class BadRelayingClass1 : ObservableObject
+    {
+        private readonly GoverningClass1 _governingClass;
+
+        public BadRelayingClass1(GoverningClass1 governingClass)
         {
-            private readonly GoverningClass1 _governingClass1;
+            _governingClass = governingClass;
+            // Invalid initialization, class has no property with a RelayedEventAttribute for GoverningClass1
+            RelayEventsOf(governingClass);
+        }
+    }
 
-            public BadRelayingClass2(GoverningClass1 governingClass)
-            {
-                _governingClass1 = governingClass;
-                RelayEventsOf(governingClass);
-            }
+    class BadRelayingClass2 : ObservableObject
+    {
+        private readonly GoverningClass1 _governingClass1;
 
-            // Invalid attribute, GoverningClass1 does not have a property "MyValue".
-            [RelayedEvent(typeof(GoverningClass1))]
-            public int MyValue => _governingClass1.Value;
+        public BadRelayingClass2(GoverningClass1 governingClass)
+        {
+            _governingClass1 = governingClass;
+            RelayEventsOf(governingClass);
         }
 
-        [TestMethod]
-        public void RelayedEventAttribute_SingleGoverningClassTest()
-        {
-            var receivedEvents = new ObservableIndexer<string, int>(_ => 0);
-            var governing = new GoverningClass1();
-            var relaying = new RelayingClass(governing);
+        // Invalid attribute, GoverningClass1 does not have a property "MyValue".
+        [RelayedEvent(typeof(GoverningClass1))]
+        public int MyValue => _governingClass1.Value;
+    }
 
-            relaying.PropertyChanged += (_, e) => receivedEvents[e.PropertyName] += 1;
+    [TestMethod]
+    public void RelayedEventAttribute_SingleGoverningClassTest()
+    {
+        var receivedEvents = new ObservableIndexer<string, int>(_ => 0);
+        var governing = new GoverningClass1();
+        var relaying = new RelayingClass(governing);
 
-            governing.Value = 5;
+        relaying.PropertyChanged += (_, e) => receivedEvents[e.PropertyName] += 1;
 
-            Assert.AreEqual(5, relaying.Value);
-            Assert.AreEqual(1, receivedEvents.Count);
-            Assert.AreEqual(1, receivedEvents["Value"]);
+        governing.Value = 5;
 
-            governing.Value = 7;
+        Assert.AreEqual(5, relaying.Value);
+        Assert.AreEqual(1, receivedEvents.Count);
+        Assert.AreEqual(1, receivedEvents["Value"]);
 
-            Assert.AreEqual(7, relaying.Value);
-            Assert.AreEqual(1, receivedEvents.Count);
-            Assert.AreEqual(2, receivedEvents["Value"]);
-        }
+        governing.Value = 7;
 
-        [TestMethod]
-        public void RelayedEventAttribute_MultipleGoverningClassTest()
-        {
-            var receivedEvents = new ObservableIndexer<string, int>(_ => 0);
-            var governing1 = new GoverningClass1();
-            var governing2 = new GoverningClass2();
-            var relaying = new RelayingClass(governing1, governing2);
+        Assert.AreEqual(7, relaying.Value);
+        Assert.AreEqual(1, receivedEvents.Count);
+        Assert.AreEqual(2, receivedEvents["Value"]);
+    }
 
-            relaying.PropertyChanged += (_, e) => receivedEvents[e.PropertyName] += 1;
+    [TestMethod]
+    public void RelayedEventAttribute_MultipleGoverningClassTest()
+    {
+        var receivedEvents = new ObservableIndexer<string, int>(_ => 0);
+        var governing1 = new GoverningClass1();
+        var governing2 = new GoverningClass2();
+        var relaying = new RelayingClass(governing1, governing2);
 
-            governing1.Value = 5;
+        relaying.PropertyChanged += (_, e) => receivedEvents[e.PropertyName] += 1;
 
-            Assert.AreEqual(5, relaying.Value);
-            Assert.AreEqual(0, relaying.MyOtherValue);
-            Assert.AreEqual(1, receivedEvents.Count);
-            Assert.AreEqual(1, receivedEvents["Value"]);
+        governing1.Value = 5;
 
-            governing1.Value = 7;
+        Assert.AreEqual(5, relaying.Value);
+        Assert.AreEqual(0, relaying.MyOtherValue);
+        Assert.AreEqual(1, receivedEvents.Count);
+        Assert.AreEqual(1, receivedEvents["Value"]);
 
-            Assert.AreEqual(7, relaying.Value);
-            Assert.AreEqual(0, relaying.MyOtherValue);
-            Assert.AreEqual(1, receivedEvents.Count);
-            Assert.AreEqual(2, receivedEvents["Value"]);
+        governing1.Value = 7;
 
-            // Governing2.Value is not relayed, changes should not generate relayed events
-            governing2.Value = 8;
+        Assert.AreEqual(7, relaying.Value);
+        Assert.AreEqual(0, relaying.MyOtherValue);
+        Assert.AreEqual(1, receivedEvents.Count);
+        Assert.AreEqual(2, receivedEvents["Value"]);
 
-            Assert.AreEqual(7, relaying.Value);
-            Assert.AreEqual(0, relaying.MyOtherValue);
-            Assert.AreEqual(1, receivedEvents.Count);
-            Assert.AreEqual(2, receivedEvents["Value"]);
+        // Governing2.Value is not relayed, changes should not generate relayed events
+        governing2.Value = 8;
 
-            governing2.OtherValue = 8;
+        Assert.AreEqual(7, relaying.Value);
+        Assert.AreEqual(0, relaying.MyOtherValue);
+        Assert.AreEqual(1, receivedEvents.Count);
+        Assert.AreEqual(2, receivedEvents["Value"]);
 
-            Assert.AreEqual(7, relaying.Value);
-            Assert.AreEqual(8, relaying.MyOtherValue);
-            Assert.AreEqual(2, receivedEvents.Count);
-            Assert.AreEqual(2, receivedEvents["Value"]);
-            Assert.AreEqual(1, receivedEvents["MyOtherValue"]);
-        }
-[TestMethod]
-        public void RelayedEventAttribute_MultipleGoverningWeakReferenceGetsReleasedTest()
-        {
-            var receivedEvents = new ObservableIndexer<string, int>(_ => 0);
-            var governing1 = new GoverningClass1();
-            var governing2 = new GoverningClass2();
-            var relaying = new RelayingClass(governing1, governing2);
+        governing2.OtherValue = 8;
 
-            relaying.PropertyChanged += (_, e) => receivedEvents[e.PropertyName] += 1;
+        Assert.AreEqual(7, relaying.Value);
+        Assert.AreEqual(8, relaying.MyOtherValue);
+        Assert.AreEqual(2, receivedEvents.Count);
+        Assert.AreEqual(2, receivedEvents["Value"]);
+        Assert.AreEqual(1, receivedEvents["MyOtherValue"]);
+    }
+    [TestMethod]
+    public void RelayedEventAttribute_MultipleGoverningWeakReferenceGetsReleasedTest()
+    {
+        var receivedEvents = new ObservableIndexer<string, int>(_ => 0);
+        var governing1 = new GoverningClass1();
+        var governing2 = new GoverningClass2();
+        var relaying = new RelayingClass(governing1, governing2);
 
-            governing1.Value = 5;
+        relaying.PropertyChanged += (_, e) => receivedEvents[e.PropertyName] += 1;
 
-            Assert.AreEqual(5, relaying.Value);
-            Assert.AreEqual(0, relaying.MyOtherValue);
-            Assert.AreEqual(1, receivedEvents.Count);
-            Assert.AreEqual(1, receivedEvents["Value"]);
+        governing1.Value = 5;
 
-            governing2.OtherValue = 8;
+        Assert.AreEqual(5, relaying.Value);
+        Assert.AreEqual(0, relaying.MyOtherValue);
+        Assert.AreEqual(1, receivedEvents.Count);
+        Assert.AreEqual(1, receivedEvents["Value"]);
 
-            Assert.AreEqual(5, relaying.Value);
-            Assert.AreEqual(8, relaying.MyOtherValue);
-            Assert.AreEqual(2, receivedEvents.Count);
-            Assert.AreEqual(1, receivedEvents["Value"]);
-            Assert.AreEqual(1, receivedEvents["MyOtherValue"]);
+        governing2.OtherValue = 8;
 
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+        Assert.AreEqual(5, relaying.Value);
+        Assert.AreEqual(8, relaying.MyOtherValue);
+        Assert.AreEqual(2, receivedEvents.Count);
+        Assert.AreEqual(1, receivedEvents["Value"]);
+        Assert.AreEqual(1, receivedEvents["MyOtherValue"]);
 
-            governing1.Value = 5;
-            governing2.OtherValue = 8;
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
 
-            Assert.AreEqual(2, receivedEvents.Count);
-            Assert.AreEqual(1, receivedEvents["Value"]);
-            Assert.AreEqual(1, receivedEvents["MyOtherValue"]);
-        }
+        governing1.Value = 5;
+        governing2.OtherValue = 8;
 
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void RelayedEventAttribute_CallingRelayEventsOfWithoutRelayedEventAttributeTest()
-        {
-            var governing = new GoverningClass1();
-            var relaying = new BadRelayingClass1(governing);
-        }
+        Assert.AreEqual(2, receivedEvents.Count);
+        Assert.AreEqual(1, receivedEvents["Value"]);
+        Assert.AreEqual(1, receivedEvents["MyOtherValue"]);
+    }
 
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void RelayedEventAttribute_CallingRelayEventsOfWithInvalidRelayedEventAttributeTest()
-        {
-            var governing = new GoverningClass1();
-            var relaying = new BadRelayingClass2(governing);
-        }
+    [TestMethod]
+    [ExpectedException(typeof(InvalidOperationException))]
+    public void RelayedEventAttribute_CallingRelayEventsOfWithoutRelayedEventAttributeTest()
+    {
+        var governing = new GoverningClass1();
+        var relaying = new BadRelayingClass1(governing);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(InvalidOperationException))]
+    public void RelayedEventAttribute_CallingRelayEventsOfWithInvalidRelayedEventAttributeTest()
+    {
+        var governing = new GoverningClass1();
+        var relaying = new BadRelayingClass2(governing);
     }
 }

@@ -1,95 +1,94 @@
-﻿namespace TomsToolbox.Wpf.Composition
-{
-    using System.Linq;
-    using System.Windows;
-    using System.Windows.Controls;
+﻿namespace TomsToolbox.Wpf.Composition;
 
-    using TomsToolbox.Wpf.Composition.XamlExtensions;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+
+using TomsToolbox.Wpf.Composition.XamlExtensions;
+
+/// <summary>
+/// Retrieves the exported object that matches RegionId and Role from the composition container
+/// and assigns it as the content of the associated <see cref="ContentControl"/>
+/// </summary>
+public class ContentControlCompositionBehavior : VisualCompositionBehavior<ContentControl>
+{
+    /// <summary>
+    /// Gets or sets the name of the item that should be attached.
+    /// </summary>
+    /// <remarks>
+    /// The first exported item matching RegionId and Role will be set as the content of the content control.
+    /// </remarks>
+    public object? Role
+    {
+        get => GetValue(RoleProperty);
+        set => SetValue(RoleProperty, value);
+    }
+    /// <summary>
+    /// Identifies the <see cref="Role"/> dependency property.
+    /// </summary>
+    public static readonly DependencyProperty RoleProperty =
+        DependencyProperty.Register("Role", typeof(object), typeof(ContentControlCompositionBehavior), new FrameworkPropertyMetadata((sender, _) => ((ContentControlCompositionBehavior)sender)?.Role_Changed()));
+
+    private void Role_Changed()
+    {
+        VisualComposition.OnTrace(this, "Role changed: " + Role);
+        Update();
+    }
 
     /// <summary>
-    /// Retrieves the exported object that matches RegionId and Role from the composition container
-    /// and assigns it as the content of the associated <see cref="ContentControl"/>
+    /// Updates this instance when any of the constraints have changed.
     /// </summary>
-    public class ContentControlCompositionBehavior : VisualCompositionBehavior<ContentControl>
+    protected override void OnUpdate()
     {
-        /// <summary>
-        /// Gets or sets the name of the item that should be attached.
-        /// </summary>
-        /// <remarks>
-        /// The first exported item matching RegionId and Role will be set as the content of the content control.
-        /// </remarks>
-        public object? Role
+        var regionId = RegionId;
+        var role = Role;
+        var contentControl = AssociatedObject;
+
+        VisualComposition.OnTrace(this, $"Update {GetType()}, RegionId={regionId}, Role={role}, ContentControl={contentControl}");
+
+        if (contentControl == null)
+            return;
+
+        object? exportedItem = null;
+
+        if (!string.IsNullOrEmpty(regionId))
         {
-            get => GetValue(RoleProperty);
-            set => SetValue(RoleProperty, value);
-        }
-        /// <summary>
-        /// Identifies the <see cref="Role"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty RoleProperty =
-            DependencyProperty.Register("Role", typeof(object), typeof(ContentControlCompositionBehavior), new FrameworkPropertyMetadata((sender, _) => ((ContentControlCompositionBehavior)sender)?.Role_Changed()));
-
-        private void Role_Changed()
-        {
-            VisualComposition.OnTrace(this, "Role changed: " + Role);
-            Update();
-        }
-
-        /// <summary>
-        /// Updates this instance when any of the constraints have changed.
-        /// </summary>
-        protected override void OnUpdate()
-        {
-            var regionId = RegionId;
-            var role = Role;
-            var contentControl = AssociatedObject;
-
-            VisualComposition.OnTrace(this, $"Update {GetType()}, RegionId={regionId}, Role={role}, ContentControl={contentControl}");
-
-            if (contentControl == null)
-                return;
-
-            object? exportedItem = null;
-
-            if (!string.IsNullOrEmpty(regionId))
+            var exports = GetExports(regionId);
+            if (exports == null)
             {
-                var exports = GetExports(regionId);
-                if (exports == null)
-                {
-                    VisualComposition.OnTrace(this, $"Update {GetType()}: No exports for RegionId={regionId} found");
-                    return;
-                }
-
-                exportedItem = exports
-                    .Where(item => DataTemplateManager.RoleEquals(item.Metadata?.Role, role))
-                    .Select(item => GetTarget(item.Value))
-                    .FirstOrDefault();
+                VisualComposition.OnTrace(this, $"Update {GetType()}: No exports for RegionId={regionId} found");
+                return;
             }
 
-            VisualComposition.OnTrace(this, $"Update {contentControl.GetType()}, Content={exportedItem?.GetType()}");
-
-            UpdateContent(contentControl, exportedItem);
+            exportedItem = exports
+                .Where(item => DataTemplateManager.RoleEquals(item.Metadata?.Role, role))
+                .Select(item => GetTarget(item.Value))
+                .FirstOrDefault();
         }
 
-        private void UpdateContent(ContentControl contentControl, object? targetItem)
+        VisualComposition.OnTrace(this, $"Update {contentControl.GetType()}, Content={exportedItem?.GetType()}");
+
+        UpdateContent(contentControl, exportedItem);
+    }
+
+    private void UpdateContent(ContentControl contentControl, object? targetItem)
+    {
+        var currentItem = contentControl.Content;
+
+        if (targetItem != currentItem)
         {
-            var currentItem = contentControl.Content;
-
-            if (targetItem != currentItem)
-            {
-                ApplyContext(currentItem as IComposablePartWithContext, null);
-                contentControl.Content = targetItem;
-            }
-
-            ApplyContext(targetItem as IComposablePartWithContext, CompositionContext);
+            ApplyContext(currentItem as IComposablePartWithContext, null);
+            contentControl.Content = targetItem;
         }
 
-        private static void ApplyContext(IComposablePartWithContext? item, object? context)
-        {
-            if (item == null)
-                return;
+        ApplyContext(targetItem as IComposablePartWithContext, CompositionContext);
+    }
 
-            item.CompositionContext = context;
-        }
+    private static void ApplyContext(IComposablePartWithContext? item, object? context)
+    {
+        if (item == null)
+            return;
+
+        item.CompositionContext = context;
     }
 }

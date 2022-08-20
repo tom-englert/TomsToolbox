@@ -1,64 +1,63 @@
-﻿namespace TomsToolbox.Wpf.Composition
+﻿namespace TomsToolbox.Wpf.Composition;
+
+using TomsToolbox.Composition;
+
+/// <summary>
+/// Export metadata for composable objects.
+/// </summary>
+public interface IVisualCompositionMetadata
 {
-    using TomsToolbox.Composition;
+    /// <summary>
+    /// Gets the id of the item for visual composition.
+    /// </summary>
+    object? Role
+    {
+        get;
+    }
 
     /// <summary>
-    /// Export metadata for composable objects.
+    /// Gets a sequence to provide ordering of lists.
     /// </summary>
-    public interface IVisualCompositionMetadata
+    double Sequence
     {
-        /// <summary>
-        /// Gets the id of the item for visual composition.
-        /// </summary>
-        object? Role
+        get;
+    }
+
+    /// <summary>
+    /// Gets the target regions for visual composition.
+    /// </summary>
+    string?[]? TargetRegions
+    {
+        get;
+    }
+}
+
+internal class VisualCompositionMetadata : IVisualCompositionMetadata
+{
+    public VisualCompositionMetadata(IMetadata? metadata)
+    {
+        if (metadata == null)
+            return;
+
+        if (metadata.TryGetValue(nameof(Role), out var role))
         {
-            get;
+            Role = role;
         }
 
-        /// <summary>
-        /// Gets a sequence to provide ordering of lists.
-        /// </summary>
-        double Sequence
+        if (metadata.TryGetValue(nameof(Sequence), out var sequence) && (sequence is double d))
         {
-            get;
+            Sequence = d;
         }
 
-        /// <summary>
-        /// Gets the target regions for visual composition.
-        /// </summary>
-        string?[]? TargetRegions
+        if (metadata.TryGetValue(nameof(TargetRegions), out var targetRegions))
         {
-            get;
+            TargetRegions = targetRegions as string[];
         }
     }
 
-    internal class VisualCompositionMetadata : IVisualCompositionMetadata
-    {
-        public VisualCompositionMetadata(IMetadata? metadata)
-        {
-            if (metadata == null)
-                return;
+    public object? Role { get; }
 
-            if (metadata.TryGetValue(nameof(Role), out var role))
-            {
-                Role = role;
-            }
+    public double Sequence { get; }
 
-            if (metadata.TryGetValue(nameof(Sequence), out var sequence) && (sequence is double d))
-            {
-                Sequence = d;
-            }
-
-            if (metadata.TryGetValue(nameof(TargetRegions), out var targetRegions))
-            {
-                TargetRegions = targetRegions as string[];
-            }
-        }
-
-        public object? Role { get; }
-
-        public double Sequence { get; }
-
-        public string?[]? TargetRegions { get; }
-    }
+    public string?[]? TargetRegions { get; }
 }

@@ -1,53 +1,52 @@
-﻿namespace TomsToolbox.Wpf.Composition
+﻿namespace TomsToolbox.Wpf.Composition;
+
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+
+/// <summary>
+/// A template selector that finds the <see cref="DataTemplate"/> by the <see cref="RoleBasedDataTemplateKey"/>.
+/// </summary>
+public class RoleBasedDataTemplateSelector : DataTemplateSelector
 {
-    using System.Linq;
-    using System.Windows;
-    using System.Windows.Controls;
+    /// <summary>
+    /// Gets or sets the role to use in the lookup.
+    /// </summary>
+    public object? Role
+    {
+        get;
+        set;
+    }
+
 
     /// <summary>
-    /// A template selector that finds the <see cref="DataTemplate"/> by the <see cref="RoleBasedDataTemplateKey"/>.
+    /// Gets or sets the template used as fallback if no template for the specified role is found.
     /// </summary>
-    public class RoleBasedDataTemplateSelector : DataTemplateSelector
+    public DataTemplate? FallbackValue
     {
-        /// <summary>
-        /// Gets or sets the role to use in the lookup.
-        /// </summary>
-        public object? Role
-        {
-            get;
-            set;
-        }
+        get;
+        set;
+    }
 
+    /// <summary>
+    /// When overridden in a derived class, returns a <see cref="T:System.Windows.DataTemplate" /> based on custom logic.
+    /// </summary>
+    /// <param name="item">The data object for which to select the template.</param>
+    /// <param name="container">The data-bound object.</param>
+    /// <returns>
+    /// Returns a <see cref="T:System.Windows.DataTemplate" /> or null. The default value is null.
+    /// </returns>
+    public override DataTemplate? SelectTemplate(object? item, DependencyObject? container)
+    {
+        if ((item == null) || (container == null))
+            return null;
 
-        /// <summary>
-        /// Gets or sets the template used as fallback if no template for the specified role is found.
-        /// </summary>
-        public DataTemplate? FallbackValue
-        {
-            get;
-            set;
-        }
+        var frameworkElement = container.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault();
+        if (frameworkElement == null)
+            return null;
 
-        /// <summary>
-        /// When overridden in a derived class, returns a <see cref="T:System.Windows.DataTemplate" /> based on custom logic.
-        /// </summary>
-        /// <param name="item">The data object for which to select the template.</param>
-        /// <param name="container">The data-bound object.</param>
-        /// <returns>
-        /// Returns a <see cref="T:System.Windows.DataTemplate" /> or null. The default value is null.
-        /// </returns>
-        public override DataTemplate? SelectTemplate(object? item, DependencyObject? container)
-        {
-            if ((item == null) || (container == null))
-                return null;
+        var key = DataTemplateManager.CreateKey(item.GetType(), Role);
 
-            var frameworkElement = container.AncestorsAndSelf().OfType<FrameworkElement>().FirstOrDefault();
-            if (frameworkElement == null)
-                return null;
-
-            var key = DataTemplateManager.CreateKey(item.GetType(), Role);
-
-            return (frameworkElement.TryFindResource(key) as DataTemplate) ?? FallbackValue;
-        }
+        return (frameworkElement.TryFindResource(key) as DataTemplate) ?? FallbackValue;
     }
 }

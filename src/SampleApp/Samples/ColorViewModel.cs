@@ -1,16 +1,15 @@
-﻿namespace SampleApp.Samples
+﻿namespace SampleApp.Samples;
+
+using System.Composition;
+
+using TomsToolbox.Wpf.Composition.AttributedModel;
+
+[VisualCompositionExport(RegionId.Main, Sequence = 100)]
+[Export, Shared]
+public class ColorViewModel
 {
-    using System.Composition;
-
-    using TomsToolbox.Wpf.Composition.AttributedModel;
-
-    [VisualCompositionExport(RegionId.Main, Sequence = 100)]
-    [Export, Shared]
-    public class ColorViewModel
+    public override string ToString()
     {
-        public override string ToString()
-        {
-            return "Colors";
-        }
+        return "Colors";
     }
 }

@@ -1,128 +1,127 @@
-﻿namespace TomsToolbox.Wpf
+﻿namespace TomsToolbox.Wpf;
+
+using System;
+using System.Reflection;
+using System.Windows.Threading;
+
+/// <summary>
+/// Extension methods to ease usage of dispatcher calls.
+/// </summary>
+public static class DispatcherExtensions
 {
-    using System;
-    using System.Reflection;
-    using System.Windows.Threading;
+    /// <summary>
+    /// Invokes the specified method in the dispatcher thread.
+    /// </summary>
+    /// <typeparam name="T">The return type of the method.</typeparam>
+    /// <param name="dispatcher">The dispatcher.</param>
+    /// <param name="method">The method.</param>
+    /// <returns>The result of the method.</returns>
+    /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
+    public static T? Invoke<T>(this Dispatcher? dispatcher, Func<T> method)
+    {
+        return InternalInvoke(dispatcher, method);
+    }
 
     /// <summary>
-    /// Extension methods to ease usage of dispatcher calls.
+    /// Invokes the specified method in the dispatcher thread.
     /// </summary>
-    public static class DispatcherExtensions
+    /// <param name="dispatcher">The dispatcher.</param>
+    /// <param name="method">The method.</param>
+    /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
+    public static void Invoke(this Dispatcher? dispatcher, Action method)
     {
-        /// <summary>
-        /// Invokes the specified method in the dispatcher thread.
-        /// </summary>
-        /// <typeparam name="T">The return type of the method.</typeparam>
-        /// <param name="dispatcher">The dispatcher.</param>
-        /// <param name="method">The method.</param>
-        /// <returns>The result of the method.</returns>
-        /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
-        public static T? Invoke<T>(this Dispatcher? dispatcher, Func<T> method)
-        {
-            return InternalInvoke(dispatcher, method);
-        }
+        InternalInvoke(dispatcher, method);
+    }
 
-        /// <summary>
-        /// Invokes the specified method in the dispatcher thread.
-        /// </summary>
-        /// <param name="dispatcher">The dispatcher.</param>
-        /// <param name="method">The method.</param>
-        /// <remarks>Exceptions thrown by <paramref name="method"/> are passed back to the caller and are not wrapped into a <see cref="TargetInvocationException"/>.</remarks>
-        public static void Invoke(this Dispatcher? dispatcher, Action method)
-        {
-            InternalInvoke(dispatcher, method);
-        }
+    private static T? InternalInvoke<T>(Dispatcher? dispatcher, Func<T> method)
+    {
+        var result = InternalInvoke(dispatcher, (Delegate)method);
+        if (result == null)
+            return default;
 
-        private static T? InternalInvoke<T>(Dispatcher? dispatcher, Func<T> method)
-        {
-            var result = InternalInvoke(dispatcher, (Delegate)method);
-            if (result == null)
-                return default;
+        return (T)result;
+    }
 
-            return (T)result;
-        }
-
-        private static object? InternalInvoke(Dispatcher? dispatcher, Delegate method)
+    private static object? InternalInvoke(Dispatcher? dispatcher, Delegate method)
+    {
+        if ((dispatcher == null) || dispatcher.CheckAccess())
         {
-            if ((dispatcher == null) || dispatcher.CheckAccess())
+            // No thread affinity, or already in the correct thread: call method directly.
+            try
             {
-                // No thread affinity, or already in the correct thread: call method directly.
-                try
-                {
-                    return method.DynamicInvoke();
-                }
-                catch (Exception ex)
-                {
-                    throw UnwrapTargetInvocation(ex);
-                }
+                return method.DynamicInvoke();
             }
-
-            Exception? innerException = null;
-
-            var result = dispatcher.Invoke(delegate
+            catch (Exception ex)
             {
-                try
-                {
-                    return method.DynamicInvoke();
-                }
-                catch (Exception ex)
-                {
-                    innerException = ex;
-                    return null;
-                }
-            });
-
-            if (innerException != null)
-            {
-                throw UnwrapTargetInvocation(innerException);
+                throw UnwrapTargetInvocation(ex);
             }
-
-            return result;
         }
 
-        private static Exception UnwrapTargetInvocation(Exception ex)
+        Exception? innerException = null;
+
+        var result = dispatcher.Invoke(delegate
         {
-            if (ex is TargetInvocationException)
+            try
             {
-                return ex.InnerException ?? ex;
+                return method.DynamicInvoke();
             }
+            catch (Exception ex)
+            {
+                innerException = ex;
+                return null;
+            }
+        });
 
-            return ex;
-        }
-
-        /// <summary>
-        /// Invokes the specified method asynchronously in the dispatcher thread.
-        /// </summary>
-        /// <param name="dispatcher">The dispatcher.</param>
-        /// <param name="method">The method.</param>
-        /// <returns>The dispatcher operation to track the outcome of the call.</returns>
-        /// <exception cref="System.InvalidOperationException">The dispatcher has already shut down.</exception>
-        public static DispatcherOperation BeginInvoke(this Dispatcher dispatcher, Action method)
+        if (innerException != null)
         {
-            return BeginInvoke(dispatcher, DispatcherPriority.Normal, method);
+            throw UnwrapTargetInvocation(innerException);
         }
 
-        /// <summary>
-        /// Invokes the specified method asynchronously in the dispatcher thread.
-        /// </summary>
-        /// <param name="dispatcher">The dispatcher.</param>
-        /// <param name="priority">The priority to use.</param>
-        /// <param name="method">The method.</param>
-        /// <returns>The dispatcher operation to track the outcome of the call.</returns>
-        /// <exception cref="System.InvalidOperationException">The dispatcher has already shut down.</exception>
-        public static DispatcherOperation BeginInvoke(this Dispatcher dispatcher, DispatcherPriority priority, Action method)
+        return result;
+    }
+
+    private static Exception UnwrapTargetInvocation(Exception ex)
+    {
+        if (ex is TargetInvocationException)
         {
-            return dispatcher.BeginInvoke(method, priority, null);
+            return ex.InnerException ?? ex;
         }
 
-        /// <summary>
-        /// Restarts the specified timer.
-        /// </summary>
-        /// <param name="timer">The timer.</param>
-        public static void Restart(this DispatcherTimer timer)
-        {
-            timer.Stop();
-            timer.Start();
-        }
+        return ex;
+    }
+
+    /// <summary>
+    /// Invokes the specified method asynchronously in the dispatcher thread.
+    /// </summary>
+    /// <param name="dispatcher">The dispatcher.</param>
+    /// <param name="method">The method.</param>
+    /// <returns>The dispatcher operation to track the outcome of the call.</returns>
+    /// <exception cref="System.InvalidOperationException">The dispatcher has already shut down.</exception>
+    public static DispatcherOperation BeginInvoke(this Dispatcher dispatcher, Action method)
+    {
+        return BeginInvoke(dispatcher, DispatcherPriority.Normal, method);
+    }
+
+    /// <summary>
+    /// Invokes the specified method asynchronously in the dispatcher thread.
+    /// </summary>
+    /// <param name="dispatcher">The dispatcher.</param>
+    /// <param name="priority">The priority to use.</param>
+    /// <param name="method">The method.</param>
+    /// <returns>The dispatcher operation to track the outcome of the call.</returns>
+    /// <exception cref="System.InvalidOperationException">The dispatcher has already shut down.</exception>
+    public static DispatcherOperation BeginInvoke(this Dispatcher dispatcher, DispatcherPriority priority, Action method)
+    {
+        return dispatcher.BeginInvoke(method, priority, null);
+    }
+
+    /// <summary>
+    /// Restarts the specified timer.
+    /// </summary>
+    /// <param name="timer">The timer.</param>
+    public static void Restart(this DispatcherTimer timer)
+    {
+        timer.Stop();
+        timer.Start();
     }
 }
