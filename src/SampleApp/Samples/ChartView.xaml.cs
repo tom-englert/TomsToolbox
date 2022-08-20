@@ -1,6 +1,6 @@
 ﻿namespace SampleApp.Samples
 {
-    using TomsToolbox.Composition;
+    using System.Composition;
     using TomsToolbox.Wpf.Composition.AttributedModel;
 
     /// <summary>
