@@ -58,7 +58,7 @@ public class PropertyDependencyAttributeTests
     [Fact]
     public void PropertyDependencyAttribute_ConstructorTest()
     {
-        var target = new PropertyDependencyAttribute("Test");
+        _ = new PropertyDependencyAttribute("Test");
     }
 
     /// <summary>
@@ -128,12 +128,12 @@ public class PropertyDependencyAttributeTests
     public void PropertyDependencyAttribute_GetInvalidDependenciesTest()
     {
         var invalidDependencies = PropertyDependencyAttribute.GetInvalidDependencies(typeof(TestTypeWithErrors)).ToList();
-        Assert.Equal(1, invalidDependencies.Count);
+        Assert.Single(invalidDependencies);
 
         var invalidDependency = invalidDependencies.Single();
 
-        Assert.True(invalidDependency.StartsWith(typeof(TestTypeWithErrors).FullName + ".Property3 "));
-        Assert.True(invalidDependency.EndsWith(" Property4"));
+        Assert.StartsWith(typeof(TestTypeWithErrors).FullName + ".Property3 ", invalidDependency);
+        Assert.EndsWith(" Property4", invalidDependency);
     }
 
     static IEnumerable<string> GetPropertyNames(params int[] indexes)

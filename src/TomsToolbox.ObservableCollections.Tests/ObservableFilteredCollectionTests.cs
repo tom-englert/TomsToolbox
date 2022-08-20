@@ -62,7 +62,7 @@ public class ObservableFilteredCollectionTests
 
         source.Clear();
         Assert.Equal(NotifyCollectionChangedAction.Reset, lastEventArgs.Action);
-        Assert.Equal(0, target.Count);
+        Assert.Empty(target);
         lastEventArgs = null;
 
         source.Add(11);
@@ -73,7 +73,7 @@ public class ObservableFilteredCollectionTests
 
         source.Add(12);
         Assert.True(target.SequenceEqual(new[] { 11 }));
-        Assert.Equal(null, lastEventArgs);
+        Assert.Null(lastEventArgs);
         lastEventArgs = null;
 
         source.Add(13);
@@ -91,9 +91,9 @@ public class ObservableFilteredCollectionTests
         var target = new ObservableFilteredCollection<TestObject>(source, s => (s.Value & 1) != 0, "Value");
 
         NotifyCollectionChangedEventArgs lastEventArgs = null;
-        NotifyCollectionChangedEventHandler callback = (_, e) => lastEventArgs = e;
+        void Callback(object _, NotifyCollectionChangedEventArgs e) => lastEventArgs = e;
 
-        target.CollectionChanged += callback;
+        target.CollectionChanged += Callback;
 
         Assert.True(target.Select(t => t.Value).SequenceEqual(new[] { 1, 3, 5, 7, 9 }));
 
@@ -121,7 +121,7 @@ public class ObservableFilteredCollectionTests
 
         source.Clear();
         Assert.Equal(NotifyCollectionChangedAction.Reset, lastEventArgs.Action);
-        Assert.Equal(0, target.Count);
+        Assert.Empty(target);
         lastEventArgs = null;
 
         source.Add(new TestObject(11));
@@ -132,7 +132,7 @@ public class ObservableFilteredCollectionTests
 
         source.Add(new TestObject(12));
         Assert.True(target.Select(t => t.Value).SequenceEqual(new[] { 11 }));
-        Assert.Equal(null, lastEventArgs);
+        Assert.Null(lastEventArgs);
         lastEventArgs = null;
 
         source.Add(new TestObject(13));
