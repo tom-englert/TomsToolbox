@@ -24,7 +24,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\TomsToolbox.snk</AssemblyOriginatorKeyFile>
     <TargetsForTfmSpecificContentInPackage>TfmSpecificContent</TargetsForTfmSpecificContentInPackage>
-    <PackageOutputPath>$(SolutionDir)..\Deploy</PackageOutputPath>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)..\Deploy</PackageOutputPath>
     <NoWarn>NU5118;NU1701</NoWarn>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>

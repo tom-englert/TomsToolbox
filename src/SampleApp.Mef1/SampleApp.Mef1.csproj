@@ -19,9 +19,12 @@
     <Reference Include="System.Reflection.Context" />
   </ItemGroup>
 
+  <!-- Manual analyzer testing only
   <ItemGroup>
     <Analyzer Include="..\TomsToolbox.Composition.Analyzer\bin\$(Configuration)\netstandard2.0\TomsToolbox.Composition.Analyzer.dll" />
+    <ProjectReference Include="..\TomsToolbox.Composition.Analyzer\TomsToolbox.Composition.Analyzer.csproj" />
   </ItemGroup>
+  -->
 
   <ItemGroup>
     <PackageReference Include="Fody" Version="6.6.3" PrivateAssets="all" />
@@ -37,7 +40,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Composition.Mef\TomsToolbox.Composition.Mef.csproj" />
-    <ProjectReference Include="..\TomsToolbox.Composition.Analyzer\TomsToolbox.Composition.Analyzer.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj" />
     <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj" />
     <ProjectReference Include="..\TomsToolbox.ObservableCollections\TomsToolbox.ObservableCollections.csproj" />

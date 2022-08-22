@@ -7,7 +7,7 @@ using TomsToolbox.Wpf.Composition.AttributedModel;
 /// Interaction logic for CharView.xaml
 /// </summary>
 [DataTemplate(typeof(ChartViewModel))]
-[NonShared]
+// [NonShared]
 public partial class ChartView
 {
     public ChartView()
