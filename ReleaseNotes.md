@@ -1,3 +1,6 @@
+2.7.10
+- Fix Composition.Analyzer nuget package
+
 2.7.9
 - Fix namespace of NonSharedAttribute
 
