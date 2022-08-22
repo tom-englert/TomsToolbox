@@ -1,3 +1,6 @@
+2.7.11
+- Fix Composition.Analyzer nuget package
+- 
 2.7.10
 - Fix Composition.Analyzer nuget package
 
