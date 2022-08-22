@@ -7,6 +7,7 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <DevelopmentDependency>true</DevelopmentDependency>
+    <TargetsForTfmSpecificContentInPackage>IncludeAnalyzer</TargetsForTfmSpecificContentInPackage>
 
     <Title>Tom's Toolbox Composition - DotNet Roslyn Analyzer</Title>
   </PropertyGroup>
@@ -16,7 +17,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="$(OutDir)*.*" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <!--<None Include="$(OutDir)*.*" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />-->
   </ItemGroup>
+
+  <Target Name="IncludeAnalyzer">
+    <ItemGroup>
+      <AnalyzerBinaries Include="$(OutDir)*.*" />
+    </ItemGroup>
+    <CreateItem Include="@(AnalyzerBinaries)" AdditionalMetadata="PackagePath=analyzers/dotnet/cs">
+      <Output TaskParameter="Include" ItemName="TfmSpecificPackageFile" />
+    </CreateItem>
+  </Target>
 
 </Project>

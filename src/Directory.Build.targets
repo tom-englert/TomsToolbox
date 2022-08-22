@@ -1,6 +1,6 @@
 <Project>
 
-  <Target Name="TfmSpecificContent" Condition="Exists('$(TargetDir)$(PackageId).ExternalAnnotations.xml')">
+  <Target Name="IncludeExternalAnnotations" Condition="Exists('$(TargetDir)$(PackageId).ExternalAnnotations.xml')">
     <ItemGroup>
       <ExternalAnnotations Include="$(TargetDir)$(PackageId).ExternalAnnotations.xml" />
     </ItemGroup>
