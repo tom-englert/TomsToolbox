@@ -8,48 +8,48 @@ using Xunit;
 
 using Newtonsoft.Json;
 
-using VerifyMSTest;
-
-using VerifyTests;
+using VerifyXunit;
 
 public class MetadataReaderTest : VerifyBase
 {
     private static readonly Regex _versionRegex = new(@"Version=2\.\d+\.\d+\.\d+");
 
-#if NETFRAMEWORK
-        [Fact]
-        public async Task ReadSampleAppTest()
-        {
-            var assembly = typeof(SampleApp.Mef1.App).Assembly;
-            var result = MetadataReader.Read(assembly);
+    public MetadataReaderTest() : base()
+    {
+    }
 
-            var data = Serialize(result);
+    [Fact]
+    public async Task ReadSampleAppTest()
+    {
+        var assembly = typeof(SampleApp.Mef1.App).Assembly;
+        var result = MetadataReader.Read(assembly);
 
-            await Verify(data);
-        }
+        var data = Serialize(result);
 
-        [Fact]
-        public async Task ReadSampleAppMef2Test()
-        {
-            var assembly = typeof(SampleApp.MainWindow).Assembly;
-            var result = MetadataReader.Read(assembly);
+        await Verify(data);
+    }
 
-            var data = Serialize(result);
+    [Fact]
+    public async Task ReadSampleAppMef2Test()
+    {
+        var assembly = typeof(SampleApp.MainWindow).Assembly;
+        var result = MetadataReader.Read(assembly);
 
-            await Verify(data);
-        }
+        var data = Serialize(result);
 
-        [Fact]
-        public async Task ReadThisAssemblyTest()
-        {
-            var assembly = GetType().Assembly;
-            var result = MetadataReader.Read(assembly);
+        await Verify(data);
+    }
 
-            var data = Serialize(result);
+    [Fact]
+    public async Task ReadThisAssemblyTest()
+    {
+        var assembly = GetType().Assembly;
+        var result = MetadataReader.Read(assembly);
 
-            await Verify(data);
-        }
-#endif
+        var data = Serialize(result);
+
+        await Verify(data);
+    }
 
     private static string Serialize(IList<ExportInfo> result)
     {
