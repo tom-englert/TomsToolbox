@@ -193,11 +193,11 @@ public static partial class ExtensionMethods
     /// <param name="metadata">The metadata.</param>
     /// <param name="contractName">Name of the contract.</param>
     /// <returns><c>true</c> if there is a match.</returns>
-    public static bool ContractNameMatches(this IMetadata metadata, string? contractName)
+    public static bool ContractNameMatches(this IMetadata? metadata, string? contractName)
     {
-        var value = metadata.GetContractName();
+        var value = metadata?.GetContractName();
 
-        return string.IsNullOrEmpty(value) == string.IsNullOrEmpty(contractName) || string.Equals(value, contractName, StringComparison.Ordinal);
+        return (string.IsNullOrEmpty(value) && string.IsNullOrEmpty(contractName)) || string.Equals(value, contractName, StringComparison.Ordinal);
     }
 
     /// <summary>

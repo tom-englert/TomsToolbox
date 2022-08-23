@@ -13,10 +13,9 @@ using TomsToolbox.Essentials;
 /// An <see cref="IExportProvider"/> adapter for the Microsoft.Extensions.DependencyInjection <see cref="ServiceCollection"/>
 /// </summary>
 /// <seealso cref="IExportProvider" />
-public class ExportProviderAdapter : IExportProvider
+public sealed class ExportProviderAdapter : IExportProvider, IDisposable
 {
     private static readonly MethodInfo _getExportsAsObjectMethod = typeof(ExportProviderAdapter).GetMethod(nameof(GetExportsAsObject), BindingFlags.NonPublic | BindingFlags.Instance) ?? throw new InvalidOperationException("Method not found: " + nameof(GetExportsAsObject));
-    private readonly ServiceProvider _context;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ExportProviderAdapter" /> class.
@@ -27,18 +26,23 @@ public class ExportProviderAdapter : IExportProvider
     {
         serviceCollection.AddSingleton<IExportProvider>(this);
 
-        _context = serviceCollection.BuildServiceProvider(options ?? new ServiceProviderOptions());
+        ServiceProvider = serviceCollection.BuildServiceProvider(options ?? new ServiceProviderOptions());
     }
 
 #pragma warning disable CS0067
     /// <inheritdoc />
     public event EventHandler<EventArgs>? ExportsChanged;
 
+    /// <summary>
+    /// Gets the adapted service provider.
+    /// </summary>
+    public ServiceProvider ServiceProvider { get; }
+
     T IExportProvider.GetExportedValue<T>(string? contractName) where T : class
     {
         if (string.IsNullOrEmpty(contractName))
         {
-            return _context.GetRequiredService<T>();
+            return ServiceProvider.GetRequiredService<T>();
         }
 
         var exports = GetServices<T>(contractName)
@@ -52,7 +56,7 @@ public class ExportProviderAdapter : IExportProvider
     {
         if (string.IsNullOrEmpty(contractName))
         {
-            return _context.GetService<T>();
+            return ServiceProvider.GetService<T>();
         }
 
         var exports = GetServices<T>(contractName)
@@ -71,7 +75,7 @@ public class ExportProviderAdapter : IExportProvider
     {
         if (string.IsNullOrEmpty(contractName))
         {
-            return _context.GetServices<T>();
+            return ServiceProvider.GetServices<T>();
         }
 
         var exports = GetServices<T>(contractName)
@@ -84,7 +88,7 @@ public class ExportProviderAdapter : IExportProvider
     {
         if (string.IsNullOrEmpty(contractName))
         {
-            return _context.GetServices(contractType).ExceptNullItems();
+            return ServiceProvider.GetServices(contractType).ExceptNullItems();
         }
 
         var exports = GetExports(contractType, contractName)
@@ -125,7 +129,15 @@ public class ExportProviderAdapter : IExportProvider
 
     private IEnumerable<IExport<T>> GetServices<T>(string? contractName) where T : class
     {
-        return _context.GetServices<IExport<T>>()
-            .Where(item => item.Metadata?.ContractNameMatches(contractName) ?? string.IsNullOrEmpty(contractName));
+        return ServiceProvider.GetServices<IExport<T>>()
+            .Where(item => item.Metadata.ContractNameMatches(contractName));
+    }
+
+    /// <summary>
+    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    /// </summary>
+    public void Dispose()
+    {
+        ServiceProvider.Dispose();
     }
 }

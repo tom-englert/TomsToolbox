@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 /// </summary>
 public static class ExtensionMethods
 {
+    private static readonly MethodInfo _addMetaDataExportMethod = typeof(ExtensionMethods).GetMethod(nameof(AddMetadataExportT), BindingFlags.NonPublic | BindingFlags.Static);
+
     /// <summary>
     /// Binds the exports of the specified assemblies to the service collection.
     /// </summary>
@@ -67,7 +69,10 @@ public static class ExtensionMethods
 
                 if (contractType != null)
                 {
-                    serviceCollection.AddTransient(contractType, sp => sp.GetRequiredService(type));
+                    if (exportInfo.IsShared)
+                        serviceCollection.AddSingleton(contractType, sp => sp.GetRequiredService(type));
+                    else
+                        serviceCollection.AddTransient(contractType, sp => sp.GetRequiredService(type));
                 }
 
                 serviceCollection.AddMetadataExport(contractType ?? type, type, new MetadataAdapter(export.Metadata));
@@ -132,8 +137,10 @@ public static class ExtensionMethods
 
     private static IServiceCollection AddMetadataExport(this IServiceCollection serviceCollection, Type serviceType, Type implementationType, IMetadata metadata)
     {
-        var method = typeof(ExtensionMethods).GetMethod(nameof(AddMetadataExportT), BindingFlags.NonPublic | BindingFlags.Static)!.MakeGenericMethod(serviceType);
+        var method = _addMetaDataExportMethod.MakeGenericMethod(serviceType);
+
         method.Invoke(null, new object?[] { serviceCollection, implementationType, metadata });
+        
         return serviceCollection;
     }
 }
