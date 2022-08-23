@@ -33,9 +33,8 @@ public class MefAttributeUsageAnalyzer : DiagnosticAnalyzer
 
         var attributeType = attributeSymbol.ContainingType;
         var namespaceName = attributeType.ContainingNamespace.ToDisplayString(FullNameDisplayFormat);
-        var typeName = attributeType.ToDisplayString(NameDisplayFormat);
 
-        if (typeName is "ImportAttribute" or "ImportManyAttribute" && namespaceName is "System.ComponentModel.Composition" or "System.Composition")
+        if (attributeType.IsOneOfTheseCompositionTypes("ImportAttribute", "ImportManyAttribute"))
         {
             context.ReportDiagnostic(Diagnostic.Create(AvoidImportAttributesRule, attribute.Name.GetLocation()));
         }
@@ -45,6 +44,8 @@ public class MefAttributeUsageAnalyzer : DiagnosticAnalyzer
     {
         var cancellationToken = context.CancellationToken;
         var classDeclaration = (ClassDeclarationSyntax)context.Node;
+        if (context.ContainingSymbol is not INamedTypeSymbol typeSymbol)
+            return;
 
         ICollection<INamedTypeSymbol> GetAttributeTypes(AttributeSyntax attributeSyntax)
         {
@@ -53,8 +54,22 @@ public class MefAttributeUsageAnalyzer : DiagnosticAnalyzer
 
             return methodSymbol.ContainingType
                 .EnumerateSelfAndBaseTypes()
-                .Where(type => type.ContainingNamespace.ToDisplayString(FullNameDisplayFormat) is "System.ComponentModel.Composition" or "System.Composition")
+                .Where(type => type.IsCompositionType())
                 .ToArray();
+        }
+
+        bool IsTypeExpectedToBeNonShared(out string info)
+        {
+            info = string.Empty;
+
+            var baseTypeNames = typeSymbol.EnumerateBaseTypes()
+                .Select(baseType => baseType.ToDisplayString(FullNameDisplayFormat))
+                .ToArray();
+
+            info = $"{typeSymbol.ToDisplayString(FullNameDisplayFormat)} : {string.Join(" : ", baseTypeNames)}";
+
+            return baseTypeNames
+                .Any(baseType => baseType is "System.Windows.UIElement" or "System.Web.Http.ApiController");
         }
 
         var attributes = classDeclaration.AttributeLists.SelectMany(list => list.Attributes)
@@ -117,21 +132,33 @@ public class MefAttributeUsageAnalyzer : DiagnosticAnalyzer
             }
         }
 
-        bool IsTypeExpectedToBeNonShared(out string info)
+        if (typeSymbol.HasNonDefaultConstructors(out var constructors))
         {
-            info = string.Empty;
-
-            if (context.ContainingSymbol is not INamedTypeSymbol typeInfo)
-                return false;
-
-            var baseTypeNames = typeInfo.EnumerateBaseTypes()
-                .Select(baseType => baseType.ToDisplayString(FullNameDisplayFormat))
+            var importingConstructors = constructors
+                .Where(ctor => ctor.GetAttributes().Any(attr => attr.AttributeClass?.IsOneOfTheseCompositionTypes("ImportingConstructorAttribute") == true))
                 .ToArray();
 
-            info = $"{typeInfo.ToDisplayString(FullNameDisplayFormat)} : {string.Join(" : ", baseTypeNames)}";
+            switch (importingConstructors.Length)
+            {
+                case 0:
+                    context.ReportDiagnostic(Diagnostic.Create(NoImportingConstructorRule, classDeclaration.Identifier.GetLocation()));
+                    if (!constructors.Any(ctor => ctor.DeclaredAccessibility == Accessibility.Public))
+                    {
+                        context.ReportDiagnostic(Diagnostic.Create(NoPublicConstructorRule, classDeclaration.Identifier.GetLocation()));
+                    }
+                    break;
 
-            return baseTypeNames
-                .Any(baseType => baseType is "System.Windows.UIElement" or "System.Web.Http.ApiController");
+                case 1:
+                    if (importingConstructors[0].DeclaredAccessibility != Accessibility.Public)
+                    {
+                        context.ReportDiagnostic(Diagnostic.Create(NoPublicConstructorRule, classDeclaration.Identifier.GetLocation()));
+                    }
+                    break;
+
+                default:
+                    context.ReportDiagnostic(Diagnostic.Create(MultipleImportingConstructorsRule, classDeclaration.Identifier.GetLocation()));
+                    break;
+            }
         }
     }
 }

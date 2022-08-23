@@ -60,23 +60,24 @@ public class Mef1AttributeUsageAnalyzerTest
     {
         [Export]
         [PartCreationPolicy(CreationPolicy.Shared)]
-        class TypeName
+        class {|#0:TypeName|}
         {   
             [ImportingConstructor]
             TypeName(){}
 
-            [{|#0:Import|}]
+            [{|#1:Import|}]
             int Property1 { get; set; }
 
-            [{|#1:ImportMany|}(""Test"")]
+            [{|#2:ImportMany|}(""Test"")]
             int Property2 { get; set; }
         }
     }";
 
-        var expected1 = VerifyCS.Diagnostic(ExtensionMethods.AvoidImportAttributesRule.Id).WithLocation(0).WithArguments("Import");
-        var expected2 = VerifyCS.Diagnostic(ExtensionMethods.AvoidImportAttributesRule.Id).WithLocation(1).WithArguments("ImportMany");
+        var expected0 = VerifyCS.Diagnostic(ExtensionMethods.NoPublicConstructorRule.Id).WithLocation(0);
+        var expected1 = VerifyCS.Diagnostic(ExtensionMethods.AvoidImportAttributesRule.Id).WithLocation(1).WithArguments("Import");
+        var expected2 = VerifyCS.Diagnostic(ExtensionMethods.AvoidImportAttributesRule.Id).WithLocation(2).WithArguments("ImportMany");
 
-        await VerifyCS.VerifyAnalyzerAsync(test, expected1, expected2);
+        await VerifyCS.VerifyAnalyzerAsync(test, expected0, expected1, expected2);
     }
 
     [Fact]
@@ -118,6 +119,29 @@ public class Mef1AttributeUsageAnalyzerTest
         var expected2 = VerifyCS.Diagnostic(ExtensionMethods.SuspiciousPolicyRule.Id).WithLocation(1).WithArguments("ConsoleApplication1.TypeName1 : ConsoleApplication1.CustomController : System.Web.Http.ApiController : System.Object");
 
         await VerifyCS.VerifyAnalyzerAsync(test, expected1, expected2);
+    }
+
+    [Fact]
+    public async Task ErrorOnTypeWithoutImportingConstructor()
+    {
+        var test = @"
+    using System;
+    using System.ComponentModel.Composition;
+
+    namespace ConsoleApplication1
+    {
+        [Export]
+        [PartCreationPolicy(CreationPolicy.Shared)]
+        class {|#0:TypeName|}
+        {   
+            TypeName(int param1){}
+        }
+    }";
+
+        var expected0 = VerifyCS.Diagnostic(ExtensionMethods.NoPublicConstructorRule.Id).WithLocation(0);
+        var expected1 = VerifyCS.Diagnostic(ExtensionMethods.NoImportingConstructorRule.Id).WithLocation(0);
+
+        await VerifyCS.VerifyAnalyzerAsync(test, expected0, expected1);
     }
 }
 
@@ -176,7 +200,7 @@ public class Mef2AttributeUsageAnalyzerTest
         class TypeName
         {   
             [ImportingConstructor]
-            TypeName(){}
+            public TypeName(){}
 
             [{|#0:Import|}]
             int Property1 { get; set; }
