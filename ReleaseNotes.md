@@ -1,3 +1,6 @@
+2.7.13
+- Add GetServiceInfo methods
+
 2.7.12
 - Composition.Analyzer: also inspect constructors
 - ExportProviderAdapter must be disposable
