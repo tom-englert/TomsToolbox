@@ -7,12 +7,17 @@ using System.Reflection;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using TomsToolbox.Essentials;
+
 /// <summary>
 /// Extension methods for Microsoft.Extensions.DependencyInjection
 /// </summary>
 public static class ExtensionMethods
 {
     private static readonly MethodInfo _addMetaDataExportMethod = typeof(ExtensionMethods).GetMethod(nameof(AddMetadataExportT), BindingFlags.NonPublic | BindingFlags.Static);
+    private static readonly MethodInfo _getMetaDataMethod = typeof(ExtensionMethods).GetMethod(nameof(GetMetadataT), BindingFlags.NonPublic | BindingFlags.Static);
+
+    private static readonly Type _exportType = typeof(IExport<>);
 
     /// <summary>
     /// Binds the exports of the specified assemblies to the service collection.
@@ -100,7 +105,7 @@ public static class ExtensionMethods
     /// <param name="serviceType">The service type that the service was registered with.</param>
     /// <param name="metadata">The metadata for the service</param>
     /// <returns>The <paramref name="serviceCollection"/></returns>
-    public static IServiceCollection BindMetadata(this IServiceCollection serviceCollection, Type serviceType, Dictionary<string, object?> metadata)
+    public static IServiceCollection BindMetadata(this IServiceCollection serviceCollection, Type serviceType, IDictionary<string, object?> metadata)
     {
         return BindMetadata(serviceCollection, serviceType, serviceType, metadata);
     }
@@ -140,7 +145,74 @@ public static class ExtensionMethods
         var method = _addMetaDataExportMethod.MakeGenericMethod(serviceType);
 
         method.Invoke(null, new object?[] { serviceCollection, implementationType, metadata });
-        
+
         return serviceCollection;
+    }
+
+    /// <summary>
+    /// Gets the service descriptor and the associated metadata of the metadata entries matching the type.
+    /// </summary>
+    /// <typeparam name="T">The service type</typeparam>
+    public static IList<ServiceInfo> GetServiceInfo<T>(this IServiceCollection serviceCollection) where T : class
+    {
+        var existing = serviceCollection
+            .Where(item => typeof(IExport<T>) == item.ServiceType)
+            .Select(item => new ServiceInfo(item, GetMetadataT<T>(item)))
+            .ToArray();
+
+        return existing;
+    }
+
+    /// <summary>
+    /// Gets the service descriptor and the associated metadata of all metadata entries.
+    /// </summary>
+    public static IList<ServiceInfo> GetServiceInfo(this IServiceCollection serviceCollection)
+    {
+        var existing = serviceCollection
+            .Where(IsExportType)
+            .Select(item => new ServiceInfo(item, GetMetadata(item)))
+            .ToArray();
+
+        return existing;
+    }
+
+    private static bool IsExportType(ServiceDescriptor serviceDescriptor)
+    {
+        var serviceType = serviceDescriptor.ServiceType;
+
+        return serviceType.Name == _exportType.Name && serviceType.Namespace == _exportType.Namespace;
+    }
+
+    private static IMetadata? GetMetadataT<T>(ServiceDescriptor serviceDescriptor) where T : class
+    {
+        try
+        {
+            // ! We can call ImplementationFactory with null here, because we only get the export, but don't instantiate it's value
+            var export = serviceDescriptor.ImplementationFactory?.Invoke(null!) as IExport<T>;
+
+            return export?.Metadata;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static IMetadata? GetMetadata(ServiceDescriptor serviceDescriptor)
+    {
+        try
+        {
+            var itemType = serviceDescriptor.ServiceType.GenericTypeArguments.Single();
+
+            var instance = _getMetaDataMethod.MakeGenericMethod(itemType);
+
+            var metadata = (IMetadata?)instance.Invoke(null, new object[] { serviceDescriptor });
+
+            return metadata;
+        }
+        catch
+        {
+            return null;
+        }
     }
 }

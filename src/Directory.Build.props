@@ -17,6 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <Nullable>enable</Nullable>
     <LangVersion>10.0</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <PropertyGroup>

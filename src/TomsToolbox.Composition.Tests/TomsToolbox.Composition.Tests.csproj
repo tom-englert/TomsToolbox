@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SampleApp.Mef2\SampleApp.Mef2.csproj" />
     <ProjectReference Include="..\SampleApp.Mef1\SampleApp.Mef1.csproj" />
+    <ProjectReference Include="..\TomsToolbox.Composition.MicrosoftExtensions\TomsToolbox.Composition.MicrosoftExtensions.csproj" />
     <ProjectReference Include="..\TomsToolbox.Composition\TomsToolbox.Composition.csproj" />
   </ItemGroup>
 

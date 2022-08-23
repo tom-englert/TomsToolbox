@@ -5,11 +5,17 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using TomsToolbox.Composition.MicrosoftExtensions;
+
 using Xunit;
 
 using TomsToolbox.Essentials;
+
+using VerifyXunit;
 
 public class MicrosoftExtensionsTest
 {
@@ -57,6 +63,58 @@ public class MicrosoftExtensionsTest
         Assert.Equal("Test1", t2.GetValue("Test"));
         Assert.Equal("Test1", t3.GetValue("Test"));
         Assert.Equal("Test1", t4.GetValue("Test"));
+    }
+
+    [Fact]
+    public void GetTypedServiceInfoWithMetadata()
+    {
+        var serviceCollection = new ServiceCollection();
+
+        serviceCollection
+            .AddSingleton<SomeDependency>()
+            .BindMetadata(typeof(SomeDependency), typeof(SomeDependency).GetDefaultMetadata("Test"))
+            .AddSingleton<SomeSingleton>()
+            .BindMetadata(typeof(SomeSingleton));
+
+        var info = serviceCollection.GetServiceInfo<SomeDependency>();
+
+        Assert.Single(info);
+        Assert.Equal("Test", info[0].Metadata?.GetValue("ContractName"));
+    }
+
+    [Fact]
+    public void GetTypedServiceInfoWithoutMetadata()
+    {
+        var serviceCollection = new ServiceCollection();
+
+        serviceCollection
+            .AddSingleton<SomeDependency>()
+            .BindMetadata(typeof(SomeDependency), typeof(SomeDependency).GetDefaultMetadata("Test"))
+            .AddSingleton<SomeSingleton>()
+            .BindMetadata(typeof(SomeSingleton));
+
+        var info = serviceCollection.GetServiceInfo<SomeSingleton>();
+
+        Assert.Single(info);
+        Assert.Null(info[0].Metadata?.GetValue("ContractName"));
+    }
+
+    [Fact]
+    public void GetAllServiceInfo()
+    {
+        var serviceCollection = new ServiceCollection();
+
+        serviceCollection
+            .AddSingleton<SomeDependency>()
+            .BindMetadata(typeof(SomeDependency), typeof(SomeDependency).GetDefaultMetadata("Test"))
+            .AddSingleton<SomeSingleton>()
+            .BindMetadata(typeof(SomeSingleton));
+
+        var info = serviceCollection.GetServiceInfo();
+
+        Assert.Equal(2, info.Count);
+        Assert.Equal("Test", info[0].Metadata?.GetValue("ContractName"));
+        Assert.Null(info[1].Metadata?.GetValue("ContractName"));
     }
 
     private class SomeDependency : INotifyChanged

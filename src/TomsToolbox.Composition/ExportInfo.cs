@@ -156,6 +156,7 @@ public static partial class ExtensionMethods
 {
     private const string ContractName = "ContractName";
     private const string ContractType = "ContractType";
+    private const string ImplementationType = "ImplementationType";
 
     /// <summary>
     /// Reads the well known ContractName property from the <paramref name="metadata"/>.
@@ -237,7 +238,8 @@ public static partial class ExtensionMethods
         return new Dictionary<string, object?>
         {
             [ContractType] = serviceType != implementationType ? serviceType : null,
-            [ContractName] = contractName
+            [ContractName] = contractName,
+            [ImplementationType] = implementationType
         };
     }
 }

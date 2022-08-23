@@ -1,5 +1,9 @@
 <Project>
 
+  <ItemGroup>
+    <Using Remove="System.Net.Http" />
+  </ItemGroup>
+
   <Target Name="IncludeExternalAnnotations" Condition="Exists('$(TargetDir)$(PackageId).ExternalAnnotations.xml')">
     <ItemGroup>
       <ExternalAnnotations Include="$(TargetDir)$(PackageId).ExternalAnnotations.xml" />
