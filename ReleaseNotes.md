@@ -1,3 +1,6 @@
+2.8.0
+- Fix design flaw in MicrosoftExtensions ExportProviderAdapter
+
 2.7.13
 - Add GetServiceInfo methods
 
