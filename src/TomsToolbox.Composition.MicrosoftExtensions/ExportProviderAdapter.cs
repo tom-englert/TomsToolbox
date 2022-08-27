@@ -13,20 +13,17 @@ using TomsToolbox.Essentials;
 /// An <see cref="IExportProvider"/> adapter for the Microsoft.Extensions.DependencyInjection <see cref="ServiceCollection"/>
 /// </summary>
 /// <seealso cref="IExportProvider" />
-public sealed class ExportProviderAdapter : IExportProvider, IDisposable
+public sealed class ExportProviderAdapter : IExportProvider
 {
     private static readonly MethodInfo _getExportsAsObjectMethod = typeof(ExportProviderAdapter).GetMethod(nameof(GetExportsAsObject), BindingFlags.NonPublic | BindingFlags.Instance) ?? throw new InvalidOperationException("Method not found: " + nameof(GetExportsAsObject));
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ExportProviderAdapter" /> class.
     /// </summary>
-    /// <param name="serviceCollection">The service collection.</param>
-    /// <param name="options">The options to build the service provider.</param>
-    public ExportProviderAdapter(IServiceCollection serviceCollection, ServiceProviderOptions? options = null)
+    /// <param name="serviceProvider">The service provider.</param>
+    public ExportProviderAdapter(IServiceProvider serviceProvider)
     {
-        serviceCollection.AddSingleton<IExportProvider>(this);
-
-        ServiceProvider = serviceCollection.BuildServiceProvider(options ?? new ServiceProviderOptions());
+        ServiceProvider = serviceProvider;
     }
 
 #pragma warning disable CS0067
@@ -36,7 +33,7 @@ public sealed class ExportProviderAdapter : IExportProvider, IDisposable
     /// <summary>
     /// Gets the adapted service provider.
     /// </summary>
-    public ServiceProvider ServiceProvider { get; }
+    public IServiceProvider ServiceProvider { get; }
 
     T IExportProvider.GetExportedValue<T>(string? contractName) where T : class
     {
@@ -131,13 +128,5 @@ public sealed class ExportProviderAdapter : IExportProvider, IDisposable
     {
         return ServiceProvider.GetServices<IExport<T>>()
             .Where(item => item.Metadata.ContractNameMatches(contractName));
-    }
-
-    /// <summary>
-    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-    /// </summary>
-    public void Dispose()
-    {
-        ServiceProvider.Dispose();
     }
 }

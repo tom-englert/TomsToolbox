@@ -6,8 +6,11 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Markup;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using SampleApp.MicrosoftExtensions.DIAdapters;
 
+using TomsToolbox.Composition;
 using TomsToolbox.Wpf;
 using TomsToolbox.Wpf.Composition;
 using TomsToolbox.Wpf.Composition.XamlExtensions;
@@ -18,6 +21,8 @@ using TomsToolbox.Wpf.Styles;
 /// </summary>
 public sealed partial class App
 {
+    private ServiceProvider? _serviceProvider;
+
     public App()
     {
         // Thread.CurrentThread.CurrentUICulture = new CultureInfo("de-DE");
@@ -32,7 +37,10 @@ public sealed partial class App
         VisualComposition.Trace += (_, args) => Trace.WriteLine(args.Text);
         BindingErrorTracer.Start(BindingErrorCallback);
 
-        var exportProvider = DIAdapter.Initialize();
+
+        _serviceProvider = DIAdapter.Initialize();
+        var exportProvider = _serviceProvider.GetRequiredService<IExportProvider>();
+
         ExportProviderLocator.Register(exportProvider);
 
         Resources.MergedDictionaries.Insert(0, WpfStyles.GetDefaultStyles().RegisterDefaultWindowStyle());
@@ -43,6 +51,13 @@ public sealed partial class App
         MainWindow = mainWindow;
 
         mainWindow.Show();
+    }
+
+    protected override void OnExit(ExitEventArgs e)
+    {
+        _serviceProvider?.Dispose();
+        
+        base.OnExit(e);
     }
 
     private void BindingErrorCallback(string msg)
