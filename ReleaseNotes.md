@@ -1,3 +1,6 @@
+2.8.1
+- Fix: Nested types are enumerated twice in MetadataReader
+
 2.8.0
 - Fix design flaw in MicrosoftExtensions ExportProviderAdapter
 
