@@ -32,7 +32,6 @@ public static class MetadataReader
         foreach (var typeInfo in typeInfos)
         {
             ReadType(typeInfo, result);
-            ReadTypes(typeInfo.DeclaredNestedTypes, result);
         }
     }
 
