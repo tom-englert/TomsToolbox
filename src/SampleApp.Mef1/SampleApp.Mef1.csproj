@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
-  <Import Project="..\TargetFrameworks.Desktop.props" />
-
   <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <Tags>Sample</Tags>
