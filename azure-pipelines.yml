@@ -17,6 +17,10 @@ steps:
   inputs:
     Contents: 'Deploy/**'
 
+- task: NuGetToolInstaller@1
+  inputs:
+    versionSpec: 
+
 - task: NuGetCommand@2
   displayName: 'NuGet restore'
   inputs:
