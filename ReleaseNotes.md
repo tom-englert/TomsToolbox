@@ -1,3 +1,6 @@
+2.8.2
+- MicrosoftExtensions.ExportAdapter => GetExportedValueOrDefault may fail if implementation is un-registered.
+
 2.8.1
 - Fix: Nested types are enumerated twice in MetadataReader
 
