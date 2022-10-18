@@ -75,9 +75,9 @@ public static class ExtensionMethods
                 if (contractType != null)
                 {
                     if (exportInfo.IsShared)
-                        serviceCollection.AddSingleton(contractType, sp => sp.GetRequiredService(type));
+                        serviceCollection.AddSingleton(contractType, sp => sp.GetService(type));
                     else
-                        serviceCollection.AddTransient(contractType, sp => sp.GetRequiredService(type));
+                        serviceCollection.AddTransient(contractType, sp => sp.GetService(type));
                 }
 
                 serviceCollection.AddMetadataExport(contractType ?? type, type, new MetadataAdapter(export.Metadata));
