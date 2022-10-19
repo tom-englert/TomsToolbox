@@ -1,5 +1,8 @@
+2.8.3
+- Microsoft.Extensions/ExportProviderAdapter service retrieval is compliant with ServiceProvider
+ 
 2.8.2
-- MicrosoftExtensions.ExportAdapter => GetExportedValueOrDefault may fail if implementation is un-registered.
+- Microsoft.Extensions/ExportProviderAdapter => GetExportedValueOrDefault may fail if implementation is un-registered.
 
 2.8.1
 - Fix: Nested types are enumerated twice in MetadataReader
