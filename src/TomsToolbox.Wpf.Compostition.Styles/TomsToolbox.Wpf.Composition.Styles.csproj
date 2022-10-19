@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
-    <PackageReference Include="Fody" Version="6.6.3" PrivateAssets="All" />
+    <PackageReference Include="Fody" Version="6.6.4" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
     <PackageReference Include="Throttle.Fody" Version="1.7.0" PrivateAssets="All" />
   </ItemGroup>

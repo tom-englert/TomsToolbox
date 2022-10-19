@@ -1,29 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
     <DebugType>full</DebugType>
     <Tags>Test</Tags>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\Nullable.cs" Link="Nullable.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Verify.Xunit" Version="17.10.2" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" PrivateAssets="all" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\SampleApp.Mef2\SampleApp.Mef2.csproj" />
     <ProjectReference Include="..\SampleApp.Mef1\SampleApp.Mef1.csproj" />
     <ProjectReference Include="..\TomsToolbox.Composition.MicrosoftExtensions\TomsToolbox.Composition.MicrosoftExtensions.csproj" />
     <ProjectReference Include="..\TomsToolbox.Composition\TomsToolbox.Composition.csproj" />
   </ItemGroup>
-
 </Project>
