@@ -44,9 +44,9 @@ public sealed class ExportProviderAdapter : IExportProvider
 
         var exports = GetServices<T>(contractName)
             .Select(item => item.Value)
-            .Single();
+            .LastOrDefault();
 
-        return exports;
+        return exports ?? throw new InvalidOperationException($"No service is registered for type {typeof(T).FullName}.");
     }
 
     T? IExportProvider.GetExportedValueOrDefault<T>(string? contractName) where T : class
@@ -56,11 +56,11 @@ public sealed class ExportProviderAdapter : IExportProvider
             return ServiceProvider.GetService<T>();
         }
 
-        var exports = GetServices<T>(contractName)
+        var export = GetServices<T>(contractName)
             .Select(item => item.Value)
-            .SingleOrDefault();
+            .LastOrDefault();
 
-        return exports;
+        return export;
     }
 
     bool IExportProvider.TryGetExportedValue<T>(string? contractName, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out T? value) where T : class
@@ -72,13 +72,13 @@ public sealed class ExportProviderAdapter : IExportProvider
     {
         if (string.IsNullOrEmpty(contractName))
         {
-            return ServiceProvider.GetServices<T>();
+            return ServiceProvider.GetServices<T>().ExceptNullItems();
         }
 
         var exports = GetServices<T>(contractName)
             .Select(item => item.Value);
 
-        return exports;
+        return exports.ExceptNullItems();
     }
 
     IEnumerable<object> IExportProvider.GetExportedValues(Type contractType, string? contractName)
@@ -91,7 +91,7 @@ public sealed class ExportProviderAdapter : IExportProvider
         var exports = GetExports(contractType, contractName)
             .Select(item => item.Value);
 
-        return exports;
+        return exports.ExceptNullItems();
     }
 
     IEnumerable<IExport<object>> IExportProvider.GetExports(Type contractType, string? contractName)

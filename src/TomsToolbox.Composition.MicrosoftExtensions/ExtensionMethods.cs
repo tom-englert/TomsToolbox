@@ -137,7 +137,7 @@ public static class ExtensionMethods
 
     private static void AddMetadataExportT<T>(IServiceCollection serviceCollection, Type implementationType, IMetadata metadata) where T : class
     {
-        serviceCollection.AddTransient<IExport<T>>(sp => new ExportAdapter<T>(() => (T)sp.GetRequiredService(implementationType), metadata));
+        serviceCollection.AddTransient<IExport<T>>(sp => new ExportAdapter<T>(() => (T)sp.GetService(implementationType), metadata));
     }
 
     private static IServiceCollection AddMetadataExport(this IServiceCollection serviceCollection, Type serviceType, Type implementationType, IMetadata metadata)
