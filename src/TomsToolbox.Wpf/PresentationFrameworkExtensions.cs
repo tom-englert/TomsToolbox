@@ -149,14 +149,7 @@ public static class PresentationFrameworkExtensions
     {
         var source = PresentationSource.FromVisual(self);
 
-        if (source == null)
-            throw new ArgumentException("The framework element is not loaded in the visual tree.");
-
-        var compositionTarget = source.CompositionTarget;
-        if (compositionTarget == null)
-            throw new ArgumentException("The framework element is not loaded in the visual tree.");
-
-        var transformFromDevice = compositionTarget.TransformFromDevice;
+        var transformFromDevice = source?.CompositionTarget?.TransformFromDevice ?? Matrix.Identity;
 
         var width = transformFromDevice.M11;
         var height = transformFromDevice.M22;
@@ -169,19 +162,11 @@ public static class PresentationFrameworkExtensions
     /// </summary>
     /// <param name="self">The framework element used to get the presentation source.</param>
     /// <returns>The physical size of one design unit in pixels.</returns>
-    /// <exception cref="System.ArgumentException">The framework element is not loaded in the visual tree.</exception>
     public static Size GetDesignUnitSize(this FrameworkElement self)
     {
         var source = PresentationSource.FromVisual(self);
 
-        if (source == null)
-            throw new ArgumentException("The framework element is not loaded in the visual tree.");
-
-        var compositionTarget = source.CompositionTarget;
-        if (compositionTarget == null)
-            throw new ArgumentException("The framework element is not loaded in the visual tree.");
-
-        var transformFromDevice = compositionTarget.TransformToDevice;
+        var transformFromDevice = source?.CompositionTarget?.TransformToDevice ?? Matrix.Identity;
 
         var width = transformFromDevice.M11;
         var height = transformFromDevice.M22;

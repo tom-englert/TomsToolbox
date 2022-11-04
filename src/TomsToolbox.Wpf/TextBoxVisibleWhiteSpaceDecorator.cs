@@ -358,11 +358,7 @@ public class TextBoxVisibleWhiteSpaceDecorator : FrameworkElement
 
                 if ((rect.Right >= 0) && (rect.Left <= desiredSize.Width))
                 {
-#if NET45
-                        drawingContext.DrawText(new FormattedText(whiteSpace.Text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, fontSize, brush, numberSubstitution, textFormattingMode), rect.TopLeft);
-#else
                     drawingContext.DrawText(new FormattedText(whiteSpace.Text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, fontSize, brush, numberSubstitution, textFormattingMode, pixelsPerDip), rect.TopLeft);
-#endif
                 }
 
                 DrawAdorners(drawingContext, textBox, whiteSpaces, index + 1, lastIndex, desiredSize, typeface, fontSize, brush, numberSubstitution, textFormattingMode, pixelsPerDip);

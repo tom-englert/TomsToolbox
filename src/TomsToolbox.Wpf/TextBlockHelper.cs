@@ -141,12 +141,9 @@ public static class TextBlockHelper
 
         var typeface = new Typeface(fontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch);
         var numberSubstitution = new NumberSubstitution(NumberSubstitution.GetCultureSource(textBlock), NumberSubstitution.GetCultureOverride(textBlock), NumberSubstitution.GetSubstitution(textBlock));
-#if NET45
-            var formattedText = new FormattedText(text, CultureInfo.CurrentCulture, textBlock.FlowDirection, typeface, textBlock.FontSize, textBlock.Foreground, numberSubstitution, TextOptions.GetTextFormattingMode(textBlock));
-#else
+
         var pixelsPerDip = textBlock.GetPhysicalPixelSize().Height;
         var formattedText = new FormattedText(text, CultureInfo.CurrentCulture, textBlock.FlowDirection, typeface, textBlock.FontSize, textBlock.Foreground, numberSubstitution, TextOptions.GetTextFormattingMode(textBlock), pixelsPerDip);
-#endif
 
         var padding = textBlock.Padding;
         var actualWidth = textBlock.ActualWidth - padding.Left - padding.Right;
