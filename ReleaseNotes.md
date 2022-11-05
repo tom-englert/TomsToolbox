@@ -1,3 +1,7 @@
+2.8.4
+- Fix #14: PresentationFrameworkExtensions.GetPhysicalPixelSize should not trow exceptions
+- add net6.0 Support
+
 2.8.3
 - Microsoft.Extensions/ExportProviderAdapter service retrieval is compliant with ServiceProvider
  
