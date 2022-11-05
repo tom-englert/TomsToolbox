@@ -283,7 +283,7 @@ public abstract class ObservableObjectBase : INotifyPropertyChanged, IDataErrorI
     /// <param name="dataErrors">The data errors for the property.</param>
     // ReSharper disable UnusedParameter.Global
     protected virtual void OnDataErrorsEvaluated(string? propertyName, IEnumerable<string>? dataErrors)
-        // ReSharper restore UnusedParameter.Global
+    // ReSharper restore UnusedParameter.Global
     {
     }
 
@@ -296,9 +296,9 @@ public abstract class ObservableObjectBase : INotifyPropertyChanged, IDataErrorI
         return dataErrors;
     }
 
-    string? IDataErrorInfo.Error => InternalGetDataErrors(null).FirstOrDefault();
+    string IDataErrorInfo.Error => InternalGetDataErrors(null).FirstOrDefault() ?? string.Empty;
 
-    string? IDataErrorInfo.this[string? columnName] => InternalGetDataErrors(columnName).FirstOrDefault();
+    string IDataErrorInfo.this[string? columnName] => InternalGetDataErrors(columnName).FirstOrDefault() ?? string.Empty;
 
     /// <inheritdoc />
     ~ObservableObjectBase()

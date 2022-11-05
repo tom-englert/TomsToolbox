@@ -142,7 +142,8 @@ public static partial class ExtensionMethods
 
     }
 
-    private class ExportAdapter<TObject, TMetadata> : IExport<TObject, TMetadata> where TObject : class
+    private class ExportAdapter<TObject, TMetadata> : IExport<TObject, TMetadata> 
+        where TObject : class
         where TMetadata : class
     {
         private readonly IExport<TObject> _source;
@@ -153,7 +154,7 @@ public static partial class ExtensionMethods
             Metadata = metadataFactory(source.Metadata);
         }
 
-        public TObject Value => _source.Value;
+        public TObject? Value => _source.Value;
 
         public TMetadata? Metadata { get; }
     }

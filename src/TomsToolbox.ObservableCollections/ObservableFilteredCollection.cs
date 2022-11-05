@@ -58,7 +58,7 @@ public class ObservableFilteredCollection<T> : ReadOnlyObservableCollectionAdapt
     }
 
     [MakeWeak]
-    private void SourceCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void SourceCollection_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         switch (e.Action)
         {
@@ -73,7 +73,7 @@ public class ObservableFilteredCollection<T> : ReadOnlyObservableCollectionAdapt
             case NotifyCollectionChangedAction.Reset:
                 WeakEvents.Unsubscribe(this);
                 Items.Clear();
-                AttachCollectionEvents((INotifyCollectionChanged)sender);
+                AttachCollectionEvents((INotifyCollectionChanged?)sender);
                 break;
 
             case NotifyCollectionChangedAction.Replace:
@@ -135,9 +135,10 @@ public class ObservableFilteredCollection<T> : ReadOnlyObservableCollectionAdapt
     }
 
     [MakeWeak]
-    private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void Item_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        var item = (T)sender;
+        if (sender is not T item)
+            return;
 
         if (!_liveTrackingProperties.Contains(e.PropertyName))
             return;

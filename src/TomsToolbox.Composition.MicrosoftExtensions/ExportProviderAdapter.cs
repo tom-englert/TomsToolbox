@@ -112,7 +112,7 @@ public sealed class ExportProviderAdapter : IExportProvider
     {
         var exportMethod = _getExportsAsObjectMethod.MakeGenericMethod(contractType);
 
-        return (IEnumerable<IExport<object>>)exportMethod.Invoke(this, new object?[] { contractName });
+        return (IEnumerable<IExport<object>>)exportMethod.Invoke(this, new object?[] { contractName })!;
     }
 
     private IEnumerable<IExport<object>> GetExportsAsObject<T>(string? contractName)

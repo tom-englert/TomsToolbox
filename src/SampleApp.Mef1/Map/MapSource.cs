@@ -157,9 +157,11 @@ public class MapSource : IImageProvider
 
                     var uri = _owner.GetImageUri(_mapTile);
 
+                    using var webClient = new WebClient();
+
                     var bitmap = new BitmapImage();
                     bitmap.BeginInit();
-                    bitmap.StreamSource = WebHelper.Download(uri);
+                    bitmap.StreamSource = new MemoryStream(webClient.DownloadData(uri));
                     bitmap.EndInit();
                     bitmap.Freeze();
 

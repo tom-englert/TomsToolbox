@@ -76,7 +76,7 @@ public class ExportInfo
 
         if (partCreationPolicyAttribute != null)
         {
-            var value = partCreationPolicyAttribute.ConstructorArguments.Select(arg => (int)arg.Value).FirstOrDefault();
+            var value = partCreationPolicyAttribute.ConstructorArguments.Select(arg => (int?)arg.Value).FirstOrDefault();
             IsShared = value != 2;
         }
     }
@@ -112,7 +112,7 @@ public class ExportInfo
 
         foreach (var namedArgument in namedArguments.OrderBy(item => item.MemberName))
         {
-            metadata[namedArgument.MemberName] = ConvertValue(namedArgument.TypedValue)!;
+            metadata[namedArgument.MemberName] = ConvertValue(namedArgument.TypedValue);
         }
     }
 
@@ -145,7 +145,7 @@ public class ExportInfo
 
         if (argumentType.IsEnum)
         {
-            return Enum.Parse(argumentType, value.ToString());
+            return Enum.Parse(argumentType, value.ToString()!);
         }
 
         throw new InvalidOperationException($"Argument type conversion from {valueType} to {argumentType} is not supported.");

@@ -45,8 +45,11 @@ public class SemanticVersion : IEquatable<SemanticVersion>, IComparable<Semantic
     /// </summary>
     /// <param name="input">The version string to parse</param>
     /// <returns>The first version found in the string, or the default if no version could be detected.</returns>
-    public static SemanticVersion Parse(string input)
+    public static SemanticVersion Parse(string? input)
     {
+        if (input is null)
+            return new SemanticVersion();
+
         var match = _versionRegex.Match(input);
         if (match.Success)
         {

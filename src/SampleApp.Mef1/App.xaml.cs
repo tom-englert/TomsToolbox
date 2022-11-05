@@ -65,7 +65,7 @@ public sealed partial class App : IDisposable
         Resources.MergedDictionaries.Insert(0, WpfStyles.GetDefaultStyles().RegisterDefaultWindowStyle());
         Resources.MergedDictionaries.Add(DataTemplateManager.CreateDynamicDataTemplates(_exportProvider));
 
-        MainWindow = _compositionContainer.GetExportedValue<MainWindow>()!;
+        MainWindow = _compositionContainer.GetExportedValue<MainWindow>();
         MainWindow.Show();
     }
 

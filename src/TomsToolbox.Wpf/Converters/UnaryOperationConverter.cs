@@ -117,6 +117,9 @@ public class UnaryOperationConverter : ValueConverter
 
     private static object? ChangeType(string? value, Type targetType)
     {
+        if (value is null)
+            return null;
+
         var typeConverter = TypeDescriptor.GetConverter(targetType);
         return typeConverter.ConvertFromInvariantString(value);
     }

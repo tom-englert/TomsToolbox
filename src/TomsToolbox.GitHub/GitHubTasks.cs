@@ -18,7 +18,7 @@ public static class GitHubTasks
         if (entryAssembly == null)
             return null;
 
-        var appVersion = SemanticVersion.Parse(entryAssembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion);
+        var appVersion = SemanticVersion.Parse(entryAssembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion);
         if (appVersion.Version == new Version())
             return null;
 
@@ -32,10 +32,10 @@ public static class GitHubTasks
             .OrderByDescending(r => SemanticVersion.Parse(r.TagName))
             .FirstOrDefault();
 
-        if (SemanticVersion.Parse(latestRelease.TagName) <= appVersion)
+        if (SemanticVersion.Parse(latestRelease?.TagName) <= appVersion)
             return null;
 
-        return latestRelease.Assets
+        return latestRelease?.Assets
             .Where(asset => string.Equals(asset.Name, Path.ChangeExtension(Path.GetFileName(entryAssembly.Location), ".exe"), StringComparison.OrdinalIgnoreCase))
             .Select(asset => asset.BrowserDownloadUrl)
             .FirstOrDefault();

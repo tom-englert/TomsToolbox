@@ -83,6 +83,7 @@ public class ObservablePropertyChangeTracker<T>
 
     private void Items_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
+#nullable disable
         switch (e.Action)
         {
             case NotifyCollectionChangedAction.Add:
@@ -119,5 +120,6 @@ public class ObservablePropertyChangeTracker<T>
             case NotifyCollectionChangedAction.Reset:
                 throw new NotSupportedException("Reset collection is not supported when the ObservablePropertyChangeTracker is active.");
         }
+#nullable restore
     }
 }

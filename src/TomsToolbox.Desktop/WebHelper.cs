@@ -14,6 +14,7 @@ public static class WebHelper
     /// </summary>
     /// <param name="uri">The URI.</param>
     /// <returns>The request.</returns>
+    [Obsolete("WebRequest is obsolete")]
     public static WebRequest CreateHttpWebRequest(Uri uri)
     {
         var webRequest = WebRequest.Create(uri);
@@ -29,6 +30,7 @@ public static class WebHelper
     /// </summary>
     /// <param name="uri">The URI.</param>
     /// <returns>A stream containing the downloaded data.</returns>
+    [Obsolete("WebRequest is obsolete")]
     public static MemoryStream Download(Uri uri)
     {
         var webRequest = CreateHttpWebRequest(uri);

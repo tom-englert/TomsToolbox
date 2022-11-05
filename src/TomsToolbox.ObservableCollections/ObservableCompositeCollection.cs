@@ -100,6 +100,7 @@ public sealed class ObservableCompositeCollection<T> : ReadOnlyObservableCollect
             if (offset == 0)
                 return e; // no offset - nothing to translate
 
+#nullable disable
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
@@ -120,6 +121,7 @@ public sealed class ObservableCompositeCollection<T> : ReadOnlyObservableCollect
                 default:
                     throw new NotImplementedException();
             }
+#nullable restore
         }
         #region IList<IList<T>> Members
 
@@ -278,6 +280,7 @@ public sealed class ObservableCompositeCollection<T> : ReadOnlyObservableCollect
 
     private void ContentCollectionChanged(NotifyCollectionChangedEventArgs e)
     {
+#nullable disable
         switch (e.Action)
         {
             case NotifyCollectionChangedAction.Add:
@@ -316,12 +319,13 @@ public sealed class ObservableCompositeCollection<T> : ReadOnlyObservableCollect
             default:
                 throw new ArgumentOutOfRangeException(nameof(e));
         }
+#nullable restore
     }
 
     /// <summary>
     /// Occurs when the collection changes.
     /// </summary>
-    public new event NotifyCollectionChangedEventHandler CollectionChanged
+    public new event NotifyCollectionChangedEventHandler? CollectionChanged
     {
         add => base.CollectionChanged += value;
         remove => base.CollectionChanged -= value;
@@ -330,7 +334,7 @@ public sealed class ObservableCompositeCollection<T> : ReadOnlyObservableCollect
     /// <summary>
     /// Occurs when a property value changes.
     /// </summary>
-    public new event PropertyChangedEventHandler PropertyChanged
+    public new event PropertyChangedEventHandler? PropertyChanged
     {
         add => base.PropertyChanged += value;
         remove => base.PropertyChanged -= value;

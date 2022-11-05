@@ -205,12 +205,12 @@ public class ObservableListAdapter<T> : IList, INotifyCollectionChanged, INotify
         OnCollectionChanged(e);
     }
 
-    private void OnCollectionChanged(NotifyCollectionChangedEventArgs? e)
+    private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
     {
         CollectionChanged?.Invoke(this, e);
     }
 
-    private void OnPropertyChanged(PropertyChangedEventArgs? e)
+    private void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         PropertyChanged?.Invoke(this, e);
     }

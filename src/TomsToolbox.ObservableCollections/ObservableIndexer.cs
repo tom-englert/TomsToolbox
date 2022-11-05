@@ -11,6 +11,7 @@ using System.Linq;
 /// <typeparam name="TKey">The type of the key.</typeparam>
 /// <typeparam name="TValue">The type of the value.</typeparam>
 public sealed class ObservableIndexer<TKey, TValue> : ReadOnlyObservableCollectionAdapter<KeyValuePair<TKey, TValue>, ObservableCollection<KeyValuePair<TKey, TValue>>>
+    where TKey: notnull
 {
     private readonly Func<TKey, TValue> _generator;
     private Dictionary<TKey, int> _index;

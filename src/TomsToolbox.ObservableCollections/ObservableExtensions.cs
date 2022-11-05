@@ -119,6 +119,7 @@ public static class ObservableExtensions
             // ReSharper disable PossibleMultipleEnumeration
             base.OnSourceCollectionChanged(sourceCollection, e);
 
+#nullable disable
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
@@ -143,10 +144,11 @@ public static class ObservableExtensions
                     break;
             }
             // ReSharper restore PossibleMultipleEnumeration
+#nullable restore
         }
 
         [MakeWeak]
-        private void SourceItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void SourceItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != _propertyName)
                 return;
@@ -154,12 +156,15 @@ public static class ObservableExtensions
             if (!_sourceReference.TryGetTarget(out var sourceCollection))
                 return;
 
-            var index = sourceCollection.IndexOf((TSource)sender);
+            if (sender is not TSource source)
+                return;
+
+            var index = sourceCollection.IndexOf(source);
 
             if (index == -1)
                 return;
 
-            Items[index] = ItemGenerator((TSource)sender);
+            Items[index] = ItemGenerator(source);
         }
 
         private void AttachItemEvents(INotifyPropertyChanged? sender)
@@ -197,6 +202,7 @@ public static class ObservableExtensions
             var oldStartingIndex = e.OldStartingIndex;
             var content = Items.Content;
 
+#nullable disable
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
@@ -233,6 +239,7 @@ public static class ObservableExtensions
                 default:
                     throw new InvalidOperationException("Invalid NotifyCollectionChangedEventArgs.Action");
             }
+#nullable restore
         }
     }
 }

@@ -295,6 +295,7 @@ public static class CollectionExtensions
     /// <exception cref="ArgumentNullException">Any of the keys is null.</exception>
     /// <exception cref="ArgumentException">Any of the keys is duplicate.</exception>
     public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> items)
+        where TKey : notnull
     {
         return items.ToDictionary(item => item.Key, item => item.Value);
     }
@@ -310,6 +311,7 @@ public static class CollectionExtensions
     /// <exception cref="ArgumentNullException">Any of the keys is null.</exception>
     /// <exception cref="ArgumentException">Any of the keys is duplicate.</exception>
     public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> items, IEqualityComparer<TKey>? comparer)
+        where TKey: notnull
     {
         return items.ToDictionary(item => item.Key, item => item.Value, comparer);
     }
@@ -344,6 +346,7 @@ public static class CollectionExtensions
     /// </returns>
     [return: NotNullIfNotNull("defaultValue")]
     public static TValue? GetValueOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue? defaultValue)
+        where TKey : notnull
     {
         return dictionary.TryGetValue(key, out var value) ? value : defaultValue;
     }
@@ -391,6 +394,7 @@ public static class CollectionExtensions
     /// The value from the dictionary, or the default value of <typeparamref name="TValue"/> if no item with the specified key exists.
     /// </returns>
     public static TValue? GetValueOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
+        where TKey : notnull
     {
         return dictionary.GetValueOrDefault(key, default);
     }

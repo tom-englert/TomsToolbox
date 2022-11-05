@@ -18,10 +18,10 @@ public static class AssemblyExtensions
     /// <returns>The directory in which the given assembly is stored.</returns>
     public static DirectoryInfo GetAssemblyDirectory(this Assembly assembly)
     {
-        var codeBase = assembly.CodeBase;
+        var location = assembly.Location;
 
-        var assemblyLocation = Path.GetDirectoryName(new Uri(codeBase).LocalPath) 
-                               ?? throw new InvalidOperationException("Can't evaluate assembly code base: " + codeBase);
+        var assemblyLocation = Path.GetDirectoryName(location) 
+                               ?? throw new InvalidOperationException("Can't evaluate assembly code base: " + location);
 
         return new DirectoryInfo(assemblyLocation);
     }
@@ -34,6 +34,8 @@ public static class AssemblyExtensions
     public static DirectoryInfo GetAssemblyDirectory(this AssemblyName assemblyName)
     {
         var codeBase = assemblyName.CodeBase;
+        if (codeBase == null)
+            throw new InvalidOperationException("Can't evaluate assembly code base: " + assemblyName);
 
         var assemblyLocation = Path.GetDirectoryName(new Uri(codeBase).LocalPath) 
                                ?? throw new InvalidOperationException("Can't evaluate assembly code base: " + codeBase);
@@ -51,7 +53,8 @@ public static class AssemblyExtensions
     /// </remarks>
     public static Uri GeneratePackUri(this Assembly assembly)
     {
-        var name = new AssemblyName(assembly.FullName).Name;
+        var assemblyFullName = assembly.FullName ?? throw new ArgumentException("Assembly does not have a full name", nameof(assembly));
+        var name = new AssemblyName(assemblyFullName).Name;
 
         return new Uri(string.Format(CultureInfo.InvariantCulture, "pack://application:,,,/{0};component/", name), UriKind.Absolute);
     }

@@ -15,6 +15,7 @@ public static class LegacyV2RuntimeActivationPolicy
     /// <para/>
     /// Useful e.g. for unit tests where you have no access to the app.config of the test runner process.
     /// </summary>
+    [Obsolete("LegacyV2RuntimeActivationPolicy is obsolete")]
     public static void Activate()
     {
         var clrRuntimeInfo = (ICLRRuntimeInfo?)RuntimeEnvironment.GetRuntimeInterfaceAsObject(Guid.Empty, typeof(ICLRRuntimeInfo).GUID);

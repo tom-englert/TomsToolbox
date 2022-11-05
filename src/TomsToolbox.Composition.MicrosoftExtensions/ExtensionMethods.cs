@@ -14,8 +14,8 @@ using TomsToolbox.Essentials;
 /// </summary>
 public static class ExtensionMethods
 {
-    private static readonly MethodInfo _addMetaDataExportMethod = typeof(ExtensionMethods).GetMethod(nameof(AddMetadataExportT), BindingFlags.NonPublic | BindingFlags.Static);
-    private static readonly MethodInfo _getMetaDataMethod = typeof(ExtensionMethods).GetMethod(nameof(GetMetadataT), BindingFlags.NonPublic | BindingFlags.Static);
+    private static readonly MethodInfo _addMetaDataExportMethod = typeof(ExtensionMethods).GetMethod(nameof(AddMetadataExportT), BindingFlags.NonPublic | BindingFlags.Static)!;
+    private static readonly MethodInfo _getMetaDataMethod = typeof(ExtensionMethods).GetMethod(nameof(GetMetadataT), BindingFlags.NonPublic | BindingFlags.Static)!;
 
     private static readonly Type _exportType = typeof(IExport<>);
 
@@ -75,9 +75,9 @@ public static class ExtensionMethods
                 if (contractType != null)
                 {
                     if (exportInfo.IsShared)
-                        serviceCollection.AddSingleton(contractType, sp => sp.GetService(type));
+                        serviceCollection.AddSingleton(contractType, sp => sp.GetService(type)!);
                     else
-                        serviceCollection.AddTransient(contractType, sp => sp.GetService(type));
+                        serviceCollection.AddTransient(contractType, sp => sp.GetService(type)!);
                 }
 
                 serviceCollection.AddMetadataExport(contractType ?? type, type, new MetadataAdapter(export.Metadata));
@@ -137,7 +137,7 @@ public static class ExtensionMethods
 
     private static void AddMetadataExportT<T>(IServiceCollection serviceCollection, Type implementationType, IMetadata metadata) where T : class
     {
-        serviceCollection.AddTransient<IExport<T>>(sp => new ExportAdapter<T>(() => (T)sp.GetService(implementationType), metadata));
+        serviceCollection.AddTransient<IExport<T>>(sp => new ExportAdapter<T>(() => (T?)sp.GetService(implementationType), metadata));
     }
 
     private static IServiceCollection AddMetadataExport(this IServiceCollection serviceCollection, Type serviceType, Type implementationType, IMetadata metadata)

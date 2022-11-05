@@ -15,6 +15,7 @@ using System.Linq;
 /// This implementation is thread safe; the draw back is that generating new items is slow, so this type is not suitable for caching a large amount of items.
 /// </remarks>
 public sealed class AutoWeakIndexer<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
+    where TKey : notnull
     where TValue : class
 {
     private readonly object _sync = new();

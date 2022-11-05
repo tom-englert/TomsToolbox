@@ -95,10 +95,11 @@ public static class CustomAttributeProviderExtensions
             .Select(attr => attr.ConverterTypeName)
             .ToList().Intercept(i => logBuilder.AppendLine($"Type names: {string.Join("; ", i)}"))
             .Select(typeName => Type.GetType(typeName, true))
+            .ExceptNullItems()
             .ToList().Intercept(i => logBuilder.AppendLine($"Types: {string.Join("; ", i)}"))
             .Where(type => typeof(TypeConverter).IsAssignableFrom(type))
             .ToList().Intercept(i => logBuilder.AppendLine($"Type converters: {string.Join("; ", i)}"))
-            .Select(type => (TypeConverter)Activator.CreateInstance(type))
+            .Select(type => (TypeConverter?)Activator.CreateInstance(type))
             .FirstOrDefault();
 
         log = logBuilder.ToString();

@@ -49,7 +49,7 @@ public static class MetadataReader
 
         var anyExportAttributeType = exportAttributes.First();
 
-        var isMef1 = anyExportAttributeType.ExportAttributeType.Namespace == "System.ComponentModel.Composition";
+        var isMef1 = anyExportAttributeType.ExportAttributeType?.Namespace == "System.ComponentModel.Composition";
 
         result.Add(new ExportInfo(type, isMef1, exportAttributes.Select(item => item.Attribute)));
     }

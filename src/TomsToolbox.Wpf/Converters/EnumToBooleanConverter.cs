@@ -40,7 +40,7 @@ public class EnumToBooleanConverter : ValueConverter
     public static bool Convert(object? value, string matches)
     {
         var valueType = value?.GetType();
-        if (valueType?.IsEnum != true)
+        if (value is null || valueType?.IsEnum != true)
         {
             throw new ArgumentException("The value is not an enum.", nameof(value));
         }

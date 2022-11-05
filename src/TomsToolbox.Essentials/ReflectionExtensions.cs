@@ -87,6 +87,7 @@ public static class ReflectionExtensions
     /// </summary>
     /// <param name="assemblyFile">The assembly file.</param>
     /// <returns>The assembly if the assembly could be loaded; otherwise <c>null</c>.</returns>
+    [Obsolete(@"'Assembly.ReflectionOnlyLoadFrom(string)' is obsolete: 'ReflectionOnly loading is not supported and throws PlatformNotSupportedException.")]
     public static Assembly? TryLoadAssemblyForReflectionOnly(this FileSystemInfo? assemblyFile)
     {
         if (assemblyFile == null)

@@ -50,9 +50,12 @@ public class ObservableWrappedCollection<TSource, TTarget> : ReadOnlyObservableC
     }
 
     [MakeWeak]
-    private void SourceCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void SourceCollection_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        OnSourceCollectionChanged((IEnumerable)sender, e);
+        if (sender is not IEnumerable sourceCollection)
+            return;
+
+        OnSourceCollectionChanged(sourceCollection, e);
     }
 
     /// <summary>
@@ -64,6 +67,7 @@ public class ObservableWrappedCollection<TSource, TTarget> : ReadOnlyObservableC
     /// <exception cref="System.NotImplementedException">Moving more than one item is not supported</exception>
     protected virtual void OnSourceCollectionChanged(IEnumerable sourceCollection, NotifyCollectionChangedEventArgs e)
     {
+#nullable disable
         switch (e.Action)
         {
             case NotifyCollectionChangedAction.Add:
@@ -103,6 +107,7 @@ public class ObservableWrappedCollection<TSource, TTarget> : ReadOnlyObservableC
                 Items.AddRange(sourceCollection.Cast<TSource>().Select(ItemGenerator));
                 break;
         }
+#nullable restore
     }
 
     /// <summary>
