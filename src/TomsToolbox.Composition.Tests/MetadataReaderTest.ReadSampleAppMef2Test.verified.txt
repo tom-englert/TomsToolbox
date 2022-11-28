@@ -5,12 +5,12 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       },
       {
         "ContractName": null,
         "ContractType": "SampleApp.Themes.IThemeManager, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       }
     ],
     "IsShared": true,
@@ -36,7 +36,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       }
     ],
     "IsShared": false,
@@ -62,7 +62,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
@@ -98,7 +98,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
@@ -175,7 +175,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       }
     ],
     "IsShared": true,
@@ -280,7 +280,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
@@ -302,7 +302,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
@@ -325,7 +325,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
@@ -348,7 +348,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
@@ -370,7 +370,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
@@ -394,7 +394,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
@@ -418,7 +418,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
@@ -442,7 +442,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
@@ -466,7 +466,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
@@ -489,7 +489,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
@@ -511,7 +511,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
@@ -533,7 +533,7 @@
       {
         "ContractName": null,
         "ContractType": null,
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
