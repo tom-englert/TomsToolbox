@@ -1,3 +1,6 @@
+2.8.5
+- Revert upgrade of System.Composition.AttributedModel
+
 2.8.4
 - Fix #14: PresentationFrameworkExtensions.GetPhysicalPixelSize should not trow exceptions
 - add net6.0 Support
