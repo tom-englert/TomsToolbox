@@ -116,7 +116,7 @@ public static class StyleBindings
         if (newValue == null)
             return;
 
-        if (!(d is UIElement target))
+        if (d is not UIElement target)
             return;
 
         var existingInputBindings = target.InputBindings;
@@ -289,7 +289,7 @@ public static class StyleBindings
 
         groupDescriptions.Clear();
 
-        if (!(e.NewValue is GroupDescriptionCollection newGroupDescriptions))
+        if (e.NewValue is not GroupDescriptionCollection newGroupDescriptions)
             return;
 
         groupDescriptions.AddRange(newGroupDescriptions);

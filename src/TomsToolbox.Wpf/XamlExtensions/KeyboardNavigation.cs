@@ -40,7 +40,7 @@ public class KeyboardNavigation : DependencyObject
     public static readonly DependencyProperty IsFocusVisualVisibleProperty =
         DependencyProperty.Register("IsFocusVisualVisible", typeof(bool), typeof(KeyboardNavigation));
 
-    private void InputManager_PostProcessInput(object sender, ProcessInputEventArgs? e)
+    private void InputManager_PostProcessInput(object sender, ProcessInputEventArgs e)
     {
         var inputManager = (InputManager)sender;
         IsFocusVisualVisible = SystemParameters.KeyboardCues || (inputManager.MostRecentInputDevice is KeyboardDevice);

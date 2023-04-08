@@ -39,13 +39,19 @@
                             <Setter.Value>
                               <ControlTemplate TargetType="Button">
                                 <Border x:Name="background" Width="36" Background="{TemplateBinding Background}">
-                                  <ContentPresenter HorizontalAlignment="Center" />
+                                  <ContentPresenter HorizontalAlignment="Center" IsHitTestVisible="False"/>
                                 </Border>
                                 <ControlTemplate.Triggers>
                                   <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="#80808080" />
                                   </Trigger>
+                                  <Trigger Property="toms:CustomNonClientAreaBehavior.IsNcMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#80808080" />
+                                  </Trigger>
                                   <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
+                                  </Trigger>
+                                  <Trigger Property="toms:CustomNonClientAreaBehavior.IsNcPressed" Value="True">
                                     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
                                   </Trigger>
                                   <Trigger Property="IsEnabled" Value="False">
@@ -75,17 +81,17 @@
                       </StackPanel>
                       <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" UseLayoutRounding="True" SnapsToDevicePixels="True" VerticalAlignment="Stretch">
                         <StackPanel x:Name="MinimizeButton" Orientation="Horizontal">
-                          <Button Command="{x:Static toms:WindowCommands.Minimize}">
+                          <Button Command="{x:Static toms:WindowCommands.Minimize}" Tag="{x:Static toms:HitTest.MinButton}">
                             <Path Width="12" Height="12" Data="M1.5,10.5 L10.5,10.5" />
                           </Button>
                         </StackPanel>
                         <StackPanel x:Name="MaximizeRestoreButton" Orientation="Horizontal">
-                          <Button Command="{x:Static toms:WindowCommands.Maximize}">
+                          <Button Command="{x:Static toms:WindowCommands.Maximize}" Tag="{x:Static toms:HitTest.MaxButton}">
                             <Grid>
                               <Path Width="12" Height="12" Data="M1.5,1.5 L1.5,10.5 L10.5,10.5 L10.5,1.5 Z" />
                             </Grid>
                           </Button>
-                          <Button Command="{x:Static toms:WindowCommands.Restore}">
+                          <Button Command="{x:Static toms:WindowCommands.Restore}" Tag="{x:Static toms:HitTest.MaxButton}">
                             <Grid>
                               <Path Width="12" Height="12" Data="M3.5,3.5 L3.5,1.5 L10.5,1.5 L10.5,8.5 L8.5,8.5" />
                               <Path Width="12" Height="12" Data="M1.5,3.5 L1.5,10.5 L8.5,10.5 L8.5,3.5 Z" />

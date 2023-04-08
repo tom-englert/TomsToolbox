@@ -8,15 +8,6 @@
     <ApplicationIcon>..\SampleApp\16x16.ico</ApplicationIcon>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <PublishDir>..\Publish</PublishDir>
-    <PublishProtocol>FileSystem</PublishProtocol>
-    <SelfContained>false</SelfContained>
-    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
-    <PublishSingleFile>True</PublishSingleFile>
-    <PublishReadyToRun>False</PublishReadyToRun>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="System.Composition" Version="[1.4.1]" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />

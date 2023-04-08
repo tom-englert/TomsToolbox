@@ -2,8 +2,12 @@
 
 using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 
@@ -104,6 +108,7 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
     private POINT _windowOffset;
     private Matrix _transformFromDevice = Matrix.Identity;
     private Matrix _transformToDevice = Matrix.Identity;
+    private FrameworkElement? _activeElement;
 
     /// <summary>
     /// Gets or sets the size of the border used to size the window.
@@ -158,6 +163,30 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
     public static readonly DependencyProperty HasGlassFrameProperty =
         DependencyProperty.Register("HasGlassFrame", typeof(bool), typeof(CustomNonClientAreaBehavior), new FrameworkPropertyMetadata(true));
 
+
+#pragma warning disable CS1591
+    public static void SetIsNcMouseOver(DependencyObject element, bool value)
+    {
+        element.SetValue(IsNcMouseOverProperty, value);
+    }
+    public static bool GetIsNcMouseOver(DependencyObject element)
+    {
+        return (bool)element.GetValue(IsNcMouseOverProperty);
+    }
+    public static readonly DependencyProperty IsNcMouseOverProperty = DependencyProperty.RegisterAttached(
+        "IsNcMouseOver", typeof(bool), typeof(CustomNonClientAreaBehavior), new PropertyMetadata(default(bool)));
+
+    public static void SetIsNcPressed(DependencyObject element, bool value)
+    {
+        element.SetValue(IsNcPressedProperty, value);
+    }
+    public static bool GetIsNcPressed(DependencyObject element)
+    {
+        return (bool)element.GetValue(IsNcPressedProperty);
+    }
+    public static readonly DependencyProperty IsNcPressedProperty = DependencyProperty.RegisterAttached(
+        "IsNcPressed", typeof(bool), typeof(CustomNonClientAreaBehavior), new PropertyMetadata(default(bool)));
+#pragma warning restore CS1591
 
     /// <summary>
     /// Gets the value indicating if the glass frame using DWM composition for this window should be disabled.
@@ -235,7 +264,7 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
         Unregister(window);
     }
 
-    private void Window_SourceInitialized(object? sender, EventArgs? e)
+    private void Window_SourceInitialized(object? sender, EventArgs e)
     {
         var window = _window ?? throw new InvalidOperationException("Window needs to be initialized");
         var messageSource = (HwndSource?)PresentationSource.FromDependencyObject(window) ?? throw new InvalidOperationException("Window needs to be initialized");
@@ -277,7 +306,7 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
                 {
                     compositionTarget.BackgroundColor = Colors.Transparent;
 
-                    var m = new MARGINS(1);
+                    var m = new DWM_MARGINS();
                     NativeMethods.DwmExtendFrameIntoClientArea(handle, ref m);
                     return;
                 }
@@ -312,9 +341,9 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
                     NativeMethods.DefWindowProc(windowHandle, WM_NCCALCSIZE, wParam, lParam);
                     var after = PtrToStructure<RECT>(lParam);
 
-                    // Fix for task-bar: task-bar location = bottom, auto hide task-bar, show task-bar on all displays, 3 displays active => on main monitor the task bar does not restore when hovering with the mouse.
-                    var monitorInfo = MonitorInfoFromWindow(windowHandle);
-                    if (monitorInfo.rcMonitor.Height == monitorInfo.rcWork.Height && monitorInfo.rcMonitor.Width == monitorInfo.rcWork.Width)
+                    var isTaskBarAutoHide = IsTaskBarAutoHide(windowHandle);
+                    // Fix for task bar: task bar location = bottom, auto hide task bar, show task bar on all displays, 3 displays active => on main monitor the task bar does not restore when hovering with the mouse.
+                    if (isTaskBarAutoHide)
                     {
                         --after.Bottom;
                     }
@@ -323,9 +352,14 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
 
                     if ((windowInfo.dwExStyle & WS_EX_CLIENTEDGE) != 0)
                     {
-                        var x = NativeMethods.GetSystemMetrics(SM_CXEDGE);
-                        after.Right += 2 * x;
-                        after.Left -= x;
+                        var cxEdge = NativeMethods.GetSystemMetrics(SM_CXEDGE);
+                        after.Left -= cxEdge;
+                        after.Right += cxEdge;
+                        if (!isTaskBarAutoHide)
+                        {
+                            var cyEdge = NativeMethods.GetSystemMetrics(SM_CYEDGE);
+                            after.Bottom += cyEdge;
+                        }
                     }
 
                     Marshal.StructureToPtr(after, lParam, true);
@@ -353,6 +387,22 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
                 var result = NcHitTest(windowHandle, lParam);
                 return (IntPtr)result;
 
+            case WM_MOUSEMOVE:
+            case WM_MOUSELEAVE:
+            case WM_NCMOUSELEAVE:
+                ClearActiveElement();
+                break;
+
+            case WM_NCMOUSEMOVE:
+                handled = ProcessNcMouseMessage(windowHandle, wParam, lParam, button => SetActiveElement(button, IsNcMouseOverProperty, true));
+                break;
+            case WM_NCLBUTTONDOWN:
+                handled = ProcessNcMouseMessage(windowHandle, wParam, lParam, button => SetActiveElement(button, IsNcPressedProperty, true));
+                break;
+            case WM_NCLBUTTONUP:
+                handled = ProcessNcMouseMessage(windowHandle, wParam, lParam, ClickButton);
+                break;
+
             case WM_NCRBUTTONUP:
                 var hitTest = wParam.ToInt32();
                 if ((hitTest == (int)HitTest.SysMenu) || (hitTest == (int)HitTest.Caption))
@@ -366,6 +416,85 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
         }
 
         return IntPtr.Zero;
+    }
+
+    private static bool IsTaskBarAutoHide(IntPtr windowHandle)
+    {
+        var monitorInfo = MonitorInfoFromWindow(windowHandle);
+        var rcMonitor = monitorInfo.rcMonitor;
+        var rcWork = monitorInfo.rcWork;
+        return rcMonitor.Height == rcWork.Height && rcMonitor.Width == rcWork.Width;
+    }
+
+    private void ClearActiveElement()
+    {
+        _activeElement?.SetValue(IsNcMouseOverProperty, false);
+        _activeElement?.SetValue(IsNcPressedProperty, false);
+        _activeElement = null;
+    }
+
+    private void SetActiveElement(FrameworkElement element, DependencyProperty property, bool value)
+    {
+        if (element != _activeElement)
+            ClearActiveElement();
+
+        element.SetValue(property, value);
+
+        _activeElement = element;
+    }
+
+    private void ClickButton(ButtonBase button)
+    {
+        ClearActiveElement();
+
+        var command = button.Command;
+        switch (command)
+        {
+            case null:
+                return;
+            case RoutedCommand routedCommand:
+                routedCommand.Execute(button.CommandParameter, button);
+                break;
+            default:
+                command.Execute(button.Command);
+                break;
+        }
+    }
+
+    private bool ProcessNcMouseMessage(IntPtr windowHandle, IntPtr wParam, IntPtr lParam, Action<ButtonBase> action)
+    {
+        if ((HitTest)wParam is HitTest.Nowhere or HitTest.Client)
+            return false;
+
+        var window = _window ?? throw new InvalidOperationException("Window needs to be initialized");
+
+        // Arguments are absolute native coordinates
+        var hitPoint = new POINT((short)lParam, (short)((uint)lParam >> 16));
+
+        NativeMethods.GetWindowRect(windowHandle, out var windowRect);
+
+        var topLeft = windowRect.TopLeft + _windowOffset;
+        var clientPoint = _transformFromDevice.Transform(hitPoint - topLeft);
+
+        if (window.InputHitTest(clientPoint) is not FrameworkElement element)
+        {
+            ClearActiveElement();
+            return false;
+        }
+
+        var button = element
+            .AncestorsAndSelf()
+            .OfType<Button>()
+            .FirstOrDefault(e => e.Tag is HitTest);
+
+        if (button == null)
+        {
+            ClearActiveElement();
+            return false;
+        }
+
+        action(button);
+        return true;
     }
 
     private HitTest NcHitTest(IntPtr windowHandle, IntPtr lParam)
@@ -426,6 +555,17 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
                     return value;
             }
 
+            var hitTest = element.AncestorsAndSelf()
+                .OfType<Button>()
+                .Select(e => e.Tag)
+                .OfType<HitTest>()
+                .FirstOrDefault();
+
+            if (hitTest != HitTest.Nowhere)
+            {
+                return hitTest;
+            }
+
             var args = new NcHitTestEventArgs();
 
             element.RaiseEvent(args);
@@ -464,6 +604,14 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
     private const int WM_NCCALCSIZE = 0x0083;
     private const int WM_NCACTIVATE = 0x0086;
     private const int WM_NCRBUTTONUP = 165;
+    private const int WM_NCMOUSEMOVE = 0x00A0;
+    private const int WM_NCLBUTTONDOWN = 0x00A1;
+    private const int WM_NCLBUTTONUP = 0x00A2;
+
+    private const int WM_MOUSEMOVE = 0x0200;
+    private const int WM_NCMOUSELEAVE = 0x02A2;
+    private const int WM_MOUSELEAVE = 0x02A3;
+
     private const int WM_DWMCOMPOSITIONCHANGED = 798;
     private const int WM_SYSCOMMAND = 274;
 
@@ -478,7 +626,7 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
     private const uint MF_DISABLED = 2;
 
     private const int SM_CXEDGE = 45;
-    // private const int SM_CYEDGE = 46;
+    private const int SM_CYEDGE = 46;
 
     private const int WS_EX_CLIENTEDGE = 0x00000200;
 
@@ -526,7 +674,7 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
 
         public override string ToString()
         {
-            return ((Rect)this).ToString();
+            return ((Rect)this).ToString(CultureInfo.InvariantCulture);
         }
     }
 
@@ -592,22 +740,22 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
 
         public override string ToString()
         {
-            return ((Size)this).ToString();
+            return ((Size)this).ToString(CultureInfo.InvariantCulture);
         }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 0)]
-    private struct MARGINS
+    private struct DWM_MARGINS
     {
         public readonly int Left;
         public readonly int Right;
         public readonly int Top;
         public readonly int Bottom;
 
-        public MARGINS(int value)
+        public DWM_MARGINS(int value = 1)
         {
             Left = value;
-            Top = value;
+            Top = 0;
             Right = value;
             Bottom = value;
         }
@@ -671,6 +819,7 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
     }
 
     private static T PtrToStructure<T>(IntPtr ptr)
+        where T : struct
     {
         return (T)Marshal.PtrToStructure(ptr, typeof(T))!;
     }
@@ -755,7 +904,7 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
         public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
 
         [DllImport("dwmapi.dll")]
-        public static extern int DwmExtendFrameIntoClientArea(IntPtr hWnd, ref MARGINS pMarInset);
+        public static extern int DwmExtendFrameIntoClientArea(IntPtr hWnd, ref DWM_MARGINS pMarInset);
 
         [DllImport("dwmapi.dll", EntryPoint = "DwmIsCompositionEnabled", PreserveSig = false)]
         [return: MarshalAs(UnmanagedType.Bool)]
