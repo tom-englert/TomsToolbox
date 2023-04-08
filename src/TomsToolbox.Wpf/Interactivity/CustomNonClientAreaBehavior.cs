@@ -484,7 +484,7 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
 
         var button = element
             .AncestorsAndSelf()
-            .OfType<Button>()
+            .OfType<ButtonBase>()
             .FirstOrDefault(e => e.Tag is HitTest);
 
         if (button == null)
@@ -556,7 +556,7 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
             }
 
             var hitTest = element.AncestorsAndSelf()
-                .OfType<Button>()
+                .OfType<ButtonBase>()
                 .Select(e => e.Tag)
                 .OfType<HitTest>()
                 .FirstOrDefault();

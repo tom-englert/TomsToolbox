@@ -1,3 +1,6 @@
+2.8.6
+- Fix #16: Layout Options context menu over maximize button is not visible on Win11
+
 2.8.5
 - Revert upgrade of System.Composition.AttributedModel
 
