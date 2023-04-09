@@ -306,7 +306,7 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
                 {
                     compositionTarget.BackgroundColor = Colors.Transparent;
 
-                    var m = new DWM_MARGINS();
+                    var m = new DWM_MARGINS(1);
                     NativeMethods.DwmExtendFrameIntoClientArea(handle, ref m);
                     return;
                 }
@@ -752,7 +752,7 @@ public class CustomNonClientAreaBehavior : Behavior<FrameworkElement>
         public readonly int Top;
         public readonly int Bottom;
 
-        public DWM_MARGINS(int value = 1)
+        public DWM_MARGINS(int value)
         {
             Left = value;
             Top = 0;
