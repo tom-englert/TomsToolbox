@@ -1,3 +1,6 @@
+2.8.8
+- Fix ObservableObject: Using RelayEventsOf may cause memory leak
+
 2.8.7
 - Fix #16: Layout Options context menu over maximize button is not visible on Win11
 
