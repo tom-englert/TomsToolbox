@@ -225,6 +225,7 @@ public abstract class ObservableObjectBase : INotifyPropertyChanged, IDataErrorI
 
     private IDictionary<string, IEnumerable<string>> DependencyMapping => _dependencyMapping ??= _dependencyMappingCache[GetType()];
 
+    [WeakEventHandler.MakeWeak]
     private void RelaySource_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (sender == null || e.PropertyName == null)
