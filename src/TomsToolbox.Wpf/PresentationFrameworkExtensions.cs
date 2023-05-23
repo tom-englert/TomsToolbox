@@ -250,8 +250,6 @@ public static class PresentationFrameworkExtensions
             if (value == null)
                 return;
 
-            _frameworkElement.VerifyAccess();
-
             if (!_eventHandlers.Add(value))
                 return;
 
@@ -265,8 +263,6 @@ public static class PresentationFrameworkExtensions
         {
             if (value == null)
                 return;
-
-            _frameworkElement.VerifyAccess();
 
             _eventHandlers.Remove(value);
             _dependencyPropertyDescriptor.RemoveValueChanged(_frameworkElement, value);
