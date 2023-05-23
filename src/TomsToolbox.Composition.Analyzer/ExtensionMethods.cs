@@ -1,10 +1,10 @@
-﻿global using static ExtensionMethods;
+﻿global using static TomsToolbox.Composition.Analyzer.ExtensionMethods;
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 
 using Microsoft.CodeAnalysis;
+
+namespace TomsToolbox.Composition.Analyzer;
 
 public static class ExtensionMethods
 {
@@ -112,7 +112,7 @@ public static class ExtensionMethods
 
             yield return typeSymbol;
 
-            typeSymbol = typeSymbol?.BaseType;
+            typeSymbol = typeSymbol.BaseType;
         }
     }
 

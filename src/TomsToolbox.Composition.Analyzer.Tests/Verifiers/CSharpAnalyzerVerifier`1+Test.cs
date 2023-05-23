@@ -11,6 +11,7 @@ public static partial class CSharpAnalyzerVerifier<TAnalyzer>
         return files.Select(file => MetadataReference.CreateFromFile(Path.Combine(@"C:\Windows\Microsoft.NET\Framework\v4.0.30319", file)));
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "Designed by Microsoft")]
     public class Test : CSharpAnalyzerTest<TAnalyzer, XUnitVerifier>
     {
         public Test()

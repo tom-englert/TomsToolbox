@@ -1,5 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 
+namespace TomsToolbox.Composition.Analyzer;
+
 [Generator(LanguageNames.CSharp)]
 public class SourceGenerator : IIncrementalGenerator
 {

@@ -31,12 +31,10 @@ public static class AssemblyExtensions
     /// </summary>
     /// <param name="assemblyName">The assembly.</param>
     /// <returns>The directory in which the given assembly is stored.</returns>
+    [Obsolete("AssemblyName is not fully supported in DotNet")]
     public static DirectoryInfo GetAssemblyDirectory(this AssemblyName assemblyName)
     {
-        var codeBase = assemblyName.CodeBase;
-        if (codeBase == null)
-            throw new InvalidOperationException("Can't evaluate assembly code base: " + assemblyName);
-
+        var codeBase = assemblyName.CodeBase ?? throw new InvalidOperationException("Can't evaluate assembly code base: " + assemblyName);
         var assemblyLocation = Path.GetDirectoryName(new Uri(codeBase).LocalPath) 
                                ?? throw new InvalidOperationException("Can't evaluate assembly code base: " + codeBase);
 

@@ -22,7 +22,7 @@ using TomsToolbox.Essentials;
 ///     [PropertyDependency("Value")]
 ///     int ValueLength { get { ... } }
 ///
-///     void ChageSomething()
+///     void ChangeSomething()
 ///     {
 ///         OnPropertyChanged("Value");
 ///     }
@@ -54,7 +54,7 @@ public sealed class PropertyDependencyAttribute : Attribute
     /// <param name="type">The type.</param>
     /// <returns>A dictionary that maps the property names to all direct and indirect dependent property names.</returns>
     /// <exception cref="System.InvalidOperationException">Invalid dependency definitions, i.e. dependency to non-existing property.</exception>
-    [return: NotNullIfNotNull("type")]
+    [return: NotNullIfNotNull(nameof(type))]
     public static Dictionary<string, IEnumerable<string>>? CreateDependencyMapping(Type? type)
     {
         if (type == null)
@@ -145,7 +145,7 @@ public sealed class PropertyDependencyAttribute : Attribute
         var referencedAssemblies = referencedAssemblyNames
             .Select(SafeLoad)
             .ExceptNullItems()
-            .Where(assembly => IsAssemblyInSubfolderOf(assembly.GetName(), programFolder));
+            .Where(assembly => IsAssemblyInSubfolderOf(assembly, programFolder));
 
         return new[] { entryAssembly }.Concat(referencedAssemblies);
     }
@@ -153,17 +153,14 @@ public sealed class PropertyDependencyAttribute : Attribute
     /// <summary>
     /// Determines whether the assembly is located in the same folder or a sub folder of the specified program folder.
     /// </summary>
-    /// <param name="assemblyName">Name of the assembly.</param>
+    /// <param name="assembly">Name of the assembly.</param>
     /// <param name="programFolder">The program folder.</param>
     /// <returns>
     ///   <c>true</c> if the assembly is located in the same folder or a sub folder of the specified program folder; otherwise, <c>false</c>.
     /// </returns>
-    private static bool IsAssemblyInSubfolderOf(AssemblyName assemblyName, string programFolder)
+    private static bool IsAssemblyInSubfolderOf(Assembly assembly, string programFolder)
     {
-        if (assemblyName.CodeBase == null)
-            return false;
-
-        var assemblyDirectory = Path.GetDirectoryName(assemblyName.GetAssemblyDirectory().FullName)!;
+        var assemblyDirectory = Path.GetDirectoryName(assembly.GetAssemblyDirectory().FullName)!;
 
         return assemblyDirectory.StartsWith(programFolder, StringComparison.OrdinalIgnoreCase);
     }

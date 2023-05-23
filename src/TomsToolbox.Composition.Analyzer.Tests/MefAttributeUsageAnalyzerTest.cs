@@ -1,4 +1,6 @@
-﻿using VerifyCS = CSharpAnalyzerVerifier<MefAttributeUsageAnalyzer>;
+﻿using VerifyCS = CSharpAnalyzerVerifier<TomsToolbox.Composition.Analyzer.MefAttributeUsageAnalyzer>;
+
+namespace TomsToolbox.Composition.Analyzer.Tests;
 
 public class Mef1AttributeUsageAnalyzerTest
 {
@@ -26,7 +28,7 @@ public class Mef1AttributeUsageAnalyzerTest
     }";
 
         var expected = VerifyCS.Diagnostic(ExtensionMethods.NoCreationPolicyRuleMef1.Id).WithLocation(0).WithArguments("TypeName");
-        
+
         await VerifyCS.VerifyAnalyzerAsync(test, expected);
     }
 
