@@ -1,3 +1,6 @@
+2.8.9
+- DependencyProperty change tracker should no make assumptions about threads when attaching or releasing event handlers
+
 2.8.8
 - Fix ObservableObject: Using RelayEventsOf may cause memory leak
 
