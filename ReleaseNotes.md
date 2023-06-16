@@ -1,3 +1,6 @@
+2.8.10
+- Fix memory leak in Validation.ShowErrorInTooltip
+
 2.8.9
 - DependencyProperty change tracker should no make assumptions about threads when attaching or releasing event handlers
 
