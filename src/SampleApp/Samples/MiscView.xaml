@@ -187,7 +187,7 @@
       </HeaderedContentControl>
       <HeaderedContentControl Header="TextBox/PasswordBox">
         <StackPanel Margin="5">
-          <TextBox x:Name="TextBox" />
+          <TextBox x:Name="TextBox" Text="{Binding TextWithError, ValidatesOnDataErrors=True}" toms:Validation.ShowErrorInTooltip="True" />
           <Decorator Height="5" />
           <PasswordBox>
             <i:Interaction.Behaviors>

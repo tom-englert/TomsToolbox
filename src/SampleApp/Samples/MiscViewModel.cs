@@ -1,19 +1,17 @@
 ﻿namespace SampleApp.Samples;
 
 using System;
+using System.ComponentModel;
 using System.Net;
 using System.Windows;
 using System.Windows.Input;
-
-using PropertyChanged;
 
 using TomsToolbox.Desktop;
 using TomsToolbox.Wpf;
 using TomsToolbox.Wpf.Composition.AttributedModel;
 
 [VisualCompositionExport(RegionId.Main, Sequence = 99)]
-[AddINotifyPropertyChangedInterface]
-internal class MiscViewModel
+internal partial class MiscViewModel : INotifyPropertyChanged, IDataErrorInfo
 {
     private string? _userName;
 
@@ -31,6 +29,8 @@ internal class MiscViewModel
     public ICommand GCCollectCommand => new DelegateCommand(GC.Collect);
 
     public ICommand CheckForAdminRightsCommand => new DelegateCommand(CheckForAdminRights);
+    
+    public string? TextWithError { get; set;  }
 
     private void CheckForAdminRights()
     {
@@ -67,5 +67,20 @@ internal class MiscViewModel
         }
 
         MessageBox.Show(CheckRights() ? "User is Admin" : "User is not an Admin");
+    }
+
+    public string Error => String.Empty;
+
+    public string this[string columnName]
+    {
+        get
+        {
+            if (columnName == nameof(TextWithError))
+            {
+                return @"This binding always returns an error";
+            }
+
+            return string.Empty;
+        }
     }
 }

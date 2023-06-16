@@ -48,17 +48,47 @@ public static class Validation
 
     private static void ShowErrorInTooltip_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
+        if (d is not FrameworkElement target)
+            return;
+
+        static void OnLoaded(object? sender, EventArgs _)
+        {
+            if (sender is not FrameworkElement target)
+                return;
+
+            _propertyDescriptor.RemoveValueChanged(target, ValidationHasErrors_Changed);
+            _propertyDescriptor.AddValueChanged(target, ValidationHasErrors_Changed);
+
+            ValidationHasErrors_Changed(sender, EventArgs.Empty);
+        }
+
+        static void OnUnloaded(object? sender, EventArgs _)
+        {
+            if (sender is not FrameworkElement target)
+                return;
+
+            _propertyDescriptor.RemoveValueChanged(target, ValidationHasErrors_Changed);
+        }
+
         if (true.Equals(e.NewValue))
         {
-            _propertyDescriptor.AddValueChanged(d, ValidationHasErrors_Changed);
+            target.Loaded += OnLoaded;
+            target.Unloaded += OnUnloaded;
+            if (target.IsLoaded)
+            {
+                OnLoaded(target, EventArgs.Empty);
+            }
         }
         else
         {
-            _propertyDescriptor.RemoveValueChanged(d, ValidationHasErrors_Changed);
+            target.Loaded -= OnLoaded;
+            target.Unloaded -= OnUnloaded;
+
+            _propertyDescriptor.RemoveValueChanged(target, ValidationHasErrors_Changed);
         }
     }
 
-    private static void ValidationHasErrors_Changed(object? sender, EventArgs e)
+    private static void ValidationHasErrors_Changed(object? sender, EventArgs _)
     {
         if (sender is not FrameworkElement target)
             return;
