@@ -1,15 +1,14 @@
-﻿using System.Windows;
+﻿namespace TomsToolbox.Wpf.Controls;
+
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
-using TomsToolbox.Essentials;
-
-namespace TomsToolbox.Wpf.Controls;
-
-using System.Diagnostics;
 using System.Windows.Threading;
 
 using global::Throttle;
+
+using TomsToolbox.Essentials;
 
 /// <summary>
 /// A <see cref="TextBlock"/> like control that highlights a search text.
@@ -39,7 +38,7 @@ public class HighlightingTextBlock : ContentControl
     /// </summary>
     public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
         nameof(Text), typeof(object), typeof(HighlightingTextBlock),
-        new PropertyMetadata(default(object), (o, args) => ((HighlightingTextBlock)o).CreateInlines()));
+        new PropertyMetadata(default(object), (o, args) => ((HighlightingTextBlock)o).ConstraintsChanged()));
 
     /// <summary>
     /// Gets or sets the search text that will be highlighted.
@@ -54,7 +53,7 @@ public class HighlightingTextBlock : ContentControl
     /// </summary>
     public static readonly DependencyProperty SearchTextProperty = DependencyProperty.Register(
         nameof(SearchText), typeof(object), typeof(HighlightingTextBlock),
-        new PropertyMetadata(default(object), (o, args) => ((HighlightingTextBlock)o).CreateInlines()));
+        new PropertyMetadata(default(object), (o, args) => ((HighlightingTextBlock)o).SearchTextChanged()));
 
     /// <summary>
     /// Gets or sets the brush to high light the search text.
@@ -69,7 +68,7 @@ public class HighlightingTextBlock : ContentControl
     /// </summary>
     public static readonly DependencyProperty HighLightBrushProperty = DependencyProperty.Register(
         nameof(HighLightBrush), typeof(Brush), typeof(HighlightingTextBlock),
-        new PropertyMetadata(default(Brush), (o, args) => ((HighlightingTextBlock)o).CreateInlines()));
+        new PropertyMetadata(default(Brush), (o, args) => ((HighlightingTextBlock)o).ConstraintsChanged()));
 
     /// <summary>
     /// Gets or sets the font weight applied to the search text; default is bold.
@@ -84,7 +83,7 @@ public class HighlightingTextBlock : ContentControl
     /// </summary>
     public static readonly DependencyProperty HighLightFontWeightProperty = DependencyProperty.Register(
         nameof(HighLightFontWeight), typeof(FontWeight), typeof(HighlightingTextBlock),
-        new PropertyMetadata(FontWeights.Bold, (o, args) => ((HighlightingTextBlock)o).CreateInlines()));
+        new PropertyMetadata(FontWeights.Bold, (o, args) => ((HighlightingTextBlock)o).ConstraintsChanged()));
 
     /// <summary>
     /// Gets or sets the string comparison used to find the highlighting text; default is <see cref="StringComparison.OrdinalIgnoreCase"/>
@@ -98,13 +97,23 @@ public class HighlightingTextBlock : ContentControl
     /// Identifies the <see cref="StringComparison"/> property
     /// </summary>
     public static readonly DependencyProperty StringComparisonProperty = DependencyProperty.Register(
-        nameof(StringComparison), typeof(StringComparison), typeof(HighlightingTextBlock), 
+        nameof(StringComparison), typeof(StringComparison), typeof(HighlightingTextBlock),
         new PropertyMetadata(default(StringComparison)));
 
-    [Throttled(typeof(DispatcherThrottle), (int)DispatcherPriority.Input)]
-    private void CreateInlines()
+    [Throttled(typeof(Throttle), 500)]
+    private void SearchTextChanged()
     {
-        Debug.WriteLine(">>> CreateInlines");
+        UpdateInlines();
+    }
+
+    [Throttled(typeof(DispatcherThrottle), (int)DispatcherPriority.Input)]
+    private void ConstraintsChanged()
+    {
+        UpdateInlines();
+    }
+
+    private void UpdateInlines()
+    {
         CreateInlines(_textBlock.Inlines, Text, SearchText, HighLightBrush, HighLightFontWeight, StringComparison);
     }
 
