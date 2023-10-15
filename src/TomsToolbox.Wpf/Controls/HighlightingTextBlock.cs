@@ -1,5 +1,7 @@
 ﻿namespace TomsToolbox.Wpf.Controls;
 
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -98,7 +100,20 @@ public class HighlightingTextBlock : ContentControl
     /// </summary>
     public static readonly DependencyProperty StringComparisonProperty = DependencyProperty.Register(
         nameof(StringComparison), typeof(StringComparison), typeof(HighlightingTextBlock),
-        new PropertyMetadata(default(StringComparison)));
+        new PropertyMetadata(StringComparison.OrdinalIgnoreCase, (o, args) => ((HighlightingTextBlock)o).ConstraintsChanged()));
+
+    /// <summary>
+    /// Gets the inlines to render in the <see cref="TextBlock"/>
+    /// </summary>
+    protected InlineCollection Inlines => _textBlock.Inlines;
+
+    /// <summary>
+    /// Updates the inlines after any constraints have changed.
+    /// </summary>
+    protected virtual void UpdateInlines()
+    {
+        CreateInlines(Inlines, Text, SearchText, HighLightBrush, HighLightFontWeight, StringComparison);
+    }
 
     [Throttled(typeof(Throttle), 500)]
     private void SearchTextChanged()
@@ -112,48 +127,76 @@ public class HighlightingTextBlock : ContentControl
         UpdateInlines();
     }
 
-    private void UpdateInlines()
+    private static void CreateInlines(InlineCollection inlines, object value, object parameter, Brush highlightBrush, FontWeight fontWeight, StringComparison stringComparison)
     {
-        CreateInlines(_textBlock.Inlines, Text, SearchText, HighLightBrush, HighLightFontWeight, StringComparison);
-    }
-
-    internal static void CreateInlines(InlineCollection inlines, object value, object parameter, Brush highlightBrush, FontWeight fontWeight, StringComparison stringComparison)
-    {
-        inlines.Clear();
+        var newInlines = new Collection<Inline>();
 
         var text = value?.ToString();
 
-        if (text.IsNullOrEmpty())
-            return;
-
-        var searchText = parameter?.ToString();
-
-        if (searchText.IsNullOrEmpty())
+        if (!text.IsNullOrEmpty())
         {
-            inlines.Add(new Run(text));
-            return;
+            var searchText = parameter?.ToString();
+
+            if (searchText.IsNullOrEmpty())
+            {
+                newInlines.Add(new Run(text));
+            }
+            else
+            {
+                var searchLength = searchText.Length;
+
+                for (var index = 0; ;)
+                {
+                    var pos = text.IndexOf(searchText, index, stringComparison);
+
+                    if (pos < 0)
+                    {
+                        newInlines.Add(new Run(text.Substring(index)));
+                        break;
+                    }
+
+                    if (pos > index)
+                    {
+                        newInlines.Add(new Run(text.Substring(index, pos - index)));
+                    }
+
+                    newInlines.Add(new Run(text.Substring(pos, searchLength))
+                    {
+                        FontWeight = fontWeight,
+                        Foreground = highlightBrush
+                    });
+
+                    index = pos + searchLength;
+                }
+            }
         }
 
-        var searchLength = searchText.Length;
+        if (newInlines.SequenceEqual(inlines, RunComparer.Instance))
+            return;
 
-        for (var index = 0; ;)
+        inlines.Clear();
+        inlines.AddRange(newInlines);
+    }
+
+    private sealed class RunComparer : IEqualityComparer<Inline>
+    {
+        public static readonly RunComparer Instance = new();
+
+        public bool Equals(Inline? x, Inline? y)
         {
-            var pos = text.IndexOf(searchText, index, stringComparison);
+            return ReferenceEquals(x, y) || Equals(x as Run, y as Run);
+        }
 
-            if (pos < 0)
-            {
-                inlines.Add(new Run(text.Substring(index)));
-                break;
-            }
+        private static bool Equals(Run? x, Run? y)
+        {
+            return string.Equals(x?.Text, y?.Text, StringComparison.Ordinal);
+        }
 
-            if (pos > index)
-            {
-                inlines.Add(new Run(text.Substring(index, pos - index)));
-            }
-
-            inlines.Add(new Run(text.Substring(pos, searchLength)) { FontWeight = fontWeight, Foreground = highlightBrush });
-
-            index = pos + searchLength;
+        public int GetHashCode(Inline obj)
+        {
+            return (obj as Run)?.Text?.GetHashCode()
+                   ?? obj?.GetHashCode()
+                   ?? 0;
         }
     }
 }
