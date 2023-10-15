@@ -167,6 +167,8 @@ public class HighlightingTextBlock : ContentControl
                     });
 
                     index = pos + searchLength;
+                    if (index >= text.Length)
+                        break;
                 }
             }
         }
@@ -189,14 +191,23 @@ public class HighlightingTextBlock : ContentControl
 
         private static bool Equals(Run? x, Run? y)
         {
-            return string.Equals(x?.Text, y?.Text, StringComparison.Ordinal);
+            if (x is null || y is null)
+                return false;
+
+            return string.Equals(x.Text, y.Text, StringComparison.Ordinal) && Equals(x.FontWeight, y.FontWeight) && Equals(x.Foreground, y.Foreground);
         }
 
         public int GetHashCode(Inline obj)
         {
-            return (obj as Run)?.Text?.GetHashCode()
-                   ?? obj?.GetHashCode()
-                   ?? 0;
+            if (obj is not Run run)
+                return 0;
+
+            return new[]
+            {
+                run.Text.GetHashCode(),
+                run.FontWeight.GetHashCode(),
+                run.Foreground.GetHashCode()
+            }.Aggregate(HashCode.Aggregate);
         }
     }
 }
