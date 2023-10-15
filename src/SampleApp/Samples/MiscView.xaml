@@ -201,6 +201,25 @@
           <Button Command="{Binding CheckForAdminRightsCommand}">Check for admin rights</Button>
         </StackPanel>
       </HeaderedContentControl>
+      <HeaderedContentControl Header="Highlight TextBlock">
+        <StackPanel>
+          <StackPanel Orientation="Horizontal">
+            <Label Content="Text:"/>
+            <TextBox x:Name="Input" Text="This is some simple text" VerticalAlignment="Center" />
+          </StackPanel>
+          <StackPanel Orientation="Horizontal">
+            <Label Content="SearchText:"/>
+            <TextBox x:Name="SearchText" Text="simple" VerticalAlignment="Center"/>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal">
+            <Label Content="HighlightingTextBlock:"/>
+            <toms:HighlightingTextBlock VerticalAlignment="Center"
+                                        Text="{Binding Text, ElementName=Input}"
+                                        SearchText="{Binding Text, ElementName=SearchText}"
+                                        HighLightBrush="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+          </StackPanel>
+        </StackPanel>
+      </HeaderedContentControl>
     </StackPanel>
   </ScrollViewer>
 </UserControl>

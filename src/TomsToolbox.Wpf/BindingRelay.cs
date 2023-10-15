@@ -39,7 +39,7 @@ public class BindingRelay : Freezable
     }
 
     /// <summary>
-    /// Identifies th <see cref="DataContext"/> dependency property.
+    /// Identifies the <see cref="DataContext"/> dependency property.
     /// </summary>
     public static readonly DependencyProperty DataContextProperty = DependencyProperty.Register("DataContext", typeof(object), typeof(BindingRelay));
 }
