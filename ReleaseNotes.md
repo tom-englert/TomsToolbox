@@ -1,3 +1,6 @@
+2.9.0
+- Add new HighlightingTextBlock control
+
 2.8.10
 - Fix memory leak in Validation.ShowErrorInTooltip
 
