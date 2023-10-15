@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <Tags>Sample</Tags>
     <ApplicationIcon>..\SampleApp\16x16.ico</ApplicationIcon>
@@ -19,8 +19,10 @@
 
   <ItemGroup>
     <PackageReference Include="Ninject.Extensions.Conventions" Version="3.3.0" />
-    <PackageReference Include="System.Composition" Version="[1.4.1]" />
+    <PackageReference Include="Ninject.Extensions.Factory" Version="3.3.3" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="System.Composition" Version="[1.4.1]" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
   </ItemGroup>
 
   <ItemGroup>
