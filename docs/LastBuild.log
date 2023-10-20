@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shfbBuild product="Sandcastle Help File Builder and Tools" version="2021.11.7.0" projectFile="C:\dev\GitHub\TomsToolbox\src\Documentation\Documentation.shfbproj" started="29.11.2021 15:45:58">
+<shfbBuild product="Sandcastle Help File Builder and Tools" version="2021.11.7.0" projectFile="C:\dev\GitHub\TomsToolbox\src\Documentation\Documentation.shfbproj" started="20.10.2023 09:48:07">
 <buildStep step="Initializing">
 Finding tools...
 The Sandcastle tools are located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder&#39;
@@ -7,7 +7,7 @@ Locating components in the following folder(s):
     C:\dev\GitHub\TomsToolbox\src\Documentation
     C:\ProgramData\EWSoftware\Sandcastle Help File Builder\Components and Plug-Ins
     C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\Components
-Using framework reflection data for &#39;.NET Framework 4.8&#39; located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\Data\.NETFramework&#39;
+Using framework reflection data for &#39;.NET Framework 4.6.2&#39; located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\Data\.NETFramework&#39;
 Using presentation style &#39;VS2013&#39; located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\Components\VS2013&#39;
 Loading and initializing plug-ins...
 Lightweight Website Style Version 2021.11.7.0
@@ -48,100 +48,95 @@ Source: C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Mef\TomsToolbox.Co
     Found project &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Mef\TomsToolbox.Composition.Mef.csproj&#39;
 
 Parsing project files
-    Multi-targeted projects where found.  The common target framework &#39;net45&#39; will be used.  Override using the TargetFramework property on the documentation sources.
-    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Essentials\bin\Debug\net45\TomsToolbox.Essentials.dll&#39; (.NETFramework 4.5)
-    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Desktop\bin\Debug\net45\TomsToolbox.Desktop.dll&#39; (.NETFramework 4.5)
-    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.ObservableCollections\bin\Debug\net45\TomsToolbox.ObservableCollections.dll&#39; (.NETFramework 4.5)
-    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf\bin\Debug\net45\TomsToolbox.Wpf.dll&#39; (.NETFramework 4.5)
-    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Styles\bin\Debug\net45\TomsToolbox.Wpf.Styles.dll&#39; (.NETFramework 4.5)
-    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition\bin\Debug\net45\TomsToolbox.Wpf.Composition.dll&#39; (.NETFramework 4.5)
-    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Compostition.Styles\bin\Debug\net45\TomsToolbox.Wpf.Composition.Styles.dll&#39; (.NETFramework 4.5)
-    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition.Mef\bin\Debug\net45\TomsToolbox.Wpf.Composition.Mef.dll&#39; (.NETFramework 4.5)
-    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition.AttributedModel\bin\Debug\net45\TomsToolbox.Wpf.Composition.AttributedModel.dll&#39; (.NETFramework 4.5)
-    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition\bin\Debug\net45\TomsToolbox.Composition.dll&#39; (.NETFramework 4.5)
-    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Ninject\bin\Debug\net45\TomsToolbox.Composition.Ninject.dll&#39; (.NETFramework 4.5)
-    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Mef2\bin\Debug\net45\TomsToolbox.Composition.Mef2.dll&#39; (.NETFramework 4.5)
-    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Core\bin\Debug\net45\TomsToolbox.Core.dll&#39; (.NETFramework 4.5)
-    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Mef\bin\Debug\net45\TomsToolbox.Composition.Mef.dll&#39; (.NETFramework 4.5)
-SHFB: Warning BE0007: A project with a different or higher framework version was found.  Changing project FrameworkVersion property from &#39;.NET Framework 4.8&#39; to &#39;.NET Framework 4.5.2&#39; for the build.
+    Multi-targeted projects where found.  The common target framework &#39;net462&#39; will be used.  Override using the TargetFramework property on the documentation sources.
+    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Essentials\bin\Debug\net462\TomsToolbox.Essentials.dll&#39; (.NETFramework 4.6.2)
+    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Desktop\bin\Debug\net462\TomsToolbox.Desktop.dll&#39; (.NETFramework 4.6.2)
+    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.ObservableCollections\bin\Debug\net462\TomsToolbox.ObservableCollections.dll&#39; (.NETFramework 4.6.2)
+    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf\bin\Debug\net462\TomsToolbox.Wpf.dll&#39; (.NETFramework 4.6.2)
+    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Styles\bin\Debug\net462\TomsToolbox.Wpf.Styles.dll&#39; (.NETFramework 4.6.2)
+    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition\bin\Debug\net462\TomsToolbox.Wpf.Composition.dll&#39; (.NETFramework 4.6.2)
+    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Compostition.Styles\bin\Debug\net462\TomsToolbox.Wpf.Composition.Styles.dll&#39; (.NETFramework 4.6.2)
+    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition.Mef\bin\Debug\net462\TomsToolbox.Wpf.Composition.Mef.dll&#39; (.NETFramework 4.6.2)
+    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition.AttributedModel\bin\Debug\net462\TomsToolbox.Wpf.Composition.AttributedModel.dll&#39; (.NETFramework 4.6.2)
+    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition\bin\Debug\net462\TomsToolbox.Composition.dll&#39; (.NETFramework 4.6.2)
+    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Ninject\bin\Debug\net462\TomsToolbox.Composition.Ninject.dll&#39; (.NETFramework 4.6.2)
+    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Mef2\bin\Debug\net462\TomsToolbox.Composition.Mef2.dll&#39; (.NETFramework 4.6.2)
+    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Core\bin\Debug\net462\TomsToolbox.Core.dll&#39; (.NETFramework 4.6.2)
+    Found assembly &#39;C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Mef\bin\Debug\net462\TomsToolbox.Composition.Mef.dll&#39; (.NETFramework 4.6.2)
 
 References to include:
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Mef2\bin\Debug\net45\TomsToolbox.Composition.Mef2.dll
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Ninject\bin\Debug\net45\TomsToolbox.Composition.Ninject.dll
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition\bin\Debug\net45\TomsToolbox.Composition.dll
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Desktop\bin\Debug\net45\TomsToolbox.Desktop.dll
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Essentials\bin\Debug\net45\TomsToolbox.Essentials.dll
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.ObservableCollections\bin\Debug\net45\TomsToolbox.ObservableCollections.dll
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition.AttributedModel\bin\Debug\net45\TomsToolbox.Wpf.Composition.AttributedModel.dll
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition.Mef\bin\Debug\net45\TomsToolbox.Wpf.Composition.Mef.dll
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition\bin\Debug\net45\TomsToolbox.Wpf.Composition.dll
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Compostition.Styles\bin\Debug\net45\TomsToolbox.Wpf.Composition.Styles.dll
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Styles\bin\Debug\net45\TomsToolbox.Wpf.Styles.dll
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf\bin\Debug\net45\TomsToolbox.Wpf.dll
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Mef2\bin\Debug\net462\TomsToolbox.Composition.Mef2.dll
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Ninject\bin\Debug\net462\TomsToolbox.Composition.Ninject.dll
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition\bin\Debug\net462\TomsToolbox.Composition.dll
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Desktop\bin\Debug\net462\TomsToolbox.Desktop.dll
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Essentials\bin\Debug\net462\TomsToolbox.Essentials.dll
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.ObservableCollections\bin\Debug\net462\TomsToolbox.ObservableCollections.dll
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition.AttributedModel\bin\Debug\net462\TomsToolbox.Wpf.Composition.AttributedModel.dll
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition.Mef\bin\Debug\net462\TomsToolbox.Wpf.Composition.Mef.dll
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition\bin\Debug\net462\TomsToolbox.Wpf.Composition.dll
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Compostition.Styles\bin\Debug\net462\TomsToolbox.Wpf.Composition.Styles.dll
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Styles\bin\Debug\net462\TomsToolbox.Wpf.Styles.dll
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf\bin\Debug\net462\TomsToolbox.Wpf.dll
     JetBrains.Annotations
     JetBrainsAnnotations
     Microsoft.Xaml.Behaviors
     Ninject
-    System.Composition.AttributedModel
-    System.Composition.Convention
-    System.Composition.Hosting
-    System.Composition.Runtime
-    System.Composition.TypedParts
     System.ValueTuple
     Throttle
     WeakEventHandler
 
 Copying XML comments files
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Mef\bin\Debug\net45\TomsToolbox.Composition.Mef.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Composition.Mef.xml
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Core\bin\Debug\net45\TomsToolbox.Core.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Core.xml
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Mef2\bin\Debug\net45\TomsToolbox.Composition.Mef2.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Composition.Mef2.xml
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Ninject\bin\Debug\net45\TomsToolbox.Composition.Ninject.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Composition.Ninject.xml
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition\bin\Debug\net45\TomsToolbox.Composition.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Composition.xml
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition.AttributedModel\bin\Debug\net45\TomsToolbox.Wpf.Composition.AttributedModel.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Wpf.Composition.AttributedModel.xml
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition.Mef\bin\Debug\net45\TomsToolbox.Wpf.Composition.Mef.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Wpf.Composition.Mef.xml
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Compostition.Styles\bin\Debug\net45\TomsToolbox.Wpf.Composition.Styles.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Wpf.Composition.Styles.xml
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition\bin\Debug\net45\TomsToolbox.Wpf.Composition.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Wpf.Composition.xml
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Styles\bin\Debug\net45\TomsToolbox.Wpf.Styles.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Wpf.Styles.xml
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf\bin\Debug\net45\TomsToolbox.Wpf.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Wpf.xml
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.ObservableCollections\bin\Debug\net45\TomsToolbox.ObservableCollections.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.ObservableCollections.xml
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Desktop\bin\Debug\net45\TomsToolbox.Desktop.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Desktop.xml
-    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Essentials\bin\Debug\net45\TomsToolbox.Essentials.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Essentials.xml
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Mef\bin\Debug\net462\TomsToolbox.Composition.Mef.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Composition.Mef.xml
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Core\bin\Debug\net462\TomsToolbox.Core.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Core.xml
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Mef2\bin\Debug\net462\TomsToolbox.Composition.Mef2.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Composition.Mef2.xml
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition.Ninject\bin\Debug\net462\TomsToolbox.Composition.Ninject.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Composition.Ninject.xml
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Composition\bin\Debug\net462\TomsToolbox.Composition.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Composition.xml
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition.AttributedModel\bin\Debug\net462\TomsToolbox.Wpf.Composition.AttributedModel.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Wpf.Composition.AttributedModel.xml
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition.Mef\bin\Debug\net462\TomsToolbox.Wpf.Composition.Mef.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Wpf.Composition.Mef.xml
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Compostition.Styles\bin\Debug\net462\TomsToolbox.Wpf.Composition.Styles.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Wpf.Composition.Styles.xml
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Composition\bin\Debug\net462\TomsToolbox.Wpf.Composition.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Wpf.Composition.xml
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf.Styles\bin\Debug\net462\TomsToolbox.Wpf.Styles.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Wpf.Styles.xml
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Wpf\bin\Debug\net462\TomsToolbox.Wpf.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Wpf.xml
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.ObservableCollections\bin\Debug\net462\TomsToolbox.ObservableCollections.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.ObservableCollections.xml
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Desktop\bin\Debug\net462\TomsToolbox.Desktop.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Desktop.xml
+    C:\dev\GitHub\TomsToolbox\src\TomsToolbox.Essentials\bin\Debug\net462\TomsToolbox.Essentials.xml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\TomsToolbox.Essentials.xml
 </buildStep>
 <buildStep step="GenerateSharedContent">
 Generating shared content files (en-US, English (United States))...
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
-</plugIn>    Last step completed in 00:00:00,0190
+</plugIn>    Last step completed in 00:00:00,0040
 </buildStep>
 <buildStep step="GenerateApiFilter">
 Generating API filter for MRefBuilder...
-    Last step completed in 00:00:00,0120
+    Last step completed in 00:00:00,0070
 </buildStep>
 <buildStep step="GenerateReflectionInfo">
 Generating reflection information...
-[C:\Program Files\Microsoft Visual Studio\2022\Preview\MSBuild\Current\Bin\amd64\MSBuild.exe - GenerateRefInfo-ca11ff7a-062d-4856-81a7-e0ff42d78b73.proj]
-Build started 29.11.2021 15:46:02.
-Project &quot;C:\dev\GitHub\TomsToolbox\docs\Working\GenerateRefInfo-ca11ff7a-062d-4856-81a7-e0ff42d78b73.proj&quot; on node 1 (default targets).
+[C:\Program Files\Microsoft Visual Studio\2022\Preview\MSBuild\Current\Bin\amd64\MSBuild.exe - GenerateRefInfo-f6681402-8347-4315-86a9-d6a7e0d42d3d.proj]
+Build started 20.10.2023 09:48:13.
+
+Project &quot;C:\dev\GitHub\TomsToolbox\docs\Working\GenerateRefInfo-f6681402-8347-4315-86a9-d6a7e0d42d3d.proj&quot; on node 1 (default targets).
 PrepareForBuild:
   Creating directory &quot;obj\Debug\&quot;.
 GenerateRefInfo:
-  Microsoft.Build (v17.1.0-preview-21526-01+a80e2274fde715df223f25f2cf90e134d746eb27)
+  Microsoft.Build (v17.8.0-preview-23376-06+f413f5497397f2895574439e10a0cd6c68ef6c80)
   c Microsoft Corporation. All rights reserved.
   No source code context base path specified.  Source context information is unavailable.
-  Loaded 14 assemblies for reflection and 75 dependency assemblies.
-  Using automatic redirect &#39;TomsToolbox.Composition, Version=2.7.3.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2&#39; in place of &#39;TomsToolbox.Composition, Version=2.7.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2&#39;
-  Using automatic redirect &#39;System.Composition.AttributedModel, Version=1.0.35.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&#39; in place of &#39;System.Composition.AttributedModel, Version=1.0.33.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&#39;
-  Wrote information on 20 namespaces, 228 types, and 1300 members
+  Loaded 14 assemblies for reflection and 20 dependency assemblies.
+  Wrote information on 20 namespaces, 230 types, and 1331 members
   Merging duplicate type and member information
   Merged 0 duplicate type(s) and 0 duplicate member(s)
-Done Building Project &quot;C:\dev\GitHub\TomsToolbox\docs\Working\GenerateRefInfo-ca11ff7a-062d-4856-81a7-e0ff42d78b73.proj&quot; (default targets).
-    Last step completed in 00:00:01,2452
+Done Building Project &quot;C:\dev\GitHub\TomsToolbox\docs\Working\GenerateRefInfo-f6681402-8347-4315-86a9-d6a7e0d42d3d.proj&quot; (default targets).
+    Last step completed in 00:00:01,0044
 </buildStep>
 <buildStep step="ApplyDocumentModel">
 Applying document model to reflection output...
-    Last step completed in 00:00:00,1730
+    Last step completed in 00:00:00,1640
 </buildStep>
 <buildStep step="AddApiTopicFilenames">
 Adding topic filenames to API members...
+    Unique name 5609F36F generated for M:TomsToolbox.Composition.ExtensionMethods.GetContractName(TomsToolbox.Composition.IMetadata)
+    Unique name 6B85E015 generated for M:TomsToolbox.Composition.ExtensionMethods.GetDefaultMetadata(System.Type,System.Type,System.String)
     Unique name 4AF54226 generated for M:TomsToolbox.Composition.ExtensionMethods.GetExports``1(TomsToolbox.Composition.IExportProvider,System.Type,System.String,System.Func{TomsToolbox.Composition.IMetadata,``0})
     Unique name 9BEC7D29 generated for M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Collections.Generic.IEnumerable{TomsToolbox.Composition.ExportInfo})
     Unique name 10877D29 generated for M:TomsToolbox.Composition.Ninject.ExtensionMethods.BindExports(Ninject.IKernel,System.Reflection.Assembly[])
@@ -261,20 +256,21 @@ Adding topic filenames to API members...
     Unique name 4F420DEA generated for M:TomsToolbox.Wpf.Converters.ThicknessMultiplyConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
     Unique name DB5A80DB generated for M:TomsToolbox.Wpf.Converters.ValueConverterExtensions.TraceError(System.Windows.Data.IValueConverter,System.String,System.String)
     Unique name C73FFCA9 generated for M:TomsToolbox.Wpf.Styles.WpfStyles.Defaults(System.Windows.Window)
-    Last step completed in 00:00:00,2130
+    Last step completed in 00:00:00,2040
 </buildStep>
 <buildStep step="GenerateApiTopicManifest">
 Generating API topic manifest...
-    Last step completed in 00:00:00,0510
+    Last step completed in 00:00:00,0470
 </buildStep>
 <buildStep step="GenerateNamespaceSummaries">
 Generating namespace summary information...
-    Last step completed in 00:00:00,0810
+    Last step completed in 00:00:00,0650
 </buildStep>
 <buildStep step="GenerateInheritedDocumentation">
 Generating inherited documentation...
 [C:\Program Files\Microsoft Visual Studio\2022\Preview\MSBuild\Current\Bin\amd64\MSBuild.exe - GenerateInheritedDocs.proj]
-    Last step completed in 00:00:01,4961
+
+    Last step completed in 00:00:01,3203
 </buildStep>
 <buildStep step="CopyConceptualContent">
 Copying conceptual content...
@@ -285,34 +281,34 @@ Copying images and creating the media map file...
 Generating conceptual topic files
     Parsing topic file &#39;C:\dev\GitHub\TomsToolbox\src\Documentation\Content\Welcome.aml&#39;
     C:\dev\GitHub\TomsToolbox\src\Documentation\Content\Welcome.aml -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\ddueXml\70e0e697-583b-46c1-94a3-a992d398d79a.xml
-    Last step completed in 00:00:00,0300
+    Last step completed in 00:00:00,0080
 </buildStep>
 <buildStep step="CreateConceptualTopicConfigs">
 Creating conceptual topic configuration files...
     Companion files
     _ContentMetadata_.xml
     Merging topic IDs into manifest.xml
-    Last step completed in 00:00:00,0140
+    Last step completed in 00:00:00,0070
 </buildStep>
 <buildStep step="CopyAdditionalContent">
 Copying additional content files...
 C:\dev\GitHub\TomsToolbox\src\Documentation\icons\Help.png -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\Output\Website\icons\Help.png
 C:\dev\GitHub\TomsToolbox\src\Documentation\Readme.md -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\Output\Website\Readme.md
-    Last step completed in 00:00:00,0070
+    Last step completed in 00:00:00,0040
 </buildStep>
 <buildStep step="MergeTablesOfContents">
 Merging conceptual and additional tables of contents...
-    Last step completed in 00:00:00,0040
+    Last step completed in 00:00:00,0000
 </buildStep>
 <buildStep step="GenerateIntermediateTableOfContents">
 Generating intermediate table of contents file for API content...
 Generating conceptual content intermediate TOC file...
-    Last step completed in 00:00:00,0800
+    Last step completed in 00:00:00,1170
 </buildStep>
 <buildStep step="CreateBuildAssemblerConfigs">
 Creating Sandcastle configuration files...
     sandcastle.config
-    Last step completed in 00:00:00,1940
+    Last step completed in 00:00:00,1370
 </buildStep>
 <buildStep step="MergeCustomConfigs">
 Merging custom build component configurations
@@ -326,15 +322,16 @@ C:\dev\GitHub\TomsToolbox\docs\Working\sandcastle.config
     Replacing default configuration for &#39;Code Block Component&#39; with the custom configuration
     Replacing default configuration for &#39;Syntax Component&#39; with the custom configuration
     Removing unused ExampleComponent.
-    Last step completed in 00:00:00,0155
+    Last step completed in 00:00:00,0070
 </buildStep>
 <buildStep step="BuildTopics">
 Building help topics...
 [C:\Program Files\Microsoft Visual Studio\2022\Preview\MSBuild\Current\Bin\amd64\MSBuild.exe - BuildTopics.proj]
-Build started 29.11.2021 15:46:06.
+Build started 20.10.2023 09:48:16.
+
 Project &quot;C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj&quot; on node 1 (default targets).
 BuildTopics:
-  Microsoft.Build (v17.1.0-preview-21526-01+a80e2274fde715df223f25f2cf90e134d746eb27)
+  Microsoft.Build (v17.8.0-preview-23376-06+f413f5497397f2895574439e10a0cd6c68ef6c80)
   c Microsoft Corporation. All rights reserved.
   Loading configuration...
   Processing topics...
@@ -376,6 +373,22 @@ BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.In
 BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.GetIsNcMouseOver(System.Windows.DependencyObject)] Missing &lt;summary&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.GetIsNcMouseOver(System.Windows.DependencyObject)] Missing &lt;returns&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.GetIsNcMouseOver(System.Windows.DependencyObject)] Missing &lt;param name=&quot;element&quot;/&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.GetIsNcPressed(System.Windows.DependencyObject)] Missing &lt;summary&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.GetIsNcPressed(System.Windows.DependencyObject)] Missing &lt;returns&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.GetIsNcPressed(System.Windows.DependencyObject)] Missing &lt;param name=&quot;element&quot;/&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [P:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.IsNcMouseOver] Missing &lt;summary&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [F:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.IsNcMouseOverProperty] Missing &lt;summary&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [P:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.IsNcPressed] Missing &lt;summary&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [F:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.IsNcPressedProperty] Missing &lt;summary&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.SetIsNcMouseOver(System.Windows.DependencyObject,System.Boolean)] Missing &lt;summary&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.SetIsNcMouseOver(System.Windows.DependencyObject,System.Boolean)] Missing &lt;param name=&quot;element&quot;/&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.SetIsNcMouseOver(System.Windows.DependencyObject,System.Boolean)] Missing &lt;param name=&quot;value&quot;/&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.SetIsNcPressed(System.Windows.DependencyObject,System.Boolean)] Missing &lt;summary&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.SetIsNcPressed(System.Windows.DependencyObject,System.Boolean)] Missing &lt;param name=&quot;element&quot;/&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Interactivity.CustomNonClientAreaBehavior.SetIsNcPressed(System.Windows.DependencyObject,System.Boolean)] Missing &lt;param name=&quot;value&quot;/&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior&#39;. [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.Interactivity.FrameworkElementBehavior`1] Member ID URL not found for target &#39;T:Microsoft.Xaml.Behaviors.Behavior`1&#39;. [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
@@ -436,14 +449,14 @@ BuildAssembler : warning : ResolveReferenceLinksComponent: [T:TomsToolbox.Wpf.In
 BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnAttached&#39;. [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
 BuildAssembler : warning : ResolveReferenceLinksComponent: [Methods.T:TomsToolbox.Wpf.Interactivity.ZoomFontSizeOnMouseWheelBehavior] Member ID URL not found for target &#39;M:Microsoft.Xaml.Behaviors.Behavior.OnDetaching&#39;. [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:TomsToolbox.Wpf.Styles.WpfStyles.RegisterDefaultStyles(System.Windows.ResourceDictionary)] Missing &lt;returns&gt; documentation [C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj]
-  Processed 2033 topic(s)
-  98 warning(s)
+  Processed 2075 topic(s)
+  114 warning(s)
   CopyFromIndexComponent: &quot;metadata&quot; in-memory cache entries used: 1 of 15.
   ResolveArtLinksComponent: Copying media files...
   CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 15 of 15.
   CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 15 of 30.
 Done Building Project &quot;C:\dev\GitHub\TomsToolbox\docs\Working\BuildTopics.proj&quot; (default targets).
-    Last step completed in 00:00:17,0809
+    Last step completed in 00:00:18,2717
 </buildStep>
 <buildStep step="CombiningIntermediateTocFiles">
 Combining conceptual and API intermediate TOC files...
@@ -452,7 +465,8 @@ Combining conceptual and API intermediate TOC files...
 <buildStep step="ExtractingHtmlInfo">
 Extracting HTML info for HTML Help 1 and/or website...
 [C:\Program Files\Microsoft Visual Studio\2022\Preview\MSBuild\Current\Bin\amd64\MSBuild.exe - ExtractHtmlInfo.proj]
-    Last step completed in 00:00:00,9660
+
+    Last step completed in 00:00:00,8520
 </buildStep>
 <buildStep step="CopyStandardHelpContent">
 Copying standard help content...
@@ -534,14 +548,14 @@ C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\Components\VS2013
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\Components\VS2013\Web\scripts\branding-Website.js -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\Output\Website\scripts\branding-Website.js
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\Components\VS2013\Web\scripts\clipboard.min.js -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\Output\Website\scripts\clipboard.min.js
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\Components\VS2013\Web\scripts\jquery-3.5.1.min.js -&gt; C:\dev\GitHub\TomsToolbox\docs\Working\Output\Website\scripts\jquery-3.5.1.min.js
-    Last step completed in 00:00:00,2800
+    Last step completed in 00:00:00,3232
 </buildStep>
 <buildStep step="GenerateFullTextIndex">
 Generating full-text index for the website...
 
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
 Adding lightweight search and TOC elements to each topic...
-</plugIn>    Last step completed in 00:00:01,3100
+</plugIn>    Last step completed in 00:00:01,4179
 </buildStep>
 <buildStep step="CopyingWebsiteFiles">
 Copying website files to output folder...
@@ -551,16 +565,16 @@ Copied 1000 files
 Copied 1500 files
 Copied 2000 files
 Copied 2500 files
-Copied 2852 files for the website content
-    Last step completed in 00:00:02,2975
+Copied 2903 files for the website content
+    Last step completed in 00:00:03,0663
 </buildStep>
 <buildStep step="CleanIntermediates">
 Removing intermediate files...
-    Last step completed in 00:00:00,3340
+    Last step completed in 00:00:00,5170
 </buildStep>
 <buildStep step="Completed">
 
-Build completed successfully at 29.11.2021 15:46:28.  Total time: 00:00:30,4895
+Build completed successfully at 20.10.2023 09:48:40.  Total time: 00:00:33,2377
 
 </buildStep>
 </shfbBuild>

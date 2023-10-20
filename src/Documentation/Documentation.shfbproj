@@ -16,7 +16,7 @@
     <RootNamespace>Documentation</RootNamespace>
     <Name>Documentation</Name>
     <!-- SHFB properties -->
-    <FrameworkVersion>.NET Framework 4.8</FrameworkVersion>
+    <FrameworkVersion>.NET Framework 4.6.2</FrameworkVersion>
     <OutputPath>..\..\docs\</OutputPath>
     <HtmlHelpName>API Documentation</HtmlHelpName>
     <Language>en-US</Language>
@@ -93,14 +93,13 @@
       <NamespaceSummaryItem name="TomsToolbox.Composition.Mef" isDocumented="True">Adapters for MEF1 (System.ComponentModel.Composition)</NamespaceSummaryItem>
     </NamespaceSummaries>
     <FeedbackEMailLinkText>https://github.com/tom-englert/TomsToolbox/issues</FeedbackEMailLinkText>
-    <CopyrightText>&amp;#169%3b tom-englert.de 2012-2020</CopyrightText>
+    <CopyrightText>&amp;#169%3b tom-englert.de 2012-2023</CopyrightText>
     <CopyrightHref>https://github.com/tom-englert/TomsToolbox/blob/master/LICENSE</CopyrightHref>
     <ComponentConfigurations>
       <ComponentConfig id="API Token Resolution" enabled="True">
         <component id="API Token Resolution">
           {@TokenFiles}
-          <replace elements="/*//token" item="string(.)" />
-        </component>
+          <replace elements="/*//token" item="string(.)" /></component>
       </ComponentConfig>
       <ComponentConfig id="Code Block Component" enabled="True">
         <component id="Code Block Component">
@@ -108,12 +107,7 @@
           <outputPaths>{@HelpFormatOutputPaths}</outputPaths>
           <allowMissingSource value="false" />
           <removeRegionMarkers value="false" />
-          <colorizer syntaxFile="{@CoreComponentsFolder}Colorizer\highlight.xml"
-                     styleFile="{@CoreComponentsFolder}Colorizer\highlight.xsl"
-                     stylesheet="{@CoreComponentsFolder}Colorizer\highlight.css"
-                     scriptFile="{@CoreComponentsFolder}Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}"
-                     language="cs" tabSize="0" numberLines="false" outlining="false" keepSeeTags="false"
-                     defaultTitle="true" />
+          <colorizer syntaxFile="{@CoreComponentsFolder}Colorizer\highlight.xml" styleFile="{@CoreComponentsFolder}Colorizer\highlight.xsl" stylesheet="{@CoreComponentsFolder}Colorizer\highlight.css" scriptFile="{@CoreComponentsFolder}Colorizer\highlight.js" disabled="{@DisableCodeBlockComponent}" language="cs" tabSize="0" numberLines="false" outlining="false" keepSeeTags="false" defaultTitle="true" />
         </component>
       </ComponentConfig>
       <ComponentConfig id="Syntax Component" enabled="True">
@@ -122,8 +116,7 @@
           <generators>
             {@SyntaxFilters}
           </generators>
-          <containerElement name="codeSnippetGroup" addNoExampleTabs="true" includeOnSingleSnippets="false"
-                            groupingEnabled="{@CodeSnippetGrouping}" />
+          <containerElement name="codeSnippetGroup" addNoExampleTabs="true" includeOnSingleSnippets="false" groupingEnabled="{@CodeSnippetGrouping}" />
           <configurations>
             <generator id="C#" />
             <generator id="Visual Basic">
@@ -234,8 +227,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="EWSoftware.SHFB" Version="2021.11.7" />
-    <PackageReference Include="EWSoftware.SHFB.NETFramework" Version="4.8.0.1" />
+    <PackageReference Include="EWSoftware.SHFB" Version="2023.7.8" />
+    <PackageReference Include="EWSoftware.SHFB.NETFramework" Version="4.8.0.2" />
   </ItemGroup>
   <!-- Import the SHFB build targets -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists('$(SHFBROOT)\SandcastleHelpFileBuilder.targets')" />

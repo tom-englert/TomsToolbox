@@ -5,17 +5,12 @@
     <introduction>
       <para>A rich set of functions and classes to ease every days .Net development tasks.</para>
       <para/>
-      <para>The modules are targeting .Net 4.5 or NetStandard 2.0/3.0, depending on the functionality they provide</para>
+      <para>The modules are targeting Net6.0, Net7.0, .NetFramework 462, and NetStandard 2.1, depending on the functionality they provide</para>
       <para>
         All code is annotated with
         <externalLink>
           <linkText>Nullable reference types</linkText>
           <linkUri>https://docs.microsoft.com/en-us/dotnet/csharp/nullable-references</linkUri>
-        </externalLink>
-        and
-        <externalLink>
-          <linkText>R# Nullability</linkText>
-          <linkUri>https://www.jetbrains.com/help/resharper/Code_Analysis__Value_Analysis.html</linkUri>
         </externalLink>
         , so you can easily build robust code.
       </para>

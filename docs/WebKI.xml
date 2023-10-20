@@ -599,6 +599,7 @@
     <HelpKINode Title="ImportBehavior.ContractName Property " Url="html/8ABAED9A.htm" />
     <HelpKINode Title="ImportExtension.ContractName Property " Url="html/9AF0B19.htm" />
   </HelpKINode>
+  <HelpKINode Title="ContractNameMatches method" Url="html/28832863.htm" />
   <HelpKINode Title="ControlWithValidationErrorToolTipStyle field" Url="html/EBE046D9.htm" />
   <HelpKINode Title="Convert method">
     <HelpKINode Title="AggregatingMultiValueConverter.Convert Method " Url="html/D16EE525.htm" />
@@ -621,6 +622,7 @@
     <HelpKINode Title="ObjectToDisplayNameConverter.Convert Method " Url="html/DC1CED01.htm" />
     <HelpKINode Title="ObjectToTextConverter.Convert Method " Url="html/7C44D5BF.htm" />
     <HelpKINode Title="ReplaceTextConverter.Convert Method " Url="html/9D9F0768.htm" />
+    <HelpKINode Title="StarSizeConverter.Convert Method " Url="html/658B7B7F.htm" />
     <HelpKINode Title="StringToObjectConverter.Convert Method " Url="html/569266DC.htm" />
     <HelpKINode Title="ThicknessMultiplyConverter.Convert Method " Url="html/96FB92FF.htm" />
     <HelpKINode Title="UnaryOperationConverter.Convert Method " Url="html/79079FAA.htm" />
@@ -740,12 +742,20 @@
   <HelpKINode Title="CustomNonClientAreaBehavior.DisableGlassFrame attached property" Url="html/181F01B3.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior.DisableGlassFrameProperty field" Url="html/514474A3.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior.GetDisableGlassFrame method" Url="html/836B7047.htm" />
+  <HelpKINode Title="CustomNonClientAreaBehavior.GetIsNcMouseOver method" Url="html/349D8BEB.htm" />
+  <HelpKINode Title="CustomNonClientAreaBehavior.GetIsNcPressed method" Url="html/B3485231.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior.HasGlassFrame property" Url="html/598EBA0C.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior.HasGlassFrameProperty field" Url="html/6BE649B6.htm" />
+  <HelpKINode Title="CustomNonClientAreaBehavior.IsNcMouseOver attached property" Url="html/1CDD30E0.htm" />
+  <HelpKINode Title="CustomNonClientAreaBehavior.IsNcMouseOverProperty field" Url="html/580D7E0C.htm" />
+  <HelpKINode Title="CustomNonClientAreaBehavior.IsNcPressed attached property" Url="html/DEBF1FA3.htm" />
+  <HelpKINode Title="CustomNonClientAreaBehavior.IsNcPressedProperty field" Url="html/1DA91670.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior.NcHitTestEvent field" Url="html/D214699F.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior.OnAttached method" Url="html/B1FF16E6.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior.OnDetaching method" Url="html/2B7DCAFE.htm" />
   <HelpKINode Title="CustomNonClientAreaBehavior.SetDisableGlassFrame method" Url="html/69886E4B.htm" />
+  <HelpKINode Title="CustomNonClientAreaBehavior.SetIsNcMouseOver method" Url="html/35691D77.htm" />
+  <HelpKINode Title="CustomNonClientAreaBehavior.SetIsNcPressed method" Url="html/B3F7DDD5.htm" />
   <HelpKINode Title="DataContext attached property" Url="html/7E067DBF.htm" />
   <HelpKINode Title="DataContext property" Url="html/D402644.htm" />
   <HelpKINode Title="DataContextProperty field">
@@ -753,8 +763,8 @@
     <HelpKINode Title="Import.DataContextProperty Field" Url="html/778C9F2D.htm" />
   </HelpKINode>
   <HelpKINode Title="DataGridCellStyle field">
-    <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/B7A4BBF6.htm" />
     <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/3B3054D2.htm" />
+    <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/B7A4BBF6.htm" />
   </HelpKINode>
   <HelpKINode Title="DataGridCheckBoxEditingElementStyle field" Url="html/57EBF12C.htm" />
   <HelpKINode Title="DataGridCheckBoxElementStyle field" Url="html/2173DFDD.htm" />
@@ -798,26 +808,26 @@
   <HelpKINode Title="DataTemplate.RoleProperty field" Url="html/21F663B4.htm" />
   <HelpKINode Title="DataTemplate.SetRole method" Url="html/A0C2F45D.htm" />
   <HelpKINode Title="DataTemplateAttribute class">
-    <HelpKINode Title="DataTemplateAttribute Class" Url="html/81714F2A.htm" />
     <HelpKINode Title="DataTemplateAttribute Class" Url="html/70B84780.htm" />
-    <HelpKINode Title="constructor" Url="html/B8CBCDB2.htm" />
+    <HelpKINode Title="DataTemplateAttribute Class" Url="html/81714F2A.htm" />
     <HelpKINode Title="constructor" Url="html/2BFCF92B.htm" />
-    <HelpKINode Title="methods" Url="html/135542AA.htm" />
+    <HelpKINode Title="constructor" Url="html/B8CBCDB2.htm" />
     <HelpKINode Title="methods" Url="html/A2C845AC.htm" />
+    <HelpKINode Title="methods" Url="html/135542AA.htm" />
     <HelpKINode Title="properties" Url="html/FF53E2AE.htm" />
     <HelpKINode Title="properties" Url="html/F59E154B.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateAttribute.DataTemplateAttribute constructor">
-    <HelpKINode Title="DataTemplateAttribute Constructor " Url="html/2BFCF92B.htm" />
     <HelpKINode Title="DataTemplateAttribute Constructor " Url="html/B8CBCDB2.htm" />
+    <HelpKINode Title="DataTemplateAttribute Constructor " Url="html/2BFCF92B.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateAttribute.DataType property">
     <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/D1E2AC38.htm" />
     <HelpKINode Title="DataTemplateAttribute.DataType Property " Url="html/5032ADFA.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateAttribute.Role property">
-    <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/FB533439.htm" />
     <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/AB47D607.htm" />
+    <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/FB533439.htm" />
   </HelpKINode>
   <HelpKINode Title="DataTemplateManager class">
     <HelpKINode Title="DataTemplateManager Class" Url="html/F883E1B6.htm" />
@@ -1224,16 +1234,14 @@
     <HelpKINode Title="constructor" Url="html/EEAA2CFE.htm" />
     <HelpKINode Title="constructor" Url="html/36565B87.htm" />
     <HelpKINode Title="events" Url="html/AFA40130.htm" />
-    <HelpKINode Title="methods" Url="html/7211FBD0.htm" />
     <HelpKINode Title="methods" Url="html/7071141D.htm" />
+    <HelpKINode Title="methods" Url="html/7211FBD0.htm" />
   </HelpKINode>
   <HelpKINode Title="ExportProviderAdapter.ExportProviderAdapter constructor">
-    <HelpKINode Title="ExportProviderAdapter Constructor " Url="html/EEAA2CFE.htm" />
     <HelpKINode Title="ExportProviderAdapter Constructor " Url="html/36565B87.htm" />
+    <HelpKINode Title="ExportProviderAdapter Constructor " Url="html/EEAA2CFE.htm" />
   </HelpKINode>
   <HelpKINode Title="ExportProviderAdapter.ExportsChanged event" Url="html/8E18065.htm" />
-  <HelpKINode Title="ExportProviderAdapter.GetExports(Of T) method" Url="html/89A344E1.htm" />
-  <HelpKINode Title="ExportProviderAdapter.GetExports&lt;T&gt; method" Url="html/89A344E1.htm" />
   <HelpKINode Title="ExportProviderLocator class">
     <HelpKINode Title="ExportProviderLocator Class" Url="html/A8C2CE8F.htm" />
     <HelpKINode Title="attached properties" Url="html/3DF0CB9A.htm" />
@@ -1254,12 +1262,17 @@
     <HelpKINode Title="IExportProvider.ExportsChanged Event" Url="html/D16EDD33.htm" />
   </HelpKINode>
   <HelpKINode Title="ExtensionMethods class">
-    <HelpKINode Title="ExtensionMethods Class" Url="html/2392FCED.htm" />
     <HelpKINode Title="ExtensionMethods Class" Url="html/9DCC5175.htm" />
-    <HelpKINode Title="methods" Url="html/C33F5656.htm" />
+    <HelpKINode Title="ExtensionMethods Class" Url="html/2392FCED.htm" />
     <HelpKINode Title="methods" Url="html/283E1F3C.htm" />
+    <HelpKINode Title="methods" Url="html/C33F5656.htm" />
   </HelpKINode>
   <HelpKINode Title="ExtensionMethods.BindExports method" Url="html/6BF16E87.htm" />
+  <HelpKINode Title="ExtensionMethods.ContractNameMatches method" Url="html/28832863.htm" />
+  <HelpKINode Title="ExtensionMethods.GetContractName method" Url="html/4655829E.htm" />
+  <HelpKINode Title="ExtensionMethods.GetContractType method" Url="html/F8ADC63D.htm" />
+  <HelpKINode Title="ExtensionMethods.GetContractTypeFor method" Url="html/92911DD8.htm" />
+  <HelpKINode Title="ExtensionMethods.GetDefaultMetadata method" Url="html/7289054.htm" />
   <HelpKINode Title="ExtensionMethods.GetExports method" Url="html/47DD0A5.htm" />
   <HelpKINode Title="ExtensionMethods.GetValue(Of T) method" Url="html/17E01326.htm" />
   <HelpKINode Title="ExtensionMethods.GetValue&lt;T&gt; method" Url="html/17E01326.htm" />
@@ -1338,6 +1351,9 @@
   <HelpKINode Title="GetClientRect method" Url="html/109BCCA2.htm" />
   <HelpKINode Title="GetClipboardDataAsTable method" Url="html/C643F13B.htm" />
   <HelpKINode Title="GetColumnDefinitions method" Url="html/6FEF4AD2.htm" />
+  <HelpKINode Title="GetContractName method" Url="html/4655829E.htm" />
+  <HelpKINode Title="GetContractType method" Url="html/F8ADC63D.htm" />
+  <HelpKINode Title="GetContractTypeFor method" Url="html/92911DD8.htm" />
   <HelpKINode Title="GetCustomAttributes(Of T) method" Url="html/2DE9D9BC.htm" />
   <HelpKINode Title="GetCustomAttributes&lt;T&gt; method" Url="html/2DE9D9BC.htm" />
   <HelpKINode Title="GetCustomTypeConverter method" Url="html/41F2C610.htm" />
@@ -1347,6 +1363,7 @@
   <HelpKINode Title="GetDaysOfWeek method" Url="html/87C39992.htm" />
   <HelpKINode Title="GetDefaultColumnStyles method" Url="html/97C35DA5.htm" />
   <HelpKINode Title="GetDefaultItemCommand method" Url="html/EB419E4B.htm" />
+  <HelpKINode Title="GetDefaultMetadata method" Url="html/7289054.htm" />
   <HelpKINode Title="GetDefaultStyles method" Url="html/3C0C89AB.htm" />
   <HelpKINode Title="GetDescendants method" Url="html/5FEC6DB6.htm" />
   <HelpKINode Title="GetDesignUnitSize method" Url="html/8E8280DC.htm" />
@@ -1364,16 +1381,13 @@
   <HelpKINode Title="GetExportedValue&lt;T&gt; method" Url="html/D50B9255.htm" />
   <HelpKINode Title="GetExportedValueOrDefault(Of T) method" Url="html/B677C664.htm" />
   <HelpKINode Title="GetExportedValueOrDefault&lt;T&gt; method" Url="html/B677C664.htm" />
-  <HelpKINode Title="GetExportedValues(Of T) method" Url="html/E7AA39A7.htm" />
-  <HelpKINode Title="GetExportedValues&lt;T&gt; method" Url="html/E7AA39A7.htm" />
+  <HelpKINode Title="GetExportedValues method" Url="html/53D696AC.htm" />
   <HelpKINode Title="GetExportProvider method" Url="html/8267EBD9.htm" />
   <HelpKINode Title="GetExports method">
     <HelpKINode Title="ExtensionMethods.GetExports Method " Url="html/47DD0A5.htm" />
-    <HelpKINode Title="IExportProvider.GetExports Method " Url="html/8C9FA86A.htm" />
+    <HelpKINode Title="IExportProvider.GetExports Method " Url="html/D959D752.htm" />
     <HelpKINode Title="VisualCompositionBehavior(T).GetExports Method " Url="html/A8F5F07A.htm" />
   </HelpKINode>
-  <HelpKINode Title="GetExports(Of T) method" Url="html/89A344E1.htm" />
-  <HelpKINode Title="GetExports&lt;T&gt; method" Url="html/89A344E1.htm" />
   <HelpKINode Title="GetExtent method">
     <HelpKINode Title="DependencyObjectExtensions.GetExtent Method " Url="html/C6E91863.htm" />
     <HelpKINode Title="PresentationFrameworkExtensions.GetExtent Method " Url="html/C3321323.htm" />
@@ -1394,6 +1408,8 @@
   <HelpKINode Title="GetInvalidDependencies method" Url="html/F8D3E90F.htm" />
   <HelpKINode Title="GetIsAutomaticToolTipEnabled method" Url="html/AA579CCF.htm" />
   <HelpKINode Title="GetIsCaptionVisible method" Url="html/E5211483.htm" />
+  <HelpKINode Title="GetIsNcMouseOver method" Url="html/349D8BEB.htm" />
+  <HelpKINode Title="GetIsNcPressed method" Url="html/B3485231.htm" />
   <HelpKINode Title="GetIsTextTrimmed method" Url="html/20C5C912.htm" />
   <HelpKINode Title="GetItemContainers(Of T) method" Url="html/73F87CFD.htm" />
   <HelpKINode Title="GetItemContainers&lt;T&gt; method" Url="html/73F87CFD.htm" />
@@ -1510,6 +1526,30 @@
   <HelpKINode Title="HGlobal.Ptr property" Url="html/51FA939D.htm" />
   <HelpKINode Title="HGlobal.Size property" Url="html/F7700830.htm" />
   <HelpKINode Title="HGlobal.ToIntPtr method" Url="html/292BA686.htm" />
+  <HelpKINode Title="HighLightBrush property" Url="html/C52C2F93.htm" />
+  <HelpKINode Title="HighLightBrushProperty field" Url="html/9ABDD987.htm" />
+  <HelpKINode Title="HighLightFontWeight property" Url="html/16B40070.htm" />
+  <HelpKINode Title="HighLightFontWeightProperty field" Url="html/EBC5BA00.htm" />
+  <HelpKINode Title="HighlightingTextBlock class">
+    <HelpKINode Title="HighlightingTextBlock Class" Url="html/826280E3.htm" />
+    <HelpKINode Title="constructor" Url="html/5B22CC17.htm" />
+    <HelpKINode Title="fields" Url="html/34BF89D7.htm" />
+    <HelpKINode Title="methods" Url="html/E9F049D9.htm" />
+    <HelpKINode Title="properties" Url="html/4589B12C.htm" />
+  </HelpKINode>
+  <HelpKINode Title="HighlightingTextBlock.HighLightBrush property" Url="html/C52C2F93.htm" />
+  <HelpKINode Title="HighlightingTextBlock.HighLightBrushProperty field" Url="html/9ABDD987.htm" />
+  <HelpKINode Title="HighlightingTextBlock.HighLightFontWeight property" Url="html/16B40070.htm" />
+  <HelpKINode Title="HighlightingTextBlock.HighLightFontWeightProperty field" Url="html/EBC5BA00.htm" />
+  <HelpKINode Title="HighlightingTextBlock.HighlightingTextBlock constructor" Url="html/5B22CC17.htm" />
+  <HelpKINode Title="HighlightingTextBlock.Inlines property" Url="html/E2194FF1.htm" />
+  <HelpKINode Title="HighlightingTextBlock.SearchText property" Url="html/5772A216.htm" />
+  <HelpKINode Title="HighlightingTextBlock.SearchTextProperty field" Url="html/BD441D92.htm" />
+  <HelpKINode Title="HighlightingTextBlock.StringComparison property" Url="html/7DDE7FD9.htm" />
+  <HelpKINode Title="HighlightingTextBlock.StringComparisonProperty field" Url="html/641DDF14.htm" />
+  <HelpKINode Title="HighlightingTextBlock.Text property" Url="html/43F42379.htm" />
+  <HelpKINode Title="HighlightingTextBlock.TextProperty field" Url="html/449D6996.htm" />
+  <HelpKINode Title="HighlightingTextBlock.UpdateInlines method" Url="html/422CE3AE.htm" />
   <HelpKINode Title="HighResolutionTimer class">
     <HelpKINode Title="HighResolutionTimer Class" Url="html/F1A2F72A.htm" />
     <HelpKINode Title="constructor" Url="html/4FBA4619.htm" />
@@ -1608,9 +1648,8 @@
   <HelpKINode Title="IExportProvider.GetExportedValue&lt;T&gt; method" Url="html/D50B9255.htm" />
   <HelpKINode Title="IExportProvider.GetExportedValueOrDefault(Of T) method" Url="html/B677C664.htm" />
   <HelpKINode Title="IExportProvider.GetExportedValueOrDefault&lt;T&gt; method" Url="html/B677C664.htm" />
-  <HelpKINode Title="IExportProvider.GetExportedValues(Of T) method" Url="html/E7AA39A7.htm" />
-  <HelpKINode Title="IExportProvider.GetExportedValues&lt;T&gt; method" Url="html/E7AA39A7.htm" />
-  <HelpKINode Title="IExportProvider.GetExports method" Url="html/8C9FA86A.htm" />
+  <HelpKINode Title="IExportProvider.GetExportedValues method" Url="html/53D696AC.htm" />
+  <HelpKINode Title="IExportProvider.GetExports method" Url="html/D959D752.htm" />
   <HelpKINode Title="IExportProvider.TryGetExportedValue(Of T) method" Url="html/8F3A94E8.htm" />
   <HelpKINode Title="IExportProvider.TryGetExportedValue&lt;T&gt; method" Url="html/8F3A94E8.htm" />
   <HelpKINode Title="Ignore property" Url="html/19C95583.htm" />
@@ -1723,6 +1762,7 @@
     <HelpKINode Title="Coordinates.Inequality Operator " Url="html/74B29BE5.htm" />
     <HelpKINode Title="SemanticVersion.Inequality Operator " Url="html/AA242D3D.htm" />
   </HelpKINode>
+  <HelpKINode Title="Inlines property" Url="html/E2194FF1.htm" />
   <HelpKINode Title="INotifyChanged interface">
     <HelpKINode Title="INotifyChanged Interface" Url="html/7F64322.htm" />
     <HelpKINode Title="events" Url="html/D6E1DC33.htm" />
@@ -1843,6 +1883,10 @@
     <HelpKINode Title="FrameworkElementBehavior(T).IsLoaded Property " Url="html/5B4EFA3C.htm" />
     <HelpKINode Title="IImage.IsLoaded Property " Url="html/C53670F3.htm" />
   </HelpKINode>
+  <HelpKINode Title="IsNcMouseOver attached property" Url="html/1CDD30E0.htm" />
+  <HelpKINode Title="IsNcMouseOverProperty field" Url="html/580D7E0C.htm" />
+  <HelpKINode Title="IsNcPressed attached property" Url="html/DEBF1FA3.htm" />
+  <HelpKINode Title="IsNcPressedProperty field" Url="html/1DA91670.htm" />
   <HelpKINode Title="IsNullOrEmpty method" Url="html/B2F7EB54.htm" />
   <HelpKINode Title="IsNullOrWhiteSpace method" Url="html/FFCEADF6.htm" />
   <HelpKINode Title="IsProcessElevated method" Url="html/A819D97B.htm" />
@@ -2917,11 +2961,11 @@
   <HelpKINode Title="ResourceKeyProperty field" Url="html/F5E6759A.htm" />
   <HelpKINode Title="ResourceKeys class">
     <HelpKINode Title="ResourceKeys Class" Url="html/70E16745.htm" />
-    <HelpKINode Title="ResourceKeys Class" Url="html/C959EDED.htm" />
     <HelpKINode Title="ResourceKeys Class" Url="html/D534761E.htm" />
-    <HelpKINode Title="fields" Url="html/CD6D30E1.htm" />
-    <HelpKINode Title="fields" Url="html/2AAA6258.htm" />
+    <HelpKINode Title="ResourceKeys Class" Url="html/C959EDED.htm" />
     <HelpKINode Title="fields" Url="html/2A12A93F.htm" />
+    <HelpKINode Title="fields" Url="html/2AAA6258.htm" />
+    <HelpKINode Title="fields" Url="html/CD6D30E1.htm" />
   </HelpKINode>
   <HelpKINode Title="ResourceKeys.AccentDarkBrush field" Url="html/5DE74413.htm" />
   <HelpKINode Title="ResourceKeys.AutoToolTipTextBoxStyle field" Url="html/D332F46B.htm" />
@@ -2934,8 +2978,8 @@
   <HelpKINode Title="ResourceKeys.ContextMenuStyle field" Url="html/E7F28551.htm" />
   <HelpKINode Title="ResourceKeys.ControlWithValidationErrorToolTipStyle field" Url="html/EBE046D9.htm" />
   <HelpKINode Title="ResourceKeys.DataGridCellStyle field">
-    <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/B7A4BBF6.htm" />
     <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/3B3054D2.htm" />
+    <HelpKINode Title="ResourceKeys.DataGridCellStyle Field" Url="html/B7A4BBF6.htm" />
   </HelpKINode>
   <HelpKINode Title="ResourceKeys.DataGridCheckBoxEditingElementStyle field" Url="html/57EBF12C.htm" />
   <HelpKINode Title="ResourceKeys.DataGridCheckBoxElementStyle field" Url="html/2173DFDD.htm" />
@@ -2995,8 +3039,8 @@
   <HelpKINode Title="Role property">
     <HelpKINode Title="ComposableContentControl.Role Property " Url="html/1959897.htm" />
     <HelpKINode Title="ContentControlCompositionBehavior.Role Property " Url="html/B3DF3EF8.htm" />
-    <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/FB533439.htm" />
     <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/AB47D607.htm" />
+    <HelpKINode Title="DataTemplateAttribute.Role Property " Url="html/FB533439.htm" />
     <HelpKINode Title="IDataTemplateMetadata.Role Property " Url="html/6373CFC4.htm" />
     <HelpKINode Title="IVisualCompositionMetadata.Role Property " Url="html/33FFCA4E.htm" />
     <HelpKINode Title="RoleBasedDataTemplateKey.Role Property " Url="html/3831FFD.htm" />
@@ -3087,6 +3131,8 @@
   <HelpKINode Title="SafeTokenHandle.SafeTokenHandle constructor" Url="html/1EF5F542.htm" />
   <HelpKINode Title="ScrollBarStyle field" Url="html/5692BDE8.htm" />
   <HelpKINode Title="ScrollViewerStyle field" Url="html/796872BB.htm" />
+  <HelpKINode Title="SearchText property" Url="html/5772A216.htm" />
+  <HelpKINode Title="SearchTextProperty field" Url="html/BD441D92.htm" />
   <HelpKINode Title="SelectGroupOnGroupHeaderClickBehavior class">
     <HelpKINode Title="SelectGroupOnGroupHeaderClickBehavior Class" Url="html/DA398D15.htm" />
     <HelpKINode Title="constructor" Url="html/54A94DA1.htm" />
@@ -3178,6 +3224,8 @@
   <HelpKINode Title="SetInputBindings method" Url="html/5E0226A6.htm" />
   <HelpKINode Title="SetIsAutomaticToolTipEnabled method" Url="html/E6A590A1.htm" />
   <HelpKINode Title="SetIsCaptionVisible method" Url="html/DEB2E96C.htm" />
+  <HelpKINode Title="SetIsNcMouseOver method" Url="html/35691D77.htm" />
+  <HelpKINode Title="SetIsNcPressed method" Url="html/B3F7DDD5.htm" />
   <HelpKINode Title="SetProperty method" Url="html/7E10BA96.htm" />
   <HelpKINode Title="SetRefreshOnSourceChanges method" Url="html/FDB6120B.htm" />
   <HelpKINode Title="SetRegionId method" Url="html/622DE1AD.htm" />
@@ -3230,6 +3278,14 @@
   <HelpKINode Title="Space enumeration member" Url="html/DAD01360.htm" />
   <HelpKINode Title="Split(Of T) method" Url="html/72770E68.htm" />
   <HelpKINode Title="Split&lt;T&gt; method" Url="html/72770E68.htm" />
+  <HelpKINode Title="StarSizeConverter class">
+    <HelpKINode Title="StarSizeConverter Class" Url="html/BBD57FCC.htm" />
+    <HelpKINode Title="constructor" Url="html/9136F9DC.htm" />
+    <HelpKINode Title="methods" Url="html/8BFA5C9F.htm" />
+    <HelpKINode Title="properties" Url="html/36417E31.htm" />
+  </HelpKINode>
+  <HelpKINode Title="StarSizeConverter.Convert method" Url="html/658B7B7F.htm" />
+  <HelpKINode Title="StarSizeConverter.StarSizeConverter constructor" Url="html/9136F9DC.htm" />
   <HelpKINode Title="Start method">
     <HelpKINode Title="BindingErrorTracer.Start Method " Url="html/DE2F9A3E.htm" />
     <HelpKINode Title="HighResolutionTimer.Start Method " Url="html/375D3A70.htm" />
@@ -3237,6 +3293,8 @@
   </HelpKINode>
   <HelpKINode Title="StartLocal method" Url="html/3666CBEF.htm" />
   <HelpKINode Title="Stop method" Url="html/980B3A72.htm" />
+  <HelpKINode Title="StringComparison property" Url="html/7DDE7FD9.htm" />
+  <HelpKINode Title="StringComparisonProperty field" Url="html/641DDF14.htm" />
   <HelpKINode Title="StringToObjectConverter class">
     <HelpKINode Title="StringToObjectConverter Class" Url="html/AE184538.htm" />
     <HelpKINode Title="constructor" Url="html/26B8FCBC.htm" />
@@ -3339,6 +3397,7 @@
   <HelpKINode Title="TemplatePartWorld field" Url="html/36CF8E4.htm" />
   <HelpKINode Title="Terminated event" Url="html/1EB7519E.htm" />
   <HelpKINode Title="Text property">
+    <HelpKINode Title="HighlightingTextBlock.Text Property " Url="html/43F42379.htm" />
     <HelpKINode Title="InPlaceEdit.Text Property " Url="html/61781F68.htm" />
     <HelpKINode Title="PasswordBoxBindingBehavior.Text Property " Url="html/E5B5174B.htm" />
     <HelpKINode Title="TextAttribute.Text Property " Url="html/83976418.htm" />
@@ -3401,6 +3460,7 @@
   <HelpKINode Title="TextEventArgs.Text property" Url="html/206F0DF9.htm" />
   <HelpKINode Title="TextEventArgs.TextEventArgs constructor" Url="html/EF9EAE9.htm" />
   <HelpKINode Title="TextProperty field">
+    <HelpKINode Title="HighlightingTextBlock.TextProperty Field" Url="html/449D6996.htm" />
     <HelpKINode Title="InPlaceEdit.TextProperty Field" Url="html/9B04339D.htm" />
     <HelpKINode Title="PasswordBoxBindingBehavior.TextProperty Field" Url="html/62739007.htm" />
   </HelpKINode>
@@ -3658,6 +3718,7 @@
   <HelpKINode Title="TomsToolbox.Wpf.Composition.XamlExtensions.DataTemplate class" Url="html/C6E69A8F.htm" />
   <HelpKINode Title="TomsToolbox.Wpf.Composition.XamlExtensions.VisualComposition class" Url="html/26B326CD.htm" />
   <HelpKINode Title="TomsToolbox.Wpf.Controls namespace" Url="html/4F732D04.htm" />
+  <HelpKINode Title="TomsToolbox.Wpf.Controls.HighlightingTextBlock class" Url="html/826280E3.htm" />
   <HelpKINode Title="TomsToolbox.Wpf.Controls.Icon class" Url="html/E1C61B13.htm" />
   <HelpKINode Title="TomsToolbox.Wpf.Controls.IImage interface" Url="html/CE7A351F.htm" />
   <HelpKINode Title="TomsToolbox.Wpf.Controls.IImageProvider interface" Url="html/4942C834.htm" />
@@ -3694,6 +3755,7 @@
   <HelpKINode Title="TomsToolbox.Wpf.Converters.ObjectToDisplayNameConverter class" Url="html/BF456DC4.htm" />
   <HelpKINode Title="TomsToolbox.Wpf.Converters.ObjectToTextConverter class" Url="html/8957C3B9.htm" />
   <HelpKINode Title="TomsToolbox.Wpf.Converters.ReplaceTextConverter class" Url="html/66D813A0.htm" />
+  <HelpKINode Title="TomsToolbox.Wpf.Converters.StarSizeConverter class" Url="html/BBD57FCC.htm" />
   <HelpKINode Title="TomsToolbox.Wpf.Converters.StringToObjectConverter class" Url="html/AE184538.htm" />
   <HelpKINode Title="TomsToolbox.Wpf.Converters.ThicknessMultiplyConverter class" Url="html/B263F28B.htm" />
   <HelpKINode Title="TomsToolbox.Wpf.Converters.UnaryOperation enumeration" Url="html/9D55D1E8.htm" />
@@ -3934,6 +3996,7 @@
   </HelpKINode>
   <HelpKINode Title="Unsubscribe method" Url="html/3F14F2FA.htm" />
   <HelpKINode Title="Update method" Url="html/BBD96270.htm" />
+  <HelpKINode Title="UpdateInlines method" Url="html/422CE3AE.htm" />
   <HelpKINode Title="UpdateInterval property" Url="html/9A6EE4E5.htm" />
   <HelpKINode Title="UpdatePropertyAction class">
     <HelpKINode Title="UpdatePropertyAction Class" Url="html/5179D942.htm" />
@@ -4144,30 +4207,30 @@
   <HelpKINode Title="VisualCompositionBehavior&lt;T&gt;.Update method" Url="html/BBD96270.htm" />
   <HelpKINode Title="VisualCompositionBehavior&lt;T&gt;.VisualCompositionBehavior constructor" Url="html/FAF6B568.htm" />
   <HelpKINode Title="VisualCompositionExportAttribute class">
-    <HelpKINode Title="VisualCompositionExportAttribute Class" Url="html/FB38E407.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute Class" Url="html/A3ADB2E6.htm" />
-    <HelpKINode Title="constructor" Url="html/2FFCFE4E.htm" />
+    <HelpKINode Title="VisualCompositionExportAttribute Class" Url="html/FB38E407.htm" />
     <HelpKINode Title="constructor" Url="html/EBFBBE4.htm" />
-    <HelpKINode Title="methods" Url="html/D9F4C1F8.htm" />
+    <HelpKINode Title="constructor" Url="html/2FFCFE4E.htm" />
     <HelpKINode Title="methods" Url="html/E5318483.htm" />
-    <HelpKINode Title="properties" Url="html/94C4E8D1.htm" />
+    <HelpKINode Title="methods" Url="html/D9F4C1F8.htm" />
     <HelpKINode Title="properties" Url="html/E381767F.htm" />
+    <HelpKINode Title="properties" Url="html/94C4E8D1.htm" />
   </HelpKINode>
   <HelpKINode Title="VisualCompositionExportAttribute.Role property">
-    <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/D4495849.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/3215271D.htm" />
+    <HelpKINode Title="VisualCompositionExportAttribute.Role Property " Url="html/D4495849.htm" />
   </HelpKINode>
   <HelpKINode Title="VisualCompositionExportAttribute.Sequence property">
     <HelpKINode Title="VisualCompositionExportAttribute.Sequence Property " Url="html/B22091C7.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute.Sequence Property " Url="html/5AF7B7AA.htm" />
   </HelpKINode>
   <HelpKINode Title="VisualCompositionExportAttribute.TargetRegions property">
-    <HelpKINode Title="VisualCompositionExportAttribute.TargetRegions Property " Url="html/D7D76DDE.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute.TargetRegions Property " Url="html/828590FC.htm" />
+    <HelpKINode Title="VisualCompositionExportAttribute.TargetRegions Property " Url="html/D7D76DDE.htm" />
   </HelpKINode>
   <HelpKINode Title="VisualCompositionExportAttribute.VisualCompositionExportAttribute constructor">
-    <HelpKINode Title="VisualCompositionExportAttribute Constructor " Url="html/2FFCFE4E.htm" />
     <HelpKINode Title="VisualCompositionExportAttribute Constructor " Url="html/EBFBBE4.htm" />
+    <HelpKINode Title="VisualCompositionExportAttribute Constructor " Url="html/2FFCFE4E.htm" />
   </HelpKINode>
   <HelpKINode Title="VisualDescendants method" Url="html/AF19DB2B.htm" />
   <HelpKINode Title="VisualDescendantsAndSelf method" Url="html/A2F20668.htm" />
@@ -4277,8 +4340,8 @@
   <HelpKINode Title="WindowCommands.Minimize property" Url="html/F16DD780.htm" />
   <HelpKINode Title="WindowCommands.Restore property" Url="html/EE43B8E3.htm" />
   <HelpKINode Title="WindowStyle field">
-    <HelpKINode Title="ResourceKeys.WindowStyle Field" Url="html/DEC31CEE.htm" />
     <HelpKINode Title="ResourceKeys.WindowStyle Field" Url="html/D12C2CA2.htm" />
+    <HelpKINode Title="ResourceKeys.WindowStyle Field" Url="html/DEC31CEE.htm" />
   </HelpKINode>
   <HelpKINode Title="WindowTitleDecorator attached property" Url="html/13A05917.htm" />
   <HelpKINode Title="WindowTitleDecoratorProperty field" Url="html/218BFA0B.htm" />
