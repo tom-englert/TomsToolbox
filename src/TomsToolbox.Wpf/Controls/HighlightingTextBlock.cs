@@ -17,7 +17,7 @@ using TomsToolbox.Essentials;
 /// </summary>
 public class HighlightingTextBlock : ContentControl
 {
-    private readonly TextBlock _textBlock = new();
+    private readonly TextBlock _textBlock = new() { Focusable = false };
 
     /// <summary>
     /// Initializes a new instance of the <see cref="HighlightingTextBlock" /> class.
