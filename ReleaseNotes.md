@@ -1,3 +1,6 @@
+2.9.1
+- Fix focusing of HighlightingTextBlock control
+
 2.9.0
 - Add new HighlightingTextBlock control
 
