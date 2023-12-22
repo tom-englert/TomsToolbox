@@ -1,3 +1,7 @@
+2.11.0
+
+- Drop native net7, include net8
+
 2.10.0
 
 - Restore netstandard2.0
