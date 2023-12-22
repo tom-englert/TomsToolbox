@@ -27,11 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
     <PackageReference Include="Fody" Version="6.8.0" PrivateAssets="All" />
-    <PackageReference Include="JetBrains.Annotations" Version="2023.2.0" PrivateAssets="All" />
+    <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" PrivateAssets="All" />
     <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.17.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="Throttle.Fody" Version="1.7.0" PrivateAssets="All" />
     <PackageReference Include="WeakEventHandler.Fody" Version="1.8.0" PrivateAssets="All" />
   </ItemGroup>
