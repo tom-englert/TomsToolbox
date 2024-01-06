@@ -14,6 +14,7 @@ using Microsoft.Xaml.Behaviors;
 using TomsToolbox.Essentials;
 
 using TriggerBase = Microsoft.Xaml.Behaviors.TriggerBase;
+using TriggerAction = Microsoft.Xaml.Behaviors.TriggerAction;
 
 /// <summary>
 /// A container to host the source <see cref="InputBindingCollection"/>. Must be a <see cref="FrameworkElement"/> to minimize binding errors.
@@ -390,13 +391,22 @@ public static class StyleBindings
     public static readonly DependencyProperty TriggersProperty =
         DependencyProperty.RegisterAttached("Triggers", typeof(TriggerCollection), typeof(StyleBindings), new UIPropertyMetadata((d, e) => Triggers_Changed(d, (TriggerCollection)e.NewValue)));
 
+    private static TriggerBase Clone(TriggerBase item)
+    {
+        var clone = (TriggerBase)item.Clone();
+
+        clone.Actions.AddRange(item.Actions.Select(action => (TriggerAction)action.Clone()));
+
+        return clone;
+    }
+
     private static void Triggers_Changed(DependencyObject? d, IEnumerable<TriggerBase>? newValue)
     {
         if (newValue != null)
         {
             var existingTriggers = Interaction.GetTriggers(d);
 
-            existingTriggers.AddRange(newValue.Select(item => (TriggerBase)item.Clone()));
+            existingTriggers.AddRange(newValue.Select(Clone));
         }
     }
 
@@ -460,15 +470,15 @@ public static class StyleBindings
                 {
                     MinWidth = columnDefinition.MinWidth,
                     MaxWidth = columnDefinition.MaxWidth,
-                    Width =  columnDefinition.Width,
+                    Width = columnDefinition.Width,
                     Name = columnDefinition.Name,
                     SharedSizeGroup = columnDefinition.SharedSizeGroup,
                 });
             }
         }
     }
-        
-        
+
+
     /// <summary>
     /// Gets the row definitions attached via the <see cref="P:TomsToolbox.Wpf.StyleBindings.RowDefinitions"/> attached property.
     /// </summary>
@@ -528,7 +538,7 @@ public static class StyleBindings
                 {
                     MinHeight = rowDefinition.MinHeight,
                     MaxHeight = rowDefinition.MaxHeight,
-                    Height =  rowDefinition.Height,
+                    Height = rowDefinition.Height,
                     Name = rowDefinition.Name,
                     SharedSizeGroup = rowDefinition.SharedSizeGroup,
                 });

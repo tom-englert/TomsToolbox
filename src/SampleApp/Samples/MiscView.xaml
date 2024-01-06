@@ -60,6 +60,7 @@
           <Button Content="#4-4-4-4" />
         </StackPanel>
       </HeaderedContentControl>
+      <Decorator Height="10"/>
       <HeaderedContentControl Header="Update binding to a POCO property with a timer." Focusable="False">
         <Grid>
           <TextBlock x:Name="Time" Margin="10"
@@ -72,6 +73,7 @@
           </toms:TimerTrigger>
         </i:Interaction.Triggers>
       </HeaderedContentControl>
+      <Decorator Height="10"/>
       <HeaderedContentControl Header="AggregatingMultiValueConverter" Focusable="False">
         <StackPanel>
           <StackPanel.Resources>
@@ -109,6 +111,7 @@
           </StackPanel>
         </StackPanel>
       </HeaderedContentControl>
+      <Decorator Height="10"/>
       <HeaderedContentControl Header="BinaryOperationConverter Sample" Focusable="False">
         <Border x:Name="OuterBorder" Margin="5" BorderBrush="Orange" BorderThickness="2">
           <Border.Resources>
@@ -145,6 +148,7 @@
           </Grid>
         </Border>
       </HeaderedContentControl>
+      <Decorator Height="10"/>
       <HeaderedContentControl Header="InPlaceEdit standalone" Focusable="False">
         <StackPanel Margin="5">
           <Border Margin="5" Padding="3,2" BorderThickness="1" BorderBrush="Gray">
@@ -155,6 +159,7 @@
           </Border>
         </StackPanel>
       </HeaderedContentControl>
+      <Decorator Height="10"/>
       <HeaderedContentControl Header="Nested items control with default command (double click item to test)" Focusable="False">
         <StackPanel Margin="5">
           <ListBox Height="110" toms:ItemsControlExtensions.DefaultItemCommand="{Binding ItemsControlDefaultCommand}">
@@ -182,9 +187,11 @@
           </ListBox>
         </StackPanel>
       </HeaderedContentControl>
+      <Decorator Height="10"/>
       <HeaderedContentControl Header="Memory testing">
         <Button Content="GC Collect" Margin="10" Command="{Binding GCCollectCommand}" />
       </HeaderedContentControl>
+      <Decorator Height="10"/>
       <HeaderedContentControl Header="TextBox/PasswordBox">
         <StackPanel Margin="5">
           <TextBox x:Name="TextBox" Text="{Binding TextWithError, ValidatesOnDataErrors=True}" toms:Validation.ShowErrorInTooltip="True" />
@@ -196,11 +203,13 @@
           </PasswordBox>
         </StackPanel>
       </HeaderedContentControl>
+      <Decorator Height="10"/>
       <HeaderedContentControl Header="User Account Control">
         <StackPanel Margin="5">
           <Button Command="{Binding CheckForAdminRightsCommand}">Check for admin rights</Button>
         </StackPanel>
       </HeaderedContentControl>
+      <Decorator Height="10"/>
       <HeaderedContentControl Header="Highlight TextBlock">
         <StackPanel>
           <StackPanel Orientation="Horizontal">
@@ -219,6 +228,28 @@
                                         HighLightBrush="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
           </StackPanel>
         </StackPanel>
+      </HeaderedContentControl>
+      <Decorator Height="10"/>
+      <HeaderedContentControl Header="Style Bindings">
+        <Label Content="Click Me">
+          <Label.Style>
+            <Style TargetType="Label">
+              <Style.Setters>
+                <Setter Property="toms:StyleBindings.Triggers">
+                  <Setter.Value>
+                    <toms:TriggerCollection>
+                      <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <i:EventTrigger.Actions>
+                          <i:InvokeCommandAction Command="{Binding MouseClickedCommand}" />
+                        </i:EventTrigger.Actions>
+                      </i:EventTrigger>
+                    </toms:TriggerCollection>
+                  </Setter.Value>
+                </Setter>
+              </Style.Setters>
+            </Style>
+          </Label.Style>
+        </Label>
       </HeaderedContentControl>
     </StackPanel>
   </ScrollViewer>

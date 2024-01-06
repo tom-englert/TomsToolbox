@@ -29,8 +29,10 @@ internal partial class MiscViewModel : INotifyPropertyChanged, IDataErrorInfo
     public ICommand GCCollectCommand => new DelegateCommand(GC.Collect);
 
     public ICommand CheckForAdminRightsCommand => new DelegateCommand(CheckForAdminRights);
-    
-    public string? TextWithError { get; set;  }
+
+    public string? TextWithError { get; set; }
+
+    public ICommand MouseClickedCommand => new DelegateCommand(() => MessageBox.Show("clicked!."));
 
     private void CheckForAdminRights()
     {
