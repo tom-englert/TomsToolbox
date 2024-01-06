@@ -1,3 +1,6 @@
+2.12.0
+- Fix  #17: Trigger Actions not copied when using StyleBindings.Triggers
+
 2.11.0
 
 - Drop native net7, include net8
