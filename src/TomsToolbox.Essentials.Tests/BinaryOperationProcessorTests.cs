@@ -298,7 +298,7 @@ public class BinaryOperationProcessorTests
     }
 
     [TypeConverter(typeof(TestClassTypeConverter))]
-    struct TestClass : IEquatable<TestClass>
+    readonly struct TestClass : IEquatable<TestClass>
     {
         private readonly int _value;
 

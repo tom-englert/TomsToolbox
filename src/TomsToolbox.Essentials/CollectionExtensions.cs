@@ -285,6 +285,7 @@ public static class CollectionExtensions
         return items.Select(item => new KeyValuePair<TValue, TKey>(item.Value, item.Key));
     }
 
+#if !NET8_0_OR_GREATER // NET8.0 already contains a ToDictionary extension method and may cause conflicts
     /// <summary>
     /// Creates a Dictionary{TKey, TValue} from an IEnumerable{KeyValuePair{TKey, TValue}}.
     /// </summary>
@@ -315,6 +316,7 @@ public static class CollectionExtensions
     {
         return items.ToDictionary(item => item.Key, item => item.Value, comparer);
     }
+#endif
 
     /// <summary>
     /// Gets the value from the dictionary, or the default value if no item with the specified key exists.
@@ -327,7 +329,7 @@ public static class CollectionExtensions
     /// <returns>
     /// The value from the dictionary, or the default value if no item with the specified key exists.
     /// </returns>
-    [return: NotNullIfNotNull("defaultValue")]
+    [return: NotNullIfNotNull(nameof(defaultValue))]
     public static TValue? GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue? defaultValue)
     {
         return dictionary.TryGetValue(key, out var value) ? value : defaultValue;
@@ -344,7 +346,7 @@ public static class CollectionExtensions
     /// <returns>
     /// The value from the dictionary, or the default value if no item with the specified key exists.
     /// </returns>
-    [return: NotNullIfNotNull("defaultValue")]
+    [return: NotNullIfNotNull(nameof(defaultValue))]
     public static TValue? GetValueOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue? defaultValue)
         where TKey : notnull
     {
@@ -362,7 +364,7 @@ public static class CollectionExtensions
     /// <returns>
     /// The value from the dictionary, or the default value if no item with the specified key exists.
     /// </returns>
-    [return: NotNullIfNotNull("defaultValue")]
+    [return: NotNullIfNotNull(nameof(defaultValue))]
     public static TValue? GetValueOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TKey key, TValue? defaultValue)
     {
         return dictionary.TryGetValue(key, out var value) ? value : defaultValue;
