@@ -1,3 +1,6 @@
+2.13.0:
+- Fix #18: TableHelper.ParseTable swallows empty lines
+
 2.12.0
 - Fix  #17: Trigger Actions not copied when using StyleBindings.Triggers
 
