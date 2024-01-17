@@ -46,7 +46,7 @@ dotnet_style_prefer_inferred_tuple_names = true:suggestion
 dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
 dotnet_style_prefer_auto_properties = true:silent
 dotnet_style_prefer_conditional_expression_over_assignment = true:silent
-dotnet_style_prefer_conditional_expression_over_return = true:silent
+dotnet_style_prefer_conditional_expression_over_return = true:suggestion
 ###############################
 # Naming Conventions          #
 ###############################
@@ -62,6 +62,7 @@ dotnet_naming_symbols.constant_fields.required_modifiers          = const
 ###############################
 # C# Coding Conventions       #
 ###############################
+
 [*.cs]
 # var preferences
 csharp_style_var_for_built_in_types = true:silent
@@ -119,6 +120,9 @@ csharp_space_between_method_call_empty_parameter_list_parentheses = false
 csharp_preserve_single_line_statements = true
 csharp_preserve_single_line_blocks = true
 
+csharp_style_namespace_declarations = file_scoped
+csharp_prefer_braces = when_multiline
+
 ###############################
 # Static Code Analysis        #
 ###############################
@@ -150,3 +154,4 @@ dotnet_diagnostic.CA1819.severity = suggestion
 
 # CA1200: Avoid using cref tags with a prefix
 dotnet_diagnostic.CA1200.severity = none
+
