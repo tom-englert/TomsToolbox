@@ -1,4 +1,4 @@
-namespace TomsToolbox.Wpf;
+﻿namespace TomsToolbox.Wpf;
 
 using System;
 using System.Collections.Generic;
@@ -122,10 +122,10 @@ public static class TableHelper
                 continue;
             }
 
-            while (IsLineFeed(reader.Peek()))
-            {
+            if (reader.Peek() == '\r')
                 reader.Read();
-            }
+            if (reader.Peek() == '\n')
+                reader.Read();
 
             break;
         }

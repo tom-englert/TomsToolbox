@@ -39,4 +39,23 @@ public class TableHelperTests
         Assert.True(sourceTable[0].SequenceEqual(target2[0]));
         Assert.True(sourceTable[1].SequenceEqual(target2[1]));
     }
+
+    [Fact]
+    public void TableHelper_ParseSimpleColumnWithEmptyLines()
+    {
+        const string input = """
+                             Line1
+                             Line2
+
+                             Line4
+                             """;
+
+        var result = input.ParseTable('\t');
+
+        Assert.NotNull(result);
+        Assert.Equal(4, result.Count);
+        Assert.Equal(4, result.Sum(r => r.Count));
+
+        Assert.True(result.Select(r => r[0]).SequenceEqual(new[] { "Line1", "Line2", "", "Line4" }));
+    }
 }
