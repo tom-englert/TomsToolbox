@@ -1,3 +1,6 @@
+2.14.0:
+- Remove ToDictionary extension method in Net8.0 ff to avoid conflicts with existing methods
+
 2.13.0:
 - Fix #18: TableHelper.ParseTable swallows empty lines
 
