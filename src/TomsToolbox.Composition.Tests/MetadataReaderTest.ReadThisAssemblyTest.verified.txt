@@ -1,5 +1,53 @@
 ﻿[
   {
+    "Type": "TomsToolbox.Composition.Tests.ExportedWithoutContract1, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+    "Metadata": [
+      {
+        "ContractName": null,
+        "ContractType": "TomsToolbox.Composition.Tests.IInterface1, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+      }
+    ],
+    "IsShared": false,
+    "SharingBoundary": null
+  },
+  {
+    "Type": "TomsToolbox.Composition.Tests.ExportedWithContract1, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+    "Metadata": [
+      {
+        "ContractName": "Contract",
+        "ContractType": "TomsToolbox.Composition.Tests.IInterface1, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+      }
+    ],
+    "IsShared": false,
+    "SharingBoundary": null
+  },
+  {
+    "Type": "TomsToolbox.Composition.Tests.ExportedWithContract2, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+    "Metadata": [
+      {
+        "ContractName": "Contract",
+        "ContractType": "TomsToolbox.Composition.Tests.IInterface2, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+      }
+    ],
+    "IsShared": false,
+    "SharingBoundary": null
+  },
+  {
+    "Type": "TomsToolbox.Composition.Tests.ExportedWithoutContract2, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+    "Metadata": [
+      {
+        "ContractName": null,
+        "ContractType": "TomsToolbox.Composition.Tests.IInterface2, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+      }
+    ],
+    "IsShared": false,
+    "SharingBoundary": null
+  },
+  {
     "Type": "TomsToolbox.Composition.Tests.SomeTemplateWithRoles1, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
     "Metadata": [
       {
