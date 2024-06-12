@@ -15,8 +15,6 @@ using Xunit;
 
 using TomsToolbox.Essentials;
 
-using VerifyXunit;
-
 public class MicrosoftExtensionsTest
 {
     [Fact]
@@ -115,6 +113,28 @@ public class MicrosoftExtensionsTest
         Assert.Equal(2, info.Count);
         Assert.Equal("Test", info[0].Metadata?.GetValue("ContractName"));
         Assert.Null(info[1].Metadata?.GetValue("ContractName"));
+    }
+
+    [Fact]
+    public void GetTypedServiceInfoWithMetadataAndContractName()
+    {
+        var serviceCollection = new ServiceCollection();
+
+        serviceCollection.BindExports(GetType().Assembly);
+
+        var serviceProvider = serviceCollection.BuildServiceProvider();
+
+        var exportProvider = (IExportProvider)new ExportProviderAdapter(serviceProvider);
+
+        var c1n = exportProvider.GetExportedValue<IInterface1>();
+        Assert.Equal("NoContract", c1n.Name);
+        var c1c = exportProvider.GetExportedValue<IInterface1>("Contract");
+        Assert.Equal("Contract", c1c.Name);
+        var c2n = exportProvider.GetExportedValue<IInterface2>();
+        Assert.Equal("NoContract", c2n.Name);
+        var c2c = exportProvider.GetExportedValue<IInterface2>("Contract");
+        Assert.Equal("Contract", c2c.Name);
+
     }
 
     private class SomeDependency : INotifyChanged

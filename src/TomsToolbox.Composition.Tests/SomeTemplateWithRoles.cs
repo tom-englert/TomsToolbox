@@ -1,5 +1,7 @@
 ﻿namespace TomsToolbox.Composition.Tests;
 
+using System.Windows;
+
 using TomsToolbox.Wpf.Composition.AttributedModel;
 
 enum SomeRoles
@@ -9,11 +11,11 @@ enum SomeRoles
 }
 
 [DataTemplate(typeof(int), Role = SomeRoles.Role2)]
-class SomeTemplateWithRoles1
+class SomeTemplateWithRoles1 : DependencyObject
 {
 }
 
 [DataTemplate(typeof(int), Role = "Role2")]
-class SomeTemplateWithRoles2
+class SomeTemplateWithRoles2 : DependencyObject
 {
 }

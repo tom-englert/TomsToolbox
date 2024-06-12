@@ -74,10 +74,16 @@ public static class ExtensionMethods
 
                 if (contractType != null)
                 {
-                    if (exportInfo.IsShared)
-                        serviceCollection.AddSingleton(contractType, sp => sp.GetService(type)!);
-                    else
-                        serviceCollection.AddTransient(contractType, sp => sp.GetService(type)!);
+                    if (!contractType.IsAssignableFrom(type))
+                        throw new InvalidOperationException($"The contract type '{contractType.FullName}' is not assignable from the implementation type '{type.FullName}'.");
+
+                    if (string.IsNullOrEmpty(export.ContractName))
+                    {
+                        if (exportInfo.IsShared)
+                            serviceCollection.AddSingleton(contractType, sp => sp.GetService(type)!);
+                        else
+                            serviceCollection.AddTransient(contractType, sp => sp.GetService(type)!);
+                    }
                 }
 
                 serviceCollection.AddMetadataExport(contractType ?? type, type, new MetadataAdapter(export.Metadata));
