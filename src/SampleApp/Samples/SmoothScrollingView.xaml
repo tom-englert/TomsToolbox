@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="SampleApp.Samples.SmoothScrollingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:local="clr-namespace:SampleApp.Samples"
+             xmlns:toms="urn:TomsToolbox"
+             d:DesignHeight="450" d:DesignWidth="800" d:DataContext="{d:DesignInstance local:SmoothScrollingViewModel}">
+  <Grid Width="800" Height="400">
+
+    <Grid.Resources>
+      <LinearGradientBrush x:Key="Background">
+        <GradientStop Offset="0.0" Color="Blue" />
+        <GradientStop Offset="0.1" Color="Red" />
+        <GradientStop Offset="0.2" Color="Blue" />
+        <GradientStop Offset="0.3" Color="Red" />
+        <GradientStop Offset="0.4" Color="Blue" />
+        <GradientStop Offset="0.5" Color="Red" />
+        <GradientStop Offset="0.6" Color="Blue" />
+        <GradientStop Offset="0.7" Color="Red" />
+        <GradientStop Offset="0.8" Color="Blue" />
+        <GradientStop Offset="0.9" Color="Red" />
+        <GradientStop Offset="1.0" Color="Blue" />
+      </LinearGradientBrush>
+      <VisualBrush x:Key="RepeatingTextBrush" TileMode="Tile" Viewport="0,0,32,32" ViewportUnits="Absolute">
+        <VisualBrush.Visual>
+          <Grid Width="32" Height="32">
+            <TextBlock Text="X" FontSize="10" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+          </Grid>
+        </VisualBrush.Visual>
+      </VisualBrush>
+    </Grid.Resources>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition />
+      <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+
+    <DockPanel Grid.Column="0">
+      <Label DockPanel.Dock="Top">Regular Scrolling</Label>
+      <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <Grid Background="{StaticResource Background}">
+          <Rectangle Fill="{StaticResource RepeatingTextBrush}" Width="1500" Height="1500" />
+        </Grid>
+      </ScrollViewer>
+    </DockPanel>
+    <DockPanel Grid.Column="1">
+      <Label DockPanel.Dock="Top">Smooth Scrolling</Label>
+      <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <Grid Background="{StaticResource Background}">
+          <Rectangle Fill="{StaticResource RepeatingTextBrush}" Width="1500" Height="1500" />
+        </Grid>
+        <i:Interaction.Behaviors>
+          <toms:SmoothScrollingBehavior />
+        </i:Interaction.Behaviors>
+      </ScrollViewer>
+    </DockPanel>
+  </Grid>
+</UserControl>
