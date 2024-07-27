@@ -9,12 +9,14 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 
+using Microsoft.Xaml.Behaviors;
+
 using TomsToolbox.Wpf;
 
 /// <summary>
-/// 
+/// Provides smooth scrolling behavior for a control.
 /// </summary>
-public class SmoothScrollingBehavior : FrameworkElementBehavior<Control>
+public class SmoothScrollingBehavior : FrameworkElementBehavior<FrameworkElement>
 {
     private const long MillisecondsBetweenTouchpadScrolling = 100;
 
@@ -70,7 +72,7 @@ public class SmoothScrollingBehavior : FrameworkElementBehavior<Control>
     }
 
     /// <summary>
-    /// Scroll with wheel delta instead of scrolling fixed number of lines
+    /// Gets or sets a value indicating whether the smooth scrolling behavior is enabled.
     /// </summary>
     public bool IsEnabled
     {
@@ -78,14 +80,13 @@ public class SmoothScrollingBehavior : FrameworkElementBehavior<Control>
         set { SetValue(IsEnabledProperty, value); }
     }
     /// <summary>
-    /// The DependencyProperty of <see cref="IsEnabled"/> property.
+    /// Identifies the <see cref="IsEnabled"/> dependency property.
     /// </summary>
     public static readonly DependencyProperty IsEnabledProperty =
         DependencyProperty.Register(nameof(IsEnabled), typeof(bool), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(true));
 
     /// <summary>
-    /// Enable scrolling animation while using mouse <br/>
-    /// You need to set ScrollWithWheelDelta to true to use this
+    /// Gets or sets a value indicating whether to use scrolling animation when scolling using the mouse wheel.
     /// </summary>
     public bool UseScrollingAnimation
     {
@@ -93,13 +94,13 @@ public class SmoothScrollingBehavior : FrameworkElementBehavior<Control>
         set { SetValue(UseScrollingAnimationProperty, value); }
     }
     /// <summary>
-    /// The DependencyProperty of <see cref="UseScrollingAnimation"/> property.
+    /// Identifies the <see cref="UseScrollingAnimation"/> dependency property.
     /// </summary>
     public static readonly DependencyProperty UseScrollingAnimationProperty =
         DependencyProperty.Register(nameof(UseScrollingAnimation), typeof(bool), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(true));
 
     /// <summary>
-    /// Scrolling animation duration
+    /// Gets or sets the duration of the scrolling animation.
     /// </summary>
     public Duration ScrollingAnimationDuration
     {
@@ -107,7 +108,7 @@ public class SmoothScrollingBehavior : FrameworkElementBehavior<Control>
         set { SetValue(ScrollingAnimationDurationProperty, value); }
     }
     /// <summary>
-    /// The DependencyProperty of <see cref="ScrollingAnimationDuration"/> property.
+    /// Identifies the <see cref="ScrollingAnimationDuration"/> dependency property.
     /// </summary>
     public static readonly DependencyProperty ScrollingAnimationDurationProperty =
         DependencyProperty.Register(nameof(ScrollingAnimationDuration), typeof(Duration), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(new Duration(TimeSpan.FromMilliseconds(250))), ValidateScrollingAnimationDuration);
@@ -116,7 +117,7 @@ public class SmoothScrollingBehavior : FrameworkElementBehavior<Control>
         => value is Duration { HasTimeSpan: true };
 
     /// <summary>
-    /// Delta value factor while mouse scrolling
+    /// Gets or sets the delta value factor while mouse scrolling.
     /// </summary>
     public double MouseScrollDeltaFactor
     {
@@ -124,13 +125,13 @@ public class SmoothScrollingBehavior : FrameworkElementBehavior<Control>
         set { SetValue(MouseScrollDeltaFactorProperty, value); }
     }
     /// <summary>
-    /// The DependencyProperty of <see cref="MouseScrollDeltaFactor"/> property
+    /// Identifies the <see cref="MouseScrollDeltaFactor"/> dependency property.
     /// </summary>
     public static readonly DependencyProperty MouseScrollDeltaFactorProperty =
         DependencyProperty.Register(nameof(MouseScrollDeltaFactor), typeof(double), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(1.0));
 
     /// <summary>
-    /// Delta value factor while touchpad scrolling
+    /// Gets or sets the delta value factor while touchpad scrolling.
     /// </summary>
     public double TouchpadScrollDeltaFactor
     {
@@ -138,13 +139,13 @@ public class SmoothScrollingBehavior : FrameworkElementBehavior<Control>
         set { SetValue(TouchpadScrollDeltaFactorProperty, value); }
     }
     /// <summary>
-    /// The DependencyProperty of <see cref="TouchpadScrollDeltaFactor"/> property
+    /// Identifies the <see cref="TouchpadScrollDeltaFactor"/> dependency property.
     /// </summary>
     public static readonly DependencyProperty TouchpadScrollDeltaFactorProperty =
         DependencyProperty.Register(nameof(TouchpadScrollDeltaFactor), typeof(double), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(2.0));
 
     /// <summary>
-    /// Always handle mouse wheel scrolling, even if the control has opted out. (e.g. "TextBox").
+    /// Gets or sets a value indicating whether to always handle mouse wheel scrolling, even if the control has opted out (e.g., "TextBox").
     /// </summary>
     public bool AlwaysHandleMouseWheelScrolling
     {
@@ -152,10 +153,51 @@ public class SmoothScrollingBehavior : FrameworkElementBehavior<Control>
         set { SetValue(AlwaysHandleMouseWheelScrollingProperty, value); }
     }
     /// <summary>
-    /// The DependencyProperty of <see cref="AlwaysHandleMouseWheelScrolling"/> property
+    /// Identifies the <see cref="AlwaysHandleMouseWheelScrolling"/> dependency property.
     /// </summary>
     public static readonly DependencyProperty AlwaysHandleMouseWheelScrollingProperty =
         DependencyProperty.Register(nameof(AlwaysHandleMouseWheelScrolling), typeof(bool), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(false));
+
+    /// <summary>
+    /// Sets the Register property for the specified element.
+    /// </summary>
+    /// <param name="element">The element to set the property for.</param>
+    /// <param name="value">The value to set.</param>
+    public static void SetRegister(DependencyObject element, bool value)
+    {
+        element.SetValue(RegisterProperty, value);
+    }
+    /// <summary>
+    /// Gets the Register property for the specified element.
+    /// </summary>
+    /// <param name="element">The element to get the property for.</param>
+    /// <returns>The value of the Register property.</returns>
+    public static bool GetRegister(DependencyObject element)
+    {
+        return (bool)element.GetValue(RegisterProperty);
+    }
+    /// <summary>
+    /// Identifies the <see cref="P:TomsToolbox.Wfp.Interactivity.SmoothScrollingBehavior.Register"/> attached property.
+    /// </summary>
+    /// <AttachedPropertyComments>
+    /// <summary>
+    /// If set to true, the behavior is attached to the target element. This is a shortcut to avoid attaching the behavior in XAML when all defaults are used.
+    /// </summary>
+    /// </AttachedPropertyComments>
+    public static readonly DependencyProperty RegisterProperty = DependencyProperty.RegisterAttached(
+        "Register", typeof(bool), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(default(bool), Register_Changed));
+
+    private static void Register_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (e.NewValue as bool? != true)
+            return;
+
+        var behaviors = Interaction.GetBehaviors(d);
+        if (behaviors.OfType<SmoothScrollingBehavior>().Any())
+            return;
+        
+        behaviors.Add(new SmoothScrollingBehavior());
+    }
 
     private static readonly DependencyProperty VerticalOffsetProperty =
         DependencyProperty.RegisterAttached("VerticalOffset", typeof(double), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(0.0, VerticalOffset_Changed));

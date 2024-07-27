@@ -4,7 +4,24 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="refresh" content="1;url=html/70e0e697-583b-46c1-94a3-a992d398d79a.htm">
 	<script type="text/javascript">
-		window.location.replace("html/70e0e697-583b-46c1-94a3-a992d398d79a.htm")
+		// Use an alternate default page if a topic is specified in the query string
+		var location = window.location;
+		var queryString = location.search;
+		if(queryString != "")
+		{
+			var idx, options = queryString.split(/[\?\=\&]/);
+			for(idx = 0; idx < options.length; idx++)
+			{
+				// Don't allow javascript, or references outside the current site
+				if(options[idx] == "topic" && idx + 1 < options.length && options[idx + 1].match(/^\w[\w\/.-]*$/))
+				{
+					location.replace(location.origin + location.pathname + options[idx + 1]);
+					break;
+				}
+			}
+		}
+		else
+			location.replace("html/70e0e697-583b-46c1-94a3-a992d398d79a.htm");
 	</script>
 	<title>Tom&#39;s Toolbox - Redirect</title>
 </head>
