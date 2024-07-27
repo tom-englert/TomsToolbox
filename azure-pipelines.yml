@@ -2,9 +2,9 @@ name: $(Build.DefinitionName) $(date:yyyyMMdd)$(rev:.r)
 
 pool:
   vmImage: 'windows-2022'
-  demands:
-  - msbuild
-  - vstest
+
+workspace:
+  clean: all  
 
 variables:
   BuildPlatform: 'Any CPU'
@@ -12,51 +12,32 @@ variables:
   Solution: 'src\TomsToolbox.sln'
 
 steps:
-- task: DeleteFiles@1
-  displayName: 'Delete files from Deploy'
-  inputs:
-    Contents: 'Deploy/**'
+- script: dotnet --info
+  displayName: 'Log DotNet version'
 
-- task: NuGetToolInstaller@1
+- task: DotNetCoreCLI@2
+  displayName: 'Restore Solution'
   inputs:
-    versionSpec: 
+    command: restore
+    projects: $(Solution)
 
-- task: NuGetCommand@2
-  displayName: 'NuGet restore'
-  inputs:
-    command: 'restore'
-    restoreSolution: '$(Solution)'
-
-- task: MSBuild@1
+- task: DotNetCoreCLI@2
   displayName: 'Build Solution'
   inputs:
-    solution: '$(Solution)'
-    platform: '$(BuildPlatform)'
-    configuration: '$(BuildConfiguration)'
-    clean: true
+    command: build
+    projects: $(Solution)
+    arguments: '--configuration $(BuildConfiguration) --no-restore'
 
-- task: MSBuild@1
+- script: dotnet publish -c $(BuildConfiguration) --no-build src\SampleApp.Ninject\SampleApp.Ninject.csproj
   displayName: 'Publish Sample App'
-  inputs:
-    solution: 'src\SampleApp.Ninject\SampleApp.Ninject.csproj'
-    platform: AnyCPU
-    configuration: release
-    msbuildArguments: '/target:publish'
-    logProjectEvents: true
-    createLogFile: true
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
-- task: VSTest@2
-  displayName: 'Test Assemblies **\$(BuildConfiguration)\*tests.dll;-:**\obj\**'
+- task: DotNetCoreCLI@2
+  displayName: 'Run Testst'
   inputs:
-    testAssemblyVer2: |
-     **\*tests.dll
-     !**\obj\**
-    runInParallel: false
-    codeCoverageEnabled: false
-    platform: '$(BuildPlatform)'
-    configuration: '$(BuildConfiguration)'
-    diagnosticsEnabled: false
+    command: test
+    projects: $(Solution)
+    arguments: '--configuration $(BuildConfiguration) --no-build'
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)/Packages'
@@ -68,8 +49,10 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)/Sample'
   inputs:
-    SourceFolder: src\Publish
-    Contents: '*.*'
+    SourceFolder: 'src\Publish'
+    Contents: |
+      *.*
+      !*.xml
     TargetFolder: '$(build.artifactstagingdirectory)/Sample'
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
