@@ -34,6 +34,7 @@
     <Grid.ColumnDefinitions>
       <ColumnDefinition />
       <ColumnDefinition />
+      <ColumnDefinition Width="0.5*"/>
     </Grid.ColumnDefinitions>
 
     <DockPanel Grid.Column="0">
@@ -51,9 +52,17 @@
           <Rectangle Fill="{StaticResource RepeatingTextBrush}" Width="1500" Height="1500" />
         </Grid>
         <i:Interaction.Behaviors>
-          <toms:SmoothScrollingBehavior />
+          <toms:SmoothScrollingBehavior x:Name="SmoothScrollingBehavior"/>
         </i:Interaction.Behaviors>
       </ScrollViewer>
     </DockPanel>
+    <StackPanel Grid.Column="2" Orientation="Vertical">
+      <Label>Enabled</Label>
+      <CheckBox IsChecked="{Binding IsEnabled, ElementName=SmoothScrollingBehavior}" />
+      <Label>Use Animation</Label>
+      <CheckBox IsChecked="{Binding UseScrollingAnimation, ElementName=SmoothScrollingBehavior}" />
+      <Label>Animation Duration</Label>
+      <TextBox Text="{Binding ScrollingAnimationDuration, ElementName=SmoothScrollingBehavior}" />
+    </StackPanel>
   </Grid>
 </UserControl>

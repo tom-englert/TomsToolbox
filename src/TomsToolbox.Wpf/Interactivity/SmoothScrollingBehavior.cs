@@ -72,31 +72,31 @@ public class SmoothScrollingBehavior : FrameworkElementBehavior<Control>
     /// <summary>
     /// Scroll with wheel delta instead of scrolling fixed number of lines
     /// </summary>
-    public bool ScrollWithWheelDelta
+    public bool IsEnabled
     {
-        get { return (bool)GetValue(ScrollWithWheelDeltaProperty); }
-        set { SetValue(ScrollWithWheelDeltaProperty, value); }
+        get { return (bool)GetValue(IsEnabledProperty); }
+        set { SetValue(IsEnabledProperty, value); }
     }
     /// <summary>
-    /// The DependencyProperty of <see cref="ScrollWithWheelDelta"/> property.
+    /// The DependencyProperty of <see cref="IsEnabled"/> property.
     /// </summary>
-    public static readonly DependencyProperty ScrollWithWheelDeltaProperty =
-        DependencyProperty.Register(nameof(ScrollWithWheelDelta), typeof(bool), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(true));
+    public static readonly DependencyProperty IsEnabledProperty =
+        DependencyProperty.Register(nameof(IsEnabled), typeof(bool), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(true));
 
     /// <summary>
     /// Enable scrolling animation while using mouse <br/>
     /// You need to set ScrollWithWheelDelta to true to use this
     /// </summary>
-    public bool EnableScrollingAnimation
+    public bool UseScrollingAnimation
     {
-        get { return (bool)GetValue(EnableScrollingAnimationProperty); }
-        set { SetValue(EnableScrollingAnimationProperty, value); }
+        get { return (bool)GetValue(UseScrollingAnimationProperty); }
+        set { SetValue(UseScrollingAnimationProperty, value); }
     }
     /// <summary>
-    /// The DependencyProperty of <see cref="EnableScrollingAnimation"/> property.
+    /// The DependencyProperty of <see cref="UseScrollingAnimation"/> property.
     /// </summary>
-    public static readonly DependencyProperty EnableScrollingAnimationProperty =
-        DependencyProperty.Register(nameof(EnableScrollingAnimation), typeof(bool), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(true));
+    public static readonly DependencyProperty UseScrollingAnimationProperty =
+        DependencyProperty.Register(nameof(UseScrollingAnimation), typeof(bool), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(true));
 
     /// <summary>
     /// Scrolling animation duration
@@ -144,7 +144,7 @@ public class SmoothScrollingBehavior : FrameworkElementBehavior<Control>
         DependencyProperty.Register(nameof(TouchpadScrollDeltaFactor), typeof(double), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(2.0));
 
     /// <summary>
-    /// Always handle mouse wheel scrolling (Especially in "TextBox").
+    /// Always handle mouse wheel scrolling, even if the control has opted out. (e.g. "TextBox").
     /// </summary>
     public bool AlwaysHandleMouseWheelScrolling
     {
@@ -155,7 +155,7 @@ public class SmoothScrollingBehavior : FrameworkElementBehavior<Control>
     /// The DependencyProperty of <see cref="AlwaysHandleMouseWheelScrolling"/> property
     /// </summary>
     public static readonly DependencyProperty AlwaysHandleMouseWheelScrollingProperty =
-        DependencyProperty.Register(nameof(AlwaysHandleMouseWheelScrolling), typeof(bool), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(true));
+        DependencyProperty.Register(nameof(AlwaysHandleMouseWheelScrolling), typeof(bool), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(false));
 
     private static readonly DependencyProperty VerticalOffsetProperty =
         DependencyProperty.RegisterAttached("VerticalOffset", typeof(double), typeof(SmoothScrollingBehavior), new FrameworkPropertyMetadata(0.0, VerticalOffset_Changed));
@@ -196,13 +196,13 @@ public class SmoothScrollingBehavior : FrameworkElementBehavior<Control>
 
     private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
     {
-        if (!ScrollWithWheelDelta)
+        if (!IsEnabled)
             return;
 
-        CoreScrollWithWheelDelta(e);
+        Scroll(e);
     }
 
-    private void CoreScrollWithWheelDelta(MouseWheelEventArgs e)
+    private void Scroll(MouseWheelEventArgs e)
     {
         if (_scrollViewer == null || _scrollContentPresenter == null)
             return;
@@ -247,7 +247,7 @@ public class SmoothScrollingBehavior : FrameworkElementBehavior<Control>
 
             _verticalOffsetTarget = newOffset;
 
-            if (!EnableScrollingAnimation || isTouchpadScrolling)
+            if (!UseScrollingAnimation || isTouchpadScrolling)
             {
                 _scrollViewer.BeginAnimation(VerticalOffsetProperty, null);
                 _scrollViewer.ScrollToVerticalOffset(newOffset);
@@ -294,7 +294,7 @@ public class SmoothScrollingBehavior : FrameworkElementBehavior<Control>
 
             _scrollViewer.BeginAnimation(HorizontalOffsetProperty, null);
 
-            if (!EnableScrollingAnimation || isTouchpadScrolling)
+            if (!UseScrollingAnimation || isTouchpadScrolling)
             {
                 _scrollViewer.ScrollToHorizontalOffset(newOffset);
             }
