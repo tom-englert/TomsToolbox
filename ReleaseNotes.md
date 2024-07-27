@@ -1,3 +1,6 @@
+2.16:
+- Add the smooth scrolling behavior to extend the scroll viewer mouse wheel behavior.
+
 2.15:
 - Fix handling of exported types with contract name: exports should not be reachable without contract name.
 
