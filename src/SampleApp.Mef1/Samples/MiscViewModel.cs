@@ -1,17 +1,15 @@
 ﻿namespace SampleApp.Mef1.Samples;
 
 using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-
-using PropertyChanged;
 
 using TomsToolbox.Wpf;
 using TomsToolbox.Wpf.Composition.Mef;
 
 [VisualCompositionExport(RegionId.Main, Sequence = 99)]
-[AddINotifyPropertyChangedInterface]
-internal class MiscViewModel
+internal partial class MiscViewModel : INotifyPropertyChanged
 {
     public override string ToString()
     {

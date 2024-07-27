@@ -27,9 +27,8 @@ enum ColorTheme
 }
 
 [VisualCompositionExport(RegionId.Main, Sequence = 10)]
-[AddINotifyPropertyChangedInterface]
 [Shared]
-class ColorThemeViewModel : ObservableObject
+internal class ColorThemeViewModel : ObservableObject
 {
     public const string DictionaryUriKey = nameof(ColorTheme);
 

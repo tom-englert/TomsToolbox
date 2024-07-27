@@ -1,15 +1,13 @@
 ﻿namespace SampleApp.Samples;
 
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-
-using PropertyChanged;
 
 using TomsToolbox.Wpf.Composition.AttributedModel;
 
 [VisualCompositionExport(RegionId.Main, Sequence=9)]
-[AddINotifyPropertyChangedInterface]
-class StyxViewModel
+internal partial class StyxViewModel : INotifyPropertyChanged
 {
     public bool IsEnabled { get; set; } = true;
 

@@ -7,8 +7,6 @@ using System.Reflection;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using TomsToolbox.Essentials;
-
 /// <summary>
 /// Extension methods for Microsoft.Extensions.DependencyInjection
 /// </summary>

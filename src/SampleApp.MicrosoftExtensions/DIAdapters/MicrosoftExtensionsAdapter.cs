@@ -1,6 +1,5 @@
 ﻿namespace SampleApp.MicrosoftExtensions.DIAdapters;
 
-using System;
 using System.Linq;
 using System.Windows.Data;
 

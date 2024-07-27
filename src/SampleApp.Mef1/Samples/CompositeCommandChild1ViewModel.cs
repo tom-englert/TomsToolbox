@@ -1,16 +1,14 @@
 ﻿namespace SampleApp.Mef1.Samples;
 
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-
-using PropertyChanged;
 
 using TomsToolbox.Wpf;
 using TomsToolbox.Wpf.Composition.Mef;
 
 [VisualCompositionExport(RegionId.CommandViewContainer)]
-[AddINotifyPropertyChangedInterface]
-class CompositeCommandChild1ViewModel
+internal partial class CompositeCommandChild1ViewModel : INotifyPropertyChanged
 {
     public string? Text { get; set; } = "Greetings from child #1";
 

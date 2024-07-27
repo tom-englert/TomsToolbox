@@ -2,21 +2,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Composition;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
-using PropertyChanged;
-
 using TomsToolbox.Wpf.Composition.AttributedModel;
 
 [Export]
 [VisualCompositionExport(RegionId.Main, Sequence = 1.5)]
-[AddINotifyPropertyChangedInterface]
 [Shared]
-internal class ChartViewModel
+internal partial class ChartViewModel : INotifyPropertyChanged
 {
     public override string ToString()
     {

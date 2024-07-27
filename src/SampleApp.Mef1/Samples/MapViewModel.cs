@@ -11,8 +11,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-using PropertyChanged;
-
 using SampleApp.Mef1.Map;
 
 using TomsToolbox.Wpf;
@@ -20,8 +18,7 @@ using TomsToolbox.Wpf.Composition.Mef;
 using TomsToolbox.Wpf.Controls;
 
 [VisualCompositionExport(RegionId.Main, Sequence = 1)]
-[AddINotifyPropertyChangedInterface]
-public class MapViewModel
+public partial class MapViewModel : INotifyPropertyChanged
 {
     private static readonly string _configurationFileName = Path.Combine(BaseDirectory, "Map", "MapSources.xml");
 

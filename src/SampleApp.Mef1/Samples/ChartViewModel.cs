@@ -2,13 +2,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
-
-using PropertyChanged;
 
 using SampleApp.Mef1;
 
@@ -16,8 +15,7 @@ using TomsToolbox.Wpf.Composition.Mef;
 
 [Export]
 [VisualCompositionExport(RegionId.Main, Sequence = 1.5)]
-[AddINotifyPropertyChangedInterface]
-internal class ChartViewModel
+internal partial class ChartViewModel : INotifyPropertyChanged
 {
     public override string ToString()
     {

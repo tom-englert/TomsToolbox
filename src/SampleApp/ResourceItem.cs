@@ -2,17 +2,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
-using PropertyChanged;
-
 using TomsToolbox.Essentials;
 
-[AddINotifyPropertyChangedInterface]
-public class ResourceItem
+public partial class ResourceItem : INotifyPropertyChanged
 {
     private readonly string _suffix;
 

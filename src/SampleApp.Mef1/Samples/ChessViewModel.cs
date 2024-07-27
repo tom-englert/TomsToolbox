@@ -1,12 +1,11 @@
 ﻿namespace SampleApp.Mef1.Samples;
 
-using PropertyChanged;
+using System.ComponentModel;
 
 using TomsToolbox.Wpf.Composition.Mef;
 
 [VisualCompositionExport(RegionId.Main, Sequence=2)]
-[AddINotifyPropertyChangedInterface]
-class ChessViewModel
+internal partial class ChessViewModel : INotifyPropertyChanged
 {
     public override string ToString()
     {

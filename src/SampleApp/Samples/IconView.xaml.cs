@@ -1,6 +1,6 @@
 ﻿namespace SampleApp.Samples;
 
-using PropertyChanged;
+using System.ComponentModel;
 
 using TomsToolbox.Wpf.Composition.AttributedModel;
 
@@ -17,8 +17,7 @@ public partial class IconView
 }
 
 [VisualCompositionExport(RegionId.Main, Sequence = 5)]
-[AddINotifyPropertyChangedInterface]
-public class IconViewModel
+public partial class IconViewModel : INotifyPropertyChanged
 {
     public override string ToString()
     {

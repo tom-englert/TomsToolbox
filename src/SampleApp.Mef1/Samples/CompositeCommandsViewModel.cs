@@ -1,16 +1,14 @@
 ﻿namespace SampleApp.Mef1.Samples;
 
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-
-using PropertyChanged;
 
 using TomsToolbox.Wpf;
 using TomsToolbox.Wpf.Composition.Mef;
 
 [VisualCompositionExport(RegionId.Main, Sequence = 4)]
-[AddINotifyPropertyChangedInterface]
-public class CompositeCommandsViewModel
+public partial class CompositeCommandsViewModel : INotifyPropertyChanged
 {
     public ICommand OpenCommand => new DelegateCommand(() => MessageBox.Show("Open..."));
 

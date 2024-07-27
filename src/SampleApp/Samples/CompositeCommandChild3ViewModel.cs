@@ -1,16 +1,14 @@
 ﻿namespace SampleApp.Samples;
 
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-
-using PropertyChanged;
 
 using TomsToolbox.Wpf;
 using TomsToolbox.Wpf.Composition.AttributedModel;
 
 [VisualCompositionExport(RegionId.CommandViewContainer)]
-[AddINotifyPropertyChangedInterface]
-class CompositeCommandChild3ViewModel
+internal partial class CompositeCommandChild3ViewModel : INotifyPropertyChanged
 {
     public string? Text { get; set; } = "Greetings from child #3";
 
