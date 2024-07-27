@@ -16,8 +16,9 @@ public class TableHelperTests
         var table = sourceText.ParseTable('\t');
 
         Assert.NotNull(table);
-        Assert.Equal(1, table.Count);
-        Assert.Equal(1, table[0].Count);
+        Assert.Single(table);
+        Assert.Single(table[0]);
+        Assert.Single(table[0]);
         Assert.Equal(targetText, table[0][0]);
     }
 

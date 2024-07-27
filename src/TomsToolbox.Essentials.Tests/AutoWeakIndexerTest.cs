@@ -51,6 +51,6 @@ public class AutoWeakIndexerTest
 
         var list = indexer[0];
 
-        Assert.Equal(1, list.Count);
+        Assert.Single(list);
     }
 }

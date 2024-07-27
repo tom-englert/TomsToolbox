@@ -29,7 +29,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.122" />
     <PackageReference Include="Fody" Version="6.8.1" PrivateAssets="All" />
-    <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" PrivateAssets="All" />
+    <PackageReference Include="JetBrains.Annotations" Version="2024.2.0" PrivateAssets="All" />
     <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.17.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="Throttle.Fody" Version="1.7.0" PrivateAssets="All" />

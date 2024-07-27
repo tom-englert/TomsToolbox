@@ -159,7 +159,7 @@ public class ObservableExtensionsTests
 
         values.CollectionChanged += collectionChangedEventHandler;
 
-        Assert.Equal(0, values.Count);
+        Assert.Empty(values);
 
         collection.AddRange(testObject1, testObject2, testObject3);
 
