@@ -9,16 +9,16 @@
   <member name="M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.Action{``0,``0},System.String)">
     <attribute ctor="M:JetBrains.Annotations.NotifyPropertyChangedInvocatorAttribute.#ctor" />
   </member>
-  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.Linq.Expressions.Expression{System.Func{``0}},System.Action{``0,``0})">
-    <attribute ctor="M:JetBrains.Annotations.NotifyPropertyChangedInvocatorAttribute.#ctor" />
-  </member>
   <member name="M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.Linq.Expressions.Expression{System.Func{``0}})">
     <attribute ctor="M:JetBrains.Annotations.NotifyPropertyChangedInvocatorAttribute.#ctor" />
   </member>
-  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.String,System.Action{``0,``0})">
+  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.Linq.Expressions.Expression{System.Func{``0}},System.Action{``0,``0})">
     <attribute ctor="M:JetBrains.Annotations.NotifyPropertyChangedInvocatorAttribute.#ctor" />
   </member>
   <member name="M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.String)">
+    <attribute ctor="M:JetBrains.Annotations.NotifyPropertyChangedInvocatorAttribute.#ctor" />
+  </member>
+  <member name="M:TomsToolbox.Wpf.ObservableObjectBase.SetProperty``1(``0@,``0,System.String,System.Action{``0,``0})">
     <attribute ctor="M:JetBrains.Annotations.NotifyPropertyChangedInvocatorAttribute.#ctor" />
   </member>
 </assembly>

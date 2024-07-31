@@ -8,13 +8,13 @@ namespace SampleApp.Samples;
 [Export]
 [VisualCompositionExport(RegionId.Main, Sequence = 12)]
 [Shared]
-public partial class SmoothScrollingViewModel : INotifyPropertyChanged
+public partial class AdvancedScrollingViewModel : INotifyPropertyChanged
 {
     private static readonly Random _randomNumberGenerator = new();
 
     public override string ToString()
     {
-        return "SmoothScrolling";
+        return "Advanced Scrolling";
     }
 
     public ICollection<string> SampleData { get; } = Enumerable.Range(1, 1000)
