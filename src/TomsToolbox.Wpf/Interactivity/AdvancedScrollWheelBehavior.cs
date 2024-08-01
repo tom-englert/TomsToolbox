@@ -77,7 +77,7 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
     private bool _lastScrollWasTouchPad;
     private long _lastScrollingTick;
 
-    private int _animationIdCounter;
+    private uint _animationIdCounter;
     private DoubleAnimation? _currentAnimation;
 
     private bool IsAnimationRunning => _currentAnimation != null;
@@ -261,7 +261,7 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
         if ((e.NewValue is not double offset) || (d is not ScrollViewer scrollViewer))
             return;
 
-        Debug.WriteLine($"Offset: {offset}");
+        Debug.WriteLine($"Offset_Changed: {offset}");
 
         scrollViewer.ScrollToVerticalOffset(offset);
     }
@@ -341,44 +341,16 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
                 scrollDelta *= scrollInfo.ViewportHeight / (_scrollContentPresenter?.ActualHeight ?? _scrollViewer.ActualHeight);
             }
 
-            Debug.WriteLine($"Delta: {scrollDelta}");
-
-            var nowOffset = _verticalOffsetTarget;
-            var newOffset = Clamp(nowOffset - scrollDelta, 0, _scrollViewer.ScrollableHeight);
-
-            _verticalOffsetTarget = newOffset;
+            _verticalOffsetTarget = Clamp(_verticalOffsetTarget - scrollDelta, 0, _scrollViewer.ScrollableHeight);
 
             if (isTouchpadScrolling || !UseScrollingAnimation)
             {
                 _scrollViewer.BeginAnimation(AnimatedVerticalOffsetProperty, null);
-                _scrollViewer.ScrollToVerticalOffset(newOffset);
+                _scrollViewer.ScrollToVerticalOffset(_verticalOffsetTarget);
             }
             else
             {
-                var from = _scrollViewer.VerticalOffset;
-                var diff = newOffset - from;
-                var absDiff = Math.Abs(diff);
-                var duration = ScrollingAnimationDuration;
-                if (absDiff < Mouse.MouseWheelDeltaForOneLine)
-                {
-                    duration = new(TimeSpan.FromTicks((long)(duration.TimeSpan.Ticks * absDiff / Mouse.MouseWheelDeltaForOneLine)));
-                }
-
-                DoubleAnimation doubleAnimation = new DoubleAnimation()
-                {
-                    EasingFunction = EasingFunction,
-                    Duration = duration,
-                    From = from,
-                    To = newOffset,
-                    Name = $"Ani{_animationIdCounter++}"
-                };
-
-                Debug.WriteLine($"Animate: {from} => {newOffset}, {duration.TimeSpan.TotalMilliseconds}");
-
-                doubleAnimation.Completed += Animation_Completed;
-
-                _currentAnimation = doubleAnimation;
-                _scrollViewer.BeginAnimation(AnimatedVerticalOffsetProperty, doubleAnimation, HandoffBehavior.SnapshotAndReplace);
+                StartAnimation(_scrollViewer, AnimatedVerticalOffsetProperty, _verticalOffsetTarget, _scrollViewer.VerticalOffset);
             }
         }
         else
@@ -389,38 +361,16 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
                 scrollDelta *= scrollInfo.ViewportWidth / (_scrollContentPresenter?.ActualWidth ?? _scrollViewer.ActualWidth);
             }
 
-            var nowOffset = _horizontalOffsetTarget;
-            var newOffset = Clamp(nowOffset - scrollDelta, 0, _scrollViewer.ScrollableWidth);
-
-            _horizontalOffsetTarget = newOffset;
+            _horizontalOffsetTarget = Clamp(_horizontalOffsetTarget - scrollDelta, 0, _scrollViewer.ScrollableWidth);
 
             if (isTouchpadScrolling || !UseScrollingAnimation)
             {
                 _scrollViewer.BeginAnimation(AnimatedHorizontalOffsetProperty, null);
-                _scrollViewer.ScrollToHorizontalOffset(newOffset);
+                _scrollViewer.ScrollToHorizontalOffset(_horizontalOffsetTarget);
             }
             else
             {
-                var diff = newOffset - nowOffset;
-                var absDiff = Math.Abs(diff);
-                var duration = ScrollingAnimationDuration;
-                if (absDiff < Mouse.MouseWheelDeltaForOneLine)
-                {
-                    duration = new(TimeSpan.FromTicks((long)(duration.TimeSpan.Ticks * absDiff / Mouse.MouseWheelDeltaForOneLine)));
-                }
-
-                DoubleAnimation doubleAnimation = new DoubleAnimation()
-                {
-                    EasingFunction = EasingFunction,
-                    Duration = duration,
-                    From = nowOffset,
-                    To = newOffset,
-                };
-
-                doubleAnimation.Completed += Animation_Completed;
-
-                _currentAnimation = doubleAnimation;
-                _scrollViewer.BeginAnimation(AnimatedHorizontalOffsetProperty, doubleAnimation, HandoffBehavior.SnapshotAndReplace);
+                StartAnimation(_scrollViewer, AnimatedHorizontalOffsetProperty, _horizontalOffsetTarget, _scrollViewer.HorizontalOffset);
             }
         }
 
@@ -430,12 +380,41 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
         e.Handled = true;
     }
 
+    private void StartAnimation(UIElement target, DependencyProperty targetProperty, double to, double from)
+    {
+        var diff = to - from;
+        var absDiff = Math.Abs(diff);
+        var duration = ScrollingAnimationDuration;
+        if (absDiff < Mouse.MouseWheelDeltaForOneLine)
+        {
+            duration = new(TimeSpan.FromTicks((long)(duration.TimeSpan.Ticks * absDiff / Mouse.MouseWheelDeltaForOneLine)));
+        }
+
+        DoubleAnimation animation = new()
+        {
+            EasingFunction = EasingFunction,
+            Duration = duration,
+            From = from,
+            To = to,
+            Name = $"A{_animationIdCounter++}"
+        };
+
+        Debug.WriteLine($"Animation: {from} => {to}, {duration.TimeSpan.TotalMilliseconds}");
+
+        animation.Completed += Animation_Completed;
+
+        target.BeginAnimation(targetProperty, animation, HandoffBehavior.SnapshotAndReplace);
+
+        _currentAnimation = animation;
+    }
+
     private void Animation_Completed(object? sender, EventArgs e)
     {
         if ((sender is not AnimationClock clock) || (clock.Timeline.Name != _currentAnimation?.Name))
             return;
 
-        Debug.WriteLine("Animation finished");
+        Debug.WriteLine("Animation_Completed");
+
         _currentAnimation = null;
     }
 }
