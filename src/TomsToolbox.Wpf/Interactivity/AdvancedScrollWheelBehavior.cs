@@ -69,7 +69,6 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
         .CreateDelegate(typeof(GetScrollInfoDelegate));
 
     private ScrollViewer? _scrollViewer;
-    private ScrollContentPresenter? _scrollContentPresenter;
 
     private double _horizontalOffsetTarget;
     private double _verticalOffsetTarget;
@@ -97,8 +96,6 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
 
         _horizontalOffsetTarget = _scrollViewer.HorizontalOffset;
         _verticalOffsetTarget = _scrollViewer.VerticalOffset;
-
-        _scrollContentPresenter = _scrollViewer.VisualDescendants().OfType<ScrollContentPresenter>().FirstOrDefault();
     }
 
     /// <inheritdoc />
@@ -315,7 +312,7 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
 
     private void Scroll(MouseWheelEventArgs e)
     {
-        if (_scrollViewer == null || _scrollContentPresenter == null)
+        if (_scrollViewer == null)
             return;
 
         if (e.Handled)
@@ -337,8 +334,8 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
         {
             if (GetScrollInfo(_scrollViewer) is { } scrollInfo)
             {
-                // Considering that VirtualizingPanel may have a virtual size, so the Delta needs to be corrected here
-                scrollDelta *= scrollInfo.ViewportHeight / (_scrollContentPresenter?.ActualHeight ?? _scrollViewer.ActualHeight);
+                // scroll about half a page per wheel tick
+                scrollDelta *= scrollInfo.ViewportHeight / (2 * Mouse.MouseWheelDeltaForOneLine);
             }
 
             _verticalOffsetTarget = Clamp(_verticalOffsetTarget - scrollDelta, 0, _scrollViewer.ScrollableHeight);
@@ -357,8 +354,8 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
         {
             if (GetScrollInfo(_scrollViewer) is { } scrollInfo)
             {
-                // Considering that VirtualizingPanel may have a virtual size, so the Delta needs to be corrected here
-                scrollDelta *= scrollInfo.ViewportWidth / (_scrollContentPresenter?.ActualWidth ?? _scrollViewer.ActualWidth);
+                // scroll about half a page per wheel tick
+                scrollDelta *= scrollInfo.ViewportWidth / (2 * Mouse.MouseWheelDeltaForOneLine);
             }
 
             _horizontalOffsetTarget = Clamp(_horizontalOffsetTarget - scrollDelta, 0, _scrollViewer.ScrollableWidth);

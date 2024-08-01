@@ -17,7 +17,7 @@ public partial class AdvancedScrollingViewModel : INotifyPropertyChanged
         return "Advanced Scrolling";
     }
 
-    public ICollection<string> SampleData { get; } = Enumerable.Range(1, 1000)
+    public ICollection<string> SampleData { get; } = Enumerable.Range(1, 10000)
         .Select(i => string.Join(" ", Enumerable.Range(i, 1000).Select(k => _randomNumberGenerator.Next('A', 'Z'))))
         .ToList();
 }
