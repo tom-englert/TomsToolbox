@@ -1,3 +1,6 @@
+2.17.1:
+- AdvancedScrollWheelBehavior: Adjust scrolling speed to be more reasonable
+
 2.17:
 - Replace SmoothScrollingBehavior with AdvancedScrollWheelBehavior
 - Fix scrolling behavior in AdvancedScrollWheelBehavior, improve support for touchpad scrolling
