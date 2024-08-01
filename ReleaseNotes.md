@@ -1,3 +1,8 @@
+2.17:
+- Replace SmoothScrollingBehavior with AdvancedScrollWheelBehavior
+- Fix scrolling behavior in AdvancedScrollWheelBehavior, improve support for touchpad scrolling
+- Shortcut to attach AdvancedScrollWheelBehavior with or without animation
+
 2.16:
 - Add the smooth scrolling behavior to extend the scroll viewer mouse wheel behavior.
 
