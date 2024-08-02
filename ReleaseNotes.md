@@ -1,3 +1,6 @@
+2.17.2:
+- Fine-tune AdvancedScrollWheelBehavior, respect system settings.
+
 2.17.1:
 - AdvancedScrollWheelBehavior: Adjust scrolling speed to be more reasonable
 
