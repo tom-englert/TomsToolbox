@@ -10,7 +10,7 @@ namespace SampleApp.Samples;
 [Shared]
 public partial class AdvancedScrollingViewModel : INotifyPropertyChanged
 {
-    private static readonly Random _randomNumberGenerator = new();
+    private static readonly Random _random = new();
 
     public override string ToString()
     {
@@ -18,6 +18,6 @@ public partial class AdvancedScrollingViewModel : INotifyPropertyChanged
     }
 
     public ICollection<string> SampleData { get; } = Enumerable.Range(1, 10000)
-        .Select(i => string.Join(" ", Enumerable.Range(i, 1000).Select(k => _randomNumberGenerator.Next('A', 'Z'))))
+        .Select(i => string.Join(" ", Enumerable.Range(i, _random.Next(10, 100)).Select(k => _random.Next('A', 'Z'))))
         .ToList();
 }

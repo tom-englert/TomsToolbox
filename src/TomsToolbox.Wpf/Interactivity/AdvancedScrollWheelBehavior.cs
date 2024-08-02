@@ -61,6 +61,11 @@ public class SmoothScrollingBehavior : AdvancedScrollWheelBehavior
 public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkElement>
 {
     private const long MillisecondsBetweenTouchpadScrolling = 100;
+    private const double LineHeight = 16;   // Default physical height of one line, as defined in https://referencesource.microsoft.com/#PresentationFramework/src/Framework/System/Windows/Controls/ScrollViewer.cs,2916
+    private static double VerticalMouseWheelDelta => SystemParameters.WheelScrollLines * LineHeight;
+    // Actually there is no system parameter available for horizontal scrolling, so we use a fixed value here.
+    private const double HorizontalMouseWheelDelta = 3 * LineHeight;
+    private const double TouchPadMouseWheelDelta = 3 * LineHeight;
 
     private delegate IScrollInfo GetScrollInfoDelegate(ScrollViewer scrollViewer);
 
@@ -74,10 +79,12 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
     private double _verticalOffsetTarget;
 
     private bool _lastScrollWasTouchPad;
-    private long _lastScrollingTick;
+    private int _lastScrollingTick;
+    private double _lastScrollDelta;
 
     private uint _animationIdCounter;
     private DoubleAnimation? _currentAnimation;
+    private int _consecutiveScrollEvents;
 
     private bool IsAnimationRunning => _currentAnimation != null;
 
@@ -183,7 +190,7 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
     /// Identifies the <see cref="TouchpadScrollDeltaFactor"/> dependency property.
     /// </summary>
     public static readonly DependencyProperty TouchpadScrollDeltaFactorProperty =
-        DependencyProperty.Register(nameof(TouchpadScrollDeltaFactor), typeof(double), typeof(AdvancedScrollWheelBehavior), new FrameworkPropertyMetadata(2.0));
+        DependencyProperty.Register(nameof(TouchpadScrollDeltaFactor), typeof(double), typeof(AdvancedScrollWheelBehavior), new FrameworkPropertyMetadata(4.0));
 
     /// <summary>
     /// Gets or sets the easing function used for the scrolling animation.
@@ -321,26 +328,65 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
         }
 
         bool vertical = Keyboard.Modifiers != ModifierKeys.Shift;
-
-        var tickCount = Environment.TickCount;
         double scrollDelta = e.Delta;
 
+        var tickCount = Environment.TickCount;
+        var ticksSinceLastEvent = tickCount - _lastScrollingTick;
+        _lastScrollingTick = tickCount;
+
+        var isSameDirection = Math.Sign(scrollDelta) == Math.Sign(_lastScrollDelta);
+        _lastScrollDelta = scrollDelta;
+
+        Debug.WriteLine($"Scroll: {scrollDelta}, {ticksSinceLastEvent}");
+
         var isTouchpadScrolling = scrollDelta % Mouse.MouseWheelDeltaForOneLine != 0
-            || (_lastScrollWasTouchPad && (tickCount - _lastScrollingTick < MillisecondsBetweenTouchpadScrolling));
+            || (_lastScrollWasTouchPad && (ticksSinceLastEvent < MillisecondsBetweenTouchpadScrolling));
+
+        _lastScrollWasTouchPad = isTouchpadScrolling;
 
         scrollDelta *= isTouchpadScrolling ? TouchpadScrollDeltaFactor : MouseScrollDeltaFactor;
+        scrollDelta /= Mouse.MouseWheelDeltaForOneLine;
+
+        if (!isTouchpadScrolling && isSameDirection && ticksSinceLastEvent <= 16)
+        {
+            scrollDelta *= ++_consecutiveScrollEvents;
+            Debug.WriteLine($"Consecutive: {_consecutiveScrollEvents} => {scrollDelta}");
+        }
+        else
+        {
+            _consecutiveScrollEvents = 0;
+        }
 
         if (vertical)
         {
-            if (GetScrollInfo(_scrollViewer) is { } scrollInfo)
+            if (GetScrollInfo(_scrollViewer) is not { } scrollInfo)
+                return;
+
+            var useScrollingAnimation = UseScrollingAnimation;
+
+            // for touchpad scrolling we ignore system settings and use a fixed value
+            var verticalMouseWheelDelta = isTouchpadScrolling ? TouchPadMouseWheelDelta : VerticalMouseWheelDelta;
+
+            if (verticalMouseWheelDelta < 0)
             {
-                // scroll about half a page per wheel tick
-                scrollDelta *= scrollInfo.ViewportHeight / (2 * Mouse.MouseWheelDeltaForOneLine);
+                // scroll a page per wheel tick
+                scrollDelta *= scrollInfo.ViewportHeight;
+            }
+            else
+            {
+                scrollDelta *= verticalMouseWheelDelta;
+
+                if (scrollInfo is VirtualizingPanel virtualizingPanel && VirtualizingPanel.GetScrollUnit(virtualizingPanel) == ScrollUnit.Item)
+                {
+                    // animation is barely noticeable and more distracting than helpful when scrolling items
+                    useScrollingAnimation = false;
+                    scrollDelta /= 16;
+                }
             }
 
             _verticalOffsetTarget = Clamp(_verticalOffsetTarget - scrollDelta, 0, _scrollViewer.ScrollableHeight);
 
-            if (isTouchpadScrolling || !UseScrollingAnimation)
+            if (isTouchpadScrolling || !useScrollingAnimation)
             {
                 _scrollViewer.BeginAnimation(AnimatedVerticalOffsetProperty, null);
                 _scrollViewer.ScrollToVerticalOffset(_verticalOffsetTarget);
@@ -352,11 +398,7 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
         }
         else
         {
-            if (GetScrollInfo(_scrollViewer) is { } scrollInfo)
-            {
-                // scroll about half a page per wheel tick
-                scrollDelta *= scrollInfo.ViewportWidth / (2 * Mouse.MouseWheelDeltaForOneLine);
-            }
+            scrollDelta *= HorizontalMouseWheelDelta;
 
             _horizontalOffsetTarget = Clamp(_horizontalOffsetTarget - scrollDelta, 0, _scrollViewer.ScrollableWidth);
 
@@ -370,9 +412,6 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
                 StartAnimation(_scrollViewer, AnimatedHorizontalOffsetProperty, _horizontalOffsetTarget, _scrollViewer.HorizontalOffset);
             }
         }
-
-        _lastScrollingTick = tickCount;
-        _lastScrollWasTouchPad = isTouchpadScrolling;
 
         e.Handled = true;
     }
@@ -396,7 +435,7 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
             Name = $"A{_animationIdCounter++}"
         };
 
-        Debug.WriteLine($"Animation: {from} => {to}, {duration.TimeSpan.TotalMilliseconds}");
+        // Debug.WriteLine($"Animation: {from} => {to}, {duration.TimeSpan.TotalMilliseconds}");
 
         animation.Completed += Animation_Completed;
 
@@ -410,7 +449,7 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
         if ((sender is not AnimationClock clock) || (clock.Timeline.Name != _currentAnimation?.Name))
             return;
 
-        Debug.WriteLine("Animation_Completed");
+        // Debug.WriteLine("Animation_Completed");
 
         _currentAnimation = null;
     }
