@@ -15,6 +15,9 @@ using Microsoft.Xaml.Behaviors;
 using TomsToolbox.Essentials;
 using TomsToolbox.Wpf;
 
+/// <summary>
+/// Obsolete: Use AdvancedScrollWheelBehavior instead.
+/// </summary>
 [Obsolete("Use AdvancedScrollWheelBehavior instead.")]
 // For backward compatibility, the SmoothScrollingBehavior is still available, but it is recommended to use the AdvancedScrollWheelBehavior instead.
 public class SmoothScrollingBehavior : AdvancedScrollWheelBehavior
@@ -80,12 +83,9 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
 
     private bool _lastScrollWasTouchPad;
     private int _lastScrollingTick;
-    private double _lastScrollDelta;
 
     private uint _animationIdCounter;
     private DoubleAnimation? _currentAnimation;
-    private int _consecutiveScrollEvents;
-
     private bool IsAnimationRunning => _currentAnimation != null;
 
     /// <inheritdoc />
@@ -319,13 +319,8 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
 
     private void Scroll(MouseWheelEventArgs e)
     {
-        if (_scrollViewer == null)
+        if ((_scrollViewer == null) || (e.Handled))
             return;
-
-        if (e.Handled)
-        {
-            return;
-        }
 
         bool vertical = Keyboard.Modifiers != ModifierKeys.Shift;
         double scrollDelta = e.Delta;
@@ -333,9 +328,6 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
         var tickCount = Environment.TickCount;
         var ticksSinceLastEvent = tickCount - _lastScrollingTick;
         _lastScrollingTick = tickCount;
-
-        var isSameDirection = Math.Sign(scrollDelta) == Math.Sign(_lastScrollDelta);
-        _lastScrollDelta = scrollDelta;
 
         Debug.WriteLine($"Scroll: {scrollDelta}, {ticksSinceLastEvent}");
 
@@ -346,16 +338,6 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
 
         scrollDelta *= isTouchpadScrolling ? TouchpadScrollDeltaFactor : MouseScrollDeltaFactor;
         scrollDelta /= Mouse.MouseWheelDeltaForOneLine;
-
-        if (!isTouchpadScrolling && isSameDirection && ticksSinceLastEvent <= 16)
-        {
-            scrollDelta *= ++_consecutiveScrollEvents;
-            Debug.WriteLine($"Consecutive: {_consecutiveScrollEvents} => {scrollDelta}");
-        }
-        else
-        {
-            _consecutiveScrollEvents = 0;
-        }
 
         if (vertical)
         {
