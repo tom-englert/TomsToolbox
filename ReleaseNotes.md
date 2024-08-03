@@ -1,3 +1,6 @@
+2.17.3:
+- Fine-tune AdvancedScrollWheelBehavior, remove dynamic scroll speed adaption
+
 2.17.2:
 - Fine-tune AdvancedScrollWheelBehavior, respect system settings.
 
