@@ -38,7 +38,7 @@ public class ExportProviderAdapter : IExportProvider
 
     T IExportProvider.GetExportedValue<T>(string? contractName) where T : class
     {
-        return _exportProvider.GetExportedValue<T>(contractName ?? string.Empty);
+        return _exportProvider.GetExportedValue<T>(contractName ?? string.Empty) ?? throw new InvalidOperationException($"No export found for type {typeof(T).FullName} with contract '{contractName}'");
     }
 
     T? IExportProvider.GetExportedValueOrDefault<T>(string? contractName) where T : class

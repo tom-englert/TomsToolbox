@@ -1,3 +1,6 @@
+2.17.4:
+- Update dependencies
+
 2.17.3:
 - Fine-tune AdvancedScrollWheelBehavior, remove dynamic scroll speed adaption
 
