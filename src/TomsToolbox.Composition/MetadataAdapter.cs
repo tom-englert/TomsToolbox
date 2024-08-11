@@ -2,11 +2,13 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 
 #if NET6_0_OR_GREATER
 
 using System.Reflection;
 
+using TomsToolbox.Essentials;
 #endif
 
 /// <summary>
@@ -67,9 +69,32 @@ public class MetadataAdapter : IMetadata
 
         protected override object? Invoke(MethodInfo? targetMethod, object?[]? args)
         {
-            var methodName = targetMethod?.Name;
+            if (targetMethod is null)
+                return null;
 
-            return methodName?.StartsWith("get_", StringComparison.Ordinal) == true ? Metadata?.GetValue(methodName[4..]) : null;
+            if (Metadata is null)
+                return DefaultValue.CreateDefault(targetMethod.ReturnType);
+
+            try
+            {
+                var methodName = targetMethod.Name;
+                if (!methodName.StartsWith("get_", StringComparison.Ordinal))
+                    return DefaultValue.CreateDefault(targetMethod.ReturnType);
+
+                var propertyName = methodName[4..];
+
+                if (Metadata.TryGetValue(propertyName, out var value) != true)
+                    return DefaultValue.CreateDefault(targetMethod.ReturnType);
+
+                if (value.GetType() == targetMethod.ReturnType)
+                    return value;
+
+                return Convert.ChangeType(value, targetMethod.ReturnType, CultureInfo.InvariantCulture);
+            }
+            catch
+            {
+                return DefaultValue.CreateDefault(targetMethod.ReturnType);
+            }
         }
     }
 #endif
