@@ -12,6 +12,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Ninject" Version="3.3.6" />
     <PackageReference Include="Verify.Xunit" Version="26.2.0" />
     <PackageReference Include="xunit.assert" Version="2.9.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" PrivateAssets="all" />
@@ -20,6 +21,7 @@
     <ProjectReference Include="..\SampleApp.Mef2\SampleApp.Mef2.csproj" />
     <ProjectReference Include="..\SampleApp.Mef1\SampleApp.Mef1.csproj" />
     <ProjectReference Include="..\TomsToolbox.Composition.MicrosoftExtensions\TomsToolbox.Composition.MicrosoftExtensions.csproj" />
+    <ProjectReference Include="..\TomsToolbox.Composition.Ninject\TomsToolbox.Composition.Ninject.csproj" />
     <ProjectReference Include="..\TomsToolbox.Composition\TomsToolbox.Composition.csproj" />
   </ItemGroup>
 </Project>
