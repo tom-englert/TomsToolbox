@@ -115,6 +115,12 @@ public sealed class ExportProviderAdapter : IExportProvider
         return (IEnumerable<IExport<object>>)exportMethod.Invoke(this, new object?[] { contractName })!;
     }
 
+    IEnumerable<IExport<T, TMetadataView>> IExportProvider.GetExports<T, TMetadataView>(string? contractName) where T : class where TMetadataView : class
+    {
+        return GetServices<T>(contractName)
+            .Select(item => new ExportAdapter<T, TMetadataView>(() => item.Value, MetadataAdapter.Create<TMetadataView>(item.Metadata)));
+    }
+
     private IEnumerable<IExport<object>> GetExportsAsObject<T>(string? contractName)
         where T : class
     {

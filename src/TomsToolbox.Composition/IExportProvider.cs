@@ -11,7 +11,7 @@ using System.Linq;
 public interface IExportProvider
 {
     /// <summary>
-    /// Occurs when the exports in the IExportProvider change.
+    /// Occurs when the exports in the IExportProvider change. Not supported by all implementations.
     /// </summary>
     event EventHandler<EventArgs>? ExportsChanged;
 
@@ -83,7 +83,19 @@ public interface IExportProvider
     /// <returns>
     /// The exports.
     /// </returns>
-    IEnumerable<IExport<T>> GetExports<T>(string? contractName) where T : class;
+    IEnumerable<IExport<T>> GetExports<T>(string? contractName = null) where T : class;
+
+    /// <summary>
+    /// Gets the exports for the specified parameters.
+    /// </summary>
+    /// <typeparam name="T">The type of the requested object.</typeparam>
+    /// <typeparam name="TMetadataView">The type of the metadata of the requested object</typeparam>
+    /// <param name="contractName">Name of the contract.</param>
+    /// <returns>
+    /// The exports.
+    /// </returns>
+    IEnumerable<IExport<T, TMetadataView>> GetExports<T, TMetadataView>(string? contractName = null) where T : class where TMetadataView : class;
+
 }
 
 /// <summary>
@@ -109,23 +121,7 @@ public static partial class ExtensionMethods
     /// <summary>
     /// Gets the exports for the specified parameters.
     /// </summary>
-    /// <typeparam name="TMetadata">The type of the metadata.</typeparam>
-    /// <param name="exportProvider">The export provider.</param>
-    /// <param name="type">The type of the requested object.</param>
-    /// <param name="metadataFactory">The factory method to create the metadata object from the metadata dictionary.</param>
-    /// <returns>
-    /// The exports.
-    /// </returns>
-    public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, Type type, Func<IMetadata?, TMetadata?> metadataFactory)
-        where TMetadata : class
-    {
-        return GetExports(exportProvider, type, null, metadataFactory);
-    }
-
-    /// <summary>
-    /// Gets the exports for the specified parameters.
-    /// </summary>
-    /// <typeparam name="TMetadata">The type of the metadata.</typeparam>
+    /// <typeparam name="TMetadataView">The type of the metadata.</typeparam>
     /// <param name="exportProvider">The export provider.</param>
     /// <param name="type">The type of the requested object.</param>
     /// <param name="contractName">Name of the contract.</param>
@@ -133,29 +129,21 @@ public static partial class ExtensionMethods
     /// <returns>
     /// The exports.
     /// </returns>
-    public static IEnumerable<IExport<object, TMetadata>> GetExports<TMetadata>(this IExportProvider exportProvider, Type type, string? contractName, Func<IMetadata?, TMetadata?> metadataFactory)
-        where TMetadata : class
+    public static IEnumerable<IExport<object, TMetadataView>> GetExports<TMetadataView>(this IExportProvider exportProvider, Type type, string? contractName, Func<IMetadata?, TMetadataView?> metadataFactory)
+        where TMetadataView : class
     {
         return exportProvider
             .GetExports(type, contractName)
-            .Select(item => new ExportAdapter<object, TMetadata>(item, metadataFactory));
+            .Select(item => new ExportAdapter<object, TMetadataView>(item, metadataFactory));
 
     }
 
-    private class ExportAdapter<TObject, TMetadata> : IExport<TObject, TMetadata> 
+    private class ExportAdapter<TObject, TMetadataView>(IExport<TObject> source, Func<IMetadata?, TMetadataView?> metadataFactory) : IExport<TObject, TMetadataView>
         where TObject : class
-        where TMetadata : class
+        where TMetadataView : class
     {
-        private readonly IExport<TObject> _source;
+        public TObject? Value => source.Value;
 
-        public ExportAdapter(IExport<TObject> source, Func<IMetadata?, TMetadata?> metadataFactory)
-        {
-            _source = source;
-            Metadata = metadataFactory(source.Metadata);
-        }
-
-        public TObject? Value => _source.Value;
-
-        public TMetadata? Metadata { get; }
+        public TMetadataView? Metadata { get; } = metadataFactory(source.Metadata);
     }
 }

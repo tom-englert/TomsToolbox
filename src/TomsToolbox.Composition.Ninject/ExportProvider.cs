@@ -100,6 +100,23 @@ public class ExportProvider : IExportProvider
         return result.ToList().AsReadOnly();
     }
 
+    IEnumerable<IExport<T, TMetadataView>> IExportProvider.GetExports<T, TMetadataView>(string? contractName) where T : class where TMetadataView :class
+    {
+#if NET6_0_OR_GREATER
+        if (contractName == string.Empty)
+            contractName = null;
+
+        var bindings = _kernel.GetBindings(typeof(T))
+            .Where(binding => GetEffectiveContractName(binding.Metadata.Name) == contractName);
+
+        var result = bindings.Select(binding => new ExportAdapter<T, TMetadataView>(() => (T)GetExportedValue(binding), MetadataAdapter.Create<TMetadataView>(binding.Metadata.Get<IMetadata>(ExportMetadataKey))));
+
+        return result.ToList().AsReadOnly();
+#else
+        throw new NotSupportedException("This method is not supported in this target framework.");
+#endif
+    }
+
     private static string? GetEffectiveContractName(string? name)
     {
         return name == DefaultMasterBindingName ? null : name;

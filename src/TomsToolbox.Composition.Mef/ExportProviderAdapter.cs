@@ -78,4 +78,11 @@ public class ExportProviderAdapter : IExportProvider
             .GetExports(typeof(T), null, contractName ?? string.Empty)
             .Select(item => new ExportAdapter<T>(() => (T)item.Value, new MetadataAdapter((IDictionary<string, object?>)item.Metadata)));
     }
+
+    IEnumerable<IExport<T, TMetadataView>> IExportProvider.GetExports<T, TMetadataView>(string? contractName) where T : class where TMetadataView : class
+    {
+        return _exportProvider
+            .GetExports<T, TMetadataView>(contractName ?? string.Empty)
+            .Select(item => new ExportAdapter<T, TMetadataView>(() => (T)item.Value, item.Metadata));
+    }
 }

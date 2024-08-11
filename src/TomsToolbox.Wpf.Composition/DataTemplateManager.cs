@@ -125,7 +125,7 @@ public static class DataTemplateManager
     /// <returns>The view</returns>
     internal static DependencyObject? GetDataTemplateView(this IExportProvider exportProvider, Type viewModel, object? role)
     {
-        return exportProvider.GetExports(typeof(DependencyObject), XamlExtensions.DataTemplate.ContractName)
+        return exportProvider.GetExports<DependencyObject, IDataTemplateMetadata>(XamlExtensions.DataTemplate.ContractName)
             .Where(item => item.IsViewModelForType(viewModel, role))
             .Reverse()  // if multiple exports exist, use the top one, e.g. s.o. wants to override in a special layout module.
             // .Select(AssertCorrectCreationPolicy)
@@ -135,14 +135,14 @@ public static class DataTemplateManager
     }
 
     /// <summary>
-    /// Gets all the meta data for the exports.
+    /// Gets all the metadata for the exports.
     /// </summary>
     /// <param name="exportProvider">The export provider.</param>
-    /// <returns>The meta data of all exports.</returns>
+    /// <returns>The metadata of all exports.</returns>
     private static IEnumerable<IDataTemplateMetadata> GetDataTemplateExportsMetadata(this IExportProvider exportProvider)
     {
         return exportProvider
-            .GetExports<IDataTemplateMetadata>(typeof(DependencyObject), XamlExtensions.DataTemplate.ContractName, item => new DataTemplateMetadata(item))
+            .GetExports<DependencyObject, IDataTemplateMetadata>(XamlExtensions.DataTemplate.ContractName)
             .Select(item => item.Metadata)
             .ExceptNullItems()
             .Distinct(ExportsComparer);
@@ -165,15 +165,13 @@ public static class DataTemplateManager
         return HashCode.Aggregate(metadata.DataType?.GetHashCode() ?? 0, (metadata.Role ?? 0).GetHashCode());
     }
 
-    private static bool IsViewModelForType(this IExport<object> item, Type viewModel, object? role)
+    private static bool IsViewModelForType(this IExport<object, IDataTemplateMetadata> item, Type viewModel, object? role)
     {
         var itemMetadata = item.Metadata;
         if (itemMetadata == null)
             return false;
 
-        var templateMetadata = new DataTemplateMetadata(itemMetadata);
-
-        return (templateMetadata.DataType == viewModel) && RoleEquals(templateMetadata.Role, role);
+        return (itemMetadata.DataType == viewModel) && RoleEquals(itemMetadata.Role, role);
     }
 
     /// <summary>

@@ -3,8 +3,6 @@
 using System;
 using System.Windows;
 
-using TomsToolbox.Composition;
-
 /// <summary>
 /// Meta data for exported visuals.
 /// </summary>
@@ -26,27 +24,4 @@ public interface IDataTemplateMetadata
     {
         get;
     }
-}
-
-internal class DataTemplateMetadata : IDataTemplateMetadata
-{
-    public DataTemplateMetadata(IMetadata?  metadata)
-    {
-        if (metadata == null)
-            return;
-
-        if (metadata.TryGetValue(nameof(DataType), out var viewModel))
-        {
-            DataType = viewModel as Type;
-        }
-
-        if (metadata.TryGetValue(nameof(Role), out var role))
-        {
-            Role = role;
-        }
-    }
-
-    public Type? DataType { get; }
-        
-    public object? Role { get; }
 }

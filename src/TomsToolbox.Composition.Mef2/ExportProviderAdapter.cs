@@ -67,6 +67,13 @@ public class ExportProviderAdapter : IExportProvider
             .Select(item => new ExportAdapter<T>(() => item.CreateExport().Value ?? throw new InvalidOperationException("Export did not return a value."), new MetadataAdapter(item.Metadata)));
     }
 
+    IEnumerable<IExport<T, TMetadataView>> IExportProvider.GetExports<T, TMetadataView>(string? contractName) where T : class where TMetadataView : class
+    {
+        return _context
+            .GetExports<ExportFactory<T, IDictionary<string, object?>>>(contractName)
+            .Select(item => new ExportAdapter<T, TMetadataView>(() => item.CreateExport().Value, MetadataAdapter.Create<TMetadataView>(new MetadataAdapter(item.Metadata))));
+    }
+
     private IEnumerable<IExport<object>> GetExportsAsObject<T>(string? contractName)
     {
         return _context
