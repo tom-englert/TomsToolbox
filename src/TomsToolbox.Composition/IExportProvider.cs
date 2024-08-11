@@ -124,6 +124,22 @@ public static partial class ExtensionMethods
     /// <typeparam name="TMetadataView">The type of the metadata.</typeparam>
     /// <param name="exportProvider">The export provider.</param>
     /// <param name="type">The type of the requested object.</param>
+    /// <param name="metadataFactory">The factory method to create the metadata object from the metadata dictionary.</param>
+    /// <returns>
+    /// The exports.
+    /// </returns>
+    public static IEnumerable<IExport<object, TMetadataView>> GetExports<TMetadataView>(this IExportProvider exportProvider, Type type, Func<IMetadata?, TMetadataView?> metadataFactory)
+        where TMetadataView : class
+    {
+        return GetExports(exportProvider, type, null, metadataFactory);
+    }
+
+    /// <summary>
+    /// Gets the exports for the specified parameters.
+    /// </summary>
+    /// <typeparam name="TMetadataView">The type of the metadata.</typeparam>
+    /// <param name="exportProvider">The export provider.</param>
+    /// <param name="type">The type of the requested object.</param>
     /// <param name="contractName">Name of the contract.</param>
     /// <param name="metadataFactory">The factory method to create the metadata object from the metadata dictionary.</param>
     /// <returns>

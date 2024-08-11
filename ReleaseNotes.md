@@ -1,3 +1,6 @@
+2.18.0
+- Composition: Support typed metadata for services
+
 2.17.4:
 - Update dependencies
 

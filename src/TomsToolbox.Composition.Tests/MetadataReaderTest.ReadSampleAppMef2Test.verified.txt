@@ -21,7 +21,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.WindowTitleDecoratorViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -47,7 +47,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.Samples.AdvancedScrollingViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -66,7 +66,7 @@
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 12.0,
         "TargetRegions": [
@@ -83,7 +83,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.Samples.ChartViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -102,7 +102,7 @@
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 1.5,
         "TargetRegions": [
@@ -119,7 +119,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.Samples.ChessViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -138,7 +138,7 @@
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 2.0,
         "TargetRegions": [
@@ -155,7 +155,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.Samples.ColorThemeViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -169,7 +169,7 @@
     "Metadata": [
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 10.0,
         "TargetRegions": [
@@ -186,7 +186,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.Samples.ColorViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -200,7 +200,7 @@
     "Metadata": [
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 100.0,
         "TargetRegions": [
@@ -222,7 +222,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.Samples.CompositeCommandChild1ViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -236,7 +236,7 @@
     "Metadata": [
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 0.0,
         "TargetRegions": [
@@ -253,7 +253,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.Samples.CompositeCommandChild2ViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -267,7 +267,7 @@
     "Metadata": [
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 0.0,
         "TargetRegions": [
@@ -284,7 +284,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.Samples.CompositeCommandChild3ViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -298,7 +298,7 @@
     "Metadata": [
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 0.0,
         "TargetRegions": [
@@ -320,7 +320,7 @@
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 0.0,
         "TargetRegions": [
@@ -342,7 +342,7 @@
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 1.0,
         "TargetRegions": [
@@ -365,7 +365,7 @@
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 2.0,
         "TargetRegions": [
@@ -388,7 +388,7 @@
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 2.0,
         "TargetRegions": [
@@ -410,7 +410,7 @@
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 14.0,
         "TargetRegions": [
@@ -434,7 +434,7 @@
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 11.0,
         "TargetRegions": [
@@ -458,7 +458,7 @@
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 12.0,
         "TargetRegions": [
@@ -482,7 +482,7 @@
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 13.0,
         "TargetRegions": [
@@ -506,7 +506,7 @@
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 20.0,
         "TargetRegions": [
@@ -529,7 +529,7 @@
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 30.0,
         "TargetRegions": [
@@ -551,7 +551,7 @@
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 31.0,
         "TargetRegions": [
@@ -573,7 +573,7 @@
       },
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 99.0,
         "TargetRegions": [
@@ -590,7 +590,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.Samples.CompositeCommandsViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -604,7 +604,7 @@
     "Metadata": [
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 4.0,
         "TargetRegions": [
@@ -621,7 +621,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.Samples.IconViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -635,7 +635,7 @@
     "Metadata": [
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 5.0,
         "TargetRegions": [
@@ -652,7 +652,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.Samples.MapViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -666,7 +666,7 @@
     "Metadata": [
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 1.0,
         "TargetRegions": [
@@ -683,7 +683,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.Samples.MiscViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -697,7 +697,7 @@
     "Metadata": [
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 99.0,
         "TargetRegions": [
@@ -714,7 +714,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.Samples.SharedWidthSampleViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -728,7 +728,7 @@
     "Metadata": [
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 4.0,
         "TargetRegions": [
@@ -745,7 +745,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.Samples.StyxViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -759,7 +759,7 @@
     "Metadata": [
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 9.0,
         "TargetRegions": [
@@ -776,7 +776,7 @@
     "Metadata": [
       {
         "ContractName": "{41cf1dfc-9c56-4e06-b177-703b4a24b0e1}",
-        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        "ContractType": "System.Windows.DependencyObject, WindowsBase, Version=8.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
         "DataType": "SampleApp.Samples.TextBoxViewModel, SampleApp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
         "Role": null,
         "TypeId": "TomsToolbox.Wpf.Composition.AttributedModel.DataTemplateAttribute, TomsToolbox.Wpf.Composition.AttributedModel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2"
@@ -790,7 +790,7 @@
     "Metadata": [
       {
         "ContractName": "VisualComposition-86E8D1EF-1322-46B4-905C-115AAD63533D",
-        "ContractType": "System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "ContractType": "System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e",
         "Role": null,
         "Sequence": 3.0,
         "TargetRegions": [
