@@ -2,13 +2,14 @@
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 
 #if NET6_0_OR_GREATER
 
+using System.Globalization;
 using System.Reflection;
 
 using TomsToolbox.Essentials;
+
 #endif
 
 /// <summary>

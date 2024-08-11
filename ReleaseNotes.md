@@ -1,3 +1,6 @@
+2.18.1
+- Typed MetadataAdapter should be more robust and never throw.
+
 2.18.0
 - Composition: Support typed metadata for services
 

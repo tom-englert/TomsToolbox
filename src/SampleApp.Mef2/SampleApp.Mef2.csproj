@@ -9,15 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ninject" Version="3.3.6" />
-    <PackageReference Include="Ninject.Extensions.Conventions" Version="3.3.0" />
     <PackageReference Include="System.Composition" Version="8.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.122" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SampleApp\SampleApp.csproj" />
-    <ProjectReference Include="..\TomsToolbox.Composition.Ninject\TomsToolbox.Composition.Ninject.csproj" />
     <ProjectReference Include="..\TomsToolbox.Composition\TomsToolbox.Composition.csproj" />
     <ProjectReference Include="..\TomsToolbox.Composition.Mef2\TomsToolbox.Composition.Mef2.csproj" />
     <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj" />
