@@ -62,9 +62,23 @@ public static class ExtensionMethods
                 .ToList();
 
             if (exportInfo.IsShared)
-                serviceCollection.AddSingleton(type);
+            {
+                switch (exportInfo.SharingBoundary)
+                {
+                    case SharingBoundary.Global:
+                        serviceCollection.AddSingleton(type);
+                        break;
+                    case SharingBoundary.Scoped:
+                        serviceCollection.AddScoped(type);
+                        break;
+                    default:
+                        throw new InvalidOperationException($"Unknown sharing boundary: {exportInfo.SharingBoundary}; supported are null, SharingBoundary.Global or SharingBoundary.Scoped");
+                }
+            }
             else
+            {
                 serviceCollection.AddTransient(type);
+            }
 
             foreach (var export in exports)
             {
@@ -78,9 +92,23 @@ public static class ExtensionMethods
                     if (string.IsNullOrEmpty(export.ContractName))
                     {
                         if (exportInfo.IsShared)
-                            serviceCollection.AddSingleton(contractType, sp => sp.GetService(type)!);
+                        {
+                            switch (exportInfo.SharingBoundary)
+                            {
+                                case SharingBoundary.Global:
+                                    serviceCollection.AddSingleton(contractType, sp => sp.GetService(type)!);
+                                    break;
+                                case SharingBoundary.Scoped:
+                                    serviceCollection.AddScoped(contractType, sp => sp.GetService(type)!);
+                                    break;
+                                default:
+                                    throw new InvalidOperationException($"Unknown sharing boundary: {exportInfo.SharingBoundary}; supported are null, SharingBoundary.Global or SharingBoundary.Scoped");
+                            }
+                        }
                         else
+                        {
                             serviceCollection.AddTransient(contractType, sp => sp.GetService(type)!);
+                        }
                     }
                 }
 
