@@ -1,3 +1,6 @@
+2.19.0
+- Support scoped service lifetime for Microsoft.Extensions.DependencyInjection
+
 2.18.1
 - Typed MetadataAdapter should be more robust and never throw.
 
