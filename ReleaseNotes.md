@@ -1,3 +1,6 @@
+2.19.1
+- Stick with System.Composition.AttributedModel Version="[1.4.1]" for Netframework
+ 
 2.19.0
 - Support scoped service lifetime for Microsoft.Extensions.DependencyInjection
 
