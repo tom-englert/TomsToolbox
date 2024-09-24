@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
-  <Import Project="..\TargetFrameworks.Desktop.props" />
-
   <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <Tags>Sample</Tags>
   </PropertyGroup>
