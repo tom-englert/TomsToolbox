@@ -1,3 +1,6 @@
+2.20.0
+- MultiSelectorExtensions support typed arrays as selection source.
+
 2.19.1
 - Stick with System.Composition.AttributedModel Version="[1.4.1]" for Netframework
  
