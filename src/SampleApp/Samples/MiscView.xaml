@@ -11,6 +11,16 @@
              UseLayoutRounding="True">
   <UserControl.Resources>
     <toms:DateTimeSource UpdateInterval="00:00:01" x:Key="LiveDateTime" />
+    <Style TargetType="HeaderedContentControl">
+      <Setter Property="HeaderTemplate">
+        <Setter.Value>
+          <DataTemplate>
+            <Label Content="{Binding}" FontWeight="Bold"/>
+          </DataTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <CollectionViewSource x:Key="FilteredItems" Source="{Binding Items}" Filter="FilteredItems_OnFilter" />
   </UserControl.Resources>
   <ScrollViewer VerticalScrollBarVisibility="Auto">
     <StackPanel Margin="10">
@@ -250,6 +260,32 @@
             </Style>
           </Label.Style>
         </Label>
+      </HeaderedContentControl>
+      <Decorator Height="10"/>
+      <HeaderedContentControl Header="MultiSelectorExtensions">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <StackPanel Grid.Column="0">
+            <CheckBox x:Name="UseFilter" Content="Use Filter" IsChecked="True" Checked="UseFilter_Changed" Unchecked="UseFilter_Changed"/>
+            <ListBox SelectionMode="Extended"
+                     ItemsSource="{Binding Source={StaticResource FilteredItems}}"
+                     toms:MultiSelectorExtensions.SelectionBinding="{Binding SelectedItemsAsObservableCollection}" />
+          </StackPanel>
+          <DataGrid Grid.Column="2" 
+                    SelectionMode="Extended"
+                    ItemsSource="{Binding Items}" 
+                    toms:MultiSelectorExtensions.SelectionBinding="{Binding SelectedItemsAsArray, Mode=TwoWay}" />
+          <DataGrid Grid.Column="4" 
+                    SelectionMode="Extended"
+                    ItemsSource="{Binding Items}" 
+                    toms:MultiSelectorExtensions.SelectionBinding="{Binding SelectedItemsAsTypedArray, Mode=TwoWay}" />
+        </Grid>
       </HeaderedContentControl>
     </StackPanel>
   </ScrollViewer>

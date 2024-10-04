@@ -1,6 +1,7 @@
 ﻿namespace SampleApp.Samples;
 
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net;
 using System.Windows;
@@ -14,6 +15,12 @@ using TomsToolbox.Wpf.Composition.AttributedModel;
 internal partial class MiscViewModel : INotifyPropertyChanged, IDataErrorInfo
 {
     private string? _userName;
+
+    public MiscViewModel()
+    {
+        SelectedItemsAsObservableCollection = new ObservableCollection<KeyValuePair<int, string>>([Items[0], Items[1], Items[2]]);
+        SelectedItemsAsObservableCollection.CollectionChanged += SelectedItemsAsObservableCollection_CollectionChanged;
+    }
 
     public override string ToString()
     {
@@ -83,6 +90,52 @@ internal partial class MiscViewModel : INotifyPropertyChanged, IDataErrorInfo
             }
 
             return string.Empty;
+        }
+    }
+
+    public KeyValuePair<int, string>[] Items { get; } = Enumerable.Range(0, 10)
+        .Select(i => new KeyValuePair<int, string>(i, $"Item {i}")).ToArray();
+
+    public ObservableCollection<KeyValuePair<int, string>> SelectedItemsAsObservableCollection { get; }
+
+    public object[] SelectedItemsAsArray
+    {
+        get => SelectedItemsAsObservableCollection.OfType<object>().ToArray();
+        set
+        {
+            if (SelectedItemsAsObservableCollection.OfType<object>().SequenceEqual(value))
+                return;
+
+            SelectedItemsAsObservableCollection.Clear();
+            foreach (var item in value)
+            {
+                SelectedItemsAsObservableCollection.Add((KeyValuePair<int, string>)item);
+            }
+        }
+    }
+
+    public KeyValuePair<int, string>[] SelectedItemsAsTypedArray
+    {
+        get => SelectedItemsAsObservableCollection.ToArray();
+        set
+        {
+            if (SelectedItemsAsObservableCollection.SequenceEqual(value))
+                return;
+
+            SelectedItemsAsObservableCollection.Clear();
+            foreach (var item in value)
+            {
+                SelectedItemsAsObservableCollection.Add((KeyValuePair<int, string>)item);
+            }
+        }
+    }
+
+    private void SelectedItemsAsObservableCollection_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    {
+        if (sender is ObservableCollection<KeyValuePair<int, string>> collection)
+        {
+            SelectedItemsAsArray = collection.OfType<object>().ToArray();
+            SelectedItemsAsTypedArray = collection.ToArray();
         }
     }
 }

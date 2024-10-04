@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Threading;
 
 using TomsToolbox.Essentials;
 
@@ -25,9 +26,6 @@ using TomsToolbox.Essentials;
 /// </remarks>
 public static class MultiSelectorExtensions
 {
-#pragma warning disable CA1825 // Avoid zero-length array allocations (=> Net45)
-    private static readonly IList _emptyObjectArray = new object[0];
-
     /// <summary>
     /// Gets the value of the <see cref="P:TomsToolbox.Wpf.MultiSelectorExtensions.SelectionBinding"/> attached property.
     /// </summary>
@@ -127,17 +125,18 @@ public static class MultiSelectorExtensions
 
         if (sourceSelection.IsFixedSize || sourceSelection.IsReadOnly)
         {
-            selector.SetSelectionBinding(_emptyObjectArray);
+            var elementType = sourceSelection.GetType().GetElementType();
+            selector.SetSelectionBinding(ArrayEmpty(elementType));
         }
         else
         {
-            sourceSelection.Clear();
+            Dispatcher.CurrentDispatcher.BeginInvoke(sourceSelection.Clear);
         }
     }
 
     private static void SynchronizeWithSource(this Selector selector, IList sourceSelection)
     {
-        var selectedItems = selector.GetSelectedItems();
+        var selectedItems = new HashSet<object>(selector.GetSelectedItems().Cast<object>());
 
         if ((selectedItems.Count == sourceSelection.Count) && sourceSelection.Cast<object>().All(selectedItems.Contains))
             return;
@@ -153,13 +152,13 @@ public static class MultiSelectorExtensions
         }
         else
         {
-            selector.AddItemsToSelection(sourceSelection);
+            selector.AddItemsToSelection(sourceSelection, sourceSelection);
         }
     }
 
-    private static void AddItemsToSelection(this Selector selector, IList itemsToSelect)
+    private static void AddItemsToSelection(this Selector selector, IList sourceSelection, IList itemsToSelect)
     {
-        var isSourceInvalid = false;
+        var isSourceInvalidAndReadOnly = false;
         var selectedItems = selector.GetSelectedItems();
         var itemsToRemove = new List<object?>();
 
@@ -172,9 +171,9 @@ public static class MultiSelectorExtensions
             else
             {
                 // The item is not present, e.g. because of filtering, and can't be selected at this time.
-                if (itemsToSelect.IsFixedSize || itemsToSelect.IsReadOnly)
+                if (sourceSelection.IsFixedSize || sourceSelection.IsReadOnly)
                 {
-                    isSourceInvalid = true;
+                    isSourceInvalidAndReadOnly = true;
                 }
                 else
                 {
@@ -183,13 +182,13 @@ public static class MultiSelectorExtensions
             }
         }
 
-        if (isSourceInvalid)
+        if (isSourceInvalidAndReadOnly)
         {
-            selector.SetSelectionBinding(ArrayCopy(selector.GetSelectedItems()));
+            selector.SetSelectionBinding(ArrayCopy(itemsToSelect.GetType().GetElementType(), selector.GetSelectedItems()));
         }
-        else
+        else if (itemsToRemove.Count > 0)
         {
-            itemsToRemove.ForEach(itemsToSelect.Remove);
+            Dispatcher.CurrentDispatcher.BeginInvoke(() => itemsToRemove.ForEach(sourceSelection.Remove));
         }
     }
 
@@ -199,7 +198,7 @@ public static class MultiSelectorExtensions
         var selectedItem = sourceSelection[0];
 
         // The item is not present, e.g. because of filtering, and can't be selected at this time.
-        if (selector.Items.Contains(selectedItem) != true)
+        if (!selector.Items.Contains(selectedItem!))
         {
             selector.ClearSourceSelection();
         }
@@ -215,10 +214,18 @@ public static class MultiSelectorExtensions
         }
     }
 
-    private static IList ArrayCopy(ICollection source)
+    private static IList ArrayEmpty(Type? elementType)
     {
-        var target = new object[source.Count];
-        source.CopyTo(target, 0);
+        return Array.CreateInstance(elementType ?? typeof(object), 0);
+    }
+
+    private static IList ArrayCopy(Type? elementType, IList source)
+    {
+        var target = Array.CreateInstance(elementType ?? typeof(object), source.Count);
+        for (var i = 0; i < source.Count; i++)
+        {
+            target.SetValue(source[i], i);
+        }
         return target;
     }
 
@@ -282,7 +289,7 @@ public static class MultiSelectorExtensions
                         if ((selectedItems.Count == 0) && (itemsToSelect.Count == 1))
                             _selector.SelectSingleItem(itemsToSelect);
                         else
-                            _selector.AddItemsToSelection(itemsToSelect);
+                            _selector.AddItemsToSelection((IList)sender, itemsToSelect);
                         break;
 
                     case NotifyCollectionChangedAction.Remove:
@@ -297,7 +304,7 @@ public static class MultiSelectorExtensions
                         else
                         {
                             selectedItems.RemoveRange(itemsToDeselect);
-                            _selector.AddItemsToSelection(itemsToSelect);
+                            _selector.AddItemsToSelection((IList)sender, itemsToSelect);
                         }
                         break;
                 }
@@ -331,12 +338,13 @@ public static class MultiSelectorExtensions
 
                 if (sourceSelection.IsFixedSize || sourceSelection.IsReadOnly)
                 {
-                    _selector.SetSelectionBinding(ArrayCopy(_selector.GetSelectedItems()));
+                    var elementType = sourceSelection.GetType().GetElementType();
+                    _selector.SetSelectionBinding(ArrayCopy(elementType, _selector.GetSelectedItems()));
                 }
                 else
                 {
-                    sourceSelection.RemoveRange(e.RemovedItems ?? _emptyObjectArray);
-                    sourceSelection.AddRange(e.AddedItems ?? _emptyObjectArray);
+                    sourceSelection.RemoveRange(e.RemovedItems ?? Array.Empty<object>());
+                    sourceSelection.AddRange(e.AddedItems ?? Array.Empty<object>());
                 }
             }
             finally
