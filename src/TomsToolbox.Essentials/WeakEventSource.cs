@@ -55,7 +55,7 @@ public class WeakEventSource<TEventArgs>
     /// </summary>
     /// <param name="sender">The sender.</param>
     /// <param name="e">The <see paramref="TEventArgs"/> instance containing the event data.</param>
-    public void Raise(object sender, TEventArgs e)
+    public void Raise(object? sender, TEventArgs e)
     {
         lock (_handlers)
         {
@@ -115,7 +115,7 @@ public class WeakEventSource<TEventArgs>
             _method = handler.GetMethodInfo();
         }
 
-        public bool Invoke(object sender, TEventArgs e)
+        public bool Invoke(object? sender, TEventArgs e)
         {
             object? target = null;
 
