@@ -1,3 +1,7 @@
+2.21.0
+- Fix nullable annotations in WeakEventSource
+- Add extension methods so we can use IServiceProvider with the same notation as IExportProvider.
+
 2.20.0
 - MultiSelectorExtensions support typed arrays as selection source.
 
