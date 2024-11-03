@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 
 using Microsoft.Extensions.DependencyInjection;
+using TomsToolbox.Essentials;
 
 /// <summary>
 /// Extension methods for Microsoft.Extensions.DependencyInjection
@@ -246,5 +247,81 @@ public static class ExtensionMethods
         {
             return null;
         }
+    }
+
+    /// <summary>
+    /// Gets the exported value of the specified type.
+    /// </summary>
+    /// <typeparam name="T">The type of the exported value.</typeparam>
+    /// <param name="serviceProvider">The service provider.</param>
+    /// <returns>The exported value of type <typeparamref name="T"/>.</returns>
+    public static T GetExportedValue<T>(this IServiceProvider serviceProvider) where T : class
+    {
+        return serviceProvider.GetRequiredService<T>();
+    }
+
+    /// <summary>
+    /// Gets the exported value of the specified type and contract name.
+    /// </summary>
+    /// <typeparam name="T">The type of the exported value.</typeparam>
+    /// <param name="serviceProvider">The service provider.</param>
+    /// <param name="contractName">The contract name.</param>
+    /// <returns>The exported value of type <typeparamref name="T"/>.</returns>
+    public static T GetExportedValue<T>(this IServiceProvider serviceProvider, string? contractName) where T : class
+    {
+        return serviceProvider.GetExportProvider().GetExportedValue<T>(contractName);
+    }
+
+    /// <summary>
+    /// Gets the exported value of the specified type, or default if not found.
+    /// </summary>
+    /// <typeparam name="T">The type of the exported value.</typeparam>
+    /// <param name="serviceProvider">The service provider.</param>
+    /// <returns>The exported value of type <typeparamref name="T"/> or default if not found.</returns>
+    public static T? GetExportedValueOrDefault<T>(this IServiceProvider serviceProvider) where T : class
+    {
+        return serviceProvider.GetService<T>();
+    }
+
+    /// <summary>
+    /// Gets the exported value of the specified type and contract name, or default if not found.
+    /// </summary>
+    /// <typeparam name="T">The type of the exported value.</typeparam>
+    /// <param name="serviceProvider">The service provider.</param>
+    /// <param name="contractName">The contract name.</param>
+    /// <returns>The exported value of type <typeparamref name="T"/> or default if not found.</returns>
+    public static T? GetExportedValueOrDefault<T>(this IServiceProvider serviceProvider, string? contractName) where T : class
+    {
+        return serviceProvider.GetExportProvider().GetExportedValueOrDefault<T>(contractName);
+    }
+
+    /// <summary>
+    /// Gets the exported values of the specified type.
+    /// </summary>
+    /// <typeparam name="T">The type of the exported values.</typeparam>
+    /// <param name="serviceProvider">The service provider.</param>
+    /// <returns>An enumerable of exported values of type <typeparamref name="T"/>.</returns>
+    public static IEnumerable<T> GetExportedValues<T>(this IServiceProvider serviceProvider) where T : class
+    {
+        return serviceProvider.GetServices<T>().ExceptNullItems();
+    }
+
+    /// <summary>
+    /// Gets the exported values of the specified type and contract name.
+    /// </summary>
+    /// <typeparam name="T">The type of the exported values.</typeparam>
+    /// <param name="serviceProvider">The service provider.</param>
+    /// <param name="contractName">The contract name.</param>
+    /// <returns>An enumerable of exported values of type <typeparamref name="T"/>.</returns>
+    public static IEnumerable<T> GetExportedValues<T>(this IServiceProvider serviceProvider, string? contractName) where T : class
+    {
+        return serviceProvider.GetExportProvider().GetExportedValues<T>(contractName);
+    }
+
+#pragma warning disable CA1859 // Use concrete types when possible for improved performance => This method is required to explicitly cast the IServiceProvider to an IExportProvider
+    private static IExportProvider GetExportProvider(this IServiceProvider serviceProvider)
+#pragma warning restore CA1859 // Use concrete types when possible for improved performance
+    {
+        return new ExportProviderAdapter(serviceProvider);
     }
 }
