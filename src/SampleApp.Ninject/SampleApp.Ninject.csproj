@@ -6,6 +6,7 @@
     <UseWPF>true</UseWPF>
     <Tags>Sample</Tags>
     <ApplicationIcon>..\SampleApp\16x16.ico</ApplicationIcon>
+    <NoWarn>NU1903;NU1902</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup>

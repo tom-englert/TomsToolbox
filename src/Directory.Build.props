@@ -29,7 +29,7 @@
     <AssemblyOriginatorKeyFile>..\TomsToolbox.snk</AssemblyOriginatorKeyFile>
     <TargetsForTfmSpecificContentInPackage>IncludeExternalAnnotations</TargetsForTfmSpecificContentInPackage>
     <PackageOutputPath>$(MSBuildThisFileDirectory)..\Deploy</PackageOutputPath>
-    <NoWarn>NU5118;NU1701</NoWarn>
+    <NoWarn>NU5118</NoWarn>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
 

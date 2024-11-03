@@ -4,6 +4,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml.Serialization;
@@ -156,11 +157,11 @@ public class MapSource : IImageProvider
 
                     var uri = _owner.GetImageUri(_mapTile);
 
-                    using var webClient = new WebClient();
+                    using var webClient = new HttpClient();
 
                     var bitmap = new BitmapImage();
                     bitmap.BeginInit();
-                    bitmap.StreamSource = new MemoryStream(webClient.DownloadData(uri));
+                    bitmap.StreamSource = new MemoryStream(webClient.GetByteArrayAsync(uri).Result);
                     bitmap.EndInit();
                     bitmap.Freeze();
 
