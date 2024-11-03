@@ -4,7 +4,7 @@
              Handle reporting of a not disposed object.<p />
              Using this pattern is a good practice to avoid code where disposable objects get never disposed.<p />
              Calling this method will raise the <a href="D560C706.htm">NotDisposedObject</a> event if any event handler is attached;
-             otherwise it will throw an <span class="noLink">InvalidOperationException</span> if a debugger is attached.
+             otherwise it will throw an <a href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception" target="_blank" rel="noopener noreferrer">InvalidOperationException</a> if a debugger is attached.
              If the application does not run in a debugger and no event handler is attached, calling this method does nothing.
              <br />(Defined by <a href="B1B9222.htm">Disposable</a>)</td></tr><tr><td><img src="../icons/pubExtension.gif" alt="Public Extension Method" title="Public Extension Method" /></td><td><a href="6FC9D90E.htm">SafeCast<span id="LSTD946E6F_0" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>T<span id="LSTD946E6F_1" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span></a></td><td>
             Performs a cast from object to <span class="typeparameter">T</span>, avoiding possible null violations if <span class="typeparameter">T</span> is a value type.
