@@ -83,6 +83,7 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
 
     private bool _lastScrollWasTouchPad;
     private int _lastScrollingTick;
+    private bool _hasSubscribedToEvents;
 
     private uint _animationIdCounter;
     private DoubleAnimation? _currentAnimation;
@@ -93,6 +94,40 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
     {
         base.OnAssociatedObjectLoaded();
 
+        SetupScrollViewer();
+    }
+
+    /// <inheritdoc />
+    protected override void OnAssociatedObjectUnloaded()
+    {
+        base.OnAssociatedObjectUnloaded();
+
+        UnloadScrollViewer();
+    }
+
+    /// <inheritdoc />
+    protected override void OnAttached()
+    {
+        base.OnAttached();
+        
+        // Also call SetupScrollViewer here, because the object may already be loaded when the behavior is attached.
+        SetupScrollViewer();
+    }
+    
+    /// <inheritdoc />
+    protected override void OnDetaching()
+    {
+        base.OnDetaching();
+        
+        // Also call UnloadScrollViewer here, because the object may still be loaded when the behavior is detached.
+        UnloadScrollViewer();
+    }
+
+    private void SetupScrollViewer()
+    {
+        if (_hasSubscribedToEvents)
+            return;
+        
         _scrollViewer = AssociatedObject.VisualDescendantsAndSelf().OfType<ScrollViewer>().FirstOrDefault();
 
         if (_scrollViewer == null)
@@ -103,18 +138,20 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
 
         _horizontalOffsetTarget = _scrollViewer.HorizontalOffset;
         _verticalOffsetTarget = _scrollViewer.VerticalOffset;
+
+        _hasSubscribedToEvents = true;
     }
-
-    /// <inheritdoc />
-    protected override void OnAssociatedObjectUnloaded()
+    
+    private void UnloadScrollViewer()
     {
-        base.OnAssociatedObjectUnloaded();
-
         if (_scrollViewer == null)
             return;
 
         _scrollViewer.PreviewMouseWheel -= ScrollViewer_PreviewMouseWheel;
         _scrollViewer.ScrollChanged -= ScrollViewer_ScrollChanged;
+
+        _scrollViewer = null;
+        _hasSubscribedToEvents = false;
     }
 
     #region DependencyProperties
