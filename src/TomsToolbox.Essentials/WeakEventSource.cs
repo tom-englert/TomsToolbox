@@ -60,6 +60,7 @@ public class WeakEventSource<TEventArgs>
         lock (_handlers)
         {
             var garbageCollectedHandlers = _handlers
+                .ToArray() // create a copy to avoid side effects when modifying the list while iterating
                 .Where(h => !h.Invoke(sender, e))
                 .ToArray();
 
@@ -104,16 +105,10 @@ public class WeakEventSource<TEventArgs>
 
     }
 
-    private class WeakDelegate
+    private class WeakDelegate(Delegate handler)
     {
-        private readonly WeakReference? _weakTarget;
-        private readonly MethodInfo _method;
-
-        public WeakDelegate(Delegate handler)
-        {
-            _weakTarget = handler.Target != null ? new WeakReference(handler.Target) : null;
-            _method = handler.GetMethodInfo();
-        }
+        private readonly WeakReference? _weakTarget = handler.Target != null ? new WeakReference(handler.Target) : null;
+        private readonly MethodInfo _method = handler.GetMethodInfo();
 
         public bool Invoke(object? sender, TEventArgs e)
         {
@@ -126,7 +121,7 @@ public class WeakEventSource<TEventArgs>
                     return false;
             }
 
-            _method.Invoke(target, new[] { sender, e });
+            _method.Invoke(target, [sender, e]);
 
             return true;
         }
