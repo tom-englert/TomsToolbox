@@ -1,3 +1,7 @@
+2.22.0
+- Fix issues with weak event source when unsubscribing while raising events. (see https://github.com/icsharpcode/ILSpy/issues/3402)
+- Merge pull request #20 from Hertzole: Fix not being able to change advanced scroll behavior after setting it
+
 2.21.0
 - Fix nullable annotations in WeakEventSource
 - Add extension methods so we can use IServiceProvider with the same notation as IExportProvider.
