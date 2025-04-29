@@ -1,3 +1,6 @@
+2.22.1
+- Avoid warning NU1608 for System.Composition.AttributedModel in projects using TomsToolbox.Wpf.Composition.AttributedModel
+
 2.22.0
 - Fix issues with weak event source when unsubscribing while raising events. (see https://github.com/icsharpcode/ILSpy/issues/3402)
 - Merge pull request #20 from Hertzole: Fix not being able to change advanced scroll behavior after setting it
