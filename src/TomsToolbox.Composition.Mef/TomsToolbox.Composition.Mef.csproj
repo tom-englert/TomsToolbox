@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-    <PackageReference Include="System.ComponentModel.Composition" Version="8.0.0" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="8.0.0" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" IsPinned="True" Justification="Minimum requirement for backward compatibility" />
   </ItemGroup>
 
   <ItemGroup>

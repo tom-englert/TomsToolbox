@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-    <PackageReference Include="System.Composition" Version="8.0.0" />
+    <PackageReference Include="System.Composition" Version="8.0.0" IsPinned="True" Justification="Minimum requirement for backward compatibility" />
   </ItemGroup>
 
   <ItemGroup>

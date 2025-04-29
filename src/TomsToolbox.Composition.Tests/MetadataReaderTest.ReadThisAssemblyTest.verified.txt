@@ -5,7 +5,7 @@
       {
         "ContractName": null,
         "ContractType": "TomsToolbox.Composition.Tests.IInterface1, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=9.0.0.4, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       }
     ],
     "IsShared": false,
@@ -17,7 +17,7 @@
       {
         "ContractName": "Contract",
         "ContractType": "TomsToolbox.Composition.Tests.IInterface1, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=9.0.0.4, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       }
     ],
     "IsShared": false,
@@ -29,7 +29,7 @@
       {
         "ContractName": "Contract",
         "ContractType": "TomsToolbox.Composition.Tests.IInterface2, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=9.0.0.4, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       }
     ],
     "IsShared": false,
@@ -41,7 +41,7 @@
       {
         "ContractName": null,
         "ContractType": "TomsToolbox.Composition.Tests.IInterface2, TomsToolbox.Composition.Tests, Version=2.0.0.0, Culture=neutral, PublicKeyToken=60b39f873a8e3fc2",
-        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        "TypeId": "System.Composition.ExportAttribute, System.Composition.AttributedModel, Version=9.0.0.4, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
       }
     ],
     "IsShared": false,
