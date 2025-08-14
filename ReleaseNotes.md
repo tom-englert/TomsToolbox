@@ -1,3 +1,6 @@
+2.22.2
+- Fix #21: AdvancedScrollWheelBehavior sometimes scrolls to wrong target position (see https://github.com/icsharpcode/ILSpy/issues/3462)
+
 2.22.1
 - Avoid warning NU1608 for System.Composition.AttributedModel in projects using TomsToolbox.Wpf.Composition.AttributedModel
 
