@@ -330,19 +330,25 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
 
     private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
     {
-        Debug.WriteLine($"ScrollChanged: {e.VerticalOffset} => {IsAnimationRunning}");
+        var scrollViewer = (ScrollViewer)sender;
+
+        // Use the current offsets from the scroll viewer, event args are not reliable if there are nested scroll viewers.
+        var horizontalOffsetTarget = scrollViewer.HorizontalOffset;
+        var verticalOffsetTarget = scrollViewer.VerticalOffset;
+        
+        Debug.WriteLine($"ScrollChanged: {_verticalOffsetTarget} => {verticalOffsetTarget} ({IsAnimationRunning})");
 
         if (IsAnimationRunning)
             return;
-
-        if (Math.Abs(e.HorizontalOffset - _horizontalOffsetTarget) >= 1.0)
+        
+        if (Math.Abs(horizontalOffsetTarget - _horizontalOffsetTarget) >= 1.0)
         {
-            _horizontalOffsetTarget = e.HorizontalOffset;
+            _horizontalOffsetTarget = horizontalOffsetTarget;
         }
 
-        if (Math.Abs(e.VerticalOffset - _verticalOffsetTarget) >= 1.0)
+        if (Math.Abs(verticalOffsetTarget - _verticalOffsetTarget) >= 1.0)
         {
-            _verticalOffsetTarget = e.VerticalOffset;
+            _verticalOffsetTarget = verticalOffsetTarget;
         }
     }
 
@@ -366,7 +372,7 @@ public class AdvancedScrollWheelBehavior : FrameworkElementBehavior<FrameworkEle
         var ticksSinceLastEvent = tickCount - _lastScrollingTick;
         _lastScrollingTick = tickCount;
 
-        Debug.WriteLine($"Scroll: {scrollDelta}, {ticksSinceLastEvent}");
+        Debug.WriteLine($"Scroll: {scrollDelta}, {_verticalOffsetTarget}, ({ticksSinceLastEvent})");
 
         var isTouchpadScrolling = scrollDelta % Mouse.MouseWheelDeltaForOneLine != 0
             || (_lastScrollWasTouchPad && (ticksSinceLastEvent < MillisecondsBetweenTouchpadScrolling));
