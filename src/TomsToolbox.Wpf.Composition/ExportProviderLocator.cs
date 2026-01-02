@@ -30,11 +30,7 @@ public static class ExportProviderLocator
     /// <exception cref="System.InvalidOperationException">Export provider must be registered in the visual tree</exception>
     public static IExportProvider GetExportProvider(this DependencyObject obj)
     {
-        var exportProvider = (IExportProvider?)obj.GetValue(ExportProviderProperty);
-        if (exportProvider == null)
-            throw new InvalidOperationException(GetMissingExportProviderMessage(obj));
-
-        return exportProvider;
+        return (IExportProvider)(obj.GetValue(ExportProviderProperty) ?? throw new InvalidOperationException(GetMissingExportProviderMessage(obj)));
     }
     /// <summary>
     /// Gets the active export provider for the specified object, or <c>null</c> if no export provider is registered.

@@ -1,4 +1,4 @@
-namespace TomsToolbox.Wpf.Composition;
+﻿namespace TomsToolbox.Wpf.Composition;
 
 using System;
 using System.Linq;
@@ -12,7 +12,10 @@ using TomsToolbox.Composition;
 public static class ExportProviderLocator
 {
     // Dummy owner class required for Avalonia RegisterAttached (can't use static class as TOwner)
+    // ReSharper disable once ClassNeverInstantiated.Local
     private sealed class Owner : AvaloniaObject { }
+
+    private static IExportProvider? _defaultExportProvider;
 
     /// <summary>
     /// Registers the specified export provider.
@@ -25,8 +28,6 @@ public static class ExportProviderLocator
         _defaultExportProvider = exportProvider;
     }
 
-    private static IExportProvider? _defaultExportProvider;
-
     /// <summary>
     /// Gets the active export provider for the specified object.
     /// </summary>
@@ -37,17 +38,8 @@ public static class ExportProviderLocator
     /// <exception cref="System.InvalidOperationException">Export provider must be registered in the visual tree</exception>
     public static IExportProvider GetExportProvider(this AvaloniaObject obj)
     {
-        var exportProvider = (IExportProvider?)obj.GetValue(ExportProviderProperty);
-        if (exportProvider == null)
-        {
-            // Fall back to the default registered provider
-            exportProvider = _defaultExportProvider;
-        }
-        
-        if (exportProvider == null)
-            throw new InvalidOperationException(GetMissingExportProviderMessage(obj));
-
-        return exportProvider;
+        // Fall back to the default registered provider
+        return (obj.GetValue(ExportProviderProperty) ?? _defaultExportProvider) ?? throw new InvalidOperationException(GetMissingExportProviderMessage(obj));
     }
     /// <summary>
     /// Gets the active export provider for the specified object, or <c>null</c> if no export provider is registered.
@@ -58,12 +50,7 @@ public static class ExportProviderLocator
     /// </returns>
     public static IExportProvider? TryGetExportProvider(this AvaloniaObject obj)
     {
-        var exportProvider = (IExportProvider?)obj.GetValue(ExportProviderProperty);
-        if (exportProvider == null)
-        {
-            exportProvider = _defaultExportProvider;
-        }
-        return exportProvider;
+        return obj.GetValue(ExportProviderProperty) ?? _defaultExportProvider;
     }
     /// <summary>
     /// Sets the export provider.
@@ -83,10 +70,7 @@ public static class ExportProviderLocator
     /// </summary>
     /// </AttachedPropertyComments>
     public static readonly AttachedProperty<IExportProvider?> ExportProviderProperty =
-        AvaloniaProperty.RegisterAttached<Owner, AvaloniaObject, IExportProvider?>(
-            "ExportProvider",
-            defaultValue: null,
-            inherits: true);
+        AvaloniaProperty.RegisterAttached<Owner, AvaloniaObject, IExportProvider?>("ExportProvider", inherits: true);
 
     /// <summary>
     /// Gets the message to show when an export provider could not be located in the visual tree.

@@ -4,6 +4,7 @@
     <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RootNamespace>TomsToolbox.Wpf</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>

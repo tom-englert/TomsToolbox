@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <DisableFody>true</DisableFody>
+    <RootNamespace>TomsToolbox.Wpf.Composition</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -14,8 +14,6 @@
   <ItemGroup>
     <Compile Include="..\Nullable.cs" Link="Nullable.cs" />
   </ItemGroup>
-
-
 
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj" />

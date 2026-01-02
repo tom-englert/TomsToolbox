@@ -1,6 +1,4 @@
-﻿#pragma warning disable IDE0130
-// ReSharper disable once CheckNamespace : Keep it namespace-compatible with the WPF pendant.
-namespace TomsToolbox.Wpf;
+﻿namespace TomsToolbox.Wpf;
 
 /// <summary>
 /// Extensions for the <see cref="Dispatcher"/> class.

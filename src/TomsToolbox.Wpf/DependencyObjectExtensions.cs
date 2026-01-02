@@ -21,8 +21,9 @@ public static class DependencyObjectExtensions
     /// <typeparam name="T"></typeparam>
     /// <param name="self">The dependency object from which to get the value.</param>
     /// <param name="property">The property to get.</param>
-    /// <returns>The value safely casted to <typeparamref name="T"/></returns>
-    public static T GetValue<T>(this DependencyObject self, DependencyProperty property)
+    /// <returns>The value safely cast to <typeparamref name="T"/></returns>
+    // ReSharper disable once ReturnTypeCanBeNotNullable
+    public static T? GetValue<T>(this DependencyObject self, DependencyProperty property)
     {
         return self.GetValue(property).SafeCast<T>();
     }
@@ -40,22 +41,15 @@ public static class DependencyObjectExtensions
         return new DependencyPropertyEventWrapper<T>(dependencyObject, property);
     }
 
-    private class DependencyPropertyEventWrapper<T> : INotifyChanged
+    private class DependencyPropertyEventWrapper<T>(T dependencyObject, DependencyProperty property) : INotifyChanged
         where T : DependencyObject
     {
-        private readonly T _dependencyObject;
-        private readonly DependencyPropertyDescriptor? _dependencyPropertyDescriptor;
-
-        public DependencyPropertyEventWrapper(T dependencyObject, DependencyProperty property)
-        {
-            _dependencyObject = dependencyObject;
-            _dependencyPropertyDescriptor = DependencyPropertyDescriptor.FromProperty(property, typeof(T));
-        }
+        private readonly DependencyPropertyDescriptor? _dependencyPropertyDescriptor = DependencyPropertyDescriptor.FromProperty(property, typeof(T));
 
         public event EventHandler Changed
         {
-            add => _dependencyPropertyDescriptor?.AddValueChanged(_dependencyObject, value);
-            remove => _dependencyPropertyDescriptor?.RemoveValueChanged(_dependencyObject, value);
+            add => _dependencyPropertyDescriptor?.AddValueChanged(dependencyObject, value);
+            remove => _dependencyPropertyDescriptor?.RemoveValueChanged(dependencyObject, value);
         }
     }
 
@@ -83,23 +77,10 @@ public static class DependencyObjectExtensions
     /// </remarks>
     public static FrameworkElement GetRootVisual(this DependencyObject item)
     {
-        var hwndSource = (HwndSource)PresentationSource.FromDependencyObject(item);
-        if (hwndSource == null)
-        {
-            throw new ArgumentException(@"Item not part of a valid visual tree.", nameof(item));
-        }
-        var compositionTarget = hwndSource.CompositionTarget;
-        if (compositionTarget == null)
-        {
-            throw new ArgumentException(@"Item not part of a valid visual tree.", nameof(item));
-        }
-
-        var rootVisual = (FrameworkElement)compositionTarget.RootVisual;
-        if (rootVisual == null)
-        {
-            throw new ArgumentException(@"Item not part of a valid visual tree.", nameof(item));
-        }
-
+        var hwndSource = (HwndSource)(PresentationSource.FromDependencyObject(item) ?? throw new ArgumentException("Item not part of a valid visual tree.", nameof(item)));
+        var compositionTarget = hwndSource.CompositionTarget ?? throw new ArgumentException("Item not part of a valid visual tree.", nameof(item));
+        var rootVisual = (FrameworkElement)compositionTarget.RootVisual ?? throw new ArgumentException("Item not part of a valid visual tree.", nameof(item));
+    
         return rootVisual;
     }
 
@@ -130,10 +111,11 @@ public static class DependencyObjectExtensions
     /// <returns>The ancestor list.</returns>
     public static IEnumerable<DependencyObject> VisualAncestorsAndSelf(this DependencyObject self)
     {
-        while (self != null)
+        DependencyObject? target = self;
+        while (target != null)
         {
-            yield return self;
-            self = VisualTreeHelper.GetParent(self);
+            yield return target;
+            target = VisualTreeHelper.GetParent(target);
         }
     }
 
@@ -155,10 +137,11 @@ public static class DependencyObjectExtensions
     /// <remarks>If the start element is not in the logical tree, this method return elements from the visual tree until the first element from the logical tree is found.</remarks>
     public static IEnumerable<DependencyObject> AncestorsAndSelf(this DependencyObject self)
     {
-        while (self != null)
+        DependencyObject? target = self;
+        while (target != null)
         {
-            yield return self;
-            self = LogicalTreeHelper.GetParent(self) ?? VisualTreeHelper.GetParent(self);
+            yield return target;
+            target = LogicalTreeHelper.GetParent(target) ?? VisualTreeHelper.GetParent(target);
         }
     }
 
