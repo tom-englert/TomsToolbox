@@ -2,7 +2,6 @@
 
 using System;
 using System.Threading;
-using System.Windows.Threading;
 
 /// <summary>
 /// Implements a simple throttle that uses the dispatcher to delay the target action.<para/>
@@ -11,7 +10,7 @@ using System.Windows.Threading;
 /// </summary>
 public class DispatcherThrottle
 {
-    private readonly Dispatcher _dispatcher = Dispatcher.CurrentDispatcher;
+    private readonly Dispatcher _dispatcher = DispatcherExtensions.CurrentDispatcher;
     private readonly Action _target;
     private readonly DispatcherPriority _priority;
 

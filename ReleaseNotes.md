@@ -1,3 +1,6 @@
+Unreleased
+- Add TomsToolbox.Avalonia module with core MVVM helpers for Avalonia.
+
 2.22.2
 - Fix #21: AdvancedScrollWheelBehavior sometimes scrolls to wrong target position (see https://github.com/icsharpcode/ILSpy/issues/3462)
 
@@ -633,4 +636,3 @@
 1.0.0.0
 
 - Initial version.
-

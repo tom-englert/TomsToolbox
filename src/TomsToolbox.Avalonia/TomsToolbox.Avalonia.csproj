@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RootNamespace>TomsToolbox.Wpf</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Title>Tom's Toolbox Avalonia Module</Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Nullable.cs" Link="Nullable.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\TomsToolbox.Wpf\DispatcherThrottle.cs" Link="DispatcherThrottle.cs" />
+    <Compile Include="..\TomsToolbox.Wpf\ObservableObject.cs" Link="ObservableObject.cs" />
+    <Compile Include="..\TomsToolbox.Wpf\ObservableObjectBase.cs" Link="ObservableObjectBase.cs" />
+    <Compile Include="..\TomsToolbox.Wpf\PropertyDependencyAttribute.cs" Link="PropertyDependencyAttribute.cs" />
+    <Compile Include="..\TomsToolbox.Wpf\Throttle.cs" Link="Throttle.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.9" />
+    <PackageReference Include="Fody" Version="6.9.2" PrivateAssets="All" />
+    <PackageReference Include="JetBrains.Annotations" Version="2024.3.0" PrivateAssets="All" />
+    <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.17.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+</Project>

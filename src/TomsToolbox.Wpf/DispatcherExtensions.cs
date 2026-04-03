@@ -2,6 +2,7 @@
 
 using System;
 using System.Reflection;
+using System.Windows;
 using System.Windows.Threading;
 
 /// <summary>
@@ -9,6 +10,15 @@ using System.Windows.Threading;
 /// </summary>
 public static class DispatcherExtensions
 {
+    /// <summary>Gets the <see cref="Dispatcher" /> for the thread currently executing and creates a new <see cref="Dispatcher" /> if one is not already associated with the thread.</summary>
+    /// <returns>The dispatcher associated with the current thread.</returns>
+    public static Dispatcher CurrentDispatcher => Dispatcher.CurrentDispatcher;
+
+    /// <summary>Gets the <see cref="Dispatcher" /> for the application's main thread.</summary>
+    /// <returns>The dispatcher associated with applications main thread</returns>
+    /// <throws cref="InvalidOperationException">The application is not running.</throws>
+    public static Dispatcher UIThreadDispatcher => Application.Current?.Dispatcher ?? throw new InvalidOperationException("The application is not running.");
+
     /// <summary>
     /// Invokes the specified method in the dispatcher thread.
     /// </summary>

@@ -14,6 +14,8 @@ Sources of version 1.x can be found [here](https://github.com/tom-englert/TomsTo
 
 Contains many extension methods, a WPF Composite MVVM framework, Controls etc...
 
+Also includes a small Avalonia-focused module with common MVVM primitives (ObservableObject, PropertyDependency, Throttle, DispatcherThrottle) intended for cross-platform UI code.
+
 - Read the [documentation](Documentation/Readme.md) to get an overview of what is in this library and how this library can support you.
 - Browse the detailed [API-documentation](http://tom-englert.github.io/TomsToolbox) to find out how to use the individual objects.
 - Use [NuGet](https://www.nuget.org/packages?q=tomstoolbox) to integrate the library into your projects.

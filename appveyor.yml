@@ -1,9 +1,0 @@
-image: Visual Studio 2022
-configuration: Release
-platform: Any CPU
-#install:
-#- cmd: git submodule update --init --recursive
-build_script:
-- cmd: MSBuild -restore /p:Configuration=Release /verbosity:minimal src/TomsToolbox.sln
-artifacts:
-- path: Deploy/*.nupkg

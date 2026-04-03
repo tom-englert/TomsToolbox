@@ -1,13 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32120.378
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11312.210
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B35F4812-32F1-469C-8AFC-A58B3D3A62C0}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		..\.gitignore = ..\.gitignore
-		..\appveyor.yml = ..\appveyor.yml
 		..\azure-pipelines.yml = ..\azure-pipelines.yml
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
@@ -25,6 +24,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Desktop", "TomsToolbox.Desktop\TomsToolbox.Desktop.csproj", "{3647CD2D-2A4E-4859-9BBD-606A73C14801}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf", "TomsToolbox.Wpf\TomsToolbox.Wpf.csproj", "{EC9F9418-877F-49BA-AF91-F456FBC5AD57}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Avalonia", "TomsToolbox.Avalonia\TomsToolbox.Avalonia.csproj", "{19C5D937-BCF9-4B4C-BD4F-8126705D333F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Wpf.Styles", "TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj", "{E5D732D2-0294-48FD-8314-63DC1A9155FE}"
 EndProject
@@ -78,6 +79,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Ana
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TomsToolbox.Composition.Analyzer.Tests", "TomsToolbox.Composition.Analyzer.Tests\TomsToolbox.Composition.Analyzer.Tests.csproj", "{DFBCEE05-910E-469F-9B00-B45CADD4C0FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomsToolbox.Avalonia.Composition", "TomsToolbox.Avalonia.Composition\TomsToolbox.Avalonia.Composition.csproj", "{2A138D27-6182-2F6C-FBDC-658B1AAAF29A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,6 +99,10 @@ Global
 		{EC9F9418-877F-49BA-AF91-F456FBC5AD57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC9F9418-877F-49BA-AF91-F456FBC5AD57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC9F9418-877F-49BA-AF91-F456FBC5AD57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19C5D937-BCF9-4B4C-BD4F-8126705D333F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19C5D937-BCF9-4B4C-BD4F-8126705D333F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19C5D937-BCF9-4B4C-BD4F-8126705D333F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19C5D937-BCF9-4B4C-BD4F-8126705D333F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E5D732D2-0294-48FD-8314-63DC1A9155FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E5D732D2-0294-48FD-8314-63DC1A9155FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5D732D2-0294-48FD-8314-63DC1A9155FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -198,6 +205,10 @@ Global
 		{DFBCEE05-910E-469F-9B00-B45CADD4C0FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFBCEE05-910E-469F-9B00-B45CADD4C0FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFBCEE05-910E-469F-9B00-B45CADD4C0FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A138D27-6182-2F6C-FBDC-658B1AAAF29A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A138D27-6182-2F6C-FBDC-658B1AAAF29A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A138D27-6182-2F6C-FBDC-658B1AAAF29A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A138D27-6182-2F6C-FBDC-658B1AAAF29A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

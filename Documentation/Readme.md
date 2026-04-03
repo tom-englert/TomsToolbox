@@ -39,3 +39,7 @@ A lightweight but powerful Visual Composition framework to decouple components a
 
 ### [TomsToolbox.Wpf.Styles](Topics/TomsToolbox.Wpf.Styles.md) 
 Themeable modern styles for most standard WPF components by adding just one line of code to your project.
+
+## TomsToolbox.Avalonia
+
+Core MVVM helpers for Avalonia applications, mirroring the ObservableObject and throttling utilities from the WPF module.

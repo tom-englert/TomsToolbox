@@ -1,7 +1,6 @@
 ﻿namespace TomsToolbox.Wpf;
 
 using System;
-using System.Windows.Threading;
 
 /// <summary>
 /// Implements a simple timed throttle.<para/>
