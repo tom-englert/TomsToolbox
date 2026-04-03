@@ -270,3 +270,171 @@ public class Mef2AttributeUsageAnalyzerTest
         await VerifyCS.VerifyAnalyzerAsync(test, expected1, expected2);
     }
 }
+
+public class ImportingConstructorNotLargestRuleAnalyzerTest
+{
+    [Fact]
+    public async Task Mef1_NoErrorWhenImportingConstructorHasMostParameters()
+    {
+        var test = @"
+    using System;
+    using System.ComponentModel.Composition;
+
+    namespace ConsoleApplication1
+    {
+        [Export]
+        [PartCreationPolicy(CreationPolicy.Shared)]
+        class TypeName
+        {
+            TypeName() {}
+
+            [ImportingConstructor]
+            public TypeName(int param1) {}
+        }
+    }";
+
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
+    public async Task Mef1_NoErrorWhenOnlySingleNonDefaultConstructorWithImportingConstructor()
+    {
+        var test = @"
+    using System;
+    using System.ComponentModel.Composition;
+
+    namespace ConsoleApplication1
+    {
+        [Export]
+        [PartCreationPolicy(CreationPolicy.Shared)]
+        class TypeName
+        {
+            [ImportingConstructor]
+            public TypeName(int param1) {}
+        }
+    }";
+
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
+    public async Task Mef1_ErrorWhenImportingConstructorDoesNotHaveMostParameters()
+    {
+        var test = @"
+    using System;
+    using System.ComponentModel.Composition;
+
+    namespace ConsoleApplication1
+    {
+        [Export]
+        [PartCreationPolicy(CreationPolicy.Shared)]
+        class {|#0:TypeName|}
+        {
+            [ImportingConstructor]
+            public TypeName() {}
+
+            public TypeName(int param1) {}
+        }
+    }";
+
+        var expected = VerifyCS.Diagnostic(ExtensionMethods.ImportingConstructorNotLargestRule.Id).WithLocation(0);
+
+        await VerifyCS.VerifyAnalyzerAsync(test, expected);
+    }
+
+    [Fact]
+    public async Task Mef1_NoErrorWhenAllConstructorsHaveSameParameterCount()
+    {
+        var test = @"
+    using System;
+    using System.ComponentModel.Composition;
+
+    namespace ConsoleApplication1
+    {
+        [Export]
+        [PartCreationPolicy(CreationPolicy.Shared)]
+        class TypeName
+        {
+            TypeName(string param1) {}
+
+            [ImportingConstructor]
+            public TypeName(int param1) {}
+        }
+    }";
+
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
+    public async Task Mef2_NoErrorWhenImportingConstructorHasMostParameters()
+    {
+        var test = @"
+    using System;
+    using System.Composition;
+
+    namespace ConsoleApplication1
+    {
+        [Export]
+        [Shared]
+        class TypeName
+        {
+            TypeName() {}
+
+            [ImportingConstructor]
+            public TypeName(int param1) {}
+        }
+    }";
+
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
+    public async Task Mef2_ErrorWhenImportingConstructorDoesNotHaveMostParameters()
+    {
+        var test = @"
+    using System;
+    using System.Composition;
+
+    namespace ConsoleApplication1
+    {
+        [Export]
+        [Shared]
+        class {|#0:TypeName|}
+        {
+            [ImportingConstructor]
+            public TypeName() {}
+
+            public TypeName(int param1) {}
+        }
+    }";
+
+        var expected = VerifyCS.Diagnostic(ExtensionMethods.ImportingConstructorNotLargestRule.Id).WithLocation(0);
+
+        await VerifyCS.VerifyAnalyzerAsync(test, expected);
+    }
+
+    [Fact]
+    public async Task Mef2_ErrorWhenImportingConstructorHasFewerParametersThanLargest()
+    {
+        var test = @"
+    using System;
+    using System.Composition;
+
+    namespace ConsoleApplication1
+    {
+        [Export]
+        [Shared]
+        class {|#0:TypeName|}
+        {
+            [ImportingConstructor]
+            public TypeName(int param1) {}
+
+            public TypeName(int param1, int param2) {}
+        }
+    }";
+
+        var expected = VerifyCS.Diagnostic(ExtensionMethods.ImportingConstructorNotLargestRule.Id).WithLocation(0);
+
+        await VerifyCS.VerifyAnalyzerAsync(test, expected);
+    }
+}

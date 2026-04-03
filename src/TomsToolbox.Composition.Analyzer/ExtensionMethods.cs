@@ -1,10 +1,10 @@
 ﻿global using static TomsToolbox.Composition.Analyzer.ExtensionMethods;
 
+namespace TomsToolbox.Composition.Analyzer;
+
 using System.Collections.Immutable;
 
 using Microsoft.CodeAnalysis;
-
-namespace TomsToolbox.Composition.Analyzer;
 
 public static class ExtensionMethods
 {
@@ -64,7 +64,13 @@ public static class ExtensionMethods
 
     public static readonly DiagnosticDescriptor NoPublicConstructorRule = new("MEF008",
         "No public constructor",
-        "Exported classes should have at least one public constructor; if one is marked with the ImportingConstructor attribute, it must be public.",
+        "Exported classes should have at least one public constructor; if one is marked with the ImportingConstructor attribute, it should be public to behave consistently across all DI containers.",
+        Category,
+        DiagnosticSeverity.Warning, isEnabledByDefault: true);
+
+    public static readonly DiagnosticDescriptor ImportingConstructorNotLargestRule = new("MEF009",
+        "ImportingConstructor should have the most parameters",
+        "When a class has multiple constructors, the constructor marked with ImportingConstructor should have the most parameters to behave consistently across all DI containers.",
         Category,
         DiagnosticSeverity.Warning, isEnabledByDefault: true);
 
@@ -76,7 +82,8 @@ public static class ExtensionMethods
         MultipleCreationPolicyRule,
         NoImportingConstructorRule,
         MultipleImportingConstructorsRule,
-        NoPublicConstructorRule
+        NoPublicConstructorRule,
+        ImportingConstructorNotLargestRule
     );
 
 
@@ -118,8 +125,7 @@ public static class ExtensionMethods
 
     public static bool IsCompositionType(this INamedTypeSymbol type)
     {
-        return type.ContainingNamespace.ToDisplayString(FullNameDisplayFormat) is "System.ComponentModel.Composition"
-            or "System.Composition";
+        return type.ContainingNamespace.ToDisplayString(FullNameDisplayFormat) is "System.ComponentModel.Composition" or "System.Composition";
     }
 
     public static bool IsMef1CompositionType(this INamedTypeSymbol type)
@@ -131,8 +137,7 @@ public static class ExtensionMethods
     {
         var typeName = type.ToDisplayString(NameDisplayFormat);
 
-        return type.ContainingNamespace.ToDisplayString(FullNameDisplayFormat) is "System.ComponentModel.Composition"
-                   or "System.Composition"
+        return type.ContainingNamespace.ToDisplayString(FullNameDisplayFormat) is "System.ComponentModel.Composition" or "System.Composition"
                && names.Any(name => name == typeName);
     }
 

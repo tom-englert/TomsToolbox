@@ -147,9 +147,19 @@ public class MefAttributeUsageAnalyzer : DiagnosticAnalyzer
                     break;
 
                 case 1:
-                    if (importingConstructors[0].DeclaredAccessibility != Accessibility.Public)
+                    var importingConstructor = importingConstructors[0];
+
+                    if (importingConstructor.DeclaredAccessibility != Accessibility.Public)
                     {
                         context.ReportDiagnostic(Diagnostic.Create(NoPublicConstructorRule, classDeclaration.Identifier.GetLocation()));
+                    }
+                    if (constructors.Length > 1)
+                    {
+                        var maxParamCount = constructors.Max(ctor => ctor.Parameters.Length);
+                        if (importingConstructor.Parameters.Length < maxParamCount)
+                        {
+                            context.ReportDiagnostic(Diagnostic.Create(ImportingConstructorNotLargestRule, classDeclaration.Identifier.GetLocation()));
+                        }
                     }
                     break;
 
