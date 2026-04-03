@@ -4,6 +4,7 @@
     <NoWarn>NU5118;NU1701;8002</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Fody" PrivateAssets="All" />
     <PackageReference Include="ILMerge.Fody" PrivateAssets="All" />
     <PackageReference Include="Octokit" />
   </ItemGroup>
