@@ -1,18 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <Import Project="..\TargetFrameworks.Portable.props" />
-
   <PropertyGroup>
     <NoWarn>NU5118;NU1701;8002</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="ILMerge.Fody" Version="1.24.0" PrivateAssets="All" />
-    <PackageReference Include="Octokit" Version="14.0.0" />
+    <PackageReference Include="ILMerge.Fody" PrivateAssets="All" />
+    <PackageReference Include="Octokit" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj" />
   </ItemGroup>
-
 </Project>

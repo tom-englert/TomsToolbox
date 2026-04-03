@@ -1,28 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <Import Project="..\TargetFrameworks.Portable.props" />
-
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-
   <PropertyGroup>
     <Title>Tom's Toolbox Composition - Ninject Module</Title>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\Nullable.cs" Link="Nullable.cs" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Ninject" Version="3.3.6" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-    <PackageReference Include="System.ValueTuple" Version="4.6.1" />
+    <PackageReference Include="Ninject" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+    <PackageReference Include="System.ValueTuple" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Composition\TomsToolbox.Composition.csproj" />
   </ItemGroup>
-
 </Project>

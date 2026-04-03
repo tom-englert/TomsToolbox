@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
@@ -8,7 +7,6 @@
     <ApplicationIcon>..\SampleApp\16x16.ico</ApplicationIcon>
     <NoWarn>NU1903;NU1902</NoWarn>
   </PropertyGroup>
-
   <PropertyGroup>
     <PublishDir>..\Publish</PublishDir>
     <PublishProtocol>FileSystem</PublishProtocol>
@@ -17,15 +15,13 @@
     <PublishSingleFile>True</PublishSingleFile>
     <PublishReadyToRun>False</PublishReadyToRun>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Ninject.Extensions.Conventions" Version="3.3.0" />
-    <PackageReference Include="Ninject.Extensions.Factory" Version="3.3.3" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
-    <PackageReference Include="System.Composition" Version="9.0.4" />
-    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+    <PackageReference Include="Ninject.Extensions.Conventions" />
+    <PackageReference Include="Ninject.Extensions.Factory" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" />
+    <PackageReference Include="System.Composition" />
+    <PackageReference Include="System.Text.RegularExpressions" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\SampleApp\SampleApp.csproj" />
     <ProjectReference Include="..\TomsToolbox.Composition.Ninject\TomsToolbox.Composition.Ninject.csproj" />
@@ -38,9 +34,7 @@
     <ProjectReference Include="..\TomsToolbox.Wpf.Styles\TomsToolbox.Wpf.Styles.csproj" />
     <ProjectReference Include="..\TomsToolbox.Wpf\TomsToolbox.Wpf.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="..\SampleApp\16x16.ico" Link="16x16.ico" />
   </ItemGroup>
-
 </Project>

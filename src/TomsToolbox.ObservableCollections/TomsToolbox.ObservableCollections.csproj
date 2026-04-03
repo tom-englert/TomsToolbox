@@ -1,24 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <Import Project="..\TargetFrameworks.Portable.props" />
-
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-
   <PropertyGroup>
     <Title>Tom's Toolbox ObservableCollections Module</Title>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Fody" Version="6.9.2" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-    <PackageReference Include="WeakEventHandler.Fody" Version="1.8.0" PrivateAssets="All" />
+    <PackageReference Include="Fody" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+    <PackageReference Include="WeakEventHandler.Fody" PrivateAssets="All" />
   </ItemGroup>
-
 </Project>

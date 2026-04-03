@@ -21,7 +21,7 @@ using TomsToolbox.Wpf.Controls;
 [VisualCompositionExport(RegionId.Main, Sequence = 1)]
 public partial class MapViewModel : INotifyPropertyChanged
 {
-    private static readonly string _configurationFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory!, "Map", "MapSources.xml");
+    private static readonly string _configurationFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Map", "MapSources.xml");
     private readonly MapSourceFile _mapSourceFile;
 
     [ImportingConstructor]

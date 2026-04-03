@@ -198,7 +198,7 @@ public static class MultiSelectorExtensions
         var selectedItem = sourceSelection[0];
 
         // The item is not present, e.g. because of filtering, and can't be selected at this time.
-        if (!selector.Items.Contains(selectedItem!))
+        if (!selector.Items.Contains(selectedItem))
         {
             selector.ClearSourceSelection();
         }

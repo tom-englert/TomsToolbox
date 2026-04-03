@@ -1,28 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <Import Project="..\TargetFrameworks.Desktop.props" />
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RootNamespace>TomsToolbox.Wpf.Composition</RootNamespace>
   </PropertyGroup>
-
   <PropertyGroup>
     <Title>Tom's Toolbox Avalonia Composition Module</Title>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\Nullable.cs" Link="Nullable.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj" />
     <ProjectReference Include="..\TomsToolbox.Composition\TomsToolbox.Composition.csproj" />
     <ProjectReference Include="..\TomsToolbox.Avalonia\TomsToolbox.Avalonia.csproj" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.3.10" />
+    <PackageReference Include="Avalonia" />
   </ItemGroup>
-
 </Project>

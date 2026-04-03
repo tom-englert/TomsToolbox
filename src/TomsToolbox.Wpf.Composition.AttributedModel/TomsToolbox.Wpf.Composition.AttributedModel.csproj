@@ -1,25 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <Import Project="..\TargetFrameworks.Desktop.props" />
-
   <PropertyGroup>
     <UseWPF>true</UseWPF>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-
   <PropertyGroup>
     <Title>Tom's Toolbox WPF Composition - Attributed Model Module</Title>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-    <PackageReference Include="System.Composition.AttributedModel" Version="8.0.0" Condition="'$(TargetFramework)'!='net462'" IsPinned="True" Justification="Minimum requirement for backward compatibility" />
-    <PackageReference Include="System.Composition.AttributedModel" Version="1.4.1" Condition="'$(TargetFramework)'=='net462'" IsPinned="True" Justification="Updating would break VS-Extensions targeting VS &lt; 2022" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+    <PackageReference Include="System.Composition.AttributedModel" Condition="'$(TargetFramework)'!='net462'" />
+    <PackageReference Include="System.Composition.AttributedModel" VersionOverride="1.4.1" Condition="'$(TargetFramework)'=='net462'" IsPinned="True" Justification="Updating would break VS-Extensions targeting VS &lt; 2022" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Wpf.Composition\TomsToolbox.Wpf.Composition.csproj" />
   </ItemGroup>
-
 </Project>
