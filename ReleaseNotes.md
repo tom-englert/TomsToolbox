@@ -1,5 +1,8 @@
 Unreleased
+
+2.23.0
 - Add TomsToolbox.Avalonia module with core MVVM helpers for Avalonia.
+- Introduce analyzer rule MEF009 to ensure that the constructor marked with [ImportingConstructor] has the most parameters when multiple constructors exist
 
 2.22.2
 - Fix #21: AdvancedScrollWheelBehavior sometimes scrolls to wrong target position (see https://github.com/icsharpcode/ILSpy/issues/3462)
