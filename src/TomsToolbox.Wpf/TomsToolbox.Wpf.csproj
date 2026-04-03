@@ -24,7 +24,6 @@
     <PackageReference Include="Fody" PrivateAssets="All" />
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
     <PackageReference Include="JetBrainsAnnotations.Fody" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
     <PackageReference Include="Throttle.Fody" PrivateAssets="All" />
     <PackageReference Include="WeakEventHandler.Fody" PrivateAssets="All" />
   </ItemGroup>

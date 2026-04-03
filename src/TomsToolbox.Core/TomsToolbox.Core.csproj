@@ -7,7 +7,4 @@
   <PropertyGroup>
     <Title>Tom's Toolbox Core Module is deprecated, code has been moved to the Tom's Toolbox Essentials Module</Title>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
-  </ItemGroup>
 </Project>

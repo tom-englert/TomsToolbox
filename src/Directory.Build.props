@@ -35,6 +35,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <GlobalPackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.201" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\Icon.png" Link="Icon.png" Pack="true" PackagePath="\" />
     <None Include="..\..\LICENSE" Link="LICENSE" Pack="true" PackagePath="\" />
     <None Include="..\TomsToolbox.snk">

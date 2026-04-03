@@ -11,9 +11,6 @@
     <Compile Include="..\Nullable.cs" Link="Nullable.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Essentials\TomsToolbox.Essentials.csproj" />
   </ItemGroup>
 </Project>
