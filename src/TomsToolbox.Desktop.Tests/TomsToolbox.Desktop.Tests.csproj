@@ -3,14 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
     <Tags>Test</Tags>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="xunit" />
-    <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
+    <PackageReference Include="xunit.v3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TomsToolbox.Desktop\TomsToolbox.Desktop.csproj">

@@ -13,7 +13,6 @@
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.2.0" IsPinned="true" Justification="Needs to work with older VS versions, too." />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing" Version="1.1.2" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.5" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.3.0" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.201" />
     <PackageVersion Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.142" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
@@ -34,10 +33,9 @@
     <PackageVersion Include="System.Text.RegularExpressions" Version="4.3.1" />
     <PackageVersion Include="System.ValueTuple" Version="4.6.2" />
     <PackageVersion Include="Throttle.Fody" Version="1.7.0" />
-    <PackageVersion Include="Verify.Xunit" Version="31.12.5" />
+    <PackageVersion Include="Verify.XunitV3" Version="31.15.0" />
     <PackageVersion Include="WeakEventHandler.Fody" Version="1.8.0" />
-    <PackageVersion Include="xunit" Version="2.9.3" />
-    <PackageVersion Include="xunit.assert" Version="2.9.3" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
+    <PackageVersion Include="xunit.v3" Version="3.2.2" />
+    <PackageVersion Include="xunit.v3.assert" Version="3.2.2" />
   </ItemGroup>
 </Project>
