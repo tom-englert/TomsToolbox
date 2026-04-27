@@ -107,8 +107,23 @@ public class DelegateCommand<T> : ICommand
         set;
     }
 
+    private event EventHandler? CanExecuteChangedEvent;
+
+    private void OnRequerySuggested(object? sender, EventArgs e)
+    {
+        CanExecuteChangedEvent?.Invoke(sender, e);
+    }
+
     /// <summary>
-    /// Occurs when changes occur that affect whether or not the command should execute.
+    /// Raises the <see cref="CanExecuteChanged"/> event to notify listeners that the execution status has changed.
+    /// </summary>
+    public void RaiseCanExecuteChanged()
+    {
+        OnRequerySuggested(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Occurs when changes occur that affect whether the command should execute or not.
     /// </summary>
     /// <remarks>
     /// The event is forwarded to the <see cref="CommandManager"/>, so visuals bound to the delegate command will be updated
@@ -116,8 +131,23 @@ public class DelegateCommand<T> : ICommand
     /// </remarks>
     public event EventHandler? CanExecuteChanged
     {
-        add => CommandManager.RequerySuggested += value;
-        remove => CommandManager.RequerySuggested -= value;
+        add
+        {
+            if (CanExecuteChangedEvent is null)
+            {
+                CommandManager.RequerySuggested += OnRequerySuggested;
+            }
+            CanExecuteChangedEvent += value;
+        }
+        remove
+        {
+            CanExecuteChangedEvent -= value;
+            
+            if (CanExecuteChangedEvent is null)
+            {
+                CommandManager.RequerySuggested -= OnRequerySuggested;
+            }
+        }
     }
 
     /// <summary>
@@ -254,8 +284,23 @@ public class DelegateCommand : ICommand
         set;
     }
 
+    private event EventHandler? CanExecuteChangedEvent;
+
+    private void OnRequerySuggested(object? sender, EventArgs e)
+    {
+        CanExecuteChangedEvent?.Invoke(sender, e);
+    }
+
     /// <summary>
-    /// Occurs when changes occur that affect whether or not the command should execute.
+    /// Raises the <see cref="CanExecuteChanged"/> event to notify listeners that the execution status has changed.
+    /// </summary>
+    public void RaiseCanExecuteChanged()
+    {
+        OnRequerySuggested(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Occurs when changes occur that affect whether the command should execute or not.
     /// </summary>
     /// <remarks>
     /// The event is forwarded to the <see cref="CommandManager"/>, so visuals bound to the delegate command will be updated
@@ -263,8 +308,23 @@ public class DelegateCommand : ICommand
     /// </remarks>
     public event EventHandler? CanExecuteChanged
     {
-        add => CommandManager.RequerySuggested += value;
-        remove => CommandManager.RequerySuggested -= value;
+        add
+        {
+            if (CanExecuteChangedEvent is null)
+            {
+                CommandManager.RequerySuggested += OnRequerySuggested;
+            }
+            CanExecuteChangedEvent += value;
+        }
+        remove
+        {
+            CanExecuteChangedEvent -= value;
+
+            if (CanExecuteChangedEvent is null)
+            {
+                CommandManager.RequerySuggested -= OnRequerySuggested;
+            }
+        }
     }
 
     /// <summary>

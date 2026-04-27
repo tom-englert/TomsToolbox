@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\TargetFrameworks.Portable.props" />
   <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RootNamespace>TomsToolbox.Wpf</RootNamespace>
@@ -12,6 +12,7 @@
     <Compile Include="..\Nullable.cs" Link="Nullable.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\TomsToolbox.Wpf\DelegateCommand.cs" Link="DelegateCommand.cs" />
     <Compile Include="..\TomsToolbox.Wpf\DispatcherThrottle.cs" Link="DispatcherThrottle.cs" />
     <Compile Include="..\TomsToolbox.Wpf\ObservableObject.cs" Link="ObservableObject.cs" />
     <Compile Include="..\TomsToolbox.Wpf\ObservableObjectBase.cs" Link="ObservableObjectBase.cs" />
