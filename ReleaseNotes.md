@@ -1,5 +1,8 @@
 Unreleased
 
+2.24.0
+- Add CommandManager and DelegateCommand to TomsToolbox.Avalonia
+
 2.23.0
 - Add TomsToolbox.Avalonia module with core MVVM helpers for Avalonia.
 - Introduce analyzer rule MEF009 to ensure that the constructor marked with [ImportingConstructor] has the most parameters when multiple constructors exist
