@@ -1,0 +1,45 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+env:
+  BuildConfiguration: Release
+  Solution: src\TomsToolbox.sln
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Log DotNet version
+      run: dotnet --info
+
+    - name: Restore Solution
+      run: dotnet restore ${{ env.Solution }}
+
+    - name: Build Solution
+      run: dotnet build ${{ env.Solution }} --configuration ${{ env.BuildConfiguration }} --no-restore
+
+    - name: Publish Sample App
+      run: dotnet publish -c ${{ env.BuildConfiguration }} --no-build src\SampleApp.Ninject\SampleApp.Ninject.csproj
+
+    - name: Run Tests
+      run: dotnet test ${{ env.Solution }} --configuration ${{ env.BuildConfiguration }} --no-build
+
+    - name: Publish Artifact Packages
+      uses: actions/upload-artifact@v4
+      with:
+        name: Packages
+        path: Deploy/*.*
+
+    - name: Publish Artifact Sample
+      uses: actions/upload-artifact@v4
+      with:
+        name: Sample
+        path: |
+          src/Publish/*.*
+          !src/Publish/*.xml
