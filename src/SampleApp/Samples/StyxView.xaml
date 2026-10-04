@@ -205,6 +205,16 @@
       </StackPanel>
     </DataTemplate>
 
+    <DataTemplate x:Key="Slider">
+      <StackPanel>
+        <Slider Minimum="0" Maximum="10" Value="3" TickFrequency="1" TickPlacement="BottomRight" />
+        <Decorator Height="10" />
+        <Slider Minimum="0" Maximum="10" Value="5" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="TopLeft" />
+        <Decorator Height="10" />
+        <Slider Orientation="Vertical" Height="80" HorizontalAlignment="Left" Minimum="0" Maximum="10" Value="5" TickFrequency="1" TickPlacement="Both" />
+      </StackPanel>
+    </DataTemplate>
+
     <DataTemplate x:Key="ScrollBar">
       <ScrollBar Orientation="Horizontal" />
     </DataTemplate>

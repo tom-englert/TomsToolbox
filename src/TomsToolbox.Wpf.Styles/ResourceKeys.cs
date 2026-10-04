@@ -148,6 +148,11 @@ public static class ResourceKeys
     [DefaultStyle(typeof(ScrollViewer))] public static readonly ResourceKey ScrollViewerStyle = new ComponentResourceKey(typeof(ResourceKeys), "ScrollViewerStyle");
 
     /// <summary>
+    /// The resource key for the <see cref="Slider"/> style.
+    /// </summary>
+    [DefaultStyle(typeof(Slider))] public static readonly ResourceKey SliderStyle = new ComponentResourceKey(typeof(ResourceKeys), "SliderStyle");
+
+    /// <summary>
     /// The resource key for the <see cref="TabControl"/> style.
     /// </summary>
     [DefaultStyle(typeof(TabControl))] public static readonly ResourceKey TabControlStyle = new ComponentResourceKey(typeof(ResourceKeys), "TabControlStyle");

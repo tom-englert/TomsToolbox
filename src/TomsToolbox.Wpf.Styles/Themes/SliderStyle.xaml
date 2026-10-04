@@ -1,0 +1,151 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:toms="urn:TomsToolbox"
+                    xmlns:styles="clr-namespace:TomsToolbox.Wpf.Styles">
+
+  <Style x:Key="SliderRepeatButtonStyle" TargetType="RepeatButton">
+    <Setter Property="OverridesDefaultStyle" Value="True" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="RepeatButton">
+          <Rectangle Fill="Transparent" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="SliderThumbStyle" TargetType="Thumb">
+    <Setter Property="OverridesDefaultStyle" Value="True" />
+    <Setter Property="SnapsToDevicePixels" Value="True" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Height" Value="18" />
+    <Setter Property="Width" Value="11" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Thumb">
+          <Border x:Name="Border"
+                  Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                  BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                  BorderThickness="1" CornerRadius="2" />
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
+            </Trigger>
+            <Trigger Property="IsDragging" Value="True">
+              <Setter TargetName="Border" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
+              <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter TargetName="Border" Property="Background" Value="{DynamicResource {x:Static styles:ResourceKeys.DisabledBrush}}" />
+              <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource {x:Static styles:ResourceKeys.BorderBrush}}" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <ControlTemplate x:Key="SliderHorizontalTemplate" TargetType="Slider">
+    <Border x:Name="Border" Background="Transparent" SnapsToDevicePixels="True" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TickBar x:Name="TopTick" Grid.Row="0" Height="4" Margin="0,0,0,2" Placement="Top" Visibility="Collapsed" Fill="{TemplateBinding Foreground}" />
+        <TickBar x:Name="BottomTick" Grid.Row="2" Height="4" Margin="0,2,0,0" Placement="Bottom" Visibility="Collapsed" Fill="{TemplateBinding Foreground}" />
+        <Border x:Name="TrackBackground" Grid.Row="1" Height="4" Margin="5,0" VerticalAlignment="Center"
+                Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"
+                BorderBrush="{DynamicResource {x:Static styles:ResourceKeys.BorderBrush}}" BorderThickness="1" />
+        <Track x:Name="PART_Track" Grid.Row="1">
+          <Track.DecreaseRepeatButton>
+            <RepeatButton Command="Slider.DecreaseLarge" Style="{StaticResource SliderRepeatButtonStyle}" />
+          </Track.DecreaseRepeatButton>
+          <Track.IncreaseRepeatButton>
+            <RepeatButton Command="Slider.IncreaseLarge" Style="{StaticResource SliderRepeatButtonStyle}" />
+          </Track.IncreaseRepeatButton>
+          <Track.Thumb>
+            <Thumb x:Name="Thumb" Style="{StaticResource SliderThumbStyle}" />
+          </Track.Thumb>
+        </Track>
+      </Grid>
+    </Border>
+    <ControlTemplate.Triggers>
+      <Trigger Property="TickPlacement" Value="TopLeft">
+        <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Property="TickPlacement" Value="BottomRight">
+        <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Property="TickPlacement" Value="Both">
+        <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
+        <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter TargetName="TrackBackground" Property="Background" Value="{DynamicResource {x:Static styles:ResourceKeys.DisabledBrush}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+
+  <ControlTemplate x:Key="SliderVerticalTemplate" TargetType="Slider">
+    <Border x:Name="Border" Background="Transparent" SnapsToDevicePixels="True" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="Auto" MinWidth="{TemplateBinding MinWidth}" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TickBar x:Name="TopTick" Grid.Column="0" Width="4" Margin="0,0,2,0" Placement="Left" Visibility="Collapsed" Fill="{TemplateBinding Foreground}" />
+        <TickBar x:Name="BottomTick" Grid.Column="2" Width="4" Margin="2,0,0,0" Placement="Right" Visibility="Collapsed" Fill="{TemplateBinding Foreground}" />
+        <Border x:Name="TrackBackground" Grid.Column="1" Width="4" Margin="0,5" HorizontalAlignment="Center"
+                Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"
+                BorderBrush="{DynamicResource {x:Static styles:ResourceKeys.BorderBrush}}" BorderThickness="1" />
+        <Track x:Name="PART_Track" Grid.Column="1">
+          <Track.DecreaseRepeatButton>
+            <RepeatButton Command="Slider.DecreaseLarge" Style="{StaticResource SliderRepeatButtonStyle}" />
+          </Track.DecreaseRepeatButton>
+          <Track.IncreaseRepeatButton>
+            <RepeatButton Command="Slider.IncreaseLarge" Style="{StaticResource SliderRepeatButtonStyle}" />
+          </Track.IncreaseRepeatButton>
+          <Track.Thumb>
+            <Thumb x:Name="Thumb" Width="18" Height="11" Style="{StaticResource SliderThumbStyle}" />
+          </Track.Thumb>
+        </Track>
+      </Grid>
+    </Border>
+    <ControlTemplate.Triggers>
+      <Trigger Property="TickPlacement" Value="TopLeft">
+        <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Property="TickPlacement" Value="BottomRight">
+        <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Property="TickPlacement" Value="Both">
+        <Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
+        <Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter TargetName="TrackBackground" Property="Background" Value="{DynamicResource {x:Static styles:ResourceKeys.DisabledBrush}}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+
+  <Style x:Key="{x:Static styles:ResourceKeys.SliderStyle}" TargetType="{x:Type Slider}">
+    <Setter Property="SnapsToDevicePixels" Value="True" />
+    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Template" Value="{StaticResource SliderHorizontalTemplate}" />
+    <Style.Triggers>
+      <Trigger Property="Orientation" Value="Vertical">
+        <Setter Property="Template" Value="{StaticResource SliderVerticalTemplate}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+</ResourceDictionary>
