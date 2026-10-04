@@ -10,10 +10,10 @@ env:
 
 jobs:
   build:
-    runs-on: windows-2022
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
 
     - name: Log DotNet version
       run: dotnet --info
@@ -31,13 +31,13 @@ jobs:
       run: dotnet test ${{ env.Solution }} --configuration ${{ env.BuildConfiguration }} --no-build
 
     - name: Publish Artifact Packages
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: Packages
         path: Deploy/*.*
 
     - name: Publish Artifact Sample
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: Sample
         path: |
