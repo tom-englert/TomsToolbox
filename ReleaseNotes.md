@@ -1,5 +1,8 @@
 Unreleased
 
+2.26.1
+- Fix: disabled check box style should gray out the box, not only the text
+
 2.26.0
 - Fix tab control style: Foreground color of active tab is inherited in the tabs content 
 
