@@ -32,12 +32,8 @@ steps:
   displayName: 'Publish Sample App'
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
-- task: DotNetCoreCLI@2
-  displayName: 'Run Testst'
-  inputs:
-    command: test
-    projects: $(Solution)
-    arguments: '--configuration $(BuildConfiguration) --no-build'
+- script: dotnet test --solution $(Solution) --configuration $(BuildConfiguration) --no-build
+  displayName: 'Run Tests'
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)/Packages'

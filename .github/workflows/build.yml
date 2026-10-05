@@ -29,7 +29,7 @@ jobs:
       run: dotnet publish -c ${{ env.BuildConfiguration }} --no-build src\SampleApp.Ninject\SampleApp.Ninject.csproj
 
     - name: Run Tests
-      run: dotnet test ${{ env.Solution }} --configuration ${{ env.BuildConfiguration }} --no-build
+      run: dotnet test --solution ${{ env.Solution }} --configuration ${{ env.BuildConfiguration }} --no-build
 
     - name: Publish Artifact Packages
       uses: actions/upload-artifact@v7
