@@ -45,7 +45,7 @@
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
               <Setter Property="Panel.ZIndex" Value="1" />
-              <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
+              <Setter Property="TextElement.Foreground" TargetName="Content" Value="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" />
               <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource FindAncestor, AncestorType=TabControl}}" />
             </Trigger>
             <MultiDataTrigger>

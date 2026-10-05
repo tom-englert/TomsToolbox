@@ -249,6 +249,20 @@
                 Header="ExpandDirection down" Content="Content" BorderThickness="1" />
     </DataTemplate>
 
+    <DataTemplate x:Key="TabControl">
+      <TabControl Height="100">
+        <TabItem Header="Tab _1">
+          <TextBlock Text="Content of tab 1" Margin="10" />
+        </TabItem>
+        <TabItem Header="Tab _2">
+          <TextBlock Text="Content of tab 2" Margin="10" />
+        </TabItem>
+        <TabItem Header="Tab _3" IsEnabled="False">
+          <TextBlock Text="Content of tab 3" Margin="10" />
+        </TabItem>
+      </TabControl>
+    </DataTemplate>
+
     <DataTemplate x:Key="ToolBar">
       <ToolBar VerticalAlignment="Top">
         <Button Content="B_utton" />
