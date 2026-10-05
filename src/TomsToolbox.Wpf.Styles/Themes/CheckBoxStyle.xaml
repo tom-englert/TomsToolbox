@@ -83,6 +83,9 @@
             <Trigger Property="IsEnabled" Value="False">
               <Setter Property="Background" Value="{DynamicResource {x:Static styles:ResourceKeys.DisabledBrush}}" />
               <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+              <Setter Property="BorderBrush" Value="{DynamicResource {x:Static styles:ResourceKeys.BorderBrush}}" />
+              <Setter TargetName="CheckMark" Property="Fill" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+              <Setter TargetName="IndeterminateCheckMark" Property="Fill" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
             </Trigger>
           </ControlTemplate.Triggers>
         </ControlTemplate>
