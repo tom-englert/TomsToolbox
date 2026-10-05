@@ -1,5 +1,8 @@
 Unreleased
 
+2.26.0
+- Fix tab control style: Foreground color of active tab is inherited in the tabs content 
+
 2.25.0
 - Add a slider style to Wpf.Styles to make it theme aware
 
