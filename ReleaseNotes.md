@@ -1,5 +1,8 @@
 Unreleased
 
+2.25.0
+- Add a slider style to Wpf.Styles to make it theme aware
+
 2.24.0
 - Add CommandManager and DelegateCommand to TomsToolbox.Avalonia
 
