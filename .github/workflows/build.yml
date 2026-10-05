@@ -29,7 +29,22 @@ jobs:
       run: dotnet publish -c ${{ env.BuildConfiguration }} --no-build src\SampleApp.Ninject\SampleApp.Ninject.csproj
 
     - name: Run Tests
-      run: dotnet test --solution ${{ env.Solution }} --configuration ${{ env.BuildConfiguration }} --no-build
+      run: dotnet test --solution ${{ env.Solution }} --configuration ${{ env.BuildConfiguration }} --no-build --results-directory TestResults -- --report-trx
+      continue-on-error: true
+      id: test
+
+    - name: Publish Test Results
+      uses: dorny/test-reporter@v2
+      if: always()
+      with:
+        name: Test Results
+        path: TestResults/*.trx
+        reporter: dotnet-trx
+        fail-on-error: true
+
+    - name: Fail job if tests failed
+      if: steps.test.outcome == 'failure'
+      run: exit 1
 
     - name: Publish Artifact Packages
       uses: actions/upload-artifact@v7
