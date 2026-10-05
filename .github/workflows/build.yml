@@ -75,6 +75,7 @@ jobs:
       run: |
         $version = ([xml](Get-Content src\Directory.Build.props)).Project.PropertyGroup.Version | Where-Object { $_ } | Select-Object -First 1
         $tag = '${{ github.ref_name }}' -replace '^v', ''
+        write-host "Tag: $tag, Version: $version"
         if (-not $version) { throw 'Version not found in Directory.Build.props' }
         if ($tag -ne $version) { throw "Tag '$tag' does not match version '$version' in Directory.Build.props" }
         "PackageVersion=$version" >> $env:GITHUB_ENV
@@ -89,7 +90,7 @@ jobs:
       id: login
       uses: NuGet/login@v1
       with:
-        user: ${{ secrets.NUGET_USER }}
+        user: tom-englert
 
     - name: Push packages to nuget.org
       shell: pwsh
