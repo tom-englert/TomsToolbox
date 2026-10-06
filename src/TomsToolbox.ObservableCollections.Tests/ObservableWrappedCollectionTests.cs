@@ -1,9 +1,4 @@
-﻿// TODO: Tests fail in finalizer introduced by WeakEventHandler.Fody, but only when running "dotnet test".
-// Re-enable the tests once this is fixed.
-
-#if false
-
-// ReSharper disable UnusedVariable
+﻿// ReSharper disable UnusedVariable
 #nullable disable
 namespace TomsToolbox.ObservableCollections.Tests;
 
@@ -103,5 +98,3 @@ public class ObservableWrappedCollectionTests : IDisposable
         Assert.True(_source.SequenceEqual(_target.Select(item => item.Wrapped)));
     }
 }
-
-#endif

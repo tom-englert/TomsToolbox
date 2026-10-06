@@ -34,6 +34,11 @@
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Verify_SponsorshipExemption>OpenSource</Verify_SponsorshipExemption>
+    <Verify_SponsorshipExemptionUntil>2027-10</Verify_SponsorshipExemptionUntil>
+  </PropertyGroup>
+
   <ItemGroup>
     <GlobalPackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.401" />
   </ItemGroup>
